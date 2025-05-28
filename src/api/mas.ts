@@ -52,8 +52,16 @@ const PaginatedResponseForUser = type({
   };
 });
 
+const SingleResponseForUser = type({
+  data: SingleResourceForUser,
+  links: {
+    self: "string",
+  },
+});
+
 export type User = typeof User.infer;
 export type PaginatedUsers = typeof PaginatedResponseForUser.infer;
+export type SingleUserResponse = typeof SingleResponseForUser.infer;
 
 export type UserListParams = {
   before?: string;
@@ -117,5 +125,49 @@ export const usersQuery = (
       }
 
       return users;
+    },
+  });
+
+export const userQuery = (
+  queryClient: QueryClient,
+  serverName: string,
+  userId: string,
+) =>
+  queryOptions({
+    queryKey: ["mas", "user", serverName, userId],
+    queryFn: async ({ signal }) => {
+      const token = await accessToken(queryClient, signal);
+      if (!token) {
+        throw new Error("No access token");
+      }
+
+      const wellKnown = await queryClient.ensureQueryData(
+        wellKnownQuery(serverName),
+      );
+
+      const authMetadata = await queryClient.ensureQueryData(
+        authMetadataQuery(wellKnown["m.homeserver"].base_url),
+      );
+
+      const masApiRoot = authMetadata.issuer;
+      const url = new URL(`/api/admin/v1/users/${userId}`, masApiRoot);
+
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        signal,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch user");
+      }
+
+      const user = SingleResponseForUser(await response.json());
+      if (user instanceof type.errors) {
+        throw new Error(user.summary);
+      }
+
+      return user;
     },
   });

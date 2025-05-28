@@ -1,5 +1,5 @@
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button, ChatFilter, Text } from "@vector-im/compound-web";
 import { type } from "arktype";
 
@@ -16,7 +16,7 @@ const UserSearchParams = type({
   "status?": "'active' | 'locked'",
 });
 
-export const Route = createFileRoute("/_console/users")({
+export const Route = createFileRoute("/_console/users/")({
   validateSearch: UserSearchParams,
   loaderDeps: ({ search }) => ({ search }),
   loader: async ({
@@ -173,7 +173,13 @@ function RouteComponent() {
             {data.data.map((user: (typeof data.data)[0]) => (
               <tr key={user.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <Text weight="medium">{user.attributes.username}</Text>
+                  <Link 
+                    to="/users/$userId" 
+                    params={{ userId: user.id }}
+                    className="text-blue-600 hover:text-blue-800 hover:underline"
+                  >
+                    <Text weight="medium">{user.attributes.username}</Text>
+                  </Link>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span
