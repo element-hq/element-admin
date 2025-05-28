@@ -1,6 +1,47 @@
-import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
+import {
+  Outlet,
+  createFileRoute,
+  createLink,
+  redirect,
+} from "@tanstack/react-router";
+import {
+  HomeSolidIcon,
+  UserIcon,
+} from "@vector-im/compound-design-tokens/assets/web/icons";
+import {
+  type ComponentProps,
+  type ComponentType,
+  type SVGAttributes,
+  forwardRef,
+} from "react";
 
 import { useAuthStore } from "@/stores/auth";
+import { Text } from "@vector-im/compound-web";
+
+type SectionLinkProps = {
+  Icon: ComponentType<SVGAttributes<SVGElement>>;
+} & ComponentProps<"a">;
+
+const SectionLinkComponent = forwardRef<HTMLAnchorElement, SectionLinkProps>(
+  ({ Icon, children, ...props }, ref) => (
+    <a
+      {...props}
+      ref={ref}
+      className={
+        "px-3 py-2 rounded-md flex gap-3 items-center " +
+        "data-[status=active]:bg-bg-subtle-secondary " +
+        "text-text-secondary hover:text-text-primary data-[status=active]:text-text-primary"
+      }
+    >
+      <Icon className="w-6 h-6" />
+      <Text weight="medium" size="md">
+        {children}
+      </Text>
+    </a>
+  ),
+);
+
+const SectionLink = createLink(SectionLinkComponent);
 
 export const Route = createFileRoute("/_console")({
   beforeLoad: () => {
@@ -15,8 +56,16 @@ export const Route = createFileRoute("/_console")({
   },
 
   component: () => (
-    <div className="flex flex-col items-center justify-center h-full">
-      <div className="container">
+    <div className="flex gap-12">
+      <div className="w-50 gap-1 flex flex-col">
+        <SectionLink Icon={HomeSolidIcon} to="/">
+          Home
+        </SectionLink>
+        <SectionLink Icon={UserIcon} to="/users">
+          Users
+        </SectionLink>
+      </div>
+      <div className="flex-1">
         <Outlet />
       </div>
     </div>

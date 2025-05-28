@@ -1,6 +1,6 @@
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Button, ChatFilter, Text } from "@vector-im/compound-web";
+import { Link, MatchRoute, createFileRoute } from "@tanstack/react-router";
+import { Badge, Button, ChatFilter, Text } from "@vector-im/compound-web";
 import { type } from "arktype";
 
 import { type UserListParams, usersQuery } from "@/api/mas";
@@ -173,8 +173,8 @@ function RouteComponent() {
             {data.data.map((user: (typeof data.data)[0]) => (
               <tr key={user.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <Link 
-                    to="/users/$userId" 
+                  <Link
+                    to="/users/$userId"
                     params={{ userId: user.id }}
                     className="text-blue-600 hover:text-blue-800 hover:underline"
                   >
@@ -182,26 +182,14 @@ function RouteComponent() {
                   </Link>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                      user.attributes.locked_at
-                        ? "bg-red-100 text-red-800"
-                        : "bg-green-100 text-green-800"
-                    }`}
-                  >
+                  <Badge kind={user.attributes.locked_at ? "red" : "blue"}>
                     {user.attributes.locked_at ? "Locked" : "Active"}
-                  </span>
+                  </Badge>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                      user.attributes.admin
-                        ? "bg-blue-100 text-blue-800"
-                        : "bg-gray-100 text-gray-800"
-                    }`}
-                  >
+                  <Badge kind={user.attributes.admin ? "green" : "grey"}>
                     {user.attributes.admin ? "Admin" : "User"}
-                  </span>
+                  </Badge>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {new Date(user.attributes.created_at).toLocaleDateString()}
@@ -214,68 +202,78 @@ function RouteComponent() {
 
       {/* Pagination */}
       <div className="flex items-center justify-between">
-        <div className="flex gap-2">
-          {firstPageParams ? (
-            <ButtonLink
-              from={Route.path}
-              kind="secondary"
-              size="sm"
-              search={firstPageParams}
-            >
-              First
-            </ButtonLink>
-          ) : (
-            <Button kind="secondary" size="sm" disabled>
-              First
-            </Button>
-          )}
+        <MatchRoute to={Route.path} pending>
+          {(match) => (
+            <>
+              <div className="flex gap-2">
+                {firstPageParams ? (
+                  <ButtonLink
+                    disabled={!!match}
+                    from={Route.path}
+                    kind="secondary"
+                    size="sm"
+                    search={firstPageParams}
+                  >
+                    First
+                  </ButtonLink>
+                ) : (
+                  <Button kind="secondary" size="sm" disabled>
+                    First
+                  </Button>
+                )}
 
-          {prevPageParams ? (
-            <ButtonLink
-              from={Route.path}
-              kind="secondary"
-              size="sm"
-              search={prevPageParams}
-            >
-              Previous
-            </ButtonLink>
-          ) : (
-            <Button kind="secondary" size="sm" disabled>
-              Previous
-            </Button>
-          )}
-        </div>
-        <div className="flex gap-2">
-          {nextPageParams ? (
-            <ButtonLink
-              from={Route.path}
-              kind="secondary"
-              size="sm"
-              search={nextPageParams}
-            >
-              Next
-            </ButtonLink>
-          ) : (
-            <Button kind="secondary" size="sm" disabled>
-              Next
-            </Button>
-          )}
+                {prevPageParams ? (
+                  <ButtonLink
+                    disabled={!!match}
+                    from={Route.path}
+                    kind="secondary"
+                    size="sm"
+                    search={prevPageParams}
+                  >
+                    Previous
+                  </ButtonLink>
+                ) : (
+                  <Button kind="secondary" size="sm" disabled>
+                    Previous
+                  </Button>
+                )}
+              </div>
+              <div className="flex gap-2">
+                {nextPageParams ? (
+                  <ButtonLink
+                    disabled={!!match}
+                    from={Route.path}
+                    kind="secondary"
+                    size="sm"
+                    search={nextPageParams}
+                  >
+                    Next
+                  </ButtonLink>
+                ) : (
+                  <Button kind="secondary" size="sm" disabled>
+                    Next
+                  </Button>
+                )}
 
-          {lastPageParams ? (
-            <ButtonLink
-              from={Route.path}
-              kind="secondary"
-              size="sm"
-              search={lastPageParams}
-            >
-              Last
-            </ButtonLink>
-          ) : (
-            <Button kind="secondary" size="sm" disabled>
-              Last
-            </Button>
+                {lastPageParams ? (
+                  <ButtonLink
+                    disabled={!!match}
+                    from={Route.path}
+                    kind="secondary"
+                    size="sm"
+                    search={lastPageParams}
+                  >
+                    Last
+                  </ButtonLink>
+                ) : (
+                  <Button kind="secondary" size="sm" disabled>
+                    Last
+                  </Button>
+                )}
+              </div>
+            </>
           )}
-        </div>
+        </MatchRoute>
       </div>
     </div>
   );

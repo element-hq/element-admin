@@ -59,9 +59,45 @@ const SingleResponseForUser = type({
   },
 });
 
+const UserEmail = type({
+  created_at: "string",
+  user_id: "string",
+  email: "string",
+});
+
+const SingleResourceForUserEmail = type({
+  type: "string",
+  id: "string",
+  attributes: UserEmail,
+  links: {
+    self: "string",
+  },
+});
+
+const PaginatedResponseForUserEmail = type({
+  meta: PaginationMeta,
+  data: "unknown[]",
+  links: PaginationLinks,
+}).pipe((value) => {
+  const validatedData = (value.data as unknown[]).map((item) => {
+    const result = SingleResourceForUserEmail(item);
+    if (result instanceof type.errors) {
+      throw new Error(result.summary);
+    }
+    return result;
+  });
+
+  return {
+    ...value,
+    data: validatedData,
+  };
+});
+
 export type User = typeof User.infer;
+export type UserEmail = typeof UserEmail.infer;
 export type PaginatedUsers = typeof PaginatedResponseForUser.infer;
 export type SingleUserResponse = typeof SingleResponseForUser.infer;
+export type PaginatedUserEmails = typeof PaginatedResponseForUserEmail.infer;
 
 export type UserListParams = {
   before?: string;
@@ -213,6 +249,54 @@ export const lockUser = async (
 
   return user;
 };
+
+export const userEmailsQuery = (
+  queryClient: QueryClient,
+  serverName: string,
+  userId: string,
+) =>
+  queryOptions({
+    queryKey: ["mas", "user-emails", serverName, userId],
+    queryFn: async ({ signal }) => {
+      const token = await accessToken(queryClient, signal);
+      if (!token) {
+        throw new Error("No access token");
+      }
+
+      const wellKnown = await queryClient.ensureQueryData(
+        wellKnownQuery(serverName),
+      );
+
+      const authMetadata = await queryClient.ensureQueryData(
+        authMetadataQuery(wellKnown["m.homeserver"].base_url),
+      );
+
+      const masApiRoot = authMetadata.issuer;
+      const url = new URL("/api/admin/v1/user-emails", masApiRoot);
+
+      // Filter by user and limit to first 10
+      url.searchParams.set("filter[user]", userId);
+      url.searchParams.set("page[first]", "10");
+
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        signal,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch user emails");
+      }
+
+      const userEmails = PaginatedResponseForUserEmail(await response.json());
+      if (userEmails instanceof type.errors) {
+        throw new Error(userEmails.summary);
+      }
+
+      return userEmails;
+    },
+  });
 
 export const unlockUser = async (
   queryClient: QueryClient,

@@ -4,15 +4,21 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { Button, InlineSpinner, Text } from "@vector-im/compound-web";
+import { ArrowLeftIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
+import { Badge, Button, InlineSpinner, Text } from "@vector-im/compound-web";
 
-import { lockUser, unlockUser, userQuery } from "@/api/mas";
+import { lockUser, unlockUser, userEmailsQuery, userQuery } from "@/api/mas";
 
 export const Route = createFileRoute("/_console/users/$userId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
-    await queryClient.ensureQueryData(
-      userQuery(queryClient, credentials.serverName, params.userId),
-    );
+    await Promise.all([
+      queryClient.ensureQueryData(
+        userQuery(queryClient, credentials.serverName, params.userId),
+      ),
+      queryClient.ensureQueryData(
+        userEmailsQuery(queryClient, credentials.serverName, params.userId),
+      ),
+    ]);
   },
   component: RouteComponent,
 });
@@ -36,36 +42,26 @@ function LockUnlockButton({
   const isLocked = !!user.attributes.locked_at;
 
   const lockMutation = useMutation({
-    mutationKey: ["mas", "lockUser", serverName, user.id],
     mutationFn: () => lockUser(queryClient, serverName, user.id),
     throwOnError: true,
-    onSuccess: async () => {
+    onSuccess: () => {
       // Invalidate both the individual user query and the users list
-      await Promise.all([
-        queryClient.invalidateQueries({
-          queryKey: ["mas", "user", serverName, user.id],
-        }),
-        queryClient.invalidateQueries({
-          queryKey: ["mas", "users", serverName],
-        }),
-      ]);
+      queryClient.invalidateQueries({
+        queryKey: ["mas", "user", serverName, user.id],
+      });
+      queryClient.invalidateQueries({ queryKey: ["mas", "users", serverName] });
     },
   });
 
   const unlockMutation = useMutation({
-    mutationKey: ["mas", "unlockUser", serverName, user.id],
     mutationFn: () => unlockUser(queryClient, serverName, user.id),
     throwOnError: true,
-    onSuccess: async () => {
+    onSuccess: () => {
       // Invalidate both the individual user query and the users list
-      await Promise.all([
-        queryClient.invalidateQueries({
-          queryKey: ["mas", "user", serverName, user.id],
-        }),
-        queryClient.invalidateQueries({
-          queryKey: ["mas", "users", serverName],
-        }),
-      ]);
+      queryClient.invalidateQueries({
+        queryKey: ["mas", "user", serverName, user.id],
+      });
+      queryClient.invalidateQueries({ queryKey: ["mas", "users", serverName] });
     },
   });
 
@@ -80,12 +76,7 @@ function LockUnlockButton({
   const isLoading = lockMutation.isPending || unlockMutation.isPending;
 
   return (
-    <Button
-      size="sm"
-      kind="secondary"
-      onClick={handleClick}
-      disabled={isLoading}
-    >
+    <Button size="sm" onClick={handleClick} disabled={isLoading}>
       {isLoading && <InlineSpinner />}
       {isLocked ? "Unlock User" : "Lock User"}
     </Button>
@@ -101,6 +92,10 @@ function RouteComponent() {
     userQuery(queryClient, credentials.serverName, userId),
   );
 
+  const { data: emailsData } = useSuspenseQuery(
+    userEmailsQuery(queryClient, credentials.serverName, userId),
+  );
+
   const user = data.data;
 
   return (
@@ -108,8 +103,8 @@ function RouteComponent() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Link to="/users">
-            <Button kind="secondary" size="sm">
-              ← Back to Users
+            <Button kind="secondary" size="sm" Icon={ArrowLeftIcon}>
+              Back to Users
             </Button>
           </Link>
           <Text as="h1" size="lg" weight="semibold">
@@ -131,37 +126,25 @@ function RouteComponent() {
         <div className="px-6 py-5 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <Text size="sm" weight="medium" className="text-gray-700 mb-2">
+              <Text size="sm" weight="medium">
                 Status
               </Text>
-              <span
-                className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                  user.attributes.locked_at
-                    ? "bg-red-100 text-red-800"
-                    : "bg-green-100 text-green-800"
-                }`}
-              >
+              <Badge kind={user.attributes.locked_at ? "red" : "blue"}>
                 {user.attributes.locked_at ? "Locked" : "Active"}
-              </span>
+              </Badge>
             </div>
 
             <div>
-              <Text size="sm" weight="medium" className="text-gray-700 mb-2">
+              <Text size="sm" weight="medium">
                 Admin Privileges
               </Text>
-              <span
-                className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                  user.attributes.admin
-                    ? "bg-blue-100 text-blue-800"
-                    : "bg-gray-100 text-gray-800"
-                }`}
-              >
+              <Badge kind={user.attributes.admin ? "green" : "grey"}>
                 {user.attributes.admin ? "Admin" : "User"}
-              </span>
+              </Badge>
             </div>
 
             <div>
-              <Text size="sm" weight="medium" className="text-gray-700 mb-2">
+              <Text size="sm" weight="medium">
                 Created At
               </Text>
               <Text size="sm">
@@ -171,13 +154,39 @@ function RouteComponent() {
 
             {user.attributes.locked_at && (
               <div>
-                <Text size="sm" weight="medium" className="text-gray-700 mb-2">
+                <Text size="sm" weight="medium">
                   Locked At
                 </Text>
                 <Text size="sm">
                   {new Date(user.attributes.locked_at).toLocaleString()}
                 </Text>
               </div>
+            )}
+          </div>
+
+          <div>
+            <Text size="sm" weight="medium">
+              Email Addresses ({emailsData.data.length})
+            </Text>
+            {emailsData.data.length > 0 ? (
+              <div className="space-y-2">
+                {emailsData.data.map((emailItem) => (
+                  <div
+                    key={emailItem.id}
+                    className="flex items-center justify-between p-3 bg-gray-50 rounded-md"
+                  >
+                    <Text size="sm">{emailItem.attributes.email}</Text>
+                    <Text size="xs">
+                      Added{" "}
+                      {new Date(
+                        emailItem.attributes.created_at,
+                      ).toLocaleDateString()}
+                    </Text>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <Text size="sm">No email addresses found</Text>
             )}
           </div>
 
