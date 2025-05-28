@@ -1,8 +1,12 @@
-import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Button, Text } from "@vector-im/compound-web";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import { Button, InlineSpinner, Text } from "@vector-im/compound-web";
 
-import { userQuery } from "@/api/mas";
+import { lockUser, unlockUser, userQuery } from "@/api/mas";
 
 export const Route = createFileRoute("/_console/users/$userId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
@@ -12,6 +16,81 @@ export const Route = createFileRoute("/_console/users/$userId")({
   },
   component: RouteComponent,
 });
+
+interface LockUnlockButtonProps {
+  user: {
+    id: string;
+    attributes: {
+      locked_at: string | null;
+    };
+  };
+  serverName: string;
+  queryClient: ReturnType<typeof useQueryClient>;
+}
+
+function LockUnlockButton({
+  user,
+  serverName,
+  queryClient,
+}: LockUnlockButtonProps) {
+  const isLocked = !!user.attributes.locked_at;
+
+  const lockMutation = useMutation({
+    mutationKey: ["mas", "lockUser", serverName, user.id],
+    mutationFn: () => lockUser(queryClient, serverName, user.id),
+    throwOnError: true,
+    onSuccess: async () => {
+      // Invalidate both the individual user query and the users list
+      await Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: ["mas", "user", serverName, user.id],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: ["mas", "users", serverName],
+        }),
+      ]);
+    },
+  });
+
+  const unlockMutation = useMutation({
+    mutationKey: ["mas", "unlockUser", serverName, user.id],
+    mutationFn: () => unlockUser(queryClient, serverName, user.id),
+    throwOnError: true,
+    onSuccess: async () => {
+      // Invalidate both the individual user query and the users list
+      await Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: ["mas", "user", serverName, user.id],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: ["mas", "users", serverName],
+        }),
+      ]);
+    },
+  });
+
+  const handleClick = () => {
+    if (isLocked) {
+      unlockMutation.mutate();
+    } else {
+      lockMutation.mutate();
+    }
+  };
+
+  const isLoading = lockMutation.isPending || unlockMutation.isPending;
+
+  return (
+    <Button
+      size="sm"
+      kind="secondary"
+      onClick={handleClick}
+      disabled={isLoading}
+    >
+      {isLoading && <InlineSpinner />}
+      {isLocked ? "Unlock User" : "Lock User"}
+    </Button>
+  );
+}
 
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
@@ -113,13 +192,11 @@ function RouteComponent() {
               <Button size="sm" kind="secondary" disabled>
                 Reset Password
               </Button>
-              <Button
-                size="sm"
-                kind={user.attributes.locked_at ? "primary" : "secondary"}
-                disabled
-              >
-                {user.attributes.locked_at ? "Unlock User" : "Lock User"}
-              </Button>
+              <LockUnlockButton
+                user={user}
+                serverName={credentials.serverName}
+                queryClient={queryClient}
+              />
               <Button size="sm" kind="tertiary" destructive disabled>
                 Deactivate User
               </Button>

@@ -171,3 +171,87 @@ export const userQuery = (
       return user;
     },
   });
+
+export const lockUser = async (
+  queryClient: QueryClient,
+  serverName: string,
+  userId: string,
+  signal?: AbortSignal,
+) => {
+  const token = await accessToken(queryClient, signal);
+  if (!token) {
+    throw new Error("No access token");
+  }
+
+  const wellKnown = await queryClient.ensureQueryData(
+    wellKnownQuery(serverName),
+  );
+
+  const authMetadata = await queryClient.ensureQueryData(
+    authMetadataQuery(wellKnown["m.homeserver"].base_url),
+  );
+
+  const masApiRoot = authMetadata.issuer;
+  const url = new URL(`/api/admin/v1/users/${userId}/lock`, masApiRoot);
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    ...(signal && { signal }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to lock user");
+  }
+
+  const user = SingleResponseForUser(await response.json());
+  if (user instanceof type.errors) {
+    throw new Error(user.summary);
+  }
+
+  return user;
+};
+
+export const unlockUser = async (
+  queryClient: QueryClient,
+  serverName: string,
+  userId: string,
+  signal?: AbortSignal,
+) => {
+  const token = await accessToken(queryClient, signal);
+  if (!token) {
+    throw new Error("No access token");
+  }
+
+  const wellKnown = await queryClient.ensureQueryData(
+    wellKnownQuery(serverName),
+  );
+
+  const authMetadata = await queryClient.ensureQueryData(
+    authMetadataQuery(wellKnown["m.homeserver"].base_url),
+  );
+
+  const masApiRoot = authMetadata.issuer;
+  const url = new URL(`/api/admin/v1/users/${userId}/unlock`, masApiRoot);
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    ...(signal && { signal }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to unlock user");
+  }
+
+  const user = SingleResponseForUser(await response.json());
+  if (user instanceof type.errors) {
+    throw new Error(user.summary);
+  }
+
+  return user;
+};

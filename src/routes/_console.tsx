@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 
 import { useAuthStore } from "@/stores/auth";
 
@@ -13,4 +13,12 @@ export const Route = createFileRoute("/_console")({
       credentials: state.credentials,
     };
   },
+
+  component: () => (
+    <div className="flex flex-col items-center justify-center h-full">
+      <div className="container">
+        <Outlet />
+      </div>
+    </div>
+  ),
 });
