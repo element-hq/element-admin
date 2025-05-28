@@ -11,60 +11,195 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
+import { Route as CallbackImport } from './routes/callback'
+import { Route as ConsoleImport } from './routes/_console'
+import { Route as AuthImport } from './routes/_auth'
+import { Route as ConsoleIndexImport } from './routes/_console.index'
+import { Route as ConsoleUsersImport } from './routes/_console.users'
+import { Route as AuthLoginIndexImport } from './routes/_auth.login.index'
+import { Route as AuthLoginServerNameImport } from './routes/_auth.login.$serverName'
 
 // Create/Update Routes
 
-const IndexRoute = IndexImport.update({
+const CallbackRoute = CallbackImport.update({
+  id: '/callback',
+  path: '/callback',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ConsoleRoute = ConsoleImport.update({
+  id: '/_console',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthRoute = AuthImport.update({
+  id: '/_auth',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ConsoleIndexRoute = ConsoleIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => ConsoleRoute,
+} as any)
+
+const ConsoleUsersRoute = ConsoleUsersImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+
+const AuthLoginIndexRoute = AuthLoginIndexImport.update({
+  id: '/login/',
+  path: '/login/',
+  getParentRoute: () => AuthRoute,
+} as any)
+
+const AuthLoginServerNameRoute = AuthLoginServerNameImport.update({
+  id: '/login/$serverName',
+  path: '/login/$serverName',
+  getParentRoute: () => AuthRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthImport
+      parentRoute: typeof rootRoute
+    }
+    '/_console': {
+      id: '/_console'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof ConsoleImport
+      parentRoute: typeof rootRoute
+    }
+    '/callback': {
+      id: '/callback'
+      path: '/callback'
+      fullPath: '/callback'
+      preLoaderRoute: typeof CallbackImport
+      parentRoute: typeof rootRoute
+    }
+    '/_console/users': {
+      id: '/_console/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof ConsoleUsersImport
+      parentRoute: typeof ConsoleImport
+    }
+    '/_console/': {
+      id: '/_console/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof ConsoleIndexImport
+      parentRoute: typeof ConsoleImport
+    }
+    '/_auth/login/$serverName': {
+      id: '/_auth/login/$serverName'
+      path: '/login/$serverName'
+      fullPath: '/login/$serverName'
+      preLoaderRoute: typeof AuthLoginServerNameImport
+      parentRoute: typeof AuthImport
+    }
+    '/_auth/login/': {
+      id: '/_auth/login/'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof AuthLoginIndexImport
+      parentRoute: typeof AuthImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface AuthRouteChildren {
+  AuthLoginServerNameRoute: typeof AuthLoginServerNameRoute
+  AuthLoginIndexRoute: typeof AuthLoginIndexRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthLoginServerNameRoute: AuthLoginServerNameRoute,
+  AuthLoginIndexRoute: AuthLoginIndexRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
+interface ConsoleRouteChildren {
+  ConsoleUsersRoute: typeof ConsoleUsersRoute
+  ConsoleIndexRoute: typeof ConsoleIndexRoute
+}
+
+const ConsoleRouteChildren: ConsoleRouteChildren = {
+  ConsoleUsersRoute: ConsoleUsersRoute,
+  ConsoleIndexRoute: ConsoleIndexRoute,
+}
+
+const ConsoleRouteWithChildren =
+  ConsoleRoute._addFileChildren(ConsoleRouteChildren)
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '': typeof ConsoleRouteWithChildren
+  '/callback': typeof CallbackRoute
+  '/users': typeof ConsoleUsersRoute
+  '/': typeof ConsoleIndexRoute
+  '/login/$serverName': typeof AuthLoginServerNameRoute
+  '/login': typeof AuthLoginIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '': typeof AuthRouteWithChildren
+  '/callback': typeof CallbackRoute
+  '/users': typeof ConsoleUsersRoute
+  '/': typeof ConsoleIndexRoute
+  '/login/$serverName': typeof AuthLoginServerNameRoute
+  '/login': typeof AuthLoginIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
+  '/_auth': typeof AuthRouteWithChildren
+  '/_console': typeof ConsoleRouteWithChildren
+  '/callback': typeof CallbackRoute
+  '/_console/users': typeof ConsoleUsersRoute
+  '/_console/': typeof ConsoleIndexRoute
+  '/_auth/login/$serverName': typeof AuthLoginServerNameRoute
+  '/_auth/login/': typeof AuthLoginIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '' | '/callback' | '/users' | '/' | '/login/$serverName' | '/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '' | '/callback' | '/users' | '/' | '/login/$serverName' | '/login'
+  id:
+    | '__root__'
+    | '/_auth'
+    | '/_console'
+    | '/callback'
+    | '/_console/users'
+    | '/_console/'
+    | '/_auth/login/$serverName'
+    | '/_auth/login/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRouteWithChildren
+  ConsoleRoute: typeof ConsoleRouteWithChildren
+  CallbackRoute: typeof CallbackRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  AuthRoute: AuthRouteWithChildren,
+  ConsoleRoute: ConsoleRouteWithChildren,
+  CallbackRoute: CallbackRoute,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +212,43 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/_auth",
+        "/_console",
+        "/callback"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
+    "/_auth": {
+      "filePath": "_auth.tsx",
+      "children": [
+        "/_auth/login/$serverName",
+        "/_auth/login/"
+      ]
+    },
+    "/_console": {
+      "filePath": "_console.tsx",
+      "children": [
+        "/_console/users",
+        "/_console/"
+      ]
+    },
+    "/callback": {
+      "filePath": "callback.tsx"
+    },
+    "/_console/users": {
+      "filePath": "_console.users.tsx",
+      "parent": "/_console"
+    },
+    "/_console/": {
+      "filePath": "_console.index.tsx",
+      "parent": "/_console"
+    },
+    "/_auth/login/$serverName": {
+      "filePath": "_auth.login.$serverName.tsx",
+      "parent": "/_auth"
+    },
+    "/_auth/login/": {
+      "filePath": "_auth.login.index.tsx",
+      "parent": "/_auth"
     }
   }
 }
