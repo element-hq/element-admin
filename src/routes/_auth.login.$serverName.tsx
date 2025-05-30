@@ -50,7 +50,8 @@ function RouteComponent() {
     response_type: "code",
     client_id: authorizationSession.clientId,
     redirect_uri: REDIRECT_URI,
-    scope: "urn:mas:admin urn:synapse:admin:*",
+    scope:
+      "urn:matrix:org.matrix.msc2967.client:api:* urn:mas:admin urn:synapse:admin:*",
     state: authorizationSession.state,
     code_challenge: authorizationSession.codeChallenge,
     code_challenge_method: "S256",

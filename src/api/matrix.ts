@@ -1,4 +1,5 @@
-import { queryOptions } from "@tanstack/react-query";
+import { accessToken } from "@/stores/auth";
+import { type QueryClient, queryOptions } from "@tanstack/react-query";
 import { type } from "arktype";
 
 const WellKnownResponse = type({
@@ -27,5 +28,40 @@ export const wellKnownQuery = (serverName: string) =>
       }
 
       return wkData;
+    },
+  });
+
+const WhoamiResponse = type({
+  user_id: "string",
+});
+
+export const whoamiQuery = (queryClient: QueryClient, synapseRoot: string) =>
+  queryOptions({
+    queryKey: ["matrix", "whoami", synapseRoot],
+    queryFn: async ({ signal }) => {
+      const token = await accessToken(queryClient, signal);
+      if (!token) {
+        throw new Error("No access token");
+      }
+
+      const whoamiUrl = new URL(
+        "/_matrix/client/v3/account/whoami",
+        synapseRoot,
+      );
+      const response = await fetch(whoamiUrl, {
+        signal,
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to call whoami");
+      }
+
+      const whoamiData = WhoamiResponse(await response.json());
+      if (whoamiData instanceof type.errors) {
+        throw new Error(whoamiData.summary);
+      }
+
+      return whoamiData;
     },
   });

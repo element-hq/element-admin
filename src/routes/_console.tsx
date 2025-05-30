@@ -15,8 +15,10 @@ import {
   forwardRef,
 } from "react";
 
+import { wellKnownQuery, whoamiQuery } from "@/api/matrix";
 import { useAuthStore } from "@/stores/auth";
-import { Text } from "@vector-im/compound-web";
+import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { H1, Text } from "@vector-im/compound-web";
 
 type SectionLinkProps = {
   Icon: ComponentType<SVGAttributes<SVGElement>>;
@@ -55,19 +57,50 @@ export const Route = createFileRoute("/_console")({
     };
   },
 
-  component: () => (
-    <div className="flex gap-12">
-      <div className="w-50 gap-1 flex flex-col">
-        <SectionLink Icon={HomeSolidIcon} to="/">
-          Home
-        </SectionLink>
-        <SectionLink Icon={UserIcon} to="/users">
-          Users
-        </SectionLink>
+  loader: async ({ context: { credentials, queryClient } }) => {
+    const wellKnown = await queryClient.ensureQueryData(
+      wellKnownQuery(credentials.serverName),
+    );
+    const synapseRoot = wellKnown["m.homeserver"].base_url;
+
+    await queryClient.ensureQueryData(whoamiQuery(queryClient, synapseRoot));
+  },
+
+  component: () => {
+    const queryClient = useQueryClient();
+    const { credentials } = Route.useRouteContext();
+    const { data: wellKnown } = useSuspenseQuery(
+      wellKnownQuery(credentials.serverName),
+    );
+    const synapseRoot = wellKnown["m.homeserver"].base_url;
+    const { data: whoami } = useSuspenseQuery(
+      whoamiQuery(queryClient, synapseRoot),
+    );
+
+    return (
+      <div className="h-full flex flex-col gap-20">
+        <div className="border-b-2 border-b-bg-subtle-primary">
+          <div className="container mx-auto flex items-center justify-between py-5">
+            <H1>Admin Console</H1>
+            <Text>{whoami.user_id}</Text>
+          </div>
+        </div>
+        <div className="container mx-auto">
+          <div className="flex gap-12">
+            <div className="w-50 gap-1 flex flex-col">
+              <SectionLink Icon={HomeSolidIcon} to="/">
+                Home
+              </SectionLink>
+              <SectionLink Icon={UserIcon} to="/users">
+                Users
+              </SectionLink>
+            </div>
+            <div className="flex-1">
+              <Outlet />
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="flex-1">
-        <Outlet />
-      </div>
-    </div>
-  ),
+    );
+  },
 });
