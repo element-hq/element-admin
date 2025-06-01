@@ -5,6 +5,7 @@ import {
   redirect,
 } from "@tanstack/react-router";
 import {
+  ChatIcon,
   HomeSolidIcon,
   UserIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
@@ -93,6 +94,9 @@ export const Route = createFileRoute("/_console")({
               </SectionLink>
               <SectionLink Icon={UserIcon} to="/users">
                 Users
+              </SectionLink>
+              <SectionLink Icon={ChatIcon} to="/rooms">
+                Rooms
               </SectionLink>
             </div>
             <div className="flex-1">

@@ -1,5 +1,5 @@
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { Button } from "@vector-im/compound-web";
 
 import { wellKnownQuery } from "@/api/matrix";

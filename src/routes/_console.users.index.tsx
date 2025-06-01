@@ -99,7 +99,7 @@ function RouteComponent() {
         <Text as="h1" size="lg" weight="semibold">
           Users
         </Text>
-        <Text size="sm" className="text-gray-600">
+        <Text size="sm" className="text-text-secondary">
           Total: {data.meta.count}
         </Text>
       </div>
@@ -152,31 +152,34 @@ function RouteComponent() {
 
       {/* Users Table */}
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+        <table className="min-w-full divide-y divide-border-interactive-secondary">
+          <thead className="bg-bg-canvas-disabled">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
                 Username
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
                 Status
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
                 Admin
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
                 Created At
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-bg-canvas-default divide-y divide-border-interactive-secondary">
             {data.data.map((user: (typeof data.data)[0]) => (
-              <tr key={user.id} className="hover:bg-gray-50">
+              <tr
+                key={user.id}
+                className="hover:bg-bg-action-secondary-hovered"
+              >
                 <td className="px-6 py-4 whitespace-nowrap">
                   <Link
                     to="/users/$userId"
                     params={{ userId: user.id }}
-                    className="text-blue-600 hover:text-blue-800 hover:underline"
+                    className="text-text-link-external hover:underline"
                   >
                     <Text weight="medium">{user.attributes.username}</Text>
                   </Link>
@@ -191,7 +194,7 @@ function RouteComponent() {
                     {user.attributes.admin ? "Admin" : "User"}
                   </Badge>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
                   {new Date(user.attributes.created_at).toLocaleDateString()}
                 </td>
               </tr>

@@ -109,7 +109,7 @@ type AuthStoreActions = {
 
 const isExpired = (credentials: Credentials): boolean => {
   const leeway = 30 * 1000; // 30 seconds
-  return credentials.expiresAt < Date.now() - leeway;
+  return credentials.expiresAt - leeway < Date.now();
 };
 
 type AuthStore = AuthStoreState & AuthStoreActions;

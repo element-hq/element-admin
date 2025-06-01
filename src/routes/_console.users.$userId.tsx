@@ -113,12 +113,12 @@ function RouteComponent() {
         </div>
       </div>
 
-      <div className="bg-white shadow rounded-lg">
-        <div className="px-6 py-5 border-b border-gray-200">
+      <div className="bg-bg-subtle-secondary rounded-lg">
+        <div className="px-6 py-5 border-b border-border-interactive-secondary">
           <Text as="h3" size="md" weight="semibold">
             {user.attributes.username}
           </Text>
-          <Text size="sm" className="text-gray-600">
+          <Text size="sm" className="text-text-secondary">
             User ID: {user.id}
           </Text>
         </div>
@@ -173,7 +173,7 @@ function RouteComponent() {
                 {emailsData.data.map((emailItem) => (
                   <div
                     key={emailItem.id}
-                    className="flex items-center justify-between p-3 bg-gray-50 rounded-md"
+                    className="flex items-center justify-between p-3 bg-bg-subtle-primary rounded-md"
                   >
                     <Text size="sm">{emailItem.attributes.email}</Text>
                     <Text size="xs">
@@ -190,8 +190,12 @@ function RouteComponent() {
             )}
           </div>
 
-          <div className="pt-5 border-t border-gray-200">
-            <Text size="sm" weight="medium" className="text-gray-700 mb-4">
+          <div className="pt-5 border-t border-border-interactive-secondary">
+            <Text
+              size="sm"
+              weight="medium"
+              className="text-text-secondary mb-4"
+            >
               Actions
             </Text>
             <div className="flex gap-3">
