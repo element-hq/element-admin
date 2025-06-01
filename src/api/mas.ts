@@ -9,6 +9,7 @@ const User = type({
   username: "string",
   created_at: "string",
   locked_at: "string | null",
+  deactivated_at: "string | null",
   admin: "boolean",
 });
 
@@ -105,7 +106,7 @@ export type UserListParams = {
   first?: number;
   last?: number;
   admin?: boolean;
-  status?: "active" | "locked";
+  status?: "active" | "locked" | "deactivated";
 };
 
 export const usersQuery = (
@@ -240,6 +241,48 @@ export const lockUser = async (
 
   if (!response.ok) {
     throw new Error("Failed to lock user");
+  }
+
+  const user = SingleResponseForUser(await response.json());
+  if (user instanceof type.errors) {
+    throw new Error(user.summary);
+  }
+
+  return user;
+};
+
+export const deactivateUser = async (
+  queryClient: QueryClient,
+  serverName: string,
+  userId: string,
+  signal?: AbortSignal,
+) => {
+  const token = await accessToken(queryClient, signal);
+  if (!token) {
+    throw new Error("No access token");
+  }
+
+  const wellKnown = await queryClient.ensureQueryData(
+    wellKnownQuery(serverName),
+  );
+
+  const authMetadata = await queryClient.ensureQueryData(
+    authMetadataQuery(wellKnown["m.homeserver"].base_url),
+  );
+
+  const masApiRoot = authMetadata.issuer;
+  const url = new URL(`/api/admin/v1/users/${userId}/deactivate`, masApiRoot);
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    ...(signal && { signal }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to deactivate user");
   }
 
   const user = SingleResponseForUser(await response.json());

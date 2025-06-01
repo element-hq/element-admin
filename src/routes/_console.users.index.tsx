@@ -13,7 +13,7 @@ const UserSearchParams = type({
   "first?": "number",
   "last?": "number",
   "admin?": "boolean",
-  "status?": "'active' | 'locked'",
+  "status?": "'active' | 'locked' | 'deactivated'",
 });
 
 export const Route = createFileRoute("/_console/users/")({
@@ -148,6 +148,20 @@ function RouteComponent() {
         >
           Locked Only
         </ChatFilter>
+        <ChatFilter
+          selected={search.status === "deactivated"}
+          onClick={() => {
+            navigate({
+              search: (prev) => {
+                const { status, ...newParams } = resetPagination(prev);
+                if (search.status === "deactivated") return newParams;
+                return { ...newParams, status: "deactivated" };
+              },
+            });
+          }}
+        >
+          Deactivated Only
+        </ChatFilter>
       </div>
 
       {/* Users Table */}
@@ -185,8 +199,20 @@ function RouteComponent() {
                   </Link>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <Badge kind={user.attributes.locked_at ? "red" : "blue"}>
-                    {user.attributes.locked_at ? "Locked" : "Active"}
+                  <Badge
+                    kind={
+                      user.attributes.deactivated_at
+                        ? "red"
+                        : user.attributes.locked_at
+                          ? "grey"
+                          : "blue"
+                    }
+                  >
+                    {user.attributes.deactivated_at
+                      ? "Deactivated"
+                      : user.attributes.locked_at
+                        ? "Locked"
+                        : "Active"}
                   </Badge>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">

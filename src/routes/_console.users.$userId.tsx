@@ -7,7 +7,13 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowLeftIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Badge, Button, InlineSpinner, Text } from "@vector-im/compound-web";
 
-import { lockUser, unlockUser, userEmailsQuery, userQuery } from "@/api/mas";
+import {
+  deactivateUser,
+  lockUser,
+  unlockUser,
+  userEmailsQuery,
+  userQuery,
+} from "@/api/mas";
 
 export const Route = createFileRoute("/_console/users/$userId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
@@ -31,6 +37,7 @@ interface LockUnlockButtonProps {
     };
   };
   serverName: string;
+  disabled?: boolean;
   queryClient: ReturnType<typeof useQueryClient>;
 }
 
@@ -38,6 +45,7 @@ function LockUnlockButton({
   user,
   serverName,
   queryClient,
+  disabled,
 }: LockUnlockButtonProps) {
   const isLocked = !!user.attributes.locked_at;
 
@@ -66,6 +74,7 @@ function LockUnlockButton({
   });
 
   const handleClick = () => {
+    if (disabled) return;
     if (isLocked) {
       unlockMutation.mutate();
     } else {
@@ -76,7 +85,7 @@ function LockUnlockButton({
   const isLoading = lockMutation.isPending || unlockMutation.isPending;
 
   return (
-    <Button size="sm" onClick={handleClick} disabled={isLoading}>
+    <Button size="sm" onClick={handleClick} disabled={disabled || isLoading}>
       {isLoading && <InlineSpinner />}
       {isLocked ? "Unlock User" : "Lock User"}
     </Button>
@@ -97,6 +106,23 @@ function RouteComponent() {
   );
 
   const user = data.data;
+
+  const deactivated = user.attributes.deactivated_at !== null;
+
+  const deactivateMutation = useMutation({
+    mutationFn: () =>
+      deactivateUser(queryClient, credentials.serverName, userId),
+    throwOnError: true,
+    onSuccess: () => {
+      // Invalidate both the individual user query and the users list
+      queryClient.invalidateQueries({
+        queryKey: ["mas", "user", credentials.serverName, userId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["mas", "users", credentials.serverName],
+      });
+    },
+  });
 
   return (
     <div className="space-y-6">
@@ -129,8 +155,20 @@ function RouteComponent() {
               <Text size="sm" weight="medium">
                 Status
               </Text>
-              <Badge kind={user.attributes.locked_at ? "red" : "blue"}>
-                {user.attributes.locked_at ? "Locked" : "Active"}
+              <Badge
+                kind={
+                  user.attributes.deactivated_at
+                    ? "red"
+                    : user.attributes.locked_at
+                      ? "grey"
+                      : "blue"
+                }
+              >
+                {user.attributes.deactivated_at
+                  ? "Deactivated"
+                  : user.attributes.locked_at
+                    ? "Locked"
+                    : "Active"}
               </Badge>
             </div>
 
@@ -199,18 +237,22 @@ function RouteComponent() {
               Actions
             </Text>
             <div className="flex gap-3">
-              <Button size="sm" disabled>
-                Edit User
-              </Button>
-              <Button size="sm" kind="secondary" disabled>
-                Reset Password
-              </Button>
               <LockUnlockButton
                 user={user}
                 serverName={credentials.serverName}
                 queryClient={queryClient}
+                disabled={deactivated}
               />
-              <Button size="sm" kind="tertiary" destructive disabled>
+              <Button
+                size="sm"
+                kind="tertiary"
+                destructive
+                disabled={deactivateMutation.isPending || deactivated}
+                onClick={() => deactivateMutation.mutate()}
+              >
+                {deactivateMutation.isPending && (
+                  <InlineSpinner className="mr-2" />
+                )}
                 Deactivate User
               </Button>
             </div>
