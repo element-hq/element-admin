@@ -1,76 +1,75 @@
 import { type QueryClient, queryOptions } from "@tanstack/react-query";
-import { type } from "arktype";
+import * as v from "valibot";
 
 import { accessToken } from "@/stores/auth";
 
-const ServerVersionResponse = type({
-  server_version: "string",
+const ServerVersionResponse = v.object({
+  server_version: v.string(),
 });
 
-const Room = type({
-  room_id: "string",
-  name: "string | null",
-  canonical_alias: "string | null",
-  joined_members: "number",
-  joined_local_members: "number",
-  version: "string",
-  creator: "string",
-  encryption: "string | null",
-  federatable: "boolean",
-  public: "boolean",
-  join_rules: "string | null",
-  guest_access: "string | null",
-  history_visibility: "string | null",
-  state_events: "number",
-  room_type: "string | null",
+const Room = v.object({
+  room_id: v.string(),
+  name: v.nullable(v.string()),
+  canonical_alias: v.nullable(v.string()),
+  joined_members: v.number(),
+  joined_local_members: v.number(),
+  version: v.string(),
+  creator: v.string(),
+  encryption: v.nullable(v.string()),
+  federatable: v.boolean(),
+  public: v.boolean(),
+  join_rules: v.nullable(v.string()),
+  guest_access: v.nullable(v.string()),
+  history_visibility: v.nullable(v.string()),
+  state_events: v.number(),
+  room_type: v.nullable(v.string()),
 });
 
-const RoomDetail = type({
-  room_id: "string",
-  name: "string | null",
-  topic: "string | null",
-  avatar: "string | null",
-  canonical_alias: "string | null",
-  joined_members: "number",
-  joined_local_members: "number",
-  joined_local_devices: "number",
-  version: "string",
-  creator: "string",
-  encryption: "string | null",
-  federatable: "boolean",
-  public: "boolean",
-  join_rules: "string | null",
-  guest_access: "string | null",
-  history_visibility: "string | null",
-  state_events: "number",
-  room_type: "string | null",
-  forgotten: "boolean",
+const RoomDetail = v.object({
+  room_id: v.string(),
+  name: v.nullable(v.string()),
+  topic: v.nullable(v.string()),
+  avatar: v.nullable(v.string()),
+  canonical_alias: v.nullable(v.string()),
+  joined_members: v.number(),
+  joined_local_members: v.number(),
+  joined_local_devices: v.number(),
+  version: v.string(),
+  creator: v.string(),
+  encryption: v.nullable(v.string()),
+  federatable: v.boolean(),
+  public: v.boolean(),
+  join_rules: v.nullable(v.string()),
+  guest_access: v.nullable(v.string()),
+  history_visibility: v.nullable(v.string()),
+  state_events: v.number(),
+  room_type: v.nullable(v.string()),
+  forgotten: v.boolean(),
 });
 
-const RoomsListResponse = type({
-  rooms: "unknown[]",
-  offset: "number",
-  total_rooms: "number",
-  "next_batch?": "string | number",
-  "prev_batch?": "string | number",
-}).pipe((value) => {
-  const validatedRooms = (value.rooms as unknown[]).map((item) => {
-    const result = Room(item);
-    if (result instanceof type.errors) {
-      throw new Error(result.summary);
-    }
-    return result;
-  });
+const RoomsListResponse = v.pipe(
+  v.object({
+    rooms: v.array(v.unknown()),
+    offset: v.number(),
+    total_rooms: v.number(),
+    next_batch: v.optional(v.union([v.string(), v.number()])),
+    prev_batch: v.optional(v.union([v.string(), v.number()])),
+  }),
+  v.transform((value) => {
+    const validatedRooms = value.rooms.map((item) => {
+      return v.parse(Room, item);
+    });
 
-  return {
-    ...value,
-    rooms: validatedRooms,
-  };
-});
+    return {
+      ...value,
+      rooms: validatedRooms,
+    };
+  }),
+);
 
-export type Room = typeof Room.infer;
-export type RoomDetail = typeof RoomDetail.infer;
-export type RoomsListResponse = typeof RoomsListResponse.infer;
+export type Room = v.InferOutput<typeof Room>;
+export type RoomDetail = v.InferOutput<typeof RoomDetail>;
+export type RoomsListResponse = v.InferOutput<typeof RoomsListResponse>;
 
 export type RoomListParams = {
   from?: number | string;
@@ -121,10 +120,10 @@ export const serverVersionQuery = (
         throw new Error("Failed to get server version");
       }
 
-      const serverVersion = ServerVersionResponse(await response.json());
-      if (serverVersion instanceof type.errors) {
-        throw new Error(serverVersion.summary);
-      }
+      const serverVersion = v.parse(
+        ServerVersionResponse,
+        await response.json(),
+      );
 
       return serverVersion;
     },
@@ -170,10 +169,7 @@ export const roomsQuery = (
         throw new Error("Failed to fetch rooms");
       }
 
-      const rooms = RoomsListResponse(await response.json());
-      if (rooms instanceof type.errors) {
-        throw new Error(rooms.summary);
-      }
+      const rooms = v.parse(RoomsListResponse, await response.json());
 
       return rooms;
     },
@@ -208,10 +204,7 @@ export const roomDetailQuery = (
         throw new Error("Failed to fetch room details");
       }
 
-      const roomDetail = RoomDetail(await response.json());
-      if (roomDetail instanceof type.errors) {
-        throw new Error(roomDetail.summary);
-      }
+      const roomDetail = v.parse(RoomDetail, await response.json());
 
       return roomDetail;
     },

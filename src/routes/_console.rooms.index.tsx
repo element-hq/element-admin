@@ -1,36 +1,38 @@
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { Link, MatchRoute, createFileRoute } from "@tanstack/react-router";
 import { Badge, Button, Text, TextInput } from "@vector-im/compound-web";
-import { type } from "arktype";
+import * as v from "valibot";
 
 import { wellKnownQuery } from "@/api/matrix";
 import { type RoomListParams, roomsQuery } from "@/api/synapse";
 import { ButtonLink, ChatFilterLink } from "@/components/link";
 import { PAGE_SIZE } from "@/constants";
 
-const RoomSearchParams = type({
-  "from?": "number | string",
-  "order_by?": type.enumerated(
-    "alphabetical",
-    "size",
-    "name",
-    "canonical_alias",
-    "joined_members",
-    "joined_local_members",
-    "version",
-    "creator",
-    "encryption",
-    "federatable",
-    "public",
-    "join_rules",
-    "guest_access",
-    "history_visibility",
-    "state_events",
+const RoomSearchParams = v.object({
+  from: v.optional(v.union([v.number(), v.string()])),
+  order_by: v.optional(
+    v.picklist([
+      "alphabetical",
+      "size",
+      "name",
+      "canonical_alias",
+      "joined_members",
+      "joined_local_members",
+      "version",
+      "creator",
+      "encryption",
+      "federatable",
+      "public",
+      "join_rules",
+      "guest_access",
+      "history_visibility",
+      "state_events",
+    ]),
   ),
-  "dir?": type.enumerated("f", "b"),
-  "search_term?": "string",
-  "public_rooms?": "boolean",
-  "empty_rooms?": "boolean",
+  dir: v.optional(v.picklist(["f", "b"])),
+  search_term: v.optional(v.string()),
+  public_rooms: v.optional(v.boolean()),
+  empty_rooms: v.optional(v.boolean()),
 });
 
 export const Route = createFileRoute("/_console/rooms/")({
@@ -68,7 +70,9 @@ export const Route = createFileRoute("/_console/rooms/")({
 const resetPagination = ({
   from,
   ...search
-}: typeof RoomSearchParams.infer): typeof RoomSearchParams.infer => search;
+}: v.InferOutput<typeof RoomSearchParams>): v.InferOutput<
+  typeof RoomSearchParams
+> => search;
 
 const omit = <T extends Record<string, unknown>, K extends keyof T>(
   obj: T,

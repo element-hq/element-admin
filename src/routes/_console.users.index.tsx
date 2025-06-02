@@ -1,19 +1,19 @@
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { Link, MatchRoute, createFileRoute } from "@tanstack/react-router";
 import { Badge, Button, Text } from "@vector-im/compound-web";
-import { type } from "arktype";
+import * as v from "valibot";
 
 import { type UserListParams, usersQuery } from "@/api/mas";
 import { ButtonLink, ChatFilterLink } from "@/components/link";
 import { PAGE_SIZE } from "@/constants";
 
-const UserSearchParams = type({
-  "before?": "string",
-  "after?": "string",
-  "first?": "number",
-  "last?": "number",
-  "admin?": "boolean",
-  "status?": "'active' | 'locked' | 'deactivated'",
+const UserSearchParams = v.object({
+  before: v.optional(v.string()),
+  after: v.optional(v.string()),
+  first: v.optional(v.number()),
+  last: v.optional(v.number()),
+  admin: v.optional(v.boolean()),
+  status: v.optional(v.picklist(["active", "locked", "deactivated"])),
 });
 
 export const Route = createFileRoute("/_console/users/")({
@@ -45,7 +45,9 @@ const resetPagination = ({
   first,
   last,
   ...search
-}: typeof UserSearchParams.infer): typeof UserSearchParams.infer => search;
+}: v.InferOutput<typeof UserSearchParams>): v.InferOutput<
+  typeof UserSearchParams
+> => search;
 
 const omit = <T extends Record<string, unknown>, K extends keyof T>(
   obj: T,

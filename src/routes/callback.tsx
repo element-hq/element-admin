@@ -1,21 +1,25 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { type } from "arktype";
+import * as v from "valibot";
 
 import { authMetadataQuery, tokenRequest } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
 import { REDIRECT_URI } from "@/constants";
 import { useAuthStore } from "@/stores/auth";
 
-const SearchParams = type({
-  state: "string",
-}).and(
-  type({
-    code: "string",
-  }).or({
-    error: "string",
-    "error_description?": "string",
+const SearchParams = v.intersect([
+  v.object({
+    state: v.string(),
   }),
-);
+  v.union([
+    v.object({
+      code: v.string(),
+    }),
+    v.object({
+      error: v.string(),
+      error_description: v.optional(v.string()),
+    }),
+  ]),
+]);
 
 export const Route = createFileRoute("/callback")({
   validateSearch: SearchParams,

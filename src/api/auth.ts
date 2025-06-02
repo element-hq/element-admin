@@ -1,11 +1,11 @@
 import { queryOptions } from "@tanstack/react-query";
-import { type } from "arktype";
+import * as v from "valibot";
 
-const AuthMetadataResponse = type({
-  issuer: "string",
-  authorization_endpoint: "string",
-  token_endpoint: "string",
-  registration_endpoint: "string",
+const AuthMetadataResponse = v.object({
+  issuer: v.string(),
+  authorization_endpoint: v.string(),
+  token_endpoint: v.string(),
+  registration_endpoint: v.string(),
 });
 
 export const authMetadataQuery = (synapseRoot: string) =>
@@ -22,10 +22,7 @@ export const authMetadataQuery = (synapseRoot: string) =>
         throw new Error("Failed to discover");
       }
 
-      const authMetadata = AuthMetadataResponse(await response.json());
-      if (authMetadata instanceof type.errors) {
-        throw new Error(authMetadata.summary);
-      }
+      const authMetadata = v.parse(AuthMetadataResponse, await response.json());
 
       return authMetadata;
     },
@@ -41,8 +38,8 @@ export type ClientMetadata = {
   response_types: string[];
 };
 
-const ClientRegistrationResponse = type({
-  client_id: "string",
+const ClientRegistrationResponse = v.object({
+  client_id: v.string(),
 });
 
 export const clientRegistration = async (
@@ -63,13 +60,10 @@ export const clientRegistration = async (
     throw new Error("Failed to register client");
   }
 
-  const clientRegistrationData = ClientRegistrationResponse(
+  const clientRegistrationData = v.parse(
+    ClientRegistrationResponse,
     await response.json(),
   );
-
-  if (clientRegistrationData instanceof type.errors) {
-    throw new Error(clientRegistrationData.summary);
-  }
 
   return clientRegistrationData;
 };
@@ -88,10 +82,10 @@ type TokenRequestParams =
       client_id: string;
     };
 
-const TokenResponse = type({
-  access_token: "string",
-  refresh_token: "string",
-  expires_in: "number",
+const TokenResponse = v.object({
+  access_token: v.string(),
+  refresh_token: v.string(),
+  expires_in: v.number(),
 });
 
 export const tokenRequest = async (
@@ -112,10 +106,7 @@ export const tokenRequest = async (
     throw new Error("Failed to get token");
   }
 
-  const tokenData = TokenResponse(await response.json());
-  if (tokenData instanceof type.errors) {
-    throw new Error(tokenData.summary);
-  }
+  const tokenData = v.parse(TokenResponse, await response.json());
 
   return tokenData;
 };

@@ -1,104 +1,104 @@
 import { type QueryClient, queryOptions } from "@tanstack/react-query";
-import { type } from "arktype";
+import * as v from "valibot";
 
 import { authMetadataQuery } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
 import { accessToken } from "@/stores/auth";
 
-const User = type({
-  username: "string",
-  created_at: "string",
-  locked_at: "string | null",
-  deactivated_at: "string | null",
-  admin: "boolean",
+const User = v.object({
+  username: v.string(),
+  created_at: v.string(),
+  locked_at: v.nullable(v.string()),
+  deactivated_at: v.nullable(v.string()),
+  admin: v.boolean(),
 });
 
-const SingleResourceForUser = type({
-  type: "string",
-  id: "string",
+const SingleResourceForUser = v.object({
+  type: v.string(),
+  id: v.string(),
   attributes: User,
-  links: {
-    self: "string",
-  },
+  links: v.object({
+    self: v.string(),
+  }),
 });
 
-const PaginationMeta = type({
-  count: "number",
+const PaginationMeta = v.object({
+  count: v.number(),
 });
 
-const PaginationLinks = type({
-  self: "string",
-  first: "string",
-  last: "string",
-  "next?": "string",
-  "prev?": "string",
+const PaginationLinks = v.object({
+  self: v.string(),
+  first: v.string(),
+  last: v.string(),
+  next: v.optional(v.string()),
+  prev: v.optional(v.string()),
 });
 
-const PaginatedResponseForUser = type({
-  meta: PaginationMeta,
-  data: "unknown[]",
-  links: PaginationLinks,
-}).pipe((value) => {
-  const validatedData = (value.data as unknown[]).map((item) => {
-    const result = SingleResourceForUser(item);
-    if (result instanceof type.errors) {
-      throw new Error(result.summary);
-    }
-    return result;
-  });
+const PaginatedResponseForUser = v.pipe(
+  v.object({
+    meta: PaginationMeta,
+    data: v.array(v.unknown()),
+    links: PaginationLinks,
+  }),
+  v.transform((value) => {
+    const validatedData = value.data.map((item) => {
+      return v.parse(SingleResourceForUser, item);
+    });
 
-  return {
-    ...value,
-    data: validatedData,
-  };
-});
+    return {
+      ...value,
+      data: validatedData,
+    };
+  }),
+);
 
-const SingleResponseForUser = type({
+const SingleResponseForUser = v.object({
   data: SingleResourceForUser,
-  links: {
-    self: "string",
-  },
+  links: v.object({
+    self: v.string(),
+  }),
 });
 
-const UserEmail = type({
-  created_at: "string",
-  user_id: "string",
-  email: "string",
+const UserEmail = v.object({
+  created_at: v.string(),
+  user_id: v.string(),
+  email: v.string(),
 });
 
-const SingleResourceForUserEmail = type({
-  type: "string",
-  id: "string",
+const SingleResourceForUserEmail = v.object({
+  type: v.string(),
+  id: v.string(),
   attributes: UserEmail,
-  links: {
-    self: "string",
-  },
+  links: v.object({
+    self: v.string(),
+  }),
 });
 
-const PaginatedResponseForUserEmail = type({
-  meta: PaginationMeta,
-  data: "unknown[]",
-  links: PaginationLinks,
-}).pipe((value) => {
-  const validatedData = (value.data as unknown[]).map((item) => {
-    const result = SingleResourceForUserEmail(item);
-    if (result instanceof type.errors) {
-      throw new Error(result.summary);
-    }
-    return result;
-  });
+const PaginatedResponseForUserEmail = v.pipe(
+  v.object({
+    meta: PaginationMeta,
+    data: v.array(v.unknown()),
+    links: PaginationLinks,
+  }),
+  v.transform((value) => {
+    const validatedData = value.data.map((item) => {
+      return v.parse(SingleResourceForUserEmail, item);
+    });
 
-  return {
-    ...value,
-    data: validatedData,
-  };
-});
+    return {
+      ...value,
+      data: validatedData,
+    };
+  }),
+);
 
-export type User = typeof User.infer;
-export type UserEmail = typeof UserEmail.infer;
-export type PaginatedUsers = typeof PaginatedResponseForUser.infer;
-export type SingleUserResponse = typeof SingleResponseForUser.infer;
-export type PaginatedUserEmails = typeof PaginatedResponseForUserEmail.infer;
+export type User = v.InferOutput<typeof User>;
+export type UserEmail = v.InferOutput<typeof UserEmail>;
+export type PaginatedUsers = v.InferOutput<typeof PaginatedResponseForUser>;
+export type SingleUserResponse = v.InferOutput<typeof SingleResponseForUser>;
+export type PaginatedUserEmails = v.InferOutput<
+  typeof PaginatedResponseForUserEmail
+>;
 
 export type UserListParams = {
   before?: string;
@@ -156,10 +156,7 @@ export const usersQuery = (
         throw new Error("Failed to fetch users");
       }
 
-      const users = PaginatedResponseForUser(await response.json());
-      if (users instanceof type.errors) {
-        throw new Error(users.summary);
-      }
+      const users = v.parse(PaginatedResponseForUser, await response.json());
 
       return users;
     },
@@ -200,10 +197,7 @@ export const userQuery = (
         throw new Error("Failed to fetch user");
       }
 
-      const user = SingleResponseForUser(await response.json());
-      if (user instanceof type.errors) {
-        throw new Error(user.summary);
-      }
+      const user = v.parse(SingleResponseForUser, await response.json());
 
       return user;
     },
@@ -243,10 +237,7 @@ export const lockUser = async (
     throw new Error("Failed to lock user");
   }
 
-  const user = SingleResponseForUser(await response.json());
-  if (user instanceof type.errors) {
-    throw new Error(user.summary);
-  }
+  const user = v.parse(SingleResponseForUser, await response.json());
 
   return user;
 };
@@ -285,10 +276,7 @@ export const deactivateUser = async (
     throw new Error("Failed to deactivate user");
   }
 
-  const user = SingleResponseForUser(await response.json());
-  if (user instanceof type.errors) {
-    throw new Error(user.summary);
-  }
+  const user = v.parse(SingleResponseForUser, await response.json());
 
   return user;
 };
@@ -332,10 +320,10 @@ export const userEmailsQuery = (
         throw new Error("Failed to fetch user emails");
       }
 
-      const userEmails = PaginatedResponseForUserEmail(await response.json());
-      if (userEmails instanceof type.errors) {
-        throw new Error(userEmails.summary);
-      }
+      const userEmails = v.parse(
+        PaginatedResponseForUserEmail,
+        await response.json(),
+      );
 
       return userEmails;
     },
@@ -375,10 +363,7 @@ export const unlockUser = async (
     throw new Error("Failed to unlock user");
   }
 
-  const user = SingleResponseForUser(await response.json());
-  if (user instanceof type.errors) {
-    throw new Error(user.summary);
-  }
+  const user = v.parse(SingleResponseForUser, await response.json());
 
   return user;
 };

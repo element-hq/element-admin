@@ -1,11 +1,11 @@
 import { accessToken } from "@/stores/auth";
 import { type QueryClient, queryOptions } from "@tanstack/react-query";
-import { type } from "arktype";
+import * as v from "valibot";
 
-const WellKnownResponse = type({
-  "m.homeserver": {
-    base_url: "string",
-  },
+const WellKnownResponse = v.object({
+  "m.homeserver": v.object({
+    base_url: v.string(),
+  }),
 });
 
 export const wellKnownQuery = (serverName: string) =>
@@ -22,17 +22,14 @@ export const wellKnownQuery = (serverName: string) =>
         throw new Error("Failed to discover");
       }
 
-      const wkData = WellKnownResponse(await wkResponse.json());
-      if (wkData instanceof type.errors) {
-        throw new Error(wkData.summary);
-      }
+      const wkData = v.parse(WellKnownResponse, await wkResponse.json());
 
       return wkData;
     },
   });
 
-const WhoamiResponse = type({
-  user_id: "string",
+const WhoamiResponse = v.object({
+  user_id: v.string(),
 });
 
 export const whoamiQuery = (queryClient: QueryClient, synapseRoot: string) =>
@@ -57,10 +54,7 @@ export const whoamiQuery = (queryClient: QueryClient, synapseRoot: string) =>
         throw new Error("Failed to call whoami");
       }
 
-      const whoamiData = WhoamiResponse(await response.json());
-      if (whoamiData instanceof type.errors) {
-        throw new Error(whoamiData.summary);
-      }
+      const whoamiData = v.parse(WhoamiResponse, await response.json());
 
       return whoamiData;
     },
