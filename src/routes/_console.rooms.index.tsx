@@ -1,17 +1,11 @@
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { Link, MatchRoute, createFileRoute } from "@tanstack/react-router";
-import {
-  Badge,
-  Button,
-  ChatFilter,
-  Text,
-  TextInput,
-} from "@vector-im/compound-web";
+import { Badge, Button, Text, TextInput } from "@vector-im/compound-web";
 import { type } from "arktype";
 
 import { wellKnownQuery } from "@/api/matrix";
 import { type RoomListParams, roomsQuery } from "@/api/synapse";
-import { ButtonLink } from "@/components/link";
+import { ButtonLink, ChatFilterLink } from "@/components/link";
 import { PAGE_SIZE } from "@/constants";
 
 const RoomSearchParams = type({
@@ -75,6 +69,14 @@ const resetPagination = ({
   from,
   ...search
 }: typeof RoomSearchParams.infer): typeof RoomSearchParams.infer => search;
+
+const omit = <T extends Record<string, unknown>, K extends keyof T>(
+  obj: T,
+  keys: K[],
+): Omit<T, K> =>
+  Object.fromEntries(
+    Object.entries(obj).filter(([key]) => !(keys as string[]).includes(key)),
+  ) as Omit<T, K>;
 
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
@@ -143,76 +145,48 @@ function RouteComponent() {
       </div>
 
       <div className="flex gap-4 flex-wrap">
-        <ChatFilter
+        <ChatFilterLink
           selected={search.public_rooms === true}
-          onClick={() => {
-            navigate({
-              search: (prev) => {
-                const { public_rooms, ...newParams } = resetPagination(prev);
-                if (search.public_rooms === true) return newParams;
-                return { ...newParams, public_rooms: true };
-              },
-            });
-          }}
+          to={Route.fullPath}
+          search={
+            search.public_rooms === true
+              ? omit(resetPagination(search), ["public_rooms"])
+              : {
+                  ...resetPagination(search),
+                  public_rooms: true,
+                }
+          }
         >
           Public Only
-        </ChatFilter>
-        <ChatFilter
+        </ChatFilterLink>
+        <ChatFilterLink
           selected={search.public_rooms === false}
-          onClick={() => {
-            navigate({
-              search: (prev) => {
-                const { public_rooms, ...newParams } = resetPagination(prev);
-                if (search.public_rooms === false) return newParams;
-                return { ...newParams, public_rooms: false };
-              },
-            });
-          }}
+          to={Route.fullPath}
+          search={
+            search.public_rooms === false
+              ? omit(resetPagination(search), ["public_rooms"])
+              : {
+                  ...resetPagination(search),
+                  public_rooms: false,
+                }
+          }
         >
           Private Only
-        </ChatFilter>
-        <ChatFilter
+        </ChatFilterLink>
+        <ChatFilterLink
           selected={search.empty_rooms === true}
-          onClick={() => {
-            navigate({
-              search: (prev) => {
-                const { empty_rooms, ...newParams } = resetPagination(prev);
-                if (search.empty_rooms === true) return newParams;
-                return { ...newParams, empty_rooms: true };
-              },
-            });
-          }}
+          to={Route.fullPath}
+          search={
+            search.empty_rooms === true
+              ? omit(resetPagination(search), ["empty_rooms"])
+              : {
+                  ...resetPagination(search),
+                  empty_rooms: true,
+                }
+          }
         >
           Empty Only
-        </ChatFilter>
-        <ChatFilter
-          selected={search.order_by === "joined_members"}
-          onClick={() => {
-            navigate({
-              search: (prev) => {
-                const { order_by, ...newParams } = resetPagination(prev);
-                if (search.order_by === "joined_members") return newParams;
-                return { ...newParams, order_by: "joined_members" };
-              },
-            });
-          }}
-        >
-          Sort by Members
-        </ChatFilter>
-        <ChatFilter
-          selected={search.order_by === "name"}
-          onClick={() => {
-            navigate({
-              search: (prev) => {
-                const { order_by, ...newParams } = resetPagination(prev);
-                if (search.order_by === "name") return newParams;
-                return { ...newParams, order_by: "name" };
-              },
-            });
-          }}
-        >
-          Sort by Name
-        </ChatFilter>
+        </ChatFilterLink>
       </div>
 
       <TextInput

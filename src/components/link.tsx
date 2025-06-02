@@ -2,7 +2,7 @@ import { createLink } from "@tanstack/react-router";
 import { Button } from "@vector-im/compound-web";
 import { type PropsWithChildren, forwardRef } from "react";
 
-type Props = {
+type ButtonLinkProps = {
   kind?: "primary" | "secondary" | "tertiary";
   size?: "sm" | "lg";
   Icon?: React.ComponentType<React.SVGAttributes<SVGElement>>;
@@ -11,7 +11,7 @@ type Props = {
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 export const ButtonLink = createLink(
-  forwardRef<HTMLAnchorElement, PropsWithChildren<Props>>(
+  forwardRef<HTMLAnchorElement, PropsWithChildren<ButtonLinkProps>>(
     ({ children, ...props }, ref) => {
       const disabled = !!props.disabled || !!props["aria-disabled"] || false;
       return (
@@ -20,5 +20,31 @@ export const ButtonLink = createLink(
         </Button>
       );
     },
+  ),
+);
+
+type ChatFilterLinkProps = {
+  selected?: boolean;
+} & React.AnchorHTMLAttributes<HTMLAnchorElement>;
+
+export const ChatFilterLink = createLink(
+  forwardRef<HTMLAnchorElement, PropsWithChildren<ChatFilterLinkProps>>(
+    ({ children, ...props }, ref) => (
+      <a
+        {...props}
+        ref={ref}
+        data-selected={props.selected || undefined}
+        aria-selected={props.selected || undefined}
+        className="
+            cpd-font-body-sm-medium text-text-primary
+            px-2 py-1
+            bg-transparent border-1 border-border-interactive-secondary rounded-full
+            hover:border-border-interactive-primary hover:bg-bg-subtle-primary
+            data-selected:border-bg-action-primary-rest data-selected:bg-bg-action-primary-rest data-selected:text-text-on-solid-primary
+          "
+      >
+        {children}
+      </a>
+    ),
   ),
 );

@@ -87,3 +87,7 @@
   --color-icon-info-primary: var(--cpd-color-icon-info-primary);
   --color-icon-on-solid-primary: var(--cpd-color-icon-on-solid-primary);
 }
+
+.cpd-font-body-sm-medium {
+  font: var(--cpd-font-body-sm-medium);
+}

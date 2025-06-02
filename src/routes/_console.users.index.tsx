@@ -1,10 +1,10 @@
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { Link, MatchRoute, createFileRoute } from "@tanstack/react-router";
-import { Badge, Button, ChatFilter, Text } from "@vector-im/compound-web";
+import { Badge, Button, Text } from "@vector-im/compound-web";
 import { type } from "arktype";
 
 import { type UserListParams, usersQuery } from "@/api/mas";
-import { ButtonLink } from "@/components/link";
+import { ButtonLink, ChatFilterLink } from "@/components/link";
 import { PAGE_SIZE } from "@/constants";
 
 const UserSearchParams = type({
@@ -47,10 +47,17 @@ const resetPagination = ({
   ...search
 }: typeof UserSearchParams.infer): typeof UserSearchParams.infer => search;
 
+const omit = <T extends Record<string, unknown>, K extends keyof T>(
+  obj: T,
+  keys: K[],
+): Omit<T, K> =>
+  Object.fromEntries(
+    Object.entries(obj).filter(([key]) => !(keys as string[]).includes(key)),
+  ) as Omit<T, K>;
+
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
-  const navigate = Route.useNavigate();
   const queryClient = useQueryClient();
 
   const params: UserListParams = {
@@ -106,62 +113,62 @@ function RouteComponent() {
 
       {/* Filters */}
       <div className="flex gap-4">
-        <ChatFilter
+        <ChatFilterLink
           selected={search.admin === true}
-          onClick={() => {
-            navigate({
-              search: (prev) => {
-                const { admin, ...newParams } = resetPagination(prev);
-                if (search.admin) return newParams;
-                return { ...newParams, admin: true };
-              },
-            });
-          }}
+          to={Route.fullPath}
+          search={
+            search.admin === true
+              ? omit(resetPagination(search), ["admin"])
+              : {
+                  ...resetPagination(search),
+                  admin: true,
+                }
+          }
         >
           Admin Only
-        </ChatFilter>
-        <ChatFilter
+        </ChatFilterLink>
+        <ChatFilterLink
           selected={search.status === "active"}
-          onClick={() => {
-            navigate({
-              search: (prev) => {
-                const { status, ...newParams } = resetPagination(prev);
-                if (search.status === "active") return newParams;
-                return { ...newParams, status: "active" };
-              },
-            });
-          }}
+          to={Route.fullPath}
+          search={
+            search.status === "active"
+              ? omit(resetPagination(search), ["status"])
+              : {
+                  ...resetPagination(search),
+                  status: "active",
+                }
+          }
         >
           Active Only
-        </ChatFilter>
-        <ChatFilter
+        </ChatFilterLink>
+        <ChatFilterLink
           selected={search.status === "locked"}
-          onClick={() => {
-            navigate({
-              search: (prev) => {
-                const { status, ...newParams } = resetPagination(prev);
-                if (search.status === "locked") return newParams;
-                return { ...newParams, status: "locked" };
-              },
-            });
-          }}
+          to={Route.fullPath}
+          search={
+            search.status === "locked"
+              ? omit(resetPagination(search), ["status"])
+              : {
+                  ...resetPagination(search),
+                  status: "locked",
+                }
+          }
         >
           Locked Only
-        </ChatFilter>
-        <ChatFilter
+        </ChatFilterLink>
+        <ChatFilterLink
           selected={search.status === "deactivated"}
-          onClick={() => {
-            navigate({
-              search: (prev) => {
-                const { status, ...newParams } = resetPagination(prev);
-                if (search.status === "deactivated") return newParams;
-                return { ...newParams, status: "deactivated" };
-              },
-            });
-          }}
+          to={Route.fullPath}
+          search={
+            search.status === "deactivated"
+              ? omit(resetPagination(search), ["status"])
+              : {
+                  ...resetPagination(search),
+                  status: "deactivated",
+                }
+          }
         >
           Deactivated Only
-        </ChatFilter>
+        </ChatFilterLink>
       </div>
 
       {/* Users Table */}
