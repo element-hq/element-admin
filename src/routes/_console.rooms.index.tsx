@@ -1,6 +1,6 @@
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { Link, MatchRoute, createFileRoute } from "@tanstack/react-router";
-import { Badge, Button, Text, TextInput } from "@vector-im/compound-web";
+import { Badge, Button, H2, Text, TextInput } from "@vector-im/compound-web";
 import * as v from "valibot";
 
 import { wellKnownQuery } from "@/api/matrix";
@@ -139,10 +139,8 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
-        <Text as="h1" size="lg" weight="semibold">
-          Rooms
-        </Text>
+      <div className="flex items-center gap-4">
+        <H2 className="flex-1">Rooms</H2>
         <Text size="sm" className="text-text-secondary">
           Total: {data.total_rooms}
         </Text>

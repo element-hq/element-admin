@@ -92,6 +92,51 @@ const PaginatedResponseForUserEmail = v.pipe(
   }),
 );
 
+const RegistrationToken = v.object({
+  token: v.string(),
+  valid: v.boolean(),
+  usage_limit: v.nullable(v.number()),
+  times_used: v.number(),
+  created_at: v.string(),
+  last_used_at: v.nullable(v.string()),
+  expires_at: v.nullable(v.string()),
+  revoked_at: v.nullable(v.string()),
+});
+
+const SingleResourceForRegistrationToken = v.object({
+  type: v.string(),
+  id: v.string(),
+  attributes: RegistrationToken,
+  links: v.object({
+    self: v.string(),
+  }),
+});
+
+const PaginatedResponseForRegistrationToken = v.pipe(
+  v.object({
+    meta: PaginationMeta,
+    data: v.array(v.unknown()),
+    links: PaginationLinks,
+  }),
+  v.transform((value) => {
+    const validatedData = value.data.map((item) => {
+      return v.parse(SingleResourceForRegistrationToken, item);
+    });
+
+    return {
+      ...value,
+      data: validatedData,
+    };
+  }),
+);
+
+const SingleResponseForRegistrationToken = v.object({
+  data: SingleResourceForRegistrationToken,
+  links: v.object({
+    self: v.string(),
+  }),
+});
+
 export type User = v.InferOutput<typeof User>;
 export type UserEmail = v.InferOutput<typeof UserEmail>;
 export type PaginatedUsers = v.InferOutput<typeof PaginatedResponseForUser>;
@@ -99,6 +144,9 @@ export type SingleUserResponse = v.InferOutput<typeof SingleResponseForUser>;
 export type PaginatedUserEmails = v.InferOutput<
   typeof PaginatedResponseForUserEmail
 >;
+export type RegistrationToken = v.InferOutput<typeof RegistrationToken>;
+export type PaginatedRegistrationTokens = v.InferOutput<typeof PaginatedResponseForRegistrationToken>;
+export type SingleRegistrationTokenResponse = v.InferOutput<typeof SingleResponseForRegistrationToken>;
 
 export type UserListParams = {
   before?: string;
@@ -107,6 +155,23 @@ export type UserListParams = {
   last?: number;
   admin?: boolean;
   status?: "active" | "locked" | "deactivated";
+};
+
+export type TokenListParams = {
+  before?: string;
+  after?: string;
+  first?: number;
+  last?: number;
+  used?: boolean;
+  revoked?: boolean;
+  expired?: boolean;
+  valid?: boolean;
+};
+
+export type CreateTokenParams = {
+  token?: string; // Custom token string (optional)
+  usage_limit?: number;
+  expires_at?: string; // ISO date string
 };
 
 export const usersQuery = (
@@ -366,4 +431,199 @@ export const unlockUser = async (
   const user = v.parse(SingleResponseForUser, await response.json());
 
   return user;
+};
+
+export const registrationTokensQuery = (
+  queryClient: QueryClient,
+  serverName: string,
+  params: TokenListParams = {},
+) =>
+  queryOptions({
+    queryKey: ["mas", "registration-tokens", serverName, params],
+    queryFn: async ({ signal }) => {
+      const token = await accessToken(queryClient, signal);
+      if (!token) {
+        throw new Error("No access token");
+      }
+
+      const wellKnown = await queryClient.ensureQueryData(
+        wellKnownQuery(serverName),
+      );
+
+      const authMetadata = await queryClient.ensureQueryData(
+        authMetadataQuery(wellKnown["m.homeserver"].base_url),
+      );
+
+      const masApiRoot = authMetadata.issuer;
+      const url = new URL("/api/admin/v1/user-registration-tokens", masApiRoot);
+
+      // Add pagination parameters
+      if (params.before) url.searchParams.set("page[before]", params.before);
+      if (params.after) url.searchParams.set("page[after]", params.after);
+      if (params.first)
+        url.searchParams.set("page[first]", String(params.first));
+      if (params.last) url.searchParams.set("page[last]", String(params.last));
+      
+      // Add filter parameters
+      if (params.used !== undefined)
+        url.searchParams.set("filter[used]", String(params.used));
+      if (params.revoked !== undefined)
+        url.searchParams.set("filter[revoked]", String(params.revoked));
+      if (params.expired !== undefined)
+        url.searchParams.set("filter[expired]", String(params.expired));
+      if (params.valid !== undefined)
+        url.searchParams.set("filter[valid]", String(params.valid));
+
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        signal,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch registration tokens");
+      }
+
+      const tokens = v.parse(
+        PaginatedResponseForRegistrationToken,
+        await response.json(),
+      );
+
+      return tokens;
+    },
+  });
+
+export const registrationTokenQuery = (
+  queryClient: QueryClient,
+  serverName: string,
+  tokenId: string,
+) =>
+  queryOptions({
+    queryKey: ["mas", "registration-token", serverName, tokenId],
+    queryFn: async ({ signal }) => {
+      const accessTokenValue = await accessToken(queryClient, signal);
+      if (!accessTokenValue) {
+        throw new Error("No access token");
+      }
+
+      const wellKnown = await queryClient.ensureQueryData(
+        wellKnownQuery(serverName),
+      );
+
+      const authMetadata = await queryClient.ensureQueryData(
+        authMetadataQuery(wellKnown["m.homeserver"].base_url),
+      );
+
+      const masApiRoot = authMetadata.issuer;
+      const url = new URL(`/api/admin/v1/user-registration-tokens/${tokenId}`, masApiRoot);
+
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${accessTokenValue}`,
+        },
+        signal,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch registration token");
+      }
+
+      const tokenData = v.parse(
+        SingleResponseForRegistrationToken,
+        await response.json(),
+      );
+
+      return tokenData;
+    },
+  });
+
+export const createRegistrationToken = async (
+  queryClient: QueryClient,
+  serverName: string,
+  params: CreateTokenParams = {},
+  signal?: AbortSignal,
+) => {
+  const accessTokenValue = await accessToken(queryClient, signal);
+  if (!accessTokenValue) {
+    throw new Error("No access token");
+  }
+
+  const wellKnown = await queryClient.ensureQueryData(
+    wellKnownQuery(serverName),
+  );
+
+  const authMetadata = await queryClient.ensureQueryData(
+    authMetadataQuery(wellKnown["m.homeserver"].base_url),
+  );
+
+  const masApiRoot = authMetadata.issuer;
+  const url = new URL("/api/admin/v1/user-registration-tokens", masApiRoot);
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessTokenValue}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ...(params.expires_at && { expires_at: params.expires_at }),
+      ...(params.usage_limit !== undefined && { usage_limit: params.usage_limit }),
+      ...(params.token && { token: params.token }),
+    }),
+    ...(signal && { signal }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create registration token");
+  }
+
+  const tokenData = v.parse(
+    SingleResponseForRegistrationToken,
+    await response.json(),
+  );
+
+  return tokenData;
+};
+
+export const revokeRegistrationToken = async (
+  queryClient: QueryClient,
+  serverName: string,
+  tokenId: string,
+  signal?: AbortSignal,
+) => {
+  const accessTokenValue = await accessToken(queryClient, signal);
+  if (!accessTokenValue) {
+    throw new Error("No access token");
+  }
+
+  const wellKnown = await queryClient.ensureQueryData(
+    wellKnownQuery(serverName),
+  );
+
+  const authMetadata = await queryClient.ensureQueryData(
+    authMetadataQuery(wellKnown["m.homeserver"].base_url),
+  );
+
+  const masApiRoot = authMetadata.issuer;
+  const url = new URL(`/api/admin/v1/user-registration-tokens/${tokenId}/revoke`, masApiRoot);
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessTokenValue}`,
+    },
+    ...(signal && { signal }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to revoke registration token");
+  }
+
+  const tokenData = v.parse(
+    SingleResponseForRegistrationToken,
+    await response.json(),
+  );
+
+  return tokenData;
 };

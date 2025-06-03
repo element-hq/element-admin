@@ -7,6 +7,7 @@ import {
 import {
   ChatIcon,
   HomeSolidIcon,
+  KeyIcon,
   UserIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
@@ -94,6 +95,9 @@ export const Route = createFileRoute("/_console")({
               </SectionLink>
               <SectionLink Icon={UserIcon} to="/users">
                 Users
+              </SectionLink>
+              <SectionLink Icon={KeyIcon} to="/registration-tokens">
+                Registration tokens
               </SectionLink>
               <SectionLink Icon={ChatIcon} to="/rooms">
                 Rooms

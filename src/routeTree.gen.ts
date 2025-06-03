@@ -17,9 +17,12 @@ import { Route as AuthImport } from './routes/_auth'
 import { Route as ConsoleIndexImport } from './routes/_console.index'
 import { Route as ConsoleUsersIndexImport } from './routes/_console.users.index'
 import { Route as ConsoleRoomsIndexImport } from './routes/_console.rooms.index'
+import { Route as ConsoleRegistrationTokensIndexImport } from './routes/_console.registration-tokens.index'
 import { Route as AuthLoginIndexImport } from './routes/_auth.login.index'
 import { Route as ConsoleUsersUserIdImport } from './routes/_console.users.$userId'
 import { Route as ConsoleRoomsRoomIdImport } from './routes/_console.rooms.$roomId'
+import { Route as ConsoleRegistrationTokensAddImport } from './routes/_console.registration-tokens.add'
+import { Route as ConsoleRegistrationTokensTokenIdImport } from './routes/_console.registration-tokens.$tokenId'
 import { Route as AuthLoginServerNameImport } from './routes/_auth.login.$serverName'
 
 // Create/Update Routes
@@ -58,6 +61,13 @@ const ConsoleRoomsIndexRoute = ConsoleRoomsIndexImport.update({
   getParentRoute: () => ConsoleRoute,
 } as any)
 
+const ConsoleRegistrationTokensIndexRoute =
+  ConsoleRegistrationTokensIndexImport.update({
+    id: '/registration-tokens/',
+    path: '/registration-tokens/',
+    getParentRoute: () => ConsoleRoute,
+  } as any)
+
 const AuthLoginIndexRoute = AuthLoginIndexImport.update({
   id: '/login/',
   path: '/login/',
@@ -75,6 +85,20 @@ const ConsoleRoomsRoomIdRoute = ConsoleRoomsRoomIdImport.update({
   path: '/rooms/$roomId',
   getParentRoute: () => ConsoleRoute,
 } as any)
+
+const ConsoleRegistrationTokensAddRoute =
+  ConsoleRegistrationTokensAddImport.update({
+    id: '/registration-tokens/add',
+    path: '/registration-tokens/add',
+    getParentRoute: () => ConsoleRoute,
+  } as any)
+
+const ConsoleRegistrationTokensTokenIdRoute =
+  ConsoleRegistrationTokensTokenIdImport.update({
+    id: '/registration-tokens/$tokenId',
+    path: '/registration-tokens/$tokenId',
+    getParentRoute: () => ConsoleRoute,
+  } as any)
 
 const AuthLoginServerNameRoute = AuthLoginServerNameImport.update({
   id: '/login/$serverName',
@@ -121,6 +145,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginServerNameImport
       parentRoute: typeof AuthImport
     }
+    '/_console/registration-tokens/$tokenId': {
+      id: '/_console/registration-tokens/$tokenId'
+      path: '/registration-tokens/$tokenId'
+      fullPath: '/registration-tokens/$tokenId'
+      preLoaderRoute: typeof ConsoleRegistrationTokensTokenIdImport
+      parentRoute: typeof ConsoleImport
+    }
+    '/_console/registration-tokens/add': {
+      id: '/_console/registration-tokens/add'
+      path: '/registration-tokens/add'
+      fullPath: '/registration-tokens/add'
+      preLoaderRoute: typeof ConsoleRegistrationTokensAddImport
+      parentRoute: typeof ConsoleImport
+    }
     '/_console/rooms/$roomId': {
       id: '/_console/rooms/$roomId'
       path: '/rooms/$roomId'
@@ -141,6 +179,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/login'
       preLoaderRoute: typeof AuthLoginIndexImport
       parentRoute: typeof AuthImport
+    }
+    '/_console/registration-tokens/': {
+      id: '/_console/registration-tokens/'
+      path: '/registration-tokens'
+      fullPath: '/registration-tokens'
+      preLoaderRoute: typeof ConsoleRegistrationTokensIndexImport
+      parentRoute: typeof ConsoleImport
     }
     '/_console/rooms/': {
       id: '/_console/rooms/'
@@ -175,16 +220,22 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface ConsoleRouteChildren {
   ConsoleIndexRoute: typeof ConsoleIndexRoute
+  ConsoleRegistrationTokensTokenIdRoute: typeof ConsoleRegistrationTokensTokenIdRoute
+  ConsoleRegistrationTokensAddRoute: typeof ConsoleRegistrationTokensAddRoute
   ConsoleRoomsRoomIdRoute: typeof ConsoleRoomsRoomIdRoute
   ConsoleUsersUserIdRoute: typeof ConsoleUsersUserIdRoute
+  ConsoleRegistrationTokensIndexRoute: typeof ConsoleRegistrationTokensIndexRoute
   ConsoleRoomsIndexRoute: typeof ConsoleRoomsIndexRoute
   ConsoleUsersIndexRoute: typeof ConsoleUsersIndexRoute
 }
 
 const ConsoleRouteChildren: ConsoleRouteChildren = {
   ConsoleIndexRoute: ConsoleIndexRoute,
+  ConsoleRegistrationTokensTokenIdRoute: ConsoleRegistrationTokensTokenIdRoute,
+  ConsoleRegistrationTokensAddRoute: ConsoleRegistrationTokensAddRoute,
   ConsoleRoomsRoomIdRoute: ConsoleRoomsRoomIdRoute,
   ConsoleUsersUserIdRoute: ConsoleUsersUserIdRoute,
+  ConsoleRegistrationTokensIndexRoute: ConsoleRegistrationTokensIndexRoute,
   ConsoleRoomsIndexRoute: ConsoleRoomsIndexRoute,
   ConsoleUsersIndexRoute: ConsoleUsersIndexRoute,
 }
@@ -197,9 +248,12 @@ export interface FileRoutesByFullPath {
   '/callback': typeof CallbackRoute
   '/': typeof ConsoleIndexRoute
   '/login/$serverName': typeof AuthLoginServerNameRoute
+  '/registration-tokens/$tokenId': typeof ConsoleRegistrationTokensTokenIdRoute
+  '/registration-tokens/add': typeof ConsoleRegistrationTokensAddRoute
   '/rooms/$roomId': typeof ConsoleRoomsRoomIdRoute
   '/users/$userId': typeof ConsoleUsersUserIdRoute
   '/login': typeof AuthLoginIndexRoute
+  '/registration-tokens': typeof ConsoleRegistrationTokensIndexRoute
   '/rooms': typeof ConsoleRoomsIndexRoute
   '/users': typeof ConsoleUsersIndexRoute
 }
@@ -209,9 +263,12 @@ export interface FileRoutesByTo {
   '/callback': typeof CallbackRoute
   '/': typeof ConsoleIndexRoute
   '/login/$serverName': typeof AuthLoginServerNameRoute
+  '/registration-tokens/$tokenId': typeof ConsoleRegistrationTokensTokenIdRoute
+  '/registration-tokens/add': typeof ConsoleRegistrationTokensAddRoute
   '/rooms/$roomId': typeof ConsoleRoomsRoomIdRoute
   '/users/$userId': typeof ConsoleUsersUserIdRoute
   '/login': typeof AuthLoginIndexRoute
+  '/registration-tokens': typeof ConsoleRegistrationTokensIndexRoute
   '/rooms': typeof ConsoleRoomsIndexRoute
   '/users': typeof ConsoleUsersIndexRoute
 }
@@ -223,9 +280,12 @@ export interface FileRoutesById {
   '/callback': typeof CallbackRoute
   '/_console/': typeof ConsoleIndexRoute
   '/_auth/login/$serverName': typeof AuthLoginServerNameRoute
+  '/_console/registration-tokens/$tokenId': typeof ConsoleRegistrationTokensTokenIdRoute
+  '/_console/registration-tokens/add': typeof ConsoleRegistrationTokensAddRoute
   '/_console/rooms/$roomId': typeof ConsoleRoomsRoomIdRoute
   '/_console/users/$userId': typeof ConsoleUsersUserIdRoute
   '/_auth/login/': typeof AuthLoginIndexRoute
+  '/_console/registration-tokens/': typeof ConsoleRegistrationTokensIndexRoute
   '/_console/rooms/': typeof ConsoleRoomsIndexRoute
   '/_console/users/': typeof ConsoleUsersIndexRoute
 }
@@ -237,9 +297,12 @@ export interface FileRouteTypes {
     | '/callback'
     | '/'
     | '/login/$serverName'
+    | '/registration-tokens/$tokenId'
+    | '/registration-tokens/add'
     | '/rooms/$roomId'
     | '/users/$userId'
     | '/login'
+    | '/registration-tokens'
     | '/rooms'
     | '/users'
   fileRoutesByTo: FileRoutesByTo
@@ -248,9 +311,12 @@ export interface FileRouteTypes {
     | '/callback'
     | '/'
     | '/login/$serverName'
+    | '/registration-tokens/$tokenId'
+    | '/registration-tokens/add'
     | '/rooms/$roomId'
     | '/users/$userId'
     | '/login'
+    | '/registration-tokens'
     | '/rooms'
     | '/users'
   id:
@@ -260,9 +326,12 @@ export interface FileRouteTypes {
     | '/callback'
     | '/_console/'
     | '/_auth/login/$serverName'
+    | '/_console/registration-tokens/$tokenId'
+    | '/_console/registration-tokens/add'
     | '/_console/rooms/$roomId'
     | '/_console/users/$userId'
     | '/_auth/login/'
+    | '/_console/registration-tokens/'
     | '/_console/rooms/'
     | '/_console/users/'
   fileRoutesById: FileRoutesById
@@ -306,8 +375,11 @@ export const routeTree = rootRoute
       "filePath": "_console.tsx",
       "children": [
         "/_console/",
+        "/_console/registration-tokens/$tokenId",
+        "/_console/registration-tokens/add",
         "/_console/rooms/$roomId",
         "/_console/users/$userId",
+        "/_console/registration-tokens/",
         "/_console/rooms/",
         "/_console/users/"
       ]
@@ -323,6 +395,14 @@ export const routeTree = rootRoute
       "filePath": "_auth.login.$serverName.tsx",
       "parent": "/_auth"
     },
+    "/_console/registration-tokens/$tokenId": {
+      "filePath": "_console.registration-tokens.$tokenId.tsx",
+      "parent": "/_console"
+    },
+    "/_console/registration-tokens/add": {
+      "filePath": "_console.registration-tokens.add.tsx",
+      "parent": "/_console"
+    },
     "/_console/rooms/$roomId": {
       "filePath": "_console.rooms.$roomId.tsx",
       "parent": "/_console"
@@ -334,6 +414,10 @@ export const routeTree = rootRoute
     "/_auth/login/": {
       "filePath": "_auth.login.index.tsx",
       "parent": "/_auth"
+    },
+    "/_console/registration-tokens/": {
+      "filePath": "_console.registration-tokens.index.tsx",
+      "parent": "/_console"
     },
     "/_console/rooms/": {
       "filePath": "_console.rooms.index.tsx",
