@@ -16,6 +16,7 @@ import {
 import { registrationTokenQuery, revokeRegistrationToken } from "@/api/mas";
 import { CopyToClipboard } from "@/components/copy";
 import { ButtonLink } from "@/components/link";
+import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 export const Route = createFileRoute("/_console/registration-tokens/$tokenId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
@@ -116,7 +117,9 @@ function TokenDetailComponent() {
                   Created At
                 </Text>
                 <Text>
-                  {new Date(tokenAttributes.created_at).toLocaleString()}
+                  {computeHumanReadableDateTimeStringFromUtc(
+                    tokenAttributes.created_at,
+                  )}
                 </Text>
               </div>
 
@@ -130,7 +133,9 @@ function TokenDetailComponent() {
                 </Text>
                 <Text>
                   {tokenAttributes.expires_at
-                    ? new Date(tokenAttributes.expires_at).toLocaleString()
+                    ? computeHumanReadableDateTimeStringFromUtc(
+                        tokenAttributes.expires_at,
+                      )
                     : "Never expires"}
                 </Text>
               </div>
@@ -161,7 +166,9 @@ function TokenDetailComponent() {
                     Revoked At
                   </Text>
                   <Text>
-                    {new Date(tokenAttributes.revoked_at).toLocaleString()}
+                    {computeHumanReadableDateTimeStringFromUtc(
+                      tokenAttributes.revoked_at,
+                    )}
                   </Text>
                 </div>
               )}

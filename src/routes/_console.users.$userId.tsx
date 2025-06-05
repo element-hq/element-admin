@@ -14,6 +14,7 @@ import {
   userEmailsQuery,
   userQuery,
 } from "@/api/mas";
+import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 export const Route = createFileRoute("/_console/users/$userId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
@@ -186,7 +187,9 @@ function RouteComponent() {
                 Created At
               </Text>
               <Text size="sm">
-                {new Date(user.attributes.created_at).toLocaleString()}
+                {computeHumanReadableDateTimeStringFromUtc(
+                  user.attributes.created_at,
+                )}
               </Text>
             </div>
 
@@ -196,7 +199,9 @@ function RouteComponent() {
                   Locked At
                 </Text>
                 <Text size="sm">
-                  {new Date(user.attributes.locked_at).toLocaleString()}
+                  {computeHumanReadableDateTimeStringFromUtc(
+                    user.attributes.locked_at,
+                  )}
                 </Text>
               </div>
             )}
@@ -216,9 +221,9 @@ function RouteComponent() {
                     <Text size="sm">{emailItem.attributes.email}</Text>
                     <Text size="xs">
                       Added{" "}
-                      {new Date(
+                      {computeHumanReadableDateTimeStringFromUtc(
                         emailItem.attributes.created_at,
-                      ).toLocaleDateString()}
+                      )}
                     </Text>
                   </div>
                 ))}

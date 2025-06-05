@@ -6,6 +6,7 @@ import * as v from "valibot";
 import { type UserListParams, usersQuery } from "@/api/mas";
 import { ButtonLink, ChatFilterLink } from "@/components/link";
 import { PAGE_SIZE } from "@/constants";
+import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 const UserSearchParams = v.object({
   before: v.optional(v.string()),
@@ -228,7 +229,9 @@ function RouteComponent() {
                   </Badge>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
-                  {new Date(user.attributes.created_at).toLocaleDateString()}
+                  {computeHumanReadableDateTimeStringFromUtc(
+                    user.attributes.created_at,
+                  )}
                 </td>
               </tr>
             ))}

@@ -8,6 +8,7 @@ import { type TokenListParams, registrationTokensQuery } from "@/api/mas";
 import { CopyToClipboard } from "@/components/copy";
 import { ButtonLink, ChatFilterLink } from "@/components/link";
 import { PAGE_SIZE } from "@/constants";
+import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 const TokenSearchParams = v.object({
   before: v.optional(v.string()),
@@ -226,11 +227,15 @@ function RouteComponent() {
                   <CopyToClipboard value={token.attributes.token} />
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {new Date(token.attributes.created_at).toLocaleDateString()}
+                  {computeHumanReadableDateTimeStringFromUtc(
+                    token.attributes.created_at,
+                  )}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {token.attributes.expires_at
-                    ? new Date(token.attributes.expires_at).toLocaleDateString()
+                    ? computeHumanReadableDateTimeStringFromUtc(
+                        token.attributes.expires_at,
+                      )
                     : "Never expires"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
