@@ -326,6 +326,7 @@ function TokenDetailComponent() {
                       min="1"
                     />
                     <Button
+                      type="button"
                       iconOnly
                       kind="secondary"
                       onClick={clearExpiration}
@@ -350,6 +351,7 @@ function TokenDetailComponent() {
                       min="1"
                     />
                     <Button
+                      type="button"
                       iconOnly
                       kind="secondary"
                       onClick={clearUsageLimit}
