@@ -36,12 +36,6 @@ function RouteComponent() {
 
   return (
     <div className="space-y-4">
-      <div className="flex gap-4">
-        <Link to="/users">
-          <Button>Manage Users</Button>
-        </Link>
-        <Button onClick={() => clear()}>Clear</Button>
-      </div>
       <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );

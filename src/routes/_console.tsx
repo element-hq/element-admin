@@ -8,6 +8,7 @@ import {
   ChatIcon,
   HomeSolidIcon,
   KeyIcon,
+  SignOutIcon,
   UserIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
@@ -17,10 +18,16 @@ import {
   forwardRef,
 } from "react";
 
+import { authMetadataQuery } from "@/api/auth";
+import { revokeToken } from "@/api/auth";
 import { wellKnownQuery, whoamiQuery } from "@/api/matrix";
 import { useAuthStore } from "@/stores/auth";
-import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { H1, Text } from "@vector-im/compound-web";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
+import { Button, H1, Text } from "@vector-im/compound-web";
 
 type SectionLinkProps = {
   Icon: ComponentType<SVGAttributes<SVGElement>>;
@@ -84,7 +91,15 @@ export const Route = createFileRoute("/_console")({
         <div className="border-b-2 border-b-bg-subtle-primary">
           <div className="container mx-auto flex items-center justify-between py-5">
             <H1>Admin Console</H1>
-            <Text>{whoami.user_id}</Text>
+            <div className="flex items-center gap-4">
+              <Text weight="medium" size="sm" className="text-text-secondary">
+                {whoami.user_id}
+              </Text>
+              <SignOutButton
+                synapseRoot={synapseRoot}
+                credentials={credentials}
+              />
+            </div>
           </div>
         </div>
         <div className="container mx-auto">
@@ -112,3 +127,47 @@ export const Route = createFileRoute("/_console")({
     );
   },
 });
+
+const SignOutButton = ({
+  synapseRoot,
+  credentials,
+}: {
+  synapseRoot: string;
+  credentials: { serverName: string; clientId: string; accessToken: string };
+}) => {
+  const queryClient = useQueryClient();
+  const clear = useAuthStore((state) => state.clear);
+  const navigate = Route.useNavigate();
+
+  const signOutMutation = useMutation({
+    mutationFn: async () => {
+      const { revocation_endpoint } = await queryClient.ensureQueryData(
+        authMetadataQuery(synapseRoot),
+      );
+
+      await revokeToken(
+        revocation_endpoint,
+        credentials.accessToken,
+        credentials.clientId,
+      );
+    },
+    onSuccess: () => {
+      clear();
+      navigate({ to: "/", reloadDocument: true });
+    },
+  });
+
+  return (
+    <Button
+      type="button"
+      size="sm"
+      destructive
+      kind="secondary"
+      onClick={() => signOutMutation.mutate()}
+      disabled={signOutMutation.isPending}
+      Icon={SignOutIcon}
+    >
+      Sign out
+    </Button>
+  );
+};

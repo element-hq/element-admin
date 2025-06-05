@@ -6,6 +6,7 @@ const AuthMetadataResponse = v.object({
   authorization_endpoint: v.string(),
   token_endpoint: v.string(),
   registration_endpoint: v.string(),
+  revocation_endpoint: v.string(),
 });
 
 export const authMetadataQuery = (synapseRoot: string) =>
@@ -109,4 +110,28 @@ export const tokenRequest = async (
   const tokenData = v.parse(TokenResponse, await response.json());
 
   return tokenData;
+};
+
+export const revokeToken = async (
+  revocationEndpoint: string,
+  token: string,
+  clientId: string,
+  signal: AbortSignal | null = null,
+) => {
+  const response = await fetch(revocationEndpoint, {
+    method: "POST",
+    body: new URLSearchParams({
+      token,
+      client_id: clientId,
+      token_type_hint: "access_token",
+    }),
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    signal,
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to revoke token");
+  }
 };
