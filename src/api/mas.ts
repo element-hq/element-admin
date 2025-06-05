@@ -174,6 +174,11 @@ export type CreateTokenParams = {
   expires_at?: string; // ISO date string
 };
 
+export type EditTokenParams = {
+  usage_limit?: number | null;
+  expires_at?: string | null; // ISO date string
+};
+
 export const usersQuery = (
   queryClient: QueryClient,
   serverName: string,
@@ -618,6 +623,96 @@ export const revokeRegistrationToken = async (
 
   if (!response.ok) {
     throw new Error("Failed to revoke registration token");
+  }
+
+  const tokenData = v.parse(
+    SingleResponseForRegistrationToken,
+    await response.json(),
+  );
+
+  return tokenData;
+};
+
+export const unrevokeRegistrationToken = async (
+  queryClient: QueryClient,
+  serverName: string,
+  tokenId: string,
+  signal?: AbortSignal,
+) => {
+  const accessTokenValue = await accessToken(queryClient, signal);
+  if (!accessTokenValue) {
+    throw new Error("No access token");
+  }
+
+  const wellKnown = await queryClient.ensureQueryData(
+    wellKnownQuery(serverName),
+  );
+
+  const authMetadata = await queryClient.ensureQueryData(
+    authMetadataQuery(wellKnown["m.homeserver"].base_url),
+  );
+
+  const masApiRoot = authMetadata.issuer;
+  const url = new URL(`/api/admin/v1/user-registration-tokens/${tokenId}/unrevoke`, masApiRoot);
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessTokenValue}`,
+    },
+    ...(signal && { signal }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to unrevoke registration token");
+  }
+
+  const tokenData = v.parse(
+    SingleResponseForRegistrationToken,
+    await response.json(),
+  );
+
+  return tokenData;
+};
+
+export const editRegistrationToken = async (
+  queryClient: QueryClient,
+  serverName: string,
+  tokenId: string,
+  params: EditTokenParams,
+  signal?: AbortSignal,
+) => {
+  const accessTokenValue = await accessToken(queryClient, signal);
+  if (!accessTokenValue) {
+    throw new Error("No access token");
+  }
+
+  const wellKnown = await queryClient.ensureQueryData(
+    wellKnownQuery(serverName),
+  );
+
+  const authMetadata = await queryClient.ensureQueryData(
+    authMetadataQuery(wellKnown["m.homeserver"].base_url),
+  );
+
+  const masApiRoot = authMetadata.issuer;
+  const url = new URL(`/api/admin/v1/user-registration-tokens/${tokenId}`, masApiRoot);
+
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${accessTokenValue}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ...(params.expires_at !== undefined && { expires_at: params.expires_at }),
+      ...(params.usage_limit !== undefined && { usage_limit: params.usage_limit }),
+    }),
+    ...(signal && { signal }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to edit registration token");
   }
 
   const tokenData = v.parse(
