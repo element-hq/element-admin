@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { Button } from "@vector-im/compound-web";
+import { Button, Form } from "@vector-im/compound-web";
 
 import { authMetadataQuery, clientRegistration } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
@@ -61,10 +61,34 @@ function RouteComponent() {
   authorizeUrl.search = params.toString();
 
   return (
-    <div>
-      <Button as="a" href={authorizeUrl.toString()}>
+    <Form.Root>
+      <Form.Field name="serverName">
+        <Form.Label>Server Name</Form.Label>
+        <Form.TextControl value={serverName} readOnly />
+      </Form.Field>
+
+      <Form.Field name="synapseRoot">
+        <Form.Label>Matrix C-S API root</Form.Label>
+        <Form.TextControl value={synapseRoot} readOnly />
+      </Form.Field>
+
+      <Form.Field name="masApiRoot">
+        <Form.Label>MAS API root</Form.Label>
+        <Form.TextControl value={authMetadata.issuer} readOnly />
+      </Form.Field>
+
+      <Form.Field name="clientId">
+        <Form.Label>Client ID</Form.Label>
+        <Form.TextControl value={authorizationSession.clientId} readOnly />
+      </Form.Field>
+
+      <Button
+        as="a"
+        style={{ inlineSize: "initial" }}
+        href={authorizeUrl.toString()}
+      >
         Authorize
       </Button>
-    </div>
+    </Form.Root>
   );
 }
