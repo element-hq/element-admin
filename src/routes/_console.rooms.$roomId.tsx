@@ -1,10 +1,11 @@
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { ArrowLeftIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
-import { Badge, Button, Text } from "@vector-im/compound-web";
+import { Badge, Button, H3, Text } from "@vector-im/compound-web";
 
 import { wellKnownQuery } from "@/api/matrix";
 import { roomDetailQuery } from "@/api/synapse";
+import { ButtonLink } from "@/components/link";
 
 export const Route = createFileRoute("/_console/rooms/$roomId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
@@ -76,22 +77,21 @@ function RouteComponent() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Link to="/rooms">
-            <Button kind="secondary" size="sm" Icon={ArrowLeftIcon}>
-              Back to Rooms
-            </Button>
-          </Link>
-          <Text as="h1" size="lg" weight="semibold">
-            Room Details
-          </Text>
+          <ButtonLink
+            kind="secondary"
+            size="sm"
+            Icon={ArrowLeftIcon}
+            to="/rooms"
+          >
+            Back to Rooms
+          </ButtonLink>
+          <H3>Room Details</H3>
         </div>
       </div>
 
       <div className="bg-bg-subtle-secondary rounded-lg">
         <div className="px-6 py-5 border-b border-border-interactive-secondary">
-          <Text as="h3" size="md" weight="semibold">
-            {formatRoomName()}
-          </Text>
+          <H3>{formatRoomName()}</H3>
           <Text size="sm" className="text-text-secondary">
             Room ID: {room.room_id}
           </Text>
@@ -265,19 +265,25 @@ function RouteComponent() {
               Actions
             </Text>
             <div className="flex gap-3 flex-wrap">
-              <Button size="sm" disabled>
+              <Button type="button" size="sm" disabled>
                 Edit Room
               </Button>
-              <Button size="sm" kind="secondary" disabled>
+              <Button type="button" size="sm" kind="secondary" disabled>
                 View Members
               </Button>
-              <Button size="sm" kind="secondary" disabled>
+              <Button type="button" size="sm" kind="secondary" disabled>
                 View Messages
               </Button>
-              <Button size="sm" kind="secondary" disabled>
+              <Button type="button" size="sm" kind="secondary" disabled>
                 Block Room
               </Button>
-              <Button size="sm" kind="tertiary" destructive disabled>
+              <Button
+                type="button"
+                size="sm"
+                kind="tertiary"
+                destructive
+                disabled
+              >
                 Delete Room
               </Button>
             </div>

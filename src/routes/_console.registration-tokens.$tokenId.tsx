@@ -392,6 +392,7 @@ function TokenDetailComponent() {
               <div className="flex gap-3">
                 {tokenAttributes.revoked_at ? (
                   <Button
+                    type="button"
                     size="sm"
                     kind="secondary"
                     disabled={unrevokeTokenMutation.isPending}
@@ -404,6 +405,7 @@ function TokenDetailComponent() {
                   </Button>
                 ) : (
                   <Button
+                    type="button"
                     size="sm"
                     kind="secondary"
                     destructive
@@ -418,6 +420,7 @@ function TokenDetailComponent() {
                 )}
 
                 <Button
+                  type="button"
                   size="sm"
                   kind="secondary"
                   onClick={() => setIsEditing(true)}

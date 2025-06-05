@@ -4,7 +4,14 @@ import {
   ArrowLeftIcon,
   CloseIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
-import { Button, Form, H2, InlineSpinner, Text } from "@vector-im/compound-web";
+import {
+  Button,
+  Form,
+  H2,
+  H3,
+  InlineSpinner,
+  Text,
+} from "@vector-im/compound-web";
 import { type FormEvent, useCallback, useRef } from "react";
 
 import { type CreateTokenParams, createRegistrationToken } from "@/api/mas";
@@ -108,9 +115,7 @@ function AddTokenComponent() {
 
       <div className="bg-bg-subtle-secondary rounded-lg">
         <div className="px-6 py-5 border-b border-border-interactive-secondary">
-          <Text as="h3" size="md" weight="semibold">
-            Token Configuration
-          </Text>
+          <H3>Token Configuration</H3>
           <Text size="sm" className="text-text-secondary">
             Configure your new registration token
           </Text>

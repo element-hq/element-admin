@@ -3,9 +3,16 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { ArrowLeftIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
-import { Badge, Button, InlineSpinner, Text } from "@vector-im/compound-web";
+import {
+  Badge,
+  Button,
+  H1,
+  H3,
+  InlineSpinner,
+  Text,
+} from "@vector-im/compound-web";
 
 import {
   deactivateUser,
@@ -15,6 +22,7 @@ import {
   userQuery,
 } from "@/api/mas";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
+import { ButtonLink } from "@/components/link";
 
 export const Route = createFileRoute("/_console/users/$userId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
@@ -86,7 +94,12 @@ function LockUnlockButton({
   const isLoading = lockMutation.isPending || unlockMutation.isPending;
 
   return (
-    <Button size="sm" onClick={handleClick} disabled={disabled || isLoading}>
+    <Button
+      type="button"
+      size="sm"
+      onClick={handleClick}
+      disabled={disabled || isLoading}
+    >
       {isLoading && <InlineSpinner />}
       {isLocked ? "Unlock User" : "Lock User"}
     </Button>
@@ -129,22 +142,21 @@ function RouteComponent() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Link to="/users">
-            <Button kind="secondary" size="sm" Icon={ArrowLeftIcon}>
-              Back to Users
-            </Button>
-          </Link>
-          <Text as="h1" size="lg" weight="semibold">
-            User Details
-          </Text>
+          <ButtonLink
+            to="/users"
+            kind="secondary"
+            size="sm"
+            Icon={ArrowLeftIcon}
+          >
+            Back to Users
+          </ButtonLink>
+          <H1>User Details</H1>
         </div>
       </div>
 
       <div className="bg-bg-subtle-secondary rounded-lg">
         <div className="px-6 py-5 border-b border-border-interactive-secondary">
-          <Text as="h3" size="md" weight="semibold">
-            {user.attributes.username}
-          </Text>
+          <H3>{user.attributes.username}</H3>
           <Text size="sm" className="text-text-secondary">
             User ID: {user.id}
           </Text>
@@ -249,6 +261,7 @@ function RouteComponent() {
                 disabled={deactivated}
               />
               <Button
+                type="button"
                 size="sm"
                 kind="tertiary"
                 destructive
