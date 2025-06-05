@@ -145,8 +145,12 @@ export type PaginatedUserEmails = v.InferOutput<
   typeof PaginatedResponseForUserEmail
 >;
 export type RegistrationToken = v.InferOutput<typeof RegistrationToken>;
-export type PaginatedRegistrationTokens = v.InferOutput<typeof PaginatedResponseForRegistrationToken>;
-export type SingleRegistrationTokenResponse = v.InferOutput<typeof SingleResponseForRegistrationToken>;
+export type PaginatedRegistrationTokens = v.InferOutput<
+  typeof PaginatedResponseForRegistrationToken
+>;
+export type SingleRegistrationTokenResponse = v.InferOutput<
+  typeof SingleResponseForRegistrationToken
+>;
 
 export type UserListParams = {
   before?: string;
@@ -468,7 +472,7 @@ export const registrationTokensQuery = (
       if (params.first)
         url.searchParams.set("page[first]", String(params.first));
       if (params.last) url.searchParams.set("page[last]", String(params.last));
-      
+
       // Add filter parameters
       if (params.used !== undefined)
         url.searchParams.set("filter[used]", String(params.used));
@@ -521,7 +525,10 @@ export const registrationTokenQuery = (
       );
 
       const masApiRoot = authMetadata.issuer;
-      const url = new URL(`/api/admin/v1/user-registration-tokens/${tokenId}`, masApiRoot);
+      const url = new URL(
+        `/api/admin/v1/user-registration-tokens/${tokenId}`,
+        masApiRoot,
+      );
 
       const response = await fetch(url, {
         headers: {
@@ -573,7 +580,9 @@ export const createRegistrationToken = async (
     },
     body: JSON.stringify({
       ...(params.expires_at && { expires_at: params.expires_at }),
-      ...(params.usage_limit !== undefined && { usage_limit: params.usage_limit }),
+      ...(params.usage_limit !== undefined && {
+        usage_limit: params.usage_limit,
+      }),
       ...(params.token && { token: params.token }),
     }),
     ...(signal && { signal }),
@@ -611,7 +620,10 @@ export const revokeRegistrationToken = async (
   );
 
   const masApiRoot = authMetadata.issuer;
-  const url = new URL(`/api/admin/v1/user-registration-tokens/${tokenId}/revoke`, masApiRoot);
+  const url = new URL(
+    `/api/admin/v1/user-registration-tokens/${tokenId}/revoke`,
+    masApiRoot,
+  );
 
   const response = await fetch(url, {
     method: "POST",
@@ -653,7 +665,10 @@ export const unrevokeRegistrationToken = async (
   );
 
   const masApiRoot = authMetadata.issuer;
-  const url = new URL(`/api/admin/v1/user-registration-tokens/${tokenId}/unrevoke`, masApiRoot);
+  const url = new URL(
+    `/api/admin/v1/user-registration-tokens/${tokenId}/unrevoke`,
+    masApiRoot,
+  );
 
   const response = await fetch(url, {
     method: "POST",
@@ -696,7 +711,10 @@ export const editRegistrationToken = async (
   );
 
   const masApiRoot = authMetadata.issuer;
-  const url = new URL(`/api/admin/v1/user-registration-tokens/${tokenId}`, masApiRoot);
+  const url = new URL(
+    `/api/admin/v1/user-registration-tokens/${tokenId}`,
+    masApiRoot,
+  );
 
   const response = await fetch(url, {
     method: "PUT",
@@ -706,7 +724,9 @@ export const editRegistrationToken = async (
     },
     body: JSON.stringify({
       ...(params.expires_at !== undefined && { expires_at: params.expires_at }),
-      ...(params.usage_limit !== undefined && { usage_limit: params.usage_limit }),
+      ...(params.usage_limit !== undefined && {
+        usage_limit: params.usage_limit,
+      }),
     }),
     ...(signal && { signal }),
   });
