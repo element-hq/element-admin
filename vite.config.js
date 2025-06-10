@@ -19,7 +19,4 @@ export default defineConfig({
       "@": resolve(__dirname, "./src"),
     },
   },
-  experimental: {
-    enableNativePlugin: true,
-  },
 });
