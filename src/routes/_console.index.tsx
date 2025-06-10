@@ -1,10 +1,8 @@
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { Link, createFileRoute } from "@tanstack/react-router";
-import { Button } from "@vector-im/compound-web";
+import { createFileRoute } from "@tanstack/react-router";
 
 import { wellKnownQuery } from "@/api/matrix";
 import { serverVersionQuery } from "@/api/synapse";
-import { useAuthStore } from "@/stores/auth";
 
 export const Route = createFileRoute("/_console/")({
   loader: async ({ context: { queryClient, credentials } }) => {
@@ -22,7 +20,6 @@ export const Route = createFileRoute("/_console/")({
 
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
-  const clear = useAuthStore((state) => state.clear);
 
   const queryClient = useQueryClient();
   const { data: wellKnown } = useSuspenseQuery(
