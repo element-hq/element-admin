@@ -1,7 +1,12 @@
 import {
-  Outlet,
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
+import {
   createFileRoute,
   createLink,
+  Outlet,
   redirect,
 } from "@tanstack/react-router";
 import {
@@ -11,23 +16,17 @@ import {
   SignOutIcon,
   UserIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
+import { Button, H1, Text } from "@vector-im/compound-web";
 import {
   type ComponentProps,
   type ComponentType,
-  type SVGAttributes,
   forwardRef,
+  type SVGAttributes,
 } from "react";
-
-import { authMetadataQuery } from "@/api/auth";
-import { revokeToken } from "@/api/auth";
+import { authMetadataQuery, revokeToken } from "@/api/auth";
 import { wellKnownQuery, whoamiQuery } from "@/api/matrix";
+import { CopyToClipboard } from "@/components/copy";
 import { useAuthStore } from "@/stores/auth";
-import {
-  useMutation,
-  useQueryClient,
-  useSuspenseQuery,
-} from "@tanstack/react-query";
-import { Button, H1, Text } from "@vector-im/compound-web";
 
 type SectionLinkProps = {
   Icon: ComponentType<SVGAttributes<SVGElement>>;
@@ -53,6 +52,15 @@ const SectionLinkComponent = forwardRef<HTMLAnchorElement, SectionLinkProps>(
 );
 
 const SectionLink = createLink(SectionLinkComponent);
+
+const TokenView: React.FC<{ token: string }> = ({ token }) => (
+  <div className="flex items-center gap-1 border pl-2 border-border-interactive-secondary rounded-full text-text-secondary font-mono text-xs">
+    {token.length > 20
+      ? `${token.substring(0, 5)}${"•".repeat(token.length - (5 + 7))}${token.substring(token.length - 7)}`
+      : "••••••••"}
+    <CopyToClipboard value={token} />
+  </div>
+);
 
 export const Route = createFileRoute("/_console")({
   beforeLoad: () => {
@@ -95,6 +103,7 @@ export const Route = createFileRoute("/_console")({
               <Text weight="medium" size="sm" className="text-text-secondary">
                 {whoami.user_id}
               </Text>
+              <TokenView token={credentials.accessToken} />
               <SignOutButton
                 synapseRoot={synapseRoot}
                 credentials={credentials}
