@@ -10,7 +10,8 @@
     "test": "vitest run",
     "format": "biome format",
     "lint": "biome lint && tsc",
-    "check": "biome check"
+    "check": "biome check",
+    "knip": "knip"
   },
   "dependencies": {
     "@fontsource/inconsolata": "5.2.6",
@@ -26,7 +27,6 @@
     "@vector-im/compound-web": "8.2.0",
     "react": "19.1.1",
     "react-dom": "19.1.1",
-    "tailwindcss": "4.1.11",
     "use-broadcast-ts": "2.0.1",
     "valibot": "1.1.0",
     "zustand": "5.0.6"
@@ -34,19 +34,25 @@
   "devDependencies": {
     "@biomejs/biome": "2.1.2",
     "@cloudflare/vite-plugin": "1.10.1",
-    "@testing-library/dom": "10.4.1",
-    "@testing-library/react": "16.3.0",
     "@tsconfig/strictest": "2.0.5",
     "@tsconfig/vite-react": "7.0.0",
+    "@types/node": "^24.1.0",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
     "@vitejs/plugin-react": "4.7.0",
     "jsdom": "26.1.0",
+    "knip": "^5.62.0",
     "typescript": "5.8.3",
     "vite": "7.0.6",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "3.2.4",
     "wrangler": "4.26.0"
+  },
+  "knip": {
+    "ignore": [
+      "src/routeTree.gen.ts",
+      "src/api/*"
+    ]
   },
   "packageManager": "pnpm@10.12.1+sha512.f0dda8580f0ee9481c5c79a1d927b9164f2c478e90992ad268bbb2465a736984391d6333d2c327913578b2804af33474ca554ba29c04a8b13060a717675ae3ac"
 }
