@@ -5,7 +5,7 @@
     "@tsconfig/strictest/tsconfig.json"
   ],
   "compilerOptions": {
-    "types": ["vite/client"],
+    "types": ["vitest/config", "vite/client"],
     "paths": {
       "@/*": ["./src/*"]
     }
