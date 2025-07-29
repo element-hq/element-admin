@@ -200,6 +200,7 @@ function RouteComponent() {
               const newParams = resetPagination(prev);
               if (!e.target.value) {
                 const { search_term, ...rest } = newParams;
+                search_term as undefined; // trick biome about it being used
                 return rest;
               }
               return { ...newParams, search_term: e.target.value };

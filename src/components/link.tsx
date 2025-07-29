@@ -33,6 +33,7 @@ export const ChatFilterLink = createLink(
       <a
         {...props}
         ref={ref}
+        role="tab"
         data-selected={props.selected || undefined}
         aria-selected={props.selected || undefined}
         className="
