@@ -185,7 +185,7 @@ function TokenDetailComponent() {
 
       editTokenMutation.mutate(params);
     },
-    [editTokenMutation.mutate],
+    [editTokenMutation],
   );
 
   const cancelEdit = useCallback(() => {

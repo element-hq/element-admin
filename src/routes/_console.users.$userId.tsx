@@ -10,8 +10,8 @@ import {
   Button,
   H1,
   H3,
-  InlineSpinner,
   Text,
+  InlineSpinner,
 } from "@vector-im/compound-web";
 
 import {
@@ -21,8 +21,8 @@ import {
   userEmailsQuery,
   userQuery,
 } from "@/api/mas";
-import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 import { ButtonLink } from "@/components/link";
+import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 export const Route = createFileRoute("/_console/users/$userId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {

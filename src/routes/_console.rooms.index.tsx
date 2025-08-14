@@ -1,5 +1,5 @@
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { Link, MatchRoute, createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link, MatchRoute } from "@tanstack/react-router";
 import { Badge, Button, H2, Text, TextInput } from "@vector-im/compound-web";
 import * as v from "valibot";
 
@@ -68,7 +68,7 @@ export const Route = createFileRoute("/_console/rooms/")({
 });
 
 const resetPagination = ({
-  from,
+  from: _from,
   ...search
 }: v.InferOutput<typeof RoomSearchParams>): v.InferOutput<
   typeof RoomSearchParams

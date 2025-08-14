@@ -47,10 +47,10 @@ export const Route = createFileRoute("/_console/registration-tokens/")({
 });
 
 const resetPagination = ({
-  before,
-  after,
-  first,
-  last,
+  before: _before,
+  after: _after,
+  first: _first,
+  last: _last,
   ...search
 }: v.InferOutput<typeof TokenSearchParams>): v.InferOutput<
   typeof TokenSearchParams

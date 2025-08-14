@@ -41,10 +41,10 @@ export const Route = createFileRoute("/_console/users/")({
 });
 
 const resetPagination = ({
-  before,
-  after,
-  first,
-  last,
+  before: _before,
+  after: _after,
+  first: _first,
+  last: _last,
   ...search
 }: v.InferOutput<typeof UserSearchParams>): v.InferOutput<
   typeof UserSearchParams

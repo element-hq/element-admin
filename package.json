@@ -7,11 +7,9 @@
     "start": "vite --port 3000",
     "build": "vite build",
     "serve": "vite preview",
-    "test": "vitest run",
-    "format": "biome format",
-    "lint": "biome lint && tsc",
-    "check": "biome check",
-    "knip": "knip"
+    "lint": "oxlint && prettier --check . && tsc",
+    "fix": "oxlint --fix && prettier --write .",
+    "prepare": "husky"
   },
   "dependencies": {
     "@fontsource/inconsolata": "5.2.6",
@@ -33,7 +31,6 @@
     "zustand": "5.0.6"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.1.2",
     "@cloudflare/vite-plugin": "1.10.1",
     "@sentry/vite-plugin": "^4.0.2",
     "@tsconfig/strictest": "2.0.5",
@@ -42,12 +39,22 @@
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
     "@vitejs/plugin-react": "4.7.0",
+    "husky": "^9.1.7",
     "knip": "^5.62.0",
+    "lint-staged": "^16.1.5",
+    "oxlint": "^1.11.2",
+    "prettier": "^3.6.2",
     "tailwindcss": "4.1.11",
     "typescript": "5.8.3",
     "vite": "7.0.6",
     "vite-tsconfig-paths": "5.1.4",
     "wrangler": "4.26.0"
+  },
+  "lint-staged": {
+    "**/*": [
+      "prettier --write --ignore-unknown",
+      "oxlint --fix"
+    ]
   },
   "knip": {
     "ignore": [
