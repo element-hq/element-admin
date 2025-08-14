@@ -20,13 +20,10 @@ export default defineConfig({
     tailwindcss(),
     cloudflare(),
     sentryVitePlugin({
+      telemetry: false,
       reactComponentAnnotation: {
         enabled: true,
       },
     }),
   ],
-  test: {
-    globals: true,
-    environment: "jsdom",
-  },
 });
