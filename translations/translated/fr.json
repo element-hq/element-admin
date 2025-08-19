@@ -1,0 +1,11 @@
+{
+  "pages.login.server_name": {
+    "message": "Nom du serveur"
+  },
+  "pages.login.title": {
+    "message": "Connexion"
+  },
+  "product.title": {
+    "message": "element Server Suite"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "readKey": "a6837568844411690045-da1f6957329939edacbed56442c7c51782fa540686d45011d67f21d9c89d200c",
+  "upload": {
+    "type": "json",
+    "features": ["content_as_object", "plural_icu"],
+    "files": "translations/extracted/en.json"
+  },
+  "download": {
+    "files": "translations/translated/${lang}.json",
+    "includeSourceLang": true
+  }
+}

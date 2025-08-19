@@ -1,2 +1,3 @@
 pnpm lint-staged
 pnpm knip
+pnpm i18n:extract

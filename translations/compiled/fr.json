@@ -1,0 +1,20 @@
+{
+  "pages.login.server_name": [
+    {
+      "type": 0,
+      "value": "Nom du serveur"
+    }
+  ],
+  "pages.login.title": [
+    {
+      "type": 0,
+      "value": "Connexion"
+    }
+  ],
+  "product.title": [
+    {
+      "type": 0,
+      "value": "element Server Suite"
+    }
+  ]
+}

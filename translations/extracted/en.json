@@ -1,0 +1,14 @@
+{
+  "pages.login.server_name": {
+    "description": "Label for the server name field",
+    "message": "Server name"
+  },
+  "pages.login.title": {
+    "description": "Title for the login page",
+    "message": "Login"
+  },
+  "product.title": {
+    "description": "The main name of the admin console",
+    "message": "element Server Suite"
+  }
+}

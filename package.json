@@ -9,6 +9,9 @@
     "serve": "vite preview",
     "lint": "oxlint && prettier --check . && tsc",
     "fix": "oxlint --fix && prettier --write .",
+    "i18n:extract": "formatjs extract --format crowdin src/**/*.tsx --out-file translations/extracted/en.json && prettier --write translations/extracted/en.json",
+    "i18n:download": "localazy download && prettier --write translations/translated/",
+    "i18n:compile": "formatjs compile-folder --format crowdin --ast translations/translated/ translations/compiled/ && prettier --write translations/compiled",
     "prepare": "husky"
   },
   "dependencies": {
@@ -26,12 +29,15 @@
     "@vector-im/compound-web": "8.2.0",
     "react": "19.1.1",
     "react-dom": "19.1.1",
+    "react-intl": "7.1.11",
     "use-broadcast-ts": "2.0.1",
     "valibot": "1.1.0",
     "zustand": "5.0.7"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.11.4",
+    "@formatjs/cli": "6.7.2",
+    "@localazy/cli": "2.0.8",
     "@sentry/vite-plugin": "4.1.1",
     "@tsconfig/strictest": "2.0.5",
     "@tsconfig/vite-react": "7.0.0",
@@ -39,6 +45,7 @@
     "@types/react": "19.1.10",
     "@types/react-dom": "19.1.7",
     "@vitejs/plugin-react": "5.0.0",
+    "babel-plugin-formatjs": "10.5.39",
     "husky": "9.1.7",
     "knip": "5.62.0",
     "lint-staged": "16.1.5",
