@@ -4,7 +4,6 @@ import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import { sentryVitePlugin } from "@sentry/vite-plugin";
 import babelPluginFormatjs from "babel-plugin-formatjs";
 
 export default defineConfig(({ mode }) => ({
@@ -44,11 +43,5 @@ export default defineConfig(({ mode }) => ({
     }),
     tailwindcss(),
     cloudflare(),
-    sentryVitePlugin({
-      telemetry: false,
-      reactComponentAnnotation: {
-        enabled: true,
-      },
-    }),
   ],
 }));
