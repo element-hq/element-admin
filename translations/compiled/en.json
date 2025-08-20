@@ -1,4 +1,40 @@
 {
+  "action.sign_out": [
+    {
+      "type": 0,
+      "value": "Sign out"
+    }
+  ],
+  "header.user_menu.title": [
+    {
+      "type": 0,
+      "value": "Account menu"
+    }
+  ],
+  "navigation.dashboard": [
+    {
+      "type": 0,
+      "value": "Dashboard"
+    }
+  ],
+  "navigation.registration_tokens": [
+    {
+      "type": 0,
+      "value": "Registration tokens"
+    }
+  ],
+  "navigation.rooms": [
+    {
+      "type": 0,
+      "value": "Rooms"
+    }
+  ],
+  "navigation.users": [
+    {
+      "type": 0,
+      "value": "Users"
+    }
+  ],
   "pages.login.server_name": [
     {
       "type": 0,

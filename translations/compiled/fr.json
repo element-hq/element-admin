@@ -1,4 +1,40 @@
 {
+  "action.sign_out": [
+    {
+      "type": 0,
+      "value": "Se déconnecter"
+    }
+  ],
+  "header.user_menu.title": [
+    {
+      "type": 0,
+      "value": "Paramètres du compte"
+    }
+  ],
+  "navigation.dashboard": [
+    {
+      "type": 0,
+      "value": "Tableau de bord"
+    }
+  ],
+  "navigation.registration_tokens": [
+    {
+      "type": 0,
+      "value": "Jetons d'enregistrement"
+    }
+  ],
+  "navigation.rooms": [
+    {
+      "type": 0,
+      "value": "Salons"
+    }
+  ],
+  "navigation.users": [
+    {
+      "type": 0,
+      "value": "Utilisateurs"
+    }
+  ],
   "pages.login.server_name": [
     {
       "type": 0,

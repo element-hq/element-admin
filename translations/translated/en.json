@@ -1,4 +1,22 @@
 {
+  "action.sign_out": {
+    "message": "Sign out"
+  },
+  "header.user_menu.title": {
+    "message": "Account menu"
+  },
+  "navigation.dashboard": {
+    "message": "Dashboard"
+  },
+  "navigation.registration_tokens": {
+    "message": "Registration tokens"
+  },
+  "navigation.rooms": {
+    "message": "Rooms"
+  },
+  "navigation.users": {
+    "message": "Users"
+  },
   "pages.login.server_name": {
     "message": "Server name"
   },
