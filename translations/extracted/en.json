@@ -7,18 +7,18 @@
     "message": "Copyright © {year}"
   },
   "footer.help_and_support": {
-    "description": "Label for the help and support link in the footer",
+    "description": "Label for the help and support (to https://ems.element.io/support) link in the footer",
     "message": "Help & Support"
   },
   "footer.legal": {
-    "description": "Label for the legal link in the footer",
+    "description": "Label for the legal (to https://element.io/legal) link in the footer",
     "message": "Legal"
   },
   "footer.powered_by": {
     "message": "Powered by {logo}"
   },
   "footer.privacy": {
-    "description": "Label for the privacy link in the footer",
+    "description": "Label for the privacy (to https://element.io/legal/privacy) link in the footer",
     "message": "Privacy"
   },
   "header.user_menu.title": {
@@ -28,6 +28,10 @@
   "navigation.dashboard": {
     "description": "Label for the dashboard navigation item in the main navigation sidebar",
     "message": "Dashboard"
+  },
+  "navigation.documentation": {
+    "description": "Label for the documentation navigation link (to https://docs.element.io/) in the main navigation sidebar",
+    "message": "Documentation"
   },
   "navigation.registration_tokens": {
     "description": "Label for the registration tokens navigation item in the main navigation sidebar",

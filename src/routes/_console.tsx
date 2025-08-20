@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-query";
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import {
+  DocumentIcon,
   HomeIcon,
   KeyIcon,
   LeaveIcon,
@@ -152,6 +153,19 @@ export const Route = createFileRoute("/_console")({
                 description="Label for the registration tokens navigation item in the main navigation sidebar"
               />
             </Navigation.NavLink>
+            <Navigation.Divider />
+            <Navigation.NavAnchor
+              Icon={DocumentIcon}
+              href="https://docs.element.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FormattedMessage
+                id="navigation.documentation"
+                defaultMessage="Documentation"
+                description="Label for the documentation navigation link (to https://docs.element.io/) in the main navigation sidebar"
+              />
+            </Navigation.NavAnchor>
           </Navigation.Sidebar>
 
           <Navigation.Content>
@@ -161,27 +175,27 @@ export const Route = createFileRoute("/_console")({
               <Footer.PoweredBy />
 
               <Footer.Section>
-                <Link href="https://docs.element.io/terms" size="small">
+                <Link href="https://ems.element.io/support" size="small">
                   <FormattedMessage
                     id="footer.help_and_support"
                     defaultMessage="Help & Support"
-                    description="Label for the help and support link in the footer"
+                    description="Label for the help and support (to https://ems.element.io/support) link in the footer"
                   />
                 </Link>
                 <Footer.Divider />
-                <Link href="https://element.io/terms" size="small">
+                <Link href="https://element.io/legal" size="small">
                   <FormattedMessage
                     id="footer.legal"
                     defaultMessage="Legal"
-                    description="Label for the legal link in the footer"
+                    description="Label for the legal (to https://element.io/legal) link in the footer"
                   />
                 </Link>
                 <Footer.Divider />
-                <Link href="https://element.io/privacy" size="small">
+                <Link href="https://element.io/legal/privacy" size="small">
                   <FormattedMessage
                     id="footer.privacy"
                     defaultMessage="Privacy"
-                    description="Label for the privacy link in the footer"
+                    description="Label for the privacy (to https://element.io/legal/privacy) link in the footer"
                   />
                 </Link>
               </Footer.Section>

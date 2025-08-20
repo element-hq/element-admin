@@ -11,21 +11,21 @@ export const Divider: React.FC = () => (
   <div className={styles["divider"]} role="separator" />
 );
 
-export const NavLink = createLink(
-  forwardRef<
-    HTMLAnchorElement,
-    {
-      Icon: React.ComponentType<React.SVGAttributes<SVGElement>>;
-    } & PropsWithChildren<React.AnchorHTMLAttributes<HTMLAnchorElement>>
-  >(({ children, Icon, className, ...props }, ref) => {
-    return (
-      <a ref={ref} className={cx(styles["nav-link"], className)} {...props}>
-        <Icon className={styles["nav-link-icon"]} />
-        <div className={styles["nav-link-label"]}>{children}</div>
-      </a>
-    );
-  }),
-);
+export const NavAnchor = forwardRef<
+  HTMLAnchorElement,
+  {
+    Icon: React.ComponentType<React.SVGAttributes<SVGElement>>;
+  } & PropsWithChildren<React.AnchorHTMLAttributes<HTMLAnchorElement>>
+>(({ children, Icon, className, ...props }, ref) => {
+  return (
+    <a ref={ref} className={cx(styles["nav-link"], className)} {...props}>
+      <Icon className={styles["nav-link-icon"]} />
+      <div className={styles["nav-link-label"]}>{children}</div>
+    </a>
+  );
+});
+
+export const NavLink = createLink(NavAnchor);
 
 export const Content: React.FC<PropsWithChildren<{}>> = ({ children }) => (
   <main className={styles["content"]}>{children}</main>
