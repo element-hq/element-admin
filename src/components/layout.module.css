@@ -8,6 +8,13 @@
   /** We need to create a new stacking context for the header to be above the content */
   position: relative;
   z-index: 0;
+
+  &.with-gradient {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: url(../background/gradient-desktop.svg);
+    background-size: 100% 100%;
+  }
 }
 
 @media screen and (min-width: 1920px) {
@@ -15,5 +22,11 @@
     margin: auto;
     border-inline: solid 1px var(--cpd-color-bg-subtle-primary);
     max-width: 1920px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .root.with-gradient {
+    background-image: url(../background/gradient-mobile.svg);
   }
 }

@@ -1,9 +1,12 @@
 import { FormattedMessage } from "react-intl";
+import cx from "classnames";
 import styles from "./footer.module.css";
 import { ElementLogotype } from "./logo";
 
-export const Root: React.FC<React.PropsWithChildren> = ({ children }) => (
-  <footer className={styles["root"]}>{children}</footer>
+export const Root: React.FC<
+  React.PropsWithChildren<{ className?: string }>
+> = ({ children, className }) => (
+  <footer className={cx(className, styles["root"])}>{children}</footer>
 );
 
 export const PoweredBy: React.FC = () => (
