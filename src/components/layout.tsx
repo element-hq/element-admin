@@ -10,5 +10,8 @@ export const Layout: React.FC<
 export const WelcomeLayout: React.FC<
   React.PropsWithChildren<{ className?: string }>
 > = ({ children, className }) => (
-  <div className={cx(className, styles["welcome-layout"])}>{children}</div>
+  <div className={cx(className, styles["welcome-layout"])}>
+    <div aria-hidden="true" className={styles["welcome-gradient"]} />
+    {children}
+  </div>
 );
