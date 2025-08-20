@@ -19,6 +19,10 @@ jobs:
         uses: actions/setup-node@v4.4.0
         with:
           node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Download translations from Localazy
         run: pnpm i18n:download
