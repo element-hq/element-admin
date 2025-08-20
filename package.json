@@ -9,7 +9,7 @@
     "serve": "vite preview",
     "lint": "oxlint && prettier --check . && tsc",
     "fix": "oxlint --fix && prettier --write .",
-    "i18n:extract": "formatjs extract --format crowdin src/**/*.tsx --out-file translations/extracted/en.json && prettier --write translations/extracted/en.json",
+    "i18n:extract": "formatjs extract --throws --format crowdin src/**/*.tsx --out-file translations/extracted/en.json && prettier --write translations/extracted/en.json",
     "i18n:download": "localazy download && prettier --write translations/translated/",
     "i18n:compile": "formatjs compile-folder --format crowdin --ast translations/translated/ translations/compiled/ && prettier --write translations/compiled",
     "prepare": "husky"
