@@ -2,11 +2,29 @@
   "action.sign_out": {
     "message": "Se déconnecter"
   },
+  "footer.copyright_notice": {
+    "message": "Copyright © {year}"
+  },
+  "footer.help_and_support": {
+    "message": "Aide et support"
+  },
+  "footer.legal": {
+    "message": "Mentions légales"
+  },
+  "footer.powered_by": {
+    "message": "Propulsé par {logo}"
+  },
+  "footer.privacy": {
+    "message": "Politique de confidentialité"
+  },
   "header.user_menu.title": {
     "message": "Paramètres du compte"
   },
   "navigation.dashboard": {
     "message": "Tableau de bord"
+  },
+  "navigation.documentation": {
+    "message": "Documentation"
   },
   "navigation.registration_tokens": {
     "message": "Jetons d'enregistrement"
@@ -23,7 +41,10 @@
   "pages.login.title": {
     "message": "Connexion"
   },
+  "product.element": {
+    "message": "Element"
+  },
   "product.title": {
-    "message": "element Server Suite"
+    "message": "Element Server Suite"
   }
 }

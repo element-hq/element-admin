@@ -5,6 +5,44 @@
       "value": "Se déconnecter"
     }
   ],
+  "footer.copyright_notice": [
+    {
+      "type": 0,
+      "value": "Copyright © "
+    },
+    {
+      "type": 1,
+      "value": "year"
+    }
+  ],
+  "footer.help_and_support": [
+    {
+      "type": 0,
+      "value": "Aide et support"
+    }
+  ],
+  "footer.legal": [
+    {
+      "type": 0,
+      "value": "Mentions légales"
+    }
+  ],
+  "footer.powered_by": [
+    {
+      "type": 0,
+      "value": "Propulsé par "
+    },
+    {
+      "type": 1,
+      "value": "logo"
+    }
+  ],
+  "footer.privacy": [
+    {
+      "type": 0,
+      "value": "Politique de confidentialité"
+    }
+  ],
   "header.user_menu.title": [
     {
       "type": 0,
@@ -15,6 +53,12 @@
     {
       "type": 0,
       "value": "Tableau de bord"
+    }
+  ],
+  "navigation.documentation": [
+    {
+      "type": 0,
+      "value": "Documentation"
     }
   ],
   "navigation.registration_tokens": [
@@ -47,10 +91,16 @@
       "value": "Connexion"
     }
   ],
+  "product.element": [
+    {
+      "type": 0,
+      "value": "Element"
+    }
+  ],
   "product.title": [
     {
       "type": 0,
-      "value": "element Server Suite"
+      "value": "Element Server Suite"
     }
   ]
 }
