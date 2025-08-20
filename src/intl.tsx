@@ -26,6 +26,7 @@ type LocaleData = Record<keyof typeof messages, MessageFormatElement[]>;
 // }
 const locales = import.meta.glob<LocaleData>("./*.json", {
   base: "../translations/compiled/",
+  import: "default",
 });
 
 const getLocaleLoader = (
