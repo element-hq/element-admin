@@ -1,0 +1,159 @@
+.root {
+  display: flex;
+  flex: 1;
+  align-items: stretch;
+
+  /* Create a new z-index stacking context for the sidebar to be over the content */
+  position: relative;
+  z-index: 0;
+}
+
+.sidebar {
+  flex: 0 0 224px;
+
+  /* Put the sidebar over the content */
+  position: relative;
+  z-index: 10;
+
+  & .sidebar-inner {
+    block-size: 100%;
+    padding-block: var(--cpd-space-6x);
+    border-inline-end: 1px solid var(--cpd-color-bg-subtle-primary);
+    background-color: var(--cpd-color-bg-canvas-default);
+    overflow: hidden;
+
+    & .sidebar-content {
+      width: 224px;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.content {
+  flex: 1;
+  padding: var(--cpd-space-12x);
+}
+
+.divider {
+  block-size: 1px;
+  background-color: var(--cpd-color-bg-subtle-secondary);
+  margin: var(--cpd-space-6x) var(--cpd-space-4x);
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: var(--cpd-space-2x) var(--cpd-space-6x);
+  gap: var(--cpd-space-3x);
+  color: var(--cpd-color-text-secondary);
+
+  & .nav-link-label {
+    font: var(--cpd-font-body-md-medium);
+    letter-spacing: var(--cpd-font-letter-spacing-body-md);
+  }
+
+  & .nav-link-icon {
+    block-size: var(--cpd-space-6x);
+    inline-size: var(--cpd-space-6x);
+  }
+
+  &:hover {
+    color: var(--cpd-color-text-primary);
+    background-color: var(--cpd-color-bg-action-secondary-hovered);
+  }
+
+  &[data-status="active"] {
+    color: var(--cpd-color-text-primary);
+    background-color: var(--cpd-color-bg-action-secondary-pressed);
+  }
+}
+
+/* At this breakpoint, the sidebar only shows icons and expands over the content on hover */
+@media screen and (max-width: 1366px) {
+  .sidebar {
+    flex-basis: calc(2 * var(--cpd-space-6x) + var(--cpd-space-6x));
+    min-width: 0;
+
+    & .sidebar-inner {
+      transition:
+        width var(--default-transition-duration)
+          var(--default-transition-timing-function),
+        box-shadow var(--default-transition-duration)
+          var(--default-transition-timing-function);
+      width: calc(2 * var(--cpd-space-6x) + var(--cpd-space-6x));
+    }
+
+    & .nav-link-label {
+      transition: opacity var(--default-transition-duration)
+        var(--default-transition-timing-function);
+      opacity: 0;
+    }
+
+    & .divider {
+      transition: margin var(--default-transition-duration)
+        var(--default-transition-timing-function);
+      margin-inline: 0;
+    }
+
+    &:hover {
+      & .sidebar-inner {
+        box-shadow: 0 4px 24px 0 rgba(27, 29, 34, 0.1);
+        width: 224px;
+      }
+
+      & .divider {
+        margin-inline: var(--cpd-space-4x);
+      }
+
+      & .nav-link-label {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+/* At this breakpoint, the sidebar becomes a scrollable list of chips */
+@media screen and (max-width: 768px) {
+  .root {
+    flex-direction: column;
+
+    & .sidebar {
+      flex: 0 0 auto;
+      & .sidebar-inner {
+        scrollbar-width: none;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 0;
+        width: auto;
+        box-shadow: none;
+        border: none;
+
+        & .sidebar-content {
+          /* FIXME: this should be 18px */
+          padding: var(--cpd-space-4x);
+          gap: var(--cpd-space-2x);
+          width: auto;
+          flex-direction: row;
+        }
+      }
+    }
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .nav-link {
+    flex-shrink: 0;
+    padding: var(--cpd-space-1-5x) var(--cpd-space-4x);
+    border-radius: var(--cpd-radius-pill-effect);
+    & .nav-link-label {
+      opacity: 1;
+    }
+
+    & .nav-link-icon {
+      display: none;
+    }
+  }
+}

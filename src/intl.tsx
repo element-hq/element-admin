@@ -19,7 +19,7 @@ declare global {
 //   "../translations/compiled/en.json": "../whatever/assets/root/en-aabbcc.json",
 //   ...
 // }
-const locales = import.meta.glob<string>("../translatons/compiled/*.json", {
+const locales = import.meta.glob<string>("../translations/compiled/*.json", {
   query: "?url",
   import: "default",
   eager: true,
@@ -97,7 +97,7 @@ export const IntlProvider = ({ children }: { children: React.ReactNode }) => {
 
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error(`Could not load locale ${locale}`);
+        throw new Error(`Could not load locale ${locale} at ${url}`);
       }
 
       return response.json();

@@ -41,6 +41,9 @@ importers:
       '@vector-im/compound-web':
         specifier: 8.2.0
         version: 8.2.0(@fontsource/inconsolata@5.2.6)(@fontsource/inter@5.2.6)(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(@vector-im/compound-design-tokens@5.0.0(@types/react@19.1.10)(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      classnames:
+        specifier: 2.5.1
+        version: 2.5.1
       react:
         specifier: 19.1.1
         version: 19.1.1

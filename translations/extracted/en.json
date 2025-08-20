@@ -1,4 +1,28 @@
 {
+  "action.sign_out": {
+    "description": "Label for the sign out menu item",
+    "message": "Sign out"
+  },
+  "header.user_menu.title": {
+    "description": "The title of the menu which shows what account is logged in and have a few options like signing out",
+    "message": "Account menu"
+  },
+  "navigation.dashboard": {
+    "description": "Label for the dashboard navigation item in the main navigation sidebar",
+    "message": "Dashboard"
+  },
+  "navigation.registration_tokens": {
+    "description": "Label for the registration tokens navigation item in the main navigation sidebar",
+    "message": "Registration tokens"
+  },
+  "navigation.rooms": {
+    "description": "Label for the rooms navigation item in the main navigation sidebar",
+    "message": "Rooms"
+  },
+  "navigation.users": {
+    "description": "Label for the users navigation item in the main navigation sidebar",
+    "message": "Users"
+  },
   "pages.login.server_name": {
     "description": "Label for the server name field",
     "message": "Server name"

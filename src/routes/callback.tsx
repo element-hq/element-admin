@@ -23,7 +23,9 @@ const SearchParams = v.intersect([
 
 export const Route = createFileRoute("/callback")({
   validateSearch: SearchParams,
-  loaderDeps: ({ search }) => {
+  loaderDeps: ({ search }) => ({ search }),
+
+  loader: async ({ deps: { search }, context }) => {
     const state = useAuthStore.getState();
     const session = state.authorizationSession;
     const saveCredentials = state.saveCredentials;
@@ -31,20 +33,18 @@ export const Route = createFileRoute("/callback")({
       throw new Error("No session");
     }
 
-    if (search.state !== session.state) {
-      throw new Error("Invalid state");
-    }
-
     if ("error" in search) {
       throw new Error(search.error_description || search.error);
     }
 
+    if (search.state !== session.state) {
+      throw new Error(
+        `Invalid state. Expected ${session.state}, got ${search.state}.`,
+      );
+    }
+
     const code = search.code;
 
-    return { code, session, saveCredentials };
-  },
-
-  loader: async ({ deps: { code, session, saveCredentials }, context }) => {
     const wellKnown = await context.queryClient.ensureQueryData(
       wellKnownQuery(session.serverName),
     );

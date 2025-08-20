@@ -26,6 +26,7 @@
     "@tanstack/router-plugin": "1.131.11",
     "@vector-im/compound-design-tokens": "5.0.0",
     "@vector-im/compound-web": "8.2.0",
+    "classnames": "2.5.1",
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "react-intl": "7.1.11",
