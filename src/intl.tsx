@@ -17,18 +17,18 @@ declare global {
   }
 }
 
-// This generates a map of locale names to their URL (based on import.meta.url), which looks like this:
+type LocaleData = Record<keyof typeof messages, MessageFormatElement[]>;
+
+// This generates a map of locale names a function which loads them
 // {
-//   "../translations/compiled/en.json": "../whatever/assets/root/en-aabbcc.json",
+//   "../translations/compiled/en.json": () => import("../whatever/assets/root/en-aabbcc.json"),
 //   ...
 // }
-const locales = import.meta.glob<string>("../translations/compiled/*.json", {
-  query: "?url",
-  import: "default",
-  eager: true,
-});
+const locales = import.meta.glob<LocaleData>("../translations/compiled/*.json");
 
-const getLocaleUrl = (name: string): string | undefined =>
+const getLocaleLoader = (
+  name: string,
+): (() => Promise<LocaleData>) | undefined =>
   locales[`../translations/compiled/${name}.json`];
 
 const DEFAULT_LOCALE = "en";
@@ -136,18 +136,13 @@ export const IntlProvider = ({ children }: { children: React.ReactNode }) => {
     queries: [
       {
         queryKey: ["language", locale],
-        queryFn: async (): Promise<Record<string, MessageFormatElement[]>> => {
-          const url = getLocaleUrl(locale);
-          if (!url) {
-            throw new Error(`Could not find locale ${locale}`);
+        queryFn: async (): Promise<LocaleData> => {
+          const loader = getLocaleLoader(locale);
+          if (!loader) {
+            throw new Error(`Could not find locale loader for ${locale}`);
           }
 
-          const response = await fetch(url);
-          if (!response.ok) {
-            throw new Error(`Could not load locale ${locale} at ${url}`);
-          }
-
-          return response.json();
+          return await loader();
         },
       },
       {
