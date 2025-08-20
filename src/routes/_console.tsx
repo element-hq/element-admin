@@ -29,7 +29,7 @@ import * as Header from "@/components/header";
 import { EssLogotype } from "@/components/logo";
 import * as Navigation from "@/components/navigation";
 import * as Footer from "@/components/footer";
-import Layout from "@/components/layout";
+import { Layout } from "@/components/layout";
 import { useImageBlob } from "@/utils/blob";
 
 const TokenView: React.FC<{ token: string }> = ({ token }) => (

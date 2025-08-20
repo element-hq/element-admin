@@ -5,7 +5,7 @@ import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import * as Footer from "@/components/footer";
 import { useAuthStore } from "@/stores/auth";
 import { EssLogotypeVertical } from "@/components/logo";
-import Layout from "@/components/layout";
+import { WelcomeLayout } from "@/components/layout";
 
 export const Route = createFileRoute("/_auth")({
   beforeLoad: () => {
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/_auth")({
 
   component: () => {
     return (
-      <Layout className="gap-10 py-10 items-center justify-center" withGradient>
+      <WelcomeLayout className="gap-10 py-10 items-center justify-center">
         <section className="flex flex-col flex-1 gap-12 items-stretch justify-center max-w-[340px]">
           {/* Logo & message */}
           <div className="flex flex-col gap-6 items-center text-center">
@@ -71,7 +71,7 @@ export const Route = createFileRoute("/_auth")({
             <Footer.CopyrightNotice />
           </Footer.Section>
         </Footer.Root>
-      </Layout>
+      </WelcomeLayout>
     );
   },
 });
