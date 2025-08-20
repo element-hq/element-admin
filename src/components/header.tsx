@@ -24,9 +24,10 @@ export const HomeserverName: React.FC<React.PropsWithChildren<{}>> = ({
 export const UserMenu: React.FC<
   React.PropsWithChildren<{
     mxid: string;
-    displayName?: string;
+    displayName?: string | undefined;
+    avatarUrl?: string | undefined;
   }>
-> = ({ children, mxid, displayName }) => {
+> = ({ children, mxid, displayName, avatarUrl }) => {
   // TODO: compound-web shouldn't require us to have a controlled state here
   const [open, setOpen] = useState(false);
   const intl = useIntl();
@@ -44,7 +45,12 @@ export const UserMenu: React.FC<
       onOpenChange={setOpen}
       align="end"
       trigger={
-        <UserMenuButton mxid={mxid} displayName={displayName} open={open} />
+        <UserMenuButton
+          mxid={mxid}
+          displayName={displayName}
+          avatarUrl={avatarUrl}
+          open={open}
+        />
       }
     >
       {children}
@@ -54,10 +60,11 @@ export const UserMenu: React.FC<
 
 export const UserMenuProfile: React.FC<{
   mxid: string;
+  avatarUrl?: string | undefined;
   displayName?: string | undefined;
-}> = ({ mxid, displayName }) => (
+}> = ({ mxid, displayName, avatarUrl }) => (
   <div className={styles["user-menu-profile"]}>
-    <Avatar size="88px" id={mxid} name={displayName || mxid} />
+    <Avatar size="88px" id={mxid} name={displayName || mxid} src={avatarUrl} />
     <section className={styles["infos"]}>
       <p className={styles["display-name"]}>{displayName || mxid}</p>
       <p className={styles["mxid"]}>{mxid}</p>
@@ -69,16 +76,17 @@ const UserMenuButton: React.FC<
   {
     mxid: string;
     displayName?: string | undefined;
+    avatarUrl?: string | undefined;
     open: boolean;
   } & React.ComponentProps<"button">
-> = ({ mxid, displayName, open, ...props }) => (
+> = ({ mxid, displayName, avatarUrl, open, ...props }) => (
   <button
     data-state={open ? "open" : "closed"}
     className={styles["user-menu-button"]}
     type="button"
     {...props}
   >
-    <Avatar size="32px" id={mxid} name={displayName || mxid} />
+    <Avatar size="32px" id={mxid} name={displayName || mxid} src={avatarUrl} />
     <ChevronDownIcon
       data-state={open ? "open" : "closed"}
       className={styles["icon"]}

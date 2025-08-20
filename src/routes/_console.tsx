@@ -1,5 +1,6 @@
 import {
   useMutation,
+  useQuery,
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
@@ -15,7 +16,12 @@ import { Link, MenuItem, Separator } from "@vector-im/compound-web";
 import { FormattedMessage, useIntl } from "react-intl";
 
 import { authMetadataQuery, revokeToken } from "@/api/auth";
-import { wellKnownQuery, whoamiQuery } from "@/api/matrix";
+import {
+  mediaThumbnailQuery,
+  profileQuery,
+  wellKnownQuery,
+  whoamiQuery,
+} from "@/api/matrix";
 import { CopyToClipboard } from "@/components/copy";
 import { useAuthStore } from "@/stores/auth";
 import * as Header from "@/components/header";
@@ -23,6 +29,7 @@ import { EssLogotype } from "@/components/logo";
 import * as Navigation from "@/components/navigation";
 import * as Footer from "@/components/footer";
 import Layout from "@/components/layout";
+import { useImageBlob } from "@/utils/blob";
 
 const TokenView: React.FC<{ token: string }> = ({ token }) => (
   <div className="flex items-center justify-between py-2 px-4 gap-1 text-text-secondary font-mono text-xs">
@@ -51,7 +58,12 @@ export const Route = createFileRoute("/_console")({
     );
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
-    await queryClient.ensureQueryData(whoamiQuery(queryClient, synapseRoot));
+    const whoami = await queryClient.ensureQueryData(
+      whoamiQuery(queryClient, synapseRoot),
+    );
+    await queryClient.ensureQueryData(
+      profileQuery(queryClient, synapseRoot, whoami.user_id),
+    );
   },
 
   component: () => {
@@ -64,6 +76,16 @@ export const Route = createFileRoute("/_console")({
     const { data: whoami } = useSuspenseQuery(
       whoamiQuery(queryClient, synapseRoot),
     );
+
+    const { data: profile } = useSuspenseQuery(
+      profileQuery(queryClient, synapseRoot, whoami.user_id),
+    );
+
+    const { data: avatar } = useQuery(
+      mediaThumbnailQuery(queryClient, synapseRoot, profile.avatar_url),
+    );
+
+    const avatarUrl = useImageBlob(avatar);
 
     return (
       // The z-index is needed to create a new stacking context, so that the
@@ -78,8 +100,16 @@ export const Route = createFileRoute("/_console")({
           </Header.Left>
 
           <Header.Right>
-            <Header.UserMenu mxid={whoami.user_id}>
-              <Header.UserMenuProfile mxid={whoami.user_id} />
+            <Header.UserMenu
+              mxid={whoami.user_id}
+              displayName={profile.displayname}
+              avatarUrl={avatarUrl}
+            >
+              <Header.UserMenuProfile
+                mxid={whoami.user_id}
+                displayName={profile.displayname}
+                avatarUrl={avatarUrl}
+              />
               <Separator />
               <TokenView token={credentials.accessToken} />
               <Separator />
