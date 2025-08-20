@@ -60,12 +60,12 @@
 
   &:hover {
     color: var(--cpd-color-text-primary);
-    background-color: var(--cpd-color-bg-action-secondary-hovered);
+    background-color: var(--cpd-color-bg-subtle-secondary);
   }
 
   &[data-status="active"] {
     color: var(--cpd-color-text-primary);
-    background-color: var(--cpd-color-bg-action-secondary-pressed);
+    background-color: var(--cpd-color-bg-subtle-primary);
   }
 }
 

@@ -75,11 +75,11 @@
   }
 
   &:hover {
-    background-color: var(--cpd-color-bg-action-secondary-hovered);
+    background-color: var(--cpd-color-bg-subtle-secondary);
   }
 
   &[data-state="open"] {
-    background-color: var(--cpd-color-bg-action-secondary-pressed);
+    background-color: var(--cpd-color-bg-subtle-primary);
 
     & .icon {
       transform: rotate(180deg);
