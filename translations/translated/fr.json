@@ -1,4 +1,22 @@
 {
+  "action.sign_out": {
+    "message": "Se déconnecter"
+  },
+  "header.user_menu.title": {
+    "message": "Paramètres du compte"
+  },
+  "navigation.dashboard": {
+    "message": "Tableau de bord"
+  },
+  "navigation.registration_tokens": {
+    "message": "Jetons d'enregistrement"
+  },
+  "navigation.rooms": {
+    "message": "Salons"
+  },
+  "navigation.users": {
+    "message": "Utilisateurs"
+  },
   "pages.login.server_name": {
     "message": "Nom du serveur"
   },
