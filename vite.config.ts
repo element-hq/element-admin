@@ -12,12 +12,15 @@ export default defineConfig(({ mode }) => ({
   },
 
   resolve: {
-    alias: {
-      // We load the translations from the compiled files, so we don't need the
-      // message parser, which reduces the bundle size
-      "@formatjs/icu-messageformat-parser":
-        "@formatjs/icu-messageformat-parser/no-parser",
-    },
+    alias:
+      mode === "production"
+        ? {
+            // We load the translations from the compiled files, so we don't need the
+            // message parser, which reduces the bundle size
+            "@formatjs/icu-messageformat-parser":
+              "@formatjs/icu-messageformat-parser/no-parser",
+          }
+        : {},
   },
 
   plugins: [
