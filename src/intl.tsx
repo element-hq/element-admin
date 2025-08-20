@@ -1,4 +1,7 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQueries, useSuspenseQuery } from "@tanstack/react-query";
+import { shouldPolyfill as shouldPolyfillIntlRelativeTimeFormat } from "@formatjs/intl-relativetimeformat/should-polyfill";
+import { shouldPolyfill as shouldPolyfillIntlPluralRules } from "@formatjs/intl-pluralrules/should-polyfill";
+
 import { useSyncExternalStore } from "react";
 import {
   IntlProvider as ReactIntlProvider,
@@ -70,6 +73,48 @@ const getBestLocale = (): string => {
 };
 
 /**
+ * Loads the Intl polyfills for the given locale
+ *
+ * @param locale The locale to load
+ */
+const loadIntlPolyfillsForLocale = async (locale: string): Promise<void> => {
+  if (shouldPolyfillIntlRelativeTimeFormat(locale)) {
+    await import("@formatjs/intl-relativetimeformat/polyfill-force");
+    // Initially, I tried using a dynamic variable import, but it has two important limitations:
+    //   1. It needs a relative path, leaving an ugly `../node_modules` prefix
+    //   2. It would emit chunks for every single locale, which slows down the
+    //      build quite a bit, even if we don't use them
+    // Maybe we should code-gen this part, or have some kind of vite plugin to handle this?
+    //
+    // FIXME: Make sure this is in sync with the current list of supported locales
+    switch (locale) {
+      case "en":
+        await import("@formatjs/intl-relativetimeformat/locale-data/en");
+        break;
+      case "fr":
+        await import("@formatjs/intl-relativetimeformat/locale-data/fr");
+        break;
+      default:
+        throw new Error(`Unsupported locale ${locale}`);
+    }
+  }
+
+  if (shouldPolyfillIntlPluralRules(locale)) {
+    await import("@formatjs/intl-pluralrules/polyfill-force");
+    switch (locale) {
+      case "en":
+        await import("@formatjs/intl-pluralrules/locale-data/en");
+        break;
+      case "fr":
+        await import("@formatjs/intl-pluralrules/locale-data/fr");
+        break;
+      default:
+        throw new Error(`Unsupported locale ${locale}`);
+    }
+  }
+};
+
+/**
  * A hook that returns the best supported language, synced with the browser's
  * language change events
  *
@@ -85,29 +130,39 @@ const useBestLocale = (): string => {
 export const IntlProvider = ({ children }: { children: React.ReactNode }) => {
   const locale = useBestLocale();
 
-  // Load the language data asynchronously
+  // Load the language data and the Intl polyfills asynchronously in parallel
   // This will suspend during loading
-  const result = useSuspenseQuery({
-    queryKey: ["language", locale],
-    queryFn: async (): Promise<Record<string, MessageFormatElement[]>> => {
-      const url = getLocaleUrl(locale);
-      if (!url) {
-        throw new Error(`Could not find locale ${locale}`);
-      }
+  const [{ data: messages }, _] = useSuspenseQueries({
+    queries: [
+      {
+        queryKey: ["language", locale],
+        queryFn: async (): Promise<Record<string, MessageFormatElement[]>> => {
+          const url = getLocaleUrl(locale);
+          if (!url) {
+            throw new Error(`Could not find locale ${locale}`);
+          }
 
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Could not load locale ${locale} at ${url}`);
-      }
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`Could not load locale ${locale} at ${url}`);
+          }
 
-      return response.json();
-    },
+          return response.json();
+        },
+      },
+      {
+        queryKey: ["intl-polyfills", locale],
+        queryFn: async (): Promise<void> => {
+          await loadIntlPolyfillsForLocale(locale);
+        },
+      },
+    ],
   });
 
   return (
     <ReactIntlProvider
       locale={locale}
-      messages={result.data}
+      messages={messages}
       defaultLocale={DEFAULT_LOCALE}
     >
       {children}
