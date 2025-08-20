@@ -59,9 +59,9 @@
     "wrangler": "4.29.1"
   },
   "lint-staged": {
-    "**/*": [
+    "*": [
       "prettier --write --ignore-unknown",
-      "oxlint --fix"
+      "oxlint --deny-warnings --fix"
     ]
   },
   "knip": {
