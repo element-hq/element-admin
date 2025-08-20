@@ -21,15 +21,16 @@ type LocaleData = Record<keyof typeof messages, MessageFormatElement[]>;
 
 // This generates a map of locale names a function which loads them
 // {
-//   "../translations/compiled/en.json": () => import("../whatever/assets/root/en-aabbcc.json"),
+//   "./en.json": () => import("../whatever/assets/root/en-aabbcc.json"),
 //   ...
 // }
-const locales = import.meta.glob<LocaleData>("../translations/compiled/*.json");
+const locales = import.meta.glob<LocaleData>("./*.json", {
+  base: "../translations/compiled/",
+});
 
 const getLocaleLoader = (
   name: string,
-): (() => Promise<LocaleData>) | undefined =>
-  locales[`../translations/compiled/${name}.json`];
+): (() => Promise<LocaleData>) | undefined => locales[`./${name}.json`];
 
 const DEFAULT_LOCALE = "en";
 
@@ -147,8 +148,9 @@ export const IntlProvider = ({ children }: { children: React.ReactNode }) => {
       },
       {
         queryKey: ["intl-polyfills", locale],
-        queryFn: async (): Promise<void> => {
+        queryFn: async (): Promise<null> => {
           await loadIntlPolyfillsForLocale(locale);
+          return null;
         },
       },
     ],
