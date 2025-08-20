@@ -17,7 +17,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
   loader: ({ context: { intl } }) => ({
     title: intl.formatMessage({
       id: "product.title",
-      defaultMessage: "element Server Suite",
+      defaultMessage: "Element Server Suite",
       description: "The main name of the admin console",
     }),
   }),
@@ -28,7 +28,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
         ? {
             title: loaderData.title,
           }
-        : { title: "Loading element Server Suite…" },
+        : { title: "Loading Element Server Suite…" },
     ],
   }),
 

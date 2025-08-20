@@ -1,0 +1,66 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--cpd-space-4x);
+  padding-block-start: var(--cpd-space-6x);
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  gap: var(--cpd-space-2x);
+}
+
+.divider {
+  color: var(--cpd-color-icon-quaternary);
+  font: var(--cpd-font-body-sm-semibold);
+  letter-spacing: var(--cpd-font-letter-spacing-body-sm);
+  user-select: none;
+
+  &::after {
+    content: "•";
+  }
+}
+
+.spacer {
+  flex: 1;
+}
+
+.powered-by {
+  margin-inline-end: auto;
+  color: var(--cpd-color-text-secondary);
+  font: var(--cpd-font-body-xs-regular);
+  letter-spacing: var(--cpd-font-letter-spacing-body-xs);
+
+  & > svg {
+    display: inline-block;
+    color: var(--cpd-color-text-primary);
+    padding-inline-start: var(--cpd-space-1x);
+    vertical-align: top;
+  }
+}
+
+.copyright-notice {
+  color: var(--cpd-color-text-secondary);
+  font: var(--cpd-font-body-sm-regular);
+  letter-spacing: var(--cpd-font-letter-spacing-body-sm);
+}
+
+/** At the mobile breakpoint, we make the footer stack vertically and hide the section divider */
+@media screen and (max-width: 768px) {
+  .root {
+    flex-direction: column;
+
+    & > .divider {
+      display: none;
+    }
+  }
+
+  /** The 'powered by element' logo moves to the end of the footer */
+  .powered-by {
+    order: 1;
+    margin-inline-end: initial;
+  }
+}

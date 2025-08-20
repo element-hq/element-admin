@@ -11,7 +11,7 @@ import {
   SignOutIcon,
   UserProfileIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
-import { MenuItem, Separator } from "@vector-im/compound-web";
+import { Link, MenuItem, Separator } from "@vector-im/compound-web";
 import { FormattedMessage, useIntl } from "react-intl";
 
 import { authMetadataQuery, revokeToken } from "@/api/auth";
@@ -19,8 +19,9 @@ import { wellKnownQuery, whoamiQuery } from "@/api/matrix";
 import { CopyToClipboard } from "@/components/copy";
 import { useAuthStore } from "@/stores/auth";
 import * as Header from "@/components/header";
-import { EssLogo } from "@/components/logo";
+import { EssLogotype } from "@/components/logo";
 import * as Navigation from "@/components/navigation";
+import * as Footer from "@/components/footer";
 import Layout from "@/components/layout";
 
 const TokenView: React.FC<{ token: string }> = ({ token }) => (
@@ -70,7 +71,7 @@ export const Route = createFileRoute("/_console")({
       <Layout>
         <Header.Root>
           <Header.Left>
-            <EssLogo />
+            <EssLogotype />
             <Header.HomeserverName>
               {credentials.serverName}
             </Header.HomeserverName>
@@ -125,6 +126,42 @@ export const Route = createFileRoute("/_console")({
 
           <Navigation.Content>
             <Outlet />
+
+            <Footer.Root>
+              <Footer.PoweredBy />
+
+              <Footer.Section>
+                <Link href="https://docs.element.io/terms" size="small">
+                  <FormattedMessage
+                    id="footer.help_and_support"
+                    defaultMessage="Help & Support"
+                    description="Label for the help and support link in the footer"
+                  />
+                </Link>
+                <Footer.Divider />
+                <Link href="https://element.io/terms" size="small">
+                  <FormattedMessage
+                    id="footer.legal"
+                    defaultMessage="Legal"
+                    description="Label for the legal link in the footer"
+                  />
+                </Link>
+                <Footer.Divider />
+                <Link href="https://element.io/privacy" size="small">
+                  <FormattedMessage
+                    id="footer.privacy"
+                    defaultMessage="Privacy"
+                    description="Label for the privacy link in the footer"
+                  />
+                </Link>
+              </Footer.Section>
+
+              <Footer.Divider />
+
+              <Footer.Section>
+                <Footer.CopyrightNotice />
+              </Footer.Section>
+            </Footer.Root>
           </Navigation.Content>
         </Navigation.Root>
       </Layout>

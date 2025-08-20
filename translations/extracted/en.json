@@ -3,6 +3,24 @@
     "description": "Label for the sign out menu item",
     "message": "Sign out"
   },
+  "footer.copyright_notice": {
+    "message": "Copyright © {year}"
+  },
+  "footer.help_and_support": {
+    "description": "Label for the help and support link in the footer",
+    "message": "Help & Support"
+  },
+  "footer.legal": {
+    "description": "Label for the legal link in the footer",
+    "message": "Legal"
+  },
+  "footer.powered_by": {
+    "message": "Powered by {logo}"
+  },
+  "footer.privacy": {
+    "description": "Label for the privacy link in the footer",
+    "message": "Privacy"
+  },
   "header.user_menu.title": {
     "description": "The title of the menu which shows what account is logged in and have a few options like signing out",
     "message": "Account menu"
@@ -31,8 +49,11 @@
     "description": "Title for the login page",
     "message": "Login"
   },
+  "product.element": {
+    "message": "Element"
+  },
   "product.title": {
     "description": "The main name of the admin console",
-    "message": "element Server Suite"
+    "message": "Element Server Suite"
   }
 }
