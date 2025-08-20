@@ -1,0 +1,46 @@
+name: Download translation files from Localazy
+on:
+  workflow_dispatch:
+
+jobs:
+  download:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v5
+
+      - name: Install Node
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version: 22
+
+      - name: Download translations from Localazy
+        run: pnpm i18n:download
+
+      - name: Compile the downloaded translations
+        run: pnpm i18n:compile
+
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v7.0.8
+        with:
+          sign-commits: true
+          token: ${{ secrets.BOT_GITHUB_TOKEN }}
+          branch-token: ${{ secrets.GITHUB_TOKEN }}
+          branch: actions/localazy-download
+          delete-branch: true
+          title: Translations updates
+          labels: |
+            T-Task
+            A-I18n
+          commit-message: Translations updates
+
+      - name: Enable automerge
+        run: gh pr merge --merge --auto "$PR_NUMBER"
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        env:
+          GH_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
