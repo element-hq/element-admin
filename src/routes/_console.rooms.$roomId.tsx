@@ -1,4 +1,4 @@
-import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowLeftIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Badge, Button, H3, Text } from "@vector-im/compound-web";
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/_console/rooms/$roomId")({
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
     await queryClient.ensureQueryData(
-      roomDetailQuery(queryClient, synapseRoot, params.roomId),
+      roomDetailQuery(synapseRoot, params.roomId),
     );
   },
   component: RouteComponent,
@@ -61,16 +61,13 @@ const formatHistoryVisibility = (historyVisibility: string | null) => {
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const { roomId } = Route.useParams();
-  const queryClient = useQueryClient();
 
   const { data: wellKnown } = useSuspenseQuery(
     wellKnownQuery(credentials.serverName),
   );
   const synapseRoot = wellKnown["m.homeserver"].base_url;
 
-  const { data: room } = useSuspenseQuery(
-    roomDetailQuery(queryClient, synapseRoot, roomId),
-  );
+  const { data: room } = useSuspenseQuery(roomDetailQuery(synapseRoot, roomId));
 
   const formatRoomName = () => {
     if (room.name) return room.name;

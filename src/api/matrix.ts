@@ -1,4 +1,4 @@
-import { type QueryClient, queryOptions } from "@tanstack/react-query";
+import { queryOptions } from "@tanstack/react-query";
 import * as v from "valibot";
 import { accessToken } from "@/stores/auth";
 
@@ -32,11 +32,11 @@ const WhoamiResponse = v.object({
   user_id: v.string(),
 });
 
-export const whoamiQuery = (queryClient: QueryClient, synapseRoot: string) =>
+export const whoamiQuery = (synapseRoot: string) =>
   queryOptions({
     queryKey: ["matrix", "whoami", synapseRoot],
-    queryFn: async ({ signal }) => {
-      const token = await accessToken(queryClient, signal);
+    queryFn: async ({ client, signal }) => {
+      const token = await accessToken(client, signal);
       if (!token) {
         throw new Error("No access token");
       }
@@ -65,15 +65,11 @@ const ProfileResponse = v.object({
   displayname: v.string(),
 });
 
-export const profileQuery = (
-  queryClient: QueryClient,
-  synapseRoot: string,
-  mxid: string,
-) =>
+export const profileQuery = (synapseRoot: string, mxid: string) =>
   queryOptions({
     queryKey: ["matrix", "profile", synapseRoot, mxid],
-    queryFn: async ({ signal }) => {
-      const token = await accessToken(queryClient, signal);
+    queryFn: async ({ client, signal }) => {
+      const token = await accessToken(client, signal);
       if (!token) {
         throw new Error("No access token");
       }
@@ -108,20 +104,16 @@ const parseMxcUrl = (mxc: string): [string, string] => {
 };
 
 /** Thumbnail a media file from a Matrix content URI. The thumbnailing is hard-coded to 96x96 with the method set to 'crop' */
-export const mediaThumbnailQuery = (
-  queryClient: QueryClient,
-  synapseRoot: string,
-  mxc: string | null,
-) =>
+export const mediaThumbnailQuery = (synapseRoot: string, mxc: string | null) =>
   queryOptions({
     enabled: !!mxc,
     queryKey: ["matrix", "media-thumbnail", synapseRoot, mxc],
-    queryFn: async ({ signal }): Promise<Blob> => {
+    queryFn: async ({ client, signal }): Promise<Blob> => {
       if (!mxc) {
         throw new Error("No mxc set");
       }
 
-      const token = await accessToken(queryClient, signal);
+      const token = await accessToken(client, signal);
       if (!token) {
         throw new Error("No access token");
       }

@@ -184,23 +184,22 @@ export type EditTokenParameters = {
 };
 
 export const usersQuery = (
-  queryClient: QueryClient,
   serverName: string,
   parameters: UserListParameters = {},
 ) =>
   queryOptions({
     queryKey: ["mas", "users", serverName, parameters],
-    queryFn: async ({ signal }) => {
-      const token = await accessToken(queryClient, signal);
+    queryFn: async ({ client, signal }) => {
+      const token = await accessToken(client, signal);
       if (!token) {
         throw new Error("No access token");
       }
 
-      const wellKnown = await queryClient.ensureQueryData(
+      const wellKnown = await client.ensureQueryData(
         wellKnownQuery(serverName),
       );
 
-      const authMetadata = await queryClient.ensureQueryData(
+      const authMetadata = await client.ensureQueryData(
         authMetadataQuery(wellKnown["m.homeserver"].base_url),
       );
 
@@ -240,24 +239,20 @@ export const usersQuery = (
     },
   });
 
-export const userQuery = (
-  queryClient: QueryClient,
-  serverName: string,
-  userId: string,
-) =>
+export const userQuery = (serverName: string, userId: string) =>
   queryOptions({
     queryKey: ["mas", "user", serverName, userId],
-    queryFn: async ({ signal }) => {
-      const token = await accessToken(queryClient, signal);
+    queryFn: async ({ client, signal }) => {
+      const token = await accessToken(client, signal);
       if (!token) {
         throw new Error("No access token");
       }
 
-      const wellKnown = await queryClient.ensureQueryData(
+      const wellKnown = await client.ensureQueryData(
         wellKnownQuery(serverName),
       );
 
-      const authMetadata = await queryClient.ensureQueryData(
+      const authMetadata = await client.ensureQueryData(
         authMetadataQuery(wellKnown["m.homeserver"].base_url),
       );
 
@@ -359,24 +354,20 @@ export const deactivateUser = async (
   return user;
 };
 
-export const userEmailsQuery = (
-  queryClient: QueryClient,
-  serverName: string,
-  userId: string,
-) =>
+export const userEmailsQuery = (serverName: string, userId: string) =>
   queryOptions({
     queryKey: ["mas", "user-emails", serverName, userId],
-    queryFn: async ({ signal }) => {
-      const token = await accessToken(queryClient, signal);
+    queryFn: async ({ client, signal }) => {
+      const token = await accessToken(client, signal);
       if (!token) {
         throw new Error("No access token");
       }
 
-      const wellKnown = await queryClient.ensureQueryData(
+      const wellKnown = await client.ensureQueryData(
         wellKnownQuery(serverName),
       );
 
-      const authMetadata = await queryClient.ensureQueryData(
+      const authMetadata = await client.ensureQueryData(
         authMetadataQuery(wellKnown["m.homeserver"].base_url),
       );
 
@@ -447,23 +438,22 @@ export const unlockUser = async (
 };
 
 export const registrationTokensQuery = (
-  queryClient: QueryClient,
   serverName: string,
   parameters: TokenListParameters = {},
 ) =>
   queryOptions({
     queryKey: ["mas", "registration-tokens", serverName, parameters],
-    queryFn: async ({ signal }) => {
-      const token = await accessToken(queryClient, signal);
+    queryFn: async ({ client, signal }) => {
+      const token = await accessToken(client, signal);
       if (!token) {
         throw new Error("No access token");
       }
 
-      const wellKnown = await queryClient.ensureQueryData(
+      const wellKnown = await client.ensureQueryData(
         wellKnownQuery(serverName),
       );
 
-      const authMetadata = await queryClient.ensureQueryData(
+      const authMetadata = await client.ensureQueryData(
         authMetadataQuery(wellKnown["m.homeserver"].base_url),
       );
 
@@ -510,24 +500,20 @@ export const registrationTokensQuery = (
     },
   });
 
-export const registrationTokenQuery = (
-  queryClient: QueryClient,
-  serverName: string,
-  tokenId: string,
-) =>
+export const registrationTokenQuery = (serverName: string, tokenId: string) =>
   queryOptions({
     queryKey: ["mas", "registration-token", serverName, tokenId],
-    queryFn: async ({ signal }) => {
-      const accessTokenValue = await accessToken(queryClient, signal);
+    queryFn: async ({ client, signal }) => {
+      const accessTokenValue = await accessToken(client, signal);
       if (!accessTokenValue) {
         throw new Error("No access token");
       }
 
-      const wellKnown = await queryClient.ensureQueryData(
+      const wellKnown = await client.ensureQueryData(
         wellKnownQuery(serverName),
       );
 
-      const authMetadata = await queryClient.ensureQueryData(
+      const authMetadata = await client.ensureQueryData(
         authMetadataQuery(wellKnown["m.homeserver"].base_url),
       );
 

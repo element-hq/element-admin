@@ -1,4 +1,4 @@
-import { type QueryClient, queryOptions } from "@tanstack/react-query";
+import { queryOptions } from "@tanstack/react-query";
 import * as v from "valibot";
 
 import { accessToken } from "@/stores/auth";
@@ -96,14 +96,11 @@ export type RoomListParameters = {
   empty_rooms?: boolean;
 };
 
-export const serverVersionQuery = (
-  queryClient: QueryClient,
-  synapseRoot: string,
-) =>
+export const serverVersionQuery = (synapseRoot: string) =>
   queryOptions({
     queryKey: ["serverVersion", synapseRoot],
-    queryFn: async ({ signal }) => {
-      const token = await accessToken(queryClient, signal);
+    queryFn: async ({ client, signal }) => {
+      const token = await accessToken(client, signal);
       if (!token) {
         throw new Error("No access token");
       }
@@ -130,14 +127,13 @@ export const serverVersionQuery = (
   });
 
 export const roomsQuery = (
-  queryClient: QueryClient,
   synapseRoot: string,
   parameters: RoomListParameters = {},
 ) =>
   queryOptions({
     queryKey: ["synapse", "rooms", synapseRoot, parameters],
-    queryFn: async ({ signal }) => {
-      const token = await accessToken(queryClient, signal);
+    queryFn: async ({ client, signal }) => {
+      const token = await accessToken(client, signal);
       if (!token) {
         throw new Error("No access token");
       }
@@ -176,15 +172,11 @@ export const roomsQuery = (
     },
   });
 
-export const roomDetailQuery = (
-  queryClient: QueryClient,
-  synapseRoot: string,
-  roomId: string,
-) =>
+export const roomDetailQuery = (synapseRoot: string, roomId: string) =>
   queryOptions({
     queryKey: ["synapse", "room", synapseRoot, roomId],
-    queryFn: async ({ signal }) => {
-      const token = await accessToken(queryClient, signal);
+    queryFn: async ({ client, signal }) => {
+      const token = await accessToken(client, signal);
       if (!token) {
         throw new Error("No access token");
       }

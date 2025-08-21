@@ -38,11 +38,7 @@ import {
 export const Route = createFileRoute("/_console/registration-tokens/$tokenId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
     await queryClient.ensureQueryData(
-      registrationTokenQuery(
-        queryClient,
-        credentials.serverName,
-        params.tokenId,
-      ),
+      registrationTokenQuery(credentials.serverName, params.tokenId),
     );
   },
   component: TokenDetailComponent,
@@ -54,11 +50,7 @@ function TokenDetailComponent() {
   const queryClient = useQueryClient();
 
   const { data } = useSuspenseQuery(
-    registrationTokenQuery(
-      queryClient,
-      credentials.serverName,
-      parameters.tokenId,
-    ),
+    registrationTokenQuery(credentials.serverName, parameters.tokenId),
   );
 
   const [isEditing, setIsEditing] = useState(false);
@@ -199,7 +191,8 @@ function TokenDetailComponent() {
 
       editTokenMutation.mutate(parameters);
     },
-    [editTokenMutation],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [editTokenMutation.mutate],
   );
 
   const cancelEdit = useCallback(() => {

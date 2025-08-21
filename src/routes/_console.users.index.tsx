@@ -1,4 +1,4 @@
-import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, MatchRoute, createFileRoute } from "@tanstack/react-router";
 import { Badge, Button, H2, Text } from "@vector-im/compound-web";
 import * as v from "valibot";
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/_console/users/")({
     };
 
     await queryClient.ensureQueryData(
-      usersQuery(queryClient, credentials.serverName, parameters),
+      usersQuery(credentials.serverName, parameters),
     );
   },
   component: RouteComponent,
@@ -61,7 +61,6 @@ const omit = <T extends Record<string, unknown>, K extends keyof T>(
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
-  const queryClient = useQueryClient();
 
   const parameters: UserListParameters = {
     ...(search.before && { before: search.before }),
@@ -73,7 +72,7 @@ function RouteComponent() {
   };
 
   const { data } = useSuspenseQuery(
-    usersQuery(queryClient, credentials.serverName, parameters),
+    usersQuery(credentials.serverName, parameters),
   );
 
   const hasNext = !!data.links.next || search.before;

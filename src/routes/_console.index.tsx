@@ -1,4 +1,4 @@
-import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 
 import { wellKnownQuery } from "@/api/matrix";
@@ -11,9 +11,7 @@ export const Route = createFileRoute("/_console/")({
     );
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
-    await queryClient.ensureQueryData(
-      serverVersionQuery(queryClient, synapseRoot),
-    );
+    await queryClient.ensureQueryData(serverVersionQuery(synapseRoot));
   },
   component: RouteComponent,
 });
@@ -21,15 +19,12 @@ export const Route = createFileRoute("/_console/")({
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
 
-  const queryClient = useQueryClient();
   const { data: wellKnown } = useSuspenseQuery(
     wellKnownQuery(credentials.serverName),
   );
 
   const synapseRoot = wellKnown["m.homeserver"].base_url;
-  const { data } = useSuspenseQuery(
-    serverVersionQuery(queryClient, synapseRoot),
-  );
+  const { data } = useSuspenseQuery(serverVersionQuery(synapseRoot));
 
   return (
     <div className="space-y-4">

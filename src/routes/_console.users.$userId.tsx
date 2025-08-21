@@ -28,10 +28,10 @@ export const Route = createFileRoute("/_console/users/$userId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
     await Promise.all([
       queryClient.ensureQueryData(
-        userQuery(queryClient, credentials.serverName, params.userId),
+        userQuery(credentials.serverName, params.userId),
       ),
       queryClient.ensureQueryData(
-        userEmailsQuery(queryClient, credentials.serverName, params.userId),
+        userEmailsQuery(credentials.serverName, params.userId),
       ),
     ]);
   },
@@ -111,12 +111,10 @@ function RouteComponent() {
   const { userId } = Route.useParams();
   const queryClient = useQueryClient();
 
-  const { data } = useSuspenseQuery(
-    userQuery(queryClient, credentials.serverName, userId),
-  );
+  const { data } = useSuspenseQuery(userQuery(credentials.serverName, userId));
 
   const { data: emailsData } = useSuspenseQuery(
-    userEmailsQuery(queryClient, credentials.serverName, userId),
+    userEmailsQuery(credentials.serverName, userId),
   );
 
   const user = data.data;

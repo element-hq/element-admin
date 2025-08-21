@@ -59,11 +59,9 @@ export const Route = createFileRoute("/_console")({
     );
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
-    const whoami = await queryClient.ensureQueryData(
-      whoamiQuery(queryClient, synapseRoot),
-    );
+    const whoami = await queryClient.ensureQueryData(whoamiQuery(synapseRoot));
     await queryClient.ensureQueryData(
-      profileQuery(queryClient, synapseRoot, whoami.user_id),
+      profileQuery(synapseRoot, whoami.user_id),
     );
   },
 
@@ -71,22 +69,19 @@ export const Route = createFileRoute("/_console")({
 });
 
 function RouteComponent() {
-  const queryClient = useQueryClient();
   const { credentials } = Route.useRouteContext();
   const { data: wellKnown } = useSuspenseQuery(
     wellKnownQuery(credentials.serverName),
   );
   const synapseRoot = wellKnown["m.homeserver"].base_url;
-  const { data: whoami } = useSuspenseQuery(
-    whoamiQuery(queryClient, synapseRoot),
-  );
+  const { data: whoami } = useSuspenseQuery(whoamiQuery(synapseRoot));
 
   const { data: profile } = useSuspenseQuery(
-    profileQuery(queryClient, synapseRoot, whoami.user_id),
+    profileQuery(synapseRoot, whoami.user_id),
   );
 
   const { data: avatar } = useQuery(
-    mediaThumbnailQuery(queryClient, synapseRoot, profile.avatar_url),
+    mediaThumbnailQuery(synapseRoot, profile.avatar_url),
   );
 
   const avatarUrl = useImageBlob(avatar);

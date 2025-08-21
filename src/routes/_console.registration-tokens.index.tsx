@@ -1,4 +1,4 @@
-import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, MatchRoute, createFileRoute } from "@tanstack/react-router";
 import { PlusIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Badge, Button, H2, Text } from "@vector-im/compound-web";
@@ -40,7 +40,7 @@ export const Route = createFileRoute("/_console/registration-tokens/")({
     };
 
     await queryClient.ensureQueryData(
-      registrationTokensQuery(queryClient, credentials.serverName, parameters),
+      registrationTokensQuery(credentials.serverName, parameters),
     );
   },
   component: RouteComponent,
@@ -67,7 +67,6 @@ const omit = <T extends Record<string, unknown>, K extends keyof T>(
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
-  const queryClient = useQueryClient();
 
   const parameters: TokenListParameters = {
     ...(search.before && { before: search.before }),
@@ -81,7 +80,7 @@ function RouteComponent() {
   };
 
   const { data } = useSuspenseQuery(
-    registrationTokensQuery(queryClient, credentials.serverName, parameters),
+    registrationTokensQuery(credentials.serverName, parameters),
   );
 
   const hasNext = !!data.links.next || search.before;

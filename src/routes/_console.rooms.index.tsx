@@ -1,4 +1,4 @@
-import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link, MatchRoute } from "@tanstack/react-router";
 import { Badge, Button, H2, Text, TextInput } from "@vector-im/compound-web";
 import * as v from "valibot";
@@ -60,9 +60,7 @@ export const Route = createFileRoute("/_console/rooms/")({
       }),
     };
 
-    await queryClient.ensureQueryData(
-      roomsQuery(queryClient, synapseRoot, parameters),
-    );
+    await queryClient.ensureQueryData(roomsQuery(synapseRoot, parameters));
   },
   component: RouteComponent,
 });
@@ -92,7 +90,6 @@ function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
-  const queryClient = useQueryClient();
 
   const parameters: RoomListParameters = {
     limit: PAGE_SIZE,
@@ -113,9 +110,7 @@ function RouteComponent() {
   );
   const synapseRoot = wellKnown["m.homeserver"].base_url;
 
-  const { data } = useSuspenseQuery(
-    roomsQuery(queryClient, synapseRoot, parameters),
-  );
+  const { data } = useSuspenseQuery(roomsQuery(synapseRoot, parameters));
 
   const currentFrom = search.from || 0;
 
