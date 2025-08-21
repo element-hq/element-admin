@@ -61,8 +61,8 @@ export const whoamiQuery = (synapseRoot: string) =>
   });
 
 const ProfileResponse = v.object({
-  avatar_url: v.string(),
-  displayname: v.string(),
+  avatar_url: v.optional(v.string()),
+  displayname: v.optional(v.string()),
 });
 
 export const profileQuery = (synapseRoot: string, mxid: string) =>
@@ -104,7 +104,10 @@ const parseMxcUrl = (mxc: string): [string, string] => {
 };
 
 /** Thumbnail a media file from a Matrix content URI. The thumbnailing is hard-coded to 96x96 with the method set to 'crop' */
-export const mediaThumbnailQuery = (synapseRoot: string, mxc: string | null) =>
+export const mediaThumbnailQuery = (
+  synapseRoot: string,
+  mxc: string | undefined,
+) =>
   queryOptions({
     enabled: !!mxc,
     queryKey: ["matrix", "media-thumbnail", synapseRoot, mxc],
