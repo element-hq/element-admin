@@ -46,7 +46,7 @@ function RouteComponent() {
     throw new Error("No authorization session");
   }
 
-  const params = new URLSearchParams({
+  const parameters = new URLSearchParams({
     response_type: "code",
     client_id: authorizationSession.clientId,
     redirect_uri: REDIRECT_URI,
@@ -58,7 +58,7 @@ function RouteComponent() {
   });
 
   const authorizeUrl = new URL(authMetadata.authorization_endpoint);
-  authorizeUrl.search = params.toString();
+  authorizeUrl.search = parameters.toString();
 
   return (
     <Form.Root>

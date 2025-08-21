@@ -4,11 +4,11 @@ import { Badge, Button, H2, Text, TextInput } from "@vector-im/compound-web";
 import * as v from "valibot";
 
 import { wellKnownQuery } from "@/api/matrix";
-import { type RoomListParams, roomsQuery } from "@/api/synapse";
+import { type RoomListParameters, roomsQuery } from "@/api/synapse";
 import { ButtonLink, ChatFilterLink } from "@/components/link";
 import { PAGE_SIZE } from "@/constants";
 
-const RoomSearchParams = v.object({
+const RoomSearchParameters = v.object({
   from: v.optional(v.union([v.number(), v.string()])),
   order_by: v.optional(
     v.picklist([
@@ -36,7 +36,7 @@ const RoomSearchParams = v.object({
 });
 
 export const Route = createFileRoute("/_console/rooms/")({
-  validateSearch: RoomSearchParams,
+  validateSearch: RoomSearchParameters,
   loaderDeps: ({ search }) => ({ search }),
   loader: async ({
     context: { queryClient, credentials },
@@ -46,7 +46,7 @@ export const Route = createFileRoute("/_console/rooms/")({
       wellKnownQuery(credentials.serverName),
     );
     const synapseRoot = wellKnown["m.homeserver"].base_url;
-    const params: RoomListParams = {
+    const parameters: RoomListParameters = {
       limit: PAGE_SIZE,
       ...(search.from !== undefined && { from: search.from }),
       ...(search.order_by && { order_by: search.order_by }),
@@ -61,7 +61,7 @@ export const Route = createFileRoute("/_console/rooms/")({
     };
 
     await queryClient.ensureQueryData(
-      roomsQuery(queryClient, synapseRoot, params),
+      roomsQuery(queryClient, synapseRoot, parameters),
     );
   },
   component: RouteComponent,
@@ -70,16 +70,16 @@ export const Route = createFileRoute("/_console/rooms/")({
 const resetPagination = ({
   from: _from,
   ...search
-}: v.InferOutput<typeof RoomSearchParams>): v.InferOutput<
-  typeof RoomSearchParams
+}: v.InferOutput<typeof RoomSearchParameters>): v.InferOutput<
+  typeof RoomSearchParameters
 > => search;
 
 const omit = <T extends Record<string, unknown>, K extends keyof T>(
-  obj: T,
+  object: T,
   keys: K[],
 ): Omit<T, K> =>
   Object.fromEntries(
-    Object.entries(obj).filter(([key]) => !(keys as string[]).includes(key)),
+    Object.entries(object).filter(([key]) => !(keys as string[]).includes(key)),
   ) as Omit<T, K>;
 
 const formatEncryption = (encryption: string | null) => {
@@ -94,7 +94,7 @@ function RouteComponent() {
   const navigate = Route.useNavigate();
   const queryClient = useQueryClient();
 
-  const params: RoomListParams = {
+  const parameters: RoomListParameters = {
     limit: PAGE_SIZE,
     ...(search.from !== undefined && { from: search.from }),
     ...(search.order_by && { order_by: search.order_by }),
@@ -114,22 +114,22 @@ function RouteComponent() {
   const synapseRoot = wellKnown["m.homeserver"].base_url;
 
   const { data } = useSuspenseQuery(
-    roomsQuery(queryClient, synapseRoot, params),
+    roomsQuery(queryClient, synapseRoot, parameters),
   );
 
   const currentFrom = search.from || 0;
 
-  const nextPageParams = data.next_batch && {
+  const nextPageParameters = data.next_batch && {
     ...resetPagination(search),
     from: data.next_batch,
   };
 
-  const prevPageParams = (data.prev_batch || data.prev_batch === 0) && {
+  const previousPageParameters = (data.prev_batch || data.prev_batch === 0) && {
     ...resetPagination(search),
     from: data.prev_batch,
   };
 
-  const firstPageParams = !!currentFrom && resetPagination(search);
+  const firstPageParameters = !!currentFrom && resetPagination(search);
 
   const formatRoomName = (room: (typeof data.rooms)[0]) => {
     if (room.name) return room.name;
@@ -194,16 +194,16 @@ function RouteComponent() {
       <TextInput
         placeholder="Search rooms by name, alias, or ID..."
         value={search.search_term || ""}
-        onChange={(e) => {
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           navigate({
-            search: (prev) => {
-              const newParams = resetPagination(prev);
-              if (!e.target.value) {
-                const { search_term, ...rest } = newParams;
+            search: (previous) => {
+              const newParameters = resetPagination(previous);
+              if (!event.target.value) {
+                const { search_term, ...rest } = newParameters;
                 search_term as undefined; // trick biome about it being used
                 return rest;
               }
-              return { ...newParams, search_term: e.target.value };
+              return { ...newParameters, search_term: event.target.value };
             },
           });
         }}
@@ -305,13 +305,13 @@ function RouteComponent() {
           {(match) => (
             <>
               <div className="flex gap-2">
-                {firstPageParams ? (
+                {firstPageParameters ? (
                   <ButtonLink
                     disabled={!!match}
                     from={Route.path}
                     kind="secondary"
                     size="sm"
-                    search={firstPageParams}
+                    search={firstPageParameters}
                   >
                     First
                   </ButtonLink>
@@ -321,13 +321,13 @@ function RouteComponent() {
                   </Button>
                 )}
 
-                {prevPageParams ? (
+                {previousPageParameters ? (
                   <ButtonLink
                     disabled={!!match}
                     from={Route.path}
                     kind="secondary"
                     size="sm"
-                    search={prevPageParams}
+                    search={previousPageParameters}
                   >
                     Previous
                   </ButtonLink>
@@ -339,13 +339,13 @@ function RouteComponent() {
               </div>
 
               <div className="flex gap-2">
-                {nextPageParams ? (
+                {nextPageParameters ? (
                   <ButtonLink
                     disabled={!!match}
                     from={Route.path}
                     kind="secondary"
                     size="sm"
-                    search={nextPageParams}
+                    search={nextPageParameters}
                   >
                     Next
                   </ButtonLink>

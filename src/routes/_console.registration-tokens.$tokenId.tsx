@@ -21,7 +21,7 @@ import {
 import { type FormEvent, useCallback, useRef, useState } from "react";
 
 import {
-  type EditTokenParams,
+  type EditTokenParameters,
   editRegistrationToken,
   registrationTokenQuery,
   revokeRegistrationToken,
@@ -50,11 +50,15 @@ export const Route = createFileRoute("/_console/registration-tokens/$tokenId")({
 
 function TokenDetailComponent() {
   const { credentials } = Route.useRouteContext();
-  const params = Route.useParams();
+  const parameters = Route.useParams();
   const queryClient = useQueryClient();
 
   const { data } = useSuspenseQuery(
-    registrationTokenQuery(queryClient, credentials.serverName, params.tokenId),
+    registrationTokenQuery(
+      queryClient,
+      credentials.serverName,
+      parameters.tokenId,
+    ),
   );
 
   const [isEditing, setIsEditing] = useState(false);
@@ -64,12 +68,17 @@ function TokenDetailComponent() {
       revokeRegistrationToken(
         queryClient,
         credentials.serverName,
-        params.tokenId,
+        parameters.tokenId,
       ),
     onSuccess: (data) => {
       // Update the token query data
       queryClient.setQueryData(
-        ["mas", "registration-token", credentials.serverName, params.tokenId],
+        [
+          "mas",
+          "registration-token",
+          credentials.serverName,
+          parameters.tokenId,
+        ],
         data,
       );
 
@@ -85,12 +94,17 @@ function TokenDetailComponent() {
       unrevokeRegistrationToken(
         queryClient,
         credentials.serverName,
-        params.tokenId,
+        parameters.tokenId,
       ),
     onSuccess: (data) => {
       // Update the token query data
       queryClient.setQueryData(
-        ["mas", "registration-token", credentials.serverName, params.tokenId],
+        [
+          "mas",
+          "registration-token",
+          credentials.serverName,
+          parameters.tokenId,
+        ],
         data,
       );
 
@@ -102,17 +116,22 @@ function TokenDetailComponent() {
   });
 
   const editTokenMutation = useMutation({
-    mutationFn: async (params: EditTokenParams) =>
+    mutationFn: async (parameters: EditTokenParameters) =>
       editRegistrationToken(
         queryClient,
         credentials.serverName,
         token.id,
-        params,
+        parameters,
       ),
     onSuccess: (data) => {
       // Update the token query data
       queryClient.setQueryData(
-        ["mas", "registration-token", credentials.serverName, params.tokenId],
+        [
+          "mas",
+          "registration-token",
+          credentials.serverName,
+          parameters.tokenId,
+        ],
         data,
       );
 
@@ -133,8 +152,8 @@ function TokenDetailComponent() {
   const usageLimitInputRef = useRef<HTMLInputElement>(null);
 
   const clearExpiration = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
       if (expiresInputRef.current) {
         expiresInputRef.current.value = "";
       }
@@ -143,8 +162,8 @@ function TokenDetailComponent() {
   );
 
   const clearUsageLimit = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
       if (usageLimitInputRef.current) {
         usageLimitInputRef.current.value = "";
       }
@@ -158,27 +177,27 @@ function TokenDetailComponent() {
   });
 
   const handleEditSubmit = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+    (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
 
-      const formData = new FormData(e.currentTarget);
-      const params: EditTokenParams = {};
+      const formData = new FormData(event.currentTarget);
+      const parameters: EditTokenParameters = {};
 
       const expires = formData.get("expires") as string;
-      params.expires_at = expires
+      parameters.expires_at = expires
         ? computeUtcIsoStringFromLocal(expires)
         : // Empty string means set to null (never expires)
           null;
 
       const usageLimitValue = formData.get("usageLimit") as string;
-      params.usage_limit =
+      parameters.usage_limit =
         usageLimitValue &&
         !Number.isNaN(Number(usageLimitValue)) &&
         Number(usageLimitValue) > 0
           ? Number(usageLimitValue)
           : null;
 
-      editTokenMutation.mutate(params);
+      editTokenMutation.mutate(parameters);
     },
     [editTokenMutation],
   );

@@ -152,7 +152,7 @@ export type SingleRegistrationTokenResponse = v.InferOutput<
   typeof SingleResponseForRegistrationToken
 >;
 
-export type UserListParams = {
+export type UserListParameters = {
   before?: string;
   after?: string;
   first?: number;
@@ -161,7 +161,7 @@ export type UserListParams = {
   status?: "active" | "locked" | "deactivated";
 };
 
-export type TokenListParams = {
+export type TokenListParameters = {
   before?: string;
   after?: string;
   first?: number;
@@ -172,13 +172,13 @@ export type TokenListParams = {
   valid?: boolean;
 };
 
-export type CreateTokenParams = {
+export type CreateTokenParameters = {
   token?: string; // Custom token string (optional)
   usage_limit?: number;
   expires_at?: string; // ISO date string
 };
 
-export type EditTokenParams = {
+export type EditTokenParameters = {
   usage_limit?: number | null;
   expires_at?: string | null; // ISO date string
 };
@@ -186,10 +186,10 @@ export type EditTokenParams = {
 export const usersQuery = (
   queryClient: QueryClient,
   serverName: string,
-  params: UserListParams = {},
+  parameters: UserListParameters = {},
 ) =>
   queryOptions({
-    queryKey: ["mas", "users", serverName, params],
+    queryKey: ["mas", "users", serverName, parameters],
     queryFn: async ({ signal }) => {
       const token = await accessToken(queryClient, signal);
       if (!token) {
@@ -208,16 +208,20 @@ export const usersQuery = (
       const url = new URL("/api/admin/v1/users", masApiRoot);
 
       // Add pagination parameters
-      if (params.before) url.searchParams.set("page[before]", params.before);
-      if (params.after) url.searchParams.set("page[after]", params.after);
-      if (params.first)
-        url.searchParams.set("page[first]", String(params.first));
-      if (params.last) url.searchParams.set("page[last]", String(params.last));
+      if (parameters.before)
+        url.searchParams.set("page[before]", parameters.before);
+      if (parameters.after)
+        url.searchParams.set("page[after]", parameters.after);
+      if (parameters.first)
+        url.searchParams.set("page[first]", String(parameters.first));
+      if (parameters.last)
+        url.searchParams.set("page[last]", String(parameters.last));
 
       // Add filter parameters
-      if (params.admin !== undefined)
-        url.searchParams.set("filter[admin]", String(params.admin));
-      if (params.status) url.searchParams.set("filter[status]", params.status);
+      if (parameters.admin !== undefined)
+        url.searchParams.set("filter[admin]", String(parameters.admin));
+      if (parameters.status)
+        url.searchParams.set("filter[status]", parameters.status);
 
       const response = await fetch(url, {
         headers: {
@@ -445,10 +449,10 @@ export const unlockUser = async (
 export const registrationTokensQuery = (
   queryClient: QueryClient,
   serverName: string,
-  params: TokenListParams = {},
+  parameters: TokenListParameters = {},
 ) =>
   queryOptions({
-    queryKey: ["mas", "registration-tokens", serverName, params],
+    queryKey: ["mas", "registration-tokens", serverName, parameters],
     queryFn: async ({ signal }) => {
       const token = await accessToken(queryClient, signal);
       if (!token) {
@@ -467,21 +471,24 @@ export const registrationTokensQuery = (
       const url = new URL("/api/admin/v1/user-registration-tokens", masApiRoot);
 
       // Add pagination parameters
-      if (params.before) url.searchParams.set("page[before]", params.before);
-      if (params.after) url.searchParams.set("page[after]", params.after);
-      if (params.first)
-        url.searchParams.set("page[first]", String(params.first));
-      if (params.last) url.searchParams.set("page[last]", String(params.last));
+      if (parameters.before)
+        url.searchParams.set("page[before]", parameters.before);
+      if (parameters.after)
+        url.searchParams.set("page[after]", parameters.after);
+      if (parameters.first)
+        url.searchParams.set("page[first]", String(parameters.first));
+      if (parameters.last)
+        url.searchParams.set("page[last]", String(parameters.last));
 
       // Add filter parameters
-      if (params.used !== undefined)
-        url.searchParams.set("filter[used]", String(params.used));
-      if (params.revoked !== undefined)
-        url.searchParams.set("filter[revoked]", String(params.revoked));
-      if (params.expired !== undefined)
-        url.searchParams.set("filter[expired]", String(params.expired));
-      if (params.valid !== undefined)
-        url.searchParams.set("filter[valid]", String(params.valid));
+      if (parameters.used !== undefined)
+        url.searchParams.set("filter[used]", String(parameters.used));
+      if (parameters.revoked !== undefined)
+        url.searchParams.set("filter[revoked]", String(parameters.revoked));
+      if (parameters.expired !== undefined)
+        url.searchParams.set("filter[expired]", String(parameters.expired));
+      if (parameters.valid !== undefined)
+        url.searchParams.set("filter[valid]", String(parameters.valid));
 
       const response = await fetch(url, {
         headers: {
@@ -553,7 +560,7 @@ export const registrationTokenQuery = (
 export const createRegistrationToken = async (
   queryClient: QueryClient,
   serverName: string,
-  params: CreateTokenParams = {},
+  parameters: CreateTokenParameters = {},
   signal?: AbortSignal,
 ) => {
   const accessTokenValue = await accessToken(queryClient, signal);
@@ -579,11 +586,11 @@ export const createRegistrationToken = async (
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      ...(params.expires_at && { expires_at: params.expires_at }),
-      ...(params.usage_limit !== undefined && {
-        usage_limit: params.usage_limit,
+      ...(parameters.expires_at && { expires_at: parameters.expires_at }),
+      ...(parameters.usage_limit !== undefined && {
+        usage_limit: parameters.usage_limit,
       }),
-      ...(params.token && { token: params.token }),
+      ...(parameters.token && { token: parameters.token }),
     }),
     ...(signal && { signal }),
   });
@@ -694,7 +701,7 @@ export const editRegistrationToken = async (
   queryClient: QueryClient,
   serverName: string,
   tokenId: string,
-  params: EditTokenParams,
+  parameters: EditTokenParameters,
   signal?: AbortSignal,
 ) => {
   const accessTokenValue = await accessToken(queryClient, signal);
@@ -723,9 +730,11 @@ export const editRegistrationToken = async (
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      ...(params.expires_at !== undefined && { expires_at: params.expires_at }),
-      ...(params.usage_limit !== undefined && {
-        usage_limit: params.usage_limit,
+      ...(parameters.expires_at !== undefined && {
+        expires_at: parameters.expires_at,
+      }),
+      ...(parameters.usage_limit !== undefined && {
+        usage_limit: parameters.usage_limit,
       }),
     }),
     ...(signal && { signal }),

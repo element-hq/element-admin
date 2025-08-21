@@ -69,7 +69,7 @@ export const clientRegistration = async (
   return clientRegistrationData;
 };
 
-type TokenRequestParams =
+type TokenRequestParameters =
   | {
       grant_type: "authorization_code";
       code: string;
@@ -91,12 +91,12 @@ const TokenResponse = v.object({
 
 export const tokenRequest = async (
   tokenEndpoint: string,
-  params: TokenRequestParams,
+  parameters: TokenRequestParameters,
   signal: AbortSignal | null = null,
 ) => {
   const response = await fetch(tokenEndpoint, {
     method: "POST",
-    body: new URLSearchParams(params),
+    body: new URLSearchParams(parameters),
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },

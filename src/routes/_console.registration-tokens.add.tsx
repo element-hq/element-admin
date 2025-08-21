@@ -14,7 +14,7 @@ import {
 } from "@vector-im/compound-web";
 import { type FormEvent, useCallback, useRef } from "react";
 
-import { type CreateTokenParams, createRegistrationToken } from "@/api/mas";
+import { type CreateTokenParameters, createRegistrationToken } from "@/api/mas";
 import { ButtonLink } from "@/components/link";
 import { computeUtcIsoStringFromLocal } from "@/utils/datetime";
 
@@ -32,8 +32,8 @@ function AddTokenComponent() {
   const expiresInputRef = useRef<HTMLInputElement>(null);
 
   const createTokenMutation = useMutation({
-    mutationFn: async (params: CreateTokenParams) =>
-      createRegistrationToken(queryClient, credentials.serverName, params),
+    mutationFn: async (parameters: CreateTokenParameters) =>
+      createRegistrationToken(queryClient, credentials.serverName, parameters),
     onSuccess: async (data): Promise<void> => {
       const tokenId = data.data.id;
       // Invalidate tokens list query to reflect new data
@@ -50,8 +50,8 @@ function AddTokenComponent() {
   });
 
   const clearCustomToken = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
       if (customTokenInputRef.current) {
         customTokenInputRef.current.value = "";
       }
@@ -60,8 +60,8 @@ function AddTokenComponent() {
   );
 
   const clearUsageLimit = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
       if (usageLimitInputRef.current) {
         usageLimitInputRef.current.value = "";
       }
@@ -70,8 +70,8 @@ function AddTokenComponent() {
   );
 
   const clearExpiration = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
       if (expiresInputRef.current) {
         expiresInputRef.current.value = "";
       }
@@ -79,29 +79,29 @@ function AddTokenComponent() {
     [],
   );
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(event.currentTarget);
 
-    const params: CreateTokenParams = {};
+    const parameters: CreateTokenParameters = {};
 
     const customTokenValue = formData.get("customToken") as string;
     if (customTokenValue && customTokenValue.trim() !== "") {
-      params.token = customTokenValue.trim();
+      parameters.token = customTokenValue.trim();
     }
 
     const usageLimitValue = formData.get("usageLimit") as string;
     if (usageLimitValue && !Number.isNaN(Number(usageLimitValue))) {
-      params.usage_limit = Number(usageLimitValue);
+      parameters.usage_limit = Number(usageLimitValue);
     }
 
     const expires = formData.get("expires") as string;
     if (expires) {
-      params.expires_at = computeUtcIsoStringFromLocal(expires);
+      parameters.expires_at = computeUtcIsoStringFromLocal(expires);
     }
 
-    createTokenMutation.mutate(params);
+    createTokenMutation.mutate(parameters);
   };
 
   return (

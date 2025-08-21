@@ -255,8 +255,8 @@ const SignOutMenuItem = ({
       })}
       kind="critical"
       Icon={SignOutIcon}
-      onSelect={(e) => {
-        e.preventDefault();
+      onSelect={(event) => {
+        event.preventDefault();
         signOutMutation.mutate();
       }}
       disabled={signOutMutation.isPending}

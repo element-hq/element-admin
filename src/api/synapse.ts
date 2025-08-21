@@ -71,7 +71,7 @@ export type Room = v.InferOutput<typeof Room>;
 export type RoomDetail = v.InferOutput<typeof RoomDetail>;
 export type RoomsListResponse = v.InferOutput<typeof RoomsListResponse>;
 
-export type RoomListParams = {
+export type RoomListParameters = {
   from?: number | string;
   limit?: number;
   order_by?:
@@ -132,10 +132,10 @@ export const serverVersionQuery = (
 export const roomsQuery = (
   queryClient: QueryClient,
   synapseRoot: string,
-  params: RoomListParams = {},
+  parameters: RoomListParameters = {},
 ) =>
   queryOptions({
-    queryKey: ["synapse", "rooms", synapseRoot, params],
+    queryKey: ["synapse", "rooms", synapseRoot, parameters],
     queryFn: async ({ signal }) => {
       const token = await accessToken(queryClient, signal);
       if (!token) {
@@ -145,18 +145,19 @@ export const roomsQuery = (
       const url = new URL("/_synapse/admin/v1/rooms", synapseRoot);
 
       // Add query parameters
-      if (params.from !== undefined)
-        url.searchParams.set("from", String(params.from));
-      if (params.limit !== undefined)
-        url.searchParams.set("limit", String(params.limit));
-      if (params.order_by) url.searchParams.set("order_by", params.order_by);
-      if (params.dir) url.searchParams.set("dir", params.dir);
-      if (params.search_term)
-        url.searchParams.set("search_term", params.search_term);
-      if (params.public_rooms !== undefined)
-        url.searchParams.set("public_rooms", String(params.public_rooms));
-      if (params.empty_rooms !== undefined)
-        url.searchParams.set("empty_rooms", String(params.empty_rooms));
+      if (parameters.from !== undefined)
+        url.searchParams.set("from", String(parameters.from));
+      if (parameters.limit !== undefined)
+        url.searchParams.set("limit", String(parameters.limit));
+      if (parameters.order_by)
+        url.searchParams.set("order_by", parameters.order_by);
+      if (parameters.dir) url.searchParams.set("dir", parameters.dir);
+      if (parameters.search_term)
+        url.searchParams.set("search_term", parameters.search_term);
+      if (parameters.public_rooms !== undefined)
+        url.searchParams.set("public_rooms", String(parameters.public_rooms));
+      if (parameters.empty_rooms !== undefined)
+        url.searchParams.set("empty_rooms", String(parameters.empty_rooms));
 
       const response = await fetch(url, {
         headers: {

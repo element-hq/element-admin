@@ -3,12 +3,12 @@ import { Link, MatchRoute, createFileRoute } from "@tanstack/react-router";
 import { Badge, Button, H2, Text } from "@vector-im/compound-web";
 import * as v from "valibot";
 
-import { type UserListParams, usersQuery } from "@/api/mas";
+import { type UserListParameters, usersQuery } from "@/api/mas";
 import { ButtonLink, ChatFilterLink } from "@/components/link";
 import { PAGE_SIZE } from "@/constants";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
-const UserSearchParams = v.object({
+const UserSearchParameters = v.object({
   before: v.optional(v.string()),
   after: v.optional(v.string()),
   first: v.optional(v.number()),
@@ -18,13 +18,13 @@ const UserSearchParams = v.object({
 });
 
 export const Route = createFileRoute("/_console/users/")({
-  validateSearch: UserSearchParams,
+  validateSearch: UserSearchParameters,
   loaderDeps: ({ search }) => ({ search }),
   loader: async ({
     context: { queryClient, credentials },
     deps: { search },
   }) => {
-    const params: UserListParams = {
+    const parameters: UserListParameters = {
       ...(search.before && { before: search.before }),
       ...(search.after && { after: search.after }),
       ...(search.first && { first: search.first }),
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/_console/users/")({
     };
 
     await queryClient.ensureQueryData(
-      usersQuery(queryClient, credentials.serverName, params),
+      usersQuery(queryClient, credentials.serverName, parameters),
     );
   },
   component: RouteComponent,
@@ -46,16 +46,16 @@ const resetPagination = ({
   first: _first,
   last: _last,
   ...search
-}: v.InferOutput<typeof UserSearchParams>): v.InferOutput<
-  typeof UserSearchParams
+}: v.InferOutput<typeof UserSearchParameters>): v.InferOutput<
+  typeof UserSearchParameters
 > => search;
 
 const omit = <T extends Record<string, unknown>, K extends keyof T>(
-  obj: T,
+  object: T,
   keys: K[],
 ): Omit<T, K> =>
   Object.fromEntries(
-    Object.entries(obj).filter(([key]) => !(keys as string[]).includes(key)),
+    Object.entries(object).filter(([key]) => !(keys as string[]).includes(key)),
   ) as Omit<T, K>;
 
 function RouteComponent() {
@@ -63,7 +63,7 @@ function RouteComponent() {
   const search = Route.useSearch();
   const queryClient = useQueryClient();
 
-  const params: UserListParams = {
+  const parameters: UserListParameters = {
     ...(search.before && { before: search.before }),
     ...(search.after && { after: search.after }),
     ...(search.first && { first: search.first }),
@@ -73,32 +73,32 @@ function RouteComponent() {
   };
 
   const { data } = useSuspenseQuery(
-    usersQuery(queryClient, credentials.serverName, params),
+    usersQuery(queryClient, credentials.serverName, parameters),
   );
 
   const hasNext = !!data.links.next || search.before;
-  const hasPrev = !!data.links.prev || search.after;
+  const hasPrevious = !!data.links.prev || search.after;
   const lastId = data.data.at(-1)?.id;
   const firstId = data.data[0]?.id;
 
-  const nextPageParams = hasNext && {
+  const nextPageParameters = hasNext && {
     ...resetPagination(search),
     after: lastId || "",
     first: search.first || PAGE_SIZE,
   };
 
-  const prevPageParams = hasPrev && {
+  const previousPageParameters = hasPrevious && {
     ...resetPagination(search),
     before: firstId || "",
     last: search.last || PAGE_SIZE,
   };
 
-  const firstPageParams = hasPrev && {
+  const firstPageParameters = hasPrevious && {
     ...resetPagination(search),
     first: search.first || PAGE_SIZE,
   };
 
-  const lastPageParams = hasNext && {
+  const lastPageParameters = hasNext && {
     ...resetPagination(search),
     last: search.last || PAGE_SIZE,
   };
@@ -245,13 +245,13 @@ function RouteComponent() {
           {(match) => (
             <>
               <div className="flex gap-2">
-                {firstPageParams ? (
+                {firstPageParameters ? (
                   <ButtonLink
                     disabled={!!match}
                     from={Route.path}
                     kind="secondary"
                     size="sm"
-                    search={firstPageParams}
+                    search={firstPageParameters}
                   >
                     First
                   </ButtonLink>
@@ -261,13 +261,13 @@ function RouteComponent() {
                   </Button>
                 )}
 
-                {prevPageParams ? (
+                {previousPageParameters ? (
                   <ButtonLink
                     disabled={!!match}
                     from={Route.path}
                     kind="secondary"
                     size="sm"
-                    search={prevPageParams}
+                    search={previousPageParameters}
                   >
                     Previous
                   </ButtonLink>
@@ -278,13 +278,13 @@ function RouteComponent() {
                 )}
               </div>
               <div className="flex gap-2">
-                {nextPageParams ? (
+                {nextPageParameters ? (
                   <ButtonLink
                     disabled={!!match}
                     from={Route.path}
                     kind="secondary"
                     size="sm"
-                    search={nextPageParams}
+                    search={nextPageParameters}
                   >
                     Next
                   </ButtonLink>
@@ -294,13 +294,13 @@ function RouteComponent() {
                   </Button>
                 )}
 
-                {lastPageParams ? (
+                {lastPageParameters ? (
                   <ButtonLink
                     disabled={!!match}
                     from={Route.path}
                     kind="secondary"
                     size="sm"
-                    search={lastPageParams}
+                    search={lastPageParameters}
                   >
                     Last
                   </ButtonLink>

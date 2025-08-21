@@ -21,9 +21,9 @@ function RouteComponent() {
   const [isPending, startTransition] = useTransition();
   const navigate = useNavigate();
   const onSubmit = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const formData = new FormData(e.currentTarget);
+    (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
       const serverName = formData.get("serverName") as string;
       startTransition(() =>
         navigate({ to: "/login/$serverName", params: { serverName } }),

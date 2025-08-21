@@ -69,8 +69,11 @@ export default tseslint.config(
           },
         },
       ],
+      "unicorn/prevent-abbreviations": [
+        "error",
+        { replacements: { props: false, ref: false } },
+      ],
       "unicorn/no-null": "off",
-      "unicorn/prevent-abbreviations": "off",
       "unicorn/no-array-reduce": "off",
       "unicorn/no-array-for-each": "off",
       "unicorn/prefer-top-level-await": "off",

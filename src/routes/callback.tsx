@@ -6,7 +6,7 @@ import { wellKnownQuery } from "@/api/matrix";
 import { REDIRECT_URI } from "@/constants";
 import { useAuthStore } from "@/stores/auth";
 
-const SearchParams = v.intersect([
+const SearchParameters = v.intersect([
   v.object({
     state: v.string(),
   }),
@@ -22,7 +22,7 @@ const SearchParams = v.intersect([
 ]);
 
 export const Route = createFileRoute("/callback")({
-  validateSearch: SearchParams,
+  validateSearch: SearchParameters,
   loaderDeps: ({ search }) => ({ search }),
 
   loader: async ({ deps: { search }, context }) => {
