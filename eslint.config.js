@@ -8,6 +8,8 @@ import * as importXPlugin from "eslint-plugin-import-x";
 import unicornPlugin from "eslint-plugin-unicorn";
 import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
+import tanstackRouterPlugin from "@tanstack/eslint-plugin-router";
+import tanstackQueryPlugin from "@tanstack/eslint-plugin-query";
 
 export default tseslint.config(
   js.configs.recommended,
@@ -21,6 +23,8 @@ export default tseslint.config(
   importXPlugin.flatConfigs.typescript,
   importXPlugin.flatConfigs.react,
   unicornPlugin.configs.recommended,
+  tanstackRouterPlugin.configs["flat/recommended"],
+  tanstackQueryPlugin.configs["flat/recommended"],
   eslintConfigPrettier,
 
   // Global configuration

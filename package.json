@@ -41,6 +41,8 @@
     "@eslint/js": "9.33.0",
     "@formatjs/cli": "6.7.2",
     "@localazy/cli": "2.0.8",
+    "@tanstack/eslint-plugin-query": "5.83.1",
+    "@tanstack/eslint-plugin-router": "1.131.2",
     "@tsconfig/strictest": "2.0.5",
     "@tsconfig/vite-react": "7.0.0",
     "@types/node": "24.3.0",
