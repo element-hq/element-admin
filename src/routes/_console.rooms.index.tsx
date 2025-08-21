@@ -194,8 +194,7 @@ function RouteComponent() {
             search: (previous) => {
               const newParameters = resetPagination(previous);
               if (!event.target.value) {
-                const { search_term, ...rest } = newParameters;
-                search_term as undefined; // trick biome about it being used
+                const { search_term: _, ...rest } = newParameters;
                 return rest;
               }
               return { ...newParameters, search_term: event.target.value };

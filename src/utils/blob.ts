@@ -4,7 +4,7 @@ export const useImageBlob = (blob: Blob | undefined): string | undefined => {
   // Create a new URL for the blob
   const objectUrl = useMemo(() => {
     if (!blob) {
-      return undefined;
+      return;
     }
 
     return URL.createObjectURL(blob);

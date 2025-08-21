@@ -13,6 +13,7 @@ import type messages from "../translations/extracted/en.json";
 import { router } from "@/router";
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace FormatjsIntl {
     interface Message {
       ids: keyof typeof messages;

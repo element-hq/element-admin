@@ -64,7 +64,7 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
 
-      // Selected Unicorn rules
+      // Unicorn
       "unicorn/filename-case": [
         "error",
         {
@@ -78,10 +78,6 @@ export default tseslint.config(
         { replacements: { props: false, ref: false } },
       ],
       "unicorn/no-null": "off",
-      "unicorn/no-array-reduce": "off",
-      "unicorn/no-array-for-each": "off",
-      "unicorn/prefer-top-level-await": "off",
-      "unicorn/no-useless-undefined": "off",
 
       // TypeScript rules
       "@typescript-eslint/no-unused-vars": [
@@ -96,9 +92,7 @@ export default tseslint.config(
         { prefer: "type-imports" },
       ],
       "@typescript-eslint/no-import-type-side-effects": "error",
-      "@typescript-eslint/no-empty-object-type": "off", // Allow {} types
-      "@typescript-eslint/no-namespace": "off", // Allow namespaces
-      "@typescript-eslint/no-unused-expressions": "off", // Allow some unused expressions
+      "@typescript-eslint/no-empty-object-type": "off", // Allow {} types, useful in props
 
       // React rules
       "react/prop-types": "off",
