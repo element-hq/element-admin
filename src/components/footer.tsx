@@ -3,9 +3,11 @@ import cx from "classnames";
 import styles from "./footer.module.css";
 import { ElementLogotype } from "./logo";
 
-export const Root: React.FC<
-  React.PropsWithChildren<{ className?: string }>
-> = ({ children, className }) => (
+type RootProps = React.PropsWithChildren<{ className?: string }>;
+export const Root: React.FC<RootProps> = ({
+  children,
+  className,
+}: RootProps) => (
   <footer className={cx(className, styles["root"])}>{children}</footer>
 );
 
@@ -27,7 +29,8 @@ export const Divider: React.FC = () => (
   />
 );
 
-export const Section: React.FC<React.PropsWithChildren> = ({ children }) => (
+type SectionProps = React.PropsWithChildren;
+export const Section: React.FC<SectionProps> = ({ children }: SectionProps) => (
   <div className={styles["section"]}>{children}</div>
 );
 

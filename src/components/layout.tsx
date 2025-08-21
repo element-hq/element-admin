@@ -1,15 +1,19 @@
 import cx from "classnames";
 import styles from "./layout.module.css";
 
-export const Layout: React.FC<
-  React.PropsWithChildren<{ className?: string }>
-> = ({ children, className }) => (
+type LayoutProps = React.PropsWithChildren<{ className?: string }>;
+export const Layout: React.FC<LayoutProps> = ({
+  children,
+  className,
+}: LayoutProps) => (
   <div className={cx(className, styles["layout"])}>{children}</div>
 );
 
-export const WelcomeLayout: React.FC<
-  React.PropsWithChildren<{ className?: string }>
-> = ({ children, className }) => (
+type WelcomeLayoutProps = React.PropsWithChildren<{ className?: string }>;
+export const WelcomeLayout: React.FC<WelcomeLayoutProps> = ({
+  children,
+  className,
+}: WelcomeLayoutProps) => (
   <div className={cx(className, styles["welcome-layout"])}>
     <div aria-hidden="true" className={styles["welcome-gradient"]} />
     {children}

@@ -4,7 +4,7 @@ import { IconButton } from "@vector-im/compound-web";
 
 type Props = { value: string };
 
-export const CopyToClipboard: React.FC<Props> = ({ value }) => {
+export const CopyToClipboard: React.FC<Props> = ({ value }: Props) => {
   const copyMutation = useMutation({
     mutationFn: () => navigator.clipboard.writeText(value),
     onSuccess: () => setTimeout(() => copyMutation.reset(), 2000),

@@ -32,7 +32,8 @@ import * as Footer from "@/components/footer";
 import { Layout } from "@/components/layout";
 import { useImageBlob } from "@/utils/blob";
 
-const TokenView: React.FC<{ token: string }> = ({ token }) => (
+type TokenViewProps = { token: string };
+const TokenView: React.FC<TokenViewProps> = ({ token }: TokenViewProps) => (
   <div className="flex items-center justify-between py-2 px-4 gap-1 text-text-secondary font-mono text-xs">
     {token.length > 20
       ? `${token.slice(0, 5)}${"•".repeat(5)}${token.slice(Math.max(0, token.length - 7))}`

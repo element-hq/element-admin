@@ -93,11 +93,6 @@ export default tseslint.config(
       ],
       "@typescript-eslint/no-import-type-side-effects": "error",
       "@typescript-eslint/no-empty-object-type": "off", // Allow {} types, useful in props
-
-      // React rules
-      "react/prop-types": "off",
-      "react/react-in-jsx-scope": "off",
-      "react/display-name": "off",
     },
   },
 
@@ -109,8 +104,6 @@ export default tseslint.config(
       ".tanstack/**",
       "src/routeTree.gen.ts",
       "translations/**",
-      ".wrangler/**",
-      "coverage/**",
     ],
   },
 );

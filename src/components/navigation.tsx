@@ -3,7 +3,8 @@ import { forwardRef, type PropsWithChildren } from "react";
 import cx from "classnames";
 import styles from "./navigation.module.css";
 
-export const Root: React.FC<PropsWithChildren<{}>> = ({ children }) => (
+type Props = PropsWithChildren;
+export const Root: React.FC<Props> = ({ children }: Props) => (
   <div className={styles["root"]}>{children}</div>
 );
 
@@ -16,7 +17,7 @@ export const NavAnchor = forwardRef<
   {
     Icon: React.ComponentType<React.SVGAttributes<SVGElement>>;
   } & PropsWithChildren<React.AnchorHTMLAttributes<HTMLAnchorElement>>
->(({ children, Icon, className, ...props }, ref) => {
+>(function NavAnchor({ children, Icon, className, ...props }, ref) {
   return (
     <a ref={ref} className={cx(styles["nav-link"], className)} {...props}>
       <Icon className={styles["nav-link-icon"]} />
@@ -27,11 +28,13 @@ export const NavAnchor = forwardRef<
 
 export const NavLink = createLink(NavAnchor);
 
-export const Content: React.FC<PropsWithChildren<{}>> = ({ children }) => (
+type ContentProps = PropsWithChildren;
+export const Content: React.FC<ContentProps> = ({ children }: ContentProps) => (
   <main className={styles["content"]}>{children}</main>
 );
 
-export const Sidebar: React.FC<PropsWithChildren<{}>> = ({ children }) => (
+type SidebarProps = PropsWithChildren;
+export const Sidebar: React.FC<SidebarProps> = ({ children }: SidebarProps) => (
   <div className={styles["sidebar"]}>
     <nav className={styles["sidebar-inner"]}>
       <div className={styles["sidebar-content"]}>{children}</div>

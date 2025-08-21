@@ -12,7 +12,7 @@ type ButtonLinkProps = {
 
 export const ButtonLink = createLink(
   forwardRef<HTMLAnchorElement, PropsWithChildren<ButtonLinkProps>>(
-    ({ children, ...props }, ref) => {
+    function ButtonLink({ children, ...props }, ref) {
       const disabled = !!props.disabled || !!props["aria-disabled"] || false;
       return (
         <Button as="a" {...props} disabled={disabled} ref={ref}>
@@ -29,23 +29,25 @@ type ChatFilterLinkProps = {
 
 export const ChatFilterLink = createLink(
   forwardRef<HTMLAnchorElement, PropsWithChildren<ChatFilterLinkProps>>(
-    ({ children, ...props }, ref) => (
-      <a
-        {...props}
-        ref={ref}
-        role="tab"
-        data-selected={props.selected || undefined}
-        aria-selected={props.selected || undefined}
-        className="
+    function ChatFilterLink({ children, ...props }, ref) {
+      return (
+        <a
+          {...props}
+          ref={ref}
+          role="tab"
+          data-selected={props.selected || undefined}
+          aria-selected={props.selected || undefined}
+          className="
             cpd-font-body-sm-medium text-text-primary
             px-2 py-1
             bg-transparent border-1 border-border-interactive-secondary rounded-full
             hover:border-border-interactive-primary hover:bg-bg-subtle-primary
             data-selected:border-bg-action-primary-rest data-selected:bg-bg-action-primary-rest data-selected:text-text-on-solid-primary
           "
-      >
-        {children}
-      </a>
-    ),
+        >
+          {children}
+        </a>
+      );
+    },
   ),
 );

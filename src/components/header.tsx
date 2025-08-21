@@ -5,29 +5,39 @@ import { useState } from "react";
 import { useIntl } from "react-intl";
 import styles from "./header.module.css";
 
-export const Root: React.FC<React.PropsWithChildren<{}>> = ({ children }) => (
+type RootProps = React.PropsWithChildren;
+export const Root: React.FC<RootProps> = ({ children }: RootProps) => (
   <header className={styles["root"]}>{children}</header>
 );
 
-export const Left: React.FC<React.PropsWithChildren<{}>> = ({ children }) => (
+type LeftProps = React.PropsWithChildren;
+export const Left: React.FC<LeftProps> = ({ children }: LeftProps) => (
   <div className={styles["left"]}>{children}</div>
 );
 
-export const Right: React.FC<React.PropsWithChildren<{}>> = ({ children }) => (
+type RightProps = React.PropsWithChildren;
+export const Right: React.FC<RightProps> = ({ children }: RightProps) => (
   <div className={styles["right"]}>{children}</div>
 );
 
-export const HomeserverName: React.FC<React.PropsWithChildren<{}>> = ({
+type HomeserverNameProps = React.PropsWithChildren;
+export const HomeserverName: React.FC<HomeserverNameProps> = ({
   children,
-}) => <p className={styles["homeserver-name"]}>{children}</p>;
+}: HomeserverNameProps) => (
+  <p className={styles["homeserver-name"]}>{children}</p>
+);
 
-export const UserMenu: React.FC<
-  React.PropsWithChildren<{
-    mxid: string;
-    displayName?: string | undefined;
-    avatarUrl?: string | undefined;
-  }>
-> = ({ children, mxid, displayName, avatarUrl }) => {
+type UserMenuProps = React.PropsWithChildren<{
+  mxid: string;
+  displayName?: string | undefined;
+  avatarUrl?: string | undefined;
+}>;
+export const UserMenu: React.FC<UserMenuProps> = ({
+  children,
+  mxid,
+  displayName,
+  avatarUrl,
+}: UserMenuProps) => {
   // TODO: compound-web shouldn't require us to have a controlled state here
   const [open, setOpen] = useState(false);
   const intl = useIntl();
@@ -58,11 +68,16 @@ export const UserMenu: React.FC<
   );
 };
 
-export const UserMenuProfile: React.FC<{
+type UserMenuProfileProps = {
   mxid: string;
   avatarUrl?: string | undefined;
   displayName?: string | undefined;
-}> = ({ mxid, displayName, avatarUrl }) => (
+};
+export const UserMenuProfile: React.FC<UserMenuProfileProps> = ({
+  mxid,
+  displayName,
+  avatarUrl,
+}: UserMenuProfileProps) => (
   <div className={styles["user-menu-profile"]}>
     <Avatar size="88px" id={mxid} name={displayName || mxid} src={avatarUrl} />
     <section className={styles["infos"]}>
@@ -72,14 +87,19 @@ export const UserMenuProfile: React.FC<{
   </div>
 );
 
-const UserMenuButton: React.FC<
-  {
-    mxid: string;
-    displayName?: string | undefined;
-    avatarUrl?: string | undefined;
-    open: boolean;
-  } & React.ComponentProps<"button">
-> = ({ mxid, displayName, avatarUrl, open, ...props }) => (
+type UserMenuButtonProps = {
+  mxid: string;
+  displayName?: string | undefined;
+  avatarUrl?: string | undefined;
+  open: boolean;
+} & React.ComponentProps<"button">;
+const UserMenuButton: React.FC<UserMenuButtonProps> = ({
+  mxid,
+  displayName,
+  avatarUrl,
+  open,
+  ...props
+}: UserMenuButtonProps) => (
   <button
     data-state={open ? "open" : "closed"}
     className={styles["user-menu-button"]}
