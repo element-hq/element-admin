@@ -1,7 +1,7 @@
 import { createLink } from "@tanstack/react-router";
 import { forwardRef, type PropsWithChildren } from "react";
-import styles from "./navigation.module.css";
 import cx from "classnames";
+import styles from "./navigation.module.css";
 
 export const Root: React.FC<PropsWithChildren<{}>> = ({ children }) => (
   <div className={styles["root"]}>{children}</div>

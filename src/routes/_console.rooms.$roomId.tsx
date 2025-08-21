@@ -21,6 +21,43 @@ export const Route = createFileRoute("/_console/rooms/$roomId")({
   component: RouteComponent,
 });
 
+const formatEncryption = (encryption: string | null) => {
+  if (!encryption) return "None";
+  if (encryption === "m.megolm.v1.aes-sha2") return "E2EE";
+  return encryption;
+};
+
+const formatJoinRules = (joinRules: string | null) => {
+  if (!joinRules) return "Unknown";
+  return joinRules;
+};
+
+const formatGuestAccess = (guestAccess: string | null) => {
+  if (!guestAccess) return "Unknown";
+  return guestAccess === "can_join" ? "Allowed" : "Forbidden";
+};
+
+const formatHistoryVisibility = (historyVisibility: string | null) => {
+  if (!historyVisibility) return "Unknown";
+  switch (historyVisibility) {
+    case "invited": {
+      return "Invited";
+    }
+    case "joined": {
+      return "Joined";
+    }
+    case "shared": {
+      return "Shared";
+    }
+    case "world_readable": {
+      return "World Readable";
+    }
+    default: {
+      return historyVisibility;
+    }
+  }
+};
+
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const { roomId } = Route.useParams();
@@ -39,38 +76,6 @@ function RouteComponent() {
     if (room.name) return room.name;
     if (room.canonical_alias) return room.canonical_alias;
     return room.room_id;
-  };
-
-  const formatEncryption = (encryption: string | null) => {
-    if (!encryption) return "None";
-    if (encryption === "m.megolm.v1.aes-sha2") return "E2EE";
-    return encryption;
-  };
-
-  const formatJoinRules = (joinRules: string | null) => {
-    if (!joinRules) return "Unknown";
-    return joinRules;
-  };
-
-  const formatGuestAccess = (guestAccess: string | null) => {
-    if (!guestAccess) return "Unknown";
-    return guestAccess === "can_join" ? "Allowed" : "Forbidden";
-  };
-
-  const formatHistoryVisibility = (historyVisibility: string | null) => {
-    if (!historyVisibility) return "Unknown";
-    switch (historyVisibility) {
-      case "invited":
-        return "Invited";
-      case "joined":
-        return "Joined";
-      case "shared":
-        return "Shared";
-      case "world_readable":
-        return "World Readable";
-      default:
-        return historyVisibility;
-    }
   };
 
   return (

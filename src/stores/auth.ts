@@ -13,7 +13,7 @@ function randomString(length: number): string {
   const possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const randomValues = new Uint8Array(length);
-  window.crypto.getRandomValues(randomValues);
+  globalThis.crypto.getRandomValues(randomValues);
 
   let codeVerifier = "";
   for (const val of randomValues) {
@@ -25,16 +25,16 @@ function randomString(length: number): string {
 async function sha256(plain: string): Promise<ArrayBuffer> {
   const encoder = new TextEncoder();
   const data = encoder.encode(plain);
-  return window.crypto.subtle.digest("SHA-256", data);
+  return globalThis.crypto.subtle.digest("SHA-256", data);
 }
 
 function base64urlencode(buffer: ArrayBuffer) {
   let str = "";
   const bytes = new Uint8Array(buffer);
   for (const byte of bytes) {
-    str += String.fromCharCode(byte);
+    str += String.fromCodePoint(byte);
   }
-  return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  return btoa(str).replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/, "");
 }
 
 async function generateCodeChallenge(codeVerifier: string) {

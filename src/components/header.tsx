@@ -2,8 +2,8 @@ import { ChevronDownIcon } from "@vector-im/compound-design-tokens/assets/web/ic
 import { Avatar, Menu } from "@vector-im/compound-web";
 import { useState } from "react";
 
-import styles from "./header.module.css";
 import { useIntl } from "react-intl";
+import styles from "./header.module.css";
 
 export const Root: React.FC<React.PropsWithChildren<{}>> = ({ children }) => (
   <header className={styles["root"]}>{children}</header>

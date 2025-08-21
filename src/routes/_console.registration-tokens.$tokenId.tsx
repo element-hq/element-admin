@@ -165,23 +165,18 @@ function TokenDetailComponent() {
       const params: EditTokenParams = {};
 
       const expires = formData.get("expires") as string;
-      if (expires) {
-        params.expires_at = computeUtcIsoStringFromLocal(expires);
-      } else {
-        // Empty string means set to null (never expires)
-        params.expires_at = null;
-      }
+      params.expires_at = expires
+        ? computeUtcIsoStringFromLocal(expires)
+        : // Empty string means set to null (never expires)
+          null;
 
       const usageLimitValue = formData.get("usageLimit") as string;
-      if (
+      params.usage_limit =
         usageLimitValue &&
         !Number.isNaN(Number(usageLimitValue)) &&
         Number(usageLimitValue) > 0
-      ) {
-        params.usage_limit = Number(usageLimitValue);
-      } else {
-        params.usage_limit = null;
-      }
+          ? Number(usageLimitValue)
+          : null;
 
       editTokenMutation.mutate(params);
     },

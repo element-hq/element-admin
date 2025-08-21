@@ -82,6 +82,12 @@ const omit = <T extends Record<string, unknown>, K extends keyof T>(
     Object.entries(obj).filter(([key]) => !(keys as string[]).includes(key)),
   ) as Omit<T, K>;
 
+const formatEncryption = (encryption: string | null) => {
+  if (!encryption) return "None";
+  if (encryption === "m.megolm.v1.aes-sha2") return "E2EE";
+  return encryption;
+};
+
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
@@ -129,12 +135,6 @@ function RouteComponent() {
     if (room.name) return room.name;
     if (room.canonical_alias) return room.canonical_alias;
     return room.room_id;
-  };
-
-  const formatEncryption = (encryption: string | null) => {
-    if (!encryption) return "None";
-    if (encryption === "m.megolm.v1.aes-sha2") return "E2EE";
-    return encryption;
   };
 
   return (

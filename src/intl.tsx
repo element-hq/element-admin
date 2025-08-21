@@ -1,14 +1,17 @@
 import { useSuspenseQueries } from "@tanstack/react-query";
 import { shouldPolyfill as shouldPolyfillIntlRelativeTimeFormat } from "@formatjs/intl-relativetimeformat/should-polyfill";
 import { shouldPolyfill as shouldPolyfillIntlPluralRules } from "@formatjs/intl-pluralrules/should-polyfill";
-
 import { useSyncExternalStore } from "react";
 import {
   IntlProvider as ReactIntlProvider,
+  useIntl,
   type MessageFormatElement,
 } from "react-intl";
+import { RouterProvider } from "@tanstack/react-router";
 
 import type messages from "../translations/extracted/en.json";
+import { router } from "@/router";
+
 declare global {
   namespace FormatjsIntl {
     interface Message {
@@ -90,28 +93,34 @@ const loadIntlPolyfillsForLocale = async (locale: string): Promise<void> => {
     //
     // FIXME: Make sure this is in sync with the current list of supported locales
     switch (locale) {
-      case "en":
+      case "en": {
         await import("@formatjs/intl-relativetimeformat/locale-data/en");
         break;
-      case "fr":
+      }
+      case "fr": {
         await import("@formatjs/intl-relativetimeformat/locale-data/fr");
         break;
-      default:
+      }
+      default: {
         throw new Error(`Unsupported locale ${locale}`);
+      }
     }
   }
 
   if (shouldPolyfillIntlPluralRules(locale)) {
     await import("@formatjs/intl-pluralrules/polyfill-force");
     switch (locale) {
-      case "en":
+      case "en": {
         await import("@formatjs/intl-pluralrules/locale-data/en");
         break;
-      case "fr":
+      }
+      case "fr": {
         await import("@formatjs/intl-pluralrules/locale-data/fr");
         break;
-      default:
+      }
+      default: {
         throw new Error(`Unsupported locale ${locale}`);
+      }
     }
   }
 };
@@ -124,8 +133,8 @@ const loadIntlPolyfillsForLocale = async (locale: string): Promise<void> => {
  */
 const useBestLocale = (): string => {
   return useSyncExternalStore((callback) => {
-    window.addEventListener("languagechange", callback);
-    return () => window.removeEventListener("languagechange", callback);
+    globalThis.addEventListener("languagechange", callback);
+    return () => globalThis.removeEventListener("languagechange", callback);
   }, getBestLocale);
 };
 
@@ -166,4 +175,9 @@ export const IntlProvider = ({ children }: { children: React.ReactNode }) => {
       {children}
     </ReactIntlProvider>
   );
+};
+
+export const RouterWithIntl = () => {
+  const intl = useIntl();
+  return <RouterProvider router={router} context={{ intl }} />;
 };

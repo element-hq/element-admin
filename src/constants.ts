@@ -4,13 +4,13 @@ export const PAGE_SIZE = 10;
 
 export const REDIRECT_URI = new URL(
   "/callback",
-  window.location.origin,
+  globalThis.location.origin,
 ).toString();
 
 export const CLIENT_METADATA: ClientMetadata = {
   application_type: "web",
   client_name: "Element Admin",
-  client_uri: new URL("/", window.location.origin).toString(),
+  client_uri: new URL("/", globalThis.location.origin).toString(),
   redirect_uris: [REDIRECT_URI],
   token_endpoint_auth_method: "none",
   grant_types: ["authorization_code", "refresh_token"],

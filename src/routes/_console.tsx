@@ -35,7 +35,7 @@ import { useImageBlob } from "@/utils/blob";
 const TokenView: React.FC<{ token: string }> = ({ token }) => (
   <div className="flex items-center justify-between py-2 px-4 gap-1 text-text-secondary font-mono text-xs">
     {token.length > 20
-      ? `${token.substring(0, 5)}${"•".repeat(5)}${token.substring(token.length - 7)}`
+      ? `${token.slice(0, 5)}${"•".repeat(5)}${token.slice(Math.max(0, token.length - 7))}`
       : "•".repeat(5)}
     <CopyToClipboard value={token} />
   </div>
@@ -67,151 +67,153 @@ export const Route = createFileRoute("/_console")({
     );
   },
 
-  component: () => {
-    const queryClient = useQueryClient();
-    const { credentials } = Route.useRouteContext();
-    const { data: wellKnown } = useSuspenseQuery(
-      wellKnownQuery(credentials.serverName),
-    );
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
-    const { data: whoami } = useSuspenseQuery(
-      whoamiQuery(queryClient, synapseRoot),
-    );
+  component: RouteComponent,
+});
 
-    const { data: profile } = useSuspenseQuery(
-      profileQuery(queryClient, synapseRoot, whoami.user_id),
-    );
+function RouteComponent() {
+  const queryClient = useQueryClient();
+  const { credentials } = Route.useRouteContext();
+  const { data: wellKnown } = useSuspenseQuery(
+    wellKnownQuery(credentials.serverName),
+  );
+  const synapseRoot = wellKnown["m.homeserver"].base_url;
+  const { data: whoami } = useSuspenseQuery(
+    whoamiQuery(queryClient, synapseRoot),
+  );
 
-    const { data: avatar } = useQuery(
-      mediaThumbnailQuery(queryClient, synapseRoot, profile.avatar_url),
-    );
+  const { data: profile } = useSuspenseQuery(
+    profileQuery(queryClient, synapseRoot, whoami.user_id),
+  );
 
-    const avatarUrl = useImageBlob(avatar);
+  const { data: avatar } = useQuery(
+    mediaThumbnailQuery(queryClient, synapseRoot, profile.avatar_url),
+  );
 
-    return (
-      // The z-index is needed to create a new stacking context, so that the
-      // header can be above the content
-      <Layout>
-        <Header.Root>
-          <Header.Left>
-            <EssLogotype />
-            <Header.HomeserverName>
-              {credentials.serverName}
-            </Header.HomeserverName>
-          </Header.Left>
+  const avatarUrl = useImageBlob(avatar);
 
-          <Header.Right>
-            <Header.UserMenu
+  return (
+    // The z-index is needed to create a new stacking context, so that the
+    // header can be above the content
+    <Layout>
+      <Header.Root>
+        <Header.Left>
+          <EssLogotype />
+          <Header.HomeserverName>
+            {credentials.serverName}
+          </Header.HomeserverName>
+        </Header.Left>
+
+        <Header.Right>
+          <Header.UserMenu
+            mxid={whoami.user_id}
+            displayName={profile.displayname}
+            avatarUrl={avatarUrl}
+          >
+            <Header.UserMenuProfile
               mxid={whoami.user_id}
               displayName={profile.displayname}
               avatarUrl={avatarUrl}
-            >
-              <Header.UserMenuProfile
-                mxid={whoami.user_id}
-                displayName={profile.displayname}
-                avatarUrl={avatarUrl}
-              />
-              <Separator />
-              <TokenView token={credentials.accessToken} />
-              <Separator />
-              <SignOutMenuItem
-                synapseRoot={synapseRoot}
-                credentials={credentials}
-              />
-            </Header.UserMenu>
-          </Header.Right>
-        </Header.Root>
+            />
+            <Separator />
+            <TokenView token={credentials.accessToken} />
+            <Separator />
+            <SignOutMenuItem
+              synapseRoot={synapseRoot}
+              credentials={credentials}
+            />
+          </Header.UserMenu>
+        </Header.Right>
+      </Header.Root>
 
-        <Navigation.Root>
-          <Navigation.Sidebar>
-            <Navigation.NavLink Icon={HomeIcon} to="/">
-              <FormattedMessage
-                id="navigation.dashboard"
-                defaultMessage="Dashboard"
-                description="Label for the dashboard navigation item in the main navigation sidebar"
-              />
-            </Navigation.NavLink>
-            <Navigation.NavLink Icon={UserProfileIcon} to="/users">
-              <FormattedMessage
-                id="navigation.users"
-                defaultMessage="Users"
-                description="Label for the users navigation item in the main navigation sidebar"
-              />
-            </Navigation.NavLink>
-            <Navigation.NavLink Icon={LeaveIcon} to="/rooms">
-              <FormattedMessage
-                id="navigation.rooms"
-                defaultMessage="Rooms"
-                description="Label for the rooms navigation item in the main navigation sidebar"
-              />
-            </Navigation.NavLink>
-            <Navigation.Divider />
-            <Navigation.NavLink Icon={KeyIcon} to="/registration-tokens">
-              <FormattedMessage
-                id="navigation.registration_tokens"
-                defaultMessage="Registration tokens"
-                description="Label for the registration tokens navigation item in the main navigation sidebar"
-              />
-            </Navigation.NavLink>
-            <Navigation.Divider />
-            <Navigation.NavAnchor
-              Icon={DocumentIcon}
-              href="https://docs.element.io/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FormattedMessage
-                id="navigation.documentation"
-                defaultMessage="Documentation"
-                description="Label for the documentation navigation link (to https://docs.element.io/) in the main navigation sidebar"
-              />
-            </Navigation.NavAnchor>
-          </Navigation.Sidebar>
+      <Navigation.Root>
+        <Navigation.Sidebar>
+          <Navigation.NavLink Icon={HomeIcon} to="/">
+            <FormattedMessage
+              id="navigation.dashboard"
+              defaultMessage="Dashboard"
+              description="Label for the dashboard navigation item in the main navigation sidebar"
+            />
+          </Navigation.NavLink>
+          <Navigation.NavLink Icon={UserProfileIcon} to="/users">
+            <FormattedMessage
+              id="navigation.users"
+              defaultMessage="Users"
+              description="Label for the users navigation item in the main navigation sidebar"
+            />
+          </Navigation.NavLink>
+          <Navigation.NavLink Icon={LeaveIcon} to="/rooms">
+            <FormattedMessage
+              id="navigation.rooms"
+              defaultMessage="Rooms"
+              description="Label for the rooms navigation item in the main navigation sidebar"
+            />
+          </Navigation.NavLink>
+          <Navigation.Divider />
+          <Navigation.NavLink Icon={KeyIcon} to="/registration-tokens">
+            <FormattedMessage
+              id="navigation.registration_tokens"
+              defaultMessage="Registration tokens"
+              description="Label for the registration tokens navigation item in the main navigation sidebar"
+            />
+          </Navigation.NavLink>
+          <Navigation.Divider />
+          <Navigation.NavAnchor
+            Icon={DocumentIcon}
+            href="https://docs.element.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FormattedMessage
+              id="navigation.documentation"
+              defaultMessage="Documentation"
+              description="Label for the documentation navigation link (to https://docs.element.io/) in the main navigation sidebar"
+            />
+          </Navigation.NavAnchor>
+        </Navigation.Sidebar>
 
-          <Navigation.Content>
-            <Outlet />
+        <Navigation.Content>
+          <Outlet />
 
-            <Footer.Root>
-              <Footer.PoweredBy />
+          <Footer.Root>
+            <Footer.PoweredBy />
 
-              <Footer.Section>
-                <Link href="https://ems.element.io/support" size="small">
-                  <FormattedMessage
-                    id="footer.help_and_support"
-                    defaultMessage="Help & Support"
-                    description="Label for the help and support (to https://ems.element.io/support) link in the footer"
-                  />
-                </Link>
-                <Footer.Divider />
-                <Link href="https://element.io/legal" size="small">
-                  <FormattedMessage
-                    id="footer.legal"
-                    defaultMessage="Legal"
-                    description="Label for the legal (to https://element.io/legal) link in the footer"
-                  />
-                </Link>
-                <Footer.Divider />
-                <Link href="https://element.io/legal/privacy" size="small">
-                  <FormattedMessage
-                    id="footer.privacy"
-                    defaultMessage="Privacy"
-                    description="Label for the privacy (to https://element.io/legal/privacy) link in the footer"
-                  />
-                </Link>
-              </Footer.Section>
-
+            <Footer.Section>
+              <Link href="https://ems.element.io/support" size="small">
+                <FormattedMessage
+                  id="footer.help_and_support"
+                  defaultMessage="Help & Support"
+                  description="Label for the help and support (to https://ems.element.io/support) link in the footer"
+                />
+              </Link>
               <Footer.Divider />
+              <Link href="https://element.io/legal" size="small">
+                <FormattedMessage
+                  id="footer.legal"
+                  defaultMessage="Legal"
+                  description="Label for the legal (to https://element.io/legal) link in the footer"
+                />
+              </Link>
+              <Footer.Divider />
+              <Link href="https://element.io/legal/privacy" size="small">
+                <FormattedMessage
+                  id="footer.privacy"
+                  defaultMessage="Privacy"
+                  description="Label for the privacy (to https://element.io/legal/privacy) link in the footer"
+                />
+              </Link>
+            </Footer.Section>
 
-              <Footer.Section>
-                <Footer.CopyrightNotice />
-              </Footer.Section>
-            </Footer.Root>
-          </Navigation.Content>
-        </Navigation.Root>
-      </Layout>
-    );
-  },
-});
+            <Footer.Divider />
+
+            <Footer.Section>
+              <Footer.CopyrightNotice />
+            </Footer.Section>
+          </Footer.Root>
+        </Navigation.Content>
+      </Navigation.Root>
+    </Layout>
+  );
+}
 
 const SignOutMenuItem = ({
   synapseRoot,

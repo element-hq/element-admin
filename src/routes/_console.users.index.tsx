@@ -78,7 +78,7 @@ function RouteComponent() {
 
   const hasNext = !!data.links.next || search.before;
   const hasPrev = !!data.links.prev || search.after;
-  const lastId = data.data[data.data.length - 1]?.id;
+  const lastId = data.data.at(-1)?.id;
   const firstId = data.data[0]?.id;
 
   const nextPageParams = hasNext && {
