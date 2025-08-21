@@ -29,7 +29,7 @@ export const authMetadataQuery = (synapseRoot: string) =>
     },
   });
 
-export type ClientMetadata = {
+export interface ClientMetadata {
   application_type: string;
   client_name: string;
   client_uri: string;
@@ -37,7 +37,7 @@ export type ClientMetadata = {
   grant_types: string[];
   redirect_uris: string[];
   response_types: string[];
-};
+}
 
 const ClientRegistrationResponse = v.object({
   client_id: v.string(),

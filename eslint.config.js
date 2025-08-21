@@ -13,12 +13,13 @@ import tanstackQueryPlugin from "@tanstack/eslint-plugin-query";
 
 export default tseslint.config(
   js.configs.recommended,
-  tseslint.configs.recommended,
+  tseslint.configs.strict,
+  tseslint.configs.stylistic,
   reactPlugin.configs.flat.recommended,
   reactPlugin.configs.flat["jsx-runtime"],
   reactHooksPlugin.configs["recommended-latest"],
   reactRefreshPlugin.configs.vite,
-  jsxA11yPlugin.flatConfigs.recommended,
+  jsxA11yPlugin.flatConfigs.strict,
   importXPlugin.flatConfigs.recommended,
   importXPlugin.flatConfigs.typescript,
   importXPlugin.flatConfigs.react,
@@ -92,7 +93,6 @@ export default tseslint.config(
         { prefer: "type-imports" },
       ],
       "@typescript-eslint/no-import-type-side-effects": "error",
-      "@typescript-eslint/no-empty-object-type": "off", // Allow {} types, useful in props
     },
   },
 

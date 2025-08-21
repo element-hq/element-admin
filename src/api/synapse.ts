@@ -71,7 +71,7 @@ export type Room = v.InferOutput<typeof Room>;
 export type RoomDetail = v.InferOutput<typeof RoomDetail>;
 export type RoomsListResponse = v.InferOutput<typeof RoomsListResponse>;
 
-export type RoomListParameters = {
+export interface RoomListParameters {
   from?: number | string;
   limit?: number;
   order_by?:
@@ -94,7 +94,7 @@ export type RoomListParameters = {
   search_term?: string;
   public_rooms?: boolean;
   empty_rooms?: boolean;
-};
+}
 
 export const serverVersionQuery = (synapseRoot: string) =>
   queryOptions({

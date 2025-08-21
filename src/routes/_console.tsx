@@ -32,7 +32,9 @@ import * as Footer from "@/components/footer";
 import { Layout } from "@/components/layout";
 import { useImageBlob } from "@/utils/blob";
 
-type TokenViewProps = { token: string };
+interface TokenViewProps {
+  token: string;
+}
 const TokenView: React.FC<TokenViewProps> = ({ token }: TokenViewProps) => (
   <div className="flex items-center justify-between py-2 px-4 gap-1 text-text-secondary font-mono text-xs">
     {token.length > 20

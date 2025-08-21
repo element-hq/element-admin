@@ -152,16 +152,16 @@ export type SingleRegistrationTokenResponse = v.InferOutput<
   typeof SingleResponseForRegistrationToken
 >;
 
-export type UserListParameters = {
+export interface UserListParameters {
   before?: string;
   after?: string;
   first?: number;
   last?: number;
   admin?: boolean;
   status?: "active" | "locked" | "deactivated";
-};
+}
 
-export type TokenListParameters = {
+export interface TokenListParameters {
   before?: string;
   after?: string;
   first?: number;
@@ -170,18 +170,18 @@ export type TokenListParameters = {
   revoked?: boolean;
   expired?: boolean;
   valid?: boolean;
-};
+}
 
-export type CreateTokenParameters = {
+export interface CreateTokenParameters {
   token?: string; // Custom token string (optional)
   usage_limit?: number;
   expires_at?: string; // ISO date string
-};
+}
 
-export type EditTokenParameters = {
+export interface EditTokenParameters {
   usage_limit?: number | null;
   expires_at?: string | null; // ISO date string
-};
+}
 
 export const usersQuery = (
   serverName: string,

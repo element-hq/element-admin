@@ -56,31 +56,31 @@ async function generatePkcePair() {
   };
 }
 
-type AuthorizationSession = {
+interface AuthorizationSession {
   serverName: string;
   clientId: string;
   codeChallenge: string;
   codeVerifier: string;
   state: string;
-};
+}
 
-type Credentials = {
+interface Credentials {
   serverName: string;
   clientId: string;
   accessToken: string;
   refreshToken: string;
   expiresAt: number;
-};
+}
 
-type AuthStoreState = {
+interface AuthStoreState {
   /** The current authorization session, if any */
   authorizationSession: AuthorizationSession | null;
 
   /** The active credentials, if any */
   credentials: Credentials | null;
-};
+}
 
-type AuthStoreActions = {
+interface AuthStoreActions {
   startAuthorizationSession: (
     serverName: string,
     clientId: string,
@@ -108,7 +108,7 @@ type AuthStoreActions = {
   ): Promise<string | null>;
 
   clear: () => void;
-};
+}
 
 const isExpired = (credentials: Credentials): boolean => {
   const leeway = 30 * 1000; // 30 seconds

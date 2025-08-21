@@ -11,6 +11,7 @@ export const router = createRouter({
   routeTree,
   context: {
     queryClient,
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     intl: undefined!,
   },
   defaultPreload: "intent",

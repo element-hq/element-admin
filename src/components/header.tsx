@@ -68,11 +68,11 @@ export const UserMenu: React.FC<UserMenuProps> = ({
   );
 };
 
-type UserMenuProfileProps = {
+interface UserMenuProfileProps {
   mxid: string;
   avatarUrl?: string | undefined;
   displayName?: string | undefined;
-};
+}
 export const UserMenuProfile: React.FC<UserMenuProfileProps> = ({
   mxid,
   displayName,
