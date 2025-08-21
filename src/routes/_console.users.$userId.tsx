@@ -42,7 +42,7 @@ interface LockUnlockButtonProps {
   user: {
     id: string;
     attributes: {
-      locked_at: string | null;
+      locked_at?: string | null;
     };
   };
   serverName: string;

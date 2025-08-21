@@ -333,10 +333,10 @@ function RouteComponent() {
 
 function getTokenStatus(token: {
   valid: boolean;
-  expires_at: string | null;
-  usage_limit: number | null;
+  expires_at?: string | null;
+  usage_limit?: number | null;
   times_used: number;
-  revoked_at: string | null;
+  revoked_at?: string | null;
 }) {
   if (!token.valid) {
     if (token.revoked_at) {
@@ -345,7 +345,11 @@ function getTokenStatus(token: {
     if (token.expires_at && new Date(token.expires_at) < new Date()) {
       return "Expired";
     }
-    if (token.usage_limit !== null && token.times_used >= token.usage_limit) {
+    if (
+      token.usage_limit !== null &&
+      token.usage_limit !== undefined &&
+      token.times_used >= token.usage_limit
+    ) {
       return "Used Up";
     }
     return "Invalid";

@@ -83,7 +83,8 @@
   "knip": {
     "ignore": [
       "src/routeTree.gen.ts",
-      "src/api/**/*",
+      "src/api/mas/api/**/*",
+      "src/api/synapse.ts",
       "openapi-ts.config.ts"
     ],
     "ignoreDependencies": [
