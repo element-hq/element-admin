@@ -96,14 +96,31 @@ export default tseslint.config(
     },
   },
 
+  // Tone things done for generated files
+  {
+    files: ["**/*.gen.ts"],
+    rules: {
+      "@typescript-eslint/array-type": "off",
+      "@typescript-eslint/consistent-type-definitions": "off",
+      "@typescript-eslint/no-dynamic-delete": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-invalid-void-type": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "unicorn/explicit-length-check": "off",
+      "unicorn/filename-case": "off",
+      "unicorn/no-abusive-eslint-disable": "off",
+      "unicorn/no-array-for-each": "off",
+      "unicorn/no-useless-switch-case": "off",
+      "unicorn/numeric-separators-style": "off",
+      "unicorn/prefer-string-slice": "off",
+      "unicorn/prefer-type-error": "off",
+      "unicorn/prevent-abbreviations": "off",
+      "unicorn/switch-case-braces": "off",
+    },
+  },
+
   // Ignore patterns
   {
-    ignores: [
-      "dist/**",
-      "node_modules/**",
-      ".tanstack/**",
-      "src/routeTree.gen.ts",
-      "translations/**",
-    ],
+    ignores: ["dist/**", "node_modules/**", ".tanstack/**"],
   },
 );

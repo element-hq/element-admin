@@ -1,9 +1,42 @@
 import { type QueryClient, queryOptions } from "@tanstack/react-query";
 import * as v from "valibot";
 
+import * as api from "./api";
+import { createClient, type Client } from "./api/client";
 import { authMetadataQuery } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
 import { accessToken } from "@/stores/auth";
+
+const masClient = createClient();
+
+const masBaseOptions = async (
+  client: QueryClient,
+  serverName: string,
+  signal?: AbortSignal,
+): Promise<{
+  client: Client;
+  auth: string;
+  baseUrl: string;
+  signal?: AbortSignal;
+}> => {
+  const token = await accessToken(client, signal);
+  if (!token) {
+    throw new Error("No access token");
+  }
+
+  const wellKnown = await client.ensureQueryData(wellKnownQuery(serverName));
+
+  const authMetadata = await client.ensureQueryData(
+    authMetadataQuery(wellKnown["m.homeserver"].base_url),
+  );
+
+  return {
+    client: masClient,
+    auth: token,
+    baseUrl: authMetadata.issuer.replace(/\/$/, ""),
+    ...(signal && { signal }),
+  };
+};
 
 const User = v.object({
   username: v.string(),
@@ -33,24 +66,6 @@ const PaginationLinks = v.object({
   next: v.optional(v.string()),
   prev: v.optional(v.string()),
 });
-
-const PaginatedResponseForUser = v.pipe(
-  v.object({
-    meta: PaginationMeta,
-    data: v.array(v.unknown()),
-    links: PaginationLinks,
-  }),
-  v.transform((value) => {
-    const validatedData = value.data.map((item) => {
-      return v.parse(SingleResourceForUser, item);
-    });
-
-    return {
-      ...value,
-      data: validatedData,
-    };
-  }),
-);
 
 const SingleResponseForUser = v.object({
   data: SingleResourceForUser,
@@ -139,7 +154,6 @@ const SingleResponseForRegistrationToken = v.object({
 
 export type User = v.InferOutput<typeof User>;
 export type UserEmail = v.InferOutput<typeof UserEmail>;
-export type PaginatedUsers = v.InferOutput<typeof PaginatedResponseForUser>;
 export type SingleUserResponse = v.InferOutput<typeof SingleResponseForUser>;
 export type PaginatedUserEmails = v.InferOutput<
   typeof PaginatedResponseForUserEmail
@@ -190,52 +204,20 @@ export const usersQuery = (
   queryOptions({
     queryKey: ["mas", "users", serverName, parameters],
     queryFn: async ({ client, signal }) => {
-      const token = await accessToken(client, signal);
-      if (!token) {
-        throw new Error("No access token");
-      }
+      const query: api.ListUsersData["query"] = {};
 
-      const wellKnown = await client.ensureQueryData(
-        wellKnownQuery(serverName),
-      );
-
-      const authMetadata = await client.ensureQueryData(
-        authMetadataQuery(wellKnown["m.homeserver"].base_url),
-      );
-
-      const masApiRoot = authMetadata.issuer;
-      const url = new URL("/api/admin/v1/users", masApiRoot);
-
-      // Add pagination parameters
-      if (parameters.before)
-        url.searchParams.set("page[before]", parameters.before);
-      if (parameters.after)
-        url.searchParams.set("page[after]", parameters.after);
-      if (parameters.first)
-        url.searchParams.set("page[first]", String(parameters.first));
-      if (parameters.last)
-        url.searchParams.set("page[last]", String(parameters.last));
-
-      // Add filter parameters
+      if (parameters.before) query["page[before]"] = parameters.before;
+      if (parameters.after) query["page[after]"] = parameters.after;
+      if (parameters.first) query["page[first]"] = parameters.first;
+      if (parameters.last) query["page[last]"] = parameters.last;
       if (parameters.admin !== undefined)
-        url.searchParams.set("filter[admin]", String(parameters.admin));
-      if (parameters.status)
-        url.searchParams.set("filter[status]", parameters.status);
+        query["filter[admin]"] = parameters.admin;
+      if (parameters.status) query["filter[status]"] = parameters.status;
 
-      const response = await fetch(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        signal,
+      return await api.listUsers({
+        ...(await masBaseOptions(client, serverName, signal)),
+        query,
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch users");
-      }
-
-      const users = v.parse(PaginatedResponseForUser, await response.json());
-
-      return users;
     },
   });
 

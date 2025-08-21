@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => ({
             "@formatjs/icu-messageformat-parser":
               "@formatjs/icu-messageformat-parser/no-parser",
           }
-        : {},
+        : [],
   },
 
   plugins: [
