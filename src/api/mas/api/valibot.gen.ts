@@ -14,8 +14,12 @@ export const vUlid = v.pipe(
 export const vPaginationParams = v.object({
   "page[before]": v.optional(vUlid),
   "page[after]": v.optional(vUlid),
-  "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[first]": v.optional(
+    v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+  ),
+  "page[last]": v.optional(
+    v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+  ),
 });
 
 export const vCompatSessionStatus = v.picklist(["active", "finished"]);
@@ -45,13 +49,17 @@ export const vCompatSession = v.object({
   user_id: vUlid,
   device_id: vDeviceId,
   user_session_id: vUlid,
-  redirect_uri: v.optional(v.pipe(v.string(), v.url())),
+  redirect_uri: v.optional(v.union([v.pipe(v.string(), v.url()), v.null()])),
   created_at: v.pipe(v.string(), v.isoTimestamp()),
-  user_agent: v.optional(v.string()),
-  last_active_at: v.optional(v.pipe(v.string(), v.isoTimestamp())),
-  last_active_ip: v.optional(v.string()),
-  finished_at: v.optional(v.pipe(v.string(), v.isoTimestamp())),
-  human_name: v.optional(v.string()),
+  user_agent: v.optional(v.union([v.string(), v.null()])),
+  last_active_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
+  last_active_ip: v.optional(v.union([v.string(), v.null()])),
+  finished_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
+  human_name: v.optional(v.union([v.string(), v.null()])),
 });
 
 /**
@@ -78,8 +86,8 @@ export const vPaginationLinks = v.object({
   self: v.string(),
   first: v.string(),
   last: v.string(),
-  next: v.optional(v.string()),
-  prev: v.optional(v.string()),
+  next: v.optional(v.union([v.string(), v.null()])),
+  prev: v.optional(v.union([v.string(), v.null()])),
 });
 
 /**
@@ -135,15 +143,19 @@ export const vOAuth2SessionFilter = v.object({
  */
 export const vOAuth2Session = v.object({
   created_at: v.pipe(v.string(), v.isoTimestamp()),
-  finished_at: v.optional(v.pipe(v.string(), v.isoTimestamp())),
+  finished_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
   user_id: v.optional(vUlid),
   user_session_id: v.optional(vUlid),
   client_id: vUlid,
   scope: v.string(),
-  user_agent: v.optional(v.string()),
-  last_active_at: v.optional(v.pipe(v.string(), v.isoTimestamp())),
-  last_active_ip: v.optional(v.string()),
-  human_name: v.optional(v.string()),
+  user_agent: v.optional(v.union([v.string(), v.null()])),
+  last_active_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
+  last_active_ip: v.optional(v.union([v.string(), v.null()])),
+  human_name: v.optional(v.union([v.string(), v.null()])),
 });
 
 /**
@@ -209,7 +221,7 @@ export const vSingleResponseForPolicyData = v.object({
 export const vUserStatus = v.picklist(["active", "locked", "deactivated"]);
 
 export const vUserFilter = v.object({
-  "filter[admin]": v.optional(v.boolean()),
+  "filter[admin]": v.optional(v.union([v.boolean(), v.null()])),
   "filter[status]": v.optional(vUserStatus),
 });
 
@@ -219,8 +231,12 @@ export const vUserFilter = v.object({
 export const vUser = v.object({
   username: v.string(),
   created_at: v.pipe(v.string(), v.isoTimestamp()),
-  locked_at: v.optional(v.pipe(v.string(), v.isoTimestamp())),
-  deactivated_at: v.optional(v.pipe(v.string(), v.isoTimestamp())),
+  locked_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
+  deactivated_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
   admin: v.boolean(),
 });
 
@@ -264,7 +280,7 @@ export const vSingleResponseForUser = v.object({
  */
 export const vSetUserPasswordRequest = v.object({
   password: v.string(),
-  skip_password_check: v.optional(v.boolean()),
+  skip_password_check: v.optional(v.union([v.boolean(), v.null()])),
 });
 
 export const vUsernamePathParam = v.object({
@@ -287,7 +303,7 @@ export const vDeactivateUserRequest = v.object({
 
 export const vUserEmailFilter = v.object({
   "filter[user]": v.optional(vUlid),
-  "filter[email]": v.optional(v.string()),
+  "filter[email]": v.optional(v.union([v.string(), v.null()])),
 });
 
 /**
@@ -346,11 +362,15 @@ export const vUserSessionFilter = v.object({
  */
 export const vUserSession = v.object({
   created_at: v.pipe(v.string(), v.isoTimestamp()),
-  finished_at: v.optional(v.pipe(v.string(), v.isoTimestamp())),
+  finished_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
   user_id: vUlid,
-  user_agent: v.optional(v.string()),
-  last_active_at: v.optional(v.pipe(v.string(), v.isoTimestamp())),
-  last_active_ip: v.optional(v.string()),
+  user_agent: v.optional(v.union([v.string(), v.null()])),
+  last_active_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
+  last_active_ip: v.optional(v.union([v.string(), v.null()])),
 });
 
 /**
@@ -381,10 +401,10 @@ export const vSingleResponseForUserSession = v.object({
 });
 
 export const vRegistrationTokenFilter = v.object({
-  "filter[used]": v.optional(v.boolean()),
-  "filter[revoked]": v.optional(v.boolean()),
-  "filter[expired]": v.optional(v.boolean()),
-  "filter[valid]": v.optional(v.boolean()),
+  "filter[used]": v.optional(v.union([v.boolean(), v.null()])),
+  "filter[revoked]": v.optional(v.union([v.boolean(), v.null()])),
+  "filter[expired]": v.optional(v.union([v.boolean(), v.null()])),
+  "filter[valid]": v.optional(v.union([v.boolean(), v.null()])),
 });
 
 /**
@@ -394,13 +414,19 @@ export const vUserRegistrationToken = v.object({
   token: v.string(),
   valid: v.boolean(),
   usage_limit: v.optional(
-    v.pipe(
-      v.number(),
-      v.integer(),
-      v.minValue(0, "Invalid value: Expected uint32 to be >= 0"),
-      v.maxValue(4294967295, "Invalid value: Expected uint32 to be <= 2^32-1"),
-      v.minValue(0),
-    ),
+    v.union([
+      v.pipe(
+        v.number(),
+        v.integer(),
+        v.minValue(0, "Invalid value: Expected uint32 to be >= 0"),
+        v.maxValue(
+          4294967295,
+          "Invalid value: Expected uint32 to be <= 2^32-1",
+        ),
+        v.minValue(0),
+      ),
+      v.null(),
+    ]),
   ),
   times_used: v.pipe(
     v.number(),
@@ -410,9 +436,15 @@ export const vUserRegistrationToken = v.object({
     v.minValue(0),
   ),
   created_at: v.pipe(v.string(), v.isoTimestamp()),
-  last_used_at: v.optional(v.pipe(v.string(), v.isoTimestamp())),
-  expires_at: v.optional(v.pipe(v.string(), v.isoTimestamp())),
-  revoked_at: v.optional(v.pipe(v.string(), v.isoTimestamp())),
+  last_used_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
+  expires_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
+  revoked_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
 });
 
 /**
@@ -438,17 +470,25 @@ export const vPaginatedResponseForUserRegistrationToken = v.object({
  * JSON payload for the `POST /api/admin/v1/user-registration-tokens`
  */
 export const vAddUserRegistrationTokenRequest = v.object({
-  token: v.optional(v.string()),
+  token: v.optional(v.union([v.string(), v.null()])),
   usage_limit: v.optional(
-    v.pipe(
-      v.number(),
-      v.integer(),
-      v.minValue(0, "Invalid value: Expected uint32 to be >= 0"),
-      v.maxValue(4294967295, "Invalid value: Expected uint32 to be <= 2^32-1"),
-      v.minValue(0),
-    ),
+    v.union([
+      v.pipe(
+        v.number(),
+        v.integer(),
+        v.minValue(0, "Invalid value: Expected uint32 to be >= 0"),
+        v.maxValue(
+          4294967295,
+          "Invalid value: Expected uint32 to be <= 2^32-1",
+        ),
+        v.minValue(0),
+      ),
+      v.null(),
+    ]),
   ),
-  expires_at: v.optional(v.pipe(v.string(), v.isoTimestamp())),
+  expires_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
 });
 
 /**
@@ -463,22 +503,30 @@ export const vSingleResponseForUserRegistrationToken = v.object({
  * JSON payload for the `PUT /api/admin/v1/user-registration-tokens/{id}` endpoint
  */
 export const vEditUserRegistrationTokenRequest = v.object({
-  expires_at: v.optional(v.pipe(v.string(), v.isoTimestamp())),
+  expires_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
   usage_limit: v.optional(
-    v.pipe(
-      v.number(),
-      v.integer(),
-      v.minValue(0, "Invalid value: Expected uint32 to be >= 0"),
-      v.maxValue(4294967295, "Invalid value: Expected uint32 to be <= 2^32-1"),
-      v.minValue(0),
-    ),
+    v.union([
+      v.pipe(
+        v.number(),
+        v.integer(),
+        v.minValue(0, "Invalid value: Expected uint32 to be >= 0"),
+        v.maxValue(
+          4294967295,
+          "Invalid value: Expected uint32 to be <= 2^32-1",
+        ),
+        v.minValue(0),
+      ),
+      v.null(),
+    ]),
   ),
 });
 
 export const vUpstreamOAuthLinkFilter = v.object({
   "filter[user]": v.optional(vUlid),
   "filter[provider]": v.optional(vUlid),
-  "filter[subject]": v.optional(v.string()),
+  "filter[subject]": v.optional(v.union([v.string(), v.null()])),
 });
 
 /**
@@ -489,7 +537,7 @@ export const vUpstreamOAuthLink = v.object({
   provider_id: vUlid,
   subject: v.string(),
   user_id: v.optional(vUlid),
-  human_account_name: v.optional(v.string()),
+  human_account_name: v.optional(v.union([v.string(), v.null()])),
 });
 
 /**
@@ -518,7 +566,7 @@ export const vAddUpstreamOauthLinkRequest = v.object({
   user_id: vUlid,
   provider_id: vUlid,
   subject: v.string(),
-  human_account_name: v.optional(v.string()),
+  human_account_name: v.optional(v.union([v.string(), v.null()])),
 });
 
 /**
@@ -536,8 +584,12 @@ export const vListCompatSessionsData = v.object({
     v.object({
       "page[before]": v.optional(vUlid),
       "page[after]": v.optional(vUlid),
-      "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      "page[first]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
+      "page[last]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
       "filter[user]": v.optional(vUlid),
       "filter[user-session]": v.optional(vUlid),
       "filter[status]": v.optional(vCompatSessionStatus),
@@ -570,8 +622,12 @@ export const vListOAuth2SessionsData = v.object({
     v.object({
       "page[before]": v.optional(vUlid),
       "page[after]": v.optional(vUlid),
-      "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      "page[first]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
+      "page[last]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
       "filter[user]": v.optional(vUlid),
       "filter[client]": v.optional(vUlid),
       "filter[client-kind]": v.optional(vOAuth2ClientKind),
@@ -642,9 +698,13 @@ export const vListUsersData = v.object({
     v.object({
       "page[before]": v.optional(vUlid),
       "page[after]": v.optional(vUlid),
-      "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "filter[admin]": v.optional(v.boolean()),
+      "page[first]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
+      "page[last]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
+      "filter[admin]": v.optional(v.union([v.boolean(), v.null()])),
       "filter[status]": v.optional(vUserStatus),
     }),
   ),
@@ -777,10 +837,14 @@ export const vListUserEmailsData = v.object({
     v.object({
       "page[before]": v.optional(vUlid),
       "page[after]": v.optional(vUlid),
-      "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      "page[first]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
+      "page[last]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
       "filter[user]": v.optional(vUlid),
-      "filter[email]": v.optional(v.string()),
+      "filter[email]": v.optional(v.union([v.string(), v.null()])),
     }),
   ),
 });
@@ -834,8 +898,12 @@ export const vListUserSessionsData = v.object({
     v.object({
       "page[before]": v.optional(vUlid),
       "page[after]": v.optional(vUlid),
-      "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      "page[first]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
+      "page[last]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
       "filter[user]": v.optional(vUlid),
       "filter[status]": v.optional(vUserSessionStatus),
     }),
@@ -867,12 +935,16 @@ export const vListUserRegistrationTokensData = v.object({
     v.object({
       "page[before]": v.optional(vUlid),
       "page[after]": v.optional(vUlid),
-      "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "filter[used]": v.optional(v.boolean()),
-      "filter[revoked]": v.optional(v.boolean()),
-      "filter[expired]": v.optional(v.boolean()),
-      "filter[valid]": v.optional(v.boolean()),
+      "page[first]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
+      "page[last]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
+      "filter[used]": v.optional(v.union([v.boolean(), v.null()])),
+      "filter[revoked]": v.optional(v.union([v.boolean(), v.null()])),
+      "filter[expired]": v.optional(v.union([v.boolean(), v.null()])),
+      "filter[valid]": v.optional(v.union([v.boolean(), v.null()])),
     }),
   ),
 });
@@ -958,11 +1030,15 @@ export const vListUpstreamOAuthLinksData = v.object({
     v.object({
       "page[before]": v.optional(vUlid),
       "page[after]": v.optional(vUlid),
-      "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      "page[first]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
+      "page[last]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
       "filter[user]": v.optional(vUlid),
       "filter[provider]": v.optional(vUlid),
-      "filter[subject]": v.optional(v.string()),
+      "filter[subject]": v.optional(v.union([v.string(), v.null()])),
     }),
   ),
 });

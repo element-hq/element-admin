@@ -14,6 +14,12 @@ export default defineConfig({
     pagination: {
       keywords: ["page[first]", "page[last]", "page[before]", "page[after]"],
     },
+
+    patch: {
+      // The schema lies. We advertise OpenAPI 3.1.0 but use "nullable" which is
+      // a 3.0.0 thing and removed in 3.1.0
+      version: "3.0.0",
+    },
   },
 
   plugins: [
