@@ -20,17 +20,9 @@
 }
 
 .homeserver-name {
-  font: var(--cpd-font-body-md-medium);
-  letter-spacing: var(--cpd-font-letter-spacing-body-md);
+  font: var(--cpd-font-body-lg-semibold);
+  letter-spacing: var(--cpd-font-letter-spacing-body-lg);
   color: var(--cpd-color-text-secondary);
-}
-
-/* TODO: at the mobile breakpoint, we have other things to do according to the
- * designs, but for now, just hiding the HS name makes it display okay */
-@media screen and (max-width: 768px) {
-  .homeserver-name {
-    display: none;
-  }
 }
 
 .user-menu-profile {
@@ -83,6 +75,22 @@
 
     & .icon {
       transform: rotate(180deg);
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .homeserver-name {
+    display: none;
+  }
+
+  /* FIXME: maybe we should be more intelligent and detect whether it's going to
+     be a modal or not instead of using breakpoints? */
+  .user-menu-button {
+    padding-inline-end: 0;
+
+    & .icon {
+      display: none;
     }
   }
 }
