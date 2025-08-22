@@ -58,8 +58,8 @@
     }
   }
 
-  /** The 'powered by element' logo moves to the end of the footer */
-  .powered-by {
+  /** The Element logo moves to the end of the footer */
+  .element-logo {
     order: 1;
     margin-inline-end: initial;
   }
