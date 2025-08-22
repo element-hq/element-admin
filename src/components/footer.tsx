@@ -11,14 +11,15 @@ export const Root: React.FC<RootProps> = ({
   <footer className={cx(className, styles["root"])}>{children}</footer>
 );
 
-export const PoweredBy: React.FC = () => (
-  <div className={styles["powered-by"]}>
-    <FormattedMessage
-      id="footer.powered_by"
-      defaultMessage="Powered by {logo}"
-      values={{ logo: <ElementLogotype /> }}
-    />
-  </div>
+export const ElementLogo: React.FC = () => (
+  <a
+    href="https://element.io/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className={styles["element-logo"]}
+  >
+    <ElementLogotype />
+  </a>
 );
 
 export const Divider: React.FC = () => (

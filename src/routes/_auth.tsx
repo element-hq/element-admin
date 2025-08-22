@@ -35,7 +35,7 @@ export const Route = createFileRoute("/_auth")({
         </section>
 
         <Footer.Root>
-          <Footer.PoweredBy />
+          <Footer.ElementLogo />
 
           <Footer.Divider />
 

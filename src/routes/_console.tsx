@@ -184,7 +184,7 @@ function RouteComponent() {
           <Outlet />
 
           <Footer.Root>
-            <Footer.PoweredBy />
+            <Footer.ElementLogo />
 
             <Footer.Section>
               <Link href="https://ems.element.io/support" size="small">

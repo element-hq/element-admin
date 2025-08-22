@@ -28,7 +28,7 @@
   flex: 1;
 }
 
-.powered-by {
+.element-logo {
   margin-inline-end: auto;
   color: var(--cpd-color-text-secondary);
   font: var(--cpd-font-body-xs-regular);
