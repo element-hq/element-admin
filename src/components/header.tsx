@@ -1,8 +1,8 @@
 import { ChevronDownIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Avatar, Menu } from "@vector-im/compound-web";
 import { useState } from "react";
-
 import { useIntl } from "react-intl";
+
 import styles from "./header.module.css";
 
 type RootProps = React.PropsWithChildren;

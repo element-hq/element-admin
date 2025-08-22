@@ -2,13 +2,13 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, MatchRoute, createFileRoute } from "@tanstack/react-router";
 import { PlusIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Badge, Button, Text } from "@vector-im/compound-web";
+import { FormattedMessage } from "react-intl";
 import * as v from "valibot";
 
-import { FormattedMessage } from "react-intl";
-import * as Page from "@/components/page";
 import { type TokenListParameters, registrationTokensQuery } from "@/api/mas";
 import { CopyToClipboard } from "@/components/copy";
 import { ButtonLink, ChatFilterLink } from "@/components/link";
+import * as Page from "@/components/page";
 import { PAGE_SIZE } from "@/constants";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 

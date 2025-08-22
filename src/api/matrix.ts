@@ -1,5 +1,6 @@
 import { queryOptions } from "@tanstack/react-query";
 import * as v from "valibot";
+
 import { accessToken } from "@/stores/auth";
 
 const WellKnownResponse = v.object({

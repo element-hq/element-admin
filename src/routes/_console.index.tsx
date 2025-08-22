@@ -3,9 +3,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { H3, Separator, Text } from "@vector-im/compound-web";
 import { FormattedMessage } from "react-intl";
 
-import * as Page from "@/components/page";
 import { wellKnownQuery } from "@/api/matrix";
 import { serverVersionQuery } from "@/api/synapse";
+import * as Page from "@/components/page";
 
 export const Route = createFileRoute("/_console/")({
   loader: async ({ context: { queryClient, credentials, intl } }) => {

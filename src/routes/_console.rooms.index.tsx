@@ -1,15 +1,15 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link, MatchRoute } from "@tanstack/react-router";
-import { Badge, Button, Text } from "@vector-im/compound-web";
-import * as v from "valibot";
-import { FormattedMessage } from "react-intl";
 import { DownloadIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
+import { Badge, Button, Text } from "@vector-im/compound-web";
 import { useState, useEffect, useCallback } from "react";
+import { FormattedMessage } from "react-intl";
+import * as v from "valibot";
 
-import * as Page from "@/components/page";
 import { wellKnownQuery } from "@/api/matrix";
 import { type RoomListParameters, roomsQuery } from "@/api/synapse";
 import { ButtonLink, ChatFilterLink } from "@/components/link";
+import * as Page from "@/components/page";
 import { PAGE_SIZE } from "@/constants";
 
 const RoomSearchParameters = v.object({

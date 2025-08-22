@@ -1,5 +1,6 @@
-import { FormattedMessage } from "react-intl";
 import cx from "classnames";
+import { FormattedMessage } from "react-intl";
+
 import styles from "./footer.module.css";
 import { ElementLogotype } from "./logo";
 

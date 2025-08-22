@@ -3,8 +3,8 @@ import { TooltipProvider } from "@vector-im/compound-web";
 import { StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 
-import { queryClient } from "@/router";
 import { IntlProvider, RouterWithIntl } from "@/intl";
+import { queryClient } from "@/router";
 import "@/styles.css";
 
 // Render the app

@@ -1,10 +1,11 @@
 import { type QueryClient, queryOptions } from "@tanstack/react-query";
 
-import * as api from "./api";
-import { createClient, type Client } from "./api/client";
 import { authMetadataQuery } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
 import { accessToken } from "@/stores/auth";
+
+import * as api from "./api";
+import { createClient, type Client } from "./api/client";
 
 const masClient = createClient();
 

@@ -1,16 +1,17 @@
-import { useSuspenseQueries } from "@tanstack/react-query";
-import { shouldPolyfill as shouldPolyfillIntlRelativeTimeFormat } from "@formatjs/intl-relativetimeformat/should-polyfill";
 import { shouldPolyfill as shouldPolyfillIntlPluralRules } from "@formatjs/intl-pluralrules/should-polyfill";
+import { shouldPolyfill as shouldPolyfillIntlRelativeTimeFormat } from "@formatjs/intl-relativetimeformat/should-polyfill";
+import { useSuspenseQueries } from "@tanstack/react-query";
+import { RouterProvider } from "@tanstack/react-router";
 import { useSyncExternalStore } from "react";
 import {
   IntlProvider as ReactIntlProvider,
   useIntl,
   type MessageFormatElement,
 } from "react-intl";
-import { RouterProvider } from "@tanstack/react-router";
+
+import { router } from "@/router";
 
 import type messages from "../translations/extracted/en.json";
-import { router } from "@/router";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

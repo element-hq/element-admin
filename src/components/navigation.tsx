@@ -1,6 +1,7 @@
 import { createLink } from "@tanstack/react-router";
-import { forwardRef, type PropsWithChildren } from "react";
 import cx from "classnames";
+import { forwardRef, type PropsWithChildren } from "react";
+
 import styles from "./navigation.module.css";
 
 type Props = PropsWithChildren;

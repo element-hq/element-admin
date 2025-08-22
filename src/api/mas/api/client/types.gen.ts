@@ -5,6 +5,7 @@ import type {
   Client as CoreClient,
   Config as CoreConfig,
 } from "../core/types.gen";
+
 import type { Middleware } from "./utils.gen";
 
 export type ResponseStyle = "data" | "fields";

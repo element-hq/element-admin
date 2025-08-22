@@ -11,6 +11,7 @@ import {
   serializeObjectParam,
   serializePrimitiveParam,
 } from "../core/pathSerializer.gen";
+
 import type {
   Client,
   ClientOptions,

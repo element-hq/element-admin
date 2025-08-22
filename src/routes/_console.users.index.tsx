@@ -1,16 +1,16 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, MatchRoute, createFileRoute } from "@tanstack/react-router";
-import { Badge, Button, Text } from "@vector-im/compound-web";
-import * as v from "valibot";
 import {
   DownloadIcon,
   UserAddIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
+import { Badge, Button, Text } from "@vector-im/compound-web";
 import { FormattedMessage } from "react-intl";
+import * as v from "valibot";
 
-import * as Page from "@/components/page";
 import { type UserListParameters, usersQuery } from "@/api/mas";
 import { ButtonLink, ChatFilterLink } from "@/components/link";
+import * as Page from "@/components/page";
 import { PAGE_SIZE } from "@/constants";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 

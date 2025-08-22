@@ -1,7 +1,8 @@
 import { useIntl } from "react-intl";
 
-import styles from "./logo.module.css";
 import { assertNever } from "@/utils/never";
+
+import styles from "./logo.module.css";
 
 /** The full "Element" logo */
 export const ElementLogotype: React.FC = () => {

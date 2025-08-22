@@ -57,7 +57,21 @@ export default tseslint.config(
     },
     rules: {
       // Import
-      "import-x/order": ["error"],
+      "import-x/order": [
+        "error",
+        {
+          "newlines-between": "always",
+          alphabetize: { order: "asc", caseInsensitive: true },
+          groups: [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index",
+          ],
+        },
+      ],
 
       // React Refresh
       "react-refresh/only-export-components": [

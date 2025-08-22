@@ -1,11 +1,11 @@
-import { FormattedMessage } from "react-intl";
-import { Link, Text } from "@vector-im/compound-web";
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { Link, Text } from "@vector-im/compound-web";
+import { FormattedMessage } from "react-intl";
 
 import * as Footer from "@/components/footer";
-import { useAuthStore } from "@/stores/auth";
-import { EssLogotypeVertical } from "@/components/logo";
 import { WelcomeLayout } from "@/components/layout";
+import { EssLogotypeVertical } from "@/components/logo";
+import { useAuthStore } from "@/stores/auth";
 
 export const Route = createFileRoute("/_auth")({
   beforeLoad: () => {

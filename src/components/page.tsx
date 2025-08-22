@@ -1,6 +1,6 @@
-import cx from "classnames";
-import { SearchIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { createLink } from "@tanstack/react-router";
+import { SearchIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
+import cx from "classnames";
 import { forwardRef } from "react";
 
 import styles from "./page.module.css";

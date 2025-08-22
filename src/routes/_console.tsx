@@ -25,12 +25,12 @@ import {
   whoamiQuery,
 } from "@/api/matrix";
 import { CopyToClipboard } from "@/components/copy";
-import { useAuthStore } from "@/stores/auth";
+import * as Footer from "@/components/footer";
 import * as Header from "@/components/header";
+import { Layout } from "@/components/layout";
 import { ElementLogo } from "@/components/logo";
 import * as Navigation from "@/components/navigation";
-import * as Footer from "@/components/footer";
-import { Layout } from "@/components/layout";
+import { useAuthStore } from "@/stores/auth";
 import { useImageBlob } from "@/utils/blob";
 
 interface TokenViewProps {
