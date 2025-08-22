@@ -30,14 +30,21 @@ export const NavLink = createLink(NavAnchor);
 
 type ContentProps = PropsWithChildren;
 export const Content: React.FC<ContentProps> = ({ children }: ContentProps) => (
-  <main className={styles["content"]}>{children}</main>
+  <div className={styles["content"]}>{children}</div>
+);
+
+type MainProps = PropsWithChildren;
+export const Main: React.FC<MainProps> = ({ children }: MainProps) => (
+  <main className={styles["main"]}>{children}</main>
 );
 
 type SidebarProps = PropsWithChildren;
 export const Sidebar: React.FC<SidebarProps> = ({ children }: SidebarProps) => (
   <div className={styles["sidebar"]}>
     <nav className={styles["sidebar-inner"]}>
-      <div className={styles["sidebar-content"]}>{children}</div>
+      <div className={styles["sidebar-sticky"]}>
+        <div className={styles["sidebar-content"]}>{children}</div>
+      </div>
     </nav>
   </div>
 );

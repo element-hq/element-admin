@@ -181,7 +181,9 @@ function RouteComponent() {
         </Navigation.Sidebar>
 
         <Navigation.Content>
-          <Outlet />
+          <Navigation.Main>
+            <Outlet />
+          </Navigation.Main>
 
           <Footer.Root>
             <Footer.ElementLogo />

@@ -7,8 +7,9 @@
   border-block-end: solid 1px var(--cpd-color-bg-subtle-secondary);
   background-color: var(--cpd-color-bg-canvas-default);
 
-  /** This is to position the header above the content, specifically the sidebar */
-  position: relative;
+  /** This is to position the header above the content, sticky at the top */
+  position: sticky;
+  top: 0;
   z-index: 1;
 }
 
