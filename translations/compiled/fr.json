@@ -79,6 +79,18 @@
       "value": "Utilisateurs"
     }
   ],
+  "pages.dashboard.synapse_version": [
+    {
+      "type": 0,
+      "value": "Version de Synapse"
+    }
+  ],
+  "pages.dashboard.title": [
+    {
+      "type": 0,
+      "value": "Tableau de bord"
+    }
+  ],
   "pages.login.server_name": [
     {
       "type": 0,
@@ -91,6 +103,24 @@
       "value": "Connexion"
     }
   ],
+  "pages.registration_tokens.title": [
+    {
+      "type": 0,
+      "value": "Jetons d'enregistrement"
+    }
+  ],
+  "pages.rooms.title": [
+    {
+      "type": 0,
+      "value": "Salons"
+    }
+  ],
+  "pages.users.title": [
+    {
+      "type": 0,
+      "value": "Utilisateurs"
+    }
+  ],
   "product.element": [
     {
       "type": 0,
@@ -101,6 +131,24 @@
     {
       "type": 0,
       "value": "Element Server Suite"
+    }
+  ],
+  "product.title.community": [
+    {
+      "type": 0,
+      "value": "Element Community"
+    }
+  ],
+  "product.title.pro": [
+    {
+      "type": 0,
+      "value": "Element Pro"
+    }
+  ],
+  "product.title.ti-m": [
+    {
+      "type": 0,
+      "value": "Element TI-Messenger"
     }
   ]
 }

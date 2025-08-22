@@ -35,16 +35,40 @@
   "navigation.users": {
     "message": "Utilisateurs"
   },
+  "pages.dashboard.synapse_version": {
+    "message": "Version de Synapse"
+  },
+  "pages.dashboard.title": {
+    "message": "Tableau de bord"
+  },
   "pages.login.server_name": {
     "message": "Nom du serveur"
   },
   "pages.login.title": {
     "message": "Connexion"
   },
+  "pages.registration_tokens.title": {
+    "message": "Jetons d'enregistrement"
+  },
+  "pages.rooms.title": {
+    "message": "Salons"
+  },
+  "pages.users.title": {
+    "message": "Utilisateurs"
+  },
   "product.element": {
     "message": "Element"
   },
   "product.title": {
     "message": "Element Server Suite"
+  },
+  "product.title.community": {
+    "message": "Element Community"
+  },
+  "product.title.pro": {
+    "message": "Element Pro"
+  },
+  "product.title.ti-m": {
+    "message": "Element TI-Messenger"
   }
 }
