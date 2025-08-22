@@ -52,10 +52,10 @@ export const LinkButton = createLink(
 export const Search = forwardRef<
   HTMLInputElement,
   React.ComponentProps<"input">
->(function Search({ className, ...props }) {
+>(function Search({ className, ...props }, ref) {
   return (
     <div className={cx(styles["search"], className)}>
-      <input type="search" {...props} />
+      <input type="search" {...props} ref={ref} />
       <SearchIcon />
     </div>
   );
