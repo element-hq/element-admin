@@ -58,6 +58,18 @@
     "description": "Title for the login page",
     "message": "Login"
   },
+  "pages.registration_tokens.title": {
+    "description": "The title of the registration tokens list page",
+    "message": "Registration tokens"
+  },
+  "pages.rooms.title": {
+    "description": "The title of the rooms list page",
+    "message": "Rooms"
+  },
+  "pages.users.title": {
+    "description": "The title of the users list page",
+    "message": "Users"
+  },
   "product.element": {
     "message": "Element"
   },

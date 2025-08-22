@@ -179,4 +179,8 @@
       display: none;
     }
   }
+
+  .content {
+    padding: var(--cpd-space-2x) var(--cpd-space-4x);
+  }
 }

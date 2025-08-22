@@ -1,0 +1,160 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-template-rows: auto;
+  grid-template-areas: "title search controls";
+  gap: var(--cpd-space-4x);
+}
+
+.title {
+  grid-area: title;
+  font: var(--cpd-font-heading-lg-semibold);
+  letter-spacing: var(--cpd-font-letter-spacing-heading-lg);
+  color: var(--cpd-color-text-primary);
+}
+
+.search {
+  grid-area: search;
+
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+
+  & > svg {
+    margin-inline-start: 14px;
+    height: var(--cpd-space-5x);
+    width: var(--cpd-space-5x);
+    color: var(--cpd-color-icon-secondary);
+  }
+
+  & > input {
+    flex: 1;
+    height: var(--cpd-space-9x);
+    border: solid 1px var(--cpd-color-border-interactive-secondary);
+    border-radius: var(--cpd-radius-pill-effect);
+    margin-inline-start: calc(-14px - var(--cpd-space-5x));
+    padding-inline-start: calc(
+      14px + var(--cpd-space-5x) + var(--cpd-space-2x)
+    );
+    padding-inline-end: 14px;
+    box-shadow: 0px 1px 2px var(--cpd-color-alpha-gray-300);
+    transition:
+      border-color var(--default-transition-duration)
+        var(--default-transition-timing-function),
+      box-shadow var(--default-transition-duration)
+        var(--default-transition-timing-function);
+
+    &:hover {
+      border-color: var(--cpd-color-border-interactive-hovered);
+      box-shadow: 0px 1.2px 2.4px var(--cpd-color-alpha-gray-500);
+
+      & + svg {
+        color: var(--cpd-color-icon-primary);
+      }
+    }
+
+    &:focus {
+      border-color: var(--cpd-color-text-primary);
+      outline: none;
+      box-shadow: none;
+
+      & + svg {
+        color: var(--cpd-color-icon-primary);
+      }
+    }
+  }
+}
+
+.controls {
+  grid-area: controls;
+  display: flex;
+  gap: var(--cpd-space-4x);
+}
+
+.link-button {
+  border-radius: var(--cpd-radius-pill-effect);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cpd-space-2x);
+  font: var(--cpd-font-body-md-semibold);
+  transition-duration: var(--default-transition-duration);
+  transition-timing-function: var(--default-transition-timing-function);
+  transition-property: color, background-color, border-color;
+  border: solid 1px;
+  padding-block: var(--cpd-space-1x);
+  padding-inline: var(--cpd-space-4x) var(--cpd-space-5x);
+
+  & > svg {
+    height: var(--cpd-space-5x);
+    width: var(--cpd-space-5x);
+  }
+
+  &[data-variant="primary"] {
+    color: var(--cpd-color-text-on-solid-primary);
+    background: var(--cpd-color-bg-action-primary-rest);
+    border-width: 0;
+
+    @media (hover) {
+      &:hover {
+        background: var(--cpd-color-bg-action-primary-hovered);
+      }
+    }
+
+    &:active {
+      background: var(--cpd-color-bg-action-primary-pressed);
+    }
+
+    & > svg {
+      color: var(--cpd-color-icon-on-solid-primary);
+    }
+  }
+
+  &[data-variant="secondary"] {
+    color: var(--cpd-color-text-on-solid-secondary);
+    background: var(--cpd-color-bg-action-secondary-rest);
+    border-color: var(--cpd-color-border-interactive-secondary);
+
+    @media (hover) {
+      &:hover {
+        background: var(--cpd-color-bg-action-secondary-hovered);
+        border-color: var(--cpd-color-border-interactive-hovered);
+      }
+    }
+
+    &:active {
+      background: var(--cpd-color-bg-action-secondary-pressed);
+      border-color: var(--cpd-color-border-interactive-pressed);
+    }
+
+    & > svg {
+      color: var(--cpd-color-icon-on-solid-secondary);
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "title controls"
+      "search search";
+  }
+
+  .title {
+    font: var(--cpd-font-heading-md-semibold);
+    letter-spacing: var(--cpd-font-letter-spacing-heading-md);
+  }
+
+  .link-button {
+    height: var(--cpd-space-9x);
+    width: var(--cpd-space-9x);
+    padding: 0;
+    box-shadow: 0px 1px 2px var(--cpd-color-alpha-gray-300);
+
+    & .link-button-text {
+      display: none;
+    }
+  }
+}

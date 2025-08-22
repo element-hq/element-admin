@@ -1,8 +1,11 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link, MatchRoute } from "@tanstack/react-router";
-import { Badge, Button, H2, Text, TextInput } from "@vector-im/compound-web";
+import { Badge, Button, Text } from "@vector-im/compound-web";
 import * as v from "valibot";
+import { FormattedMessage } from "react-intl";
+import { DownloadIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 
+import * as Page from "@/components/page";
 import { wellKnownQuery } from "@/api/matrix";
 import { type RoomListParameters, roomsQuery } from "@/api/synapse";
 import { ButtonLink, ChatFilterLink } from "@/components/link";
@@ -39,7 +42,7 @@ export const Route = createFileRoute("/_console/rooms/")({
   validateSearch: RoomSearchParameters,
   loaderDeps: ({ search }) => ({ search }),
   loader: async ({
-    context: { queryClient, credentials },
+    context: { queryClient, credentials, intl },
     deps: { search },
   }) => {
     const wellKnown = await queryClient.ensureQueryData(
@@ -61,7 +64,18 @@ export const Route = createFileRoute("/_console/rooms/")({
     };
 
     await queryClient.ensureQueryData(roomsQuery(synapseRoot, parameters));
+
+    return {
+      title: intl.formatMessage({
+        id: "pages.rooms.title",
+        defaultMessage: "Rooms",
+        description: "The title of the rooms list page",
+      }),
+    };
   },
+  head: ({ loaderData }) => ({
+    meta: [loaderData ? { title: loaderData.title } : {}],
+  }),
   component: RouteComponent,
 });
 
@@ -134,12 +148,37 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center gap-4">
-        <H2 className="flex-1">Rooms</H2>
-        <Text size="sm" className="text-text-secondary">
-          Total: {data.total_rooms}
-        </Text>
-      </div>
+      <Page.Header>
+        <Page.Title>
+          <FormattedMessage
+            id="pages.users.title"
+            defaultMessage="Users"
+            description="The title of the users list page"
+          />
+        </Page.Title>
+        <Page.Search
+          placeholder="Search rooms by name, alias, or ID…"
+          value={search.search_term || ""}
+          // TODO: debounce, search async
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            navigate({
+              search: (previous) => {
+                const newParameters = resetPagination(previous);
+                if (!event.target.value) {
+                  const { search_term: _, ...rest } = newParameters;
+                  return rest;
+                }
+                return { ...newParameters, search_term: event.target.value };
+              },
+            });
+          }}
+        />
+        <Page.Controls>
+          <Page.LinkButton to="/" variant="secondary" Icon={DownloadIcon}>
+            Export
+          </Page.LinkButton>
+        </Page.Controls>
+      </Page.Header>
 
       <div className="flex gap-4 flex-wrap">
         <ChatFilterLink
@@ -185,23 +224,6 @@ function RouteComponent() {
           Empty Only
         </ChatFilterLink>
       </div>
-
-      <TextInput
-        placeholder="Search rooms by name, alias, or ID..."
-        value={search.search_term || ""}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          navigate({
-            search: (previous) => {
-              const newParameters = resetPagination(previous);
-              if (!event.target.value) {
-                const { search_term: _, ...rest } = newParameters;
-                return rest;
-              }
-              return { ...newParameters, search_term: event.target.value };
-            },
-          });
-        }}
-      />
 
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-border-interactive-secondary">

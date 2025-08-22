@@ -1,8 +1,9 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { H1, H3, Separator, Text } from "@vector-im/compound-web";
+import { H3, Separator, Text } from "@vector-im/compound-web";
 import { FormattedMessage } from "react-intl";
 
+import * as Page from "@/components/page";
 import { wellKnownQuery } from "@/api/matrix";
 import { serverVersionQuery } from "@/api/synapse";
 
@@ -23,6 +24,9 @@ export const Route = createFileRoute("/_console/")({
       }),
     };
   },
+  head: ({ loaderData }) => ({
+    meta: [loaderData ? { title: loaderData.title } : {}],
+  }),
   component: RouteComponent,
 });
 
@@ -52,13 +56,15 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col gap-8">
-      <H1>
-        <FormattedMessage
-          id="pages.dashboard.title"
-          defaultMessage="Dashboard"
-          description="The title of the dashboard page"
-        />
-      </H1>
+      <Page.Header>
+        <Page.Title>
+          <FormattedMessage
+            id="pages.dashboard.title"
+            defaultMessage="Dashboard"
+            description="The title of the dashboard page"
+          />
+        </Page.Title>
+      </Page.Header>
 
       <section className="flex flex-col gap-6">
         <div>

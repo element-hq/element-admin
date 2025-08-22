@@ -1,9 +1,11 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, MatchRoute, createFileRoute } from "@tanstack/react-router";
 import { PlusIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
-import { Badge, Button, H2, Text } from "@vector-im/compound-web";
+import { Badge, Button, Text } from "@vector-im/compound-web";
 import * as v from "valibot";
 
+import { FormattedMessage } from "react-intl";
+import * as Page from "@/components/page";
 import { type TokenListParameters, registrationTokensQuery } from "@/api/mas";
 import { CopyToClipboard } from "@/components/copy";
 import { ButtonLink, ChatFilterLink } from "@/components/link";
@@ -25,7 +27,7 @@ export const Route = createFileRoute("/_console/registration-tokens/")({
   validateSearch: TokenSearchParameters,
   loaderDeps: ({ search }) => ({ search }),
   loader: async ({
-    context: { queryClient, credentials },
+    context: { queryClient, credentials, intl },
     deps: { search },
   }) => {
     const parameters: TokenListParameters = {
@@ -42,7 +44,18 @@ export const Route = createFileRoute("/_console/registration-tokens/")({
     await queryClient.ensureQueryData(
       registrationTokensQuery(credentials.serverName, parameters),
     );
+
+    return {
+      title: intl.formatMessage({
+        id: "pages.registration_tokens.title",
+        defaultMessage: "Registration tokens",
+        description: "The title of the registration tokens list page",
+      }),
+    };
   },
+  head: ({ loaderData }) => ({
+    meta: [loaderData ? { title: loaderData.title } : {}],
+  }),
   component: RouteComponent,
 });
 
@@ -112,20 +125,24 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center gap-4">
-        <H2 className="flex-1">Registration Tokens</H2>
-        <ButtonLink
-          to="/registration-tokens/add"
-          kind="secondary"
-          size="sm"
-          Icon={PlusIcon}
-        >
-          Create New Token
-        </ButtonLink>
-        <Text size="sm" className="text-text-secondary">
-          Total: {data.meta.count}
-        </Text>
-      </div>
+      <Page.Header>
+        <Page.Title>
+          <FormattedMessage
+            id="pages.registration_tokens.title"
+            defaultMessage="Registration tokens"
+            description="The title of the registration tokens list page"
+          />
+        </Page.Title>
+        <Page.Controls>
+          <Page.LinkButton
+            to="/registration-tokens/add"
+            variant="secondary"
+            Icon={PlusIcon}
+          >
+            Add
+          </Page.LinkButton>
+        </Page.Controls>
+      </Page.Header>
 
       {/* Filters */}
       <div className="flex gap-4">

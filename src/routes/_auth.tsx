@@ -15,6 +15,16 @@ export const Route = createFileRoute("/_auth")({
     }
   },
 
+  head: () => ({
+    meta: [
+      {
+        name: "description",
+        content:
+          "Manage the deployment of the element app for your organization or community.",
+      },
+    ],
+  }),
+
   component: () => {
     return (
       <WelcomeLayout className="gap-10 py-10 items-center justify-center">

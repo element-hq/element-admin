@@ -1,8 +1,14 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, MatchRoute, createFileRoute } from "@tanstack/react-router";
-import { Badge, Button, H2, Text } from "@vector-im/compound-web";
+import { Badge, Button, Text } from "@vector-im/compound-web";
 import * as v from "valibot";
+import {
+  DownloadIcon,
+  UserAddIcon,
+} from "@vector-im/compound-design-tokens/assets/web/icons";
+import { FormattedMessage } from "react-intl";
 
+import * as Page from "@/components/page";
 import { type UserListParameters, usersQuery } from "@/api/mas";
 import { ButtonLink, ChatFilterLink } from "@/components/link";
 import { PAGE_SIZE } from "@/constants";
@@ -21,7 +27,7 @@ export const Route = createFileRoute("/_console/users/")({
   validateSearch: UserSearchParameters,
   loaderDeps: ({ search }) => ({ search }),
   loader: async ({
-    context: { queryClient, credentials },
+    context: { queryClient, credentials, intl },
     deps: { search },
   }) => {
     const parameters: UserListParameters = {
@@ -36,7 +42,20 @@ export const Route = createFileRoute("/_console/users/")({
     await queryClient.ensureQueryData(
       usersQuery(credentials.serverName, parameters),
     );
+
+    return {
+      title: intl.formatMessage({
+        id: "pages.users.title",
+        defaultMessage: "Users",
+        description: "The title of the users list page",
+      }),
+    };
   },
+
+  head: ({ loaderData }) => ({
+    meta: [loaderData ? { title: loaderData.title } : {}],
+  }),
+
   component: RouteComponent,
 });
 
@@ -104,12 +123,24 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-center gap-4">
-        <H2 className="flex-1">Users</H2>
-        <Text size="sm" className="text-text-secondary">
-          Total: {data.meta.count}
-        </Text>
-      </div>
+      <Page.Header>
+        <Page.Title>
+          <FormattedMessage
+            id="pages.users.title"
+            defaultMessage="Users"
+            description="The title of the users list page"
+          />
+        </Page.Title>
+        <Page.Search placeholder="Non-functional search" />
+        <Page.Controls>
+          <Page.LinkButton to="/" variant="secondary" Icon={DownloadIcon}>
+            Export
+          </Page.LinkButton>
+          <Page.LinkButton to="/" variant="primary" Icon={UserAddIcon}>
+            Add
+          </Page.LinkButton>
+        </Page.Controls>
+      </Page.Header>
 
       {/* Filters */}
       <div className="flex gap-4">
