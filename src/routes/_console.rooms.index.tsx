@@ -4,6 +4,7 @@ import { Badge, Button, Text } from "@vector-im/compound-web";
 import * as v from "valibot";
 import { FormattedMessage } from "react-intl";
 import { DownloadIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
+import { useState, useEffect, useCallback } from "react";
 
 import * as Page from "@/components/page";
 import { wellKnownQuery } from "@/api/matrix";
@@ -105,6 +106,30 @@ function RouteComponent() {
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
 
+  // Local state for search input
+  const [localSearchTerm, setLocalSearchTerm] = useState(
+    search.search_term || "",
+  );
+
+  // Debounced effect to sync local state to URL
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      navigate({
+        replace: true,
+        search: (previous) => {
+          const newParameters = resetPagination(previous);
+          if (!localSearchTerm.trim()) {
+            const { search_term: _, ...rest } = newParameters;
+            return rest;
+          }
+          return { ...newParameters, search_term: localSearchTerm.trim() };
+        },
+      });
+    }, 400);
+
+    return () => clearTimeout(timeout);
+  }, [localSearchTerm, navigate]);
+
   const parameters: RoomListParameters = {
     limit: PAGE_SIZE,
     ...(search.from !== undefined && { from: search.from }),
@@ -146,6 +171,13 @@ function RouteComponent() {
     return room.room_id;
   };
 
+  const onSearchInput = useCallback(
+    (event: React.FormEvent<HTMLInputElement>) => {
+      setLocalSearchTerm(event.currentTarget.value);
+    },
+    [setLocalSearchTerm],
+  );
+
   return (
     <div className="flex flex-col gap-6">
       <Page.Header>
@@ -157,21 +189,9 @@ function RouteComponent() {
           />
         </Page.Title>
         <Page.Search
-          placeholder="Search rooms by name, alias, or ID…"
-          value={search.search_term || ""}
-          // TODO: debounce, search async
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            navigate({
-              search: (previous) => {
-                const newParameters = resetPagination(previous);
-                if (!event.target.value) {
-                  const { search_term: _, ...rest } = newParameters;
-                  return rest;
-                }
-                return { ...newParameters, search_term: event.target.value };
-              },
-            });
-          }}
+          placeholder="Search…"
+          value={localSearchTerm}
+          onInput={onSearchInput}
         />
         <Page.Controls>
           <Page.LinkButton to="/" variant="secondary" Icon={DownloadIcon}>
