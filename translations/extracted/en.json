@@ -42,6 +42,14 @@
     "description": "Label for the users navigation item in the main navigation sidebar",
     "message": "Users"
   },
+  "pages.dashboard.synapse_version": {
+    "description": "On the dashboard, this shows the Synapse version",
+    "message": "Synapse version"
+  },
+  "pages.dashboard.title": {
+    "description": "The title of the dashboard page",
+    "message": "Dashboard"
+  },
   "pages.login.server_name": {
     "description": "Label for the server name field",
     "message": "Server name"
