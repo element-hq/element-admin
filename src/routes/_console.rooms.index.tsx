@@ -183,9 +183,9 @@ function RouteComponent() {
       <Page.Header>
         <Page.Title>
           <FormattedMessage
-            id="pages.users.title"
-            defaultMessage="Users"
-            description="The title of the users list page"
+            id="pages.rooms.title"
+            defaultMessage="Rooms"
+            description="The title of the rooms list page"
           />
         </Page.Title>
         <Page.Search
