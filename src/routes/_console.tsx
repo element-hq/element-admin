@@ -14,6 +14,7 @@ import {
   UserProfileIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Link, MenuItem, Separator } from "@vector-im/compound-web";
+import { useCallback, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
 import { authMetadataQuery, revokeToken } from "@/api/auth";
@@ -26,7 +27,7 @@ import {
 import { CopyToClipboard } from "@/components/copy";
 import { useAuthStore } from "@/stores/auth";
 import * as Header from "@/components/header";
-import { EssLogotype } from "@/components/logo";
+import { ElementLogo } from "@/components/logo";
 import * as Navigation from "@/components/navigation";
 import * as Footer from "@/components/footer";
 import { Layout } from "@/components/layout";
@@ -89,13 +90,23 @@ function RouteComponent() {
 
   const avatarUrl = useImageBlob(avatar);
 
+  // Temporary thing to show off the logo variants
+  const variants = ["pro", "community", "ti-m"] as const;
+  const [logoClicks, setLogoClicks] = useState(0);
+  const onLogoClick = useCallback(
+    () => setLogoClicks((n) => n + 1),
+    [setLogoClicks],
+  );
+  const variant = variants[logoClicks % variants.length] || variants[0];
+
   return (
     // The z-index is needed to create a new stacking context, so that the
     // header can be above the content
     <Layout>
       <Header.Root>
         <Header.Left>
-          <EssLogotype />
+          <ElementLogo variant={variant} onClick={onLogoClick} />
+          {logoClicks > 10 ? <div>Okay you can stop clicking now.</div> : null}
           <Header.HomeserverName>
             {credentials.serverName}
           </Header.HomeserverName>

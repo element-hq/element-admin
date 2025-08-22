@@ -1,0 +1,35 @@
+.element-logo-container {
+  display: flex;
+  gap: var(--cpd-space-2x);
+  align-items: center;
+  color: var(--cpd-color-text-primary);
+}
+
+.badge {
+  border: solid 1px;
+  border-radius: 6px;
+  padding-inline: var(--cpd-space-2x);
+
+  /* The inner SVG size vary, so it's easier to use a fixed size & center it */
+  height: 25px;
+  display: flex;
+  align-items: center;
+
+  [data-variant="pro"] & {
+    color: var(--cpd-color-green-900);
+    background-color: var(--cpd-color-green-300);
+    border-color: var(--cpd-color-green-700);
+  }
+
+  [data-variant="community"] & {
+    color: var(--cpd-color-text-secondary);
+    background-color: var(--cpd-color-gray-300);
+    border-color: var(--cpd-color-gray-700);
+  }
+
+  [data-variant="ti-m"] & {
+    color: var(--cpd-color-blue-900);
+    background-color: var(--cpd-color-blue-300);
+    border-color: var(--cpd-color-blue-700);
+  }
+}

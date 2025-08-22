@@ -59,5 +59,17 @@
   "product.title": {
     "description": "The main name of the admin console",
     "message": "Element Server Suite"
+  },
+  "product.title.community": {
+    "description": "The main name of the admin console, the Community variant",
+    "message": "Element Community"
+  },
+  "product.title.pro": {
+    "description": "The main name of the admin console, the Pro variant",
+    "message": "Element Pro"
+  },
+  "product.title.ti-m": {
+    "description": "The main name of the admin console, the TI-Messenger variant",
+    "message": "Element TI-Messenger"
   }
 }
