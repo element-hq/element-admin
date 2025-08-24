@@ -3,7 +3,8 @@
   "upload": {
     "type": "json",
     "features": ["content_as_object", "plural_icu"],
-    "files": "translations/extracted/en.json"
+    "files": "translations/extracted/en.json",
+    "deprecate": "project"
   },
   "download": {
     "files": "translations/translated/${lang}.json",
