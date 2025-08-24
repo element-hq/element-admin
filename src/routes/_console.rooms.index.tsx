@@ -249,7 +249,14 @@ function RouteComponent() {
 
       <Table.Root>
         <Table.Header>
-          <Table.Title>{data.rooms.length.toLocaleString()} rooms</Table.Title>
+          <Table.Title>
+            <FormattedMessage
+              id="pages.rooms.room_count"
+              defaultMessage="{count, plural, zero {No rooms} one {# room} other {# rooms}}"
+              description="On the room list page, this heading shows the total number of rooms"
+              values={{ count: data.meta.count }}
+            />
+          </Table.Title>
           <Table.Controls>
             <Table.Showing>
               Showing {data.rooms.length} room
