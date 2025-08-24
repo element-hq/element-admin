@@ -84,6 +84,11 @@ export const profileQuery = (synapseRoot: string, mxid: string) =>
         headers: { Authorization: `Bearer ${token}` },
       });
 
+      // Special case: if we get a 404, it might be fine, just return an empty profile
+      if (response.status === 404) {
+        return {};
+      }
+
       if (!response.ok) {
         throw new Error(`Failed to fetch profile for ${mxid}`);
       }
