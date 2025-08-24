@@ -1,8 +1,26 @@
 {
+  "action.add": [
+    {
+      "type": 0,
+      "value": "Add"
+    }
+  ],
+  "action.export": [
+    {
+      "type": 0,
+      "value": "Export"
+    }
+  ],
   "action.sign_out": [
     {
       "type": 0,
       "value": "Se déconnecter"
+    }
+  ],
+  "common.filter": [
+    {
+      "type": 0,
+      "value": "Filter"
     }
   ],
   "footer.copyright_notice": [
@@ -91,6 +109,12 @@
       "value": "Tableau de bord"
     }
   ],
+  "pages.landing.description": [
+    {
+      "type": 0,
+      "value": "Manage the deployment of the element app for your organization or community."
+    }
+  ],
   "pages.login.server_name": [
     {
       "type": 0,
@@ -119,6 +143,46 @@
     {
       "type": 0,
       "value": "Utilisateurs"
+    }
+  ],
+  "pages.users.users_count": [
+    {
+      "offset": 0,
+      "options": {
+        "=0": {
+          "value": [
+            {
+              "type": 0,
+              "value": "No users"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " user"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " users"
+            }
+          ]
+        }
+      },
+      "pluralType": "cardinal",
+      "type": 6,
+      "value": "count"
     }
   ],
   "product.element": [
