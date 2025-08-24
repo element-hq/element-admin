@@ -12,16 +12,13 @@
     "message": "Filter"
   },
   "footer.copyright_notice": {
-    "message": "Copyright © {year}"
+    "message": "Copyright © {now, date, ::yyyy}"
   },
   "footer.help_and_support": {
     "message": "Help & Support"
   },
   "footer.legal": {
     "message": "Legal"
-  },
-  "footer.powered_by": {
-    "message": "Powered by {logo}"
   },
   "footer.privacy": {
     "message": "Privacy"
@@ -62,14 +59,17 @@
   "pages.registration_tokens.title": {
     "message": "Registration tokens"
   },
+  "pages.rooms.room_count": {
+    "message": "{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
+  },
   "pages.rooms.title": {
     "message": "Rooms"
   },
   "pages.users.title": {
     "message": "Users"
   },
-  "pages.users.users_count": {
-    "message": "{count, plural, =0 {No users} one {# user} other {# users}}"
+  "pages.users.user_count": {
+    "message": "{COUNT, plural, zero {No users} one {# user} other {# users}}"
   },
   "product.element": {
     "message": "Element"
