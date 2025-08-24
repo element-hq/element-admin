@@ -17,7 +17,7 @@
   },
   "footer.copyright_notice": {
     "description": "The copyright notice on the footer",
-    "message": "Copyright © {year}"
+    "message": "Copyright © {now, date, ::yyyy}"
   },
   "footer.help_and_support": {
     "description": "Label for the help and support (to https://ems.element.io/support) link in the footer",
