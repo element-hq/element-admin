@@ -14,12 +14,24 @@ importers:
       '@fontsource/inter':
         specifier: 5.2.6
         version: 5.2.6
+      '@formatjs/intl-getcanonicallocales':
+        specifier: 2.5.5
+        version: 2.5.5
+      '@formatjs/intl-locale':
+        specifier: 4.2.11
+        version: 4.2.11
+      '@formatjs/intl-numberformat':
+        specifier: 8.15.4
+        version: 8.15.4
       '@formatjs/intl-pluralrules':
         specifier: 5.4.4
         version: 5.4.4
       '@formatjs/intl-relativetimeformat':
         specifier: 11.4.11
         version: 11.4.11
+      '@formatjs/intl-segmenter':
+        specifier: 11.7.10
+        version: 11.7.10
       '@js-temporal/polyfill':
         specifier: 0.5.1
         version: 0.5.1
@@ -795,14 +807,29 @@ packages:
   '@formatjs/icu-skeleton-parser@1.8.14':
     resolution: {integrity: sha512-i4q4V4qslThK4Ig8SxyD76cp3+QJ3sAqr7f6q9VVfeGtxG9OhiAk3y9XF6Q41OymsKzsGQ6OQQoJNY4/lI8TcQ==}
 
+  '@formatjs/intl-enumerator@1.8.10':
+    resolution: {integrity: sha512-/iDm5v5809LN6GiEwT7gU/0lVuKbpyRh3l9USL205mi1kcunvY8eo4mooNr/3/cV4zWG9aUuPwrzukgSCaYlcg==}
+
+  '@formatjs/intl-getcanonicallocales@2.5.5':
+    resolution: {integrity: sha512-sxosgiLSGhf3So3hf4nk223G+qxWEZytAWVmgwuK5k16698N6jMbndzLL0R51i54aTTIp+UyIC+VKjns2eil3w==}
+
+  '@formatjs/intl-locale@4.2.11':
+    resolution: {integrity: sha512-8OtGsxPawRF8D6I9SPVhoS/tNSAD0KO/9BywbaP3YNHeoI3qxsK7IR0bN7BCjW6qHZZD7U3VnXVHHteVk12zMA==}
+
   '@formatjs/intl-localematcher@0.6.1':
     resolution: {integrity: sha512-ePEgLgVCqi2BBFnTMWPfIghu6FkbZnnBVhO2sSxvLfrdFw7wCHAHiDoM2h4NRgjbaY7+B7HgOLZGkK187pZTZg==}
+
+  '@formatjs/intl-numberformat@8.15.4':
+    resolution: {integrity: sha512-Y7ObFiSY5XC2v19H6nXwQ9zRMvPcBQP+rva26u8Z1ZfUTiMVtYAJ5dtAITILFJ9IPgcjUZY1gZLmJCmu0uLIhg==}
 
   '@formatjs/intl-pluralrules@5.4.4':
     resolution: {integrity: sha512-PdxoTmqaIh9c/zMR6Hw6+avrEh0b0giYlF4S4KOUjmWHUfDFj/8BqKVFFyQx1QInsRWhjdRWumqKYrcsjogDwg==}
 
   '@formatjs/intl-relativetimeformat@11.4.11':
     resolution: {integrity: sha512-EiknGq2z8ZcIDUhf3kkizrPmHHdD0lO6B3OXG6u0o0lAvusSc9gkr33F2S/vzOHM9iTh6oHmzTl21klGsLR9LA==}
+
+  '@formatjs/intl-segmenter@11.7.10':
+    resolution: {integrity: sha512-P938HeVcdhFFShvBEZWlQF1t6ES9CnwPgeGboLspc0p5q9rCjQ6atNEkLZoDjes0MKAWbgJzTsPjNjTh4ggqoA==}
 
   '@formatjs/intl@3.1.6':
     resolution: {integrity: sha512-tDkXnA4qpIFcDWac8CyVJq6oW8DR7W44QDUBsfXWIIJD/FYYen0QoH46W7XsVMFfPOVKkvbufjboZrrWbEfmww==}
@@ -4592,8 +4619,31 @@ snapshots:
       '@formatjs/ecma402-abstract': 2.3.4
       tslib: 2.8.1
 
+  '@formatjs/intl-enumerator@1.8.10':
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.4
+      tslib: 2.8.1
+
+  '@formatjs/intl-getcanonicallocales@2.5.5':
+    dependencies:
+      tslib: 2.8.1
+
+  '@formatjs/intl-locale@4.2.11':
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.4
+      '@formatjs/intl-enumerator': 1.8.10
+      '@formatjs/intl-getcanonicallocales': 2.5.5
+      tslib: 2.8.1
+
   '@formatjs/intl-localematcher@0.6.1':
     dependencies:
+      tslib: 2.8.1
+
+  '@formatjs/intl-numberformat@8.15.4':
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.4
+      '@formatjs/intl-localematcher': 0.6.1
+      decimal.js: 10.6.0
       tslib: 2.8.1
 
   '@formatjs/intl-pluralrules@5.4.4':
@@ -4604,6 +4654,12 @@ snapshots:
       tslib: 2.8.1
 
   '@formatjs/intl-relativetimeformat@11.4.11':
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.4
+      '@formatjs/intl-localematcher': 0.6.1
+      tslib: 2.8.1
+
+  '@formatjs/intl-segmenter@11.7.10':
     dependencies:
       '@formatjs/ecma402-abstract': 2.3.4
       '@formatjs/intl-localematcher': 0.6.1

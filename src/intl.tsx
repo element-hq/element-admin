@@ -1,5 +1,9 @@
+import { shouldPolyfill as shouldPolyfillIntlGetCanonicalLocales } from "@formatjs/intl-getcanonicallocales/should-polyfill";
+import { shouldPolyfill as shouldPolyfillIntlLocale } from "@formatjs/intl-locale/should-polyfill";
+import { shouldPolyfill as shouldPolyfillIntlNumberFormat } from "@formatjs/intl-numberformat/should-polyfill";
 import { shouldPolyfill as shouldPolyfillIntlPluralRules } from "@formatjs/intl-pluralrules/should-polyfill";
 import { shouldPolyfill as shouldPolyfillIntlRelativeTimeFormat } from "@formatjs/intl-relativetimeformat/should-polyfill";
+import { shouldPolyfill as shouldPolyfillIntlSegmenter } from "@formatjs/intl-segmenter/should-polyfill";
 import { useSuspenseQueries } from "@tanstack/react-query";
 import { RouterProvider } from "@tanstack/react-router";
 import { useEffect, useSyncExternalStore } from "react";
@@ -85,8 +89,25 @@ const getBestLocale = (): string => {
  * @param locale The locale to load
  */
 const loadIntlPolyfillsForLocale = async (locale: string): Promise<void> => {
-  if (shouldPolyfillIntlRelativeTimeFormat(locale)) {
-    await import("@formatjs/intl-relativetimeformat/polyfill-force");
+  // Holds the dynamic imports of polyfills
+  const promises: Promise<unknown>[] = [];
+  // Holds the extra data to load once the polyfills are loaded
+  const dataLoaders: (() => Promise<unknown>)[] = [];
+
+  if (shouldPolyfillIntlSegmenter()) {
+    promises.push(import("@formatjs/intl-segmenter/polyfill-force"));
+  }
+
+  if (shouldPolyfillIntlGetCanonicalLocales()) {
+    promises.push(import("@formatjs/intl-getcanonicallocales/polyfill-force"));
+  }
+
+  if (shouldPolyfillIntlLocale()) {
+    promises.push(import("@formatjs/intl-locale/polyfill-force"));
+  }
+
+  if (shouldPolyfillIntlPluralRules(locale)) {
+    promises.push(import("@formatjs/intl-pluralrules/polyfill-force"));
     // Initially, I tried using a dynamic variable import, but it has two important limitations:
     //   1. It needs a relative path, leaving an ugly `../node_modules` prefix
     //   2. It would emit chunks for every single locale, which slows down the
@@ -96,11 +117,15 @@ const loadIntlPolyfillsForLocale = async (locale: string): Promise<void> => {
     // FIXME: Make sure this is in sync with the current list of supported locales
     switch (locale) {
       case "en": {
-        await import("@formatjs/intl-relativetimeformat/locale-data/en");
+        dataLoaders.push(
+          () => import("@formatjs/intl-pluralrules/locale-data/en"),
+        );
         break;
       }
       case "fr": {
-        await import("@formatjs/intl-relativetimeformat/locale-data/fr");
+        dataLoaders.push(
+          () => import("@formatjs/intl-pluralrules/locale-data/fr"),
+        );
         break;
       }
       default: {
@@ -109,15 +134,19 @@ const loadIntlPolyfillsForLocale = async (locale: string): Promise<void> => {
     }
   }
 
-  if (shouldPolyfillIntlPluralRules(locale)) {
-    await import("@formatjs/intl-pluralrules/polyfill-force");
+  if (shouldPolyfillIntlNumberFormat(locale)) {
+    promises.push(import("@formatjs/intl-numberformat/polyfill-force"));
     switch (locale) {
       case "en": {
-        await import("@formatjs/intl-pluralrules/locale-data/en");
+        dataLoaders.push(
+          () => import("@formatjs/intl-numberformat/locale-data/en"),
+        );
         break;
       }
       case "fr": {
-        await import("@formatjs/intl-pluralrules/locale-data/fr");
+        dataLoaders.push(
+          () => import("@formatjs/intl-numberformat/locale-data/fr"),
+        );
         break;
       }
       default: {
@@ -125,6 +154,32 @@ const loadIntlPolyfillsForLocale = async (locale: string): Promise<void> => {
       }
     }
   }
+
+  if (shouldPolyfillIntlRelativeTimeFormat(locale)) {
+    promises.push(import("@formatjs/intl-relativetimeformat/polyfill-force"));
+    switch (locale) {
+      case "en": {
+        dataLoaders.push(
+          () => import("@formatjs/intl-relativetimeformat/locale-data/en"),
+        );
+        break;
+      }
+      case "fr": {
+        dataLoaders.push(
+          () => import("@formatjs/intl-relativetimeformat/locale-data/fr"),
+        );
+        break;
+      }
+      default: {
+        throw new Error(`Unsupported locale ${locale}`);
+      }
+    }
+  }
+
+  // First, make sure all the polyfills are loaded
+  await Promise.all(promises);
+  // Then load the associated locale datas
+  await Promise.all(dataLoaders.map((loader) => loader()));
 };
 
 /**
