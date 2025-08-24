@@ -2,7 +2,7 @@ import { shouldPolyfill as shouldPolyfillIntlPluralRules } from "@formatjs/intl-
 import { shouldPolyfill as shouldPolyfillIntlRelativeTimeFormat } from "@formatjs/intl-relativetimeformat/should-polyfill";
 import { useSuspenseQueries } from "@tanstack/react-query";
 import { RouterProvider } from "@tanstack/react-router";
-import { useSyncExternalStore } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import {
   IntlProvider as ReactIntlProvider,
   useIntl,
@@ -142,6 +142,12 @@ const useBestLocale = (): string => {
 
 export const IntlProvider = ({ children }: { children: React.ReactNode }) => {
   const locale = useBestLocale();
+
+  useEffect(() => {
+    if (document && document.documentElement) {
+      document.documentElement.lang = locale;
+    }
+  });
 
   // Load the language data and the Intl polyfills asynchronously in parallel
   // This will suspend during loading
