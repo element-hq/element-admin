@@ -1,11 +1,18 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { Link, Text } from "@vector-im/compound-web";
-import { FormattedMessage } from "react-intl";
+import { defineMessage, FormattedMessage } from "react-intl";
 
 import * as Footer from "@/components/footer";
 import { WelcomeLayout } from "@/components/layout";
 import { EssLogotypeVertical } from "@/components/logo";
 import { useAuthStore } from "@/stores/auth";
+
+const welcomeMessage = defineMessage({
+  id: "pages.landing.description",
+  defaultMessage:
+    "Manage the deployment of the element app for your organization or community.",
+  description: "On the landing pages, explains what the app does",
+});
 
 export const Route = createFileRoute("/_auth")({
   beforeLoad: () => {
@@ -15,14 +22,19 @@ export const Route = createFileRoute("/_auth")({
     }
   },
 
-  head: () => ({
-    meta: [
-      {
-        name: "description",
-        content:
-          "Manage the deployment of the element app for your organization or community.",
-      },
-    ],
+  loader: ({ context: { intl } }) => ({
+    description: intl.formatMessage(welcomeMessage),
+  }),
+
+  head: ({ loaderData }) => ({
+    meta: loaderData
+      ? [
+          {
+            name: "description",
+            content: loaderData.description,
+          },
+        ]
+      : [],
   }),
 
   component: () => {
@@ -34,8 +46,7 @@ export const Route = createFileRoute("/_auth")({
             <EssLogotypeVertical />
 
             <Text size="md" className="text-text-secondary">
-              Manage the deployment of the element app for your organization or
-              community.
+              <FormattedMessage {...welcomeMessage} />
             </Text>
           </div>
 

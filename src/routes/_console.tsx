@@ -39,7 +39,8 @@ interface TokenViewProps {
 const TokenView: React.FC<TokenViewProps> = ({ token }: TokenViewProps) => (
   <div className="flex items-center justify-between py-2 px-4 gap-1 text-text-secondary font-mono text-xs">
     {token.length > 20
-      ? `${token.slice(0, 5)}${"•".repeat(5)}${token.slice(Math.max(0, token.length - 7))}`
+      ? // eslint-disable-next-line formatjs/no-literal-string-in-jsx -- Not a translatable string
+        `${token.slice(0, 5)}${"•".repeat(5)}${token.slice(Math.max(0, token.length - 7))}`
       : "•".repeat(5)}
     <CopyToClipboard value={token} />
   </div>
@@ -106,6 +107,7 @@ function RouteComponent() {
       <Header.Root>
         <Header.Left>
           <ElementLogo variant={variant} onClick={onLogoClick} />
+          {/* eslint-disable-next-line formatjs/no-literal-string-in-jsx -- This is a joke */}
           {logoClicks > 10 ? <div>Okay you can stop clicking now.</div> : null}
           <Header.HomeserverName>
             {credentials.serverName}

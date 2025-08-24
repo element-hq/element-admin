@@ -1,3 +1,4 @@
+/* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
 import {
   useMutation,
   useQueryClient,

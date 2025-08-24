@@ -10,6 +10,8 @@ import { createTypeScriptImportResolver } from "eslint-import-resolver-typescrip
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import tanstackRouterPlugin from "@tanstack/eslint-plugin-router";
 import tanstackQueryPlugin from "@tanstack/eslint-plugin-query";
+// eslint-disable-next-line import-x/default -- The exported types are wrong
+import formatjsPlugin from "eslint-plugin-formatjs";
 
 export default tseslint.config(
   js.configs.recommended,
@@ -26,6 +28,7 @@ export default tseslint.config(
   unicornPlugin.configs.recommended,
   tanstackRouterPlugin.configs["flat/recommended"],
   tanstackQueryPlugin.configs["flat/recommended"],
+  formatjsPlugin.configs.strict,
   eslintConfigPrettier,
 
   // Global configuration
@@ -93,6 +96,9 @@ export default tseslint.config(
         { replacements: { props: false, ref: false } },
       ],
       "unicorn/no-null": "off",
+
+      // Format.JS
+      "formatjs/enforce-id": "off", // We don't use the hashed IDs
 
       // TypeScript rules
       "@typescript-eslint/no-unused-vars": [

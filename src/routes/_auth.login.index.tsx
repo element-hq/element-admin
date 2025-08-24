@@ -49,6 +49,7 @@ function RouteComponent() {
         />
       </Form.Field>
 
+      {/* eslint-disable-next-line formatjs/no-literal-string-in-jsx -- Temporary */}
       <Submit disabled={isPending}>Discover</Submit>
     </Form.Root>
   );

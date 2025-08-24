@@ -1,3 +1,4 @@
+/* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, MatchRoute, createFileRoute } from "@tanstack/react-router";
 import {
@@ -135,10 +136,18 @@ function RouteComponent() {
         <Page.Search placeholder="Non-functional search" />
         <Page.Controls>
           <Page.LinkButton to="/" variant="secondary" Icon={DownloadIcon}>
-            Export
+            <FormattedMessage
+              id="action.export"
+              defaultMessage="Export"
+              description="The label for the export action/button"
+            />
           </Page.LinkButton>
           <Page.LinkButton to="/" variant="primary" Icon={UserAddIcon}>
-            Add
+            <FormattedMessage
+              id="action.add"
+              defaultMessage="Add"
+              description="The label for the add action/button"
+            />
           </Page.LinkButton>
         </Page.Controls>
       </Page.Header>

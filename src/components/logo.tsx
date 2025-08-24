@@ -9,6 +9,7 @@ export const ElementLogotype: React.FC = () => {
   const intl = useIntl();
   const title = intl.formatMessage({
     id: "product.element",
+    description: "Just Element.",
     defaultMessage: "Element",
   });
 

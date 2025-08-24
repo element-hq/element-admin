@@ -1,3 +1,4 @@
+/* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link, MatchRoute } from "@tanstack/react-router";
 import { DownloadIcon } from "@vector-im/compound-design-tokens/assets/web/icons";

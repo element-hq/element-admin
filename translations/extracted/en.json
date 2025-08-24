@@ -1,9 +1,22 @@
 {
+  "action.add": {
+    "description": "The label for the add action/button",
+    "message": "Add"
+  },
+  "action.export": {
+    "description": "The label for the export action/button",
+    "message": "Export"
+  },
   "action.sign_out": {
     "description": "Label for the sign out menu item",
     "message": "Sign out"
   },
+  "common.filter": {
+    "description": "Label for a filter section/button",
+    "message": "Filter"
+  },
   "footer.copyright_notice": {
+    "description": "The copyright notice on the footer",
     "message": "Copyright © {year}"
   },
   "footer.help_and_support": {
@@ -50,6 +63,10 @@
     "description": "The title of the dashboard page",
     "message": "Dashboard"
   },
+  "pages.landing.description": {
+    "description": "On the landing pages, explains what the app does",
+    "message": "Manage the deployment of the element app for your organization or community."
+  },
   "pages.login.server_name": {
     "description": "Label for the server name field",
     "message": "Server name"
@@ -70,7 +87,12 @@
     "description": "The title of the users list page",
     "message": "Users"
   },
+  "pages.users.users_count": {
+    "description": "On the users list page, this heading shows the total number of users",
+    "message": "{count, plural, =0 {No users} one {# user} other {# users}}"
+  },
   "product.element": {
+    "description": "Just Element.",
     "message": "Element"
   },
   "product.title": {
