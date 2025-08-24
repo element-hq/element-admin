@@ -9,6 +9,7 @@ import { type TokenListParameters, registrationTokensQuery } from "@/api/mas";
 import { CopyToClipboard } from "@/components/copy";
 import { ButtonLink, ChatFilterLink } from "@/components/link";
 import * as Page from "@/components/page";
+import * as Table from "@/components/table";
 import { PAGE_SIZE } from "@/constants";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
@@ -204,70 +205,68 @@ function RouteComponent() {
         </ChatFilterLink>
       </div>
 
-      {/* Tokens Table */}
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-border-interactive-secondary">
-          <thead className="bg-bg-canvas-disabled">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Token
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Created At
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Valid Until
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Uses
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Status
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-bg-canvas-default divide-y divide-border-interactive-secondary">
+      <Table.Root>
+        <Table.Header>
+          <Table.Title>{data.data.length.toLocaleString()} tokens</Table.Title>
+          <Table.Controls>
+            <Table.Showing>
+              Showing {data.data.length} token
+              {data.data.length === 1 ? "" : "s"}
+            </Table.Showing>
+            <Table.FilterButton />
+          </Table.Controls>
+        </Table.Header>
+
+        <Table.List>
+          <Table.ListHeader>
+            <Table.ListHeaderCell>Token</Table.ListHeaderCell>
+            <Table.ListHeaderCell>Created At</Table.ListHeaderCell>
+            <Table.ListHeaderCell>Valid Until</Table.ListHeaderCell>
+            <Table.ListHeaderCell>Uses</Table.ListHeaderCell>
+            <Table.ListHeaderCell>Status</Table.ListHeaderCell>
+          </Table.ListHeader>
+
+          <Table.ListBody>
             {data.data.map((token) => (
-              <tr
-                key={token.id}
-                className="hover:bg-bg-action-secondary-hovered"
-              >
-                <td className="px-6 py-4 whitespace-nowrap flex items-center gap-2">
-                  <Link
-                    to="/registration-tokens/$tokenId"
-                    params={{ tokenId: token.id }}
-                    className="text-text-link-external hover:underline"
-                  >
-                    <Text weight="medium">{token.attributes.token}</Text>
-                  </Link>
-                  <CopyToClipboard value={token.attributes.token} />
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+              <Table.ListRow key={token.id} clickable>
+                <Table.ListCell>
+                  <div className="flex items-center gap-2">
+                    <Link
+                      to="/registration-tokens/$tokenId"
+                      params={{ tokenId: token.id }}
+                      className="text-text-link-external hover:underline"
+                    >
+                      <Text weight="medium">{token.attributes.token}</Text>
+                    </Link>
+                    <CopyToClipboard value={token.attributes.token} />
+                  </div>
+                </Table.ListCell>
+                <Table.ListCell>
                   {computeHumanReadableDateTimeStringFromUtc(
                     token.attributes.created_at,
                   )}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                </Table.ListCell>
+                <Table.ListCell>
                   {token.attributes.expires_at
                     ? computeHumanReadableDateTimeStringFromUtc(
                         token.attributes.expires_at,
                       )
                     : "Never expires"}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                </Table.ListCell>
+                <Table.ListCell>
                   {token.attributes.times_used} /{" "}
                   {token.attributes.usage_limit || "∞"}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                </Table.ListCell>
+                <Table.ListCell>
                   <Badge kind={token.attributes.valid ? "green" : "red"}>
                     {getTokenStatus(token.attributes)}
                   </Badge>
-                </td>
-              </tr>
+                </Table.ListCell>
+              </Table.ListRow>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </Table.ListBody>
+        </Table.List>
+      </Table.Root>
 
       {/* Pagination */}
       <div className="flex items-center justify-between">

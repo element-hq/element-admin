@@ -11,6 +11,7 @@ import * as v from "valibot";
 import { type UserListParameters, usersQuery } from "@/api/mas";
 import { ButtonLink, ChatFilterLink } from "@/components/link";
 import * as Page from "@/components/page";
+import * as Table from "@/components/table";
 import { PAGE_SIZE } from "@/constants";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
@@ -202,72 +203,71 @@ function RouteComponent() {
         </ChatFilterLink>
       </div>
 
-      {/* Users Table */}
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-border-interactive-secondary">
-          <thead className="bg-bg-canvas-disabled">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Username
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Status
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Admin
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Created At
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-bg-canvas-default divide-y divide-border-interactive-secondary">
+      <Table.Root>
+        <Table.Header>
+          <Table.Title>
+            <FormattedMessage
+              id="pages.users.users_count"
+              defaultMessage="{count, plural, =0 {No users} one {# user} other {# users}}"
+              description="On the users list page, this heading shows the total number of users"
+              values={{ count: data.meta.count }}
+            />
+          </Table.Title>
+          <Table.Controls>
+            <Table.Showing>
+              Showing {data.data.length} user{data.data.length === 1 ? "" : "s"}
+            </Table.Showing>
+            <Table.FilterButton />
+          </Table.Controls>
+        </Table.Header>
+
+        <Table.List>
+          <Table.ListHeader>
+            <Table.ListHeaderCell>Matrix ID</Table.ListHeaderCell>
+            <Table.ListHeaderCell>Account Type</Table.ListHeaderCell>
+            <Table.ListHeaderCell>Created at</Table.ListHeaderCell>
+          </Table.ListHeader>
+
+          <Table.ListBody>
             {data.data.map((user: (typeof data.data)[0]) => (
-              <tr
-                key={user.id}
-                className="hover:bg-bg-action-secondary-hovered"
-              >
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <Link
-                    to="/users/$userId"
-                    params={{ userId: user.id }}
-                    className="text-text-link-external hover:underline"
-                  >
-                    <Text weight="medium">{user.attributes.username}</Text>
-                  </Link>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <Badge
-                    kind={
-                      user.attributes.deactivated_at
-                        ? "red"
-                        : user.attributes.locked_at
-                          ? "grey"
-                          : "blue"
-                    }
-                  >
-                    {user.attributes.deactivated_at
-                      ? "Deactivated"
-                      : user.attributes.locked_at
-                        ? "Locked"
-                        : "Active"}
-                  </Badge>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+              <Table.ListRow key={user.id} clickable>
+                <Table.ListCell>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-gray-300 rounded-full flex-shrink-0" />
+                    <div className="flex flex-col min-w-0">
+                      <Link
+                        to="/users/$userId"
+                        params={{ userId: user.id }}
+                        className="text-text-link-external hover:underline"
+                      >
+                        <Text weight="semibold" size="md">
+                          {user.attributes.username}
+                        </Text>
+                      </Link>
+                      <Text size="sm" className="text-text-secondary">
+                        Display name
+                      </Text>
+                    </div>
+                  </div>
+                </Table.ListCell>
+                <Table.ListCell>
                   <Badge kind={user.attributes.admin ? "green" : "grey"}>
-                    {user.attributes.admin ? "Admin" : "User"}
+                    {user.attributes.admin ? "Admin" : "Local"}
                   </Badge>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
-                  {computeHumanReadableDateTimeStringFromUtc(
-                    user.attributes.created_at,
-                  )}
-                </td>
-              </tr>
+                </Table.ListCell>
+                <Table.ListCell>
+                  <Text size="sm" className="text-text-secondary">
+                    {/* TODO: format this with the user's locale */}
+                    {computeHumanReadableDateTimeStringFromUtc(
+                      user.attributes.created_at,
+                    )}
+                  </Text>
+                </Table.ListCell>
+              </Table.ListRow>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </Table.ListBody>
+        </Table.List>
+      </Table.Root>
 
       {/* Pagination */}
       <div className="flex items-center justify-between">

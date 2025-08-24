@@ -10,6 +10,7 @@ import { wellKnownQuery } from "@/api/matrix";
 import { type RoomListParameters, roomsQuery } from "@/api/synapse";
 import { ButtonLink, ChatFilterLink } from "@/components/link";
 import * as Page from "@/components/page";
+import * as Table from "@/components/table";
 import { PAGE_SIZE } from "@/constants";
 
 const RoomSearchParameters = v.object({
@@ -245,40 +246,33 @@ function RouteComponent() {
         </ChatFilterLink>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-border-interactive-secondary">
-          <thead className="bg-bg-canvas-disabled">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Room
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Members
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Local Members
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Version
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Encryption
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Visibility
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Join Rules
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-bg-action-secondary-rest divide-y divide-border-interactive-secondary">
+      <Table.Root>
+        <Table.Header>
+          <Table.Title>{data.rooms.length.toLocaleString()} rooms</Table.Title>
+          <Table.Controls>
+            <Table.Showing>
+              Showing {data.rooms.length} room
+              {data.rooms.length === 1 ? "" : "s"}
+            </Table.Showing>
+            <Table.FilterButton />
+          </Table.Controls>
+        </Table.Header>
+
+        <Table.List>
+          <Table.ListHeader>
+            <Table.ListHeaderCell>Room</Table.ListHeaderCell>
+            <Table.ListHeaderCell>Members</Table.ListHeaderCell>
+            <Table.ListHeaderCell>Local Members</Table.ListHeaderCell>
+            <Table.ListHeaderCell>Version</Table.ListHeaderCell>
+            <Table.ListHeaderCell>Encryption</Table.ListHeaderCell>
+            <Table.ListHeaderCell>Visibility</Table.ListHeaderCell>
+            <Table.ListHeaderCell>Join Rules</Table.ListHeaderCell>
+          </Table.ListHeader>
+
+          <Table.ListBody>
             {data.rooms.map((room) => (
-              <tr
-                key={room.room_id}
-                className="hover:bg-bg-action-secondary-hovered"
-              >
-                <td className="px-6 py-4 whitespace-nowrap">
+              <Table.ListRow key={room.room_id} clickable>
+                <Table.ListCell>
                   <div className="flex flex-col">
                     <Link
                       to="/rooms/$roomId"
@@ -297,27 +291,27 @@ function RouteComponent() {
                         </Text>
                       )}
                   </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                </Table.ListCell>
+                <Table.ListCell>
                   <Text>{room.joined_members}</Text>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                </Table.ListCell>
+                <Table.ListCell>
                   <Text>{room.joined_local_members}</Text>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                </Table.ListCell>
+                <Table.ListCell>
                   <Badge kind="grey">{room.version}</Badge>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                </Table.ListCell>
+                <Table.ListCell>
                   <Badge kind={room.encryption ? "green" : "grey"}>
                     {formatEncryption(room.encryption)}
                   </Badge>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                </Table.ListCell>
+                <Table.ListCell>
                   <Badge kind={room.public ? "blue" : "grey"}>
                     {room.public ? "Public" : "Private"}
                   </Badge>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                </Table.ListCell>
+                <Table.ListCell>
                   <Badge
                     kind={
                       room.join_rules === "public"
@@ -329,12 +323,12 @@ function RouteComponent() {
                   >
                     {room.join_rules}
                   </Badge>
-                </td>
-              </tr>
+                </Table.ListCell>
+              </Table.ListRow>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </Table.ListBody>
+        </Table.List>
+      </Table.Root>
 
       <div className="flex items-center justify-between">
         <MatchRoute to={Route.path} pending>
