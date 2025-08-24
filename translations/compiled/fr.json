@@ -2,13 +2,13 @@
   "action.add": [
     {
       "type": 0,
-      "value": "Add"
+      "value": "Ajouter"
     }
   ],
   "action.export": [
     {
       "type": 0,
-      "value": "Export"
+      "value": "Exporter"
     }
   ],
   "action.sign_out": [
@@ -20,7 +20,7 @@
   "common.filter": [
     {
       "type": 0,
-      "value": "Filter"
+      "value": "Filtre"
     }
   ],
   "footer.copyright_notice": [
@@ -29,8 +29,15 @@
       "value": "Copyright © "
     },
     {
-      "type": 1,
-      "value": "year"
+      "style": {
+        "parsedOptions": {
+          "year": "numeric"
+        },
+        "pattern": "yyyy",
+        "type": 1
+      },
+      "type": 3,
+      "value": "now"
     }
   ],
   "footer.help_and_support": [
@@ -43,16 +50,6 @@
     {
       "type": 0,
       "value": "Mentions légales"
-    }
-  ],
-  "footer.powered_by": [
-    {
-      "type": 0,
-      "value": "Propulsé par "
-    },
-    {
-      "type": 1,
-      "value": "logo"
     }
   ],
   "footer.privacy": [
@@ -112,7 +109,7 @@
   "pages.landing.description": [
     {
       "type": 0,
-      "value": "Manage the deployment of the element app for your organization or community."
+      "value": "Gérez le déploiement d'element pour votre organisation ou votre communauté."
     }
   ],
   "pages.login.server_name": [
@@ -133,6 +130,46 @@
       "value": "Jetons d'enregistrement"
     }
   ],
+  "pages.rooms.room_count": [
+    {
+      "offset": 0,
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " salon"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " salons"
+            }
+          ]
+        },
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Aucun salon"
+            }
+          ]
+        }
+      },
+      "pluralType": "cardinal",
+      "type": 6,
+      "value": "COUNT"
+    }
+  ],
   "pages.rooms.title": [
     {
       "type": 0,
@@ -145,18 +182,10 @@
       "value": "Utilisateurs"
     }
   ],
-  "pages.users.users_count": [
+  "pages.users.user_count": [
     {
       "offset": 0,
       "options": {
-        "=0": {
-          "value": [
-            {
-              "type": 0,
-              "value": "No users"
-            }
-          ]
-        },
         "one": {
           "value": [
             {
@@ -164,7 +193,7 @@
             },
             {
               "type": 0,
-              "value": " user"
+              "value": " utilisateur"
             }
           ]
         },
@@ -175,14 +204,22 @@
             },
             {
               "type": 0,
-              "value": " users"
+              "value": " utilisateurs"
+            }
+          ]
+        },
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Aucun utilisateur"
             }
           ]
         }
       },
       "pluralType": "cardinal",
       "type": 6,
-      "value": "count"
+      "value": "COUNT"
     }
   ],
   "product.element": [
