@@ -81,7 +81,7 @@
   },
   "pages.rooms.room_count": {
     "description": "On the room list page, this heading shows the total number of rooms",
-    "message": "{count, plural, zero {No rooms} one {# room} other {# rooms}}"
+    "message": "{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
   },
   "pages.rooms.title": {
     "description": "The title of the rooms list page",
@@ -93,7 +93,7 @@
   },
   "pages.users.user_count": {
     "description": "On the user list page, this heading shows the total number of users",
-    "message": "{count, plural, zero {No users} one {# user} other {# users}}"
+    "message": "{COUNT, plural, zero {No users} one {# user} other {# users}}"
   },
   "product.element": {
     "description": "Just Element.",

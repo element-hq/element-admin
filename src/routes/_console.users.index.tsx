@@ -217,9 +217,9 @@ function RouteComponent() {
           <Table.Title>
             <FormattedMessage
               id="pages.users.user_count"
-              defaultMessage="{count, plural, zero {No users} one {# user} other {# users}}"
+              defaultMessage="{COUNT, plural, zero {No users} one {# user} other {# users}}"
               description="On the user list page, this heading shows the total number of users"
-              values={{ count: data.meta.count }}
+              values={{ COUNT: data.meta.count }}
             />
           </Table.Title>
           <Table.Controls>

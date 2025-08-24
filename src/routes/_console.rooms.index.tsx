@@ -252,9 +252,9 @@ function RouteComponent() {
           <Table.Title>
             <FormattedMessage
               id="pages.rooms.room_count"
-              defaultMessage="{count, plural, zero {No rooms} one {# room} other {# rooms}}"
+              defaultMessage="{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
               description="On the room list page, this heading shows the total number of rooms"
-              values={{ count: data.meta.count }}
+              values={{ COUNT: data.total_rooms }}
             />
           </Table.Title>
           <Table.Controls>
