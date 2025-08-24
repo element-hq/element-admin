@@ -24,7 +24,9 @@ function RouteComponent() {
     (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
-      const serverName = formData.get("serverName") as string;
+      const serverName = (formData.get("serverName") as string)
+        .toLocaleLowerCase()
+        .trim();
       startTransition(() =>
         navigate({ to: "/login/$serverName", params: { serverName } }),
       );
@@ -44,6 +46,7 @@ function RouteComponent() {
         </Form.Label>
         <Form.TextControl
           disabled={isPending}
+          autoCapitalize="none"
           type="text"
           defaultValue="matrix.org"
         />

@@ -9,6 +9,11 @@ import { router } from "@/router";
 
 const REFRESH_LOCK = "element-admin-refresh-lock";
 
+// Normalize the server name. For now it only lowercases and trim
+function normalizeServerName(serverName: string): string {
+  return serverName.toLocaleLowerCase().trim();
+}
+
 function randomString(length: number): string {
   const possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -124,7 +129,8 @@ export const useAuthStore = create<AuthStore>()(
         authorizationSession: null,
         credentials: null,
 
-        async startAuthorizationSession(serverName, clientId) {
+        async startAuthorizationSession(rawServerName, clientId) {
+          const serverName = normalizeServerName(rawServerName);
           const current = get();
           if (
             current.authorizationSession?.serverName === serverName &&
@@ -216,12 +222,13 @@ export const useAuthStore = create<AuthStore>()(
         },
 
         saveCredentials(
-          serverName,
+          rawServerName,
           clientId,
           accessToken,
           refreshToken,
           expiresIn,
         ) {
+          const serverName = normalizeServerName(rawServerName);
           const expiresAt = Date.now() + expiresIn * 1000;
           const credentials = {
             serverName,
