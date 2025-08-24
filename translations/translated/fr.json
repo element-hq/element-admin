@@ -1,6 +1,15 @@
 {
+  "action.add": {
+    "message": "Add"
+  },
+  "action.export": {
+    "message": "Export"
+  },
   "action.sign_out": {
     "message": "Se déconnecter"
+  },
+  "common.filter": {
+    "message": "Filter"
   },
   "footer.copyright_notice": {
     "message": "Copyright © {year}"
@@ -41,6 +50,9 @@
   "pages.dashboard.title": {
     "message": "Tableau de bord"
   },
+  "pages.landing.description": {
+    "message": "Manage the deployment of the element app for your organization or community."
+  },
   "pages.login.server_name": {
     "message": "Nom du serveur"
   },
@@ -55,6 +67,9 @@
   },
   "pages.users.title": {
     "message": "Utilisateurs"
+  },
+  "pages.users.users_count": {
+    "message": "{count, plural, =0 {No users} one {# user} other {# users}}"
   },
   "product.element": {
     "message": "Element"
