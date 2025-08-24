@@ -12,6 +12,12 @@ const rootElement = document.querySelector("#app");
 if (rootElement && !rootElement.innerHTML) {
   const root = createRoot(rootElement);
 
+  // Remove the existing <title> tag, as this is managed by Tanstack Router now
+  const title = document.querySelector("title");
+  if (title) {
+    title.remove();
+  }
+
   root.render(
     <StrictMode>
       {/* TODO: better fallback */}
