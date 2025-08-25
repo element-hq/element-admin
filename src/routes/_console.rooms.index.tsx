@@ -1,21 +1,43 @@
 /* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute, Link, MatchRoute } from "@tanstack/react-router";
+import {
+  useQuery,
+  useSuspenseInfiniteQuery,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
+import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { DownloadIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
-import { Badge, Button, Text } from "@vector-im/compound-web";
-import { useState, useEffect, useCallback } from "react";
+import { Avatar, Badge, Text } from "@vector-im/compound-web";
+import {
+  Fragment,
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { FormattedMessage } from "react-intl";
 import * as v from "valibot";
 
-import { wellKnownQuery } from "@/api/matrix";
-import { type RoomListParameters, roomsQuery } from "@/api/synapse";
-import { ButtonLink, ChatFilterLink } from "@/components/link";
+import { mediaThumbnailQuery, wellKnownQuery } from "@/api/matrix";
+import {
+  type RoomListFilters,
+  roomsInfiniteQuery,
+  type Room,
+  roomDetailQuery,
+} from "@/api/synapse";
+import { ChatFilterLink } from "@/components/link";
 import * as Page from "@/components/page";
 import * as Table from "@/components/table";
-import { PAGE_SIZE } from "@/constants";
+import { useImageBlob } from "@/utils/blob";
 
 const RoomSearchParameters = v.object({
-  from: v.optional(v.union([v.number(), v.string()])),
   order_by: v.optional(
     v.picklist([
       "alphabetical",
@@ -52,9 +74,7 @@ export const Route = createFileRoute("/_console/rooms/")({
       wellKnownQuery(credentials.serverName),
     );
     const synapseRoot = wellKnown["m.homeserver"].base_url;
-    const parameters: RoomListParameters = {
-      limit: PAGE_SIZE,
-      ...(search.from !== undefined && { from: search.from }),
+    const parameters: RoomListFilters = {
       ...(search.order_by && { order_by: search.order_by }),
       ...(search.dir && { dir: search.dir }),
       ...(search.search_term && { search_term: search.search_term }),
@@ -66,7 +86,9 @@ export const Route = createFileRoute("/_console/rooms/")({
       }),
     };
 
-    await queryClient.ensureQueryData(roomsQuery(synapseRoot, parameters));
+    await queryClient.ensureInfiniteQueryData(
+      roomsInfiniteQuery(synapseRoot, parameters),
+    );
 
     return {
       title: intl.formatMessage({
@@ -82,12 +104,36 @@ export const Route = createFileRoute("/_console/rooms/")({
   component: RouteComponent,
 });
 
-const resetPagination = ({
-  from: _from,
-  ...search
-}: v.InferOutput<typeof RoomSearchParameters>): v.InferOutput<
-  typeof RoomSearchParameters
-> => search;
+const LazyRoomAvatar = ({
+  roomId,
+  name,
+  synapseRoot,
+}: {
+  roomId: string;
+  name: string;
+  synapseRoot: string;
+}) => {
+  const { data: room } = useSuspenseQuery(roomDetailQuery(synapseRoot, roomId));
+  const { data: avatar } = useQuery(
+    mediaThumbnailQuery(synapseRoot, room.avatar || undefined),
+  );
+  const avatarUrl = useImageBlob(avatar);
+  return <Avatar id={roomId} name={name} src={avatarUrl} size="32px" />;
+};
+
+const RoomAvatarWithFallback = ({
+  roomId,
+  name,
+  synapseRoot,
+}: {
+  roomId: string;
+  name: string;
+  synapseRoot: string;
+}) => (
+  <Suspense fallback={<Avatar id={roomId} name={name} size="32px" />}>
+    <LazyRoomAvatar roomId={roomId} name={name} synapseRoot={synapseRoot} />
+  </Suspense>
+);
 
 const omit = <T extends Record<string, unknown>, K extends keyof T>(
   object: T,
@@ -96,12 +142,6 @@ const omit = <T extends Record<string, unknown>, K extends keyof T>(
   Object.fromEntries(
     Object.entries(object).filter(([key]) => !(keys as string[]).includes(key)),
   ) as Omit<T, K>;
-
-const formatEncryption = (encryption: string | null) => {
-  if (!encryption) return "None";
-  if (encryption === "m.megolm.v1.aes-sha2") return "E2EE";
-  return encryption;
-};
 
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
@@ -119,12 +159,12 @@ function RouteComponent() {
       navigate({
         replace: true,
         search: (previous) => {
-          const newParameters = resetPagination(previous);
           if (!localSearchTerm.trim()) {
-            const { search_term: _, ...rest } = newParameters;
+            const { search_term: _, ...rest } = previous;
             return rest;
           }
-          return { ...newParameters, search_term: localSearchTerm.trim() };
+
+          return { ...previous, search_term: localSearchTerm.trim() };
         },
       });
     }, 400);
@@ -132,9 +172,7 @@ function RouteComponent() {
     return () => clearTimeout(timeout);
   }, [localSearchTerm, navigate]);
 
-  const parameters: RoomListParameters = {
-    limit: PAGE_SIZE,
-    ...(search.from !== undefined && { from: search.from }),
+  const parameters: RoomListFilters = {
     ...(search.order_by && { order_by: search.order_by }),
     ...(search.dir && { dir: search.dir }),
     ...(search.search_term && { search_term: search.search_term }),
@@ -151,27 +189,95 @@ function RouteComponent() {
   );
   const synapseRoot = wellKnown["m.homeserver"].base_url;
 
-  const { data } = useSuspenseQuery(roomsQuery(synapseRoot, parameters));
+  const { data, hasNextPage, fetchNextPage, isFetching } =
+    useSuspenseInfiniteQuery(roomsInfiniteQuery(synapseRoot, parameters));
 
-  const currentFrom = search.from || 0;
+  // Flatten the array of arrays from the useInfiniteQuery hook
+  const flatData = useMemo(
+    () => data?.pages?.flatMap((page) => page.rooms) ?? [],
+    [data],
+  );
 
-  const nextPageParameters = data.next_batch && {
-    ...resetPagination(search),
-    from: data.next_batch,
-  };
+  const totalCount = data.pages[0]?.total_rooms ?? 0;
+  const totalFetched = flatData.length;
 
-  const previousPageParameters = (data.prev_batch || data.prev_batch === 0) && {
-    ...resetPagination(search),
-    from: data.prev_batch,
-  };
+  // Column definitions
+  const columns = useMemo<ColumnDef<Room>[]>(
+    () => [
+      {
+        id: "roomName",
+        header: "Room",
+        cell: ({ row }) => {
+          const room = row.original;
+          const displayName = room.name || room.canonical_alias || room.room_id;
+          return (
+            <div className="flex items-center gap-3 max-w-full w-full min-w-0">
+              <RoomAvatarWithFallback
+                synapseRoot={synapseRoot}
+                roomId={room.room_id}
+                name={displayName}
+              />
+              <div className="flex flex-col min-w-0">
+                <Link
+                  to="/rooms/$roomId"
+                  params={{ roomId: room.room_id }}
+                  className="text-text-link-external hover:underline"
+                >
+                  <Text weight="semibold" size="md">
+                    {displayName}
+                  </Text>
+                </Link>
+              </div>
+            </div>
+          );
+        },
+      },
+      {
+        id: "alias",
+        header: "Alias",
+        cell: ({ row }) => {
+          const room = row.original;
+          const displayAlias = room.canonical_alias || room.room_id;
+          return (
+            <Text size="sm" className="text-text-secondary">
+              {displayAlias}
+            </Text>
+          );
+        },
+      },
+      {
+        id: "members",
+        header: "Members",
+        cell: ({ row }) => {
+          const room = row.original;
+          return <Text size="sm">{room.joined_members}</Text>;
+        },
+      },
+      {
+        id: "type",
+        header: "Type",
+        cell: ({ row }) => {
+          const room = row.original;
+          let type = "Private";
+          let kind: "grey" | "green" | "blue" = "grey";
 
-  const firstPageParameters = !!currentFrom && resetPagination(search);
+          if (room.public) {
+            type = "Public";
+            kind = "green";
+          } else if (room.join_rules === "restricted") {
+            type = "Restricted";
+            kind = "blue";
+          } else if (room.join_rules === "invite") {
+            type = "Private";
+            kind = "grey";
+          }
 
-  const formatRoomName = (room: (typeof data.rooms)[0]) => {
-    if (room.name) return room.name;
-    if (room.canonical_alias) return room.canonical_alias;
-    return room.room_id;
-  };
+          return <Badge kind={kind}>{type}</Badge>;
+        },
+      },
+    ],
+    [synapseRoot],
+  );
 
   const onSearchInput = useCallback(
     (event: React.FormEvent<HTMLInputElement>) => {
@@ -179,6 +285,55 @@ function RouteComponent() {
     },
     [setLocalSearchTerm],
   );
+
+  const table = useReactTable({
+    data: flatData,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    manualSorting: true,
+    debugTable: false,
+  });
+
+  const { rows } = table.getRowModel();
+
+  // Called on scroll to fetch more data as the user scrolls
+  const fetchMoreOnBottomReached = useCallback(() => {
+    if (globalThis.window !== undefined) {
+      const { scrollY, innerHeight } = globalThis.window;
+      const { scrollHeight } = document.documentElement;
+
+      // Once the user has scrolled within 1000px of the bottom, fetch more data
+      if (
+        scrollHeight - scrollY - innerHeight < 1000 &&
+        !isFetching &&
+        hasNextPage &&
+        totalFetched < totalCount
+      ) {
+        fetchNextPage();
+      }
+    }
+  }, [fetchNextPage, isFetching, hasNextPage, totalFetched, totalCount]);
+
+  // Set up scroll listener
+  useEffect(() => {
+    const handleScroll = () => {
+      fetchMoreOnBottomReached();
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    // Check on mount if we need to fetch more
+    fetchMoreOnBottomReached();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [fetchMoreOnBottomReached]);
+
+  const rowVirtualizer = useWindowVirtualizer({
+    count: rows.length,
+    estimateSize: () => 56, // 56px + 1px border
+    overscan: 20,
+  });
 
   return (
     <div className="flex flex-col gap-6">
@@ -197,20 +352,25 @@ function RouteComponent() {
         />
         <Page.Controls>
           <Page.LinkButton to="/" variant="secondary" Icon={DownloadIcon}>
-            Export
+            <FormattedMessage
+              id="action.export"
+              defaultMessage="Export"
+              description="The label for the export action/button"
+            />
           </Page.LinkButton>
         </Page.Controls>
       </Page.Header>
 
-      <div className="flex gap-4 flex-wrap">
+      {/* Filters */}
+      <div className="flex gap-4">
         <ChatFilterLink
           selected={search.public_rooms === true}
           to={Route.fullPath}
           search={
             search.public_rooms === true
-              ? omit(resetPagination(search), ["public_rooms"])
+              ? omit(search, ["public_rooms"])
               : {
-                  ...resetPagination(search),
+                  ...search,
                   public_rooms: true,
                 }
           }
@@ -222,9 +382,9 @@ function RouteComponent() {
           to={Route.fullPath}
           search={
             search.public_rooms === false
-              ? omit(resetPagination(search), ["public_rooms"])
+              ? omit(search, ["public_rooms"])
               : {
-                  ...resetPagination(search),
+                  ...search,
                   public_rooms: false,
                 }
           }
@@ -236,9 +396,9 @@ function RouteComponent() {
           to={Route.fullPath}
           search={
             search.empty_rooms === true
-              ? omit(resetPagination(search), ["empty_rooms"])
+              ? omit(search, ["empty_rooms"])
               : {
-                  ...resetPagination(search),
+                  ...search,
                   empty_rooms: true,
                 }
           }
@@ -254,149 +414,73 @@ function RouteComponent() {
               id="pages.rooms.room_count"
               defaultMessage="{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
               description="On the room list page, this heading shows the total number of rooms"
-              values={{ COUNT: data.total_rooms }}
+              values={{ COUNT: totalCount }}
             />
           </Table.Title>
-          <Table.Controls>
-            <Table.Showing>
-              Showing {data.rooms.length} room
-              {data.rooms.length === 1 ? "" : "s"}
-            </Table.Showing>
-            <Table.FilterButton />
-          </Table.Controls>
         </Table.Header>
 
-        <Table.List>
+        <Table.List
+          style={{
+            // 40px is the height of the table header
+            height: `${rowVirtualizer.getTotalSize() + 40}px`,
+          }}
+        >
           <Table.ListHeader>
-            <Table.ListHeaderCell>Room</Table.ListHeaderCell>
-            <Table.ListHeaderCell>Members</Table.ListHeaderCell>
-            <Table.ListHeaderCell>Local Members</Table.ListHeaderCell>
-            <Table.ListHeaderCell>Version</Table.ListHeaderCell>
-            <Table.ListHeaderCell>Encryption</Table.ListHeaderCell>
-            <Table.ListHeaderCell>Visibility</Table.ListHeaderCell>
-            <Table.ListHeaderCell>Join Rules</Table.ListHeaderCell>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <Fragment key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <Table.ListHeaderCell key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                  </Table.ListHeaderCell>
+                ))}
+              </Fragment>
+            ))}
           </Table.ListHeader>
 
           <Table.ListBody>
-            {data.rooms.map((room) => (
-              <Table.ListRow key={room.room_id} clickable>
-                <Table.ListCell>
-                  <div className="flex flex-col">
-                    <Link
-                      to="/rooms/$roomId"
-                      params={{ roomId: room.room_id }}
-                      className="text-text-link-external hover:underline"
-                    >
-                      <Text weight="medium">{formatRoomName(room)}</Text>
-                    </Link>
-                    <Text size="sm" className="text-text-secondary">
-                      {room.room_id}
-                    </Text>
-                    {room.canonical_alias &&
-                      room.canonical_alias !== formatRoomName(room) && (
-                        <Text size="sm" className="text-text-primary">
-                          {room.canonical_alias}
-                        </Text>
+            {rowVirtualizer.getVirtualItems().map((virtualRow, index) => {
+              const row = rows[virtualRow.index];
+              if (!row)
+                throw new Error("got a virtual row for a non-existing row");
+
+              return (
+                <Table.ListRow
+                  key={row.id}
+                  style={{
+                    height: `${virtualRow.size}px`,
+                    transform: `translateY(${
+                      virtualRow.start - index * virtualRow.size
+                    }px)`,
+                  }}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <Table.ListCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
                       )}
-                  </div>
-                </Table.ListCell>
-                <Table.ListCell>
-                  <Text>{room.joined_members}</Text>
-                </Table.ListCell>
-                <Table.ListCell>
-                  <Text>{room.joined_local_members}</Text>
-                </Table.ListCell>
-                <Table.ListCell>
-                  <Badge kind="grey">{room.version}</Badge>
-                </Table.ListCell>
-                <Table.ListCell>
-                  <Badge kind={room.encryption ? "green" : "grey"}>
-                    {formatEncryption(room.encryption)}
-                  </Badge>
-                </Table.ListCell>
-                <Table.ListCell>
-                  <Badge kind={room.public ? "blue" : "grey"}>
-                    {room.public ? "Public" : "Private"}
-                  </Badge>
-                </Table.ListCell>
-                <Table.ListCell>
-                  <Badge
-                    kind={
-                      room.join_rules === "public"
-                        ? "green"
-                        : room.join_rules === "invite"
-                          ? "blue"
-                          : "grey"
-                    }
-                  >
-                    {room.join_rules}
-                  </Badge>
-                </Table.ListCell>
-              </Table.ListRow>
-            ))}
+                    </Table.ListCell>
+                  ))}
+                </Table.ListRow>
+              );
+            })}
           </Table.ListBody>
         </Table.List>
+
+        {/* Loading indicator */}
+        {isFetching && (
+          <div className="flex justify-center py-4">
+            <Text size="sm" className="text-text-secondary">
+              Loading more rooms...
+            </Text>
+          </div>
+        )}
       </Table.Root>
-
-      <div className="flex items-center justify-between">
-        <MatchRoute to={Route.path} pending>
-          {(match) => (
-            <>
-              <div className="flex gap-2">
-                {firstPageParameters ? (
-                  <ButtonLink
-                    disabled={!!match}
-                    from={Route.path}
-                    kind="secondary"
-                    size="sm"
-                    search={firstPageParameters}
-                  >
-                    First
-                  </ButtonLink>
-                ) : (
-                  <Button kind="secondary" size="sm" disabled>
-                    First
-                  </Button>
-                )}
-
-                {previousPageParameters ? (
-                  <ButtonLink
-                    disabled={!!match}
-                    from={Route.path}
-                    kind="secondary"
-                    size="sm"
-                    search={previousPageParameters}
-                  >
-                    Previous
-                  </ButtonLink>
-                ) : (
-                  <Button kind="secondary" size="sm" disabled>
-                    Previous
-                  </Button>
-                )}
-              </div>
-
-              <div className="flex gap-2">
-                {nextPageParameters ? (
-                  <ButtonLink
-                    disabled={!!match}
-                    from={Route.path}
-                    kind="secondary"
-                    size="sm"
-                    search={nextPageParameters}
-                  >
-                    Next
-                  </ButtonLink>
-                ) : (
-                  <Button kind="secondary" size="sm" disabled>
-                    Next
-                  </Button>
-                )}
-              </div>
-            </>
-          )}
-        </MatchRoute>
-      </div>
     </div>
   );
 }

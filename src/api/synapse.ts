@@ -1,6 +1,7 @@
-import { queryOptions } from "@tanstack/react-query";
+import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
 import * as v from "valibot";
 
+import { PAGE_SIZE } from "@/constants";
 import { accessToken } from "@/stores/auth";
 
 const ServerVersionResponse = v.object({
@@ -71,9 +72,7 @@ export type Room = v.InferOutput<typeof Room>;
 export type RoomDetail = v.InferOutput<typeof RoomDetail>;
 export type RoomsListResponse = v.InferOutput<typeof RoomsListResponse>;
 
-export interface RoomListParameters {
-  from?: number | string;
-  limit?: number;
+export interface RoomListFilters {
   order_by?:
     | "alphabetical"
     | "size"
@@ -126,13 +125,13 @@ export const serverVersionQuery = (synapseRoot: string) =>
     },
   });
 
-export const roomsQuery = (
+export const roomsInfiniteQuery = (
   synapseRoot: string,
-  parameters: RoomListParameters = {},
+  parameters: RoomListFilters = {},
 ) =>
-  queryOptions({
-    queryKey: ["synapse", "rooms", synapseRoot, parameters],
-    queryFn: async ({ client, signal }) => {
+  infiniteQueryOptions({
+    queryKey: ["synapse", "rooms", "infinite", synapseRoot, parameters],
+    queryFn: async ({ client, signal, pageParam }) => {
       const token = await accessToken(client, signal);
       if (!token) {
         throw new Error("No access token");
@@ -140,11 +139,15 @@ export const roomsQuery = (
 
       const url = new URL("/_synapse/admin/v1/rooms", synapseRoot);
 
-      // Add query parameters
-      if (parameters.from !== undefined)
-        url.searchParams.set("from", String(parameters.from));
-      if (parameters.limit !== undefined)
-        url.searchParams.set("limit", String(parameters.limit));
+      // Set limit to PAGE_SIZE for infinite queries
+      url.searchParams.set("limit", String(PAGE_SIZE));
+
+      // Add pagination parameter
+      if (pageParam !== null) {
+        url.searchParams.set("from", String(pageParam));
+      }
+
+      // Add other query parameters
       if (parameters.order_by)
         url.searchParams.set("order_by", parameters.order_by);
       if (parameters.dir) url.searchParams.set("dir", parameters.dir);
@@ -170,6 +173,9 @@ export const roomsQuery = (
 
       return rooms;
     },
+    initialPageParam: null as number | string | null,
+    getNextPageParam: (lastPage): number | string | null =>
+      lastPage.next_batch ?? null,
   });
 
 export const roomDetailQuery = (synapseRoot: string, roomId: string) =>

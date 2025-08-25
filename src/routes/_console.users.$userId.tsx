@@ -230,12 +230,6 @@ function RouteComponent() {
                     className="flex items-center justify-between p-3 bg-bg-subtle-primary rounded-md"
                   >
                     <Text size="sm">{emailItem.attributes.email}</Text>
-                    <Text size="xs">
-                      Added{" "}
-                      {computeHumanReadableDateTimeStringFromUtc(
-                        emailItem.attributes.created_at,
-                      )}
-                    </Text>
                   </div>
                 ))}
               </div>
