@@ -73,9 +73,9 @@ export const FilterButton = forwardRef<
 type ListProps = React.ComponentProps<"div">;
 export const List = ({ className, children, ...props }: ListProps) => (
   <div className={cx(styles["list"], className)} {...props}>
-    <div className={styles["list-container"]}>
-      <table className={styles["table"]}>{children}</table>
-    </div>
+    <table cellSpacing="0" cellPadding="0" className={styles["table"]}>
+      {children}
+    </table>
   </div>
 );
 

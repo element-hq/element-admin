@@ -1,6 +1,6 @@
 import type { ClientMetadata } from "@/api/auth";
 
-export const PAGE_SIZE = 10;
+export const PAGE_SIZE = 50;
 
 export const REDIRECT_URI = new URL(
   "/callback",

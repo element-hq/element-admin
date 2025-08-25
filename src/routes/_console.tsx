@@ -119,8 +119,6 @@ function RouteComponent() {
   const variant = variants[logoClicks % variants.length] || variants[0];
 
   return (
-    // The z-index is needed to create a new stacking context, so that the
-    // header can be above the content
     <Layout>
       <Header.Root>
         <Header.Left>
