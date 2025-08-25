@@ -117,6 +117,7 @@ export const mediaThumbnailQuery = (
   queryOptions({
     enabled: !!mxc,
     queryKey: ["matrix", "media-thumbnail", synapseRoot, mxc],
+    refetchOnWindowFocus: false,
     queryFn: async ({ client, signal }): Promise<Blob> => {
       if (!mxc) {
         throw new Error("No mxc set");

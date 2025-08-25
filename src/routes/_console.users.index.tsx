@@ -1,6 +1,10 @@
 /* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
-import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
-import { Link, createFileRoute } from "@tanstack/react-router";
+import {
+  useQuery,
+  useSuspenseInfiniteQuery,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
+import { createFileRoute, createLink } from "@tanstack/react-router";
 import {
   flexRender,
   getCoreRowModel,
@@ -12,17 +16,31 @@ import {
   DownloadIcon,
   UserAddIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
-import { Badge, Text } from "@vector-im/compound-web";
-import { Fragment, useCallback, useEffect, useMemo } from "react";
+import { Avatar, Badge, Text } from "@vector-im/compound-web";
+import cx from "classnames";
+import {
+  forwardRef,
+  Fragment,
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+} from "react";
 import { FormattedMessage } from "react-intl";
 import * as v from "valibot";
 
 import { usersInfiniteQuery } from "@/api/mas";
 import type { UserListFilters } from "@/api/mas";
 import type { SingleResourceForUser } from "@/api/mas/api/types.gen";
+import {
+  mediaThumbnailQuery,
+  profileQuery,
+  wellKnownQuery,
+} from "@/api/matrix";
 import { ChatFilterLink } from "@/components/link";
 import * as Page from "@/components/page";
 import * as Table from "@/components/table";
+import { useImageBlob } from "@/utils/blob";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 const UserSearchParameters = v.object({
@@ -37,6 +55,8 @@ export const Route = createFileRoute("/_console/users/")({
     context: { queryClient, credentials, intl },
     deps: { search },
   }) => {
+    await queryClient.ensureQueryData(wellKnownQuery(credentials.serverName));
+
     const parameters: UserListFilters = {
       ...(search.admin !== undefined && { admin: search.admin }),
       ...(search.status && { status: search.status }),
@@ -70,6 +90,100 @@ const omit = <T extends Record<string, unknown>, K extends keyof T>(
     Object.entries(object).filter(([key]) => !(keys as string[]).includes(key)),
   ) as Omit<T, K>;
 
+interface UserRowProps extends React.ComponentPropsWithoutRef<"a"> {
+  avatarUrl?: string;
+  displayName?: string;
+  userId: string;
+}
+const UserRow = forwardRef<HTMLAnchorElement, UserRowProps>(function UserRow(
+  { avatarUrl, displayName, userId, className, ...props }: UserRowProps,
+  ref,
+) {
+  return (
+    <a
+      className={cx(className, "flex items-center gap-3")}
+      {...props}
+      ref={ref}
+    >
+      <Avatar
+        id={userId}
+        name={displayName || userId}
+        src={avatarUrl}
+        size="32px"
+      />
+      <div className="flex flex-1 flex-col min-w-0">
+        {displayName ? (
+          <>
+            <Text size="sm" className="text-text-primary">
+              {displayName}
+            </Text>
+            <Text size="sm" className="text-text-secondary">
+              {userId}
+            </Text>
+          </>
+        ) : (
+          <Text size="sm" className="text-text-primary">
+            {userId}
+          </Text>
+        )}
+      </div>
+    </a>
+  );
+});
+
+interface LazyUserRowProps extends React.ComponentPropsWithoutRef<"a"> {
+  synapseRoot: string;
+  userId: string;
+}
+const LazyUserRow = forwardRef<HTMLAnchorElement, LazyUserRowProps>(
+  function LazyUserRow(
+    { synapseRoot, userId, ...props }: LazyUserRowProps,
+    ref,
+  ) {
+    const { data: profile } = useSuspenseQuery(
+      profileQuery(synapseRoot, userId),
+    );
+    const { data: avatarBlob } = useQuery(
+      mediaThumbnailQuery(synapseRoot, profile?.avatar_url),
+    );
+    const avatarUrl = useImageBlob(avatarBlob);
+
+    return (
+      <UserRow
+        avatarUrl={avatarUrl}
+        userId={userId}
+        displayName={profile.displayname}
+        {...props}
+        ref={ref}
+      />
+    );
+  },
+);
+
+interface UserRowWithFallbackProps extends React.ComponentPropsWithoutRef<"a"> {
+  synapseRoot: string;
+  userId: string;
+}
+const UserRowWithFallback = createLink(
+  forwardRef<HTMLAnchorElement, UserRowWithFallbackProps>(
+    function UserRowWithFallback(
+      { synapseRoot, userId, ...props }: UserRowWithFallbackProps,
+      ref,
+    ) {
+      return (
+        <Suspense fallback={<UserRow userId={userId} />}>
+          <LazyUserRow
+            synapseRoot={synapseRoot}
+            userId={userId}
+            {...props}
+            ref={ref}
+          />
+        </Suspense>
+      );
+    },
+  ),
+);
+
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
@@ -78,6 +192,11 @@ function RouteComponent() {
     ...(search.admin !== undefined && { admin: search.admin }),
     ...(search.status && { status: search.status }),
   };
+
+  const { data: wellKnown } = useSuspenseQuery(
+    wellKnownQuery(credentials.serverName),
+  );
+  const synapseRoot = wellKnown["m.homeserver"].base_url;
 
   const { data, hasNextPage, fetchNextPage, isFetching } =
     useSuspenseInfiniteQuery(
@@ -101,24 +220,15 @@ function RouteComponent() {
         header: "Matrix ID",
         cell: ({ row }) => {
           const user = row.original;
+          // TODO: factor this out
+          const mxid = `@${user.attributes.username}:${credentials.serverName}`;
           return (
-            <div className="flex items-center gap-3 max-w-full w-full min-w-0">
-              <div className="w-8 h-8 bg-gray-300 rounded-full flex-shrink-0" />
-              <div className="flex flex-col min-w-0">
-                <Link
-                  to="/users/$userId"
-                  params={{ userId: user.id }}
-                  className="text-text-link-external hover:underline"
-                >
-                  <Text weight="semibold" size="md">
-                    {user.attributes.username}
-                  </Text>
-                </Link>
-                <Text size="sm" className="text-text-secondary">
-                  Display name
-                </Text>
-              </div>
-            </div>
+            <UserRowWithFallback
+              to="/users/$userId"
+              params={{ userId: user.id }}
+              userId={mxid}
+              synapseRoot={synapseRoot}
+            />
           );
         },
       },
@@ -149,7 +259,7 @@ function RouteComponent() {
         },
       },
     ],
-    [],
+    [credentials.serverName, synapseRoot],
   );
 
   const table = useReactTable({
