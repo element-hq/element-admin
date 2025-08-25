@@ -134,12 +134,18 @@
     & .sidebar {
       flex: 0 0 auto;
 
+      /* The whole sidebar becomes sticky, not just the content */
+      position: sticky;
+      /* This is the side of the header plus its border */
+      top: calc(var(--cpd-space-16x) + 1px);
+
       & .sidebar-inner {
         width: 100%;
         border: none;
         box-shadow: none;
 
         & .sidebar-sticky {
+          position: initial;
           padding: 0;
           & .sidebar-content {
             overflow-x: auto;
