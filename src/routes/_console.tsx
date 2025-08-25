@@ -14,7 +14,8 @@ import {
   UserProfileIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Link, MenuItem, Separator } from "@vector-im/compound-web";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { FormattedMessage, useIntl } from "react-intl";
 
 import { authMetadataQuery, revokeToken } from "@/api/auth";
@@ -98,6 +99,23 @@ function RouteComponent() {
     () => setLogoClicks((n) => n + 1),
     [setLogoClicks],
   );
+
+  useEffect(() => {
+    if (logoClicks > 20) {
+      toast("Oh, well.");
+    } else if (logoClicks > 15) {
+      const promise = new Promise((_, reject) => setTimeout(reject, 2000));
+      toast.promise(promise, {
+        loading: "Finding reasons why you kept clicking…",
+        error: "No sensible reason found.",
+      });
+    } else if (logoClicks > 10) {
+      toast.error("But like, really, stop.");
+    } else if (logoClicks > 5) {
+      toast.success("Okay you can stop clicking now.");
+    }
+  }, [logoClicks]);
+
   const variant = variants[logoClicks % variants.length] || variants[0];
 
   return (
@@ -107,8 +125,6 @@ function RouteComponent() {
       <Header.Root>
         <Header.Left>
           <ElementLogo variant={variant} onClick={onLogoClick} />
-          {/* eslint-disable-next-line formatjs/no-literal-string-in-jsx -- This is a joke */}
-          {logoClicks > 10 ? <div>Okay you can stop clicking now.</div> : null}
           <Header.HomeserverName>
             {credentials.serverName}
           </Header.HomeserverName>

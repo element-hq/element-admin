@@ -3,6 +3,7 @@ import { TooltipProvider } from "@vector-im/compound-web";
 import { StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 
+import { Toaster } from "@/components/toast";
 import { IntlProvider, RouterWithIntl } from "@/intl";
 import { queryClient } from "@/router";
 import "@/styles.css";
@@ -27,6 +28,7 @@ if (rootElement && !rootElement.innerHTML) {
             <TooltipProvider>
               <RouterWithIntl />
             </TooltipProvider>
+            <Toaster />
           </IntlProvider>
         </QueryClientProvider>
       </Suspense>
