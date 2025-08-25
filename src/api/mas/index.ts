@@ -1,7 +1,12 @@
-import { type QueryClient, queryOptions } from "@tanstack/react-query";
+import {
+  infiniteQueryOptions,
+  type QueryClient,
+  queryOptions,
+} from "@tanstack/react-query";
 
 import { authMetadataQuery } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
+import { PAGE_SIZE } from "@/constants";
 import { accessToken } from "@/stores/auth";
 
 import * as api from "./api";
@@ -38,20 +43,19 @@ const masBaseOptions = async (
   };
 };
 
-export interface UserListParameters {
+interface PageParameters {
   before?: string;
   after?: string;
   first?: number;
   last?: number;
+}
+
+export interface UserListFilters {
   admin?: boolean;
   status?: "active" | "locked" | "deactivated";
 }
 
-export interface TokenListParameters {
-  before?: string;
-  after?: string;
-  first?: number;
-  last?: number;
+export interface TokenListParameters extends PageParameters {
   used?: boolean;
   revoked?: boolean;
   expired?: boolean;
@@ -69,19 +73,19 @@ export interface EditTokenParameters {
   expires_at?: string | null; // ISO date string
 }
 
-export const usersQuery = (
+export const usersInfiniteQuery = (
   serverName: string,
-  parameters: UserListParameters = {},
+  parameters: UserListFilters = {},
 ) =>
-  queryOptions({
+  infiniteQueryOptions({
     queryKey: ["mas", "users", serverName, parameters],
-    queryFn: async ({ client, signal }) => {
-      const query: api.ListUsersData["query"] = {};
+    queryFn: async ({ client, signal, pageParam }) => {
+      const query: api.ListUsersData["query"] = {
+        "page[first]": PAGE_SIZE,
+      };
 
-      if (parameters.before) query["page[before]"] = parameters.before;
-      if (parameters.after) query["page[after]"] = parameters.after;
-      if (parameters.first) query["page[first]"] = parameters.first;
-      if (parameters.last) query["page[last]"] = parameters.last;
+      if (pageParam) query["page[after]"] = pageParam;
+
       if (parameters.admin !== undefined)
         query["filter[admin]"] = parameters.admin;
       if (parameters.status) query["filter[status]"] = parameters.status;
@@ -91,6 +95,9 @@ export const usersQuery = (
         query,
       });
     },
+    initialPageParam: null as api.Ulid | null,
+    getNextPageParam: (lastPage): api.Ulid | null =>
+      lastPage.data.at(-1)?.id ?? null,
   });
 
 export const userQuery = (serverName: string, userId: string) =>

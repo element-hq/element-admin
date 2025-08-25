@@ -1,26 +1,22 @@
 /* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { Link, MatchRoute, createFileRoute } from "@tanstack/react-router";
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import {
   DownloadIcon,
   UserAddIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Badge, Button, Text } from "@vector-im/compound-web";
+import { Fragment } from "react";
 import { FormattedMessage } from "react-intl";
 import * as v from "valibot";
 
-import { type UserListParameters, usersQuery } from "@/api/mas";
-import { ButtonLink, ChatFilterLink } from "@/components/link";
+import { type UserListFilters, usersInfiniteQuery } from "@/api/mas";
+import { ChatFilterLink } from "@/components/link";
 import * as Page from "@/components/page";
 import * as Table from "@/components/table";
-import { PAGE_SIZE } from "@/constants";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 const UserSearchParameters = v.object({
-  before: v.optional(v.string()),
-  after: v.optional(v.string()),
-  first: v.optional(v.number()),
-  last: v.optional(v.number()),
   admin: v.optional(v.boolean()),
   status: v.optional(v.picklist(["active", "locked", "deactivated"])),
 });
@@ -32,17 +28,13 @@ export const Route = createFileRoute("/_console/users/")({
     context: { queryClient, credentials, intl },
     deps: { search },
   }) => {
-    const parameters: UserListParameters = {
-      ...(search.before && { before: search.before }),
-      ...(search.after && { after: search.after }),
-      ...(search.first && { first: search.first }),
-      ...(search.last && { last: search.last }),
+    const parameters: UserListFilters = {
       ...(search.admin !== undefined && { admin: search.admin }),
       ...(search.status && { status: search.status }),
     };
 
-    await queryClient.ensureQueryData(
-      usersQuery(credentials.serverName, parameters),
+    await queryClient.ensureInfiniteQueryData(
+      usersInfiniteQuery(credentials.serverName, parameters),
     );
 
     return {
@@ -61,16 +53,6 @@ export const Route = createFileRoute("/_console/users/")({
   component: RouteComponent,
 });
 
-const resetPagination = ({
-  before: _before,
-  after: _after,
-  first: _first,
-  last: _last,
-  ...search
-}: v.InferOutput<typeof UserSearchParameters>): v.InferOutput<
-  typeof UserSearchParameters
-> => search;
-
 const omit = <T extends Record<string, unknown>, K extends keyof T>(
   object: T,
   keys: K[],
@@ -83,45 +65,17 @@ function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
 
-  const parameters: UserListParameters = {
-    ...(search.before && { before: search.before }),
-    ...(search.after && { after: search.after }),
-    ...(search.first && { first: search.first }),
-    ...(search.last && { last: search.last }),
+  const parameters: UserListFilters = {
     ...(search.admin !== undefined && { admin: search.admin }),
     ...(search.status && { status: search.status }),
   };
 
-  const { data } = useSuspenseQuery(
-    usersQuery(credentials.serverName, parameters),
-  );
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
+    useSuspenseInfiniteQuery(
+      usersInfiniteQuery(credentials.serverName, parameters),
+    );
 
-  const hasNext = !!data.links.next || search.before;
-  const hasPrevious = !!data.links.prev || search.after;
-  const lastId = data.data.at(-1)?.id;
-  const firstId = data.data[0]?.id;
-
-  const nextPageParameters = hasNext && {
-    ...resetPagination(search),
-    after: lastId || "",
-    first: search.first || PAGE_SIZE,
-  };
-
-  const previousPageParameters = hasPrevious && {
-    ...resetPagination(search),
-    before: firstId || "",
-    last: search.last || PAGE_SIZE,
-  };
-
-  const firstPageParameters = hasPrevious && {
-    ...resetPagination(search),
-    first: search.first || PAGE_SIZE,
-  };
-
-  const lastPageParameters = hasNext && {
-    ...resetPagination(search),
-    last: search.last || PAGE_SIZE,
-  };
+  const totalCount = data.pages[0]?.meta.count ?? 0;
 
   return (
     <div className="flex flex-col gap-6">
@@ -159,9 +113,9 @@ function RouteComponent() {
           to={Route.fullPath}
           search={
             search.admin === true
-              ? omit(resetPagination(search), ["admin"])
+              ? omit(search, ["admin"])
               : {
-                  ...resetPagination(search),
+                  ...search,
                   admin: true,
                 }
           }
@@ -173,9 +127,9 @@ function RouteComponent() {
           to={Route.fullPath}
           search={
             search.status === "active"
-              ? omit(resetPagination(search), ["status"])
+              ? omit(search, ["status"])
               : {
-                  ...resetPagination(search),
+                  ...search,
                   status: "active",
                 }
           }
@@ -187,9 +141,9 @@ function RouteComponent() {
           to={Route.fullPath}
           search={
             search.status === "locked"
-              ? omit(resetPagination(search), ["status"])
+              ? omit(search, ["status"])
               : {
-                  ...resetPagination(search),
+                  ...search,
                   status: "locked",
                 }
           }
@@ -201,9 +155,9 @@ function RouteComponent() {
           to={Route.fullPath}
           search={
             search.status === "deactivated"
-              ? omit(resetPagination(search), ["status"])
+              ? omit(search, ["status"])
               : {
-                  ...resetPagination(search),
+                  ...search,
                   status: "deactivated",
                 }
           }
@@ -219,15 +173,9 @@ function RouteComponent() {
               id="pages.users.user_count"
               defaultMessage="{COUNT, plural, zero {No users} one {# user} other {# users}}"
               description="On the user list page, this heading shows the total number of users"
-              values={{ COUNT: data.meta.count }}
+              values={{ COUNT: totalCount }}
             />
           </Table.Title>
-          <Table.Controls>
-            <Table.Showing>
-              Showing {data.data.length} user{data.data.length === 1 ? "" : "s"}
-            </Table.Showing>
-            <Table.FilterButton />
-          </Table.Controls>
         </Table.Header>
 
         <Table.List>
@@ -238,121 +186,58 @@ function RouteComponent() {
           </Table.ListHeader>
 
           <Table.ListBody>
-            {data.data.map((user: (typeof data.data)[0]) => (
-              <Table.ListRow key={user.id} clickable>
-                <Table.ListCell>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-gray-300 rounded-full flex-shrink-0" />
-                    <div className="flex flex-col min-w-0">
-                      <Link
-                        to="/users/$userId"
-                        params={{ userId: user.id }}
-                        className="text-text-link-external hover:underline"
-                      >
-                        <Text weight="semibold" size="md">
-                          {user.attributes.username}
-                        </Text>
-                      </Link>
+            {data.pages.map((page) => (
+              <Fragment key={page.links.self}>
+                {page.data.map((user) => (
+                  <Table.ListRow key={user.id} clickable>
+                    <Table.ListCell>
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-gray-300 rounded-full flex-shrink-0" />
+                        <div className="flex flex-col min-w-0">
+                          <Link
+                            to="/users/$userId"
+                            params={{ userId: user.id }}
+                            className="text-text-link-external hover:underline"
+                          >
+                            <Text weight="semibold" size="md">
+                              {user.attributes.username}
+                            </Text>
+                          </Link>
+                          <Text size="sm" className="text-text-secondary">
+                            Display name
+                          </Text>
+                        </div>
+                      </div>
+                    </Table.ListCell>
+                    <Table.ListCell>
+                      <Badge kind={user.attributes.admin ? "green" : "grey"}>
+                        {user.attributes.admin ? "Admin" : "Local"}
+                      </Badge>
+                    </Table.ListCell>
+                    <Table.ListCell>
                       <Text size="sm" className="text-text-secondary">
-                        Display name
+                        {/* TODO: format this with the user's locale */}
+                        {computeHumanReadableDateTimeStringFromUtc(
+                          user.attributes.created_at,
+                        )}
                       </Text>
-                    </div>
-                  </div>
-                </Table.ListCell>
-                <Table.ListCell>
-                  <Badge kind={user.attributes.admin ? "green" : "grey"}>
-                    {user.attributes.admin ? "Admin" : "Local"}
-                  </Badge>
-                </Table.ListCell>
-                <Table.ListCell>
-                  <Text size="sm" className="text-text-secondary">
-                    {/* TODO: format this with the user's locale */}
-                    {computeHumanReadableDateTimeStringFromUtc(
-                      user.attributes.created_at,
-                    )}
-                  </Text>
-                </Table.ListCell>
-              </Table.ListRow>
+                    </Table.ListCell>
+                  </Table.ListRow>
+                ))}
+              </Fragment>
             ))}
           </Table.ListBody>
         </Table.List>
       </Table.Root>
 
-      {/* Pagination */}
-      <div className="flex items-center justify-between">
-        <MatchRoute to={Route.path} pending>
-          {(match) => (
-            <>
-              <div className="flex gap-2">
-                {firstPageParameters ? (
-                  <ButtonLink
-                    disabled={!!match}
-                    from={Route.path}
-                    kind="secondary"
-                    size="sm"
-                    search={firstPageParameters}
-                  >
-                    First
-                  </ButtonLink>
-                ) : (
-                  <Button kind="secondary" size="sm" disabled>
-                    First
-                  </Button>
-                )}
-
-                {previousPageParameters ? (
-                  <ButtonLink
-                    disabled={!!match}
-                    from={Route.path}
-                    kind="secondary"
-                    size="sm"
-                    search={previousPageParameters}
-                  >
-                    Previous
-                  </ButtonLink>
-                ) : (
-                  <Button kind="secondary" size="sm" disabled>
-                    Previous
-                  </Button>
-                )}
-              </div>
-              <div className="flex gap-2">
-                {nextPageParameters ? (
-                  <ButtonLink
-                    disabled={!!match}
-                    from={Route.path}
-                    kind="secondary"
-                    size="sm"
-                    search={nextPageParameters}
-                  >
-                    Next
-                  </ButtonLink>
-                ) : (
-                  <Button kind="secondary" size="sm" disabled>
-                    Next
-                  </Button>
-                )}
-
-                {lastPageParameters ? (
-                  <ButtonLink
-                    disabled={!!match}
-                    from={Route.path}
-                    kind="secondary"
-                    size="sm"
-                    search={lastPageParameters}
-                  >
-                    Last
-                  </ButtonLink>
-                ) : (
-                  <Button kind="secondary" size="sm" disabled>
-                    Last
-                  </Button>
-                )}
-              </div>
-            </>
-          )}
-        </MatchRoute>
-      </div>
+      <Button
+        kind="secondary"
+        disabled={!hasNextPage || isFetchingNextPage}
+        size="lg"
+        onClick={() => fetchNextPage()}
+      >
+        {isFetchingNextPage ? "Loading..." : "Load more"}
+      </Button>
     </div>
   );
 }
