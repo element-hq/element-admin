@@ -114,5 +114,29 @@
   "product.title.ti-m": {
     "description": "The main name of the admin console, the TI-Messenger variant",
     "message": "Element TI-Messenger"
+  },
+  "room_info.empty_room": {
+    "description": "Name of a room when the room has no explicit name and no member",
+    "message": "Empty room"
+  },
+  "room_info.empty_space": {
+    "description": "Name of a space when the space has no explicit name and no member",
+    "message": "Empty space"
+  },
+  "room_info.room_with": {
+    "description": "Name we display for a room with no explicit name. In this case, we show the list of members, e.g. 'Room with Alice and Bob'",
+    "message": "Room with {members}"
+  },
+  "room_info.space_with": {
+    "description": "Name we display for a space with no explicit name. In this case, we show the list of members, e.g. 'Space with Alice and Bob'",
+    "message": "Space with {members}"
+  },
+  "room_info.unknown_user": {
+    "description": "When showing the room name based on members, this is the fallback when we can't load the member name for some reason",
+    "message": "Unknown user"
+  },
+  "rooms_info.other_members": {
+    "description": "When a room or space has no name, we show 'Room/Space with Alice, Bob and 3 others'. This is the 'X others' part.",
+    "message": "{COUNT, plural, one {# other} other {# others}}"
   }
 }

@@ -48,6 +48,11 @@ const RoomDetail = v.object({
   forgotten: v.boolean(),
 });
 
+const RoomMembers = v.object({
+  members: v.array(v.string()),
+  total: v.number(),
+});
+
 const RoomsListResponse = v.pipe(
   v.object({
     rooms: v.array(v.unknown()),
@@ -70,6 +75,7 @@ const RoomsListResponse = v.pipe(
 
 export type Room = v.InferOutput<typeof Room>;
 export type RoomDetail = v.InferOutput<typeof RoomDetail>;
+export type RoomMembers = v.InferOutput<typeof RoomMembers>;
 export type RoomsListResponse = v.InferOutput<typeof RoomsListResponse>;
 
 export interface RoomListFilters {
@@ -206,5 +212,36 @@ export const roomDetailQuery = (synapseRoot: string, roomId: string) =>
       const roomDetail = v.parse(RoomDetail, await response.json());
 
       return roomDetail;
+    },
+  });
+
+export const roomMembersQuery = (synapseRoot: string, roomId: string) =>
+  queryOptions({
+    queryKey: ["synapse", "roomMembers", synapseRoot, roomId],
+    queryFn: async ({ client, signal }) => {
+      const token = await accessToken(client, signal);
+      if (!token) {
+        throw new Error("No access token");
+      }
+
+      const url = new URL(
+        `/_synapse/admin/v1/rooms/${encodeURIComponent(roomId)}/members`,
+        synapseRoot,
+      );
+
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        signal,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch room members");
+      }
+
+      const roomMembers = v.parse(RoomMembers, await response.json());
+
+      return roomMembers;
     },
   });

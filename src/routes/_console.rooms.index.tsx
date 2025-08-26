@@ -1,6 +1,5 @@
 /* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
 import {
-  useQuery,
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
@@ -13,29 +12,21 @@ import {
 import type { ColumnDef } from "@tanstack/react-table";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { DownloadIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
-import { Avatar, Badge, Text } from "@vector-im/compound-web";
-import {
-  Fragment,
-  Suspense,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { Badge, Text } from "@vector-im/compound-web";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import * as v from "valibot";
 
-import { mediaThumbnailQuery, wellKnownQuery } from "@/api/matrix";
+import { wellKnownQuery } from "@/api/matrix";
 import {
   type RoomListFilters,
   roomsInfiniteQuery,
   type Room,
-  roomDetailQuery,
 } from "@/api/synapse";
 import { ChatFilterLink } from "@/components/link";
 import * as Page from "@/components/page";
+import { RoomAvatar, RoomDisplayName } from "@/components/room-info";
 import * as Table from "@/components/table";
-import { useImageBlob } from "@/utils/blob";
 
 const RoomSearchParameters = v.object({
   order_by: v.optional(
@@ -103,37 +94,6 @@ export const Route = createFileRoute("/_console/rooms/")({
   }),
   component: RouteComponent,
 });
-
-const LazyRoomAvatar = ({
-  roomId,
-  name,
-  synapseRoot,
-}: {
-  roomId: string;
-  name: string;
-  synapseRoot: string;
-}) => {
-  const { data: room } = useSuspenseQuery(roomDetailQuery(synapseRoot, roomId));
-  const { data: avatar } = useQuery(
-    mediaThumbnailQuery(synapseRoot, room.avatar || undefined),
-  );
-  const avatarUrl = useImageBlob(avatar);
-  return <Avatar id={roomId} name={name} src={avatarUrl} size="32px" />;
-};
-
-const RoomAvatarWithFallback = ({
-  roomId,
-  name,
-  synapseRoot,
-}: {
-  roomId: string;
-  name: string;
-  synapseRoot: string;
-}) => (
-  <Suspense fallback={<Avatar id={roomId} name={name} size="32px" />}>
-    <LazyRoomAvatar roomId={roomId} name={name} synapseRoot={synapseRoot} />
-  </Suspense>
-);
 
 const omit = <T extends Record<string, unknown>, K extends keyof T>(
   object: T,
@@ -209,26 +169,30 @@ function RouteComponent() {
         header: "Room",
         cell: ({ row }) => {
           const room = row.original;
-          const displayName = room.name || room.canonical_alias || room.room_id;
           return (
-            <div className="flex items-center gap-3 max-w-full w-full min-w-0">
-              <RoomAvatarWithFallback
-                synapseRoot={synapseRoot}
+            <Link
+              to="/rooms/$roomId"
+              params={{ roomId: room.room_id }}
+              className="flex items-center gap-3"
+            >
+              <RoomAvatar
                 roomId={room.room_id}
-                name={displayName}
+                roomName={room.name}
+                roomType={room.room_type}
+                members={room.joined_members}
+                synapseRoot={synapseRoot}
+                size="32px"
               />
-              <div className="flex flex-col min-w-0">
-                <Link
-                  to="/rooms/$roomId"
-                  params={{ roomId: room.room_id }}
-                  className="text-text-link-external hover:underline"
-                >
-                  <Text weight="semibold" size="md">
-                    {displayName}
-                  </Text>
-                </Link>
-              </div>
-            </div>
+              <Text size="md" weight="semibold" className="text-text-primary">
+                <RoomDisplayName
+                  roomId={room.room_id}
+                  roomName={room.name}
+                  roomType={room.room_type}
+                  members={room.joined_members}
+                  synapseRoot={synapseRoot}
+                />
+              </Text>
+            </Link>
           );
         },
       },

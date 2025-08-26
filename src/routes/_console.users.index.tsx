@@ -4,7 +4,7 @@ import {
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { createFileRoute, createLink } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   flexRender,
   getCoreRowModel,
@@ -17,15 +17,7 @@ import {
   UserAddIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Avatar, Badge, Text } from "@vector-im/compound-web";
-import cx from "classnames";
-import {
-  forwardRef,
-  Fragment,
-  Suspense,
-  useCallback,
-  useEffect,
-  useMemo,
-} from "react";
+import { Fragment, useCallback, useEffect, useMemo } from "react";
 import { FormattedMessage } from "react-intl";
 import * as v from "valibot";
 
@@ -90,27 +82,40 @@ const omit = <T extends Record<string, unknown>, K extends keyof T>(
     Object.entries(object).filter(([key]) => !(keys as string[]).includes(key)),
   ) as Omit<T, K>;
 
-interface UserRowProps extends React.ComponentPropsWithoutRef<"a"> {
-  avatarUrl?: string;
-  displayName?: string;
+const useUserAvatar = (
+  synapseRoot: string,
+  userId: string,
+): string | undefined => {
+  const { data: profile } = useQuery(profileQuery(synapseRoot, userId));
+  const { data: avatarBlob } = useQuery(
+    mediaThumbnailQuery(synapseRoot, profile?.avatar_url),
+  );
+  return useImageBlob(avatarBlob);
+};
+
+const useUserDisplayName = (
+  synapseRoot: string,
+  userId: string,
+): string | undefined => {
+  const { data: profile } = useQuery(profileQuery(synapseRoot, userId));
+  return profile?.displayname;
+};
+
+interface UserCellProps {
   userId: string;
+  mxid: string;
+  synapseRoot: string;
 }
-const UserRow = forwardRef<HTMLAnchorElement, UserRowProps>(function UserRow(
-  { avatarUrl, displayName, userId, className, ...props }: UserRowProps,
-  ref,
-) {
+const UserCell = ({ userId, mxid, synapseRoot }: UserCellProps) => {
+  const displayName = useUserDisplayName(synapseRoot, mxid);
+  const avatar = useUserAvatar(synapseRoot, mxid);
   return (
-    <a
-      className={cx(className, "flex items-center gap-3")}
-      {...props}
-      ref={ref}
+    <Link
+      to="/users/$userId"
+      params={{ userId }}
+      className="flex items-center gap-3"
     >
-      <Avatar
-        id={userId}
-        name={displayName || userId}
-        src={avatarUrl}
-        size="32px"
-      />
+      <Avatar id={mxid} name={displayName || mxid} src={avatar} size="32px" />
       <div className="flex flex-1 flex-col min-w-0">
         {displayName ? (
           <>
@@ -118,71 +123,18 @@ const UserRow = forwardRef<HTMLAnchorElement, UserRowProps>(function UserRow(
               {displayName}
             </Text>
             <Text size="sm" className="text-text-secondary">
-              {userId}
+              {mxid}
             </Text>
           </>
         ) : (
           <Text size="sm" className="text-text-primary">
-            {userId}
+            {mxid}
           </Text>
         )}
       </div>
-    </a>
+    </Link>
   );
-});
-
-interface LazyUserRowProps extends React.ComponentPropsWithoutRef<"a"> {
-  synapseRoot: string;
-  userId: string;
-}
-const LazyUserRow = forwardRef<HTMLAnchorElement, LazyUserRowProps>(
-  function LazyUserRow(
-    { synapseRoot, userId, ...props }: LazyUserRowProps,
-    ref,
-  ) {
-    const { data: profile } = useSuspenseQuery(
-      profileQuery(synapseRoot, userId),
-    );
-    const { data: avatarBlob } = useQuery(
-      mediaThumbnailQuery(synapseRoot, profile?.avatar_url),
-    );
-    const avatarUrl = useImageBlob(avatarBlob);
-
-    return (
-      <UserRow
-        avatarUrl={avatarUrl}
-        userId={userId}
-        displayName={profile.displayname}
-        {...props}
-        ref={ref}
-      />
-    );
-  },
-);
-
-interface UserRowWithFallbackProps extends React.ComponentPropsWithoutRef<"a"> {
-  synapseRoot: string;
-  userId: string;
-}
-const UserRowWithFallback = createLink(
-  forwardRef<HTMLAnchorElement, UserRowWithFallbackProps>(
-    function UserRowWithFallback(
-      { synapseRoot, userId, ...props }: UserRowWithFallbackProps,
-      ref,
-    ) {
-      return (
-        <Suspense fallback={<UserRow userId={userId} />}>
-          <LazyUserRow
-            synapseRoot={synapseRoot}
-            userId={userId}
-            {...props}
-            ref={ref}
-          />
-        </Suspense>
-      );
-    },
-  ),
-);
+};
 
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
@@ -223,12 +175,7 @@ function RouteComponent() {
           // TODO: factor this out
           const mxid = `@${user.attributes.username}:${credentials.serverName}`;
           return (
-            <UserRowWithFallback
-              to="/users/$userId"
-              params={{ userId: user.id }}
-              userId={mxid}
-              synapseRoot={synapseRoot}
-            />
+            <UserCell userId={user.id} mxid={mxid} synapseRoot={synapseRoot} />
           );
         },
       },
