@@ -2,9 +2,6 @@
   "action.add": {
     "message": "Ajouter"
   },
-  "action.export": {
-    "message": "Exporter"
-  },
   "action.sign_out": {
     "message": "Se déconnecter"
   },
@@ -58,6 +55,9 @@
   },
   "pages.registration_tokens.title": {
     "message": "Jetons d'enregistrement"
+  },
+  "pages.registration_tokens.token_count": {
+    "message": "{COUNT, plural, zero {Aucun jeton} one {# jeton} other {# jetons}}"
   },
   "pages.rooms.room_count": {
     "message": "{COUNT, plural, zero {Aucun salon} one {# salon} other {# salons}}"

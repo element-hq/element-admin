@@ -5,12 +5,6 @@
       "value": "Add"
     }
   ],
-  "action.export": [
-    {
-      "type": 0,
-      "value": "Export"
-    }
-  ],
   "action.sign_out": [
     {
       "type": 0,
@@ -128,6 +122,46 @@
     {
       "type": 0,
       "value": "Registration tokens"
+    }
+  ],
+  "pages.registration_tokens.token_count": [
+    {
+      "offset": 0,
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " token"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " tokens"
+            }
+          ]
+        },
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "No tokens"
+            }
+          ]
+        }
+      },
+      "pluralType": "cardinal",
+      "type": 6,
+      "value": "COUNT"
     }
   ],
   "pages.rooms.room_count": [
