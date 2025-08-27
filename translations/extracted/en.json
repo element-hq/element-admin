@@ -79,6 +79,10 @@
     "description": "The title of the registration tokens list page",
     "message": "Registration tokens"
   },
+  "pages.registration_tokens.token_count": {
+    "description": "On the registration tokens list page, this heading shows the total number of tokens",
+    "message": "{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
+  },
   "pages.rooms.room_count": {
     "description": "On the room list page, this heading shows the total number of rooms",
     "message": "{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"

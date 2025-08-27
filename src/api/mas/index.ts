@@ -161,19 +161,22 @@ export const unlockUser = async (
   });
 };
 
-export const registrationTokensQuery = (
+export const registrationTokensInfiniteQuery = (
   serverName: string,
-  parameters: TokenListParameters = {},
+  parameters: Omit<
+    TokenListParameters,
+    "after" | "before" | "first" | "last"
+  > = {},
 ) =>
-  queryOptions({
-    queryKey: ["mas", "registration-tokens", serverName, parameters],
-    queryFn: async ({ client, signal }) => {
-      const query: api.ListUserRegistrationTokensData["query"] = {};
+  infiniteQueryOptions({
+    queryKey: ["mas", "registration-tokens-infinite", serverName, parameters],
+    queryFn: async ({ client, signal, pageParam }) => {
+      const query: api.ListUserRegistrationTokensData["query"] = {
+        "page[first]": PAGE_SIZE,
+      };
 
-      if (parameters.before) query["page[before]"] = parameters.before;
-      if (parameters.after) query["page[after]"] = parameters.after;
-      if (parameters.first) query["page[first]"] = parameters.first;
-      if (parameters.last) query["page[last]"] = parameters.last;
+      if (pageParam) query["page[after]"] = pageParam;
+
       if (parameters.used !== undefined)
         query["filter[used]"] = parameters.used;
       if (parameters.revoked !== undefined)
@@ -188,6 +191,9 @@ export const registrationTokensQuery = (
         query,
       });
     },
+    initialPageParam: null as api.Ulid | null,
+    getNextPageParam: (lastPage): api.Ulid | null =>
+      lastPage.data.at(-1)?.id ?? null,
   });
 
 export const registrationTokenQuery = (serverName: string, tokenId: string) =>
