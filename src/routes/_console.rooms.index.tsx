@@ -12,7 +12,7 @@ import {
 import type { ColumnDef } from "@tanstack/react-table";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { DownloadIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
-import { Badge, Text } from "@vector-im/compound-web";
+import { Badge, CheckboxMenuItem, Text } from "@vector-im/compound-web";
 import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import * as v from "valibot";
@@ -23,32 +23,11 @@ import {
   roomsInfiniteQuery,
   type Room,
 } from "@/api/synapse";
-import { ChatFilterLink } from "@/components/link";
 import * as Page from "@/components/page";
 import { RoomAvatar, RoomDisplayName } from "@/components/room-info";
 import * as Table from "@/components/table";
 
 const RoomSearchParameters = v.object({
-  order_by: v.optional(
-    v.picklist([
-      "alphabetical",
-      "size",
-      "name",
-      "canonical_alias",
-      "joined_members",
-      "joined_local_members",
-      "version",
-      "creator",
-      "encryption",
-      "federatable",
-      "public",
-      "join_rules",
-      "guest_access",
-      "history_visibility",
-      "state_events",
-    ]),
-  ),
-  dir: v.optional(v.picklist(["f", "b"])),
   search_term: v.optional(v.string()),
   public_rooms: v.optional(v.boolean()),
   empty_rooms: v.optional(v.boolean()),
@@ -66,8 +45,6 @@ export const Route = createFileRoute("/_console/rooms/")({
     );
     const synapseRoot = wellKnown["m.homeserver"].base_url;
     const parameters: RoomListFilters = {
-      ...(search.order_by && { order_by: search.order_by }),
-      ...(search.dir && { dir: search.dir }),
       ...(search.search_term && { search_term: search.search_term }),
       ...(search.public_rooms !== undefined && {
         public_rooms: search.public_rooms,
@@ -133,8 +110,6 @@ function RouteComponent() {
   }, [localSearchTerm, navigate]);
 
   const parameters: RoomListFilters = {
-    ...(search.order_by && { order_by: search.order_by }),
-    ...(search.dir && { dir: search.dir }),
     ...(search.search_term && { search_term: search.search_term }),
     ...(search.public_rooms !== undefined && {
       public_rooms: search.public_rooms,
@@ -325,52 +300,6 @@ function RouteComponent() {
         </Page.Controls>
       </Page.Header>
 
-      {/* Filters */}
-      <div className="flex gap-4">
-        <ChatFilterLink
-          selected={search.public_rooms === true}
-          to={Route.fullPath}
-          search={
-            search.public_rooms === true
-              ? omit(search, ["public_rooms"])
-              : {
-                  ...search,
-                  public_rooms: true,
-                }
-          }
-        >
-          Public Only
-        </ChatFilterLink>
-        <ChatFilterLink
-          selected={search.public_rooms === false}
-          to={Route.fullPath}
-          search={
-            search.public_rooms === false
-              ? omit(search, ["public_rooms"])
-              : {
-                  ...search,
-                  public_rooms: false,
-                }
-          }
-        >
-          Private Only
-        </ChatFilterLink>
-        <ChatFilterLink
-          selected={search.empty_rooms === true}
-          to={Route.fullPath}
-          search={
-            search.empty_rooms === true
-              ? omit(search, ["empty_rooms"])
-              : {
-                  ...search,
-                  empty_rooms: true,
-                }
-          }
-        >
-          Empty Only
-        </ChatFilterLink>
-      </div>
-
       <Table.Root>
         <Table.Header>
           <Table.Title>
@@ -381,6 +310,73 @@ function RouteComponent() {
               values={{ COUNT: totalCount }}
             />
           </Table.Title>
+
+          <Table.Filter>
+            <CheckboxMenuItem
+              onSelect={(event) => {
+                event.preventDefault();
+                navigate({
+                  search:
+                    search.public_rooms === false
+                      ? omit(search, ["public_rooms"])
+                      : {
+                          ...search,
+                          public_rooms: false,
+                        },
+                });
+              }}
+              label="Private rooms"
+              checked={search.public_rooms === false}
+            />
+            <CheckboxMenuItem
+              onSelect={(event) => {
+                event.preventDefault();
+                navigate({
+                  search:
+                    search.public_rooms === true
+                      ? omit(search, ["public_rooms"])
+                      : {
+                          ...search,
+                          public_rooms: true,
+                        },
+                });
+              }}
+              label="Public rooms"
+              checked={search.public_rooms === true}
+            />
+            <CheckboxMenuItem
+              onSelect={(event) => {
+                event.preventDefault();
+                navigate({
+                  search:
+                    search.empty_rooms === false
+                      ? omit(search, ["empty_rooms"])
+                      : {
+                          ...search,
+                          empty_rooms: false,
+                        },
+                });
+              }}
+              label="Non-empty rooms"
+              checked={search.empty_rooms === false}
+            />
+            <CheckboxMenuItem
+              onSelect={(event) => {
+                event.preventDefault();
+                navigate({
+                  search:
+                    search.empty_rooms === true
+                      ? omit(search, ["empty_rooms"])
+                      : {
+                          ...search,
+                          empty_rooms: true,
+                        },
+                });
+              }}
+              label="Empty rooms"
+              checked={search.empty_rooms === true}
+            />
+          </Table.Filter>
         </Table.Header>
 
         <Table.List
@@ -415,6 +411,8 @@ function RouteComponent() {
               return (
                 <Table.ListRow
                   key={row.id}
+                  data-index={virtualRow.index}
+                  ref={rowVirtualizer.measureElement}
                   style={{
                     height: `${virtualRow.size}px`,
                     transform: `translateY(${

@@ -2,9 +2,10 @@ import {
   ChevronDownIcon,
   FilterIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
+import { Menu } from "@vector-im/compound-web";
 import cx from "classnames";
-import { forwardRef } from "react";
-import { useIntl } from "react-intl";
+import { forwardRef, useId, useState } from "react";
+import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
 import styles from "./table.module.css";
 
@@ -31,40 +32,51 @@ export const Title = ({ className, children, ...props }: TitleProps) => (
   </div>
 );
 
-type ControlsProps = React.ComponentProps<"div">;
-export const Controls = ({ className, children, ...props }: ControlsProps) => (
-  <div className={cx(styles["header-controls"], className)} {...props}>
-    {children}
-  </div>
-);
+const filterMessage = defineMessage({
+  id: "common.filter",
+  defaultMessage: "Filter",
+  description: "Label for a filter section/button",
+});
 
-type ShowingProps = React.ComponentProps<"div">;
-export const Showing = ({ className, children, ...props }: ShowingProps) => (
-  <div className={cx(styles["header-showing"], className)} {...props}>
-    {children}
-  </div>
-);
+type FilterProps = React.PropsWithChildren;
+export const Filter = ({ children }: FilterProps) => {
+  const [open, setOpen] = useState(false);
+  const intl = useIntl();
+  const title = intl.formatMessage(filterMessage);
+  return (
+    <>
+      <Menu
+        open={open}
+        onOpenChange={setOpen}
+        title={title}
+        align="end"
+        trigger={<FilterButton />}
+      >
+        {children}
+      </Menu>
+    </>
+  );
+};
 
 // Filter Button
 export const FilterButton = forwardRef<
   HTMLButtonElement,
-  React.ComponentProps<"button">
->(function FilterButton({ className, children, ...props }, ref) {
-  const intl = useIntl();
+  React.ComponentPropsWithoutRef<"button">
+>(function FilterButton({ className, ...props }, ref) {
+  const labelId = useId();
   return (
     <button
       ref={ref}
-      className={cx(styles["filter-button"], className)}
       type="button"
-      aria-label={intl.formatMessage({
-        id: "common.filter",
-        defaultMessage: "Filter",
-        description: "Label for a filter section/button",
-      })}
+      aria-labelledby={labelId}
+      className={cx(className, styles["filter-button"])}
       {...props}
     >
       <FilterIcon className={styles["filter-icon"]} />
-      {children}
+
+      <div className={styles["filter-button-label"]} id={labelId}>
+        <FormattedMessage {...filterMessage} />
+      </div>
     </button>
   );
 });

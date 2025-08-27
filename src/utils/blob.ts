@@ -34,11 +34,14 @@ export const useImageBlob = (blob: Blob | undefined): string | undefined => {
   });
 
   // Revoke the object URL to free memory when the component is unmounted
+  // We do that on the next tick to let the render flush first
   useEffect(() => {
     return () => {
-      if (objectUrl) {
-        URL.revokeObjectURL(objectUrl);
-      }
+      setTimeout(() => {
+        if (objectUrl) {
+          URL.revokeObjectURL(objectUrl);
+        }
+      }, 0);
     };
   }, [objectUrl]);
 

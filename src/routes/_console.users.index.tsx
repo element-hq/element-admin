@@ -16,7 +16,7 @@ import {
   DownloadIcon,
   UserAddIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
-import { Avatar, Badge, Text } from "@vector-im/compound-web";
+import { Avatar, Badge, CheckboxMenuItem, Text } from "@vector-im/compound-web";
 import { Fragment, useCallback, useEffect, useMemo } from "react";
 import { FormattedMessage } from "react-intl";
 import * as v from "valibot";
@@ -29,7 +29,6 @@ import {
   profileQuery,
   wellKnownQuery,
 } from "@/api/matrix";
-import { ChatFilterLink } from "@/components/link";
 import * as Page from "@/components/page";
 import * as Table from "@/components/table";
 import { useImageBlob } from "@/utils/blob";
@@ -164,6 +163,8 @@ function RouteComponent() {
   const totalCount = data.pages[0]?.meta.count ?? 0;
   const totalFetched = flatData.length;
 
+  const navigate = Route.useNavigate();
+
   // Column definitions
   const columns = useMemo<ColumnDef<SingleResourceForUser>[]>(
     () => [
@@ -254,7 +255,7 @@ function RouteComponent() {
 
   const rowVirtualizer = useWindowVirtualizer({
     count: rows.length,
-    estimateSize: () => 56, // 56px + 1px border
+    estimateSize: () => 56,
     overscan: 20,
   });
 
@@ -287,66 +288,6 @@ function RouteComponent() {
         </Page.Controls>
       </Page.Header>
 
-      {/* Filters */}
-      <div className="flex gap-4">
-        <ChatFilterLink
-          selected={search.admin === true}
-          to={Route.fullPath}
-          search={
-            search.admin === true
-              ? omit(search, ["admin"])
-              : {
-                  ...search,
-                  admin: true,
-                }
-          }
-        >
-          Admin Only
-        </ChatFilterLink>
-        <ChatFilterLink
-          selected={search.status === "active"}
-          to={Route.fullPath}
-          search={
-            search.status === "active"
-              ? omit(search, ["status"])
-              : {
-                  ...search,
-                  status: "active",
-                }
-          }
-        >
-          Active Only
-        </ChatFilterLink>
-        <ChatFilterLink
-          selected={search.status === "locked"}
-          to={Route.fullPath}
-          search={
-            search.status === "locked"
-              ? omit(search, ["status"])
-              : {
-                  ...search,
-                  status: "locked",
-                }
-          }
-        >
-          Locked Only
-        </ChatFilterLink>
-        <ChatFilterLink
-          selected={search.status === "deactivated"}
-          to={Route.fullPath}
-          search={
-            search.status === "deactivated"
-              ? omit(search, ["status"])
-              : {
-                  ...search,
-                  status: "deactivated",
-                }
-          }
-        >
-          Deactivated Only
-        </ChatFilterLink>
-      </div>
-
       <Table.Root>
         <Table.Header>
           <Table.Title>
@@ -357,6 +298,73 @@ function RouteComponent() {
               values={{ COUNT: totalCount }}
             />
           </Table.Title>
+
+          <Table.Filter>
+            <CheckboxMenuItem
+              onSelect={(event) => {
+                event.preventDefault();
+                navigate({
+                  search:
+                    search.admin === true
+                      ? omit(search, ["admin"])
+                      : {
+                          ...search,
+                          admin: true,
+                        },
+                });
+              }}
+              label="Admins"
+              checked={search.admin === true}
+            />
+            <CheckboxMenuItem
+              onSelect={(event) => {
+                event.preventDefault();
+                navigate({
+                  search:
+                    search.status === "active"
+                      ? omit(search, ["status"])
+                      : {
+                          ...search,
+                          status: "active",
+                        },
+                });
+              }}
+              label="Active users"
+              checked={search.status === "active"}
+            />
+            <CheckboxMenuItem
+              onSelect={(event) => {
+                event.preventDefault();
+                navigate({
+                  search:
+                    search.status === "locked"
+                      ? omit(search, ["status"])
+                      : {
+                          ...search,
+                          status: "locked",
+                        },
+                });
+              }}
+              label="Locked users"
+              checked={search.status === "locked"}
+            />
+            <CheckboxMenuItem
+              onSelect={(event) => {
+                event.preventDefault();
+                navigate({
+                  search:
+                    search.status === "deactivated"
+                      ? omit(search, ["status"])
+                      : {
+                          ...search,
+                          status: "deactivated",
+                        },
+                });
+              }}
+              label="Deactivated users"
+              checked={search.status === "deactivated"}
+            />
+          </Table.Filter>
         </Table.Header>
 
         <Table.List
@@ -391,6 +399,8 @@ function RouteComponent() {
               return (
                 <Table.ListRow
                   key={row.id}
+                  data-index={virtualRow.index}
+                  ref={rowVirtualizer.measureElement}
                   style={{
                     height: `${virtualRow.size}px`,
                     transform: `translateY(${

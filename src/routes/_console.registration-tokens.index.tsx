@@ -209,13 +209,7 @@ function RouteComponent() {
       <Table.Root>
         <Table.Header>
           <Table.Title>{data.data.length.toLocaleString()} tokens</Table.Title>
-          <Table.Controls>
-            <Table.Showing>
-              Showing {data.data.length} token
-              {data.data.length === 1 ? "" : "s"}
-            </Table.Showing>
-            <Table.FilterButton />
-          </Table.Controls>
+          <Table.FilterButton />
         </Table.Header>
 
         <Table.List>
