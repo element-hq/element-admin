@@ -4,7 +4,12 @@ import {
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Link,
+  MatchRoute,
+  Outlet,
+} from "@tanstack/react-router";
 import {
   flexRender,
   getCoreRowModel,
@@ -135,21 +140,22 @@ const UserCell = ({ userId, mxid, synapseRoot }: UserCellProps) => {
     <Link
       to="/users/$userId"
       params={{ userId }}
+      resetScroll={false}
       className="flex items-center gap-3"
     >
       <Avatar id={mxid} name={displayName || mxid} src={avatar} size="32px" />
       <div className="flex flex-1 flex-col min-w-0">
         {displayName ? (
           <>
-            <Text size="sm" className="text-text-primary">
-              {displayName}
+            <Text size="md" weight="semibold" className="text-text-primary">
+              {mxid}
             </Text>
             <Text size="sm" className="text-text-secondary">
-              {mxid}
+              {displayName}
             </Text>
           </>
         ) : (
-          <Text size="sm" className="text-text-primary">
+          <Text size="md" weight="semibold" className="text-text-primary">
             {mxid}
           </Text>
         )}
@@ -405,24 +411,33 @@ function RouteComponent() {
                     throw new Error("got a virtual row for a non-existing row");
 
                   return (
-                    <Table.ListRow
+                    <MatchRoute
                       key={row.id}
-                      style={{
-                        height: `${virtualRow.size}px`,
-                        transform: `translateY(${
-                          virtualRow.start - index * virtualRow.size
-                        }px)`,
-                      }}
+                      from={Route.path}
+                      to="$userId"
+                      params={{ userId: row.original.id }}
                     >
-                      {row.getVisibleCells().map((cell) => (
-                        <Table.ListCell key={cell.id}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext(),
-                          )}
-                        </Table.ListCell>
-                      ))}
-                    </Table.ListRow>
+                      {(match) => (
+                        <Table.ListRow
+                          selected={!!match}
+                          style={{
+                            height: `${virtualRow.size}px`,
+                            transform: `translateY(${
+                              virtualRow.start - index * virtualRow.size
+                            }px)`,
+                          }}
+                        >
+                          {row.getVisibleCells().map((cell) => (
+                            <Table.ListCell key={cell.id}>
+                              {flexRender(
+                                cell.column.columnDef.cell,
+                                cell.getContext(),
+                              )}
+                            </Table.ListCell>
+                          ))}
+                        </Table.ListRow>
+                      )}
+                    </MatchRoute>
                   );
                 })}
               </Table.ListBody>

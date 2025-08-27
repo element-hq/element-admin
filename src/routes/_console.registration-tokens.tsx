@@ -181,9 +181,15 @@ function RouteComponent() {
               <Link
                 to="/registration-tokens/$tokenId"
                 params={{ tokenId: token.id }}
-                className="text-text-link-external hover:underline"
+                resetScroll={false}
               >
-                <Text weight="medium">{token.attributes.token}</Text>
+                <Text
+                  size="md"
+                  weight="semibold"
+                  className="text-text-secondary"
+                >
+                  {token.attributes.token}
+                </Text>
               </Link>
               <CopyToClipboard value={token.attributes.token} />
             </div>

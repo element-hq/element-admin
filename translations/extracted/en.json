@@ -3,9 +3,25 @@
     "description": "The label for the add action/button",
     "message": "Add"
   },
+  "action.deactivate": {
+    "description": "Button label to deactivate a user account",
+    "message": "Deactivate"
+  },
+  "action.lock": {
+    "description": "Button label to lock a user account",
+    "message": "Lock"
+  },
   "action.sign_out": {
     "description": "Label for the sign out menu item",
     "message": "Sign out"
+  },
+  "action.unlock": {
+    "description": "Button label to unlock a user account",
+    "message": "Unlock"
+  },
+  "admin": {
+    "description": "Checkbox label to indicate if the user is an admin",
+    "message": "Admin"
   },
   "common.filter": {
     "description": "Label for a filter section/button",
@@ -138,5 +154,9 @@
   "rooms_info.other_members": {
     "description": "When a room or space has no name, we show 'Room/Space with Alice, Bob and 3 others'. This is the 'X others' part.",
     "message": "{COUNT, plural, one {# other} other {# others}}"
+  },
+  "user.account_created": {
+    "description": "Label for the user account creation date",
+    "message": "Account created"
   }
 }

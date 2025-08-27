@@ -162,19 +162,16 @@ export const ListBody = ({ className, children, ...props }: ListBodyProps) => (
 
 // Table Row
 interface ListRowProps extends React.ComponentProps<"tr"> {
-  clickable?: boolean;
+  selected?: boolean;
 }
 
 export const ListRow = forwardRef<HTMLTableRowElement, ListRowProps>(
-  function ListRow({ children, clickable, className, ...props }, ref) {
+  function ListRow({ children, selected, className, ...props }, ref) {
     return (
       <tr
         ref={ref}
-        className={cx(
-          styles["row"],
-          clickable && styles["clickable"],
-          className,
-        )}
+        className={cx(styles["row"], selected && styles["selected"], className)}
+        aria-selected={selected}
         {...props}
       >
         {children}

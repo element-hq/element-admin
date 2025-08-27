@@ -187,12 +187,13 @@
   transition: background-color var(--default-transition-duration)
     var(--default-transition-timing-function);
 
-  &:hover {
-    background-color: var(--cpd-color-bg-action-secondary-hovered);
+  &.selected,
+  &.selected:hover {
+    background-color: var(--cpd-color-bg-subtle-primary);
   }
 
-  &.clickable {
-    cursor: pointer;
+  &:hover {
+    background-color: var(--cpd-color-bg-action-secondary-hovered);
   }
 }
 
@@ -240,11 +241,6 @@
 }
 
 .header-cell.sortable:focus-visible {
-  outline: 2px solid var(--cpd-color-border-focused);
-  outline-offset: -2px;
-}
-
-.row.clickable:focus-visible {
   outline: 2px solid var(--cpd-color-border-focused);
   outline-offset: -2px;
 }
