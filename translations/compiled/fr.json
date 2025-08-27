@@ -251,5 +251,75 @@
       "type": 0,
       "value": "Element TI-Messenger"
     }
+  ],
+  "room_info.empty_room": [
+    {
+      "type": 0,
+      "value": "Salon vide"
+    }
+  ],
+  "room_info.empty_space": [
+    {
+      "type": 0,
+      "value": "Espace vide"
+    }
+  ],
+  "room_info.room_with": [
+    {
+      "type": 0,
+      "value": "Salon avec "
+    },
+    {
+      "type": 1,
+      "value": "members"
+    }
+  ],
+  "room_info.space_with": [
+    {
+      "type": 0,
+      "value": "Espace avec "
+    },
+    {
+      "type": 1,
+      "value": "members"
+    }
+  ],
+  "room_info.unknown_user": [
+    {
+      "type": 0,
+      "value": "Utilisateur inconnu"
+    }
+  ],
+  "rooms_info.other_members": [
+    {
+      "offset": 0,
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " autre"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " autres"
+            }
+          ]
+        }
+      },
+      "pluralType": "cardinal",
+      "type": 6,
+      "value": "COUNT"
+    }
   ]
 }

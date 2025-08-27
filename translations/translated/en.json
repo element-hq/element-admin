@@ -85,5 +85,23 @@
   },
   "product.title.ti-m": {
     "message": "Element TI-Messenger"
+  },
+  "room_info.empty_room": {
+    "message": "Empty room"
+  },
+  "room_info.empty_space": {
+    "message": "Empty space"
+  },
+  "room_info.room_with": {
+    "message": "Room with {members}"
+  },
+  "room_info.space_with": {
+    "message": "Space with {members}"
+  },
+  "room_info.unknown_user": {
+    "message": "Unknown user"
+  },
+  "rooms_info.other_members": {
+    "message": "{COUNT, plural, one {# other} other {# others}}"
   }
 }
