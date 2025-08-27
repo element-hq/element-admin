@@ -2,9 +2,6 @@
   "action.add": {
     "message": "Add"
   },
-  "action.export": {
-    "message": "Export"
-  },
   "action.sign_out": {
     "message": "Sign out"
   },
@@ -58,6 +55,9 @@
   },
   "pages.registration_tokens.title": {
     "message": "Registration tokens"
+  },
+  "pages.registration_tokens.token_count": {
+    "message": "{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
   },
   "pages.rooms.room_count": {
     "message": "{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
