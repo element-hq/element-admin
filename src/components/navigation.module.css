@@ -40,11 +40,33 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-width: 0;
   padding: var(--cpd-space-12x);
 
   & .main {
     /* Take the remaining height */
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-6x);
+  }
+}
+
+.details {
+  flex: 0 0 360px;
+  min-width: 0;
+  /* In the DOM, the details view is first, but it's on the right side, hence
+     the explicit ordering */
+  order: 1;
+  border-inline-start: solid 1px var(--cpd-color-bg-subtle-secondary);
+
+  & .details-inner {
+    position: sticky;
+    /* This is the side of the header plus its border */
+    top: calc(var(--cpd-space-16x) + 1px);
+    padding: var(--cpd-space-4x);
+    overflow-y: auto;
+    max-block-size: calc(100vh - var(--cpd-space-16x) - 1px);
   }
 }
 
@@ -159,6 +181,27 @@
             flex-direction: row;
           }
         }
+      }
+    }
+
+    /* Only focus on the details screen if it's visible */
+    &:has(> .details) {
+      .content {
+        /* We only hide the 'content', because we still want the footer */
+        .main {
+          display: none;
+        }
+      }
+    }
+
+    & .details {
+      order: initial;
+
+      & .details-inner {
+        position: initial;
+        top: initial;
+        overflow-y: initial;
+        max-block-size: initial;
       }
     }
   }

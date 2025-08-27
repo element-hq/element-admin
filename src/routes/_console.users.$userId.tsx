@@ -23,6 +23,7 @@ import {
   userQuery,
 } from "@/api/mas";
 import { ButtonLink } from "@/components/link";
+import * as Navigation from "@/components/navigation";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 export const Route = createFileRoute("/_console/users/$userId")({
@@ -138,138 +139,140 @@ function RouteComponent() {
   });
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <ButtonLink
-            to="/users"
-            kind="secondary"
-            size="sm"
-            Icon={ArrowLeftIcon}
-          >
-            Back to Users
-          </ButtonLink>
-          <H1>User Details</H1>
-        </div>
-      </div>
-
-      <div className="bg-bg-subtle-secondary rounded-lg">
-        <div className="px-6 py-5 border-b border-border-interactive-secondary">
-          <H3>{user.attributes.username}</H3>
-          <Text size="sm" className="text-text-secondary">
-            User ID: {user.id}
-          </Text>
+    <Navigation.Details>
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <ButtonLink
+              to="/users"
+              kind="secondary"
+              size="sm"
+              Icon={ArrowLeftIcon}
+            >
+              Back to Users
+            </ButtonLink>
+            <H1>User Details</H1>
+          </div>
         </div>
 
-        <div className="px-6 py-5 space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <Text size="sm" weight="medium">
-                Status
-              </Text>
-              <Badge
-                kind={
-                  user.attributes.deactivated_at
-                    ? "red"
-                    : user.attributes.locked_at
-                      ? "grey"
-                      : "blue"
-                }
-              >
-                {user.attributes.deactivated_at
-                  ? "Deactivated"
-                  : user.attributes.locked_at
-                    ? "Locked"
-                    : "Active"}
-              </Badge>
-            </div>
+        <div className="bg-bg-subtle-secondary rounded-lg">
+          <div className="px-6 py-5 border-b border-border-interactive-secondary">
+            <H3>{user.attributes.username}</H3>
+            <Text size="sm" className="text-text-secondary">
+              User ID: {user.id}
+            </Text>
+          </div>
 
-            <div>
-              <Text size="sm" weight="medium">
-                Admin Privileges
-              </Text>
-              <Badge kind={user.attributes.admin ? "green" : "grey"}>
-                {user.attributes.admin ? "Admin" : "User"}
-              </Badge>
-            </div>
-
-            <div>
-              <Text size="sm" weight="medium">
-                Created At
-              </Text>
-              <Text size="sm">
-                {computeHumanReadableDateTimeStringFromUtc(
-                  user.attributes.created_at,
-                )}
-              </Text>
-            </div>
-
-            {user.attributes.locked_at && (
+          <div className="px-6 py-5 space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <Text size="sm" weight="medium">
-                  Locked At
+                  Status
+                </Text>
+                <Badge
+                  kind={
+                    user.attributes.deactivated_at
+                      ? "red"
+                      : user.attributes.locked_at
+                        ? "grey"
+                        : "blue"
+                  }
+                >
+                  {user.attributes.deactivated_at
+                    ? "Deactivated"
+                    : user.attributes.locked_at
+                      ? "Locked"
+                      : "Active"}
+                </Badge>
+              </div>
+
+              <div>
+                <Text size="sm" weight="medium">
+                  Admin Privileges
+                </Text>
+                <Badge kind={user.attributes.admin ? "green" : "grey"}>
+                  {user.attributes.admin ? "Admin" : "User"}
+                </Badge>
+              </div>
+
+              <div>
+                <Text size="sm" weight="medium">
+                  Created At
                 </Text>
                 <Text size="sm">
                   {computeHumanReadableDateTimeStringFromUtc(
-                    user.attributes.locked_at,
+                    user.attributes.created_at,
                   )}
                 </Text>
               </div>
-            )}
-          </div>
 
-          <div>
-            <Text size="sm" weight="medium">
-              Email Addresses ({emailsData.data.length})
-            </Text>
-            {emailsData.data.length > 0 ? (
-              <div className="space-y-2">
-                {emailsData.data.map((emailItem) => (
-                  <div
-                    key={emailItem.id}
-                    className="flex items-center justify-between p-3 bg-bg-subtle-primary rounded-md"
-                  >
-                    <Text size="sm">{emailItem.attributes.email}</Text>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <Text size="sm">No email addresses found</Text>
-            )}
-          </div>
+              {user.attributes.locked_at && (
+                <div>
+                  <Text size="sm" weight="medium">
+                    Locked At
+                  </Text>
+                  <Text size="sm">
+                    {computeHumanReadableDateTimeStringFromUtc(
+                      user.attributes.locked_at,
+                    )}
+                  </Text>
+                </div>
+              )}
+            </div>
 
-          <div className="pt-5 border-t border-border-interactive-secondary">
-            <Text
-              size="sm"
-              weight="medium"
-              className="text-text-secondary mb-4"
-            >
-              Actions
-            </Text>
-            <div className="flex gap-3">
-              <LockUnlockButton
-                user={user}
-                serverName={credentials.serverName}
-                queryClient={queryClient}
-                disabled={deactivated}
-              />
-              <Button
-                type="button"
+            <div>
+              <Text size="sm" weight="medium">
+                Email Addresses ({emailsData.data.length})
+              </Text>
+              {emailsData.data.length > 0 ? (
+                <div className="space-y-2">
+                  {emailsData.data.map((emailItem) => (
+                    <div
+                      key={emailItem.id}
+                      className="flex items-center justify-between p-3 bg-bg-subtle-primary rounded-md"
+                    >
+                      <Text size="sm">{emailItem.attributes.email}</Text>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <Text size="sm">No email addresses found</Text>
+              )}
+            </div>
+
+            <div className="pt-5 border-t border-border-interactive-secondary">
+              <Text
                 size="sm"
-                kind="tertiary"
-                destructive
-                disabled={deactivateMutation.isPending || deactivated}
-                onClick={() => deactivateMutation.mutate()}
+                weight="medium"
+                className="text-text-secondary mb-4"
               >
-                {deactivateMutation.isPending && (
-                  <InlineSpinner className="mr-2" />
-                )}
-                Deactivate User
-              </Button>
+                Actions
+              </Text>
+              <div className="flex gap-3">
+                <LockUnlockButton
+                  user={user}
+                  serverName={credentials.serverName}
+                  queryClient={queryClient}
+                  disabled={deactivated}
+                />
+                <Button
+                  type="button"
+                  size="sm"
+                  kind="tertiary"
+                  destructive
+                  disabled={deactivateMutation.isPending || deactivated}
+                  onClick={() => deactivateMutation.mutate()}
+                >
+                  {deactivateMutation.isPending && (
+                    <InlineSpinner className="mr-2" />
+                  )}
+                  Deactivate User
+                </Button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </Navigation.Details>
   );
 }

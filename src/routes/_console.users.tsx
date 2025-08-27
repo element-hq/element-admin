@@ -4,7 +4,7 @@ import {
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import {
   flexRender,
   getCoreRowModel,
@@ -12,13 +12,9 @@ import {
 } from "@tanstack/react-table";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
-import {
-  DownloadIcon,
-  UserAddIcon,
-} from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Avatar, Badge, CheckboxMenuItem, Text } from "@vector-im/compound-web";
 import { Fragment, useCallback, useEffect, useMemo } from "react";
-import { FormattedMessage } from "react-intl";
+import { defineMessage, FormattedMessage } from "react-intl";
 import * as v from "valibot";
 
 import { usersInfiniteQuery } from "@/api/mas";
@@ -29,8 +25,12 @@ import {
   profileQuery,
   wellKnownQuery,
 } from "@/api/matrix";
+import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
+import * as Placeholder from "@/components/placeholder";
 import * as Table from "@/components/table";
+import AppFooter from "@/ui/footer";
+import AppNavigation from "@/ui/navigation";
 import { useImageBlob } from "@/utils/blob";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
@@ -39,7 +39,13 @@ const UserSearchParameters = v.object({
   status: v.optional(v.picklist(["active", "locked", "deactivated"])),
 });
 
-export const Route = createFileRoute("/_console/users/")({
+const titleMessage = defineMessage({
+  id: "pages.users.title",
+  defaultMessage: "Users",
+  description: "The title of the users list page",
+});
+
+export const Route = createFileRoute("/_console/users")({
   validateSearch: UserSearchParameters,
   loaderDeps: ({ search }) => ({ search }),
   loader: async ({
@@ -58,17 +64,34 @@ export const Route = createFileRoute("/_console/users/")({
     );
 
     return {
-      title: intl.formatMessage({
-        id: "pages.users.title",
-        defaultMessage: "Users",
-        description: "The title of the users list page",
-      }),
+      title: intl.formatMessage(titleMessage),
     };
   },
 
   head: ({ loaderData }) => ({
     meta: [loaderData ? { title: loaderData.title } : {}],
   }),
+
+  pendingComponent: () => (
+    <Navigation.Root>
+      <AppNavigation />
+
+      <Navigation.Content>
+        <Navigation.Main>
+          <Page.Header>
+            <Page.Title>
+              <FormattedMessage {...titleMessage} />
+            </Page.Title>
+          </Page.Header>
+
+          <Placeholder.LoadingTable />
+        </Navigation.Main>
+
+        <AppFooter />
+      </Navigation.Content>
+      <Outlet />
+    </Navigation.Root>
+  ),
 
   component: RouteComponent,
 });
@@ -260,177 +283,164 @@ function RouteComponent() {
   });
 
   return (
-    <div className="flex flex-col gap-6">
-      <Page.Header>
-        <Page.Title>
-          <FormattedMessage
-            id="pages.users.title"
-            defaultMessage="Users"
-            description="The title of the users list page"
-          />
-        </Page.Title>
-        <Page.Search placeholder="Non-functional search" />
-        <Page.Controls>
-          <Page.LinkButton to="/" variant="secondary" Icon={DownloadIcon}>
-            <FormattedMessage
-              id="action.export"
-              defaultMessage="Export"
-              description="The label for the export action/button"
-            />
-          </Page.LinkButton>
-          <Page.LinkButton to="/" variant="primary" Icon={UserAddIcon}>
-            <FormattedMessage
-              id="action.add"
-              defaultMessage="Add"
-              description="The label for the add action/button"
-            />
-          </Page.LinkButton>
-        </Page.Controls>
-      </Page.Header>
+    <Navigation.Root>
+      <AppNavigation />
 
-      <Table.Root>
-        <Table.Header>
-          <Table.Title>
-            <FormattedMessage
-              id="pages.users.user_count"
-              defaultMessage="{COUNT, plural, zero {No users} one {# user} other {# users}}"
-              description="On the user list page, this heading shows the total number of users"
-              values={{ COUNT: totalCount }}
-            />
-          </Table.Title>
+      <Outlet />
 
-          <Table.Filter>
-            <CheckboxMenuItem
-              onSelect={(event) => {
-                event.preventDefault();
-                navigate({
-                  search:
-                    search.admin === true
-                      ? omit(search, ["admin"])
-                      : {
-                          ...search,
-                          admin: true,
-                        },
-                });
-              }}
-              label="Admins"
-              checked={search.admin === true}
-            />
-            <CheckboxMenuItem
-              onSelect={(event) => {
-                event.preventDefault();
-                navigate({
-                  search:
-                    search.status === "active"
-                      ? omit(search, ["status"])
-                      : {
-                          ...search,
-                          status: "active",
-                        },
-                });
-              }}
-              label="Active users"
-              checked={search.status === "active"}
-            />
-            <CheckboxMenuItem
-              onSelect={(event) => {
-                event.preventDefault();
-                navigate({
-                  search:
-                    search.status === "locked"
-                      ? omit(search, ["status"])
-                      : {
-                          ...search,
-                          status: "locked",
-                        },
-                });
-              }}
-              label="Locked users"
-              checked={search.status === "locked"}
-            />
-            <CheckboxMenuItem
-              onSelect={(event) => {
-                event.preventDefault();
-                navigate({
-                  search:
-                    search.status === "deactivated"
-                      ? omit(search, ["status"])
-                      : {
-                          ...search,
-                          status: "deactivated",
-                        },
-                });
-              }}
-              label="Deactivated users"
-              checked={search.status === "deactivated"}
-            />
-          </Table.Filter>
-        </Table.Header>
+      <Navigation.Content>
+        <Navigation.Main>
+          <Page.Header>
+            <Page.Title>
+              <FormattedMessage {...titleMessage} />
+            </Page.Title>
+          </Page.Header>
 
-        <Table.List
-          style={{
-            // 40px is the height of the table header
-            height: `${rowVirtualizer.getTotalSize() + 40}px`,
-          }}
-        >
-          <Table.ListHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <Fragment key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <Table.ListHeaderCell key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                  </Table.ListHeaderCell>
-                ))}
-              </Fragment>
-            ))}
-          </Table.ListHeader>
+          <Table.Root>
+            <Table.Header>
+              <Table.Title>
+                <FormattedMessage
+                  id="pages.users.user_count"
+                  defaultMessage="{COUNT, plural, zero {No users} one {# user} other {# users}}"
+                  description="On the user list page, this heading shows the total number of users"
+                  values={{ COUNT: totalCount }}
+                />
+              </Table.Title>
 
-          <Table.ListBody>
-            {rowVirtualizer.getVirtualItems().map((virtualRow, index) => {
-              const row = rows[virtualRow.index];
-              if (!row)
-                throw new Error("got a virtual row for a non-existing row");
-
-              return (
-                <Table.ListRow
-                  key={row.id}
-                  data-index={virtualRow.index}
-                  ref={rowVirtualizer.measureElement}
-                  style={{
-                    height: `${virtualRow.size}px`,
-                    transform: `translateY(${
-                      virtualRow.start - index * virtualRow.size
-                    }px)`,
+              <Table.Filter>
+                <CheckboxMenuItem
+                  onSelect={(event) => {
+                    event.preventDefault();
+                    navigate({
+                      search:
+                        search.admin === true
+                          ? omit(search, ["admin"])
+                          : {
+                              ...search,
+                              admin: true,
+                            },
+                    });
                   }}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <Table.ListCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </Table.ListCell>
-                  ))}
-                </Table.ListRow>
-              );
-            })}
-          </Table.ListBody>
-        </Table.List>
+                  label="Admins"
+                  checked={search.admin === true}
+                />
+                <CheckboxMenuItem
+                  onSelect={(event) => {
+                    event.preventDefault();
+                    navigate({
+                      search:
+                        search.status === "active"
+                          ? omit(search, ["status"])
+                          : {
+                              ...search,
+                              status: "active",
+                            },
+                    });
+                  }}
+                  label="Active users"
+                  checked={search.status === "active"}
+                />
+                <CheckboxMenuItem
+                  onSelect={(event) => {
+                    event.preventDefault();
+                    navigate({
+                      search:
+                        search.status === "locked"
+                          ? omit(search, ["status"])
+                          : {
+                              ...search,
+                              status: "locked",
+                            },
+                    });
+                  }}
+                  label="Locked users"
+                  checked={search.status === "locked"}
+                />
+                <CheckboxMenuItem
+                  onSelect={(event) => {
+                    event.preventDefault();
+                    navigate({
+                      search:
+                        search.status === "deactivated"
+                          ? omit(search, ["status"])
+                          : {
+                              ...search,
+                              status: "deactivated",
+                            },
+                    });
+                  }}
+                  label="Deactivated users"
+                  checked={search.status === "deactivated"}
+                />
+              </Table.Filter>
+            </Table.Header>
 
-        {/* Loading indicator */}
-        {isFetching && (
-          <div className="flex justify-center py-4">
-            <Text size="sm" className="text-text-secondary">
-              Loading more users...
-            </Text>
-          </div>
-        )}
-      </Table.Root>
-    </div>
+            <Table.List
+              style={{
+                // 40px is the height of the table header
+                height: `${rowVirtualizer.getTotalSize() + 40}px`,
+              }}
+            >
+              <Table.ListHeader>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <Fragment key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <Table.ListHeaderCell key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
+                      </Table.ListHeaderCell>
+                    ))}
+                  </Fragment>
+                ))}
+              </Table.ListHeader>
+
+              <Table.ListBody>
+                {rowVirtualizer.getVirtualItems().map((virtualRow, index) => {
+                  const row = rows[virtualRow.index];
+                  if (!row)
+                    throw new Error("got a virtual row for a non-existing row");
+
+                  return (
+                    <Table.ListRow
+                      key={row.id}
+                      style={{
+                        height: `${virtualRow.size}px`,
+                        transform: `translateY(${
+                          virtualRow.start - index * virtualRow.size
+                        }px)`,
+                      }}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <Table.ListCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </Table.ListCell>
+                      ))}
+                    </Table.ListRow>
+                  );
+                })}
+              </Table.ListBody>
+            </Table.List>
+
+            {/* Loading indicator */}
+            {isFetching && (
+              <div className="flex justify-center py-4">
+                <Text size="sm" className="text-text-secondary">
+                  Loading more users...
+                </Text>
+              </div>
+            )}
+          </Table.Root>
+        </Navigation.Main>
+
+        <AppFooter />
+      </Navigation.Content>
+    </Navigation.Root>
   );
 }

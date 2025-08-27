@@ -3,10 +3,6 @@
     "description": "The label for the add action/button",
     "message": "Add"
   },
-  "action.export": {
-    "description": "The label for the export action/button",
-    "message": "Export"
-  },
   "action.sign_out": {
     "description": "Label for the sign out menu item",
     "message": "Sign out"

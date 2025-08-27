@@ -17,6 +17,7 @@ import { type FormEvent, useCallback, useRef } from "react";
 
 import { type CreateTokenParameters, createRegistrationToken } from "@/api/mas";
 import { ButtonLink } from "@/components/link";
+import * as Navigation from "@/components/navigation";
 import { computeUtcIsoStringFromLocal } from "@/utils/datetime";
 
 export const Route = createFileRoute("/_console/registration-tokens/add")({
@@ -106,107 +107,109 @@ function AddTokenComponent() {
   };
 
   return (
-    <div className="space-y-6">
-      <ButtonLink to="/registration-tokens" kind="tertiary" size="sm">
-        <ArrowLeftIcon className="h-4 w-4" />
-        Back to Tokens
-      </ButtonLink>
+    <Navigation.Details>
+      <div className="space-y-6">
+        <ButtonLink to="/registration-tokens" kind="tertiary" size="sm">
+          <ArrowLeftIcon className="h-4 w-4" />
+          Back to Tokens
+        </ButtonLink>
 
-      <H2>Create Registration Token</H2>
+        <H2>Create Registration Token</H2>
 
-      <div className="bg-bg-subtle-secondary rounded-lg">
-        <div className="px-6 py-5 border-b border-border-interactive-secondary">
-          <H3>Token Configuration</H3>
-          <Text size="sm" className="text-text-secondary">
-            Configure your new registration token
-          </Text>
-        </div>
+        <div className="bg-bg-subtle-secondary rounded-lg">
+          <div className="px-6 py-5 border-b border-border-interactive-secondary">
+            <H3>Token Configuration</H3>
+            <Text size="sm" className="text-text-secondary">
+              Configure your new registration token
+            </Text>
+          </div>
 
-        <div className="px-6 py-5">
-          <Form.Root onSubmit={handleSubmit} className="space-y-6">
-            <Form.Field name="customToken">
-              <Form.Label>Custom Token</Form.Label>
-              <div className="flex items-center gap-3">
-                <Form.TextControl
-                  type="text"
-                  ref={customTokenInputRef}
-                  className="flex-1"
-                  placeholder="Auto-generate if left empty"
-                />
-                <Button
-                  type="button"
-                  iconOnly
-                  kind="secondary"
-                  onClick={clearCustomToken}
-                  Icon={CloseIcon}
-                />
-              </div>
-              <Form.HelpMessage>
-                Optional custom token string. If left empty, a secure token will
-                be auto-generated.
-              </Form.HelpMessage>
-            </Form.Field>
+          <div className="px-6 py-5">
+            <Form.Root onSubmit={handleSubmit} className="space-y-6">
+              <Form.Field name="customToken">
+                <Form.Label>Custom Token</Form.Label>
+                <div className="flex items-center gap-3">
+                  <Form.TextControl
+                    type="text"
+                    ref={customTokenInputRef}
+                    className="flex-1"
+                    placeholder="Auto-generate if left empty"
+                  />
+                  <Button
+                    type="button"
+                    iconOnly
+                    kind="secondary"
+                    onClick={clearCustomToken}
+                    Icon={CloseIcon}
+                  />
+                </div>
+                <Form.HelpMessage>
+                  Optional custom token string. If left empty, a secure token
+                  will be auto-generated.
+                </Form.HelpMessage>
+              </Form.Field>
 
-            <Form.Field name="usageLimit">
-              <Form.Label>Usage Limit</Form.Label>
-              <div className="flex items-center gap-3">
-                <Form.TextControl
-                  type="number"
-                  ref={usageLimitInputRef}
-                  className="flex-1"
-                  placeholder="Leave empty for unlimited uses"
-                  min="1"
-                />
-                <Button
-                  type="button"
-                  iconOnly
-                  kind="secondary"
-                  onClick={clearUsageLimit}
-                  Icon={CloseIcon}
-                />
-              </div>
-              <Form.HelpMessage>
-                Maximum number of times this token can be used. Leave empty for
-                unlimited uses.
-              </Form.HelpMessage>
-            </Form.Field>
+              <Form.Field name="usageLimit">
+                <Form.Label>Usage Limit</Form.Label>
+                <div className="flex items-center gap-3">
+                  <Form.TextControl
+                    type="number"
+                    ref={usageLimitInputRef}
+                    className="flex-1"
+                    placeholder="Leave empty for unlimited uses"
+                    min="1"
+                  />
+                  <Button
+                    type="button"
+                    iconOnly
+                    kind="secondary"
+                    onClick={clearUsageLimit}
+                    Icon={CloseIcon}
+                  />
+                </div>
+                <Form.HelpMessage>
+                  Maximum number of times this token can be used. Leave empty
+                  for unlimited uses.
+                </Form.HelpMessage>
+              </Form.Field>
 
-            <Form.Field name="expires">
-              <Form.Label>Expires at</Form.Label>
-              <div className="flex items-center gap-3">
-                <Form.TextControl
-                  type="datetime-local"
-                  ref={expiresInputRef}
-                  className="flex-1"
-                  placeholder="No expiration"
-                />
-                <Button
-                  type="button"
-                  iconOnly
-                  kind="secondary"
-                  onClick={clearExpiration}
-                  Icon={CloseIcon}
-                />
-              </div>
-              <Form.HelpMessage>
-                When the token expires. Leave empty if the token should never
-                expire.
-              </Form.HelpMessage>
-            </Form.Field>
+              <Form.Field name="expires">
+                <Form.Label>Expires at</Form.Label>
+                <div className="flex items-center gap-3">
+                  <Form.TextControl
+                    type="datetime-local"
+                    ref={expiresInputRef}
+                    className="flex-1"
+                    placeholder="No expiration"
+                  />
+                  <Button
+                    type="button"
+                    iconOnly
+                    kind="secondary"
+                    onClick={clearExpiration}
+                    Icon={CloseIcon}
+                  />
+                </div>
+                <Form.HelpMessage>
+                  When the token expires. Leave empty if the token should never
+                  expire.
+                </Form.HelpMessage>
+              </Form.Field>
 
-            <Button
-              type="submit"
-              kind="primary"
-              disabled={createTokenMutation.isPending}
-            >
-              {createTokenMutation.isPending && (
-                <InlineSpinner className="mr-2" />
-              )}
-              Create Token
-            </Button>
-          </Form.Root>
+              <Button
+                type="submit"
+                kind="primary"
+                disabled={createTokenMutation.isPending}
+              >
+                {createTokenMutation.isPending && (
+                  <InlineSpinner className="mr-2" />
+                )}
+                Create Token
+              </Button>
+            </Form.Root>
+          </div>
         </div>
       </div>
-    </div>
+    </Navigation.Details>
   );
 }

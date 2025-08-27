@@ -49,3 +49,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ children }: SidebarProps) => (
     </nav>
   </div>
 );
+
+type DetailsProps = React.ComponentProps<"section">;
+export const Details: React.FC<DetailsProps> = ({
+  children,
+  className,
+  ...props
+}: DetailsProps) => (
+  <section className={cx(styles["details"], className)} {...props}>
+    <div className={styles["details-inner"]}>{children}</div>
+  </section>
+);

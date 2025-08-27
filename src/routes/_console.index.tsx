@@ -1,11 +1,20 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { H3, Separator, Text } from "@vector-im/compound-web";
-import { FormattedMessage } from "react-intl";
+import { defineMessage, FormattedMessage } from "react-intl";
 
 import { wellKnownQuery } from "@/api/matrix";
 import { serverVersionQuery } from "@/api/synapse";
+import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
+import AppFooter from "@/ui/footer";
+import AppNavigation from "@/ui/navigation";
+
+const titleMessage = defineMessage({
+  id: "pages.dashboard.title",
+  defaultMessage: "Dashboard",
+  description: "The title of the dashboard page",
+});
 
 export const Route = createFileRoute("/_console/")({
   loader: async ({ context: { queryClient, credentials, intl } }) => {
@@ -17,11 +26,7 @@ export const Route = createFileRoute("/_console/")({
     await queryClient.ensureQueryData(serverVersionQuery(synapseRoot));
 
     return {
-      title: intl.formatMessage({
-        id: "pages.dashboard.title",
-        defaultMessage: "Dashboard",
-        description: "The title of the dashboard page",
-      }),
+      title: intl.formatMessage(titleMessage),
     };
   },
   head: ({ loaderData }) => ({
@@ -55,33 +60,39 @@ function RouteComponent() {
   const { data } = useSuspenseQuery(serverVersionQuery(synapseRoot));
 
   return (
-    <div className="flex flex-col gap-8">
-      <Page.Header>
-        <Page.Title>
-          <FormattedMessage
-            id="pages.dashboard.title"
-            defaultMessage="Dashboard"
-            description="The title of the dashboard page"
-          />
-        </Page.Title>
-      </Page.Header>
+    <Navigation.Root>
+      <AppNavigation />
 
-      <section className="flex flex-col gap-6">
-        <div>
-          <H3>{credentials.serverName}</H3>
-          <Separator kind="section" />
-        </div>
-        <Data>
-          <DataTitle>
-            <FormattedMessage
-              id="pages.dashboard.synapse_version"
-              defaultMessage="Synapse version"
-              description="On the dashboard, this shows the Synapse version"
-            />
-          </DataTitle>
-          <Text>{data.server_version}</Text>
-        </Data>
-      </section>
-    </div>
+      <Navigation.Content>
+        <Navigation.Main>
+          <Page.Header>
+            <Page.Title>
+              <FormattedMessage {...titleMessage} />
+            </Page.Title>
+          </Page.Header>
+
+          <section className="flex flex-col gap-6">
+            <div>
+              <H3>{credentials.serverName}</H3>
+              <Separator kind="section" />
+            </div>
+            <Data>
+              <DataTitle>
+                <FormattedMessage
+                  id="pages.dashboard.synapse_version"
+                  defaultMessage="Synapse version"
+                  description="On the dashboard, this shows the Synapse version"
+                />
+              </DataTitle>
+              <Text>{data.server_version}</Text>
+            </Data>
+          </section>
+        </Navigation.Main>
+
+        <AppFooter />
+      </Navigation.Content>
+
+      <Outlet />
+    </Navigation.Root>
   );
 }

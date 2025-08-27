@@ -30,6 +30,7 @@ import {
 } from "@/api/mas";
 import { CopyToClipboard } from "@/components/copy";
 import { ButtonLink } from "@/components/link";
+import * as Navigation from "@/components/navigation";
 import {
   computeHumanReadableDateTimeStringFromUtc,
   computeLocalDateTimeStringFromUtc,
@@ -201,248 +202,250 @@ function TokenDetailComponent() {
   }, []);
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-2">
-        <ButtonLink to="/registration-tokens" kind="tertiary" size="sm">
-          <ArrowLeftIcon className="h-4 w-4" />
-          Back to Tokens
-        </ButtonLink>
-      </div>
-
-      <div className="bg-bg-subtle-secondary rounded-lg">
-        <div className="px-6 py-5 border-b border-border-interactive-secondary">
-          <H3 className="flex items-center gap-2">
-            {tokenAttributes.token}
-
-            <CopyToClipboard value={tokenAttributes.token} />
-          </H3>
-
-          <Text size="sm" className="text-text-secondary">
-            Token ID: {token.id}
-          </Text>
+    <Navigation.Details>
+      <div className="space-y-6">
+        <div className="flex items-center gap-2">
+          <ButtonLink to="/registration-tokens" kind="tertiary" size="sm">
+            <ArrowLeftIcon className="h-4 w-4" />
+            Back to Tokens
+          </ButtonLink>
         </div>
-        <div className="px-6 py-5 space-y-6">
-          <div className="flex flex-col space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Text
-                  size="sm"
-                  weight="semibold"
-                  className="text-text-secondary"
-                >
-                  Status
-                </Text>
-                <Badge kind={tokenAttributes.valid ? "green" : "red"}>
-                  {getTokenStatus(tokenAttributes)}
-                </Badge>
-              </div>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Text
-                  size="sm"
-                  weight="semibold"
-                  className="text-text-secondary"
-                >
-                  Created At
-                </Text>
-                <Text>
-                  {computeHumanReadableDateTimeStringFromUtc(
-                    tokenAttributes.created_at,
-                  )}
-                </Text>
-              </div>
+        <div className="bg-bg-subtle-secondary rounded-lg">
+          <div className="px-6 py-5 border-b border-border-interactive-secondary">
+            <H3 className="flex items-center gap-2">
+              {tokenAttributes.token}
 
-              <div className="space-y-2">
-                <Text
-                  size="sm"
-                  weight="semibold"
-                  className="text-text-secondary"
-                >
-                  Expires At
-                </Text>
-                <Text>
-                  {tokenAttributes.expires_at
-                    ? computeHumanReadableDateTimeStringFromUtc(
-                        tokenAttributes.expires_at,
-                      )
-                    : "Never expires"}
-                </Text>
-              </div>
-            </div>
+              <CopyToClipboard value={tokenAttributes.token} />
+            </H3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Text
-                  size="sm"
-                  weight="semibold"
-                  className="text-text-secondary"
-                >
-                  Usage Count
-                </Text>
-                <Text>
-                  {tokenAttributes.times_used} /{" "}
-                  {tokenAttributes.usage_limit || "∞"}
-                </Text>
-              </div>
-
-              {tokenAttributes.revoked_at && (
+            <Text size="sm" className="text-text-secondary">
+              Token ID: {token.id}
+            </Text>
+          </div>
+          <div className="px-6 py-5 space-y-6">
+            <div className="flex flex-col space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Text
                     size="sm"
                     weight="semibold"
                     className="text-text-secondary"
                   >
-                    Revoked At
+                    Status
+                  </Text>
+                  <Badge kind={tokenAttributes.valid ? "green" : "red"}>
+                    {getTokenStatus(tokenAttributes)}
+                  </Badge>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Text
+                    size="sm"
+                    weight="semibold"
+                    className="text-text-secondary"
+                  >
+                    Created At
                   </Text>
                   <Text>
                     {computeHumanReadableDateTimeStringFromUtc(
-                      tokenAttributes.revoked_at,
+                      tokenAttributes.created_at,
                     )}
                   </Text>
                 </div>
-              )}
-            </div>
-          </div>
 
-          {isEditing ? (
-            <div className="pt-5 border-t border-border-interactive-secondary">
-              <Text
-                size="sm"
-                weight="medium"
-                className="text-text-secondary mb-4"
-              >
-                Edit Token
-              </Text>
-              <Form.Root onSubmit={handleEditSubmit} className="space-y-6">
-                <Form.Field name="expires">
-                  <Form.Label>Expires at</Form.Label>
-                  <div className="flex items-center gap-3">
-                    <Form.TextControl
-                      type="datetime-local"
-                      ref={expiresInputRef}
-                      className="flex-1"
-                      defaultValue={
-                        tokenAttributes.expires_at
-                          ? computeLocalDateTimeStringFromUtc(
-                              tokenAttributes.expires_at,
-                            )
-                          : ""
-                      }
-                      placeholder="No expiration"
-                      min="1"
-                    />
-                    <Button
-                      type="button"
-                      iconOnly
-                      kind="secondary"
-                      onClick={clearExpiration}
-                      Icon={CloseIcon}
-                    />
-                  </div>
-                  <Form.HelpMessage>
-                    When the token expires. Leave empty if the token should
-                    never expire.
-                  </Form.HelpMessage>
-                </Form.Field>
-
-                <Form.Field name="usageLimit">
-                  <Form.Label>Usage Limit</Form.Label>
-                  <div className="flex items-center gap-3">
-                    <Form.TextControl
-                      type="number"
-                      ref={usageLimitInputRef}
-                      className="flex-1"
-                      defaultValue={tokenAttributes.usage_limit || ""}
-                      placeholder="Unlimited"
-                      min="1"
-                    />
-                    <Button
-                      type="button"
-                      iconOnly
-                      kind="secondary"
-                      onClick={clearUsageLimit}
-                      Icon={CloseIcon}
-                    />
-                  </div>
-                  <Form.HelpMessage>
-                    Maximum number of times this token can be used. Leave empty
-                    for unlimited uses.
-                  </Form.HelpMessage>
-                </Form.Field>
-
-                <div className="flex gap-3">
-                  <Button
-                    type="submit"
-                    kind="primary"
-                    disabled={editTokenMutation.isPending}
+                <div className="space-y-2">
+                  <Text
+                    size="sm"
+                    weight="semibold"
+                    className="text-text-secondary"
                   >
-                    {editTokenMutation.isPending && (
-                      <InlineSpinner className="mr-2" />
-                    )}
-                    Save Changes
-                  </Button>
-                  <Button
-                    type="button"
-                    kind="secondary"
-                    onClick={cancelEdit}
-                    disabled={editTokenMutation.isPending}
-                  >
-                    Cancel
-                  </Button>
+                    Expires At
+                  </Text>
+                  <Text>
+                    {tokenAttributes.expires_at
+                      ? computeHumanReadableDateTimeStringFromUtc(
+                          tokenAttributes.expires_at,
+                        )
+                      : "Never expires"}
+                  </Text>
                 </div>
-              </Form.Root>
-            </div>
-          ) : (
-            <div className="pt-5 border-t border-border-interactive-secondary flex flex-col gap-3">
-              <H6>Actions</H6>
-              <div className="flex gap-3">
-                {tokenAttributes.revoked_at ? (
-                  <Button
-                    type="button"
-                    size="sm"
-                    kind="secondary"
-                    disabled={unrevokeTokenMutation.isPending}
-                    onClick={() => unrevokeTokenMutation.mutate()}
-                  >
-                    {unrevokeTokenMutation.isPending && (
-                      <InlineSpinner className="mr-2" />
-                    )}
-                    Unrevoke Token
-                  </Button>
-                ) : (
-                  <Button
-                    type="button"
-                    size="sm"
-                    kind="secondary"
-                    destructive
-                    disabled={revokeTokenMutation.isPending}
-                    onClick={() => revokeTokenMutation.mutate()}
-                  >
-                    {revokeTokenMutation.isPending && (
-                      <InlineSpinner className="mr-2" />
-                    )}
-                    Revoke Token
-                  </Button>
-                )}
+              </div>
 
-                <Button
-                  type="button"
-                  size="sm"
-                  kind="secondary"
-                  onClick={() => setIsEditing(true)}
-                  disabled={!!tokenAttributes.revoked_at}
-                  Icon={EditIcon}
-                >
-                  Edit Properties
-                </Button>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Text
+                    size="sm"
+                    weight="semibold"
+                    className="text-text-secondary"
+                  >
+                    Usage Count
+                  </Text>
+                  <Text>
+                    {tokenAttributes.times_used} /{" "}
+                    {tokenAttributes.usage_limit || "∞"}
+                  </Text>
+                </div>
+
+                {tokenAttributes.revoked_at && (
+                  <div className="space-y-2">
+                    <Text
+                      size="sm"
+                      weight="semibold"
+                      className="text-text-secondary"
+                    >
+                      Revoked At
+                    </Text>
+                    <Text>
+                      {computeHumanReadableDateTimeStringFromUtc(
+                        tokenAttributes.revoked_at,
+                      )}
+                    </Text>
+                  </div>
+                )}
               </div>
             </div>
-          )}
+
+            {isEditing ? (
+              <div className="pt-5 border-t border-border-interactive-secondary">
+                <Text
+                  size="sm"
+                  weight="medium"
+                  className="text-text-secondary mb-4"
+                >
+                  Edit Token
+                </Text>
+                <Form.Root onSubmit={handleEditSubmit} className="space-y-6">
+                  <Form.Field name="expires">
+                    <Form.Label>Expires at</Form.Label>
+                    <div className="flex items-center gap-3">
+                      <Form.TextControl
+                        type="datetime-local"
+                        ref={expiresInputRef}
+                        className="flex-1"
+                        defaultValue={
+                          tokenAttributes.expires_at
+                            ? computeLocalDateTimeStringFromUtc(
+                                tokenAttributes.expires_at,
+                              )
+                            : ""
+                        }
+                        placeholder="No expiration"
+                        min="1"
+                      />
+                      <Button
+                        type="button"
+                        iconOnly
+                        kind="secondary"
+                        onClick={clearExpiration}
+                        Icon={CloseIcon}
+                      />
+                    </div>
+                    <Form.HelpMessage>
+                      When the token expires. Leave empty if the token should
+                      never expire.
+                    </Form.HelpMessage>
+                  </Form.Field>
+
+                  <Form.Field name="usageLimit">
+                    <Form.Label>Usage Limit</Form.Label>
+                    <div className="flex items-center gap-3">
+                      <Form.TextControl
+                        type="number"
+                        ref={usageLimitInputRef}
+                        className="flex-1"
+                        defaultValue={tokenAttributes.usage_limit || ""}
+                        placeholder="Unlimited"
+                        min="1"
+                      />
+                      <Button
+                        type="button"
+                        iconOnly
+                        kind="secondary"
+                        onClick={clearUsageLimit}
+                        Icon={CloseIcon}
+                      />
+                    </div>
+                    <Form.HelpMessage>
+                      Maximum number of times this token can be used. Leave
+                      empty for unlimited uses.
+                    </Form.HelpMessage>
+                  </Form.Field>
+
+                  <div className="flex gap-3">
+                    <Button
+                      type="submit"
+                      kind="primary"
+                      disabled={editTokenMutation.isPending}
+                    >
+                      {editTokenMutation.isPending && (
+                        <InlineSpinner className="mr-2" />
+                      )}
+                      Save Changes
+                    </Button>
+                    <Button
+                      type="button"
+                      kind="secondary"
+                      onClick={cancelEdit}
+                      disabled={editTokenMutation.isPending}
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                </Form.Root>
+              </div>
+            ) : (
+              <div className="pt-5 border-t border-border-interactive-secondary flex flex-col gap-3">
+                <H6>Actions</H6>
+                <div className="flex gap-3">
+                  {tokenAttributes.revoked_at ? (
+                    <Button
+                      type="button"
+                      size="sm"
+                      kind="secondary"
+                      disabled={unrevokeTokenMutation.isPending}
+                      onClick={() => unrevokeTokenMutation.mutate()}
+                    >
+                      {unrevokeTokenMutation.isPending && (
+                        <InlineSpinner className="mr-2" />
+                      )}
+                      Unrevoke Token
+                    </Button>
+                  ) : (
+                    <Button
+                      type="button"
+                      size="sm"
+                      kind="secondary"
+                      destructive
+                      disabled={revokeTokenMutation.isPending}
+                      onClick={() => revokeTokenMutation.mutate()}
+                    >
+                      {revokeTokenMutation.isPending && (
+                        <InlineSpinner className="mr-2" />
+                      )}
+                      Revoke Token
+                    </Button>
+                  )}
+
+                  <Button
+                    type="button"
+                    size="sm"
+                    kind="secondary"
+                    onClick={() => setIsEditing(true)}
+                    disabled={!!tokenAttributes.revoked_at}
+                    Icon={EditIcon}
+                  >
+                    Edit Properties
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </Navigation.Details>
   );
 }
 

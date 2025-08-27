@@ -59,7 +59,7 @@ export const Filter = ({ children }: FilterProps) => {
 };
 
 // Filter Button
-const FilterButton = forwardRef<
+export const FilterButton = forwardRef<
   HTMLButtonElement,
   React.ComponentPropsWithoutRef<"button">
 >(function FilterButton({ className, ...props }, ref) {

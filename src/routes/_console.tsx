@@ -5,18 +5,11 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
-import {
-  DocumentIcon,
-  HomeIcon,
-  KeyIcon,
-  LeaveIcon,
-  SignOutIcon,
-  UserProfileIcon,
-} from "@vector-im/compound-design-tokens/assets/web/icons";
-import { Link, MenuItem, Separator } from "@vector-im/compound-web";
+import { SignOutIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
+import { MenuItem, Separator } from "@vector-im/compound-web";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { FormattedMessage, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 
 import { authMetadataQuery, revokeToken } from "@/api/auth";
 import {
@@ -26,11 +19,9 @@ import {
   whoamiQuery,
 } from "@/api/matrix";
 import { CopyToClipboard } from "@/components/copy";
-import * as Footer from "@/components/footer";
 import * as Header from "@/components/header";
 import { Layout } from "@/components/layout";
 import { ElementLogo } from "@/components/logo";
-import * as Navigation from "@/components/navigation";
 import { useAuthStore } from "@/stores/auth";
 import { useImageBlob } from "@/utils/blob";
 
@@ -150,94 +141,7 @@ function RouteComponent() {
         </Header.Right>
       </Header.Root>
 
-      <Navigation.Root>
-        <Navigation.Sidebar>
-          <Navigation.NavLink Icon={HomeIcon} to="/">
-            <FormattedMessage
-              id="navigation.dashboard"
-              defaultMessage="Dashboard"
-              description="Label for the dashboard navigation item in the main navigation sidebar"
-            />
-          </Navigation.NavLink>
-          <Navigation.NavLink Icon={UserProfileIcon} to="/users">
-            <FormattedMessage
-              id="navigation.users"
-              defaultMessage="Users"
-              description="Label for the users navigation item in the main navigation sidebar"
-            />
-          </Navigation.NavLink>
-          <Navigation.NavLink Icon={LeaveIcon} to="/rooms">
-            <FormattedMessage
-              id="navigation.rooms"
-              defaultMessage="Rooms"
-              description="Label for the rooms navigation item in the main navigation sidebar"
-            />
-          </Navigation.NavLink>
-          <Navigation.Divider />
-          <Navigation.NavLink Icon={KeyIcon} to="/registration-tokens">
-            <FormattedMessage
-              id="navigation.registration_tokens"
-              defaultMessage="Registration tokens"
-              description="Label for the registration tokens navigation item in the main navigation sidebar"
-            />
-          </Navigation.NavLink>
-          <Navigation.Divider />
-          <Navigation.NavAnchor
-            Icon={DocumentIcon}
-            href="https://docs.element.io/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FormattedMessage
-              id="navigation.documentation"
-              defaultMessage="Documentation"
-              description="Label for the documentation navigation link (to https://docs.element.io/) in the main navigation sidebar"
-            />
-          </Navigation.NavAnchor>
-        </Navigation.Sidebar>
-
-        <Navigation.Content>
-          <Navigation.Main>
-            <Outlet />
-          </Navigation.Main>
-
-          <Footer.Root>
-            <Footer.ElementLogo />
-
-            <Footer.Section>
-              <Link href="https://ems.element.io/support" size="small">
-                <FormattedMessage
-                  id="footer.help_and_support"
-                  defaultMessage="Help & Support"
-                  description="Label for the help and support (to https://ems.element.io/support) link in the footer"
-                />
-              </Link>
-              <Footer.Divider />
-              <Link href="https://element.io/legal" size="small">
-                <FormattedMessage
-                  id="footer.legal"
-                  defaultMessage="Legal"
-                  description="Label for the legal (to https://element.io/legal) link in the footer"
-                />
-              </Link>
-              <Footer.Divider />
-              <Link href="https://element.io/legal/privacy" size="small">
-                <FormattedMessage
-                  id="footer.privacy"
-                  defaultMessage="Privacy"
-                  description="Label for the privacy (to https://element.io/legal/privacy) link in the footer"
-                />
-              </Link>
-            </Footer.Section>
-
-            <Footer.Divider />
-
-            <Footer.Section>
-              <Footer.CopyrightNotice />
-            </Footer.Section>
-          </Footer.Root>
-        </Navigation.Content>
-      </Navigation.Root>
+      <Outlet />
     </Layout>
   );
 }

@@ -3,7 +3,7 @@ import {
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import {
   flexRender,
   getCoreRowModel,
@@ -11,10 +11,9 @@ import {
 } from "@tanstack/react-table";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
-import { DownloadIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Badge, CheckboxMenuItem, Text } from "@vector-im/compound-web";
 import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
-import { FormattedMessage } from "react-intl";
+import { defineMessage, FormattedMessage } from "react-intl";
 import * as v from "valibot";
 
 import { wellKnownQuery } from "@/api/matrix";
@@ -23,9 +22,13 @@ import {
   roomsInfiniteQuery,
   type Room,
 } from "@/api/synapse";
+import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
+import * as Placeholder from "@/components/placeholder";
 import { RoomAvatar, RoomDisplayName } from "@/components/room-info";
 import * as Table from "@/components/table";
+import AppFooter from "@/ui/footer";
+import AppNavigation from "@/ui/navigation";
 
 const RoomSearchParameters = v.object({
   search_term: v.optional(v.string()),
@@ -33,7 +36,13 @@ const RoomSearchParameters = v.object({
   empty_rooms: v.optional(v.boolean()),
 });
 
-export const Route = createFileRoute("/_console/rooms/")({
+const titleMessage = defineMessage({
+  id: "pages.rooms.title",
+  defaultMessage: "Rooms",
+  description: "The title of the rooms list page",
+});
+
+export const Route = createFileRoute("/_console/rooms")({
   validateSearch: RoomSearchParameters,
   loaderDeps: ({ search }) => ({ search }),
   loader: async ({
@@ -59,16 +68,36 @@ export const Route = createFileRoute("/_console/rooms/")({
     );
 
     return {
-      title: intl.formatMessage({
-        id: "pages.rooms.title",
-        defaultMessage: "Rooms",
-        description: "The title of the rooms list page",
-      }),
+      title: intl.formatMessage(titleMessage),
     };
   },
+
   head: ({ loaderData }) => ({
     meta: [loaderData ? { title: loaderData.title } : {}],
   }),
+
+  pendingComponent: () => (
+    <Navigation.Root>
+      <AppNavigation />
+
+      <Navigation.Content>
+        <Navigation.Main>
+          <Page.Header>
+            <Page.Title>
+              <FormattedMessage {...titleMessage} />
+            </Page.Title>
+          </Page.Header>
+
+          <Placeholder.LoadingTable />
+        </Navigation.Main>
+
+        <AppFooter />
+      </Navigation.Content>
+
+      <Outlet />
+    </Navigation.Root>
+  ),
+
   component: RouteComponent,
 });
 
@@ -275,174 +304,169 @@ function RouteComponent() {
   });
 
   return (
-    <div className="flex flex-col gap-6">
-      <Page.Header>
-        <Page.Title>
-          <FormattedMessage
-            id="pages.rooms.title"
-            defaultMessage="Rooms"
-            description="The title of the rooms list page"
-          />
-        </Page.Title>
-        <Page.Search
-          placeholder="Search…"
-          value={localSearchTerm}
-          onInput={onSearchInput}
-        />
-        <Page.Controls>
-          <Page.LinkButton to="/" variant="secondary" Icon={DownloadIcon}>
-            <FormattedMessage
-              id="action.export"
-              defaultMessage="Export"
-              description="The label for the export action/button"
-            />
-          </Page.LinkButton>
-        </Page.Controls>
-      </Page.Header>
+    <Navigation.Root>
+      <AppNavigation />
 
-      <Table.Root>
-        <Table.Header>
-          <Table.Title>
-            <FormattedMessage
-              id="pages.rooms.room_count"
-              defaultMessage="{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
-              description="On the room list page, this heading shows the total number of rooms"
-              values={{ COUNT: totalCount }}
-            />
-          </Table.Title>
+      <Outlet />
 
-          <Table.Filter>
-            <CheckboxMenuItem
-              onSelect={(event) => {
-                event.preventDefault();
-                navigate({
-                  search:
-                    search.public_rooms === false
-                      ? omit(search, ["public_rooms"])
-                      : {
-                          ...search,
-                          public_rooms: false,
-                        },
-                });
-              }}
-              label="Private rooms"
-              checked={search.public_rooms === false}
+      <Navigation.Content>
+        <Navigation.Main>
+          <Page.Header>
+            <Page.Title>
+              <FormattedMessage {...titleMessage} />
+            </Page.Title>
+            <Page.Search
+              placeholder="Search…"
+              value={localSearchTerm}
+              onInput={onSearchInput}
             />
-            <CheckboxMenuItem
-              onSelect={(event) => {
-                event.preventDefault();
-                navigate({
-                  search:
-                    search.public_rooms === true
-                      ? omit(search, ["public_rooms"])
-                      : {
-                          ...search,
-                          public_rooms: true,
-                        },
-                });
-              }}
-              label="Public rooms"
-              checked={search.public_rooms === true}
-            />
-            <CheckboxMenuItem
-              onSelect={(event) => {
-                event.preventDefault();
-                navigate({
-                  search:
-                    search.empty_rooms === false
-                      ? omit(search, ["empty_rooms"])
-                      : {
-                          ...search,
-                          empty_rooms: false,
-                        },
-                });
-              }}
-              label="Non-empty rooms"
-              checked={search.empty_rooms === false}
-            />
-            <CheckboxMenuItem
-              onSelect={(event) => {
-                event.preventDefault();
-                navigate({
-                  search:
-                    search.empty_rooms === true
-                      ? omit(search, ["empty_rooms"])
-                      : {
-                          ...search,
-                          empty_rooms: true,
-                        },
-                });
-              }}
-              label="Empty rooms"
-              checked={search.empty_rooms === true}
-            />
-          </Table.Filter>
-        </Table.Header>
+          </Page.Header>
 
-        <Table.List
-          style={{
-            // 40px is the height of the table header
-            height: `${rowVirtualizer.getTotalSize() + 40}px`,
-          }}
-        >
-          <Table.ListHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <Fragment key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <Table.ListHeaderCell key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                  </Table.ListHeaderCell>
-                ))}
-              </Fragment>
-            ))}
-          </Table.ListHeader>
+          <Table.Root>
+            <Table.Header>
+              <Table.Title>
+                <FormattedMessage
+                  id="pages.rooms.room_count"
+                  defaultMessage="{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
+                  description="On the room list page, this heading shows the total number of rooms"
+                  values={{ COUNT: totalCount }}
+                />
+              </Table.Title>
 
-          <Table.ListBody>
-            {rowVirtualizer.getVirtualItems().map((virtualRow, index) => {
-              const row = rows[virtualRow.index];
-              if (!row)
-                throw new Error("got a virtual row for a non-existing row");
-
-              return (
-                <Table.ListRow
-                  key={row.id}
-                  data-index={virtualRow.index}
-                  ref={rowVirtualizer.measureElement}
-                  style={{
-                    height: `${virtualRow.size}px`,
-                    transform: `translateY(${
-                      virtualRow.start - index * virtualRow.size
-                    }px)`,
+              <Table.Filter>
+                <CheckboxMenuItem
+                  onSelect={(event) => {
+                    event.preventDefault();
+                    navigate({
+                      search:
+                        search.public_rooms === false
+                          ? omit(search, ["public_rooms"])
+                          : {
+                              ...search,
+                              public_rooms: false,
+                            },
+                    });
                   }}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <Table.ListCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </Table.ListCell>
-                  ))}
-                </Table.ListRow>
-              );
-            })}
-          </Table.ListBody>
-        </Table.List>
+                  label="Private rooms"
+                  checked={search.public_rooms === false}
+                />
+                <CheckboxMenuItem
+                  onSelect={(event) => {
+                    event.preventDefault();
+                    navigate({
+                      search:
+                        search.public_rooms === true
+                          ? omit(search, ["public_rooms"])
+                          : {
+                              ...search,
+                              public_rooms: true,
+                            },
+                    });
+                  }}
+                  label="Public rooms"
+                  checked={search.public_rooms === true}
+                />
+                <CheckboxMenuItem
+                  onSelect={(event) => {
+                    event.preventDefault();
+                    navigate({
+                      search:
+                        search.empty_rooms === false
+                          ? omit(search, ["empty_rooms"])
+                          : {
+                              ...search,
+                              empty_rooms: false,
+                            },
+                    });
+                  }}
+                  label="Non-empty rooms"
+                  checked={search.empty_rooms === false}
+                />
+                <CheckboxMenuItem
+                  onSelect={(event) => {
+                    event.preventDefault();
+                    navigate({
+                      search:
+                        search.empty_rooms === true
+                          ? omit(search, ["empty_rooms"])
+                          : {
+                              ...search,
+                              empty_rooms: true,
+                            },
+                    });
+                  }}
+                  label="Empty rooms"
+                  checked={search.empty_rooms === true}
+                />
+              </Table.Filter>
+            </Table.Header>
 
-        {/* Loading indicator */}
-        {isFetching && (
-          <div className="flex justify-center py-4">
-            <Text size="sm" className="text-text-secondary">
-              Loading more rooms...
-            </Text>
-          </div>
-        )}
-      </Table.Root>
-    </div>
+            <Table.List
+              style={{
+                // 40px is the height of the table header
+                height: `${rowVirtualizer.getTotalSize() + 40}px`,
+              }}
+            >
+              <Table.ListHeader>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <Fragment key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <Table.ListHeaderCell key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
+                      </Table.ListHeaderCell>
+                    ))}
+                  </Fragment>
+                ))}
+              </Table.ListHeader>
+
+              <Table.ListBody>
+                {rowVirtualizer.getVirtualItems().map((virtualRow, index) => {
+                  const row = rows[virtualRow.index];
+                  if (!row)
+                    throw new Error("got a virtual row for a non-existing row");
+
+                  return (
+                    <Table.ListRow
+                      key={row.id}
+                      style={{
+                        height: `${virtualRow.size}px`,
+                        transform: `translateY(${
+                          virtualRow.start - index * virtualRow.size
+                        }px)`,
+                      }}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <Table.ListCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </Table.ListCell>
+                      ))}
+                    </Table.ListRow>
+                  );
+                })}
+              </Table.ListBody>
+            </Table.List>
+
+            {/* Loading indicator */}
+            {isFetching && (
+              <div className="flex justify-center py-4">
+                <Text size="sm" className="text-text-secondary">
+                  Loading more rooms...
+                </Text>
+              </div>
+            )}
+          </Table.Root>
+        </Navigation.Main>
+
+        <AppFooter />
+      </Navigation.Content>
+    </Navigation.Root>
   );
 }
