@@ -128,6 +128,12 @@ const loadIntlPolyfillsForLocale = async (locale: string): Promise<void> => {
         );
         break;
       }
+      case "de": {
+        dataLoaders.push(
+          () => import("@formatjs/intl-pluralrules/locale-data/de"),
+        );
+        break;
+      }
       default: {
         throw new Error(`Unsupported locale ${locale}`);
       }
@@ -149,6 +155,12 @@ const loadIntlPolyfillsForLocale = async (locale: string): Promise<void> => {
         );
         break;
       }
+      case "de": {
+        dataLoaders.push(
+          () => import("@formatjs/intl-numberformat/locale-data/de"),
+        );
+        break;
+      }
       default: {
         throw new Error(`Unsupported locale ${locale}`);
       }
@@ -167,6 +179,12 @@ const loadIntlPolyfillsForLocale = async (locale: string): Promise<void> => {
       case "fr": {
         dataLoaders.push(
           () => import("@formatjs/intl-relativetimeformat/locale-data/fr"),
+        );
+        break;
+      }
+      case "de": {
+        dataLoaders.push(
+          () => import("@formatjs/intl-relativetimeformat/locale-data/de"),
         );
         break;
       }
