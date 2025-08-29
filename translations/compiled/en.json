@@ -5,10 +5,34 @@
       "value": "Add"
     }
   ],
+  "action.deactivate": [
+    {
+      "type": 0,
+      "value": "Deactivate"
+    }
+  ],
+  "action.lock": [
+    {
+      "type": 0,
+      "value": "Lock"
+    }
+  ],
   "action.sign_out": [
     {
       "type": 0,
       "value": "Sign out"
+    }
+  ],
+  "action.unlock": [
+    {
+      "type": 0,
+      "value": "Unlock"
+    }
+  ],
+  "admin": [
+    {
+      "type": 0,
+      "value": "Admin"
     }
   ],
   "common.filter": [
@@ -354,6 +378,12 @@
       "pluralType": "cardinal",
       "type": 6,
       "value": "COUNT"
+    }
+  ],
+  "user.account_created": [
+    {
+      "type": 0,
+      "value": "Account created"
     }
   ]
 }
