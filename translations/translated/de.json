@@ -1,87 +1,87 @@
 {
   "action.add": {
-    "message": "Ajouter"
+    "message": "Hinzufügen"
   },
   "action.deactivate": {
-    "message": "Désactiver"
+    "message": "Deaktivieren"
   },
   "action.lock": {
-    "message": "Verrouiller"
+    "message": "Sperren"
   },
   "action.sign_out": {
-    "message": "Se déconnecter"
+    "message": "Abmelden"
   },
   "action.unlock": {
-    "message": "Déverrouiller"
+    "message": "Entsperren"
   },
   "admin": {
-    "message": "Administrateur"
+    "message": "Admin"
   },
   "common.filter": {
-    "message": "Filtre"
+    "message": "Filter"
   },
   "footer.copyright_notice": {
     "message": "Copyright © {now, date, ::yyyy}"
   },
   "footer.help_and_support": {
-    "message": "Aide et support"
+    "message": "Hilfe & Support"
   },
   "footer.legal": {
-    "message": "Mentions légales"
+    "message": "Rechtliche Hinweise"
   },
   "footer.privacy": {
-    "message": "Politique de confidentialité"
+    "message": "Datenschutz"
   },
   "header.user_menu.title": {
-    "message": "Paramètres du compte"
+    "message": "Konto-Menü"
   },
   "navigation.dashboard": {
-    "message": "Tableau de bord"
+    "message": "Dashboard"
   },
   "navigation.documentation": {
-    "message": "Documentation"
+    "message": "Dokumentation"
   },
   "navigation.registration_tokens": {
-    "message": "Jetons d'enregistrement"
+    "message": "Registrierungstoken"
   },
   "navigation.rooms": {
-    "message": "Salons"
+    "message": "Chats"
   },
   "navigation.users": {
-    "message": "Utilisateurs"
+    "message": "Nutzer"
   },
   "pages.dashboard.synapse_version": {
-    "message": "Version de Synapse"
+    "message": "Synapse-Version"
   },
   "pages.dashboard.title": {
-    "message": "Tableau de bord"
+    "message": "Dashboard"
   },
   "pages.landing.description": {
-    "message": "Gérez le déploiement d'element pour votre organisation ou votre communauté."
+    "message": "Verwalte die Bereitstellung der Element-App für deine Organisation oder Community."
   },
   "pages.login.server_name": {
-    "message": "Nom du serveur"
+    "message": "Servername"
   },
   "pages.login.title": {
-    "message": "Connexion"
+    "message": "Login"
   },
   "pages.registration_tokens.title": {
-    "message": "Jetons d'enregistrement"
+    "message": "Registrierungstoken"
   },
   "pages.registration_tokens.token_count": {
-    "message": "{COUNT, plural, zero {Aucun jeton} one {# jeton} other {# jetons}}"
+    "message": "{COUNT, plural, zero {Keine Token} one {# Token} other {# Token}}"
   },
   "pages.rooms.room_count": {
-    "message": "{COUNT, plural, zero {Aucun salon} one {# salon} other {# salons}}"
+    "message": "{COUNT, plural, =0 {Keine Chats} one {# Chat} other {# Chats}}"
   },
   "pages.rooms.title": {
-    "message": "Salons"
+    "message": "Chats"
   },
   "pages.users.title": {
-    "message": "Utilisateurs"
+    "message": "Nutzer"
   },
   "pages.users.user_count": {
-    "message": "{COUNT, plural, zero {Aucun utilisateur} one {# utilisateur} other {# utilisateurs}}"
+    "message": "{COUNT, plural, zero {Keine Nutzer} one {# Nutzer} other {# Nutzer}}"
   },
   "product.element": {
     "message": "Element"
@@ -99,24 +99,24 @@
     "message": "Element TI-Messenger"
   },
   "room_info.empty_room": {
-    "message": "Salon vide"
+    "message": "Leerer Chat"
   },
   "room_info.empty_space": {
-    "message": "Espace vide"
+    "message": "Leerer Space"
   },
   "room_info.room_with": {
-    "message": "Salon avec {members}"
+    "message": "Chat mit {members}"
   },
   "room_info.space_with": {
-    "message": "Espace avec {members}"
+    "message": "Space mit {members}"
   },
   "room_info.unknown_user": {
-    "message": "Utilisateur inconnu"
+    "message": "Unbekannter Nutzer."
   },
   "rooms_info.other_members": {
-    "message": "{COUNT, plural, one {# autre} other {# autres}}"
+    "message": "{COUNT, plural, one {# weiteren} other {# weiteren}}"
   },
   "user.account_created": {
-    "message": "Compte créé"
+    "message": "Konto erstellt"
   }
 }

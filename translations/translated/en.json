@@ -2,8 +2,20 @@
   "action.add": {
     "message": "Add"
   },
+  "action.deactivate": {
+    "message": "Deactivate"
+  },
+  "action.lock": {
+    "message": "Lock"
+  },
   "action.sign_out": {
     "message": "Sign out"
+  },
+  "action.unlock": {
+    "message": "Unlock"
+  },
+  "admin": {
+    "message": "Admin"
   },
   "common.filter": {
     "message": "Filter"
@@ -103,5 +115,8 @@
   },
   "rooms_info.other_members": {
     "message": "{COUNT, plural, one {# other} other {# others}}"
+  },
+  "user.account_created": {
+    "message": "Account created"
   }
 }

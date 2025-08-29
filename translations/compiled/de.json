@@ -2,43 +2,43 @@
   "action.add": [
     {
       "type": 0,
-      "value": "Ajouter"
+      "value": "Hinzufügen"
     }
   ],
   "action.deactivate": [
     {
       "type": 0,
-      "value": "Désactiver"
+      "value": "Deaktivieren"
     }
   ],
   "action.lock": [
     {
       "type": 0,
-      "value": "Verrouiller"
+      "value": "Sperren"
     }
   ],
   "action.sign_out": [
     {
       "type": 0,
-      "value": "Se déconnecter"
+      "value": "Abmelden"
     }
   ],
   "action.unlock": [
     {
       "type": 0,
-      "value": "Déverrouiller"
+      "value": "Entsperren"
     }
   ],
   "admin": [
     {
       "type": 0,
-      "value": "Administrateur"
+      "value": "Admin"
     }
   ],
   "common.filter": [
     {
       "type": 0,
-      "value": "Filtre"
+      "value": "Filter"
     }
   ],
   "footer.copyright_notice": [
@@ -61,91 +61,91 @@
   "footer.help_and_support": [
     {
       "type": 0,
-      "value": "Aide et support"
+      "value": "Hilfe & Support"
     }
   ],
   "footer.legal": [
     {
       "type": 0,
-      "value": "Mentions légales"
+      "value": "Rechtliche Hinweise"
     }
   ],
   "footer.privacy": [
     {
       "type": 0,
-      "value": "Politique de confidentialité"
+      "value": "Datenschutz"
     }
   ],
   "header.user_menu.title": [
     {
       "type": 0,
-      "value": "Paramètres du compte"
+      "value": "Konto-Menü"
     }
   ],
   "navigation.dashboard": [
     {
       "type": 0,
-      "value": "Tableau de bord"
+      "value": "Dashboard"
     }
   ],
   "navigation.documentation": [
     {
       "type": 0,
-      "value": "Documentation"
+      "value": "Dokumentation"
     }
   ],
   "navigation.registration_tokens": [
     {
       "type": 0,
-      "value": "Jetons d'enregistrement"
+      "value": "Registrierungstoken"
     }
   ],
   "navigation.rooms": [
     {
       "type": 0,
-      "value": "Salons"
+      "value": "Chats"
     }
   ],
   "navigation.users": [
     {
       "type": 0,
-      "value": "Utilisateurs"
+      "value": "Nutzer"
     }
   ],
   "pages.dashboard.synapse_version": [
     {
       "type": 0,
-      "value": "Version de Synapse"
+      "value": "Synapse-Version"
     }
   ],
   "pages.dashboard.title": [
     {
       "type": 0,
-      "value": "Tableau de bord"
+      "value": "Dashboard"
     }
   ],
   "pages.landing.description": [
     {
       "type": 0,
-      "value": "Gérez le déploiement d'element pour votre organisation ou votre communauté."
+      "value": "Verwalte die Bereitstellung der Element-App für deine Organisation oder Community."
     }
   ],
   "pages.login.server_name": [
     {
       "type": 0,
-      "value": "Nom du serveur"
+      "value": "Servername"
     }
   ],
   "pages.login.title": [
     {
       "type": 0,
-      "value": "Connexion"
+      "value": "Login"
     }
   ],
   "pages.registration_tokens.title": [
     {
       "type": 0,
-      "value": "Jetons d'enregistrement"
+      "value": "Registrierungstoken"
     }
   ],
   "pages.registration_tokens.token_count": [
@@ -159,7 +159,7 @@
             },
             {
               "type": 0,
-              "value": " jeton"
+              "value": " Token"
             }
           ]
         },
@@ -170,7 +170,7 @@
             },
             {
               "type": 0,
-              "value": " jetons"
+              "value": " Token"
             }
           ]
         },
@@ -178,7 +178,7 @@
           "value": [
             {
               "type": 0,
-              "value": "Aucun jeton"
+              "value": "Keine Token"
             }
           ]
         }
@@ -192,6 +192,14 @@
     {
       "offset": 0,
       "options": {
+        "=0": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Keine Chats"
+            }
+          ]
+        },
         "one": {
           "value": [
             {
@@ -199,7 +207,7 @@
             },
             {
               "type": 0,
-              "value": " salon"
+              "value": " Chat"
             }
           ]
         },
@@ -210,15 +218,7 @@
             },
             {
               "type": 0,
-              "value": " salons"
-            }
-          ]
-        },
-        "zero": {
-          "value": [
-            {
-              "type": 0,
-              "value": "Aucun salon"
+              "value": " Chats"
             }
           ]
         }
@@ -231,13 +231,13 @@
   "pages.rooms.title": [
     {
       "type": 0,
-      "value": "Salons"
+      "value": "Chats"
     }
   ],
   "pages.users.title": [
     {
       "type": 0,
-      "value": "Utilisateurs"
+      "value": "Nutzer"
     }
   ],
   "pages.users.user_count": [
@@ -251,7 +251,7 @@
             },
             {
               "type": 0,
-              "value": " utilisateur"
+              "value": " Nutzer"
             }
           ]
         },
@@ -262,7 +262,7 @@
             },
             {
               "type": 0,
-              "value": " utilisateurs"
+              "value": " Nutzer"
             }
           ]
         },
@@ -270,7 +270,7 @@
           "value": [
             {
               "type": 0,
-              "value": "Aucun utilisateur"
+              "value": "Keine Nutzer"
             }
           ]
         }
@@ -313,19 +313,19 @@
   "room_info.empty_room": [
     {
       "type": 0,
-      "value": "Salon vide"
+      "value": "Leerer Chat"
     }
   ],
   "room_info.empty_space": [
     {
       "type": 0,
-      "value": "Espace vide"
+      "value": "Leerer Space"
     }
   ],
   "room_info.room_with": [
     {
       "type": 0,
-      "value": "Salon avec "
+      "value": "Chat mit "
     },
     {
       "type": 1,
@@ -335,7 +335,7 @@
   "room_info.space_with": [
     {
       "type": 0,
-      "value": "Espace avec "
+      "value": "Space mit "
     },
     {
       "type": 1,
@@ -345,7 +345,7 @@
   "room_info.unknown_user": [
     {
       "type": 0,
-      "value": "Utilisateur inconnu"
+      "value": "Unbekannter Nutzer."
     }
   ],
   "rooms_info.other_members": [
@@ -359,7 +359,7 @@
             },
             {
               "type": 0,
-              "value": " autre"
+              "value": " weiteren"
             }
           ]
         },
@@ -370,7 +370,7 @@
             },
             {
               "type": 0,
-              "value": " autres"
+              "value": " weiteren"
             }
           ]
         }
@@ -383,7 +383,7 @@
   "user.account_created": [
     {
       "type": 0,
-      "value": "Compte créé"
+      "value": "Konto erstellt"
     }
   ]
 }
