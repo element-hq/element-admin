@@ -14,6 +14,9 @@ import { createClient, type Client } from "./api/client";
 
 const masClient = createClient();
 
+export const isErrorResponse = (t: unknown): t is api.ErrorResponse =>
+  typeof t === "object" && t !== null && Object.hasOwn(t, "errors");
+
 const masBaseOptions = async (
   client: QueryClient,
   serverName: string,
@@ -22,6 +25,7 @@ const masBaseOptions = async (
   client: Client;
   auth: string;
   baseUrl: string;
+  throwOnError: true;
   signal?: AbortSignal;
 }> => {
   const token = await accessToken(client, signal);
@@ -39,6 +43,7 @@ const masBaseOptions = async (
     client: masClient,
     auth: token,
     baseUrl: authMetadata.issuer.replace(/\/$/, ""),
+    throwOnError: true,
     ...(signal && { signal }),
   };
 };
@@ -110,6 +115,20 @@ export const userQuery = (serverName: string, userId: string) =>
       });
     },
   });
+
+export const createUser = async (
+  queryClient: QueryClient,
+  serverName: string,
+  username: string,
+  signal?: AbortSignal,
+) => {
+  return api.createUser({
+    ...(await masBaseOptions(queryClient, serverName, signal)),
+    body: {
+      username,
+    },
+  });
+};
 
 export const lockUser = async (
   queryClient: QueryClient,

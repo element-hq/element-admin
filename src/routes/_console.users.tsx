@@ -1,6 +1,8 @@
 /* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
 import {
+  useMutation,
   useQuery,
+  useQueryClient,
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
@@ -17,12 +19,21 @@ import {
 } from "@tanstack/react-table";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
-import { Avatar, Badge, CheckboxMenuItem, Text } from "@vector-im/compound-web";
-import { Fragment, useCallback, useEffect, useMemo } from "react";
-import { defineMessage, FormattedMessage } from "react-intl";
+import { UserAddIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
+import {
+  Avatar,
+  Badge,
+  CheckboxMenuItem,
+  Form,
+  InlineSpinner,
+  Text,
+} from "@vector-im/compound-web";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
+import { toast } from "react-hot-toast";
+import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 import * as v from "valibot";
 
-import { usersInfiniteQuery } from "@/api/mas";
+import { createUser, isErrorResponse, usersInfiniteQuery } from "@/api/mas";
 import type { UserListFilters } from "@/api/mas";
 import type { SingleResourceForUser } from "@/api/mas/api/types.gen";
 import {
@@ -30,6 +41,7 @@ import {
   profileQuery,
   wellKnownQuery,
 } from "@/api/matrix";
+import * as Dialog from "@/components/dialog";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import * as Placeholder from "@/components/placeholder";
@@ -161,6 +173,165 @@ const UserCell = ({ userId, mxid, synapseRoot }: UserCellProps) => {
         )}
       </div>
     </Link>
+  );
+};
+
+interface UserAddButtonProps {
+  serverName: string;
+}
+const UserAddButton: React.FC<UserAddButtonProps> = ({
+  serverName,
+}: UserAddButtonProps) => {
+  const queryClient = useQueryClient();
+  const navigate = Route.useNavigate();
+  const intl = useIntl();
+  const [open, setOpen] = useState(false);
+  const [localpart, setLocalpart] = useState("");
+
+  const { mutate, isPending, isError, error } = useMutation({
+    mutationFn: (username: string) =>
+      createUser(queryClient, serverName, username),
+    onError: () => {
+      toast.error("Failed to create user");
+    },
+    onSuccess: async (response) => {
+      toast.success(
+        intl.formatMessage({
+          id: "pages.users.new_user.success_message",
+          defaultMessage: "User created",
+          description:
+            "The success message shown in a toast when a user is created",
+        }),
+      );
+
+      await navigate({
+        to: "./$userId",
+        params: { userId: response.data.id },
+      });
+      setOpen(false);
+    },
+  });
+
+  // TODO: have a generic way to normalize those errors
+  const errors = isErrorResponse(error)
+    ? error.errors
+    : error === null
+      ? []
+      : [{ title: error.message }];
+
+  const onOpenChange = useCallback(
+    (open: boolean) => {
+      // Prevent from closing if the mutation is pending
+      if (isPending) {
+        return;
+      }
+
+      setOpen(open);
+    },
+    [isPending],
+  );
+
+  const onLocalpartInput = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setLocalpart(event.target.value);
+    },
+    [setLocalpart],
+  );
+
+  const onSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      if (isPending) {
+        return;
+      }
+
+      const data = new FormData(event.currentTarget);
+      const localpart = data.get("new-user-localpart") as string;
+      mutate(localpart);
+    },
+    [mutate, isPending],
+  );
+
+  return (
+    <Dialog.Root
+      onOpenChange={onOpenChange}
+      open={open}
+      trigger={
+        <Page.Button Icon={UserAddIcon}>
+          <FormattedMessage
+            id="action.add"
+            defaultMessage="Add"
+            description="The label for the add action/button"
+          />
+        </Page.Button>
+      }
+    >
+      <Dialog.Title>
+        <FormattedMessage
+          id="pages.users.new_user.add_user"
+          defaultMessage="Add user"
+          description="The title of the add user dialog"
+        />
+      </Dialog.Title>
+
+      <Dialog.Description>
+        <FormattedMessage
+          id="pages.users.new_user.description"
+          defaultMessage="To add a new user to {serverName}, choose a user name for this user, which will be part of their user ID."
+          description="The description of the add user dialog"
+          values={{ serverName }}
+        />
+      </Dialog.Description>
+
+      <Form.Root onSubmit={onSubmit}>
+        <Form.Field name="new-user-localpart" serverInvalid={isError}>
+          <Form.Label>
+            <FormattedMessage
+              id="pages.users.new_user.localpart"
+              defaultMessage="Enter name"
+              description="The label for the localpart input in the new user form. Careful with the value, some browsers (*cough* Safari) will trigger autocomplete (which we don't want!) if the input label has 'username' or 'user ID' in it"
+            />
+          </Form.Label>
+          <Form.TextControl
+            onInput={onLocalpartInput}
+            required
+            pattern="[a-z0-9_]+"
+            autoCapitalize="off"
+            autoComplete="off"
+          />
+          <Form.HelpMessage>
+            @{localpart || "---"}:{serverName}
+          </Form.HelpMessage>
+          <Form.ErrorMessage match="patternMismatch">
+            <FormattedMessage
+              id="pages.users.new_user.invalid_localpart"
+              defaultMessage="Localpart can only contain lowercase letters, numbers and underscores"
+              description="The error message shown when the localpart input is empty"
+            />
+          </Form.ErrorMessage>
+          <Form.ErrorMessage match="valueMissing">
+            <FormattedMessage
+              id="pages.users.new_user.required_error"
+              defaultMessage="This field is required"
+              description="The error message shown when the localpart input is empty"
+            />
+          </Form.ErrorMessage>
+
+          {errors.map((error, index) => (
+            <Form.ErrorMessage key={index}>{error.title}</Form.ErrorMessage>
+          ))}
+        </Form.Field>
+
+        <Form.Submit disabled={isPending}>
+          {isPending && <InlineSpinner />}
+          <FormattedMessage
+            id="pages.users.new_user.create_account"
+            defaultMessage="Create account"
+            description="The label for the create account button in the new user form"
+          />
+        </Form.Submit>
+      </Form.Root>
+    </Dialog.Root>
   );
 };
 
@@ -300,6 +471,9 @@ function RouteComponent() {
             <Page.Title>
               <FormattedMessage {...titleMessage} />
             </Page.Title>
+            <Page.Controls>
+              <UserAddButton serverName={credentials.serverName} />
+            </Page.Controls>
           </Page.Header>
 
           <Table.Root>

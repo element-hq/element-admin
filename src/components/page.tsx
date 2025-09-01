@@ -26,10 +26,12 @@ export const Controls = ({ className, children, ...props }: ControlsProps) => (
   </div>
 );
 
-interface LinkButtonProps extends React.ComponentProps<"a"> {
+interface BaseButtonProps {
   variant?: "primary" | "secondary";
   Icon: React.ComponentType<React.SVGAttributes<SVGElement>>;
 }
+
+interface LinkButtonProps extends React.ComponentProps<"a">, BaseButtonProps {}
 export const LinkButton = createLink(
   forwardRef<HTMLAnchorElement, LinkButtonProps>(function LinkButton(
     { className, variant = "primary", children, Icon, ...props },
@@ -38,15 +40,37 @@ export const LinkButton = createLink(
     return (
       <a
         data-variant={variant}
-        className={cx(styles["link-button"], className)}
+        className={cx(styles["button"], className)}
+        role="button"
         {...props}
         ref={ref}
       >
         <Icon />
-        <div className={styles["link-button-text"]}>{children}</div>
+        <div className={styles["button-text"]}>{children}</div>
       </a>
     );
   }),
+);
+
+interface ButtonProps extends React.ComponentProps<"button">, BaseButtonProps {}
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  function Button(
+    { className, variant = "primary", children, Icon, ...props },
+    ref,
+  ) {
+    return (
+      <button
+        data-variant={variant}
+        className={cx(styles["button"], className)}
+        type="button"
+        {...props}
+        ref={ref}
+      >
+        <Icon />
+        <div className={styles["button-text"]}>{children}</div>
+      </button>
+    );
+  },
 );
 
 export const Search = forwardRef<

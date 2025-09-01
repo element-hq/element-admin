@@ -71,7 +71,7 @@
   gap: var(--cpd-space-4x);
 }
 
-.link-button {
+.button {
   border-radius: var(--cpd-radius-pill-effect);
   display: flex;
   align-items: center;
@@ -147,13 +147,13 @@
     letter-spacing: var(--cpd-font-letter-spacing-heading-md);
   }
 
-  .link-button {
+  .button {
     height: var(--cpd-space-9x);
     width: var(--cpd-space-9x);
     padding: 0;
     box-shadow: 0px 1px 2px var(--cpd-color-alpha-gray-300);
 
-    & .link-button-text {
+    & .button-text {
       display: none;
     }
   }

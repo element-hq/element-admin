@@ -3,25 +3,13 @@
     "description": "The label for the add action/button",
     "message": "Add"
   },
-  "action.deactivate": {
-    "description": "Button label to deactivate a user account",
-    "message": "Deactivate"
-  },
-  "action.lock": {
-    "description": "Button label to lock a user account",
-    "message": "Lock"
+  "action.close": {
+    "description": "Label for a 'close' action/button",
+    "message": "Close"
   },
   "action.sign_out": {
     "description": "Label for the sign out menu item",
     "message": "Sign out"
-  },
-  "action.unlock": {
-    "description": "Button label to unlock a user account",
-    "message": "Unlock"
-  },
-  "admin": {
-    "description": "Checkbox label to indicate if the user is an admin",
-    "message": "Admin"
   },
   "common.filter": {
     "description": "Label for a filter section/button",
@@ -103,6 +91,30 @@
     "description": "The title of the rooms list page",
     "message": "Rooms"
   },
+  "pages.users.new_user.add_user": {
+    "description": "The title of the add user dialog",
+    "message": "Add user"
+  },
+  "pages.users.new_user.create_account": {
+    "description": "The label for the create account button in the new user form",
+    "message": "Create account"
+  },
+  "pages.users.new_user.invalid_localpart": {
+    "description": "The error message shown when the localpart input is empty",
+    "message": "Localpart can only contain lowercase letters, numbers and underscores"
+  },
+  "pages.users.new_user.localpart": {
+    "description": "The label for the localpart input in the new user\n              form. Careful with the value, some browsers (*cough* Safari) will\n              trigger autocomplete (which we don't want!) if the input labal has\n              'username' or 'user ID' in it",
+    "message": "Enter name"
+  },
+  "pages.users.new_user.required_error": {
+    "description": "The error message shown when the localpart input is empty",
+    "message": "This field is required"
+  },
+  "pages.users.new_user.success_message": {
+    "description": "The success message shown in a toast when a user is created",
+    "message": "User created"
+  },
   "pages.users.title": {
     "description": "The title of the users list page",
     "message": "Users"
@@ -154,9 +166,5 @@
   "rooms_info.other_members": {
     "description": "When a room or space has no name, we show 'Room/Space with Alice, Bob and 3 others'. This is the 'X others' part.",
     "message": "{COUNT, plural, one {# other} other {# others}}"
-  },
-  "user.account_created": {
-    "description": "Label for the user account creation date",
-    "message": "Account created"
   }
 }
