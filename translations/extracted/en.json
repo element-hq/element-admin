@@ -187,6 +187,46 @@
     "description": "The success message for reactivating a user account",
     "message": "Account reactivated"
   },
+  "pages.users.set_password.button": {
+    "description": "The label for the change password button on the user panel",
+    "message": "Change password"
+  },
+  "pages.users.set_password.confirm_password_label": {
+    "description": "Label for the confirm password field in set password modal",
+    "message": "Enter password again"
+  },
+  "pages.users.set_password.error": {
+    "description": "The error message when the request for setting a user password fails",
+    "message": "Failed to set password"
+  },
+  "pages.users.set_password.error.password_missing": {
+    "description": "Error message for missing password in set password modal",
+    "message": "This field is required"
+  },
+  "pages.users.set_password.error.passwords_mismatch": {
+    "description": "Error message for mismatched passwords in set password modal",
+    "message": "Passwords do not match"
+  },
+  "pages.users.set_password.password_label": {
+    "description": "Label for the password field in set password modal",
+    "message": "Password"
+  },
+  "pages.users.set_password.password_match": {
+    "description": "When the two password input match in the set password modal",
+    "message": "Passwords match!"
+  },
+  "pages.users.set_password.submit": {
+    "description": "The submit button text in the set password modal",
+    "message": "Set new password"
+  },
+  "pages.users.set_password.success": {
+    "description": "The success message for setting a user password",
+    "message": "Password set successfully"
+  },
+  "pages.users.set_password.title": {
+    "description": "The title of the modal for setting a user password",
+    "message": "Set a new password for this user"
+  },
   "pages.users.title": {
     "description": "The title of the users list page",
     "message": "Users"

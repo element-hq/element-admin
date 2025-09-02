@@ -10,6 +10,7 @@ import {
   LockIcon,
   DeleteIcon,
   CheckCircleIcon,
+  KeyIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
   Badge,
@@ -19,8 +20,9 @@ import {
   Text,
   InlineSpinner,
   Alert,
+  Form,
 } from "@vector-im/compound-web";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
@@ -28,6 +30,7 @@ import {
   deactivateUser,
   lockUser,
   reactivateUser,
+  setUserPassword,
   unlockUser,
   userEmailsQuery,
   userQuery,
@@ -478,6 +481,199 @@ function LockButton({ user, serverName }: LockUnlockButtonProps) {
   );
 }
 
+interface SetPasswordButtonProps {
+  user: {
+    id: string;
+    attributes: {
+      username: string;
+    };
+  };
+  serverName: string;
+}
+
+function SetPasswordButton({ user, serverName }: SetPasswordButtonProps) {
+  const intl = useIntl();
+  const queryClient = useQueryClient();
+  const [open, setOpen] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const otherPasswordRef = useRef<HTMLInputElement>(null);
+
+  const { mutate, isPending } = useMutation({
+    // TODO: we always skip the server check for now?
+    mutationFn: (password: string) =>
+      setUserPassword(queryClient, serverName, user.id, password, true),
+    onError: () => {
+      toast.error(
+        intl.formatMessage({
+          id: "pages.users.set_password.error",
+          defaultMessage: "Failed to set password",
+          description:
+            "The error message when the request for setting a user password fails",
+        }),
+      );
+    },
+    onSuccess: async (): Promise<void> => {
+      toast.success(
+        intl.formatMessage({
+          id: "pages.users.set_password.success",
+          defaultMessage: "Password set successfully",
+          description: "The success message for setting a user password",
+        }),
+      );
+      setOpen(false);
+      formRef.current?.reset();
+    },
+  });
+
+  const onOpenChange = useCallback(
+    (open: boolean) => {
+      if (isPending) {
+        return;
+      }
+      setOpen(open);
+      if (!open) {
+        formRef.current?.reset();
+      }
+    },
+    [isPending],
+  );
+
+  // Whenever there is an input on the first password field, we trigger a
+  // validation on the second input (if there is anything there), so that the
+  // 'password match/don't match' gets updated
+  const onPasswordInput = useCallback(
+    (_event: React.ChangeEvent<HTMLInputElement>) => {
+      if (otherPasswordRef.current && otherPasswordRef.current.value) {
+        otherPasswordRef.current.reportValidity();
+      }
+    },
+    [otherPasswordRef],
+  );
+
+  const handleSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      const password = formData.get("password") as string;
+      mutate(password);
+    },
+    [mutate],
+  );
+
+  return (
+    <Dialog.Root
+      open={open}
+      onOpenChange={onOpenChange}
+      trigger={
+        <Button type="button" size="sm" kind="secondary" Icon={KeyIcon}>
+          <FormattedMessage
+            id="pages.users.set_password.button"
+            defaultMessage="Change password"
+            description="The label for the change password button on the user panel"
+          />
+        </Button>
+      }
+    >
+      <Dialog.Title>
+        <FormattedMessage
+          id="pages.users.set_password.title"
+          defaultMessage="Set a new password for this user"
+          description="The title of the modal for setting a user password"
+        />
+      </Dialog.Title>
+      <p className="text-text-secondary border border-bg-subtle-primary p-3 leading-10">
+        <Text
+          weight="semibold"
+          size="md"
+          as="span"
+          className="text-text-primary"
+        >
+          @{user.attributes.username}
+        </Text>
+        :{serverName}
+      </p>
+      <Dialog.Description asChild>
+        <Form.Root ref={formRef} onSubmit={handleSubmit}>
+          <Form.Field name="password">
+            <Form.Label>
+              <FormattedMessage
+                id="pages.users.set_password.password_label"
+                defaultMessage="Password"
+                description="Label for the password field in set password modal"
+              />
+            </Form.Label>
+            <Form.PasswordControl
+              disabled={isPending}
+              required
+              onInput={onPasswordInput}
+            />
+            <Form.ErrorMessage match="valueMissing">
+              <FormattedMessage
+                id="pages.users.set_password.error.password_missing"
+                defaultMessage="This field is required"
+                description="Error message for missing password in set password modal"
+              />
+            </Form.ErrorMessage>
+          </Form.Field>
+
+          <Form.Field name="confirmPassword">
+            <Form.Label>
+              <FormattedMessage
+                id="pages.users.set_password.confirm_password_label"
+                defaultMessage="Enter password again"
+                description="Label for the confirm password field in set password modal"
+              />
+            </Form.Label>
+            <Form.PasswordControl
+              ref={otherPasswordRef}
+              disabled={isPending}
+              required
+            />
+            <Form.ErrorMessage match="valueMissing">
+              <FormattedMessage
+                id="pages.users.set_password.error.password_missing"
+                defaultMessage="This field is required"
+                description="Error message for missing password in set password modal"
+              />
+            </Form.ErrorMessage>
+
+            <Form.ErrorMessage match={(v, form) => v !== form.get("password")}>
+              <FormattedMessage
+                id="pages.users.set_password.error.passwords_mismatch"
+                defaultMessage="Passwords do not match"
+                description="Error message for mismatched passwords in set password modal"
+              />
+            </Form.ErrorMessage>
+
+            <Form.SuccessMessage match="valid">
+              <FormattedMessage
+                id="pages.users.set_password.password_match"
+                defaultMessage="Passwords match!"
+                description="When the two password input match in the set password modal"
+              />
+            </Form.SuccessMessage>
+          </Form.Field>
+
+          <Form.Submit disabled={isPending}>
+            {isPending && <InlineSpinner />}
+            <FormattedMessage
+              id="pages.users.set_password.submit"
+              defaultMessage="Set new password"
+              description="The submit button text in the set password modal"
+            />
+          </Form.Submit>
+        </Form.Root>
+      </Dialog.Description>
+
+      <Dialog.Close asChild>
+        <Button type="button" kind="tertiary" disabled={isPending}>
+          <FormattedMessage {...cancelMessage} />
+        </Button>
+      </Dialog.Close>
+    </Dialog.Root>
+  );
+}
+
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const { userId } = Route.useParams();
@@ -616,6 +812,11 @@ function RouteComponent() {
                 serverName={credentials.serverName}
               />
             )}
+
+            <SetPasswordButton
+              user={user}
+              serverName={credentials.serverName}
+            />
           </div>
         </div>
       </div>

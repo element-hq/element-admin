@@ -166,6 +166,24 @@ export const reactivateUser = async (
   });
 };
 
+export const setUserPassword = async (
+  queryClient: QueryClient,
+  serverName: string,
+  userId: api.Ulid,
+  password: string,
+  skipPasswordCheck = false,
+  signal?: AbortSignal,
+) => {
+  return await api.setUserPassword({
+    ...(await masBaseOptions(queryClient, serverName, signal)),
+    path: { id: userId },
+    body: {
+      password,
+      skip_password_check: skipPasswordCheck,
+    },
+  });
+};
+
 export const userEmailsQuery = (serverName: string, userId: string) =>
   queryOptions({
     queryKey: ["mas", "user-emails", serverName, userId],
