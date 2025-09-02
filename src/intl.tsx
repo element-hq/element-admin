@@ -1,5 +1,6 @@
 import { shouldPolyfill as shouldPolyfillIntlGetCanonicalLocales } from "@formatjs/intl-getcanonicallocales/should-polyfill";
 import { shouldPolyfill as shouldPolyfillIntlLocale } from "@formatjs/intl-locale/should-polyfill";
+import { match } from "@formatjs/intl-localematcher";
 import { shouldPolyfill as shouldPolyfillIntlNumberFormat } from "@formatjs/intl-numberformat/should-polyfill";
 import { shouldPolyfill as shouldPolyfillIntlPluralRules } from "@formatjs/intl-pluralrules/should-polyfill";
 import { shouldPolyfill as shouldPolyfillIntlRelativeTimeFormat } from "@formatjs/intl-relativetimeformat/should-polyfill";
@@ -57,31 +58,8 @@ const supportedLngs = Object.keys(locales).map((url) => {
  *
  * @returns The best supported language
  */
-const getBestLocale = (): string => {
-  for (const preference of navigator.languages) {
-    try {
-      // Use Intl.Collator to resolve the locale
-      const resolved = new Intl.Collator(preference).resolvedOptions().locale;
-
-      // Check if we have an exact match
-      const exact = supportedLngs.find(
-        (locale) => locale.toLowerCase() === resolved.toLowerCase(),
-      );
-      if (exact) return exact;
-
-      // Check for language match
-      const resolvedLang = resolved.split("-")[0];
-      const langMatch = supportedLngs.find(
-        (locale) => locale.split("-")[0] === resolvedLang,
-      );
-      if (langMatch) return langMatch;
-    } catch {
-      continue;
-    }
-  }
-
-  return DEFAULT_LOCALE; // Default locale
-};
+const getBestLocale = (): string =>
+  match(navigator.languages, supportedLngs, DEFAULT_LOCALE);
 
 /**
  * Loads the Intl polyfills for the given locale
