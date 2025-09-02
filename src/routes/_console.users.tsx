@@ -192,7 +192,14 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
     mutationFn: (username: string) =>
       createUser(queryClient, serverName, username),
     onError: () => {
-      toast.error("Failed to create user");
+      toast.error(
+        intl.formatMessage({
+          id: "pages.users.new_user.error_message",
+          defaultMessage: "Error creating user",
+          description:
+            "The error message shown in a toast when a user fails to be created",
+        }),
+      );
     },
     onSuccess: async (response) => {
       toast.success(

@@ -3,6 +3,10 @@
     "description": "The label for the add action/button",
     "message": "Add"
   },
+  "action.cancel": {
+    "description": "Label for a cancel action/button",
+    "message": "Cancel"
+  },
   "action.close": {
     "description": "Label for a 'close' action/button",
     "message": "Close"
@@ -91,6 +95,30 @@
     "description": "The title of the rooms list page",
     "message": "Rooms"
   },
+  "pages.users.lock_account.alert.description": {
+    "description": "In the modal to lock a user, the description of the alert",
+    "message": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."
+  },
+  "pages.users.lock_account.alert.title": {
+    "description": "In the modal to lock a user, the title of the alert",
+    "message": "The user will not be able to send or receive messages"
+  },
+  "pages.users.lock_account.button": {
+    "description": "The label for the lock account button on the user panel",
+    "message": "Lock account"
+  },
+  "pages.users.lock_account.error": {
+    "description": "The error message for locking a user account",
+    "message": "Failed to lock account"
+  },
+  "pages.users.lock_account.success": {
+    "description": "The success message for locking a user account",
+    "message": "Account locked"
+  },
+  "pages.users.lock_account.title": {
+    "description": "The title of the modal asking for confirmation to lock a user account",
+    "message": "Lock this user's account?"
+  },
   "pages.users.new_user.add_user": {
     "description": "The title of the add user dialog",
     "message": "Add user"
@@ -102,6 +130,10 @@
   "pages.users.new_user.description": {
     "description": "The description of the add user dialog",
     "message": "To add a new user to {serverName}, choose a user name for this user, which will be part of their user ID."
+  },
+  "pages.users.new_user.error_message": {
+    "description": "The error message shown in a toast when a user fails to be created",
+    "message": "Error creating user"
   },
   "pages.users.new_user.invalid_localpart": {
     "description": "The error message shown when the localpart input is empty",
@@ -122,6 +154,18 @@
   "pages.users.title": {
     "description": "The title of the users list page",
     "message": "Users"
+  },
+  "pages.users.unlock_account.button": {
+    "description": "The label for the lock account button on the user panel",
+    "message": "Unlock account"
+  },
+  "pages.users.unlock_account.error": {
+    "description": "The error message for unlocking a user account",
+    "message": "Failed to unlock account"
+  },
+  "pages.users.unlock_account.success": {
+    "description": "The success message for unlocking a user account",
+    "message": "Account unlocked"
   },
   "pages.users.user_count": {
     "description": "On the user list page, this heading shows the total number of users",
