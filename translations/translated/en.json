@@ -2,20 +2,14 @@
   "action.add": {
     "message": "Add"
   },
-  "action.deactivate": {
-    "message": "Deactivate"
+  "action.cancel": {
+    "message": "Cancel"
   },
-  "action.lock": {
-    "message": "Lock"
+  "action.close": {
+    "message": "Close"
   },
   "action.sign_out": {
     "message": "Sign out"
-  },
-  "action.unlock": {
-    "message": "Unlock"
-  },
-  "admin": {
-    "message": "Admin"
   },
   "common.filter": {
     "message": "Filter"
@@ -77,8 +71,116 @@
   "pages.rooms.title": {
     "message": "Rooms"
   },
+  "pages.users.deactivate_account.alert.description": {
+    "message": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
+  },
+  "pages.users.deactivate_account.alert.title": {
+    "message": "You're about to delete user data"
+  },
+  "pages.users.deactivate_account.button": {
+    "message": "Deactivate account"
+  },
+  "pages.users.deactivate_account.error": {
+    "message": "Failed to deactivate account"
+  },
+  "pages.users.deactivate_account.success": {
+    "message": "Account deactivated"
+  },
+  "pages.users.deactivate_account.title": {
+    "message": "Deactivate this user?"
+  },
+  "pages.users.lock_account.alert.description": {
+    "message": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."
+  },
+  "pages.users.lock_account.alert.title": {
+    "message": "The user will not be able to send or receive messages"
+  },
+  "pages.users.lock_account.button": {
+    "message": "Lock account"
+  },
+  "pages.users.lock_account.error": {
+    "message": "Failed to lock account"
+  },
+  "pages.users.lock_account.success": {
+    "message": "Account locked"
+  },
+  "pages.users.lock_account.title": {
+    "message": "Lock this user's account?"
+  },
+  "pages.users.new_user.add_user": {
+    "message": "Add user"
+  },
+  "pages.users.new_user.create_account": {
+    "message": "Create account"
+  },
+  "pages.users.new_user.description": {
+    "message": "To add a new user to {serverName}, choose a user name for this user, which will be part of their user ID."
+  },
+  "pages.users.new_user.error_message": {
+    "message": "Error creating user"
+  },
+  "pages.users.new_user.invalid_localpart": {
+    "message": "Localpart can only contain lowercase letters, numbers and underscores"
+  },
+  "pages.users.new_user.localpart": {
+    "message": "Enter name"
+  },
+  "pages.users.new_user.required_error": {
+    "message": "This field is required"
+  },
+  "pages.users.new_user.success_message": {
+    "message": "User created"
+  },
+  "pages.users.reactivate_account.button": {
+    "message": "Reactivate"
+  },
+  "pages.users.reactivate_account.error": {
+    "message": "Failed to reactivate account"
+  },
+  "pages.users.reactivate_account.success": {
+    "message": "Account reactivated"
+  },
+  "pages.users.set_password.button": {
+    "message": "Change password"
+  },
+  "pages.users.set_password.confirm_password_label": {
+    "message": "Enter password again"
+  },
+  "pages.users.set_password.error": {
+    "message": "Failed to set password"
+  },
+  "pages.users.set_password.error.password_missing": {
+    "message": "This field is required"
+  },
+  "pages.users.set_password.error.passwords_mismatch": {
+    "message": "Passwords do not match"
+  },
+  "pages.users.set_password.password_label": {
+    "message": "Password"
+  },
+  "pages.users.set_password.password_match": {
+    "message": "Passwords match!"
+  },
+  "pages.users.set_password.submit": {
+    "message": "Set new password"
+  },
+  "pages.users.set_password.success": {
+    "message": "Password set successfully"
+  },
+  "pages.users.set_password.title": {
+    "message": "Set a new password for this user"
+  },
   "pages.users.title": {
     "message": "Users"
+  },
+  "pages.users.unlock_account.button": {
+    "message": "Unlock account"
+  },
+  "pages.users.unlock_account.error": {
+    "message": "Failed to unlock account"
+  },
+  "pages.users.unlock_account.success": {
+    "message": "Account unlocked"
   },
   "pages.users.user_count": {
     "message": "{COUNT, plural, zero {No users} one {# user} other {# users}}"
@@ -115,8 +217,5 @@
   },
   "rooms_info.other_members": {
     "message": "{COUNT, plural, one {# other} other {# others}}"
-  },
-  "user.account_created": {
-    "message": "Account created"
   }
 }

@@ -5,34 +5,22 @@
       "value": "Hinzufügen"
     }
   ],
-  "action.deactivate": [
+  "action.cancel": [
     {
       "type": 0,
-      "value": "Deaktivieren"
+      "value": "Abbrechen"
     }
   ],
-  "action.lock": [
+  "action.close": [
     {
       "type": 0,
-      "value": "Sperren"
+      "value": "Schließen"
     }
   ],
   "action.sign_out": [
     {
       "type": 0,
       "value": "Abmelden"
-    }
-  ],
-  "action.unlock": [
-    {
-      "type": 0,
-      "value": "Entsperren"
-    }
-  ],
-  "admin": [
-    {
-      "type": 0,
-      "value": "Admin"
     }
   ],
   "common.filter": [
@@ -234,10 +222,234 @@
       "value": "Chats"
     }
   ],
+  "pages.users.deactivate_account.alert.description": [
+    {
+      "type": 0,
+      "value": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
+    }
+  ],
+  "pages.users.deactivate_account.alert.title": [
+    {
+      "type": 0,
+      "value": "You're about to delete user data"
+    }
+  ],
+  "pages.users.deactivate_account.button": [
+    {
+      "type": 0,
+      "value": "Deactivate account"
+    }
+  ],
+  "pages.users.deactivate_account.error": [
+    {
+      "type": 0,
+      "value": "Failed to deactivate account"
+    }
+  ],
+  "pages.users.deactivate_account.success": [
+    {
+      "type": 0,
+      "value": "Account deactivated"
+    }
+  ],
+  "pages.users.deactivate_account.title": [
+    {
+      "type": 0,
+      "value": "Deactivate this user?"
+    }
+  ],
+  "pages.users.lock_account.alert.description": [
+    {
+      "type": 0,
+      "value": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."
+    }
+  ],
+  "pages.users.lock_account.alert.title": [
+    {
+      "type": 0,
+      "value": "The user will not be able to send or receive messages"
+    }
+  ],
+  "pages.users.lock_account.button": [
+    {
+      "type": 0,
+      "value": "Lock account"
+    }
+  ],
+  "pages.users.lock_account.error": [
+    {
+      "type": 0,
+      "value": "Failed to lock account"
+    }
+  ],
+  "pages.users.lock_account.success": [
+    {
+      "type": 0,
+      "value": "Account locked"
+    }
+  ],
+  "pages.users.lock_account.title": [
+    {
+      "type": 0,
+      "value": "Lock this user's account?"
+    }
+  ],
+  "pages.users.new_user.add_user": [
+    {
+      "type": 0,
+      "value": "Nutzer hinzufügen"
+    }
+  ],
+  "pages.users.new_user.create_account": [
+    {
+      "type": 0,
+      "value": "Konto erstellen"
+    }
+  ],
+  "pages.users.new_user.description": [
+    {
+      "type": 0,
+      "value": "Um einen neuen Nutzer zu "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": " hinzuzufügen, wähle einen Nutzernamen aus, der Teil der Nutzer-ID sein wird."
+    }
+  ],
+  "pages.users.new_user.error_message": [
+    {
+      "type": 0,
+      "value": "Error creating user"
+    }
+  ],
+  "pages.users.new_user.invalid_localpart": [
+    {
+      "type": 0,
+      "value": "Der lokale Teil darf nur Kleinbuchstaben, Zahlen und Unterstriche enthalten"
+    }
+  ],
+  "pages.users.new_user.localpart": [
+    {
+      "type": 0,
+      "value": "Name eingeben"
+    }
+  ],
+  "pages.users.new_user.required_error": [
+    {
+      "type": 0,
+      "value": "Dies ist ein Pflichtfeld"
+    }
+  ],
+  "pages.users.new_user.success_message": [
+    {
+      "type": 0,
+      "value": "Nutzer angelegt"
+    }
+  ],
+  "pages.users.reactivate_account.button": [
+    {
+      "type": 0,
+      "value": "Reactivate"
+    }
+  ],
+  "pages.users.reactivate_account.error": [
+    {
+      "type": 0,
+      "value": "Failed to reactivate account"
+    }
+  ],
+  "pages.users.reactivate_account.success": [
+    {
+      "type": 0,
+      "value": "Account reactivated"
+    }
+  ],
+  "pages.users.set_password.button": [
+    {
+      "type": 0,
+      "value": "Change password"
+    }
+  ],
+  "pages.users.set_password.confirm_password_label": [
+    {
+      "type": 0,
+      "value": "Enter password again"
+    }
+  ],
+  "pages.users.set_password.error": [
+    {
+      "type": 0,
+      "value": "Failed to set password"
+    }
+  ],
+  "pages.users.set_password.error.password_missing": [
+    {
+      "type": 0,
+      "value": "This field is required"
+    }
+  ],
+  "pages.users.set_password.error.passwords_mismatch": [
+    {
+      "type": 0,
+      "value": "Passwords do not match"
+    }
+  ],
+  "pages.users.set_password.password_label": [
+    {
+      "type": 0,
+      "value": "Password"
+    }
+  ],
+  "pages.users.set_password.password_match": [
+    {
+      "type": 0,
+      "value": "Passwords match!"
+    }
+  ],
+  "pages.users.set_password.submit": [
+    {
+      "type": 0,
+      "value": "Set new password"
+    }
+  ],
+  "pages.users.set_password.success": [
+    {
+      "type": 0,
+      "value": "Password set successfully"
+    }
+  ],
+  "pages.users.set_password.title": [
+    {
+      "type": 0,
+      "value": "Set a new password for this user"
+    }
+  ],
   "pages.users.title": [
     {
       "type": 0,
       "value": "Nutzer"
+    }
+  ],
+  "pages.users.unlock_account.button": [
+    {
+      "type": 0,
+      "value": "Unlock account"
+    }
+  ],
+  "pages.users.unlock_account.error": [
+    {
+      "type": 0,
+      "value": "Failed to unlock account"
+    }
+  ],
+  "pages.users.unlock_account.success": [
+    {
+      "type": 0,
+      "value": "Account unlocked"
     }
   ],
   "pages.users.user_count": [
@@ -378,12 +590,6 @@
       "pluralType": "cardinal",
       "type": 6,
       "value": "COUNT"
-    }
-  ],
-  "user.account_created": [
-    {
-      "type": 0,
-      "value": "Konto erstellt"
     }
   ]
 }

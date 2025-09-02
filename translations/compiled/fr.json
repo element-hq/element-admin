@@ -5,34 +5,22 @@
       "value": "Ajouter"
     }
   ],
-  "action.deactivate": [
+  "action.cancel": [
     {
       "type": 0,
-      "value": "Désactiver"
+      "value": "Annuler"
     }
   ],
-  "action.lock": [
+  "action.close": [
     {
       "type": 0,
-      "value": "Verrouiller"
+      "value": "Fermer"
     }
   ],
   "action.sign_out": [
     {
       "type": 0,
       "value": "Se déconnecter"
-    }
-  ],
-  "action.unlock": [
-    {
-      "type": 0,
-      "value": "Déverrouiller"
-    }
-  ],
-  "admin": [
-    {
-      "type": 0,
-      "value": "Administrateur"
     }
   ],
   "common.filter": [
@@ -234,10 +222,234 @@
       "value": "Salons"
     }
   ],
+  "pages.users.deactivate_account.alert.description": [
+    {
+      "type": 0,
+      "value": "Cela déconnectera automatiquement l'utilisateur de tous les appareils, invalidera tous les jetons d'accès, supprimera tous les identifiants tiers et effacera définitivement les données de son compte."
+    }
+  ],
+  "pages.users.deactivate_account.alert.title": [
+    {
+      "type": 0,
+      "value": "Vous êtes sur le point de supprimer des données utilisateur"
+    }
+  ],
+  "pages.users.deactivate_account.button": [
+    {
+      "type": 0,
+      "value": "Désactiver le compte"
+    }
+  ],
+  "pages.users.deactivate_account.error": [
+    {
+      "type": 0,
+      "value": "Impossible de désactiver le compte"
+    }
+  ],
+  "pages.users.deactivate_account.success": [
+    {
+      "type": 0,
+      "value": "Compte désactivé"
+    }
+  ],
+  "pages.users.deactivate_account.title": [
+    {
+      "type": 0,
+      "value": "Désactiver cet utilisateur ?"
+    }
+  ],
+  "pages.users.lock_account.alert.description": [
+    {
+      "type": 0,
+      "value": "Cet utilisateur sera automatiquement bloqué de tous les appareils sur lesquels il est actuellement connecté et ne pourra pas se connecter à de nouveaux appareils tant qu'ils n'auront pas été déverrouillés."
+    }
+  ],
+  "pages.users.lock_account.alert.title": [
+    {
+      "type": 0,
+      "value": "L'utilisateur ne pourra pas envoyer ou recevoir de messages"
+    }
+  ],
+  "pages.users.lock_account.button": [
+    {
+      "type": 0,
+      "value": "Bloquer le compte"
+    }
+  ],
+  "pages.users.lock_account.error": [
+    {
+      "type": 0,
+      "value": "Impossible de bloquer le compte"
+    }
+  ],
+  "pages.users.lock_account.success": [
+    {
+      "type": 0,
+      "value": "Compte bloqué"
+    }
+  ],
+  "pages.users.lock_account.title": [
+    {
+      "type": 0,
+      "value": "Bloquer ce compte utilisateur ?"
+    }
+  ],
+  "pages.users.new_user.add_user": [
+    {
+      "type": 0,
+      "value": "Ajouter un utilisateur"
+    }
+  ],
+  "pages.users.new_user.create_account": [
+    {
+      "type": 0,
+      "value": "Créer le compte"
+    }
+  ],
+  "pages.users.new_user.description": [
+    {
+      "type": 0,
+      "value": "Pour ajouter un nouvel utilisateur à "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": " , choisissez un nom d'utilisateur pour cet utilisateur, qui fera partie de son identifiant utilisateur."
+    }
+  ],
+  "pages.users.new_user.error_message": [
+    {
+      "type": 0,
+      "value": "Erreur lors de la création de l'utilisateur"
+    }
+  ],
+  "pages.users.new_user.invalid_localpart": [
+    {
+      "type": 0,
+      "value": "Le nom d'utilisateur ne peux contenir uniquement des lettres minuscules, des chiffres et des traits de soulignement"
+    }
+  ],
+  "pages.users.new_user.localpart": [
+    {
+      "type": 0,
+      "value": "Saisir un nom d'utilisateur"
+    }
+  ],
+  "pages.users.new_user.required_error": [
+    {
+      "type": 0,
+      "value": "Ce champ est requis"
+    }
+  ],
+  "pages.users.new_user.success_message": [
+    {
+      "type": 0,
+      "value": "Utilisateur créé"
+    }
+  ],
+  "pages.users.reactivate_account.button": [
+    {
+      "type": 0,
+      "value": "Débloquer"
+    }
+  ],
+  "pages.users.reactivate_account.error": [
+    {
+      "type": 0,
+      "value": "Impossible de réactiver le compte"
+    }
+  ],
+  "pages.users.reactivate_account.success": [
+    {
+      "type": 0,
+      "value": "Compte débloqué"
+    }
+  ],
+  "pages.users.set_password.button": [
+    {
+      "type": 0,
+      "value": "Changer le mot de passe"
+    }
+  ],
+  "pages.users.set_password.confirm_password_label": [
+    {
+      "type": 0,
+      "value": "Saisir le mot de passe à nouveau"
+    }
+  ],
+  "pages.users.set_password.error": [
+    {
+      "type": 0,
+      "value": "Impossible de définir mot de passe de l'utilisateur"
+    }
+  ],
+  "pages.users.set_password.error.password_missing": [
+    {
+      "type": 0,
+      "value": "Ce champ est requis"
+    }
+  ],
+  "pages.users.set_password.error.passwords_mismatch": [
+    {
+      "type": 0,
+      "value": "Les mots de passe ne correspondent pas"
+    }
+  ],
+  "pages.users.set_password.password_label": [
+    {
+      "type": 0,
+      "value": "Mot de passe"
+    }
+  ],
+  "pages.users.set_password.password_match": [
+    {
+      "type": 0,
+      "value": "Les mots de passe correspondent."
+    }
+  ],
+  "pages.users.set_password.submit": [
+    {
+      "type": 0,
+      "value": "Définir un nouveau mot de passe"
+    }
+  ],
+  "pages.users.set_password.success": [
+    {
+      "type": 0,
+      "value": "Mot de passe défini avec succès"
+    }
+  ],
+  "pages.users.set_password.title": [
+    {
+      "type": 0,
+      "value": "Définir un nouveau mot de passe pour cet utilisateur"
+    }
+  ],
   "pages.users.title": [
     {
       "type": 0,
       "value": "Utilisateurs"
+    }
+  ],
+  "pages.users.unlock_account.button": [
+    {
+      "type": 0,
+      "value": "Débloquer le compte"
+    }
+  ],
+  "pages.users.unlock_account.error": [
+    {
+      "type": 0,
+      "value": "Impossible de débloquer le compte"
+    }
+  ],
+  "pages.users.unlock_account.success": [
+    {
+      "type": 0,
+      "value": "Compte débloqué"
     }
   ],
   "pages.users.user_count": [
@@ -378,12 +590,6 @@
       "pluralType": "cardinal",
       "type": 6,
       "value": "COUNT"
-    }
-  ],
-  "user.account_created": [
-    {
-      "type": 0,
-      "value": "Compte créé"
     }
   ]
 }
