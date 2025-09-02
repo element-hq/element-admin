@@ -95,6 +95,30 @@
     "description": "The title of the rooms list page",
     "message": "Rooms"
   },
+  "pages.users.deactivate_account.alert.description": {
+    "description": "In the modal to deactivate a user, the description of the alert",
+    "message": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
+  },
+  "pages.users.deactivate_account.alert.title": {
+    "description": "In the modal to deactivate a user, the title of the alert",
+    "message": "You're about to delete user data"
+  },
+  "pages.users.deactivate_account.button": {
+    "description": "The label for the deactivate account button on the user panel",
+    "message": "Deactivate account"
+  },
+  "pages.users.deactivate_account.error": {
+    "description": "The error message for deactivating a user account",
+    "message": "Failed to deactivate account"
+  },
+  "pages.users.deactivate_account.success": {
+    "description": "The success message for deactivating a user account",
+    "message": "Account deactivated"
+  },
+  "pages.users.deactivate_account.title": {
+    "description": "The title of the modal asking for confirmation to deactivate a user account",
+    "message": "Deactivate this user?"
+  },
   "pages.users.lock_account.alert.description": {
     "description": "In the modal to lock a user, the description of the alert",
     "message": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."
@@ -150,6 +174,18 @@
   "pages.users.new_user.success_message": {
     "description": "The success message shown in a toast when a user is created",
     "message": "User created"
+  },
+  "pages.users.reactivate_account.button": {
+    "description": "The label for the reactivate account button on the user panel",
+    "message": "Reactivate"
+  },
+  "pages.users.reactivate_account.error": {
+    "description": "The error message for reactivating a user account",
+    "message": "Failed to reactivate account"
+  },
+  "pages.users.reactivate_account.success": {
+    "description": "The success message for reactivating a user account",
+    "message": "Account reactivated"
   },
   "pages.users.title": {
     "description": "The title of the users list page",

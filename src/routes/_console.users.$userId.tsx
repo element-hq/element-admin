@@ -8,6 +8,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowLeftIcon,
   LockIcon,
+  DeleteIcon,
+  CheckCircleIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
   Badge,
@@ -25,6 +27,7 @@ import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 import {
   deactivateUser,
   lockUser,
+  reactivateUser,
   unlockUser,
   userEmailsQuery,
   userQuery,
@@ -60,6 +63,17 @@ interface LockUnlockButtonProps {
     attributes: {
       username: string;
       locked_at?: string | null;
+    };
+  };
+  serverName: string;
+}
+
+interface DeactivateReactivateButtonProps {
+  user: {
+    id: string;
+    attributes: {
+      username: string;
+      deactivated_at?: string | null;
     };
   };
   serverName: string;
@@ -112,6 +126,7 @@ function UnlockButton({ user, serverName }: LockUnlockButtonProps) {
     <Button
       type="button"
       kind="secondary"
+      size="sm"
       disabled={isPending}
       onClick={onClick}
     >
@@ -122,6 +137,211 @@ function UnlockButton({ user, serverName }: LockUnlockButtonProps) {
         description="The label for the lock account button on the user panel"
       />
     </Button>
+  );
+}
+
+function ReactivateButton({
+  user,
+  serverName,
+}: DeactivateReactivateButtonProps) {
+  const queryClient = useQueryClient();
+  const intl = useIntl();
+  const { mutate, isPending } = useMutation({
+    mutationFn: () => reactivateUser(queryClient, serverName, user.id),
+    onError: () => {
+      toast.error(
+        intl.formatMessage({
+          id: "pages.users.reactivate_account.error",
+          defaultMessage: "Failed to reactivate account",
+          description: "The error message for reactivating a user account",
+        }),
+      );
+    },
+    onSuccess: async (): Promise<void> => {
+      toast.success(
+        intl.formatMessage({
+          id: "pages.users.reactivate_account.success",
+          defaultMessage: "Account reactivated",
+          description: "The success message for reactivating a user account",
+        }),
+      );
+
+      // Invalidate both the individual user query and the users list
+      queryClient.invalidateQueries({ queryKey: ["mas", "users", serverName] });
+
+      // We await on the individual user invalidation query invalidation so that
+      // the query stays in a pending state until the new data is loaded
+      await queryClient.invalidateQueries({
+        queryKey: ["mas", "user", serverName, user.id],
+      });
+    },
+  });
+
+  const onClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      if (isPending) return;
+      mutate();
+    },
+    [mutate, isPending],
+  );
+
+  return (
+    <Button
+      type="button"
+      kind="secondary"
+      disabled={isPending}
+      onClick={onClick}
+      size="sm"
+      Icon={isPending ? undefined : CheckCircleIcon}
+    >
+      {isPending && <InlineSpinner />}
+      <FormattedMessage
+        id="pages.users.reactivate_account.button"
+        defaultMessage="Reactivate"
+        description="The label for the reactivate account button on the user panel"
+      />
+    </Button>
+  );
+}
+
+const deactivateAccountMessage = defineMessage({
+  id: "pages.users.deactivate_account.button",
+  defaultMessage: "Deactivate account",
+  description: "The label for the deactivate account button on the user panel",
+});
+
+function DeactivateButton({
+  user,
+  serverName,
+}: DeactivateReactivateButtonProps) {
+  const intl = useIntl();
+  const queryClient = useQueryClient();
+  const [open, setOpen] = useState(false);
+  const { mutate, isPending } = useMutation({
+    mutationFn: () => deactivateUser(queryClient, serverName, user.id),
+    onError: () => {
+      toast.error(
+        intl.formatMessage({
+          id: "pages.users.deactivate_account.error",
+          defaultMessage: "Failed to deactivate account",
+          description: "The error message for deactivating a user account",
+        }),
+      );
+    },
+    onSuccess: async (): Promise<void> => {
+      toast.success(
+        intl.formatMessage({
+          id: "pages.users.deactivate_account.success",
+          defaultMessage: "Account deactivated",
+          description: "The success message for deactivating a user account",
+        }),
+      );
+
+      // Invalidate both the individual user query and the users list
+      queryClient.invalidateQueries({ queryKey: ["mas", "users", serverName] });
+
+      // We await on the individual user invalidation query invalidation so that
+      // the query stays in a pending state until the new data is loaded
+      await queryClient.invalidateQueries({
+        queryKey: ["mas", "user", serverName, user.id],
+      });
+      setOpen(false);
+    },
+  });
+
+  const onOpenChange = useCallback(
+    (open: boolean) => {
+      if (isPending) {
+        return;
+      }
+
+      setOpen(open);
+    },
+    [setOpen, isPending],
+  );
+
+  const handleClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      mutate();
+    },
+    [mutate],
+  );
+
+  return (
+    <Dialog.Root
+      open={open}
+      onOpenChange={onOpenChange}
+      trigger={
+        <Button
+          type="button"
+          size="sm"
+          kind="secondary"
+          destructive
+          Icon={DeleteIcon}
+        >
+          <FormattedMessage {...deactivateAccountMessage} />
+        </Button>
+      }
+    >
+      <Dialog.Title>
+        <FormattedMessage
+          id="pages.users.deactivate_account.title"
+          defaultMessage="Deactivate this user?"
+          description="The title of the modal asking for confirmation to deactivate a user account"
+        />
+      </Dialog.Title>
+      {/* TODO: user avatar, display name, better style */}
+      <p className="text-text-secondary border border-bg-subtle-primary p-3 leading-10">
+        <Text
+          weight="semibold"
+          size="md"
+          as="span"
+          className="text-text-primary"
+        >
+          @{user.attributes.username}
+        </Text>
+        :{serverName}
+      </p>
+      <Dialog.Description asChild>
+        <Alert
+          type="critical"
+          title={intl.formatMessage({
+            id: "pages.users.deactivate_account.alert.title",
+            description:
+              "In the modal to deactivate a user, the title of the alert",
+            defaultMessage: "You're about to delete user data",
+          })}
+        >
+          <FormattedMessage
+            id="pages.users.deactivate_account.alert.description"
+            description="In the modal to deactivate a user, the description of the alert"
+            defaultMessage="This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
+          />
+        </Alert>
+      </Dialog.Description>
+      <Button
+        type="button"
+        kind="primary"
+        destructive
+        disabled={isPending}
+        onClick={handleClick}
+        Icon={isPending ? undefined : DeleteIcon}
+      >
+        {isPending && <InlineSpinner />}
+        <FormattedMessage {...deactivateAccountMessage} />
+      </Button>
+      <Dialog.Close asChild>
+        <Button type="button" kind="tertiary" disabled={isPending}>
+          <FormattedMessage
+            id="action.cancel"
+            defaultMessage="Cancel"
+            description="Label for a cancel action/button"
+          />
+        </Button>
+      </Dialog.Close>
+    </Dialog.Root>
   );
 }
 
@@ -261,7 +481,6 @@ function LockButton({ user, serverName }: LockUnlockButtonProps) {
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const { userId } = Route.useParams();
-  const queryClient = useQueryClient();
 
   const { data } = useSuspenseQuery(userQuery(credentials.serverName, userId));
 
@@ -272,21 +491,7 @@ function RouteComponent() {
   const user = data.data;
 
   const deactivated = user.attributes.deactivated_at !== null;
-
-  const deactivateMutation = useMutation({
-    mutationFn: () =>
-      deactivateUser(queryClient, credentials.serverName, userId),
-    throwOnError: true,
-    onSuccess: () => {
-      // Invalidate both the individual user query and the users list
-      queryClient.invalidateQueries({
-        queryKey: ["mas", "user", credentials.serverName, userId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["mas", "users", credentials.serverName],
-      });
-    },
-  });
+  const locked = user.attributes.locked_at !== null;
 
   return (
     <Navigation.Details>
@@ -390,27 +595,27 @@ function RouteComponent() {
               )}
             </div>
 
-            {user.attributes.locked_at !== null && (
+            {locked && !deactivated && (
               <UnlockButton user={user} serverName={credentials.serverName} />
             )}
 
-            {user.attributes.locked_at === null && (
+            {!locked && !deactivated && (
               <LockButton user={user} serverName={credentials.serverName} />
             )}
 
-            <Button
-              type="button"
-              size="sm"
-              kind="tertiary"
-              destructive
-              disabled={deactivateMutation.isPending || deactivated}
-              onClick={() => deactivateMutation.mutate()}
-            >
-              {deactivateMutation.isPending && (
-                <InlineSpinner className="mr-2" />
-              )}
-              Deactivate User
-            </Button>
+            {deactivated && (
+              <ReactivateButton
+                user={user}
+                serverName={credentials.serverName}
+              />
+            )}
+
+            {!deactivated && (
+              <DeactivateButton
+                user={user}
+                serverName={credentials.serverName}
+              />
+            )}
           </div>
         </div>
       </div>

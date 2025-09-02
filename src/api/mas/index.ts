@@ -154,6 +154,18 @@ export const deactivateUser = async (
   });
 };
 
+export const reactivateUser = async (
+  queryClient: QueryClient,
+  serverName: string,
+  userId: api.Ulid,
+  signal?: AbortSignal,
+) => {
+  return await api.reactivateUser({
+    ...(await masBaseOptions(queryClient, serverName, signal)),
+    path: { id: userId },
+  });
+};
+
 export const userEmailsQuery = (serverName: string, userId: string) =>
   queryOptions({
     queryKey: ["mas", "user-emails", serverName, userId],
