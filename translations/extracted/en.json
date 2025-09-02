@@ -99,12 +99,16 @@
     "description": "The label for the create account button in the new user form",
     "message": "Create account"
   },
+  "pages.users.new_user.description": {
+    "description": "The description of the add user dialog",
+    "message": "To add a new user to {serverName}, choose a user name for this user, which will be part of their user ID."
+  },
   "pages.users.new_user.invalid_localpart": {
     "description": "The error message shown when the localpart input is empty",
     "message": "Localpart can only contain lowercase letters, numbers and underscores"
   },
   "pages.users.new_user.localpart": {
-    "description": "The label for the localpart input in the new user\n              form. Careful with the value, some browsers (*cough* Safari) will\n              trigger autocomplete (which we don't want!) if the input labal has\n              'username' or 'user ID' in it",
+    "description": "The label for the localpart input in the new user form. Careful with the value, some browsers (*cough* Safari) will trigger autocomplete (which we don't want!) if the input label has 'username' or 'user ID' in it",
     "message": "Enter name"
   },
   "pages.users.new_user.required_error": {
