@@ -6,7 +6,6 @@ import {
 } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  ArrowLeftIcon,
   CloseIcon,
   EditIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
@@ -15,11 +14,12 @@ import {
   Button,
   Form,
   H3,
-  H6,
   InlineSpinner,
   Text,
+  Tooltip,
 } from "@vector-im/compound-web";
 import { type FormEvent, useCallback, useRef, useState } from "react";
+import { useIntl } from "react-intl";
 
 import {
   type EditTokenParameters,
@@ -29,6 +29,7 @@ import {
   unrevokeRegistrationToken,
 } from "@/api/mas";
 import { CopyToClipboard } from "@/components/copy";
+import * as Dialog from "@/components/dialog";
 import { ButtonLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import {
@@ -47,6 +48,7 @@ export const Route = createFileRoute("/_console/registration-tokens/$tokenId")({
 });
 
 function TokenDetailComponent() {
+  const intl = useIntl();
   const { credentials } = Route.useRouteContext();
   const parameters = Route.useParams();
   const queryClient = useQueryClient();
@@ -54,8 +56,6 @@ function TokenDetailComponent() {
   const { data } = useSuspenseQuery(
     registrationTokenQuery(credentials.serverName, parameters.tokenId),
   );
-
-  const [isEditing, setIsEditing] = useState(false);
 
   const revokeTokenMutation = useMutation({
     mutationFn: async () =>
@@ -109,41 +109,184 @@ function TokenDetailComponent() {
     },
   });
 
+  const token = data.data;
+  const tokenAttributes = token.attributes;
+
+  const copyMutation = useMutation({
+    mutationFn: () => navigator.clipboard.writeText(tokenAttributes.token),
+    onSuccess: () => setTimeout(() => copyMutation.reset(), 2000),
+  });
+
+  return (
+    <Navigation.Details>
+      <div className="flex items-center justify-end">
+        <Tooltip
+          label={intl.formatMessage({
+            id: "action.close",
+            defaultMessage: "Close",
+            description: "Label for a 'close' action/button",
+          })}
+        >
+          <ButtonLink
+            iconOnly
+            to="/registration-tokens"
+            kind="tertiary"
+            size="sm"
+            Icon={CloseIcon}
+          />
+        </Tooltip>
+      </div>
+
+      <div className="flex flex-col gap-4">
+        <H3 className="flex items-center gap-2">
+          {tokenAttributes.token}
+
+          <CopyToClipboard value={tokenAttributes.token} />
+        </H3>
+
+        <div className="flex flex-wrap gap-4 *:flex *:flex-col *:gap-1 *:items-start">
+          <div>
+            <Text size="sm" weight="semibold" className="text-text-secondary">
+              Status
+            </Text>
+            <Badge kind={tokenAttributes.valid ? "green" : "red"}>
+              {getTokenStatus(tokenAttributes)}
+            </Badge>
+          </div>
+
+          <div>
+            <Text size="sm" weight="semibold" className="text-text-secondary">
+              Created At
+            </Text>
+            <Text>
+              {computeHumanReadableDateTimeStringFromUtc(
+                tokenAttributes.created_at,
+              )}
+            </Text>
+          </div>
+
+          <div>
+            <Text size="sm" weight="semibold" className="text-text-secondary">
+              Expires At
+            </Text>
+            <Text>
+              {tokenAttributes.expires_at
+                ? computeHumanReadableDateTimeStringFromUtc(
+                    tokenAttributes.expires_at,
+                  )
+                : "Never expires"}
+            </Text>
+          </div>
+          <div>
+            <Text size="sm" weight="semibold" className="text-text-secondary">
+              Usage Count
+            </Text>
+            <Text>
+              {tokenAttributes.times_used} /{" "}
+              {tokenAttributes.usage_limit || "∞"}
+            </Text>
+          </div>
+
+          {tokenAttributes.revoked_at && (
+            <div>
+              <Text size="sm" weight="semibold" className="text-text-secondary">
+                Revoked At
+              </Text>
+              <Text>
+                {computeHumanReadableDateTimeStringFromUtc(
+                  tokenAttributes.revoked_at,
+                )}
+              </Text>
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-col gap-3">
+          {tokenAttributes.revoked_at ? (
+            <Button
+              type="button"
+              size="sm"
+              kind="secondary"
+              disabled={unrevokeTokenMutation.isPending}
+              onClick={() => unrevokeTokenMutation.mutate()}
+            >
+              {unrevokeTokenMutation.isPending && (
+                <InlineSpinner className="mr-2" />
+              )}
+              Unrevoke Token
+            </Button>
+          ) : (
+            <Button
+              type="button"
+              size="sm"
+              kind="secondary"
+              destructive
+              disabled={revokeTokenMutation.isPending}
+              onClick={() => revokeTokenMutation.mutate()}
+            >
+              {revokeTokenMutation.isPending && (
+                <InlineSpinner className="mr-2" />
+              )}
+              Revoke Token
+            </Button>
+          )}
+
+          <EditTokenModal
+            token={token}
+            serverName={credentials.serverName}
+            tokenId={parameters.tokenId}
+          />
+        </div>
+      </div>
+    </Navigation.Details>
+  );
+}
+
+interface EditTokenModalProps {
+  token: {
+    id: string;
+    attributes: {
+      token: string;
+      expires_at?: string | null;
+      usage_limit?: number | null;
+      revoked_at?: string | null;
+    };
+  };
+  serverName: string;
+  tokenId: string;
+}
+
+function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
+  const [open, setOpen] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const expiresInputRef = useRef<HTMLInputElement>(null);
+  const usageLimitInputRef = useRef<HTMLInputElement>(null);
+
+  const queryClient = useQueryClient();
+
   const editTokenMutation = useMutation({
     mutationFn: async (parameters: EditTokenParameters) =>
-      editRegistrationToken(
-        queryClient,
-        credentials.serverName,
-        token.id,
-        parameters,
-      ),
+      editRegistrationToken(queryClient, serverName, token.id, parameters),
     onSuccess: (data) => {
       // Update the token query data
       queryClient.setQueryData(
-        [
-          "mas",
-          "registration-token",
-          credentials.serverName,
-          parameters.tokenId,
-        ],
+        ["mas", "registration-token", serverName, tokenId],
         data,
       );
 
       // Invalidate tokens list query to reflect new data
       queryClient.invalidateQueries({
-        queryKey: ["mas", "registration-tokens", credentials.serverName],
+        queryKey: ["mas", "registration-tokens", serverName],
       });
 
-      // Exit edit mode
-      setIsEditing(false);
+      // Close the modal and reset form
+      setOpen(false);
+      formRef.current?.reset();
     },
   });
 
-  const token = data.data;
+  const { mutate: mutateEditToken, isPending } = editTokenMutation;
   const tokenAttributes = token.attributes;
-
-  const expiresInputRef = useRef<HTMLInputElement>(null);
-  const usageLimitInputRef = useRef<HTMLInputElement>(null);
 
   const clearExpiration = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -165,287 +308,142 @@ function TokenDetailComponent() {
     [],
   );
 
-  const copyMutation = useMutation({
-    mutationFn: () => navigator.clipboard.writeText(tokenAttributes.token),
-    onSuccess: () => setTimeout(() => copyMutation.reset(), 2000),
-  });
+  const onOpenChange = useCallback(
+    (open: boolean) => {
+      if (isPending) {
+        return;
+      }
+      setOpen(open);
+      if (!open) {
+        formRef.current?.reset();
+      }
+    },
+    [isPending],
+  );
 
   const handleEditSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       const formData = new FormData(event.currentTarget);
-      const parameters: EditTokenParameters = {};
+      const editParameters: EditTokenParameters = {};
 
       const expires = formData.get("expires") as string;
-      parameters.expires_at = expires
+      editParameters.expires_at = expires
         ? computeUtcIsoStringFromLocal(expires)
         : // Empty string means set to null (never expires)
           null;
 
       const usageLimitValue = formData.get("usageLimit") as string;
-      parameters.usage_limit =
+      editParameters.usage_limit =
         usageLimitValue &&
         !Number.isNaN(Number(usageLimitValue)) &&
         Number(usageLimitValue) > 0
           ? Number(usageLimitValue)
           : null;
 
-      editTokenMutation.mutate(parameters);
+      mutateEditToken(editParameters);
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [editTokenMutation.mutate],
+    [mutateEditToken],
   );
 
-  const cancelEdit = useCallback(() => {
-    setIsEditing(false);
-  }, []);
-
   return (
-    <Navigation.Details>
-      <div className="space-y-6">
-        <div className="flex items-center gap-2">
-          <ButtonLink to="/registration-tokens" kind="tertiary" size="sm">
-            <ArrowLeftIcon className="h-4 w-4" />
-            Back to Tokens
-          </ButtonLink>
-        </div>
+    <Dialog.Root
+      open={open}
+      onOpenChange={onOpenChange}
+      trigger={
+        <Button
+          type="button"
+          size="sm"
+          kind="secondary"
+          disabled={!!tokenAttributes.revoked_at}
+          Icon={EditIcon}
+        >
+          Edit Properties
+        </Button>
+      }
+    >
+      <Dialog.Title>Edit Registration Token</Dialog.Title>
 
-        <div className="bg-bg-subtle-secondary rounded-lg">
-          <div className="px-6 py-5 border-b border-border-interactive-secondary">
-            <H3 className="flex items-center gap-2">
-              {tokenAttributes.token}
-
-              <CopyToClipboard value={tokenAttributes.token} />
-            </H3>
-
-            <Text size="sm" className="text-text-secondary">
-              Token ID: {token.id}
-            </Text>
-          </div>
-          <div className="px-6 py-5 space-y-6">
-            <div className="flex flex-col space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Text
-                    size="sm"
-                    weight="semibold"
-                    className="text-text-secondary"
-                  >
-                    Status
-                  </Text>
-                  <Badge kind={tokenAttributes.valid ? "green" : "red"}>
-                    {getTokenStatus(tokenAttributes)}
-                  </Badge>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Text
-                    size="sm"
-                    weight="semibold"
-                    className="text-text-secondary"
-                  >
-                    Created At
-                  </Text>
-                  <Text>
-                    {computeHumanReadableDateTimeStringFromUtc(
-                      tokenAttributes.created_at,
-                    )}
-                  </Text>
-                </div>
-
-                <div className="space-y-2">
-                  <Text
-                    size="sm"
-                    weight="semibold"
-                    className="text-text-secondary"
-                  >
-                    Expires At
-                  </Text>
-                  <Text>
-                    {tokenAttributes.expires_at
-                      ? computeHumanReadableDateTimeStringFromUtc(
-                          tokenAttributes.expires_at,
-                        )
-                      : "Never expires"}
-                  </Text>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Text
-                    size="sm"
-                    weight="semibold"
-                    className="text-text-secondary"
-                  >
-                    Usage Count
-                  </Text>
-                  <Text>
-                    {tokenAttributes.times_used} /{" "}
-                    {tokenAttributes.usage_limit || "∞"}
-                  </Text>
-                </div>
-
-                {tokenAttributes.revoked_at && (
-                  <div className="space-y-2">
-                    <Text
-                      size="sm"
-                      weight="semibold"
-                      className="text-text-secondary"
-                    >
-                      Revoked At
-                    </Text>
-                    <Text>
-                      {computeHumanReadableDateTimeStringFromUtc(
-                        tokenAttributes.revoked_at,
-                      )}
-                    </Text>
-                  </div>
-                )}
-              </div>
+      <Dialog.Description asChild>
+        <Form.Root
+          ref={formRef}
+          onSubmit={handleEditSubmit}
+          className="space-y-6"
+        >
+          <Form.Field name="expires">
+            <Form.Label>Expires at</Form.Label>
+            <div className="flex items-center gap-3">
+              <Form.TextControl
+                type="datetime-local"
+                ref={expiresInputRef}
+                className="flex-1"
+                defaultValue={
+                  tokenAttributes.expires_at
+                    ? computeLocalDateTimeStringFromUtc(
+                        tokenAttributes.expires_at,
+                      )
+                    : ""
+                }
+                placeholder="No expiration"
+                min="1"
+                disabled={isPending}
+              />
+              <Button
+                type="button"
+                iconOnly
+                kind="secondary"
+                onClick={clearExpiration}
+                Icon={CloseIcon}
+                disabled={isPending}
+              />
             </div>
+            <Form.HelpMessage>
+              When the token expires. Leave empty if the token should never
+              expire.
+            </Form.HelpMessage>
+          </Form.Field>
 
-            {isEditing ? (
-              <div className="pt-5 border-t border-border-interactive-secondary">
-                <Text
-                  size="sm"
-                  weight="medium"
-                  className="text-text-secondary mb-4"
-                >
-                  Edit Token
-                </Text>
-                <Form.Root onSubmit={handleEditSubmit} className="space-y-6">
-                  <Form.Field name="expires">
-                    <Form.Label>Expires at</Form.Label>
-                    <div className="flex items-center gap-3">
-                      <Form.TextControl
-                        type="datetime-local"
-                        ref={expiresInputRef}
-                        className="flex-1"
-                        defaultValue={
-                          tokenAttributes.expires_at
-                            ? computeLocalDateTimeStringFromUtc(
-                                tokenAttributes.expires_at,
-                              )
-                            : ""
-                        }
-                        placeholder="No expiration"
-                        min="1"
-                      />
-                      <Button
-                        type="button"
-                        iconOnly
-                        kind="secondary"
-                        onClick={clearExpiration}
-                        Icon={CloseIcon}
-                      />
-                    </div>
-                    <Form.HelpMessage>
-                      When the token expires. Leave empty if the token should
-                      never expire.
-                    </Form.HelpMessage>
-                  </Form.Field>
+          <Form.Field name="usageLimit">
+            <Form.Label>Usage Limit</Form.Label>
+            <div className="flex items-center gap-3">
+              <Form.TextControl
+                type="number"
+                ref={usageLimitInputRef}
+                className="flex-1"
+                defaultValue={tokenAttributes.usage_limit || ""}
+                placeholder="Unlimited"
+                min="1"
+                disabled={isPending}
+              />
+              <Button
+                type="button"
+                iconOnly
+                kind="secondary"
+                onClick={clearUsageLimit}
+                Icon={CloseIcon}
+                disabled={isPending}
+              />
+            </div>
+            <Form.HelpMessage>
+              Maximum number of times this token can be used. Leave empty for
+              unlimited uses.
+            </Form.HelpMessage>
+          </Form.Field>
 
-                  <Form.Field name="usageLimit">
-                    <Form.Label>Usage Limit</Form.Label>
-                    <div className="flex items-center gap-3">
-                      <Form.TextControl
-                        type="number"
-                        ref={usageLimitInputRef}
-                        className="flex-1"
-                        defaultValue={tokenAttributes.usage_limit || ""}
-                        placeholder="Unlimited"
-                        min="1"
-                      />
-                      <Button
-                        type="button"
-                        iconOnly
-                        kind="secondary"
-                        onClick={clearUsageLimit}
-                        Icon={CloseIcon}
-                      />
-                    </div>
-                    <Form.HelpMessage>
-                      Maximum number of times this token can be used. Leave
-                      empty for unlimited uses.
-                    </Form.HelpMessage>
-                  </Form.Field>
+          <Form.Submit disabled={isPending}>
+            {isPending && <InlineSpinner />}
+            Save Changes
+          </Form.Submit>
+        </Form.Root>
+      </Dialog.Description>
 
-                  <div className="flex gap-3">
-                    <Button
-                      type="submit"
-                      kind="primary"
-                      disabled={editTokenMutation.isPending}
-                    >
-                      {editTokenMutation.isPending && (
-                        <InlineSpinner className="mr-2" />
-                      )}
-                      Save Changes
-                    </Button>
-                    <Button
-                      type="button"
-                      kind="secondary"
-                      onClick={cancelEdit}
-                      disabled={editTokenMutation.isPending}
-                    >
-                      Cancel
-                    </Button>
-                  </div>
-                </Form.Root>
-              </div>
-            ) : (
-              <div className="pt-5 border-t border-border-interactive-secondary flex flex-col gap-3">
-                <H6>Actions</H6>
-                <div className="flex gap-3">
-                  {tokenAttributes.revoked_at ? (
-                    <Button
-                      type="button"
-                      size="sm"
-                      kind="secondary"
-                      disabled={unrevokeTokenMutation.isPending}
-                      onClick={() => unrevokeTokenMutation.mutate()}
-                    >
-                      {unrevokeTokenMutation.isPending && (
-                        <InlineSpinner className="mr-2" />
-                      )}
-                      Unrevoke Token
-                    </Button>
-                  ) : (
-                    <Button
-                      type="button"
-                      size="sm"
-                      kind="secondary"
-                      destructive
-                      disabled={revokeTokenMutation.isPending}
-                      onClick={() => revokeTokenMutation.mutate()}
-                    >
-                      {revokeTokenMutation.isPending && (
-                        <InlineSpinner className="mr-2" />
-                      )}
-                      Revoke Token
-                    </Button>
-                  )}
-
-                  <Button
-                    type="button"
-                    size="sm"
-                    kind="secondary"
-                    onClick={() => setIsEditing(true)}
-                    disabled={!!tokenAttributes.revoked_at}
-                    Icon={EditIcon}
-                  >
-                    Edit Properties
-                  </Button>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </Navigation.Details>
+      <Dialog.Close asChild>
+        <Button type="button" kind="tertiary" disabled={isPending}>
+          Cancel
+        </Button>
+      </Dialog.Close>
+    </Dialog.Root>
   );
 }
 
