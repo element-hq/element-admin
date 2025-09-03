@@ -3,6 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import babelPluginFormatjs from "babel-plugin-formatjs";
+import babelPluginReactCompiler from "babel-plugin-react-compiler";
 import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
@@ -32,6 +33,7 @@ export default defineConfig(({ mode }) => ({
     viteReact({
       babel: {
         plugins: [
+          babelPluginReactCompiler,
           [
             babelPluginFormatjs,
             {
