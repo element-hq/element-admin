@@ -17,6 +17,7 @@ import {
   Text,
   Tooltip,
 } from "@vector-im/compound-web";
+import cx from "classnames";
 import { type FormEvent, useCallback, useRef, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
@@ -138,42 +139,42 @@ function TokenDetailComponent() {
           <CopyToClipboard value={tokenAttributes.token} />
         </H3>
 
-        <div className="flex flex-wrap gap-4 *:flex *:flex-col *:gap-1 *:items-start">
-          <div>
-            <Text size="sm" weight="semibold" className="text-text-secondary">
+        <div className="flex flex-col gap-6">
+          <Info>
+            <InfoTitle>
               <FormattedMessage
                 id="pages.registration_tokens.status.label"
                 defaultMessage="Status"
                 description="Label for the Registration token status field"
               />
-            </Text>
+            </InfoTitle>
             <TokenStatusBadge token={tokenAttributes} />
-          </div>
+          </Info>
 
-          <div>
-            <Text size="sm" weight="semibold" className="text-text-secondary">
+          <Info>
+            <InfoTitle>
               <FormattedMessage
                 id="pages.registration_tokens.created_at_label"
                 defaultMessage="Created at"
                 description="Label for the token creation date field"
               />
-            </Text>
-            <Text>
+            </InfoTitle>
+            <InfoValue>
               {computeHumanReadableDateTimeStringFromUtc(
                 tokenAttributes.created_at,
               )}
-            </Text>
-          </div>
+            </InfoValue>
+          </Info>
 
-          <div>
-            <Text size="sm" weight="semibold" className="text-text-secondary">
+          <Info>
+            <InfoTitle>
               <FormattedMessage
                 id="pages.registration_tokens.expires_at_label"
                 defaultMessage="Expires at"
                 description="Label for the token expiration date field"
               />
-            </Text>
-            <Text>
+            </InfoTitle>
+            <InfoValue>
               {tokenAttributes.expires_at
                 ? computeHumanReadableDateTimeStringFromUtc(
                     tokenAttributes.expires_at,
@@ -184,17 +185,17 @@ function TokenDetailComponent() {
                     description:
                       "Text shown when a token has no expiration date",
                   })}
-            </Text>
-          </div>
-          <div>
-            <Text size="sm" weight="semibold" className="text-text-secondary">
+            </InfoValue>
+          </Info>
+          <Info>
+            <InfoTitle>
               <FormattedMessage
                 id="pages.registration_tokens.usage_count_label"
                 defaultMessage="Usage count"
                 description="Label for the token usage count field"
               />
-            </Text>
-            <Text>
+            </InfoTitle>
+            <InfoValue>
               {tokenAttributes.usage_limit === null ? (
                 <FormattedMessage
                   id="pages.registration_tokens.token_uses.unlimited"
@@ -215,24 +216,24 @@ function TokenDetailComponent() {
                   }}
                 />
               )}
-            </Text>
-          </div>
+            </InfoValue>
+          </Info>
 
           {tokenAttributes.revoked_at && (
-            <div>
-              <Text size="sm" weight="semibold" className="text-text-secondary">
+            <Info>
+              <InfoTitle>
                 <FormattedMessage
                   id="pages.registration_tokens.revoked_at_label"
                   defaultMessage="Revoked at"
                   description="Label for the token revocation date field"
                 />
-              </Text>
-              <Text>
+              </InfoTitle>
+              <InfoValue>
                 {computeHumanReadableDateTimeStringFromUtc(
                   tokenAttributes.revoked_at,
                 )}
-              </Text>
-            </div>
+              </InfoValue>
+            </Info>
           )}
         </div>
 
@@ -604,3 +605,18 @@ function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
     </Dialog.Root>
   );
 }
+
+const Info = ({ className, ...props }: React.ComponentProps<"section">) => (
+  <section
+    className={cx(className, "flex flex-col gap-2 items-start")}
+    {...props}
+  />
+);
+
+const InfoTitle = ({ className, ...props }: React.ComponentProps<"p">) => (
+  <Text size="sm" className={cx(className, "text-text-secondary")} {...props} />
+);
+
+const InfoValue = ({ className, ...props }: React.ComponentProps<"p">) => (
+  <Text size="md" className={cx(className, "text-text-primary")} {...props} />
+);

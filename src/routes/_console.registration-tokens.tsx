@@ -534,11 +534,7 @@ function RouteComponent() {
                 params={{ tokenId: token.id }}
                 resetScroll={false}
               >
-                <Text
-                  size="md"
-                  weight="semibold"
-                  className="text-text-secondary"
-                >
+                <Text size="md" weight="semibold">
                   {token.attributes.token}
                 </Text>
               </Link>

@@ -22,6 +22,7 @@ import {
   Form,
   Tooltip,
 } from "@vector-im/compound-web";
+import cx from "classnames";
 import { useCallback, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { defineMessage, FormattedMessage, useIntl } from "react-intl";
@@ -784,11 +785,9 @@ function RouteComponent() {
           )}
         </div>
 
-        <div className="flex flex-wrap gap-4 *:flex *:flex-col *:gap-1 *:items-start">
-          <div>
-            <Text size="sm" weight="medium">
-              Status
-            </Text>
+        <div className="flex flex-col gap-6">
+          <Info>
+            <InfoTitle>Status</InfoTitle>
             <Badge
               kind={
                 user.attributes.deactivated_at
@@ -804,45 +803,37 @@ function RouteComponent() {
                   ? "Locked"
                   : "Active"}
             </Badge>
-          </div>
+          </Info>
 
-          <div>
-            <Text size="sm" weight="medium">
-              Admin Privileges
-            </Text>
+          <Info>
+            <InfoTitle>Admin Privileges</InfoTitle>
             <Badge kind={user.attributes.admin ? "green" : "grey"}>
               {user.attributes.admin ? "Admin" : "User"}
             </Badge>
-          </div>
+          </Info>
 
-          <div>
-            <Text size="sm" weight="medium">
-              Created At
-            </Text>
-            <Text size="sm">
+          <Info>
+            <InfoTitle>Created At</InfoTitle>
+            <InfoValue>
               {computeHumanReadableDateTimeStringFromUtc(
                 user.attributes.created_at,
               )}
-            </Text>
-          </div>
+            </InfoValue>
+          </Info>
 
           {user.attributes.locked_at && (
-            <div>
-              <Text size="sm" weight="medium">
-                Locked At
-              </Text>
-              <Text size="sm">
+            <Info>
+              <InfoTitle>Locked At</InfoTitle>
+              <InfoValue>
                 {computeHumanReadableDateTimeStringFromUtc(
                   user.attributes.locked_at,
                 )}
-              </Text>
-            </div>
+              </InfoValue>
+            </Info>
           )}
 
-          <div>
-            <Text size="sm" weight="medium">
-              Email Addresses ({emailsData.data.length})
-            </Text>
+          <Info>
+            <InfoTitle>Email Addresses ({emailsData.data.length})</InfoTitle>
             {emailsData.data.length > 0 ? (
               <div className="space-y-2">
                 {emailsData.data.map((emailItem) => (
@@ -850,16 +841,31 @@ function RouteComponent() {
                     key={emailItem.id}
                     className="flex items-center justify-between p-3 bg-bg-subtle-primary rounded-md"
                   >
-                    <Text size="sm">{emailItem.attributes.email}</Text>
+                    <InfoValue>{emailItem.attributes.email}</InfoValue>
                   </div>
                 ))}
               </div>
             ) : (
-              <Text size="sm">No email addresses found</Text>
+              <InfoValue>No email addresses found</InfoValue>
             )}
-          </div>
+          </Info>
         </div>
       </div>
     </Navigation.Details>
   );
 }
+
+const Info = ({ className, ...props }: React.ComponentProps<"section">) => (
+  <section
+    className={cx(className, "flex flex-col gap-2 items-start")}
+    {...props}
+  />
+);
+
+const InfoTitle = ({ className, ...props }: React.ComponentProps<"p">) => (
+  <Text size="sm" className={cx(className, "text-text-secondary")} {...props} />
+);
+
+const InfoValue = ({ className, ...props }: React.ComponentProps<"p">) => (
+  <Text size="md" className={cx(className, "text-text-primary")} {...props} />
+);
