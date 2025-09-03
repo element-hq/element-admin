@@ -59,11 +59,140 @@
   "pages.login.title": {
     "message": "Login"
   },
+  "pages.registration_tokens.auto_generate_placeholder": {
+    "message": "Auto-generate if left empty"
+  },
+  "pages.registration_tokens.create_token.error": {
+    "message": "Failed to create token"
+  },
+  "pages.registration_tokens.create_token.submit": {
+    "message": "Create Token"
+  },
+  "pages.registration_tokens.create_token.success": {
+    "message": "Token created successfully"
+  },
+  "pages.registration_tokens.create_token.title": {
+    "message": "Create Registration Token"
+  },
+  "pages.registration_tokens.created_at_column": {
+    "message": "Created at"
+  },
+  "pages.registration_tokens.created_at_label": {
+    "message": "Created at"
+  },
+  "pages.registration_tokens.custom_token_help": {
+    "message": "Optional custom token string. If left empty, a secure token will be auto-generated."
+  },
+  "pages.registration_tokens.custom_token_label": {
+    "message": "Custom Token"
+  },
+  "pages.registration_tokens.edit_properties": {
+    "message": "Edit properties"
+  },
+  "pages.registration_tokens.edit_token_title": {
+    "message": "Edit registration token"
+  },
+  "pages.registration_tokens.expires_at_field": {
+    "message": "Expires at"
+  },
+  "pages.registration_tokens.expires_at_help": {
+    "message": "When the token expires. Leave empty if the token should never expire."
+  },
+  "pages.registration_tokens.expires_at_label": {
+    "message": "Expires at"
+  },
+  "pages.registration_tokens.filter_active_only": {
+    "message": "Active Only"
+  },
+  "pages.registration_tokens.filter_expired_only": {
+    "message": "Expired Only"
+  },
+  "pages.registration_tokens.filter_revoked_only": {
+    "message": "Revoked Only"
+  },
+  "pages.registration_tokens.filter_used_only": {
+    "message": "Used Only"
+  },
+  "pages.registration_tokens.loading_more": {
+    "message": "Loading more tokens..."
+  },
+  "pages.registration_tokens.never_expires": {
+    "message": "Never expires"
+  },
+  "pages.registration_tokens.no_expiration_placeholder": {
+    "message": "No expiration"
+  },
+  "pages.registration_tokens.revoke_token": {
+    "message": "Revoke token"
+  },
+  "pages.registration_tokens.revoked_at_label": {
+    "message": "Revoked at"
+  },
+  "pages.registration_tokens.save_changes": {
+    "message": "Save Changes"
+  },
+  "pages.registration_tokens.status.active": {
+    "message": "Active"
+  },
+  "pages.registration_tokens.status.column": {
+    "message": "Status"
+  },
+  "pages.registration_tokens.status.expired": {
+    "message": "Expired"
+  },
+  "pages.registration_tokens.status.invalid": {
+    "message": "Invalid"
+  },
+  "pages.registration_tokens.status.label": {
+    "message": "Status"
+  },
+  "pages.registration_tokens.status.revoked": {
+    "message": "Revoked"
+  },
+  "pages.registration_tokens.status.used_up": {
+    "message": "Used up"
+  },
   "pages.registration_tokens.title": {
     "message": "Registration tokens"
   },
+  "pages.registration_tokens.token_column": {
+    "message": "Token"
+  },
   "pages.registration_tokens.token_count": {
     "message": "{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
+  },
+  "pages.registration_tokens.token_uses.limited": {
+    "message": "{uses, number} / {limit, number}"
+  },
+  "pages.registration_tokens.token_uses.unlimited": {
+    "message": "{uses, number} / ∞"
+  },
+  "pages.registration_tokens.unlimited_placeholder": {
+    "message": "Unlimited"
+  },
+  "pages.registration_tokens.unlimited_uses_placeholder": {
+    "message": "Leave empty for unlimited uses"
+  },
+  "pages.registration_tokens.unrevoke_token": {
+    "message": "Unrevoke token"
+  },
+  "pages.registration_tokens.usage_count_label": {
+    "message": "Usage count"
+  },
+  "pages.registration_tokens.usage_limit_field": {
+    "message": "Usage limit"
+  },
+  "pages.registration_tokens.usage_limit_help": {
+    "message": "Maximum number of times this token can be used. Leave empty for unlimited uses."
+  },
+  "pages.registration_tokens.usage_limit_label": {
+    "message": "Usage Limit"
+  },
+  "pages.registration_tokens.uses_column": {
+    "message": "Uses"
+  },
+  "pages.registration_tokens.valid_until_column": {
+    "message": "Valid Until"
   },
   "pages.rooms.room_count": {
     "message": "{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"

@@ -130,10 +130,202 @@
       "value": "Login"
     }
   ],
+  "pages.registration_tokens.auto_generate_placeholder": [
+    {
+      "type": 0,
+      "value": "Auto-generate if left empty"
+    }
+  ],
+  "pages.registration_tokens.create_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to create token"
+    }
+  ],
+  "pages.registration_tokens.create_token.submit": [
+    {
+      "type": 0,
+      "value": "Create Token"
+    }
+  ],
+  "pages.registration_tokens.create_token.success": [
+    {
+      "type": 0,
+      "value": "Token created successfully"
+    }
+  ],
+  "pages.registration_tokens.create_token.title": [
+    {
+      "type": 0,
+      "value": "Create Registration Token"
+    }
+  ],
+  "pages.registration_tokens.created_at_column": [
+    {
+      "type": 0,
+      "value": "Created at"
+    }
+  ],
+  "pages.registration_tokens.created_at_label": [
+    {
+      "type": 0,
+      "value": "Created at"
+    }
+  ],
+  "pages.registration_tokens.custom_token_help": [
+    {
+      "type": 0,
+      "value": "Optional custom token string. If left empty, a secure token will be auto-generated."
+    }
+  ],
+  "pages.registration_tokens.custom_token_label": [
+    {
+      "type": 0,
+      "value": "Custom Token"
+    }
+  ],
+  "pages.registration_tokens.edit_properties": [
+    {
+      "type": 0,
+      "value": "Edit properties"
+    }
+  ],
+  "pages.registration_tokens.edit_token_title": [
+    {
+      "type": 0,
+      "value": "Edit registration token"
+    }
+  ],
+  "pages.registration_tokens.expires_at_field": [
+    {
+      "type": 0,
+      "value": "Expires at"
+    }
+  ],
+  "pages.registration_tokens.expires_at_help": [
+    {
+      "type": 0,
+      "value": "When the token expires. Leave empty if the token should never expire."
+    }
+  ],
+  "pages.registration_tokens.expires_at_label": [
+    {
+      "type": 0,
+      "value": "Expires at"
+    }
+  ],
+  "pages.registration_tokens.filter_active_only": [
+    {
+      "type": 0,
+      "value": "Active Only"
+    }
+  ],
+  "pages.registration_tokens.filter_expired_only": [
+    {
+      "type": 0,
+      "value": "Expired Only"
+    }
+  ],
+  "pages.registration_tokens.filter_revoked_only": [
+    {
+      "type": 0,
+      "value": "Revoked Only"
+    }
+  ],
+  "pages.registration_tokens.filter_used_only": [
+    {
+      "type": 0,
+      "value": "Used Only"
+    }
+  ],
+  "pages.registration_tokens.loading_more": [
+    {
+      "type": 0,
+      "value": "Loading more tokens..."
+    }
+  ],
+  "pages.registration_tokens.never_expires": [
+    {
+      "type": 0,
+      "value": "Never expires"
+    }
+  ],
+  "pages.registration_tokens.no_expiration_placeholder": [
+    {
+      "type": 0,
+      "value": "No expiration"
+    }
+  ],
+  "pages.registration_tokens.revoke_token": [
+    {
+      "type": 0,
+      "value": "Revoke token"
+    }
+  ],
+  "pages.registration_tokens.revoked_at_label": [
+    {
+      "type": 0,
+      "value": "Revoked at"
+    }
+  ],
+  "pages.registration_tokens.save_changes": [
+    {
+      "type": 0,
+      "value": "Save Changes"
+    }
+  ],
+  "pages.registration_tokens.status.active": [
+    {
+      "type": 0,
+      "value": "Active"
+    }
+  ],
+  "pages.registration_tokens.status.column": [
+    {
+      "type": 0,
+      "value": "Status"
+    }
+  ],
+  "pages.registration_tokens.status.expired": [
+    {
+      "type": 0,
+      "value": "Expired"
+    }
+  ],
+  "pages.registration_tokens.status.invalid": [
+    {
+      "type": 0,
+      "value": "Invalid"
+    }
+  ],
+  "pages.registration_tokens.status.label": [
+    {
+      "type": 0,
+      "value": "Status"
+    }
+  ],
+  "pages.registration_tokens.status.revoked": [
+    {
+      "type": 0,
+      "value": "Revoked"
+    }
+  ],
+  "pages.registration_tokens.status.used_up": [
+    {
+      "type": 0,
+      "value": "Used up"
+    }
+  ],
   "pages.registration_tokens.title": [
     {
       "type": 0,
       "value": "Registrierungstoken"
+    }
+  ],
+  "pages.registration_tokens.token_column": [
+    {
+      "type": 0,
+      "value": "Token"
     }
   ],
   "pages.registration_tokens.token_count": [
@@ -174,6 +366,87 @@
       "pluralType": "cardinal",
       "type": 6,
       "value": "COUNT"
+    }
+  ],
+  "pages.registration_tokens.token_uses.limited": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "uses"
+    },
+    {
+      "type": 0,
+      "value": " / "
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "limit"
+    }
+  ],
+  "pages.registration_tokens.token_uses.unlimited": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "uses"
+    },
+    {
+      "type": 0,
+      "value": " / ∞"
+    }
+  ],
+  "pages.registration_tokens.unlimited_placeholder": [
+    {
+      "type": 0,
+      "value": "Unlimited"
+    }
+  ],
+  "pages.registration_tokens.unlimited_uses_placeholder": [
+    {
+      "type": 0,
+      "value": "Leave empty for unlimited uses"
+    }
+  ],
+  "pages.registration_tokens.unrevoke_token": [
+    {
+      "type": 0,
+      "value": "Unrevoke token"
+    }
+  ],
+  "pages.registration_tokens.usage_count_label": [
+    {
+      "type": 0,
+      "value": "Usage count"
+    }
+  ],
+  "pages.registration_tokens.usage_limit_field": [
+    {
+      "type": 0,
+      "value": "Usage limit"
+    }
+  ],
+  "pages.registration_tokens.usage_limit_help": [
+    {
+      "type": 0,
+      "value": "Maximum number of times this token can be used. Leave empty for unlimited uses."
+    }
+  ],
+  "pages.registration_tokens.usage_limit_label": [
+    {
+      "type": 0,
+      "value": "Usage Limit"
+    }
+  ],
+  "pages.registration_tokens.uses_column": [
+    {
+      "type": 0,
+      "value": "Uses"
+    }
+  ],
+  "pages.registration_tokens.valid_until_column": [
+    {
+      "type": 0,
+      "value": "Valid Until"
     }
   ],
   "pages.rooms.room_count": [
@@ -225,73 +498,73 @@
   "pages.users.deactivate_account.alert.description": [
     {
       "type": 0,
-      "value": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
+      "value": "Der Nutzer wird durch diese Aktion automatisch von allen Geräten abgemeldet, alle Zugriffstoken werden entfernt, alle IDs von Drittanbietern werden gelöscht und die Kontodaten werden dauerhaft gelöscht."
     }
   ],
   "pages.users.deactivate_account.alert.title": [
     {
       "type": 0,
-      "value": "You're about to delete user data"
+      "value": "Du bist dabei, Nutzerdaten zu löschen"
     }
   ],
   "pages.users.deactivate_account.button": [
     {
       "type": 0,
-      "value": "Deactivate account"
+      "value": "Nutzerkonto deaktivieren"
     }
   ],
   "pages.users.deactivate_account.error": [
     {
       "type": 0,
-      "value": "Failed to deactivate account"
+      "value": "Konto konnte nicht deaktiviert werden"
     }
   ],
   "pages.users.deactivate_account.success": [
     {
       "type": 0,
-      "value": "Account deactivated"
+      "value": "Konto deaktiviert"
     }
   ],
   "pages.users.deactivate_account.title": [
     {
       "type": 0,
-      "value": "Deactivate this user?"
+      "value": "Diesen Nutzer deaktivieren?"
     }
   ],
   "pages.users.lock_account.alert.description": [
     {
       "type": 0,
-      "value": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."
+      "value": "Dieser Nutzer wird automatisch auf allen angemeldeten Geräten gesperrt und kann sich erst bei neuen Geräten anmelden, wenn diese entsperrt wurden."
     }
   ],
   "pages.users.lock_account.alert.title": [
     {
       "type": 0,
-      "value": "The user will not be able to send or receive messages"
+      "value": "Der Nutzer kann keine Nachrichten mehr senden oder empfangen."
     }
   ],
   "pages.users.lock_account.button": [
     {
       "type": 0,
-      "value": "Lock account"
+      "value": "Konto sperren"
     }
   ],
   "pages.users.lock_account.error": [
     {
       "type": 0,
-      "value": "Failed to lock account"
+      "value": "Konto konnte nicht gesperrt werden"
     }
   ],
   "pages.users.lock_account.success": [
     {
       "type": 0,
-      "value": "Account locked"
+      "value": "Konto gesperrt"
     }
   ],
   "pages.users.lock_account.title": [
     {
       "type": 0,
-      "value": "Lock this user's account?"
+      "value": "Das Konto dieses Nutzers sperren?"
     }
   ],
   "pages.users.new_user.add_user": [
@@ -323,7 +596,7 @@
   "pages.users.new_user.error_message": [
     {
       "type": 0,
-      "value": "Error creating user"
+      "value": "Fehler beim Anlegen des Nutzers"
     }
   ],
   "pages.users.new_user.invalid_localpart": [
@@ -353,79 +626,79 @@
   "pages.users.reactivate_account.button": [
     {
       "type": 0,
-      "value": "Reactivate"
+      "value": "Reaktivieren"
     }
   ],
   "pages.users.reactivate_account.error": [
     {
       "type": 0,
-      "value": "Failed to reactivate account"
+      "value": "Reaktivierung des Kontos fehlgeschlagen"
     }
   ],
   "pages.users.reactivate_account.success": [
     {
       "type": 0,
-      "value": "Account reactivated"
+      "value": "Konto reaktiviert"
     }
   ],
   "pages.users.set_password.button": [
     {
       "type": 0,
-      "value": "Change password"
+      "value": "Passwort ändern"
     }
   ],
   "pages.users.set_password.confirm_password_label": [
     {
       "type": 0,
-      "value": "Enter password again"
+      "value": "Passwort erneut eingeben"
     }
   ],
   "pages.users.set_password.error": [
     {
       "type": 0,
-      "value": "Failed to set password"
+      "value": "Passwort konnte nicht festgelegt werden"
     }
   ],
   "pages.users.set_password.error.password_missing": [
     {
       "type": 0,
-      "value": "This field is required"
+      "value": "Dies ist ein Pflichtfeld"
     }
   ],
   "pages.users.set_password.error.passwords_mismatch": [
     {
       "type": 0,
-      "value": "Passwords do not match"
+      "value": "Passwörter stimmen nicht überein"
     }
   ],
   "pages.users.set_password.password_label": [
     {
       "type": 0,
-      "value": "Password"
+      "value": "Passwort"
     }
   ],
   "pages.users.set_password.password_match": [
     {
       "type": 0,
-      "value": "Passwords match!"
+      "value": "Passwörter stimmen überein"
     }
   ],
   "pages.users.set_password.submit": [
     {
       "type": 0,
-      "value": "Set new password"
+      "value": "Neues Passwort festlegen"
     }
   ],
   "pages.users.set_password.success": [
     {
       "type": 0,
-      "value": "Password set successfully"
+      "value": "Passwort erfolgreich festgelegt"
     }
   ],
   "pages.users.set_password.title": [
     {
       "type": 0,
-      "value": "Set a new password for this user"
+      "value": "Neues Passwort für diesen Nutzer festlegen"
     }
   ],
   "pages.users.title": [
@@ -437,19 +710,19 @@
   "pages.users.unlock_account.button": [
     {
       "type": 0,
-      "value": "Unlock account"
+      "value": "Konto entsperren"
     }
   ],
   "pages.users.unlock_account.error": [
     {
       "type": 0,
-      "value": "Failed to unlock account"
+      "value": "Entsperren des Kontos ist fehlgeschlagen."
     }
   ],
   "pages.users.unlock_account.success": [
     {
       "type": 0,
-      "value": "Account unlocked"
+      "value": "Konto entsperrt"
     }
   ],
   "pages.users.user_count": [

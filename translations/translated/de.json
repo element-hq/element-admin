@@ -59,11 +59,140 @@
   "pages.login.title": {
     "message": "Login"
   },
+  "pages.registration_tokens.auto_generate_placeholder": {
+    "message": "Auto-generate if left empty"
+  },
+  "pages.registration_tokens.create_token.error": {
+    "message": "Failed to create token"
+  },
+  "pages.registration_tokens.create_token.submit": {
+    "message": "Create Token"
+  },
+  "pages.registration_tokens.create_token.success": {
+    "message": "Token created successfully"
+  },
+  "pages.registration_tokens.create_token.title": {
+    "message": "Create Registration Token"
+  },
+  "pages.registration_tokens.created_at_column": {
+    "message": "Created at"
+  },
+  "pages.registration_tokens.created_at_label": {
+    "message": "Created at"
+  },
+  "pages.registration_tokens.custom_token_help": {
+    "message": "Optional custom token string. If left empty, a secure token will be auto-generated."
+  },
+  "pages.registration_tokens.custom_token_label": {
+    "message": "Custom Token"
+  },
+  "pages.registration_tokens.edit_properties": {
+    "message": "Edit properties"
+  },
+  "pages.registration_tokens.edit_token_title": {
+    "message": "Edit registration token"
+  },
+  "pages.registration_tokens.expires_at_field": {
+    "message": "Expires at"
+  },
+  "pages.registration_tokens.expires_at_help": {
+    "message": "When the token expires. Leave empty if the token should never expire."
+  },
+  "pages.registration_tokens.expires_at_label": {
+    "message": "Expires at"
+  },
+  "pages.registration_tokens.filter_active_only": {
+    "message": "Active Only"
+  },
+  "pages.registration_tokens.filter_expired_only": {
+    "message": "Expired Only"
+  },
+  "pages.registration_tokens.filter_revoked_only": {
+    "message": "Revoked Only"
+  },
+  "pages.registration_tokens.filter_used_only": {
+    "message": "Used Only"
+  },
+  "pages.registration_tokens.loading_more": {
+    "message": "Loading more tokens..."
+  },
+  "pages.registration_tokens.never_expires": {
+    "message": "Never expires"
+  },
+  "pages.registration_tokens.no_expiration_placeholder": {
+    "message": "No expiration"
+  },
+  "pages.registration_tokens.revoke_token": {
+    "message": "Revoke token"
+  },
+  "pages.registration_tokens.revoked_at_label": {
+    "message": "Revoked at"
+  },
+  "pages.registration_tokens.save_changes": {
+    "message": "Save Changes"
+  },
+  "pages.registration_tokens.status.active": {
+    "message": "Active"
+  },
+  "pages.registration_tokens.status.column": {
+    "message": "Status"
+  },
+  "pages.registration_tokens.status.expired": {
+    "message": "Expired"
+  },
+  "pages.registration_tokens.status.invalid": {
+    "message": "Invalid"
+  },
+  "pages.registration_tokens.status.label": {
+    "message": "Status"
+  },
+  "pages.registration_tokens.status.revoked": {
+    "message": "Revoked"
+  },
+  "pages.registration_tokens.status.used_up": {
+    "message": "Used up"
+  },
   "pages.registration_tokens.title": {
     "message": "Registrierungstoken"
   },
+  "pages.registration_tokens.token_column": {
+    "message": "Token"
+  },
   "pages.registration_tokens.token_count": {
     "message": "{COUNT, plural, zero {Keine Token} one {# Token} other {# Token}}"
+  },
+  "pages.registration_tokens.token_uses.limited": {
+    "message": "{uses, number} / {limit, number}"
+  },
+  "pages.registration_tokens.token_uses.unlimited": {
+    "message": "{uses, number} / ∞"
+  },
+  "pages.registration_tokens.unlimited_placeholder": {
+    "message": "Unlimited"
+  },
+  "pages.registration_tokens.unlimited_uses_placeholder": {
+    "message": "Leave empty for unlimited uses"
+  },
+  "pages.registration_tokens.unrevoke_token": {
+    "message": "Unrevoke token"
+  },
+  "pages.registration_tokens.usage_count_label": {
+    "message": "Usage count"
+  },
+  "pages.registration_tokens.usage_limit_field": {
+    "message": "Usage limit"
+  },
+  "pages.registration_tokens.usage_limit_help": {
+    "message": "Maximum number of times this token can be used. Leave empty for unlimited uses."
+  },
+  "pages.registration_tokens.usage_limit_label": {
+    "message": "Usage Limit"
+  },
+  "pages.registration_tokens.uses_column": {
+    "message": "Uses"
+  },
+  "pages.registration_tokens.valid_until_column": {
+    "message": "Valid Until"
   },
   "pages.rooms.room_count": {
     "message": "{COUNT, plural, =0 {Keine Chats} one {# Chat} other {# Chats}}"
@@ -72,40 +201,40 @@
     "message": "Chats"
   },
   "pages.users.deactivate_account.alert.description": {
-    "message": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
+    "message": "Der Nutzer wird durch diese Aktion automatisch von allen Geräten abgemeldet, alle Zugriffstoken werden entfernt, alle IDs von Drittanbietern werden gelöscht und die Kontodaten werden dauerhaft gelöscht."
   },
   "pages.users.deactivate_account.alert.title": {
-    "message": "You're about to delete user data"
+    "message": "Du bist dabei, Nutzerdaten zu löschen"
   },
   "pages.users.deactivate_account.button": {
-    "message": "Deactivate account"
+    "message": "Nutzerkonto deaktivieren"
   },
   "pages.users.deactivate_account.error": {
-    "message": "Failed to deactivate account"
+    "message": "Konto konnte nicht deaktiviert werden"
   },
   "pages.users.deactivate_account.success": {
-    "message": "Account deactivated"
+    "message": "Konto deaktiviert"
   },
   "pages.users.deactivate_account.title": {
-    "message": "Deactivate this user?"
+    "message": "Diesen Nutzer deaktivieren?"
   },
   "pages.users.lock_account.alert.description": {
-    "message": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."
+    "message": "Dieser Nutzer wird automatisch auf allen angemeldeten Geräten gesperrt und kann sich erst bei neuen Geräten anmelden, wenn diese entsperrt wurden."
   },
   "pages.users.lock_account.alert.title": {
-    "message": "The user will not be able to send or receive messages"
+    "message": "Der Nutzer kann keine Nachrichten mehr senden oder empfangen."
   },
   "pages.users.lock_account.button": {
-    "message": "Lock account"
+    "message": "Konto sperren"
   },
   "pages.users.lock_account.error": {
-    "message": "Failed to lock account"
+    "message": "Konto konnte nicht gesperrt werden"
   },
   "pages.users.lock_account.success": {
-    "message": "Account locked"
+    "message": "Konto gesperrt"
   },
   "pages.users.lock_account.title": {
-    "message": "Lock this user's account?"
+    "message": "Das Konto dieses Nutzers sperren?"
   },
   "pages.users.new_user.add_user": {
     "message": "Nutzer hinzufügen"
@@ -117,7 +246,7 @@
     "message": "Um einen neuen Nutzer zu {serverName} hinzuzufügen, wähle einen Nutzernamen aus, der Teil der Nutzer-ID sein wird."
   },
   "pages.users.new_user.error_message": {
-    "message": "Error creating user"
+    "message": "Fehler beim Anlegen des Nutzers"
   },
   "pages.users.new_user.invalid_localpart": {
     "message": "Der lokale Teil darf nur Kleinbuchstaben, Zahlen und Unterstriche enthalten"
@@ -132,55 +261,55 @@
     "message": "Nutzer angelegt"
   },
   "pages.users.reactivate_account.button": {
-    "message": "Reactivate"
+    "message": "Reaktivieren"
   },
   "pages.users.reactivate_account.error": {
-    "message": "Failed to reactivate account"
+    "message": "Reaktivierung des Kontos fehlgeschlagen"
   },
   "pages.users.reactivate_account.success": {
-    "message": "Account reactivated"
+    "message": "Konto reaktiviert"
   },
   "pages.users.set_password.button": {
-    "message": "Change password"
+    "message": "Passwort ändern"
   },
   "pages.users.set_password.confirm_password_label": {
-    "message": "Enter password again"
+    "message": "Passwort erneut eingeben"
   },
   "pages.users.set_password.error": {
-    "message": "Failed to set password"
+    "message": "Passwort konnte nicht festgelegt werden"
   },
   "pages.users.set_password.error.password_missing": {
-    "message": "This field is required"
+    "message": "Dies ist ein Pflichtfeld"
   },
   "pages.users.set_password.error.passwords_mismatch": {
-    "message": "Passwords do not match"
+    "message": "Passwörter stimmen nicht überein"
   },
   "pages.users.set_password.password_label": {
-    "message": "Password"
+    "message": "Passwort"
   },
   "pages.users.set_password.password_match": {
-    "message": "Passwords match!"
+    "message": "Passwörter stimmen überein"
   },
   "pages.users.set_password.submit": {
-    "message": "Set new password"
+    "message": "Neues Passwort festlegen"
   },
   "pages.users.set_password.success": {
-    "message": "Password set successfully"
+    "message": "Passwort erfolgreich festgelegt"
   },
   "pages.users.set_password.title": {
-    "message": "Set a new password for this user"
+    "message": "Neues Passwort für diesen Nutzer festlegen"
   },
   "pages.users.title": {
     "message": "Nutzer"
   },
   "pages.users.unlock_account.button": {
-    "message": "Unlock account"
+    "message": "Konto entsperren"
   },
   "pages.users.unlock_account.error": {
-    "message": "Failed to unlock account"
+    "message": "Entsperren des Kontos ist fehlgeschlagen."
   },
   "pages.users.unlock_account.success": {
-    "message": "Account unlocked"
+    "message": "Konto entsperrt"
   },
   "pages.users.user_count": {
     "message": "{COUNT, plural, zero {Keine Nutzer} one {# Nutzer} other {# Nutzer}}"

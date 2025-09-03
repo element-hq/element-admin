@@ -130,10 +130,202 @@
       "value": "Login"
     }
   ],
+  "pages.registration_tokens.auto_generate_placeholder": [
+    {
+      "type": 0,
+      "value": "Auto-generate if left empty"
+    }
+  ],
+  "pages.registration_tokens.create_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to create token"
+    }
+  ],
+  "pages.registration_tokens.create_token.submit": [
+    {
+      "type": 0,
+      "value": "Create Token"
+    }
+  ],
+  "pages.registration_tokens.create_token.success": [
+    {
+      "type": 0,
+      "value": "Token created successfully"
+    }
+  ],
+  "pages.registration_tokens.create_token.title": [
+    {
+      "type": 0,
+      "value": "Create Registration Token"
+    }
+  ],
+  "pages.registration_tokens.created_at_column": [
+    {
+      "type": 0,
+      "value": "Created at"
+    }
+  ],
+  "pages.registration_tokens.created_at_label": [
+    {
+      "type": 0,
+      "value": "Created at"
+    }
+  ],
+  "pages.registration_tokens.custom_token_help": [
+    {
+      "type": 0,
+      "value": "Optional custom token string. If left empty, a secure token will be auto-generated."
+    }
+  ],
+  "pages.registration_tokens.custom_token_label": [
+    {
+      "type": 0,
+      "value": "Custom Token"
+    }
+  ],
+  "pages.registration_tokens.edit_properties": [
+    {
+      "type": 0,
+      "value": "Edit properties"
+    }
+  ],
+  "pages.registration_tokens.edit_token_title": [
+    {
+      "type": 0,
+      "value": "Edit registration token"
+    }
+  ],
+  "pages.registration_tokens.expires_at_field": [
+    {
+      "type": 0,
+      "value": "Expires at"
+    }
+  ],
+  "pages.registration_tokens.expires_at_help": [
+    {
+      "type": 0,
+      "value": "When the token expires. Leave empty if the token should never expire."
+    }
+  ],
+  "pages.registration_tokens.expires_at_label": [
+    {
+      "type": 0,
+      "value": "Expires at"
+    }
+  ],
+  "pages.registration_tokens.filter_active_only": [
+    {
+      "type": 0,
+      "value": "Active Only"
+    }
+  ],
+  "pages.registration_tokens.filter_expired_only": [
+    {
+      "type": 0,
+      "value": "Expired Only"
+    }
+  ],
+  "pages.registration_tokens.filter_revoked_only": [
+    {
+      "type": 0,
+      "value": "Revoked Only"
+    }
+  ],
+  "pages.registration_tokens.filter_used_only": [
+    {
+      "type": 0,
+      "value": "Used Only"
+    }
+  ],
+  "pages.registration_tokens.loading_more": [
+    {
+      "type": 0,
+      "value": "Loading more tokens..."
+    }
+  ],
+  "pages.registration_tokens.never_expires": [
+    {
+      "type": 0,
+      "value": "Never expires"
+    }
+  ],
+  "pages.registration_tokens.no_expiration_placeholder": [
+    {
+      "type": 0,
+      "value": "No expiration"
+    }
+  ],
+  "pages.registration_tokens.revoke_token": [
+    {
+      "type": 0,
+      "value": "Revoke token"
+    }
+  ],
+  "pages.registration_tokens.revoked_at_label": [
+    {
+      "type": 0,
+      "value": "Revoked at"
+    }
+  ],
+  "pages.registration_tokens.save_changes": [
+    {
+      "type": 0,
+      "value": "Save Changes"
+    }
+  ],
+  "pages.registration_tokens.status.active": [
+    {
+      "type": 0,
+      "value": "Active"
+    }
+  ],
+  "pages.registration_tokens.status.column": [
+    {
+      "type": 0,
+      "value": "Status"
+    }
+  ],
+  "pages.registration_tokens.status.expired": [
+    {
+      "type": 0,
+      "value": "Expired"
+    }
+  ],
+  "pages.registration_tokens.status.invalid": [
+    {
+      "type": 0,
+      "value": "Invalid"
+    }
+  ],
+  "pages.registration_tokens.status.label": [
+    {
+      "type": 0,
+      "value": "Status"
+    }
+  ],
+  "pages.registration_tokens.status.revoked": [
+    {
+      "type": 0,
+      "value": "Revoked"
+    }
+  ],
+  "pages.registration_tokens.status.used_up": [
+    {
+      "type": 0,
+      "value": "Used up"
+    }
+  ],
   "pages.registration_tokens.title": [
     {
       "type": 0,
       "value": "Registration tokens"
+    }
+  ],
+  "pages.registration_tokens.token_column": [
+    {
+      "type": 0,
+      "value": "Token"
     }
   ],
   "pages.registration_tokens.token_count": [
@@ -174,6 +366,87 @@
       "pluralType": "cardinal",
       "type": 6,
       "value": "COUNT"
+    }
+  ],
+  "pages.registration_tokens.token_uses.limited": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "uses"
+    },
+    {
+      "type": 0,
+      "value": " / "
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "limit"
+    }
+  ],
+  "pages.registration_tokens.token_uses.unlimited": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "uses"
+    },
+    {
+      "type": 0,
+      "value": " / ∞"
+    }
+  ],
+  "pages.registration_tokens.unlimited_placeholder": [
+    {
+      "type": 0,
+      "value": "Unlimited"
+    }
+  ],
+  "pages.registration_tokens.unlimited_uses_placeholder": [
+    {
+      "type": 0,
+      "value": "Leave empty for unlimited uses"
+    }
+  ],
+  "pages.registration_tokens.unrevoke_token": [
+    {
+      "type": 0,
+      "value": "Unrevoke token"
+    }
+  ],
+  "pages.registration_tokens.usage_count_label": [
+    {
+      "type": 0,
+      "value": "Usage count"
+    }
+  ],
+  "pages.registration_tokens.usage_limit_field": [
+    {
+      "type": 0,
+      "value": "Usage limit"
+    }
+  ],
+  "pages.registration_tokens.usage_limit_help": [
+    {
+      "type": 0,
+      "value": "Maximum number of times this token can be used. Leave empty for unlimited uses."
+    }
+  ],
+  "pages.registration_tokens.usage_limit_label": [
+    {
+      "type": 0,
+      "value": "Usage Limit"
+    }
+  ],
+  "pages.registration_tokens.uses_column": [
+    {
+      "type": 0,
+      "value": "Uses"
+    }
+  ],
+  "pages.registration_tokens.valid_until_column": [
+    {
+      "type": 0,
+      "value": "Valid Until"
     }
   ],
   "pages.rooms.room_count": [
