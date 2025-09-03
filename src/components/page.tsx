@@ -1,4 +1,3 @@
-import { createLink } from "@tanstack/react-router";
 import { SearchIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import cx from "classnames";
 import { forwardRef } from "react";
@@ -30,27 +29,6 @@ interface BaseButtonProps {
   variant?: "primary" | "secondary";
   Icon: React.ComponentType<React.SVGAttributes<SVGElement>>;
 }
-
-interface LinkButtonProps extends React.ComponentProps<"a">, BaseButtonProps {}
-export const LinkButton = createLink(
-  forwardRef<HTMLAnchorElement, LinkButtonProps>(function LinkButton(
-    { className, variant = "primary", children, Icon, ...props },
-    ref,
-  ) {
-    return (
-      <a
-        data-variant={variant}
-        className={cx(styles["button"], className)}
-        role="button"
-        {...props}
-        ref={ref}
-      >
-        <Icon />
-        <div className={styles["button-text"]}>{children}</div>
-      </a>
-    );
-  }),
-);
 
 interface ButtonProps extends React.ComponentProps<"button">, BaseButtonProps {}
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(

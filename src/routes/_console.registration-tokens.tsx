@@ -1,5 +1,9 @@
 /* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
-import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseInfiniteQuery,
+} from "@tanstack/react-query";
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 import {
   flexRender,
@@ -8,23 +12,49 @@ import {
 } from "@tanstack/react-table";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
-import { PlusIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
-import { Badge, CheckboxMenuItem, Text } from "@vector-im/compound-web";
-import { Fragment, useCallback, useEffect, useMemo } from "react";
-import { defineMessage, FormattedMessage } from "react-intl";
+import {
+  CloseIcon,
+  PlusIcon,
+} from "@vector-im/compound-design-tokens/assets/web/icons";
+import {
+  Badge,
+  Button,
+  CheckboxMenuItem,
+  Form,
+  InlineSpinner,
+  Text,
+} from "@vector-im/compound-web";
+import {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { toast } from "react-hot-toast";
+import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 import * as v from "valibot";
 
-import { registrationTokensInfiniteQuery } from "@/api/mas";
-import type { TokenListParameters } from "@/api/mas";
+import {
+  type CreateTokenParameters,
+  createRegistrationToken,
+  registrationTokensInfiniteQuery,
+  type TokenListParameters,
+} from "@/api/mas";
 import type { SingleResourceForUserRegistrationToken } from "@/api/mas/api/types.gen";
 import { CopyToClipboard } from "@/components/copy";
+import * as Dialog from "@/components/dialog";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import * as Placeholder from "@/components/placeholder";
 import * as Table from "@/components/table";
 import AppFooter from "@/ui/footer";
 import AppNavigation from "@/ui/navigation";
-import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
+import {
+  computeHumanReadableDateTimeStringFromUtc,
+  computeUtcIsoStringFromLocal,
+} from "@/utils/datetime";
 
 const TokenSearchParameters = v.object({
   used: v.optional(v.boolean()),
@@ -79,17 +109,13 @@ export const Route = createFileRoute("/_console/registration-tokens")({
               <FormattedMessage {...titleMessage} />
             </Page.Title>
             <Page.Controls>
-              <Page.LinkButton
-                to="/registration-tokens/add"
-                variant="secondary"
-                Icon={PlusIcon}
-              >
+              <Page.Button Icon={PlusIcon}>
                 <FormattedMessage
                   id="action.add"
                   defaultMessage="Add"
                   description="The label for the add action/button"
                 />
-              </Page.LinkButton>
+              </Page.Button>
             </Page.Controls>
           </Page.Header>
 
@@ -138,6 +164,251 @@ function getTokenStatus(token: {
   }
   return "Active";
 }
+
+interface TokenAddButtonProps {
+  serverName: string;
+}
+
+const TokenAddButton: React.FC<TokenAddButtonProps> = ({
+  serverName,
+}: TokenAddButtonProps) => {
+  const queryClient = useQueryClient();
+  const navigate = Route.useNavigate();
+  const intl = useIntl();
+
+  const [open, setOpen] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const customTokenInputRef = useRef<HTMLInputElement>(null);
+  const usageLimitInputRef = useRef<HTMLInputElement>(null);
+  const expiresInputRef = useRef<HTMLInputElement>(null);
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: (parameters: CreateTokenParameters) =>
+      createRegistrationToken(queryClient, serverName, parameters),
+    onError: () => {
+      toast.error(
+        intl.formatMessage({
+          id: "pages.registration_tokens.create_token.error",
+          defaultMessage: "Failed to create token",
+          description:
+            "The error message when the request for creating a registration token fails",
+        }),
+      );
+    },
+    onSuccess: async (response) => {
+      toast.success(
+        intl.formatMessage({
+          id: "pages.registration_tokens.create_token.success",
+          defaultMessage: "Token created successfully",
+          description: "The success message for creating a registration token",
+        }),
+      );
+
+      await navigate({
+        to: "/registration-tokens/$tokenId",
+        params: { tokenId: response.data.id },
+      });
+      setOpen(false);
+      formRef.current?.reset();
+    },
+  });
+
+  const onOpenChange = useCallback(
+    (open: boolean) => {
+      if (isPending) {
+        return;
+      }
+      setOpen(open);
+      if (!open) {
+        formRef.current?.reset();
+      }
+    },
+    [isPending],
+  );
+
+  const clearCustomToken = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      if (customTokenInputRef.current) {
+        customTokenInputRef.current.value = "";
+      }
+    },
+    [],
+  );
+
+  const clearUsageLimit = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      if (usageLimitInputRef.current) {
+        usageLimitInputRef.current.value = "";
+      }
+    },
+    [],
+  );
+
+  const clearExpiration = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      if (expiresInputRef.current) {
+        expiresInputRef.current.value = "";
+      }
+    },
+    [],
+  );
+
+  const onSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      if (isPending) {
+        return;
+      }
+
+      const formData = new FormData(event.currentTarget);
+      const parameters: CreateTokenParameters = {};
+
+      const customTokenValue = formData.get("customToken") as string;
+      if (customTokenValue && customTokenValue.trim() !== "") {
+        parameters.token = customTokenValue.trim();
+      }
+
+      const usageLimitValue = formData.get("usageLimit") as string;
+      if (usageLimitValue && !Number.isNaN(Number(usageLimitValue))) {
+        parameters.usage_limit = Number(usageLimitValue);
+      }
+
+      const expires = formData.get("expires") as string;
+      if (expires) {
+        parameters.expires_at = computeUtcIsoStringFromLocal(expires);
+      }
+
+      mutate(parameters);
+    },
+    [mutate, isPending],
+  );
+
+  return (
+    <Dialog.Root
+      onOpenChange={onOpenChange}
+      open={open}
+      trigger={
+        <Page.Button Icon={PlusIcon}>
+          <FormattedMessage
+            id="action.add"
+            defaultMessage="Add"
+            description="The label for the add action/button"
+          />
+        </Page.Button>
+      }
+    >
+      <Dialog.Title>
+        <FormattedMessage
+          id="pages.registration_tokens.create_token.title"
+          defaultMessage="Create Registration Token"
+          description="The title of the create registration token dialog"
+        />
+      </Dialog.Title>
+
+      <Dialog.Description asChild>
+        <Form.Root ref={formRef} onSubmit={onSubmit}>
+          <Form.Field name="customToken">
+            <Form.Label>Custom Token</Form.Label>
+            <div className="flex items-center gap-3">
+              <Form.TextControl
+                type="text"
+                ref={customTokenInputRef}
+                className="flex-1"
+                placeholder="Auto-generate if left empty"
+                disabled={isPending}
+              />
+              <Button
+                type="button"
+                iconOnly
+                kind="secondary"
+                onClick={clearCustomToken}
+                Icon={CloseIcon}
+                disabled={isPending}
+              />
+            </div>
+            <Form.HelpMessage>
+              Optional custom token string. If left empty, a secure token will
+              be auto-generated.
+            </Form.HelpMessage>
+          </Form.Field>
+
+          <Form.Field name="usageLimit">
+            <Form.Label>Usage Limit</Form.Label>
+            <div className="flex items-center gap-3">
+              <Form.TextControl
+                type="number"
+                ref={usageLimitInputRef}
+                className="flex-1"
+                placeholder="Leave empty for unlimited uses"
+                min="1"
+                disabled={isPending}
+              />
+              <Button
+                type="button"
+                iconOnly
+                kind="secondary"
+                onClick={clearUsageLimit}
+                Icon={CloseIcon}
+                disabled={isPending}
+              />
+            </div>
+            <Form.HelpMessage>
+              Maximum number of times this token can be used. Leave empty for
+              unlimited uses.
+            </Form.HelpMessage>
+          </Form.Field>
+
+          <Form.Field name="expires">
+            <Form.Label>Expires at</Form.Label>
+            <div className="flex items-center gap-3">
+              <Form.TextControl
+                type="datetime-local"
+                ref={expiresInputRef}
+                className="flex-1"
+                placeholder="No expiration"
+                disabled={isPending}
+              />
+              <Button
+                type="button"
+                iconOnly
+                kind="secondary"
+                onClick={clearExpiration}
+                Icon={CloseIcon}
+                disabled={isPending}
+              />
+            </div>
+            <Form.HelpMessage>
+              When the token expires. Leave empty if the token should never
+              expire.
+            </Form.HelpMessage>
+          </Form.Field>
+
+          <Form.Submit disabled={isPending}>
+            {isPending && <InlineSpinner />}
+            <FormattedMessage
+              id="pages.registration_tokens.create_token.submit"
+              defaultMessage="Create Token"
+              description="The submit button text in the create registration token dialog"
+            />
+          </Form.Submit>
+        </Form.Root>
+      </Dialog.Description>
+
+      <Dialog.Close asChild>
+        <Button type="button" kind="tertiary" disabled={isPending}>
+          <FormattedMessage
+            id="action.cancel"
+            defaultMessage="Cancel"
+            description="Label for a cancel action/button"
+          />
+        </Button>
+      </Dialog.Close>
+    </Dialog.Root>
+  );
+};
 
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
@@ -315,17 +586,7 @@ function RouteComponent() {
               <FormattedMessage {...titleMessage} />
             </Page.Title>
             <Page.Controls>
-              <Page.LinkButton
-                to="/registration-tokens/add"
-                variant="secondary"
-                Icon={PlusIcon}
-              >
-                <FormattedMessage
-                  id="action.add"
-                  defaultMessage="Add"
-                  description="The label for the add action/button"
-                />
-              </Page.LinkButton>
+              <TokenAddButton serverName={credentials.serverName} />
             </Page.Controls>
           </Page.Header>
 

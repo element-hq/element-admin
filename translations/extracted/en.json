@@ -79,6 +79,22 @@
     "description": "Title for the login page",
     "message": "Login"
   },
+  "pages.registration_tokens.create_token.error": {
+    "description": "The error message when the request for creating a registration token fails",
+    "message": "Failed to create token"
+  },
+  "pages.registration_tokens.create_token.submit": {
+    "description": "The submit button text in the create registration token dialog",
+    "message": "Create Token"
+  },
+  "pages.registration_tokens.create_token.success": {
+    "description": "The success message for creating a registration token",
+    "message": "Token created successfully"
+  },
+  "pages.registration_tokens.create_token.title": {
+    "description": "The title of the create registration token dialog",
+    "message": "Create Registration Token"
+  },
   "pages.registration_tokens.title": {
     "description": "The title of the registration tokens list page",
     "message": "Registration tokens"

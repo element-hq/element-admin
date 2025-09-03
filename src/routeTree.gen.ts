@@ -19,7 +19,6 @@ import { Route as ConsoleRegistrationTokensRouteImport } from './routes/_console
 import { Route as AuthLoginIndexRouteImport } from './routes/_auth.login.index'
 import { Route as ConsoleUsersUserIdRouteImport } from './routes/_console.users.$userId'
 import { Route as ConsoleRoomsRoomIdRouteImport } from './routes/_console.rooms.$roomId'
-import { Route as ConsoleRegistrationTokensAddRouteImport } from './routes/_console.registration-tokens.add'
 import { Route as ConsoleRegistrationTokensTokenIdRouteImport } from './routes/_console.registration-tokens.$tokenId'
 import { Route as AuthLoginServerNameRouteImport } from './routes/_auth.login.$serverName'
 
@@ -72,12 +71,6 @@ const ConsoleRoomsRoomIdRoute = ConsoleRoomsRoomIdRouteImport.update({
   path: '/$roomId',
   getParentRoute: () => ConsoleRoomsRoute,
 } as any)
-const ConsoleRegistrationTokensAddRoute =
-  ConsoleRegistrationTokensAddRouteImport.update({
-    id: '/add',
-    path: '/add',
-    getParentRoute: () => ConsoleRegistrationTokensRoute,
-  } as any)
 const ConsoleRegistrationTokensTokenIdRoute =
   ConsoleRegistrationTokensTokenIdRouteImport.update({
     id: '/$tokenId',
@@ -98,7 +91,6 @@ export interface FileRoutesByFullPath {
   '/': typeof ConsoleIndexRoute
   '/login/$serverName': typeof AuthLoginServerNameRoute
   '/registration-tokens/$tokenId': typeof ConsoleRegistrationTokensTokenIdRoute
-  '/registration-tokens/add': typeof ConsoleRegistrationTokensAddRoute
   '/rooms/$roomId': typeof ConsoleRoomsRoomIdRoute
   '/users/$userId': typeof ConsoleUsersUserIdRoute
   '/login': typeof AuthLoginIndexRoute
@@ -111,7 +103,6 @@ export interface FileRoutesByTo {
   '/': typeof ConsoleIndexRoute
   '/login/$serverName': typeof AuthLoginServerNameRoute
   '/registration-tokens/$tokenId': typeof ConsoleRegistrationTokensTokenIdRoute
-  '/registration-tokens/add': typeof ConsoleRegistrationTokensAddRoute
   '/rooms/$roomId': typeof ConsoleRoomsRoomIdRoute
   '/users/$userId': typeof ConsoleUsersUserIdRoute
   '/login': typeof AuthLoginIndexRoute
@@ -127,7 +118,6 @@ export interface FileRoutesById {
   '/_console/': typeof ConsoleIndexRoute
   '/_auth/login/$serverName': typeof AuthLoginServerNameRoute
   '/_console/registration-tokens/$tokenId': typeof ConsoleRegistrationTokensTokenIdRoute
-  '/_console/registration-tokens/add': typeof ConsoleRegistrationTokensAddRoute
   '/_console/rooms/$roomId': typeof ConsoleRoomsRoomIdRoute
   '/_console/users/$userId': typeof ConsoleUsersUserIdRoute
   '/_auth/login/': typeof AuthLoginIndexRoute
@@ -142,7 +132,6 @@ export interface FileRouteTypes {
     | '/'
     | '/login/$serverName'
     | '/registration-tokens/$tokenId'
-    | '/registration-tokens/add'
     | '/rooms/$roomId'
     | '/users/$userId'
     | '/login'
@@ -155,7 +144,6 @@ export interface FileRouteTypes {
     | '/'
     | '/login/$serverName'
     | '/registration-tokens/$tokenId'
-    | '/registration-tokens/add'
     | '/rooms/$roomId'
     | '/users/$userId'
     | '/login'
@@ -170,7 +158,6 @@ export interface FileRouteTypes {
     | '/_console/'
     | '/_auth/login/$serverName'
     | '/_console/registration-tokens/$tokenId'
-    | '/_console/registration-tokens/add'
     | '/_console/rooms/$roomId'
     | '/_console/users/$userId'
     | '/_auth/login/'
@@ -254,13 +241,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConsoleRoomsRoomIdRouteImport
       parentRoute: typeof ConsoleRoomsRoute
     }
-    '/_console/registration-tokens/add': {
-      id: '/_console/registration-tokens/add'
-      path: '/add'
-      fullPath: '/registration-tokens/add'
-      preLoaderRoute: typeof ConsoleRegistrationTokensAddRouteImport
-      parentRoute: typeof ConsoleRegistrationTokensRoute
-    }
     '/_console/registration-tokens/$tokenId': {
       id: '/_console/registration-tokens/$tokenId'
       path: '/$tokenId'
@@ -292,14 +272,12 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface ConsoleRegistrationTokensRouteChildren {
   ConsoleRegistrationTokensTokenIdRoute: typeof ConsoleRegistrationTokensTokenIdRoute
-  ConsoleRegistrationTokensAddRoute: typeof ConsoleRegistrationTokensAddRoute
 }
 
 const ConsoleRegistrationTokensRouteChildren: ConsoleRegistrationTokensRouteChildren =
   {
     ConsoleRegistrationTokensTokenIdRoute:
       ConsoleRegistrationTokensTokenIdRoute,
-    ConsoleRegistrationTokensAddRoute: ConsoleRegistrationTokensAddRoute,
   }
 
 const ConsoleRegistrationTokensRouteWithChildren =
