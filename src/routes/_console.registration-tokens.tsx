@@ -48,6 +48,7 @@ import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import * as Placeholder from "@/components/placeholder";
 import * as Table from "@/components/table";
+import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
 import AppNavigation from "@/ui/navigation";
 import {
@@ -109,11 +110,7 @@ export const Route = createFileRoute("/_console/registration-tokens")({
             </Page.Title>
             <Page.Controls>
               <Page.Button disabled Icon={PlusIcon}>
-                <FormattedMessage
-                  id="action.add"
-                  defaultMessage="Add"
-                  description="The label for the add action/button"
-                />
+                <FormattedMessage {...messages.actionAdd} />
               </Page.Button>
             </Page.Controls>
           </Page.Header>
@@ -339,11 +336,7 @@ const TokenAddButton: React.FC<TokenAddButtonProps> = ({
       open={open}
       trigger={
         <Page.Button Icon={PlusIcon}>
-          <FormattedMessage
-            id="action.add"
-            defaultMessage="Add"
-            description="The label for the add action/button"
-          />
+          <FormattedMessage {...messages.actionAdd} />
         </Page.Button>
       }
     >
@@ -485,11 +478,7 @@ const TokenAddButton: React.FC<TokenAddButtonProps> = ({
 
       <Dialog.Close asChild>
         <Button type="button" kind="tertiary" disabled={isPending}>
-          <FormattedMessage
-            id="action.cancel"
-            defaultMessage="Cancel"
-            description="Label for a cancel action/button"
-          />
+          <FormattedMessage {...messages.actionCancel} />
         </Button>
       </Dialog.Close>
     </Dialog.Root>

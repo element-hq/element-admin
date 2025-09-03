@@ -31,6 +31,7 @@ import { CopyToClipboard } from "@/components/copy";
 import * as Dialog from "@/components/dialog";
 import { ButtonLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
+import * as messages from "@/messages";
 import {
   computeHumanReadableDateTimeStringFromUtc,
   computeLocalDateTimeStringFromUtc,
@@ -119,13 +120,7 @@ function TokenDetailComponent() {
   return (
     <Navigation.Details>
       <div className="flex items-center justify-end">
-        <Tooltip
-          label={intl.formatMessage({
-            id: "action.close",
-            defaultMessage: "Close",
-            description: "Label for a 'close' action/button",
-          })}
-        >
+        <Tooltip label={intl.formatMessage(messages.actionClose)}>
           <ButtonLink
             iconOnly
             to="/registration-tokens"
@@ -603,11 +598,7 @@ function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
 
       <Dialog.Close asChild>
         <Button type="button" kind="tertiary" disabled={isPending}>
-          <FormattedMessage
-            id="action.cancel"
-            defaultMessage="Cancel"
-            description="Label for a cancel action/button"
-          />
+          <FormattedMessage {...messages.actionCancel} />
         </Button>
       </Dialog.Close>
     </Dialog.Root>

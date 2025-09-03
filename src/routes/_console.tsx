@@ -22,6 +22,7 @@ import { CopyToClipboard } from "@/components/copy";
 import * as Header from "@/components/header";
 import { Layout } from "@/components/layout";
 import { ElementLogo } from "@/components/logo";
+import * as messages from "@/messages";
 import { useAuthStore } from "@/stores/auth";
 import { useImageBlob } from "@/utils/blob";
 
@@ -179,11 +180,7 @@ const SignOutMenuItem = ({
 
   return (
     <MenuItem
-      label={intl.formatMessage({
-        id: "action.sign_out",
-        defaultMessage: "Sign out",
-        description: "Label for the sign out menu item",
-      })}
+      label={intl.formatMessage(messages.actionSignOut)}
       kind="critical"
       Icon={SignOutIcon}
       onSelect={(event) => {

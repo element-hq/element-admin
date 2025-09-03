@@ -13,6 +13,8 @@ import type { PropsWithChildren } from "react";
 import { useIntl } from "react-intl";
 import { Drawer } from "vaul";
 
+import * as messages from "@/messages";
+
 import styles from "./dialog.module.css";
 
 // The granularity of this value is kind of arbitrary: it distinguishes exactly
@@ -78,13 +80,7 @@ export const Root: React.FC<RootProps> = ({
               <DialogContent className={styles["body"]}>
                 {children}
 
-                <Tooltip
-                  label={intl.formatMessage({
-                    id: "action.close",
-                    defaultMessage: "Close",
-                    description: "Label for a 'close' action/button",
-                  })}
-                >
+                <Tooltip label={intl.formatMessage(messages.actionClose)}>
                   <Close className={styles["close"]}>
                     <CloseIcon />
                   </Close>

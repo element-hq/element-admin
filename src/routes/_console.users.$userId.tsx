@@ -40,6 +40,7 @@ import * as Dialog from "@/components/dialog";
 import { ButtonLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import { UserAvatar } from "@/components/room-info";
+import * as messages from "@/messages";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 export const Route = createFileRoute("/_console/users/$userId")({
@@ -62,12 +63,6 @@ export const Route = createFileRoute("/_console/users/$userId")({
     await emailPromise;
   },
   component: RouteComponent,
-});
-
-const cancelMessage = defineMessage({
-  id: "action.cancel",
-  description: "Label for a cancel action/button",
-  defaultMessage: "Cancel",
 });
 
 interface UserChipProps {
@@ -367,11 +362,7 @@ function DeactivateButton({
       </Button>
       <Dialog.Close asChild>
         <Button type="button" kind="tertiary" disabled={isPending}>
-          <FormattedMessage
-            id="action.cancel"
-            defaultMessage="Cancel"
-            description="Label for a cancel action/button"
-          />
+          <FormattedMessage {...messages.actionCancel} />
         </Button>
       </Dialog.Close>
     </Dialog.Root>
@@ -498,7 +489,7 @@ function LockButton({
       </Button>
       <Dialog.Close asChild>
         <Button type="button" kind="tertiary" disabled={isPending}>
-          <FormattedMessage {...cancelMessage} />
+          <FormattedMessage {...messages.actionCancel} />
         </Button>
       </Dialog.Close>
     </Dialog.Root>
@@ -688,7 +679,7 @@ function SetPasswordButton({
 
       <Dialog.Close asChild>
         <Button type="button" kind="tertiary" disabled={isPending}>
-          <FormattedMessage {...cancelMessage} />
+          <FormattedMessage {...messages.actionCancel} />
         </Button>
       </Dialog.Close>
     </Dialog.Root>
@@ -724,13 +715,7 @@ function RouteComponent() {
   return (
     <Navigation.Details>
       <div className="flex items-center justify-end">
-        <Tooltip
-          label={intl.formatMessage({
-            id: "action.close",
-            defaultMessage: "Close",
-            description: "Label for a 'close' action/button",
-          })}
-        >
+        <Tooltip label={intl.formatMessage(messages.actionClose)}>
           <ButtonLink
             iconOnly
             to="/users"

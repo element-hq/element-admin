@@ -41,6 +41,7 @@ import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import * as Placeholder from "@/components/placeholder";
 import * as Table from "@/components/table";
+import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
 import AppNavigation from "@/ui/navigation";
 import { useImageBlob } from "@/utils/blob";
@@ -260,11 +261,7 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
       open={open}
       trigger={
         <Page.Button Icon={UserAddIcon}>
-          <FormattedMessage
-            id="action.add"
-            defaultMessage="Add"
-            description="The label for the add action/button"
-          />
+          <FormattedMessage {...messages.actionAdd} />
         </Page.Button>
       }
     >

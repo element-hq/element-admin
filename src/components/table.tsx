@@ -5,7 +5,9 @@ import {
 import { Menu } from "@vector-im/compound-web";
 import cx from "classnames";
 import { forwardRef, useId, useState } from "react";
-import { defineMessage, FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
+
+import * as messages from "@/messages";
 
 import styles from "./table.module.css";
 
@@ -32,17 +34,11 @@ export const Title = ({ className, children, ...props }: TitleProps) => (
   </div>
 );
 
-const filterMessage = defineMessage({
-  id: "common.filter",
-  defaultMessage: "Filter",
-  description: "Label for a filter section/button",
-});
-
 type FilterProps = React.PropsWithChildren;
 export const Filter = ({ children }: FilterProps) => {
   const [open, setOpen] = useState(false);
   const intl = useIntl();
-  const title = intl.formatMessage(filterMessage);
+  const title = intl.formatMessage(messages.commonFilter);
   return (
     <>
       <Menu
@@ -75,7 +71,7 @@ export const FilterButton = forwardRef<
       <FilterIcon className={styles["filter-icon"]} />
 
       <div className={styles["filter-button-label"]} id={labelId}>
-        <FormattedMessage {...filterMessage} />
+        <FormattedMessage {...messages.commonFilter} />
       </div>
     </button>
   );
