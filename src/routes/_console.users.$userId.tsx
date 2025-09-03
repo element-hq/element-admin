@@ -7,21 +7,20 @@ import {
 } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  ArrowLeftIcon,
   LockIcon,
   DeleteIcon,
   CheckCircleIcon,
   KeyIcon,
+  CloseIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
   Badge,
   Button,
-  H1,
-  H3,
   Text,
   InlineSpinner,
   Alert,
   Form,
+  Tooltip,
 } from "@vector-im/compound-web";
 import { useCallback, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -697,6 +696,7 @@ function SetPasswordButton({
 }
 
 function RouteComponent() {
+  const intl = useIntl();
   const { credentials } = Route.useRouteContext();
   const { userId } = Route.useParams();
 
@@ -711,6 +711,9 @@ function RouteComponent() {
   // TODO: this should be in a helper
   const mxid = `@${user.attributes.username}:${credentials.serverName}`;
 
+  const { data: profile } = useQuery(profileQuery(synapseRoot, mxid));
+  const displayName = profile?.displayname;
+
   const { data: emailsData } = useSuspenseQuery(
     userEmailsQuery(credentials.serverName, userId),
   );
@@ -720,148 +723,155 @@ function RouteComponent() {
 
   return (
     <Navigation.Details>
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <ButtonLink
-              to="/users"
-              kind="secondary"
-              size="sm"
-              Icon={ArrowLeftIcon}
-            >
-              Back to Users
-            </ButtonLink>
-            <H1>User Details</H1>
+      <div className="flex items-center justify-end">
+        <Tooltip
+          label={intl.formatMessage({
+            id: "action.close",
+            defaultMessage: "Close",
+            description: "Label for a 'close' action/button",
+          })}
+        >
+          <ButtonLink
+            iconOnly
+            to="/users"
+            kind="tertiary"
+            size="sm"
+            Icon={CloseIcon}
+          />
+        </Tooltip>
+      </div>
+
+      <div className="flex flex-col gap-8">
+        <div className="flex flex-col items-center gap-4">
+          <UserAvatar synapseRoot={synapseRoot} userId={mxid} size="88px" />
+          <div className="flex flex-col gap-2 items-center text-text-primary">
+            <Text size="lg" weight="semibold">
+              {mxid}
+            </Text>
+            {displayName && <Text size="md">{displayName}</Text>}
           </div>
         </div>
 
-        <div className="bg-bg-subtle-secondary rounded-lg">
-          <div className="px-6 py-5 border-b border-border-interactive-secondary">
-            <H3>{user.attributes.username}</H3>
-            <Text size="sm" className="text-text-secondary">
-              User ID: {user.id}
-            </Text>
-          </div>
+        <div className="flex flex-col gap-4">
+          {locked && !deactivated && (
+            <UnlockButton
+              user={user}
+              serverName={credentials.serverName}
+              synapseRoot={synapseRoot}
+              mxid={mxid}
+            />
+          )}
 
-          <div className="px-6 py-5 space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <Text size="sm" weight="medium">
-                  Status
-                </Text>
-                <Badge
-                  kind={
-                    user.attributes.deactivated_at
-                      ? "red"
-                      : user.attributes.locked_at
-                        ? "grey"
-                        : "blue"
-                  }
-                >
-                  {user.attributes.deactivated_at
-                    ? "Deactivated"
-                    : user.attributes.locked_at
-                      ? "Locked"
-                      : "Active"}
-                </Badge>
-              </div>
+          {!locked && !deactivated && (
+            <LockButton
+              user={user}
+              serverName={credentials.serverName}
+              synapseRoot={synapseRoot}
+              mxid={mxid}
+            />
+          )}
 
-              <div>
-                <Text size="sm" weight="medium">
-                  Admin Privileges
-                </Text>
-                <Badge kind={user.attributes.admin ? "green" : "grey"}>
-                  {user.attributes.admin ? "Admin" : "User"}
-                </Badge>
-              </div>
+          {deactivated && (
+            <ReactivateButton
+              user={user}
+              serverName={credentials.serverName}
+              synapseRoot={synapseRoot}
+              mxid={mxid}
+            />
+          )}
 
-              <div>
-                <Text size="sm" weight="medium">
-                  Created At
-                </Text>
-                <Text size="sm">
-                  {computeHumanReadableDateTimeStringFromUtc(
-                    user.attributes.created_at,
-                  )}
-                </Text>
-              </div>
+          {!deactivated && (
+            <DeactivateButton
+              user={user}
+              serverName={credentials.serverName}
+              synapseRoot={synapseRoot}
+              mxid={mxid}
+            />
+          )}
 
-              {user.attributes.locked_at && (
-                <div>
-                  <Text size="sm" weight="medium">
-                    Locked At
-                  </Text>
-                  <Text size="sm">
-                    {computeHumanReadableDateTimeStringFromUtc(
-                      user.attributes.locked_at,
-                    )}
-                  </Text>
-                </div>
-              )}
-            </div>
-
-            <div>
-              <Text size="sm" weight="medium">
-                Email Addresses ({emailsData.data.length})
-              </Text>
-              {emailsData.data.length > 0 ? (
-                <div className="space-y-2">
-                  {emailsData.data.map((emailItem) => (
-                    <div
-                      key={emailItem.id}
-                      className="flex items-center justify-between p-3 bg-bg-subtle-primary rounded-md"
-                    >
-                      <Text size="sm">{emailItem.attributes.email}</Text>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <Text size="sm">No email addresses found</Text>
-              )}
-            </div>
-
-            {locked && !deactivated && (
-              <UnlockButton
-                user={user}
-                serverName={credentials.serverName}
-                synapseRoot={synapseRoot}
-                mxid={mxid}
-              />
-            )}
-
-            {!locked && !deactivated && (
-              <LockButton
-                user={user}
-                serverName={credentials.serverName}
-                synapseRoot={synapseRoot}
-                mxid={mxid}
-              />
-            )}
-
-            {deactivated && (
-              <ReactivateButton
-                user={user}
-                serverName={credentials.serverName}
-                synapseRoot={synapseRoot}
-                mxid={mxid}
-              />
-            )}
-
-            {!deactivated && (
-              <DeactivateButton
-                user={user}
-                serverName={credentials.serverName}
-                synapseRoot={synapseRoot}
-                mxid={mxid}
-              />
-            )}
-
+          {!deactivated && (
             <SetPasswordButton
               user={user}
               serverName={credentials.serverName}
               synapseRoot={synapseRoot}
               mxid={mxid}
             />
+          )}
+        </div>
+
+        <div className="flex flex-wrap gap-4 *:flex *:flex-col *:gap-1 *:items-start">
+          <div>
+            <Text size="sm" weight="medium">
+              Status
+            </Text>
+            <Badge
+              kind={
+                user.attributes.deactivated_at
+                  ? "red"
+                  : user.attributes.locked_at
+                    ? "grey"
+                    : "blue"
+              }
+            >
+              {user.attributes.deactivated_at
+                ? "Deactivated"
+                : user.attributes.locked_at
+                  ? "Locked"
+                  : "Active"}
+            </Badge>
+          </div>
+
+          <div>
+            <Text size="sm" weight="medium">
+              Admin Privileges
+            </Text>
+            <Badge kind={user.attributes.admin ? "green" : "grey"}>
+              {user.attributes.admin ? "Admin" : "User"}
+            </Badge>
+          </div>
+
+          <div>
+            <Text size="sm" weight="medium">
+              Created At
+            </Text>
+            <Text size="sm">
+              {computeHumanReadableDateTimeStringFromUtc(
+                user.attributes.created_at,
+              )}
+            </Text>
+          </div>
+
+          {user.attributes.locked_at && (
+            <div>
+              <Text size="sm" weight="medium">
+                Locked At
+              </Text>
+              <Text size="sm">
+                {computeHumanReadableDateTimeStringFromUtc(
+                  user.attributes.locked_at,
+                )}
+              </Text>
+            </div>
+          )}
+
+          <div>
+            <Text size="sm" weight="medium">
+              Email Addresses ({emailsData.data.length})
+            </Text>
+            {emailsData.data.length > 0 ? (
+              <div className="space-y-2">
+                {emailsData.data.map((emailItem) => (
+                  <div
+                    key={emailItem.id}
+                    className="flex items-center justify-between p-3 bg-bg-subtle-primary rounded-md"
+                  >
+                    <Text size="sm">{emailItem.attributes.email}</Text>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <Text size="sm">No email addresses found</Text>
+            )}
           </div>
         </div>
       </div>

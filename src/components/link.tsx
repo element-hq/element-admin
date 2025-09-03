@@ -2,13 +2,15 @@ import { createLink } from "@tanstack/react-router";
 import { Button } from "@vector-im/compound-web";
 import { type PropsWithChildren, forwardRef } from "react";
 
-type ButtonLinkProps = {
+interface ButtonLinkProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   kind?: "primary" | "secondary" | "tertiary";
   size?: "sm" | "lg";
   Icon?: React.ComponentType<React.SVGAttributes<SVGElement>>;
+  iconOnly?: boolean;
   destructive?: boolean;
   disabled?: boolean;
-} & React.AnchorHTMLAttributes<HTMLAnchorElement>;
+}
 
 export const ButtonLink = createLink(
   forwardRef<HTMLAnchorElement, PropsWithChildren<ButtonLinkProps>>(

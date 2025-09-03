@@ -387,11 +387,19 @@ function RouteComponent() {
         header: "Account Type",
         cell: ({ row }) => {
           const user = row.original;
-          return (
-            <Badge kind={user.attributes.admin ? "green" : "grey"}>
-              {user.attributes.admin ? "Admin" : "Local"}
-            </Badge>
-          );
+          if (user.attributes.deactivated_at) {
+            return <Badge kind="red">Deactivated</Badge>;
+          }
+
+          if (user.attributes.locked_at) {
+            return <Badge kind="grey">Locked</Badge>;
+          }
+
+          if (user.attributes.admin) {
+            return <Badge kind="green">Admin</Badge>;
+          }
+
+          return <Badge kind="blue">Local</Badge>;
         },
       },
       {
