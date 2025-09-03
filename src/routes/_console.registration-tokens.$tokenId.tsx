@@ -495,11 +495,7 @@ function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
       </Dialog.Title>
 
       <Dialog.Description asChild>
-        <Form.Root
-          ref={formRef}
-          onSubmit={handleEditSubmit}
-          className="space-y-6"
-        >
+        <Form.Root ref={formRef} onSubmit={handleEditSubmit}>
           <Form.Field name="expires">
             <Form.Label>
               <FormattedMessage

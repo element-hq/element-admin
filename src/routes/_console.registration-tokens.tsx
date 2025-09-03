@@ -349,7 +349,7 @@ const TokenAddButton: React.FC<TokenAddButtonProps> = ({
       </Dialog.Title>
 
       <Dialog.Description asChild>
-        <Form.Root ref={formRef} onSubmit={onSubmit} className="space-y-6">
+        <Form.Root ref={formRef} onSubmit={onSubmit}>
           <Form.Field name="customToken">
             <Form.Label>
               <FormattedMessage
