@@ -1,6 +1,7 @@
 /* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
 import {
   useMutation,
+  useQuery,
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
@@ -35,21 +36,31 @@ import {
   userEmailsQuery,
   userQuery,
 } from "@/api/mas";
+import { profileQuery, wellKnownQuery } from "@/api/matrix";
 import * as Dialog from "@/components/dialog";
 import { ButtonLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
+import { UserAvatar } from "@/components/room-info";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 export const Route = createFileRoute("/_console/users/$userId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
-    await Promise.all([
-      queryClient.ensureQueryData(
-        userQuery(credentials.serverName, params.userId),
-      ),
-      queryClient.ensureQueryData(
-        userEmailsQuery(credentials.serverName, params.userId),
-      ),
-    ]);
+    // Fire the email query as soon as possible without awaiting it
+    const emailPromise = queryClient.ensureQueryData(
+      userEmailsQuery(credentials.serverName, params.userId),
+    );
+    const userPromise = queryClient.ensureQueryData(
+      userQuery(credentials.serverName, params.userId),
+    );
+    const wellKnown = await queryClient.ensureQueryData(
+      wellKnownQuery(credentials.serverName),
+    );
+    const synapseRoot = wellKnown["m.homeserver"].base_url;
+
+    const { data: user } = await userPromise;
+    const mxid = `@${user.attributes.username}:${credentials.serverName}`;
+    await queryClient.ensureQueryData(profileQuery(synapseRoot, mxid));
+    await emailPromise;
   },
   component: RouteComponent,
 });
@@ -60,6 +71,31 @@ const cancelMessage = defineMessage({
   defaultMessage: "Cancel",
 });
 
+interface UserChipProps {
+  mxid: string;
+  synapseRoot: string;
+}
+
+function UserChip({ mxid, synapseRoot }: UserChipProps) {
+  const { data: profile } = useQuery(profileQuery(synapseRoot, mxid));
+  const displayName = profile?.displayname;
+  return (
+    <div className="border border-bg-subtle-primary p-3 flex gap-3 items-center">
+      <UserAvatar synapseRoot={synapseRoot} userId={mxid} size="32px" />
+      <div className="flex flex-col">
+        <Text size="md" weight="semibold" className="text-text-primary">
+          {mxid}
+        </Text>
+        {displayName && (
+          <Text size="sm" weight="regular" className="text-text-secondary">
+            {displayName}
+          </Text>
+        )}
+      </div>
+    </div>
+  );
+}
+
 interface LockUnlockButtonProps {
   user: {
     id: string;
@@ -69,6 +105,8 @@ interface LockUnlockButtonProps {
     };
   };
   serverName: string;
+  synapseRoot: string;
+  mxid: string;
 }
 
 interface DeactivateReactivateButtonProps {
@@ -80,6 +118,8 @@ interface DeactivateReactivateButtonProps {
     };
   };
   serverName: string;
+  synapseRoot: string;
+  mxid: string;
 }
 
 function UnlockButton({ user, serverName }: LockUnlockButtonProps) {
@@ -217,6 +257,8 @@ const deactivateAccountMessage = defineMessage({
 function DeactivateButton({
   user,
   serverName,
+  mxid,
+  synapseRoot,
 }: DeactivateReactivateButtonProps) {
   const intl = useIntl();
   const queryClient = useQueryClient();
@@ -295,18 +337,7 @@ function DeactivateButton({
           description="The title of the modal asking for confirmation to deactivate a user account"
         />
       </Dialog.Title>
-      {/* TODO: user avatar, display name, better style */}
-      <p className="text-text-secondary border border-bg-subtle-primary p-3 leading-10">
-        <Text
-          weight="semibold"
-          size="md"
-          as="span"
-          className="text-text-primary"
-        >
-          @{user.attributes.username}
-        </Text>
-        :{serverName}
-      </p>
+      <UserChip mxid={mxid} synapseRoot={synapseRoot} />
       <Dialog.Description asChild>
         <Alert
           type="critical"
@@ -354,7 +385,12 @@ const lockAccountMessage = defineMessage({
   description: "The label for the lock account button on the user panel",
 });
 
-function LockButton({ user, serverName }: LockUnlockButtonProps) {
+function LockButton({
+  user,
+  serverName,
+  synapseRoot,
+  mxid,
+}: LockUnlockButtonProps) {
   const intl = useIntl();
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
@@ -432,18 +468,7 @@ function LockButton({ user, serverName }: LockUnlockButtonProps) {
           description="The title of the modal asking for confirmation to lock a user account"
         />
       </Dialog.Title>
-      {/* TODO: user avatar, display name, better style */}
-      <p className="text-text-secondary border border-bg-subtle-primary p-3 leading-10">
-        <Text
-          weight="semibold"
-          size="md"
-          as="span"
-          className="text-text-primary"
-        >
-          @{user.attributes.username}
-        </Text>
-        :{serverName}
-      </p>
+      <UserChip mxid={mxid} synapseRoot={synapseRoot} />
       <Dialog.Description asChild>
         <Alert
           type="critical"
@@ -489,9 +514,16 @@ interface SetPasswordButtonProps {
     };
   };
   serverName: string;
+  synapseRoot: string;
+  mxid: string;
 }
 
-function SetPasswordButton({ user, serverName }: SetPasswordButtonProps) {
+function SetPasswordButton({
+  user,
+  serverName,
+  synapseRoot,
+  mxid,
+}: SetPasswordButtonProps) {
   const intl = useIntl();
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
@@ -581,17 +613,7 @@ function SetPasswordButton({ user, serverName }: SetPasswordButtonProps) {
           description="The title of the modal for setting a user password"
         />
       </Dialog.Title>
-      <p className="text-text-secondary border border-bg-subtle-primary p-3 leading-10">
-        <Text
-          weight="semibold"
-          size="md"
-          as="span"
-          className="text-text-primary"
-        >
-          @{user.attributes.username}
-        </Text>
-        :{serverName}
-      </p>
+      <UserChip mxid={mxid} synapseRoot={synapseRoot} />
       <Dialog.Description asChild>
         <Form.Root ref={formRef} onSubmit={handleSubmit}>
           <Form.Field name="password">
@@ -678,13 +700,20 @@ function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const { userId } = Route.useParams();
 
-  const { data } = useSuspenseQuery(userQuery(credentials.serverName, userId));
+  const { data: wellKnown } = useSuspenseQuery(
+    wellKnownQuery(credentials.serverName),
+  );
+  const synapseRoot = wellKnown["m.homeserver"].base_url;
+
+  const {
+    data: { data: user },
+  } = useSuspenseQuery(userQuery(credentials.serverName, userId));
+  // TODO: this should be in a helper
+  const mxid = `@${user.attributes.username}:${credentials.serverName}`;
 
   const { data: emailsData } = useSuspenseQuery(
     userEmailsQuery(credentials.serverName, userId),
   );
-
-  const user = data.data;
 
   const deactivated = user.attributes.deactivated_at !== null;
   const locked = user.attributes.locked_at !== null;
@@ -792,17 +821,29 @@ function RouteComponent() {
             </div>
 
             {locked && !deactivated && (
-              <UnlockButton user={user} serverName={credentials.serverName} />
+              <UnlockButton
+                user={user}
+                serverName={credentials.serverName}
+                synapseRoot={synapseRoot}
+                mxid={mxid}
+              />
             )}
 
             {!locked && !deactivated && (
-              <LockButton user={user} serverName={credentials.serverName} />
+              <LockButton
+                user={user}
+                serverName={credentials.serverName}
+                synapseRoot={synapseRoot}
+                mxid={mxid}
+              />
             )}
 
             {deactivated && (
               <ReactivateButton
                 user={user}
                 serverName={credentials.serverName}
+                synapseRoot={synapseRoot}
+                mxid={mxid}
               />
             )}
 
@@ -810,12 +851,16 @@ function RouteComponent() {
               <DeactivateButton
                 user={user}
                 serverName={credentials.serverName}
+                synapseRoot={synapseRoot}
+                mxid={mxid}
               />
             )}
 
             <SetPasswordButton
               user={user}
               serverName={credentials.serverName}
+              synapseRoot={synapseRoot}
+              mxid={mxid}
             />
           </div>
         </div>

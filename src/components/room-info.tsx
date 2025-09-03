@@ -248,7 +248,7 @@ interface UserAvatarProps {
   userId: string;
   size: string;
 }
-const UserAvatar: React.FC<UserAvatarProps> = ({
+export const UserAvatar: React.FC<UserAvatarProps> = ({
   synapseRoot,
   userId,
   size,
