@@ -1,4 +1,3 @@
-/* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
 import {
   useMutation,
   useQueryClient,
@@ -109,7 +108,7 @@ export const Route = createFileRoute("/_console/registration-tokens")({
               <FormattedMessage {...titleMessage} />
             </Page.Title>
             <Page.Controls>
-              <Page.Button Icon={PlusIcon}>
+              <Page.Button disabled Icon={PlusIcon}>
                 <FormattedMessage
                   id="action.add"
                   defaultMessage="Add"
@@ -139,30 +138,78 @@ const omit = <T extends Record<string, unknown>, K extends keyof T>(
     Object.entries(object).filter(([key]) => !(keys as string[]).includes(key)),
   ) as Omit<T, K>;
 
-function getTokenStatus(token: {
-  valid: boolean;
-  expires_at?: string | null;
-  usage_limit?: number | null;
-  times_used: number;
-  revoked_at?: string | null;
-}) {
-  if (!token.valid) {
-    if (token.revoked_at) {
-      return "Revoked";
-    }
-    if (token.expires_at && new Date(token.expires_at) < new Date()) {
-      return "Expired";
-    }
-    if (
-      token.usage_limit !== null &&
-      token.usage_limit !== undefined &&
-      token.times_used >= token.usage_limit
-    ) {
-      return "Used Up";
-    }
-    return "Invalid";
+interface TokenStatusBadgeProps {
+  token: {
+    valid: boolean;
+    expires_at?: string | null;
+    usage_limit?: number | null;
+    times_used: number;
+    revoked_at?: string | null;
+  };
+}
+
+function TokenStatusBadge({ token }: TokenStatusBadgeProps) {
+  if (token.valid) {
+    return (
+      <Badge kind="green">
+        <FormattedMessage
+          id="pages.registration_tokens.status.active"
+          defaultMessage="Active"
+          description="Registration token status: active"
+        />
+      </Badge>
+    );
   }
-  return "Active";
+
+  if (token.revoked_at) {
+    return (
+      <Badge kind="red">
+        <FormattedMessage
+          id="pages.registration_tokens.status.revoked"
+          defaultMessage="Revoked"
+          description="Registration token status: revoked"
+        />
+      </Badge>
+    );
+  }
+
+  if (token.expires_at && new Date(token.expires_at) < new Date()) {
+    return (
+      <Badge kind="red">
+        <FormattedMessage
+          id="pages.registration_tokens.status.expired"
+          defaultMessage="Expired"
+          description="Registration token status: expired"
+        />
+      </Badge>
+    );
+  }
+
+  if (
+    token.usage_limit !== null &&
+    token.usage_limit !== undefined &&
+    token.times_used >= token.usage_limit
+  ) {
+    return (
+      <Badge kind="red">
+        <FormattedMessage
+          id="pages.registration_tokens.status.used_up"
+          defaultMessage="Used up"
+          description="Registration token status: used up"
+        />
+      </Badge>
+    );
+  }
+
+  return (
+    <Badge kind="red">
+      <FormattedMessage
+        id="pages.registration_tokens.status.invalid"
+        defaultMessage="Invalid"
+        description="Registration token status: invalid"
+      />
+    </Badge>
+  );
 }
 
 interface TokenAddButtonProps {
@@ -309,15 +356,25 @@ const TokenAddButton: React.FC<TokenAddButtonProps> = ({
       </Dialog.Title>
 
       <Dialog.Description asChild>
-        <Form.Root ref={formRef} onSubmit={onSubmit}>
+        <Form.Root ref={formRef} onSubmit={onSubmit} className="space-y-6">
           <Form.Field name="customToken">
-            <Form.Label>Custom Token</Form.Label>
+            <Form.Label>
+              <FormattedMessage
+                id="pages.registration_tokens.custom_token_label"
+                defaultMessage="Custom Token"
+                description="Label for the custom token field"
+              />
+            </Form.Label>
             <div className="flex items-center gap-3">
               <Form.TextControl
                 type="text"
                 ref={customTokenInputRef}
                 className="flex-1"
-                placeholder="Auto-generate if left empty"
+                placeholder={intl.formatMessage({
+                  id: "pages.registration_tokens.auto_generate_placeholder",
+                  defaultMessage: "Auto-generate if left empty",
+                  description: "Placeholder text for custom token field",
+                })}
                 disabled={isPending}
               />
               <Button
@@ -330,19 +387,32 @@ const TokenAddButton: React.FC<TokenAddButtonProps> = ({
               />
             </div>
             <Form.HelpMessage>
-              Optional custom token string. If left empty, a secure token will
-              be auto-generated.
+              <FormattedMessage
+                id="pages.registration_tokens.custom_token_help"
+                defaultMessage="Optional custom token string. If left empty, a secure token will be auto-generated."
+                description="Help text for the custom token field"
+              />
             </Form.HelpMessage>
           </Form.Field>
 
           <Form.Field name="usageLimit">
-            <Form.Label>Usage Limit</Form.Label>
+            <Form.Label>
+              <FormattedMessage
+                id="pages.registration_tokens.usage_limit_label"
+                defaultMessage="Usage Limit"
+                description="Label for the usage limit field"
+              />
+            </Form.Label>
             <div className="flex items-center gap-3">
               <Form.TextControl
                 type="number"
                 ref={usageLimitInputRef}
                 className="flex-1"
-                placeholder="Leave empty for unlimited uses"
+                placeholder={intl.formatMessage({
+                  id: "pages.registration_tokens.unlimited_uses_placeholder",
+                  defaultMessage: "Leave empty for unlimited uses",
+                  description: "Placeholder text for usage limit field",
+                })}
                 min="1"
                 disabled={isPending}
               />
@@ -356,19 +426,32 @@ const TokenAddButton: React.FC<TokenAddButtonProps> = ({
               />
             </div>
             <Form.HelpMessage>
-              Maximum number of times this token can be used. Leave empty for
-              unlimited uses.
+              <FormattedMessage
+                id="pages.registration_tokens.usage_limit_help"
+                defaultMessage="Maximum number of times this token can be used. Leave empty for unlimited uses."
+                description="Help text for the usage limit field"
+              />
             </Form.HelpMessage>
           </Form.Field>
 
           <Form.Field name="expires">
-            <Form.Label>Expires at</Form.Label>
+            <Form.Label>
+              <FormattedMessage
+                id="pages.registration_tokens.expires_at_label"
+                defaultMessage="Expires at"
+                description="Label for the token expiration date field"
+              />
+            </Form.Label>
             <div className="flex items-center gap-3">
               <Form.TextControl
                 type="datetime-local"
                 ref={expiresInputRef}
                 className="flex-1"
-                placeholder="No expiration"
+                placeholder={intl.formatMessage({
+                  id: "pages.registration_tokens.no_expiration_placeholder",
+                  defaultMessage: "No expiration",
+                  description: "Placeholder text for the expires at field",
+                })}
                 disabled={isPending}
               />
               <Button
@@ -381,8 +464,11 @@ const TokenAddButton: React.FC<TokenAddButtonProps> = ({
               />
             </div>
             <Form.HelpMessage>
-              When the token expires. Leave empty if the token should never
-              expire.
+              <FormattedMessage
+                id="pages.registration_tokens.expires_at_help"
+                defaultMessage="When the token expires. Leave empty if the token should never expire."
+                description="Help text for the expires at field"
+              />
             </Form.HelpMessage>
           </Form.Field>
 
@@ -414,6 +500,7 @@ function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
+  const intl = useIntl();
 
   const parameters: Omit<
     TokenListParameters,
@@ -444,7 +531,11 @@ function RouteComponent() {
     () => [
       {
         id: "token",
-        header: "Token",
+        header: intl.formatMessage({
+          id: "pages.registration_tokens.token_column",
+          defaultMessage: "Token",
+          description: "Column header for token column",
+        }),
         cell: ({ row }) => {
           const token = row.original;
           return (
@@ -469,7 +560,11 @@ function RouteComponent() {
       },
       {
         id: "createdAt",
-        header: "Created At",
+        header: intl.formatMessage({
+          id: "pages.registration_tokens.created_at_column",
+          defaultMessage: "Created at",
+          description: "Column header for created at column",
+        }),
         cell: ({ row }) => {
           const token = row.original;
           return (
@@ -483,7 +578,11 @@ function RouteComponent() {
       },
       {
         id: "validUntil",
-        header: "Valid Until",
+        header: intl.formatMessage({
+          id: "pages.registration_tokens.valid_until_column",
+          defaultMessage: "Valid Until",
+          description: "Column header for valid until column",
+        }),
         cell: ({ row }) => {
           const token = row.original;
           return (
@@ -492,38 +591,65 @@ function RouteComponent() {
                 ? computeHumanReadableDateTimeStringFromUtc(
                     token.attributes.expires_at,
                   )
-                : "Never expires"}
+                : intl.formatMessage({
+                    id: "pages.registration_tokens.never_expires",
+                    defaultMessage: "Never expires",
+                    description:
+                      "Text shown when a token has no expiration date",
+                  })}
             </Text>
           );
         },
       },
       {
         id: "uses",
-        header: "Uses",
+        header: intl.formatMessage({
+          id: "pages.registration_tokens.uses_column",
+          defaultMessage: "Uses",
+          description: "Column header for uses column",
+        }),
         cell: ({ row }) => {
           const token = row.original;
           return (
             <Text size="sm" className="text-text-secondary">
-              {token.attributes.times_used} /{" "}
-              {token.attributes.usage_limit || "∞"}
+              {token.attributes.usage_limit === null ? (
+                <FormattedMessage
+                  id="pages.registration_tokens.token_uses.unlimited"
+                  defaultMessage="{uses, number} / ∞"
+                  description="Shows the number of uses of a registration token, when there is no usage limit"
+                  values={{
+                    uses: token.attributes.times_used,
+                  }}
+                />
+              ) : (
+                <FormattedMessage
+                  id="pages.registration_tokens.token_uses.limited"
+                  defaultMessage="{uses, number} / {limit, number}"
+                  description="Shows the number of uses of a registration token, when there is a usage limit"
+                  values={{
+                    uses: token.attributes.times_used,
+                    limit: token.attributes.usage_limit,
+                  }}
+                />
+              )}
             </Text>
           );
         },
       },
       {
         id: "status",
-        header: "Status",
+        header: intl.formatMessage({
+          id: "pages.registration_tokens.status.column",
+          defaultMessage: "Status",
+          description: "Column header for status column",
+        }),
         cell: ({ row }) => {
           const token = row.original;
-          return (
-            <Badge kind={token.attributes.valid ? "green" : "red"}>
-              {getTokenStatus(token.attributes)}
-            </Badge>
-          );
+          return <TokenStatusBadge token={token.attributes} />;
         },
       },
     ],
-    [],
+    [intl],
   );
 
   const table = useReactTable({
@@ -615,7 +741,11 @@ function RouteComponent() {
                             },
                     });
                   }}
-                  label="Active Only"
+                  label={intl.formatMessage({
+                    id: "pages.registration_tokens.filter_active_only",
+                    defaultMessage: "Active Only",
+                    description: "Filter option for active tokens only",
+                  })}
                   checked={search.valid === true}
                 />
                 <CheckboxMenuItem
@@ -631,7 +761,11 @@ function RouteComponent() {
                             },
                     });
                   }}
-                  label="Used Only"
+                  label={intl.formatMessage({
+                    id: "pages.registration_tokens.filter_used_only",
+                    defaultMessage: "Used Only",
+                    description: "Filter option for used tokens only",
+                  })}
                   checked={search.used === true}
                 />
                 <CheckboxMenuItem
@@ -647,7 +781,11 @@ function RouteComponent() {
                             },
                     });
                   }}
-                  label="Revoked Only"
+                  label={intl.formatMessage({
+                    id: "pages.registration_tokens.filter_revoked_only",
+                    defaultMessage: "Revoked Only",
+                    description: "Filter option for revoked tokens only",
+                  })}
                   checked={search.revoked === true}
                 />
                 <CheckboxMenuItem
@@ -663,7 +801,11 @@ function RouteComponent() {
                             },
                     });
                   }}
-                  label="Expired Only"
+                  label={intl.formatMessage({
+                    id: "pages.registration_tokens.filter_expired_only",
+                    defaultMessage: "Expired Only",
+                    description: "Filter option for expired tokens only",
+                  })}
                   checked={search.expired === true}
                 />
               </Table.Filter>
@@ -726,7 +868,11 @@ function RouteComponent() {
             {isFetching && (
               <div className="flex justify-center py-4">
                 <Text size="sm" className="text-text-secondary">
-                  Loading more tokens...
+                  <FormattedMessage
+                    id="pages.registration_tokens.loading_more"
+                    defaultMessage="Loading more tokens..."
+                    description="Text shown when loading more tokens"
+                  />
                 </Text>
               </div>
             )}

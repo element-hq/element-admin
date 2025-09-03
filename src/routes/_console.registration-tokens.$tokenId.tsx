@@ -1,4 +1,3 @@
-/* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
 import {
   useMutation,
   useQueryClient,
@@ -19,7 +18,7 @@ import {
   Tooltip,
 } from "@vector-im/compound-web";
 import { type FormEvent, useCallback, useRef, useState } from "react";
-import { useIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 import {
   type EditTokenParameters,
@@ -147,16 +146,22 @@ function TokenDetailComponent() {
         <div className="flex flex-wrap gap-4 *:flex *:flex-col *:gap-1 *:items-start">
           <div>
             <Text size="sm" weight="semibold" className="text-text-secondary">
-              Status
+              <FormattedMessage
+                id="pages.registration_tokens.status.label"
+                defaultMessage="Status"
+                description="Label for the Registration token status field"
+              />
             </Text>
-            <Badge kind={tokenAttributes.valid ? "green" : "red"}>
-              {getTokenStatus(tokenAttributes)}
-            </Badge>
+            <TokenStatusBadge token={tokenAttributes} />
           </div>
 
           <div>
             <Text size="sm" weight="semibold" className="text-text-secondary">
-              Created At
+              <FormattedMessage
+                id="pages.registration_tokens.created_at_label"
+                defaultMessage="Created at"
+                description="Label for the token creation date field"
+              />
             </Text>
             <Text>
               {computeHumanReadableDateTimeStringFromUtc(
@@ -167,30 +172,65 @@ function TokenDetailComponent() {
 
           <div>
             <Text size="sm" weight="semibold" className="text-text-secondary">
-              Expires At
+              <FormattedMessage
+                id="pages.registration_tokens.expires_at_label"
+                defaultMessage="Expires at"
+                description="Label for the token expiration date field"
+              />
             </Text>
             <Text>
               {tokenAttributes.expires_at
                 ? computeHumanReadableDateTimeStringFromUtc(
                     tokenAttributes.expires_at,
                   )
-                : "Never expires"}
+                : intl.formatMessage({
+                    id: "pages.registration_tokens.never_expires",
+                    defaultMessage: "Never expires",
+                    description:
+                      "Text shown when a token has no expiration date",
+                  })}
             </Text>
           </div>
           <div>
             <Text size="sm" weight="semibold" className="text-text-secondary">
-              Usage Count
+              <FormattedMessage
+                id="pages.registration_tokens.usage_count_label"
+                defaultMessage="Usage count"
+                description="Label for the token usage count field"
+              />
             </Text>
             <Text>
-              {tokenAttributes.times_used} /{" "}
-              {tokenAttributes.usage_limit || "∞"}
+              {tokenAttributes.usage_limit === null ? (
+                <FormattedMessage
+                  id="pages.registration_tokens.token_uses.unlimited"
+                  defaultMessage="{uses, number} / ∞"
+                  description="Shows the number of uses of a registration token, when there is no usage limit"
+                  values={{
+                    uses: tokenAttributes.times_used,
+                  }}
+                />
+              ) : (
+                <FormattedMessage
+                  id="pages.registration_tokens.token_uses.limited"
+                  defaultMessage="{uses, number} / {limit, number}"
+                  description="Shows the number of uses of a registration token, when there is a usage limit"
+                  values={{
+                    uses: tokenAttributes.times_used,
+                    limit: tokenAttributes.usage_limit,
+                  }}
+                />
+              )}
             </Text>
           </div>
 
           {tokenAttributes.revoked_at && (
             <div>
               <Text size="sm" weight="semibold" className="text-text-secondary">
-                Revoked At
+                <FormattedMessage
+                  id="pages.registration_tokens.revoked_at_label"
+                  defaultMessage="Revoked at"
+                  description="Label for the token revocation date field"
+                />
               </Text>
               <Text>
                 {computeHumanReadableDateTimeStringFromUtc(
@@ -213,7 +253,11 @@ function TokenDetailComponent() {
               {unrevokeTokenMutation.isPending && (
                 <InlineSpinner className="mr-2" />
               )}
-              Unrevoke Token
+              <FormattedMessage
+                id="pages.registration_tokens.unrevoke_token"
+                defaultMessage="Unrevoke token"
+                description="Button text to unrevoke a token"
+              />
             </Button>
           ) : (
             <Button
@@ -227,7 +271,11 @@ function TokenDetailComponent() {
               {revokeTokenMutation.isPending && (
                 <InlineSpinner className="mr-2" />
               )}
-              Revoke Token
+              <FormattedMessage
+                id="pages.registration_tokens.revoke_token"
+                defaultMessage="Revoke token"
+                description="Button text to revoke a token"
+              />
             </Button>
           )}
 
@@ -239,6 +287,80 @@ function TokenDetailComponent() {
         </div>
       </div>
     </Navigation.Details>
+  );
+}
+
+interface TokenStatusBadgeProps {
+  token: {
+    valid: boolean;
+    expires_at?: string | null;
+    usage_limit?: number | null;
+    times_used: number;
+    revoked_at?: string | null;
+  };
+}
+
+function TokenStatusBadge({ token }: TokenStatusBadgeProps) {
+  if (token.valid) {
+    return (
+      <Badge kind="green">
+        <FormattedMessage
+          id="pages.registration_tokens.status.active"
+          defaultMessage="Active"
+          description="Registration token status: active"
+        />
+      </Badge>
+    );
+  }
+
+  if (token.revoked_at) {
+    return (
+      <Badge kind="red">
+        <FormattedMessage
+          id="pages.registration_tokens.status.revoked"
+          defaultMessage="Revoked"
+          description="Registration token status: revoked"
+        />
+      </Badge>
+    );
+  }
+
+  if (token.expires_at && new Date(token.expires_at) < new Date()) {
+    return (
+      <Badge kind="red">
+        <FormattedMessage
+          id="pages.registration_tokens.status.expired"
+          defaultMessage="Expired"
+          description="Registration token status: expired"
+        />
+      </Badge>
+    );
+  }
+
+  if (
+    token.usage_limit !== null &&
+    token.usage_limit !== undefined &&
+    token.times_used >= token.usage_limit
+  ) {
+    return (
+      <Badge kind="red">
+        <FormattedMessage
+          id="pages.registration_tokens.status.used_up"
+          defaultMessage="Used up"
+          description="Registration token status: used up"
+        />
+      </Badge>
+    );
+  }
+
+  return (
+    <Badge kind="red">
+      <FormattedMessage
+        id="pages.registration_tokens.status.invalid"
+        defaultMessage="Invalid"
+        description="Registration token status: invalid"
+      />
+    </Badge>
   );
 }
 
@@ -263,6 +385,7 @@ function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
   const usageLimitInputRef = useRef<HTMLInputElement>(null);
 
   const queryClient = useQueryClient();
+  const intl = useIntl();
 
   const editTokenMutation = useMutation({
     mutationFn: async (parameters: EditTokenParameters) =>
@@ -359,11 +482,21 @@ function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
           disabled={!!tokenAttributes.revoked_at}
           Icon={EditIcon}
         >
-          Edit Properties
+          <FormattedMessage
+            id="pages.registration_tokens.edit_properties"
+            defaultMessage="Edit properties"
+            description="Button text to edit token properties"
+          />
         </Button>
       }
     >
-      <Dialog.Title>Edit Registration Token</Dialog.Title>
+      <Dialog.Title>
+        <FormattedMessage
+          id="pages.registration_tokens.edit_token_title"
+          defaultMessage="Edit registration token"
+          description="Title of the edit token modal"
+        />
+      </Dialog.Title>
 
       <Dialog.Description asChild>
         <Form.Root
@@ -372,7 +505,13 @@ function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
           className="space-y-6"
         >
           <Form.Field name="expires">
-            <Form.Label>Expires at</Form.Label>
+            <Form.Label>
+              <FormattedMessage
+                id="pages.registration_tokens.expires_at_field"
+                defaultMessage="Expires at"
+                description="Label for the expires at form field"
+              />
+            </Form.Label>
             <div className="flex items-center gap-3">
               <Form.TextControl
                 type="datetime-local"
@@ -385,7 +524,11 @@ function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
                       )
                     : ""
                 }
-                placeholder="No expiration"
+                placeholder={intl.formatMessage({
+                  id: "pages.registration_tokens.no_expiration_placeholder",
+                  defaultMessage: "No expiration",
+                  description: "Placeholder text for the expires at field",
+                })}
                 min="1"
                 disabled={isPending}
               />
@@ -399,20 +542,33 @@ function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
               />
             </div>
             <Form.HelpMessage>
-              When the token expires. Leave empty if the token should never
-              expire.
+              <FormattedMessage
+                id="pages.registration_tokens.expires_at_help"
+                defaultMessage="When the token expires. Leave empty if the token should never expire."
+                description="Help text for the expires at field"
+              />
             </Form.HelpMessage>
           </Form.Field>
 
           <Form.Field name="usageLimit">
-            <Form.Label>Usage Limit</Form.Label>
+            <Form.Label>
+              <FormattedMessage
+                id="pages.registration_tokens.usage_limit_field"
+                defaultMessage="Usage limit"
+                description="Label for the usage limit form field"
+              />
+            </Form.Label>
             <div className="flex items-center gap-3">
               <Form.TextControl
                 type="number"
                 ref={usageLimitInputRef}
                 className="flex-1"
                 defaultValue={tokenAttributes.usage_limit || ""}
-                placeholder="Unlimited"
+                placeholder={intl.formatMessage({
+                  id: "pages.registration_tokens.unlimited_placeholder",
+                  defaultMessage: "Unlimited",
+                  description: "Placeholder text for the usage limit field",
+                })}
                 min="1"
                 disabled={isPending}
               />
@@ -426,49 +582,34 @@ function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
               />
             </div>
             <Form.HelpMessage>
-              Maximum number of times this token can be used. Leave empty for
-              unlimited uses.
+              <FormattedMessage
+                id="pages.registration_tokens.usage_limit_help"
+                defaultMessage="Maximum number of times this token can be used. Leave empty for unlimited uses."
+                description="Help text for the usage limit field"
+              />
             </Form.HelpMessage>
           </Form.Field>
 
           <Form.Submit disabled={isPending}>
             {isPending && <InlineSpinner />}
-            Save Changes
+            <FormattedMessage
+              id="pages.registration_tokens.save_changes"
+              defaultMessage="Save Changes"
+              description="Submit button text for saving token changes"
+            />
           </Form.Submit>
         </Form.Root>
       </Dialog.Description>
 
       <Dialog.Close asChild>
         <Button type="button" kind="tertiary" disabled={isPending}>
-          Cancel
+          <FormattedMessage
+            id="action.cancel"
+            defaultMessage="Cancel"
+            description="Label for a cancel action/button"
+          />
         </Button>
       </Dialog.Close>
     </Dialog.Root>
   );
-}
-
-function getTokenStatus(token: {
-  valid: boolean;
-  expires_at?: string | null;
-  usage_limit?: number | null;
-  times_used: number;
-  revoked_at?: string | null;
-}) {
-  if (!token.valid) {
-    if (token.revoked_at) {
-      return "Revoked";
-    }
-    if (token.expires_at && new Date(token.expires_at) < new Date()) {
-      return "Expired";
-    }
-    if (
-      token.usage_limit !== null &&
-      token.usage_limit !== undefined &&
-      token.times_used >= token.usage_limit
-    ) {
-      return "Used Up";
-    }
-    return "Invalid";
-  }
-  return "Active";
 }

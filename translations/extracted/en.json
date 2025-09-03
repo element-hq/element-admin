@@ -79,6 +79,10 @@
     "description": "Title for the login page",
     "message": "Login"
   },
+  "pages.registration_tokens.auto_generate_placeholder": {
+    "description": "Placeholder text for custom token field",
+    "message": "Auto-generate if left empty"
+  },
   "pages.registration_tokens.create_token.error": {
     "description": "The error message when the request for creating a registration token fails",
     "message": "Failed to create token"
@@ -95,13 +99,165 @@
     "description": "The title of the create registration token dialog",
     "message": "Create Registration Token"
   },
+  "pages.registration_tokens.created_at_column": {
+    "description": "Column header for created at column",
+    "message": "Created at"
+  },
+  "pages.registration_tokens.created_at_label": {
+    "description": "Label for the token creation date field",
+    "message": "Created at"
+  },
+  "pages.registration_tokens.custom_token_help": {
+    "description": "Help text for the custom token field",
+    "message": "Optional custom token string. If left empty, a secure token will be auto-generated."
+  },
+  "pages.registration_tokens.custom_token_label": {
+    "description": "Label for the custom token field",
+    "message": "Custom Token"
+  },
+  "pages.registration_tokens.edit_properties": {
+    "description": "Button text to edit token properties",
+    "message": "Edit properties"
+  },
+  "pages.registration_tokens.edit_token_title": {
+    "description": "Title of the edit token modal",
+    "message": "Edit registration token"
+  },
+  "pages.registration_tokens.expires_at_field": {
+    "description": "Label for the expires at form field",
+    "message": "Expires at"
+  },
+  "pages.registration_tokens.expires_at_help": {
+    "description": "Help text for the expires at field",
+    "message": "When the token expires. Leave empty if the token should never expire."
+  },
+  "pages.registration_tokens.expires_at_label": {
+    "description": "Label for the token expiration date field",
+    "message": "Expires at"
+  },
+  "pages.registration_tokens.filter_active_only": {
+    "description": "Filter option for active tokens only",
+    "message": "Active Only"
+  },
+  "pages.registration_tokens.filter_expired_only": {
+    "description": "Filter option for expired tokens only",
+    "message": "Expired Only"
+  },
+  "pages.registration_tokens.filter_revoked_only": {
+    "description": "Filter option for revoked tokens only",
+    "message": "Revoked Only"
+  },
+  "pages.registration_tokens.filter_used_only": {
+    "description": "Filter option for used tokens only",
+    "message": "Used Only"
+  },
+  "pages.registration_tokens.loading_more": {
+    "description": "Text shown when loading more tokens",
+    "message": "Loading more tokens..."
+  },
+  "pages.registration_tokens.never_expires": {
+    "description": "Text shown when a token has no expiration date",
+    "message": "Never expires"
+  },
+  "pages.registration_tokens.no_expiration_placeholder": {
+    "description": "Placeholder text for the expires at field",
+    "message": "No expiration"
+  },
+  "pages.registration_tokens.revoke_token": {
+    "description": "Button text to revoke a token",
+    "message": "Revoke token"
+  },
+  "pages.registration_tokens.revoked_at_label": {
+    "description": "Label for the token revocation date field",
+    "message": "Revoked at"
+  },
+  "pages.registration_tokens.save_changes": {
+    "description": "Submit button text for saving token changes",
+    "message": "Save Changes"
+  },
+  "pages.registration_tokens.status.active": {
+    "description": "Registration token status: active",
+    "message": "Active"
+  },
+  "pages.registration_tokens.status.column": {
+    "description": "Column header for status column",
+    "message": "Status"
+  },
+  "pages.registration_tokens.status.expired": {
+    "description": "Registration token status: expired",
+    "message": "Expired"
+  },
+  "pages.registration_tokens.status.invalid": {
+    "description": "Registration token status: invalid",
+    "message": "Invalid"
+  },
+  "pages.registration_tokens.status.label": {
+    "description": "Label for the Registration token status field",
+    "message": "Status"
+  },
+  "pages.registration_tokens.status.revoked": {
+    "description": "Registration token status: revoked",
+    "message": "Revoked"
+  },
+  "pages.registration_tokens.status.used_up": {
+    "description": "Registration token status: used up",
+    "message": "Used up"
+  },
   "pages.registration_tokens.title": {
     "description": "The title of the registration tokens list page",
     "message": "Registration tokens"
   },
+  "pages.registration_tokens.token_column": {
+    "description": "Column header for token column",
+    "message": "Token"
+  },
   "pages.registration_tokens.token_count": {
     "description": "On the registration tokens list page, this heading shows the total number of tokens",
     "message": "{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
+  },
+  "pages.registration_tokens.token_uses.limited": {
+    "description": "Shows the number of uses of a registration token, when there is a usage limit",
+    "message": "{uses, number} / {limit, number}"
+  },
+  "pages.registration_tokens.token_uses.unlimited": {
+    "description": "Shows the number of uses of a registration token, when there is no usage limit",
+    "message": "{uses, number} / ∞"
+  },
+  "pages.registration_tokens.unlimited_placeholder": {
+    "description": "Placeholder text for the usage limit field",
+    "message": "Unlimited"
+  },
+  "pages.registration_tokens.unlimited_uses_placeholder": {
+    "description": "Placeholder text for usage limit field",
+    "message": "Leave empty for unlimited uses"
+  },
+  "pages.registration_tokens.unrevoke_token": {
+    "description": "Button text to unrevoke a token",
+    "message": "Unrevoke token"
+  },
+  "pages.registration_tokens.usage_count_label": {
+    "description": "Label for the token usage count field",
+    "message": "Usage count"
+  },
+  "pages.registration_tokens.usage_limit_field": {
+    "description": "Label for the usage limit form field",
+    "message": "Usage limit"
+  },
+  "pages.registration_tokens.usage_limit_help": {
+    "description": "Help text for the usage limit field",
+    "message": "Maximum number of times this token can be used. Leave empty for unlimited uses."
+  },
+  "pages.registration_tokens.usage_limit_label": {
+    "description": "Label for the usage limit field",
+    "message": "Usage Limit"
+  },
+  "pages.registration_tokens.uses_column": {
+    "description": "Column header for uses column",
+    "message": "Uses"
+  },
+  "pages.registration_tokens.valid_until_column": {
+    "description": "Column header for valid until column",
+    "message": "Valid Until"
   },
   "pages.rooms.room_count": {
     "description": "On the room list page, this heading shows the total number of rooms",
