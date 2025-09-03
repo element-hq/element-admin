@@ -62,6 +62,7 @@
     "@types/react-dom": "19.1.7",
     "@vitejs/plugin-react": "5.0.1",
     "babel-plugin-formatjs": "10.5.39",
+    "babel-plugin-react-compiler": "19.1.0-rc.3",
     "eslint": "9.33.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-import-resolver-typescript": "4.4.4",

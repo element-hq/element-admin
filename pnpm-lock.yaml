@@ -141,6 +141,9 @@ importers:
       babel-plugin-formatjs:
         specifier: 10.5.39
         version: 10.5.39
+      babel-plugin-react-compiler:
+        specifier: 19.1.0-rc.3
+        version: 19.1.0-rc.3
       eslint:
         specifier: 9.33.0
         version: 9.33.0(jiti@2.5.1)
@@ -2217,6 +2220,9 @@ packages:
 
   babel-plugin-formatjs@10.5.39:
     resolution: {integrity: sha512-GnQGhQZLFYB0dqWUb07sl0h31tCEwU0HblS+rIAYNP84Fj5zQCyCldcYFm9gsEGYvialuYpxEt9+7+d/zqG7lQ==}
+
+  babel-plugin-react-compiler@19.1.0-rc.3:
+    resolution: {integrity: sha512-mjRn69WuTz4adL0bXGx8Rsyk1086zFJeKmes6aK0xPuK3aaXmDJdLHqwKKMrpm6KAI1MCoUK72d2VeqQbu8YIA==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -6012,6 +6018,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
       - ts-jest
+
+  babel-plugin-react-compiler@19.1.0-rc.3:
+    dependencies:
+      '@babel/types': 7.28.2
 
   balanced-match@1.0.2: {}
 
