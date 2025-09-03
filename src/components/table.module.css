@@ -187,8 +187,11 @@
   transition: background-color var(--default-transition-duration)
     var(--default-transition-timing-function);
 
-  &.selected,
-  &.selected:hover {
+  /* The row selection style is done automatically based on if there is an
+     'active' link in the row. This avoids a bunch of react re-renders when
+     switching page */
+  &:has([aria-current="page"]),
+  &:has([aria-current="page"]):hover {
     background-color: var(--cpd-color-bg-subtle-primary);
   }
 

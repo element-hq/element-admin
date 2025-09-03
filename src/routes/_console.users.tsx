@@ -6,12 +6,7 @@ import {
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import {
-  createFileRoute,
-  Link,
-  MatchRoute,
-  Outlet,
-} from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import {
   flexRender,
   getCoreRowModel,
@@ -592,33 +587,24 @@ function RouteComponent() {
                     throw new Error("got a virtual row for a non-existing row");
 
                   return (
-                    <MatchRoute
+                    <Table.ListRow
                       key={row.id}
-                      from={Route.path}
-                      to="$userId"
-                      params={{ userId: row.original.id }}
+                      style={{
+                        height: `${virtualRow.size}px`,
+                        transform: `translateY(${
+                          virtualRow.start - index * virtualRow.size
+                        }px)`,
+                      }}
                     >
-                      {(match) => (
-                        <Table.ListRow
-                          selected={!!match}
-                          style={{
-                            height: `${virtualRow.size}px`,
-                            transform: `translateY(${
-                              virtualRow.start - index * virtualRow.size
-                            }px)`,
-                          }}
-                        >
-                          {row.getVisibleCells().map((cell) => (
-                            <Table.ListCell key={cell.id}>
-                              {flexRender(
-                                cell.column.columnDef.cell,
-                                cell.getContext(),
-                              )}
-                            </Table.ListCell>
-                          ))}
-                        </Table.ListRow>
-                      )}
-                    </MatchRoute>
+                      {row.getVisibleCells().map((cell) => (
+                        <Table.ListCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </Table.ListCell>
+                      ))}
+                    </Table.ListRow>
                   );
                 })}
               </Table.ListBody>
