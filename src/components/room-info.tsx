@@ -165,6 +165,7 @@ interface RoomAvatarProps {
   synapseRoot: string;
   roomId: string;
   roomName: string | null;
+  roomCanonicalAlias: string | null;
   roomType: string | null;
   members: number;
   size?: string;
@@ -173,13 +174,15 @@ export const RoomAvatar: React.FC<RoomAvatarProps> = ({
   synapseRoot,
   roomId,
   roomName,
+  roomCanonicalAlias,
   roomType,
   members,
   size,
 }: RoomAvatarProps) => {
   const isSpace = roomType === "m.space";
   const avatar = useRoomAvatar(synapseRoot, roomId);
-  const shouldShowHeroes = members > 0 && members <= 2 && !roomName;
+  const shouldShowHeroes =
+    members > 0 && members <= 2 && !roomName && !roomCanonicalAlias;
   const { data: membersList } = useQuery({
     ...roomMembersQuery(synapseRoot, roomId),
     initialData: {
@@ -191,7 +194,7 @@ export const RoomAvatar: React.FC<RoomAvatarProps> = ({
   // In case we don't have a room avatar, we show up to two user avatars
   const heroes = [...membersList.members].sort().splice(0, 2);
   const displayName = useRoomName(
-    roomName,
+    roomName || roomCanonicalAlias,
     roomType,
     members,
     synapseRoot,
@@ -223,6 +226,7 @@ interface RoomDisplayNameProps {
   synapseRoot: string;
   roomId: string;
   roomName: string | null;
+  roomCanonicalAlias: string | null;
   roomType: string | null;
   members: number;
 }
@@ -230,11 +234,12 @@ export const RoomDisplayName: React.FC<RoomDisplayNameProps> = ({
   synapseRoot,
   roomId,
   roomName,
+  roomCanonicalAlias,
   roomType,
   members,
 }: RoomDisplayNameProps) => {
   const displayName = useRoomName(
-    roomName,
+    roomName || roomCanonicalAlias,
     roomType,
     members,
     synapseRoot,

@@ -183,6 +183,7 @@ function RouteComponent() {
               <RoomAvatar
                 roomId={room.room_id}
                 roomName={room.name}
+                roomCanonicalAlias={room.canonical_alias}
                 roomType={room.room_type}
                 members={room.joined_members}
                 synapseRoot={synapseRoot}
@@ -192,6 +193,7 @@ function RouteComponent() {
                 <RoomDisplayName
                   roomId={room.room_id}
                   roomName={room.name}
+                  roomCanonicalAlias={room.canonical_alias}
                   roomType={room.room_type}
                   members={room.joined_members}
                   synapseRoot={synapseRoot}
