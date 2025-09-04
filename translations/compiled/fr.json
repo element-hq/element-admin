@@ -20,13 +20,13 @@
   "action.go_back": [
     {
       "type": 0,
-      "value": "Go back"
+      "value": "Retour"
     }
   ],
   "action.retry": [
     {
       "type": 0,
-      "value": "Retry"
+      "value": "Réessayer"
     }
   ],
   "action.sign_out": [
@@ -115,19 +115,19 @@
   "pages.dashboard.failed_to_load": [
     {
       "type": 0,
-      "value": "Failed to load"
+      "value": "Échec du chargement"
     }
   ],
   "pages.dashboard.registered_users_count": [
     {
       "type": 0,
-      "value": "Users registered"
+      "value": "Utilisateurs enregistrés"
     }
   ],
   "pages.dashboard.rooms_count": [
     {
       "type": 0,
-      "value": "Rooms total"
+      "value": "Nombre total de salons"
     }
   ],
   "pages.dashboard.synapse_version": [
@@ -142,10 +142,16 @@
       "value": "Tableau de bord"
     }
   ],
+  "pages.generic_error.go_home": [
+    {
+      "type": 0,
+      "value": "Retour à l'accueil"
+    }
+  ],
   "pages.generic_error.sign_out_and_reload": [
     {
       "type": 0,
-      "value": "Sign out and reload"
+      "value": "Se déconnecter et recharger"
     }
   ],
   "pages.generic_error.technical_details.item": [
@@ -165,13 +171,13 @@
   "pages.generic_error.text": [
     {
       "type": 0,
-      "value": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
+      "value": "Ça peut être à cause d'un bug ou parce que le serveur d’accueil n'est pas accessible. Vous pouvez essayer de recharger la page, retourner à la page précédente ou tout réinitialiser et retourner à la page d'accueil."
     }
   ],
   "pages.generic_error.title": [
     {
       "type": 0,
-      "value": "An unexpected error occurred"
+      "value": "Une erreur inattendue s'est produite."
     }
   ],
   "pages.landing.description": [
@@ -183,13 +189,13 @@
   "pages.login.failed_to_reach": [
     {
       "type": 0,
-      "value": "Failed to reach server"
+      "value": "Impossible de joindre le serveur"
     }
   ],
   "pages.login.get_started": [
     {
       "type": 0,
-      "value": "Get started"
+      "value": "Commencer"
     }
   ],
   "pages.login.server_name": [
@@ -207,187 +213,187 @@
   "pages.registration_tokens.auto_generate_placeholder": [
     {
       "type": 0,
-      "value": "Auto-generate if left empty"
+      "value": "Laisser vite pour générer automatiquement"
     }
   ],
   "pages.registration_tokens.create_token.error": [
     {
       "type": 0,
-      "value": "Failed to create token"
+      "value": "Impossible de créer le jeton"
     }
   ],
   "pages.registration_tokens.create_token.submit": [
     {
       "type": 0,
-      "value": "Create Token"
+      "value": "Créer un jeton"
     }
   ],
   "pages.registration_tokens.create_token.success": [
     {
       "type": 0,
-      "value": "Token created successfully"
+      "value": "Jeton créé avec succès"
     }
   ],
   "pages.registration_tokens.create_token.title": [
     {
       "type": 0,
-      "value": "Create Registration Token"
+      "value": "Créer un jeton d'enregistrement"
     }
   ],
   "pages.registration_tokens.created_at_column": [
     {
       "type": 0,
-      "value": "Created at"
+      "value": "Date de création"
     }
   ],
   "pages.registration_tokens.created_at_label": [
     {
       "type": 0,
-      "value": "Created at"
+      "value": "Date de création"
     }
   ],
   "pages.registration_tokens.custom_token_help": [
     {
       "type": 0,
-      "value": "Optional custom token string. If left empty, a secure token will be auto-generated."
+      "value": "Jeton personnalisé. Laisser vide pour générer le jeton automatiquement."
     }
   ],
   "pages.registration_tokens.custom_token_label": [
     {
       "type": 0,
-      "value": "Custom Token"
+      "value": "Jeton personnalisé"
     }
   ],
   "pages.registration_tokens.edit_properties": [
     {
       "type": 0,
-      "value": "Edit properties"
+      "value": "Modifier les propriétés"
     }
   ],
   "pages.registration_tokens.edit_token_title": [
     {
       "type": 0,
-      "value": "Edit registration token"
+      "value": "Modifier le jeton d'enregistrement"
     }
   ],
   "pages.registration_tokens.expires_at_field": [
     {
       "type": 0,
-      "value": "Expires at"
+      "value": "Date d'expiration"
     }
   ],
   "pages.registration_tokens.expires_at_help": [
     {
       "type": 0,
-      "value": "When the token expires. Leave empty if the token should never expire."
+      "value": "Quand le jeton expire. Laisse ce champ vide pour que le jeton n'expire jamais."
     }
   ],
   "pages.registration_tokens.expires_at_label": [
     {
       "type": 0,
-      "value": "Expires at"
+      "value": "Date d'expiration"
     }
   ],
   "pages.registration_tokens.filter_active_only": [
     {
       "type": 0,
-      "value": "Active Only"
+      "value": "Actifs uniquement"
     }
   ],
   "pages.registration_tokens.filter_expired_only": [
     {
       "type": 0,
-      "value": "Expired Only"
+      "value": "Expirés uniquement"
     }
   ],
   "pages.registration_tokens.filter_revoked_only": [
     {
       "type": 0,
-      "value": "Revoked Only"
+      "value": "Révoqués uniquement"
     }
   ],
   "pages.registration_tokens.filter_used_only": [
     {
       "type": 0,
-      "value": "Used Only"
+      "value": "Utilisés uniquement"
     }
   ],
   "pages.registration_tokens.loading_more": [
     {
       "type": 0,
-      "value": "Loading more tokens..."
+      "value": "Chargement de plus de jetons..."
     }
   ],
   "pages.registration_tokens.never_expires": [
     {
       "type": 0,
-      "value": "Never expires"
+      "value": "N'expire jamais"
     }
   ],
   "pages.registration_tokens.no_expiration_placeholder": [
     {
       "type": 0,
-      "value": "No expiration"
+      "value": "Aucune date d'expiration"
     }
   ],
   "pages.registration_tokens.revoke_token": [
     {
       "type": 0,
-      "value": "Revoke token"
+      "value": "Révoquer le jeton"
     }
   ],
   "pages.registration_tokens.revoked_at_label": [
     {
       "type": 0,
-      "value": "Revoked at"
+      "value": "Date de révocation"
     }
   ],
   "pages.registration_tokens.save_changes": [
     {
       "type": 0,
-      "value": "Save Changes"
+      "value": "Enregistrer les modifications"
     }
   ],
   "pages.registration_tokens.status.active": [
     {
       "type": 0,
-      "value": "Active"
+      "value": "Actif"
     }
   ],
   "pages.registration_tokens.status.column": [
     {
       "type": 0,
-      "value": "Status"
+      "value": "Statut"
     }
   ],
   "pages.registration_tokens.status.expired": [
     {
       "type": 0,
-      "value": "Expired"
+      "value": "Expiré"
     }
   ],
   "pages.registration_tokens.status.invalid": [
     {
       "type": 0,
-      "value": "Invalid"
+      "value": "Invalide"
     }
   ],
   "pages.registration_tokens.status.label": [
     {
       "type": 0,
-      "value": "Status"
+      "value": "Statut"
     }
   ],
   "pages.registration_tokens.status.revoked": [
     {
       "type": 0,
-      "value": "Revoked"
+      "value": "Révoqué"
     }
   ],
   "pages.registration_tokens.status.used_up": [
     {
       "type": 0,
-      "value": "Used up"
+      "value": "Usé"
     }
   ],
   "pages.registration_tokens.title": [
@@ -399,7 +405,7 @@
   "pages.registration_tokens.token_column": [
     {
       "type": 0,
-      "value": "Token"
+      "value": "Jeton"
     }
   ],
   "pages.registration_tokens.token_count": [
@@ -450,7 +456,7 @@
     },
     {
       "type": 0,
-      "value": " / "
+      "value": "/"
     },
     {
       "style": null,
@@ -466,61 +472,61 @@
     },
     {
       "type": 0,
-      "value": " / ∞"
+      "value": "/ ∞"
     }
   ],
   "pages.registration_tokens.unlimited_placeholder": [
     {
       "type": 0,
-      "value": "Unlimited"
+      "value": "Illimitée"
     }
   ],
   "pages.registration_tokens.unlimited_uses_placeholder": [
     {
       "type": 0,
-      "value": "Leave empty for unlimited uses"
+      "value": "Laisse vide pour une utilisation illimitée"
     }
   ],
   "pages.registration_tokens.unrevoke_token": [
     {
       "type": 0,
-      "value": "Unrevoke token"
+      "value": "Annuler la révocation du jeton"
     }
   ],
   "pages.registration_tokens.usage_count_label": [
     {
       "type": 0,
-      "value": "Usage count"
+      "value": "Nombre d'utilisations"
     }
   ],
   "pages.registration_tokens.usage_limit_field": [
     {
       "type": 0,
-      "value": "Usage limit"
+      "value": "Limite d'utilisation"
     }
   ],
   "pages.registration_tokens.usage_limit_help": [
     {
       "type": 0,
-      "value": "Maximum number of times this token can be used. Leave empty for unlimited uses."
+      "value": "Nombre maximum de fois où ce jeton peut être utilisé. Laisser vide pour un nombre illimité d'utilisations."
     }
   ],
   "pages.registration_tokens.usage_limit_label": [
     {
       "type": 0,
-      "value": "Usage Limit"
+      "value": "Limite d'utilisation"
     }
   ],
   "pages.registration_tokens.uses_column": [
     {
       "type": 0,
-      "value": "Uses"
+      "value": "Utilisations"
     }
   ],
   "pages.registration_tokens.valid_until_column": [
     {
       "type": 0,
-      "value": "Valid Until"
+      "value": "Valable jusqu'à"
     }
   ],
   "pages.rooms.room_count": [
@@ -942,7 +948,7 @@
   "ui.language_switcher.browser_default": [
     {
       "type": 0,
-      "value": "Use browser settings ("
+      "value": "Utiliser les paramètres du navigateur ("
     },
     {
       "type": 1,
@@ -956,19 +962,19 @@
   "ui.language_switcher.button_label": [
     {
       "type": 0,
-      "value": "Language settings"
+      "value": "Paramètres de langue"
     }
   ],
   "ui.language_switcher.description": [
     {
       "type": 0,
-      "value": "Choose your preferred language for the interface."
+      "value": "Choisissez la langue préférée pour l'interface."
     }
   ],
   "ui.language_switcher.title": [
     {
       "type": 0,
-      "value": "Language settings"
+      "value": "Paramètres de langue"
     }
   ]
 }

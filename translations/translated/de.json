@@ -9,7 +9,7 @@
     "message": "Schließen"
   },
   "action.go_back": {
-    "message": "Go back"
+    "message": "Zurück"
   },
   "action.retry": {
     "message": "Erneut versuchen"
@@ -64,6 +64,9 @@
   },
   "pages.dashboard.title": {
     "message": "Dashboard"
+  },
+  "pages.generic_error.go_home": {
+    "message": "Go home"
   },
   "pages.generic_error.sign_out_and_reload": {
     "message": "Sign out and reload"

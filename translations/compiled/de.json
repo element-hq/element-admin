@@ -20,7 +20,7 @@
   "action.go_back": [
     {
       "type": 0,
-      "value": "Go back"
+      "value": "Zurück"
     }
   ],
   "action.retry": [
@@ -140,6 +140,12 @@
     {
       "type": 0,
       "value": "Dashboard"
+    }
+  ],
+  "pages.generic_error.go_home": [
+    {
+      "type": 0,
+      "value": "Go home"
     }
   ],
   "pages.generic_error.sign_out_and_reload": [
