@@ -87,6 +87,10 @@
     "description": "The title of the dashboard page",
     "message": "Dashboard"
   },
+  "pages.generic_error.go_home": {
+    "description": "When an unxpected error happen, one option is to go back to the homepage",
+    "message": "Go home"
+  },
   "pages.generic_error.sign_out_and_reload": {
     "description": "When an unxpected error happen, one option is to try to sign out the account and reload the page",
     "message": "Sign out and reload"

@@ -20,6 +20,7 @@ import { FormattedMessage } from "react-intl";
 
 import { authMetadataQuery, revokeToken } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
+import { ButtonLink } from "@/components/link";
 import * as messages from "@/messages";
 import { useAuthStore } from "@/stores/auth";
 
@@ -159,10 +160,18 @@ function GenericError({ error, reset }: ErrorComponentProps) {
           />
         </Button>
       )}
-      {canGoBack && (
+      {canGoBack ? (
         <Button kind="secondary" onClick={goBack} Icon={ArrowLeftIcon}>
           <FormattedMessage {...messages.actionGoBack} />
         </Button>
+      ) : (
+        <ButtonLink kind="secondary" to="/" Icon={ArrowLeftIcon}>
+          <FormattedMessage
+            id="pages.generic_error.go_home"
+            defaultMessage="Go home"
+            description="When an unxpected error happen, one option is to go back to the homepage"
+          />
+        </ButtonLink>
       )}
     </section>
   );

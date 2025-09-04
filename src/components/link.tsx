@@ -17,7 +17,14 @@ export const ButtonLink = createLink(
     function ButtonLink({ children, ...props }, ref) {
       const disabled = !!props.disabled || !!props["aria-disabled"] || false;
       return (
-        <Button as="a" {...props} disabled={disabled} ref={ref}>
+        <Button
+          as="a"
+          // Override a weird default that compound has on button links
+          style={{ inlineSize: "initial " }}
+          {...props}
+          disabled={disabled}
+          ref={ref}
+        >
           {children}
         </Button>
       );
