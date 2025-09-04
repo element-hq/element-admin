@@ -379,5 +379,17 @@
   },
   "rooms_info.other_members": {
     "message": "{COUNT, plural, one {# other} other {# others}}"
+  },
+  "ui.language_switcher.browser_default": {
+    "message": "Use browser settings ({language})"
+  },
+  "ui.language_switcher.button_label": {
+    "message": "Language settings"
+  },
+  "ui.language_switcher.description": {
+    "message": "Choose your preferred language for the interface."
+  },
+  "ui.language_switcher.title": {
+    "message": "Language settings"
   }
 }
