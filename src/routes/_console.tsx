@@ -95,6 +95,7 @@ function RouteComponent() {
   useEffect(() => {
     if (logoClicks > 20) {
       toast("Oh, well.");
+      throw new Error("User clicked too many times");
     } else if (logoClicks > 15) {
       const promise = new Promise((_, reject) => setTimeout(reject, 2000));
       toast.promise(promise, {
