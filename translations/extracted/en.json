@@ -107,6 +107,14 @@
     "description": "On the landing pages, explains what the app does",
     "message": "Manage the deployment of the element app for your organization or community."
   },
+  "pages.login.failed_to_reach": {
+    "description": "Error message when the server name is invalid",
+    "message": "Failed to reach server"
+  },
+  "pages.login.get_started": {
+    "description": "On the login page, this starts the authorization process",
+    "message": "Get started"
+  },
   "pages.login.server_name": {
     "description": "Label for the server name field",
     "message": "Server name"
