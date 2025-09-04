@@ -17,6 +17,18 @@
       "value": "Schließen"
     }
   ],
+  "action.go_back": [
+    {
+      "type": 0,
+      "value": "Go back"
+    }
+  ],
+  "action.retry": [
+    {
+      "type": 0,
+      "value": "Erneut versuchen"
+    }
+  ],
   "action.sign_out": [
     {
       "type": 0,
@@ -100,6 +112,24 @@
       "value": "Nutzer"
     }
   ],
+  "pages.dashboard.failed_to_load": [
+    {
+      "type": 0,
+      "value": "Laden fehlgeschlagen"
+    }
+  ],
+  "pages.dashboard.registered_users_count": [
+    {
+      "type": 0,
+      "value": "Registrierte Nutzer"
+    }
+  ],
+  "pages.dashboard.rooms_count": [
+    {
+      "type": 0,
+      "value": "Gesamtzahl der Chats"
+    }
+  ],
   "pages.dashboard.synapse_version": [
     {
       "type": 0,
@@ -112,10 +142,54 @@
       "value": "Dashboard"
     }
   ],
+  "pages.generic_error.sign_out_and_reload": [
+    {
+      "type": 0,
+      "value": "Sign out and reload"
+    }
+  ],
+  "pages.generic_error.technical_details.item": [
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": ": "
+    },
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
+  "pages.generic_error.text": [
+    {
+      "type": 0,
+      "value": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
+    }
+  ],
+  "pages.generic_error.title": [
+    {
+      "type": 0,
+      "value": "An unexpected error occurred"
+    }
+  ],
   "pages.landing.description": [
     {
       "type": 0,
       "value": "Verwalte die Bereitstellung der Element-App für deine Organisation oder Community."
+    }
+  ],
+  "pages.login.failed_to_reach": [
+    {
+      "type": 0,
+      "value": "Failed to reach server"
+    }
+  ],
+  "pages.login.get_started": [
+    {
+      "type": 0,
+      "value": "Get started"
     }
   ],
   "pages.login.server_name": [
@@ -133,151 +207,151 @@
   "pages.registration_tokens.auto_generate_placeholder": [
     {
       "type": 0,
-      "value": "Auto-generate if left empty"
+      "value": "Automatisch generieren, wenn leer gelassen"
     }
   ],
   "pages.registration_tokens.create_token.error": [
     {
       "type": 0,
-      "value": "Failed to create token"
+      "value": "Token konnte nicht erstellt werden"
     }
   ],
   "pages.registration_tokens.create_token.submit": [
     {
       "type": 0,
-      "value": "Create Token"
+      "value": "Token erstellen"
     }
   ],
   "pages.registration_tokens.create_token.success": [
     {
       "type": 0,
-      "value": "Token created successfully"
+      "value": "Token erfolgreich erstellt"
     }
   ],
   "pages.registration_tokens.create_token.title": [
     {
       "type": 0,
-      "value": "Create Registration Token"
+      "value": "Registrierungstoken erstellen"
     }
   ],
   "pages.registration_tokens.created_at_column": [
     {
       "type": 0,
-      "value": "Created at"
+      "value": "Erstellt am"
     }
   ],
   "pages.registration_tokens.created_at_label": [
     {
       "type": 0,
-      "value": "Created at"
+      "value": "Erstellt am"
     }
   ],
   "pages.registration_tokens.custom_token_help": [
     {
       "type": 0,
-      "value": "Optional custom token string. If left empty, a secure token will be auto-generated."
+      "value": "Optionales benutzerdefiniertes Token. Wenn das Feld leer bleibt, wird automatisch ein sicheres Token generiert."
     }
   ],
   "pages.registration_tokens.custom_token_label": [
     {
       "type": 0,
-      "value": "Custom Token"
+      "value": "Benutzerdefiniertes Token"
     }
   ],
   "pages.registration_tokens.edit_properties": [
     {
       "type": 0,
-      "value": "Edit properties"
+      "value": "Eigenschaften bearbeiten"
     }
   ],
   "pages.registration_tokens.edit_token_title": [
     {
       "type": 0,
-      "value": "Edit registration token"
+      "value": "Registrierungstoken bearbeiten"
     }
   ],
   "pages.registration_tokens.expires_at_field": [
     {
       "type": 0,
-      "value": "Expires at"
+      "value": "Ablaufdatum"
     }
   ],
   "pages.registration_tokens.expires_at_help": [
     {
       "type": 0,
-      "value": "When the token expires. Leave empty if the token should never expire."
+      "value": "Ablaufdatum. Lass das Feld leer, wenn das Token nie ablaufen soll."
     }
   ],
   "pages.registration_tokens.expires_at_label": [
     {
       "type": 0,
-      "value": "Expires at"
+      "value": "Ablaufdatum"
     }
   ],
   "pages.registration_tokens.filter_active_only": [
     {
       "type": 0,
-      "value": "Active Only"
+      "value": "Nur aktive"
     }
   ],
   "pages.registration_tokens.filter_expired_only": [
     {
       "type": 0,
-      "value": "Expired Only"
+      "value": "Nur abgelaufene"
     }
   ],
   "pages.registration_tokens.filter_revoked_only": [
     {
       "type": 0,
-      "value": "Revoked Only"
+      "value": "Nur widerrufene"
     }
   ],
   "pages.registration_tokens.filter_used_only": [
     {
       "type": 0,
-      "value": "Used Only"
+      "value": "Nur verwendete"
     }
   ],
   "pages.registration_tokens.loading_more": [
     {
       "type": 0,
-      "value": "Loading more tokens..."
+      "value": "Weitere Token werden geladen …"
     }
   ],
   "pages.registration_tokens.never_expires": [
     {
       "type": 0,
-      "value": "Never expires"
+      "value": "Läuft nie ab"
     }
   ],
   "pages.registration_tokens.no_expiration_placeholder": [
     {
       "type": 0,
-      "value": "No expiration"
+      "value": "Kein Ablaufdatum"
     }
   ],
   "pages.registration_tokens.revoke_token": [
     {
       "type": 0,
-      "value": "Revoke token"
+      "value": "Token widerrufen"
     }
   ],
   "pages.registration_tokens.revoked_at_label": [
     {
       "type": 0,
-      "value": "Revoked at"
+      "value": "Widerrufen am"
     }
   ],
   "pages.registration_tokens.save_changes": [
     {
       "type": 0,
-      "value": "Save Changes"
+      "value": "Speichern"
     }
   ],
   "pages.registration_tokens.status.active": [
     {
       "type": 0,
-      "value": "Active"
+      "value": "Aktiv"
     }
   ],
   "pages.registration_tokens.status.column": [
@@ -289,13 +363,13 @@
   "pages.registration_tokens.status.expired": [
     {
       "type": 0,
-      "value": "Expired"
+      "value": "Abgelaufen"
     }
   ],
   "pages.registration_tokens.status.invalid": [
     {
       "type": 0,
-      "value": "Invalid"
+      "value": "Ungültig"
     }
   ],
   "pages.registration_tokens.status.label": [
@@ -307,13 +381,13 @@
   "pages.registration_tokens.status.revoked": [
     {
       "type": 0,
-      "value": "Revoked"
+      "value": "Widerrufen"
     }
   ],
   "pages.registration_tokens.status.used_up": [
     {
       "type": 0,
-      "value": "Used up"
+      "value": "Aufgebraucht"
     }
   ],
   "pages.registration_tokens.title": [
@@ -398,55 +472,55 @@
   "pages.registration_tokens.unlimited_placeholder": [
     {
       "type": 0,
-      "value": "Unlimited"
+      "value": "Unbegrenzt"
     }
   ],
   "pages.registration_tokens.unlimited_uses_placeholder": [
     {
       "type": 0,
-      "value": "Leave empty for unlimited uses"
+      "value": "Für unbegrenzte Nutzung leer lassen"
     }
   ],
   "pages.registration_tokens.unrevoke_token": [
     {
       "type": 0,
-      "value": "Unrevoke token"
+      "value": "Widerruf des Tokens rückgängig machen"
     }
   ],
   "pages.registration_tokens.usage_count_label": [
     {
       "type": 0,
-      "value": "Usage count"
+      "value": "Nutzungsanzahl"
     }
   ],
   "pages.registration_tokens.usage_limit_field": [
     {
       "type": 0,
-      "value": "Usage limit"
+      "value": "Nutzungslimit"
     }
   ],
   "pages.registration_tokens.usage_limit_help": [
     {
       "type": 0,
-      "value": "Maximum number of times this token can be used. Leave empty for unlimited uses."
+      "value": "Maximale Anzahl der Verwendungen dieses Tokens. Für unbegrenzte Verwendungen leer lassen."
     }
   ],
   "pages.registration_tokens.usage_limit_label": [
     {
       "type": 0,
-      "value": "Usage Limit"
+      "value": "Nutzungslimit"
     }
   ],
   "pages.registration_tokens.uses_column": [
     {
       "type": 0,
-      "value": "Uses"
+      "value": "Verwendungen"
     }
   ],
   "pages.registration_tokens.valid_until_column": [
     {
       "type": 0,
-      "value": "Valid Until"
+      "value": "Gültig bis"
     }
   ],
   "pages.rooms.room_count": [

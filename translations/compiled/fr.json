@@ -17,6 +17,18 @@
       "value": "Fermer"
     }
   ],
+  "action.go_back": [
+    {
+      "type": 0,
+      "value": "Go back"
+    }
+  ],
+  "action.retry": [
+    {
+      "type": 0,
+      "value": "Retry"
+    }
+  ],
   "action.sign_out": [
     {
       "type": 0,
@@ -100,6 +112,24 @@
       "value": "Utilisateurs"
     }
   ],
+  "pages.dashboard.failed_to_load": [
+    {
+      "type": 0,
+      "value": "Failed to load"
+    }
+  ],
+  "pages.dashboard.registered_users_count": [
+    {
+      "type": 0,
+      "value": "Users registered"
+    }
+  ],
+  "pages.dashboard.rooms_count": [
+    {
+      "type": 0,
+      "value": "Rooms total"
+    }
+  ],
   "pages.dashboard.synapse_version": [
     {
       "type": 0,
@@ -112,10 +142,54 @@
       "value": "Tableau de bord"
     }
   ],
+  "pages.generic_error.sign_out_and_reload": [
+    {
+      "type": 0,
+      "value": "Sign out and reload"
+    }
+  ],
+  "pages.generic_error.technical_details.item": [
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": ": "
+    },
+    {
+      "type": 1,
+      "value": "message"
+    }
+  ],
+  "pages.generic_error.text": [
+    {
+      "type": 0,
+      "value": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
+    }
+  ],
+  "pages.generic_error.title": [
+    {
+      "type": 0,
+      "value": "An unexpected error occurred"
+    }
+  ],
   "pages.landing.description": [
     {
       "type": 0,
       "value": "Gérez le déploiement d'element pour votre organisation ou votre communauté."
+    }
+  ],
+  "pages.login.failed_to_reach": [
+    {
+      "type": 0,
+      "value": "Failed to reach server"
+    }
+  ],
+  "pages.login.get_started": [
+    {
+      "type": 0,
+      "value": "Get started"
     }
   ],
   "pages.login.server_name": [

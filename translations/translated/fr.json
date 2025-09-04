@@ -8,6 +8,12 @@
   "action.close": {
     "message": "Fermer"
   },
+  "action.go_back": {
+    "message": "Go back"
+  },
+  "action.retry": {
+    "message": "Retry"
+  },
   "action.sign_out": {
     "message": "Se déconnecter"
   },
@@ -44,14 +50,41 @@
   "navigation.users": {
     "message": "Utilisateurs"
   },
+  "pages.dashboard.failed_to_load": {
+    "message": "Failed to load"
+  },
+  "pages.dashboard.registered_users_count": {
+    "message": "Users registered"
+  },
+  "pages.dashboard.rooms_count": {
+    "message": "Rooms total"
+  },
   "pages.dashboard.synapse_version": {
     "message": "Version de Synapse"
   },
   "pages.dashboard.title": {
     "message": "Tableau de bord"
   },
+  "pages.generic_error.sign_out_and_reload": {
+    "message": "Sign out and reload"
+  },
+  "pages.generic_error.technical_details.item": {
+    "message": "{name}: {message}"
+  },
+  "pages.generic_error.text": {
+    "message": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
+  },
+  "pages.generic_error.title": {
+    "message": "An unexpected error occurred"
+  },
   "pages.landing.description": {
     "message": "Gérez le déploiement d'element pour votre organisation ou votre communauté."
+  },
+  "pages.login.failed_to_reach": {
+    "message": "Failed to reach server"
+  },
+  "pages.login.get_started": {
+    "message": "Get started"
   },
   "pages.login.server_name": {
     "message": "Nom du serveur"

@@ -8,6 +8,12 @@
   "action.close": {
     "message": "Schließen"
   },
+  "action.go_back": {
+    "message": "Go back"
+  },
+  "action.retry": {
+    "message": "Erneut versuchen"
+  },
   "action.sign_out": {
     "message": "Abmelden"
   },
@@ -44,14 +50,41 @@
   "navigation.users": {
     "message": "Nutzer"
   },
+  "pages.dashboard.failed_to_load": {
+    "message": "Laden fehlgeschlagen"
+  },
+  "pages.dashboard.registered_users_count": {
+    "message": "Registrierte Nutzer"
+  },
+  "pages.dashboard.rooms_count": {
+    "message": "Gesamtzahl der Chats"
+  },
   "pages.dashboard.synapse_version": {
     "message": "Synapse-Version"
   },
   "pages.dashboard.title": {
     "message": "Dashboard"
   },
+  "pages.generic_error.sign_out_and_reload": {
+    "message": "Sign out and reload"
+  },
+  "pages.generic_error.technical_details.item": {
+    "message": "{name}: {message}"
+  },
+  "pages.generic_error.text": {
+    "message": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
+  },
+  "pages.generic_error.title": {
+    "message": "An unexpected error occurred"
+  },
   "pages.landing.description": {
     "message": "Verwalte die Bereitstellung der Element-App für deine Organisation oder Community."
+  },
+  "pages.login.failed_to_reach": {
+    "message": "Failed to reach server"
+  },
+  "pages.login.get_started": {
+    "message": "Get started"
   },
   "pages.login.server_name": {
     "message": "Servername"
@@ -60,97 +93,97 @@
     "message": "Login"
   },
   "pages.registration_tokens.auto_generate_placeholder": {
-    "message": "Auto-generate if left empty"
+    "message": "Automatisch generieren, wenn leer gelassen"
   },
   "pages.registration_tokens.create_token.error": {
-    "message": "Failed to create token"
+    "message": "Token konnte nicht erstellt werden"
   },
   "pages.registration_tokens.create_token.submit": {
-    "message": "Create Token"
+    "message": "Token erstellen"
   },
   "pages.registration_tokens.create_token.success": {
-    "message": "Token created successfully"
+    "message": "Token erfolgreich erstellt"
   },
   "pages.registration_tokens.create_token.title": {
-    "message": "Create Registration Token"
+    "message": "Registrierungstoken erstellen"
   },
   "pages.registration_tokens.created_at_column": {
-    "message": "Created at"
+    "message": "Erstellt am"
   },
   "pages.registration_tokens.created_at_label": {
-    "message": "Created at"
+    "message": "Erstellt am"
   },
   "pages.registration_tokens.custom_token_help": {
-    "message": "Optional custom token string. If left empty, a secure token will be auto-generated."
+    "message": "Optionales benutzerdefiniertes Token. Wenn das Feld leer bleibt, wird automatisch ein sicheres Token generiert."
   },
   "pages.registration_tokens.custom_token_label": {
-    "message": "Custom Token"
+    "message": "Benutzerdefiniertes Token"
   },
   "pages.registration_tokens.edit_properties": {
-    "message": "Edit properties"
+    "message": "Eigenschaften bearbeiten"
   },
   "pages.registration_tokens.edit_token_title": {
-    "message": "Edit registration token"
+    "message": "Registrierungstoken bearbeiten"
   },
   "pages.registration_tokens.expires_at_field": {
-    "message": "Expires at"
+    "message": "Ablaufdatum"
   },
   "pages.registration_tokens.expires_at_help": {
-    "message": "When the token expires. Leave empty if the token should never expire."
+    "message": "Ablaufdatum. Lass das Feld leer, wenn das Token nie ablaufen soll."
   },
   "pages.registration_tokens.expires_at_label": {
-    "message": "Expires at"
+    "message": "Ablaufdatum"
   },
   "pages.registration_tokens.filter_active_only": {
-    "message": "Active Only"
+    "message": "Nur aktive"
   },
   "pages.registration_tokens.filter_expired_only": {
-    "message": "Expired Only"
+    "message": "Nur abgelaufene"
   },
   "pages.registration_tokens.filter_revoked_only": {
-    "message": "Revoked Only"
+    "message": "Nur widerrufene"
   },
   "pages.registration_tokens.filter_used_only": {
-    "message": "Used Only"
+    "message": "Nur verwendete"
   },
   "pages.registration_tokens.loading_more": {
-    "message": "Loading more tokens..."
+    "message": "Weitere Token werden geladen …"
   },
   "pages.registration_tokens.never_expires": {
-    "message": "Never expires"
+    "message": "Läuft nie ab"
   },
   "pages.registration_tokens.no_expiration_placeholder": {
-    "message": "No expiration"
+    "message": "Kein Ablaufdatum"
   },
   "pages.registration_tokens.revoke_token": {
-    "message": "Revoke token"
+    "message": "Token widerrufen"
   },
   "pages.registration_tokens.revoked_at_label": {
-    "message": "Revoked at"
+    "message": "Widerrufen am"
   },
   "pages.registration_tokens.save_changes": {
-    "message": "Save Changes"
+    "message": "Speichern"
   },
   "pages.registration_tokens.status.active": {
-    "message": "Active"
+    "message": "Aktiv"
   },
   "pages.registration_tokens.status.column": {
     "message": "Status"
   },
   "pages.registration_tokens.status.expired": {
-    "message": "Expired"
+    "message": "Abgelaufen"
   },
   "pages.registration_tokens.status.invalid": {
-    "message": "Invalid"
+    "message": "Ungültig"
   },
   "pages.registration_tokens.status.label": {
     "message": "Status"
   },
   "pages.registration_tokens.status.revoked": {
-    "message": "Revoked"
+    "message": "Widerrufen"
   },
   "pages.registration_tokens.status.used_up": {
-    "message": "Used up"
+    "message": "Aufgebraucht"
   },
   "pages.registration_tokens.title": {
     "message": "Registrierungstoken"
@@ -168,31 +201,31 @@
     "message": "{uses, number} / ∞"
   },
   "pages.registration_tokens.unlimited_placeholder": {
-    "message": "Unlimited"
+    "message": "Unbegrenzt"
   },
   "pages.registration_tokens.unlimited_uses_placeholder": {
-    "message": "Leave empty for unlimited uses"
+    "message": "Für unbegrenzte Nutzung leer lassen"
   },
   "pages.registration_tokens.unrevoke_token": {
-    "message": "Unrevoke token"
+    "message": "Widerruf des Tokens rückgängig machen"
   },
   "pages.registration_tokens.usage_count_label": {
-    "message": "Usage count"
+    "message": "Nutzungsanzahl"
   },
   "pages.registration_tokens.usage_limit_field": {
-    "message": "Usage limit"
+    "message": "Nutzungslimit"
   },
   "pages.registration_tokens.usage_limit_help": {
-    "message": "Maximum number of times this token can be used. Leave empty for unlimited uses."
+    "message": "Maximale Anzahl der Verwendungen dieses Tokens. Für unbegrenzte Verwendungen leer lassen."
   },
   "pages.registration_tokens.usage_limit_label": {
-    "message": "Usage Limit"
+    "message": "Nutzungslimit"
   },
   "pages.registration_tokens.uses_column": {
-    "message": "Uses"
+    "message": "Verwendungen"
   },
   "pages.registration_tokens.valid_until_column": {
-    "message": "Valid Until"
+    "message": "Gültig bis"
   },
   "pages.rooms.room_count": {
     "message": "{COUNT, plural, =0 {Keine Chats} one {# Chat} other {# Chats}}"
