@@ -1,7 +1,7 @@
 import styles from "./placeholder.module.css";
 import { FilterButton } from "./table";
 
-const Text = () => <div className={styles["text"]} aria-hidden="true" />;
+export const Text = () => <div className={styles["text"]} aria-hidden="true" />;
 
 const Avatar = () => <div className={styles["avatar"]} aria-hidden="true" />;
 

@@ -184,6 +184,34 @@ export const roomsInfiniteQuery = (
       lastPage.next_batch ?? null,
   });
 
+export const roomsCountQuery = (synapseRoot: string) =>
+  queryOptions({
+    queryKey: ["synapse", "rooms-count", synapseRoot],
+    queryFn: async ({ client, signal }) => {
+      const token = await accessToken(client, signal);
+      if (!token) {
+        throw new Error("No access token");
+      }
+
+      const url = new URL("/_synapse/admin/v1/rooms?limit=0", synapseRoot);
+
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        signal,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch rooms");
+      }
+
+      const rooms = v.parse(RoomsListResponse, await response.json());
+
+      return rooms.total_rooms;
+    },
+  });
+
 export const roomDetailQuery = (synapseRoot: string, roomId: string) =>
   queryOptions({
     queryKey: ["synapse", "room", synapseRoot, roomId],

@@ -18,6 +18,12 @@ export const actionClose = defineMessage({
   description: "Label for a 'close' action/button",
 });
 
+export const actionRetry = defineMessage({
+  id: "action.retry",
+  defaultMessage: "Retry",
+  description: "Label for a retry action/button",
+});
+
 export const actionSignOut = defineMessage({
   id: "action.sign_out",
   defaultMessage: "Sign out",

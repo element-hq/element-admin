@@ -28,14 +28,35 @@
   block-size: var(--cpd-space-8x);
   inline-size: var(--cpd-space-8x);
   border-radius: var(--cpd-radius-pill-effect);
-  background-color: var(--placeholder-color);
 }
 
 .text {
   block-size: var(--cpd-space-4x);
   min-inline-size: 200px;
-  background-color: var(--placeholder-color);
   border-radius: var(--cpd-radius-pill-effect);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 300% 0;
+  }
+}
+
+.text,
+.avatar {
+  transition: opacity var(--default-transition-duration)
+    var(--default-transition-timing-function);
+  opacity: 1;
+  animation: shimmer 3s linear infinite;
+  background:
+    linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255, 255, 255, 40%) 50%,
+        transparent 100%
+      )
+      0% 0% / 300%,
+    var(--placeholder-color);
 }
 
 .table-row {

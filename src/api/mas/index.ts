@@ -116,6 +116,20 @@ export const userQuery = (serverName: string, userId: string) =>
     },
   });
 
+export const registeredUsersCountQuery = (serverName: string) =>
+  queryOptions({
+    queryKey: ["mas", "registered-users-count", serverName],
+    queryFn: async ({ client, signal }) => {
+      const data = await api.listUsers({
+        ...(await masBaseOptions(client, serverName, signal)),
+        query: {
+          "page[first]": 1,
+        },
+      });
+      return data.meta.count;
+    },
+  });
+
 export const createUser = async (
   queryClient: QueryClient,
   serverName: string,
