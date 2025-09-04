@@ -938,5 +938,37 @@
       "type": 6,
       "value": "COUNT"
     }
+  ],
+  "ui.language_switcher.browser_default": [
+    {
+      "type": 0,
+      "value": "Use browser settings ("
+    },
+    {
+      "type": 1,
+      "value": "language"
+    },
+    {
+      "type": 0,
+      "value": ")"
+    }
+  ],
+  "ui.language_switcher.button_label": [
+    {
+      "type": 0,
+      "value": "Language settings"
+    }
+  ],
+  "ui.language_switcher.description": [
+    {
+      "type": 0,
+      "value": "Choose your preferred language for the interface."
+    }
+  ],
+  "ui.language_switcher.title": [
+    {
+      "type": 0,
+      "value": "Language settings"
+    }
   ]
 }
