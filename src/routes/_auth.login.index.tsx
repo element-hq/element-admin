@@ -1,13 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { Button, Form, InlineSpinner } from "@vector-im/compound-web";
-import {
-  type ChangeEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { Form, InlineSpinner } from "@vector-im/compound-web";
+import { type ChangeEvent, useCallback, useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 
 import { authMetadataQuery, clientRegistration } from "@/api/auth";
@@ -101,33 +95,37 @@ function RouteComponent() {
   );
 
   // Create authorize URL if we have all the data
-  const authorizeUrl = useMemo(() => {
-    if (!discovery?.authMetadata || !authorizationSession) {
-      return null;
-    }
+  const onSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      if (!discovery?.authMetadata || !authorizationSession) {
+        return;
+      }
 
-    const parameters = new URLSearchParams({
-      response_type: "code",
-      client_id: authorizationSession.clientId,
-      redirect_uri: REDIRECT_URI,
-      scope:
-        "urn:matrix:org.matrix.msc2967.client:api:* urn:mas:admin urn:synapse:admin:*",
-      state: authorizationSession.state,
-      code_challenge: authorizationSession.codeChallenge,
-      code_challenge_method: "S256",
-    });
+      const parameters = new URLSearchParams({
+        response_type: "code",
+        client_id: authorizationSession.clientId,
+        redirect_uri: REDIRECT_URI,
+        scope:
+          "urn:matrix:org.matrix.msc2967.client:api:* urn:mas:admin urn:synapse:admin:*",
+        state: authorizationSession.state,
+        code_challenge: authorizationSession.codeChallenge,
+        code_challenge_method: "S256",
+      });
 
-    const url = new URL(discovery.authMetadata.authorization_endpoint);
-    url.search = parameters.toString();
-    return url.toString();
-  }, [discovery, authorizationSession]);
+      const url = new URL(discovery.authMetadata.authorization_endpoint);
+      url.search = parameters.toString();
+      globalThis.window.location.href = url.toString();
+    },
+    [discovery, authorizationSession],
+  );
 
   const isLoading =
     (debouncedServerName !== serverName || isFetching) && serverName !== "";
   const isReady = !isLoading && !isError && serverName !== "";
 
   return (
-    <Form.Root>
+    <Form.Root onSubmit={onSubmit}>
       <Form.Field name="serverName" serverInvalid={isError}>
         <Form.Label>
           <FormattedMessage
@@ -153,19 +151,14 @@ function RouteComponent() {
         )}
       </Form.Field>
 
-      <Button
-        as="a"
-        disabled={!isReady}
-        href={authorizeUrl || "#"}
-        style={{ inlineSize: "initial" }}
-      >
+      <Form.Submit disabled={!isReady}>
         {isLoading && <InlineSpinner />}
         <FormattedMessage
           id="pages.login.get_started"
           defaultMessage="Get started"
           description="On the login page, this starts the authorization process"
         />
-      </Button>
+      </Form.Submit>
     </Form.Root>
   );
 }
