@@ -8,6 +8,8 @@ import {
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import type { IntlShape } from "react-intl";
 
+import { GenericError } from "@/ui/errors";
+
 interface RouterContext {
   queryClient: QueryClient;
   intl: IntlShape;
@@ -33,6 +35,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
   }),
 
   component: RouteComponent,
+  errorComponent: GenericError,
 });
 
 function RouteComponent() {

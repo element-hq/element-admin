@@ -18,6 +18,12 @@ export const actionClose = defineMessage({
   description: "Label for a 'close' action/button",
 });
 
+export const actionGoBack = defineMessage({
+  id: "action.go_back",
+  defaultMessage: "Go back",
+  description: "Label for a go back action/button",
+});
+
 export const actionRetry = defineMessage({
   id: "action.retry",
   defaultMessage: "Retry",

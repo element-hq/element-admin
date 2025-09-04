@@ -11,6 +11,10 @@
     "description": "Label for a 'close' action/button",
     "message": "Close"
   },
+  "action.go_back": {
+    "description": "Label for a go back action/button",
+    "message": "Go back"
+  },
   "action.retry": {
     "description": "Label for a retry action/button",
     "message": "Retry"
@@ -82,6 +86,22 @@
   "pages.dashboard.title": {
     "description": "The title of the dashboard page",
     "message": "Dashboard"
+  },
+  "pages.generic_error.sign_out_and_reload": {
+    "description": "When an unxpected error happen, one option is to try to sign out the account and reload the page",
+    "message": "Sign out and reload"
+  },
+  "pages.generic_error.technical_details.item": {
+    "description": "Technical details for the error, showing the error name and message",
+    "message": "{name}: {message}"
+  },
+  "pages.generic_error.text": {
+    "description": "Text of the generic error page",
+    "message": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
+  },
+  "pages.generic_error.title": {
+    "description": "Title of the generic error page",
+    "message": "An unexpected error occurred"
   },
   "pages.landing.description": {
     "description": "On the landing pages, explains what the app does",

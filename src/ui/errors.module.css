@@ -1,0 +1,74 @@
+.error-page {
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--cpd-space-6x);
+  padding: var(--cpd-space-12x) var(--cpd-space-4x);
+  margin: 0 auto;
+}
+
+.technical-details {
+  padding: var(--cpd-space-4x);
+  background-color: var(--cpd-color-bg-critical-subtle);
+  border: solid 1px var(--cpd-color-border-critical-subtle);
+}
+
+.page-heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cpd-space-4x);
+
+  /* Layout already has 8x/12x padding, and we need 12x/20x */
+  margin-block-start: var(--cpd-space-4x);
+
+  & .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    align-self: center;
+    height: var(--cpd-space-16x);
+    width: var(--cpd-space-16x);
+    padding: var(--cpd-space-2x);
+    background-color: var(--cpd-color-bg-critical-subtle);
+    border-radius: var(--cpd-space-2x);
+
+    & svg {
+      height: var(--cpd-space-8x);
+      width: var(--cpd-space-8x);
+      color: var(--cpd-color-icon-critical-primary);
+    }
+  }
+
+  & .header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cpd-space-2x);
+    text-align: center;
+
+    & .title {
+      font: var(--cpd-font-heading-md-semibold);
+      letter-spacing: var(--cpd-font-letter-spacing-heading-xl);
+      color: var(--cpd-color-text-primary);
+      text-wrap: balance;
+    }
+
+    & .text {
+      font: var(--cpd-font-body-lg-regular);
+      letter-spacing: var(--cpd-font-letter-spacing-body-lg);
+      color: var(--cpd-color-text-secondary);
+      text-wrap: balance;
+
+      & em {
+        font-style: normal;
+        color: var(--cpd-color-text-primary);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .page-heading {
+    margin-block-start: var(--cpd-space-8x);
+  }
+}
