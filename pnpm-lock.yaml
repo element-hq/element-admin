@@ -14,6 +14,9 @@ importers:
       '@fontsource/inter':
         specifier: 5.2.6
         version: 5.2.6
+      '@formatjs/intl-displaynames':
+        specifier: 6.8.11
+        version: 6.8.11
       '@formatjs/intl-getcanonicallocales':
         specifier: 2.5.5
         version: 2.5.5
@@ -834,6 +837,9 @@ packages:
 
   '@formatjs/icu-skeleton-parser@1.8.14':
     resolution: {integrity: sha512-i4q4V4qslThK4Ig8SxyD76cp3+QJ3sAqr7f6q9VVfeGtxG9OhiAk3y9XF6Q41OymsKzsGQ6OQQoJNY4/lI8TcQ==}
+
+  '@formatjs/intl-displaynames@6.8.11':
+    resolution: {integrity: sha512-SKEMzDsf6WR4gu/M+zCCXeDXdve+x4e5WXpyjjhEsP01Jo+jS0tNdBO4ZloTTRGWvltLpixuttIZXqCqimq/Eg==}
 
   '@formatjs/intl-enumerator@1.8.10':
     resolution: {integrity: sha512-/iDm5v5809LN6GiEwT7gU/0lVuKbpyRh3l9USL205mi1kcunvY8eo4mooNr/3/cV4zWG9aUuPwrzukgSCaYlcg==}
@@ -4682,6 +4688,12 @@ snapshots:
   '@formatjs/icu-skeleton-parser@1.8.14':
     dependencies:
       '@formatjs/ecma402-abstract': 2.3.4
+      tslib: 2.8.1
+
+  '@formatjs/intl-displaynames@6.8.11':
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.4
+      '@formatjs/intl-localematcher': 0.6.1
       tslib: 2.8.1
 
   '@formatjs/intl-enumerator@1.8.10':

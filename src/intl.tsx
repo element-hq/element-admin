@@ -1,3 +1,4 @@
+import { shouldPolyfill as shouldPolyfillIntlDisplayNames } from "@formatjs/intl-displaynames/should-polyfill";
 import { shouldPolyfill as shouldPolyfillIntlGetCanonicalLocales } from "@formatjs/intl-getcanonicallocales/should-polyfill";
 import { shouldPolyfill as shouldPolyfillIntlLocale } from "@formatjs/intl-locale/should-polyfill";
 import { match } from "@formatjs/intl-localematcher";
@@ -167,6 +168,33 @@ const loadIntlPolyfillsForLocale = async (locale: string): Promise<void> => {
       case "de": {
         dataLoaders.push(
           () => import("@formatjs/intl-relativetimeformat/locale-data/de"),
+        );
+        break;
+      }
+      default: {
+        throw new Error(`Unsupported locale ${locale}`);
+      }
+    }
+  }
+
+  if (shouldPolyfillIntlDisplayNames(locale)) {
+    promises.push(import("@formatjs/intl-displaynames/polyfill-force"));
+    switch (locale) {
+      case "en": {
+        dataLoaders.push(
+          () => import("@formatjs/intl-displaynames/locale-data/en"),
+        );
+        break;
+      }
+      case "fr": {
+        dataLoaders.push(
+          () => import("@formatjs/intl-displaynames/locale-data/fr"),
+        );
+        break;
+      }
+      case "de": {
+        dataLoaders.push(
+          () => import("@formatjs/intl-displaynames/locale-data/de"),
         );
         break;
       }

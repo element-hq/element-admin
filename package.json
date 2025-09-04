@@ -18,6 +18,7 @@
   "dependencies": {
     "@fontsource/inconsolata": "5.2.6",
     "@fontsource/inter": "5.2.6",
+    "@formatjs/intl-displaynames": "6.8.11",
     "@formatjs/intl-getcanonicallocales": "2.5.5",
     "@formatjs/intl-locale": "4.2.11",
     "@formatjs/intl-localematcher": "0.6.1",
