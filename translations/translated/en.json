@@ -65,6 +65,9 @@
   "pages.dashboard.title": {
     "message": "Dashboard"
   },
+  "pages.generic_error.go_home": {
+    "message": "Go home"
+  },
   "pages.generic_error.sign_out_and_reload": {
     "message": "Sign out and reload"
   },

@@ -9,10 +9,10 @@
     "message": "Fermer"
   },
   "action.go_back": {
-    "message": "Go back"
+    "message": "Retour"
   },
   "action.retry": {
-    "message": "Retry"
+    "message": "Réessayer"
   },
   "action.sign_out": {
     "message": "Se déconnecter"
@@ -51,13 +51,13 @@
     "message": "Utilisateurs"
   },
   "pages.dashboard.failed_to_load": {
-    "message": "Failed to load"
+    "message": "Échec du chargement"
   },
   "pages.dashboard.registered_users_count": {
-    "message": "Users registered"
+    "message": "Utilisateurs enregistrés"
   },
   "pages.dashboard.rooms_count": {
-    "message": "Rooms total"
+    "message": "Nombre total de salons"
   },
   "pages.dashboard.synapse_version": {
     "message": "Version de Synapse"
@@ -65,26 +65,29 @@
   "pages.dashboard.title": {
     "message": "Tableau de bord"
   },
+  "pages.generic_error.go_home": {
+    "message": "Retour à l'accueil"
+  },
   "pages.generic_error.sign_out_and_reload": {
-    "message": "Sign out and reload"
+    "message": "Se déconnecter et recharger"
   },
   "pages.generic_error.technical_details.item": {
     "message": "{name}: {message}"
   },
   "pages.generic_error.text": {
-    "message": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
+    "message": "Ça peut être à cause d'un bug ou parce que le serveur d’accueil n'est pas accessible. Vous pouvez essayer de recharger la page, retourner à la page précédente ou tout réinitialiser et retourner à la page d'accueil."
   },
   "pages.generic_error.title": {
-    "message": "An unexpected error occurred"
+    "message": "Une erreur inattendue s'est produite."
   },
   "pages.landing.description": {
     "message": "Gérez le déploiement d'element pour votre organisation ou votre communauté."
   },
   "pages.login.failed_to_reach": {
-    "message": "Failed to reach server"
+    "message": "Impossible de joindre le serveur"
   },
   "pages.login.get_started": {
-    "message": "Get started"
+    "message": "Commencer"
   },
   "pages.login.server_name": {
     "message": "Nom du serveur"
@@ -93,139 +96,139 @@
     "message": "Connexion"
   },
   "pages.registration_tokens.auto_generate_placeholder": {
-    "message": "Auto-generate if left empty"
+    "message": "Laisser vite pour générer automatiquement"
   },
   "pages.registration_tokens.create_token.error": {
-    "message": "Failed to create token"
+    "message": "Impossible de créer le jeton"
   },
   "pages.registration_tokens.create_token.submit": {
-    "message": "Create Token"
+    "message": "Créer un jeton"
   },
   "pages.registration_tokens.create_token.success": {
-    "message": "Token created successfully"
+    "message": "Jeton créé avec succès"
   },
   "pages.registration_tokens.create_token.title": {
-    "message": "Create Registration Token"
+    "message": "Créer un jeton d'enregistrement"
   },
   "pages.registration_tokens.created_at_column": {
-    "message": "Created at"
+    "message": "Date de création"
   },
   "pages.registration_tokens.created_at_label": {
-    "message": "Created at"
+    "message": "Date de création"
   },
   "pages.registration_tokens.custom_token_help": {
-    "message": "Optional custom token string. If left empty, a secure token will be auto-generated."
+    "message": "Jeton personnalisé. Laisser vide pour générer le jeton automatiquement."
   },
   "pages.registration_tokens.custom_token_label": {
-    "message": "Custom Token"
+    "message": "Jeton personnalisé"
   },
   "pages.registration_tokens.edit_properties": {
-    "message": "Edit properties"
+    "message": "Modifier les propriétés"
   },
   "pages.registration_tokens.edit_token_title": {
-    "message": "Edit registration token"
+    "message": "Modifier le jeton d'enregistrement"
   },
   "pages.registration_tokens.expires_at_field": {
-    "message": "Expires at"
+    "message": "Date d'expiration"
   },
   "pages.registration_tokens.expires_at_help": {
-    "message": "When the token expires. Leave empty if the token should never expire."
+    "message": "Quand le jeton expire. Laisse ce champ vide pour que le jeton n'expire jamais."
   },
   "pages.registration_tokens.expires_at_label": {
-    "message": "Expires at"
+    "message": "Date d'expiration"
   },
   "pages.registration_tokens.filter_active_only": {
-    "message": "Active Only"
+    "message": "Actifs uniquement"
   },
   "pages.registration_tokens.filter_expired_only": {
-    "message": "Expired Only"
+    "message": "Expirés uniquement"
   },
   "pages.registration_tokens.filter_revoked_only": {
-    "message": "Revoked Only"
+    "message": "Révoqués uniquement"
   },
   "pages.registration_tokens.filter_used_only": {
-    "message": "Used Only"
+    "message": "Utilisés uniquement"
   },
   "pages.registration_tokens.loading_more": {
-    "message": "Loading more tokens..."
+    "message": "Chargement de plus de jetons..."
   },
   "pages.registration_tokens.never_expires": {
-    "message": "Never expires"
+    "message": "N'expire jamais"
   },
   "pages.registration_tokens.no_expiration_placeholder": {
-    "message": "No expiration"
+    "message": "Aucune date d'expiration"
   },
   "pages.registration_tokens.revoke_token": {
-    "message": "Revoke token"
+    "message": "Révoquer le jeton"
   },
   "pages.registration_tokens.revoked_at_label": {
-    "message": "Revoked at"
+    "message": "Date de révocation"
   },
   "pages.registration_tokens.save_changes": {
-    "message": "Save Changes"
+    "message": "Enregistrer les modifications"
   },
   "pages.registration_tokens.status.active": {
-    "message": "Active"
+    "message": "Actif"
   },
   "pages.registration_tokens.status.column": {
-    "message": "Status"
+    "message": "Statut"
   },
   "pages.registration_tokens.status.expired": {
-    "message": "Expired"
+    "message": "Expiré"
   },
   "pages.registration_tokens.status.invalid": {
-    "message": "Invalid"
+    "message": "Invalide"
   },
   "pages.registration_tokens.status.label": {
-    "message": "Status"
+    "message": "Statut"
   },
   "pages.registration_tokens.status.revoked": {
-    "message": "Revoked"
+    "message": "Révoqué"
   },
   "pages.registration_tokens.status.used_up": {
-    "message": "Used up"
+    "message": "Usé"
   },
   "pages.registration_tokens.title": {
     "message": "Jetons d'enregistrement"
   },
   "pages.registration_tokens.token_column": {
-    "message": "Token"
+    "message": "Jeton"
   },
   "pages.registration_tokens.token_count": {
     "message": "{COUNT, plural, zero {Aucun jeton} one {# jeton} other {# jetons}}"
   },
   "pages.registration_tokens.token_uses.limited": {
-    "message": "{uses, number} / {limit, number}"
+    "message": "{uses, number}/{limit, number}"
   },
   "pages.registration_tokens.token_uses.unlimited": {
-    "message": "{uses, number} / ∞"
+    "message": "{uses, number}/ ∞"
   },
   "pages.registration_tokens.unlimited_placeholder": {
-    "message": "Unlimited"
+    "message": "Illimitée"
   },
   "pages.registration_tokens.unlimited_uses_placeholder": {
-    "message": "Leave empty for unlimited uses"
+    "message": "Laisse vide pour une utilisation illimitée"
   },
   "pages.registration_tokens.unrevoke_token": {
-    "message": "Unrevoke token"
+    "message": "Annuler la révocation du jeton"
   },
   "pages.registration_tokens.usage_count_label": {
-    "message": "Usage count"
+    "message": "Nombre d'utilisations"
   },
   "pages.registration_tokens.usage_limit_field": {
-    "message": "Usage limit"
+    "message": "Limite d'utilisation"
   },
   "pages.registration_tokens.usage_limit_help": {
-    "message": "Maximum number of times this token can be used. Leave empty for unlimited uses."
+    "message": "Nombre maximum de fois où ce jeton peut être utilisé. Laisser vide pour un nombre illimité d'utilisations."
   },
   "pages.registration_tokens.usage_limit_label": {
-    "message": "Usage Limit"
+    "message": "Limite d'utilisation"
   },
   "pages.registration_tokens.uses_column": {
-    "message": "Uses"
+    "message": "Utilisations"
   },
   "pages.registration_tokens.valid_until_column": {
-    "message": "Valid Until"
+    "message": "Valable jusqu'à"
   },
   "pages.rooms.room_count": {
     "message": "{COUNT, plural, zero {Aucun salon} one {# salon} other {# salons}}"
@@ -381,15 +384,15 @@
     "message": "{COUNT, plural, one {# autre} other {# autres}}"
   },
   "ui.language_switcher.browser_default": {
-    "message": "Use browser settings ({language})"
+    "message": "Utiliser les paramètres du navigateur ({language})"
   },
   "ui.language_switcher.button_label": {
-    "message": "Language settings"
+    "message": "Paramètres de langue"
   },
   "ui.language_switcher.description": {
-    "message": "Choose your preferred language for the interface."
+    "message": "Choisissez la langue préférée pour l'interface."
   },
   "ui.language_switcher.title": {
-    "message": "Language settings"
+    "message": "Paramètres de langue"
   }
 }
