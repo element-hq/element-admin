@@ -117,6 +117,8 @@ export const mediaThumbnailQuery = (
   queryOptions({
     enabled: !!mxc,
     queryKey: ["matrix", "media-thumbnail", synapseRoot, mxc],
+    // Never try to re-fetch a media, they are immutable
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
     queryFn: async ({ client, signal }): Promise<Blob> => {
       if (!mxc) {

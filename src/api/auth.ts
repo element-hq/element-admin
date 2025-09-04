@@ -12,6 +12,7 @@ const AuthMetadataResponse = v.object({
 export const authMetadataQuery = (synapseRoot: string) =>
   queryOptions({
     queryKey: ["authMetadataDiscovery", synapseRoot],
+    staleTime: Infinity,
     queryFn: async ({ signal }) => {
       const authMetadataUrl = new URL(
         "/_matrix/client/unstable/org.matrix.msc2965/auth_metadata",

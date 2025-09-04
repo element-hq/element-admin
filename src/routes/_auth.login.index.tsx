@@ -49,23 +49,27 @@ function RouteComponent() {
     isError,
   } = useQuery({
     queryKey: ["serverDiscovery", debouncedServerName],
-    queryFn: async ({ client }) => {
+    queryFn: async ({ client, signal }) => {
       // Step 1: Well-known discovery
       const wellKnown = await client.ensureQueryData(
         wellKnownQuery(debouncedServerName),
       );
       const synapseRoot = wellKnown["m.homeserver"].base_url;
+      signal.throwIfAborted();
 
       // Step 2: Auth metadata discovery
       const authMetadata = await client.ensureQueryData(
         authMetadataQuery(synapseRoot),
       );
+      signal.throwIfAborted();
 
       // Step 3: Client registration
       const clientMetadata = await clientRegistration(
         authMetadata.registration_endpoint,
         CLIENT_METADATA,
+        signal,
       );
+      signal.throwIfAborted();
 
       // Step 4: Start authorization session
       await useAuthStore

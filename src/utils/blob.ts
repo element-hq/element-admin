@@ -14,6 +14,7 @@ export const useImageBlob = (blob: Blob | undefined): string | undefined => {
   const { data: loadedObjectUrl } = useQuery({
     enabled: !!objectUrl,
     queryKey: ["image-preload", objectUrl],
+    staleTime: Infinity,
     queryFn: async (): Promise<string | undefined> => {
       if (!objectUrl) {
         throw new Error("Object URL is not defined");
