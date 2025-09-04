@@ -506,5 +506,21 @@
   "rooms_info.other_members": {
     "description": "When a room or space has no name, we show 'Room/Space with Alice, Bob and 3 others'. This is the 'X others' part.",
     "message": "{COUNT, plural, one {# other} other {# others}}"
+  },
+  "ui.language_switcher.browser_default": {
+    "description": "Option to use browser's default language in the language switcher",
+    "message": "Use browser settings ({language})"
+  },
+  "ui.language_switcher.button_label": {
+    "description": "Aria label for the language switcher button",
+    "message": "Language settings"
+  },
+  "ui.language_switcher.description": {
+    "description": "Description text in the language switcher modal",
+    "message": "Choose your preferred language for the interface."
+  },
+  "ui.language_switcher.title": {
+    "description": "Title of the language switcher modal",
+    "message": "Language settings"
   }
 }

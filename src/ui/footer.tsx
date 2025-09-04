@@ -2,6 +2,7 @@ import { Link } from "@vector-im/compound-web";
 import { FormattedMessage } from "react-intl";
 
 import * as Footer from "@/components/footer";
+import { LanguageSwitcher } from "@/ui/language-switcher";
 
 const AppFooter = () => (
   <Footer.Root>
@@ -37,6 +38,8 @@ const AppFooter = () => (
 
     <Footer.Section>
       <Footer.CopyrightNotice />
+      <Footer.Divider />
+      <LanguageSwitcher />
     </Footer.Section>
   </Footer.Root>
 );

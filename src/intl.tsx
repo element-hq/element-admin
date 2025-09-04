@@ -15,6 +15,7 @@ import {
 } from "react-intl";
 
 import { router } from "@/router";
+import { useLocaleStore } from "@/stores/locale";
 
 import type messages from "../translations/extracted/en.json";
 
@@ -45,13 +46,16 @@ const getLocaleLoader = (
 
 const DEFAULT_LOCALE = "en";
 
-const supportedLngs = Object.keys(locales).map((url) => {
-  const lang = url.match(/\/([^/]+)\.json$/)?.[1];
-  if (!lang) {
-    throw new Error(`Could not parse locale URL ${url}`);
-  }
-  return lang;
-});
+// eslint-disable-next-line react-refresh/only-export-components -- We should probably move that?
+export const AVAILABLE_LOCALES = Object.keys(locales)
+  .map((url) => {
+    const lang = url.match(/\/([^/]+)\.json$/)?.[1];
+    if (!lang) {
+      throw new Error(`Could not parse locale URL ${url}`);
+    }
+    return lang;
+  })
+  .sort();
 
 /**
  * Figure out the best language out of the available ones
@@ -59,7 +63,7 @@ const supportedLngs = Object.keys(locales).map((url) => {
  * @returns The best supported language
  */
 const getBestLocale = (): string =>
-  match(navigator.languages, supportedLngs, DEFAULT_LOCALE);
+  match(navigator.languages, AVAILABLE_LOCALES, DEFAULT_LOCALE);
 
 /**
  * Loads the Intl polyfills for the given locale
@@ -184,15 +188,20 @@ const loadIntlPolyfillsForLocale = async (locale: string): Promise<void> => {
  *
  * @returns The best supported language
  */
-const useBestLocale = (): string => {
-  return useSyncExternalStore((callback) => {
+// eslint-disable-next-line react-refresh/only-export-components
+export const useBestLocale = (): string =>
+  useSyncExternalStore((callback) => {
     globalThis.addEventListener("languagechange", callback);
     return () => globalThis.removeEventListener("languagechange", callback);
   }, getBestLocale);
-};
 
 export const IntlProvider = ({ children }: { children: React.ReactNode }) => {
-  const locale = useBestLocale();
+  const bestLocale = useBestLocale();
+  const selectedLocale = useLocaleStore((state) => state.selectedLocale);
+  const locale =
+    selectedLocale && AVAILABLE_LOCALES.includes(selectedLocale)
+      ? selectedLocale
+      : bestLocale;
 
   useEffect(() => {
     if (document && document.documentElement) {

@@ -6,6 +6,7 @@ import * as Footer from "@/components/footer";
 import { WelcomeLayout } from "@/components/layout";
 import { EssLogotypeVertical } from "@/components/logo";
 import { useAuthStore } from "@/stores/auth";
+import { LanguageSwitcher } from "@/ui/language-switcher";
 
 const welcomeMessage = defineMessage({
   id: "pages.landing.description",
@@ -90,6 +91,8 @@ export const Route = createFileRoute("/_auth")({
 
           <Footer.Section>
             <Footer.CopyrightNotice />
+            <Footer.Divider />
+            <LanguageSwitcher />
           </Footer.Section>
         </Footer.Root>
       </WelcomeLayout>

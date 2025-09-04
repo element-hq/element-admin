@@ -1,0 +1,25 @@
+.language-row-list {
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.1s;
+
+  &[data-pending="true"] {
+    background-color: var(--cpd-color-bg-canvas-disabled);
+    color: var(--cpd-color-text-disabled);
+  }
+
+  & .language-row {
+    cursor: pointer;
+    padding: var(--cpd-space-2x);
+    transition: background-color 0.1s;
+
+    &:hover {
+      background-color: var(--cpd-color-bg-subtle-secondary);
+    }
+
+    &[data-selected="true"],
+    &[data-selected="true"]:hover {
+      background-color: var(--cpd-color-bg-subtle-primary);
+    }
+  }
+}
