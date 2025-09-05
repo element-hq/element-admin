@@ -6,6 +6,7 @@ import { persist } from "zustand/middleware";
 import { authMetadataQuery, tokenRequest } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
 import { router } from "@/router";
+import { addTimeout } from "@/utils/signal";
 
 const REFRESH_LOCK = "element-admin-refresh-lock";
 
@@ -155,6 +156,8 @@ export const useAuthStore = create<AuthStore>()(
         },
 
         async accessToken(queryClient, signal) {
+          signal = addTimeout(signal, 10 * 1000);
+
           const current = get();
 
           // No credentials, no access token
@@ -167,23 +170,23 @@ export const useAuthStore = create<AuthStore>()(
             return current.credentials.accessToken;
           }
 
-          signal?.throwIfAborted();
+          signal.throwIfAborted();
 
           const wellKnown = await queryClient.ensureQueryData(
             wellKnownQuery(current.credentials.serverName),
           );
 
-          signal?.throwIfAborted();
+          signal.throwIfAborted();
 
           const { token_endpoint } = await queryClient.ensureQueryData(
             authMetadataQuery(wellKnown["m.homeserver"].base_url),
           );
 
-          signal?.throwIfAborted();
+          signal.throwIfAborted();
 
           return await navigator.locks.request(
             REFRESH_LOCK,
-            signal ? { signal } : {},
+            { signal },
             async (): Promise<string | null> => {
               const current = get();
 
