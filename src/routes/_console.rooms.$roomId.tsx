@@ -3,11 +3,11 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { CloseIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { H3, Text, Tooltip } from "@vector-im/compound-web";
-import cx from "classnames";
-import { FormattedNumber, useIntl } from "react-intl";
+import { useIntl } from "react-intl";
 
 import { wellKnownQuery } from "@/api/matrix";
 import { roomDetailQuery } from "@/api/synapse";
+import * as Data from "@/components/data";
 import { ButtonLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import { RoomAvatar, RoomDisplayName } from "@/components/room-info";
@@ -128,107 +128,86 @@ function RouteComponent() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-6">
-        <Info>
-          <InfoTitle>Visibility</InfoTitle>
-          <InfoValue>{room.public ? "Public" : "Private"}</InfoValue>
-        </Info>
+      <Data.Grid>
+        <Data.Item>
+          <Data.Title>Visibility</Data.Title>
+          <Data.Value>{room.public ? "Public" : "Private"}</Data.Value>
+        </Data.Item>
 
-        <Info>
-          <InfoTitle>Encryption</InfoTitle>
-          <InfoValue>{formatEncryption(room.encryption)}</InfoValue>
-        </Info>
+        <Data.Item>
+          <Data.Title>Encryption</Data.Title>
+          <Data.Value>{formatEncryption(room.encryption)}</Data.Value>
+        </Data.Item>
 
-        <Info>
-          <InfoTitle>Join Rules</InfoTitle>
-          <InfoValue>{formatJoinRules(room.join_rules)}</InfoValue>
-        </Info>
+        <Data.Item>
+          <Data.Title>Join Rules</Data.Title>
+          <Data.Value>{formatJoinRules(room.join_rules)}</Data.Value>
+        </Data.Item>
 
-        <Info>
-          <InfoTitle>Guest Access</InfoTitle>
-          <InfoValue>{formatGuestAccess(room.guest_access)}</InfoValue>
-        </Info>
+        <Data.Item>
+          <Data.Title>Guest Access</Data.Title>
+          <Data.Value>{formatGuestAccess(room.guest_access)}</Data.Value>
+        </Data.Item>
 
-        <Info>
-          <InfoTitle>History Visibility</InfoTitle>
-          <InfoValue>
+        <Data.Item>
+          <Data.Title>History Visibility</Data.Title>
+          <Data.Value>
             {formatHistoryVisibility(room.history_visibility)}
-          </InfoValue>
-        </Info>
+          </Data.Value>
+        </Data.Item>
 
-        <Info>
-          <InfoTitle>Federatable</InfoTitle>
-          <InfoValue>{room.federatable ? "Yes" : "No"}</InfoValue>
-        </Info>
+        <Data.Item>
+          <Data.Title>Federatable</Data.Title>
+          <Data.Value>{room.federatable ? "Yes" : "No"}</Data.Value>
+        </Data.Item>
 
-        <Info>
-          <InfoTitle>Room Version</InfoTitle>
-          <InfoValue>{room.version}</InfoValue>
-        </Info>
+        <Data.Item>
+          <Data.Title>Room Version</Data.Title>
+          <Data.Value>{room.version}</Data.Value>
+        </Data.Item>
 
-        <Info>
-          <InfoTitle>Room Type</InfoTitle>
-          <InfoValue>{room.room_type || "Standard Room"}</InfoValue>
-        </Info>
+        <Data.Item>
+          <Data.Title>Room Type</Data.Title>
+          <Data.Value>{room.room_type || "Standard Room"}</Data.Value>
+        </Data.Item>
 
-        <Info>
-          <InfoTitle>Total Members</InfoTitle>
-          <InfoValue>{room.joined_members.toLocaleString()}</InfoValue>
-        </Info>
+        <Data.Item>
+          <Data.Title>Total Members</Data.Title>
+          <Data.Value>{room.joined_members.toLocaleString()}</Data.Value>
+        </Data.Item>
 
-        <Info>
-          <InfoTitle>Local Members</InfoTitle>
-          <InfoValue>
-            <FormattedNumber value={room.joined_local_members} />
-          </InfoValue>
-        </Info>
+        <Data.Item>
+          <Data.Title>Local Members</Data.Title>
+          <Data.NumericValue value={room.joined_local_members} />
+        </Data.Item>
 
-        <Info>
-          <InfoTitle>Local Devices</InfoTitle>
-          <InfoValue>
-            <FormattedNumber value={room.joined_local_devices} />
-          </InfoValue>
-        </Info>
+        <Data.Item>
+          <Data.Title>Local Devices</Data.Title>
+          <Data.NumericValue value={room.joined_local_devices} />
+        </Data.Item>
 
-        <Info>
-          <InfoTitle>Creator</InfoTitle>
-          <InfoValue>{room.creator}</InfoValue>
-        </Info>
+        <Data.Item>
+          <Data.Title>Creator</Data.Title>
+          <Data.Value>{room.creator}</Data.Value>
+        </Data.Item>
 
-        <Info>
-          <InfoTitle>State Events</InfoTitle>
-          <InfoValue>
-            <FormattedNumber value={room.state_events} />
-          </InfoValue>
-        </Info>
+        <Data.Item>
+          <Data.Title>State Events</Data.Title>
+          <Data.NumericValue value={room.state_events} />
+        </Data.Item>
 
         {room.avatar && (
-          <Info>
-            <InfoTitle>Avatar URL</InfoTitle>
-            <InfoValue className="break-all">{room.avatar}</InfoValue>
-          </Info>
+          <Data.Item>
+            <Data.Title>Avatar URL</Data.Title>
+            <Data.Value className="break-all">{room.avatar}</Data.Value>
+          </Data.Item>
         )}
 
-        <Info>
-          <InfoTitle>Forgotten</InfoTitle>
-          <InfoValue>{room.forgotten ? "Yes" : "No"}</InfoValue>
-        </Info>
-      </div>
+        <Data.Item>
+          <Data.Title>Forgotten</Data.Title>
+          <Data.Value>{room.forgotten ? "Yes" : "No"}</Data.Value>
+        </Data.Item>
+      </Data.Grid>
     </Navigation.Details>
   );
 }
-
-const Info = ({ className, ...props }: React.ComponentProps<"section">) => (
-  <section
-    className={cx(className, "flex flex-col gap-2 items-start")}
-    {...props}
-  />
-);
-
-const InfoTitle = ({ className, ...props }: React.ComponentProps<"p">) => (
-  <Text size="sm" className={cx(className, "text-text-secondary")} {...props} />
-);
-
-const InfoValue = ({ className, ...props }: React.ComponentProps<"p">) => (
-  <Text size="md" className={cx(className, "text-text-primary")} {...props} />
-);

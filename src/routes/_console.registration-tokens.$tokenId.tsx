@@ -14,10 +14,8 @@ import {
   Form,
   H3,
   InlineSpinner,
-  Text,
   Tooltip,
 } from "@vector-im/compound-web";
-import cx from "classnames";
 import { type FormEvent, useCallback, useRef, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
@@ -29,6 +27,7 @@ import {
   unrevokeRegistrationToken,
 } from "@/api/mas";
 import { CopyToClipboard } from "@/components/copy";
+import * as Data from "@/components/data";
 import * as Dialog from "@/components/dialog";
 import { ButtonLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
@@ -139,42 +138,44 @@ function TokenDetailComponent() {
           <CopyToClipboard value={tokenAttributes.token} />
         </H3>
 
-        <div className="flex flex-col gap-6">
-          <Info>
-            <InfoTitle>
+        <Data.Grid>
+          <Data.Item>
+            <Data.Title>
               <FormattedMessage
                 id="pages.registration_tokens.status.label"
                 defaultMessage="Status"
                 description="Label for the Registration token status field"
               />
-            </InfoTitle>
-            <TokenStatusBadge token={tokenAttributes} />
-          </Info>
+            </Data.Title>
+            <Data.Value>
+              <TokenStatusBadge token={tokenAttributes} />
+            </Data.Value>
+          </Data.Item>
 
-          <Info>
-            <InfoTitle>
+          <Data.Item>
+            <Data.Title>
               <FormattedMessage
                 id="pages.registration_tokens.created_at_label"
                 defaultMessage="Created at"
                 description="Label for the token creation date field"
               />
-            </InfoTitle>
-            <InfoValue>
+            </Data.Title>
+            <Data.Value>
               {computeHumanReadableDateTimeStringFromUtc(
                 tokenAttributes.created_at,
               )}
-            </InfoValue>
-          </Info>
+            </Data.Value>
+          </Data.Item>
 
-          <Info>
-            <InfoTitle>
+          <Data.Item>
+            <Data.Title>
               <FormattedMessage
                 id="pages.registration_tokens.expires_at_label"
                 defaultMessage="Expires at"
                 description="Label for the token expiration date field"
               />
-            </InfoTitle>
-            <InfoValue>
+            </Data.Title>
+            <Data.Value>
               {tokenAttributes.expires_at
                 ? computeHumanReadableDateTimeStringFromUtc(
                     tokenAttributes.expires_at,
@@ -185,17 +186,17 @@ function TokenDetailComponent() {
                     description:
                       "Text shown when a token has no expiration date",
                   })}
-            </InfoValue>
-          </Info>
-          <Info>
-            <InfoTitle>
+            </Data.Value>
+          </Data.Item>
+          <Data.Item>
+            <Data.Title>
               <FormattedMessage
                 id="pages.registration_tokens.usage_count_label"
                 defaultMessage="Usage count"
                 description="Label for the token usage count field"
               />
-            </InfoTitle>
-            <InfoValue>
+            </Data.Title>
+            <Data.Value>
               {tokenAttributes.usage_limit === null ? (
                 <FormattedMessage
                   id="pages.registration_tokens.token_uses.unlimited"
@@ -216,26 +217,26 @@ function TokenDetailComponent() {
                   }}
                 />
               )}
-            </InfoValue>
-          </Info>
+            </Data.Value>
+          </Data.Item>
 
           {tokenAttributes.revoked_at && (
-            <Info>
-              <InfoTitle>
+            <Data.Item>
+              <Data.Title>
                 <FormattedMessage
                   id="pages.registration_tokens.revoked_at_label"
                   defaultMessage="Revoked at"
                   description="Label for the token revocation date field"
                 />
-              </InfoTitle>
-              <InfoValue>
+              </Data.Title>
+              <Data.Value>
                 {computeHumanReadableDateTimeStringFromUtc(
                   tokenAttributes.revoked_at,
                 )}
-              </InfoValue>
-            </Info>
+              </Data.Value>
+            </Data.Item>
           )}
-        </div>
+        </Data.Grid>
 
         <div className="flex flex-col gap-3">
           {tokenAttributes.revoked_at ? (
@@ -601,18 +602,3 @@ function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
     </Dialog.Root>
   );
 }
-
-const Info = ({ className, ...props }: React.ComponentProps<"section">) => (
-  <section
-    className={cx(className, "flex flex-col gap-2 items-start")}
-    {...props}
-  />
-);
-
-const InfoTitle = ({ className, ...props }: React.ComponentProps<"p">) => (
-  <Text size="sm" className={cx(className, "text-text-secondary")} {...props} />
-);
-
-const InfoValue = ({ className, ...props }: React.ComponentProps<"p">) => (
-  <Text size="md" className={cx(className, "text-text-primary")} {...props} />
-);

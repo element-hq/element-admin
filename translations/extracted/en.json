@@ -67,10 +67,6 @@
     "description": "Label for the users navigation item in the main navigation sidebar",
     "message": "Users"
   },
-  "pages.dashboard.failed_to_load": {
-    "description": "On the dashboard, we display this message when a particular data value fails to load",
-    "message": "Failed to load"
-  },
   "pages.dashboard.registered_users_count": {
     "description": "On the dashboard, this shows the number of users registered in MAS",
     "message": "Users registered"
@@ -510,6 +506,14 @@
   "rooms_info.other_members": {
     "description": "When a room or space has no name, we show 'Room/Space with Alice, Bob and 3 others'. This is the 'X others' part.",
     "message": "{COUNT, plural, one {# other} other {# others}}"
+  },
+  "ui.data.failed_to_load": {
+    "description": "In a data grid, when a specific data value failed to load",
+    "message": "Failed to load"
+  },
+  "ui.data.loading": {
+    "description": "In a data grid, aria label for when a data value is loading",
+    "message": "Loading value"
   },
   "ui.language_switcher.browser_default": {
     "description": "Option to use browser's default language in the language switcher",

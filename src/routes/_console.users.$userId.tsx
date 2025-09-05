@@ -22,7 +22,6 @@ import {
   Form,
   Tooltip,
 } from "@vector-im/compound-web";
-import cx from "classnames";
 import { useCallback, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { defineMessage, FormattedMessage, useIntl } from "react-intl";
@@ -37,6 +36,7 @@ import {
   userQuery,
 } from "@/api/mas";
 import { profileQuery, wellKnownQuery } from "@/api/matrix";
+import * as Data from "@/components/data";
 import * as Dialog from "@/components/dialog";
 import { ButtonLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
@@ -785,9 +785,9 @@ function RouteComponent() {
           )}
         </div>
 
-        <div className="flex flex-col gap-6">
-          <Info>
-            <InfoTitle>Status</InfoTitle>
+        <Data.Grid>
+          <Data.Item>
+            <Data.Title>Status</Data.Title>
             <Badge
               kind={
                 user.attributes.deactivated_at
@@ -803,69 +803,49 @@ function RouteComponent() {
                   ? "Locked"
                   : "Active"}
             </Badge>
-          </Info>
+          </Data.Item>
 
-          <Info>
-            <InfoTitle>Admin Privileges</InfoTitle>
+          <Data.Item>
+            <Data.Title>Admin Privileges</Data.Title>
             <Badge kind={user.attributes.admin ? "green" : "grey"}>
               {user.attributes.admin ? "Admin" : "User"}
             </Badge>
-          </Info>
+          </Data.Item>
 
-          <Info>
-            <InfoTitle>Created At</InfoTitle>
-            <InfoValue>
+          <Data.Item>
+            <Data.Title>Created At</Data.Title>
+            <Data.Value>
               {computeHumanReadableDateTimeStringFromUtc(
                 user.attributes.created_at,
               )}
-            </InfoValue>
-          </Info>
+            </Data.Value>
+          </Data.Item>
 
           {user.attributes.locked_at && (
-            <Info>
-              <InfoTitle>Locked At</InfoTitle>
-              <InfoValue>
+            <Data.Item>
+              <Data.Title>Locked At</Data.Title>
+              <Data.Value>
                 {computeHumanReadableDateTimeStringFromUtc(
                   user.attributes.locked_at,
                 )}
-              </InfoValue>
-            </Info>
+              </Data.Value>
+            </Data.Item>
           )}
 
-          <Info>
-            <InfoTitle>Email Addresses ({emailsData.data.length})</InfoTitle>
+          <Data.Item>
+            <Data.Title>Email Addresses ({emailsData.data.length})</Data.Title>
             {emailsData.data.length > 0 ? (
-              <div className="space-y-2">
-                {emailsData.data.map((emailItem) => (
-                  <div
-                    key={emailItem.id}
-                    className="flex items-center justify-between p-3 bg-bg-subtle-primary rounded-md"
-                  >
-                    <InfoValue>{emailItem.attributes.email}</InfoValue>
-                  </div>
-                ))}
-              </div>
+              emailsData.data.map((emailItem) => (
+                <Data.Value key={emailItem.id}>
+                  {emailItem.attributes.email}
+                </Data.Value>
+              ))
             ) : (
-              <InfoValue>No email addresses found</InfoValue>
+              <Data.Value>No email addresses found</Data.Value>
             )}
-          </Info>
-        </div>
+          </Data.Item>
+        </Data.Grid>
       </div>
     </Navigation.Details>
   );
 }
-
-const Info = ({ className, ...props }: React.ComponentProps<"section">) => (
-  <section
-    className={cx(className, "flex flex-col gap-2 items-start")}
-    {...props}
-  />
-);
-
-const InfoTitle = ({ className, ...props }: React.ComponentProps<"p">) => (
-  <Text size="sm" className={cx(className, "text-text-secondary")} {...props} />
-);
-
-const InfoValue = ({ className, ...props }: React.ComponentProps<"p">) => (
-  <Text size="md" className={cx(className, "text-text-primary")} {...props} />
-);
