@@ -10,6 +10,7 @@ import { createTypeScriptImportResolver } from "eslint-import-resolver-typescrip
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import tanstackRouterPlugin from "@tanstack/eslint-plugin-router";
 import tanstackQueryPlugin from "@tanstack/eslint-plugin-query";
+import compatPlugin from "eslint-plugin-compat";
 // eslint-disable-next-line import-x/default -- The exported types are wrong
 import formatjsPlugin from "eslint-plugin-formatjs";
 
@@ -30,6 +31,7 @@ export default tseslint.config(
   tanstackQueryPlugin.configs["flat/recommended"],
   formatjsPlugin.configs.strict,
   eslintConfigPrettier,
+  compatPlugin.configs["flat/recommended"],
 
   // Global configuration
   {
@@ -37,6 +39,8 @@ export default tseslint.config(
       react: {
         version: "detect",
       },
+
+      lintAllEsApis: true,
 
       "import-x/resolver-next": [
         createTypeScriptImportResolver({
