@@ -55,6 +55,7 @@
 .details {
   flex: 0 0 360px;
   min-width: 0;
+
   /* In the DOM, the details view is first, but it's on the right side, hence
      the explicit ordering */
   order: 1;
@@ -62,6 +63,7 @@
 
   & .details-inner {
     position: sticky;
+
     /* This is the side of the header plus its border */
     top: calc(var(--cpd-space-16x) + 1px);
     padding: var(--cpd-space-4x);
@@ -105,7 +107,7 @@
 }
 
 /* At this breakpoint, the sidebar only shows icons and expands over the content on hover */
-@media screen and (max-width: 1366px) {
+@media screen and (width <= 1366px) {
   .sidebar {
     flex-basis: calc(2 * var(--cpd-space-6x) + var(--cpd-space-6x));
     min-width: 0;
@@ -133,7 +135,7 @@
 
     &:hover {
       & .sidebar-inner {
-        box-shadow: 0 4px 24px 0 rgba(27, 29, 34, 0.1);
+        box-shadow: 0 4px 24px 0 rgb(27 29 34 / 10%);
         width: 224px;
       }
 
@@ -149,7 +151,7 @@
 }
 
 /* At this breakpoint, the sidebar becomes a scrollable list of chips */
-@media screen and (max-width: 768px) {
+@media screen and (width <= 768px) {
   .root {
     flex-direction: column;
 
@@ -158,6 +160,7 @@
 
       /* The whole sidebar becomes sticky, not just the content */
       position: sticky;
+
       /* This is the side of the header plus its border */
       top: calc(var(--cpd-space-16x) + 1px);
 
@@ -169,11 +172,12 @@
         & .sidebar-sticky {
           position: initial;
           padding: 0;
+
           & .sidebar-content {
-            overflow-x: auto;
-            overflow-y: hidden;
+            overflow: auto hidden;
             scrollbar-width: none;
             scroll-snap-type: x mandatory;
+
             /* FIXME: this should be 18px */
             padding: var(--cpd-space-4x);
             gap: var(--cpd-space-2x);
@@ -217,6 +221,7 @@
 
     /* Make the scroll snap to items */
     scroll-snap-align: start;
+
     /* Matches the padding of the scroll container */
     scroll-margin-inline: var(--cpd-space-4x);
 

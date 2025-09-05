@@ -6,7 +6,6 @@
 @import url("@fontsource/inconsolata/700.css");
 @import url("@vector-im/compound-design-tokens/assets/web/css/compound-design-tokens.css");
 @import url("@vector-im/compound-web/dist/style.css");
-
 @import "tailwindcss";
 
 @theme {
@@ -21,7 +20,6 @@
   --color-text-success-primary: var(--cpd-color-text-success-primary);
   --color-text-info-primary: var(--cpd-color-text-info-primary);
   --color-text-on-solid-primary: var(--cpd-color-text-on-solid-primary);
-
   --color-bg-subtle-primary: var(--cpd-color-bg-subtle-primary);
   --color-bg-subtle-secondary: var(--cpd-color-bg-subtle-secondary);
   --color-bg-canvas-default: var(--cpd-color-bg-canvas-default);

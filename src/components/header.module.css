@@ -3,7 +3,6 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--cpd-space-4x) var(--cpd-space-5x);
-
   border-block-end: solid 1px var(--cpd-color-bg-subtle-secondary);
   background-color: var(--cpd-color-bg-canvas-default);
 
@@ -80,7 +79,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (width <= 768px) {
   .homeserver-name {
     display: none;
   }

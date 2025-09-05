@@ -18,7 +18,7 @@
   background-color: var(--cpd-color-bg-canvas-default);
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-image: url(../background/gradient-desktop.png);
+  background-image: url("../background/gradient-desktop.png");
   background-size: 100% 100%;
 
   /* This is a trick to make the background its own compositing layer, else the
@@ -27,7 +27,7 @@
   will-change: opacity;
 }
 
-@media screen and (min-width: 1920px) {
+@media screen and (width >= 1920px) {
   .layout {
     margin: auto;
     border-inline: solid 1px var(--cpd-color-bg-subtle-primary);
@@ -35,8 +35,8 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (width <= 768px) {
   .welcome-gradient {
-    background-image: url(../background/gradient-mobile.png);
+    background-image: url("../background/gradient-mobile.png");
   }
 }

@@ -49,7 +49,7 @@
 }
 
 /** At the mobile breakpoint, we make the footer stack vertically and hide the section divider */
-@media screen and (max-width: 768px) {
+@media screen and (width <= 768px) {
   .root {
     flex-direction: column;
 

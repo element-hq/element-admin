@@ -2,7 +2,7 @@
 .scroll-container {
   position: fixed;
   inset: 0;
-  background: rgba(3 12 27 / 52.8%);
+  background: rgb(3 12 27 / 52.8%);
 }
 
 .scroll-container {
@@ -88,6 +88,7 @@
 
   /* Cap the block size */
   max-block-size: calc(100vh - var(--cpd-space-4x));
+
   /* biome-ignore lint/suspicious/noDuplicateProperties: this isn't a real duplicate */
   max-block-size: calc(100svh - var(--cpd-space-4x));
 
@@ -112,16 +113,14 @@
   scrollbar-width: none;
   padding-inline: var(--cpd-space-4x);
   margin-block-start: var(--cpd-space-2x);
-  padding-block-start: var(--cpd-space-4x);
-  padding-block-end: var(--cpd-space-12x);
+  padding-block: var(--cpd-space-4x) var(--cpd-space-12x);
 }
 
 .drawer .handle {
   align-self: center;
   block-size: var(--handle-block-size);
   inline-size: var(--handle-inline-size);
-  margin-block-start: var(--handle-inset-block-start);
-  margin-block-end: var(--handle-inset-block-end);
+  margin-block: var(--handle-inset-block-start) var(--handle-inset-block-end);
   background: var(--cpd-color-icon-secondary);
   border-radius: var(--cpd-radius-pill-effect);
 }

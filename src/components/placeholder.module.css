@@ -4,21 +4,27 @@
 
 .group {
   --placeholder-color: var(--cpd-color-gray-100);
+
   & > *:nth-child(1) {
     --placeholder-color: var(--cpd-color-gray-700);
   }
+
   & > *:nth-child(2) {
     --placeholder-color: var(--cpd-color-gray-600);
   }
+
   & > *:nth-child(3) {
     --placeholder-color: var(--cpd-color-gray-500);
   }
+
   & > *:nth-child(4) {
     --placeholder-color: var(--cpd-color-gray-400);
   }
+
   & > *:nth-child(5) {
     --placeholder-color: var(--cpd-color-gray-300);
   }
+
   & > *:nth-child(6) {
     --placeholder-color: var(--cpd-color-gray-200);
   }
@@ -52,7 +58,7 @@
     linear-gradient(
         to right,
         transparent 0%,
-        rgba(255, 255, 255, 40%) 50%,
+        rgb(255 255 255 / 40%) 50%,
         transparent 100%
       )
       0% 0% / 300%,

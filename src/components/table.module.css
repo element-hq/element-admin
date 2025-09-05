@@ -65,7 +65,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (width <= 768px) {
   .filter-button-label {
     display: none;
   }
@@ -76,8 +76,7 @@
   min-width: 0;
   flex-direction: column;
   max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto hidden;
   scrollbar-width: none;
 }
 
@@ -102,21 +101,6 @@
 
   &:last-child {
     padding-right: var(--cpd-space-4x);
-  }
-
-  &.sortable {
-    cursor: pointer;
-    user-select: none;
-
-    &:hover {
-      & .header-label {
-        color: var(--cpd-color-text-primary);
-      }
-
-      & .sort-icon {
-        color: var(--cpd-color-icon-primary);
-      }
-    }
   }
 
   &.align-center {
@@ -153,31 +137,6 @@
   text-underline-position: from-font;
 }
 
-.sort-icon {
-  width: var(--cpd-space-4x);
-  height: var(--cpd-space-4x);
-  color: var(--cpd-color-icon-secondary);
-  transition:
-    transform var(--default-transition-duration)
-      var(--default-transition-timing-function),
-    color var(--default-transition-duration)
-      var(--default-transition-timing-function);
-
-  &.sort-icon-asc {
-    transform: rotate(180deg);
-    color: var(--cpd-color-icon-primary);
-  }
-
-  &.sort-icon-desc {
-    transform: rotate(0deg);
-    color: var(--cpd-color-icon-primary);
-  }
-
-  &.sort-icon-none {
-    opacity: 0.5;
-  }
-}
-
 .tbody {
   background-color: var(--cpd-color-bg-canvas-default);
 }
@@ -187,16 +146,16 @@
   transition: background-color var(--default-transition-duration)
     var(--default-transition-timing-function);
 
+  &:hover {
+    background-color: var(--cpd-color-bg-action-secondary-hovered);
+  }
+
   /* The row selection style is done automatically based on if there is an
      'active' link in the row. This avoids a bunch of react re-renders when
      switching page */
   &:has([aria-current="page"]),
   &:has([aria-current="page"]):hover {
     background-color: var(--cpd-color-bg-subtle-primary);
-  }
-
-  &:hover {
-    background-color: var(--cpd-color-bg-action-secondary-hovered);
   }
 }
 
@@ -221,10 +180,14 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (width <= 768px) {
   .header-title {
     font: var(--cpd-font-heading-md-semibold);
     letter-spacing: var(--cpd-font-letter-spacing-heading-md);
+  }
+
+  .cell {
+    padding: var(--cpd-space-2x) 0;
   }
 
   .cell,
@@ -237,13 +200,4 @@
       padding-right: var(--cpd-space-2x);
     }
   }
-
-  .cell {
-    padding: var(--cpd-space-2x) 0;
-  }
-}
-
-.header-cell.sortable:focus-visible {
-  outline: 2px solid var(--cpd-color-border-focused);
-  outline-offset: -2px;
 }

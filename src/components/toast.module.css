@@ -1,19 +1,21 @@
-@keyframes slideIn {
+@keyframes slide-in {
   from {
     opacity: 0;
     transform: translateY(100%);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@keyframes slideOut {
+@keyframes slide-out {
   from {
     opacity: 1;
     transform: translateY(0);
   }
+
   to {
     opacity: 0;
     transform: translateY(100%);
@@ -29,18 +31,18 @@
   background-color: var(--cpd-color-alpha-gray-1300);
   color: var(--cpd-color-text-on-solid-primary);
   border-radius: var(--cpd-radius-pill-effect);
-  box-shadow: 0px 4px 24px rgba(27, 29, 34, 0.1);
+  box-shadow: 0 4px 24px rgb(27 29 34 / 10%);
   font: var(--cpd-font-body-sm-medium);
   letter-spacing: var(--cpd-letter-spacing-body-sm);
 
   &[data-state="visible"] {
-    animation: slideIn var(--default-transition-duration)
+    animation: slide-in var(--default-transition-duration)
       var(--default-transition-timing-function);
     opacity: 1;
   }
 
   &[data-state="hidden"] {
-    animation: slideOut var(--default-transition-duration)
+    animation: slide-out var(--default-transition-duration)
       var(--default-transition-timing-function);
     opacity: 0;
   }
