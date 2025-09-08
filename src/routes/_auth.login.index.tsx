@@ -6,6 +6,7 @@ import { FormattedMessage } from "react-intl";
 
 import { authMetadataQuery, clientRegistration } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
+import config from "@/config";
 import { CLIENT_METADATA, REDIRECT_URI } from "@/constants";
 import { useAuthStore } from "@/stores/auth";
 
@@ -24,8 +25,10 @@ export const Route = createFileRoute("/_auth/login/")({
 });
 
 function RouteComponent() {
-  const [serverName, setServerName] = useState("");
-  const [debouncedServerName, setDebouncedServerName] = useState("");
+  const [serverName, setServerName] = useState(config.serverName ?? "");
+  const [debouncedServerName, setDebouncedServerName] = useState(
+    config.serverName ?? "",
+  );
 
   const authorizationSession = useAuthStore(
     (state) => state.authorizationSession,
@@ -123,7 +126,7 @@ function RouteComponent() {
 
   const isLoading =
     (debouncedServerName !== serverName || isFetching) && serverName !== "";
-  const isReady = !isLoading && !isError && serverName !== "";
+  const isReady = !!discovery && !isError && serverName !== "";
 
   return (
     <Form.Root onSubmit={onSubmit}>
@@ -137,6 +140,7 @@ function RouteComponent() {
         </Form.Label>
         <Form.TextControl
           value={serverName}
+          readOnly={config.serverName !== null}
           onChange={handleServerNameChange}
           autoCapitalize="none"
           type="text"
