@@ -1,0 +1,22 @@
+name: Check code
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v5
+
+      - uses: ./.github/actions/setup-node
+
+      - name: Run the linters
+        run: pnpm lint
