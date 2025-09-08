@@ -1,0 +1,50 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    labels:
+      - "A-Dependencies"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    labels:
+      - "A-Dependencies"
+    schedule:
+      interval: "daily"
+    groups:
+      fontsource:
+        patterns:
+          - "@fontsource/*"
+      vite:
+        patterns:
+          - "vite"
+          - "@vitejs/*"
+          - "vite-*"
+      eslint:
+        patterns:
+          - "eslint"
+          - "eslint-*"
+          - "@eslint/*"
+      stylelint:
+        patterns:
+          - "stylelint"
+          - "stylelint-*"
+      react:
+        patterns:
+          - "react"
+          - "react-*"
+        exclude-patterns:
+          - "react-i18next"
+      tanstack-router:
+        patterns:
+          - "@tanstack/react-router"
+          - "@tanstack/react-router-*"
+          - "@tanstack/router-*"
+      tanstack-query:
+        patterns:
+          - "@tanstack/react-query"
+          - "@tanstack/react-query-*"
+      types:
+        patterns:
+          - "@types/*"
