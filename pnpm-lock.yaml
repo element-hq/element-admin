@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@fontsource/inconsolata':
-        specifier: 5.2.6
-        version: 5.2.6
+        specifier: 5.2.7
+        version: 5.2.7
       '@fontsource/inter':
         specifier: 5.2.6
         version: 5.2.6
@@ -52,7 +52,7 @@ importers:
         version: 5.0.0(@types/react@19.1.10)(react@19.1.1)
       '@vector-im/compound-web':
         specifier: 8.2.0
-        version: 8.2.0(@fontsource/inconsolata@5.2.6)(@fontsource/inter@5.2.6)(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(@vector-im/compound-design-tokens@5.0.0(@types/react@19.1.10)(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        version: 8.2.0(@fontsource/inconsolata@5.2.7)(@fontsource/inter@5.2.6)(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(@vector-im/compound-design-tokens@5.0.0(@types/react@19.1.10)(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       classnames:
         specifier: 2.5.1
         version: 2.5.1
@@ -812,8 +812,8 @@ packages:
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
 
-  '@fontsource/inconsolata@5.2.6':
-    resolution: {integrity: sha512-TRGh7bN+BN/oP8qD1IYe8REXM/0Uw3jbuERSncA/ZF6mqKFEOeTt6PR2T3xK7G+65N9pn2p0ablamdboee2nFQ==}
+  '@fontsource/inconsolata@5.2.7':
+    resolution: {integrity: sha512-qmARxA7lS16PCoB404sehiXzh8mzcZzFio6n05/zpxIC97W+AxdJqgWQ0kfMzdj78ILy2PaaXZ1Js4kfxL1JMw==}
 
   '@fontsource/inter@5.2.6':
     resolution: {integrity: sha512-CZs9S1CrjD0jPwsNy9W6j0BhsmRSQrgwlTNkgQXTsAeDRM42LBRLo3eo9gCzfH4GvV7zpyf78Ozfl773826csw==}
@@ -4939,7 +4939,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.10': {}
 
-  '@fontsource/inconsolata@5.2.6': {}
+  '@fontsource/inconsolata@5.2.7': {}
 
   '@fontsource/inter@5.2.6': {}
 
@@ -6100,10 +6100,10 @@ snapshots:
       '@types/react': 19.1.10
       react: 19.1.1
 
-  '@vector-im/compound-web@8.2.0(@fontsource/inconsolata@5.2.6)(@fontsource/inter@5.2.6)(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(@vector-im/compound-design-tokens@5.0.0(@types/react@19.1.10)(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@vector-im/compound-web@8.2.0(@fontsource/inconsolata@5.2.7)(@fontsource/inter@5.2.6)(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(@vector-im/compound-design-tokens@5.0.0(@types/react@19.1.10)(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@floating-ui/react': 0.27.15(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      '@fontsource/inconsolata': 5.2.6
+      '@fontsource/inconsolata': 5.2.7
       '@fontsource/inter': 5.2.6
       '@radix-ui/react-context-menu': 2.2.16(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@radix-ui/react-dropdown-menu': 2.1.16(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
