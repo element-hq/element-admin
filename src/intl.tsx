@@ -84,7 +84,7 @@ export const IntlProvider = ({ children }: { children: React.ReactNode }) => {
     if (document && document.documentElement) {
       document.documentElement.lang = locale;
     }
-  });
+  }, [locale]);
 
   // Load the language data. This will suspend during loading
   const { data: messages } = useSuspenseQuery({
