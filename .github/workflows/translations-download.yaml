@@ -12,17 +12,7 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v5
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4.1.0
-
-      - name: Install Node
-        uses: actions/setup-node@v4.4.0
-        with:
-          node-version: 22
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install
+      - uses: ./.github/actions/setup-node
 
       - name: Download translations from Localazy
         run: pnpm i18n:download

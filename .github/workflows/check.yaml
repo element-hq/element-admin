@@ -11,7 +11,10 @@ on:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+
     steps:
       - name: Checkout the code
         uses: actions/checkout@v5
