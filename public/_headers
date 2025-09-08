@@ -5,3 +5,6 @@
 	Referrer-Policy: strict-origin-when-cross-origin
     Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; font-src 'self'; connect-src *; object-src 'none'; media-src 'self'; child-src 'none'; worker-src 'self'; manifest-src 'self';
     Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=(), magnetometer=(), accelerometer=(), gyroscope=()
+
+/assets/*
+  Cache-Control: public, max-age=31556952, immutable
