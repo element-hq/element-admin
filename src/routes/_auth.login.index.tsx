@@ -9,8 +9,6 @@ import { wellKnownQuery } from "@/api/matrix";
 import { CLIENT_METADATA, REDIRECT_URI } from "@/constants";
 import { useAuthStore } from "@/stores/auth";
 
-const DEFAULT_SERVER_NAME = "matrix.org";
-
 export const Route = createFileRoute("/_auth/login/")({
   loader: ({ context: { intl } }) => ({
     title: intl.formatMessage({
@@ -26,9 +24,8 @@ export const Route = createFileRoute("/_auth/login/")({
 });
 
 function RouteComponent() {
-  const [serverName, setServerName] = useState(DEFAULT_SERVER_NAME);
-  const [debouncedServerName, setDebouncedServerName] =
-    useState(DEFAULT_SERVER_NAME);
+  const [serverName, setServerName] = useState("");
+  const [debouncedServerName, setDebouncedServerName] = useState("");
 
   const authorizationSession = useAuthStore(
     (state) => state.authorizationSession,
