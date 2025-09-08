@@ -60,7 +60,7 @@ const useRoomName = (
   });
 
   // We load the profile of up to the first 3 members
-  const heroes = [...members.members].sort().splice(0, 3);
+  const heroes = members.members.toSorted().splice(0, 3);
   const heroesDisplayNames = useQueries({
     queries: heroes.map((userId) => profileQuery(synapseRoot, userId)),
     combine: (results): string[] =>
@@ -192,7 +192,7 @@ export const RoomAvatar: React.FC<RoomAvatarProps> = ({
     enabled: shouldShowHeroes,
   });
   // In case we don't have a room avatar, we show up to two user avatars
-  const heroes = [...membersList.members].sort().splice(0, 2);
+  const heroes = membersList.members.toSorted().splice(0, 2);
   const displayName = useRoomName(
     roomName || roomCanonicalAlias,
     roomType,

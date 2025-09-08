@@ -49,7 +49,7 @@ export const AVAILABLE_LOCALES = Object.keys(locales)
     }
     return lang;
   })
-  .sort();
+  .toSorted();
 
 /**
  * Figure out the best language out of the available ones

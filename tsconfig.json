@@ -5,6 +5,7 @@
     "@tsconfig/strictest/tsconfig.json"
   ],
   "compilerOptions": {
+    "lib": ["ES2023.Array", "ES2022", "DOM", "DOM.Iterable"],
     "types": ["vite/client"],
     "paths": {
       "@/*": ["./src/*"]
