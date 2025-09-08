@@ -6,7 +6,13 @@ import * as v from "valibot";
  * This is stored in the 'APP_CONFIG_BASE64' global as a base64'd JSON object
  */
 const AppConfigSchema = v.object({
-  serverName: v.nullable(v.string()),
+  serverName: v.nullable(
+    v.pipe(
+      v.string(),
+      v.trim(),
+      v.transform((s) => (s === "" ? null : s)),
+    ),
+  ),
 });
 
 type AppConfig = v.InferOutput<typeof AppConfigSchema>;
