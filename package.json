@@ -76,7 +76,7 @@
     "knip": "5.63.0",
     "lint-staged": "16.1.5",
     "prettier": "3.6.2",
-    "stylelint": "16.23.1",
+    "stylelint": "16.24.0",
     "stylelint-config-standard": "39.0.0",
     "stylelint-config-tailwindcss": "1.0.0",
     "tailwindcss": "4.1.12",
