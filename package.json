@@ -49,7 +49,7 @@
     "@formatjs/cli": "6.7.2",
     "@hey-api/openapi-ts": "0.80.16",
     "@localazy/cli": "2.0.8",
-    "@tanstack/eslint-plugin-query": "5.83.1",
+    "@tanstack/eslint-plugin-query": "5.86.0",
     "@tanstack/eslint-plugin-router": "1.131.2",
     "@tsconfig/strictest": "2.0.5",
     "@tsconfig/vite-react": "7.0.0",
