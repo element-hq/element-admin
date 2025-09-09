@@ -75,6 +75,10 @@
     "description": "On the dashboard, this shows the latest ESS release",
     "message": "Latest ESS release"
   },
+  "pages.dashboard.latest_ess_release_notes": {
+    "description": "On the dashboard, this shows the latest ESS release notes",
+    "message": "What's new in ESS"
+  },
   "pages.dashboard.registered_users_count": {
     "description": "On the dashboard, this shows the number of users registered in MAS",
     "message": "Users registered"

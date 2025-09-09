@@ -1,6 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { H3, Separator } from "@vector-im/compound-web";
+import { lazy } from "react";
 import { defineMessage, FormattedMessage } from "react-intl";
 
 import { useEssVersion } from "@/api/ess";
@@ -13,6 +14,8 @@ import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import AppFooter from "@/ui/footer";
 import AppNavigation from "@/ui/navigation";
+
+const Gfm = lazy(() => import("@/components/gfm"));
 
 const titleMessage = defineMessage({
   id: "pages.dashboard.title",
@@ -65,6 +68,11 @@ const LatestEssRelease: React.FC = () => {
       </a>
     </Data.Value>
   );
+};
+
+const LatestEssReleaseNotes: React.FC = () => {
+  const { data } = useSuspenseQuery(latestEssReleaseQuery);
+  return <Gfm markdown={data.body} repo="element-hq/ess-helm" />;
 };
 
 interface SynapseVersionProps {
@@ -192,6 +200,19 @@ function RouteComponent() {
               </Data.Item>
             </Data.Grid>
           </section>
+
+          <Data.Item>
+            <Data.Title>
+              <FormattedMessage
+                id="pages.dashboard.latest_ess_release_notes"
+                defaultMessage="What's new in ESS"
+                description="On the dashboard, this shows the latest ESS release notes"
+              />
+            </Data.Title>
+            <Data.DynamicValue>
+              <LatestEssReleaseNotes />
+            </Data.DynamicValue>
+          </Data.Item>
         </Navigation.Main>
 
         <AppFooter />
