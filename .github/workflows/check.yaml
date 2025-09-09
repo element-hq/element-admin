@@ -30,6 +30,8 @@ jobs:
     permissions:
       contents: read
 
+    container: mcr.microsoft.com/playwright:v1.55.0-noble
+
     steps:
       - name: Checkout the code
         uses: actions/checkout@v5
@@ -40,9 +42,7 @@ jobs:
         run: pnpm build
 
       - name: Run Playwright tests
-        uses: docker://mcr.microsoft.com/playwright:v1.55.0-noble
-        with:
-          args: pnpm exec playwright test
+        run: pnpm test
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
