@@ -12,6 +12,9 @@ export default defineConfig({
     trace: "on-first-retry",
   },
 
+  snapshotPathTemplate:
+    "{testDir}/__screenshots__/{testFilePath}/{arg}-{projectName}{ext}",
+
   projects: [
     {
       name: "desktop-light",
