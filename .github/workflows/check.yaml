@@ -37,7 +37,7 @@ jobs:
       - uses: ./.github/actions/setup-node
 
       - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install --with-deps chromium webkit
 
       - name: Build frontend
         run: pnpm build
