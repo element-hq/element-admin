@@ -43,6 +43,8 @@ export const Route = createFileRoute("/_console/")({
       registeredUsersCountQuery(credentials.serverName),
     );
     queryClient.prefetchQuery(latestEssReleaseQuery);
+    // Also trigger the preloading of the Gfm component
+    import("@/components/gfm");
 
     return {
       title: intl.formatMessage(titleMessage),
