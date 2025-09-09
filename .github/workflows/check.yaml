@@ -23,3 +23,31 @@ jobs:
 
       - name: Run the linters
         run: pnpm lint
+
+  playwright:
+    name: E2E tests
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v5
+
+      - uses: ./.github/actions/setup-node
+
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
+
+      - name: Build frontend
+        run: pnpm build
+
+      - name: Run Playwright tests
+        run: pnpm exec playwright test
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

@@ -41,7 +41,7 @@ export const Route = createFileRoute("/_auth")({
   component: () => {
     return (
       <WelcomeLayout className="gap-10 py-10 items-center justify-center">
-        <section className="flex flex-col flex-1 gap-12 items-stretch justify-center max-w-[340px]">
+        <main className="flex flex-col flex-1 gap-12 items-stretch justify-center max-w-[340px]">
           {/* Logo & message */}
           <div className="flex flex-col gap-6 items-center text-center">
             <EssLogotypeVertical />
@@ -54,7 +54,7 @@ export const Route = createFileRoute("/_auth")({
           <div>
             <Outlet />
           </div>
-        </section>
+        </main>
 
         <Footer.Root>
           <Footer.ElementLogo />

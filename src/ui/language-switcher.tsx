@@ -18,7 +18,7 @@ const LanguageSwitcherButton = forwardRef<
   return (
     <Tooltip
       placement="top"
-      description={intl.formatMessage({
+      label={intl.formatMessage({
         id: "ui.language_switcher.button_label",
         defaultMessage: "Language settings",
         description: "Aria label for the language switcher button",

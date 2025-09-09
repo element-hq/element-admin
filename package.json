@@ -14,7 +14,8 @@
     "i18n:compile": "formatjs compile-folder --format crowdin --ast translations/translated/ translations/compiled/ && prettier --write translations/compiled",
     "openapi-ts": "openapi-ts",
     "prepare": "husky",
-    "browserslist": "browserslist"
+    "browserslist": "browserslist",
+    "test": "playwright test"
   },
   "dependencies": {
     "@fontsource/inconsolata": "5.2.7",
@@ -44,11 +45,13 @@
     "zustand": "5.0.8"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.10.2",
     "@cloudflare/vite-plugin": "1.12.3",
     "@eslint/js": "9.35.0",
     "@formatjs/cli": "6.7.2",
     "@hey-api/openapi-ts": "0.82.5",
     "@localazy/cli": "2.0.8",
+    "@playwright/test": "1.55.0",
     "@tanstack/eslint-plugin-query": "5.86.0",
     "@tanstack/eslint-plugin-router": "1.131.2",
     "@tsconfig/strictest": "2.0.5",
