@@ -7,11 +7,12 @@ import {
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { SignOutIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { MenuItem, Separator } from "@vector-im/compound-web";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useIntl } from "react-intl";
 
 import { authMetadataQuery, revokeToken } from "@/api/auth";
+import { essVersionQuery, useEssVariant } from "@/api/ess";
 import {
   mediaThumbnailQuery,
   profileQuery,
@@ -57,10 +58,14 @@ export const Route = createFileRoute("/_console")({
     );
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
+    const essVersionPromise = queryClient.ensureQueryData(
+      essVersionQuery(synapseRoot),
+    );
     const whoami = await queryClient.ensureQueryData(whoamiQuery(synapseRoot));
     await queryClient.ensureQueryData(
       profileQuery(synapseRoot, whoami.user_id),
     );
+    await essVersionPromise;
   },
 
   component: RouteComponent,
@@ -84,38 +89,39 @@ function RouteComponent() {
 
   const avatarUrl = useImageBlob(avatar);
 
-  // Temporary thing to show off the logo variants
-  const variants = ["pro", "community", "ti-m"] as const;
-  const [logoClicks, setLogoClicks] = useState(0);
-  const onLogoClick = useCallback(
-    () => setLogoClicks((n) => n + 1),
-    [setLogoClicks],
-  );
+  const variant = useEssVariant(synapseRoot);
 
-  useEffect(() => {
-    if (logoClicks > 20) {
+  // An easter egg to trigger toasts and error boundaries
+  const logoClicks = useRef(0);
+  const [clickedTooMuch, setClickedTooMuch] = useState(false);
+  const onLogoClick = useCallback(() => {
+    logoClicks.current++;
+
+    if (logoClicks.current > 20) {
       toast("Oh, well.");
-      throw new Error("User clicked too many times");
-    } else if (logoClicks > 15) {
+      setClickedTooMuch(true);
+    } else if (logoClicks.current > 15) {
       const promise = new Promise((_, reject) => setTimeout(reject, 2000));
       toast.promise(promise, {
         loading: "Finding reasons why you kept clicking…",
         error: "No sensible reason found.",
       });
-    } else if (logoClicks > 10) {
+    } else if (logoClicks.current > 10) {
       toast.error("But like, really, stop.");
-    } else if (logoClicks > 5) {
+    } else if (logoClicks.current > 5) {
       toast.success("Okay you can stop clicking now.");
     }
-  }, [logoClicks]);
+  }, []);
 
-  const variant = variants[logoClicks % variants.length] || variants[0];
+  if (clickedTooMuch) {
+    throw new Error("User clicked too many times");
+  }
 
   return (
     <Layout>
       <Header.Root>
         <Header.Left>
-          <ElementLogo variant={variant} onClick={onLogoClick} />
+          <ElementLogo variant={variant ?? "community"} onClick={onLogoClick} />
           <Header.HomeserverName>
             {credentials.serverName}
           </Header.HomeserverName>

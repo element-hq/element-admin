@@ -3,6 +3,8 @@ import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { H3, Separator } from "@vector-im/compound-web";
 import { defineMessage, FormattedMessage } from "react-intl";
 
+import { useEssVersion } from "@/api/ess";
+import { githubReleaseQuery } from "@/api/github";
 import { registeredUsersCountQuery } from "@/api/mas";
 import { wellKnownQuery } from "@/api/matrix";
 import { roomsCountQuery, serverVersionQuery } from "@/api/synapse";
@@ -18,6 +20,11 @@ const titleMessage = defineMessage({
   description: "The title of the dashboard page",
 });
 
+const latestEssReleaseQuery = githubReleaseQuery(
+  "element-hq/ess-helm",
+  "latest",
+);
+
 export const Route = createFileRoute("/_console/")({
   loader: async ({ context: { queryClient, credentials, intl } }) => {
     const wellKnown = await queryClient.ensureQueryData(
@@ -26,12 +33,13 @@ export const Route = createFileRoute("/_console/")({
 
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
-    // Kick the loading of the 3 queries but don't await them
+    // Kick the loading of the 4 queries but don't await them
     queryClient.prefetchQuery(serverVersionQuery(synapseRoot));
     queryClient.prefetchQuery(roomsCountQuery(synapseRoot));
     queryClient.prefetchQuery(
       registeredUsersCountQuery(credentials.serverName),
     );
+    queryClient.prefetchQuery(latestEssReleaseQuery);
 
     return {
       title: intl.formatMessage(titleMessage),
@@ -42,6 +50,22 @@ export const Route = createFileRoute("/_console/")({
   }),
   component: RouteComponent,
 });
+
+const LatestEssRelease: React.FC = () => {
+  const { data } = useSuspenseQuery(latestEssReleaseQuery);
+  return (
+    <Data.Value>
+      <a
+        href={data.html_url}
+        target="_blank"
+        rel="noreferrer"
+        className="text-text-link-external underline hover:no-underline"
+      >
+        {data.name}
+      </a>
+    </Data.Value>
+  );
+};
 
 interface SynapseVersionProps {
   synapseRoot: string;
@@ -81,6 +105,7 @@ function RouteComponent() {
   );
 
   const synapseRoot = wellKnown["m.homeserver"].base_url;
+  const essVersion = useEssVersion(synapseRoot);
 
   return (
     <Navigation.Root>
@@ -101,6 +126,32 @@ function RouteComponent() {
             </div>
 
             <Data.Grid>
+              <Data.Item>
+                <Data.Title>
+                  <FormattedMessage
+                    id="pages.dashboard.latest_ess_release"
+                    defaultMessage="Latest ESS release"
+                    description="On the dashboard, this shows the latest ESS release"
+                  />
+                </Data.Title>
+                <Data.DynamicValue>
+                  <LatestEssRelease />
+                </Data.DynamicValue>
+              </Data.Item>
+
+              {essVersion && (
+                <Data.Item>
+                  <Data.Title>
+                    <FormattedMessage
+                      id="pages.dashboard.current_ess_version"
+                      defaultMessage="Your current ESS version"
+                      description="On the dashboard, this shows the current ESS version"
+                    />
+                  </Data.Title>
+                  <Data.Value>{essVersion}</Data.Value>
+                </Data.Item>
+              )}
+
               <Data.Item>
                 <Data.Title>
                   <FormattedMessage

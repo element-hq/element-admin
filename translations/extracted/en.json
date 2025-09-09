@@ -67,6 +67,14 @@
     "description": "Label for the users navigation item in the main navigation sidebar",
     "message": "Users"
   },
+  "pages.dashboard.current_ess_version": {
+    "description": "On the dashboard, this shows the current ESS version",
+    "message": "Your current ESS version"
+  },
+  "pages.dashboard.latest_ess_release": {
+    "description": "On the dashboard, this shows the latest ESS release",
+    "message": "Latest ESS release"
+  },
   "pages.dashboard.registered_users_count": {
     "description": "On the dashboard, this shows the number of users registered in MAS",
     "message": "Users registered"
