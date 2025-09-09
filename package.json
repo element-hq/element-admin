@@ -14,7 +14,8 @@
     "i18n:compile": "formatjs compile-folder --format crowdin --ast translations/translated/ translations/compiled/ && prettier --write translations/compiled",
     "openapi-ts": "openapi-ts",
     "prepare": "husky",
-    "browserslist": "browserslist"
+    "browserslist": "browserslist",
+    "test": "playwright test"
   },
   "dependencies": {
     "@fontsource/inconsolata": "5.2.7",
@@ -31,7 +32,7 @@
     "@tanstack/react-virtual": "3.13.12",
     "@tanstack/router-plugin": "1.131.36",
     "@vector-im/compound-design-tokens": "6.0.0",
-    "@vector-im/compound-web": "8.2.3",
+    "@vector-im/compound-web": "8.2.4",
     "classnames": "2.5.1",
     "react": "19.1.1",
     "react-dom": "19.1.1",
@@ -44,11 +45,13 @@
     "zustand": "5.0.8"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "1.12.3",
+    "@axe-core/playwright": "4.10.2",
+    "@cloudflare/vite-plugin": "1.12.4",
     "@eslint/js": "9.35.0",
     "@formatjs/cli": "6.7.2",
     "@hey-api/openapi-ts": "0.82.5",
     "@localazy/cli": "2.0.8",
+    "@playwright/test": "1.55.0",
     "@tanstack/eslint-plugin-query": "5.86.0",
     "@tanstack/eslint-plugin-router": "1.131.2",
     "@tsconfig/strictest": "2.0.5",
@@ -81,10 +84,10 @@
     "stylelint-config-tailwindcss": "1.0.0",
     "tailwindcss": "4.1.13",
     "typescript": "5.9.2",
-    "typescript-eslint": "8.42.0",
+    "typescript-eslint": "8.43.0",
     "vite": "7.1.5",
     "vite-tsconfig-paths": "5.1.4",
-    "wrangler": "4.34.0"
+    "wrangler": "4.35.0"
   },
   "lint-staged": {
     "*": [
