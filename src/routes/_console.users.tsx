@@ -50,6 +50,7 @@ import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 const UserSearchParameters = v.object({
   admin: v.optional(v.boolean()),
   status: v.optional(v.picklist(["active", "locked", "deactivated"])),
+  dir: v.optional(v.picklist(["forward", "backward"])),
 });
 
 const titleMessage = defineMessage({
@@ -73,7 +74,7 @@ export const Route = createFileRoute("/_console/users")({
     };
 
     await queryClient.ensureInfiniteQueryData(
-      usersInfiniteQuery(credentials.serverName, parameters),
+      usersInfiniteQuery(credentials.serverName, parameters, search.dir),
     );
 
     return {
@@ -348,15 +349,19 @@ function RouteComponent() {
   );
   const synapseRoot = wellKnown["m.homeserver"].base_url;
 
+  const isBackward = search.dir === "backward";
   const { data, hasNextPage, fetchNextPage, isFetching } =
     useSuspenseInfiniteQuery(
-      usersInfiniteQuery(credentials.serverName, parameters),
+      usersInfiniteQuery(credentials.serverName, parameters, search.dir),
     );
 
   // Flatten the array of arrays from the useInfiniteQuery hook
   const flatData = useMemo(
-    () => data?.pages?.flatMap((page) => page.data) ?? [],
-    [data],
+    () =>
+      data?.pages?.flatMap((page) =>
+        isBackward ? page.data.toReversed() : page.data,
+      ) ?? [],
+    [data, isBackward],
   );
 
   const totalCount = data.pages[0]?.meta.count ?? 0;
@@ -495,6 +500,22 @@ function RouteComponent() {
               </Table.Title>
 
               <Table.Filter>
+                <CheckboxMenuItem
+                  onSelect={(event) => {
+                    event.preventDefault();
+                    navigate({
+                      search:
+                        search.dir === "backward"
+                          ? omit(search, ["dir"])
+                          : {
+                              ...search,
+                              dir: "backward",
+                            },
+                    });
+                  }}
+                  label="Oldest first"
+                  checked={search.dir === "backward"}
+                />
                 <CheckboxMenuItem
                   onSelect={(event) => {
                     event.preventDefault();

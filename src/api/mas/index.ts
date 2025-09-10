@@ -90,18 +90,26 @@ export interface EditTokenParameters {
   expires_at?: string | null; // ISO date string
 }
 
+// FIXME: pagination direction is temporary until MAS gets proper ordering in the API
+type PaginationDirection = "forward" | "backward";
+
 export const usersInfiniteQuery = (
   serverName: string,
   parameters: UserListFilters = {},
+  direction: PaginationDirection = "forward",
 ) =>
   infiniteQueryOptions({
-    queryKey: ["mas", "users", serverName, parameters],
+    queryKey: ["mas", "users", serverName, parameters, direction],
     queryFn: async ({ client, signal, pageParam }) => {
-      const query: api.ListUsersData["query"] = {
-        "page[first]": PAGE_SIZE,
-      };
+      const query: api.ListUsersData["query"] = {};
 
-      if (pageParam) query["page[after]"] = pageParam;
+      if (direction === "forward") {
+        query["page[first]"] = PAGE_SIZE;
+        if (pageParam) query["page[after]"] = pageParam;
+      } else {
+        query["page[last]"] = PAGE_SIZE;
+        if (pageParam) query["page[before]"] = pageParam;
+      }
 
       if (parameters.admin !== undefined)
         query["filter[admin]"] = parameters.admin;
@@ -114,7 +122,9 @@ export const usersInfiniteQuery = (
     },
     initialPageParam: null as api.Ulid | null,
     getNextPageParam: (lastPage): api.Ulid | null =>
-      lastPage.data.at(-1)?.id ?? null,
+      direction === "forward"
+        ? ((lastPage.links.next && lastPage.data.at(-1)?.id) ?? null)
+        : ((lastPage.links.prev && lastPage.data.at(0)?.id) ?? null),
   });
 
 export const userQuery = (serverName: string, userId: string) =>
@@ -268,7 +278,7 @@ export const registrationTokensInfiniteQuery = (
     },
     initialPageParam: null as api.Ulid | null,
     getNextPageParam: (lastPage): api.Ulid | null =>
-      lastPage.data.at(-1)?.id ?? null,
+      (lastPage.links.next && lastPage.data.at(-1)?.id) ?? null,
   });
 
 export const registrationTokenQuery = (serverName: string, tokenId: string) =>
