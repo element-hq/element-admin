@@ -423,6 +423,38 @@
     "description": "The success message for reactivating a user account",
     "message": "Account reactivated"
   },
+  "pages.users.set_admin.alert.description": {
+    "description": "In the modal to give admin privileges, the description of the alert",
+    "message": "The user will be able to view user data and make changes to user and room permissions."
+  },
+  "pages.users.set_admin.alert.title": {
+    "description": "In the modal to give admin privileges, the title of the alert",
+    "message": "User will have access to sensitive data"
+  },
+  "pages.users.set_admin.error": {
+    "description": "The error message for changing a user's admin privileges",
+    "message": "Failed to change admin privileges for {mxid}"
+  },
+  "pages.users.set_admin.label": {
+    "description": "The label for the admin checkbox in the user panel",
+    "message": "Admin"
+  },
+  "pages.users.set_admin.make_admin_button": {
+    "description": "The submit button text in the set admin privileges modal",
+    "message": "Make admin"
+  },
+  "pages.users.set_admin.successfully_demoted": {
+    "description": "The success message when removing admin privileges from a user",
+    "message": "{mxid} no longer has admin privileges"
+  },
+  "pages.users.set_admin.successfully_promoted": {
+    "description": "The success message when giving admin privileges to a user",
+    "message": "{mxid} now has admin privileges"
+  },
+  "pages.users.set_admin.title": {
+    "description": "The title of the modal asking for confirmation to give admin privileges to a user",
+    "message": "Make this user an admin?"
+  },
   "pages.users.set_password.button": {
     "description": "The label for the change password button on the user panel",
     "message": "Change password"
