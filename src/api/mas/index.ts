@@ -39,10 +39,22 @@ const masBaseOptions = async (
     authMetadataQuery(wellKnown["m.homeserver"].base_url),
   );
 
+  // There is an edge-case where the issuer is not the same as where MAS is deployed.
+  // In this case, we rely on the GraphQL endpoint to determine the MAS API
+  // root. Ideally MAS would tell us in the metadata the exact base.
+  let baseUrl = authMetadata.issuer.replace(/\/$/, "");
+  if (
+    authMetadata["org.matrix.matrix-authentication-service.graphql_endpoint"]
+  ) {
+    baseUrl = authMetadata[
+      "org.matrix.matrix-authentication-service.graphql_endpoint"
+    ].replace(/\/graphql$/, "");
+  }
+
   return {
     client: masClient,
     auth: token,
-    baseUrl: authMetadata.issuer.replace(/\/$/, ""),
+    baseUrl,
     throwOnError: true,
     ...(signal && { signal }),
   };

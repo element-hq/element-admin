@@ -7,6 +7,9 @@ const AuthMetadataResponse = v.object({
   token_endpoint: v.string(),
   registration_endpoint: v.string(),
   revocation_endpoint: v.string(),
+  ["org.matrix.matrix-authentication-service.graphql_endpoint"]: v.optional(
+    v.string(),
+  ),
 });
 
 export const authMetadataQuery = (synapseRoot: string) =>
