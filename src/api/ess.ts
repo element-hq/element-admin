@@ -1,8 +1,18 @@
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import type SemVer from "semver/classes/semver";
+import parseSemver from "semver/functions/parse";
 import * as v from "valibot";
 
 const VersionResponse = v.object({
-  version: v.fallback(v.nullable(v.string()), null),
+  version: v.fallback(
+    v.nullable(
+      v.pipe(
+        v.string(),
+        v.transform((version) => parseSemver(version, true, false)),
+      ),
+    ),
+    null,
+  ),
   edition: v.fallback(v.nullable(v.picklist(["community", "pro"])), null),
 });
 
@@ -35,7 +45,7 @@ export const useEssVariant = (
   return data.edition;
 };
 
-export const useEssVersion = (synapseRoot: string): null | string => {
+export const useEssVersion = (synapseRoot: string): null | SemVer => {
   const { data } = useSuspenseQuery(essVersionQuery(synapseRoot));
   return data?.version;
 };

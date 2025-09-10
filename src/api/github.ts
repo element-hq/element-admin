@@ -1,9 +1,16 @@
 import { queryOptions } from "@tanstack/react-query";
+import parseSemver from "semver/functions/parse";
 import * as v from "valibot";
 
 const ReleaseResponse = v.object({
   html_url: v.string(),
   name: v.string(),
+  // XXX: this parses the version from the tag as semver; maybe we want to do
+  // that in a separate field?
+  tag_name: v.pipe(
+    v.string(),
+    v.transform((version) => parseSemver(version, true, false)),
+  ),
   created_at: v.pipe(v.string(), v.isoTimestamp()),
   body: v.string(),
 });

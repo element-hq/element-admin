@@ -1,4 +1,5 @@
-import { H3, H4, H5, Link, Text } from "@vector-im/compound-web";
+import { H3, H4, H5, Text } from "@vector-im/compound-web";
+import cx from "classnames";
 import type { Root } from "mdast";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -15,38 +16,53 @@ function remarkRemoveFirstHeading(): Transformer<Root, Root> {
   };
 }
 
-interface MarkdownProps {
+interface ReleaseNotesProps {
   markdown: string;
   repo: string;
 }
-const Gfm = ({ markdown, repo }: MarkdownProps) => {
+const ReleaseNotes = ({ markdown, repo }: ReleaseNotesProps) => {
   return (
-    <article>
-      <Markdown
-        components={{
-          a: (props) => <Link {...props} target="_blank" />,
-          h1: H3,
-          h2: H4,
-          h3: H5,
-          h4: H5,
-          h5: H5,
-          h6: H5,
-          ul: ({ children }) => (
-            <ul className="list-disc list-outside ml-8">{children}</ul>
-          ),
-          li: ({ children }) => <li className="space-x-2">{children}</li>,
-          p: ({ children }) => <Text>{children}</Text>,
-        }}
-        remarkPlugins={[
-          remarkRemoveFirstHeading,
-          remarkGfm,
-          [remarkGithub, { repository: repo }],
-        ]}
-      >
-        {markdown}
-      </Markdown>
-    </article>
+    <Markdown
+      components={{
+        a: ({ node: _, className, children, ...props }) => (
+          <a
+            {...props}
+            className={cx(
+              className,
+              "underline hover:no-underline font-semibold",
+            )}
+            rel="noreferrer"
+            target="_blank"
+          >
+            {children}
+          </a>
+        ),
+        h1: ({ node: _, ...props }) => <H3 {...props} />,
+        h2: ({ node: _, ...props }) => <H4 {...props} />,
+        h3: ({ node: _, ...props }) => <H5 {...props} />,
+        h4: ({ node: _, ...props }) => <H5 {...props} />,
+        h5: ({ node: _, ...props }) => <H5 {...props} />,
+        h6: ({ node: _, ...props }) => <H5 {...props} />,
+        code: ({ node: _, className, ...props }) => (
+          <code {...props} className={cx(className, "font-mono break-all")} />
+        ),
+        ul: ({ node: _, className, ...props }) => (
+          <ul className={cx(className, "list-disc list-outside")} {...props} />
+        ),
+        li: ({ node: _, className, ...props }) => (
+          <li className={cx(className, "my-1 ml-6")} {...props} />
+        ),
+        p: ({ children }) => <Text>{children}</Text>,
+      }}
+      remarkPlugins={[
+        remarkRemoveFirstHeading,
+        remarkGfm,
+        [remarkGithub, { repository: repo }],
+      ]}
+    >
+      {markdown}
+    </Markdown>
   );
 };
 
-export default Gfm;
+export default ReleaseNotes;

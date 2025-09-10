@@ -79,6 +79,10 @@
     "description": "On the dashboard, this shows the latest ESS release notes",
     "message": "What's new in ESS"
   },
+  "pages.dashboard.new_ess_release": {
+    "description": "On the dashboard, this shows that there is a new ESS release available",
+    "message": "(New release)"
+  },
   "pages.dashboard.registered_users_count": {
     "description": "On the dashboard, this shows the number of users registered in MAS",
     "message": "Users registered"
@@ -86,6 +90,10 @@
   "pages.dashboard.rooms_count": {
     "description": "On the dashboard, this shows the Synapse uptime",
     "message": "Rooms total"
+  },
+  "pages.dashboard.running_latest_ess": {
+    "description": "On the dashboard, this shows that you're running the latest ESS version",
+    "message": "(You're running the latest version)"
   },
   "pages.dashboard.synapse_version": {
     "description": "On the dashboard, this shows the Synapse version",
