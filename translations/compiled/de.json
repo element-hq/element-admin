@@ -112,10 +112,28 @@
       "value": "Nutzer"
     }
   ],
-  "pages.dashboard.failed_to_load": [
+  "pages.dashboard.current_ess_version": [
     {
       "type": 0,
-      "value": "Laden fehlgeschlagen"
+      "value": "Deine aktuelle ESS-Version"
+    }
+  ],
+  "pages.dashboard.latest_ess_release": [
+    {
+      "type": 0,
+      "value": "Neueste ESS-Version"
+    }
+  ],
+  "pages.dashboard.latest_ess_release_notes": [
+    {
+      "type": 0,
+      "value": "Was ist neu in ESS"
+    }
+  ],
+  "pages.dashboard.new_ess_release": [
+    {
+      "type": 0,
+      "value": "(New release)"
     }
   ],
   "pages.dashboard.registered_users_count": [
@@ -128,6 +146,12 @@
     {
       "type": 0,
       "value": "Gesamtzahl der Chats"
+    }
+  ],
+  "pages.dashboard.running_latest_ess": [
+    {
+      "type": 0,
+      "value": "(You're running the latest version)"
     }
   ],
   "pages.dashboard.synapse_version": [
@@ -145,13 +169,13 @@
   "pages.generic_error.go_home": [
     {
       "type": 0,
-      "value": "Go home"
+      "value": "Gehe zur Startseite"
     }
   ],
   "pages.generic_error.sign_out_and_reload": [
     {
       "type": 0,
-      "value": "Sign out and reload"
+      "value": "Abmelden und neu laden"
     }
   ],
   "pages.generic_error.technical_details.item": [
@@ -171,13 +195,13 @@
   "pages.generic_error.text": [
     {
       "type": 0,
-      "value": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
+      "value": "Das könnte an einem Fehler liegen oder daran, dass der Homeserver nicht erreichbar ist. Du kannst versuchen, die Seite nochmal zu laden, zur vorherigen Seite zurückgehen oder alles zurücksetzen und zur Startseite zurückkehren."
     }
   ],
   "pages.generic_error.title": [
     {
       "type": 0,
-      "value": "An unexpected error occurred"
+      "value": "Ein unerwarteter Fehler ist aufgetreten"
     }
   ],
   "pages.landing.description": [
@@ -189,13 +213,13 @@
   "pages.login.failed_to_reach": [
     {
       "type": 0,
-      "value": "Failed to reach server"
+      "value": "Server konnte nicht erreicht werden"
     }
   ],
   "pages.login.get_started": [
     {
       "type": 0,
-      "value": "Get started"
+      "value": "Los geht's"
     }
   ],
   "pages.login.server_name": [
@@ -945,10 +969,22 @@
       "value": "COUNT"
     }
   ],
+  "ui.data.failed_to_load": [
+    {
+      "type": 0,
+      "value": "Laden fehlgeschlagen"
+    }
+  ],
+  "ui.data.loading": [
+    {
+      "type": 0,
+      "value": "Wert wird geladen"
+    }
+  ],
   "ui.language_switcher.browser_default": [
     {
       "type": 0,
-      "value": "Use browser settings ("
+      "value": "Browser-Einstellungen verwenden ("
     },
     {
       "type": 1,
@@ -962,19 +998,19 @@
   "ui.language_switcher.button_label": [
     {
       "type": 0,
-      "value": "Language settings"
+      "value": "Spracheinstellungen"
     }
   ],
   "ui.language_switcher.description": [
     {
       "type": 0,
-      "value": "Choose your preferred language for the interface."
+      "value": "Wähle deine bevorzugte Sprache für die Benutzeroberfläche"
     }
   ],
   "ui.language_switcher.title": [
     {
       "type": 0,
-      "value": "Language settings"
+      "value": "Spracheinstellungen"
     }
   ]
 }

@@ -112,10 +112,28 @@
       "value": "Users"
     }
   ],
-  "pages.dashboard.failed_to_load": [
+  "pages.dashboard.current_ess_version": [
     {
       "type": 0,
-      "value": "Failed to load"
+      "value": "Your current ESS version"
+    }
+  ],
+  "pages.dashboard.latest_ess_release": [
+    {
+      "type": 0,
+      "value": "Latest ESS release"
+    }
+  ],
+  "pages.dashboard.latest_ess_release_notes": [
+    {
+      "type": 0,
+      "value": "What's new in ESS"
+    }
+  ],
+  "pages.dashboard.new_ess_release": [
+    {
+      "type": 0,
+      "value": "(New release)"
     }
   ],
   "pages.dashboard.registered_users_count": [
@@ -128,6 +146,12 @@
     {
       "type": 0,
       "value": "Rooms total"
+    }
+  ],
+  "pages.dashboard.running_latest_ess": [
+    {
+      "type": 0,
+      "value": "(You're running the latest version)"
     }
   ],
   "pages.dashboard.synapse_version": [
@@ -943,6 +967,18 @@
       "pluralType": "cardinal",
       "type": 6,
       "value": "COUNT"
+    }
+  ],
+  "ui.data.failed_to_load": [
+    {
+      "type": 0,
+      "value": "Failed to load"
+    }
+  ],
+  "ui.data.loading": [
+    {
+      "type": 0,
+      "value": "Loading value"
     }
   ],
   "ui.language_switcher.browser_default": [
