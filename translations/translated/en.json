@@ -50,14 +50,26 @@
   "navigation.users": {
     "message": "Users"
   },
-  "pages.dashboard.failed_to_load": {
-    "message": "Failed to load"
+  "pages.dashboard.current_ess_version": {
+    "message": "Your current ESS version"
+  },
+  "pages.dashboard.latest_ess_release": {
+    "message": "Latest ESS release"
+  },
+  "pages.dashboard.latest_ess_release_notes": {
+    "message": "What's new in ESS"
+  },
+  "pages.dashboard.new_ess_release": {
+    "message": "(New release)"
   },
   "pages.dashboard.registered_users_count": {
     "message": "Users registered"
   },
   "pages.dashboard.rooms_count": {
     "message": "Rooms total"
+  },
+  "pages.dashboard.running_latest_ess": {
+    "message": "(You're running the latest version)"
   },
   "pages.dashboard.synapse_version": {
     "message": "Synapse version"
@@ -382,6 +394,12 @@
   },
   "rooms_info.other_members": {
     "message": "{COUNT, plural, one {# other} other {# others}}"
+  },
+  "ui.data.failed_to_load": {
+    "message": "Failed to load"
+  },
+  "ui.data.loading": {
+    "message": "Loading value"
   },
   "ui.language_switcher.browser_default": {
     "message": "Use browser settings ({language})"

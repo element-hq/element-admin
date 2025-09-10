@@ -50,14 +50,26 @@
   "navigation.users": {
     "message": "Utilisateurs"
   },
-  "pages.dashboard.failed_to_load": {
-    "message": "Échec du chargement"
+  "pages.dashboard.current_ess_version": {
+    "message": "Votre version actuelle d'ESS"
+  },
+  "pages.dashboard.latest_ess_release": {
+    "message": "Dernière version d'ESS"
+  },
+  "pages.dashboard.latest_ess_release_notes": {
+    "message": "Nouveautés dans ESS"
+  },
+  "pages.dashboard.new_ess_release": {
+    "message": "(Nouvelle version)"
   },
   "pages.dashboard.registered_users_count": {
     "message": "Utilisateurs enregistrés"
   },
   "pages.dashboard.rooms_count": {
     "message": "Nombre total de salons"
+  },
+  "pages.dashboard.running_latest_ess": {
+    "message": "(Vous utilisez la dernière version)"
   },
   "pages.dashboard.synapse_version": {
     "message": "Version de Synapse"
@@ -382,6 +394,12 @@
   },
   "rooms_info.other_members": {
     "message": "{COUNT, plural, one {# autre} other {# autres}}"
+  },
+  "ui.data.failed_to_load": {
+    "message": "Échec du chargement"
+  },
+  "ui.data.loading": {
+    "message": "Chargement de l'information"
   },
   "ui.language_switcher.browser_default": {
     "message": "Utiliser les paramètres du navigateur ({language})"

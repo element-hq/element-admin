@@ -50,14 +50,26 @@
   "navigation.users": {
     "message": "Nutzer"
   },
-  "pages.dashboard.failed_to_load": {
-    "message": "Laden fehlgeschlagen"
+  "pages.dashboard.current_ess_version": {
+    "message": "Deine aktuelle ESS-Version"
+  },
+  "pages.dashboard.latest_ess_release": {
+    "message": "Neueste ESS-Version"
+  },
+  "pages.dashboard.latest_ess_release_notes": {
+    "message": "Was ist neu in ESS"
+  },
+  "pages.dashboard.new_ess_release": {
+    "message": "(New release)"
   },
   "pages.dashboard.registered_users_count": {
     "message": "Registrierte Nutzer"
   },
   "pages.dashboard.rooms_count": {
     "message": "Gesamtzahl der Chats"
+  },
+  "pages.dashboard.running_latest_ess": {
+    "message": "(You're running the latest version)"
   },
   "pages.dashboard.synapse_version": {
     "message": "Synapse-Version"
@@ -66,28 +78,28 @@
     "message": "Dashboard"
   },
   "pages.generic_error.go_home": {
-    "message": "Go home"
+    "message": "Gehe zur Startseite"
   },
   "pages.generic_error.sign_out_and_reload": {
-    "message": "Sign out and reload"
+    "message": "Abmelden und neu laden"
   },
   "pages.generic_error.technical_details.item": {
     "message": "{name}: {message}"
   },
   "pages.generic_error.text": {
-    "message": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
+    "message": "Das könnte an einem Fehler liegen oder daran, dass der Homeserver nicht erreichbar ist. Du kannst versuchen, die Seite nochmal zu laden, zur vorherigen Seite zurückgehen oder alles zurücksetzen und zur Startseite zurückkehren."
   },
   "pages.generic_error.title": {
-    "message": "An unexpected error occurred"
+    "message": "Ein unerwarteter Fehler ist aufgetreten"
   },
   "pages.landing.description": {
     "message": "Verwalte die Bereitstellung der Element-App für deine Organisation oder Community."
   },
   "pages.login.failed_to_reach": {
-    "message": "Failed to reach server"
+    "message": "Server konnte nicht erreicht werden"
   },
   "pages.login.get_started": {
-    "message": "Get started"
+    "message": "Los geht's"
   },
   "pages.login.server_name": {
     "message": "Servername"
@@ -383,16 +395,22 @@
   "rooms_info.other_members": {
     "message": "{COUNT, plural, one {# weiteren} other {# weiteren}}"
   },
+  "ui.data.failed_to_load": {
+    "message": "Laden fehlgeschlagen"
+  },
+  "ui.data.loading": {
+    "message": "Wert wird geladen"
+  },
   "ui.language_switcher.browser_default": {
-    "message": "Use browser settings ({language})"
+    "message": "Browser-Einstellungen verwenden ({language})"
   },
   "ui.language_switcher.button_label": {
-    "message": "Language settings"
+    "message": "Spracheinstellungen"
   },
   "ui.language_switcher.description": {
-    "message": "Choose your preferred language for the interface."
+    "message": "Wähle deine bevorzugte Sprache für die Benutzeroberfläche"
   },
   "ui.language_switcher.title": {
-    "message": "Language settings"
+    "message": "Spracheinstellungen"
   }
 }
