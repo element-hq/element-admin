@@ -220,6 +220,22 @@ export const setUserPassword = async (
   });
 };
 
+export const setUserCanRequestAdmin = async (
+  queryClient: QueryClient,
+  serverName: string,
+  userId: api.Ulid,
+  canRequestAdmin: boolean,
+  signal?: AbortSignal,
+) => {
+  return await api.userSetAdmin({
+    ...(await masBaseOptions(queryClient, serverName, signal)),
+    path: { id: userId },
+    body: {
+      admin: canRequestAdmin,
+    },
+  });
+};
+
 export const userEmailsQuery = (serverName: string, userId: string) =>
   queryOptions({
     queryKey: ["mas", "user-emails", serverName, userId],

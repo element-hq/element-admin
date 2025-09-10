@@ -31,6 +31,7 @@ import {
   lockUser,
   reactivateUser,
   setUserPassword,
+  setUserCanRequestAdmin,
   unlockUser,
   userEmailsQuery,
   userQuery,
@@ -88,6 +89,174 @@ function UserChip({ mxid, synapseRoot }: UserChipProps) {
         )}
       </div>
     </div>
+  );
+}
+
+interface AdminCheckboxProps {
+  user: {
+    id: string;
+    attributes: {
+      username: string;
+      admin: boolean;
+    };
+  };
+  mxid: string;
+  serverName: string;
+  synapseRoot: string;
+}
+function AdminCheckbox({
+  user,
+  mxid,
+  serverName,
+  synapseRoot,
+}: AdminCheckboxProps) {
+  const queryClient = useQueryClient();
+  const intl = useIntl();
+  const [open, setOpen] = useState(false);
+  const { mutate, isPending } = useMutation({
+    mutationFn: (admin: boolean) =>
+      setUserCanRequestAdmin(queryClient, serverName, user.id, admin),
+    async onSettled(): Promise<void> {
+      await queryClient.invalidateQueries({
+        queryKey: ["mas", "user", serverName, user.id],
+      });
+    },
+
+    onError() {
+      toast.error(
+        intl.formatMessage(
+          {
+            id: "pages.users.set_admin.error",
+            defaultMessage: "Failed to change admin privileges for {mxid}",
+            description:
+              "The error message for changing a user's admin privileges",
+          },
+          { mxid },
+        ),
+      );
+    },
+
+    onSuccess(_data, admin) {
+      setOpen(false);
+      if (admin) {
+        toast.success(
+          intl.formatMessage(
+            {
+              id: "pages.users.set_admin.successfully_promoted",
+              defaultMessage: "{mxid} now has admin privileges",
+              description:
+                "The success message when giving admin privileges to a user",
+            },
+            { mxid },
+          ),
+        );
+      } else {
+        toast.success(
+          intl.formatMessage(
+            {
+              id: "pages.users.set_admin.successfully_demoted",
+              defaultMessage: "{mxid} no longer has admin privileges",
+              description:
+                "The success message when removing admin privileges from a user",
+            },
+            { mxid },
+          ),
+        );
+      }
+    },
+  });
+
+  const onClick = useCallback(
+    (event: React.MouseEvent<HTMLInputElement>) => {
+      // On the unchecked -> checked transition, we handle that directly,
+      // without the dialog. Else it falls through the default handler, which opens the dialog
+      if (!event.currentTarget.checked) {
+        event.preventDefault();
+        mutate(event.currentTarget.checked);
+      }
+    },
+    [mutate],
+  );
+
+  const onDialogAccept = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      mutate(true);
+    },
+    [mutate],
+  );
+
+  return (
+    <Form.Root>
+      <Form.InlineField
+        name="admin"
+        control={
+          <Dialog.Root
+            onOpenChange={setOpen}
+            open={open}
+            trigger={
+              <Form.CheckboxControl
+                checked={user.attributes.admin}
+                onClick={onClick}
+                disabled={isPending || open}
+              />
+            }
+          >
+            <Dialog.Title>
+              <FormattedMessage
+                id="pages.users.set_admin.title"
+                defaultMessage="Make this user an admin?"
+                description="The title of the modal asking for confirmation to give admin privileges to a user"
+              />
+            </Dialog.Title>
+            <UserChip mxid={mxid} synapseRoot={synapseRoot} />
+            <Dialog.Description asChild>
+              <Alert
+                type="critical"
+                title={intl.formatMessage({
+                  id: "pages.users.set_admin.alert.title",
+                  description:
+                    "In the modal to give admin privileges, the title of the alert",
+                  defaultMessage: "User will have access to sensitive data",
+                })}
+              >
+                <FormattedMessage
+                  id="pages.users.set_admin.alert.description"
+                  description="In the modal to give admin privileges, the description of the alert"
+                  defaultMessage="The user will be able to view user data and make changes to user and room permissions."
+                />
+              </Alert>
+            </Dialog.Description>
+            <Button
+              type="button"
+              kind="primary"
+              onClick={onDialogAccept}
+              disabled={isPending}
+            >
+              {isPending && <InlineSpinner />}
+              <FormattedMessage
+                id="pages.users.set_admin.make_admin_button"
+                defaultMessage="Make admin"
+                description="The submit button text in the set admin privileges modal"
+              />
+            </Button>
+            <Dialog.Close asChild>
+              <Button type="button" kind="tertiary" disabled={isPending}>
+                <FormattedMessage {...messages.actionCancel} />
+              </Button>
+            </Dialog.Close>
+          </Dialog.Root>
+        }
+      >
+        <Form.Label>
+          <FormattedMessage
+            id="pages.users.set_admin.label"
+            defaultMessage="Admin"
+            description="The label for the admin checkbox in the user panel"
+          />
+        </Form.Label>
+      </Form.InlineField>
+    </Form.Root>
   );
 }
 
@@ -736,6 +905,12 @@ function RouteComponent() {
             </Text>
             {displayName && <Text size="md">{displayName}</Text>}
           </div>
+          <AdminCheckbox
+            mxid={mxid}
+            user={user}
+            synapseRoot={synapseRoot}
+            serverName={credentials.serverName}
+          />
         </div>
 
         <div className="flex flex-col gap-4">
