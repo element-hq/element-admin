@@ -21,20 +21,28 @@ export const essVersionQuery = (synapseRoot: string) =>
     queryKey: ["ess", "version", synapseRoot],
     queryFn: async ({ signal }) => {
       const versionUrl = new URL("/_synapse/ess/version", synapseRoot);
-      const response = await fetch(versionUrl, {
-        signal,
-      });
+      try {
+        const response = await fetch(versionUrl, {
+          signal,
+        });
 
-      if (response.status >= 400 && response.status < 500) {
+        if (response.ok) {
+          throw new Error("/_synapse/ess/version returned an error");
+        }
+
+        const versionData = v.parse(VersionResponse, await response.json());
+
+        return versionData;
+      } catch (error) {
         console.warn(
           "Failed to detect ESS version, this is probably not an ESS deployment",
+          error,
         );
-        return { version: null, edition: null };
+        return {
+          version: null,
+          edition: null,
+        };
       }
-
-      const versionData = v.parse(VersionResponse, await response.json());
-
-      return versionData;
     },
   });
 
