@@ -116,11 +116,6 @@ function AdminCheckbox({
   const { mutate, isPending } = useMutation({
     mutationFn: (admin: boolean) =>
       setUserCanRequestAdmin(queryClient, serverName, user.id, admin),
-    async onSettled(): Promise<void> {
-      await queryClient.invalidateQueries({
-        queryKey: ["mas", "user", serverName, user.id],
-      });
-    },
 
     onError() {
       toast.error(
@@ -136,8 +131,7 @@ function AdminCheckbox({
       );
     },
 
-    onSuccess(_data, admin) {
-      setOpen(false);
+    async onSuccess(_data, admin): Promise<void> {
       if (admin) {
         toast.success(
           intl.formatMessage(
@@ -163,6 +157,17 @@ function AdminCheckbox({
           ),
         );
       }
+
+      // Invalidate both the individual user query and the users list
+      queryClient.invalidateQueries({ queryKey: ["mas", "users", serverName] });
+
+      // We await on the individual user invalidation query invalidation so that
+      // the query stays in a pending state until the new data is loaded
+      await queryClient.invalidateQueries({
+        queryKey: ["mas", "user", serverName, user.id],
+      });
+
+      setOpen(false);
     },
   });
 
