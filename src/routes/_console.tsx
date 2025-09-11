@@ -179,9 +179,9 @@ const SignOutMenuItem = ({
       );
     },
     throwOnError: true,
-    onSuccess: () => {
-      clear();
-      navigate({ to: "/", reloadDocument: true });
+    onSuccess: async () => {
+      await clear();
+      await navigate({ to: "/", reloadDocument: true });
     },
   });
 

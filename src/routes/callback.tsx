@@ -64,16 +64,12 @@ export const Route = createFileRoute("/callback")({
 
     // TODO: looks like we have to do it on the next tick, else it invalidates
     // the route match?
-    setTimeout(
-      () =>
-        saveCredentials(
-          session.serverName,
-          session.clientId,
-          tokenResponse.access_token,
-          tokenResponse.refresh_token,
-          tokenResponse.expires_in,
-        ),
-      0,
+    await saveCredentials(
+      session.serverName,
+      session.clientId,
+      tokenResponse.access_token,
+      tokenResponse.refresh_token,
+      tokenResponse.expires_in,
     );
 
     throw redirect({ to: "/" });

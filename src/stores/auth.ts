@@ -98,7 +98,7 @@ interface AuthStoreActions {
     accessToken: string,
     refreshToken: string,
     expiresIn: number,
-  ): void;
+  ): Promise<void>;
 
   /**
    * Returns the access token for the current session, or null if the
@@ -113,7 +113,7 @@ interface AuthStoreActions {
     abortSignal?: AbortSignal,
   ): Promise<string | null>;
 
-  clear: () => void;
+  clear: () => Promise<void>;
 }
 
 const isExpired = (credentials: Credentials): boolean => {
@@ -144,7 +144,7 @@ export const useAuthStore = create<AuthStore>()(
           const state = randomString(32);
           const { codeVerifier, codeChallenge } = await generatePkcePair();
 
-          set({
+          await set({
             authorizationSession: {
               serverName,
               clientId,
@@ -211,7 +211,7 @@ export const useAuthStore = create<AuthStore>()(
                 signal,
               );
 
-              current.saveCredentials(
+              await current.saveCredentials(
                 current.credentials.serverName,
                 current.credentials.clientId,
                 response.access_token,
@@ -224,7 +224,7 @@ export const useAuthStore = create<AuthStore>()(
           );
         },
 
-        saveCredentials(
+        async saveCredentials(
           rawServerName,
           clientId,
           accessToken,
@@ -240,11 +240,11 @@ export const useAuthStore = create<AuthStore>()(
             refreshToken,
             expiresAt,
           };
-          set({ authorizationSession: null, credentials });
+          await set({ authorizationSession: null, credentials });
         },
 
-        clear() {
-          set({ authorizationSession: null, credentials: null });
+        async clear() {
+          await set({ authorizationSession: null, credentials: null });
         },
       }),
       { name: "auth" },

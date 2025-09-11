@@ -87,12 +87,9 @@ function GenericError({ error, reset }: ErrorComponentProps) {
       );
     },
 
-    // Retry a few times before actually clearing the storage
-    retry: 3,
-
-    onSettled: () => {
-      clear();
-      navigate({ to: "/", reloadDocument: true });
+    onSettled: async () => {
+      await clear();
+      await navigate({ to: "/", reloadDocument: true });
     },
   });
 
