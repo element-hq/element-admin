@@ -108,6 +108,10 @@
     ]
   },
   "knip": {
+    "entry": [
+      "src/main.tsx",
+      "src/prerender.tsx"
+    ],
     "ignore": [
       "src/routeTree.gen.ts",
       "src/api/mas/api/**/*",

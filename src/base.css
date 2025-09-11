@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  --color-text-primary: var(--cpd-color-text-primary);
+  --color-text-secondary: var(--cpd-color-text-secondary);
+  --color-text-placeholder: var(--cpd-color-text-placeholder);
+  --color-text-disabled: var(--cpd-color-text-disabled);
+  --color-text-action-primary: var(--cpd-color-text-action-primary);
+  --color-text-action-accent: var(--cpd-color-text-action-accent);
+  --color-text-link-external: var(--cpd-color-text-link-external);
+  --color-text-critical-primary: var(--cpd-color-text-critical-primary);
+  --color-text-success-primary: var(--cpd-color-text-success-primary);
+  --color-text-info-primary: var(--cpd-color-text-info-primary);
+  --color-text-on-solid-primary: var(--cpd-color-text-on-solid-primary);
+  --color-bg-subtle-primary: var(--cpd-color-bg-subtle-primary);
+  --color-bg-subtle-secondary: var(--cpd-color-bg-subtle-secondary);
+  --color-bg-canvas-default: var(--cpd-color-bg-canvas-default);
+  --color-bg-canvas-disabled: var(--cpd-color-bg-canvas-disabled);
+  --color-bg-action-primary-rest: var(--cpd-color-bg-action-primary-rest);
+  --color-bg-action-primary-hovered: var(--cpd-color-bg-action-primary-hovered);
+  --color-bg-action-primary-pressed: var(--cpd-color-bg-action-primary-pressed);
+  --color-bg-action-primary-disabled: var(
+    --cpd-color-bg-action-primary-disabled
+  );
+  --color-bg-action-secondary-rest: var(--cpd-color-bg-action-secondary-rest);
+  --color-bg-action-secondary-hovered: var(
+    --cpd-color-bg-action-secondary-hovered
+  );
+  --color-bg-action-secondary-pressed: var(
+    --cpd-color-bg-action-secondary-pressed
+  );
+  --color-bg-critical-primary: var(--cpd-color-bg-critical-primary);
+  --color-bg-critical-hovered: var(--cpd-color-bg-critical-hovered);
+  --color-bg-critical-subtle: var(--cpd-color-bg-critical-subtle);
+  --color-bg-critical-subtle-hovered: var(
+    --cpd-color-bg-critical-subtle-hovered
+  );
+  --color-bg-success-subtle: var(--cpd-color-bg-success-subtle);
+  --color-bg-info-subtle: var(--cpd-color-bg-info-subtle);
+  --color-bg-decorative-1: var(--cpd-color-bg-decorative-1);
+  --color-bg-decorative-2: var(--cpd-color-bg-decorative-2);
+  --color-bg-decorative-3: var(--cpd-color-bg-decorative-3);
+  --color-bg-decorative-4: var(--cpd-color-bg-decorative-4);
+  --color-bg-decorative-5: var(--cpd-color-bg-decorative-5);
+  --color-bg-decorative-6: var(--cpd-color-bg-decorative-6);
+  --color-bg-accent-rest: var(--cpd-color-bg-accent-rest);
+  --color-bg-accent-hovered: var(--cpd-color-bg-accent-hovered);
+  --color-bg-accent-pressed: var(--cpd-color-bg-accent-pressed);
+  --color-border-disabled: var(--cpd-color-border-disabled);
+  --color-border-focused: var(--cpd-color-border-focused);
+  --color-border-interactive-primary: var(
+    --cpd-color-border-interactive-primary
+  );
+  --color-border-interactive-secondary: var(
+    --cpd-color-border-interactive-secondary
+  );
+  --color-border-interactive-hovered: var(
+    --cpd-color-border-interactive-hovered
+  );
+  --color-border-critical-primary: var(--cpd-color-border-critical-primary);
+  --color-border-critical-hovered: var(--cpd-color-border-critical-hovered);
+  --color-border-critical-subtle: var(--cpd-color-border-critical-subtle);
+  --color-border-success-subtle: var(--cpd-color-border-success-subtle);
+  --color-border-info-subtle: var(--cpd-color-border-info-subtle);
+  --color-icon-primary: var(--cpd-color-icon-primary);
+  --color-icon-secondary: var(--cpd-color-icon-secondary);
+  --color-icon-tertiary: var(--cpd-color-icon-tertiary);
+  --color-icon-quaternary: var(--cpd-color-icon-quaternary);
+  --color-icon-disabled: var(--cpd-color-icon-disabled);
+  --color-icon-primary-alpha: var(--cpd-color-icon-primary-alpha);
+  --color-icon-secondary-alpha: var(--cpd-color-icon-secondary-alpha);
+  --color-icon-tertiary-alpha: var(--cpd-color-icon-tertiary-alpha);
+  --color-icon-quaternary-alpha: var(--cpd-color-icon-quaternary-alpha);
+  --color-icon-accent-tertiary: var(--cpd-color-icon-accent-tertiary);
+  --color-icon-critical-primary: var(--cpd-color-icon-critical-primary);
+  --color-icon-success-primary: var(--cpd-color-icon-success-primary);
+  --color-icon-info-primary: var(--cpd-color-icon-info-primary);
+  --color-icon-on-solid-primary: var(--cpd-color-icon-on-solid-primary);
+}
+
+.cpd-font-body-sm-medium {
+  font: var(--cpd-font-body-sm-medium);
+}

@@ -1,13 +1,17 @@
 import { match } from "@formatjs/intl-localematcher";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { RouterProvider } from "@tanstack/react-router";
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useSyncExternalStore } from "react";
 import {
-  IntlProvider as ReactIntlProvider,
+  createIntl,
+  createIntlCache,
+  RawIntlProvider,
   useIntl,
+  type IntlShape,
   type MessageFormatElement,
 } from "react-intl";
 
+import { queryClient } from "@/query";
 import { router } from "@/router";
 import { useLocaleStore } from "@/stores/locale";
 
@@ -72,6 +76,35 @@ export const useBestLocale = (): string =>
     return () => globalThis.removeEventListener("languagechange", callback);
   }, getBestLocale);
 
+const localeQuery = (locale: string) =>
+  queryOptions({
+    queryKey: ["language", locale],
+    queryFn: async (): Promise<LocaleData> => {
+      const loader = getLocaleLoader(locale);
+      if (!loader) {
+        throw new Error(`Could not find locale loader for ${locale}`);
+      }
+
+      return await loader();
+    },
+    staleTime: Infinity,
+  });
+
+const cache = createIntlCache();
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const loadIntl = async (): Promise<IntlShape> => {
+  const bestLocale = getBestLocale();
+  const selectedLocale = useLocaleStore.getState().selectedLocale;
+  const locale =
+    selectedLocale && AVAILABLE_LOCALES.includes(selectedLocale)
+      ? selectedLocale
+      : bestLocale;
+
+  const messages = await queryClient.ensureQueryData(localeQuery(locale));
+  return createIntl({ messages, locale, defaultLocale: DEFAULT_LOCALE }, cache);
+};
+
 export const IntlProvider = ({ children }: { children: React.ReactNode }) => {
   const bestLocale = useBestLocale();
   const selectedLocale = useLocaleStore((state) => state.selectedLocale);
@@ -87,28 +120,15 @@ export const IntlProvider = ({ children }: { children: React.ReactNode }) => {
   }, [locale]);
 
   // Load the language data. This will suspend during loading
-  const { data: messages } = useSuspenseQuery({
-    queryKey: ["language", locale],
-    queryFn: async (): Promise<LocaleData> => {
-      const loader = getLocaleLoader(locale);
-      if (!loader) {
-        throw new Error(`Could not find locale loader for ${locale}`);
-      }
+  const { data: messages } = useSuspenseQuery(localeQuery(locale));
 
-      return await loader();
-    },
-    staleTime: Infinity,
-  });
-
-  return (
-    <ReactIntlProvider
-      locale={locale}
-      messages={messages}
-      defaultLocale={DEFAULT_LOCALE}
-    >
-      {children}
-    </ReactIntlProvider>
+  const intl = useMemo(
+    () =>
+      createIntl({ messages, locale, defaultLocale: DEFAULT_LOCALE }, cache),
+    [messages, locale],
   );
+
+  return <RawIntlProvider value={intl}>{children}</RawIntlProvider>;
 };
 
 export const RouterWithIntl = () => {
