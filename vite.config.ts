@@ -60,6 +60,7 @@ export default defineConfig(({ mode }) => ({
   ],
 }));
 
+/** Plugin to pre-render the react root with the suspense boundary at build-time */
 function vitePluginPrerender(): Plugin {
   let config: UserConfig | undefined;
 
@@ -103,6 +104,8 @@ function vitePluginPrerender(): Plugin {
 
       const resolvedConfig = await resolveConfig(config, "serve");
 
+      // Create a new runnable dev environment, which will let us import
+      // modules built by vite
       const environment = createRunnableDevEnvironment(
         "prerender",
         resolvedConfig,
@@ -118,10 +121,18 @@ function vitePluginPrerender(): Plugin {
 
       await environment.init();
 
-      const { render } = await environment.runner.import("/src/prerender");
+      // Import the prerender module
+      const { render } =
+        // eslint-disable-next-line @typescript-eslint/consistent-type-imports
+        await environment.runner.import<typeof import("@/prerender")>(
+          "/src/prerender",
+        );
 
+      // Render the component to a string
       const rendered = await render();
 
+      // And swap the div in the index.html with the pre-rendered component
+      // This must be kept in sync with index.html
       return html.replace(
         '<div id="app"></div>',
         `<div id="app">${rendered}</div>`,
