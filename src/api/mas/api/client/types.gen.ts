@@ -2,6 +2,10 @@
 
 import type { Auth } from "../core/auth.gen";
 import type {
+  ServerSentEventsOptions,
+  ServerSentEventsResult,
+} from "../core/serverSentEvents.gen";
+import type {
   Client as CoreClient,
   Config as CoreConfig,
 } from "../core/types.gen";
@@ -23,7 +27,7 @@ export interface Config<T extends ClientOptions = ClientOptions>
    *
    * @default globalThis.fetch
    */
-  fetch?: (request: Request) => ReturnType<typeof fetch>;
+  fetch?: typeof fetch;
   /**
    * Please don't use the Fetch client for Next.js applications. The `next`
    * options won't have any effect.
@@ -62,13 +66,22 @@ export interface Config<T extends ClientOptions = ClientOptions>
 }
 
 export interface RequestOptions<
+  TData = unknown,
   TResponseStyle extends ResponseStyle = "fields",
   ThrowOnError extends boolean = boolean,
   Url extends string = string,
 > extends Config<{
-    responseStyle: TResponseStyle;
-    throwOnError: ThrowOnError;
-  }> {
+      responseStyle: TResponseStyle;
+      throwOnError: ThrowOnError;
+    }>,
+    Pick<
+      ServerSentEventsOptions<TData>,
+      | "onSseError"
+      | "onSseEvent"
+      | "sseDefaultRetryDelay"
+      | "sseMaxRetryAttempts"
+      | "sseMaxRetryDelay"
+    > {
   /**
    * Any body that you want to add to your request.
    *
@@ -88,7 +101,7 @@ export interface ResolvedRequestOptions<
   TResponseStyle extends ResponseStyle = "fields",
   ThrowOnError extends boolean = boolean,
   Url extends string = string,
-> extends RequestOptions<TResponseStyle, ThrowOnError, Url> {
+> extends RequestOptions<unknown, TResponseStyle, ThrowOnError, Url> {
   serializedBody?: string;
 }
 
@@ -149,8 +162,17 @@ type MethodFn = <
   ThrowOnError extends boolean = false,
   TResponseStyle extends ResponseStyle = "fields",
 >(
-  options: Omit<RequestOptions<TResponseStyle, ThrowOnError>, "method">,
+  options: Omit<RequestOptions<TData, TResponseStyle, ThrowOnError>, "method">,
 ) => RequestResult<TData, TError, ThrowOnError, TResponseStyle>;
+
+type SseFn = <
+  TData = unknown,
+  TError = unknown,
+  ThrowOnError extends boolean = false,
+  TResponseStyle extends ResponseStyle = "fields",
+>(
+  options: Omit<RequestOptions<TData, TResponseStyle, ThrowOnError>, "method">,
+) => Promise<ServerSentEventsResult<TData, TError>>;
 
 type RequestFn = <
   TData = unknown,
@@ -158,8 +180,11 @@ type RequestFn = <
   ThrowOnError extends boolean = false,
   TResponseStyle extends ResponseStyle = "fields",
 >(
-  options: Omit<RequestOptions<TResponseStyle, ThrowOnError>, "method"> &
-    Pick<Required<RequestOptions<TResponseStyle, ThrowOnError>>, "method">,
+  options: Omit<RequestOptions<TData, TResponseStyle, ThrowOnError>, "method"> &
+    Pick<
+      Required<RequestOptions<TData, TResponseStyle, ThrowOnError>>,
+      "method"
+    >,
 ) => RequestResult<TData, TError, ThrowOnError, TResponseStyle>;
 
 type BuildUrlFn = <
@@ -173,7 +198,13 @@ type BuildUrlFn = <
   options: Pick<TData, "url"> & Options<TData>,
 ) => string;
 
-export type Client = CoreClient<RequestFn, Config, MethodFn, BuildUrlFn> & {
+export type Client = CoreClient<
+  RequestFn,
+  Config,
+  MethodFn,
+  BuildUrlFn,
+  SseFn
+> & {
   interceptors: Middleware<Request, Response, unknown, ResolvedRequestOptions>;
 };
 
@@ -202,9 +233,10 @@ type OmitKeys<T, K> = Pick<T, Exclude<keyof T, K>>;
 export type Options<
   TData extends TDataShape = TDataShape,
   ThrowOnError extends boolean = boolean,
+  TResponse = unknown,
   TResponseStyle extends ResponseStyle = "fields",
 > = OmitKeys<
-  RequestOptions<TResponseStyle, ThrowOnError>,
+  RequestOptions<TResponse, TResponseStyle, ThrowOnError>,
   "body" | "path" | "query" | "url"
 > &
   Omit<TData, "url">;
@@ -216,18 +248,22 @@ export type OptionsLegacyParser<
 > = TData extends { body?: any }
   ? TData extends { headers?: any }
     ? OmitKeys<
-        RequestOptions<TResponseStyle, ThrowOnError>,
+        RequestOptions<unknown, TResponseStyle, ThrowOnError>,
         "body" | "headers" | "url"
       > &
         TData
-    : OmitKeys<RequestOptions<TResponseStyle, ThrowOnError>, "body" | "url"> &
+    : OmitKeys<
+        RequestOptions<unknown, TResponseStyle, ThrowOnError>,
+        "body" | "url"
+      > &
         TData &
-        Pick<RequestOptions<TResponseStyle, ThrowOnError>, "headers">
+        Pick<RequestOptions<unknown, TResponseStyle, ThrowOnError>, "headers">
   : TData extends { headers?: any }
     ? OmitKeys<
-        RequestOptions<TResponseStyle, ThrowOnError>,
+        RequestOptions<unknown, TResponseStyle, ThrowOnError>,
         "headers" | "url"
       > &
         TData &
-        Pick<RequestOptions<TResponseStyle, ThrowOnError>, "body">
-    : OmitKeys<RequestOptions<TResponseStyle, ThrowOnError>, "url"> & TData;
+        Pick<RequestOptions<unknown, TResponseStyle, ThrowOnError>, "body">
+    : OmitKeys<RequestOptions<unknown, TResponseStyle, ThrowOnError>, "url"> &
+        TData;

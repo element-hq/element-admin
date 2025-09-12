@@ -2,7 +2,7 @@
 
 import * as v from "valibot";
 
-import type { Options as ClientOptions, TDataShape, Client } from "./client";
+import type { Options as ClientOptions, Client, TDataShape } from "./client";
 import type {
   ListCompatSessionsData,
   ListCompatSessionsResponses,
@@ -102,38 +102,71 @@ import type {
   GetUpstreamOAuthLinkErrors,
 } from "./types.gen";
 import {
+  vListCompatSessionsData,
   vListCompatSessionsResponse,
+  vGetCompatSessionData,
   vGetCompatSessionResponse,
+  vListOAuth2SessionsData,
   vListOAuth2SessionsResponse,
+  vGetOAuth2SessionData,
   vGetOAuth2SessionResponse,
+  vSetPolicyDataData,
   vSetPolicyDataResponse,
+  vGetLatestPolicyDataData,
   vGetLatestPolicyDataResponse,
+  vGetPolicyDataData,
   vGetPolicyDataResponse,
+  vListUsersData,
   vListUsersResponse,
+  vCreateUserData,
   vCreateUserResponse,
+  vGetUserData,
   vGetUserResponse,
+  vSetUserPasswordData,
   vSetUserPasswordResponse,
+  vGetUserByUsernameData,
   vGetUserByUsernameResponse,
+  vUserSetAdminData,
   vUserSetAdminResponse,
+  vDeactivateUserData,
   vDeactivateUserResponse,
+  vReactivateUserData,
   vReactivateUserResponse,
+  vLockUserData,
   vLockUserResponse,
+  vUnlockUserData,
   vUnlockUserResponse,
+  vListUserEmailsData,
   vListUserEmailsResponse,
+  vAddUserEmailData,
   vAddUserEmailResponse,
+  vDeleteUserEmailData,
   vDeleteUserEmailResponse,
+  vGetUserEmailData,
   vGetUserEmailResponse,
+  vListUserSessionsData,
   vListUserSessionsResponse,
+  vGetUserSessionData,
   vGetUserSessionResponse,
+  vListUserRegistrationTokensData,
   vListUserRegistrationTokensResponse,
+  vAddUserRegistrationTokenData,
   vAddUserRegistrationTokenResponse,
+  vGetUserRegistrationTokenData,
   vGetUserRegistrationTokenResponse,
+  vUpdateUserRegistrationTokenData,
   vUpdateUserRegistrationTokenResponse,
+  vRevokeUserRegistrationTokenData,
   vRevokeUserRegistrationTokenResponse,
+  vUnrevokeUserRegistrationTokenData,
   vUnrevokeUserRegistrationTokenResponse,
+  vListUpstreamOAuthLinksData,
   vListUpstreamOAuthLinksResponse,
+  vAddUpstreamOAuthLinkData,
   vAddUpstreamOAuthLinkResponse,
+  vDeleteUpstreamOAuthLinkData,
   vDeleteUpstreamOAuthLinkResponse,
+  vGetUpstreamOAuthLinkData,
   vGetUpstreamOAuthLinkResponse,
 } from "./valibot.gen";
 
@@ -169,6 +202,9 @@ export const listCompatSessions = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vListCompatSessionsData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vListCompatSessionsResponse, data);
     },
@@ -196,6 +232,9 @@ export const getCompatSession = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vGetCompatSessionData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vGetCompatSessionResponse, data);
     },
@@ -226,6 +265,9 @@ export const listOAuth2Sessions = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vListOAuth2SessionsData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vListOAuth2SessionsResponse, data);
     },
@@ -253,6 +295,9 @@ export const getOAuth2Session = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vGetOAuth2SessionData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vGetOAuth2SessionResponse, data);
     },
@@ -280,6 +325,9 @@ export const setPolicyData = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vSetPolicyDataData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vSetPolicyDataResponse, data);
     },
@@ -311,6 +359,9 @@ export const getLatestPolicyData = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vGetLatestPolicyDataData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vGetLatestPolicyDataResponse, data);
     },
@@ -338,6 +389,9 @@ export const getPolicyData = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vGetPolicyDataData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vGetPolicyDataResponse, data);
     },
@@ -360,6 +414,9 @@ export const listUsers = <ThrowOnError extends boolean = true>(
   options: Options<ListUsersData, ThrowOnError>,
 ) => {
   return options.client.get<ListUsersResponses, unknown, ThrowOnError, "data">({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vListUsersData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vListUsersResponse, data);
     },
@@ -387,6 +444,9 @@ export const createUser = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vCreateUserData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vCreateUserResponse, data);
     },
@@ -418,6 +478,9 @@ export const getUser = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vGetUserData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vGetUserResponse, data);
     },
@@ -445,6 +508,9 @@ export const setUserPassword = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vSetUserPasswordData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vSetUserPasswordResponse, data);
     },
@@ -476,6 +542,9 @@ export const getUserByUsername = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vGetUserByUsernameData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vGetUserByUsernameResponse, data);
     },
@@ -504,6 +573,9 @@ export const userSetAdmin = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vUserSetAdminData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vUserSetAdminResponse, data);
     },
@@ -537,6 +609,9 @@ export const deactivateUser = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vDeactivateUserData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vDeactivateUserResponse, data);
     },
@@ -570,6 +645,9 @@ export const reactivateUser = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vReactivateUserData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vReactivateUserResponse, data);
     },
@@ -599,6 +677,9 @@ export const lockUser = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vLockUserData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vLockUserResponse, data);
     },
@@ -628,6 +709,9 @@ export const unlockUser = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vUnlockUserData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vUnlockUserResponse, data);
     },
@@ -656,6 +740,9 @@ export const listUserEmails = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vListUserEmailsData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vListUserEmailsResponse, data);
     },
@@ -685,6 +772,9 @@ export const addUserEmail = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vAddUserEmailData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vAddUserEmailResponse, data);
     },
@@ -716,6 +806,9 @@ export const deleteUserEmail = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vDeleteUserEmailData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vDeleteUserEmailResponse, data);
     },
@@ -743,6 +836,9 @@ export const getUserEmail = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vGetUserEmailData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vGetUserEmailResponse, data);
     },
@@ -773,6 +869,9 @@ export const listUserSessions = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vListUserSessionsData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vListUserSessionsResponse, data);
     },
@@ -800,6 +899,9 @@ export const getUserSession = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vGetUserSessionData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vGetUserSessionResponse, data);
     },
@@ -827,6 +929,9 @@ export const listUserRegistrationTokens = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vListUserRegistrationTokensData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vListUserRegistrationTokensResponse, data);
     },
@@ -854,6 +959,9 @@ export const addUserRegistrationToken = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vAddUserRegistrationTokenData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vAddUserRegistrationTokenResponse, data);
     },
@@ -885,6 +993,9 @@ export const getUserRegistrationToken = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vGetUserRegistrationTokenData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vGetUserRegistrationTokenResponse, data);
     },
@@ -915,6 +1026,9 @@ export const updateUserRegistrationToken = <
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vUpdateUserRegistrationTokenData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vUpdateUserRegistrationTokenResponse, data);
     },
@@ -949,6 +1063,9 @@ export const revokeUserRegistrationToken = <
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vRevokeUserRegistrationTokenData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vRevokeUserRegistrationTokenResponse, data);
     },
@@ -979,6 +1096,9 @@ export const unrevokeUserRegistrationToken = <
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vUnrevokeUserRegistrationTokenData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vUnrevokeUserRegistrationTokenResponse, data);
     },
@@ -1007,6 +1127,9 @@ export const listUpstreamOAuthLinks = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vListUpstreamOAuthLinksData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vListUpstreamOAuthLinksResponse, data);
     },
@@ -1034,6 +1157,9 @@ export const addUpstreamOAuthLink = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vAddUpstreamOAuthLinkData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vAddUpstreamOAuthLinkResponse, data);
     },
@@ -1065,6 +1191,9 @@ export const deleteUpstreamOAuthLink = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vDeleteUpstreamOAuthLinkData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vDeleteUpstreamOAuthLinkResponse, data);
     },
@@ -1092,6 +1221,9 @@ export const getUpstreamOAuthLink = <ThrowOnError extends boolean = true>(
     ThrowOnError,
     "data"
   >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vGetUpstreamOAuthLinkData, data);
+    },
     responseValidator: async (data) => {
       return await v.parseAsync(vGetUpstreamOAuthLinkResponse, data);
     },
