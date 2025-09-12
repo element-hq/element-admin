@@ -60,7 +60,7 @@
     "message": "Was ist neu in ESS"
   },
   "pages.dashboard.new_ess_release": {
-    "message": "(New release)"
+    "message": "(Neues Release)"
   },
   "pages.dashboard.registered_users_count": {
     "message": "Registrierte Nutzer"
@@ -69,7 +69,7 @@
     "message": "Gesamtzahl der Chats"
   },
   "pages.dashboard.running_latest_ess": {
-    "message": "(You're running the latest version)"
+    "message": "(Du verwendest die neueste Version)"
   },
   "pages.dashboard.synapse_version": {
     "message": "Synapse-Version"
@@ -316,6 +316,30 @@
   },
   "pages.users.reactivate_account.success": {
     "message": "Konto reaktiviert"
+  },
+  "pages.users.set_admin.alert.description": {
+    "message": "Der Nutzer kann Nutzerdaten einsehen und Änderungen an Nutzer- und Chat-Berechtigungen vornehmen."
+  },
+  "pages.users.set_admin.alert.title": {
+    "message": "Nutzer erhält Zugriff auf sensible Daten"
+  },
+  "pages.users.set_admin.error": {
+    "message": "Fehler beim Ändern der Adminrechte für {mxid}"
+  },
+  "pages.users.set_admin.label": {
+    "message": "Admin"
+  },
+  "pages.users.set_admin.make_admin_button": {
+    "message": "Zum Admin machen"
+  },
+  "pages.users.set_admin.successfully_demoted": {
+    "message": "{mxid} hat keine Adminrechte mehr"
+  },
+  "pages.users.set_admin.successfully_promoted": {
+    "message": "{mxid} hat jetzt Adminrechte"
+  },
+  "pages.users.set_admin.title": {
+    "message": "Diesen Nutzer zum Admin machen?"
   },
   "pages.users.set_password.button": {
     "message": "Passwort ändern"

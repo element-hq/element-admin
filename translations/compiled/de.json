@@ -133,7 +133,7 @@
   "pages.dashboard.new_ess_release": [
     {
       "type": 0,
-      "value": "(New release)"
+      "value": "(Neues Release)"
     }
   ],
   "pages.dashboard.registered_users_count": [
@@ -151,7 +151,7 @@
   "pages.dashboard.running_latest_ess": [
     {
       "type": 0,
-      "value": "(You're running the latest version)"
+      "value": "(Du verwendest die neueste Version)"
     }
   ],
   "pages.dashboard.synapse_version": [
@@ -743,6 +743,66 @@
     {
       "type": 0,
       "value": "Konto reaktiviert"
+    }
+  ],
+  "pages.users.set_admin.alert.description": [
+    {
+      "type": 0,
+      "value": "Der Nutzer kann Nutzerdaten einsehen und Änderungen an Nutzer- und Chat-Berechtigungen vornehmen."
+    }
+  ],
+  "pages.users.set_admin.alert.title": [
+    {
+      "type": 0,
+      "value": "Nutzer erhält Zugriff auf sensible Daten"
+    }
+  ],
+  "pages.users.set_admin.error": [
+    {
+      "type": 0,
+      "value": "Fehler beim Ändern der Adminrechte für "
+    },
+    {
+      "type": 1,
+      "value": "mxid"
+    }
+  ],
+  "pages.users.set_admin.label": [
+    {
+      "type": 0,
+      "value": "Admin"
+    }
+  ],
+  "pages.users.set_admin.make_admin_button": [
+    {
+      "type": 0,
+      "value": "Zum Admin machen"
+    }
+  ],
+  "pages.users.set_admin.successfully_demoted": [
+    {
+      "type": 1,
+      "value": "mxid"
+    },
+    {
+      "type": 0,
+      "value": " hat keine Adminrechte mehr"
+    }
+  ],
+  "pages.users.set_admin.successfully_promoted": [
+    {
+      "type": 1,
+      "value": "mxid"
+    },
+    {
+      "type": 0,
+      "value": " hat jetzt Adminrechte"
+    }
+  ],
+  "pages.users.set_admin.title": [
+    {
+      "type": 0,
+      "value": "Diesen Nutzer zum Admin machen?"
     }
   ],
   "pages.users.set_password.button": [
