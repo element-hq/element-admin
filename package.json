@@ -69,7 +69,7 @@
     "@vitejs/plugin-react": "5.0.2",
     "babel-plugin-formatjs": "10.5.39",
     "babel-plugin-react-compiler": "19.1.0-rc.3",
-    "browserslist": "4.25.4",
+    "browserslist": "4.26.0",
     "browserslist-to-esbuild": "2.1.1",
     "eslint": "9.35.0",
     "eslint-config-prettier": "10.1.8",
