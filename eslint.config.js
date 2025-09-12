@@ -124,6 +124,7 @@ export default tseslint.config(
   {
     files: ["**/*.gen.ts"],
     rules: {
+      "@typescript-eslint/ban-ts-comment": "off",
       "@typescript-eslint/array-type": "off",
       "@typescript-eslint/consistent-type-definitions": "off",
       "@typescript-eslint/no-dynamic-delete": "off",
