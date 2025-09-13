@@ -1,0 +1,82 @@
+@keyframes reveal-circle {
+  0%,
+  10% {
+    r: 0;
+  }
+}
+
+@keyframes fade-out {
+  0%,
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  5% {
+    transform: scale(100%);
+    rotate: 90deg;
+  }
+
+  20% {
+    transform: scale(90%);
+  }
+
+  30% {
+    transform: scale(120%);
+  }
+
+  60% {
+    transform: scale(100%);
+    rotate: 0deg;
+  }
+}
+
+@keyframes swirl {
+  0%,
+  15% {
+    opacity: 0;
+    stroke-dashoffset: 100;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  50% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.loading {
+  --loading-animation-speed: 2s;
+  --size: 800px;
+
+  height: var(--size);
+  width: var(--size);
+  margin: calc(var(--size) * 0.2 * -2);
+}
+
+.reveal-circle {
+  animation: var(--loading-animation-speed) reveal-circle;
+}
+
+.wireframe-fade {
+  animation: var(--loading-animation-speed) fade-out;
+  opacity: 0;
+}
+
+.pulse {
+  animation: var(--loading-animation-speed) pulse;
+  transform-origin: center;
+}
+
+.swirls > path {
+  stroke-dasharray: 100 100;
+  animation: var(--loading-animation-speed) swirl;
+}

@@ -1,5 +1,7 @@
 import { WelcomeLayout } from "@/components/layout";
 
+import { Loading } from "./loading";
+
 /**
  * This is what is displayed when the app is loading.
  * Because of when this is displayed, there are a few constraints with this:
@@ -10,6 +12,10 @@ import { WelcomeLayout } from "@/components/layout";
  *
  * This gets pre-rendered at build-time
  */
-const LoadingFallback: React.FC = () => <WelcomeLayout />;
+const LoadingFallback: React.FC = () => (
+  <WelcomeLayout className="items-center justify-center">
+    <Loading />
+  </WelcomeLayout>
+);
 
 export default LoadingFallback;

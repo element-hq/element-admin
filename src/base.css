@@ -1,5 +1,23 @@
 @import "tailwindcss";
 
+/* Duplicate a few base variables from compound in the critical CSS */
+:root {
+  --cpd-color-bg-canvas-default: white;
+  --cpd-color-text-primary: #1b1d22;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cpd-color-bg-canvas-default: #101317;
+    --cpd-color-text-primary: #ebeef2;
+  }
+}
+
+body {
+  background: var(--cpd-color-bg-canvas-default);
+  color: var(--cpd-color-text-primary);
+}
+
 @theme {
   --color-text-primary: var(--cpd-color-text-primary);
   --color-text-secondary: var(--cpd-color-text-secondary);
