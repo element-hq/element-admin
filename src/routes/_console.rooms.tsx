@@ -1,4 +1,5 @@
 /* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
+import { useAsyncDebouncedCallback } from "@tanstack/react-pacer";
 import {
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
@@ -12,7 +13,7 @@ import {
 import type { ColumnDef } from "@tanstack/react-table";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { Badge, CheckboxMenuItem, Text } from "@vector-im/compound-web";
-import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo } from "react";
 import { defineMessage, FormattedMessage } from "react-intl";
 import * as v from "valibot";
 
@@ -114,29 +115,24 @@ function RouteComponent() {
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
 
-  // Local state for search input
-  const [localSearchTerm, setLocalSearchTerm] = useState(
-    search.search_term || "",
-  );
-
-  // Debounced effect to sync local state to URL
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      navigate({
+  const debouncedSearch = useAsyncDebouncedCallback(
+    async (term: string) => {
+      await navigate({
         replace: true,
         search: (previous) => {
-          if (!localSearchTerm.trim()) {
+          if (!term.trim()) {
             const { search_term: _, ...rest } = previous;
             return rest;
           }
 
-          return { ...previous, search_term: localSearchTerm.trim() };
+          return { ...previous, search_term: term.trim() };
         },
       });
-    }, 400);
-
-    return () => clearTimeout(timeout);
-  }, [localSearchTerm, navigate]);
+    },
+    {
+      wait: 400,
+    },
+  );
 
   const parameters: RoomListFilters = {
     ...(search.search_term && { search_term: search.search_term }),
@@ -252,9 +248,9 @@ function RouteComponent() {
 
   const onSearchInput = useCallback(
     (event: React.FormEvent<HTMLInputElement>) => {
-      setLocalSearchTerm(event.currentTarget.value);
+      debouncedSearch(event.currentTarget.value);
     },
-    [setLocalSearchTerm],
+    [debouncedSearch],
   );
 
   const table = useReactTable({
@@ -320,7 +316,7 @@ function RouteComponent() {
             </Page.Title>
             <Page.Search
               placeholder="Search…"
-              value={localSearchTerm}
+              defaultValue={search.search_term}
               onInput={onSearchInput}
             />
           </Page.Header>

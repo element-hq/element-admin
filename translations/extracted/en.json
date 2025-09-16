@@ -423,6 +423,10 @@
     "description": "The success message for reactivating a user account",
     "message": "Account reactivated"
   },
+  "pages.users.search_placeholder": {
+    "description": "The placeholder text for the user search input",
+    "message": "Search users…"
+  },
   "pages.users.set_admin.alert.description": {
     "description": "In the modal to give admin privileges, the description of the alert",
     "message": "The user will be able to view user data and make changes to user and room permissions."

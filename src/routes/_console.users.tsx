@@ -1,4 +1,5 @@
 /* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
+import { useAsyncDebouncedCallback } from "@tanstack/react-pacer";
 import {
   useMutation,
   useQuery,
@@ -50,6 +51,7 @@ import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 const UserSearchParameters = v.object({
   admin: v.optional(v.boolean()),
   status: v.optional(v.picklist(["active", "locked", "deactivated"])),
+  search: v.optional(v.string()),
   dir: v.optional(v.picklist(["forward", "backward"])),
 });
 
@@ -71,6 +73,7 @@ export const Route = createFileRoute("/_console/users")({
     const parameters: UserListFilters = {
       ...(search.admin !== undefined && { admin: search.admin }),
       ...(search.status && { status: search.status }),
+      ...(search.search && { search: search.search }),
     };
 
     await queryClient.ensureInfiniteQueryData(
@@ -338,10 +341,13 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
+  const navigate = Route.useNavigate();
+  const intl = useIntl();
 
   const parameters: UserListFilters = {
     ...(search.admin !== undefined && { admin: search.admin }),
     ...(search.status && { status: search.status }),
+    ...(search.search && { search: search.search }),
   };
 
   const { data: wellKnown } = useSuspenseQuery(
@@ -367,7 +373,31 @@ function RouteComponent() {
   const totalCount = data.pages[0]?.meta.count ?? 0;
   const totalFetched = flatData.length;
 
-  const navigate = Route.useNavigate();
+  const debouncedSearch = useAsyncDebouncedCallback(
+    async (term: string) => {
+      await navigate({
+        replace: true,
+        search: (previous) => {
+          if (!term.trim()) {
+            const { search: _, ...rest } = previous;
+            return rest;
+          }
+
+          return { ...previous, search: term.trim() };
+        },
+      });
+    },
+    {
+      wait: 200,
+    },
+  );
+
+  const onSearch = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      debouncedSearch(event.target.value);
+    },
+    [debouncedSearch],
+  );
 
   // Column definitions
   const columns = useMemo<ColumnDef<SingleResourceForUser>[]>(
@@ -483,6 +513,15 @@ function RouteComponent() {
             <Page.Title>
               <FormattedMessage {...titleMessage} />
             </Page.Title>
+            <Page.Search
+              placeholder={intl.formatMessage({
+                id: "pages.users.search_placeholder",
+                defaultMessage: "Search users…",
+                description: "The placeholder text for the user search input",
+              })}
+              onInput={onSearch}
+              defaultValue={search.search}
+            />
             <Page.Controls>
               <UserAddButton serverName={credentials.serverName} />
             </Page.Controls>
