@@ -69,6 +69,7 @@ interface PageParameters {
 
 export interface UserListFilters {
   admin?: boolean;
+  guest?: boolean;
   status?: "active" | "locked" | "deactivated";
   search?: string;
 }
@@ -114,6 +115,8 @@ export const usersInfiniteQuery = (
 
       if (parameters.admin !== undefined)
         query["filter[admin]"] = parameters.admin;
+      if (parameters.guest !== undefined)
+        query["filter[legacy-guest]"] = parameters.guest;
       if (parameters.status) query["filter[status]"] = parameters.status;
       if (parameters.search) query["filter[search]"] = parameters.search;
 

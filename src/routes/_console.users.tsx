@@ -50,6 +50,7 @@ import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 const UserSearchParameters = v.object({
   admin: v.optional(v.boolean()),
+  guest: v.optional(v.boolean()),
   status: v.optional(v.picklist(["active", "locked", "deactivated"])),
   search: v.optional(v.string()),
   dir: v.optional(v.picklist(["forward", "backward"])),
@@ -72,6 +73,7 @@ export const Route = createFileRoute("/_console/users")({
 
     const parameters: UserListFilters = {
       ...(search.admin !== undefined && { admin: search.admin }),
+      ...(search.guest !== undefined && { guest: search.guest }),
       ...(search.status && { status: search.status }),
       ...(search.search && { search: search.search }),
     };
@@ -346,6 +348,7 @@ function RouteComponent() {
 
   const parameters: UserListFilters = {
     ...(search.admin !== undefined && { admin: search.admin }),
+    ...(search.guest !== undefined && { guest: search.guest }),
     ...(search.status && { status: search.status }),
     ...(search.search && { search: search.search }),
   };
@@ -425,6 +428,10 @@ function RouteComponent() {
 
           if (user.attributes.locked_at) {
             return <Badge kind="grey">Locked</Badge>;
+          }
+
+          if (user.attributes.legacy_guest) {
+            return <Badge kind="grey">Guest</Badge>;
           }
 
           if (user.attributes.admin) {
@@ -552,7 +559,7 @@ function RouteComponent() {
                             },
                     });
                   }}
-                  label="Oldest first"
+                  label="Newest first"
                   checked={search.dir === "backward"}
                 />
                 <CheckboxMenuItem
@@ -570,6 +577,38 @@ function RouteComponent() {
                   }}
                   label="Admins"
                   checked={search.admin === true}
+                />
+                <CheckboxMenuItem
+                  onSelect={(event) => {
+                    event.preventDefault();
+                    navigate({
+                      search:
+                        search.guest === true
+                          ? omit(search, ["guest"])
+                          : {
+                              ...search,
+                              guest: true,
+                            },
+                    });
+                  }}
+                  label="Guests (legacy)"
+                  checked={search.guest === true}
+                />
+                <CheckboxMenuItem
+                  onSelect={(event) => {
+                    event.preventDefault();
+                    navigate({
+                      search:
+                        search.guest === false
+                          ? omit(search, ["guest"])
+                          : {
+                              ...search,
+                              guest: false,
+                            },
+                    });
+                  }}
+                  label="Non-guests (legacy)"
+                  checked={search.guest === false}
                 />
                 <CheckboxMenuItem
                   onSelect={(event) => {
