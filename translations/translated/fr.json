@@ -317,29 +317,32 @@
   "pages.users.reactivate_account.success": {
     "message": "Compte débloqué"
   },
+  "pages.users.search_placeholder": {
+    "message": "Rechercher des utilisateurs…"
+  },
   "pages.users.set_admin.alert.description": {
-    "message": "The user will be able to view user data and make changes to user and room permissions."
+    "message": "L'utilisateur pourra voir les données de tous les utilisateurs et modifier les autorisations des utilisateurs et des salons."
   },
   "pages.users.set_admin.alert.title": {
-    "message": "User will have access to sensitive data"
+    "message": "L'utilisateur aura accès à des données sensibles"
   },
   "pages.users.set_admin.error": {
-    "message": "Failed to change admin privileges for {mxid}"
+    "message": "Impossible de changer les droits d'administration pour {mxid}"
   },
   "pages.users.set_admin.label": {
-    "message": "Admin"
+    "message": "Administrateur"
   },
   "pages.users.set_admin.make_admin_button": {
-    "message": "Make admin"
+    "message": "Donner les droits d'administration"
   },
   "pages.users.set_admin.successfully_demoted": {
-    "message": "{mxid} no longer has admin privileges"
+    "message": "{mxid} n'a plus les droits d'administration"
   },
   "pages.users.set_admin.successfully_promoted": {
-    "message": "{mxid} now has admin privileges"
+    "message": "{mxid} a maintenant les droits d'administration"
   },
   "pages.users.set_admin.title": {
-    "message": "Make this user an admin?"
+    "message": "Donner les droits d'administration à cet utilisateur ?"
   },
   "pages.users.set_password.button": {
     "message": "Changer le mot de passe"
@@ -390,7 +393,7 @@
     "message": "Element"
   },
   "product.title": {
-    "message": "Element Server Suite"
+    "message": "Element Admin"
   },
   "product.title.community": {
     "message": "Element Community"

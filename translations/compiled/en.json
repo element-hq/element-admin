@@ -745,6 +745,12 @@
       "value": "Account reactivated"
     }
   ],
+  "pages.users.search_placeholder": [
+    {
+      "type": 0,
+      "value": "Search users…"
+    }
+  ],
   "pages.users.set_admin.alert.description": [
     {
       "type": 0,
@@ -938,7 +944,7 @@
   "product.title": [
     {
       "type": 0,
-      "value": "Element Server Suite"
+      "value": "Element Admin"
     }
   ],
   "product.title.community": [

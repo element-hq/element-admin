@@ -745,22 +745,28 @@
       "value": "Compte débloqué"
     }
   ],
+  "pages.users.search_placeholder": [
+    {
+      "type": 0,
+      "value": "Rechercher des utilisateurs…"
+    }
+  ],
   "pages.users.set_admin.alert.description": [
     {
       "type": 0,
-      "value": "The user will be able to view user data and make changes to user and room permissions."
+      "value": "L'utilisateur pourra voir les données de tous les utilisateurs et modifier les autorisations des utilisateurs et des salons."
     }
   ],
   "pages.users.set_admin.alert.title": [
     {
       "type": 0,
-      "value": "User will have access to sensitive data"
+      "value": "L'utilisateur aura accès à des données sensibles"
     }
   ],
   "pages.users.set_admin.error": [
     {
       "type": 0,
-      "value": "Failed to change admin privileges for "
+      "value": "Impossible de changer les droits d'administration pour "
     },
     {
       "type": 1,
@@ -770,13 +776,13 @@
   "pages.users.set_admin.label": [
     {
       "type": 0,
-      "value": "Admin"
+      "value": "Administrateur"
     }
   ],
   "pages.users.set_admin.make_admin_button": [
     {
       "type": 0,
-      "value": "Make admin"
+      "value": "Donner les droits d'administration"
     }
   ],
   "pages.users.set_admin.successfully_demoted": [
@@ -786,7 +792,7 @@
     },
     {
       "type": 0,
-      "value": " no longer has admin privileges"
+      "value": " n'a plus les droits d'administration"
     }
   ],
   "pages.users.set_admin.successfully_promoted": [
@@ -796,13 +802,13 @@
     },
     {
       "type": 0,
-      "value": " now has admin privileges"
+      "value": " a maintenant les droits d'administration"
     }
   ],
   "pages.users.set_admin.title": [
     {
       "type": 0,
-      "value": "Make this user an admin?"
+      "value": "Donner les droits d'administration à cet utilisateur ?"
     }
   ],
   "pages.users.set_password.button": [
@@ -938,7 +944,7 @@
   "product.title": [
     {
       "type": 0,
-      "value": "Element Server Suite"
+      "value": "Element Admin"
     }
   ],
   "product.title.community": [
