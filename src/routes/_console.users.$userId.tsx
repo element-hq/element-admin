@@ -35,6 +35,7 @@ import {
   unlockUser,
   userEmailsQuery,
   userQuery,
+  siteConfigQuery,
 } from "@/api/mas";
 import { profileQuery, wellKnownQuery } from "@/api/matrix";
 import * as Data from "@/components/data";
@@ -51,6 +52,9 @@ export const Route = createFileRoute("/_console/users/$userId")({
     const emailPromise = queryClient.ensureQueryData(
       userEmailsQuery(credentials.serverName, params.userId),
     );
+    const siteConfigPromise = queryClient.ensureQueryData(
+      siteConfigQuery(credentials.serverName),
+    );
     const userPromise = queryClient.ensureQueryData(
       userQuery(credentials.serverName, params.userId),
     );
@@ -63,6 +67,7 @@ export const Route = createFileRoute("/_console/users/$userId")({
     const mxid = `@${user.attributes.username}:${credentials.serverName}`;
     await queryClient.ensureQueryData(profileQuery(synapseRoot, mxid));
     await emailPromise;
+    await siteConfigPromise;
   },
   component: RouteComponent,
 });
@@ -884,6 +889,10 @@ function RouteComponent() {
     userEmailsQuery(credentials.serverName, userId),
   );
 
+  const { data: siteConfig } = useSuspenseQuery(
+    siteConfigQuery(credentials.serverName),
+  );
+
   const deactivated = user.attributes.deactivated_at !== null;
   const locked = user.attributes.locked_at !== null;
 
@@ -955,7 +964,7 @@ function RouteComponent() {
             />
           )}
 
-          {!deactivated && (
+          {siteConfig.password_login_enabled && !deactivated && (
             <SetPasswordButton
               user={user}
               serverName={credentials.serverName}

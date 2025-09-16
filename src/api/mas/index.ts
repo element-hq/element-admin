@@ -95,6 +95,16 @@ export interface EditTokenParameters {
 // FIXME: pagination direction is temporary until MAS gets proper ordering in the API
 type PaginationDirection = "forward" | "backward";
 
+export const siteConfigQuery = (serverName: string) =>
+  queryOptions({
+    queryKey: ["mas", "site-config", serverName],
+    queryFn: async ({ client, signal }) => {
+      return await api.siteConfig({
+        ...(await masBaseOptions(client, serverName, signal)),
+      });
+    },
+  });
+
 export const usersInfiniteQuery = (
   serverName: string,
   parameters: UserListFilters = {},
