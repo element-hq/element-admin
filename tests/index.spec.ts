@@ -10,7 +10,7 @@ test.describe("homepage", () => {
   });
 
   test("should have a title", async ({ page }) => {
-    await expect(page).toHaveTitle("Login");
+    await expect(page).toHaveTitle("Login • Element Admin");
   });
 
   test("should match screenshot", { tag: "@screenshot" }, async ({ page }) => {
