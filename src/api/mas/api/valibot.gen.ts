@@ -2,6 +2,27 @@
 
 import * as v from "valibot";
 
+export const vSiteConfig = v.object({
+  server_name: v.string(),
+  password_login_enabled: v.boolean(),
+  password_registration_enabled: v.boolean(),
+  registration_token_required: v.boolean(),
+  email_change_allowed: v.boolean(),
+  displayname_change_allowed: v.boolean(),
+  password_change_allowed: v.boolean(),
+  account_recovery_allowed: v.boolean(),
+  account_deactivation_allowed: v.boolean(),
+  captcha_enabled: v.boolean(),
+  minimum_password_complexity: v.pipe(
+    v.number(),
+    v.integer(),
+    v.minValue(0, "Invalid value: Expected uint8 to be >= 0"),
+    v.maxValue(255, "Invalid value: Expected uint8 to be <= 2^8-1"),
+    v.minValue(0),
+    v.maxValue(4),
+  ),
+});
+
 /**
  * ULID
  * A ULID as per https://github.com/ulid/spec
@@ -222,6 +243,8 @@ export const vUserStatus = v.picklist(["active", "locked", "deactivated"]);
 
 export const vUserFilter = v.object({
   "filter[admin]": v.optional(v.union([v.boolean(), v.null()])),
+  "filter[legacy-guest]": v.optional(v.union([v.boolean(), v.null()])),
+  "filter[search]": v.optional(v.union([v.string(), v.null()])),
   "filter[status]": v.optional(vUserStatus),
 });
 
@@ -238,6 +261,7 @@ export const vUser = v.object({
     v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
   ),
   admin: v.boolean(),
+  legacy_guest: v.optional(v.boolean()),
 });
 
 /**
@@ -577,6 +601,14 @@ export const vSingleResponseForUpstreamOAuthLink = v.object({
   links: vSelfLinks,
 });
 
+export const vSiteConfigData = v.object({
+  body: v.optional(v.never()),
+  path: v.optional(v.never()),
+  query: v.optional(v.never()),
+});
+
+export const vSiteConfigResponse = vSiteConfig;
+
 export const vListCompatSessionsData = v.object({
   body: v.optional(v.never()),
   path: v.optional(v.never()),
@@ -705,6 +737,8 @@ export const vListUsersData = v.object({
         v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
       ),
       "filter[admin]": v.optional(v.union([v.boolean(), v.null()])),
+      "filter[legacy-guest]": v.optional(v.union([v.boolean(), v.null()])),
+      "filter[search]": v.optional(v.union([v.string(), v.null()])),
       "filter[status]": v.optional(vUserStatus),
     }),
   ),

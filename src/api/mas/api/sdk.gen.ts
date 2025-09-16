@@ -4,6 +4,8 @@ import * as v from "valibot";
 
 import type { Options as ClientOptions, Client, TDataShape } from "./client";
 import type {
+  SiteConfigData,
+  SiteConfigResponses,
   ListCompatSessionsData,
   ListCompatSessionsResponses,
   ListCompatSessionsErrors,
@@ -102,6 +104,8 @@ import type {
   GetUpstreamOAuthLinkErrors,
 } from "./types.gen";
 import {
+  vSiteConfigData,
+  vSiteConfigResponse,
   vListCompatSessionsData,
   vListCompatSessionsResponse,
   vGetCompatSessionData,
@@ -185,6 +189,33 @@ export type Options<
    * used to access values that aren't defined as part of the SDK function.
    */
   meta?: Record<string, unknown>;
+};
+
+/**
+ * Get informations about the configuration of this MAS instance
+ */
+export const siteConfig = <ThrowOnError extends boolean = true>(
+  options: Options<SiteConfigData, ThrowOnError>,
+) => {
+  return options.client.get<SiteConfigResponses, unknown, ThrowOnError, "data">(
+    {
+      requestValidator: async (data) => {
+        return await v.parseAsync(vSiteConfigData, data);
+      },
+      responseValidator: async (data) => {
+        return await v.parseAsync(vSiteConfigResponse, data);
+      },
+      responseStyle: "data",
+      security: [
+        {
+          scheme: "bearer",
+          type: "http",
+        },
+      ],
+      url: "/api/admin/v1/site-config",
+      ...options,
+    },
+  );
 };
 
 /**
