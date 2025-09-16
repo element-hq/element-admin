@@ -317,6 +317,9 @@
   "pages.users.reactivate_account.success": {
     "message": "Konto reaktiviert"
   },
+  "pages.users.search_placeholder": {
+    "message": "Nutzer suchen..."
+  },
   "pages.users.set_admin.alert.description": {
     "message": "Der Nutzer kann Nutzerdaten einsehen und Änderungen an Nutzer- und Chat-Berechtigungen vornehmen."
   },
@@ -390,7 +393,7 @@
     "message": "Element"
   },
   "product.title": {
-    "message": "Element Server Suite"
+    "message": "Element Admin"
   },
   "product.title.community": {
     "message": "Element Community"

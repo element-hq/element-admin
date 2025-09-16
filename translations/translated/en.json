@@ -317,6 +317,9 @@
   "pages.users.reactivate_account.success": {
     "message": "Account reactivated"
   },
+  "pages.users.search_placeholder": {
+    "message": "Search users…"
+  },
   "pages.users.set_admin.alert.description": {
     "message": "The user will be able to view user data and make changes to user and room permissions."
   },
@@ -390,7 +393,7 @@
     "message": "Element"
   },
   "product.title": {
-    "message": "Element Server Suite"
+    "message": "Element Admin"
   },
   "product.title.community": {
     "message": "Element Community"
