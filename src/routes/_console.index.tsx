@@ -15,6 +15,7 @@ import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import AppFooter from "@/ui/footer";
 import AppNavigation from "@/ui/navigation";
+import type { WithBreadcrumbEntry } from "@/utils/breadcrumbs";
 
 const ReleaseNotes = lazy(() => import("@/components/gfm"));
 
@@ -48,12 +49,11 @@ export const Route = createFileRoute("/_console/")({
     import("@/components/gfm");
 
     return {
-      title: intl.formatMessage(titleMessage),
-    };
+      breadcrumb: {
+        name: intl.formatMessage(titleMessage),
+      },
+    } satisfies WithBreadcrumbEntry;
   },
-  head: ({ loaderData }) => ({
-    meta: [loaderData ? { title: loaderData.title } : {}],
-  }),
   component: RouteComponent,
 });
 

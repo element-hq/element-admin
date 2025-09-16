@@ -26,6 +26,7 @@ import { ElementLogo } from "@/components/logo";
 import * as messages from "@/messages";
 import { useAuthStore } from "@/stores/auth";
 import { useImageBlob } from "@/utils/blob";
+import type { WithBreadcrumbEntry } from "@/utils/breadcrumbs";
 
 interface TokenViewProps {
   token: string;
@@ -66,6 +67,12 @@ export const Route = createFileRoute("/_console")({
       profileQuery(synapseRoot, whoami.user_id),
     );
     await essVersionPromise;
+
+    return {
+      breadcrumb: {
+        name: credentials.serverName,
+      },
+    } satisfies WithBreadcrumbEntry;
   },
 
   component: RouteComponent,

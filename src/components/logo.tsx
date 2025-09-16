@@ -270,7 +270,7 @@ export const EssLogotypeVertical: React.FC = () => {
   const intl = useIntl();
   const title = intl.formatMessage({
     id: "product.title",
-    defaultMessage: "Element Server Suite",
+    defaultMessage: "Element Admin",
     description: "The main name of the admin console",
   });
   return (

@@ -30,6 +30,7 @@ import { RoomAvatar, RoomDisplayName } from "@/components/room-info";
 import * as Table from "@/components/table";
 import AppFooter from "@/ui/footer";
 import AppNavigation from "@/ui/navigation";
+import type { WithBreadcrumbEntry } from "@/utils/breadcrumbs";
 
 const RoomSearchParameters = v.object({
   search_term: v.optional(v.string()),
@@ -69,13 +70,11 @@ export const Route = createFileRoute("/_console/rooms")({
     );
 
     return {
-      title: intl.formatMessage(titleMessage),
-    };
+      breadcrumb: {
+        name: intl.formatMessage(titleMessage),
+      },
+    } satisfies WithBreadcrumbEntry;
   },
-
-  head: ({ loaderData }) => ({
-    meta: [loaderData ? { title: loaderData.title } : {}],
-  }),
 
   pendingComponent: () => (
     <Navigation.Root>

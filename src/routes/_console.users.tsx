@@ -46,6 +46,7 @@ import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
 import AppNavigation from "@/ui/navigation";
 import { useImageBlob } from "@/utils/blob";
+import type { WithBreadcrumbEntry } from "@/utils/breadcrumbs";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 const UserSearchParameters = v.object({
@@ -83,13 +84,11 @@ export const Route = createFileRoute("/_console/users")({
     );
 
     return {
-      title: intl.formatMessage(titleMessage),
-    };
+      breadcrumb: {
+        name: intl.formatMessage(titleMessage),
+      },
+    } satisfies WithBreadcrumbEntry;
   },
-
-  head: ({ loaderData }) => ({
-    meta: [loaderData ? { title: loaderData.title } : {}],
-  }),
 
   pendingComponent: () => (
     <Navigation.Root>

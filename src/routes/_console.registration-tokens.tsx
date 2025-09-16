@@ -51,6 +51,7 @@ import * as Table from "@/components/table";
 import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
 import AppNavigation from "@/ui/navigation";
+import type { WithBreadcrumbEntry } from "@/utils/breadcrumbs";
 import {
   computeHumanReadableDateTimeStringFromUtc,
   computeUtcIsoStringFromLocal,
@@ -91,12 +92,11 @@ export const Route = createFileRoute("/_console/registration-tokens")({
     );
 
     return {
-      title: intl.formatMessage(titleMessage),
-    };
+      breadcrumb: {
+        name: intl.formatMessage(titleMessage),
+      },
+    } satisfies WithBreadcrumbEntry;
   },
-  head: ({ loaderData }) => ({
-    meta: [loaderData ? { title: loaderData.title } : {}],
-  }),
 
   pendingComponent: () => (
     <Navigation.Root>

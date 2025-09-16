@@ -9,18 +9,19 @@ import { wellKnownQuery } from "@/api/matrix";
 import config from "@/config";
 import { CLIENT_METADATA, REDIRECT_URI } from "@/constants";
 import { useAuthStore } from "@/stores/auth";
+import type { WithBreadcrumbEntry } from "@/utils/breadcrumbs";
 
 export const Route = createFileRoute("/_auth/login/")({
-  loader: ({ context: { intl } }) => ({
-    title: intl.formatMessage({
-      id: "pages.login.title",
-      description: "Title for the login page",
-      defaultMessage: "Login",
-    }),
-  }),
-  head: ({ loaderData }) => ({
-    meta: loaderData ? [{ title: loaderData.title }] : undefined,
-  }),
+  loader: ({ context: { intl } }) =>
+    ({
+      breadcrumb: {
+        name: intl.formatMessage({
+          id: "pages.login.title",
+          description: "Title for the login page",
+          defaultMessage: "Login",
+        }),
+      },
+    }) satisfies WithBreadcrumbEntry,
   component: RouteComponent,
 });
 

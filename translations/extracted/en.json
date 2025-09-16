@@ -525,7 +525,7 @@
   },
   "product.title": {
     "description": "The main name of the admin console",
-    "message": "Element Server Suite"
+    "message": "Element Admin"
   },
   "product.title.community": {
     "description": "The main name of the admin console, the Community variant",
