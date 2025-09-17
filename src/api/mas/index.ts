@@ -98,10 +98,31 @@ type PaginationDirection = "forward" | "backward";
 export const siteConfigQuery = (serverName: string) =>
   queryOptions({
     queryKey: ["mas", "site-config", serverName],
-    queryFn: async ({ client, signal }) => {
-      return await api.siteConfig({
-        ...(await masBaseOptions(client, serverName, signal)),
-      });
+    queryFn: async ({ client, signal }): Promise<api.SiteConfig> => {
+      try {
+        return await api.siteConfig({
+          ...(await masBaseOptions(client, serverName, signal)),
+        });
+      } catch (error) {
+        console.warn(
+          "Site-config query failed, this is likely because of talking to an older version of MAS, ignoring",
+          error,
+        );
+        // Fallback to a vaguely sensible config where everything is enabled
+        return {
+          account_deactivation_allowed: true,
+          account_recovery_allowed: true,
+          captcha_enabled: true,
+          displayname_change_allowed: true,
+          email_change_allowed: true,
+          minimum_password_complexity: 3,
+          password_change_allowed: true,
+          password_login_enabled: true,
+          password_registration_enabled: true,
+          registration_token_required: true,
+          server_name: serverName,
+        };
+      }
     },
   });
 
