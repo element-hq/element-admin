@@ -26,7 +26,7 @@ export const essVersionQuery = (synapseRoot: string) =>
           signal,
         });
 
-        if (response.ok) {
+        if (!response.ok) {
           throw new Error("/_synapse/ess/version returned an error");
         }
 
