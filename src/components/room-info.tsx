@@ -44,14 +44,20 @@ const useRoomName = (
   roomId: string,
 ): string => {
   const intl = useIntl();
-  const { data: members } = useQuery({
+  const { data } = useQuery({
     ...roomMembersQuery(synapseRoot, roomId),
-    initialData: {
-      members: [],
-      total: membersCount,
-    },
     enabled: !roomName,
   });
+  // Fill our own placeholder data if we haven't loaded them yet
+  // This is because:
+  //
+  //  - initialData is a bad fit, as it ends up in the cache
+  //    and won't trigger a fetch on mount
+  //  - placeholderData still means the data is nullable
+  const members = data ?? {
+    members: [],
+    total: membersCount,
+  };
   const fallbackDisplayName = intl.formatMessage({
     id: "room_info.unknown_user",
     defaultMessage: "Unknown user",
@@ -183,14 +189,15 @@ export const RoomAvatar: React.FC<RoomAvatarProps> = ({
   const avatar = useRoomAvatar(synapseRoot, roomId);
   const shouldShowHeroes =
     members > 0 && members <= 2 && !roomName && !roomCanonicalAlias;
-  const { data: membersList } = useQuery({
+  // Fill our own placeholder data if we haven't loaded them yet
+  const { data } = useQuery({
     ...roomMembersQuery(synapseRoot, roomId),
-    initialData: {
-      members: [],
-      total: members,
-    },
     enabled: shouldShowHeroes,
   });
+  const membersList = data ?? {
+    members: [],
+    total: members,
+  };
   // In case we don't have a room avatar, we show up to two user avatars
   const heroes = membersList.members.toSorted().splice(0, 2);
   const displayName = useRoomName(
