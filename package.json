@@ -18,8 +18,8 @@
     "test": "playwright test"
   },
   "dependencies": {
-    "@fontsource/inconsolata": "5.2.7",
-    "@fontsource/inter": "5.2.7",
+    "@fontsource/inconsolata": "5.2.8",
+    "@fontsource/inter": "5.2.8",
     "@formatjs/intl-localematcher": "0.6.1",
     "@js-temporal/polyfill": "0.5.1",
     "@radix-ui/react-dialog": "1.1.15",
