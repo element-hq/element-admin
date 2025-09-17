@@ -19,3 +19,5 @@ FROM ghcr.io/nginx/nginx-unprivileged:1.29.1-alpine
 COPY --from=builder /app/dist /dist
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 COPY docker/replace-config.sh /docker-entrypoint.d/replace-config.sh
+
+EXPOSE 8080
