@@ -3,6 +3,8 @@ import type SemVer from "semver/classes/semver";
 import parseSemver from "semver/functions/parse";
 import * as v from "valibot";
 
+import { accessToken } from "@/stores/auth";
+
 const VersionResponse = v.object({
   version: v.fallback(
     v.nullable(
@@ -19,10 +21,18 @@ const VersionResponse = v.object({
 export const essVersionQuery = (synapseRoot: string) =>
   queryOptions({
     queryKey: ["ess", "version", synapseRoot],
-    queryFn: async ({ signal }) => {
+    queryFn: async ({ client, signal }) => {
       const versionUrl = new URL("/_synapse/ess/version", synapseRoot);
       try {
+        const token = await accessToken(client, signal);
+        if (!token) {
+          throw new Error("No access token");
+        }
+
         const response = await fetch(versionUrl, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
           signal,
         });
 
