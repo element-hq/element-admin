@@ -30,10 +30,22 @@ export const actionRetry = defineMessage({
   description: "Label for a retry action/button",
 });
 
+export const actionRemove = defineMessage({
+  id: "action.remove",
+  defaultMessage: "Remove",
+  description: "Label for the remove action/button",
+});
+
 export const actionSignOut = defineMessage({
   id: "action.sign_out",
   defaultMessage: "Sign out",
   description: "Label for the sign out menu item",
+});
+
+export const commonEmailAddress = defineMessage({
+  id: "common.email_address",
+  defaultMessage: "Email address",
+  description: "Label for an email address",
 });
 
 export const commonFilter = defineMessage({

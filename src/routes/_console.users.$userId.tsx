@@ -7,19 +7,21 @@ import {
 } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  LockIcon,
-  DeleteIcon,
   CheckCircleIcon,
-  KeyIcon,
   CloseIcon,
+  DeleteIcon,
+  KeyIcon,
+  LockIcon,
+  PlusIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
+  Alert,
   Badge,
   Button,
-  Text,
-  InlineSpinner,
-  Alert,
   Form,
+  InlineSpinner,
+  Separator,
+  Text,
   Tooltip,
 } from "@vector-im/compound-web";
 import { useCallback, useRef, useState } from "react";
@@ -28,15 +30,25 @@ import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
 import {
   deactivateUser,
+  deleteUpstreamOAuthLink,
   lockUser,
   reactivateUser,
-  setUserPassword,
   setUserCanRequestAdmin,
+  setUserPassword,
+  siteConfigQuery,
   unlockUser,
   userEmailsQuery,
   userQuery,
-  siteConfigQuery,
+  userUpstreamLinksQuery,
+  deleteUserEmail,
+  addUserEmail,
+  addUpstreamOAuthLink,
 } from "@/api/mas";
+import type {
+  Ulid,
+  UpstreamOAuthLink,
+  UserEmail,
+} from "@/api/mas/api";
 import { profileQuery, wellKnownQuery } from "@/api/matrix";
 import * as Data from "@/components/data";
 import * as Dialog from "@/components/dialog";
@@ -48,9 +60,12 @@ import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 export const Route = createFileRoute("/_console/users/$userId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
-    // Fire the email query as soon as possible without awaiting it
+    // Fire the queries as soon as possible without awaiting it
     const emailPromise = queryClient.ensureQueryData(
       userEmailsQuery(credentials.serverName, params.userId),
+    );
+    const upstreamLinksPromise = queryClient.ensureQueryData(
+      userUpstreamLinksQuery(credentials.serverName, params.userId),
     );
     const siteConfigPromise = queryClient.ensureQueryData(
       siteConfigQuery(credentials.serverName),
@@ -67,6 +82,7 @@ export const Route = createFileRoute("/_console/users/$userId")({
     const mxid = `@${user.attributes.username}:${credentials.serverName}`;
     await queryClient.ensureQueryData(profileQuery(synapseRoot, mxid));
     await emailPromise;
+    await upstreamLinksPromise;
     await siteConfigPromise;
   },
   component: RouteComponent,
@@ -866,6 +882,486 @@ function SetPasswordButton({
   );
 }
 
+interface UpstreamLinkListItemProps {
+  serverName: string;
+  mxid: string;
+  id: Ulid;
+  attributes: UpstreamOAuthLink;
+}
+
+function UpstreamLinkListItem({
+  serverName,
+  mxid,
+  id,
+  attributes,
+}: UpstreamLinkListItemProps) {
+  const queryClient = useQueryClient();
+  const intl = useIntl();
+  const { mutate, isPending } = useMutation({
+    mutationFn: (linkId: Ulid) =>
+      deleteUpstreamOAuthLink(queryClient, serverName, linkId),
+    onError: () => {
+      toast.error(
+        intl.formatMessage({
+          id: "pages.users.delete_upstream_link.error",
+          defaultMessage: "Failed to delete upstream link",
+          description: "The error message for deleting an upstream link",
+        }),
+      );
+    },
+    onSuccess: async (): Promise<void> => {
+      toast.success(
+        intl.formatMessage({
+          id: "pages.users.delete_upstream_link.success",
+          defaultMessage: "Upstream link deleted",
+          description: "The success message for deleting an upstream link",
+        }),
+      );
+      await queryClient.invalidateQueries({
+        queryKey: [
+          "mas",
+          "user-upstream-links",
+          serverName,
+          attributes.user_id,
+        ],
+      });
+    },
+  });
+
+  const onClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      mutate(id);
+    },
+    [mutate, id],
+  );
+
+  return (
+    <Data.Item>
+      <Data.Title>Upstream account</Data.Title>
+      {attributes.human_account_name && (
+        <Data.Value>{attributes.human_account_name}</Data.Value>
+      )}
+      <Data.Value>ID: {attributes.subject}</Data.Value>
+      <Data.Value>Provider: {attributes.provider_id}</Data.Value>
+      <Dialog.Root
+        trigger={
+          <Button
+            destructive
+            kind="tertiary"
+            size="sm"
+            className="self-stretch"
+          >
+            <FormattedMessage {...messages.actionRemove} />
+          </Button>
+        }
+      >
+        <Dialog.Title>
+          <FormattedMessage
+            id="pages.users.delete_upstream_link.title"
+            defaultMessage="Remove link with upstream account?"
+            description="The title of the modal asking for confirmation to delete an upstream account link"
+          />
+        </Dialog.Title>
+        <Dialog.Description>
+          <FormattedMessage
+            id="pages.users.delete_upstream_link.description"
+            defaultMessage="Are you sure you want to remove the link between this user ({mxid}) with this upstream account ({subject})?"
+            description="The description of the modal asking for confirmation to delete an upstream link"
+            values={{
+              mxid,
+              subject: attributes.subject,
+            }}
+          />
+        </Dialog.Description>
+        <Button kind="primary" destructive onClick={onClick}>
+          {isPending && <InlineSpinner />}
+          <FormattedMessage {...messages.actionRemove} />
+        </Button>
+        <Dialog.Close asChild>
+          <Button kind="tertiary">
+            <FormattedMessage {...messages.actionCancel} />
+          </Button>
+        </Dialog.Close>
+      </Dialog.Root>
+    </Data.Item>
+  );
+}
+
+interface UpstreamLinksListProps {
+  userId: string;
+  mxid: string;
+  serverName: string;
+}
+function UpstreamLinksList({
+  userId,
+  mxid,
+  serverName,
+}: UpstreamLinksListProps) {
+  const intl = useIntl();
+  const queryClient = useQueryClient();
+  const [open, setOpen] = useState(false);
+
+  const { data: upstreamLinksData } = useSuspenseQuery(
+    userUpstreamLinksQuery(serverName, userId),
+  );
+
+  // TODO: handle error message from the server
+  const { mutate, isPending } = useMutation({
+    mutationFn: ({
+      providerId,
+      subject,
+    }: {
+      providerId: string;
+      subject: string;
+    }) =>
+      addUpstreamOAuthLink(
+        queryClient,
+        serverName,
+        userId,
+        providerId,
+        subject,
+      ),
+    onError: () => {
+      toast.error(
+        intl.formatMessage({
+          id: "pages.users.add_upstream_link.error",
+          defaultMessage: "Failed to add link upstream account",
+          description: "The error message for adding an upstream link",
+        }),
+      );
+    },
+    onSuccess: async (): Promise<void> => {
+      toast.success(
+        intl.formatMessage({
+          id: "pages.users.add_upstream_link.success",
+          defaultMessage: "Link to upstream account added",
+          description: "The success message for adding an upstream link",
+        }),
+      );
+      await queryClient.invalidateQueries({
+        queryKey: ["mas", "user-upstream-links", serverName, userId],
+      });
+      setOpen(false);
+    },
+  });
+
+  const onSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const subject = data.get("subject") as string;
+      const providerId = data.get("providerId") as string;
+      mutate({ providerId, subject });
+    },
+    [mutate],
+  );
+
+  return (
+    <>
+      {upstreamLinksData.data.map((link) => (
+        <UpstreamLinkListItem
+          key={link.id}
+          mxid={mxid}
+          serverName={serverName}
+          {...link}
+        />
+      ))}
+
+      <Dialog.Root
+        open={open}
+        onOpenChange={setOpen}
+        trigger={
+          <Button
+            kind="tertiary"
+            size="sm"
+            Icon={PlusIcon}
+            className="self-stretch"
+          >
+            Add link to upstream account
+          </Button>
+        }
+      >
+        <Dialog.Title>Add link to upstream account</Dialog.Title>
+        <Dialog.Description>
+          Add a link to an upstream account to this user
+        </Dialog.Description>
+        <Form.Root onSubmit={onSubmit}>
+          <Form.Field name="providerId">
+            <Form.Label>Provider ID</Form.Label>
+            <Form.TextControl
+              required
+              type="text"
+              pattern="[0-7][0-9A-HJKMNP-TV-Z]{25}"
+            />
+            <Form.HelpMessage>
+              The upstream provider ID, as specified in the MAS configuration
+            </Form.HelpMessage>
+            <Form.ErrorMessage match="valueMissing">
+              This field is required
+            </Form.ErrorMessage>
+            <Form.ErrorMessage match="patternMismatch">
+              Must be a valid ULID
+            </Form.ErrorMessage>
+          </Form.Field>
+
+          <Form.Field name="subject">
+            <Form.Label>Subject</Form.Label>
+            <Form.TextControl required type="text" />
+            <Form.HelpMessage>
+              The internal ID of the upstream account
+            </Form.HelpMessage>
+            <Form.ErrorMessage match="valueMissing">
+              This field is required
+            </Form.ErrorMessage>
+          </Form.Field>
+
+          <Form.Submit disabled={isPending}>
+            {isPending && <InlineSpinner />}
+            <FormattedMessage {...messages.actionAdd} />
+          </Form.Submit>
+        </Form.Root>
+
+        <Dialog.Close asChild>
+          <Button kind="tertiary">
+            <FormattedMessage {...messages.actionCancel} />
+          </Button>
+        </Dialog.Close>
+      </Dialog.Root>
+    </>
+  );
+}
+
+interface EmailListItemProps {
+  serverName: string;
+  mxid: string;
+  id: Ulid;
+  attributes: UserEmail;
+}
+
+function EmailListItem({
+  serverName,
+  mxid,
+  id,
+  attributes,
+}: EmailListItemProps) {
+  const queryClient = useQueryClient();
+  const intl = useIntl();
+  const { mutate, isPending } = useMutation({
+    mutationFn: (userEmailId: Ulid) =>
+      deleteUserEmail(queryClient, serverName, userEmailId),
+    onError: () => {
+      toast.error(
+        intl.formatMessage({
+          id: "pages.users.delete_email.error",
+          defaultMessage: "Failed to delete email address",
+          description: "The error message for deleting an email address",
+        }),
+      );
+    },
+    onSuccess: async (): Promise<void> => {
+      toast.success(
+        intl.formatMessage({
+          id: "pages.users.delete_email.success",
+          defaultMessage: "Email address deleted",
+          description: "The success message for deleting an email address",
+        }),
+      );
+      await queryClient.invalidateQueries({
+        queryKey: ["mas", "user-emails", serverName, attributes.user_id],
+      });
+    },
+  });
+
+  const onClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      mutate(id);
+    },
+    [mutate, id],
+  );
+
+  return (
+    <Data.Item>
+      <Data.Title>
+        <FormattedMessage {...messages.commonEmailAddress} />
+      </Data.Title>
+      <Data.Value>{attributes.email}</Data.Value>
+      <Dialog.Root
+        trigger={
+          <Button
+            destructive
+            kind="tertiary"
+            size="sm"
+            className="self-stretch"
+          >
+            <FormattedMessage {...messages.actionRemove} />
+          </Button>
+        }
+      >
+        <Dialog.Title>
+          <FormattedMessage
+            id="pages.users.delete_email.title"
+            defaultMessage="Remove email address?"
+            description="The title of the modal asking for confirmation to delete an email address"
+          />
+        </Dialog.Title>
+        <Dialog.Description>
+          <FormattedMessage
+            id="pages.users.delete_email.description"
+            defaultMessage="Are you sure you want to remove this email address ({email}) from this user ({mxid})?"
+            description="The description of the modal asking for confirmation to delete an email address"
+            values={{
+              email: attributes.email,
+              mxid,
+            }}
+          />
+        </Dialog.Description>
+        <Button kind="primary" destructive onClick={onClick}>
+          {isPending && <InlineSpinner />}
+          <FormattedMessage {...messages.actionRemove} />
+        </Button>
+        <Dialog.Close asChild>
+          <Button kind="tertiary">
+            <FormattedMessage {...messages.actionCancel} />
+          </Button>
+        </Dialog.Close>
+      </Dialog.Root>
+    </Data.Item>
+  );
+}
+
+interface EmailsListProps {
+  userId: string;
+  mxid: string;
+  serverName: string;
+}
+function EmailsList({ userId, mxid, serverName }: EmailsListProps) {
+  const intl = useIntl();
+  const queryClient = useQueryClient();
+  const [open, setOpen] = useState(false);
+
+  const { data: emailsData } = useSuspenseQuery(
+    userEmailsQuery(serverName, userId),
+  );
+  // TODO: handle error message from the server
+  const { mutate, isPending } = useMutation({
+    mutationFn: (email: string) =>
+      addUserEmail(queryClient, serverName, userId, email),
+    onError: () => {
+      toast.error(
+        intl.formatMessage({
+          id: "pages.users.add_email.error",
+          defaultMessage: "Failed to add email address",
+          description: "The error message for adding an email address",
+        }),
+      );
+    },
+    onSuccess: async (): Promise<void> => {
+      toast.success(
+        intl.formatMessage({
+          id: "pages.users.add_email.success",
+          defaultMessage: "Email address added",
+          description: "The success message for adding an email address",
+        }),
+      );
+      await queryClient.invalidateQueries({
+        queryKey: ["mas", "user-emails", serverName, userId],
+      });
+      setOpen(false);
+    },
+  });
+
+  const onSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const email = data.get("email") as string;
+      mutate(email);
+    },
+    [mutate],
+  );
+
+  return (
+    <>
+      {emailsData.data.map((emailItem) => (
+        <EmailListItem
+          key={emailItem.id}
+          mxid={mxid}
+          serverName={serverName}
+          {...emailItem}
+        />
+      ))}
+
+      <Dialog.Root
+        open={open}
+        onOpenChange={setOpen}
+        trigger={
+          <Button
+            kind="tertiary"
+            size="sm"
+            Icon={PlusIcon}
+            className="self-stretch"
+          >
+            <FormattedMessage
+              id="pages.users.add_email.button"
+              defaultMessage="Add email address"
+              description="The label of the button for adding an email address to a user"
+            />
+          </Button>
+        }
+      >
+        <Dialog.Title>
+          <FormattedMessage
+            id="pages.users.add_email.title"
+            defaultMessage="Add email address"
+            description="The title of the modal for adding an email address"
+          />
+        </Dialog.Title>
+        <Dialog.Description>
+          <FormattedMessage
+            id="pages.users.add_email.description"
+            defaultMessage="Add an email address to this user"
+            description="The description of the modal for adding an email address"
+          />
+        </Dialog.Description>
+        <Form.Root onSubmit={onSubmit}>
+          <Form.Field name="email">
+            <Form.Label>
+              <FormattedMessage {...messages.commonEmailAddress} />
+            </Form.Label>
+            <Form.TextControl required type="email" />
+            <Form.ErrorMessage match="valueMissing">
+              <FormattedMessage
+                id="pages.users.add_email.error.email_missing"
+                defaultMessage="This field is required"
+                description="Error message for missing email address in the modal for adding an email address"
+              />
+            </Form.ErrorMessage>
+            <Form.ErrorMessage match="typeMismatch">
+              <FormattedMessage
+                id="pages.users.add_email.error.email_invalid"
+                defaultMessage="Invalid email address"
+                description="Error message for invalid email address in the modal for adding an email address"
+              />
+            </Form.ErrorMessage>
+          </Form.Field>
+          <Form.Submit disabled={isPending}>
+            {isPending && <InlineSpinner />}
+            <FormattedMessage {...messages.actionAdd} />
+          </Form.Submit>
+        </Form.Root>
+
+        <Dialog.Close asChild>
+          <Button kind="tertiary">
+            <FormattedMessage {...messages.actionCancel} />
+          </Button>
+        </Dialog.Close>
+      </Dialog.Root>
+    </>
+  );
+}
+
 function RouteComponent() {
   const intl = useIntl();
   const { credentials } = Route.useRouteContext();
@@ -884,10 +1380,6 @@ function RouteComponent() {
 
   const { data: profile } = useQuery(profileQuery(synapseRoot, mxid));
   const displayName = profile?.displayname;
-
-  const { data: emailsData } = useSuspenseQuery(
-    userEmailsQuery(credentials.serverName, userId),
-  );
 
   const { data: siteConfig } = useSuspenseQuery(
     siteConfigQuery(credentials.serverName),
@@ -995,14 +1487,7 @@ function RouteComponent() {
           </Data.Item>
 
           <Data.Item>
-            <Data.Title>Admin Privileges</Data.Title>
-            <Badge kind={user.attributes.admin ? "green" : "grey"}>
-              {user.attributes.admin ? "Admin" : "User"}
-            </Badge>
-          </Data.Item>
-
-          <Data.Item>
-            <Data.Title>Created At</Data.Title>
+            <Data.Title>Created at</Data.Title>
             <Data.Value>
               {computeHumanReadableDateTimeStringFromUtc(
                 user.attributes.created_at,
@@ -1021,18 +1506,21 @@ function RouteComponent() {
             </Data.Item>
           )}
 
-          <Data.Item>
-            <Data.Title>Email Addresses ({emailsData.data.length})</Data.Title>
-            {emailsData.data.length > 0 ? (
-              emailsData.data.map((emailItem) => (
-                <Data.Value key={emailItem.id}>
-                  {emailItem.attributes.email}
-                </Data.Value>
-              ))
-            ) : (
-              <Data.Value>No email addresses found</Data.Value>
-            )}
-          </Data.Item>
+          <Separator />
+
+          <EmailsList
+            mxid={mxid}
+            userId={userId}
+            serverName={credentials.serverName}
+          />
+
+          <Separator />
+
+          <UpstreamLinksList
+            userId={userId}
+            mxid={mxid}
+            serverName={credentials.serverName}
+          />
         </Data.Grid>
       </div>
     </Navigation.Details>

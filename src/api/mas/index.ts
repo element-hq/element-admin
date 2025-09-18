@@ -286,6 +286,78 @@ export const userEmailsQuery = (serverName: string, userId: string) =>
     },
   });
 
+export const deleteUserEmail = async (
+  queryClient: QueryClient,
+  serverName: string,
+  emailId: api.Ulid,
+  signal?: AbortSignal,
+) => {
+  return await api.deleteUserEmail({
+    ...(await masBaseOptions(queryClient, serverName, signal)),
+    path: { id: emailId },
+  });
+};
+
+export const addUserEmail = async (
+  queryClient: QueryClient,
+  serverName: string,
+  userId: api.Ulid,
+  email: string,
+  signal?: AbortSignal,
+) => {
+  return await api.addUserEmail({
+    ...(await masBaseOptions(queryClient, serverName, signal)),
+    body: {
+      email,
+      user_id: userId,
+    },
+  });
+};
+
+export const userUpstreamLinksQuery = (serverName: string, userId: string) =>
+  queryOptions({
+    queryKey: ["mas", "user-upstream-links", serverName, userId],
+    queryFn: async ({ client, signal }) => {
+      return await api.listUpstreamOAuthLinks({
+        ...(await masBaseOptions(client, serverName, signal)),
+        query: {
+          "filter[user]": userId,
+          "page[first]": 10,
+        },
+      });
+    },
+  });
+
+export const deleteUpstreamOAuthLink = async (
+  queryClient: QueryClient,
+  serverName: string,
+  linkId: api.Ulid,
+  signal?: AbortSignal,
+) => {
+  return await api.deleteUpstreamOAuthLink({
+    ...(await masBaseOptions(queryClient, serverName, signal)),
+    path: { id: linkId },
+  });
+};
+
+export const addUpstreamOAuthLink = async (
+  queryClient: QueryClient,
+  serverName: string,
+  userId: api.Ulid,
+  providerId: api.Ulid,
+  subject: string,
+  signal?: AbortSignal,
+) => {
+  return await api.addUpstreamOAuthLink({
+    ...(await masBaseOptions(queryClient, serverName, signal)),
+    body: {
+      user_id: userId,
+      provider_id: providerId,
+      subject,
+    },
+  });
+};
+
 export const unlockUser = async (
   queryClient: QueryClient,
   serverName: string,

@@ -15,6 +15,10 @@
     "description": "Label for a go back action/button",
     "message": "Go back"
   },
+  "action.remove": {
+    "description": "Label for the remove action/button",
+    "message": "Remove"
+  },
   "action.retry": {
     "description": "Label for a retry action/button",
     "message": "Retry"
@@ -22,6 +26,10 @@
   "action.sign_out": {
     "description": "Label for the sign out menu item",
     "message": "Sign out"
+  },
+  "common.email_address": {
+    "description": "Label for an email address",
+    "message": "Email address"
   },
   "common.filter": {
     "description": "Label for a filter section/button",
@@ -331,6 +339,42 @@
     "description": "The title of the rooms list page",
     "message": "Rooms"
   },
+  "pages.users.add_email.button": {
+    "description": "The label of the button for adding an email address to a user",
+    "message": "Add email address"
+  },
+  "pages.users.add_email.description": {
+    "description": "The description of the modal for adding an email address",
+    "message": "Add an email address to this user"
+  },
+  "pages.users.add_email.error": {
+    "description": "The error message for adding an email address",
+    "message": "Failed to add email address"
+  },
+  "pages.users.add_email.error.email_invalid": {
+    "description": "Error message for invalid email address in the modal for adding an email address",
+    "message": "Invalid email address"
+  },
+  "pages.users.add_email.error.email_missing": {
+    "description": "Error message for missing email address in the modal for adding an email address",
+    "message": "This field is required"
+  },
+  "pages.users.add_email.success": {
+    "description": "The success message for adding an email address",
+    "message": "Email address added"
+  },
+  "pages.users.add_email.title": {
+    "description": "The title of the modal for adding an email address",
+    "message": "Add email address"
+  },
+  "pages.users.add_upstream_link.error": {
+    "description": "The error message for adding an upstream link",
+    "message": "Failed to add link upstream account"
+  },
+  "pages.users.add_upstream_link.success": {
+    "description": "The success message for adding an upstream link",
+    "message": "Link to upstream account added"
+  },
   "pages.users.deactivate_account.alert.description": {
     "description": "In the modal to deactivate a user, the description of the alert",
     "message": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
@@ -354,6 +398,38 @@
   "pages.users.deactivate_account.title": {
     "description": "The title of the modal asking for confirmation to deactivate a user account",
     "message": "Deactivate this user?"
+  },
+  "pages.users.delete_email.description": {
+    "description": "The description of the modal asking for confirmation to delete an email address",
+    "message": "Are you sure you want to remove this email address ({email}) from this user ({mxid})?"
+  },
+  "pages.users.delete_email.error": {
+    "description": "The error message for deleting an email address",
+    "message": "Failed to delete email address"
+  },
+  "pages.users.delete_email.success": {
+    "description": "The success message for deleting an email address",
+    "message": "Email address deleted"
+  },
+  "pages.users.delete_email.title": {
+    "description": "The title of the modal asking for confirmation to delete an email address",
+    "message": "Remove email address?"
+  },
+  "pages.users.delete_upstream_link.description": {
+    "description": "The description of the modal asking for confirmation to delete an upstream link",
+    "message": "Are you sure you want to remove the link between this user ({mxid}) with this upstream account ({subject})?"
+  },
+  "pages.users.delete_upstream_link.error": {
+    "description": "The error message for deleting an upstream link",
+    "message": "Failed to delete upstream link"
+  },
+  "pages.users.delete_upstream_link.success": {
+    "description": "The success message for deleting an upstream link",
+    "message": "Upstream link deleted"
+  },
+  "pages.users.delete_upstream_link.title": {
+    "description": "The title of the modal asking for confirmation to delete an upstream account link",
+    "message": "Remove link with upstream account?"
   },
   "pages.users.lock_account.alert.description": {
     "description": "In the modal to lock a user, the description of the alert",
