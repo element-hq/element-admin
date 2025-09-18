@@ -11,11 +11,17 @@
   "action.go_back": {
     "message": "Zurück"
   },
+  "action.remove": {
+    "message": "Remove"
+  },
   "action.retry": {
     "message": "Erneut versuchen"
   },
   "action.sign_out": {
     "message": "Abmelden"
+  },
+  "common.email_address": {
+    "message": "Email address"
   },
   "common.filter": {
     "message": "Filter"
@@ -248,6 +254,33 @@
   "pages.rooms.title": {
     "message": "Chats"
   },
+  "pages.users.add_email.button": {
+    "message": "Add email address"
+  },
+  "pages.users.add_email.description": {
+    "message": "Add an email address to this user"
+  },
+  "pages.users.add_email.error": {
+    "message": "Failed to add email address"
+  },
+  "pages.users.add_email.error.email_invalid": {
+    "message": "Invalid email address"
+  },
+  "pages.users.add_email.error.email_missing": {
+    "message": "This field is required"
+  },
+  "pages.users.add_email.success": {
+    "message": "Email address added"
+  },
+  "pages.users.add_email.title": {
+    "message": "Add email address"
+  },
+  "pages.users.add_upstream_link.error": {
+    "message": "Failed to add link upstream account"
+  },
+  "pages.users.add_upstream_link.success": {
+    "message": "Link to upstream account added"
+  },
   "pages.users.deactivate_account.alert.description": {
     "message": "Der Nutzer wird durch diese Aktion automatisch von allen Geräten abgemeldet, alle Zugriffstoken werden entfernt, alle IDs von Drittanbietern werden gelöscht und die Kontodaten werden dauerhaft gelöscht."
   },
@@ -265,6 +298,30 @@
   },
   "pages.users.deactivate_account.title": {
     "message": "Diesen Nutzer deaktivieren?"
+  },
+  "pages.users.delete_email.description": {
+    "message": "Are you sure you want to remove this email address ({email}) from this user ({mxid})?"
+  },
+  "pages.users.delete_email.error": {
+    "message": "Failed to delete email address"
+  },
+  "pages.users.delete_email.success": {
+    "message": "Email address deleted"
+  },
+  "pages.users.delete_email.title": {
+    "message": "Remove email address?"
+  },
+  "pages.users.delete_upstream_link.description": {
+    "message": "Are you sure you want to remove the link between this user ({mxid}) with this upstream account ({subject})?"
+  },
+  "pages.users.delete_upstream_link.error": {
+    "message": "Failed to delete upstream link"
+  },
+  "pages.users.delete_upstream_link.success": {
+    "message": "Upstream link deleted"
+  },
+  "pages.users.delete_upstream_link.title": {
+    "message": "Remove link with upstream account?"
   },
   "pages.users.lock_account.alert.description": {
     "message": "Dieser Nutzer wird automatisch auf allen angemeldeten Geräten gesperrt und kann sich erst bei neuen Geräten anmelden, wenn diese entsperrt wurden."

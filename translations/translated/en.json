@@ -11,11 +11,17 @@
   "action.go_back": {
     "message": "Go back"
   },
+  "action.remove": {
+    "message": "Remove"
+  },
   "action.retry": {
     "message": "Retry"
   },
   "action.sign_out": {
     "message": "Sign out"
+  },
+  "common.email_address": {
+    "message": "Email address"
   },
   "common.filter": {
     "message": "Filter"
@@ -248,6 +254,33 @@
   "pages.rooms.title": {
     "message": "Rooms"
   },
+  "pages.users.add_email.button": {
+    "message": "Add email address"
+  },
+  "pages.users.add_email.description": {
+    "message": "Add an email address to this user"
+  },
+  "pages.users.add_email.error": {
+    "message": "Failed to add email address"
+  },
+  "pages.users.add_email.error.email_invalid": {
+    "message": "Invalid email address"
+  },
+  "pages.users.add_email.error.email_missing": {
+    "message": "This field is required"
+  },
+  "pages.users.add_email.success": {
+    "message": "Email address added"
+  },
+  "pages.users.add_email.title": {
+    "message": "Add email address"
+  },
+  "pages.users.add_upstream_link.error": {
+    "message": "Failed to add link upstream account"
+  },
+  "pages.users.add_upstream_link.success": {
+    "message": "Link to upstream account added"
+  },
   "pages.users.deactivate_account.alert.description": {
     "message": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
   },
@@ -265,6 +298,30 @@
   },
   "pages.users.deactivate_account.title": {
     "message": "Deactivate this user?"
+  },
+  "pages.users.delete_email.description": {
+    "message": "Are you sure you want to remove this email address ({email}) from this user ({mxid})?"
+  },
+  "pages.users.delete_email.error": {
+    "message": "Failed to delete email address"
+  },
+  "pages.users.delete_email.success": {
+    "message": "Email address deleted"
+  },
+  "pages.users.delete_email.title": {
+    "message": "Remove email address?"
+  },
+  "pages.users.delete_upstream_link.description": {
+    "message": "Are you sure you want to remove the link between this user ({mxid}) with this upstream account ({subject})?"
+  },
+  "pages.users.delete_upstream_link.error": {
+    "message": "Failed to delete upstream link"
+  },
+  "pages.users.delete_upstream_link.success": {
+    "message": "Upstream link deleted"
+  },
+  "pages.users.delete_upstream_link.title": {
+    "message": "Remove link with upstream account?"
   },
   "pages.users.lock_account.alert.description": {
     "message": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."

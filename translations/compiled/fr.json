@@ -23,6 +23,12 @@
       "value": "Retour"
     }
   ],
+  "action.remove": [
+    {
+      "type": 0,
+      "value": "Supprimer"
+    }
+  ],
   "action.retry": [
     {
       "type": 0,
@@ -33,6 +39,12 @@
     {
       "type": 0,
       "value": "Se déconnecter"
+    }
+  ],
+  "common.email_address": [
+    {
+      "type": 0,
+      "value": "Adresse e-mail"
     }
   ],
   "common.filter": [
@@ -599,6 +611,60 @@
       "value": "Salons"
     }
   ],
+  "pages.users.add_email.button": [
+    {
+      "type": 0,
+      "value": "Ajouter une adresse e-mail"
+    }
+  ],
+  "pages.users.add_email.description": [
+    {
+      "type": 0,
+      "value": "Ajouter une adresse e-mail à cet utilisateur"
+    }
+  ],
+  "pages.users.add_email.error": [
+    {
+      "type": 0,
+      "value": "Impossible d'ajouter l'adresse e-mail"
+    }
+  ],
+  "pages.users.add_email.error.email_invalid": [
+    {
+      "type": 0,
+      "value": "Adresse e-mail invalide"
+    }
+  ],
+  "pages.users.add_email.error.email_missing": [
+    {
+      "type": 0,
+      "value": "Ce champ est requis"
+    }
+  ],
+  "pages.users.add_email.success": [
+    {
+      "type": 0,
+      "value": "Adresse e-mail ajoutée"
+    }
+  ],
+  "pages.users.add_email.title": [
+    {
+      "type": 0,
+      "value": "Ajouter une adresse e-mail"
+    }
+  ],
+  "pages.users.add_upstream_link.error": [
+    {
+      "type": 0,
+      "value": "Impossible d'associer le lien vers le compte en amont"
+    }
+  ],
+  "pages.users.add_upstream_link.success": [
+    {
+      "type": 0,
+      "value": "Association vers le compte en amont ajoutée"
+    }
+  ],
   "pages.users.deactivate_account.alert.description": [
     {
       "type": 0,
@@ -633,6 +699,86 @@
     {
       "type": 0,
       "value": "Désactiver cet utilisateur ?"
+    }
+  ],
+  "pages.users.delete_email.description": [
+    {
+      "type": 0,
+      "value": "Êtes-vous sûr de vouloir supprimer cette adresse e-mail ("
+    },
+    {
+      "type": 1,
+      "value": "email"
+    },
+    {
+      "type": 0,
+      "value": ") de cet utilisateur ("
+    },
+    {
+      "type": 1,
+      "value": "mxid"
+    },
+    {
+      "type": 0,
+      "value": ") ?"
+    }
+  ],
+  "pages.users.delete_email.error": [
+    {
+      "type": 0,
+      "value": "Impossible de supprimer l'adresse e-mail"
+    }
+  ],
+  "pages.users.delete_email.success": [
+    {
+      "type": 0,
+      "value": "Adresse e-mail supprimée"
+    }
+  ],
+  "pages.users.delete_email.title": [
+    {
+      "type": 0,
+      "value": "Supprimer l'adresse e-mail ?"
+    }
+  ],
+  "pages.users.delete_upstream_link.description": [
+    {
+      "type": 0,
+      "value": "Êtes-vous sûr de vouloir supprimer l'association entre cet utilisateur ("
+    },
+    {
+      "type": 1,
+      "value": "mxid"
+    },
+    {
+      "type": 0,
+      "value": ") et ce compte en amont ("
+    },
+    {
+      "type": 1,
+      "value": "subject"
+    },
+    {
+      "type": 0,
+      "value": ") ?"
+    }
+  ],
+  "pages.users.delete_upstream_link.error": [
+    {
+      "type": 0,
+      "value": "Impossible de supprimer le l'association de compte"
+    }
+  ],
+  "pages.users.delete_upstream_link.success": [
+    {
+      "type": 0,
+      "value": "Association de compte en amont supprimée"
+    }
+  ],
+  "pages.users.delete_upstream_link.title": [
+    {
+      "type": 0,
+      "value": "Supprimer l'association avec le compte en amont ?"
     }
   ],
   "pages.users.lock_account.alert.description": [
