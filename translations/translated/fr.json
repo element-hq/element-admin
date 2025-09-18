@@ -11,11 +11,17 @@
   "action.go_back": {
     "message": "Retour"
   },
+  "action.remove": {
+    "message": "Supprimer"
+  },
   "action.retry": {
     "message": "Réessayer"
   },
   "action.sign_out": {
     "message": "Se déconnecter"
+  },
+  "common.email_address": {
+    "message": "Adresse e-mail"
   },
   "common.filter": {
     "message": "Filtre"
@@ -248,6 +254,33 @@
   "pages.rooms.title": {
     "message": "Salons"
   },
+  "pages.users.add_email.button": {
+    "message": "Ajouter une adresse e-mail"
+  },
+  "pages.users.add_email.description": {
+    "message": "Ajouter une adresse e-mail à cet utilisateur"
+  },
+  "pages.users.add_email.error": {
+    "message": "Impossible d'ajouter l'adresse e-mail"
+  },
+  "pages.users.add_email.error.email_invalid": {
+    "message": "Adresse e-mail invalide"
+  },
+  "pages.users.add_email.error.email_missing": {
+    "message": "Ce champ est requis"
+  },
+  "pages.users.add_email.success": {
+    "message": "Adresse e-mail ajoutée"
+  },
+  "pages.users.add_email.title": {
+    "message": "Ajouter une adresse e-mail"
+  },
+  "pages.users.add_upstream_link.error": {
+    "message": "Impossible d'associer le lien vers le compte en amont"
+  },
+  "pages.users.add_upstream_link.success": {
+    "message": "Association vers le compte en amont ajoutée"
+  },
   "pages.users.deactivate_account.alert.description": {
     "message": "Cela déconnectera automatiquement l'utilisateur de tous les appareils, invalidera tous les jetons d'accès, supprimera tous les identifiants tiers et effacera définitivement les données de son compte."
   },
@@ -265,6 +298,30 @@
   },
   "pages.users.deactivate_account.title": {
     "message": "Désactiver cet utilisateur ?"
+  },
+  "pages.users.delete_email.description": {
+    "message": "Êtes-vous sûr de vouloir supprimer cette adresse e-mail ({email}) de cet utilisateur ({mxid}) ?"
+  },
+  "pages.users.delete_email.error": {
+    "message": "Impossible de supprimer l'adresse e-mail"
+  },
+  "pages.users.delete_email.success": {
+    "message": "Adresse e-mail supprimée"
+  },
+  "pages.users.delete_email.title": {
+    "message": "Supprimer l'adresse e-mail ?"
+  },
+  "pages.users.delete_upstream_link.description": {
+    "message": "Êtes-vous sûr de vouloir supprimer l'association entre cet utilisateur ({mxid}) et ce compte en amont ({subject}) ?"
+  },
+  "pages.users.delete_upstream_link.error": {
+    "message": "Impossible de supprimer le l'association de compte"
+  },
+  "pages.users.delete_upstream_link.success": {
+    "message": "Association de compte en amont supprimée"
+  },
+  "pages.users.delete_upstream_link.title": {
+    "message": "Supprimer l'association avec le compte en amont ?"
   },
   "pages.users.lock_account.alert.description": {
     "message": "Cet utilisateur sera automatiquement bloqué de tous les appareils sur lesquels il est actuellement connecté et ne pourra pas se connecter à de nouveaux appareils tant qu'ils n'auront pas été déverrouillés."

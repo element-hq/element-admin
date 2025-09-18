@@ -23,6 +23,12 @@
       "value": "Zurück"
     }
   ],
+  "action.remove": [
+    {
+      "type": 0,
+      "value": "Remove"
+    }
+  ],
   "action.retry": [
     {
       "type": 0,
@@ -33,6 +39,12 @@
     {
       "type": 0,
       "value": "Abmelden"
+    }
+  ],
+  "common.email_address": [
+    {
+      "type": 0,
+      "value": "Email address"
     }
   ],
   "common.filter": [
@@ -599,6 +611,60 @@
       "value": "Chats"
     }
   ],
+  "pages.users.add_email.button": [
+    {
+      "type": 0,
+      "value": "Add email address"
+    }
+  ],
+  "pages.users.add_email.description": [
+    {
+      "type": 0,
+      "value": "Add an email address to this user"
+    }
+  ],
+  "pages.users.add_email.error": [
+    {
+      "type": 0,
+      "value": "Failed to add email address"
+    }
+  ],
+  "pages.users.add_email.error.email_invalid": [
+    {
+      "type": 0,
+      "value": "Invalid email address"
+    }
+  ],
+  "pages.users.add_email.error.email_missing": [
+    {
+      "type": 0,
+      "value": "This field is required"
+    }
+  ],
+  "pages.users.add_email.success": [
+    {
+      "type": 0,
+      "value": "Email address added"
+    }
+  ],
+  "pages.users.add_email.title": [
+    {
+      "type": 0,
+      "value": "Add email address"
+    }
+  ],
+  "pages.users.add_upstream_link.error": [
+    {
+      "type": 0,
+      "value": "Failed to add link upstream account"
+    }
+  ],
+  "pages.users.add_upstream_link.success": [
+    {
+      "type": 0,
+      "value": "Link to upstream account added"
+    }
+  ],
   "pages.users.deactivate_account.alert.description": [
     {
       "type": 0,
@@ -633,6 +699,86 @@
     {
       "type": 0,
       "value": "Diesen Nutzer deaktivieren?"
+    }
+  ],
+  "pages.users.delete_email.description": [
+    {
+      "type": 0,
+      "value": "Are you sure you want to remove this email address ("
+    },
+    {
+      "type": 1,
+      "value": "email"
+    },
+    {
+      "type": 0,
+      "value": ") from this user ("
+    },
+    {
+      "type": 1,
+      "value": "mxid"
+    },
+    {
+      "type": 0,
+      "value": ")?"
+    }
+  ],
+  "pages.users.delete_email.error": [
+    {
+      "type": 0,
+      "value": "Failed to delete email address"
+    }
+  ],
+  "pages.users.delete_email.success": [
+    {
+      "type": 0,
+      "value": "Email address deleted"
+    }
+  ],
+  "pages.users.delete_email.title": [
+    {
+      "type": 0,
+      "value": "Remove email address?"
+    }
+  ],
+  "pages.users.delete_upstream_link.description": [
+    {
+      "type": 0,
+      "value": "Are you sure you want to remove the link between this user ("
+    },
+    {
+      "type": 1,
+      "value": "mxid"
+    },
+    {
+      "type": 0,
+      "value": ") with this upstream account ("
+    },
+    {
+      "type": 1,
+      "value": "subject"
+    },
+    {
+      "type": 0,
+      "value": ")?"
+    }
+  ],
+  "pages.users.delete_upstream_link.error": [
+    {
+      "type": 0,
+      "value": "Failed to delete upstream link"
+    }
+  ],
+  "pages.users.delete_upstream_link.success": [
+    {
+      "type": 0,
+      "value": "Upstream link deleted"
+    }
+  ],
+  "pages.users.delete_upstream_link.title": [
+    {
+      "type": 0,
+      "value": "Remove link with upstream account?"
     }
   ],
   "pages.users.lock_account.alert.description": [
