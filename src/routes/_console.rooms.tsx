@@ -5,15 +5,10 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
-import {
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
+import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import type { ColumnDef } from "@tanstack/react-table";
-import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { Badge, CheckboxMenuItem, Text } from "@vector-im/compound-web";
-import { Fragment, useCallback, useEffect, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { defineMessage, FormattedMessage } from "react-intl";
 import * as v from "valibot";
 
@@ -158,7 +153,6 @@ function RouteComponent() {
   );
 
   const totalCount = data.pages[0]?.total_rooms ?? 0;
-  const totalFetched = flatData.length;
 
   // Column definitions
   const columns = useMemo<ColumnDef<Room>[]>(
@@ -257,48 +251,6 @@ function RouteComponent() {
     columns,
     getCoreRowModel: getCoreRowModel(),
     manualSorting: true,
-    debugTable: false,
-  });
-
-  const { rows } = table.getRowModel();
-
-  // Called on scroll to fetch more data as the user scrolls
-  const fetchMoreOnBottomReached = useCallback(() => {
-    if (globalThis.window !== undefined) {
-      const { scrollY, innerHeight } = globalThis.window;
-      const { scrollHeight } = document.documentElement;
-
-      // Once the user has scrolled within 1000px of the bottom, fetch more data
-      if (
-        scrollHeight - scrollY - innerHeight < 1000 &&
-        !isFetching &&
-        hasNextPage &&
-        totalFetched < totalCount
-      ) {
-        fetchNextPage();
-      }
-    }
-  }, [fetchNextPage, isFetching, hasNextPage, totalFetched, totalCount]);
-
-  // Set up scroll listener
-  useEffect(() => {
-    const handleScroll = () => {
-      fetchMoreOnBottomReached();
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    // Check on mount if we need to fetch more
-    fetchMoreOnBottomReached();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [fetchMoreOnBottomReached]);
-
-  const rowVirtualizer = useWindowVirtualizer({
-    count: rows.length,
-    estimateSize: () => 56, // 56px + 1px border
-    overscan: 20,
   });
 
   return (
@@ -399,58 +351,11 @@ function RouteComponent() {
               </Table.Filter>
             </Table.Header>
 
-            <Table.List
-              style={{
-                // 40px is the height of the table header
-                height: `${rowVirtualizer.getTotalSize() + 40}px`,
-              }}
-            >
-              <Table.ListHeader>
-                {table.getHeaderGroups().map((headerGroup) => (
-                  <Fragment key={headerGroup.id}>
-                    {headerGroup.headers.map((header) => (
-                      <Table.ListHeaderCell key={header.id}>
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext(),
-                            )}
-                      </Table.ListHeaderCell>
-                    ))}
-                  </Fragment>
-                ))}
-              </Table.ListHeader>
-
-              <Table.ListBody>
-                {rowVirtualizer.getVirtualItems().map((virtualRow, index) => {
-                  const row = rows[virtualRow.index];
-                  if (!row)
-                    throw new Error("got a virtual row for a non-existing row");
-
-                  return (
-                    <Table.ListRow
-                      key={row.id}
-                      style={{
-                        height: `${virtualRow.size}px`,
-                        transform: `translateY(${
-                          virtualRow.start - index * virtualRow.size
-                        }px)`,
-                      }}
-                    >
-                      {row.getVisibleCells().map((cell) => (
-                        <Table.ListCell key={cell.id}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext(),
-                          )}
-                        </Table.ListCell>
-                      ))}
-                    </Table.ListRow>
-                  );
-                })}
-              </Table.ListBody>
-            </Table.List>
+            <Table.VirtualizedList
+              table={table}
+              canFetchNextPage={hasNextPage && !isFetching}
+              fetchNextPage={fetchNextPage}
+            />
 
             {/* Loading indicator */}
             {isFetching && (

@@ -1,10 +1,21 @@
 import {
-  ChevronDownIcon,
-  FilterIcon,
-} from "@vector-im/compound-design-tokens/assets/web/icons";
+  flexRender,
+  type Cell,
+  type Header as THeader,
+  type Table,
+} from "@tanstack/react-table";
+import { useWindowVirtualizer } from "@tanstack/react-virtual";
+import { FilterIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Menu } from "@vector-im/compound-web";
 import cx from "classnames";
-import { forwardRef, useId, useState } from "react";
+import {
+  forwardRef,
+  Fragment,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
 import * as messages from "@/messages";
@@ -77,112 +88,152 @@ export const FilterButton = forwardRef<
   );
 });
 
-// Table List Container
-type ListProps = React.ComponentProps<"div">;
-export const List = ({ className, children, ...props }: ListProps) => (
-  <div className={cx(styles["list"], className)} {...props}>
-    <table cellSpacing="0" cellPadding="0" className={styles["table"]}>
-      {children}
-    </table>
-  </div>
+interface ListHeaderProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  table: Table<any>;
+}
+const ListHeader = forwardRef<HTMLTableSectionElement, ListHeaderProps>(
+  function ListHeader({ table }, ref) {
+    return (
+      <thead className={styles["thead"]} ref={ref}>
+        <tr className={styles["header-row"]}>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <Fragment key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <ListHeaderCell key={header.id} header={header} />
+              ))}
+            </Fragment>
+          ))}
+        </tr>
+      </thead>
+    );
+  },
 );
 
-// Table Header Section
-type ListHeaderProps = React.ComponentProps<"thead">;
-export const ListHeader = ({
-  className,
-  children,
-  ...props
-}: ListHeaderProps) => (
-  <thead className={cx(styles["thead"], className)} {...props}>
-    <tr className={styles["header-row"]}>{children}</tr>
-  </thead>
+interface ListHeaderCellProps
+  extends Omit<React.ComponentProps<"th">, "children"> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  header: THeader<any, any>;
+}
+const ListHeaderCell = forwardRef<HTMLTableCellElement, ListHeaderCellProps>(
+  function ListHeaderCell({ header, className, ...props }, ref) {
+    return (
+      <th ref={ref} className={cx(styles["header-cell"], className)} {...props}>
+        <div className={styles["header-cell-content"]}>
+          <span className={styles["header-label"]}>
+            {header.isPlaceholder
+              ? null
+              : flexRender(header.column.columnDef.header, header.getContext())}
+          </span>
+        </div>
+      </th>
+    );
+  },
 );
 
-// Table Header Cell
-interface ListHeaderCellProps extends React.ComponentProps<"th"> {
-  sortable?: boolean;
-  sortDirection?: "asc" | "desc";
-  align?: "left" | "center" | "right";
+interface VirtualizedListProps
+  extends Omit<React.ComponentProps<"div">, "children"> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  table: Table<any>;
+  fetchNextPage?: () => void;
+  canFetchNextPage?: boolean;
 }
 
-export const ListHeaderCell = forwardRef<
-  HTMLTableCellElement,
-  ListHeaderCellProps
->(function ListHeaderCell(
-  {
-    children,
-    sortable,
-    sortDirection,
-    align = "left",
-    className,
-    onClick,
-    ...props
-  },
-  ref,
-) {
-  return (
-    <th
-      ref={ref}
-      className={cx(
-        styles["header-cell"],
-        sortable && styles["sortable"],
-        styles[`align-${align}`],
-        className,
-      )}
-      onClick={sortable ? onClick : undefined}
-      {...props}
-    >
-      <div className={styles["header-cell-content"]}>
-        <span className={styles["header-label"]}>{children}</span>
-        {sortable && (
-          <ChevronDownIcon
-            className={cx(
-              styles["sort-icon"],
-              styles[`sort-icon-${sortDirection || "none"}`],
-            )}
-          />
-        )}
-      </div>
-    </th>
-  );
-});
+export const VirtualizedList = forwardRef<HTMLDivElement, VirtualizedListProps>(
+  function VirtualizedList(
+    { fetchNextPage, canFetchNextPage, table, className, style, ...props },
+    ref,
+  ) {
+    // There are behaviours in this component that the react compiler doesn't
+    // handle how we exepct, so we opt out from it
+    "use no memo";
 
-// Table Body
-type ListBodyProps = React.ComponentProps<"tbody">;
-export const ListBody = ({ className, children, ...props }: ListBodyProps) => (
-  <tbody className={cx(styles["tbody"], className)} {...props}>
-    {children}
-  </tbody>
-);
+    const headerRef = useRef<HTMLTableSectionElement | null>(null);
+    const listRef = useRef<HTMLTableSectionElement | null>(null);
+    const { rows } = table.getRowModel();
+    const rowVirtualizer = useWindowVirtualizer({
+      count: rows.length,
+      estimateSize: () => 56,
+      overscan: 5,
+      // Because we're using a window virtualizer, we need to calculate the
+      // offset with the window top. Even though this looks complicated, this
+      // will be relatively stable (unless the window gets resized and layout
+      // shifts), around 300px.
+      // The virtualiser installs a ResizeObserver to look for window resizes,
+      // this component will re-render anyway when the window resizes, so we
+      // don't have to look for that ourselves.
+      scrollMargin:
+        (listRef.current?.getBoundingClientRect().top ?? 0) +
+        globalThis.window.scrollY,
+    });
 
-// Table Row
-type ListRowProps = React.ComponentProps<"tr">;
+    const virtualItems = rowVirtualizer.getVirtualItems();
 
-export const ListRow = forwardRef<HTMLTableRowElement, ListRowProps>(
-  function ListRow({ children, className, ...props }, ref) {
+    useEffect(() => {
+      const lastVirtualItem = virtualItems.at(-1);
+      if (!lastVirtualItem || !fetchNextPage || !canFetchNextPage) return;
+
+      // Start fetching the next page if we're close to the bottom
+      if (lastVirtualItem.index > rows.length - 50) {
+        fetchNextPage();
+      }
+    }, [canFetchNextPage, fetchNextPage, virtualItems, rows]);
+
     return (
-      <tr ref={ref} className={cx(styles["row"], className)} {...props}>
-        {children}
-      </tr>
+      <div
+        className={cx(styles["list"], className)}
+        style={{
+          height: `${rowVirtualizer.getTotalSize() + (headerRef.current?.clientHeight ?? 40)}px`,
+          ...style,
+        }}
+        {...props}
+        ref={ref}
+      >
+        <table cellSpacing="0" cellPadding="0" className={styles["table"]}>
+          <ListHeader table={table} ref={headerRef} />
+          <tbody className={styles["tbody"]} ref={listRef}>
+            {virtualItems.map((virtualRow, index) => {
+              const row = rows[virtualRow.index];
+              if (!row)
+                throw new Error("got a virtual row for a non-existing row");
+
+              return (
+                <tr
+                  key={row.id}
+                  className={styles["row"]}
+                  style={{
+                    height: `${virtualRow.size}px`,
+                    transform: `translateY(${
+                      virtualRow.start -
+                      index * virtualRow.size -
+                      rowVirtualizer.options.scrollMargin
+                    }px)`,
+                  }}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <ListCell key={cell.id} cell={cell} />
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     );
   },
 );
 
 // Table Cell
-interface ListCellProps extends React.ComponentProps<"td"> {
-  align?: "left" | "center" | "right";
+interface ListCellProps extends Omit<React.ComponentProps<"td">, "children"> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  cell: Cell<any, any>;
 }
 
-export const ListCell = forwardRef<HTMLTableCellElement, ListCellProps>(
-  function ListCell({ children, align = "left", className, ...props }, ref) {
+const ListCell = forwardRef<HTMLTableCellElement, ListCellProps>(
+  function ListCell({ cell, className, ...props }, ref) {
     return (
-      <td
-        ref={ref}
-        className={cx(styles["cell"], styles[`align-${align}`], className)}
-        {...props}
-      >
-        {children}
+      <td ref={ref} className={cx(styles["cell"], className)} {...props}>
+        {flexRender(cell.column.columnDef.cell, cell.getContext())}
       </td>
     );
   },
