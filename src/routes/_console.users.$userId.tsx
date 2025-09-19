@@ -44,11 +44,7 @@ import {
   addUserEmail,
   addUpstreamOAuthLink,
 } from "@/api/mas";
-import type {
-  Ulid,
-  UpstreamOAuthLink,
-  UserEmail,
-} from "@/api/mas/api";
+import type { Ulid, UpstreamOAuthLink, UserEmail } from "@/api/mas/api";
 import { profileQuery, wellKnownQuery } from "@/api/matrix";
 import * as Data from "@/components/data";
 import * as Dialog from "@/components/dialog";
