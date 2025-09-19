@@ -20,20 +20,17 @@ import { router } from "@/router";
     },
   });
 
-  // This will trigger the loading everything in the router.
-  // We do this before trying to render/hydrate, to avoid flickering to a blank
-  // screen (which TanStack Router will do if it is loading the matches)
-  await router.load();
-
-  // Remove the existing <title> tag, as this is managed by Tanstack Router now
-  const title = document.querySelector("title");
-  if (title) {
-    title.remove();
-  }
-
   // If there is something in the root element, hydrate, else fallback to
   // creating a new root
   if (rootElement.innerHTML) {
+    // This will trigger the loading everything in the router.
+    // We do this before trying to render/hydrate, to avoid flickering to a blank
+    // screen (which TanStack Router will do if it is loading the matches)
+    await router.load();
+
+    // Remove the existing <title> tag, as this is managed by Tanstack Router now
+    document.querySelector("title")?.remove();
+
     hydrateRoot(rootElement, <App />, {
       onRecoverableError: (error) => {
         // React doesn't like that we use `renderToString` to render a
@@ -47,6 +44,13 @@ import { router } from "@/router";
       },
     });
   } else {
+    // This is the fallback during development, when we don't have a pre-rendered
+    // spinner. We want to start rendering as soon as possible so that devtools
+    // get rendered; we don't care about pre-loading the router
+
+    // Remove the existing <title> tag, as this is managed by Tanstack Router now
+    document.querySelector("title")?.remove();
+
     const root = createRoot(rootElement);
 
     root.render(<App />);

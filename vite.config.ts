@@ -1,5 +1,6 @@
 import { cloudflare } from "@cloudflare/vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
+import { devtools as tanstackDevtools } from "@tanstack/devtools-vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import babelPluginFormatjs from "babel-plugin-formatjs";
@@ -33,6 +34,7 @@ export default defineConfig(({ mode }) => ({
   },
 
   plugins: [
+    tanstackDevtools(),
     tsConfigPaths(),
     tanstackRouter({
       target: "react",
