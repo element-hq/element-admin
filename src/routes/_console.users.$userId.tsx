@@ -43,8 +43,14 @@ import {
   deleteUserEmail,
   addUserEmail,
   addUpstreamOAuthLink,
+  upstreamProvidersQuery,
 } from "@/api/mas";
-import type { Ulid, UpstreamOAuthLink, UserEmail } from "@/api/mas/api";
+import type {
+  SingleResourceForUpstreamOAuthProvider,
+  Ulid,
+  UpstreamOAuthLink,
+  UserEmail,
+} from "@/api/mas/api";
 import { profileQuery, wellKnownQuery } from "@/api/matrix";
 import * as Data from "@/components/data";
 import * as Dialog from "@/components/dialog";
@@ -63,6 +69,11 @@ export const Route = createFileRoute("/_console/users/$userId")({
     const upstreamLinksPromise = queryClient.ensureQueryData(
       userUpstreamLinksQuery(credentials.serverName, params.userId),
     );
+    // This API might not be available, if it's the case we don't want to throw,
+    // so we use prefetchQuery instead of ensureQueryData
+    const upstreamProvidersPromise = queryClient.prefetchQuery(
+      upstreamProvidersQuery(credentials.serverName),
+    );
     const siteConfigPromise = queryClient.ensureQueryData(
       siteConfigQuery(credentials.serverName),
     );
@@ -79,6 +90,7 @@ export const Route = createFileRoute("/_console/users/$userId")({
     await queryClient.ensureQueryData(profileQuery(synapseRoot, mxid));
     await emailPromise;
     await upstreamLinksPromise;
+    await upstreamProvidersPromise;
     await siteConfigPromise;
   },
   component: RouteComponent,
@@ -893,6 +905,14 @@ function UpstreamLinkListItem({
 }: UpstreamLinkListItemProps) {
   const queryClient = useQueryClient();
   const intl = useIntl();
+
+  const { data: upstreamProvidersData } = useQuery(
+    upstreamProvidersQuery(serverName),
+  );
+  const upstreamProvider = upstreamProvidersData?.find(
+    (provider) => provider.id === attributes.provider_id,
+  );
+
   const { mutate, isPending } = useMutation({
     mutationFn: (linkId: Ulid) =>
       deleteUpstreamOAuthLink(queryClient, serverName, linkId),
@@ -939,7 +959,11 @@ function UpstreamLinkListItem({
         <Data.Value>{attributes.human_account_name}</Data.Value>
       )}
       <Data.Value>ID: {attributes.subject}</Data.Value>
-      <Data.Value>Provider: {attributes.provider_id}</Data.Value>
+      {upstreamProvider ? (
+        <Data.Value>{formatProviderName(upstreamProvider)}</Data.Value>
+      ) : (
+        <Data.Value>Provider ID: {attributes.provider_id}</Data.Value>
+      )}
       <Dialog.Root
         trigger={
           <Button
@@ -984,6 +1008,18 @@ function UpstreamLinkListItem({
   );
 }
 
+function formatProviderName(
+  provider: SingleResourceForUpstreamOAuthProvider,
+): string {
+  const base =
+    provider.attributes.human_name ?? provider.attributes.issuer ?? provider.id;
+  if (provider.attributes.disabled_at) {
+    return `${base} (disabled)`;
+  }
+
+  return base;
+}
+
 interface UpstreamLinksListProps {
   userId: string;
   mxid: string;
@@ -1001,6 +1037,16 @@ function UpstreamLinksList({
   const { data: upstreamLinksData } = useSuspenseQuery(
     userUpstreamLinksQuery(serverName, userId),
   );
+
+  const { data: upstreamProvidersData } = useQuery(
+    upstreamProvidersQuery(serverName),
+  );
+
+  // This value is set if and only if there is a single provider in the list
+  let onlyProvider = upstreamProvidersData?.at(0);
+  if (upstreamProvidersData?.length !== 1) {
+    onlyProvider = undefined;
+  }
 
   // TODO: handle error message from the server
   const { mutate, isPending } = useMutation({
@@ -1083,24 +1129,6 @@ function UpstreamLinksList({
           Add a link to an upstream account to this user
         </Dialog.Description>
         <Form.Root onSubmit={onSubmit}>
-          <Form.Field name="providerId">
-            <Form.Label>Provider ID</Form.Label>
-            <Form.TextControl
-              required
-              type="text"
-              pattern="[0-7][0-9A-HJKMNP-TV-Z]{25}"
-            />
-            <Form.HelpMessage>
-              The upstream provider ID, as specified in the MAS configuration
-            </Form.HelpMessage>
-            <Form.ErrorMessage match="valueMissing">
-              This field is required
-            </Form.ErrorMessage>
-            <Form.ErrorMessage match="patternMismatch">
-              Must be a valid ULID
-            </Form.ErrorMessage>
-          </Form.Field>
-
           <Form.Field name="subject">
             <Form.Label>Subject</Form.Label>
             <Form.TextControl required type="text" />
@@ -1111,6 +1139,54 @@ function UpstreamLinksList({
               This field is required
             </Form.ErrorMessage>
           </Form.Field>
+
+          {upstreamProvidersData && upstreamLinksData.data.length > 0 ? (
+            onlyProvider ? (
+              <Form.Field name="readonlyProvider">
+                {/* If we have a single provider, display that as a read-only text field */}
+                <Form.Label>Provider</Form.Label>
+                <Form.TextControl
+                  type="text"
+                  readOnly
+                  value={formatProviderName(onlyProvider)}
+                />
+                <input
+                  type="hidden"
+                  name="providerId"
+                  value={onlyProvider.id}
+                />
+              </Form.Field>
+            ) : (
+              upstreamProvidersData.map((provider) => (
+                <Form.InlineField
+                  name="providerId"
+                  key={provider.id}
+                  control={<Form.RadioControl value={provider.id} />}
+                >
+                  <Form.Label>{formatProviderName(provider)}</Form.Label>
+                </Form.InlineField>
+              ))
+            )
+          ) : (
+            <Form.Field name="providerId">
+              {/* If we don't have the providers list, fallback to a text field */}
+              <Form.Label>Provider ID</Form.Label>
+              <Form.TextControl
+                required
+                type="text"
+                pattern="[0-7][0-9A-HJKMNP-TV-Z]{25}"
+              />
+              <Form.HelpMessage>
+                The upstream provider ID, as specified in the MAS configuration
+              </Form.HelpMessage>
+              <Form.ErrorMessage match="valueMissing">
+                This field is required
+              </Form.ErrorMessage>
+              <Form.ErrorMessage match="patternMismatch">
+                Must be a valid ULID
+              </Form.ErrorMessage>
+            </Form.Field>
+          )}
 
           <Form.Submit disabled={isPending}>
             {isPending && <InlineSpinner />}

@@ -328,6 +328,21 @@ export const userUpstreamLinksQuery = (serverName: string, userId: string) =>
     },
   });
 
+export const upstreamProvidersQuery = (serverName: string) =>
+  queryOptions({
+    queryKey: ["mas", "upstream-providers", serverName],
+    queryFn: async ({ client, signal }) => {
+      const response = await api.listUpstreamOAuthProviders({
+        ...(await masBaseOptions(client, serverName, signal)),
+        query: {
+          // Let's assume we're not going to have more than 1000 providers
+          "page[first]": 1000,
+        },
+      });
+      return response.data;
+    },
+  });
+
 export const deleteUpstreamOAuthLink = async (
   queryClient: QueryClient,
   serverName: string,

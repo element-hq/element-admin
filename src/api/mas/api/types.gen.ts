@@ -824,6 +824,64 @@ export type SingleResponseForUpstreamOAuthLink = {
   links: SelfLinks;
 };
 
+export type UpstreamOAuthProviderFilter = {
+  /**
+   * Retrieve providers that are (or are not) enabled
+   */
+  "filter[enabled]"?: boolean | null;
+};
+
+/**
+ * A top-level response with a page of resources
+ */
+export type PaginatedResponseForUpstreamOAuthProvider = {
+  meta: PaginationMeta;
+  /**
+   * The list of resources
+   */
+  data: Array<SingleResourceForUpstreamOAuthProvider>;
+  links: PaginationLinks;
+};
+
+/**
+ * A single resource, with its type, ID, attributes and related links
+ */
+export type SingleResourceForUpstreamOAuthProvider = {
+  /**
+   * The type of the resource
+   */
+  type: string;
+  id: Ulid;
+  attributes: UpstreamOAuthProvider;
+  links: SelfLinks;
+};
+
+/**
+ * An upstream OAuth 2.0 provider
+ */
+export type UpstreamOAuthProvider = {
+  /**
+   * The OIDC issuer of the provider
+   */
+  issuer?: string | null;
+  /**
+   * A human-readable name for the provider
+   */
+  human_name?: string | null;
+  /**
+   * A brand identifier, e.g. "apple" or "google"
+   */
+  brand_name?: string | null;
+  /**
+   * When the provider was created
+   */
+  created_at: string;
+  /**
+   * When the provider was disabled. If null, the provider is enabled.
+   */
+  disabled_at?: string | null;
+};
+
 export type SiteConfigData = {
   body?: never;
   path?: never;
@@ -2011,6 +2069,44 @@ export type GetUpstreamOAuthLinkResponses = {
 
 export type GetUpstreamOAuthLinkResponse =
   GetUpstreamOAuthLinkResponses[keyof GetUpstreamOAuthLinkResponses];
+
+export type ListUpstreamOAuthProvidersData = {
+  body?: never;
+  path?: never;
+  query?: {
+    /**
+     * Retrieve the items before the given ID
+     */
+    "page[before]"?: Ulid;
+    /**
+     * Retrieve the items after the given ID
+     */
+    "page[after]"?: Ulid;
+    /**
+     * Retrieve the first N items
+     */
+    "page[first]"?: number | null;
+    /**
+     * Retrieve the last N items
+     */
+    "page[last]"?: number | null;
+    /**
+     * Retrieve providers that are (or are not) enabled
+     */
+    "filter[enabled]"?: boolean | null;
+  };
+  url: "/api/admin/v1/upstream-oauth-providers";
+};
+
+export type ListUpstreamOAuthProvidersResponses = {
+  /**
+   * Paginated response of upstream OAuth 2.0 providers
+   */
+  200: PaginatedResponseForUpstreamOAuthProvider;
+};
+
+export type ListUpstreamOAuthProvidersResponse =
+  ListUpstreamOAuthProvidersResponses[keyof ListUpstreamOAuthProvidersResponses];
 
 export type ClientOptions = {
   baseUrl: `${string}://{base}` | (string & {});

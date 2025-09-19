@@ -102,6 +102,8 @@ import type {
   GetUpstreamOAuthLinkData,
   GetUpstreamOAuthLinkResponses,
   GetUpstreamOAuthLinkErrors,
+  ListUpstreamOAuthProvidersData,
+  ListUpstreamOAuthProvidersResponses,
 } from "./types.gen";
 import {
   vSiteConfigData,
@@ -172,6 +174,8 @@ import {
   vDeleteUpstreamOAuthLinkResponse,
   vGetUpstreamOAuthLinkData,
   vGetUpstreamOAuthLinkResponse,
+  vListUpstreamOAuthProvidersData,
+  vListUpstreamOAuthProvidersResponse,
 } from "./valibot.gen";
 
 export type Options<
@@ -1266,6 +1270,36 @@ export const getUpstreamOAuthLink = <ThrowOnError extends boolean = true>(
       },
     ],
     url: "/api/admin/v1/upstream-oauth-links/{id}",
+    ...options,
+  });
+};
+
+/**
+ * List upstream OAuth 2.0 providers
+ */
+export const listUpstreamOAuthProviders = <ThrowOnError extends boolean = true>(
+  options: Options<ListUpstreamOAuthProvidersData, ThrowOnError>,
+) => {
+  return options.client.get<
+    ListUpstreamOAuthProvidersResponses,
+    unknown,
+    ThrowOnError,
+    "data"
+  >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vListUpstreamOAuthProvidersData, data);
+    },
+    responseValidator: async (data) => {
+      return await v.parseAsync(vListUpstreamOAuthProvidersResponse, data);
+    },
+    responseStyle: "data",
+    security: [
+      {
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
+    url: "/api/admin/v1/upstream-oauth-providers",
     ...options,
   });
 };

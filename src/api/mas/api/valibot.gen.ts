@@ -601,6 +601,42 @@ export const vSingleResponseForUpstreamOAuthLink = v.object({
   links: vSelfLinks,
 });
 
+export const vUpstreamOAuthProviderFilter = v.object({
+  "filter[enabled]": v.optional(v.union([v.boolean(), v.null()])),
+});
+
+/**
+ * An upstream OAuth 2.0 provider
+ */
+export const vUpstreamOAuthProvider = v.object({
+  issuer: v.optional(v.union([v.string(), v.null()])),
+  human_name: v.optional(v.union([v.string(), v.null()])),
+  brand_name: v.optional(v.union([v.string(), v.null()])),
+  created_at: v.pipe(v.string(), v.isoTimestamp()),
+  disabled_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
+});
+
+/**
+ * A single resource, with its type, ID, attributes and related links
+ */
+export const vSingleResourceForUpstreamOAuthProvider = v.object({
+  type: v.string(),
+  id: vUlid,
+  attributes: vUpstreamOAuthProvider,
+  links: vSelfLinks,
+});
+
+/**
+ * A top-level response with a page of resources
+ */
+export const vPaginatedResponseForUpstreamOAuthProvider = v.object({
+  meta: vPaginationMeta,
+  data: v.array(vSingleResourceForUpstreamOAuthProvider),
+  links: vPaginationLinks,
+});
+
 export const vSiteConfigData = v.object({
   body: v.optional(v.never()),
   path: v.optional(v.never()),
@@ -1121,3 +1157,27 @@ export const vGetUpstreamOAuthLinkData = v.object({
  */
 export const vGetUpstreamOAuthLinkResponse =
   vSingleResponseForUpstreamOAuthLink;
+
+export const vListUpstreamOAuthProvidersData = v.object({
+  body: v.optional(v.never()),
+  path: v.optional(v.never()),
+  query: v.optional(
+    v.object({
+      "page[before]": v.optional(vUlid),
+      "page[after]": v.optional(vUlid),
+      "page[first]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
+      "page[last]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
+      "filter[enabled]": v.optional(v.union([v.boolean(), v.null()])),
+    }),
+  ),
+});
+
+/**
+ * Paginated response of upstream OAuth 2.0 providers
+ */
+export const vListUpstreamOAuthProvidersResponse =
+  vPaginatedResponseForUpstreamOAuthProvider;
