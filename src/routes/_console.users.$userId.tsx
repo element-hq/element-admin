@@ -968,7 +968,7 @@ function UpstreamLinkListItem({
         trigger={
           <Button
             destructive
-            kind="tertiary"
+            kind="secondary"
             size="sm"
             className="self-stretch"
           >
@@ -1042,6 +1042,11 @@ function UpstreamLinksList({
     upstreamProvidersQuery(serverName),
   );
 
+  // We show the add button either if the providers list is not available, or if
+  // there are providers in that list
+  const shouldShowAddButton =
+    upstreamProvidersData === undefined || upstreamProvidersData.length > 0;
+
   // This value is set if and only if there is a single provider in the list
   let onlyProvider = upstreamProvidersData?.at(0);
   if (upstreamProvidersData?.length !== 1) {
@@ -1101,105 +1106,112 @@ function UpstreamLinksList({
 
   return (
     <>
-      {upstreamLinksData.data.map((link) => (
-        <UpstreamLinkListItem
-          key={link.id}
-          mxid={mxid}
-          serverName={serverName}
-          {...link}
-        />
-      ))}
+      {upstreamLinksData.data.length > 0 && (
+        <Data.Grid>
+          {upstreamLinksData.data.map((link) => (
+            <UpstreamLinkListItem
+              key={link.id}
+              mxid={mxid}
+              serverName={serverName}
+              {...link}
+            />
+          ))}
+        </Data.Grid>
+      )}
 
-      <Dialog.Root
-        open={open}
-        onOpenChange={setOpen}
-        trigger={
-          <Button
-            kind="tertiary"
-            size="sm"
-            Icon={PlusIcon}
-            className="self-stretch"
-          >
-            Add link to upstream account
-          </Button>
-        }
-      >
-        <Dialog.Title>Add link to upstream account</Dialog.Title>
-        <Dialog.Description>
-          Add a link to an upstream account to this user
-        </Dialog.Description>
-        <Form.Root onSubmit={onSubmit}>
-          <Form.Field name="subject">
-            <Form.Label>Subject</Form.Label>
-            <Form.TextControl required type="text" />
-            <Form.HelpMessage>
-              The internal ID of the upstream account
-            </Form.HelpMessage>
-            <Form.ErrorMessage match="valueMissing">
-              This field is required
-            </Form.ErrorMessage>
-          </Form.Field>
-
-          {upstreamProvidersData && upstreamProvidersData.length > 0 ? (
-            onlyProvider ? (
-              <Form.Field name="readonlyProvider">
-                {/* If we have a single provider, display that as a read-only text field */}
-                <Form.Label>Provider</Form.Label>
-                <Form.TextControl
-                  type="text"
-                  readOnly
-                  value={formatProviderName(onlyProvider)}
-                />
-                <input
-                  type="hidden"
-                  name="providerId"
-                  value={onlyProvider.id}
-                />
-              </Form.Field>
-            ) : (
-              upstreamProvidersData.map((provider) => (
-                <Form.InlineField
-                  name="providerId"
-                  key={provider.id}
-                  control={<Form.RadioControl value={provider.id} />}
-                >
-                  <Form.Label>{formatProviderName(provider)}</Form.Label>
-                </Form.InlineField>
-              ))
-            )
-          ) : (
-            <Form.Field name="providerId">
-              {/* If we don't have the providers list, fallback to a text field */}
-              <Form.Label>Provider ID</Form.Label>
-              <Form.TextControl
-                required
-                type="text"
-                pattern="[0-7][0-9A-HJKMNP-TV-Z]{25}"
-              />
+      {shouldShowAddButton && (
+        <Dialog.Root
+          open={open}
+          onOpenChange={setOpen}
+          trigger={
+            <Button
+              kind="secondary"
+              size="sm"
+              Icon={PlusIcon}
+              className="self-stretch"
+            >
+              Add link to upstream account
+            </Button>
+          }
+        >
+          <Dialog.Title>Add link to upstream account</Dialog.Title>
+          <Dialog.Description>
+            Add a link to an upstream account to this user
+          </Dialog.Description>
+          <Form.Root onSubmit={onSubmit}>
+            <Form.Field name="subject">
+              <Form.Label>Subject</Form.Label>
+              <Form.TextControl required type="text" />
               <Form.HelpMessage>
-                The upstream provider ID, as specified in the MAS configuration
+                The internal ID of the upstream account
               </Form.HelpMessage>
               <Form.ErrorMessage match="valueMissing">
                 This field is required
               </Form.ErrorMessage>
-              <Form.ErrorMessage match="patternMismatch">
-                Must be a valid ULID
-              </Form.ErrorMessage>
             </Form.Field>
-          )}
 
-          <Form.Submit disabled={isPending}>
-            {isPending && <InlineSpinner />}
-            <FormattedMessage {...messages.actionAdd} />
-          </Form.Submit>
-        </Form.Root>
+            {upstreamProvidersData && upstreamProvidersData.length > 0 ? (
+              onlyProvider ? (
+                <Form.Field name="readonlyProvider">
+                  {/* If we have a single provider, display that as a read-only text field */}
+                  <Form.Label>Provider</Form.Label>
+                  <Form.TextControl
+                    type="text"
+                    readOnly
+                    value={formatProviderName(onlyProvider)}
+                  />
+                  <input
+                    type="hidden"
+                    name="providerId"
+                    value={onlyProvider.id}
+                  />
+                </Form.Field>
+              ) : (
+                upstreamProvidersData.map((provider) => (
+                  <Form.InlineField
+                    name="providerId"
+                    key={provider.id}
+                    control={<Form.RadioControl value={provider.id} />}
+                  >
+                    <Form.Label>{formatProviderName(provider)}</Form.Label>
+                  </Form.InlineField>
+                ))
+              )
+            ) : (
+              <Form.Field name="providerId">
+                {/* If we don't have the providers list, fallback to a text field */}
+                <Form.Label>Provider ID</Form.Label>
+                <Form.TextControl
+                  required
+                  type="text"
+                  pattern="[0-7][0-9A-HJKMNP-TV-Z]{25}"
+                />
+                <Form.HelpMessage>
+                  The upstream provider ID, as specified in the MAS
+                  configuration
+                </Form.HelpMessage>
+                <Form.ErrorMessage match="valueMissing">
+                  This field is required
+                </Form.ErrorMessage>
+                <Form.ErrorMessage match="patternMismatch">
+                  Must be a valid ULID
+                </Form.ErrorMessage>
+              </Form.Field>
+            )}
 
-        <Dialog.Close asChild>
-          <Button kind="tertiary">
-            <FormattedMessage {...messages.actionCancel} />
-          </Button>
-        </Dialog.Close>
-      </Dialog.Root>
+            <Form.Submit disabled={isPending}>
+              {isPending && <InlineSpinner />}
+              <FormattedMessage {...messages.actionAdd} />
+            </Form.Submit>
+          </Form.Root>
+
+          <Dialog.Close asChild>
+            <Button kind="tertiary">
+              <FormattedMessage {...messages.actionCancel} />
+            </Button>
+          </Dialog.Close>
+        </Dialog.Root>
+      )}
     </>
   );
 }
@@ -1263,7 +1275,7 @@ function EmailListItem({
         trigger={
           <Button
             destructive
-            kind="tertiary"
+            kind="secondary"
             size="sm"
             className="self-stretch"
           >
@@ -1356,21 +1368,25 @@ function EmailsList({ userId, mxid, serverName }: EmailsListProps) {
 
   return (
     <>
-      {emailsData.data.map((emailItem) => (
-        <EmailListItem
-          key={emailItem.id}
-          mxid={mxid}
-          serverName={serverName}
-          {...emailItem}
-        />
-      ))}
+      {emailsData.data.length > 0 && (
+        <Data.Grid>
+          {emailsData.data.map((emailItem) => (
+            <EmailListItem
+              key={emailItem.id}
+              mxid={mxid}
+              serverName={serverName}
+              {...emailItem}
+            />
+          ))}
+        </Data.Grid>
+      )}
 
       <Dialog.Root
         open={open}
         onOpenChange={setOpen}
         trigger={
           <Button
-            kind="tertiary"
+            kind="secondary"
             size="sm"
             Icon={PlusIcon}
             className="self-stretch"
@@ -1577,23 +1593,23 @@ function RouteComponent() {
               </Data.Value>
             </Data.Item>
           )}
+        </Data.Grid>
 
-          <Separator />
+        <Separator />
 
+        <div className="flex flex-col gap-4">
           <EmailsList
             mxid={mxid}
             userId={userId}
             serverName={credentials.serverName}
           />
 
-          <Separator />
-
           <UpstreamLinksList
             userId={userId}
             mxid={mxid}
             serverName={credentials.serverName}
           />
-        </Data.Grid>
+        </div>
       </div>
     </Navigation.Details>
   );
