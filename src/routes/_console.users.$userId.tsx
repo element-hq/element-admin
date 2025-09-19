@@ -1140,7 +1140,7 @@ function UpstreamLinksList({
             </Form.ErrorMessage>
           </Form.Field>
 
-          {upstreamProvidersData && upstreamLinksData.data.length > 0 ? (
+          {upstreamProvidersData && upstreamProvidersData.length > 0 ? (
             onlyProvider ? (
               <Form.Field name="readonlyProvider">
                 {/* If we have a single provider, display that as a read-only text field */}
