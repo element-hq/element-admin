@@ -1,3 +1,5 @@
 pnpm lint-staged
-pnpm knip
 pnpm i18n:extract
+git add translations/extracted/en.json
+pnpm tsc
+pnpm knip
