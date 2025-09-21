@@ -1,53 +1,27 @@
 import type { QueryClient } from "@tanstack/react-query";
-import {
-  HeadContent,
-  Outlet,
-  createRootRouteWithContext,
-} from "@tanstack/react-router";
-import type { IntlShape } from "react-intl";
+import { Outlet, createRootRouteWithContext } from "@tanstack/react-router";
+import { useLayoutEffect } from "react";
+import { defineMessage, useIntl } from "react-intl";
 
 import { GenericError } from "@/ui/errors";
 import {
   formatBreadcrumbs,
-  type WithBreadcrumbEntry,
+  useBreadcrumbsFromMatches,
 } from "@/utils/breadcrumbs";
 
 interface RouterContext {
   queryClient: QueryClient;
-  intl: IntlShape;
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({
-  loader: ({ context: { intl } }) =>
-    ({
-      breadcrumb: {
-        name: intl.formatMessage({
-          id: "product.title",
-          defaultMessage: "Element Admin",
-          description: "The main name of the admin console",
-        }),
-      },
-    }) satisfies WithBreadcrumbEntry,
-
-  head: ({ matches }) => {
-    const breadcrumbs = matches
-      .map((match) => match.loaderData?.breadcrumb)
-      .filter((breadcrumb) => breadcrumb !== undefined);
-
-    if (breadcrumbs.length === 0) {
-      return {
-        meta: [
-          {
-            title: "Loading Element Admin…",
-          },
-        ],
-      };
-    }
-
-    const title = formatBreadcrumbs(breadcrumbs);
-    return {
-      meta: [{ title }],
-    };
+  staticData: {
+    breadcrumb: {
+      message: defineMessage({
+        id: "product.title",
+        defaultMessage: "Element Admin",
+        description: "The main name of the admin console",
+      }),
+    },
   },
 
   component: RouteComponent,
@@ -55,9 +29,19 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 });
 
 function RouteComponent() {
+  const intl = useIntl();
+  const breadcrumbs = useBreadcrumbsFromMatches();
+
+  useLayoutEffect(() => {
+    if (document) {
+      // Remove the existing title tag from the initial HTML
+      document.querySelector("title[data-temp-title]")?.remove();
+    }
+  }, []);
+
   return (
     <>
-      <HeadContent />
+      <title>{formatBreadcrumbs(intl, breadcrumbs)}</title>
       <Outlet />
     </>
   );

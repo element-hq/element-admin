@@ -15,7 +15,6 @@ import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import AppFooter from "@/ui/footer";
 import AppNavigation from "@/ui/navigation";
-import type { WithBreadcrumbEntry } from "@/utils/breadcrumbs";
 
 const ReleaseNotes = lazy(() => import("@/components/gfm"));
 
@@ -31,7 +30,13 @@ const latestEssReleaseQuery = githubReleaseQuery(
 );
 
 export const Route = createFileRoute("/_console/")({
-  loader: async ({ context: { queryClient, credentials, intl } }) => {
+  staticData: {
+    breadcrumb: {
+      message: titleMessage,
+    },
+  },
+
+  loader: async ({ context: { queryClient, credentials } }) => {
     const wellKnown = await queryClient.ensureQueryData(
       wellKnownQuery(credentials.serverName),
     );
@@ -47,12 +52,6 @@ export const Route = createFileRoute("/_console/")({
     queryClient.prefetchQuery(latestEssReleaseQuery);
     // Also trigger the preloading of the Gfm component
     import("@/components/gfm");
-
-    return {
-      breadcrumb: {
-        name: intl.formatMessage(titleMessage),
-      },
-    } satisfies WithBreadcrumbEntry;
   },
   component: RouteComponent,
 });

@@ -25,7 +25,6 @@ import { RoomAvatar, RoomDisplayName } from "@/components/room-info";
 import * as Table from "@/components/table";
 import AppFooter from "@/ui/footer";
 import AppNavigation from "@/ui/navigation";
-import type { WithBreadcrumbEntry } from "@/utils/breadcrumbs";
 
 const RoomSearchParameters = v.object({
   search_term: v.optional(v.string()),
@@ -40,10 +39,16 @@ const titleMessage = defineMessage({
 });
 
 export const Route = createFileRoute("/_console/rooms")({
+  staticData: {
+    breadcrumb: {
+      message: titleMessage,
+    },
+  },
+
   validateSearch: RoomSearchParameters,
   loaderDeps: ({ search }) => ({ search }),
   loader: async ({
-    context: { queryClient, credentials, intl },
+    context: { queryClient, credentials },
     deps: { search },
   }) => {
     const wellKnown = await queryClient.ensureQueryData(
@@ -63,12 +68,6 @@ export const Route = createFileRoute("/_console/rooms")({
     await queryClient.ensureInfiniteQueryData(
       roomsInfiniteQuery(synapseRoot, parameters),
     );
-
-    return {
-      breadcrumb: {
-        name: intl.formatMessage(titleMessage),
-      },
-    } satisfies WithBreadcrumbEntry;
   },
 
   pendingComponent: () => (

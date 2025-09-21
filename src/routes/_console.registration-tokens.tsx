@@ -39,7 +39,6 @@ import * as Table from "@/components/table";
 import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
 import AppNavigation from "@/ui/navigation";
-import type { WithBreadcrumbEntry } from "@/utils/breadcrumbs";
 import {
   computeHumanReadableDateTimeStringFromUtc,
   computeUtcIsoStringFromLocal,
@@ -59,10 +58,16 @@ const titleMessage = defineMessage({
 });
 
 export const Route = createFileRoute("/_console/registration-tokens")({
+  staticData: {
+    breadcrumb: {
+      message: titleMessage,
+    },
+  },
+
   validateSearch: TokenSearchParameters,
   loaderDeps: ({ search }) => ({ search }),
   loader: async ({
-    context: { queryClient, credentials, intl },
+    context: { queryClient, credentials },
     deps: { search },
   }) => {
     const parameters: Omit<
@@ -78,12 +83,6 @@ export const Route = createFileRoute("/_console/registration-tokens")({
     await queryClient.ensureInfiniteQueryData(
       registrationTokensInfiniteQuery(credentials.serverName, parameters),
     );
-
-    return {
-      breadcrumb: {
-        name: intl.formatMessage(titleMessage),
-      },
-    } satisfies WithBreadcrumbEntry;
   },
 
   pendingComponent: () => (

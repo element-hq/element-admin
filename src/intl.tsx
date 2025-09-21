@@ -1,18 +1,13 @@
 import { match } from "@formatjs/intl-localematcher";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import { RouterProvider } from "@tanstack/react-router";
 import { useEffect, useMemo, useSyncExternalStore } from "react";
 import {
   createIntl,
   createIntlCache,
   RawIntlProvider,
-  useIntl,
-  type IntlShape,
   type MessageFormatElement,
 } from "react-intl";
 
-import { queryClient } from "@/query";
-import { router } from "@/router";
 import { useLocaleStore } from "@/stores/locale";
 
 import type messages from "../translations/extracted/en.json";
@@ -92,19 +87,6 @@ const localeQuery = (locale: string) =>
 
 const cache = createIntlCache();
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const loadIntl = async (): Promise<IntlShape> => {
-  const bestLocale = getBestLocale();
-  const selectedLocale = useLocaleStore.getState().selectedLocale;
-  const locale =
-    selectedLocale && AVAILABLE_LOCALES.includes(selectedLocale)
-      ? selectedLocale
-      : bestLocale;
-
-  const messages = await queryClient.ensureQueryData(localeQuery(locale));
-  return createIntl({ messages, locale, defaultLocale: DEFAULT_LOCALE }, cache);
-};
-
 export const IntlProvider = ({ children }: { children: React.ReactNode }) => {
   const bestLocale = useBestLocale();
   const selectedLocale = useLocaleStore((state) => state.selectedLocale);
@@ -129,9 +111,4 @@ export const IntlProvider = ({ children }: { children: React.ReactNode }) => {
   );
 
   return <RawIntlProvider value={intl}>{children}</RawIntlProvider>;
-};
-
-export const RouterWithIntl = () => {
-  const intl = useIntl();
-  return <RouterProvider router={router} context={{ intl }} />;
 };

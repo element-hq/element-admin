@@ -1,35 +1,22 @@
 import { createRoot, hydrateRoot } from "react-dom/client";
 
 import { App } from "@/app";
-import { loadIntl } from "@/intl";
 import { router } from "@/router";
 
-// eslint-disable-next-line unicorn/prefer-top-level-await -- Top-level await doesn't work in this case
-(async () => {
-  const rootElement = document.querySelector("#app");
-  if (!rootElement) {
-    throw new Error("Root element not found");
-  }
+const rootElement = document.querySelector("#app");
+if (!rootElement) {
+  throw new Error("Root element not found");
+}
 
-  // Now we load the locales and inject them in the router
-  router.update({
-    ...router.options,
-    context: {
-      ...router.options.context,
-      intl: await loadIntl(),
-    },
-  });
-
-  // If there is something in the root element, hydrate, else fallback to
-  // creating a new root
-  if (rootElement.innerHTML) {
+// If there is something in the root element, hydrate, else fallback to
+// creating a new root
+if (rootElement.innerHTML) {
+  // eslint-disable-next-line unicorn/prefer-top-level-await -- Top-level await doesn't work in this case
+  (async () => {
     // This will trigger the loading everything in the router.
     // We do this before trying to render/hydrate, to avoid flickering to a blank
     // screen (which TanStack Router will do if it is loading the matches)
     await router.load();
-
-    // Remove the existing <title> tag, as this is managed by Tanstack Router now
-    document.querySelector("title")?.remove();
 
     hydrateRoot(rootElement, <App />, {
       onRecoverableError: (error) => {
@@ -43,16 +30,12 @@ import { router } from "@/router";
         console.error(error);
       },
     });
-  } else {
-    // This is the fallback during development, when we don't have a pre-rendered
-    // spinner. We want to start rendering as soon as possible so that devtools
-    // get rendered; we don't care about pre-loading the router
+  })();
+} else {
+  // This is the fallback during development, when we don't have a pre-rendered
+  // spinner. We want to start rendering as soon as possible so that devtools
+  // get rendered; we don't care about pre-loading the router
+  const root = createRoot(rootElement);
 
-    // Remove the existing <title> tag, as this is managed by Tanstack Router now
-    document.querySelector("title")?.remove();
-
-    const root = createRoot(rootElement);
-
-    root.render(<App />);
-  }
-})();
+  root.render(<App />);
+}

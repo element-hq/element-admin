@@ -70,7 +70,7 @@ export const Route = createFileRoute("/_console")({
 
     return {
       breadcrumb: {
-        name: credentials.serverName,
+        literal: credentials.serverName,
       },
     } satisfies WithBreadcrumbEntry;
   },

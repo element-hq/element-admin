@@ -41,7 +41,6 @@ import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
 import AppNavigation from "@/ui/navigation";
 import { useImageBlob } from "@/utils/blob";
-import type { WithBreadcrumbEntry } from "@/utils/breadcrumbs";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 const UserSearchParameters = v.object({
@@ -59,10 +58,16 @@ const titleMessage = defineMessage({
 });
 
 export const Route = createFileRoute("/_console/users")({
+  staticData: {
+    breadcrumb: {
+      message: titleMessage,
+    },
+  },
+
   validateSearch: UserSearchParameters,
   loaderDeps: ({ search }) => ({ search }),
   loader: async ({
-    context: { queryClient, credentials, intl },
+    context: { queryClient, credentials },
     deps: { search },
   }) => {
     await queryClient.ensureQueryData(wellKnownQuery(credentials.serverName));
@@ -77,12 +82,6 @@ export const Route = createFileRoute("/_console/users")({
     await queryClient.ensureInfiniteQueryData(
       usersInfiniteQuery(credentials.serverName, parameters, search.dir),
     );
-
-    return {
-      breadcrumb: {
-        name: intl.formatMessage(titleMessage),
-      },
-    } satisfies WithBreadcrumbEntry;
   },
 
   pendingComponent: () => (

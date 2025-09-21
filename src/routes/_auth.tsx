@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { Link, Text } from "@vector-im/compound-web";
-import { defineMessage, FormattedMessage } from "react-intl";
+import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
 import * as Footer from "@/components/footer";
 import { WelcomeLayout } from "@/components/layout";
@@ -23,23 +23,14 @@ export const Route = createFileRoute("/_auth")({
     }
   },
 
-  loader: ({ context: { intl } }) => ({
-    description: intl.formatMessage(welcomeMessage),
-  }),
+  component: RouteComponent,
+});
 
-  head: ({ loaderData }) => ({
-    meta: loaderData
-      ? [
-          {
-            name: "description",
-            content: loaderData.description,
-          },
-        ]
-      : [],
-  }),
-
-  component: () => {
-    return (
+function RouteComponent() {
+  const intl = useIntl();
+  return (
+    <>
+      <meta name="description" content={intl.formatMessage(welcomeMessage)} />
       <WelcomeLayout className="gap-10 py-10 items-center justify-center">
         <main className="flex flex-col flex-1 gap-12 items-stretch justify-center max-w-[340px]">
           {/* Logo & message */}
@@ -96,6 +87,6 @@ export const Route = createFileRoute("/_auth")({
           </Footer.Section>
         </Footer.Root>
       </WelcomeLayout>
-    );
-  },
-});
+    </>
+  );
+}

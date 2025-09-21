@@ -12,8 +12,6 @@ export const router = createRouter({
   history,
   context: {
     queryClient,
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    intl: undefined!,
   },
   defaultPreload: "intent",
   scrollRestoration: true,
