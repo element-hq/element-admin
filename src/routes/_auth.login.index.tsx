@@ -144,6 +144,7 @@ function RouteComponent() {
           onChange={handleServerNameChange}
           autoCapitalize="none"
           type="text"
+          size={1}
         />
         {isError && (
           <Form.ErrorMessage>

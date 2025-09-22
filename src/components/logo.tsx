@@ -281,6 +281,7 @@ export const EssLogotypeVertical: React.FC = () => {
       fill="none"
       role="img"
       aria-label={title}
+      className="max-w-full h-auto"
       xmlns="http://www.w3.org/2000/svg"
     >
       <title>{title}</title>
