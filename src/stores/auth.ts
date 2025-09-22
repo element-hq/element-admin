@@ -5,6 +5,7 @@ import { persist } from "zustand/middleware";
 
 import { authMetadataQuery, tokenRequest } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
+import { NotLoggedInError } from "@/errors";
 import { router } from "@/router";
 import { addTimeout } from "@/utils/signal";
 
@@ -111,7 +112,7 @@ interface AuthStoreActions {
   accessToken(
     queryClient: QueryClient,
     abortSignal?: AbortSignal,
-  ): Promise<string | null>;
+  ): Promise<string>;
 
   clear: () => Promise<void>;
 }
@@ -162,7 +163,7 @@ export const useAuthStore = create<AuthStore>()(
 
           // No credentials, no access token
           if (!current.credentials) {
-            return null;
+            throw new NotLoggedInError();
           }
 
           // Looks like it's not expired, return early with the access token
@@ -187,12 +188,12 @@ export const useAuthStore = create<AuthStore>()(
           return await navigator.locks.request(
             REFRESH_LOCK,
             { signal },
-            async (): Promise<string | null> => {
+            async (): Promise<string> => {
               const current = get();
 
               // Looks like we've got logged out in the meantime
               if (!current.credentials) {
-                return null;
+                throw new NotLoggedInError();
               }
 
               // Maybe we got refreshed in parallel in the meantime? Let's check again

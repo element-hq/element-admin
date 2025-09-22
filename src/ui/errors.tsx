@@ -21,12 +21,25 @@ import { FormattedMessage } from "react-intl";
 import { authMetadataQuery, revokeToken } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
 import { ButtonLink } from "@/components/link";
+import { LocalizedError } from "@/errors";
 import * as messages from "@/messages";
 import { useAuthStore } from "@/stores/auth";
 
 import styles from "./errors.module.css";
 
 function RenderError({ error }: { error: unknown }) {
+  if (error instanceof LocalizedError) {
+    return (
+      <Text title={error.stack}>
+        <FormattedMessage
+          {...error.localizedMessage}
+          values={error.localizedValues}
+        />
+        {error.cause && <RenderError error={error.cause} />}
+      </Text>
+    );
+  }
+
   if (error instanceof Error) {
     return (
       <>

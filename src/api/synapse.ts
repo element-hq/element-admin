@@ -1,8 +1,20 @@
+import type { QueryClient } from "@tanstack/react-query";
 import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
 import * as v from "valibot";
 
 import { PAGE_SIZE } from "@/constants";
 import { accessToken } from "@/stores/auth";
+import { ensureResponseOk, fetch } from "@/utils/fetch";
+
+const baseOptions = async (
+  client: QueryClient,
+  signal?: AbortSignal,
+): Promise<{ signal?: AbortSignal; headers: HeadersInit }> => ({
+  headers: {
+    Authorization: `Bearer ${await accessToken(client, signal)}`,
+  },
+  signal,
+});
 
 const ServerVersionResponse = v.object({
   server_version: v.string(),
@@ -105,22 +117,10 @@ export const serverVersionQuery = (synapseRoot: string) =>
   queryOptions({
     queryKey: ["serverVersion", synapseRoot],
     queryFn: async ({ client, signal }) => {
-      const token = await accessToken(client, signal);
-      if (!token) {
-        throw new Error("No access token");
-      }
-
       const url = new URL("/_synapse/admin/v1/server_version", synapseRoot);
-      const response = await fetch(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        signal,
-      });
+      const response = await fetch(url, await baseOptions(client, signal));
 
-      if (!response.ok) {
-        throw new Error("Failed to get server version");
-      }
+      ensureResponseOk(response);
 
       const serverVersion = v.parse(
         ServerVersionResponse,
@@ -138,11 +138,6 @@ export const roomsInfiniteQuery = (
   infiniteQueryOptions({
     queryKey: ["synapse", "rooms", "infinite", synapseRoot, parameters],
     queryFn: async ({ client, signal, pageParam }) => {
-      const token = await accessToken(client, signal);
-      if (!token) {
-        throw new Error("No access token");
-      }
-
       const url = new URL("/_synapse/admin/v1/rooms", synapseRoot);
 
       // Set limit to PAGE_SIZE for infinite queries
@@ -164,16 +159,9 @@ export const roomsInfiniteQuery = (
       if (parameters.empty_rooms !== undefined)
         url.searchParams.set("empty_rooms", String(parameters.empty_rooms));
 
-      const response = await fetch(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        signal,
-      });
+      const response = await fetch(url, await baseOptions(client, signal));
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch rooms");
-      }
+      ensureResponseOk(response);
 
       const rooms = v.parse(RoomsListResponse, await response.json());
 
@@ -188,23 +176,11 @@ export const roomsCountQuery = (synapseRoot: string) =>
   queryOptions({
     queryKey: ["synapse", "rooms-count", synapseRoot],
     queryFn: async ({ client, signal }) => {
-      const token = await accessToken(client, signal);
-      if (!token) {
-        throw new Error("No access token");
-      }
-
       const url = new URL("/_synapse/admin/v1/rooms?limit=0", synapseRoot);
 
-      const response = await fetch(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        signal,
-      });
+      const response = await fetch(url, await baseOptions(client, signal));
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch rooms");
-      }
+      ensureResponseOk(response);
 
       const rooms = v.parse(RoomsListResponse, await response.json());
 
@@ -216,26 +192,14 @@ export const roomDetailQuery = (synapseRoot: string, roomId: string) =>
   queryOptions({
     queryKey: ["synapse", "room", synapseRoot, roomId],
     queryFn: async ({ client, signal }) => {
-      const token = await accessToken(client, signal);
-      if (!token) {
-        throw new Error("No access token");
-      }
-
       const url = new URL(
         `/_synapse/admin/v1/rooms/${encodeURIComponent(roomId)}`,
         synapseRoot,
       );
 
-      const response = await fetch(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        signal,
-      });
+      const response = await fetch(url, await baseOptions(client, signal));
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch room details");
-      }
+      ensureResponseOk(response);
 
       const roomDetail = v.parse(RoomDetail, await response.json());
 
@@ -247,26 +211,14 @@ export const roomMembersQuery = (synapseRoot: string, roomId: string) =>
   queryOptions({
     queryKey: ["synapse", "roomMembers", synapseRoot, roomId],
     queryFn: async ({ client, signal }) => {
-      const token = await accessToken(client, signal);
-      if (!token) {
-        throw new Error("No access token");
-      }
-
       const url = new URL(
         `/_synapse/admin/v1/rooms/${encodeURIComponent(roomId)}/members`,
         synapseRoot,
       );
 
-      const response = await fetch(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        signal,
-      });
+      const response = await fetch(url, await baseOptions(client, signal));
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch room members");
-      }
+      ensureResponseOk(response);
 
       const roomMembers = v.parse(RoomMembers, await response.json());
 

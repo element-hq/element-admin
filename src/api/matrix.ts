@@ -1,7 +1,19 @@
+import type { QueryClient } from "@tanstack/react-query";
 import { queryOptions } from "@tanstack/react-query";
 import * as v from "valibot";
 
 import { accessToken } from "@/stores/auth";
+import { ensureResponseOk } from "@/utils/fetch";
+
+const baseOptions = async (
+  client: QueryClient,
+  signal?: AbortSignal,
+): Promise<{ signal?: AbortSignal; headers: HeadersInit }> => ({
+  headers: {
+    Authorization: `Bearer ${await accessToken(client, signal)}`,
+  },
+  signal,
+});
 
 const WellKnownResponse = v.object({
   "m.homeserver": v.object({
@@ -19,9 +31,7 @@ export const wellKnownQuery = (serverName: string) =>
       );
       const wkResponse = await fetch(wellKnown, { signal });
 
-      if (!wkResponse.ok) {
-        throw new Error("Failed to discover");
-      }
+      ensureResponseOk(wkResponse);
 
       const wkData = v.parse(WellKnownResponse, await wkResponse.json());
 
@@ -37,23 +47,16 @@ export const whoamiQuery = (synapseRoot: string) =>
   queryOptions({
     queryKey: ["matrix", "whoami", synapseRoot],
     queryFn: async ({ client, signal }) => {
-      const token = await accessToken(client, signal);
-      if (!token) {
-        throw new Error("No access token");
-      }
-
       const whoamiUrl = new URL(
         "/_matrix/client/v3/account/whoami",
         synapseRoot,
       );
-      const response = await fetch(whoamiUrl, {
-        signal,
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await fetch(
+        whoamiUrl,
+        await baseOptions(client, signal),
+      );
 
-      if (!response.ok) {
-        throw new Error("Failed to call whoami");
-      }
+      ensureResponseOk(response);
 
       const whoamiData = v.parse(WhoamiResponse, await response.json());
 
@@ -70,28 +73,21 @@ export const profileQuery = (synapseRoot: string, mxid: string) =>
   queryOptions({
     queryKey: ["matrix", "profile", synapseRoot, mxid],
     queryFn: async ({ client, signal }) => {
-      const token = await accessToken(client, signal);
-      if (!token) {
-        throw new Error("No access token");
-      }
-
       const profileUrl = new URL(
         `/_matrix/client/v3/profile/${encodeURIComponent(mxid)}`,
         synapseRoot,
       );
-      const response = await fetch(profileUrl, {
-        signal,
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await fetch(
+        profileUrl,
+        await baseOptions(client, signal),
+      );
 
       // Special case: if we get a 404, it might be fine, just return an empty profile
       if (response.status === 404) {
         return {};
       }
 
-      if (!response.ok) {
-        throw new Error(`Failed to fetch profile for ${mxid}`);
-      }
+      ensureResponseOk(response);
 
       const profileData = v.parse(ProfileResponse, await response.json());
 
@@ -125,25 +121,15 @@ export const mediaThumbnailQuery = (
         throw new Error("No mxc set");
       }
 
-      const token = await accessToken(client, signal);
-      if (!token) {
-        throw new Error("No access token");
-      }
-
       const [serverName, mediaId] = parseMxcUrl(mxc);
 
       const mediaUrl = new URL(
         `/_matrix/media/v3/thumbnail/${encodeURIComponent(serverName)}/${encodeURIComponent(mediaId)}?width=96&height=96&method=crop`,
         synapseRoot,
       );
-      const response = await fetch(mediaUrl, {
-        signal,
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await fetch(mediaUrl, await baseOptions(client, signal));
 
-      if (!response.ok) {
-        throw new Error(`Failed to fetch media thumbnail for ${mxc}`);
-      }
+      ensureResponseOk(response);
 
       const mediaData = await response.blob();
 

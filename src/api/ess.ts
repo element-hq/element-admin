@@ -4,6 +4,7 @@ import parseSemver from "semver/functions/parse";
 import * as v from "valibot";
 
 import { accessToken } from "@/stores/auth";
+import { ensureResponseOk, fetch } from "@/utils/fetch";
 
 const VersionResponse = v.object({
   version: v.fallback(
@@ -25,10 +26,6 @@ export const essVersionQuery = (synapseRoot: string) =>
       const versionUrl = new URL("/_synapse/ess/version", synapseRoot);
       try {
         const token = await accessToken(client, signal);
-        if (!token) {
-          throw new Error("No access token");
-        }
-
         const response = await fetch(versionUrl, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -36,9 +33,7 @@ export const essVersionQuery = (synapseRoot: string) =>
           signal,
         });
 
-        if (!response.ok) {
-          throw new Error("/_synapse/ess/version returned an error");
-        }
+        ensureResponseOk(response);
 
         const versionData = v.parse(VersionResponse, await response.json());
 

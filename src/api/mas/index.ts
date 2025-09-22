@@ -8,11 +8,14 @@ import { authMetadataQuery } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
 import { PAGE_SIZE } from "@/constants";
 import { accessToken } from "@/stores/auth";
+import { fetch } from "@/utils/fetch";
 
 import * as api from "./api";
 import { createClient, type Client } from "./api/client";
 
-const masClient = createClient();
+const masClient = createClient({
+  fetch,
+});
 
 export const isErrorResponse = (t: unknown): t is api.ErrorResponse =>
   typeof t === "object" && t !== null && Object.hasOwn(t, "errors");
@@ -29,10 +32,6 @@ const masBaseOptions = async (
   signal?: AbortSignal;
 }> => {
   const token = await accessToken(client, signal);
-  if (!token) {
-    throw new Error("No access token");
-  }
-
   const wellKnown = await client.ensureQueryData(wellKnownQuery(serverName));
 
   const authMetadata = await client.ensureQueryData(

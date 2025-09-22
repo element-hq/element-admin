@@ -2,6 +2,8 @@ import { queryOptions } from "@tanstack/react-query";
 import parseSemver from "semver/functions/parse";
 import * as v from "valibot";
 
+import { ensureResponseOk, fetch } from "@/utils/fetch";
+
 const ReleaseResponse = v.object({
   html_url: v.string(),
   name: v.string(),
@@ -26,11 +28,7 @@ export const githubReleaseQuery = (repo: string, release: string) =>
         signal,
       });
 
-      if (!response.ok) {
-        throw new Error(
-          `Failed to fetch GitHub release ${release} for ${repo}`,
-        );
-      }
+      ensureResponseOk(response);
 
       const releaseData = v.parse(ReleaseResponse, await response.json());
 

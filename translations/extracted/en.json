@@ -35,6 +35,22 @@
     "description": "Label for a filter section/button",
     "message": "Filter"
   },
+  "errors.http_fetch": {
+    "description": "Generic error message when we fail to make a request to the specified URL",
+    "message": "Request to {url} failed"
+  },
+  "errors.http_fetch_json_decoding": {
+    "description": "Error message when we fail to decode a JSON response from the specified URL",
+    "message": "Failed to decode JSON response from {url}"
+  },
+  "errors.http_status": {
+    "description": "Generic error message when we fail to make a request to the specified URL. Typical values for 'status' are '404' or '500', typical values for 'statusText' are 'Not Found' or 'Internal Server Error'",
+    "message": "Request to {url} failed with status code {status} {statusText}"
+  },
+  "errors.not_logged_in": {
+    "description": "Error message when a request was sent which was supposed to be authenticated, but turns out that the user is not logged in. This is a rare error, usually because of a race-condition during login or logout.",
+    "message": "Not logged in"
+  },
   "footer.copyright_notice": {
     "description": "The copyright notice on the footer",
     "message": "Copyright © {now, date, ::yyyy}"

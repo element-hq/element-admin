@@ -1,6 +1,8 @@
 import { queryOptions } from "@tanstack/react-query";
 import * as v from "valibot";
 
+import { ensureResponseOk, fetch } from "@/utils/fetch";
+
 const AuthMetadataResponse = v.object({
   issuer: v.string(),
   authorization_endpoint: v.string(),
@@ -23,9 +25,7 @@ export const authMetadataQuery = (synapseRoot: string) =>
       );
       const response = await fetch(authMetadataUrl, { signal });
 
-      if (!response.ok) {
-        throw new Error("Failed to discover");
-      }
+      ensureResponseOk(response);
 
       const authMetadata = v.parse(AuthMetadataResponse, await response.json());
 
@@ -61,9 +61,7 @@ export const clientRegistration = async (
     signal,
   });
 
-  if (!response.ok) {
-    throw new Error("Failed to register client");
-  }
+  ensureResponseOk(response);
 
   const clientRegistrationData = v.parse(
     ClientRegistrationResponse,
@@ -107,9 +105,7 @@ export const tokenRequest = async (
     signal,
   });
 
-  if (!response.ok) {
-    throw new Error("Failed to get token");
-  }
+  ensureResponseOk(response);
 
   const tokenData = v.parse(TokenResponse, await response.json());
 
@@ -135,7 +131,5 @@ export const revokeToken = async (
     signal,
   });
 
-  if (!response.ok) {
-    throw new Error("Failed to revoke token");
-  }
+  ensureResponseOk(response);
 };
