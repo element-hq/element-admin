@@ -8,7 +8,7 @@ import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Badge, CheckboxMenuItem, Text } from "@vector-im/compound-web";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import { defineMessage, FormattedMessage } from "react-intl";
 import * as v from "valibot";
 
@@ -104,9 +104,6 @@ const omit = <T extends Record<string, unknown>, K extends keyof T>(
   ) as Omit<T, K>;
 
 function RouteComponent() {
-  // FIXME: TanStack Table and the React compiler don't play well
-  "use no memo";
-
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
@@ -255,6 +252,10 @@ function RouteComponent() {
     manualSorting: true,
   });
 
+  // This prevents the compiler from optimizing the table
+  // See https://github.com/TanStack/table/issues/5567
+  const tableRef = useRef(table);
+
   return (
     <Navigation.Root>
       <AppNavigation />
@@ -354,7 +355,7 @@ function RouteComponent() {
             </Table.Header>
 
             <Table.VirtualizedList
-              table={table}
+              table={tableRef.current}
               canFetchNextPage={hasNextPage && !isFetching}
               fetchNextPage={fetchNextPage}
             />

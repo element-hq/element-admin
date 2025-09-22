@@ -144,10 +144,6 @@ export const VirtualizedList = forwardRef<HTMLDivElement, VirtualizedListProps>(
     { fetchNextPage, canFetchNextPage, table, className, style, ...props },
     ref,
   ) {
-    // There are behaviours in this component that the react compiler doesn't
-    // handle how we exepct, so we opt out from it
-    "use no memo";
-
     const headerRef = useRef<HTMLTableSectionElement | null>(null);
     const listRef = useRef<HTMLTableSectionElement | null>(null);
     const { rows } = table.getRowModel();
@@ -167,7 +163,11 @@ export const VirtualizedList = forwardRef<HTMLDivElement, VirtualizedListProps>(
         globalThis.window.scrollY,
     });
 
-    const virtualItems = rowVirtualizer.getVirtualItems();
+    // Prevent the compiler from optimizing it
+    // See https://github.com/TanStack/virtual/issues/743
+    const rowVirtualizerRef = useRef(rowVirtualizer);
+
+    const virtualItems = rowVirtualizerRef.current.getVirtualItems();
 
     useEffect(() => {
       const lastVirtualItem = virtualItems.at(-1);
@@ -183,7 +183,7 @@ export const VirtualizedList = forwardRef<HTMLDivElement, VirtualizedListProps>(
       <div
         className={cx(styles["list"], className)}
         style={{
-          height: `${rowVirtualizer.getTotalSize() + (headerRef.current?.clientHeight ?? 40)}px`,
+          height: `${rowVirtualizerRef.current.getTotalSize() + (headerRef.current?.clientHeight ?? 40)}px`,
           ...style,
         }}
         {...props}
@@ -206,7 +206,7 @@ export const VirtualizedList = forwardRef<HTMLDivElement, VirtualizedListProps>(
                     transform: `translateY(${
                       virtualRow.start -
                       index * virtualRow.size -
-                      rowVirtualizer.options.scrollMargin
+                      rowVirtualizerRef.current.options.scrollMargin
                     }px)`,
                   }}
                 >

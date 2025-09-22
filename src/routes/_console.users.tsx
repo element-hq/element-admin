@@ -19,7 +19,7 @@ import {
   InlineSpinner,
   Text,
 } from "@vector-im/compound-web";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 import * as v from "valibot";
@@ -334,9 +334,6 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
 };
 
 function RouteComponent() {
-  // FIXME: TanStack Table and the React compiler don't play well
-  "use no memo";
-
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
@@ -460,6 +457,10 @@ function RouteComponent() {
     getCoreRowModel: getCoreRowModel(),
     manualSorting: true,
   });
+
+  // This prevents the compiler from optimizing the table
+  // See https://github.com/TanStack/table/issues/5567
+  const tableRef = useRef(table);
 
   return (
     <Navigation.Root>
@@ -615,7 +616,7 @@ function RouteComponent() {
             </Table.Header>
 
             <Table.VirtualizedList
-              table={table}
+              table={tableRef.current}
               canFetchNextPage={hasNextPage && !isFetching}
               fetchNextPage={fetchNextPage}
             />
