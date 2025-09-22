@@ -104,6 +104,9 @@ const omit = <T extends Record<string, unknown>, K extends keyof T>(
   ) as Omit<T, K>;
 
 function RouteComponent() {
+  // FIXME: TanStack Table and the React compiler don't play well
+  "use no memo";
+
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
   const navigate = Route.useNavigate();

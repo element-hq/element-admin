@@ -334,6 +334,9 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
 };
 
 function RouteComponent() {
+  // FIXME: TanStack Table and the React compiler don't play well
+  "use no memo";
+
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
