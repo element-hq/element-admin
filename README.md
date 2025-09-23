@@ -21,15 +21,22 @@ Developers and users of Element Admin can chat in the [#ess-community:element.io
 Element Admin ships as part of the [Element Server Suite](https://element.io/server-suite) and is enabled by default, starting version 25.9.2.
 Refer to the [ESS setup instructions](https://github.com/element-hq/ess-helm#installation) for more information.
 
-### 📝 Prerequisites for manual installations
+### 📝 Prerequisites
 
-Element Admin is a single-page application, which can be deployed as static files to any web server or hosting platform, outside of the Element Server Suite if needed.
+Element Admin works assuming the following:
 
 - A [Synapse](https://github.com/element-hq/synapse) instance and [its admin API](https://element-hq.github.io/synapse/latest/reverse_proxy.html#synapse-administration-endpoints) accessible
 - A [Matrix Authentication Service](https://github.com/element-hq/matrix-authentication-service) instance with [its admin API](https://element-hq.github.io/matrix-authentication-service/topics/admin-api.html#enabling-the-api) accessible
 - An domain name with a valid SSL certificate (HTTPS) where to host Element Admin. It _must_ be served from a secure context, as required by the next-generation auth Matrix APIs.
 
+Under the hood, Element Admin is a single-page application React application which can be deployed in any static hosting service or container environment.
+
+<details>
+<summary>
+
 #### 🐳 Using Docker
+
+</summary>
 
 A pre-built Docker image is available on [GitHub Container Registry](https://github.com/element-hq/element-admin/pkgs/container/element-admin).
 
@@ -43,7 +50,20 @@ It can be configured using the following environment variables:
 | ------------- | --------------------------------------------------------------------------------------------------- |
 | `SERVER_NAME` | The name of the Matrix server to use. If not set, the user will be prompted to enter a server name. |
 
-#### 📦 From the source
+A local Docker image can be built from the source code using the following command:
+
+```bash
+docker build -t element-admin .
+```
+
+</details>
+
+<details>
+<summary>
+
+#### 📦 Building from the source code
+
+</summary>
 
 1. Clone the repository:
 
@@ -65,6 +85,8 @@ pnpm build
 ```
 
 The built application will be in the `dist/` directory, ready to be deployed to any static hosting service.
+
+</details>
 
 ## 🌍 Translations
 
