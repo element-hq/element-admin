@@ -37,23 +37,25 @@ export function App() {
         </QueryClientProvider>
       </Suspense>
 
-      <TanStackDevtools
-        eventBusConfig={{ connectToServerBus: true }}
-        plugins={[
-          {
-            name: "TanStack Query",
-            render: <ReactQueryDevtoolsPanel client={queryClient} />,
-          },
-          {
-            name: "TanStack Router",
-            render: <TanStackRouterDevtoolsPanel router={router} />,
-          },
-          {
-            name: "TanStack Pacer",
-            render: (_element, theme) => <PacerDevtoolsPanel theme={theme} />,
-          },
-        ]}
-      />
+      {import.meta.env.DEV && (
+        <TanStackDevtools
+          eventBusConfig={{ connectToServerBus: true }}
+          plugins={[
+            {
+              name: "TanStack Query",
+              render: <ReactQueryDevtoolsPanel client={queryClient} />,
+            },
+            {
+              name: "TanStack Router",
+              render: <TanStackRouterDevtoolsPanel router={router} />,
+            },
+            {
+              name: "TanStack Pacer",
+              render: (_element, theme) => <PacerDevtoolsPanel theme={theme} />,
+            },
+          ]}
+        />
+      )}
     </StrictMode>
   );
 }
