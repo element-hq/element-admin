@@ -22,10 +22,10 @@ Element Admin is a single-page application (SPA) built with React and TypeScript
 
 ### 🐳 Using Docker
 
-A pre-built Docker image is available on [GitHub Container Registry](https://github.com/element-hq/element-admin/pkgs/container/element-admin-console).
+A pre-built Docker image is available on [GitHub Container Registry](https://github.com/element-hq/element-admin/pkgs/container/element-admin).
 
 ```bash
-docker run -p 8080:8080 ghcr.io/element-hq/element-admin-console:main
+docker run -p 8080:8080 ghcr.io/element-hq/element-admin:main
 ```
 
 It can be configured using the following environment variables:
@@ -60,7 +60,7 @@ The built application will be in the `dist/` directory, ready to be deployed to 
 ## 🌍 Translations
 
 Element Admin Console is available in multiple languages.
-Anyone can contribute to translations through [Localazy](https://localazy.com/p/element-admin-console).
+Anyone can contribute to translations through [Localazy](https://localazy.com/p/element-admin).
 
 ## 🏗️ Contributing
 
