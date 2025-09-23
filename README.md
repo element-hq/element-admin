@@ -14,12 +14,27 @@ Developers and users of Element Admin can chat in the [#ess-community:element.io
 
 Element Admin is a single-page application (SPA) built with React and TypeScript. It can be deployed as static files to any web server or hosting platform.
 
-### Prerequisites
+### 📝 Prerequisites
 
-- A Matrix homeserver with [Synapse](https://github.com/element-hq/synapse) and the [Synapse admin API](https://element-hq.github.io/synapse/latest/reverse_proxy.html#synapse-administration-endpoints) accessible
-- A [Matrix Authentication Service](https://github.com/element-hq/matrix-authentication-service) instance with the [MAS admin API](https://element-hq.github.io/matrix-authentication-service/topics/admin-api.html#enabling-the-api) accessible
+- A [Synapse](https://github.com/element-hq/synapse) instance and [its admin API](https://element-hq.github.io/synapse/latest/reverse_proxy.html#synapse-administration-endpoints) accessible
+- A [Matrix Authentication Service](https://github.com/element-hq/matrix-authentication-service) instance with [its admin API](https://element-hq.github.io/matrix-authentication-service/topics/admin-api.html#enabling-the-api) accessible
+- An domain name with a valid SSL certificate (HTTPS) where to host Element Admin. It _must_ be served from a secure context, as required by the next-generation auth Matrix APIs.
 
-### Development
+### 🐳 Using Docker
+
+A pre-built Docker image is available on [GitHub Container Registry](https://github.com/element-hq/element-admin/pkgs/container/element-admin-console).
+
+```bash
+docker run -p 8080:8080 ghcr.io/element-hq/element-admin-console:main
+```
+
+It can be configured using the following environment variables:
+
+| Variable      | Description                                                                                         |
+| ------------- | --------------------------------------------------------------------------------------------------- |
+| `SERVER_NAME` | The name of the Matrix server to use. If not set, the user will be prompted to enter a server name. |
+
+### 📦 From the source
 
 1. Clone the repository:
 
@@ -34,15 +49,7 @@ cd element-admin
 pnpm install
 ```
 
-3. Start the development server:
-
-```bash
-pnpm dev
-```
-
-The application will be available at `http://localhost:3000`.
-
-### Building for production
+3. Build the application
 
 ```bash
 pnpm build
