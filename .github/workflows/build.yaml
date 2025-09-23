@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  IMAGE: ghcr.io/element-hq/element-admin-console
+  IMAGE: ghcr.io/element-hq/element-admin
 
 jobs:
   build:
