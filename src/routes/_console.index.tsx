@@ -1,9 +1,7 @@
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { H3, Separator, Text } from "@vector-im/compound-web";
-import { lazy } from "react";
 import { defineMessage, FormattedMessage } from "react-intl";
-import incSemver from "semver/functions/inc";
 
 import { useEssVersion } from "@/api/ess";
 import { githubReleaseQuery } from "@/api/github";
@@ -15,8 +13,6 @@ import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import AppFooter from "@/ui/footer";
 import AppNavigation from "@/ui/navigation";
-
-const ReleaseNotes = lazy(() => import("@/components/gfm"));
 
 const titleMessage = defineMessage({
   id: "pages.dashboard.title",
@@ -50,8 +46,6 @@ export const Route = createFileRoute("/_console/")({
       registeredUsersCountQuery(credentials.serverName),
     );
     queryClient.prefetchQuery(latestEssReleaseQuery);
-    // Also trigger the preloading of the Gfm component
-    import("@/components/gfm");
   },
   component: RouteComponent,
 });
@@ -90,18 +84,6 @@ const LatestEssRelease: React.FC<LatestEssReleaseProps> = ({
       </Text>
     </Data.Value>
   );
-};
-
-interface EssReleaseNotesProps {
-  version: string;
-}
-const EssReleaseNotes: React.FC<EssReleaseNotesProps> = ({
-  version,
-}: EssReleaseNotesProps) => {
-  const { data } = useSuspenseQuery(
-    githubReleaseQuery("element-hq/ess-helm", version),
-  );
-  return <ReleaseNotes markdown={data.body} repo="element-hq/ess-helm" />;
 };
 
 interface SynapseVersionProps {
@@ -148,14 +130,6 @@ function RouteComponent() {
   if (latestEssRelease?.tag_name && essVersion) {
     isUsingLatest = essVersion.compareMain(latestEssRelease.tag_name) >= 0;
   }
-  let releaseNotesToLoad = "latest";
-  if (!isUsingLatest && essVersion) {
-    // Grab the main version from the preversion
-    const cleanedUpVersion =
-      (essVersion.prerelease.length > 0 && incSemver(essVersion, "release")) ||
-      essVersion.toString();
-    releaseNotesToLoad = `tags/${cleanedUpVersion}`;
-  }
 
   return (
     <Navigation.Root>
@@ -182,7 +156,7 @@ function RouteComponent() {
                     <Data.Title>
                       <FormattedMessage
                         id="pages.dashboard.current_ess_version"
-                        defaultMessage="Your current ESS version"
+                        defaultMessage="ESS version"
                         description="On the dashboard, this shows the current ESS version"
                       />
                     </Data.Title>
@@ -192,8 +166,8 @@ function RouteComponent() {
                   <Data.Item>
                     <Data.Title>
                       <FormattedMessage
-                        id="pages.dashboard.latest_ess_release"
-                        defaultMessage="Latest ESS release"
+                        id="pages.dashboard.latest_ess_version"
+                        defaultMessage="Latest ESS version"
                         description="On the dashboard, this shows the latest ESS release"
                       />
                     </Data.Title>
@@ -244,23 +218,6 @@ function RouteComponent() {
               </Data.Item>
             </Data.Grid>
           </section>
-
-          {!!essVersion && (
-            <Data.Item>
-              <Data.Title>
-                <FormattedMessage
-                  id="pages.dashboard.latest_ess_release_notes"
-                  defaultMessage="What's new in ESS"
-                  description="On the dashboard, this shows the latest ESS release notes"
-                />
-              </Data.Title>
-              <Data.DynamicValue>
-                <section>
-                  <EssReleaseNotes version={releaseNotesToLoad} />
-                </section>
-              </Data.DynamicValue>
-            </Data.Item>
-          )}
         </Navigation.Main>
 
         <AppFooter />

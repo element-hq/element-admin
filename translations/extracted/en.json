@@ -93,15 +93,11 @@
   },
   "pages.dashboard.current_ess_version": {
     "description": "On the dashboard, this shows the current ESS version",
-    "message": "Your current ESS version"
+    "message": "ESS version"
   },
-  "pages.dashboard.latest_ess_release": {
+  "pages.dashboard.latest_ess_version": {
     "description": "On the dashboard, this shows the latest ESS release",
-    "message": "Latest ESS release"
-  },
-  "pages.dashboard.latest_ess_release_notes": {
-    "description": "On the dashboard, this shows the latest ESS release notes",
-    "message": "What's new in ESS"
+    "message": "Latest ESS version"
   },
   "pages.dashboard.new_ess_release": {
     "description": "On the dashboard, this shows that there is a new ESS release available",
