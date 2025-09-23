@@ -26,6 +26,18 @@
   "common.filter": {
     "message": "Filter"
   },
+  "errors.http_fetch": {
+    "message": "Request to {url} failed"
+  },
+  "errors.http_fetch_json_decoding": {
+    "message": "Failed to decode JSON response from {url}"
+  },
+  "errors.http_status": {
+    "message": "Request to {url} failed with status code {status} {statusText}"
+  },
+  "errors.not_logged_in": {
+    "message": "Not logged in"
+  },
   "footer.copyright_notice": {
     "message": "Copyright © {now, date, ::yyyy}"
   },
@@ -57,13 +69,10 @@
     "message": "Users"
   },
   "pages.dashboard.current_ess_version": {
-    "message": "Your current ESS version"
+    "message": "ESS version"
   },
-  "pages.dashboard.latest_ess_release": {
-    "message": "Latest ESS release"
-  },
-  "pages.dashboard.latest_ess_release_notes": {
-    "message": "What's new in ESS"
+  "pages.dashboard.latest_ess_version": {
+    "message": "Latest ESS version"
   },
   "pages.dashboard.new_ess_release": {
     "message": "(New release)"
@@ -101,8 +110,14 @@
   "pages.landing.description": {
     "message": "Manage the deployment of the element app for your organization or community."
   },
-  "pages.login.failed_to_reach": {
-    "message": "Failed to reach server"
+  "pages.login.errors.no_auth_metadata": {
+    "message": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
+  },
+  "pages.login.errors.no_client_metadata": {
+    "message": "Failed to register the client. Matrix Authentication Service may be unreachable or misconfigured."
+  },
+  "pages.login.errors.no_well_known": {
+    "message": "Failed to load the server's well-known document. The server name may be invalid."
   },
   "pages.login.get_started": {
     "message": "Get started"

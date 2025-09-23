@@ -12,7 +12,7 @@
     "message": "Zurück"
   },
   "action.remove": {
-    "message": "Remove"
+    "message": "Entfernen"
   },
   "action.retry": {
     "message": "Erneut versuchen"
@@ -21,10 +21,22 @@
     "message": "Abmelden"
   },
   "common.email_address": {
-    "message": "Email address"
+    "message": "E-Mail Adresse"
   },
   "common.filter": {
     "message": "Filter"
+  },
+  "errors.http_fetch": {
+    "message": "Anfrage an {url} fehlgeschlagen"
+  },
+  "errors.http_fetch_json_decoding": {
+    "message": "JSON-Antwort von {url} konnte nicht dekodiert werden"
+  },
+  "errors.http_status": {
+    "message": "Anfrage an {url} fehlgeschlagen mit Statuscode {status} {statusText}"
+  },
+  "errors.not_logged_in": {
+    "message": "Nicht angemeldet"
   },
   "footer.copyright_notice": {
     "message": "Copyright © {now, date, ::yyyy}"
@@ -57,13 +69,10 @@
     "message": "Nutzer"
   },
   "pages.dashboard.current_ess_version": {
-    "message": "Deine aktuelle ESS-Version"
+    "message": "ESS-Version"
   },
-  "pages.dashboard.latest_ess_release": {
+  "pages.dashboard.latest_ess_version": {
     "message": "Neueste ESS-Version"
-  },
-  "pages.dashboard.latest_ess_release_notes": {
-    "message": "Was ist neu in ESS"
   },
   "pages.dashboard.new_ess_release": {
     "message": "(Neues Release)"
@@ -101,8 +110,14 @@
   "pages.landing.description": {
     "message": "Verwalte die Bereitstellung der Element-App für deine Organisation oder Community."
   },
-  "pages.login.failed_to_reach": {
-    "message": "Server konnte nicht erreicht werden"
+  "pages.login.errors.no_auth_metadata": {
+    "message": "Das Laden der Metadaten des Servers für die Authentifizierung ist fehlgeschlagen. Der Homeserver ist möglicherweise nicht erreichbar oder nicht für die Verwendung des Matrix Authentication Service konfiguriert."
+  },
+  "pages.login.errors.no_client_metadata": {
+    "message": "Die Registrierung der Anwendung ist fehlgeschlagen. Der Matrix Authentication Service ist möglicherweise nicht erreichbar oder falsch konfiguriert."
+  },
+  "pages.login.errors.no_well_known": {
+    "message": "Das \"well-known\" Dokument des Servers konnte nicht geladen werden. Der Servername ist möglicherweise ungültig."
   },
   "pages.login.get_started": {
     "message": "Los geht's"
@@ -255,37 +270,37 @@
     "message": "Chats"
   },
   "pages.users.add_email.button": {
-    "message": "Add email address"
+    "message": "E-Mail hinzufügen"
   },
   "pages.users.add_email.description": {
-    "message": "Add an email address to this user"
+    "message": "Füge diesem Nutzer eine E-Mail-Adresse hinzu"
   },
   "pages.users.add_email.error": {
-    "message": "Failed to add email address"
+    "message": "E-Mail-Adresse konnte nicht hinzugefügt werden"
   },
   "pages.users.add_email.error.email_invalid": {
-    "message": "Invalid email address"
+    "message": "Ungültige E-Mail Adresse"
   },
   "pages.users.add_email.error.email_missing": {
-    "message": "This field is required"
+    "message": "Dies ist ein Pflichtfeld"
   },
   "pages.users.add_email.success": {
-    "message": "Email address added"
+    "message": "E-Mail Adresse hinzugefügt"
   },
   "pages.users.add_email.title": {
-    "message": "Add email address"
+    "message": "E-Mail Adresse hinzufügen"
   },
   "pages.users.add_upstream_link.error": {
-    "message": "Failed to add link upstream account"
+    "message": "Fehler beim Verbinden des Upstream-Kontos"
   },
   "pages.users.add_upstream_link.success": {
-    "message": "Link to upstream account added"
+    "message": "Link zum Upstream-Konto hinzugefügt"
   },
   "pages.users.deactivate_account.alert.description": {
-    "message": "Der Nutzer wird durch diese Aktion automatisch von allen Geräten abgemeldet, alle Zugriffstoken werden entfernt, alle IDs von Drittanbietern werden gelöscht und die Kontodaten werden dauerhaft gelöscht."
+    "message": "Der Nutzer wird durch diese Aktion automatisch von allen Geräten abgemeldet, alle Zugriffstoken werden entfernt, alle IDs von Drittanbietern werden entfernt und die Kontodaten werden dauerhaft entfernt."
   },
   "pages.users.deactivate_account.alert.title": {
-    "message": "Du bist dabei, Nutzerdaten zu löschen"
+    "message": "Du bist dabei, Nutzerdaten zu entfernen"
   },
   "pages.users.deactivate_account.button": {
     "message": "Nutzerkonto deaktivieren"
@@ -300,28 +315,28 @@
     "message": "Diesen Nutzer deaktivieren?"
   },
   "pages.users.delete_email.description": {
-    "message": "Are you sure you want to remove this email address ({email}) from this user ({mxid})?"
+    "message": "Soll diese E-Mail-Adresse ({email}) von diesem Nutzer ({mxid}) wirklich entfernt werden?"
   },
   "pages.users.delete_email.error": {
-    "message": "Failed to delete email address"
+    "message": "E-Mail Adresse konnte nicht entfernt werden"
   },
   "pages.users.delete_email.success": {
-    "message": "Email address deleted"
+    "message": "E-Mail Adresse entfernt"
   },
   "pages.users.delete_email.title": {
-    "message": "Remove email address?"
+    "message": "E-Mail Adresse entfernen?"
   },
   "pages.users.delete_upstream_link.description": {
-    "message": "Are you sure you want to remove the link between this user ({mxid}) with this upstream account ({subject})?"
+    "message": "Soll die Verbindung zwischen diesem Nutzer ({mxid}) mit diesem Upstream-Konto ({subject}) wirklich entfernt werden?"
   },
   "pages.users.delete_upstream_link.error": {
-    "message": "Failed to delete upstream link"
+    "message": "Upstream-Verbindung konnte nicht entfernt werden"
   },
   "pages.users.delete_upstream_link.success": {
-    "message": "Upstream link deleted"
+    "message": "Upstream-Verbindung entfernt"
   },
   "pages.users.delete_upstream_link.title": {
-    "message": "Remove link with upstream account?"
+    "message": "Verbindung mit dem Upstream-Konto entfernen?"
   },
   "pages.users.lock_account.alert.description": {
     "message": "Dieser Nutzer wird automatisch auf allen angemeldeten Geräten gesperrt und kann sich erst bei neuen Geräten anmelden, wenn diese entsperrt wurden."

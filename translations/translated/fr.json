@@ -26,6 +26,18 @@
   "common.filter": {
     "message": "Filtre"
   },
+  "errors.http_fetch": {
+    "message": "La requête vers {url} n'a pas abouti"
+  },
+  "errors.http_fetch_json_decoding": {
+    "message": "Impossible de décoder la réponse JSON provenant de {url}"
+  },
+  "errors.http_status": {
+    "message": "La requête vers {url} n'a pas abouti avec le code d'état {status} {statusText}"
+  },
+  "errors.not_logged_in": {
+    "message": "Déconnecté"
+  },
   "footer.copyright_notice": {
     "message": "Copyright © {now, date, ::yyyy}"
   },
@@ -57,13 +69,10 @@
     "message": "Utilisateurs"
   },
   "pages.dashboard.current_ess_version": {
-    "message": "Votre version actuelle d'ESS"
+    "message": "Version d'ESS"
   },
-  "pages.dashboard.latest_ess_release": {
+  "pages.dashboard.latest_ess_version": {
     "message": "Dernière version d'ESS"
-  },
-  "pages.dashboard.latest_ess_release_notes": {
-    "message": "Nouveautés dans ESS"
   },
   "pages.dashboard.new_ess_release": {
     "message": "(Nouvelle version)"
@@ -101,8 +110,14 @@
   "pages.landing.description": {
     "message": "Gérez le déploiement d'element pour votre organisation ou votre communauté."
   },
-  "pages.login.failed_to_reach": {
-    "message": "Impossible de joindre le serveur"
+  "pages.login.errors.no_auth_metadata": {
+    "message": "Impossible de charger les métadonnées d'authentification du serveur. Synapse est peut-être inaccessible ou pas configuré pour utiliser Matrix Authentication Service."
+  },
+  "pages.login.errors.no_client_metadata": {
+    "message": "Impossible d'enregistrer l'application. Matrix Authentication Service est peut-être inaccessible ou mal configuré."
+  },
+  "pages.login.errors.no_well_known": {
+    "message": "Impossible de charger le document de découverte du serveur. Le nom du serveur est peut-être invalide."
   },
   "pages.login.get_started": {
     "message": "Commencer"

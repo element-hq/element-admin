@@ -53,6 +53,62 @@
       "value": "Filter"
     }
   ],
+  "errors.http_fetch": [
+    {
+      "type": 0,
+      "value": "Request to "
+    },
+    {
+      "type": 1,
+      "value": "url"
+    },
+    {
+      "type": 0,
+      "value": " failed"
+    }
+  ],
+  "errors.http_fetch_json_decoding": [
+    {
+      "type": 0,
+      "value": "Failed to decode JSON response from "
+    },
+    {
+      "type": 1,
+      "value": "url"
+    }
+  ],
+  "errors.http_status": [
+    {
+      "type": 0,
+      "value": "Request to "
+    },
+    {
+      "type": 1,
+      "value": "url"
+    },
+    {
+      "type": 0,
+      "value": " failed with status code "
+    },
+    {
+      "type": 1,
+      "value": "status"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "statusText"
+    }
+  ],
+  "errors.not_logged_in": [
+    {
+      "type": 0,
+      "value": "Not logged in"
+    }
+  ],
   "footer.copyright_notice": [
     {
       "type": 0,
@@ -127,19 +183,13 @@
   "pages.dashboard.current_ess_version": [
     {
       "type": 0,
-      "value": "Your current ESS version"
+      "value": "ESS version"
     }
   ],
-  "pages.dashboard.latest_ess_release": [
+  "pages.dashboard.latest_ess_version": [
     {
       "type": 0,
-      "value": "Latest ESS release"
-    }
-  ],
-  "pages.dashboard.latest_ess_release_notes": [
-    {
-      "type": 0,
-      "value": "What's new in ESS"
+      "value": "Latest ESS version"
     }
   ],
   "pages.dashboard.new_ess_release": [
@@ -222,10 +272,22 @@
       "value": "Manage the deployment of the element app for your organization or community."
     }
   ],
-  "pages.login.failed_to_reach": [
+  "pages.login.errors.no_auth_metadata": [
     {
       "type": 0,
-      "value": "Failed to reach server"
+      "value": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
+    }
+  ],
+  "pages.login.errors.no_client_metadata": [
+    {
+      "type": 0,
+      "value": "Failed to register the client. Matrix Authentication Service may be unreachable or misconfigured."
+    }
+  ],
+  "pages.login.errors.no_well_known": [
+    {
+      "type": 0,
+      "value": "Failed to load the server's well-known document. The server name may be invalid."
     }
   ],
   "pages.login.get_started": [
