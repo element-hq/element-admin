@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: Copyright 2025 New Vector Ltd.
+//
+// SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+
 import { PublicIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Button, Tooltip } from "@vector-im/compound-web";
 import { forwardRef, useState, useTransition } from "react";

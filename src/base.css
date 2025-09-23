@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: Copyright 2025 New Vector Ltd.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+ */
+
 @import "tailwindcss";
 
 /* Duplicate a few base variables from compound in the critical CSS */

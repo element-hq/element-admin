@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: Copyright 2025 New Vector Ltd.
+//
+// SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+
 import { FetchError, FetchJsonDecodingError, HttpStatusError } from "@/errors";
 
 /* Our cursom fetch function, which wraps the errors with the original request URL */

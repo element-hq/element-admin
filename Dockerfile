@@ -1,5 +1,9 @@
 # syntax=docker/dockerfile:1.4
 
+# SPDX-FileCopyrightText: Copyright 2025 New Vector Ltd.
+#
+# SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+
 FROM --platform=$BUILDPLATFORM docker.io/library/node:24-alpine AS builder
 
 ENV PNPM_HOME="/pnpm"

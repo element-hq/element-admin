@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: Copyright 2025 New Vector Ltd.
+//
+// SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+
 import { createLink } from "@tanstack/react-router";
 import cx from "classnames";
 import { forwardRef, type PropsWithChildren } from "react";
