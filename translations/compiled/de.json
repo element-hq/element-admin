@@ -26,7 +26,7 @@
   "action.remove": [
     {
       "type": 0,
-      "value": "Remove"
+      "value": "Entfernen"
     }
   ],
   "action.retry": [
@@ -44,13 +44,73 @@
   "common.email_address": [
     {
       "type": 0,
-      "value": "Email address"
+      "value": "E-Mail Adresse"
     }
   ],
   "common.filter": [
     {
       "type": 0,
       "value": "Filter"
+    }
+  ],
+  "errors.http_fetch": [
+    {
+      "type": 0,
+      "value": "Anfrage an "
+    },
+    {
+      "type": 1,
+      "value": "url"
+    },
+    {
+      "type": 0,
+      "value": " fehlgeschlagen"
+    }
+  ],
+  "errors.http_fetch_json_decoding": [
+    {
+      "type": 0,
+      "value": "JSON-Antwort von "
+    },
+    {
+      "type": 1,
+      "value": "url"
+    },
+    {
+      "type": 0,
+      "value": " konnte nicht dekodiert werden"
+    }
+  ],
+  "errors.http_status": [
+    {
+      "type": 0,
+      "value": "Anfrage an "
+    },
+    {
+      "type": 1,
+      "value": "url"
+    },
+    {
+      "type": 0,
+      "value": " fehlgeschlagen mit Statuscode "
+    },
+    {
+      "type": 1,
+      "value": "status"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "statusText"
+    }
+  ],
+  "errors.not_logged_in": [
+    {
+      "type": 0,
+      "value": "Nicht angemeldet"
     }
   ],
   "footer.copyright_notice": [
@@ -127,19 +187,13 @@
   "pages.dashboard.current_ess_version": [
     {
       "type": 0,
-      "value": "Deine aktuelle ESS-Version"
+      "value": "ESS-Version"
     }
   ],
-  "pages.dashboard.latest_ess_release": [
+  "pages.dashboard.latest_ess_version": [
     {
       "type": 0,
       "value": "Neueste ESS-Version"
-    }
-  ],
-  "pages.dashboard.latest_ess_release_notes": [
-    {
-      "type": 0,
-      "value": "Was ist neu in ESS"
     }
   ],
   "pages.dashboard.new_ess_release": [
@@ -222,10 +276,22 @@
       "value": "Verwalte die Bereitstellung der Element-App für deine Organisation oder Community."
     }
   ],
-  "pages.login.failed_to_reach": [
+  "pages.login.errors.no_auth_metadata": [
     {
       "type": 0,
-      "value": "Server konnte nicht erreicht werden"
+      "value": "Das Laden der Metadaten des Servers für die Authentifizierung ist fehlgeschlagen. Der Homeserver ist möglicherweise nicht erreichbar oder nicht für die Verwendung des Matrix Authentication Service konfiguriert."
+    }
+  ],
+  "pages.login.errors.no_client_metadata": [
+    {
+      "type": 0,
+      "value": "Die Registrierung der Anwendung ist fehlgeschlagen. Der Matrix Authentication Service ist möglicherweise nicht erreichbar oder falsch konfiguriert."
+    }
+  ],
+  "pages.login.errors.no_well_known": [
+    {
+      "type": 0,
+      "value": "Das \"well-known\" Dokument des Servers konnte nicht geladen werden. Der Servername ist möglicherweise ungültig."
     }
   ],
   "pages.login.get_started": [
@@ -614,67 +680,67 @@
   "pages.users.add_email.button": [
     {
       "type": 0,
-      "value": "Add email address"
+      "value": "E-Mail hinzufügen"
     }
   ],
   "pages.users.add_email.description": [
     {
       "type": 0,
-      "value": "Add an email address to this user"
+      "value": "Füge diesem Nutzer eine E-Mail-Adresse hinzu"
     }
   ],
   "pages.users.add_email.error": [
     {
       "type": 0,
-      "value": "Failed to add email address"
+      "value": "E-Mail-Adresse konnte nicht hinzugefügt werden"
     }
   ],
   "pages.users.add_email.error.email_invalid": [
     {
       "type": 0,
-      "value": "Invalid email address"
+      "value": "Ungültige E-Mail Adresse"
     }
   ],
   "pages.users.add_email.error.email_missing": [
     {
       "type": 0,
-      "value": "This field is required"
+      "value": "Dies ist ein Pflichtfeld"
     }
   ],
   "pages.users.add_email.success": [
     {
       "type": 0,
-      "value": "Email address added"
+      "value": "E-Mail Adresse hinzugefügt"
     }
   ],
   "pages.users.add_email.title": [
     {
       "type": 0,
-      "value": "Add email address"
+      "value": "E-Mail Adresse hinzufügen"
     }
   ],
   "pages.users.add_upstream_link.error": [
     {
       "type": 0,
-      "value": "Failed to add link upstream account"
+      "value": "Fehler beim Verbinden des Upstream-Kontos"
     }
   ],
   "pages.users.add_upstream_link.success": [
     {
       "type": 0,
-      "value": "Link to upstream account added"
+      "value": "Link zum Upstream-Konto hinzugefügt"
     }
   ],
   "pages.users.deactivate_account.alert.description": [
     {
       "type": 0,
-      "value": "Der Nutzer wird durch diese Aktion automatisch von allen Geräten abgemeldet, alle Zugriffstoken werden entfernt, alle IDs von Drittanbietern werden gelöscht und die Kontodaten werden dauerhaft gelöscht."
+      "value": "Der Nutzer wird durch diese Aktion automatisch von allen Geräten abgemeldet, alle Zugriffstoken werden entfernt, alle IDs von Drittanbietern werden entfernt und die Kontodaten werden dauerhaft entfernt."
     }
   ],
   "pages.users.deactivate_account.alert.title": [
     {
       "type": 0,
-      "value": "Du bist dabei, Nutzerdaten zu löschen"
+      "value": "Du bist dabei, Nutzerdaten zu entfernen"
     }
   ],
   "pages.users.deactivate_account.button": [
@@ -704,7 +770,7 @@
   "pages.users.delete_email.description": [
     {
       "type": 0,
-      "value": "Are you sure you want to remove this email address ("
+      "value": "Soll diese E-Mail-Adresse ("
     },
     {
       "type": 1,
@@ -712,7 +778,7 @@
     },
     {
       "type": 0,
-      "value": ") from this user ("
+      "value": ") von diesem Nutzer ("
     },
     {
       "type": 1,
@@ -720,31 +786,31 @@
     },
     {
       "type": 0,
-      "value": ")?"
+      "value": ") wirklich entfernt werden?"
     }
   ],
   "pages.users.delete_email.error": [
     {
       "type": 0,
-      "value": "Failed to delete email address"
+      "value": "E-Mail Adresse konnte nicht entfernt werden"
     }
   ],
   "pages.users.delete_email.success": [
     {
       "type": 0,
-      "value": "Email address deleted"
+      "value": "E-Mail Adresse entfernt"
     }
   ],
   "pages.users.delete_email.title": [
     {
       "type": 0,
-      "value": "Remove email address?"
+      "value": "E-Mail Adresse entfernen?"
     }
   ],
   "pages.users.delete_upstream_link.description": [
     {
       "type": 0,
-      "value": "Are you sure you want to remove the link between this user ("
+      "value": "Soll die Verbindung zwischen diesem Nutzer ("
     },
     {
       "type": 1,
@@ -752,7 +818,7 @@
     },
     {
       "type": 0,
-      "value": ") with this upstream account ("
+      "value": ") mit diesem Upstream-Konto ("
     },
     {
       "type": 1,
@@ -760,25 +826,25 @@
     },
     {
       "type": 0,
-      "value": ")?"
+      "value": ") wirklich entfernt werden?"
     }
   ],
   "pages.users.delete_upstream_link.error": [
     {
       "type": 0,
-      "value": "Failed to delete upstream link"
+      "value": "Upstream-Verbindung konnte nicht entfernt werden"
     }
   ],
   "pages.users.delete_upstream_link.success": [
     {
       "type": 0,
-      "value": "Upstream link deleted"
+      "value": "Upstream-Verbindung entfernt"
     }
   ],
   "pages.users.delete_upstream_link.title": [
     {
       "type": 0,
-      "value": "Remove link with upstream account?"
+      "value": "Verbindung mit dem Upstream-Konto entfernen?"
     }
   ],
   "pages.users.lock_account.alert.description": [

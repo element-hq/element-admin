@@ -53,6 +53,62 @@
       "value": "Filtre"
     }
   ],
+  "errors.http_fetch": [
+    {
+      "type": 0,
+      "value": "La requête vers "
+    },
+    {
+      "type": 1,
+      "value": "url"
+    },
+    {
+      "type": 0,
+      "value": " n'a pas abouti"
+    }
+  ],
+  "errors.http_fetch_json_decoding": [
+    {
+      "type": 0,
+      "value": "Impossible de décoder la réponse JSON provenant de "
+    },
+    {
+      "type": 1,
+      "value": "url"
+    }
+  ],
+  "errors.http_status": [
+    {
+      "type": 0,
+      "value": "La requête vers "
+    },
+    {
+      "type": 1,
+      "value": "url"
+    },
+    {
+      "type": 0,
+      "value": " n'a pas abouti avec le code d'état "
+    },
+    {
+      "type": 1,
+      "value": "status"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "statusText"
+    }
+  ],
+  "errors.not_logged_in": [
+    {
+      "type": 0,
+      "value": "Déconnecté"
+    }
+  ],
   "footer.copyright_notice": [
     {
       "type": 0,
@@ -127,19 +183,13 @@
   "pages.dashboard.current_ess_version": [
     {
       "type": 0,
-      "value": "Votre version actuelle d'ESS"
+      "value": "Version d'ESS"
     }
   ],
-  "pages.dashboard.latest_ess_release": [
+  "pages.dashboard.latest_ess_version": [
     {
       "type": 0,
       "value": "Dernière version d'ESS"
-    }
-  ],
-  "pages.dashboard.latest_ess_release_notes": [
-    {
-      "type": 0,
-      "value": "Nouveautés dans ESS"
     }
   ],
   "pages.dashboard.new_ess_release": [
@@ -222,10 +272,22 @@
       "value": "Gérez le déploiement d'element pour votre organisation ou votre communauté."
     }
   ],
-  "pages.login.failed_to_reach": [
+  "pages.login.errors.no_auth_metadata": [
     {
       "type": 0,
-      "value": "Impossible de joindre le serveur"
+      "value": "Impossible de charger les métadonnées d'authentification du serveur. Synapse est peut-être inaccessible ou pas configuré pour utiliser Matrix Authentication Service."
+    }
+  ],
+  "pages.login.errors.no_client_metadata": [
+    {
+      "type": 0,
+      "value": "Impossible d'enregistrer l'application. Matrix Authentication Service est peut-être inaccessible ou mal configuré."
+    }
+  ],
+  "pages.login.errors.no_well_known": [
+    {
+      "type": 0,
+      "value": "Impossible de charger le document de découverte du serveur. Le nom du serveur est peut-être invalide."
     }
   ],
   "pages.login.get_started": [
