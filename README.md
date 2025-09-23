@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: Copyright 2025 New Vector Ltd.
+
+SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+-->
+
 # Element Admin
 
 Element Admin is a web-based administration panel for the [Element Server Suite](https://element.io/server-suite), available in both [ESS Pro](https://element.io/server-suite/pro) and in the free [ESS Community](https://github.com/element-hq/ess-helm) edition.

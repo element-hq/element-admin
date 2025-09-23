@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: Copyright 2025 New Vector Ltd.
+//
+// SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+
 import { useMutation } from "@tanstack/react-query";
 import { CopyIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { IconButton } from "@vector-im/compound-web";

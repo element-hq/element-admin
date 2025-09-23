@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: Copyright 2025 New Vector Ltd.
+//
+// SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+
 import { shared } from "use-broadcast-ts";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";

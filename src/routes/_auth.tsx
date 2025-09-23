@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: Copyright 2025 New Vector Ltd.
+//
+// SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { Link, Text } from "@vector-im/compound-web";
 import { defineMessage, FormattedMessage, useIntl } from "react-intl";

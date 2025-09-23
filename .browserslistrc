@@ -1,2 +1,6 @@
+# SPDX-FileCopyrightText: Copyright 2025 New Vector Ltd.
+#
+# SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+
 # Browsers that we support
 > 0.5%, last 2 versions, not op_mini all, Firefox ESR, not dead

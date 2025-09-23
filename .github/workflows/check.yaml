@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: Copyright 2025 New Vector Ltd.
+#
+# SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+
 name: Check code
 
 on:
@@ -9,6 +13,19 @@ on:
       - main
 
 jobs:
+  license:
+    name: REUSE license compliance check
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v5
+
+      - name: REUSE Compliance Check
+        uses: fsfe/reuse-action@v5
+
   lint:
     name: Lint
     runs-on: ubuntu-24.04
