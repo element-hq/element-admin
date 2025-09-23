@@ -50,7 +50,6 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "4.10.2",
-    "@cloudflare/vite-plugin": "1.13.3",
     "@eslint/js": "9.36.0",
     "@formatjs/cli": "6.7.2",
     "@hey-api/openapi-ts": "0.84.1",
@@ -92,8 +91,7 @@
     "typescript": "5.9.2",
     "typescript-eslint": "8.44.1",
     "vite": "7.1.7",
-    "vite-tsconfig-paths": "5.1.4",
-    "wrangler": "4.38.0"
+    "vite-tsconfig-paths": "5.1.4"
   },
   "lint-staged": {
     "*": [

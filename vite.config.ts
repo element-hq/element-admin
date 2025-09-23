@@ -1,4 +1,3 @@
-import { cloudflare } from "@cloudflare/vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
 import { devtools as tanstackDevtools } from "@tanstack/devtools-vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
@@ -57,7 +56,6 @@ export default defineConfig(({ mode }) => ({
       },
     }),
     tailwindcss(),
-    cloudflare(),
     vitePluginPrerender(),
   ],
 }));
