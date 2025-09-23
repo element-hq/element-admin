@@ -47,7 +47,7 @@ jobs:
     permissions:
       contents: read
 
-    container: mcr.microsoft.com/playwright:v1.55.0-noble
+    container: mcr.microsoft.com/playwright:v1.55.1-noble
 
     steps:
       - name: Checkout the code
