@@ -64,7 +64,7 @@ Anyone can contribute to translations through [Localazy](https://localazy.com/p/
 
 ## 🏗️ Contributing
 
-We welcome contributions from the community! Please read our contribution guidelines before getting started.
+We welcome contributions from the community! If you'd like to suggest changes or contribute to the project, please come and chat with us first in the [#ess-community:element.io](https://matrix.to/#/#ess-community:element.io) room on Matrix.
 
 ### Development workflow
 
