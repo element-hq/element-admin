@@ -4,7 +4,12 @@ import {
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Link,
+  Outlet,
+  retainSearchParams,
+} from "@tanstack/react-router";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Badge, CheckboxMenuItem, Text } from "@vector-im/compound-web";
@@ -46,6 +51,10 @@ export const Route = createFileRoute("/_console/rooms")({
   },
 
   validateSearch: RoomSearchParameters,
+  search: {
+    middlewares: [retainSearchParams(true)],
+  },
+
   loaderDeps: ({ search }) => ({ search }),
   loader: async ({
     context: { queryClient, credentials },

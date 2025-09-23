@@ -3,7 +3,12 @@ import {
   useQueryClient,
   useSuspenseInfiniteQuery,
 } from "@tanstack/react-query";
-import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
+import {
+  Link,
+  Outlet,
+  createFileRoute,
+  retainSearchParams,
+} from "@tanstack/react-router";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import type { ColumnDef } from "@tanstack/react-table";
 import {
@@ -65,6 +70,10 @@ export const Route = createFileRoute("/_console/registration-tokens")({
   },
 
   validateSearch: TokenSearchParameters,
+  search: {
+    middlewares: [retainSearchParams(true)],
+  },
+
   loaderDeps: ({ search }) => ({ search }),
   loader: async ({
     context: { queryClient, credentials },

@@ -7,7 +7,12 @@ import {
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Link,
+  Outlet,
+  retainSearchParams,
+} from "@tanstack/react-router";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import type { ColumnDef } from "@tanstack/react-table";
 import { UserAddIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
@@ -65,6 +70,10 @@ export const Route = createFileRoute("/_console/users")({
   },
 
   validateSearch: UserSearchParameters,
+  search: {
+    middlewares: [retainSearchParams(true)],
+  },
+
   loaderDeps: ({ search }) => ({ search }),
   loader: async ({
     context: { queryClient, credentials },
