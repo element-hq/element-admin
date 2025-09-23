@@ -1,10 +1,10 @@
 # Element Admin
 
-Element Admin is a web-based administration panel the [Element Server Suite](https://element.io/server-suite), both for [ESS Pro](https://element.io/server-suite/pro) and the free [ESS Community](https://github.com/element-hq/ess-helm) edition.
+Element Admin is a web-based administration panel for the [Element Server Suite](https://element.io/server-suite), available in both [ESS Pro](https://element.io/server-suite/pro) and in the free [ESS Community](https://github.com/element-hq/ess-helm) edition.
 
 ## 🚀 Quick Start
 
-You can try Element Admin immediately using the hosted version at <https://admin-beta.element.dev/>.
+You can try the latest Element Admin using the hosted version at <https://admin-beta.element.dev/>.
 
 ## 💬 Community room
 
