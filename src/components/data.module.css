@@ -1,7 +1,17 @@
 .grid {
+  container: grid / inline-size;
+}
+
+.grid-inner {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--cpd-space-4x);
+}
+
+@container grid (width >= 800px) {
+  .grid-inner {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .item {

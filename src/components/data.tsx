@@ -22,7 +22,7 @@ export const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
       className={clsx(styles["grid"], className)}
       {...props}
     >
-      {children}
+      <div className={styles["grid-inner"]}>{children}</div>
     </div>
   );
 });
