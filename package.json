@@ -2,6 +2,14 @@
   "name": "element-admin",
   "private": true,
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/element-hq/element-admin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/element-hq/element-admin/issues"
+  },
+  "license": "SEE LICENSE IN README.md",
   "scripts": {
     "dev": "vite --port 3000",
     "start": "vite --port 3000",

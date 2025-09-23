@@ -1,0 +1,53 @@
+version = 1
+
+# Configuration files
+[[annotations]]
+path = "package.json"
+SPDX-FileCopyrightText = "Copyright 2025 New Vector Ltd."
+SPDX-License-Identifier = "AGPL-3.0-only OR LicenseRef-Element-Commercial"
+[[annotations]]
+path = "localazy.json"
+SPDX-FileCopyrightText = "Copyright 2025 New Vector Ltd."
+SPDX-License-Identifier = "AGPL-3.0-only OR LicenseRef-Element-Commercial"
+[[annotations]]
+path = "tsconfig.json"
+SPDX-FileCopyrightText = "Copyright 2025 New Vector Ltd."
+SPDX-License-Identifier = "AGPL-3.0-only OR LicenseRef-Element-Commercial"
+[[annotations]]
+path = ".stylelintrc.json"
+SPDX-FileCopyrightText = "Copyright 2025 New Vector Ltd."
+SPDX-License-Identifier = "AGPL-3.0-only OR LicenseRef-Element-Commercial"
+
+# Lock file
+[[annotations]]
+path = "pnpm-lock.yaml"
+SPDX-FileCopyrightText = "Copyright 2025 New Vector Ltd."
+SPDX-License-Identifier = "AGPL-3.0-only OR LicenseRef-Element-Commercial"
+
+# Translations
+[[annotations]]
+path = "translations/**/*.json"
+SPDX-FileCopyrightText = "Copyright 2025 New Vector Ltd."
+SPDX-License-Identifier = "AGPL-3.0-only OR LicenseRef-Element-Commercial"
+
+# Image snapshots
+[[annotations]]
+path = "tests/**/*.png"
+SPDX-FileCopyrightText = "Copyright 2025 New Vector Ltd."
+SPDX-License-Identifier = "AGPL-3.0-only OR LicenseRef-Element-Commercial"
+
+# Images
+[[annotations]]
+path = "src/background/*"
+SPDX-FileCopyrightText = "Copyright 2025 New Vector Ltd."
+SPDX-License-Identifier = "AGPL-3.0-only OR LicenseRef-Element-Commercial"
+
+# Generated files
+[[annotations]]
+path = "src/api/mas/api/**/*"
+SPDX-FileCopyrightText = "Copyright 2025 New Vector Ltd."
+SPDX-License-Identifier = "AGPL-3.0-only OR LicenseRef-Element-Commercial"
+[[annotations]]
+path = "src/routeTree.gen.ts"
+SPDX-FileCopyrightText = "Copyright 2025 New Vector Ltd."
+SPDX-License-Identifier = "AGPL-3.0-only OR LicenseRef-Element-Commercial"
