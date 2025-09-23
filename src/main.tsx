@@ -5,6 +5,7 @@
 import { createRoot, hydrateRoot } from "react-dom/client";
 
 import { App } from "@/app";
+import { preloadLocale } from "@/intl";
 import { router } from "@/router";
 
 const rootElement = document.querySelector("#app");
@@ -20,7 +21,12 @@ if (rootElement.innerHTML) {
     // This will trigger the loading everything in the router.
     // We do this before trying to render/hydrate, to avoid flickering to a blank
     // screen (which TanStack Router will do if it is loading the matches)
-    await router.load();
+    await Promise.all([
+      // Preload the locale data
+      preloadLocale(),
+      // Preload anything from the router
+      router.load(),
+    ]);
 
     hydrateRoot(rootElement, <App />, {
       onRecoverableError: (error) => {

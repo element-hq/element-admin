@@ -16,6 +16,8 @@ import { useLocaleStore } from "@/stores/locale";
 
 import type messages from "../translations/extracted/en.json";
 
+import { queryClient } from "./query";
+
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace FormatjsIntl {
@@ -90,6 +92,18 @@ const localeQuery = (locale: string) =>
   });
 
 const cache = createIntlCache();
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const preloadLocale = async (): Promise<void> => {
+  const bestLocale = getBestLocale();
+  const selectedLocale = useLocaleStore.getState().selectedLocale;
+  const locale =
+    selectedLocale && AVAILABLE_LOCALES.includes(selectedLocale)
+      ? selectedLocale
+      : bestLocale;
+
+  await queryClient.ensureQueryData(localeQuery(locale));
+};
 
 export const IntlProvider = ({ children }: { children: React.ReactNode }) => {
   const bestLocale = useBestLocale();
