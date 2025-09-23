@@ -18,12 +18,13 @@ Developers and users of Element Admin can chat in the [#ess-community:element.io
 
 ## 🛠️ Installing and configuration
 
-Element Admin ships as part of the [Element Server Suite](https://element.io/server-suite) and is enabled by default, starting version 25.9.2.
+Element Admin ships as part of the [Element Server Suite](https://element.io/server-suite) and is **enabled by default, starting version 25.9.2**.
 Refer to the [ESS setup instructions](https://github.com/element-hq/ess-helm#installation) for more information.
 
 ### 📝 Prerequisites
 
-Element Admin works assuming the following:
+Element Admin is designed to work with the components that ship with ESS.
+It assumes the following, which is **handled out of the box by ESS version 25.9.2 or later**:
 
 - A [Synapse](https://github.com/element-hq/synapse) instance and [its admin API](https://element-hq.github.io/synapse/latest/reverse_proxy.html#synapse-administration-endpoints) accessible
 - A [Matrix Authentication Service](https://github.com/element-hq/matrix-authentication-service) instance with [its admin API](https://element-hq.github.io/matrix-authentication-service/topics/admin-api.html#enabling-the-api) accessible
