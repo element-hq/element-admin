@@ -1,25 +1,18 @@
-# Element Admin Console
+# Element Admin
 
-The Element Admin Console is a web-based administration panel for Matrix homeservers using [Synapse](https://github.com/element-hq/synapse/) and [Matrix Authentication Service (MAS)](https://github.com/element-hq/matrix-authentication-service), written and maintained by [Element](https://element.io/).
-It is part of the [Element Server Suite](https://element.io/server-suite), including the free [ESS Community Edition](https://github.com/element-hq/ess-helm).
+Element Admin is a web-based administration panel the [Element Server Suite](https://element.io/server-suite), both for [ESS Pro](https://element.io/server-suite/pro) and the free [ESS Community](https://github.com/element-hq/ess-helm) edition.
 
 ## 🚀 Quick Start
 
-You can try Element Admin Console immediately using the hosted version at <https://admin-beta.element.dev/>.
-
-Alternatively, run it locally using Docker:
-
-```bash
-docker run -p 8080:8080 ghcr.io/element-hq/element-admin-console:latest
-```
+You can try Element Admin immediately using the hosted version at <https://admin-beta.element.dev/>.
 
 ## 💬 Community room
 
-Developers and users of Element Admin Console can chat in the [#ess-community:element.io](https://matrix.to/#/#ess-community:element.io) room on Matrix.
+Developers and users of Element Admin can chat in the [#ess-community:element.io](https://matrix.to/#/#ess-community:element.io) room on Matrix.
 
 ## 🛠️ Installing and configuration
 
-Element Admin Console is a single-page application (SPA) built with React and TypeScript. It can be deployed as static files to any web server or hosting platform.
+Element Admin is a single-page application (SPA) built with React and TypeScript. It can be deployed as static files to any web server or hosting platform.
 
 ### Prerequisites
 
