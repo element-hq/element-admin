@@ -151,9 +151,17 @@
     "description": "On the landing pages, explains what the app does",
     "message": "Manage the deployment of the element app for your organization or community."
   },
-  "pages.login.failed_to_reach": {
-    "description": "Error message when the server name is invalid",
-    "message": "Failed to reach server"
+  "pages.login.errors.no_auth_metadata": {
+    "description": "Error message on the login page when we couldn't fetch the auth metadata, indicating that either Synapse is down, or not configured to use MAS",
+    "message": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
+  },
+  "pages.login.errors.no_client_metadata": {
+    "description": "Error message on the login page when we couldn't register the client against the auth metadata, indicating that either MAS is down, or refusing the client registration for some reason",
+    "message": "Failed to register the client. Matrix Authentication Service may be unreachable or misconfigured."
+  },
+  "pages.login.errors.no_well_known": {
+    "description": "Error message on the login page when we couldn't fetch the well-known document at https://{serverName}/.well-known/matrix/client",
+    "message": "Failed to load the server's well-known document. The server name may be invalid."
   },
   "pages.login.get_started": {
     "description": "On the login page, this starts the authorization process",

@@ -1,7 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
+import { useDebouncedState } from "@tanstack/react-pacer";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { Form, InlineSpinner } from "@vector-im/compound-web";
-import { type ChangeEvent, useCallback, useEffect, useState } from "react";
+import { type ChangeEvent, useCallback, useState } from "react";
 import { defineMessage, FormattedMessage } from "react-intl";
 
 import { authMetadataQuery, clientRegistration } from "@/api/auth";
@@ -26,107 +27,123 @@ export const Route = createFileRoute("/_auth/login/")({
 
 function RouteComponent() {
   const [serverName, setServerName] = useState(config.serverName ?? "");
-  const [debouncedServerName, setDebouncedServerName] = useState(
-    config.serverName ?? "",
-  );
-
-  const authorizationSession = useAuthStore(
-    (state) => state.authorizationSession,
-  );
-
-  // Debounced effect to update the server name used for the query
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setDebouncedServerName(serverName);
-    }, 250);
-
-    return () => clearTimeout(timeout);
-  }, [serverName]);
-
-  const {
-    data: discovery,
-    isFetching,
-    isError,
-  } = useQuery({
-    queryKey: ["serverDiscovery", debouncedServerName],
-    queryFn: async ({ client, signal }) => {
-      // Step 1: Well-known discovery
-      const wellKnown = await client.ensureQueryData(
-        wellKnownQuery(debouncedServerName),
-      );
-      const synapseRoot = wellKnown["m.homeserver"].base_url;
-      signal.throwIfAborted();
-
-      // Step 2: Auth metadata discovery
-      const authMetadata = await client.ensureQueryData(
-        authMetadataQuery(synapseRoot),
-      );
-      signal.throwIfAborted();
-
-      // Step 3: Client registration
-      const clientMetadata = await clientRegistration(
-        authMetadata.registration_endpoint,
-        CLIENT_METADATA,
-        signal,
-      );
-      signal.throwIfAborted();
-
-      // Step 4: Start authorization session
-      await useAuthStore
-        .getState()
-        .startAuthorizationSession(
-          debouncedServerName,
-          clientMetadata.client_id,
-        );
-
-      return {
-        serverName: debouncedServerName,
-        synapseRoot,
-        authMetadata,
-        clientId: clientMetadata.client_id,
-      };
-    },
-    retry: false,
-    enabled: !!debouncedServerName.trim(),
-  });
+  const [debouncedServerName, setDebouncedServerName, debouncer] =
+    useDebouncedState(
+      config.serverName ?? "",
+      {
+        wait: 250,
+      },
+      (state) => ({ isPending: state.isPending }),
+    );
 
   const handleServerNameChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       event.preventDefault();
-      setServerName(event.target.value.toLowerCase().trim());
+      const newServerName = event.target.value.toLowerCase().trim();
+      setServerName(newServerName);
+      setDebouncedServerName(newServerName);
     },
-    [],
+    [setServerName, setDebouncedServerName],
   );
 
-  // Create authorize URL if we have all the data
-  const onSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      if (!discovery?.authMetadata || !authorizationSession) {
-        return;
-      }
+  const startAuthorizationSession = useAuthStore(
+    (store) => store.startAuthorizationSession,
+  );
+
+  // Step 1: discovery the server root using the well-known document
+  const {
+    data: wellKnown,
+    isFetching: isWellKnownFetching,
+    isError: isWellKnownError,
+  } = useQuery({
+    ...wellKnownQuery(debouncedServerName),
+    enabled: !!debouncedServerName.trim(),
+    retry: false,
+  });
+  const synapseRoot = wellKnown?.["m.homeserver"].base_url;
+
+  // Step 2: discover the auth metadata
+  const {
+    data: authMetadata,
+    isFetching: isAuthMetadataFetching,
+    isError: isAuthMetadataError,
+  } = useQuery({
+    ...authMetadataQuery(synapseRoot || ""),
+    enabled: !!synapseRoot,
+    retry: false,
+  });
+
+  // Step 3: register the client against the server
+  const {
+    data: clientMetadata,
+    isFetching: isClientMetadataFetching,
+    isError: isClientMetadataError,
+  } = useQuery({
+    queryKey: ["clientRegistration", authMetadata?.registration_endpoint],
+    queryFn: ({ signal }) =>
+      clientRegistration(
+        authMetadata?.registration_endpoint || "",
+        CLIENT_METADATA,
+        signal,
+      ),
+    enabled: !!authMetadata?.registration_endpoint,
+    retry: false,
+  });
+
+  const { mutate: startAuthorization } = useMutation({
+    mutationFn: async (variables: {
+      serverName: string;
+      authorizationEndpoint: string;
+      clientId: string;
+    }) => {
+      const session = await startAuthorizationSession(
+        variables.serverName,
+        variables.clientId,
+      );
 
       const parameters = new URLSearchParams({
         response_type: "code",
-        client_id: authorizationSession.clientId,
+        client_id: variables.clientId,
         redirect_uri: REDIRECT_URI,
         scope:
           "urn:matrix:org.matrix.msc2967.client:api:* urn:mas:admin urn:synapse:admin:*",
-        state: authorizationSession.state,
-        code_challenge: authorizationSession.codeChallenge,
+        state: session.state,
+        code_challenge: session.codeChallenge,
         code_challenge_method: "S256",
       });
 
-      const url = new URL(discovery.authMetadata.authorization_endpoint);
+      const url = new URL(variables.authorizationEndpoint);
       url.search = parameters.toString();
       globalThis.window.location.href = url.toString();
     },
-    [discovery, authorizationSession],
+  });
+
+  // Create authorize URL if we have all the data
+  const onSubmit = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+      event.preventDefault();
+      if (!debouncedServerName.trim() || !authMetadata || !clientMetadata) {
+        return;
+      }
+
+      startAuthorization({
+        serverName: debouncedServerName,
+        authorizationEndpoint: authMetadata.authorization_endpoint,
+        clientId: clientMetadata.client_id,
+      });
+    },
+    [debouncedServerName, authMetadata, clientMetadata, startAuthorization],
   );
 
+  const isError =
+    isWellKnownError || isAuthMetadataError || isClientMetadataError;
   const isLoading =
-    (debouncedServerName !== serverName || isFetching) && serverName !== "";
-  const isReady = !!discovery && !isError && serverName !== "";
+    (isWellKnownFetching ||
+      isAuthMetadataFetching ||
+      isClientMetadataFetching ||
+      debouncer.state.isPending) &&
+    serverName !== "";
+  const isReady = !!clientMetadata && !debouncer.state.isPending;
 
   return (
     <Form.Root onSubmit={onSubmit}>
@@ -146,12 +163,30 @@ function RouteComponent() {
           type="text"
           size={1}
         />
-        {isError && (
+        {isWellKnownError && (
           <Form.ErrorMessage>
             <FormattedMessage
-              id="pages.login.failed_to_reach"
-              defaultMessage="Failed to reach server"
-              description="Error message when the server name is invalid"
+              id="pages.login.errors.no_well_known"
+              defaultMessage="Failed to load the server's well-known document. The server name may be invalid."
+              description="Error message on the login page when we couldn't fetch the well-known document at https://{serverName}/.well-known/matrix/client"
+            />
+          </Form.ErrorMessage>
+        )}
+        {isAuthMetadataError && (
+          <Form.ErrorMessage>
+            <FormattedMessage
+              id="pages.login.errors.no_auth_metadata"
+              defaultMessage="Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
+              description="Error message on the login page when we couldn't fetch the auth metadata, indicating that either Synapse is down, or not configured to use MAS"
+            />
+          </Form.ErrorMessage>
+        )}
+        {isClientMetadataError && (
+          <Form.ErrorMessage>
+            <FormattedMessage
+              id="pages.login.errors.no_client_metadata"
+              defaultMessage="Failed to register the client. Matrix Authentication Service may be unreachable or misconfigured."
+              description="Error message on the login page when we couldn't register the client against the auth metadata, indicating that either MAS is down, or refusing the client registration for some reason"
             />
           </Form.ErrorMessage>
         )}

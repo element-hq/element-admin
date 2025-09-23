@@ -91,7 +91,10 @@ interface AuthStoreActions {
   startAuthorizationSession: (
     serverName: string,
     clientId: string,
-  ) => Promise<void>;
+  ) => Promise<{
+    state: string;
+    codeChallenge: string;
+  }>;
 
   saveCredentials(
     serverName: string,
@@ -139,7 +142,10 @@ export const useAuthStore = create<AuthStore>()(
             current.authorizationSession?.clientId === clientId
           ) {
             // Don't start a new session if we're already in one
-            return;
+            return {
+              state: current.authorizationSession.state,
+              codeChallenge: current.authorizationSession.codeChallenge,
+            };
           }
 
           const state = randomString(32);
@@ -154,6 +160,11 @@ export const useAuthStore = create<AuthStore>()(
               state,
             },
           });
+
+          return {
+            state,
+            codeChallenge,
+          };
         },
 
         async accessToken(queryClient, signal) {
