@@ -91,7 +91,7 @@ The built application will be in the `dist/` directory, ready to be deployed to 
 
 ## 🌍 Translations
 
-Element Admin Console is available in multiple languages.
+Element Admin is available in multiple languages.
 Anyone can contribute to translations through [Localazy](https://localazy.com/p/element-admin).
 
 ## 🏗️ Contributing
