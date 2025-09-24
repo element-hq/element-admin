@@ -33,11 +33,7 @@ It assumes the following, which is **handled out of the box by ESS version 25.9.
 Under the hood, Element Admin is a single-page application React application which can be deployed in any static hosting service or container environment.
 
 <details>
-<summary>
-
-#### 🐳 Using Docker
-
-</summary>
+<summary><b>🐳 Using Docker</b></summary>
 
 A pre-built Docker image is available on [GitHub Container Registry](https://github.com/element-hq/element-admin/pkgs/container/element-admin).
 
@@ -58,13 +54,8 @@ docker build -t element-admin .
 ```
 
 </details>
-
 <details>
-<summary>
-
-#### 📦 Building from the source code
-
-</summary>
+<summary><b>📦 Building from the source code</b></summary>
 
 1. Clone the repository:
 
