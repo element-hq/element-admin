@@ -62,7 +62,7 @@
     "@formatjs/cli": "6.7.2",
     "@hey-api/openapi-ts": "0.84.1",
     "@localazy/cli": "2.0.8",
-    "@playwright/test": "1.55.0",
+    "@playwright/test": "1.55.1",
     "@tanstack/devtools-vite": "0.3.3",
     "@tanstack/eslint-plugin-query": "5.90.1",
     "@tanstack/eslint-plugin-router": "1.132.0",
