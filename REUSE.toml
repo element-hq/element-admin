@@ -46,6 +46,12 @@ path = "src/background/*"
 SPDX-FileCopyrightText = "Copyright 2025 New Vector Ltd."
 SPDX-License-Identifier = "AGPL-3.0-only OR LicenseRef-Element-Commercial"
 
+# Docs images
+[[annotations]]
+path = "docs/**/*.png"
+SPDX-FileCopyrightText = "Copyright 2025 New Vector Ltd."
+SPDX-License-Identifier = "AGPL-3.0-only OR LicenseRef-Element-Commercial"
+
 # Generated files
 [[annotations]]
 path = "src/api/mas/api/**/*"

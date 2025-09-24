@@ -12,6 +12,8 @@ Element Admin is a web-based administration panel for the [Element Server Suite]
 
 You can try the latest Element Admin using the hosted version at <https://admin-beta.element.dev/>.
 
+![Dashboard screenshot](./docs/screenshot.png)
+
 ## 💬 Community room
 
 Developers and users of Element Admin can chat in the [#ess-community:element.io](https://matrix.to/#/#ess-community:element.io) room on Matrix.
