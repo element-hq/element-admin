@@ -116,11 +116,6 @@ function TokenDetailComponent() {
   const token = data.data;
   const tokenAttributes = token.attributes;
 
-  const copyMutation = useMutation({
-    mutationFn: () => navigator.clipboard.writeText(tokenAttributes.token),
-    onSuccess: () => setTimeout(() => copyMutation.reset(), 2000),
-  });
-
   return (
     <Navigation.Details>
       <div className="flex items-center justify-end">
