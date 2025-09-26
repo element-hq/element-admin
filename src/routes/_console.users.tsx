@@ -94,6 +94,8 @@ export const Route = createFileRoute("/_console/users")({
 
   pendingComponent: () => (
     <>
+      <Outlet />
+
       <Navigation.Content>
         <Navigation.Main>
           <Page.Header>
@@ -107,7 +109,6 @@ export const Route = createFileRoute("/_console/users")({
 
         <AppFooter />
       </Navigation.Content>
-      <Outlet />
     </>
   ),
 
