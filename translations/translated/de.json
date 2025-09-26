@@ -6,7 +6,7 @@
     "message": "Abbrechen"
   },
   "action.clear": {
-    "message": "Clear"
+    "message": "Zurücksetzen"
   },
   "action.close": {
     "message": "Schließen"
@@ -174,19 +174,19 @@
     "message": "Ablaufdatum"
   },
   "pages.registration_tokens.filters.active_only": {
-    "message": "Active"
+    "message": "Aktiv"
   },
   "pages.registration_tokens.filters.expired_only": {
-    "message": "Expired"
+    "message": "Abgelaufen"
   },
   "pages.registration_tokens.filters.revoked_only": {
-    "message": "Revoked"
+    "message": "Widerrufen"
   },
   "pages.registration_tokens.filters.unused_only": {
-    "message": "Unused"
+    "message": "Ungenutzt"
   },
   "pages.registration_tokens.filters.used_only": {
-    "message": "Used"
+    "message": "Genutzt"
   },
   "pages.registration_tokens.loading_more": {
     "message": "Weitere Token werden geladen …"
@@ -270,16 +270,16 @@
     "message": "Gültig bis"
   },
   "pages.rooms.filters.empty_rooms": {
-    "message": "Empty rooms"
+    "message": "Leere Chats"
   },
   "pages.rooms.filters.non_empty_rooms": {
-    "message": "Non-empty rooms"
+    "message": "Genutzte Chats"
   },
   "pages.rooms.filters.private_rooms": {
-    "message": "Private rooms"
+    "message": "Private Chats"
   },
   "pages.rooms.filters.public_rooms": {
-    "message": "Public rooms"
+    "message": "Öffentliche Chats"
   },
   "pages.rooms.room_count": {
     "message": "{COUNT, plural, =0 {Keine Chats} one {# Chat} other {# Chats}}"
@@ -357,25 +357,25 @@
     "message": "Verbindung mit dem Upstream-Konto entfernen?"
   },
   "pages.users.filters.active": {
-    "message": "Active users"
+    "message": "Aktive Nutzer"
   },
   "pages.users.filters.admins": {
     "message": "Admins"
   },
   "pages.users.filters.deactivated": {
-    "message": "Deactivated users"
+    "message": "Deaktivierte Nutzer"
   },
   "pages.users.filters.guests": {
-    "message": "Guests (legacy)"
+    "message": "Gäste (Legacy)"
   },
   "pages.users.filters.locked": {
-    "message": "Locked users"
+    "message": "Gesperrte Nutzer"
   },
   "pages.users.filters.newest_first": {
-    "message": "Newest first"
+    "message": "Neueste zuerst"
   },
   "pages.users.filters.non_guests": {
-    "message": "Non-guests (legacy)"
+    "message": "Nicht-Gäste (Legacy)"
   },
   "pages.users.lock_account.alert.description": {
     "message": "Dieser Nutzer wird automatisch auf allen angemeldeten Geräten gesperrt und kann sich erst bei neuen Geräten anmelden, wenn diese entsperrt wurden."

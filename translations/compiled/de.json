@@ -14,7 +14,7 @@
   "action.clear": [
     {
       "type": 0,
-      "value": "Clear"
+      "value": "Zurücksetzen"
     }
   ],
   "action.close": [
@@ -405,31 +405,31 @@
   "pages.registration_tokens.filters.active_only": [
     {
       "type": 0,
-      "value": "Active"
+      "value": "Aktiv"
     }
   ],
   "pages.registration_tokens.filters.expired_only": [
     {
       "type": 0,
-      "value": "Expired"
+      "value": "Abgelaufen"
     }
   ],
   "pages.registration_tokens.filters.revoked_only": [
     {
       "type": 0,
-      "value": "Revoked"
+      "value": "Widerrufen"
     }
   ],
   "pages.registration_tokens.filters.unused_only": [
     {
       "type": 0,
-      "value": "Unused"
+      "value": "Ungenutzt"
     }
   ],
   "pages.registration_tokens.filters.used_only": [
     {
       "type": 0,
-      "value": "Used"
+      "value": "Genutzt"
     }
   ],
   "pages.registration_tokens.loading_more": [
@@ -646,25 +646,25 @@
   "pages.rooms.filters.empty_rooms": [
     {
       "type": 0,
-      "value": "Empty rooms"
+      "value": "Leere Chats"
     }
   ],
   "pages.rooms.filters.non_empty_rooms": [
     {
       "type": 0,
-      "value": "Non-empty rooms"
+      "value": "Genutzte Chats"
     }
   ],
   "pages.rooms.filters.private_rooms": [
     {
       "type": 0,
-      "value": "Private rooms"
+      "value": "Private Chats"
     }
   ],
   "pages.rooms.filters.public_rooms": [
     {
       "type": 0,
-      "value": "Public rooms"
+      "value": "Öffentliche Chats"
     }
   ],
   "pages.rooms.room_count": [
@@ -886,7 +886,7 @@
   "pages.users.filters.active": [
     {
       "type": 0,
-      "value": "Active users"
+      "value": "Aktive Nutzer"
     }
   ],
   "pages.users.filters.admins": [
@@ -898,31 +898,31 @@
   "pages.users.filters.deactivated": [
     {
       "type": 0,
-      "value": "Deactivated users"
+      "value": "Deaktivierte Nutzer"
     }
   ],
   "pages.users.filters.guests": [
     {
       "type": 0,
-      "value": "Guests (legacy)"
+      "value": "Gäste (Legacy)"
     }
   ],
   "pages.users.filters.locked": [
     {
       "type": 0,
-      "value": "Locked users"
+      "value": "Gesperrte Nutzer"
     }
   ],
   "pages.users.filters.newest_first": [
     {
       "type": 0,
-      "value": "Newest first"
+      "value": "Neueste zuerst"
     }
   ],
   "pages.users.filters.non_guests": [
     {
       "type": 0,
-      "value": "Non-guests (legacy)"
+      "value": "Nicht-Gäste (Legacy)"
     }
   ],
   "pages.users.lock_account.alert.description": [
