@@ -90,6 +90,8 @@ export const Route = createFileRoute("/_console/registration-tokens")({
 
   pendingComponent: () => (
     <>
+      <Outlet />
+
       <Navigation.Content>
         <Navigation.Main>
           <Page.Header>
@@ -107,8 +109,6 @@ export const Route = createFileRoute("/_console/registration-tokens")({
         </Navigation.Main>
         <AppFooter />
       </Navigation.Content>
-
-      <Outlet />
     </>
   ),
 
@@ -671,6 +671,8 @@ function RouteComponent() {
 
   return (
     <>
+      <Outlet />
+
       <Navigation.Content>
         <Navigation.Main>
           <Page.Header>
@@ -754,8 +756,6 @@ function RouteComponent() {
         </Navigation.Main>
         <AppFooter />
       </Navigation.Content>
-
-      <Outlet />
     </>
   );
 }
