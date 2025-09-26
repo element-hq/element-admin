@@ -30,11 +30,11 @@ importers:
         specifier: 0.7.0
         version: 0.7.0(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(csstype@3.1.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(solid-js@1.9.9)
       '@tanstack/react-pacer':
-        specifier: 0.16.3
-        version: 0.16.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 0.16.4
+        version: 0.16.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@tanstack/react-pacer-devtools':
         specifier: 0.3.0
-        version: 0.3.0(@tanstack/pacer@0.15.3)(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(csstype@3.1.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        version: 0.3.0(@tanstack/pacer@0.15.4)(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(csstype@3.1.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@tanstack/react-query':
         specifier: 5.90.2
         version: 5.90.2(react@19.1.1)
@@ -1480,8 +1480,8 @@ packages:
     resolution: {integrity: sha512-yJT2As/drc+Epu0nsqCsJaKaLcaNGufiNxSlp/+/oeTD0jsBxF9/PJBfh66XVpYXkKr97b8689mSu7QMef0Rrw==}
     engines: {node: '>=18'}
 
-  '@tanstack/devtools-event-client@0.2.5':
-    resolution: {integrity: sha512-iVdqw879KETXyyPHc3gQR5Ld0GjlPLk7bKenBUhzr3+z1FiQZvsbfgYfRRokTSPcgwANAV7aA2Uv05nx5xWT8A==}
+  '@tanstack/devtools-event-client@0.3.2':
+    resolution: {integrity: sha512-gkvph/YMCFUfAca75EsJBJnhbKitDGix7vdEcT/3lAV+eyGSv+uECYG43apVQN4yLJKnV6mzcNvGzOhDhb72gg==}
     engines: {node: '>=18'}
 
   '@tanstack/devtools-ui@0.3.5':
@@ -1522,8 +1522,8 @@ packages:
     peerDependencies:
       '@tanstack/pacer': '>=0.15.0'
 
-  '@tanstack/pacer@0.15.3':
-    resolution: {integrity: sha512-yF7TDPeCwss+4zlHAinBDUrG+RF4+f3oUedYsTEcyXSdgTLLwozFxA1nH72KugTE67A1BkpfSrgeMjDYHgaaPw==}
+  '@tanstack/pacer@0.15.4':
+    resolution: {integrity: sha512-vGY+CWsFZeac3dELgB6UZ4c7OacwsLb8hvL2gLS6hTgy8Fl0Bm/aLokHaeDIP+q9F9HUZTnp360z9uv78eg8pg==}
     engines: {node: '>=18'}
 
   '@tanstack/query-core@5.90.2':
@@ -1550,8 +1550,8 @@ packages:
       react: '>=16.8'
       react-dom: '>=16.8'
 
-  '@tanstack/react-pacer@0.16.3':
-    resolution: {integrity: sha512-XQyCh395yS/hPiPx8WzWyQeH+7Zu+XeKY50lqE36z/TgjqO7yhiI2GcHa5+a98+wdQzdI3eQ80YZmUnHpnRAHA==}
+  '@tanstack/react-pacer@0.16.4':
+    resolution: {integrity: sha512-nuQLE8bx0rYMiJau4jOTPZFp3XC/GnIHDKfKVVWeKUHNF4grRdVHPgTlJ8EV/nt/HJxSUnIcy+IIKX+Bj0bLSw==}
     engines: {node: '>=18'}
     peerDependencies:
       react: '>=16.8'
@@ -5237,7 +5237,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@tanstack/devtools-event-client@0.2.5': {}
+  '@tanstack/devtools-event-client@0.3.2': {}
 
   '@tanstack/devtools-ui@0.3.5(csstype@3.1.3)(solid-js@1.9.9)':
     dependencies:
@@ -5294,10 +5294,10 @@ snapshots:
 
   '@tanstack/history@1.132.0': {}
 
-  '@tanstack/pacer-devtools@0.3.0(@tanstack/pacer@0.15.3)(csstype@3.1.3)':
+  '@tanstack/pacer-devtools@0.3.0(@tanstack/pacer@0.15.4)(csstype@3.1.3)':
     dependencies:
       '@tanstack/devtools-ui': 0.3.5(csstype@3.1.3)(solid-js@1.9.9)
-      '@tanstack/pacer': 0.15.3
+      '@tanstack/pacer': 0.15.4
       '@tanstack/solid-store': 0.7.7(solid-js@1.9.9)
       clsx: 2.1.1
       dayjs: 1.11.18
@@ -5306,9 +5306,9 @@ snapshots:
     transitivePeerDependencies:
       - csstype
 
-  '@tanstack/pacer@0.15.3':
+  '@tanstack/pacer@0.15.4':
     dependencies:
-      '@tanstack/devtools-event-client': 0.2.5
+      '@tanstack/devtools-event-client': 0.3.2
       '@tanstack/store': 0.7.7
 
   '@tanstack/query-core@5.90.2': {}
@@ -5328,9 +5328,9 @@ snapshots:
       - solid-js
       - utf-8-validate
 
-  '@tanstack/react-pacer-devtools@0.3.0(@tanstack/pacer@0.15.3)(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(csstype@3.1.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@tanstack/react-pacer-devtools@0.3.0(@tanstack/pacer@0.15.4)(@types/react-dom@19.1.9(@types/react@19.1.13))(@types/react@19.1.13)(csstype@3.1.3)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
-      '@tanstack/pacer-devtools': 0.3.0(@tanstack/pacer@0.15.3)(csstype@3.1.3)
+      '@tanstack/pacer-devtools': 0.3.0(@tanstack/pacer@0.15.4)(csstype@3.1.3)
       '@types/react': 19.1.13
       '@types/react-dom': 19.1.9(@types/react@19.1.13)
       react: 19.1.1
@@ -5339,9 +5339,9 @@ snapshots:
       - '@tanstack/pacer'
       - csstype
 
-  '@tanstack/react-pacer@0.16.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+  '@tanstack/react-pacer@0.16.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
-      '@tanstack/pacer': 0.15.3
+      '@tanstack/pacer': 0.15.4
       '@tanstack/react-store': 0.7.7(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
