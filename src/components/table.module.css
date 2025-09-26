@@ -34,6 +34,7 @@
 
   & .active-filter-list {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: var(--cpd-space-2x);
     grid-column: 1 / -1;
@@ -52,16 +53,22 @@
       font: var(--cpd-font-body-xs-medium);
       letter-spacing: var(--cpd-font-letter-spacing-body-xs);
 
-      &:has(.remove-filter-button:hover) {
-        background-color: var(--cpd-color-bg-action-primary-hovered);
+      @media (hover: hover) {
+        &:has(.remove-filter-button:hover) {
+          background-color: var(--cpd-color-bg-action-primary-hovered);
+        }
       }
 
       & .remove-filter-button {
         font-size: var(--cpd-space-4x);
-        color: var(--cpd-color-icon-tertiary);
+        color: var(--cpd-color-icon-on-primary);
 
-        &:hover {
-          color: var(--cpd-color-icon-on-primary);
+        @media (hover: hover) {
+          color: var(--cpd-color-icon-tertiary);
+
+          &:hover {
+            color: var(--cpd-color-icon-on-primary);
+          }
         }
       }
     }
