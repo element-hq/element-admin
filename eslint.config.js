@@ -101,7 +101,7 @@ export default tseslint.config(
       ],
       "unicorn/prevent-abbreviations": [
         "error",
-        { replacements: { props: false, ref: false } },
+        { replacements: { props: false, ref: false, refs: false } },
       ],
       "unicorn/no-null": "off",
 

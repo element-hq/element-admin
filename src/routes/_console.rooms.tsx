@@ -30,7 +30,6 @@ import { RoomAvatar, RoomDisplayName } from "@/components/room-info";
 import * as Table from "@/components/table";
 import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
-import AppNavigation from "@/ui/navigation";
 import { useFilters } from "@/utils/filters";
 
 const RoomSearchParameters = v.object({
@@ -80,9 +79,7 @@ export const Route = createFileRoute("/_console/rooms")({
   },
 
   pendingComponent: () => (
-    <Navigation.Root>
-      <AppNavigation />
-
+    <>
       <Navigation.Content>
         <Navigation.Main>
           <Page.Header>
@@ -98,7 +95,7 @@ export const Route = createFileRoute("/_console/rooms")({
       </Navigation.Content>
 
       <Outlet />
-    </Navigation.Root>
+    </>
   ),
 
   component: RouteComponent,
@@ -291,9 +288,7 @@ function RouteComponent() {
   const tableRef = useRef(table);
 
   return (
-    <Navigation.Root>
-      <AppNavigation />
-
+    <>
       <Outlet />
 
       <Navigation.Content>
@@ -378,6 +373,6 @@ function RouteComponent() {
 
         <AppFooter />
       </Navigation.Content>
-    </Navigation.Root>
+    </>
   );
 }

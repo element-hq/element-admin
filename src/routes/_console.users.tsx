@@ -44,7 +44,6 @@ import * as Placeholder from "@/components/placeholder";
 import * as Table from "@/components/table";
 import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
-import AppNavigation from "@/ui/navigation";
 import { useImageBlob } from "@/utils/blob";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 import { useFilters } from "@/utils/filters";
@@ -94,9 +93,7 @@ export const Route = createFileRoute("/_console/users")({
   },
 
   pendingComponent: () => (
-    <Navigation.Root>
-      <AppNavigation />
-
+    <>
       <Navigation.Content>
         <Navigation.Main>
           <Page.Header>
@@ -111,7 +108,7 @@ export const Route = createFileRoute("/_console/users")({
         <AppFooter />
       </Navigation.Content>
       <Outlet />
-    </Navigation.Root>
+    </>
   ),
 
   component: RouteComponent,
@@ -530,9 +527,7 @@ function RouteComponent() {
   const tableRef = useRef(table);
 
   return (
-    <Navigation.Root>
-      <AppNavigation />
-
+    <>
       <Outlet />
 
       <Navigation.Content>
@@ -624,6 +619,6 @@ function RouteComponent() {
 
         <AppFooter />
       </Navigation.Content>
-    </Navigation.Root>
+    </>
   );
 }
