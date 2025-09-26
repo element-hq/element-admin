@@ -60,7 +60,7 @@ export const vPaginationMeta = v.object({
  */
 export const vDeviceId = v.pipe(
   v.string(),
-  v.regex(/^[A-Za-z0-9._~!$&'()*+,;=:&/-]+$/),
+  v.regex(/^[A-Za-z0-9._~!$&'()*+,;=:&\/-]+$/),
 );
 
 /**
