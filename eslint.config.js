@@ -145,6 +145,7 @@ export default tseslint.config(
       "unicorn/prefer-type-error": "off",
       "unicorn/prevent-abbreviations": "off",
       "unicorn/switch-case-braces": "off",
+      "no-useless-escape": "off",
     },
   },
 
