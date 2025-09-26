@@ -3,17 +3,12 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 /* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
-import { useAsyncDebouncedCallback } from "@tanstack/react-pacer";
+import { useDebouncedCallback } from "@tanstack/react-pacer";
 import {
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import {
-  createFileRoute,
-  Link,
-  Outlet,
-  retainSearchParams,
-} from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Badge, CheckboxMenuItem, Text } from "@vector-im/compound-web";
@@ -58,20 +53,9 @@ export const Route = createFileRoute("/_console/rooms")({
   },
 
   validateSearch: RoomSearchParameters,
-  search: {
-    middlewares: [retainSearchParams(true)],
-  },
 
-  loaderDeps: ({ search }) => ({ search }),
-  loader: async ({
-    context: { queryClient, credentials },
-    deps: { search },
-  }) => {
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
-    const parameters: RoomListFilters = {
+  loaderDeps: ({ search }) => ({
+    parameters: {
       ...(search.search_term && { search_term: search.search_term }),
       ...(search.public_rooms !== undefined && {
         public_rooms: search.public_rooms,
@@ -79,7 +63,16 @@ export const Route = createFileRoute("/_console/rooms")({
       ...(search.empty_rooms !== undefined && {
         empty_rooms: search.empty_rooms,
       }),
-    };
+    } satisfies RoomListFilters,
+  }),
+  loader: async ({
+    context: { queryClient, credentials },
+    deps: { parameters },
+  }) => {
+    const wellKnown = await queryClient.ensureQueryData(
+      wellKnownQuery(credentials.serverName),
+    );
+    const synapseRoot = wellKnown["m.homeserver"].base_url;
 
     await queryClient.ensureInfiniteQueryData(
       roomsInfiniteQuery(synapseRoot, parameters),
@@ -153,17 +146,17 @@ const filtersDefinition = [
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
+  const { parameters } = Route.useLoaderDeps();
   const navigate = Route.useNavigate();
   const intl = useIntl();
 
-  const debouncedSearch = useAsyncDebouncedCallback(
-    async (term: string) => {
-      await navigate({
+  const debouncedSearch = useDebouncedCallback(
+    (term: string) => {
+      navigate({
         replace: true,
         search: (previous) => {
           if (!term.trim()) {
-            const { search_term: _, ...rest } = previous;
-            return rest;
+            return { ...previous, search_term: undefined };
           }
 
           return { ...previous, search_term: term.trim() };
@@ -174,16 +167,6 @@ function RouteComponent() {
       wait: 400,
     },
   );
-
-  const parameters: RoomListFilters = {
-    ...(search.search_term && { search_term: search.search_term }),
-    ...(search.public_rooms !== undefined && {
-      public_rooms: search.public_rooms,
-    }),
-    ...(search.empty_rooms !== undefined && {
-      empty_rooms: search.empty_rooms,
-    }),
-  };
 
   const { data: wellKnown } = useSuspenseQuery(
     wellKnownQuery(credentials.serverName),
@@ -215,6 +198,7 @@ function RouteComponent() {
             <Link
               to="/rooms/$roomId"
               params={{ roomId: room.room_id }}
+              search={search}
               resetScroll={false}
               className="flex items-center gap-3"
             >
@@ -285,7 +269,7 @@ function RouteComponent() {
         },
       },
     ],
-    [synapseRoot],
+    [search, synapseRoot],
   );
 
   const onSearchInput = useCallback(
