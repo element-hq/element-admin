@@ -11,6 +11,12 @@
       "value": "Abbrechen"
     }
   ],
+  "action.clear": [
+    {
+      "type": 0,
+      "value": "Clear"
+    }
+  ],
   "action.close": [
     {
       "type": 0,
@@ -396,28 +402,34 @@
       "value": "Ablaufdatum"
     }
   ],
-  "pages.registration_tokens.filter_active_only": [
+  "pages.registration_tokens.filters.active_only": [
     {
       "type": 0,
-      "value": "Nur aktive"
+      "value": "Active"
     }
   ],
-  "pages.registration_tokens.filter_expired_only": [
+  "pages.registration_tokens.filters.expired_only": [
     {
       "type": 0,
-      "value": "Nur abgelaufene"
+      "value": "Expired"
     }
   ],
-  "pages.registration_tokens.filter_revoked_only": [
+  "pages.registration_tokens.filters.revoked_only": [
     {
       "type": 0,
-      "value": "Nur widerrufene"
+      "value": "Revoked"
     }
   ],
-  "pages.registration_tokens.filter_used_only": [
+  "pages.registration_tokens.filters.unused_only": [
     {
       "type": 0,
-      "value": "Nur verwendete"
+      "value": "Unused"
+    }
+  ],
+  "pages.registration_tokens.filters.used_only": [
+    {
+      "type": 0,
+      "value": "Used"
     }
   ],
   "pages.registration_tokens.loading_more": [
@@ -629,6 +641,30 @@
     {
       "type": 0,
       "value": "Gültig bis"
+    }
+  ],
+  "pages.rooms.filters.empty_rooms": [
+    {
+      "type": 0,
+      "value": "Empty rooms"
+    }
+  ],
+  "pages.rooms.filters.non_empty_rooms": [
+    {
+      "type": 0,
+      "value": "Non-empty rooms"
+    }
+  ],
+  "pages.rooms.filters.private_rooms": [
+    {
+      "type": 0,
+      "value": "Private rooms"
+    }
+  ],
+  "pages.rooms.filters.public_rooms": [
+    {
+      "type": 0,
+      "value": "Public rooms"
     }
   ],
   "pages.rooms.room_count": [
@@ -845,6 +881,48 @@
     {
       "type": 0,
       "value": "Verbindung mit dem Upstream-Konto entfernen?"
+    }
+  ],
+  "pages.users.filters.active": [
+    {
+      "type": 0,
+      "value": "Active users"
+    }
+  ],
+  "pages.users.filters.admins": [
+    {
+      "type": 0,
+      "value": "Admins"
+    }
+  ],
+  "pages.users.filters.deactivated": [
+    {
+      "type": 0,
+      "value": "Deactivated users"
+    }
+  ],
+  "pages.users.filters.guests": [
+    {
+      "type": 0,
+      "value": "Guests (legacy)"
+    }
+  ],
+  "pages.users.filters.locked": [
+    {
+      "type": 0,
+      "value": "Locked users"
+    }
+  ],
+  "pages.users.filters.newest_first": [
+    {
+      "type": 0,
+      "value": "Newest first"
+    }
+  ],
+  "pages.users.filters.non_guests": [
+    {
+      "type": 0,
+      "value": "Non-guests (legacy)"
     }
   ],
   "pages.users.lock_account.alert.description": [
