@@ -32,8 +32,10 @@ export const NavAnchor = forwardRef<
     if (active) {
       internalRef.current?.scrollIntoView({
         behavior: "smooth",
-        block: "start",
         inline: "start",
+        block: "nearest",
+        // @ts-expect-error This isn't in the TS DOM types yet, only supported by Chrome
+        container: "nearest",
       });
     }
   }, [active]);
