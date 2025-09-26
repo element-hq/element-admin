@@ -7,6 +7,10 @@
     "description": "Label for a cancel action/button",
     "message": "Cancel"
   },
+  "action.clear": {
+    "description": "Label for a clear action/button",
+    "message": "Clear"
+  },
   "action.close": {
     "description": "Label for a 'close' action/button",
     "message": "Close"
@@ -450,6 +454,34 @@
   "pages.users.delete_upstream_link.title": {
     "description": "The title of the modal asking for confirmation to delete an upstream account link",
     "message": "Remove link with upstream account?"
+  },
+  "pages.users.filters.active": {
+    "description": "The label for the 'Active users' filter in the user list",
+    "message": "Active users"
+  },
+  "pages.users.filters.admins": {
+    "description": "The label for the 'Admins' filter in the user list",
+    "message": "Admins"
+  },
+  "pages.users.filters.deactivated": {
+    "description": "The label for the 'Deactivated users' filter in the user list",
+    "message": "Deactivated users"
+  },
+  "pages.users.filters.guests": {
+    "description": "The label for the 'Guests (legacy)' filter in the user list",
+    "message": "Guests (legacy)"
+  },
+  "pages.users.filters.locked": {
+    "description": "The label for the 'Locked users' filter in the user list",
+    "message": "Locked users"
+  },
+  "pages.users.filters.newest_first": {
+    "description": "The label for the 'Newest first' filter in the user list",
+    "message": "Newest first"
+  },
+  "pages.users.filters.non_guests": {
+    "description": "The label for the 'Non-guests (legacy)' filter in the user list",
+    "message": "Non-guests (legacy)"
   },
   "pages.users.lock_account.alert.description": {
     "description": "In the modal to lock a user, the description of the alert",

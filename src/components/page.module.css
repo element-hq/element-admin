@@ -6,8 +6,20 @@
 
 .header {
   display: grid;
-  grid-template: "title search controls" auto / 1fr auto auto;
   gap: var(--cpd-space-4x);
+  grid-template: "title" auto / 1fr;
+
+  &:has(.controls) {
+    grid-template: "title controls" auto / 1fr auto;
+  }
+
+  &:has(.search) {
+    grid-template: "title search" auto / 1fr auto;
+  }
+
+  &:has(.controls):has(.search) {
+    grid-template: "title search controls" auto / 1fr auto auto;
+  }
 }
 
 .title {
@@ -138,7 +150,19 @@
 
 @media screen and (width <= 768px) {
   .header {
-    grid-template: "title controls" auto "search search" auto / 1fr auto;
+    grid-template: "title" auto / 1fr;
+
+    &:has(.controls) {
+      grid-template: "title controls" auto / 1fr auto;
+    }
+
+    &:has(.search) {
+      grid-template: "title" auto "search" auto / 1fr;
+    }
+
+    &:has(.controls):has(.search) {
+      grid-template: "title controls" auto "search search" auto / 1fr auto;
+    }
   }
 
   .title {

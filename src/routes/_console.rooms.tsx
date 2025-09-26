@@ -299,7 +299,7 @@ function RouteComponent() {
                 />
               </Table.Title>
 
-              <Table.Filter>
+              <Table.FilterMenu>
                 <CheckboxMenuItem
                   onSelect={(event) => {
                     event.preventDefault();
@@ -364,7 +364,7 @@ function RouteComponent() {
                   label="Empty rooms"
                   checked={search.empty_rooms === true}
                 />
-              </Table.Filter>
+              </Table.FilterMenu>
             </Table.Header>
 
             <Table.VirtualizedList

@@ -673,7 +673,7 @@ function RouteComponent() {
                 />
               </Table.Title>
 
-              <Table.Filter>
+              <Table.FilterMenu>
                 <CheckboxMenuItem
                   onSelect={(event) => {
                     event.preventDefault();
@@ -754,7 +754,7 @@ function RouteComponent() {
                   })}
                   checked={search.expired === true}
                 />
-              </Table.Filter>
+              </Table.FilterMenu>
             </Table.Header>
 
             <Table.VirtualizedList
