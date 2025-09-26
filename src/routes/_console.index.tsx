@@ -16,7 +16,6 @@ import * as Data from "@/components/data";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import AppFooter from "@/ui/footer";
-import AppNavigation from "@/ui/navigation";
 
 const titleMessage = defineMessage({
   id: "pages.dashboard.title",
@@ -136,9 +135,7 @@ function RouteComponent() {
   }
 
   return (
-    <Navigation.Root>
-      <AppNavigation />
-
+    <>
       <Navigation.Content>
         <Navigation.Main>
           <Page.Header>
@@ -228,6 +225,6 @@ function RouteComponent() {
       </Navigation.Content>
 
       <Outlet />
-    </Navigation.Root>
+    </>
   );
 }

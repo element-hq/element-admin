@@ -4,7 +4,9 @@
 
 import { createLink } from "@tanstack/react-router";
 import cx from "classnames";
-import { forwardRef, type PropsWithChildren } from "react";
+import { forwardRef, useEffect, useRef, type PropsWithChildren } from "react";
+
+import { mergeRefs } from "@/utils/refs";
 
 import styles from "./navigation.module.css";
 
@@ -21,10 +23,27 @@ export const NavAnchor = forwardRef<
   HTMLAnchorElement,
   {
     Icon: React.ComponentType<React.SVGAttributes<SVGElement>>;
+    ["data-status"]?: string;
   } & PropsWithChildren<React.AnchorHTMLAttributes<HTMLAnchorElement>>
 >(function NavAnchor({ children, Icon, className, ...props }, ref) {
+  const internalRef = useRef<HTMLAnchorElement>(null);
+  const active = props["data-status"] === "active";
+  useEffect(() => {
+    if (active) {
+      internalRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "start",
+      });
+    }
+  }, [active]);
+
   return (
-    <a ref={ref} className={cx(styles["nav-link"], className)} {...props}>
+    <a
+      ref={mergeRefs(ref, internalRef)}
+      className={cx(styles["nav-link"], className)}
+      {...props}
+    >
       <Icon className={styles["nav-link-icon"]} />
       <div className={styles["nav-link-label"]}>{children}</div>
     </a>

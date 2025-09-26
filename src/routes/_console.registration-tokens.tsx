@@ -43,7 +43,6 @@ import * as Placeholder from "@/components/placeholder";
 import * as Table from "@/components/table";
 import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
-import AppNavigation from "@/ui/navigation";
 import {
   computeHumanReadableDateTimeStringFromUtc,
   computeUtcIsoStringFromLocal,
@@ -90,9 +89,7 @@ export const Route = createFileRoute("/_console/registration-tokens")({
   },
 
   pendingComponent: () => (
-    <Navigation.Root>
-      <AppNavigation />
-
+    <>
       <Navigation.Content>
         <Navigation.Main>
           <Page.Header>
@@ -112,7 +109,7 @@ export const Route = createFileRoute("/_console/registration-tokens")({
       </Navigation.Content>
 
       <Outlet />
-    </Navigation.Root>
+    </>
   ),
 
   component: RouteComponent,
@@ -673,9 +670,7 @@ function RouteComponent() {
   const tableRef = useRef(table);
 
   return (
-    <Navigation.Root>
-      <AppNavigation />
-
+    <>
       <Navigation.Content>
         <Navigation.Main>
           <Page.Header>
@@ -761,6 +756,6 @@ function RouteComponent() {
       </Navigation.Content>
 
       <Outlet />
-    </Navigation.Root>
+    </>
   );
 }

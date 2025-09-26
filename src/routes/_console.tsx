@@ -27,8 +27,10 @@ import { CopyToClipboard } from "@/components/copy";
 import * as Header from "@/components/header";
 import { Layout } from "@/components/layout";
 import { ElementLogo } from "@/components/logo";
+import * as Navigation from "@/components/navigation";
 import * as messages from "@/messages";
 import { useAuthStore } from "@/stores/auth";
+import AppNavigation from "@/ui/navigation";
 import { useImageBlob } from "@/utils/blob";
 import type { WithBreadcrumbEntry } from "@/utils/breadcrumbs";
 
@@ -160,7 +162,10 @@ function RouteComponent() {
         </Header.Right>
       </Header.Root>
 
-      <Outlet />
+      <Navigation.Root>
+        <AppNavigation />
+        <Outlet />
+      </Navigation.Root>
     </Layout>
   );
 }
