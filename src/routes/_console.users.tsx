@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 /* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
-import { useAsyncDebouncedCallback } from "@tanstack/react-pacer";
+import { useDebouncedCallback } from "@tanstack/react-pacer";
 import {
   useMutation,
   useQuery,
@@ -11,12 +11,7 @@ import {
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import {
-  createFileRoute,
-  Link,
-  Outlet,
-  retainSearchParams,
-} from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import type { ColumnDef } from "@tanstack/react-table";
 import { UserAddIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
@@ -76,9 +71,6 @@ export const Route = createFileRoute("/_console/users")({
   },
 
   validateSearch: UserSearchParameters,
-  search: {
-    middlewares: [retainSearchParams(true)],
-  },
 
   loaderDeps: ({ search }) => {
     const parameters: UserListFilters = {
@@ -152,10 +144,12 @@ interface UserCellProps {
 const UserCell = ({ userId, mxid, synapseRoot }: UserCellProps) => {
   const displayName = useUserDisplayName(synapseRoot, mxid);
   const avatar = useUserAvatar(synapseRoot, mxid);
+  const search = Route.useSearch();
   return (
     <Link
       to="/users/$userId"
       params={{ userId }}
+      search={search}
       resetScroll={false}
       className="flex items-center gap-3"
     >
@@ -440,14 +434,13 @@ function RouteComponent() {
 
   const totalCount = data.pages[0]?.meta.count ?? 0;
 
-  const debouncedSearch = useAsyncDebouncedCallback(
-    async (term: string) => {
-      await navigate({
+  const debouncedSearch = useDebouncedCallback(
+    (term: string) => {
+      navigate({
         replace: true,
         search: (previous) => {
           if (!term.trim()) {
-            const { search: _, ...rest } = previous;
-            return rest;
+            return { ...previous, search: undefined };
           }
 
           return { ...previous, search: term.trim() };

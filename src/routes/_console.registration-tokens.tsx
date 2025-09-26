@@ -7,12 +7,7 @@ import {
   useQueryClient,
   useSuspenseInfiniteQuery,
 } from "@tanstack/react-query";
-import {
-  Link,
-  Outlet,
-  createFileRoute,
-  retainSearchParams,
-} from "@tanstack/react-router";
+import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import type { ColumnDef } from "@tanstack/react-table";
 import {
@@ -76,25 +71,19 @@ export const Route = createFileRoute("/_console/registration-tokens")({
   },
 
   validateSearch: TokenSearchParameters,
-  search: {
-    middlewares: [retainSearchParams(true)],
-  },
 
-  loaderDeps: ({ search }) => ({ search }),
-  loader: async ({
-    context: { queryClient, credentials },
-    deps: { search },
-  }) => {
-    const parameters: Omit<
-      TokenListParameters,
-      "after" | "before" | "first" | "last"
-    > = {
+  loaderDeps: ({ search }) => ({
+    parameters: {
       ...(search.used !== undefined && { used: search.used }),
       ...(search.revoked !== undefined && { revoked: search.revoked }),
       ...(search.expired !== undefined && { expired: search.expired }),
       ...(search.valid !== undefined && { valid: search.valid }),
-    };
-
+    } satisfies TokenListParameters,
+  }),
+  loader: async ({
+    context: { queryClient, credentials },
+    deps: { parameters },
+  }) => {
     await queryClient.ensureInfiniteQueryData(
       registrationTokensInfiniteQuery(credentials.serverName, parameters),
     );
@@ -530,18 +519,9 @@ const filtersDefinition = [
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
+  const { parameters } = Route.useLoaderDeps();
   const navigate = Route.useNavigate();
   const intl = useIntl();
-
-  const parameters: Omit<
-    TokenListParameters,
-    "after" | "before" | "first" | "last"
-  > = {
-    ...(search.used !== undefined && { used: search.used }),
-    ...(search.revoked !== undefined && { revoked: search.revoked }),
-    ...(search.expired !== undefined && { expired: search.expired }),
-    ...(search.valid !== undefined && { valid: search.valid }),
-  };
 
   const { data, hasNextPage, fetchNextPage, isFetching } =
     useSuspenseInfiniteQuery(
@@ -575,6 +555,7 @@ function RouteComponent() {
               <Link
                 to="/registration-tokens/$tokenId"
                 params={{ tokenId: token.id }}
+                search={search}
                 resetScroll={false}
               >
                 <Text size="md" weight="semibold">
@@ -677,7 +658,7 @@ function RouteComponent() {
         },
       },
     ],
-    [intl],
+    [search, intl],
   );
 
   const table = useReactTable({
