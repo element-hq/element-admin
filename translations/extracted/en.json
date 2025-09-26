@@ -231,21 +231,25 @@
     "description": "Label for the token expiration date field",
     "message": "Expires at"
   },
-  "pages.registration_tokens.filter_active_only": {
-    "description": "Filter option for active tokens only",
-    "message": "Active Only"
+  "pages.registration_tokens.filters.active_only": {
+    "description": "Filter option for active registration tokens only",
+    "message": "Active"
   },
-  "pages.registration_tokens.filter_expired_only": {
-    "description": "Filter option for expired tokens only",
-    "message": "Expired Only"
+  "pages.registration_tokens.filters.expired_only": {
+    "description": "Filter option for expired registration tokens only",
+    "message": "Expired"
   },
-  "pages.registration_tokens.filter_revoked_only": {
-    "description": "Filter option for revoked tokens only",
-    "message": "Revoked Only"
+  "pages.registration_tokens.filters.revoked_only": {
+    "description": "Filter option for revoked registration tokens only",
+    "message": "Revoked"
   },
-  "pages.registration_tokens.filter_used_only": {
-    "description": "Filter option for used tokens only",
-    "message": "Used Only"
+  "pages.registration_tokens.filters.unused_only": {
+    "description": "Filter option for unused registration tokens only",
+    "message": "Unused"
+  },
+  "pages.registration_tokens.filters.used_only": {
+    "description": "Filter option for used registration tokens only",
+    "message": "Used"
   },
   "pages.registration_tokens.loading_more": {
     "description": "Text shown when loading more tokens",
@@ -354,6 +358,22 @@
   "pages.registration_tokens.valid_until_column": {
     "description": "Column header for valid until column",
     "message": "Valid Until"
+  },
+  "pages.rooms.filters.empty_rooms": {
+    "description": "Filter option for empty rooms",
+    "message": "Empty rooms"
+  },
+  "pages.rooms.filters.non_empty_rooms": {
+    "description": "Filter option for non-empty rooms",
+    "message": "Non-empty rooms"
+  },
+  "pages.rooms.filters.private_rooms": {
+    "description": "Filter option for private rooms",
+    "message": "Private rooms"
+  },
+  "pages.rooms.filters.public_rooms": {
+    "description": "Filter option for public rooms",
+    "message": "Public rooms"
   },
   "pages.rooms.room_count": {
     "description": "On the room list page, this heading shows the total number of rooms",
