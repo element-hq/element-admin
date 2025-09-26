@@ -5,6 +5,9 @@
   "action.cancel": {
     "message": "Cancel"
   },
+  "action.clear": {
+    "message": "Clear"
+  },
   "action.close": {
     "message": "Close"
   },
@@ -170,17 +173,20 @@
   "pages.registration_tokens.expires_at_label": {
     "message": "Expires at"
   },
-  "pages.registration_tokens.filter_active_only": {
-    "message": "Active Only"
+  "pages.registration_tokens.filters.active_only": {
+    "message": "Active"
   },
-  "pages.registration_tokens.filter_expired_only": {
-    "message": "Expired Only"
+  "pages.registration_tokens.filters.expired_only": {
+    "message": "Expired"
   },
-  "pages.registration_tokens.filter_revoked_only": {
-    "message": "Revoked Only"
+  "pages.registration_tokens.filters.revoked_only": {
+    "message": "Revoked"
   },
-  "pages.registration_tokens.filter_used_only": {
-    "message": "Used Only"
+  "pages.registration_tokens.filters.unused_only": {
+    "message": "Unused"
+  },
+  "pages.registration_tokens.filters.used_only": {
+    "message": "Used"
   },
   "pages.registration_tokens.loading_more": {
     "message": "Loading more tokens..."
@@ -263,6 +269,18 @@
   "pages.registration_tokens.valid_until_column": {
     "message": "Valid Until"
   },
+  "pages.rooms.filters.empty_rooms": {
+    "message": "Empty rooms"
+  },
+  "pages.rooms.filters.non_empty_rooms": {
+    "message": "Non-empty rooms"
+  },
+  "pages.rooms.filters.private_rooms": {
+    "message": "Private rooms"
+  },
+  "pages.rooms.filters.public_rooms": {
+    "message": "Public rooms"
+  },
   "pages.rooms.room_count": {
     "message": "{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
   },
@@ -337,6 +355,27 @@
   },
   "pages.users.delete_upstream_link.title": {
     "message": "Remove link with upstream account?"
+  },
+  "pages.users.filters.active": {
+    "message": "Active users"
+  },
+  "pages.users.filters.admins": {
+    "message": "Admins"
+  },
+  "pages.users.filters.deactivated": {
+    "message": "Deactivated users"
+  },
+  "pages.users.filters.guests": {
+    "message": "Guests (legacy)"
+  },
+  "pages.users.filters.locked": {
+    "message": "Locked users"
+  },
+  "pages.users.filters.newest_first": {
+    "message": "Newest first"
+  },
+  "pages.users.filters.non_guests": {
+    "message": "Non-guests (legacy)"
   },
   "pages.users.lock_account.alert.description": {
     "message": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."

@@ -5,6 +5,9 @@
   "action.cancel": {
     "message": "Annuler"
   },
+  "action.clear": {
+    "message": "Effacer"
+  },
   "action.close": {
     "message": "Fermer"
   },
@@ -170,17 +173,20 @@
   "pages.registration_tokens.expires_at_label": {
     "message": "Date d'expiration"
   },
-  "pages.registration_tokens.filter_active_only": {
-    "message": "Actifs uniquement"
+  "pages.registration_tokens.filters.active_only": {
+    "message": "Actif"
   },
-  "pages.registration_tokens.filter_expired_only": {
-    "message": "Expirés uniquement"
+  "pages.registration_tokens.filters.expired_only": {
+    "message": "Expiré"
   },
-  "pages.registration_tokens.filter_revoked_only": {
-    "message": "Révoqués uniquement"
+  "pages.registration_tokens.filters.revoked_only": {
+    "message": "Révoqué"
   },
-  "pages.registration_tokens.filter_used_only": {
-    "message": "Utilisés uniquement"
+  "pages.registration_tokens.filters.unused_only": {
+    "message": "Inutilisé"
+  },
+  "pages.registration_tokens.filters.used_only": {
+    "message": "Utilisé"
   },
   "pages.registration_tokens.loading_more": {
     "message": "Chargement de plus de jetons..."
@@ -263,6 +269,18 @@
   "pages.registration_tokens.valid_until_column": {
     "message": "Valable jusqu'à"
   },
+  "pages.rooms.filters.empty_rooms": {
+    "message": "Salons vides"
+  },
+  "pages.rooms.filters.non_empty_rooms": {
+    "message": "Salons non vides"
+  },
+  "pages.rooms.filters.private_rooms": {
+    "message": "Salons privés"
+  },
+  "pages.rooms.filters.public_rooms": {
+    "message": "Salons publics"
+  },
   "pages.rooms.room_count": {
     "message": "{COUNT, plural, zero {Aucun salon} one {# salon} other {# salons}}"
   },
@@ -337,6 +355,27 @@
   },
   "pages.users.delete_upstream_link.title": {
     "message": "Supprimer l'association avec le compte en amont ?"
+  },
+  "pages.users.filters.active": {
+    "message": "Utilisateurs actifs"
+  },
+  "pages.users.filters.admins": {
+    "message": "Administrateurs"
+  },
+  "pages.users.filters.deactivated": {
+    "message": "Utilisateurs désactivés"
+  },
+  "pages.users.filters.guests": {
+    "message": "Invités (legacy)"
+  },
+  "pages.users.filters.locked": {
+    "message": "Utilisateurs verrouillés"
+  },
+  "pages.users.filters.newest_first": {
+    "message": "Plus récent en premier"
+  },
+  "pages.users.filters.non_guests": {
+    "message": "Non-invités (leagacy)"
   },
   "pages.users.lock_account.alert.description": {
     "message": "Cet utilisateur sera automatiquement bloqué de tous les appareils sur lesquels il est actuellement connecté et ne pourra pas se connecter à de nouveaux appareils tant qu'ils n'auront pas été déverrouillés."
