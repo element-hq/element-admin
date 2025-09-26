@@ -16,6 +16,12 @@ export const actionCancel = defineMessage({
   description: "Label for a cancel action/button",
 });
 
+export const actionClear = defineMessage({
+  id: "action.clear",
+  defaultMessage: "Clear",
+  description: "Label for a clear action/button",
+});
+
 export const actionClose = defineMessage({
   id: "action.close",
   defaultMessage: "Close",

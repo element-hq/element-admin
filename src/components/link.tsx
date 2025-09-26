@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 import { createLink } from "@tanstack/react-router";
-import { Button } from "@vector-im/compound-web";
+import { Button, Link } from "@vector-im/compound-web";
 import { type PropsWithChildren, forwardRef } from "react";
 
 interface ButtonLinkProps
@@ -35,3 +35,5 @@ export const ButtonLink = createLink(
     },
   ),
 );
+
+export const TextLink = createLink(Link);

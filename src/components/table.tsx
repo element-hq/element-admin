@@ -2,14 +2,18 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
+import { createLink } from "@tanstack/react-router";
 import {
   flexRender,
   type Cell,
-  type Header as THeader,
   type Table,
+  type Header as THeader,
 } from "@tanstack/react-table";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
-import { FilterIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
+import {
+  CloseIcon,
+  FilterIcon,
+} from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Menu } from "@vector-im/compound-web";
 import cx from "classnames";
 import {
@@ -49,8 +53,8 @@ export const Title = ({ className, children, ...props }: TitleProps) => (
   </div>
 );
 
-type FilterProps = React.PropsWithChildren;
-export const Filter = ({ children }: FilterProps) => {
+type FilterMenuProps = React.PropsWithChildren;
+export const FilterMenu = ({ children }: FilterMenuProps) => {
   const [open, setOpen] = useState(false);
   const intl = useIntl();
   const title = intl.formatMessage(messages.commonFilter);
@@ -91,6 +95,53 @@ export const FilterButton = forwardRef<
     </button>
   );
 });
+
+// Filter list, under the header
+export const ActiveFilterList = forwardRef<
+  HTMLUListElement,
+  React.ComponentPropsWithoutRef<"ul">
+>(function ActiveFilterList({ className, ...props }, ref) {
+  return (
+    <ul
+      className={cx(styles["active-filter-list"], className)}
+      {...props}
+      ref={ref}
+    />
+  );
+});
+
+export const ActiveFilter = forwardRef<
+  HTMLLIElement,
+  React.ComponentPropsWithoutRef<"li">
+>(function ActiveFilter({ className, ...props }, ref) {
+  return (
+    <li
+      className={cx(styles["active-filter"], className)}
+      {...props}
+      ref={ref}
+    />
+  );
+});
+
+const RemoveFilterButton = forwardRef<
+  HTMLAnchorElement,
+  Omit<React.ComponentPropsWithoutRef<"a">, "children">
+>(function RemoveFilterButton({ className, ...props }, ref) {
+  const intl = useIntl();
+  return (
+    <a
+      ref={ref}
+      type="button"
+      className={cx(className, styles["remove-filter-button"])}
+      title={intl.formatMessage(messages.actionRemove)}
+      {...props}
+    >
+      <CloseIcon className={styles["remove-filter-icon"]} />
+    </a>
+  );
+});
+
+export const RemoveFilterLink = createLink(RemoveFilterButton);
 
 interface ListHeaderProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

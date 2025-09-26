@@ -41,6 +41,7 @@ import {
 import type { SingleResourceForUserRegistrationToken } from "@/api/mas/api/types.gen";
 import { CopyToClipboard } from "@/components/copy";
 import * as Dialog from "@/components/dialog";
+import { TextLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import * as Placeholder from "@/components/placeholder";
@@ -52,6 +53,7 @@ import {
   computeHumanReadableDateTimeStringFromUtc,
   computeUtcIsoStringFromLocal,
 } from "@/utils/datetime";
+import { useFilters } from "@/utils/filters";
 
 const TokenSearchParameters = v.object({
   used: v.optional(v.boolean()),
@@ -126,14 +128,6 @@ export const Route = createFileRoute("/_console/registration-tokens")({
 
   component: RouteComponent,
 });
-
-const omit = <T extends Record<string, unknown>, K extends keyof T>(
-  object: T,
-  keys: K[],
-): Omit<T, K> =>
-  Object.fromEntries(
-    Object.entries(object).filter(([key]) => !(keys as string[]).includes(key)),
-  ) as Omit<T, K>;
 
 interface TokenStatusBadgeProps {
   token: {
@@ -485,6 +479,54 @@ const TokenAddButton: React.FC<TokenAddButtonProps> = ({
   );
 };
 
+const filtersDefinition = [
+  {
+    key: "valid",
+    value: true,
+    message: defineMessage({
+      id: "pages.registration_tokens.filters.active_only",
+      defaultMessage: "Active",
+      description: "Filter option for active registration tokens only",
+    }),
+  },
+  {
+    key: "used",
+    value: true,
+    message: defineMessage({
+      id: "pages.registration_tokens.filters.used_only",
+      defaultMessage: "Used",
+      description: "Filter option for used registration tokens only",
+    }),
+  },
+  {
+    key: "used",
+    value: false,
+    message: defineMessage({
+      id: "pages.registration_tokens.filters.unused_only",
+      defaultMessage: "Unused",
+      description: "Filter option for unused registration tokens only",
+    }),
+  },
+  {
+    key: "revoked",
+    value: true,
+    message: defineMessage({
+      id: "pages.registration_tokens.filters.revoked_only",
+      defaultMessage: "Revoked",
+      description: "Filter option for revoked registration tokens only",
+    }),
+  },
+  {
+    key: "expired",
+    value: true,
+    message: defineMessage({
+      id: "pages.registration_tokens.filters.expired_only",
+      defaultMessage: "Expired ",
+      description: "Filter option for expired registration tokens only",
+    }),
+  },
+] as const;
+
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
@@ -513,6 +555,8 @@ function RouteComponent() {
   );
 
   const totalCount = data.pages[0]?.meta.count ?? 0;
+
+  const filters = useFilters(search, filtersDefinition);
 
   // Column definitions
   const columns = useMemo<ColumnDef<SingleResourceForUserRegistrationToken>[]>(
@@ -673,88 +717,43 @@ function RouteComponent() {
                 />
               </Table.Title>
 
-              <Table.Filter>
-                <CheckboxMenuItem
-                  onSelect={(event) => {
-                    event.preventDefault();
-                    navigate({
-                      search:
-                        search.valid === true
-                          ? omit(search, ["valid"])
-                          : {
-                              ...search,
-                              valid: true,
-                            },
-                    });
-                  }}
-                  label={intl.formatMessage({
-                    id: "pages.registration_tokens.filter_active_only",
-                    defaultMessage: "Active Only",
-                    description: "Filter option for active tokens only",
-                  })}
-                  checked={search.valid === true}
-                />
-                <CheckboxMenuItem
-                  onSelect={(event) => {
-                    event.preventDefault();
-                    navigate({
-                      search:
-                        search.used === true
-                          ? omit(search, ["used"])
-                          : {
-                              ...search,
-                              used: true,
-                            },
-                    });
-                  }}
-                  label={intl.formatMessage({
-                    id: "pages.registration_tokens.filter_used_only",
-                    defaultMessage: "Used Only",
-                    description: "Filter option for used tokens only",
-                  })}
-                  checked={search.used === true}
-                />
-                <CheckboxMenuItem
-                  onSelect={(event) => {
-                    event.preventDefault();
-                    navigate({
-                      search:
-                        search.revoked === true
-                          ? omit(search, ["revoked"])
-                          : {
-                              ...search,
-                              revoked: true,
-                            },
-                    });
-                  }}
-                  label={intl.formatMessage({
-                    id: "pages.registration_tokens.filter_revoked_only",
-                    defaultMessage: "Revoked Only",
-                    description: "Filter option for revoked tokens only",
-                  })}
-                  checked={search.revoked === true}
-                />
-                <CheckboxMenuItem
-                  onSelect={(event) => {
-                    event.preventDefault();
-                    navigate({
-                      search:
-                        search.expired === true
-                          ? omit(search, ["expired"])
-                          : {
-                              ...search,
-                              expired: true,
-                            },
-                    });
-                  }}
-                  label={intl.formatMessage({
-                    id: "pages.registration_tokens.filter_expired_only",
-                    defaultMessage: "Expired Only",
-                    description: "Filter option for expired tokens only",
-                  })}
-                  checked={search.expired === true}
-                />
-              </Table.Filter>
+              <Table.FilterMenu>
+                {filters.all.map((filter) => (
+                  <CheckboxMenuItem
+                    key={filter.key}
+                    onSelect={(event) => {
+                      event.preventDefault();
+                      navigate({ search: filter.toggledState });
+                    }}
+                    label={intl.formatMessage(filter.message)}
+                    checked={filter.enabled}
+                  />
+                ))}
+              </Table.FilterMenu>
+
+              {filters.active.length > 0 && (
+                <Table.ActiveFilterList>
+                  {filters.active.map((filter) => (
+                    <Table.ActiveFilter key={filter.key}>
+                      <FormattedMessage {...filter.message} />
+                      <Table.RemoveFilterLink
+                        from={Route.fullPath}
+                        replace={true}
+                        search={filter.toggledState}
+                      />
+                    </Table.ActiveFilter>
+                  ))}
+
+                  <TextLink
+                    from={Route.fullPath}
+                    replace={true}
+                    search={filters.clearedState}
+                    size="small"
+                  >
+                    <FormattedMessage {...messages.actionClear} />
+                  </TextLink>
+                </Table.ActiveFilterList>
+              )}
             </Table.Header>
 
             <Table.VirtualizedList

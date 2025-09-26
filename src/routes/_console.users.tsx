@@ -42,6 +42,7 @@ import {
   wellKnownQuery,
 } from "@/api/matrix";
 import * as Dialog from "@/components/dialog";
+import { TextLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import * as Placeholder from "@/components/placeholder";
@@ -51,6 +52,7 @@ import AppFooter from "@/ui/footer";
 import AppNavigation from "@/ui/navigation";
 import { useImageBlob } from "@/utils/blob";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
+import { useFilters } from "@/utils/filters";
 
 const UserSearchParameters = v.object({
   admin: v.optional(v.boolean()),
@@ -78,13 +80,7 @@ export const Route = createFileRoute("/_console/users")({
     middlewares: [retainSearchParams(true)],
   },
 
-  loaderDeps: ({ search }) => ({ search }),
-  loader: async ({
-    context: { queryClient, credentials },
-    deps: { search },
-  }) => {
-    await queryClient.ensureQueryData(wellKnownQuery(credentials.serverName));
-
+  loaderDeps: ({ search }) => {
     const parameters: UserListFilters = {
       ...(search.admin !== undefined && { admin: search.admin }),
       ...(search.guest !== undefined && { guest: search.guest }),
@@ -92,8 +88,16 @@ export const Route = createFileRoute("/_console/users")({
       ...(search.search && { search: search.search }),
     };
 
+    return { parameters, direction: search.dir };
+  },
+  loader: async ({
+    context: { queryClient, credentials },
+    deps: { parameters, direction },
+  }) => {
+    await queryClient.ensureQueryData(wellKnownQuery(credentials.serverName));
+
     await queryClient.ensureInfiniteQueryData(
-      usersInfiniteQuery(credentials.serverName, parameters, search.dir),
+      usersInfiniteQuery(credentials.serverName, parameters, direction),
     );
   },
 
@@ -120,14 +124,6 @@ export const Route = createFileRoute("/_console/users")({
 
   component: RouteComponent,
 });
-
-const omit = <T extends Record<string, unknown>, K extends keyof T>(
-  object: T,
-  keys: K[],
-): Omit<T, K> =>
-  Object.fromEntries(
-    Object.entries(object).filter(([key]) => !(keys as string[]).includes(key)),
-  ) as Omit<T, K>;
 
 const useUserAvatar = (
   synapseRoot: string,
@@ -346,18 +342,81 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
   );
 };
 
+const filtersDefinition = [
+  {
+    key: "dir",
+    value: "backward",
+    message: defineMessage({
+      id: "pages.users.filters.newest_first",
+      defaultMessage: "Newest first",
+      description: "The label for the 'Newest first' filter in the user list",
+    }),
+  },
+  {
+    key: "admin",
+    value: true,
+    message: defineMessage({
+      id: "pages.users.filters.admins",
+      defaultMessage: "Admins",
+      description: "The label for the 'Admins' filter in the user list",
+    }),
+  },
+  {
+    key: "guest",
+    value: true,
+    message: defineMessage({
+      id: "pages.users.filters.guests",
+      defaultMessage: "Guests (legacy)",
+      description:
+        "The label for the 'Guests (legacy)' filter in the user list",
+    }),
+  },
+  {
+    key: "guest",
+    value: false,
+    message: defineMessage({
+      id: "pages.users.filters.non_guests",
+      defaultMessage: "Non-guests (legacy)",
+      description:
+        "The label for the 'Non-guests (legacy)' filter in the user list",
+    }),
+  },
+  {
+    key: "status",
+    value: "active",
+    message: defineMessage({
+      id: "pages.users.filters.active",
+      defaultMessage: "Active users",
+      description: "The label for the 'Active users' filter in the user list",
+    }),
+  },
+  {
+    key: "status",
+    value: "locked",
+    message: defineMessage({
+      id: "pages.users.filters.locked",
+      defaultMessage: "Locked users",
+      description: "The label for the 'Locked users' filter in the user list",
+    }),
+  },
+  {
+    key: "status",
+    value: "deactivated",
+    message: defineMessage({
+      id: "pages.users.filters.deactivated",
+      defaultMessage: "Deactivated users",
+      description:
+        "The label for the 'Deactivated users' filter in the user list",
+    }),
+  },
+] as const;
+
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
+  const { direction, parameters } = Route.useLoaderDeps();
   const navigate = Route.useNavigate();
   const intl = useIntl();
-
-  const parameters: UserListFilters = {
-    ...(search.admin !== undefined && { admin: search.admin }),
-    ...(search.guest !== undefined && { guest: search.guest }),
-    ...(search.status && { status: search.status }),
-    ...(search.search && { search: search.search }),
-  };
 
   const { data: wellKnown } = useSuspenseQuery(
     wellKnownQuery(credentials.serverName),
@@ -367,7 +426,7 @@ function RouteComponent() {
   const isBackward = search.dir === "backward";
   const { data, hasNextPage, fetchNextPage, isFetching } =
     useSuspenseInfiniteQuery(
-      usersInfiniteQuery(credentials.serverName, parameters, search.dir),
+      usersInfiniteQuery(credentials.serverName, parameters, direction),
     );
 
   // Flatten the array of arrays from the useInfiniteQuery hook
@@ -406,6 +465,8 @@ function RouteComponent() {
     },
     [debouncedSearch],
   );
+
+  const filters = useFilters(search, filtersDefinition);
 
   // Column definitions
   const columns = useMemo<ColumnDef<SingleResourceForUser>[]>(
@@ -512,120 +573,43 @@ function RouteComponent() {
                 />
               </Table.Title>
 
-              <Table.Filter>
-                <CheckboxMenuItem
-                  onSelect={(event) => {
-                    event.preventDefault();
-                    navigate({
-                      search:
-                        search.dir === "backward"
-                          ? omit(search, ["dir"])
-                          : {
-                              ...search,
-                              dir: "backward",
-                            },
-                    });
-                  }}
-                  label="Newest first"
-                  checked={search.dir === "backward"}
-                />
-                <CheckboxMenuItem
-                  onSelect={(event) => {
-                    event.preventDefault();
-                    navigate({
-                      search:
-                        search.admin === true
-                          ? omit(search, ["admin"])
-                          : {
-                              ...search,
-                              admin: true,
-                            },
-                    });
-                  }}
-                  label="Admins"
-                  checked={search.admin === true}
-                />
-                <CheckboxMenuItem
-                  onSelect={(event) => {
-                    event.preventDefault();
-                    navigate({
-                      search:
-                        search.guest === true
-                          ? omit(search, ["guest"])
-                          : {
-                              ...search,
-                              guest: true,
-                            },
-                    });
-                  }}
-                  label="Guests (legacy)"
-                  checked={search.guest === true}
-                />
-                <CheckboxMenuItem
-                  onSelect={(event) => {
-                    event.preventDefault();
-                    navigate({
-                      search:
-                        search.guest === false
-                          ? omit(search, ["guest"])
-                          : {
-                              ...search,
-                              guest: false,
-                            },
-                    });
-                  }}
-                  label="Non-guests (legacy)"
-                  checked={search.guest === false}
-                />
-                <CheckboxMenuItem
-                  onSelect={(event) => {
-                    event.preventDefault();
-                    navigate({
-                      search:
-                        search.status === "active"
-                          ? omit(search, ["status"])
-                          : {
-                              ...search,
-                              status: "active",
-                            },
-                    });
-                  }}
-                  label="Active users"
-                  checked={search.status === "active"}
-                />
-                <CheckboxMenuItem
-                  onSelect={(event) => {
-                    event.preventDefault();
-                    navigate({
-                      search:
-                        search.status === "locked"
-                          ? omit(search, ["status"])
-                          : {
-                              ...search,
-                              status: "locked",
-                            },
-                    });
-                  }}
-                  label="Locked users"
-                  checked={search.status === "locked"}
-                />
-                <CheckboxMenuItem
-                  onSelect={(event) => {
-                    event.preventDefault();
-                    navigate({
-                      search:
-                        search.status === "deactivated"
-                          ? omit(search, ["status"])
-                          : {
-                              ...search,
-                              status: "deactivated",
-                            },
-                    });
-                  }}
-                  label="Deactivated users"
-                  checked={search.status === "deactivated"}
-                />
-              </Table.Filter>
+              <Table.FilterMenu>
+                {filters.all.map((filter) => (
+                  <CheckboxMenuItem
+                    key={filter.key}
+                    onSelect={(event) => {
+                      event.preventDefault();
+                      navigate({ search: filter.toggledState });
+                    }}
+                    label={intl.formatMessage(filter.message)}
+                    checked={filter.enabled}
+                  />
+                ))}
+              </Table.FilterMenu>
+
+              {filters.active.length > 0 && (
+                <Table.ActiveFilterList>
+                  {filters.active.map((filter) => (
+                    <Table.ActiveFilter key={filter.key}>
+                      <FormattedMessage {...filter.message} />
+                      <Table.RemoveFilterLink
+                        from={Route.fullPath}
+                        replace={true}
+                        search={filter.toggledState}
+                      />
+                    </Table.ActiveFilter>
+                  ))}
+
+                  <TextLink
+                    from={Route.fullPath}
+                    replace={true}
+                    search={filters.clearedState}
+                    size="small"
+                  >
+                    <FormattedMessage {...messages.actionClear} />
+                  </TextLink>
+                </Table.ActiveFilterList>
+              )}
             </Table.Header>
 
             <Table.VirtualizedList

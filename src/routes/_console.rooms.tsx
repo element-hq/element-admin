@@ -18,7 +18,7 @@ import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Badge, CheckboxMenuItem, Text } from "@vector-im/compound-web";
 import { useCallback, useMemo, useRef } from "react";
-import { defineMessage, FormattedMessage } from "react-intl";
+import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 import * as v from "valibot";
 
 import { wellKnownQuery } from "@/api/matrix";
@@ -27,13 +27,16 @@ import {
   roomsInfiniteQuery,
   type Room,
 } from "@/api/synapse";
+import { TextLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import * as Placeholder from "@/components/placeholder";
 import { RoomAvatar, RoomDisplayName } from "@/components/room-info";
 import * as Table from "@/components/table";
+import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
 import AppNavigation from "@/ui/navigation";
+import { useFilters } from "@/utils/filters";
 
 const RoomSearchParameters = v.object({
   search_term: v.optional(v.string()),
@@ -108,18 +111,50 @@ export const Route = createFileRoute("/_console/rooms")({
   component: RouteComponent,
 });
 
-const omit = <T extends Record<string, unknown>, K extends keyof T>(
-  object: T,
-  keys: K[],
-): Omit<T, K> =>
-  Object.fromEntries(
-    Object.entries(object).filter(([key]) => !(keys as string[]).includes(key)),
-  ) as Omit<T, K>;
+const filtersDefinition = [
+  {
+    key: "public_rooms",
+    value: false,
+    message: defineMessage({
+      id: "pages.rooms.filters.private_rooms",
+      defaultMessage: "Private rooms",
+      description: "Filter option for private rooms",
+    }),
+  },
+  {
+    key: "public_rooms",
+    value: true,
+    message: defineMessage({
+      id: "pages.rooms.filters.public_rooms",
+      defaultMessage: "Public rooms",
+      description: "Filter option for public rooms",
+    }),
+  },
+  {
+    key: "empty_rooms",
+    value: false,
+    message: defineMessage({
+      id: "pages.rooms.filters.non_empty_rooms",
+      defaultMessage: "Non-empty rooms",
+      description: "Filter option for non-empty rooms",
+    }),
+  },
+  {
+    key: "empty_rooms",
+    value: true,
+    message: defineMessage({
+      id: "pages.rooms.filters.empty_rooms",
+      defaultMessage: "Empty rooms",
+      description: "Filter option for empty rooms",
+    }),
+  },
+] as const;
 
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
+  const intl = useIntl();
 
   const debouncedSearch = useAsyncDebouncedCallback(
     async (term: string) => {
@@ -165,6 +200,8 @@ function RouteComponent() {
   );
 
   const totalCount = data.pages[0]?.total_rooms ?? 0;
+
+  const filters = useFilters(search, filtersDefinition);
 
   // Column definitions
   const columns = useMemo<ColumnDef<Room>[]>(
@@ -299,72 +336,43 @@ function RouteComponent() {
                 />
               </Table.Title>
 
-              <Table.Filter>
-                <CheckboxMenuItem
-                  onSelect={(event) => {
-                    event.preventDefault();
-                    navigate({
-                      search:
-                        search.public_rooms === false
-                          ? omit(search, ["public_rooms"])
-                          : {
-                              ...search,
-                              public_rooms: false,
-                            },
-                    });
-                  }}
-                  label="Private rooms"
-                  checked={search.public_rooms === false}
-                />
-                <CheckboxMenuItem
-                  onSelect={(event) => {
-                    event.preventDefault();
-                    navigate({
-                      search:
-                        search.public_rooms === true
-                          ? omit(search, ["public_rooms"])
-                          : {
-                              ...search,
-                              public_rooms: true,
-                            },
-                    });
-                  }}
-                  label="Public rooms"
-                  checked={search.public_rooms === true}
-                />
-                <CheckboxMenuItem
-                  onSelect={(event) => {
-                    event.preventDefault();
-                    navigate({
-                      search:
-                        search.empty_rooms === false
-                          ? omit(search, ["empty_rooms"])
-                          : {
-                              ...search,
-                              empty_rooms: false,
-                            },
-                    });
-                  }}
-                  label="Non-empty rooms"
-                  checked={search.empty_rooms === false}
-                />
-                <CheckboxMenuItem
-                  onSelect={(event) => {
-                    event.preventDefault();
-                    navigate({
-                      search:
-                        search.empty_rooms === true
-                          ? omit(search, ["empty_rooms"])
-                          : {
-                              ...search,
-                              empty_rooms: true,
-                            },
-                    });
-                  }}
-                  label="Empty rooms"
-                  checked={search.empty_rooms === true}
-                />
-              </Table.Filter>
+              <Table.FilterMenu>
+                {filters.all.map((filter) => (
+                  <CheckboxMenuItem
+                    key={filter.key}
+                    onSelect={(event) => {
+                      event.preventDefault();
+                      navigate({ search: filter.toggledState });
+                    }}
+                    label={intl.formatMessage(filter.message)}
+                    checked={filter.enabled}
+                  />
+                ))}
+              </Table.FilterMenu>
+
+              {filters.active.length > 0 && (
+                <Table.ActiveFilterList>
+                  {filters.active.map((filter) => (
+                    <Table.ActiveFilter key={filter.key}>
+                      <FormattedMessage {...filter.message} />
+                      <Table.RemoveFilterLink
+                        from={Route.fullPath}
+                        replace={true}
+                        search={filter.toggledState}
+                      />
+                    </Table.ActiveFilter>
+                  ))}
+
+                  <TextLink
+                    from={Route.fullPath}
+                    replace={true}
+                    search={filters.clearedState}
+                    size="small"
+                  >
+                    <FormattedMessage {...messages.actionClear} />
+                  </TextLink>
+                </Table.ActiveFilterList>
+              )}
             </Table.Header>
 
             <Table.VirtualizedList

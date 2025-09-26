@@ -7,6 +7,10 @@
     "description": "Label for a cancel action/button",
     "message": "Cancel"
   },
+  "action.clear": {
+    "description": "Label for a clear action/button",
+    "message": "Clear"
+  },
   "action.close": {
     "description": "Label for a 'close' action/button",
     "message": "Close"
@@ -227,21 +231,25 @@
     "description": "Label for the token expiration date field",
     "message": "Expires at"
   },
-  "pages.registration_tokens.filter_active_only": {
-    "description": "Filter option for active tokens only",
-    "message": "Active Only"
+  "pages.registration_tokens.filters.active_only": {
+    "description": "Filter option for active registration tokens only",
+    "message": "Active"
   },
-  "pages.registration_tokens.filter_expired_only": {
-    "description": "Filter option for expired tokens only",
-    "message": "Expired Only"
+  "pages.registration_tokens.filters.expired_only": {
+    "description": "Filter option for expired registration tokens only",
+    "message": "Expired"
   },
-  "pages.registration_tokens.filter_revoked_only": {
-    "description": "Filter option for revoked tokens only",
-    "message": "Revoked Only"
+  "pages.registration_tokens.filters.revoked_only": {
+    "description": "Filter option for revoked registration tokens only",
+    "message": "Revoked"
   },
-  "pages.registration_tokens.filter_used_only": {
-    "description": "Filter option for used tokens only",
-    "message": "Used Only"
+  "pages.registration_tokens.filters.unused_only": {
+    "description": "Filter option for unused registration tokens only",
+    "message": "Unused"
+  },
+  "pages.registration_tokens.filters.used_only": {
+    "description": "Filter option for used registration tokens only",
+    "message": "Used"
   },
   "pages.registration_tokens.loading_more": {
     "description": "Text shown when loading more tokens",
@@ -351,6 +359,22 @@
     "description": "Column header for valid until column",
     "message": "Valid Until"
   },
+  "pages.rooms.filters.empty_rooms": {
+    "description": "Filter option for empty rooms",
+    "message": "Empty rooms"
+  },
+  "pages.rooms.filters.non_empty_rooms": {
+    "description": "Filter option for non-empty rooms",
+    "message": "Non-empty rooms"
+  },
+  "pages.rooms.filters.private_rooms": {
+    "description": "Filter option for private rooms",
+    "message": "Private rooms"
+  },
+  "pages.rooms.filters.public_rooms": {
+    "description": "Filter option for public rooms",
+    "message": "Public rooms"
+  },
   "pages.rooms.room_count": {
     "description": "On the room list page, this heading shows the total number of rooms",
     "message": "{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
@@ -450,6 +474,34 @@
   "pages.users.delete_upstream_link.title": {
     "description": "The title of the modal asking for confirmation to delete an upstream account link",
     "message": "Remove link with upstream account?"
+  },
+  "pages.users.filters.active": {
+    "description": "The label for the 'Active users' filter in the user list",
+    "message": "Active users"
+  },
+  "pages.users.filters.admins": {
+    "description": "The label for the 'Admins' filter in the user list",
+    "message": "Admins"
+  },
+  "pages.users.filters.deactivated": {
+    "description": "The label for the 'Deactivated users' filter in the user list",
+    "message": "Deactivated users"
+  },
+  "pages.users.filters.guests": {
+    "description": "The label for the 'Guests (legacy)' filter in the user list",
+    "message": "Guests (legacy)"
+  },
+  "pages.users.filters.locked": {
+    "description": "The label for the 'Locked users' filter in the user list",
+    "message": "Locked users"
+  },
+  "pages.users.filters.newest_first": {
+    "description": "The label for the 'Newest first' filter in the user list",
+    "message": "Newest first"
+  },
+  "pages.users.filters.non_guests": {
+    "description": "The label for the 'Non-guests (legacy)' filter in the user list",
+    "message": "Non-guests (legacy)"
   },
   "pages.users.lock_account.alert.description": {
     "description": "In the modal to lock a user, the description of the alert",
