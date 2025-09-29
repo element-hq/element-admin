@@ -18,7 +18,7 @@ SOURCE=/dist/index.html
 DEST=/tmp/index.runtime.html
 SERVER_NAME="${SERVER_NAME:-}"
 
-CONFIG=$(base64 <<EOF
+CONFIG=$(base64 -w 0 <<EOF
 {
   "serverName": "$SERVER_NAME"
 }
