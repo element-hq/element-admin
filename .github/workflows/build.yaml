@@ -12,7 +12,7 @@ on:
       - v*
 
 env:
-  IMAGE: ghcr.io/element-hq/element-admin
+  IMAGE: oci-push.element.io/element-admin
 
 jobs:
   build:
@@ -21,7 +21,6 @@ jobs:
 
     permissions:
       contents: read
-      packages: write
       id-token: write
 
     steps:
@@ -51,9 +50,9 @@ jobs:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3.5.0
         with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: oci-push.element.io
+          username: ${{ secrets.OCI_PUSH_USERNAME }}
+          password: ${{ secrets.OCI_PUSH_PASSWORD }}
 
       - name: Build and push
         id: bake
