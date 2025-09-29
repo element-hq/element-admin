@@ -37,7 +37,7 @@ Under the hood, Element Admin is a single-page application React application whi
 <details>
 <summary><b>🐳 Using Docker</b></summary>
 
-A pre-built Docker image is available on [GitHub Container Registry](https://github.com/element-hq/element-admin/pkgs/container/element-admin).
+A pre-built Docker image is available on Element's container registry:
 
 ```bash
 docker run -p 8080:8080 oci.element.io/element-admin:latest
