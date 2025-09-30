@@ -9,7 +9,7 @@ import { defineMessage, FormattedMessage } from "react-intl";
 
 import { useEssVersion } from "@/api/ess";
 import { githubReleaseQuery } from "@/api/github";
-import { registeredUsersCountQuery } from "@/api/mas";
+import { usersCountQuery } from "@/api/mas";
 import { wellKnownQuery } from "@/api/matrix";
 import { roomsCountQuery, serverVersionQuery } from "@/api/synapse";
 import * as Data from "@/components/data";
@@ -45,9 +45,7 @@ export const Route = createFileRoute("/_console/")({
     // Kick the loading of the 4 queries but don't await them
     queryClient.prefetchQuery(serverVersionQuery(synapseRoot));
     queryClient.prefetchQuery(roomsCountQuery(synapseRoot));
-    queryClient.prefetchQuery(
-      registeredUsersCountQuery(credentials.serverName),
-    );
+    queryClient.prefetchQuery(usersCountQuery(credentials.serverName));
     queryClient.prefetchQuery(latestEssReleaseQuery);
   },
   component: RouteComponent,
@@ -105,7 +103,7 @@ interface RegisteredUsersProps {
 const RegisteredUsers: React.FC<RegisteredUsersProps> = ({
   serverName,
 }: RegisteredUsersProps) => {
-  const { data } = useSuspenseQuery(registeredUsersCountQuery(serverName));
+  const { data } = useSuspenseQuery(usersCountQuery(serverName));
   return <Data.NumericValue value={data} />;
 };
 

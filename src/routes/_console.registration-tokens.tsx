@@ -6,6 +6,7 @@ import {
   useMutation,
   useQueryClient,
   useSuspenseInfiniteQuery,
+  useSuspenseQuery,
 } from "@tanstack/react-query";
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
@@ -32,6 +33,7 @@ import {
   createRegistrationToken,
   registrationTokensInfiniteQuery,
   type TokenListParameters,
+  registrationTokensCountQuery,
 } from "@/api/mas";
 import type { SingleResourceForUserRegistrationToken } from "@/api/mas/api/types.gen";
 import { CopyToClipboard } from "@/components/copy";
@@ -85,6 +87,11 @@ export const Route = createFileRoute("/_console/registration-tokens")({
   }) => {
     await queryClient.ensureInfiniteQueryData(
       registrationTokensInfiniteQuery(credentials.serverName, parameters),
+    );
+
+    // Kick off the token count query without awaiting it
+    queryClient.prefetchQuery(
+      registrationTokensCountQuery(credentials.serverName, parameters),
     );
   },
 
@@ -465,6 +472,22 @@ const TokenAddButton: React.FC<TokenAddButtonProps> = ({
   );
 };
 
+const TokenCount = ({ serverName }: { serverName: string }) => {
+  const { parameters } = Route.useLoaderDeps();
+  const { data: totalCount } = useSuspenseQuery(
+    registrationTokensCountQuery(serverName, parameters),
+  );
+
+  return (
+    <FormattedMessage
+      id="pages.registration_tokens.token_count"
+      defaultMessage="{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
+      description="On the registration tokens list page, this heading shows the total number of tokens"
+      values={{ COUNT: totalCount }}
+    />
+  );
+};
+
 const filtersDefinition = [
   {
     key: "valid",
@@ -530,8 +553,6 @@ function RouteComponent() {
     () => data?.pages?.flatMap((page) => page.data) ?? [],
     [data],
   );
-
-  const totalCount = data.pages[0]?.meta?.count ?? 0;
 
   const filters = useFilters(search, filtersDefinition);
 
@@ -686,14 +707,9 @@ function RouteComponent() {
 
           <Table.Root>
             <Table.Header>
-              <Table.Title>
-                <FormattedMessage
-                  id="pages.registration_tokens.token_count"
-                  defaultMessage="{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
-                  description="On the registration tokens list page, this heading shows the total number of tokens"
-                  values={{ COUNT: totalCount }}
-                />
-              </Table.Title>
+              <Table.DynamicTitle>
+                <TokenCount serverName={credentials.serverName} />
+              </Table.DynamicTitle>
 
               <Table.FilterMenu>
                 {filters.all.map((filter) => (

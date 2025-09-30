@@ -214,15 +214,27 @@ export const userQuery = (serverName: string, userId: string) =>
     },
   });
 
-export const registeredUsersCountQuery = (serverName: string) =>
+export const usersCountQuery = (
+  serverName: string,
+  parameters: UserListFilters = {},
+) =>
   queryOptions({
-    queryKey: ["mas", "registered-users-count", serverName],
+    queryKey: ["mas", "users", serverName, parameters, "count"],
     queryFn: async ({ client, signal }) => {
+      const query: api.ListUsersData["query"] = {
+        count: "only",
+      };
+
+      if (parameters.admin !== undefined)
+        query["filter[admin]"] = parameters.admin;
+      if (parameters.guest !== undefined)
+        query["filter[legacy-guest]"] = parameters.guest;
+      if (parameters.status) query["filter[status]"] = parameters.status;
+      if (parameters.search) query["filter[search]"] = parameters.search;
+
       const data = await api.listUsers({
         ...(await masBaseOptions(client, serverName, signal)),
-        query: {
-          count: "only",
-        },
+        query,
       });
       ensureHasCount(data);
 
@@ -323,6 +335,7 @@ export const userEmailsQuery = (serverName: string, userId: string) =>
         query: {
           "filter[user]": userId,
           "page[first]": 10,
+          count: "false",
         },
       });
       ensureHasData(response);
@@ -436,13 +449,10 @@ export const unlockUser = async (
 
 export const registrationTokensInfiniteQuery = (
   serverName: string,
-  parameters: Omit<
-    TokenListParameters,
-    "after" | "before" | "first" | "last"
-  > = {},
+  parameters: TokenListParameters = {},
 ) =>
   infiniteQueryOptions({
-    queryKey: ["mas", "registration-tokens-infinite", serverName, parameters],
+    queryKey: ["mas", "registration-tokens", serverName, parameters],
     queryFn: async ({ client, signal, pageParam }) => {
       const query: api.ListUserRegistrationTokensData["query"] = {
         "page[first]": PAGE_SIZE,
@@ -471,6 +481,34 @@ export const registrationTokensInfiniteQuery = (
     getNextPageParam: (lastPage): api.Ulid | null =>
       (lastPage.links.next && cursorForSingleResource(lastPage.data?.at(-1))) ??
       null,
+  });
+
+export const registrationTokensCountQuery = (
+  serverName: string,
+  parameters: TokenListParameters = {},
+) =>
+  queryOptions({
+    queryKey: ["mas", "registration-tokens", serverName, parameters, "count"],
+    queryFn: async ({ client, signal }) => {
+      const query: api.ListUserRegistrationTokensData["query"] = {
+        count: "only",
+      };
+
+      if (parameters.used !== undefined)
+        query["filter[used]"] = parameters.used;
+      if (parameters.revoked !== undefined)
+        query["filter[revoked]"] = parameters.revoked;
+      if (parameters.expired !== undefined)
+        query["filter[expired]"] = parameters.expired;
+      if (parameters.valid !== undefined)
+        query["filter[valid]"] = parameters.valid;
+      const response = await api.listUserRegistrationTokens({
+        ...(await masBaseOptions(client, serverName, signal)),
+        query,
+      });
+      ensureHasCount(response);
+      return response.meta.count;
+    },
   });
 
 export const registrationTokenQuery = (serverName: string, tokenId: string) =>
