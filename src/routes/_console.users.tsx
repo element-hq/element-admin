@@ -430,7 +430,7 @@ function RouteComponent() {
     [data, isBackward],
   );
 
-  const totalCount = data.pages[0]?.meta.count ?? 0;
+  const totalCount = data.pages[0]?.meta?.count ?? 0;
 
   const debouncedSearch = useDebouncedCallback(
     (term: string) => {

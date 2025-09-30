@@ -531,7 +531,7 @@ function RouteComponent() {
     [data],
   );
 
-  const totalCount = data.pages[0]?.meta.count ?? 0;
+  const totalCount = data.pages[0]?.meta?.count ?? 0;
 
   const filters = useFilters(search, filtersDefinition);
 
