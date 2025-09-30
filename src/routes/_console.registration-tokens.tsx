@@ -85,13 +85,13 @@ export const Route = createFileRoute("/_console/registration-tokens")({
     context: { queryClient, credentials },
     deps: { parameters },
   }) => {
-    await queryClient.ensureInfiniteQueryData(
-      registrationTokensInfiniteQuery(credentials.serverName, parameters),
-    );
-
     // Kick off the token count query without awaiting it
     queryClient.prefetchQuery(
       registrationTokensCountQuery(credentials.serverName, parameters),
+    );
+
+    await queryClient.ensureInfiniteQueryData(
+      registrationTokensInfiniteQuery(credentials.serverName, parameters),
     );
   },
 

@@ -90,15 +90,15 @@ export const Route = createFileRoute("/_console/users")({
     context: { queryClient, credentials },
     deps: { parameters, direction },
   }) => {
+    // Kick-off the users count query without awaiting it
+    queryClient.prefetchQuery(
+      usersCountQuery(credentials.serverName, parameters),
+    );
+
     await queryClient.ensureQueryData(wellKnownQuery(credentials.serverName));
 
     await queryClient.ensureInfiniteQueryData(
       usersInfiniteQuery(credentials.serverName, parameters, direction),
-    );
-
-    // Kick-off the users count query without awaiting it
-    queryClient.prefetchQuery(
-      usersCountQuery(credentials.serverName, parameters),
     );
   },
 
