@@ -32,6 +32,12 @@ export const vUlid = v.pipe(
   v.regex(/^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$/),
 );
 
+export const vIncludeCount = v.union([
+  v.picklist(["true"]),
+  v.picklist(["false"]),
+  v.picklist(["only"]),
+]);
+
 export const vPaginationParams = v.object({
   "page[before]": v.optional(vUlid),
   "page[after]": v.optional(vUlid),
@@ -41,6 +47,7 @@ export const vPaginationParams = v.object({
   "page[last]": v.optional(
     v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
   ),
+  count: v.optional(vIncludeCount),
 });
 
 export const vCompatSessionStatus = v.picklist(["active", "finished"]);
@@ -52,7 +59,9 @@ export const vCompatSessionFilter = v.object({
 });
 
 export const vPaginationMeta = v.object({
-  count: v.pipe(v.number(), v.integer(), v.minValue(0)),
+  count: v.optional(
+    v.union([v.pipe(v.number(), v.integer(), v.minValue(0)), v.null()]),
+  ),
 });
 
 /**
@@ -91,6 +100,20 @@ export const vSelfLinks = v.object({
 });
 
 /**
+ * Pagination metadata for a resource
+ */
+export const vSingleResourceMetaPage = v.object({
+  cursor: v.string(),
+});
+
+/**
+ * Metadata associated with a resource
+ */
+export const vSingleResourceMeta = v.object({
+  page: v.optional(vSingleResourceMetaPage),
+});
+
+/**
  * A single resource, with its type, ID, attributes and related links
  */
 export const vSingleResourceForCompatSession = v.object({
@@ -98,6 +121,7 @@ export const vSingleResourceForCompatSession = v.object({
   id: vUlid,
   attributes: vCompatSession,
   links: vSelfLinks,
+  meta: v.optional(vSingleResourceMeta),
 });
 
 /**
@@ -105,8 +129,8 @@ export const vSingleResourceForCompatSession = v.object({
  */
 export const vPaginationLinks = v.object({
   self: v.string(),
-  first: v.string(),
-  last: v.string(),
+  first: v.optional(v.union([v.string(), v.null()])),
+  last: v.optional(v.union([v.string(), v.null()])),
   next: v.optional(v.union([v.string(), v.null()])),
   prev: v.optional(v.union([v.string(), v.null()])),
 });
@@ -115,8 +139,10 @@ export const vPaginationLinks = v.object({
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForCompatSession = v.object({
-  meta: vPaginationMeta,
-  data: v.array(vSingleResourceForCompatSession),
+  meta: v.optional(vPaginationMeta),
+  data: v.optional(
+    v.union([v.array(vSingleResourceForCompatSession), v.null()]),
+  ),
   links: vPaginationLinks,
 });
 
@@ -187,14 +213,17 @@ export const vSingleResourceForOAuth2Session = v.object({
   id: vUlid,
   attributes: vOAuth2Session,
   links: vSelfLinks,
+  meta: v.optional(vSingleResourceMeta),
 });
 
 /**
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForOAuth2Session = v.object({
-  meta: vPaginationMeta,
-  data: v.array(vSingleResourceForOAuth2Session),
+  meta: v.optional(vPaginationMeta),
+  data: v.optional(
+    v.union([v.array(vSingleResourceForOAuth2Session), v.null()]),
+  ),
   links: vPaginationLinks,
 });
 
@@ -229,6 +258,7 @@ export const vSingleResourceForPolicyData = v.object({
   id: vUlid,
   attributes: vPolicyData,
   links: vSelfLinks,
+  meta: v.optional(vSingleResourceMeta),
 });
 
 /**
@@ -272,14 +302,15 @@ export const vSingleResourceForUser = v.object({
   id: vUlid,
   attributes: vUser,
   links: vSelfLinks,
+  meta: v.optional(vSingleResourceMeta),
 });
 
 /**
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForUser = v.object({
-  meta: vPaginationMeta,
-  data: v.array(vSingleResourceForUser),
+  meta: v.optional(vPaginationMeta),
+  data: v.optional(v.union([v.array(vSingleResourceForUser), v.null()])),
   links: vPaginationLinks,
 });
 
@@ -347,14 +378,15 @@ export const vSingleResourceForUserEmail = v.object({
   id: vUlid,
   attributes: vUserEmail,
   links: vSelfLinks,
+  meta: v.optional(vSingleResourceMeta),
 });
 
 /**
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForUserEmail = v.object({
-  meta: vPaginationMeta,
-  data: v.array(vSingleResourceForUserEmail),
+  meta: v.optional(vPaginationMeta),
+  data: v.optional(v.union([v.array(vSingleResourceForUserEmail), v.null()])),
   links: vPaginationLinks,
 });
 
@@ -405,14 +437,15 @@ export const vSingleResourceForUserSession = v.object({
   id: vUlid,
   attributes: vUserSession,
   links: vSelfLinks,
+  meta: v.optional(vSingleResourceMeta),
 });
 
 /**
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForUserSession = v.object({
-  meta: vPaginationMeta,
-  data: v.array(vSingleResourceForUserSession),
+  meta: v.optional(vPaginationMeta),
+  data: v.optional(v.union([v.array(vSingleResourceForUserSession), v.null()])),
   links: vPaginationLinks,
 });
 
@@ -479,14 +512,17 @@ export const vSingleResourceForUserRegistrationToken = v.object({
   id: vUlid,
   attributes: vUserRegistrationToken,
   links: vSelfLinks,
+  meta: v.optional(vSingleResourceMeta),
 });
 
 /**
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForUserRegistrationToken = v.object({
-  meta: vPaginationMeta,
-  data: v.array(vSingleResourceForUserRegistrationToken),
+  meta: v.optional(vPaginationMeta),
+  data: v.optional(
+    v.union([v.array(vSingleResourceForUserRegistrationToken), v.null()]),
+  ),
   links: vPaginationLinks,
 });
 
@@ -572,14 +608,17 @@ export const vSingleResourceForUpstreamOAuthLink = v.object({
   id: vUlid,
   attributes: vUpstreamOAuthLink,
   links: vSelfLinks,
+  meta: v.optional(vSingleResourceMeta),
 });
 
 /**
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForUpstreamOAuthLink = v.object({
-  meta: vPaginationMeta,
-  data: v.array(vSingleResourceForUpstreamOAuthLink),
+  meta: v.optional(vPaginationMeta),
+  data: v.optional(
+    v.union([v.array(vSingleResourceForUpstreamOAuthLink), v.null()]),
+  ),
   links: vPaginationLinks,
 });
 
@@ -626,15 +665,26 @@ export const vSingleResourceForUpstreamOAuthProvider = v.object({
   id: vUlid,
   attributes: vUpstreamOAuthProvider,
   links: vSelfLinks,
+  meta: v.optional(vSingleResourceMeta),
 });
 
 /**
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForUpstreamOAuthProvider = v.object({
-  meta: vPaginationMeta,
-  data: v.array(vSingleResourceForUpstreamOAuthProvider),
+  meta: v.optional(vPaginationMeta),
+  data: v.optional(
+    v.union([v.array(vSingleResourceForUpstreamOAuthProvider), v.null()]),
+  ),
   links: vPaginationLinks,
+});
+
+/**
+ * A top-level response with a single resource
+ */
+export const vSingleResponseForUpstreamOAuthProvider = v.object({
+  data: vSingleResourceForUpstreamOAuthProvider,
+  links: vSelfLinks,
 });
 
 export const vSiteConfigData = v.object({
@@ -658,6 +708,7 @@ export const vListCompatSessionsData = v.object({
       "page[last]": v.optional(
         v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
       ),
+      count: v.optional(vIncludeCount),
       "filter[user]": v.optional(vUlid),
       "filter[user-session]": v.optional(vUlid),
       "filter[status]": v.optional(vCompatSessionStatus),
@@ -696,6 +747,7 @@ export const vListOAuth2SessionsData = v.object({
       "page[last]": v.optional(
         v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
       ),
+      count: v.optional(vIncludeCount),
       "filter[user]": v.optional(vUlid),
       "filter[client]": v.optional(vUlid),
       "filter[client-kind]": v.optional(vOAuth2ClientKind),
@@ -772,6 +824,7 @@ export const vListUsersData = v.object({
       "page[last]": v.optional(
         v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
       ),
+      count: v.optional(vIncludeCount),
       "filter[admin]": v.optional(v.union([v.boolean(), v.null()])),
       "filter[legacy-guest]": v.optional(v.union([v.boolean(), v.null()])),
       "filter[search]": v.optional(v.union([v.string(), v.null()])),
@@ -913,6 +966,7 @@ export const vListUserEmailsData = v.object({
       "page[last]": v.optional(
         v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
       ),
+      count: v.optional(vIncludeCount),
       "filter[user]": v.optional(vUlid),
       "filter[email]": v.optional(v.union([v.string(), v.null()])),
     }),
@@ -974,6 +1028,7 @@ export const vListUserSessionsData = v.object({
       "page[last]": v.optional(
         v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
       ),
+      count: v.optional(vIncludeCount),
       "filter[user]": v.optional(vUlid),
       "filter[status]": v.optional(vUserSessionStatus),
     }),
@@ -1011,6 +1066,7 @@ export const vListUserRegistrationTokensData = v.object({
       "page[last]": v.optional(
         v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
       ),
+      count: v.optional(vIncludeCount),
       "filter[used]": v.optional(v.union([v.boolean(), v.null()])),
       "filter[revoked]": v.optional(v.union([v.boolean(), v.null()])),
       "filter[expired]": v.optional(v.union([v.boolean(), v.null()])),
@@ -1106,6 +1162,7 @@ export const vListUpstreamOAuthLinksData = v.object({
       "page[last]": v.optional(
         v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
       ),
+      count: v.optional(vIncludeCount),
       "filter[user]": v.optional(vUlid),
       "filter[provider]": v.optional(vUlid),
       "filter[subject]": v.optional(v.union([v.string(), v.null()])),
@@ -1171,6 +1228,7 @@ export const vListUpstreamOAuthProvidersData = v.object({
       "page[last]": v.optional(
         v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
       ),
+      count: v.optional(vIncludeCount),
       "filter[enabled]": v.optional(v.union([v.boolean(), v.null()])),
     }),
   ),
@@ -1181,3 +1239,17 @@ export const vListUpstreamOAuthProvidersData = v.object({
  */
 export const vListUpstreamOAuthProvidersResponse =
   vPaginatedResponseForUpstreamOAuthProvider;
+
+export const vGetUpstreamOAuthProviderData = v.object({
+  body: v.optional(v.never()),
+  path: v.object({
+    id: vUlid,
+  }),
+  query: v.optional(v.never()),
+});
+
+/**
+ * The upstream OAuth provider
+ */
+export const vGetUpstreamOAuthProviderResponse =
+  vSingleResponseForUpstreamOAuthProvider;

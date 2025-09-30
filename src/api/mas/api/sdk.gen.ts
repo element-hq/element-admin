@@ -39,6 +39,9 @@ import type {
   GetUpstreamOAuthLinkData,
   GetUpstreamOAuthLinkErrors,
   GetUpstreamOAuthLinkResponses,
+  GetUpstreamOAuthProviderData,
+  GetUpstreamOAuthProviderErrors,
+  GetUpstreamOAuthProviderResponses,
   GetUserByUsernameData,
   GetUserByUsernameErrors,
   GetUserByUsernameResponses,
@@ -130,6 +133,8 @@ import {
   vGetPolicyDataResponse,
   vGetUpstreamOAuthLinkData,
   vGetUpstreamOAuthLinkResponse,
+  vGetUpstreamOAuthProviderData,
+  vGetUpstreamOAuthProviderResponse,
   vGetUserByUsernameData,
   vGetUserByUsernameResponse,
   vGetUserData,
@@ -1300,6 +1305,36 @@ export const listUpstreamOAuthProviders = <ThrowOnError extends boolean = true>(
       },
     ],
     url: "/api/admin/v1/upstream-oauth-providers",
+    ...options,
+  });
+};
+
+/**
+ * Get upstream OAuth provider
+ */
+export const getUpstreamOAuthProvider = <ThrowOnError extends boolean = true>(
+  options: Options<GetUpstreamOAuthProviderData, ThrowOnError>,
+) => {
+  return options.client.get<
+    GetUpstreamOAuthProviderResponses,
+    GetUpstreamOAuthProviderErrors,
+    ThrowOnError,
+    "data"
+  >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vGetUpstreamOAuthProviderData, data);
+    },
+    responseValidator: async (data) => {
+      return await v.parseAsync(vGetUpstreamOAuthProviderResponse, data);
+    },
+    responseStyle: "data",
+    security: [
+      {
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
+    url: "/api/admin/v1/upstream-oauth-providers/{id}",
     ...options,
   });
 };
