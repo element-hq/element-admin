@@ -28,7 +28,12 @@ import { toast } from "react-hot-toast";
 import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 import * as v from "valibot";
 
-import { createUser, isErrorResponse, usersInfiniteQuery } from "@/api/mas";
+import {
+  createUser,
+  isErrorResponse,
+  usersCountQuery,
+  usersInfiniteQuery,
+} from "@/api/mas";
 import type { UserListFilters } from "@/api/mas";
 import type { SingleResourceForUser } from "@/api/mas/api/types.gen";
 import {
@@ -85,6 +90,11 @@ export const Route = createFileRoute("/_console/users")({
     context: { queryClient, credentials },
     deps: { parameters, direction },
   }) => {
+    // Kick-off the users count query without awaiting it
+    queryClient.prefetchQuery(
+      usersCountQuery(credentials.serverName, parameters),
+    );
+
     await queryClient.ensureQueryData(wellKnownQuery(credentials.serverName));
 
     await queryClient.ensureInfiniteQueryData(
@@ -334,6 +344,22 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
   );
 };
 
+const UserCount = ({ serverName }: { serverName: string }) => {
+  const { parameters } = Route.useLoaderDeps();
+  const { data: totalCount } = useSuspenseQuery(
+    usersCountQuery(serverName, parameters),
+  );
+
+  return (
+    <FormattedMessage
+      id="pages.users.user_count"
+      defaultMessage="{COUNT, plural, zero {No users} one {# user} other {# users}}"
+      description="On the user list page, this heading shows the total number of users"
+      values={{ COUNT: totalCount }}
+    />
+  );
+};
+
 const filtersDefinition = [
   {
     key: "dir",
@@ -429,8 +455,6 @@ function RouteComponent() {
       ) ?? [],
     [data, isBackward],
   );
-
-  const totalCount = data.pages[0]?.meta.count ?? 0;
 
   const debouncedSearch = useDebouncedCallback(
     (term: string) => {
@@ -553,14 +577,9 @@ function RouteComponent() {
 
           <Table.Root>
             <Table.Header>
-              <Table.Title>
-                <FormattedMessage
-                  id="pages.users.user_count"
-                  defaultMessage="{COUNT, plural, zero {No users} one {# user} other {# users}}"
-                  description="On the user list page, this heading shows the total number of users"
-                  values={{ COUNT: totalCount }}
-                />
-              </Table.Title>
+              <Table.DynamicTitle>
+                <UserCount serverName={credentials.serverName} />
+              </Table.DynamicTitle>
 
               <Table.FilterMenu>
                 {filters.all.map((filter) => (

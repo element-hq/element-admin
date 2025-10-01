@@ -19,6 +19,7 @@ import cx from "classnames";
 import {
   forwardRef,
   Fragment,
+  Suspense,
   useEffect,
   useId,
   useRef,
@@ -26,6 +27,7 @@ import {
 } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
+import * as Placeholder from "@/components/placeholder";
 import * as messages from "@/messages";
 
 import styles from "./table.module.css";
@@ -51,6 +53,13 @@ export const Title = ({ className, children, ...props }: TitleProps) => (
   <div className={cx(styles["header-title"], className)} {...props}>
     {children}
   </div>
+);
+
+// A table title with a suspense fallback, useful when loading expensive counts in the table title
+export const DynamicTitle = ({ children, ...props }: TitleProps) => (
+  <Title {...props}>
+    <Suspense fallback={<Placeholder.Text />}>{children}</Suspense>
+  </Title>
 );
 
 type FilterMenuProps = React.PropsWithChildren;

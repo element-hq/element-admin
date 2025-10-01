@@ -62,6 +62,7 @@ export type PaginationParams = {
    * Retrieve the last N items
    */
   "page[last]"?: number | null;
+  count?: IncludeCount;
 };
 
 /**
@@ -69,6 +70,8 @@ export type PaginationParams = {
  * A ULID as per https://github.com/ulid/spec
  */
 export type Ulid = string;
+
+export type IncludeCount = "true" | "false" | "only";
 
 export type CompatSessionFilter = {
   "filter[user]"?: Ulid;
@@ -82,11 +85,11 @@ export type CompatSessionStatus = "active" | "finished";
  * A top-level response with a page of resources
  */
 export type PaginatedResponseForCompatSession = {
-  meta: PaginationMeta;
+  meta?: PaginationMeta;
   /**
    * The list of resources
    */
-  data: Array<SingleResourceForCompatSession>;
+  data?: Array<SingleResourceForCompatSession> | null;
   links: PaginationLinks;
 };
 
@@ -94,7 +97,7 @@ export type PaginationMeta = {
   /**
    * The total number of results
    */
-  count: number;
+  count?: number | null;
 };
 
 /**
@@ -108,6 +111,7 @@ export type SingleResourceForCompatSession = {
   id: Ulid;
   attributes: CompatSession;
   links: SelfLinks;
+  meta?: SingleResourceMeta;
 };
 
 /**
@@ -163,6 +167,23 @@ export type SelfLinks = {
 };
 
 /**
+ * Metadata associated with a resource
+ */
+export type SingleResourceMeta = {
+  page?: SingleResourceMetaPage;
+};
+
+/**
+ * Pagination metadata for a resource
+ */
+export type SingleResourceMetaPage = {
+  /**
+   * The cursor of this resource in the paginated result
+   */
+  cursor: string;
+};
+
+/**
  * Related links
  */
 export type PaginationLinks = {
@@ -173,11 +194,11 @@ export type PaginationLinks = {
   /**
    * The link to the first page of results
    */
-  first: string;
+  first?: string | null;
   /**
    * The link to the last page of results
    */
-  last: string;
+  last?: string | null;
   /**
    * The link to the next page of results
    *
@@ -244,11 +265,11 @@ export type OAuth2SessionStatus = "active" | "finished";
  * A top-level response with a page of resources
  */
 export type PaginatedResponseForOAuth2Session = {
-  meta: PaginationMeta;
+  meta?: PaginationMeta;
   /**
    * The list of resources
    */
-  data: Array<SingleResourceForOAuth2Session>;
+  data?: Array<SingleResourceForOAuth2Session> | null;
   links: PaginationLinks;
 };
 
@@ -263,6 +284,7 @@ export type SingleResourceForOAuth2Session = {
   id: Ulid;
   attributes: OAuth2Session;
   links: SelfLinks;
+  meta?: SingleResourceMeta;
 };
 
 /**
@@ -336,6 +358,7 @@ export type SingleResourceForPolicyData = {
   id: Ulid;
   attributes: PolicyData;
   links: SelfLinks;
+  meta?: SingleResourceMeta;
 };
 
 /**
@@ -376,11 +399,11 @@ export type UserStatus = "active" | "locked" | "deactivated";
  * A top-level response with a page of resources
  */
 export type PaginatedResponseForUser = {
-  meta: PaginationMeta;
+  meta?: PaginationMeta;
   /**
    * The list of resources
    */
-  data: Array<SingleResourceForUser>;
+  data?: Array<SingleResourceForUser> | null;
   links: PaginationLinks;
 };
 
@@ -395,6 +418,7 @@ export type SingleResourceForUser = {
   id: Ulid;
   attributes: User;
   links: SelfLinks;
+  meta?: SingleResourceMeta;
 };
 
 /**
@@ -504,11 +528,11 @@ export type UserEmailFilter = {
  * A top-level response with a page of resources
  */
 export type PaginatedResponseForUserEmail = {
-  meta: PaginationMeta;
+  meta?: PaginationMeta;
   /**
    * The list of resources
    */
-  data: Array<SingleResourceForUserEmail>;
+  data?: Array<SingleResourceForUserEmail> | null;
   links: PaginationLinks;
 };
 
@@ -523,6 +547,7 @@ export type SingleResourceForUserEmail = {
   id: Ulid;
   attributes: UserEmail;
   links: SelfLinks;
+  meta?: SingleResourceMeta;
 };
 
 /**
@@ -570,11 +595,11 @@ export type UserSessionStatus = "active" | "finished";
  * A top-level response with a page of resources
  */
 export type PaginatedResponseForUserSession = {
-  meta: PaginationMeta;
+  meta?: PaginationMeta;
   /**
    * The list of resources
    */
-  data: Array<SingleResourceForUserSession>;
+  data?: Array<SingleResourceForUserSession> | null;
   links: PaginationLinks;
 };
 
@@ -589,6 +614,7 @@ export type SingleResourceForUserSession = {
   id: Ulid;
   attributes: UserSession;
   links: SelfLinks;
+  meta?: SingleResourceMeta;
 };
 
 /**
@@ -651,11 +677,11 @@ export type RegistrationTokenFilter = {
  * A top-level response with a page of resources
  */
 export type PaginatedResponseForUserRegistrationToken = {
-  meta: PaginationMeta;
+  meta?: PaginationMeta;
   /**
    * The list of resources
    */
-  data: Array<SingleResourceForUserRegistrationToken>;
+  data?: Array<SingleResourceForUserRegistrationToken> | null;
   links: PaginationLinks;
 };
 
@@ -670,6 +696,7 @@ export type SingleResourceForUserRegistrationToken = {
   id: Ulid;
   attributes: UserRegistrationToken;
   links: SelfLinks;
+  meta?: SingleResourceMeta;
 };
 
 /**
@@ -763,11 +790,11 @@ export type UpstreamOAuthLinkFilter = {
  * A top-level response with a page of resources
  */
 export type PaginatedResponseForUpstreamOAuthLink = {
-  meta: PaginationMeta;
+  meta?: PaginationMeta;
   /**
    * The list of resources
    */
-  data: Array<SingleResourceForUpstreamOAuthLink>;
+  data?: Array<SingleResourceForUpstreamOAuthLink> | null;
   links: PaginationLinks;
 };
 
@@ -782,6 +809,7 @@ export type SingleResourceForUpstreamOAuthLink = {
   id: Ulid;
   attributes: UpstreamOAuthLink;
   links: SelfLinks;
+  meta?: SingleResourceMeta;
 };
 
 /**
@@ -839,11 +867,11 @@ export type UpstreamOAuthProviderFilter = {
  * A top-level response with a page of resources
  */
 export type PaginatedResponseForUpstreamOAuthProvider = {
-  meta: PaginationMeta;
+  meta?: PaginationMeta;
   /**
    * The list of resources
    */
-  data: Array<SingleResourceForUpstreamOAuthProvider>;
+  data?: Array<SingleResourceForUpstreamOAuthProvider> | null;
   links: PaginationLinks;
 };
 
@@ -858,6 +886,7 @@ export type SingleResourceForUpstreamOAuthProvider = {
   id: Ulid;
   attributes: UpstreamOAuthProvider;
   links: SelfLinks;
+  meta?: SingleResourceMeta;
 };
 
 /**
@@ -884,6 +913,14 @@ export type UpstreamOAuthProvider = {
    * When the provider was disabled. If null, the provider is enabled.
    */
   disabled_at?: string | null;
+};
+
+/**
+ * A top-level response with a single resource
+ */
+export type SingleResponseForUpstreamOAuthProvider = {
+  data: SingleResourceForUpstreamOAuthProvider;
+  links: SelfLinks;
 };
 
 export type SiteConfigData = {
@@ -919,6 +956,10 @@ export type ListCompatSessionsData = {
      * Retrieve the last N items
      */
     "page[last]"?: number | null;
+    /**
+     * Include the total number of items. Defaults to `true`.
+     */
+    count?: IncludeCount;
     /**
      * Retrieve the items for the given user
      */
@@ -1010,6 +1051,10 @@ export type ListOAuth2SessionsData = {
      * Retrieve the last N items
      */
     "page[last]"?: number | null;
+    /**
+     * Include the total number of items. Defaults to `true`.
+     */
+    count?: IncludeCount;
     /**
      * Retrieve the items for the given user
      */
@@ -1198,6 +1243,10 @@ export type ListUsersData = {
      * Retrieve the last N items
      */
     "page[last]"?: number | null;
+    /**
+     * Include the total number of items. Defaults to `true`.
+     */
+    count?: IncludeCount;
     /**
      * Retrieve users with (or without) the `admin` flag set
      */
@@ -1523,6 +1572,10 @@ export type ListUserEmailsData = {
      */
     "page[last]"?: number | null;
     /**
+     * Include the total number of items. Defaults to `true`.
+     */
+    count?: IncludeCount;
+    /**
      * Retrieve the items for the given user
      */
     "filter[user]"?: Ulid;
@@ -1666,6 +1719,10 @@ export type ListUserSessionsData = {
      */
     "page[last]"?: number | null;
     /**
+     * Include the total number of items. Defaults to `true`.
+     */
+    count?: IncludeCount;
+    /**
      * Retrieve the items for the given user
      */
     "filter[user]"?: Ulid;
@@ -1752,6 +1809,10 @@ export type ListUserRegistrationTokensData = {
      * Retrieve the last N items
      */
     "page[last]"?: number | null;
+    /**
+     * Include the total number of items. Defaults to `true`.
+     */
+    count?: IncludeCount;
     /**
      * Retrieve tokens that have (or have not) been used at least once
      */
@@ -1946,6 +2007,10 @@ export type ListUpstreamOAuthLinksData = {
      */
     "page[last]"?: number | null;
     /**
+     * Include the total number of items. Defaults to `true`.
+     */
+    count?: IncludeCount;
+    /**
      * Retrieve the items for the given user
      */
     "filter[user]"?: Ulid;
@@ -2095,6 +2160,10 @@ export type ListUpstreamOAuthProvidersData = {
      */
     "page[last]"?: number | null;
     /**
+     * Include the total number of items. Defaults to `true`.
+     */
+    count?: IncludeCount;
+    /**
      * Retrieve providers that are (or are not) enabled
      */
     "filter[enabled]"?: boolean | null;
@@ -2111,3 +2180,32 @@ export type ListUpstreamOAuthProvidersResponses = {
 
 export type ListUpstreamOAuthProvidersResponse =
   ListUpstreamOAuthProvidersResponses[keyof ListUpstreamOAuthProvidersResponses];
+
+export type GetUpstreamOAuthProviderData = {
+  body?: never;
+  path: {
+    id: Ulid;
+  };
+  query?: never;
+  url: "/api/admin/v1/upstream-oauth-providers/{id}";
+};
+
+export type GetUpstreamOAuthProviderErrors = {
+  /**
+   * Provider not found
+   */
+  404: ErrorResponse;
+};
+
+export type GetUpstreamOAuthProviderError =
+  GetUpstreamOAuthProviderErrors[keyof GetUpstreamOAuthProviderErrors];
+
+export type GetUpstreamOAuthProviderResponses = {
+  /**
+   * The upstream OAuth provider
+   */
+  200: SingleResponseForUpstreamOAuthProvider;
+};
+
+export type GetUpstreamOAuthProviderResponse =
+  GetUpstreamOAuthProviderResponses[keyof GetUpstreamOAuthProviderResponses];

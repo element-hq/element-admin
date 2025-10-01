@@ -24,6 +24,37 @@ const masClient = createClient({
 export const isErrorResponse = (t: unknown): t is api.ErrorResponse =>
   typeof t === "object" && t !== null && Object.hasOwn(t, "errors");
 
+function ensureHasData<R extends { data?: unknown[] | null | undefined }>(
+  response: R,
+): asserts response is R & { data: NonNullable<R["data"]> } {
+  if (!Array.isArray(response?.data)) {
+    throw new TypeError("Unexpected response from MAS");
+  }
+}
+
+function ensureHasCount<R extends { meta?: { count?: number | null } | null }>(
+  response: R,
+): asserts response is R & { meta: { count: number } } {
+  if (typeof response.meta?.count !== "number") {
+    throw new TypeError("Unexpected response from MAS");
+  }
+}
+
+interface SingleResource {
+  readonly id: string;
+  readonly meta?: {
+    readonly page?: {
+      cursor: string;
+    };
+  };
+}
+
+// Extracts the cursor from an item on a page. This works with both MAS 1.4.0
+// and earlier versions
+const cursorForSingleResource = (
+  resource: SingleResource | null | undefined,
+): string | null => resource?.meta?.page?.cursor ?? resource?.id ?? null;
+
 const masBaseOptions = async (
   client: QueryClient,
   serverName: string,
@@ -137,7 +168,9 @@ export const usersInfiniteQuery = (
   infiniteQueryOptions({
     queryKey: ["mas", "users", serverName, parameters, direction],
     queryFn: async ({ client, signal, pageParam }) => {
-      const query: api.ListUsersData["query"] = {};
+      const query: api.ListUsersData["query"] = {
+        count: "false",
+      };
 
       if (direction === "forward") {
         query["page[first]"] = PAGE_SIZE;
@@ -154,16 +187,20 @@ export const usersInfiniteQuery = (
       if (parameters.status) query["filter[status]"] = parameters.status;
       if (parameters.search) query["filter[search]"] = parameters.search;
 
-      return await api.listUsers({
+      const response = await api.listUsers({
         ...(await masBaseOptions(client, serverName, signal)),
         query,
       });
+      ensureHasData(response);
+
+      return response;
     },
-    initialPageParam: null as api.Ulid | null,
-    getNextPageParam: (lastPage): api.Ulid | null =>
-      direction === "forward"
-        ? ((lastPage.links.next && lastPage.data.at(-1)?.id) ?? null)
-        : ((lastPage.links.prev && lastPage.data.at(0)?.id) ?? null),
+    initialPageParam: null as string | null,
+    getNextPageParam: (lastPage): string | null =>
+      (direction === "forward"
+        ? lastPage.links.next && cursorForSingleResource(lastPage.data?.at(-1))
+        : lastPage.links.prev &&
+          cursorForSingleResource(lastPage.data?.at(0))) ?? null,
   });
 
 export const userQuery = (serverName: string, userId: string) =>
@@ -177,16 +214,30 @@ export const userQuery = (serverName: string, userId: string) =>
     },
   });
 
-export const registeredUsersCountQuery = (serverName: string) =>
+export const usersCountQuery = (
+  serverName: string,
+  parameters: UserListFilters = {},
+) =>
   queryOptions({
-    queryKey: ["mas", "registered-users-count", serverName],
+    queryKey: ["mas", "users", serverName, parameters, "count"],
     queryFn: async ({ client, signal }) => {
+      const query: api.ListUsersData["query"] = {
+        count: "only",
+      };
+
+      if (parameters.admin !== undefined)
+        query["filter[admin]"] = parameters.admin;
+      if (parameters.guest !== undefined)
+        query["filter[legacy-guest]"] = parameters.guest;
+      if (parameters.status) query["filter[status]"] = parameters.status;
+      if (parameters.search) query["filter[search]"] = parameters.search;
+
       const data = await api.listUsers({
         ...(await masBaseOptions(client, serverName, signal)),
-        query: {
-          "page[first]": 1,
-        },
+        query,
       });
+      ensureHasCount(data);
+
       return data.meta.count;
     },
   });
@@ -279,13 +330,16 @@ export const userEmailsQuery = (serverName: string, userId: string) =>
   queryOptions({
     queryKey: ["mas", "user-emails", serverName, userId],
     queryFn: async ({ client, signal }) => {
-      return await api.listUserEmails({
+      const response = await api.listUserEmails({
         ...(await masBaseOptions(client, serverName, signal)),
         query: {
           "filter[user]": userId,
           "page[first]": 10,
+          count: "false",
         },
       });
+      ensureHasData(response);
+      return response;
     },
   });
 
@@ -321,13 +375,16 @@ export const userUpstreamLinksQuery = (serverName: string, userId: string) =>
   queryOptions({
     queryKey: ["mas", "user-upstream-links", serverName, userId],
     queryFn: async ({ client, signal }) => {
-      return await api.listUpstreamOAuthLinks({
+      const response = await api.listUpstreamOAuthLinks({
         ...(await masBaseOptions(client, serverName, signal)),
         query: {
           "filter[user]": userId,
           "page[first]": 10,
+          count: "false",
         },
       });
+      ensureHasData(response);
+      return response;
     },
   });
 
@@ -340,8 +397,10 @@ export const upstreamProvidersQuery = (serverName: string) =>
         query: {
           // Let's assume we're not going to have more than 1000 providers
           "page[first]": 1000,
+          count: "false",
         },
       });
+      ensureHasData(response);
       return response.data;
     },
   });
@@ -390,16 +449,14 @@ export const unlockUser = async (
 
 export const registrationTokensInfiniteQuery = (
   serverName: string,
-  parameters: Omit<
-    TokenListParameters,
-    "after" | "before" | "first" | "last"
-  > = {},
+  parameters: TokenListParameters = {},
 ) =>
   infiniteQueryOptions({
-    queryKey: ["mas", "registration-tokens-infinite", serverName, parameters],
+    queryKey: ["mas", "registration-tokens", serverName, parameters],
     queryFn: async ({ client, signal, pageParam }) => {
       const query: api.ListUserRegistrationTokensData["query"] = {
         "page[first]": PAGE_SIZE,
+        count: "false",
       };
 
       if (pageParam) query["page[after]"] = pageParam;
@@ -413,14 +470,45 @@ export const registrationTokensInfiniteQuery = (
       if (parameters.valid !== undefined)
         query["filter[valid]"] = parameters.valid;
 
-      return await api.listUserRegistrationTokens({
+      const response = await api.listUserRegistrationTokens({
         ...(await masBaseOptions(client, serverName, signal)),
         query,
       });
+      ensureHasData(response);
+      return response;
     },
     initialPageParam: null as api.Ulid | null,
     getNextPageParam: (lastPage): api.Ulid | null =>
-      (lastPage.links.next && lastPage.data.at(-1)?.id) ?? null,
+      (lastPage.links.next && cursorForSingleResource(lastPage.data?.at(-1))) ??
+      null,
+  });
+
+export const registrationTokensCountQuery = (
+  serverName: string,
+  parameters: TokenListParameters = {},
+) =>
+  queryOptions({
+    queryKey: ["mas", "registration-tokens", serverName, parameters, "count"],
+    queryFn: async ({ client, signal }) => {
+      const query: api.ListUserRegistrationTokensData["query"] = {
+        count: "only",
+      };
+
+      if (parameters.used !== undefined)
+        query["filter[used]"] = parameters.used;
+      if (parameters.revoked !== undefined)
+        query["filter[revoked]"] = parameters.revoked;
+      if (parameters.expired !== undefined)
+        query["filter[expired]"] = parameters.expired;
+      if (parameters.valid !== undefined)
+        query["filter[valid]"] = parameters.valid;
+      const response = await api.listUserRegistrationTokens({
+        ...(await masBaseOptions(client, serverName, signal)),
+        query,
+      });
+      ensureHasCount(response);
+      return response.meta.count;
+    },
   });
 
 export const registrationTokenQuery = (serverName: string, tokenId: string) =>
