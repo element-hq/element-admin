@@ -13,6 +13,7 @@ import {
   EditIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
+  Alert,
   Badge,
   Button,
   Form,
@@ -41,15 +42,70 @@ import {
   computeLocalDateTimeStringFromUtc,
   computeUtcIsoStringFromLocal,
 } from "@/utils/datetime";
+import { ensureParametersAreUlids } from "@/utils/parameters";
 
 export const Route = createFileRoute("/_console/registration-tokens/$tokenId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
+    ensureParametersAreUlids(params);
     await queryClient.ensureQueryData(
       registrationTokenQuery(credentials.serverName, params.tokenId),
     );
   },
   component: TokenDetailComponent,
+  notFoundComponent: NotFoundComponent,
 });
+
+function NotFoundComponent() {
+  const { tokenId } = Route.useParams();
+  const {
+    credentials: { serverName },
+  } = Route.useRouteContext();
+  const intl = useIntl();
+  return (
+    <Navigation.Details className="gap-4">
+      <CloseSidebar />
+
+      <Alert
+        type="critical"
+        title={intl.formatMessage({
+          id: "pages.registration_tokens.not_found.title",
+          defaultMessage: "Registration token not found",
+          description:
+            "The title of the alert when a registration token could not be found",
+        })}
+      >
+        <FormattedMessage
+          id="pages.registration_tokens.not_found.description"
+          defaultMessage="The requested registration token ({tokenId}) could not be found on {serverName}."
+          description="The description of the alert when a registration token could not be found"
+          values={{
+            tokenId,
+            serverName,
+          }}
+        />
+      </Alert>
+    </Navigation.Details>
+  );
+}
+
+const CloseSidebar: React.FC = () => {
+  const intl = useIntl();
+  const search = Route.useSearch();
+  return (
+    <div className="flex items-center justify-end">
+      <Tooltip label={intl.formatMessage(messages.actionClose)}>
+        <ButtonLink
+          iconOnly
+          to="/registration-tokens"
+          search={search}
+          kind="tertiary"
+          size="sm"
+          Icon={CloseIcon}
+        />
+      </Tooltip>
+    </div>
+  );
+};
 
 function TokenDetailComponent() {
   const intl = useIntl();
@@ -118,17 +174,7 @@ function TokenDetailComponent() {
 
   return (
     <Navigation.Details>
-      <div className="flex items-center justify-end">
-        <Tooltip label={intl.formatMessage(messages.actionClose)}>
-          <ButtonLink
-            iconOnly
-            to="/registration-tokens"
-            kind="tertiary"
-            size="sm"
-            Icon={CloseIcon}
-          />
-        </Tooltip>
-      </div>
+      <CloseSidebar />
 
       <div className="flex flex-col gap-4">
         <H3 className="flex items-center gap-2">

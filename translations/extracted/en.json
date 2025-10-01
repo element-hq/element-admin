@@ -267,6 +267,14 @@
     "description": "Placeholder text for the expires at field",
     "message": "No expiration"
   },
+  "pages.registration_tokens.not_found.description": {
+    "description": "The description of the alert when a registration token could not be found",
+    "message": "The requested registration token ({tokenId}) could not be found on {serverName}."
+  },
+  "pages.registration_tokens.not_found.title": {
+    "description": "The title of the alert when a registration token could not be found",
+    "message": "Registration token not found"
+  },
   "pages.registration_tokens.revoke_token": {
     "description": "Button text to revoke a token",
     "message": "Revoke token"
@@ -378,6 +386,14 @@
   "pages.rooms.filters.public_rooms": {
     "description": "Filter option for public rooms",
     "message": "Public rooms"
+  },
+  "pages.rooms.not_found.description": {
+    "description": "The description of the alert when a room could not be found",
+    "message": "The requested room ({roomId}) could not be found on {serverName}."
+  },
+  "pages.rooms.not_found.title": {
+    "description": "The title of the alert when a room could not be found",
+    "message": "Room not found"
   },
   "pages.rooms.room_count": {
     "description": "On the room list page, this heading shows the total number of rooms",
@@ -562,6 +578,14 @@
   "pages.users.new_user.success_message": {
     "description": "The success message shown in a toast when a user is created",
     "message": "User created"
+  },
+  "pages.users.not_found.description": {
+    "description": "The description of the alert when a user could not be found",
+    "message": "The requested user ({userId}) could not be found on {serverName}."
+  },
+  "pages.users.not_found.title": {
+    "description": "The title of the alert when a user could not be found",
+    "message": "User not found"
   },
   "pages.users.reactivate_account.button": {
     "description": "The label for the reactivate account button on the user panel",
