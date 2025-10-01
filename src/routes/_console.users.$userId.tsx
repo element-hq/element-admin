@@ -63,9 +63,12 @@ import * as Navigation from "@/components/navigation";
 import { UserAvatar } from "@/components/room-info";
 import * as messages from "@/messages";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
+import { ensureParametersAreUlids } from "@/utils/parameters";
 
 export const Route = createFileRoute("/_console/users/$userId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
+    ensureParametersAreUlids(params);
+
     // Fire the queries as soon as possible without awaiting it
     const emailPromise = queryClient.ensureQueryData(
       userEmailsQuery(credentials.serverName, params.userId),
@@ -98,7 +101,40 @@ export const Route = createFileRoute("/_console/users/$userId")({
     await siteConfigPromise;
   },
   component: RouteComponent,
+  notFoundComponent: NotFoundComponent,
 });
+
+function NotFoundComponent() {
+  const { userId } = Route.useParams();
+  const {
+    credentials: { serverName },
+  } = Route.useRouteContext();
+  const intl = useIntl();
+  return (
+    <Navigation.Details className="gap-4">
+      <CloseSidebar />
+
+      <Alert
+        type="critical"
+        title={intl.formatMessage({
+          id: "pages.users.not_found.title",
+          defaultMessage: "User not found",
+          description: "The title of the alert when a user could not be found",
+        })}
+      >
+        <FormattedMessage
+          id="pages.users.not_found.description"
+          defaultMessage="The requested user ({userId}) could not be found on {serverName}."
+          description="The description of the alert when a user could not be found"
+          values={{
+            userId,
+            serverName,
+          }}
+        />
+      </Alert>
+    </Navigation.Details>
+  );
+}
 
 interface UserChipProps {
   mxid: string;
@@ -1454,8 +1490,26 @@ function EmailsList({ userId, mxid, serverName }: EmailsListProps) {
   );
 }
 
-function RouteComponent() {
+const CloseSidebar: React.FC = () => {
   const intl = useIntl();
+  const search = Route.useSearch();
+  return (
+    <div className="flex items-center justify-end">
+      <Tooltip label={intl.formatMessage(messages.actionClose)}>
+        <ButtonLink
+          iconOnly
+          to="/users"
+          search={search}
+          kind="tertiary"
+          size="sm"
+          Icon={CloseIcon}
+        />
+      </Tooltip>
+    </div>
+  );
+};
+
+function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const { userId } = Route.useParams();
 
@@ -1482,17 +1536,7 @@ function RouteComponent() {
 
   return (
     <Navigation.Details>
-      <div className="flex items-center justify-end">
-        <Tooltip label={intl.formatMessage(messages.actionClose)}>
-          <ButtonLink
-            iconOnly
-            to="/users"
-            kind="tertiary"
-            size="sm"
-            Icon={CloseIcon}
-          />
-        </Tooltip>
-      </div>
+      <CloseSidebar />
 
       <div className="flex flex-col gap-8">
         <div className="flex flex-col items-center gap-4">

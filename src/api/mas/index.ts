@@ -7,6 +7,7 @@ import {
   type QueryClient,
   queryOptions,
 } from "@tanstack/react-query";
+import { notFound } from "@tanstack/react-router";
 
 import { authMetadataQuery } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
@@ -24,9 +25,39 @@ const masClient = createClient({
 export const isErrorResponse = (t: unknown): t is api.ErrorResponse =>
   typeof t === "object" && t !== null && Object.hasOwn(t, "errors");
 
+function ensureNoError<
+  R extends {
+    data: unknown;
+    error: unknown | undefined;
+    response: Response;
+    request: Request;
+  },
+>(
+  result: R,
+  handleNotFound = false,
+): asserts result is R & { data: NonNullable<R["data"]>; error: undefined } {
+  if (handleNotFound && result.response.status === 404) {
+    console.warn(
+      `MAS replied with a 404 on ${result.request.method} request to ${result.request.url}, throwing a 'not found' error`,
+    );
+    throw notFound({
+      data: result.error,
+    });
+  }
+  if (result.error !== undefined) {
+    throw result.error;
+  }
+  if (result.data === undefined) {
+    throw new TypeError("Missing data");
+  }
+}
+
+type WithData<R extends { data?: unknown[] | null | undefined }> = R & {
+  data: NonNullable<R["data"]>;
+};
 function ensureHasData<R extends { data?: unknown[] | null | undefined }>(
   response: R,
-): asserts response is R & { data: NonNullable<R["data"]> } {
+): asserts response is WithData<R> {
   if (!Array.isArray(response?.data)) {
     throw new TypeError("Unexpected response from MAS");
   }
@@ -63,7 +94,7 @@ const masBaseOptions = async (
   client: Client;
   auth: string;
   baseUrl: string;
-  throwOnError: true;
+  throwOnError: false;
   signal?: AbortSignal;
 }> => {
   const token = await accessToken(client, signal);
@@ -89,7 +120,7 @@ const masBaseOptions = async (
     client: masClient,
     auth: token,
     baseUrl,
-    throwOnError: true,
+    throwOnError: false,
     ...(signal && { signal }),
   };
 };
@@ -134,9 +165,11 @@ export const siteConfigQuery = (serverName: string) =>
     queryKey: ["mas", "site-config", serverName],
     queryFn: async ({ client, signal }): Promise<api.SiteConfig> => {
       try {
-        return await api.siteConfig({
+        const result = await api.siteConfig({
           ...(await masBaseOptions(client, serverName, signal)),
         });
+        ensureNoError(result);
+        return result.data;
       } catch (error) {
         console.warn(
           "Site-config query failed, this is likely because of talking to an older version of MAS, ignoring",
@@ -167,7 +200,11 @@ export const usersInfiniteQuery = (
 ) =>
   infiniteQueryOptions({
     queryKey: ["mas", "users", serverName, parameters, direction],
-    queryFn: async ({ client, signal, pageParam }) => {
+    queryFn: async ({
+      client,
+      signal,
+      pageParam,
+    }): Promise<WithData<api.PaginatedResponseForUser>> => {
       const query: api.ListUsersData["query"] = {
         count: "false",
       };
@@ -187,13 +224,13 @@ export const usersInfiniteQuery = (
       if (parameters.status) query["filter[status]"] = parameters.status;
       if (parameters.search) query["filter[search]"] = parameters.search;
 
-      const response = await api.listUsers({
+      const result = await api.listUsers({
         ...(await masBaseOptions(client, serverName, signal)),
         query,
       });
-      ensureHasData(response);
-
-      return response;
+      ensureNoError(result);
+      ensureHasData(result.data);
+      return result.data;
     },
     initialPageParam: null as string | null,
     getNextPageParam: (lastPage): string | null =>
@@ -206,11 +243,13 @@ export const usersInfiniteQuery = (
 export const userQuery = (serverName: string, userId: string) =>
   queryOptions({
     queryKey: ["mas", "user", serverName, userId],
-    queryFn: async ({ client, signal }) => {
-      return await api.getUser({
+    queryFn: async ({ client, signal }): Promise<api.SingleResponseForUser> => {
+      const result = await api.getUser({
         ...(await masBaseOptions(client, serverName, signal)),
         path: { id: userId },
       });
+      ensureNoError(result, true);
+      return result.data;
     },
   });
 
@@ -220,7 +259,7 @@ export const usersCountQuery = (
 ) =>
   queryOptions({
     queryKey: ["mas", "users", serverName, parameters, "count"],
-    queryFn: async ({ client, signal }) => {
+    queryFn: async ({ client, signal }): Promise<number> => {
       const query: api.ListUsersData["query"] = {
         count: "only",
       };
@@ -232,13 +271,14 @@ export const usersCountQuery = (
       if (parameters.status) query["filter[status]"] = parameters.status;
       if (parameters.search) query["filter[search]"] = parameters.search;
 
-      const data = await api.listUsers({
+      const result = await api.listUsers({
         ...(await masBaseOptions(client, serverName, signal)),
         query,
       });
-      ensureHasCount(data);
+      ensureNoError(result);
+      ensureHasCount(result.data);
 
-      return data.meta.count;
+      return result.data.meta.count;
     },
   });
 
@@ -247,13 +287,15 @@ export const createUser = async (
   serverName: string,
   username: string,
   signal?: AbortSignal,
-) => {
-  return api.createUser({
+): Promise<api.SingleResponseForUser> => {
+  const result = await api.createUser({
     ...(await masBaseOptions(queryClient, serverName, signal)),
     body: {
       username,
     },
   });
+  ensureNoError(result);
+  return result.data;
 };
 
 export const lockUser = async (
@@ -261,11 +303,13 @@ export const lockUser = async (
   serverName: string,
   userId: api.Ulid,
   signal?: AbortSignal,
-) => {
-  return await api.lockUser({
+): Promise<api.SingleResponseForUser> => {
+  const result = await api.lockUser({
     ...(await masBaseOptions(queryClient, serverName, signal)),
     path: { id: userId },
   });
+  ensureNoError(result);
+  return result.data;
 };
 
 export const deactivateUser = async (
@@ -273,11 +317,13 @@ export const deactivateUser = async (
   serverName: string,
   userId: api.Ulid,
   signal?: AbortSignal,
-) => {
-  return await api.deactivateUser({
+): Promise<api.SingleResponseForUser> => {
+  const result = await api.deactivateUser({
     ...(await masBaseOptions(queryClient, serverName, signal)),
     path: { id: userId },
   });
+  ensureNoError(result);
+  return result.data;
 };
 
 export const reactivateUser = async (
@@ -285,11 +331,13 @@ export const reactivateUser = async (
   serverName: string,
   userId: api.Ulid,
   signal?: AbortSignal,
-) => {
-  return await api.reactivateUser({
+): Promise<api.SingleResponseForUser> => {
+  const result = await api.reactivateUser({
     ...(await masBaseOptions(queryClient, serverName, signal)),
     path: { id: userId },
   });
+  ensureNoError(result);
+  return result.data;
 };
 
 export const setUserPassword = async (
@@ -299,8 +347,8 @@ export const setUserPassword = async (
   password: string,
   skipPasswordCheck = false,
   signal?: AbortSignal,
-) => {
-  return await api.setUserPassword({
+): Promise<void> => {
+  const result = await api.setUserPassword({
     ...(await masBaseOptions(queryClient, serverName, signal)),
     path: { id: userId },
     body: {
@@ -308,6 +356,7 @@ export const setUserPassword = async (
       skip_password_check: skipPasswordCheck,
     },
   });
+  ensureNoError(result);
 };
 
 export const setUserCanRequestAdmin = async (
@@ -316,21 +365,23 @@ export const setUserCanRequestAdmin = async (
   userId: api.Ulid,
   canRequestAdmin: boolean,
   signal?: AbortSignal,
-) => {
-  return await api.userSetAdmin({
+): Promise<api.SingleResponseForUser> => {
+  const result = await api.userSetAdmin({
     ...(await masBaseOptions(queryClient, serverName, signal)),
     path: { id: userId },
     body: {
       admin: canRequestAdmin,
     },
   });
+  ensureNoError(result);
+  return result.data;
 };
 
 export const userEmailsQuery = (serverName: string, userId: string) =>
   queryOptions({
     queryKey: ["mas", "user-emails", serverName, userId],
     queryFn: async ({ client, signal }) => {
-      const response = await api.listUserEmails({
+      const result = await api.listUserEmails({
         ...(await masBaseOptions(client, serverName, signal)),
         query: {
           "filter[user]": userId,
@@ -338,8 +389,9 @@ export const userEmailsQuery = (serverName: string, userId: string) =>
           count: "false",
         },
       });
-      ensureHasData(response);
-      return response;
+      ensureNoError(result);
+      ensureHasData(result.data);
+      return result.data;
     },
   });
 
@@ -348,11 +400,12 @@ export const deleteUserEmail = async (
   serverName: string,
   emailId: api.Ulid,
   signal?: AbortSignal,
-) => {
-  return await api.deleteUserEmail({
+): Promise<void> => {
+  const result = await api.deleteUserEmail({
     ...(await masBaseOptions(queryClient, serverName, signal)),
     path: { id: emailId },
   });
+  ensureNoError(result);
 };
 
 export const addUserEmail = async (
@@ -361,21 +414,23 @@ export const addUserEmail = async (
   userId: api.Ulid,
   email: string,
   signal?: AbortSignal,
-) => {
-  return await api.addUserEmail({
+): Promise<api.SingleResponseForUserEmail> => {
+  const result = await api.addUserEmail({
     ...(await masBaseOptions(queryClient, serverName, signal)),
     body: {
       email,
       user_id: userId,
     },
   });
+  ensureNoError(result);
+  return result.data;
 };
 
 export const userUpstreamLinksQuery = (serverName: string, userId: string) =>
   queryOptions({
     queryKey: ["mas", "user-upstream-links", serverName, userId],
     queryFn: async ({ client, signal }) => {
-      const response = await api.listUpstreamOAuthLinks({
+      const result = await api.listUpstreamOAuthLinks({
         ...(await masBaseOptions(client, serverName, signal)),
         query: {
           "filter[user]": userId,
@@ -383,16 +438,20 @@ export const userUpstreamLinksQuery = (serverName: string, userId: string) =>
           count: "false",
         },
       });
-      ensureHasData(response);
-      return response;
+      ensureNoError(result);
+      ensureHasData(result.data);
+      return result.data;
     },
   });
 
 export const upstreamProvidersQuery = (serverName: string) =>
   queryOptions({
     queryKey: ["mas", "upstream-providers", serverName],
-    queryFn: async ({ client, signal }) => {
-      const response = await api.listUpstreamOAuthProviders({
+    queryFn: async ({
+      client,
+      signal,
+    }): Promise<api.SingleResourceForUpstreamOAuthProvider[]> => {
+      const result = await api.listUpstreamOAuthProviders({
         ...(await masBaseOptions(client, serverName, signal)),
         query: {
           // Let's assume we're not going to have more than 1000 providers
@@ -400,8 +459,9 @@ export const upstreamProvidersQuery = (serverName: string) =>
           count: "false",
         },
       });
-      ensureHasData(response);
-      return response.data;
+      ensureNoError(result);
+      ensureHasData(result.data);
+      return result.data.data;
     },
   });
 
@@ -410,11 +470,12 @@ export const deleteUpstreamOAuthLink = async (
   serverName: string,
   linkId: api.Ulid,
   signal?: AbortSignal,
-) => {
-  return await api.deleteUpstreamOAuthLink({
+): Promise<void> => {
+  const result = await api.deleteUpstreamOAuthLink({
     ...(await masBaseOptions(queryClient, serverName, signal)),
     path: { id: linkId },
   });
+  ensureNoError(result);
 };
 
 export const addUpstreamOAuthLink = async (
@@ -424,8 +485,8 @@ export const addUpstreamOAuthLink = async (
   providerId: api.Ulid,
   subject: string,
   signal?: AbortSignal,
-) => {
-  return await api.addUpstreamOAuthLink({
+): Promise<api.SingleResponseForUpstreamOAuthLink> => {
+  const result = await api.addUpstreamOAuthLink({
     ...(await masBaseOptions(queryClient, serverName, signal)),
     body: {
       user_id: userId,
@@ -433,6 +494,8 @@ export const addUpstreamOAuthLink = async (
       subject,
     },
   });
+  ensureNoError(result);
+  return result.data;
 };
 
 export const unlockUser = async (
@@ -440,11 +503,13 @@ export const unlockUser = async (
   serverName: string,
   userId: api.Ulid,
   signal?: AbortSignal,
-) => {
-  return await api.unlockUser({
+): Promise<api.SingleResponseForUser> => {
+  const result = await api.unlockUser({
     ...(await masBaseOptions(queryClient, serverName, signal)),
     path: { id: userId },
   });
+  ensureNoError(result);
+  return result.data;
 };
 
 export const registrationTokensInfiniteQuery = (
@@ -453,7 +518,11 @@ export const registrationTokensInfiniteQuery = (
 ) =>
   infiniteQueryOptions({
     queryKey: ["mas", "registration-tokens", serverName, parameters],
-    queryFn: async ({ client, signal, pageParam }) => {
+    queryFn: async ({
+      client,
+      signal,
+      pageParam,
+    }): Promise<WithData<api.PaginatedResponseForUserRegistrationToken>> => {
       const query: api.ListUserRegistrationTokensData["query"] = {
         "page[first]": PAGE_SIZE,
         count: "false",
@@ -470,12 +539,13 @@ export const registrationTokensInfiniteQuery = (
       if (parameters.valid !== undefined)
         query["filter[valid]"] = parameters.valid;
 
-      const response = await api.listUserRegistrationTokens({
+      const result = await api.listUserRegistrationTokens({
         ...(await masBaseOptions(client, serverName, signal)),
         query,
       });
-      ensureHasData(response);
-      return response;
+      ensureNoError(result);
+      ensureHasData(result.data);
+      return result.data;
     },
     initialPageParam: null as api.Ulid | null,
     getNextPageParam: (lastPage): api.Ulid | null =>
@@ -489,7 +559,7 @@ export const registrationTokensCountQuery = (
 ) =>
   queryOptions({
     queryKey: ["mas", "registration-tokens", serverName, parameters, "count"],
-    queryFn: async ({ client, signal }) => {
+    queryFn: async ({ client, signal }): Promise<number> => {
       const query: api.ListUserRegistrationTokensData["query"] = {
         count: "only",
       };
@@ -502,23 +572,29 @@ export const registrationTokensCountQuery = (
         query["filter[expired]"] = parameters.expired;
       if (parameters.valid !== undefined)
         query["filter[valid]"] = parameters.valid;
-      const response = await api.listUserRegistrationTokens({
+      const result = await api.listUserRegistrationTokens({
         ...(await masBaseOptions(client, serverName, signal)),
         query,
       });
-      ensureHasCount(response);
-      return response.meta.count;
+      ensureNoError(result);
+      ensureHasCount(result.data);
+      return result.data.meta.count;
     },
   });
 
 export const registrationTokenQuery = (serverName: string, tokenId: string) =>
   queryOptions({
     queryKey: ["mas", "registration-token", serverName, tokenId],
-    queryFn: async ({ client, signal }) => {
-      return await api.getUserRegistrationToken({
+    queryFn: async ({
+      client,
+      signal,
+    }): Promise<api.SingleResponseForUserRegistrationToken> => {
+      const result = await api.getUserRegistrationToken({
         ...(await masBaseOptions(client, serverName, signal)),
         path: { id: tokenId },
       });
+      ensureNoError(result, true);
+      return result.data;
     },
   });
 
@@ -527,7 +603,7 @@ export const createRegistrationToken = async (
   serverName: string,
   parameters: CreateTokenParameters = {},
   signal?: AbortSignal,
-) => {
+): Promise<api.SingleResponseForUserRegistrationToken> => {
   const body: api.AddUserRegistrationTokenData["body"] = {};
 
   if (parameters.expires_at) body.expires_at = parameters.expires_at;
@@ -535,10 +611,12 @@ export const createRegistrationToken = async (
     body.usage_limit = parameters.usage_limit;
   if (parameters.token) body.token = parameters.token;
 
-  return await api.addUserRegistrationToken({
+  const result = await api.addUserRegistrationToken({
     ...(await masBaseOptions(queryClient, serverName, signal)),
     body,
   });
+  ensureNoError(result);
+  return result.data;
 };
 
 export const revokeRegistrationToken = async (
@@ -546,11 +624,13 @@ export const revokeRegistrationToken = async (
   serverName: string,
   tokenId: api.Ulid,
   signal?: AbortSignal,
-) => {
-  return await api.revokeUserRegistrationToken({
+): Promise<api.SingleResponseForUserRegistrationToken> => {
+  const result = await api.revokeUserRegistrationToken({
     ...(await masBaseOptions(queryClient, serverName, signal)),
     path: { id: tokenId },
   });
+  ensureNoError(result);
+  return result.data;
 };
 
 export const unrevokeRegistrationToken = async (
@@ -558,11 +638,13 @@ export const unrevokeRegistrationToken = async (
   serverName: string,
   tokenId: api.Ulid,
   signal?: AbortSignal,
-) => {
-  return await api.unrevokeUserRegistrationToken({
+): Promise<api.SingleResponseForUserRegistrationToken> => {
+  const result = await api.unrevokeUserRegistrationToken({
     ...(await masBaseOptions(queryClient, serverName, signal)),
     path: { id: tokenId },
   });
+  ensureNoError(result);
+  return result.data;
 };
 
 export const editRegistrationToken = async (
@@ -571,7 +653,7 @@ export const editRegistrationToken = async (
   tokenId: api.Ulid,
   parameters: EditTokenParameters,
   signal?: AbortSignal,
-) => {
+): Promise<api.SingleResponseForUserRegistrationToken> => {
   const body: api.UpdateUserRegistrationTokenData["body"] = {};
 
   if (parameters.expires_at !== undefined)
@@ -579,9 +661,11 @@ export const editRegistrationToken = async (
   if (parameters.usage_limit !== undefined)
     body.usage_limit = parameters.usage_limit;
 
-  return await api.updateUserRegistrationToken({
+  const result = await api.updateUserRegistrationToken({
     ...(await masBaseOptions(queryClient, serverName, signal)),
     path: { id: tokenId },
     body,
   });
+  ensureNoError(result);
+  return result.data;
 };

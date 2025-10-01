@@ -20,8 +20,4 @@ export type CreateClientConfig<T extends ClientOptions = ClientOptions2> = (
   override?: Config<ClientOptions & T>,
 ) => Config<Required<ClientOptions> & T>;
 
-export const client = createClient(
-  createConfig<ClientOptions2>({
-    throwOnError: true,
-  }),
-);
+export const client = createClient(createConfig<ClientOptions2>());

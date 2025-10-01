@@ -4,11 +4,52 @@
 
 import type { QueryClient } from "@tanstack/react-query";
 import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
+import { notFound } from "@tanstack/react-router";
 import * as v from "valibot";
 
 import { PAGE_SIZE } from "@/constants";
+import { MatrixStandardError } from "@/errors";
 import { accessToken } from "@/stores/auth";
 import { ensureResponseOk, fetch } from "@/utils/fetch";
+
+const MatrixErrorResponse = v.object({
+  errcode: v.string(),
+  error: v.string(),
+});
+
+const ensureNotError = async (response: Response, handleNotFound = false) => {
+  try {
+    ensureResponseOk(response);
+  } catch (error) {
+    // Try to decode the error message from the JSON response
+    let matrixError;
+    try {
+      const data = await response.json();
+      matrixError = v.parse(MatrixErrorResponse, data);
+    } catch {
+      // In case the body wasn't JSON, ignore that error and instead throw the original error
+      throw error;
+    }
+
+    // Special case for M_NOT_FOUND errors
+    if (
+      handleNotFound &&
+      response.status === 404 &&
+      matrixError.errcode === "M_NOT_FOUND"
+    ) {
+      console.warn(
+        "Received M_NOT_FOUND error from Synapse, throwing a 'notFound' error",
+        error,
+        matrixError,
+      );
+      throw notFound();
+    }
+
+    throw new MatrixStandardError(matrixError.errcode, matrixError.error, {
+      cause: error,
+    });
+  }
+};
 
 const baseOptions = async (
   client: QueryClient,
@@ -124,7 +165,7 @@ export const serverVersionQuery = (synapseRoot: string) =>
       const url = new URL("/_synapse/admin/v1/server_version", synapseRoot);
       const response = await fetch(url, await baseOptions(client, signal));
 
-      ensureResponseOk(response);
+      await ensureNotError(response);
 
       const serverVersion = v.parse(
         ServerVersionResponse,
@@ -165,7 +206,7 @@ export const roomsInfiniteQuery = (
 
       const response = await fetch(url, await baseOptions(client, signal));
 
-      ensureResponseOk(response);
+      await ensureNotError(response);
 
       const rooms = v.parse(RoomsListResponse, await response.json());
 
@@ -184,7 +225,7 @@ export const roomsCountQuery = (synapseRoot: string) =>
 
       const response = await fetch(url, await baseOptions(client, signal));
 
-      ensureResponseOk(response);
+      await ensureNotError(response);
 
       const rooms = v.parse(RoomsListResponse, await response.json());
 
@@ -203,7 +244,7 @@ export const roomDetailQuery = (synapseRoot: string, roomId: string) =>
 
       const response = await fetch(url, await baseOptions(client, signal));
 
-      ensureResponseOk(response);
+      await ensureNotError(response, true);
 
       const roomDetail = v.parse(RoomDetail, await response.json());
 
@@ -222,7 +263,7 @@ export const roomMembersQuery = (synapseRoot: string, roomId: string) =>
 
       const response = await fetch(url, await baseOptions(client, signal));
 
-      ensureResponseOk(response);
+      await ensureNotError(response, true);
 
       const roomMembers = v.parse(RoomMembers, await response.json());
 

@@ -6,8 +6,8 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { CloseIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
-import { H3, Text, Tooltip } from "@vector-im/compound-web";
-import { useIntl } from "react-intl";
+import { Alert, H3, Text, Tooltip } from "@vector-im/compound-web";
+import { FormattedMessage, useIntl } from "react-intl";
 
 import { wellKnownQuery } from "@/api/matrix";
 import { roomDetailQuery } from "@/api/synapse";
@@ -29,7 +29,40 @@ export const Route = createFileRoute("/_console/rooms/$roomId")({
     );
   },
   component: RouteComponent,
+  notFoundComponent: NotFoundComponent,
 });
+
+function NotFoundComponent() {
+  const { roomId } = Route.useParams();
+  const {
+    credentials: { serverName },
+  } = Route.useRouteContext();
+  const intl = useIntl();
+  return (
+    <Navigation.Details className="gap-4">
+      <CloseSidebar />
+
+      <Alert
+        type="critical"
+        title={intl.formatMessage({
+          id: "pages.rooms.not_found.title",
+          defaultMessage: "Room not found",
+          description: "The title of the alert when a room could not be found",
+        })}
+      >
+        <FormattedMessage
+          id="pages.rooms.not_found.description"
+          defaultMessage="The requested room ({roomId}) could not be found on {serverName}."
+          description="The description of the alert when a room could not be found"
+          values={{
+            roomId,
+            serverName,
+          }}
+        />
+      </Alert>
+    </Navigation.Details>
+  );
+}
 
 const formatEncryption = (encryption: string | null) => {
   if (!encryption) return "None";
@@ -68,8 +101,26 @@ const formatHistoryVisibility = (historyVisibility: string | null) => {
   }
 };
 
-function RouteComponent() {
+const CloseSidebar: React.FC = () => {
   const intl = useIntl();
+  const search = Route.useSearch();
+  return (
+    <div className="flex items-center justify-end">
+      <Tooltip label={intl.formatMessage(messages.actionClose)}>
+        <ButtonLink
+          iconOnly
+          to="/rooms"
+          search={search}
+          kind="tertiary"
+          size="sm"
+          Icon={CloseIcon}
+        />
+      </Tooltip>
+    </div>
+  );
+};
+
+function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const { roomId } = Route.useParams();
 
@@ -82,17 +133,7 @@ function RouteComponent() {
 
   return (
     <Navigation.Details>
-      <div className="flex items-center justify-end">
-        <Tooltip label={intl.formatMessage(messages.actionClose)}>
-          <ButtonLink
-            iconOnly
-            to="/rooms"
-            kind="tertiary"
-            size="sm"
-            Icon={CloseIcon}
-          />
-        </Tooltip>
-      </div>
+      <CloseSidebar />
 
       <div className="py-6 flex flex-col items-center gap-4">
         <RoomAvatar

@@ -18,14 +18,15 @@ interface ButtonLinkProps
 
 export const ButtonLink = createLink(
   forwardRef<HTMLAnchorElement, PropsWithChildren<ButtonLinkProps>>(
-    function ButtonLink({ children, ...props }, ref) {
+    function ButtonLink({ children, iconOnly, ...props }, ref) {
       const disabled = !!props.disabled || !!props["aria-disabled"] || false;
       return (
         <Button
           as="a"
           // Override a weird default that compound has on button links
-          style={{ inlineSize: "initial " }}
+          style={iconOnly ? {} : { inlineSize: "initial" }}
           {...props}
+          iconOnly={iconOnly}
           disabled={disabled}
           ref={ref}
         >
