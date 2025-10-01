@@ -106,7 +106,7 @@ function GenericError({ error, reset }: ErrorComponentProps) {
 
     onSettled: async () => {
       await clear();
-      await navigate({ to: "/", reloadDocument: true });
+      await navigate({ reloadDocument: true });
     },
   });
 

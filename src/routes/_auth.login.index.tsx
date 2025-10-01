@@ -8,6 +8,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Form, InlineSpinner } from "@vector-im/compound-web";
 import { type ChangeEvent, useCallback, useState } from "react";
 import { defineMessage, FormattedMessage } from "react-intl";
+import * as v from "valibot";
 
 import { authMetadataQuery, clientRegistration } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
@@ -15,7 +16,13 @@ import config from "@/config";
 import { CLIENT_METADATA, REDIRECT_URI } from "@/constants";
 import { useAuthStore } from "@/stores/auth";
 
+const LoginSearchParameters = v.object({
+  redirect: v.optional(v.string()),
+});
+
 export const Route = createFileRoute("/_auth/login/")({
+  validateSearch: LoginSearchParameters,
+
   staticData: {
     breadcrumb: {
       message: defineMessage({
@@ -30,6 +37,7 @@ export const Route = createFileRoute("/_auth/login/")({
 });
 
 function RouteComponent() {
+  const { redirect } = Route.useSearch();
   const [serverName, setServerName] = useState(config.serverName ?? "");
   const [debouncedServerName, setDebouncedServerName, debouncer] =
     useDebouncedState(
@@ -99,10 +107,12 @@ function RouteComponent() {
       serverName: string;
       authorizationEndpoint: string;
       clientId: string;
+      redirect: string | undefined;
     }) => {
       const session = await startAuthorizationSession(
         variables.serverName,
         variables.clientId,
+        variables.redirect,
       );
 
       const parameters = new URLSearchParams({
@@ -134,9 +144,16 @@ function RouteComponent() {
         serverName: debouncedServerName,
         authorizationEndpoint: authMetadata.authorization_endpoint,
         clientId: clientMetadata.client_id,
+        redirect,
       });
     },
-    [debouncedServerName, authMetadata, clientMetadata, startAuthorization],
+    [
+      debouncedServerName,
+      authMetadata,
+      clientMetadata,
+      startAuthorization,
+      redirect,
+    ],
   );
 
   const isError =

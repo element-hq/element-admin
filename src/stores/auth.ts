@@ -73,6 +73,7 @@ interface AuthorizationSession {
   codeChallenge: string;
   codeVerifier: string;
   state: string;
+  redirect: string | undefined;
 }
 
 interface Credentials {
@@ -95,6 +96,7 @@ interface AuthStoreActions {
   startAuthorizationSession: (
     serverName: string,
     clientId: string,
+    redirect: string | undefined,
   ) => Promise<{
     state: string;
     codeChallenge: string;
@@ -138,7 +140,7 @@ export const useAuthStore = create<AuthStore>()(
         authorizationSession: null,
         credentials: null,
 
-        async startAuthorizationSession(rawServerName, clientId) {
+        async startAuthorizationSession(rawServerName, clientId, redirect) {
           const serverName = normalizeServerName(rawServerName);
           const current = get();
           if (
@@ -162,6 +164,7 @@ export const useAuthStore = create<AuthStore>()(
               codeVerifier,
               codeChallenge,
               state,
+              redirect,
             },
           });
 

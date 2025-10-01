@@ -66,8 +66,6 @@ export const Route = createFileRoute("/callback")({
       redirect_uri: REDIRECT_URI,
     });
 
-    // TODO: looks like we have to do it on the next tick, else it invalidates
-    // the route match?
     await saveCredentials(
       session.serverName,
       session.clientId,
@@ -76,6 +74,6 @@ export const Route = createFileRoute("/callback")({
       tokenResponse.expires_in,
     );
 
-    throw redirect({ to: "/" });
+    throw redirect({ to: session.redirect ?? "/" });
   },
 });
