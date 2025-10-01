@@ -203,28 +203,25 @@ export type Options<
 /**
  * Get informations about the configuration of this MAS instance
  */
-export const siteConfig = <ThrowOnError extends boolean = true>(
+export const siteConfig = <ThrowOnError extends boolean = false>(
   options: Options<SiteConfigData, ThrowOnError>,
 ) => {
-  return options.client.get<SiteConfigResponses, unknown, ThrowOnError, "data">(
-    {
-      requestValidator: async (data) => {
-        return await v.parseAsync(vSiteConfigData, data);
-      },
-      responseValidator: async (data) => {
-        return await v.parseAsync(vSiteConfigResponse, data);
-      },
-      responseStyle: "data",
-      security: [
-        {
-          scheme: "bearer",
-          type: "http",
-        },
-      ],
-      url: "/api/admin/v1/site-config",
-      ...options,
+  return options.client.get<SiteConfigResponses, unknown, ThrowOnError>({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vSiteConfigData, data);
     },
-  );
+    responseValidator: async (data) => {
+      return await v.parseAsync(vSiteConfigResponse, data);
+    },
+    security: [
+      {
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
+    url: "/api/admin/v1/site-config",
+    ...options,
+  });
 };
 
 /**
@@ -233,14 +230,13 @@ export const siteConfig = <ThrowOnError extends boolean = true>(
  * Note that by default, all sessions, including finished ones are returned, with the oldest first.
  * Use the `filter[status]` parameter to filter the sessions by their status and `page[last]` parameter to retrieve the last N sessions.
  */
-export const listCompatSessions = <ThrowOnError extends boolean = true>(
+export const listCompatSessions = <ThrowOnError extends boolean = false>(
   options: Options<ListCompatSessionsData, ThrowOnError>,
 ) => {
   return options.client.get<
     ListCompatSessionsResponses,
     ListCompatSessionsErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vListCompatSessionsData, data);
@@ -248,7 +244,6 @@ export const listCompatSessions = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vListCompatSessionsResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -263,14 +258,13 @@ export const listCompatSessions = <ThrowOnError extends boolean = true>(
 /**
  * Get a compatibility session
  */
-export const getCompatSession = <ThrowOnError extends boolean = true>(
+export const getCompatSession = <ThrowOnError extends boolean = false>(
   options: Options<GetCompatSessionData, ThrowOnError>,
 ) => {
   return options.client.get<
     GetCompatSessionResponses,
     GetCompatSessionErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vGetCompatSessionData, data);
@@ -278,7 +272,6 @@ export const getCompatSession = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vGetCompatSessionResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -296,14 +289,13 @@ export const getCompatSession = <ThrowOnError extends boolean = true>(
  * Note that by default, all sessions, including finished ones are returned, with the oldest first.
  * Use the `filter[status]` parameter to filter the sessions by their status and `page[last]` parameter to retrieve the last N sessions.
  */
-export const listOAuth2Sessions = <ThrowOnError extends boolean = true>(
+export const listOAuth2Sessions = <ThrowOnError extends boolean = false>(
   options: Options<ListOAuth2SessionsData, ThrowOnError>,
 ) => {
   return options.client.get<
     ListOAuth2SessionsResponses,
     ListOAuth2SessionsErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vListOAuth2SessionsData, data);
@@ -311,7 +303,6 @@ export const listOAuth2Sessions = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vListOAuth2SessionsResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -326,14 +317,13 @@ export const listOAuth2Sessions = <ThrowOnError extends boolean = true>(
 /**
  * Get an OAuth 2.0 session
  */
-export const getOAuth2Session = <ThrowOnError extends boolean = true>(
+export const getOAuth2Session = <ThrowOnError extends boolean = false>(
   options: Options<GetOAuth2SessionData, ThrowOnError>,
 ) => {
   return options.client.get<
     GetOAuth2SessionResponses,
     GetOAuth2SessionErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vGetOAuth2SessionData, data);
@@ -341,7 +331,6 @@ export const getOAuth2Session = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vGetOAuth2SessionResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -356,14 +345,13 @@ export const getOAuth2Session = <ThrowOnError extends boolean = true>(
 /**
  * Set the current policy data
  */
-export const setPolicyData = <ThrowOnError extends boolean = true>(
+export const setPolicyData = <ThrowOnError extends boolean = false>(
   options: Options<SetPolicyDataData, ThrowOnError>,
 ) => {
   return options.client.post<
     SetPolicyDataResponses,
     SetPolicyDataErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vSetPolicyDataData, data);
@@ -371,7 +359,6 @@ export const setPolicyData = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vSetPolicyDataResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -390,14 +377,13 @@ export const setPolicyData = <ThrowOnError extends boolean = true>(
 /**
  * Get the latest policy data
  */
-export const getLatestPolicyData = <ThrowOnError extends boolean = true>(
+export const getLatestPolicyData = <ThrowOnError extends boolean = false>(
   options: Options<GetLatestPolicyDataData, ThrowOnError>,
 ) => {
   return options.client.get<
     GetLatestPolicyDataResponses,
     GetLatestPolicyDataErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vGetLatestPolicyDataData, data);
@@ -405,7 +391,6 @@ export const getLatestPolicyData = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vGetLatestPolicyDataResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -420,14 +405,13 @@ export const getLatestPolicyData = <ThrowOnError extends boolean = true>(
 /**
  * Get policy data by ID
  */
-export const getPolicyData = <ThrowOnError extends boolean = true>(
+export const getPolicyData = <ThrowOnError extends boolean = false>(
   options: Options<GetPolicyDataData, ThrowOnError>,
 ) => {
   return options.client.get<
     GetPolicyDataResponses,
     GetPolicyDataErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vGetPolicyDataData, data);
@@ -435,7 +419,6 @@ export const getPolicyData = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vGetPolicyDataResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -450,17 +433,16 @@ export const getPolicyData = <ThrowOnError extends boolean = true>(
 /**
  * List users
  */
-export const listUsers = <ThrowOnError extends boolean = true>(
+export const listUsers = <ThrowOnError extends boolean = false>(
   options: Options<ListUsersData, ThrowOnError>,
 ) => {
-  return options.client.get<ListUsersResponses, unknown, ThrowOnError, "data">({
+  return options.client.get<ListUsersResponses, unknown, ThrowOnError>({
     requestValidator: async (data) => {
       return await v.parseAsync(vListUsersData, data);
     },
     responseValidator: async (data) => {
       return await v.parseAsync(vListUsersResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -475,14 +457,13 @@ export const listUsers = <ThrowOnError extends boolean = true>(
 /**
  * Create a new user
  */
-export const createUser = <ThrowOnError extends boolean = true>(
+export const createUser = <ThrowOnError extends boolean = false>(
   options: Options<CreateUserData, ThrowOnError>,
 ) => {
   return options.client.post<
     CreateUserResponses,
     CreateUserErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vCreateUserData, data);
@@ -490,7 +471,6 @@ export const createUser = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vCreateUserResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -509,22 +489,16 @@ export const createUser = <ThrowOnError extends boolean = true>(
 /**
  * Get a user
  */
-export const getUser = <ThrowOnError extends boolean = true>(
+export const getUser = <ThrowOnError extends boolean = false>(
   options: Options<GetUserData, ThrowOnError>,
 ) => {
-  return options.client.get<
-    GetUserResponses,
-    GetUserErrors,
-    ThrowOnError,
-    "data"
-  >({
+  return options.client.get<GetUserResponses, GetUserErrors, ThrowOnError>({
     requestValidator: async (data) => {
       return await v.parseAsync(vGetUserData, data);
     },
     responseValidator: async (data) => {
       return await v.parseAsync(vGetUserResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -539,14 +513,13 @@ export const getUser = <ThrowOnError extends boolean = true>(
 /**
  * Set the password for a user
  */
-export const setUserPassword = <ThrowOnError extends boolean = true>(
+export const setUserPassword = <ThrowOnError extends boolean = false>(
   options: Options<SetUserPasswordData, ThrowOnError>,
 ) => {
   return options.client.post<
     SetUserPasswordResponses,
     SetUserPasswordErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vSetUserPasswordData, data);
@@ -554,7 +527,6 @@ export const setUserPassword = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vSetUserPasswordResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -573,14 +545,13 @@ export const setUserPassword = <ThrowOnError extends boolean = true>(
 /**
  * Get a user by its username (localpart)
  */
-export const getUserByUsername = <ThrowOnError extends boolean = true>(
+export const getUserByUsername = <ThrowOnError extends boolean = false>(
   options: Options<GetUserByUsernameData, ThrowOnError>,
 ) => {
   return options.client.get<
     GetUserByUsernameResponses,
     GetUserByUsernameErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vGetUserByUsernameData, data);
@@ -588,7 +559,6 @@ export const getUserByUsername = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vGetUserByUsernameResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -604,14 +574,13 @@ export const getUserByUsername = <ThrowOnError extends boolean = true>(
  * Set whether a user can request admin
  * Calling this endpoint will not have any effect on existing sessions, meaning that their existing sessions will keep admin access if they were granted it.
  */
-export const userSetAdmin = <ThrowOnError extends boolean = true>(
+export const userSetAdmin = <ThrowOnError extends boolean = false>(
   options: Options<UserSetAdminData, ThrowOnError>,
 ) => {
   return options.client.post<
     UserSetAdminResponses,
     UserSetAdminErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vUserSetAdminData, data);
@@ -619,7 +588,6 @@ export const userSetAdmin = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vUserSetAdminResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -640,14 +608,13 @@ export const userSetAdmin = <ThrowOnError extends boolean = true>(
  * Calling this endpoint will deactivate the user, preventing them from doing any action.
  * This invalidates any existing session, and will ask the homeserver to make them leave all rooms.
  */
-export const deactivateUser = <ThrowOnError extends boolean = true>(
+export const deactivateUser = <ThrowOnError extends boolean = false>(
   options: Options<DeactivateUserData, ThrowOnError>,
 ) => {
   return options.client.post<
     DeactivateUserResponses,
     DeactivateUserErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vDeactivateUserData, data);
@@ -655,7 +622,6 @@ export const deactivateUser = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vDeactivateUserResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -676,14 +642,13 @@ export const deactivateUser = <ThrowOnError extends boolean = true>(
  * Calling this endpoint will reactivate a deactivated user.
  * This DOES NOT unlock a locked user, which is still prevented from doing any action until it is explicitly unlocked.
  */
-export const reactivateUser = <ThrowOnError extends boolean = true>(
+export const reactivateUser = <ThrowOnError extends boolean = false>(
   options: Options<ReactivateUserData, ThrowOnError>,
 ) => {
   return options.client.post<
     ReactivateUserResponses,
     ReactivateUserErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vReactivateUserData, data);
@@ -691,7 +656,6 @@ export const reactivateUser = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vReactivateUserResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -708,22 +672,16 @@ export const reactivateUser = <ThrowOnError extends boolean = true>(
  * Calling this endpoint will lock the user, preventing them from doing any action.
  * This DOES NOT invalidate any existing session, meaning that all their existing sessions will work again as soon as they get unlocked.
  */
-export const lockUser = <ThrowOnError extends boolean = true>(
+export const lockUser = <ThrowOnError extends boolean = false>(
   options: Options<LockUserData, ThrowOnError>,
 ) => {
-  return options.client.post<
-    LockUserResponses,
-    LockUserErrors,
-    ThrowOnError,
-    "data"
-  >({
+  return options.client.post<LockUserResponses, LockUserErrors, ThrowOnError>({
     requestValidator: async (data) => {
       return await v.parseAsync(vLockUserData, data);
     },
     responseValidator: async (data) => {
       return await v.parseAsync(vLockUserResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -740,14 +698,13 @@ export const lockUser = <ThrowOnError extends boolean = true>(
  * Calling this endpoint will lift restrictions on user actions that had imposed by locking.
  * This DOES NOT reactivate a deactivated user, which will remain unavailable until it is explicitly reactivated.
  */
-export const unlockUser = <ThrowOnError extends boolean = true>(
+export const unlockUser = <ThrowOnError extends boolean = false>(
   options: Options<UnlockUserData, ThrowOnError>,
 ) => {
   return options.client.post<
     UnlockUserResponses,
     UnlockUserErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vUnlockUserData, data);
@@ -755,7 +712,6 @@ export const unlockUser = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vUnlockUserResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -771,14 +727,13 @@ export const unlockUser = <ThrowOnError extends boolean = true>(
  * List user emails
  * Retrieve a list of user emails.
  */
-export const listUserEmails = <ThrowOnError extends boolean = true>(
+export const listUserEmails = <ThrowOnError extends boolean = false>(
   options: Options<ListUserEmailsData, ThrowOnError>,
 ) => {
   return options.client.get<
     ListUserEmailsResponses,
     ListUserEmailsErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vListUserEmailsData, data);
@@ -786,7 +741,6 @@ export const listUserEmails = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vListUserEmailsResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -803,14 +757,13 @@ export const listUserEmails = <ThrowOnError extends boolean = true>(
  * Add an email address to a user.
  * Note that this endpoint ignores any policy which would normally prevent the email from being added.
  */
-export const addUserEmail = <ThrowOnError extends boolean = true>(
+export const addUserEmail = <ThrowOnError extends boolean = false>(
   options: Options<AddUserEmailData, ThrowOnError>,
 ) => {
   return options.client.post<
     AddUserEmailResponses,
     AddUserEmailErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vAddUserEmailData, data);
@@ -818,7 +771,6 @@ export const addUserEmail = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vAddUserEmailResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -837,14 +789,13 @@ export const addUserEmail = <ThrowOnError extends boolean = true>(
 /**
  * Delete a user email
  */
-export const deleteUserEmail = <ThrowOnError extends boolean = true>(
+export const deleteUserEmail = <ThrowOnError extends boolean = false>(
   options: Options<DeleteUserEmailData, ThrowOnError>,
 ) => {
   return options.client.delete<
     DeleteUserEmailResponses,
     DeleteUserEmailErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vDeleteUserEmailData, data);
@@ -852,7 +803,6 @@ export const deleteUserEmail = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vDeleteUserEmailResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -867,14 +817,13 @@ export const deleteUserEmail = <ThrowOnError extends boolean = true>(
 /**
  * Get a user email
  */
-export const getUserEmail = <ThrowOnError extends boolean = true>(
+export const getUserEmail = <ThrowOnError extends boolean = false>(
   options: Options<GetUserEmailData, ThrowOnError>,
 ) => {
   return options.client.get<
     GetUserEmailResponses,
     GetUserEmailErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vGetUserEmailData, data);
@@ -882,7 +831,6 @@ export const getUserEmail = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vGetUserEmailResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -900,14 +848,13 @@ export const getUserEmail = <ThrowOnError extends boolean = true>(
  * Note that by default, all sessions, including finished ones are returned, with the oldest first.
  * Use the `filter[status]` parameter to filter the sessions by their status and `page[last]` parameter to retrieve the last N sessions.
  */
-export const listUserSessions = <ThrowOnError extends boolean = true>(
+export const listUserSessions = <ThrowOnError extends boolean = false>(
   options: Options<ListUserSessionsData, ThrowOnError>,
 ) => {
   return options.client.get<
     ListUserSessionsResponses,
     ListUserSessionsErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vListUserSessionsData, data);
@@ -915,7 +862,6 @@ export const listUserSessions = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vListUserSessionsResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -930,14 +876,13 @@ export const listUserSessions = <ThrowOnError extends boolean = true>(
 /**
  * Get a user session
  */
-export const getUserSession = <ThrowOnError extends boolean = true>(
+export const getUserSession = <ThrowOnError extends boolean = false>(
   options: Options<GetUserSessionData, ThrowOnError>,
 ) => {
   return options.client.get<
     GetUserSessionResponses,
     GetUserSessionErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vGetUserSessionData, data);
@@ -945,7 +890,6 @@ export const getUserSession = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vGetUserSessionResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -960,14 +904,15 @@ export const getUserSession = <ThrowOnError extends boolean = true>(
 /**
  * List user registration tokens
  */
-export const listUserRegistrationTokens = <ThrowOnError extends boolean = true>(
+export const listUserRegistrationTokens = <
+  ThrowOnError extends boolean = false,
+>(
   options: Options<ListUserRegistrationTokensData, ThrowOnError>,
 ) => {
   return options.client.get<
     ListUserRegistrationTokensResponses,
     unknown,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vListUserRegistrationTokensData, data);
@@ -975,7 +920,6 @@ export const listUserRegistrationTokens = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vListUserRegistrationTokensResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -990,14 +934,13 @@ export const listUserRegistrationTokens = <ThrowOnError extends boolean = true>(
 /**
  * Create a new user registration token
  */
-export const addUserRegistrationToken = <ThrowOnError extends boolean = true>(
+export const addUserRegistrationToken = <ThrowOnError extends boolean = false>(
   options: Options<AddUserRegistrationTokenData, ThrowOnError>,
 ) => {
   return options.client.post<
     AddUserRegistrationTokenResponses,
     unknown,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vAddUserRegistrationTokenData, data);
@@ -1005,7 +948,6 @@ export const addUserRegistrationToken = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vAddUserRegistrationTokenResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -1024,14 +966,13 @@ export const addUserRegistrationToken = <ThrowOnError extends boolean = true>(
 /**
  * Get a user registration token
  */
-export const getUserRegistrationToken = <ThrowOnError extends boolean = true>(
+export const getUserRegistrationToken = <ThrowOnError extends boolean = false>(
   options: Options<GetUserRegistrationTokenData, ThrowOnError>,
 ) => {
   return options.client.get<
     GetUserRegistrationTokenResponses,
     GetUserRegistrationTokenErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vGetUserRegistrationTokenData, data);
@@ -1039,7 +980,6 @@ export const getUserRegistrationToken = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vGetUserRegistrationTokenResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -1056,15 +996,14 @@ export const getUserRegistrationToken = <ThrowOnError extends boolean = true>(
  * Update properties of a user registration token such as expiration and usage limit. To set a field to null (removing the limit/expiration), include the field with a null value. To leave a field unchanged, omit it from the request body.
  */
 export const updateUserRegistrationToken = <
-  ThrowOnError extends boolean = true,
+  ThrowOnError extends boolean = false,
 >(
   options: Options<UpdateUserRegistrationTokenData, ThrowOnError>,
 ) => {
   return options.client.put<
     UpdateUserRegistrationTokenResponses,
     UpdateUserRegistrationTokenErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vUpdateUserRegistrationTokenData, data);
@@ -1072,7 +1011,6 @@ export const updateUserRegistrationToken = <
     responseValidator: async (data) => {
       return await v.parseAsync(vUpdateUserRegistrationTokenResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -1093,15 +1031,14 @@ export const updateUserRegistrationToken = <
  * Calling this endpoint will revoke the user registration token, preventing it from being used for new registrations.
  */
 export const revokeUserRegistrationToken = <
-  ThrowOnError extends boolean = true,
+  ThrowOnError extends boolean = false,
 >(
   options: Options<RevokeUserRegistrationTokenData, ThrowOnError>,
 ) => {
   return options.client.post<
     RevokeUserRegistrationTokenResponses,
     RevokeUserRegistrationTokenErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vRevokeUserRegistrationTokenData, data);
@@ -1109,7 +1046,6 @@ export const revokeUserRegistrationToken = <
     responseValidator: async (data) => {
       return await v.parseAsync(vRevokeUserRegistrationTokenResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -1126,15 +1062,14 @@ export const revokeUserRegistrationToken = <
  * Calling this endpoint will unrevoke a previously revoked user registration token, allowing it to be used for registrations again (subject to its usage limits and expiration).
  */
 export const unrevokeUserRegistrationToken = <
-  ThrowOnError extends boolean = true,
+  ThrowOnError extends boolean = false,
 >(
   options: Options<UnrevokeUserRegistrationTokenData, ThrowOnError>,
 ) => {
   return options.client.post<
     UnrevokeUserRegistrationTokenResponses,
     UnrevokeUserRegistrationTokenErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vUnrevokeUserRegistrationTokenData, data);
@@ -1142,7 +1077,6 @@ export const unrevokeUserRegistrationToken = <
     responseValidator: async (data) => {
       return await v.parseAsync(vUnrevokeUserRegistrationTokenResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -1158,14 +1092,13 @@ export const unrevokeUserRegistrationToken = <
  * List upstream OAuth 2.0 links
  * Retrieve a list of upstream OAuth 2.0 links.
  */
-export const listUpstreamOAuthLinks = <ThrowOnError extends boolean = true>(
+export const listUpstreamOAuthLinks = <ThrowOnError extends boolean = false>(
   options: Options<ListUpstreamOAuthLinksData, ThrowOnError>,
 ) => {
   return options.client.get<
     ListUpstreamOAuthLinksResponses,
     ListUpstreamOAuthLinksErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vListUpstreamOAuthLinksData, data);
@@ -1173,7 +1106,6 @@ export const listUpstreamOAuthLinks = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vListUpstreamOAuthLinksResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -1188,14 +1120,13 @@ export const listUpstreamOAuthLinks = <ThrowOnError extends boolean = true>(
 /**
  * Add an upstream OAuth 2.0 link
  */
-export const addUpstreamOAuthLink = <ThrowOnError extends boolean = true>(
+export const addUpstreamOAuthLink = <ThrowOnError extends boolean = false>(
   options: Options<AddUpstreamOAuthLinkData, ThrowOnError>,
 ) => {
   return options.client.post<
     AddUpstreamOAuthLinkResponses,
     AddUpstreamOAuthLinkErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vAddUpstreamOAuthLinkData, data);
@@ -1203,7 +1134,6 @@ export const addUpstreamOAuthLink = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vAddUpstreamOAuthLinkResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -1222,14 +1152,13 @@ export const addUpstreamOAuthLink = <ThrowOnError extends boolean = true>(
 /**
  * Delete an upstream OAuth 2.0 link
  */
-export const deleteUpstreamOAuthLink = <ThrowOnError extends boolean = true>(
+export const deleteUpstreamOAuthLink = <ThrowOnError extends boolean = false>(
   options: Options<DeleteUpstreamOAuthLinkData, ThrowOnError>,
 ) => {
   return options.client.delete<
     DeleteUpstreamOAuthLinkResponses,
     DeleteUpstreamOAuthLinkErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vDeleteUpstreamOAuthLinkData, data);
@@ -1237,7 +1166,6 @@ export const deleteUpstreamOAuthLink = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vDeleteUpstreamOAuthLinkResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -1252,14 +1180,13 @@ export const deleteUpstreamOAuthLink = <ThrowOnError extends boolean = true>(
 /**
  * Get an upstream OAuth 2.0 link
  */
-export const getUpstreamOAuthLink = <ThrowOnError extends boolean = true>(
+export const getUpstreamOAuthLink = <ThrowOnError extends boolean = false>(
   options: Options<GetUpstreamOAuthLinkData, ThrowOnError>,
 ) => {
   return options.client.get<
     GetUpstreamOAuthLinkResponses,
     GetUpstreamOAuthLinkErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vGetUpstreamOAuthLinkData, data);
@@ -1267,7 +1194,6 @@ export const getUpstreamOAuthLink = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vGetUpstreamOAuthLinkResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -1282,14 +1208,15 @@ export const getUpstreamOAuthLink = <ThrowOnError extends boolean = true>(
 /**
  * List upstream OAuth 2.0 providers
  */
-export const listUpstreamOAuthProviders = <ThrowOnError extends boolean = true>(
+export const listUpstreamOAuthProviders = <
+  ThrowOnError extends boolean = false,
+>(
   options: Options<ListUpstreamOAuthProvidersData, ThrowOnError>,
 ) => {
   return options.client.get<
     ListUpstreamOAuthProvidersResponses,
     unknown,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vListUpstreamOAuthProvidersData, data);
@@ -1297,7 +1224,6 @@ export const listUpstreamOAuthProviders = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vListUpstreamOAuthProvidersResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
@@ -1312,14 +1238,13 @@ export const listUpstreamOAuthProviders = <ThrowOnError extends boolean = true>(
 /**
  * Get upstream OAuth provider
  */
-export const getUpstreamOAuthProvider = <ThrowOnError extends boolean = true>(
+export const getUpstreamOAuthProvider = <ThrowOnError extends boolean = false>(
   options: Options<GetUpstreamOAuthProviderData, ThrowOnError>,
 ) => {
   return options.client.get<
     GetUpstreamOAuthProviderResponses,
     GetUpstreamOAuthProviderErrors,
-    ThrowOnError,
-    "data"
+    ThrowOnError
   >({
     requestValidator: async (data) => {
       return await v.parseAsync(vGetUpstreamOAuthProviderData, data);
@@ -1327,7 +1252,6 @@ export const getUpstreamOAuthProvider = <ThrowOnError extends boolean = true>(
     responseValidator: async (data) => {
       return await v.parseAsync(vGetUpstreamOAuthProviderResponse, data);
     },
-    responseStyle: "data",
     security: [
       {
         scheme: "bearer",
