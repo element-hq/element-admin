@@ -38,6 +38,9 @@
   "errors.http_status": {
     "message": "Anfrage an {url} fehlgeschlagen mit Statuscode {status} {statusText}"
   },
+  "errors.matrix_standard": {
+    "message": "Request to the homeserver failed with error code '{errorCode}'. Additionally, the server gave the following error message: {errorMessage}"
+  },
   "errors.not_logged_in": {
     "message": "Nicht angemeldet"
   },
@@ -197,6 +200,12 @@
   "pages.registration_tokens.no_expiration_placeholder": {
     "message": "Kein Ablaufdatum"
   },
+  "pages.registration_tokens.not_found.description": {
+    "message": "The requested registration token ({tokenId}) could not be found on {serverName}."
+  },
+  "pages.registration_tokens.not_found.title": {
+    "message": "Registration token not found"
+  },
   "pages.registration_tokens.revoke_token": {
     "message": "Token widerrufen"
   },
@@ -280,6 +289,12 @@
   },
   "pages.rooms.filters.public_rooms": {
     "message": "Öffentliche Chats"
+  },
+  "pages.rooms.not_found.description": {
+    "message": "The requested room ({roomId}) could not be found on {serverName}."
+  },
+  "pages.rooms.not_found.title": {
+    "message": "Room not found"
   },
   "pages.rooms.room_count": {
     "message": "{COUNT, plural, =0 {Keine Chats} one {# Chat} other {# Chats}}"
@@ -418,6 +433,12 @@
   },
   "pages.users.new_user.success_message": {
     "message": "Nutzer angelegt"
+  },
+  "pages.users.not_found.description": {
+    "message": "The requested user ({userId}) could not be found on {serverName}."
+  },
+  "pages.users.not_found.title": {
+    "message": "User not found"
   },
   "pages.users.reactivate_account.button": {
     "message": "Reaktivieren"

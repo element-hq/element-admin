@@ -109,6 +109,16 @@
       "value": "statusText"
     }
   ],
+  "errors.matrix_standard": [
+    {
+      "type": 0,
+      "value": "Request to the homeserver failed with error code {errorCode}. Additionally, the server gave the following error message: "
+    },
+    {
+      "type": 1,
+      "value": "errorMessage"
+    }
+  ],
   "errors.not_logged_in": [
     {
       "type": 0,
@@ -446,6 +456,34 @@
       "value": "No expiration"
     }
   ],
+  "pages.registration_tokens.not_found.description": [
+    {
+      "type": 0,
+      "value": "The requested registration token ("
+    },
+    {
+      "type": 1,
+      "value": "tokenId"
+    },
+    {
+      "type": 0,
+      "value": ") could not be found on "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "pages.registration_tokens.not_found.title": [
+    {
+      "type": 0,
+      "value": "Registration token not found"
+    }
+  ],
   "pages.registration_tokens.revoke_token": [
     {
       "type": 0,
@@ -661,6 +699,34 @@
     {
       "type": 0,
       "value": "Public rooms"
+    }
+  ],
+  "pages.rooms.not_found.description": [
+    {
+      "type": 0,
+      "value": "The requested room ("
+    },
+    {
+      "type": 1,
+      "value": "roomId"
+    },
+    {
+      "type": 0,
+      "value": ") could not be found on "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "pages.rooms.not_found.title": [
+    {
+      "type": 0,
+      "value": "Room not found"
     }
   ],
   "pages.rooms.room_count": [
@@ -1011,6 +1077,34 @@
     {
       "type": 0,
       "value": "User created"
+    }
+  ],
+  "pages.users.not_found.description": [
+    {
+      "type": 0,
+      "value": "The requested user ("
+    },
+    {
+      "type": 1,
+      "value": "userId"
+    },
+    {
+      "type": 0,
+      "value": ") could not be found on "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "pages.users.not_found.title": [
+    {
+      "type": 0,
+      "value": "User not found"
     }
   ],
   "pages.users.reactivate_account.button": [
