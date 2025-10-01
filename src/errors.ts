@@ -64,6 +64,27 @@ export class HttpStatusError extends LocalizedError {
   }
 }
 
+export class MatrixStandardError extends LocalizedError {
+  localizedMessage = defineMessage({
+    id: "errors.matrix_standard",
+    defaultMessage:
+      "Request to the homeserver failed with error code '{errorCode}'. Additionally, the server gave the following error message: {errorMessage}",
+    description:
+      "Generic error message when Synapse returned a rich error, with an error code (M_FORBIDDEN, etc.) and a human-readable error message, usually in english.",
+  });
+
+  constructor(errcode: string, error: string, options?: ErrorOptions) {
+    super(
+      `Request failed with error code ${errcode}. Additionally, the server gave the following error message: ${error}`,
+      options,
+    );
+    this.values = {
+      errorCode: errcode,
+      errorMessage: error,
+    };
+  }
+}
+
 export class FetchError extends LocalizedError {
   localizedMessage = defineMessage({
     id: "errors.http_fetch",

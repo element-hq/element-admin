@@ -51,6 +51,10 @@
     "description": "Generic error message when we fail to make a request to the specified URL. Typical values for 'status' are '404' or '500', typical values for 'statusText' are 'Not Found' or 'Internal Server Error'",
     "message": "Request to {url} failed with status code {status} {statusText}"
   },
+  "errors.matrix_standard": {
+    "description": "Generic error message when Synapse returned a rich error, with an error code (M_FORBIDDEN, etc.) and a human-readable error message, usually in english.",
+    "message": "Request to the homeserver failed with error code '{errorCode}'. Additionally, the server gave the following error message: {errorMessage}"
+  },
   "errors.not_logged_in": {
     "description": "Error message when a request was sent which was supposed to be authenticated, but turns out that the user is not logged in. This is a rare error, usually because of a race-condition during login or logout.",
     "message": "Not logged in"
