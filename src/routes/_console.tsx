@@ -48,10 +48,15 @@ const TokenView: React.FC<TokenViewProps> = ({ token }: TokenViewProps) => (
 );
 
 export const Route = createFileRoute("/_console")({
-  beforeLoad: () => {
+  beforeLoad: ({ location }) => {
     const state = useAuthStore.getState();
     if (!state.credentials) {
-      throw redirect({ to: "/login" });
+      throw redirect({
+        to: "/login",
+        // We include the current URL in the login search parameters to go back
+        // to that page once the user is logged in, *unless* it is the root URL
+        search: location.href === "/" ? undefined : { redirect: location.href },
+      });
     }
 
     return {
