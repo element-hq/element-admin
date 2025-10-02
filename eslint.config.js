@@ -2,10 +2,12 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
+import { defineConfig } from "eslint/config";
 import js from "@eslint/js";
 import * as tseslint from "typescript-eslint";
 import reactPlugin from "eslint-plugin-react";
-import * as reactHooksPlugin from "eslint-plugin-react-hooks";
+// eslint-disable-next-line import-x/default -- The exported types are wrong
+import reactHooksPlugin from "eslint-plugin-react-hooks";
 import reactRefreshPlugin from "eslint-plugin-react-refresh";
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
 import * as importXPlugin from "eslint-plugin-import-x";
@@ -18,13 +20,13 @@ import compatPlugin from "eslint-plugin-compat";
 // eslint-disable-next-line import-x/default -- The exported types are wrong
 import formatjsPlugin from "eslint-plugin-formatjs";
 
-export default tseslint.config(
+export default defineConfig(
   js.configs.recommended,
   tseslint.configs.strict,
   tseslint.configs.stylistic,
   reactPlugin.configs.flat.recommended,
   reactPlugin.configs.flat["jsx-runtime"],
-  reactHooksPlugin.configs["recommended-latest"],
+  reactHooksPlugin.configs["flat/recommended"],
   reactRefreshPlugin.configs.vite,
   jsxA11yPlugin.flatConfigs.strict,
   importXPlugin.flatConfigs.recommended,
