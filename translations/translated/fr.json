@@ -423,7 +423,10 @@
     "message": "Erreur lors de la création de l'utilisateur"
   },
   "pages.users.new_user.invalid_localpart": {
-    "message": "Le nom d'utilisateur ne peux contenir uniquement des lettres minuscules, des chiffres et des traits de soulignement"
+    "message": "Le nom d'utilisateur ne peux contenir uniquement des lettres minuscules, des chiffres, des traits de soulignement, des tirets et des barres obliques"
+  },
+  "pages.users.new_user.invalid_localpart_numeric_only": {
+    "message": "Le nom d'utilisateur ne peut pas contenir uniquement des chiffres"
   },
   "pages.users.new_user.localpart": {
     "message": "Saisir un nom d'utilisateur"

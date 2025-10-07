@@ -116,7 +116,15 @@
   "errors.matrix_standard": [
     {
       "type": 0,
-      "value": "Request to the homeserver failed with error code {errorCode}. Additionally, the server gave the following error message: "
+      "value": "Die Anfrage an den Homeserver ist mit dem Fehlercode „"
+    },
+    {
+      "type": 1,
+      "value": "errorCode"
+    },
+    {
+      "type": 0,
+      "value": "” fehlgeschlagen. Zusätzlich hat der Server die folgende Fehlernachricht ausgegeben: "
     },
     {
       "type": 1,
@@ -463,7 +471,7 @@
   "pages.registration_tokens.not_found.description": [
     {
       "type": 0,
-      "value": "The requested registration token ("
+      "value": "Das angeforderte Registrierungstoken ("
     },
     {
       "type": 1,
@@ -471,7 +479,7 @@
     },
     {
       "type": 0,
-      "value": ") could not be found on "
+      "value": ") konnte auf "
     },
     {
       "type": 1,
@@ -479,13 +487,13 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " nicht gefunden werden."
     }
   ],
   "pages.registration_tokens.not_found.title": [
     {
       "type": 0,
-      "value": "Registration token not found"
+      "value": "Registrierungstoken nicht gefunden"
     }
   ],
   "pages.registration_tokens.revoke_token": [
@@ -708,7 +716,7 @@
   "pages.rooms.not_found.description": [
     {
       "type": 0,
-      "value": "The requested room ("
+      "value": "Der angeforderte Chat ("
     },
     {
       "type": 1,
@@ -716,7 +724,7 @@
     },
     {
       "type": 0,
-      "value": ") could not be found on "
+      "value": ") konnte auf "
     },
     {
       "type": 1,
@@ -724,13 +732,13 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " nicht gefunden werden."
     }
   ],
   "pages.rooms.not_found.title": [
     {
       "type": 0,
-      "value": "Room not found"
+      "value": "Chat nicht gefunden"
     }
   ],
   "pages.rooms.room_count": [
@@ -1065,6 +1073,12 @@
       "value": "Der lokale Teil darf nur Kleinbuchstaben, Zahlen und Unterstriche enthalten"
     }
   ],
+  "pages.users.new_user.invalid_localpart_numeric_only": [
+    {
+      "type": 0,
+      "value": "Localpart cannot only contain numbers"
+    }
+  ],
   "pages.users.new_user.localpart": [
     {
       "type": 0,
@@ -1086,7 +1100,7 @@
   "pages.users.not_found.description": [
     {
       "type": 0,
-      "value": "The requested user ("
+      "value": "Der angeforderte Nutzer ("
     },
     {
       "type": 1,
@@ -1094,7 +1108,7 @@
     },
     {
       "type": 0,
-      "value": ") could not be found on "
+      "value": ") konnte auf "
     },
     {
       "type": 1,
@@ -1102,13 +1116,13 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " nicht gefunden werden."
     }
   ],
   "pages.users.not_found.title": [
     {
       "type": 0,
-      "value": "User not found"
+      "value": "Nutzer nicht gefunden"
     }
   ],
   "pages.users.reactivate_account.button": [

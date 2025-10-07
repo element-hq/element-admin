@@ -1,243 +1,243 @@
 {
   "action.add": {
-    "message": "Add"
+    "message": "添加"
   },
   "action.cancel": {
-    "message": "Cancel"
+    "message": "取消"
   },
   "action.clear": {
-    "message": "Clear"
+    "message": "清除"
   },
   "action.close": {
-    "message": "Close"
+    "message": "关闭"
   },
   "action.go_back": {
-    "message": "Go back"
+    "message": "后退"
   },
   "action.remove": {
-    "message": "Remove"
+    "message": "移除"
   },
   "action.retry": {
-    "message": "Retry"
+    "message": "重试"
   },
   "action.sign_out": {
-    "message": "Sign out"
+    "message": "注销"
   },
   "common.email_address": {
-    "message": "Email address"
+    "message": "邮件地址"
   },
   "common.filter": {
-    "message": "Filter"
+    "message": "筛选"
   },
   "errors.http_fetch": {
-    "message": "Request to {url} failed"
+    "message": "{url} 请求失败"
   },
   "errors.http_fetch_json_decoding": {
-    "message": "Failed to decode JSON response from {url}"
+    "message": "来自 {url} 的 JSON 响应解码失败"
   },
   "errors.http_status": {
-    "message": "Request to {url} failed with status code {status} {statusText}"
+    "message": "{url} 请求失败，状态码：{status} {statusText}"
   },
   "errors.matrix_standard": {
-    "message": "Request to the homeserver failed with error code '{errorCode}'. Additionally, the server gave the following error message: {errorMessage}"
+    "message": "对主服务器的请求失败，错误代码：{errorCode}。另外服务器还返回了以下错误信息：{errorMessage}"
   },
   "errors.not_logged_in": {
-    "message": "Not logged in"
+    "message": "未登录"
   },
   "footer.copyright_notice": {
     "message": "Copyright © {now, date, ::yyyy}"
   },
   "footer.help_and_support": {
-    "message": "Help & Support"
+    "message": "帮助与支持"
   },
   "footer.legal": {
-    "message": "Legal"
+    "message": "法律信息"
   },
   "footer.privacy": {
-    "message": "Privacy"
+    "message": "隐私"
   },
   "header.user_menu.title": {
-    "message": "Account menu"
+    "message": "账户菜单"
   },
   "navigation.dashboard": {
-    "message": "Dashboard"
+    "message": "仪表盘"
   },
   "navigation.documentation": {
-    "message": "Documentation"
+    "message": "文档"
   },
   "navigation.registration_tokens": {
-    "message": "Registration tokens"
+    "message": "注册 Tokens"
   },
   "navigation.rooms": {
-    "message": "Rooms"
+    "message": "房间"
   },
   "navigation.users": {
-    "message": "Users"
+    "message": "用户"
   },
   "pages.dashboard.current_ess_version": {
-    "message": "ESS version"
+    "message": "ESS 版本"
   },
   "pages.dashboard.latest_ess_version": {
-    "message": "Latest ESS version"
+    "message": "最新的 ESS 版本"
   },
   "pages.dashboard.new_ess_release": {
-    "message": "(New release)"
+    "message": "（新版本）"
   },
   "pages.dashboard.registered_users_count": {
-    "message": "Users registered"
+    "message": "已注册的用户"
   },
   "pages.dashboard.rooms_count": {
-    "message": "Rooms total"
+    "message": "房间总数"
   },
   "pages.dashboard.running_latest_ess": {
-    "message": "(You're running the latest version)"
+    "message": "（你已在运行最新版本）"
   },
   "pages.dashboard.synapse_version": {
-    "message": "Synapse version"
+    "message": "Synapse 版本"
   },
   "pages.dashboard.title": {
-    "message": "Dashboard"
+    "message": "仪表盘"
   },
   "pages.generic_error.go_home": {
-    "message": "Go home"
+    "message": "返回首页"
   },
   "pages.generic_error.sign_out_and_reload": {
-    "message": "Sign out and reload"
+    "message": "注销并重载"
   },
   "pages.generic_error.technical_details.item": {
-    "message": "{name}: {message}"
+    "message": "{name}：{message}"
   },
   "pages.generic_error.text": {
-    "message": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
+    "message": "这可能是由某个 bug 或无法连接到主服务器导致的。你可以重新加载页面、返回上一页或重置所有内容并返回到主页。"
   },
   "pages.generic_error.title": {
-    "message": "An unexpected error occurred"
+    "message": "发生意外错误"
   },
   "pages.landing.description": {
-    "message": "Manage the deployment of the element app for your organization or community."
+    "message": "管理你的组织或社区内 Element 应用程序的部署。"
   },
   "pages.login.errors.no_auth_metadata": {
-    "message": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
+    "message": "载入服务器认证元数据失败。Synapse 可能无法访问或未被配置对接 Matrix Authentication Service。"
   },
   "pages.login.errors.no_client_metadata": {
-    "message": "Failed to register the client. Matrix Authentication Service may be unreachable or misconfigured."
+    "message": "无法注册客户端。Matrix Authentication Service 可能无法访问或配置错误。"
   },
   "pages.login.errors.no_well_known": {
-    "message": "Failed to load the server's well-known document. The server name may be invalid."
+    "message": "加载服务器 well-known 文档失败，服务器名称可能无效。"
   },
   "pages.login.get_started": {
-    "message": "Get started"
+    "message": "开始"
   },
   "pages.login.server_name": {
-    "message": "Server name"
+    "message": "服务器名称"
   },
   "pages.login.title": {
-    "message": "Login"
+    "message": "登录"
   },
   "pages.registration_tokens.auto_generate_placeholder": {
-    "message": "Auto-generate if left empty"
+    "message": "留空则自动生成"
   },
   "pages.registration_tokens.create_token.error": {
-    "message": "Failed to create token"
+    "message": "Token 创建失败"
   },
   "pages.registration_tokens.create_token.submit": {
-    "message": "Create Token"
+    "message": "创建 Token"
   },
   "pages.registration_tokens.create_token.success": {
-    "message": "Token created successfully"
+    "message": "Token 创建成功"
   },
   "pages.registration_tokens.create_token.title": {
-    "message": "Create Registration Token"
+    "message": "创建注册 Token"
   },
   "pages.registration_tokens.created_at_column": {
-    "message": "Created at"
+    "message": "创建于"
   },
   "pages.registration_tokens.created_at_label": {
-    "message": "Created at"
+    "message": "创建于"
   },
   "pages.registration_tokens.custom_token_help": {
-    "message": "Optional custom token string. If left empty, a secure token will be auto-generated."
+    "message": "自定义 Token 字符串为可选。若留空则自动生成。"
   },
   "pages.registration_tokens.custom_token_label": {
-    "message": "Custom Token"
+    "message": "自定义 Token"
   },
   "pages.registration_tokens.edit_properties": {
-    "message": "Edit properties"
+    "message": "编辑属性"
   },
   "pages.registration_tokens.edit_token_title": {
-    "message": "Edit registration token"
+    "message": "编辑注册 Token"
   },
   "pages.registration_tokens.expires_at_field": {
-    "message": "Expires at"
+    "message": "有效期到"
   },
   "pages.registration_tokens.expires_at_help": {
-    "message": "When the token expires. Leave empty if the token should never expire."
+    "message": "当 Token 何时过期。若要使 Token 永不过期请留空。"
   },
   "pages.registration_tokens.expires_at_label": {
-    "message": "Expires at"
+    "message": "有效期到"
   },
   "pages.registration_tokens.filters.active_only": {
-    "message": "Active"
+    "message": "激活"
   },
   "pages.registration_tokens.filters.expired_only": {
-    "message": "Expired"
+    "message": "已过期"
   },
   "pages.registration_tokens.filters.revoked_only": {
-    "message": "Revoked"
+    "message": "已撤消"
   },
   "pages.registration_tokens.filters.unused_only": {
-    "message": "Unused"
+    "message": "未使用"
   },
   "pages.registration_tokens.filters.used_only": {
-    "message": "Used"
+    "message": "已使用"
   },
   "pages.registration_tokens.loading_more": {
-    "message": "Loading more tokens..."
+    "message": "载入更多 Token…"
   },
   "pages.registration_tokens.never_expires": {
-    "message": "Never expires"
+    "message": "永不过期"
   },
   "pages.registration_tokens.no_expiration_placeholder": {
-    "message": "No expiration"
+    "message": "无过期时间"
   },
   "pages.registration_tokens.not_found.description": {
-    "message": "The requested registration token ({tokenId}) could not be found on {serverName}."
+    "message": "在 {serverName} 上无法找到请求的 Token（{tokenId}）。"
   },
   "pages.registration_tokens.not_found.title": {
-    "message": "Registration token not found"
+    "message": "未找到注册 Token"
   },
   "pages.registration_tokens.revoke_token": {
-    "message": "Revoke token"
+    "message": "撤消 Token"
   },
   "pages.registration_tokens.revoked_at_label": {
-    "message": "Revoked at"
+    "message": "撤消于"
   },
   "pages.registration_tokens.save_changes": {
-    "message": "Save Changes"
+    "message": "保存更改"
   },
   "pages.registration_tokens.status.active": {
-    "message": "Active"
+    "message": "活跃"
   },
   "pages.registration_tokens.status.column": {
-    "message": "Status"
+    "message": "状态"
   },
   "pages.registration_tokens.status.expired": {
-    "message": "Expired"
+    "message": "已过期"
   },
   "pages.registration_tokens.status.invalid": {
-    "message": "Invalid"
+    "message": "无效"
   },
   "pages.registration_tokens.status.label": {
-    "message": "Status"
+    "message": "状态"
   },
   "pages.registration_tokens.status.revoked": {
-    "message": "Revoked"
+    "message": "已撤消"
   },
   "pages.registration_tokens.status.used_up": {
-    "message": "Used up"
+    "message": "已用尽"
   },
   "pages.registration_tokens.title": {
-    "message": "Registration tokens"
+    "message": "注册 Tokens"
   },
   "pages.registration_tokens.token_column": {
     "message": "Token"
@@ -252,274 +252,274 @@
     "message": "{uses, number} / ∞"
   },
   "pages.registration_tokens.unlimited_placeholder": {
-    "message": "Unlimited"
+    "message": "无限制"
   },
   "pages.registration_tokens.unlimited_uses_placeholder": {
-    "message": "Leave empty for unlimited uses"
+    "message": "留空则不限制使用量"
   },
   "pages.registration_tokens.unrevoke_token": {
-    "message": "Unrevoke token"
+    "message": "反转撤消 Token"
   },
   "pages.registration_tokens.usage_count_label": {
-    "message": "Usage count"
+    "message": "使用次数"
   },
   "pages.registration_tokens.usage_limit_field": {
-    "message": "Usage limit"
+    "message": "使用次数限制"
   },
   "pages.registration_tokens.usage_limit_help": {
-    "message": "Maximum number of times this token can be used. Leave empty for unlimited uses."
+    "message": "此 Token 的最大使用次数。留空则表示不限制使用次数。"
   },
   "pages.registration_tokens.usage_limit_label": {
-    "message": "Usage Limit"
+    "message": "使用次数限制"
   },
   "pages.registration_tokens.uses_column": {
-    "message": "Uses"
+    "message": "使用次数"
   },
   "pages.registration_tokens.valid_until_column": {
-    "message": "Valid Until"
+    "message": "有效期到"
   },
   "pages.rooms.filters.empty_rooms": {
-    "message": "Empty rooms"
+    "message": "空房间"
   },
   "pages.rooms.filters.non_empty_rooms": {
-    "message": "Non-empty rooms"
+    "message": "非空房间"
   },
   "pages.rooms.filters.private_rooms": {
-    "message": "Private rooms"
+    "message": "私有房间"
   },
   "pages.rooms.filters.public_rooms": {
-    "message": "Public rooms"
+    "message": "公共房间"
   },
   "pages.rooms.not_found.description": {
-    "message": "The requested room ({roomId}) could not be found on {serverName}."
+    "message": "在 {serverName} 上无法找到房间（{roomId}）。"
   },
   "pages.rooms.not_found.title": {
-    "message": "Room not found"
+    "message": "未找到房间"
   },
   "pages.rooms.room_count": {
     "message": "{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
   },
   "pages.rooms.title": {
-    "message": "Rooms"
+    "message": "房间"
   },
   "pages.users.add_email.button": {
-    "message": "Add email address"
+    "message": "添加邮件地址"
   },
   "pages.users.add_email.description": {
-    "message": "Add an email address to this user"
+    "message": "为此用户添加邮件地址"
   },
   "pages.users.add_email.error": {
-    "message": "Failed to add email address"
+    "message": "邮件地址添加失败"
   },
   "pages.users.add_email.error.email_invalid": {
-    "message": "Invalid email address"
+    "message": "邮件地址无效"
   },
   "pages.users.add_email.error.email_missing": {
-    "message": "This field is required"
+    "message": "此字段为必填项"
   },
   "pages.users.add_email.success": {
-    "message": "Email address added"
+    "message": "已添加邮件地址"
   },
   "pages.users.add_email.title": {
-    "message": "Add email address"
+    "message": "添加邮件地址"
   },
   "pages.users.add_upstream_link.error": {
-    "message": "Failed to add link upstream account"
+    "message": "上游账户关联失败"
   },
   "pages.users.add_upstream_link.success": {
-    "message": "Link to upstream account added"
+    "message": "已与上游账户关联"
   },
   "pages.users.deactivate_account.alert.description": {
-    "message": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
+    "message": "这会自动从用户的所有设备中注销、移除所有访问 token、删除所有第三方 ID 并永久删除其账户数据。"
   },
   "pages.users.deactivate_account.alert.title": {
-    "message": "You're about to delete user data"
+    "message": "你即将删除用户数据"
   },
   "pages.users.deactivate_account.button": {
-    "message": "Deactivate account"
+    "message": "停用账户"
   },
   "pages.users.deactivate_account.error": {
-    "message": "Failed to deactivate account"
+    "message": "停用账户失败"
   },
   "pages.users.deactivate_account.success": {
-    "message": "Account deactivated"
+    "message": "账户已停用"
   },
   "pages.users.deactivate_account.title": {
-    "message": "Deactivate this user?"
+    "message": "停用此用户？"
   },
   "pages.users.delete_email.description": {
-    "message": "Are you sure you want to remove this email address ({email}) from this user ({mxid})?"
+    "message": "你确定要为该用户（{mxid}）移除此邮件地址（{email}）？"
   },
   "pages.users.delete_email.error": {
-    "message": "Failed to delete email address"
+    "message": "删除邮件地址失败"
   },
   "pages.users.delete_email.success": {
-    "message": "Email address deleted"
+    "message": "邮件地址已删除"
   },
   "pages.users.delete_email.title": {
-    "message": "Remove email address?"
+    "message": "移除邮件地址？"
   },
   "pages.users.delete_upstream_link.description": {
-    "message": "Are you sure you want to remove the link between this user ({mxid}) with this upstream account ({subject})?"
+    "message": "你确定要删除此用户（{mxid}）与该上游账户（{subject} ）的关联？"
   },
   "pages.users.delete_upstream_link.error": {
-    "message": "Failed to delete upstream link"
+    "message": "上游关联删除失败"
   },
   "pages.users.delete_upstream_link.success": {
-    "message": "Upstream link deleted"
+    "message": "上游关联已删除"
   },
   "pages.users.delete_upstream_link.title": {
-    "message": "Remove link with upstream account?"
+    "message": "删除与上游账户的关联？"
   },
   "pages.users.filters.active": {
-    "message": "Active users"
+    "message": "激活用户"
   },
   "pages.users.filters.admins": {
-    "message": "Admins"
+    "message": "管理员"
   },
   "pages.users.filters.deactivated": {
-    "message": "Deactivated users"
+    "message": "已停用的用户"
   },
   "pages.users.filters.guests": {
-    "message": "Guests (legacy)"
+    "message": "访客（旧版）"
   },
   "pages.users.filters.locked": {
-    "message": "Locked users"
+    "message": "已锁定的用户"
   },
   "pages.users.filters.newest_first": {
-    "message": "Newest first"
+    "message": "最新的优先"
   },
   "pages.users.filters.non_guests": {
-    "message": "Non-guests (legacy)"
+    "message": "非访客（旧版）"
   },
   "pages.users.lock_account.alert.description": {
-    "message": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."
+    "message": "此用户将自动在其登录的所有设备中锁定，并且在解锁前无法登录到任何新设备。"
   },
   "pages.users.lock_account.alert.title": {
-    "message": "The user will not be able to send or receive messages"
+    "message": "用户将无法发送或接收消息"
   },
   "pages.users.lock_account.button": {
-    "message": "Lock account"
+    "message": "锁定账户"
   },
   "pages.users.lock_account.error": {
-    "message": "Failed to lock account"
+    "message": "锁定账户失败"
   },
   "pages.users.lock_account.success": {
-    "message": "Account locked"
+    "message": "账户已锁定"
   },
   "pages.users.lock_account.title": {
-    "message": "Lock this user's account?"
+    "message": "锁定此用户的账户？"
   },
   "pages.users.new_user.add_user": {
-    "message": "Add user"
+    "message": "添加用户"
   },
   "pages.users.new_user.create_account": {
-    "message": "Create account"
+    "message": "创建账户"
   },
   "pages.users.new_user.description": {
-    "message": "To add a new user to {serverName}, choose a user name for this user, which will be part of their user ID."
+    "message": "为此用户指定用户名以新增用户到 {serverName}，该用户名将成为其用户 ID 的一部分。"
   },
   "pages.users.new_user.error_message": {
-    "message": "Error creating user"
+    "message": "创建用户时出错"
   },
   "pages.users.new_user.invalid_localpart": {
-    "message": "Localpart can only contain lowercase letters, numbers, dots, underscores, dashes and slashes"
+    "message": "Localpart 只能包含小写字母、数字与下划线"
   },
   "pages.users.new_user.invalid_localpart_numeric_only": {
     "message": "Localpart cannot only contain numbers"
   },
   "pages.users.new_user.localpart": {
-    "message": "Enter name"
+    "message": "输入名称"
   },
   "pages.users.new_user.required_error": {
-    "message": "This field is required"
+    "message": "此字段为必填"
   },
   "pages.users.new_user.success_message": {
-    "message": "User created"
+    "message": "用户已创建"
   },
   "pages.users.not_found.description": {
-    "message": "The requested user ({userId}) could not be found on {serverName}."
+    "message": "在 {serverName} 上无法找到请求的用户（{userId}）。"
   },
   "pages.users.not_found.title": {
-    "message": "User not found"
+    "message": "用户未找到"
   },
   "pages.users.reactivate_account.button": {
-    "message": "Reactivate"
+    "message": "重新激活"
   },
   "pages.users.reactivate_account.error": {
-    "message": "Failed to reactivate account"
+    "message": "重新激活账户失败"
   },
   "pages.users.reactivate_account.success": {
-    "message": "Account reactivated"
+    "message": "账户已重新激活"
   },
   "pages.users.search_placeholder": {
-    "message": "Search users…"
+    "message": "搜索用户…"
   },
   "pages.users.set_admin.alert.description": {
-    "message": "The user will be able to view user data and make changes to user and room permissions."
+    "message": "用户将能够查看用户数据，并修改用户和房间权限。"
   },
   "pages.users.set_admin.alert.title": {
-    "message": "User will have access to sensitive data"
+    "message": "用户将有权访问敏感数据"
   },
   "pages.users.set_admin.error": {
-    "message": "Failed to change admin privileges for {mxid}"
+    "message": "为 {mxid} 更改管理员权限失败"
   },
   "pages.users.set_admin.label": {
-    "message": "Admin"
+    "message": "管理员"
   },
   "pages.users.set_admin.make_admin_button": {
-    "message": "Make admin"
+    "message": "设为管理员"
   },
   "pages.users.set_admin.successfully_demoted": {
-    "message": "{mxid} no longer has admin privileges"
+    "message": "{mxid} 已不再具有管理员权限"
   },
   "pages.users.set_admin.successfully_promoted": {
-    "message": "{mxid} now has admin privileges"
+    "message": "{mxid} 现在拥有管理员权限"
   },
   "pages.users.set_admin.title": {
-    "message": "Make this user an admin?"
+    "message": "将此用户设为管理员？"
   },
   "pages.users.set_password.button": {
-    "message": "Change password"
+    "message": "更改密码"
   },
   "pages.users.set_password.confirm_password_label": {
-    "message": "Enter password again"
+    "message": "再次输入密码"
   },
   "pages.users.set_password.error": {
-    "message": "Failed to set password"
+    "message": "密码设置失败"
   },
   "pages.users.set_password.error.password_missing": {
-    "message": "This field is required"
+    "message": "此字段为必填"
   },
   "pages.users.set_password.error.passwords_mismatch": {
-    "message": "Passwords do not match"
+    "message": "密码不匹配"
   },
   "pages.users.set_password.password_label": {
-    "message": "Password"
+    "message": "密码"
   },
   "pages.users.set_password.password_match": {
-    "message": "Passwords match!"
+    "message": "密码匹配！"
   },
   "pages.users.set_password.submit": {
-    "message": "Set new password"
+    "message": "设置新密码"
   },
   "pages.users.set_password.success": {
-    "message": "Password set successfully"
+    "message": "密码设置成功"
   },
   "pages.users.set_password.title": {
-    "message": "Set a new password for this user"
+    "message": "为此用户设置新密码"
   },
   "pages.users.title": {
-    "message": "Users"
+    "message": "用户"
   },
   "pages.users.unlock_account.button": {
-    "message": "Unlock account"
+    "message": "解锁账户"
   },
   "pages.users.unlock_account.error": {
-    "message": "Failed to unlock account"
+    "message": "解锁账户失败"
   },
   "pages.users.unlock_account.success": {
-    "message": "Account unlocked"
+    "message": "账户已解锁"
   },
   "pages.users.user_count": {
     "message": "{COUNT, plural, zero {No users} one {# user} other {# users}}"
@@ -540,39 +540,39 @@
     "message": "Element TI-Messenger"
   },
   "room_info.empty_room": {
-    "message": "Empty room"
+    "message": "空房间"
   },
   "room_info.empty_space": {
-    "message": "Empty space"
+    "message": "空闲空间"
   },
   "room_info.room_with": {
-    "message": "Room with {members}"
+    "message": "{members} 位成员的房间"
   },
   "room_info.space_with": {
-    "message": "Space with {members}"
+    "message": "{members} 位成员的空间"
   },
   "room_info.unknown_user": {
-    "message": "Unknown user"
+    "message": "未知用户"
   },
   "rooms_info.other_members": {
-    "message": "{COUNT, plural, one {# other} other {# others}}"
+    "message": "{COUNT, plural, other {其他}}"
   },
   "ui.data.failed_to_load": {
-    "message": "Failed to load"
+    "message": "载入失败"
   },
   "ui.data.loading": {
-    "message": "Loading value"
+    "message": "正在载入值"
   },
   "ui.language_switcher.browser_default": {
-    "message": "Use browser settings ({language})"
+    "message": "跟随浏览器设置（{language}）"
   },
   "ui.language_switcher.button_label": {
-    "message": "Language settings"
+    "message": "语言设置"
   },
   "ui.language_switcher.description": {
-    "message": "Choose your preferred language for the interface."
+    "message": "为界面更改你偏好的语言。"
   },
   "ui.language_switcher.title": {
-    "message": "Language settings"
+    "message": "语言设置"
   }
 }

@@ -2,99 +2,95 @@
   "action.add": [
     {
       "type": 0,
-      "value": "Add"
+      "value": "添加"
     }
   ],
   "action.cancel": [
     {
       "type": 0,
-      "value": "Cancel"
+      "value": "取消"
     }
   ],
   "action.clear": [
     {
       "type": 0,
-      "value": "Clear"
+      "value": "清除"
     }
   ],
   "action.close": [
     {
       "type": 0,
-      "value": "Close"
+      "value": "关闭"
     }
   ],
   "action.go_back": [
     {
       "type": 0,
-      "value": "Go back"
+      "value": "后退"
     }
   ],
   "action.remove": [
     {
       "type": 0,
-      "value": "Remove"
+      "value": "移除"
     }
   ],
   "action.retry": [
     {
       "type": 0,
-      "value": "Retry"
+      "value": "重试"
     }
   ],
   "action.sign_out": [
     {
       "type": 0,
-      "value": "Sign out"
+      "value": "注销"
     }
   ],
   "common.email_address": [
     {
       "type": 0,
-      "value": "Email address"
+      "value": "邮件地址"
     }
   ],
   "common.filter": [
     {
       "type": 0,
-      "value": "Filter"
+      "value": "筛选"
     }
   ],
   "errors.http_fetch": [
-    {
-      "type": 0,
-      "value": "Request to "
-    },
     {
       "type": 1,
       "value": "url"
     },
     {
       "type": 0,
-      "value": " failed"
+      "value": " 请求失败"
     }
   ],
   "errors.http_fetch_json_decoding": [
     {
       "type": 0,
-      "value": "Failed to decode JSON response from "
+      "value": "来自 "
     },
     {
       "type": 1,
       "value": "url"
+    },
+    {
+      "type": 0,
+      "value": " 的 JSON 响应解码失败"
     }
   ],
   "errors.http_status": [
     {
-      "type": 0,
-      "value": "Request to "
-    },
-    {
       "type": 1,
       "value": "url"
     },
     {
       "type": 0,
-      "value": " failed with status code "
+      "value": " 请求失败，状态码："
     },
     {
       "type": 1,
@@ -112,7 +108,15 @@
   "errors.matrix_standard": [
     {
       "type": 0,
-      "value": "Request to the homeserver failed with error code {errorCode}. Additionally, the server gave the following error message: "
+      "value": "对主服务器的请求失败，错误代码："
+    },
+    {
+      "type": 1,
+      "value": "errorCode"
+    },
+    {
+      "type": 0,
+      "value": "。另外服务器还返回了以下错误信息："
     },
     {
       "type": 1,
@@ -122,7 +126,7 @@
   "errors.not_logged_in": [
     {
       "type": 0,
-      "value": "Not logged in"
+      "value": "未登录"
     }
   ],
   "footer.copyright_notice": [
@@ -145,115 +149,115 @@
   "footer.help_and_support": [
     {
       "type": 0,
-      "value": "Help & Support"
+      "value": "帮助与支持"
     }
   ],
   "footer.legal": [
     {
       "type": 0,
-      "value": "Legal"
+      "value": "法律信息"
     }
   ],
   "footer.privacy": [
     {
       "type": 0,
-      "value": "Privacy"
+      "value": "隐私"
     }
   ],
   "header.user_menu.title": [
     {
       "type": 0,
-      "value": "Account menu"
+      "value": "账户菜单"
     }
   ],
   "navigation.dashboard": [
     {
       "type": 0,
-      "value": "Dashboard"
+      "value": "仪表盘"
     }
   ],
   "navigation.documentation": [
     {
       "type": 0,
-      "value": "Documentation"
+      "value": "文档"
     }
   ],
   "navigation.registration_tokens": [
     {
       "type": 0,
-      "value": "Registration tokens"
+      "value": "注册 Tokens"
     }
   ],
   "navigation.rooms": [
     {
       "type": 0,
-      "value": "Rooms"
+      "value": "房间"
     }
   ],
   "navigation.users": [
     {
       "type": 0,
-      "value": "Users"
+      "value": "用户"
     }
   ],
   "pages.dashboard.current_ess_version": [
     {
       "type": 0,
-      "value": "ESS version"
+      "value": "ESS 版本"
     }
   ],
   "pages.dashboard.latest_ess_version": [
     {
       "type": 0,
-      "value": "Latest ESS version"
+      "value": "最新的 ESS 版本"
     }
   ],
   "pages.dashboard.new_ess_release": [
     {
       "type": 0,
-      "value": "(New release)"
+      "value": "（新版本）"
     }
   ],
   "pages.dashboard.registered_users_count": [
     {
       "type": 0,
-      "value": "Users registered"
+      "value": "已注册的用户"
     }
   ],
   "pages.dashboard.rooms_count": [
     {
       "type": 0,
-      "value": "Rooms total"
+      "value": "房间总数"
     }
   ],
   "pages.dashboard.running_latest_ess": [
     {
       "type": 0,
-      "value": "(You're running the latest version)"
+      "value": "（你已在运行最新版本）"
     }
   ],
   "pages.dashboard.synapse_version": [
     {
       "type": 0,
-      "value": "Synapse version"
+      "value": "Synapse 版本"
     }
   ],
   "pages.dashboard.title": [
     {
       "type": 0,
-      "value": "Dashboard"
+      "value": "仪表盘"
     }
   ],
   "pages.generic_error.go_home": [
     {
       "type": 0,
-      "value": "Go home"
+      "value": "返回首页"
     }
   ],
   "pages.generic_error.sign_out_and_reload": [
     {
       "type": 0,
-      "value": "Sign out and reload"
+      "value": "注销并重载"
     }
   ],
   "pages.generic_error.technical_details.item": [
@@ -263,7 +267,7 @@
     },
     {
       "type": 0,
-      "value": ": "
+      "value": "："
     },
     {
       "type": 1,
@@ -273,201 +277,193 @@
   "pages.generic_error.text": [
     {
       "type": 0,
-      "value": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
+      "value": "这可能是由某个 bug 或无法连接到主服务器导致的。你可以重新加载页面、返回上一页或重置所有内容并返回到主页。"
     }
   ],
   "pages.generic_error.title": [
     {
       "type": 0,
-      "value": "An unexpected error occurred"
+      "value": "发生意外错误"
     }
   ],
   "pages.landing.description": [
     {
       "type": 0,
-      "value": "Manage the deployment of the element app for your organization or community."
+      "value": "管理你的组织或社区内 Element 应用程序的部署。"
     }
   ],
   "pages.login.errors.no_auth_metadata": [
     {
       "type": 0,
-      "value": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
+      "value": "载入服务器认证元数据失败。Synapse 可能无法访问或未被配置对接 Matrix Authentication Service。"
     }
   ],
   "pages.login.errors.no_client_metadata": [
     {
       "type": 0,
-      "value": "Failed to register the client. Matrix Authentication Service may be unreachable or misconfigured."
+      "value": "无法注册客户端。Matrix Authentication Service 可能无法访问或配置错误。"
     }
   ],
   "pages.login.errors.no_well_known": [
     {
       "type": 0,
-      "value": "Failed to load the server's well-known document. The server name may be invalid."
+      "value": "加载服务器 well-known 文档失败，服务器名称可能无效。"
     }
   ],
   "pages.login.get_started": [
     {
       "type": 0,
-      "value": "Get started"
+      "value": "开始"
     }
   ],
   "pages.login.server_name": [
     {
       "type": 0,
-      "value": "Server name"
+      "value": "服务器名称"
     }
   ],
   "pages.login.title": [
     {
       "type": 0,
-      "value": "Login"
+      "value": "登录"
     }
   ],
   "pages.registration_tokens.auto_generate_placeholder": [
     {
       "type": 0,
-      "value": "Auto-generate if left empty"
+      "value": "留空则自动生成"
     }
   ],
   "pages.registration_tokens.create_token.error": [
     {
       "type": 0,
-      "value": "Failed to create token"
+      "value": "Token 创建失败"
     }
   ],
   "pages.registration_tokens.create_token.submit": [
     {
       "type": 0,
-      "value": "Create Token"
+      "value": "创建 Token"
     }
   ],
   "pages.registration_tokens.create_token.success": [
     {
       "type": 0,
-      "value": "Token created successfully"
+      "value": "Token 创建成功"
     }
   ],
   "pages.registration_tokens.create_token.title": [
     {
       "type": 0,
-      "value": "Create Registration Token"
+      "value": "创建注册 Token"
     }
   ],
   "pages.registration_tokens.created_at_column": [
     {
       "type": 0,
-      "value": "Created at"
+      "value": "创建于"
     }
   ],
   "pages.registration_tokens.created_at_label": [
     {
       "type": 0,
-      "value": "Created at"
+      "value": "创建于"
     }
   ],
   "pages.registration_tokens.custom_token_help": [
     {
       "type": 0,
-      "value": "Optional custom token string. If left empty, a secure token will be auto-generated."
+      "value": "自定义 Token 字符串为可选。若留空则自动生成。"
     }
   ],
   "pages.registration_tokens.custom_token_label": [
     {
       "type": 0,
-      "value": "Custom Token"
+      "value": "自定义 Token"
     }
   ],
   "pages.registration_tokens.edit_properties": [
     {
       "type": 0,
-      "value": "Edit properties"
+      "value": "编辑属性"
     }
   ],
   "pages.registration_tokens.edit_token_title": [
     {
       "type": 0,
-      "value": "Edit registration token"
+      "value": "编辑注册 Token"
     }
   ],
   "pages.registration_tokens.expires_at_field": [
     {
       "type": 0,
-      "value": "Expires at"
+      "value": "有效期到"
     }
   ],
   "pages.registration_tokens.expires_at_help": [
     {
       "type": 0,
-      "value": "When the token expires. Leave empty if the token should never expire."
+      "value": "当 Token 何时过期。若要使 Token 永不过期请留空。"
     }
   ],
   "pages.registration_tokens.expires_at_label": [
     {
       "type": 0,
-      "value": "Expires at"
+      "value": "有效期到"
     }
   ],
   "pages.registration_tokens.filters.active_only": [
     {
       "type": 0,
-      "value": "Active"
+      "value": "激活"
     }
   ],
   "pages.registration_tokens.filters.expired_only": [
     {
       "type": 0,
-      "value": "Expired"
+      "value": "已过期"
     }
   ],
   "pages.registration_tokens.filters.revoked_only": [
     {
       "type": 0,
-      "value": "Revoked"
+      "value": "已撤消"
     }
   ],
   "pages.registration_tokens.filters.unused_only": [
     {
       "type": 0,
-      "value": "Unused"
+      "value": "未使用"
     }
   ],
   "pages.registration_tokens.filters.used_only": [
     {
       "type": 0,
-      "value": "Used"
+      "value": "已使用"
     }
   ],
   "pages.registration_tokens.loading_more": [
     {
       "type": 0,
-      "value": "Loading more tokens..."
+      "value": "载入更多 Token…"
     }
   ],
   "pages.registration_tokens.never_expires": [
     {
       "type": 0,
-      "value": "Never expires"
+      "value": "永不过期"
     }
   ],
   "pages.registration_tokens.no_expiration_placeholder": [
     {
       "type": 0,
-      "value": "No expiration"
+      "value": "无过期时间"
     }
   ],
   "pages.registration_tokens.not_found.description": [
     {
       "type": 0,
-      "value": "The requested registration token ("
-    },
-    {
-      "type": 1,
-      "value": "tokenId"
-    },
-    {
-      "type": 0,
-      "value": ") could not be found on "
+      "value": "在 "
     },
     {
       "type": 1,
@@ -475,79 +471,87 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " 上无法找到请求的 Token（"
+    },
+    {
+      "type": 1,
+      "value": "tokenId"
+    },
+    {
+      "type": 0,
+      "value": "）。"
     }
   ],
   "pages.registration_tokens.not_found.title": [
     {
       "type": 0,
-      "value": "Registration token not found"
+      "value": "未找到注册 Token"
     }
   ],
   "pages.registration_tokens.revoke_token": [
     {
       "type": 0,
-      "value": "Revoke token"
+      "value": "撤消 Token"
     }
   ],
   "pages.registration_tokens.revoked_at_label": [
     {
       "type": 0,
-      "value": "Revoked at"
+      "value": "撤消于"
     }
   ],
   "pages.registration_tokens.save_changes": [
     {
       "type": 0,
-      "value": "Save Changes"
+      "value": "保存更改"
     }
   ],
   "pages.registration_tokens.status.active": [
     {
       "type": 0,
-      "value": "Active"
+      "value": "活跃"
     }
   ],
   "pages.registration_tokens.status.column": [
     {
       "type": 0,
-      "value": "Status"
+      "value": "状态"
     }
   ],
   "pages.registration_tokens.status.expired": [
     {
       "type": 0,
-      "value": "Expired"
+      "value": "已过期"
     }
   ],
   "pages.registration_tokens.status.invalid": [
     {
       "type": 0,
-      "value": "Invalid"
+      "value": "无效"
     }
   ],
   "pages.registration_tokens.status.label": [
     {
       "type": 0,
-      "value": "Status"
+      "value": "状态"
     }
   ],
   "pages.registration_tokens.status.revoked": [
     {
       "type": 0,
-      "value": "Revoked"
+      "value": "已撤消"
     }
   ],
   "pages.registration_tokens.status.used_up": [
     {
       "type": 0,
-      "value": "Used up"
+      "value": "已用尽"
     }
   ],
   "pages.registration_tokens.title": [
     {
       "type": 0,
-      "value": "Registration tokens"
+      "value": "注册 Tokens"
     }
   ],
   "pages.registration_tokens.token_column": [
@@ -626,93 +630,85 @@
   "pages.registration_tokens.unlimited_placeholder": [
     {
       "type": 0,
-      "value": "Unlimited"
+      "value": "无限制"
     }
   ],
   "pages.registration_tokens.unlimited_uses_placeholder": [
     {
       "type": 0,
-      "value": "Leave empty for unlimited uses"
+      "value": "留空则不限制使用量"
     }
   ],
   "pages.registration_tokens.unrevoke_token": [
     {
       "type": 0,
-      "value": "Unrevoke token"
+      "value": "反转撤消 Token"
     }
   ],
   "pages.registration_tokens.usage_count_label": [
     {
       "type": 0,
-      "value": "Usage count"
+      "value": "使用次数"
     }
   ],
   "pages.registration_tokens.usage_limit_field": [
     {
       "type": 0,
-      "value": "Usage limit"
+      "value": "使用次数限制"
     }
   ],
   "pages.registration_tokens.usage_limit_help": [
     {
       "type": 0,
-      "value": "Maximum number of times this token can be used. Leave empty for unlimited uses."
+      "value": "此 Token 的最大使用次数。留空则表示不限制使用次数。"
     }
   ],
   "pages.registration_tokens.usage_limit_label": [
     {
       "type": 0,
-      "value": "Usage Limit"
+      "value": "使用次数限制"
     }
   ],
   "pages.registration_tokens.uses_column": [
     {
       "type": 0,
-      "value": "Uses"
+      "value": "使用次数"
     }
   ],
   "pages.registration_tokens.valid_until_column": [
     {
       "type": 0,
-      "value": "Valid Until"
+      "value": "有效期到"
     }
   ],
   "pages.rooms.filters.empty_rooms": [
     {
       "type": 0,
-      "value": "Empty rooms"
+      "value": "空房间"
     }
   ],
   "pages.rooms.filters.non_empty_rooms": [
     {
       "type": 0,
-      "value": "Non-empty rooms"
+      "value": "非空房间"
     }
   ],
   "pages.rooms.filters.private_rooms": [
     {
       "type": 0,
-      "value": "Private rooms"
+      "value": "私有房间"
     }
   ],
   "pages.rooms.filters.public_rooms": [
     {
       "type": 0,
-      "value": "Public rooms"
+      "value": "公共房间"
     }
   ],
   "pages.rooms.not_found.description": [
     {
       "type": 0,
-      "value": "The requested room ("
-    },
-    {
-      "type": 1,
-      "value": "roomId"
-    },
-    {
-      "type": 0,
-      "value": ") could not be found on "
+      "value": "在 "
     },
     {
       "type": 1,
@@ -720,13 +716,21 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " 上无法找到房间（"
+    },
+    {
+      "type": 1,
+      "value": "roomId"
+    },
+    {
+      "type": 0,
+      "value": "）。"
     }
   ],
   "pages.rooms.not_found.title": [
     {
       "type": 0,
-      "value": "Room not found"
+      "value": "未找到房间"
     }
   ],
   "pages.rooms.room_count": [
@@ -772,103 +776,111 @@
   "pages.rooms.title": [
     {
       "type": 0,
-      "value": "Rooms"
+      "value": "房间"
     }
   ],
   "pages.users.add_email.button": [
     {
       "type": 0,
-      "value": "Add email address"
+      "value": "添加邮件地址"
     }
   ],
   "pages.users.add_email.description": [
     {
       "type": 0,
-      "value": "Add an email address to this user"
+      "value": "为此用户添加邮件地址"
     }
   ],
   "pages.users.add_email.error": [
     {
       "type": 0,
-      "value": "Failed to add email address"
+      "value": "邮件地址添加失败"
     }
   ],
   "pages.users.add_email.error.email_invalid": [
     {
       "type": 0,
-      "value": "Invalid email address"
+      "value": "邮件地址无效"
     }
   ],
   "pages.users.add_email.error.email_missing": [
     {
       "type": 0,
-      "value": "This field is required"
+      "value": "此字段为必填项"
     }
   ],
   "pages.users.add_email.success": [
     {
       "type": 0,
-      "value": "Email address added"
+      "value": "已添加邮件地址"
     }
   ],
   "pages.users.add_email.title": [
     {
       "type": 0,
-      "value": "Add email address"
+      "value": "添加邮件地址"
     }
   ],
   "pages.users.add_upstream_link.error": [
     {
       "type": 0,
-      "value": "Failed to add link upstream account"
+      "value": "上游账户关联失败"
     }
   ],
   "pages.users.add_upstream_link.success": [
     {
       "type": 0,
-      "value": "Link to upstream account added"
+      "value": "已与上游账户关联"
     }
   ],
   "pages.users.deactivate_account.alert.description": [
     {
       "type": 0,
-      "value": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
+      "value": "这会自动从用户的所有设备中注销、移除所有访问 token、删除所有第三方 ID 并永久删除其账户数据。"
     }
   ],
   "pages.users.deactivate_account.alert.title": [
     {
       "type": 0,
-      "value": "You're about to delete user data"
+      "value": "你即将删除用户数据"
     }
   ],
   "pages.users.deactivate_account.button": [
     {
       "type": 0,
-      "value": "Deactivate account"
+      "value": "停用账户"
     }
   ],
   "pages.users.deactivate_account.error": [
     {
       "type": 0,
-      "value": "Failed to deactivate account"
+      "value": "停用账户失败"
     }
   ],
   "pages.users.deactivate_account.success": [
     {
       "type": 0,
-      "value": "Account deactivated"
+      "value": "账户已停用"
     }
   ],
   "pages.users.deactivate_account.title": [
     {
       "type": 0,
-      "value": "Deactivate this user?"
+      "value": "停用此用户？"
     }
   ],
   "pages.users.delete_email.description": [
     {
       "type": 0,
-      "value": "Are you sure you want to remove this email address ("
+      "value": "你确定要为该用户（"
+    },
+    {
+      "type": 1,
+      "value": "mxid"
+    },
+    {
+      "type": 0,
+      "value": "）移除此邮件地址（"
     },
     {
       "type": 1,
@@ -876,39 +888,31 @@
     },
     {
       "type": 0,
-      "value": ") from this user ("
-    },
-    {
-      "type": 1,
-      "value": "mxid"
-    },
-    {
-      "type": 0,
-      "value": ")?"
+      "value": "）？"
     }
   ],
   "pages.users.delete_email.error": [
     {
       "type": 0,
-      "value": "Failed to delete email address"
+      "value": "删除邮件地址失败"
     }
   ],
   "pages.users.delete_email.success": [
     {
       "type": 0,
-      "value": "Email address deleted"
+      "value": "邮件地址已删除"
     }
   ],
   "pages.users.delete_email.title": [
     {
       "type": 0,
-      "value": "Remove email address?"
+      "value": "移除邮件地址？"
     }
   ],
   "pages.users.delete_upstream_link.description": [
     {
       "type": 0,
-      "value": "Are you sure you want to remove the link between this user ("
+      "value": "你确定要删除此用户（"
     },
     {
       "type": 1,
@@ -916,7 +920,7 @@
     },
     {
       "type": 0,
-      "value": ") with this upstream account ("
+      "value": "）与该上游账户（"
     },
     {
       "type": 1,
@@ -924,121 +928,121 @@
     },
     {
       "type": 0,
-      "value": ")?"
+      "value": " ）的关联？"
     }
   ],
   "pages.users.delete_upstream_link.error": [
     {
       "type": 0,
-      "value": "Failed to delete upstream link"
+      "value": "上游关联删除失败"
     }
   ],
   "pages.users.delete_upstream_link.success": [
     {
       "type": 0,
-      "value": "Upstream link deleted"
+      "value": "上游关联已删除"
     }
   ],
   "pages.users.delete_upstream_link.title": [
     {
       "type": 0,
-      "value": "Remove link with upstream account?"
+      "value": "删除与上游账户的关联？"
     }
   ],
   "pages.users.filters.active": [
     {
       "type": 0,
-      "value": "Active users"
+      "value": "激活用户"
     }
   ],
   "pages.users.filters.admins": [
     {
       "type": 0,
-      "value": "Admins"
+      "value": "管理员"
     }
   ],
   "pages.users.filters.deactivated": [
     {
       "type": 0,
-      "value": "Deactivated users"
+      "value": "已停用的用户"
     }
   ],
   "pages.users.filters.guests": [
     {
       "type": 0,
-      "value": "Guests (legacy)"
+      "value": "访客（旧版）"
     }
   ],
   "pages.users.filters.locked": [
     {
       "type": 0,
-      "value": "Locked users"
+      "value": "已锁定的用户"
     }
   ],
   "pages.users.filters.newest_first": [
     {
       "type": 0,
-      "value": "Newest first"
+      "value": "最新的优先"
     }
   ],
   "pages.users.filters.non_guests": [
     {
       "type": 0,
-      "value": "Non-guests (legacy)"
+      "value": "非访客（旧版）"
     }
   ],
   "pages.users.lock_account.alert.description": [
     {
       "type": 0,
-      "value": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."
+      "value": "此用户将自动在其登录的所有设备中锁定，并且在解锁前无法登录到任何新设备。"
     }
   ],
   "pages.users.lock_account.alert.title": [
     {
       "type": 0,
-      "value": "The user will not be able to send or receive messages"
+      "value": "用户将无法发送或接收消息"
     }
   ],
   "pages.users.lock_account.button": [
     {
       "type": 0,
-      "value": "Lock account"
+      "value": "锁定账户"
     }
   ],
   "pages.users.lock_account.error": [
     {
       "type": 0,
-      "value": "Failed to lock account"
+      "value": "锁定账户失败"
     }
   ],
   "pages.users.lock_account.success": [
     {
       "type": 0,
-      "value": "Account locked"
+      "value": "账户已锁定"
     }
   ],
   "pages.users.lock_account.title": [
     {
       "type": 0,
-      "value": "Lock this user's account?"
+      "value": "锁定此用户的账户？"
     }
   ],
   "pages.users.new_user.add_user": [
     {
       "type": 0,
-      "value": "Add user"
+      "value": "添加用户"
     }
   ],
   "pages.users.new_user.create_account": [
     {
       "type": 0,
-      "value": "Create account"
+      "value": "创建账户"
     }
   ],
   "pages.users.new_user.description": [
     {
       "type": 0,
-      "value": "To add a new user to "
+      "value": "为此用户指定用户名以新增用户到 "
     },
     {
       "type": 1,
@@ -1046,19 +1050,19 @@
     },
     {
       "type": 0,
-      "value": ", choose a user name for this user, which will be part of their user ID."
+      "value": "，该用户名将成为其用户 ID 的一部分。"
     }
   ],
   "pages.users.new_user.error_message": [
     {
       "type": 0,
-      "value": "Error creating user"
+      "value": "创建用户时出错"
     }
   ],
   "pages.users.new_user.invalid_localpart": [
     {
       "type": 0,
-      "value": "Localpart can only contain lowercase letters, numbers, dots, underscores, dashes and slashes"
+      "value": "Localpart 只能包含小写字母、数字与下划线"
     }
   ],
   "pages.users.new_user.invalid_localpart_numeric_only": [
@@ -1070,33 +1074,25 @@
   "pages.users.new_user.localpart": [
     {
       "type": 0,
-      "value": "Enter name"
+      "value": "输入名称"
     }
   ],
   "pages.users.new_user.required_error": [
     {
       "type": 0,
-      "value": "This field is required"
+      "value": "此字段为必填"
     }
   ],
   "pages.users.new_user.success_message": [
     {
       "type": 0,
-      "value": "User created"
+      "value": "用户已创建"
     }
   ],
   "pages.users.not_found.description": [
     {
       "type": 0,
-      "value": "The requested user ("
-    },
-    {
-      "type": 1,
-      "value": "userId"
-    },
-    {
-      "type": 0,
-      "value": ") could not be found on "
+      "value": "在 "
     },
     {
       "type": 1,
@@ -1104,71 +1100,83 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " 上无法找到请求的用户（"
+    },
+    {
+      "type": 1,
+      "value": "userId"
+    },
+    {
+      "type": 0,
+      "value": "）。"
     }
   ],
   "pages.users.not_found.title": [
     {
       "type": 0,
-      "value": "User not found"
+      "value": "用户未找到"
     }
   ],
   "pages.users.reactivate_account.button": [
     {
       "type": 0,
-      "value": "Reactivate"
+      "value": "重新激活"
     }
   ],
   "pages.users.reactivate_account.error": [
     {
       "type": 0,
-      "value": "Failed to reactivate account"
+      "value": "重新激活账户失败"
     }
   ],
   "pages.users.reactivate_account.success": [
     {
       "type": 0,
-      "value": "Account reactivated"
+      "value": "账户已重新激活"
     }
   ],
   "pages.users.search_placeholder": [
     {
       "type": 0,
-      "value": "Search users…"
+      "value": "搜索用户…"
     }
   ],
   "pages.users.set_admin.alert.description": [
     {
       "type": 0,
-      "value": "The user will be able to view user data and make changes to user and room permissions."
+      "value": "用户将能够查看用户数据，并修改用户和房间权限。"
     }
   ],
   "pages.users.set_admin.alert.title": [
     {
       "type": 0,
-      "value": "User will have access to sensitive data"
+      "value": "用户将有权访问敏感数据"
     }
   ],
   "pages.users.set_admin.error": [
     {
       "type": 0,
-      "value": "Failed to change admin privileges for "
+      "value": "为 "
     },
     {
       "type": 1,
       "value": "mxid"
+    },
+    {
+      "type": 0,
+      "value": " 更改管理员权限失败"
     }
   ],
   "pages.users.set_admin.label": [
     {
       "type": 0,
-      "value": "Admin"
+      "value": "管理员"
     }
   ],
   "pages.users.set_admin.make_admin_button": [
     {
       "type": 0,
-      "value": "Make admin"
+      "value": "设为管理员"
     }
   ],
   "pages.users.set_admin.successfully_demoted": [
@@ -1178,7 +1186,7 @@
     },
     {
       "type": 0,
-      "value": " no longer has admin privileges"
+      "value": " 已不再具有管理员权限"
     }
   ],
   "pages.users.set_admin.successfully_promoted": [
@@ -1188,97 +1196,97 @@
     },
     {
       "type": 0,
-      "value": " now has admin privileges"
+      "value": " 现在拥有管理员权限"
     }
   ],
   "pages.users.set_admin.title": [
     {
       "type": 0,
-      "value": "Make this user an admin?"
+      "value": "将此用户设为管理员？"
     }
   ],
   "pages.users.set_password.button": [
     {
       "type": 0,
-      "value": "Change password"
+      "value": "更改密码"
     }
   ],
   "pages.users.set_password.confirm_password_label": [
     {
       "type": 0,
-      "value": "Enter password again"
+      "value": "再次输入密码"
     }
   ],
   "pages.users.set_password.error": [
     {
       "type": 0,
-      "value": "Failed to set password"
+      "value": "密码设置失败"
     }
   ],
   "pages.users.set_password.error.password_missing": [
     {
       "type": 0,
-      "value": "This field is required"
+      "value": "此字段为必填"
     }
   ],
   "pages.users.set_password.error.passwords_mismatch": [
     {
       "type": 0,
-      "value": "Passwords do not match"
+      "value": "密码不匹配"
     }
   ],
   "pages.users.set_password.password_label": [
     {
       "type": 0,
-      "value": "Password"
+      "value": "密码"
     }
   ],
   "pages.users.set_password.password_match": [
     {
       "type": 0,
-      "value": "Passwords match!"
+      "value": "密码匹配！"
     }
   ],
   "pages.users.set_password.submit": [
     {
       "type": 0,
-      "value": "Set new password"
+      "value": "设置新密码"
     }
   ],
   "pages.users.set_password.success": [
     {
       "type": 0,
-      "value": "Password set successfully"
+      "value": "密码设置成功"
     }
   ],
   "pages.users.set_password.title": [
     {
       "type": 0,
-      "value": "Set a new password for this user"
+      "value": "为此用户设置新密码"
     }
   ],
   "pages.users.title": [
     {
       "type": 0,
-      "value": "Users"
+      "value": "用户"
     }
   ],
   "pages.users.unlock_account.button": [
     {
       "type": 0,
-      "value": "Unlock account"
+      "value": "解锁账户"
     }
   ],
   "pages.users.unlock_account.error": [
     {
       "type": 0,
-      "value": "Failed to unlock account"
+      "value": "解锁账户失败"
     }
   ],
   "pages.users.unlock_account.success": [
     {
       "type": 0,
-      "value": "Account unlocked"
+      "value": "账户已解锁"
     }
   ],
   "pages.users.user_count": [
@@ -1354,64 +1362,50 @@
   "room_info.empty_room": [
     {
       "type": 0,
-      "value": "Empty room"
+      "value": "空房间"
     }
   ],
   "room_info.empty_space": [
     {
       "type": 0,
-      "value": "Empty space"
+      "value": "空闲空间"
     }
   ],
   "room_info.room_with": [
     {
-      "type": 0,
-      "value": "Room with "
-    },
-    {
       "type": 1,
       "value": "members"
+    },
+    {
+      "type": 0,
+      "value": " 位成员的房间"
     }
   ],
   "room_info.space_with": [
     {
-      "type": 0,
-      "value": "Space with "
-    },
-    {
       "type": 1,
       "value": "members"
+    },
+    {
+      "type": 0,
+      "value": " 位成员的空间"
     }
   ],
   "room_info.unknown_user": [
     {
       "type": 0,
-      "value": "Unknown user"
+      "value": "未知用户"
     }
   ],
   "rooms_info.other_members": [
     {
       "offset": 0,
       "options": {
-        "one": {
-          "value": [
-            {
-              "type": 7
-            },
-            {
-              "type": 0,
-              "value": " other"
-            }
-          ]
-        },
         "other": {
           "value": [
             {
-              "type": 7
-            },
-            {
               "type": 0,
-              "value": " others"
+              "value": "其他"
             }
           ]
         }
@@ -1424,19 +1418,19 @@
   "ui.data.failed_to_load": [
     {
       "type": 0,
-      "value": "Failed to load"
+      "value": "载入失败"
     }
   ],
   "ui.data.loading": [
     {
       "type": 0,
-      "value": "Loading value"
+      "value": "正在载入值"
     }
   ],
   "ui.language_switcher.browser_default": [
     {
       "type": 0,
-      "value": "Use browser settings ("
+      "value": "跟随浏览器设置（"
     },
     {
       "type": 1,
@@ -1444,25 +1438,25 @@
     },
     {
       "type": 0,
-      "value": ")"
+      "value": "）"
     }
   ],
   "ui.language_switcher.button_label": [
     {
       "type": 0,
-      "value": "Language settings"
+      "value": "语言设置"
     }
   ],
   "ui.language_switcher.description": [
     {
       "type": 0,
-      "value": "Choose your preferred language for the interface."
+      "value": "为界面更改你偏好的语言。"
     }
   ],
   "ui.language_switcher.title": [
     {
       "type": 0,
-      "value": "Language settings"
+      "value": "语言设置"
     }
   ]
 }

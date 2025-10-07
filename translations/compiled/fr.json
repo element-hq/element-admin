@@ -1058,7 +1058,13 @@
   "pages.users.new_user.invalid_localpart": [
     {
       "type": 0,
-      "value": "Le nom d'utilisateur ne peux contenir uniquement des lettres minuscules, des chiffres et des traits de soulignement"
+      "value": "Le nom d'utilisateur ne peux contenir uniquement des lettres minuscules, des chiffres, des traits de soulignement, des tirets et des barres obliques"
+    }
+  ],
+  "pages.users.new_user.invalid_localpart_numeric_only": [
+    {
+      "type": 0,
+      "value": "Le nom d'utilisateur ne peut pas contenir uniquement des chiffres"
     }
   ],
   "pages.users.new_user.localpart": [

@@ -39,7 +39,7 @@
     "message": "Anfrage an {url} fehlgeschlagen mit Statuscode {status} {statusText}"
   },
   "errors.matrix_standard": {
-    "message": "Request to the homeserver failed with error code '{errorCode}'. Additionally, the server gave the following error message: {errorMessage}"
+    "message": "Die Anfrage an den Homeserver ist mit dem Fehlercode „{errorCode}” fehlgeschlagen. Zusätzlich hat der Server die folgende Fehlernachricht ausgegeben: {errorMessage}"
   },
   "errors.not_logged_in": {
     "message": "Nicht angemeldet"
@@ -201,10 +201,10 @@
     "message": "Kein Ablaufdatum"
   },
   "pages.registration_tokens.not_found.description": {
-    "message": "The requested registration token ({tokenId}) could not be found on {serverName}."
+    "message": "Das angeforderte Registrierungstoken ({tokenId}) konnte auf {serverName} nicht gefunden werden."
   },
   "pages.registration_tokens.not_found.title": {
-    "message": "Registration token not found"
+    "message": "Registrierungstoken nicht gefunden"
   },
   "pages.registration_tokens.revoke_token": {
     "message": "Token widerrufen"
@@ -291,10 +291,10 @@
     "message": "Öffentliche Chats"
   },
   "pages.rooms.not_found.description": {
-    "message": "The requested room ({roomId}) could not be found on {serverName}."
+    "message": "Der angeforderte Chat ({roomId}) konnte auf {serverName} nicht gefunden werden."
   },
   "pages.rooms.not_found.title": {
-    "message": "Room not found"
+    "message": "Chat nicht gefunden"
   },
   "pages.rooms.room_count": {
     "message": "{COUNT, plural, =0 {Keine Chats} one {# Chat} other {# Chats}}"
@@ -425,6 +425,9 @@
   "pages.users.new_user.invalid_localpart": {
     "message": "Der lokale Teil darf nur Kleinbuchstaben, Zahlen und Unterstriche enthalten"
   },
+  "pages.users.new_user.invalid_localpart_numeric_only": {
+    "message": "Localpart cannot only contain numbers"
+  },
   "pages.users.new_user.localpart": {
     "message": "Name eingeben"
   },
@@ -435,10 +438,10 @@
     "message": "Nutzer angelegt"
   },
   "pages.users.not_found.description": {
-    "message": "The requested user ({userId}) could not be found on {serverName}."
+    "message": "Der angeforderte Nutzer ({userId}) konnte auf {serverName} nicht gefunden werden."
   },
   "pages.users.not_found.title": {
-    "message": "User not found"
+    "message": "Nutzer nicht gefunden"
   },
   "pages.users.reactivate_account.button": {
     "message": "Reaktivieren"
