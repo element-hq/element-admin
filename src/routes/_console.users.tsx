@@ -214,6 +214,12 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
       );
     },
     onSuccess: async (response) => {
+      // Set the user query data so that we avoid one round trip
+      queryClient.setQueryData(
+        ["mas", "user", serverName, response.data.id],
+        response,
+      );
+
       toast.success(
         intl.formatMessage({
           id: "pages.users.new_user.success_message",
@@ -223,6 +229,11 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
         }),
       );
 
+      // Invalidate the user list queries
+      queryClient.invalidateQueries({
+        queryKey: ["mas", "users", serverName],
+      });
+
       await navigate({
         to: "./$userId",
         params: { userId: response.data.id },
@@ -230,6 +241,7 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
         search: (previous) => previous,
       });
       setOpen(false);
+      setLocalpart("");
     },
   });
 
@@ -248,6 +260,7 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
       }
 
       setOpen(open);
+      setLocalpart("");
     },
     [isPending],
   );

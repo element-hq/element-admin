@@ -233,6 +233,12 @@ const TokenAddButton: React.FC<TokenAddButtonProps> = ({
       );
     },
     onSuccess: async (response) => {
+      // Set the registration token query data so that we avoid one round trip
+      queryClient.setQueryData(
+        ["mas", "registration-token", serverName, response.data.id],
+        response,
+      );
+
       toast.success(
         intl.formatMessage({
           id: "pages.registration_tokens.create_token.success",
@@ -240,6 +246,10 @@ const TokenAddButton: React.FC<TokenAddButtonProps> = ({
           description: "The success message for creating a registration token",
         }),
       );
+
+      queryClient.invalidateQueries({
+        queryKey: ["mas", "registration-tokens", serverName],
+      });
 
       await navigate({
         to: "/registration-tokens/$tokenId",
