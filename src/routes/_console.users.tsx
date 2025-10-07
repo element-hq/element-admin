@@ -312,7 +312,7 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
           <Form.TextControl
             onInput={onLocalpartInput}
             required
-            pattern="[a-z0-9_]+"
+            pattern="[a-z0-9.=_/-]+"
             autoCapitalize="off"
             autoComplete="off"
           />
@@ -322,8 +322,8 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
           <Form.ErrorMessage match="patternMismatch">
             <FormattedMessage
               id="pages.users.new_user.invalid_localpart"
-              defaultMessage="Localpart can only contain lowercase letters, numbers and underscores"
-              description="The error message shown when the localpart input is empty"
+              defaultMessage="Localpart can only contain lowercase letters, numbers, dots, underscores, dashes and slashes"
+              description="The error message shown when the localpart contains invalid characters"
             />
           </Form.ErrorMessage>
           <Form.ErrorMessage match="valueMissing">
@@ -331,6 +331,13 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
               id="pages.users.new_user.required_error"
               defaultMessage="This field is required"
               description="The error message shown when the localpart input is empty"
+            />
+          </Form.ErrorMessage>
+          <Form.ErrorMessage match={(value) => /^[0-9]+$/.test(value)}>
+            <FormattedMessage
+              id="pages.users.new_user.invalid_localpart_numeric_only"
+              defaultMessage="Localpart cannot only contain numbers"
+              description="The error message shown when the localpart input only has numbers, which are reserved for guests"
             />
           </Form.ErrorMessage>
 
