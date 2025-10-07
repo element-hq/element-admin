@@ -47,7 +47,8 @@ jobs:
     permissions:
       contents: read
 
-    container: mcr.microsoft.com/playwright:v1.55.1-noble
+    # Keep in sync with the @playwright/test version in package.json
+    container: mcr.microsoft.com/playwright:v1.56.0-noble
 
     steps:
       - name: Checkout the code
