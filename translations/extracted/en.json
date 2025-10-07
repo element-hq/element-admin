@@ -564,8 +564,12 @@
     "message": "Error creating user"
   },
   "pages.users.new_user.invalid_localpart": {
-    "description": "The error message shown when the localpart input is empty",
-    "message": "Localpart can only contain lowercase letters, numbers and underscores"
+    "description": "The error message shown when the localpart contains invalid characters",
+    "message": "Localpart can only contain lowercase letters, numbers, dots, underscores, dashes and slashes"
+  },
+  "pages.users.new_user.invalid_localpart_numeric_only": {
+    "description": "The error message shown when the localpart input only has numbers, which are reserved for guests",
+    "message": "Localpart cannot only contain numbers"
   },
   "pages.users.new_user.localpart": {
     "description": "The label for the localpart input in the new user form. Careful with the value, some browsers (*cough* Safari) will trigger autocomplete (which we don't want!) if the input label has 'username' or 'user ID' in it",
