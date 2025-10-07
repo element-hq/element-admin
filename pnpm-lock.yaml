@@ -202,14 +202,14 @@ importers:
         specifier: 3.6.2
         version: 3.6.2
       stylelint:
-        specifier: 16.24.0
-        version: 16.24.0(typescript@5.9.3)
+        specifier: 16.25.0
+        version: 16.25.0(typescript@5.9.3)
       stylelint-config-standard:
-        specifier: 39.0.0
-        version: 39.0.0(stylelint@16.24.0(typescript@5.9.3))
+        specifier: 39.0.1
+        version: 39.0.1(stylelint@16.25.0(typescript@5.9.3))
       stylelint-config-tailwindcss:
         specifier: 1.0.0
-        version: 1.0.0(stylelint@16.24.0(typescript@5.9.3))(tailwindcss@4.1.14)
+        version: 1.0.0(stylelint@16.25.0(typescript@5.9.3))(tailwindcss@4.1.14)
       tailwindcss:
         specifier: 4.1.14
         version: 4.1.14
@@ -391,8 +391,8 @@ packages:
   '@cacheable/memory@2.0.3':
     resolution: {integrity: sha512-R3UKy/CKOyb1LZG/VRCTMcpiMDyLH7SH3JrraRdK6kf3GweWCOU3sgvE13W3TiDRbxnDKylzKJvhUAvWl9LQOA==}
 
-  '@cacheable/utils@2.0.3':
-    resolution: {integrity: sha512-m7Rce68cMHlAUjvWBy9Ru1Nmw5gU0SjGGtQDdhpe6E0xnbcvrIY0Epy//JU1VYYBUTzrG9jvgmTauULGKzOkWA==}
+  '@cacheable/utils@2.1.0':
+    resolution: {integrity: sha512-ZdxfOiaarMqMj+H7qwlt5EBKWaeGihSYVHdQv5lUsbn8MJJOTW82OIwirQ39U5tMZkNvy3bQE+ryzC+xTAb9/g==}
 
   '@csstools/css-parser-algorithms@3.0.5':
     resolution: {integrity: sha512-DaDeUkXZKjdGhgYaHNJTV9pV7Y9B3b644jCLs9Upc3VeNGg6LWARAT6O+Q+/COo+2gg/bM5rhpMAtf70WqfBdQ==}
@@ -2115,8 +2115,8 @@ packages:
       magicast:
         optional: true
 
-  cacheable@2.0.3:
-    resolution: {integrity: sha512-nZF80J3d8RMrroMSYm1E9pBllVDXWPuECZgEZxH+vusCY4MAXAJVrY0jutcHSgh3xYX3G2EUNnmtWGZVVjWCXw==}
+  cacheable@2.1.0:
+    resolution: {integrity: sha512-zzL1BxdnqwD69JRT0dihnawAcLkBMwAH+hZSKjUzeBbPedVhk3qYPjRw9VOMYWwt5xRih5xd8S+3kEdGohZm/g==}
 
   call-bind-apply-helpers@1.0.2:
     resolution: {integrity: sha512-Sp1ablJ0ivDkSzjcaJdxEunN5/XvksFJ2sMBFfq6x0ryhQV/2b/KwFe21cMpmHtPOSij8K99/wSfoEuTObmuMQ==}
@@ -3455,6 +3455,10 @@ packages:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
 
+  qified@0.5.0:
+    resolution: {integrity: sha512-Zj6Q/Vc/SQ+Fzc87N90jJUzBzxD7MVQ2ZvGyMmYtnl2u1a07CejAhvtk4ZwASos+SiHKCAIylyGHJKIek75QBw==}
+    engines: {node: '>=20'}
+
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
@@ -3780,8 +3784,8 @@ packages:
     peerDependencies:
       stylelint: ^16.23.0
 
-  stylelint-config-standard@39.0.0:
-    resolution: {integrity: sha512-JabShWORb8Bmc1A47ZyJstran60P3yUdI1zWMpGYPeFiC6xzHXJMkpKAd8EjIhq3HPUplIWWMDJ/xu0AiPd+kA==}
+  stylelint-config-standard@39.0.1:
+    resolution: {integrity: sha512-b7Fja59EYHRNOTa3aXiuWnhUWXFU2Nfg6h61bLfAb5GS5fX3LMUD0U5t4S8N/4tpHQg3Acs2UVPR9jy2l1g/3A==}
     engines: {node: '>=18.12.0'}
     peerDependencies:
       stylelint: ^16.23.0
@@ -3792,8 +3796,8 @@ packages:
       stylelint: '>=13.13.1'
       tailwindcss: '>=2.2.16'
 
-  stylelint@16.24.0:
-    resolution: {integrity: sha512-7ksgz3zJaSbTUGr/ujMXvLVKdDhLbGl3R/3arNudH7z88+XZZGNLMTepsY28WlnvEFcuOmUe7fg40Q3lfhOfSQ==}
+  stylelint@16.25.0:
+    resolution: {integrity: sha512-Li0avYWV4nfv1zPbdnxLYBGq4z8DVZxbRgx4Kn6V+Uftz1rMoF1qiEI3oL4kgWqyYgCgs7gT5maHNZ82Gk03vQ==}
     engines: {node: '>=18.12.0'}
     hasBin: true
 
@@ -4372,17 +4376,19 @@ snapshots:
 
   '@cacheable/memoize@2.0.3':
     dependencies:
-      '@cacheable/utils': 2.0.3
+      '@cacheable/utils': 2.1.0
 
   '@cacheable/memory@2.0.3':
     dependencies:
       '@cacheable/memoize': 2.0.3
-      '@cacheable/utils': 2.0.3
+      '@cacheable/utils': 2.1.0
       '@keyv/bigmap': 1.0.2
       hookified: 1.12.1
       keyv: 5.5.3
 
-  '@cacheable/utils@2.0.3': {}
+  '@cacheable/utils@2.1.0':
+    dependencies:
+      keyv: 5.5.3
 
   '@csstools/css-parser-algorithms@3.0.5(@csstools/css-tokenizer@3.0.4)':
     dependencies:
@@ -6042,13 +6048,14 @@ snapshots:
       pkg-types: 1.3.1
       rc9: 2.1.2
 
-  cacheable@2.0.3:
+  cacheable@2.1.0:
     dependencies:
       '@cacheable/memoize': 2.0.3
       '@cacheable/memory': 2.0.3
-      '@cacheable/utils': 2.0.3
+      '@cacheable/utils': 2.1.0
       hookified: 1.12.1
       keyv: 5.5.3
+      qified: 0.5.0
 
   call-bind-apply-helpers@1.0.2:
     dependencies:
@@ -6697,7 +6704,7 @@ snapshots:
 
   flat-cache@6.1.17:
     dependencies:
-      cacheable: 2.0.3
+      cacheable: 2.1.0
       flatted: 3.3.3
       hookified: 1.12.1
 
@@ -7508,6 +7515,10 @@ snapshots:
 
   punycode@2.3.1: {}
 
+  qified@0.5.0:
+    dependencies:
+      hookified: 1.12.1
+
   queue-microtask@1.2.3: {}
 
   rc9@2.1.2:
@@ -7884,21 +7895,21 @@ snapshots:
 
   strip-json-comments@5.0.2: {}
 
-  stylelint-config-recommended@17.0.0(stylelint@16.24.0(typescript@5.9.3)):
+  stylelint-config-recommended@17.0.0(stylelint@16.25.0(typescript@5.9.3)):
     dependencies:
-      stylelint: 16.24.0(typescript@5.9.3)
+      stylelint: 16.25.0(typescript@5.9.3)
 
-  stylelint-config-standard@39.0.0(stylelint@16.24.0(typescript@5.9.3)):
+  stylelint-config-standard@39.0.1(stylelint@16.25.0(typescript@5.9.3)):
     dependencies:
-      stylelint: 16.24.0(typescript@5.9.3)
-      stylelint-config-recommended: 17.0.0(stylelint@16.24.0(typescript@5.9.3))
+      stylelint: 16.25.0(typescript@5.9.3)
+      stylelint-config-recommended: 17.0.0(stylelint@16.25.0(typescript@5.9.3))
 
-  stylelint-config-tailwindcss@1.0.0(stylelint@16.24.0(typescript@5.9.3))(tailwindcss@4.1.14):
+  stylelint-config-tailwindcss@1.0.0(stylelint@16.25.0(typescript@5.9.3))(tailwindcss@4.1.14):
     dependencies:
-      stylelint: 16.24.0(typescript@5.9.3)
+      stylelint: 16.25.0(typescript@5.9.3)
       tailwindcss: 4.1.14
 
-  stylelint@16.24.0(typescript@5.9.3):
+  stylelint@16.25.0(typescript@5.9.3):
     dependencies:
       '@csstools/css-parser-algorithms': 3.0.5(@csstools/css-tokenizer@3.0.4)
       '@csstools/css-tokenizer': 3.0.4
