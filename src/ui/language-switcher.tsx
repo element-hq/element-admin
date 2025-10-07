@@ -4,8 +4,8 @@
 
 import { PublicIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Button, Tooltip } from "@vector-im/compound-web";
-import { forwardRef, useState, useTransition } from "react";
-import { FormattedDisplayName, FormattedMessage, useIntl } from "react-intl";
+import { forwardRef, useMemo, useState, useTransition } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 
 import * as Dialog from "@/components/dialog";
 import { AVAILABLE_LOCALES, useBestLocale } from "@/intl";
@@ -42,10 +42,26 @@ const LanguageSwitcherButton = forwardRef<
   );
 });
 
+interface LanguageNameProps {
+  locale: string;
+}
+const LanguageName: React.FC<LanguageNameProps> = ({
+  locale,
+}: LanguageNameProps) => {
+  const displayNameFormatter = useMemo(
+    () =>
+      new Intl.DisplayNames([locale], {
+        type: "language",
+      }),
+    [locale],
+  );
+
+  return displayNameFormatter.of(locale);
+};
+
 export const LanguageSwitcher: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [pending, startTransition] = useTransition();
-  const intl = useIntl();
   const { selectedLocale, setLocale, clearLocale } = useLocaleStore();
   const bestLocale = useBestLocale();
 
@@ -95,9 +111,7 @@ export const LanguageSwitcher: React.FC = () => {
             defaultMessage="Use browser settings ({language})"
             description="Option to use browser's default language in the language switcher"
             values={{
-              language: intl.formatDisplayName(bestLocale, {
-                type: "language",
-              }),
+              language: <LanguageName locale={bestLocale} />,
             }}
           />
         </button>
@@ -110,7 +124,7 @@ export const LanguageSwitcher: React.FC = () => {
             data-selected={selectedLocale === locale}
             onClick={() => handleLanguageSelect(locale)}
           >
-            <FormattedDisplayName type="language" value={locale} />
+            <LanguageName locale={locale} />
           </button>
         ))}
       </div>
