@@ -141,6 +141,7 @@ export default defineConfig(
       "unicorn/filename-case": "off",
       "unicorn/no-abusive-eslint-disable": "off",
       "unicorn/no-array-for-each": "off",
+      "unicorn/no-array-sort": "off",
       "unicorn/no-useless-switch-case": "off",
       "unicorn/numeric-separators-style": "off",
       "unicorn/prefer-string-slice": "off",
