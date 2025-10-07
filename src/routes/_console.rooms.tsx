@@ -8,7 +8,12 @@ import {
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Link,
+  Outlet,
+  useNavigate,
+} from "@tanstack/react-router";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Badge, CheckboxMenuItem, Text } from "@vector-im/compound-web";
@@ -31,6 +36,7 @@ import * as Table from "@/components/table";
 import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
 import { useFilters } from "@/utils/filters";
+import { useCurrentChildRoutePath } from "@/utils/routes";
 
 const RoomSearchParameters = v.object({
   search_term: v.optional(v.string()),
@@ -144,7 +150,8 @@ function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const search = Route.useSearch();
   const { parameters } = Route.useLoaderDeps();
-  const navigate = Route.useNavigate();
+  const from = useCurrentChildRoutePath(Route.id);
+  const navigate = useNavigate({ from });
   const intl = useIntl();
 
   const debouncedSearch = useDebouncedCallback(
@@ -321,7 +328,10 @@ function RouteComponent() {
                     key={filter.key}
                     onSelect={(event) => {
                       event.preventDefault();
-                      navigate({ search: filter.toggledState });
+                      navigate({
+                        replace: true,
+                        search: filter.toggledState,
+                      });
                     }}
                     label={intl.formatMessage(filter.message)}
                     checked={filter.enabled}
@@ -335,7 +345,7 @@ function RouteComponent() {
                     <Table.ActiveFilter key={filter.key}>
                       <FormattedMessage {...filter.message} />
                       <Table.RemoveFilterLink
-                        from={Route.fullPath}
+                        from={from}
                         replace={true}
                         search={filter.toggledState}
                       />
@@ -343,7 +353,7 @@ function RouteComponent() {
                   ))}
 
                   <TextLink
-                    from={Route.fullPath}
+                    from={from}
                     replace={true}
                     search={filters.clearedState}
                     size="small"
