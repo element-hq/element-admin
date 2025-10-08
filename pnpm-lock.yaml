@@ -115,8 +115,8 @@ importers:
         specifier: 1.56.0
         version: 1.56.0
       '@tanstack/devtools-vite':
-        specifier: 0.3.4
-        version: 0.3.4(vite@7.1.9(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6)(yaml@2.8.1))
+        specifier: 0.3.5
+        version: 0.3.5(vite@7.1.9(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6)(yaml@2.8.1))
       '@tanstack/eslint-plugin-query':
         specifier: 5.91.0
         version: 5.91.0(eslint@9.37.0(jiti@2.6.1))(typescript@5.9.3)
@@ -1519,8 +1519,8 @@ packages:
       solid-js:
         optional: true
 
-  '@tanstack/devtools-vite@0.3.4':
-    resolution: {integrity: sha512-rBovWj1cYN/+M0AH2rqUmB5WuOTqGuJ2PakOEweSX1zexHxa3NpPVNbBjvUeKIJxw5klBOZ8EKd2g4iw319Q/w==}
+  '@tanstack/devtools-vite@0.3.5':
+    resolution: {integrity: sha512-phL/deHPvJgxUiYlKe60kaGjcxvA7guiZ/63f1+7uqHgh/RnWAUJRwXP78CUKemqFgrNNspoPCgVUvhjmEEQcA==}
     engines: {node: '>=18'}
     peerDependencies:
       vite: ^6.0.0 || ^7.0.0
@@ -5279,7 +5279,7 @@ snapshots:
     transitivePeerDependencies:
       - csstype
 
-  '@tanstack/devtools-vite@0.3.4(vite@7.1.9(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6)(yaml@2.8.1))':
+  '@tanstack/devtools-vite@0.3.5(vite@7.1.9(@types/node@24.7.0)(jiti@2.6.1)(lightningcss@1.30.1)(tsx@4.20.6)(yaml@2.8.1))':
     dependencies:
       '@babel/core': 7.28.4
       '@babel/generator': 7.28.3
