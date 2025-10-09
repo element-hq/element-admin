@@ -61,12 +61,13 @@ function RenderError({ error }: { error: unknown }) {
   }
 
   if (typeof error === "object") {
+    let stringified;
     try {
-      const stringified = JSON.stringify(error);
-      return <Text>{stringified}</Text>;
+      stringified = JSON.stringify(error);
     } catch (error) {
       console.error("Failed to stringify error", error);
     }
+    return <Text>{stringified}</Text>;
   }
 
   return <Text>{String(error)}</Text>;

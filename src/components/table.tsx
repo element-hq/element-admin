@@ -223,6 +223,7 @@ export const VirtualizedList = forwardRef<HTMLDivElement, VirtualizedListProps>(
       // this component will re-render anyway when the window resizes, so we
       // don't have to look for that ourselves.
       scrollMargin:
+        // eslint-disable-next-line react-hooks/refs
         (listRef.current?.getBoundingClientRect().top ?? 0) +
         globalThis.window.scrollY,
     });
@@ -231,6 +232,7 @@ export const VirtualizedList = forwardRef<HTMLDivElement, VirtualizedListProps>(
     // See https://github.com/TanStack/virtual/issues/743
     const rowVirtualizerRef = useRef(rowVirtualizer);
 
+    // eslint-disable-next-line react-hooks/refs
     const virtualItems = rowVirtualizerRef.current.getVirtualItems();
 
     useEffect(() => {
@@ -247,6 +249,7 @@ export const VirtualizedList = forwardRef<HTMLDivElement, VirtualizedListProps>(
       <div
         className={cx(styles["list"], className)}
         style={{
+          // eslint-disable-next-line react-hooks/refs
           height: `${rowVirtualizerRef.current.getTotalSize() + (headerRef.current?.clientHeight ?? 40)}px`,
           ...style,
         }}
@@ -256,6 +259,7 @@ export const VirtualizedList = forwardRef<HTMLDivElement, VirtualizedListProps>(
         <table cellSpacing="0" cellPadding="0" className={styles["table"]}>
           <ListHeader table={table} ref={headerRef} />
           <tbody className={styles["tbody"]} ref={listRef}>
+            {/* eslint-disable-next-line react-hooks/refs */}
             {virtualItems.map((virtualRow, index) => {
               const row = rows[virtualRow.index];
               if (!row)
