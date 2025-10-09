@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: Copyright 2025 New Vector Ltd.
+#
+# SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+
+changelog:
+  categories:
+    - title: Bug Fixes
+      labels:
+        - T-Defect
+
+    - title: Enhancements
+      labels:
+        - T-Enhancement
+
+    - title: Translations
+      labels:
+        - A-I18n
+
+    - title: Internal Changes
+      labels:
+        - T-Task
+
+    - title: Other Changes
+      labels:
+        - "*"
+      exclude:
+        labels:
+          - A-Dependencies
+
+    - title: Dependency Updates
+      labels:
+        - A-Dependencies
