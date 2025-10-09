@@ -10,6 +10,7 @@ import { persist } from "zustand/middleware";
 import { authMetadataQuery, tokenRequest } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
 import { NotLoggedInError } from "@/errors";
+import { reset } from "@/query";
 import { router } from "@/router";
 import { addTimeout } from "@/utils/signal";
 
@@ -264,6 +265,9 @@ export const useAuthStore = create<AuthStore>()(
 
         async clear() {
           await set({ authorizationSession: null, credentials: null });
+
+          // Reset the query client
+          await reset();
         },
       }),
       { name: "auth" },
