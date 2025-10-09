@@ -569,6 +569,7 @@ function RouteComponent() {
     [credentials.serverName, synapseRoot],
   );
 
+  // eslint-disable-next-line react-hooks/incompatible-library -- We pass things as a ref to avoid this problem
   const table = useReactTable({
     data: flatData,
     columns,
