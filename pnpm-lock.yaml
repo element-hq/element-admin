@@ -109,8 +109,8 @@ importers:
         specifier: 9.37.0
         version: 9.37.0
       '@formatjs/cli':
-        specifier: 6.7.3
-        version: 6.7.3
+        specifier: 6.7.4
+        version: 6.7.4
       '@hey-api/openapi-ts':
         specifier: 0.85.1
         version: 0.85.1(typescript@5.9.3)
@@ -657,8 +657,8 @@ packages:
   '@fontsource/inter@5.2.8':
     resolution: {integrity: sha512-P6r5WnJoKiNVV+zvW2xM13gNdFhAEpQ9dQJHt3naLvfg+LkF2ldgSLiF4T41lf1SQCM9QmkqPTn4TH568IRagg==}
 
-  '@formatjs/cli@6.7.3':
-    resolution: {integrity: sha512-9I6hZXHnD+xJcphSNA2v2zdhwMQiKU1hUXom4pYR83WyO+eyri0rt89U+OuyLvdet3ign0ahwA91fhfdBy2AUw==}
+  '@formatjs/cli@6.7.4':
+    resolution: {integrity: sha512-k6uqdeZDAjDd7iKKQ8yFYizFpbi5Y9H9NkV+hoIhmxaMSGvWRnRusQJaIQ+2rI14MH6knW6fx7tnO15C+ijDiw==}
     engines: {node: '>= 16'}
     hasBin: true
     peerDependencies:
@@ -4564,7 +4564,7 @@ snapshots:
 
   '@fontsource/inter@5.2.8': {}
 
-  '@formatjs/cli@6.7.3': {}
+  '@formatjs/cli@6.7.4': {}
 
   '@formatjs/ecma402-abstract@2.3.5':
     dependencies:
