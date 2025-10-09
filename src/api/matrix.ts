@@ -128,7 +128,7 @@ export const mediaThumbnailQuery = (
       const [serverName, mediaId] = parseMxcUrl(mxc);
 
       const mediaUrl = new URL(
-        `/_matrix/media/v3/thumbnail/${encodeURIComponent(serverName)}/${encodeURIComponent(mediaId)}?width=96&height=96&method=crop`,
+        `/_matrix/client/v1/media/thumbnail/${encodeURIComponent(serverName)}/${encodeURIComponent(mediaId)}?width=96&height=96&method=crop`,
         synapseRoot,
       );
       const response = await fetch(mediaUrl, await baseOptions(client, signal));
