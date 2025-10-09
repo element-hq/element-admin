@@ -6,7 +6,6 @@ import { defineConfig } from "eslint/config";
 import js from "@eslint/js";
 import * as tseslint from "typescript-eslint";
 import reactPlugin from "eslint-plugin-react";
-// eslint-disable-next-line import-x/default -- The exported types are wrong
 import reactHooksPlugin from "eslint-plugin-react-hooks";
 import reactRefreshPlugin from "eslint-plugin-react-refresh";
 import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
@@ -26,7 +25,7 @@ export default defineConfig(
   tseslint.configs.stylistic,
   reactPlugin.configs.flat.recommended,
   reactPlugin.configs.flat["jsx-runtime"],
-  reactHooksPlugin.configs["flat/recommended"],
+  reactHooksPlugin.configs.flat["recommended-latest"],
   reactRefreshPlugin.configs.vite,
   jsxA11yPlugin.flatConfigs.strict,
   importXPlugin.flatConfigs.recommended,
