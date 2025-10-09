@@ -30,8 +30,8 @@ importers:
         specifier: 5.90.2
         version: 5.90.2
       '@tanstack/react-devtools':
-        specifier: 0.7.2
-        version: 0.7.2(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(csstype@3.1.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(solid-js@1.9.9)
+        specifier: 0.7.4
+        version: 0.7.4(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(csstype@3.1.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(solid-js@1.9.9)
       '@tanstack/react-pacer':
         specifier: 0.16.4
         version: 0.16.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -1504,8 +1504,8 @@ packages:
     peerDependencies:
       solid-js: '>=1.9.7'
 
-  '@tanstack/devtools-ui@0.4.0':
-    resolution: {integrity: sha512-kiCfKnfuPWz1VWOKIr3kkWXMMvwu6GOR/SSu2AjTOu/CxkDSl57DVvOHJDNE6PDd5gN7JPn/46R9Rg8jcrR6nA==}
+  '@tanstack/devtools-ui@0.4.1':
+    resolution: {integrity: sha512-1xhhTu4mjXjU7hv3DA9J1Ux9R3lH6tTF+NkEq8HPZRW4AJfpbb+hIvuqGOlLYZQb+nIgWZvtvjIe/tUDjiyKaA==}
     engines: {node: '>=18'}
     peerDependencies:
       solid-js: '>=1.9.7'
@@ -1531,8 +1531,8 @@ packages:
     peerDependencies:
       vite: ^6.0.0 || ^7.0.0
 
-  '@tanstack/devtools@0.6.16':
-    resolution: {integrity: sha512-KUP4RAiikKMoL+M3ltIrN4p0trAI4tbYHsLh7BHS2iCb79jGP2vWqKjpT1NazaRakF2sMoEloXePKjSNwYcbVQ==}
+  '@tanstack/devtools@0.6.18':
+    resolution: {integrity: sha512-LQ3KRy33NHUyG4QuQaFbdn7dbh8BE9p7gSi8cDV8quPcPQkLcdxx7AQERiRiqnqUvALwV9CqcXYx+GYWRQnUTA==}
     engines: {node: '>=18'}
     peerDependencies:
       solid-js: '>=1.9.7'
@@ -1570,8 +1570,8 @@ packages:
   '@tanstack/query-persist-client-core@5.90.2':
     resolution: {integrity: sha512-rgJRgqqziPc3KgK2mav2HNR4PoI5e7fkiIrkg85xZ5j29mHPzTp3A0QcceQXVaV9qcPp/SMDJA48A6BpGJGHZg==}
 
-  '@tanstack/react-devtools@0.7.2':
-    resolution: {integrity: sha512-GrTmi71lgbWa/sjyDG6CusG6h7gxk5ODvblXUHkvS3um0T0rnfpH/QlKyJQdh7qbNYQl6hwdVHDDLV5GE5FNbw==}
+  '@tanstack/react-devtools@0.7.4':
+    resolution: {integrity: sha512-bRuvMR5elO51Z7Jy+3wRUyPD0+a5u4pUD3x+YU9Vyh9AE5xG83D6YJvSqfscua5kV1hs462V16kABtM3WWlEhQ==}
     engines: {node: '>=18'}
     peerDependencies:
       '@types/react': '>=16.8'
@@ -5273,7 +5273,7 @@ snapshots:
     transitivePeerDependencies:
       - csstype
 
-  '@tanstack/devtools-ui@0.4.0(csstype@3.1.3)(solid-js@1.9.9)':
+  '@tanstack/devtools-ui@0.4.1(csstype@3.1.3)(solid-js@1.9.9)':
     dependencies:
       clsx: 2.1.1
       goober: 2.1.18(csstype@3.1.3)
@@ -5307,11 +5307,11 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@tanstack/devtools@0.6.16(csstype@3.1.3)(solid-js@1.9.9)':
+  '@tanstack/devtools@0.6.18(csstype@3.1.3)(solid-js@1.9.9)':
     dependencies:
       '@solid-primitives/keyboard': 1.3.3(solid-js@1.9.9)
       '@tanstack/devtools-event-bus': 0.3.2
-      '@tanstack/devtools-ui': 0.4.0(csstype@3.1.3)(solid-js@1.9.9)
+      '@tanstack/devtools-ui': 0.4.1(csstype@3.1.3)(solid-js@1.9.9)
       clsx: 2.1.1
       goober: 2.1.18(csstype@3.1.3)
       solid-js: 1.9.9
@@ -5366,9 +5366,9 @@ snapshots:
     dependencies:
       '@tanstack/query-core': 5.90.2
 
-  '@tanstack/react-devtools@0.7.2(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(csstype@3.1.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(solid-js@1.9.9)':
+  '@tanstack/react-devtools@0.7.4(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(csstype@3.1.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(solid-js@1.9.9)':
     dependencies:
-      '@tanstack/devtools': 0.6.16(csstype@3.1.3)(solid-js@1.9.9)
+      '@tanstack/devtools': 0.6.18(csstype@3.1.3)(solid-js@1.9.9)
       '@types/react': 19.2.2
       '@types/react-dom': 19.2.1(@types/react@19.2.2)
       react: 19.2.0
