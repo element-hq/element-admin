@@ -158,11 +158,15 @@ function RouteComponent() {
             />
             <Separator />
             <TokenView token={credentials.accessToken} />
-            <Separator />
-            <SignOutMenuItem
-              synapseRoot={synapseRoot}
-              credentials={credentials}
-            />
+            {!credentials.static && (
+              <>
+                <Separator />
+                <SignOutMenuItem
+                  synapseRoot={synapseRoot}
+                  credentials={credentials}
+                />
+              </>
+            )}
           </Header.UserMenu>
         </Header.Right>
       </Header.Root>
