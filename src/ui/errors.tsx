@@ -89,6 +89,10 @@ function GenericError({ error, reset }: ErrorComponentProps) {
         return;
       }
 
+      if (credentials.static) {
+        throw new Error("Cannot sign out of a static credential");
+      }
+
       const wellKnown = await queryClient.ensureQueryData(
         wellKnownQuery(credentials.serverName),
       );

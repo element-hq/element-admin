@@ -77,12 +77,19 @@ interface AuthorizationSession {
   redirect: string | undefined;
 }
 
-interface Credentials {
+interface DynamicCredential {
   serverName: string;
   clientId: string;
   accessToken: string;
   refreshToken: string;
   expiresAt: number;
+  static: false;
+}
+
+interface StaticCredential {
+  serverName: string;
+  accessToken: string;
+  static: true;
 }
 
 interface AuthStoreState {
@@ -90,7 +97,7 @@ interface AuthStoreState {
   authorizationSession: AuthorizationSession | null;
 
   /** The active credentials, if any */
-  credentials: Credentials | null;
+  credentials: DynamicCredential | StaticCredential | null;
 }
 
 interface AuthStoreActions {
@@ -102,6 +109,8 @@ interface AuthStoreActions {
     state: string;
     codeChallenge: string;
   }>;
+
+  useStaticCredential(serverName: string, accessToken: string): Promise<void>;
 
   saveCredentials(
     serverName: string,
@@ -127,7 +136,8 @@ interface AuthStoreActions {
   clear: () => Promise<void>;
 }
 
-const isExpired = (credentials: Credentials): boolean => {
+const isExpired = (credentials: DynamicCredential): boolean => {
+  if (credentials.static) return false;
   const leeway = 30 * 1000; // 30 seconds
   return credentials.expiresAt - leeway < Date.now();
 };
@@ -185,6 +195,11 @@ export const useAuthStore = create<AuthStore>()(
             throw new NotLoggedInError();
           }
 
+          // No need to refresh a static credential
+          if (current.credentials.static) {
+            return current.credentials.accessToken;
+          }
+
           // Looks like it's not expired, return early with the access token
           if (!isExpired(current.credentials)) {
             return current.credentials.accessToken;
@@ -213,6 +228,11 @@ export const useAuthStore = create<AuthStore>()(
               // Looks like we've got logged out in the meantime
               if (!current.credentials) {
                 throw new NotLoggedInError();
+              }
+
+              // No need to refresh a static credential
+              if (current.credentials.static) {
+                return current.credentials.accessToken;
               }
 
               // Maybe we got refreshed in parallel in the meantime? Let's check again
@@ -244,6 +264,16 @@ export const useAuthStore = create<AuthStore>()(
           );
         },
 
+        async useStaticCredential(rawServerName, accessToken) {
+          const serverName = normalizeServerName(rawServerName);
+          const credentials = {
+            serverName,
+            accessToken,
+            static: true,
+          } satisfies StaticCredential;
+          await set({ authorizationSession: null, credentials });
+        },
+
         async saveCredentials(
           rawServerName,
           clientId,
@@ -259,7 +289,8 @@ export const useAuthStore = create<AuthStore>()(
             accessToken,
             refreshToken,
             expiresAt,
-          };
+            static: false,
+          } satisfies DynamicCredential;
           await set({ authorizationSession: null, credentials });
         },
 
@@ -284,3 +315,15 @@ useAuthStore.subscribe((oldState, newState) => {
     router.invalidate();
   }
 });
+
+// Expose a method to expose the static credential
+(globalThis as Record<string, unknown>)["__useStaticCredentials"] = (
+  serverName: string,
+  accessToken: string,
+) => {
+  useAuthStore.getState().useStaticCredential(serverName, accessToken);
+};
+
+(globalThis as Record<string, unknown>)["__clearCredentials"] = () => {
+  useAuthStore.getState().clear();
+};
