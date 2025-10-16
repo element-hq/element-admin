@@ -11,15 +11,7 @@ import { accessToken } from "@/stores/auth";
 import { ensureResponseOk, fetch } from "@/utils/fetch";
 
 const VersionResponse = v.object({
-  version: v.fallback(
-    v.nullable(
-      v.pipe(
-        v.string(),
-        v.transform((version) => parseSemver(version, true, false)),
-      ),
-    ),
-    null,
-  ),
+  version: v.nullable(v.string()),
   edition: v.fallback(v.nullable(v.picklist(["community", "pro"])), null),
 });
 
@@ -64,5 +56,6 @@ export const useEssVariant = (
 
 export const useEssVersion = (synapseRoot: string): null | SemVer => {
   const { data } = useSuspenseQuery(essVersionQuery(synapseRoot));
-  return data?.version;
+  if (!data) return null;
+  return parseSemver(data.version);
 };

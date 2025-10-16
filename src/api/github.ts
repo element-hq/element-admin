@@ -3,7 +3,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 import { queryOptions } from "@tanstack/react-query";
-import parseSemver from "semver/functions/parse";
 import * as v from "valibot";
 
 import { ensureResponseOk, fetch } from "@/utils/fetch";
@@ -11,12 +10,7 @@ import { ensureResponseOk, fetch } from "@/utils/fetch";
 const ReleaseResponse = v.object({
   html_url: v.string(),
   name: v.string(),
-  // XXX: this parses the version from the tag as semver; maybe we want to do
-  // that in a separate field?
-  tag_name: v.pipe(
-    v.string(),
-    v.transform((version) => parseSemver(version, true, false)),
-  ),
+  tag_name: v.string(),
   created_at: v.pipe(v.string(), v.isoTimestamp()),
   body: v.string(),
 });
