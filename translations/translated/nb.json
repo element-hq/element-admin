@@ -1,0 +1,578 @@
+{
+  "action.add": {
+    "message": "Legg til"
+  },
+  "action.cancel": {
+    "message": "Avbryt"
+  },
+  "action.clear": {
+    "message": "Tøm"
+  },
+  "action.close": {
+    "message": "Lukk"
+  },
+  "action.go_back": {
+    "message": "Gå tilbake"
+  },
+  "action.remove": {
+    "message": "Fjern"
+  },
+  "action.retry": {
+    "message": "Prøv på nytt"
+  },
+  "action.sign_out": {
+    "message": "Logg ut"
+  },
+  "common.email_address": {
+    "message": "E-postadresse"
+  },
+  "common.filter": {
+    "message": "Filtre"
+  },
+  "errors.http_fetch": {
+    "message": "Forespørsel til {url} mislyktes"
+  },
+  "errors.http_fetch_json_decoding": {
+    "message": "Kunne ikke dekode JSON-svaret fra {url}"
+  },
+  "errors.http_status": {
+    "message": "Forespørsel til {url} mislyktes med statuskode {status} {statusText}"
+  },
+  "errors.matrix_standard": {
+    "message": "Forespørsel til homeserveren mislyktes med feilkode '{errorCode}'. I tillegg ga serveren følgende feilmelding: {errorMessage}"
+  },
+  "errors.not_logged_in": {
+    "message": "Ikke pålogget"
+  },
+  "footer.copyright_notice": {
+    "message": "Copyright © {now, date, ::yyyy}"
+  },
+  "footer.help_and_support": {
+    "message": "Hjelp og støtte"
+  },
+  "footer.legal": {
+    "message": "Juridisk"
+  },
+  "footer.privacy": {
+    "message": "Personvern"
+  },
+  "header.user_menu.title": {
+    "message": "Konto-meny"
+  },
+  "navigation.dashboard": {
+    "message": "Dashbord"
+  },
+  "navigation.documentation": {
+    "message": "Dokumentasjon"
+  },
+  "navigation.registration_tokens": {
+    "message": "Registreringstokener"
+  },
+  "navigation.rooms": {
+    "message": "Rom"
+  },
+  "navigation.users": {
+    "message": "Brukere"
+  },
+  "pages.dashboard.current_ess_version": {
+    "message": "ESS-versjon"
+  },
+  "pages.dashboard.latest_ess_version": {
+    "message": "Siste ESS-versjon"
+  },
+  "pages.dashboard.new_ess_release": {
+    "message": "(Ny versjon)"
+  },
+  "pages.dashboard.registered_users_count": {
+    "message": "Brukere registrert"
+  },
+  "pages.dashboard.rooms_count": {
+    "message": "Totalt antall rom"
+  },
+  "pages.dashboard.running_latest_ess": {
+    "message": "(Du kjører den nyeste versjonen)"
+  },
+  "pages.dashboard.synapse_version": {
+    "message": "Synapse-versjon"
+  },
+  "pages.dashboard.title": {
+    "message": "Dashbord"
+  },
+  "pages.generic_error.go_home": {
+    "message": "Gå hjem"
+  },
+  "pages.generic_error.sign_out_and_reload": {
+    "message": "Logg ut og last inn på nytt"
+  },
+  "pages.generic_error.technical_details.item": {
+    "message": "{name}:{message}"
+  },
+  "pages.generic_error.text": {
+    "message": "Dette kan være et resultat av en feil eller at det ikke lykkes å nå hjemmeserveren. Du kan prøve å laste inn siden på nytt, gå tilbake til forrige side eller tilbakestille alt og gå tilbake til hjemmesiden."
+  },
+  "pages.generic_error.title": {
+    "message": "Det oppsto en uventet feil"
+  },
+  "pages.landing.description": {
+    "message": "Administrer utrullingen av Element-appen for organisasjonen eller fellesskapet ditt."
+  },
+  "pages.login.errors.no_auth_metadata": {
+    "message": "Kunne ikke laste inn serverens autentiseringsmetadata. Synapse kan være utilgjengelig eller ikke konfigurert til å bruke Matrix Authentication Service."
+  },
+  "pages.login.errors.no_client_metadata": {
+    "message": "Kunne ikke registrere klienten. Matrix Authentication Service kan være utilgjengelig eller feilkonfigurert."
+  },
+  "pages.login.errors.no_well_known": {
+    "message": "Failed to load the server's well-known document. The server name may be invalid."
+  },
+  "pages.login.get_started": {
+    "message": "Kom i gang"
+  },
+  "pages.login.server_name": {
+    "message": "Navn på server"
+  },
+  "pages.login.title": {
+    "message": "Logg inn"
+  },
+  "pages.registration_tokens.auto_generate_placeholder": {
+    "message": "Generer automatisk hvis feltet står tomt"
+  },
+  "pages.registration_tokens.create_token.error": {
+    "message": "Kunne ikke opprette token"
+  },
+  "pages.registration_tokens.create_token.submit": {
+    "message": "Opprett token"
+  },
+  "pages.registration_tokens.create_token.success": {
+    "message": "Token opprettet"
+  },
+  "pages.registration_tokens.create_token.title": {
+    "message": "Opprett registreringstoken"
+  },
+  "pages.registration_tokens.created_at_column": {
+    "message": "Created at"
+  },
+  "pages.registration_tokens.created_at_label": {
+    "message": "Created at"
+  },
+  "pages.registration_tokens.custom_token_help": {
+    "message": "Valgfri tilpasset tokenstreng. Hvis feltet er tomt, genereres det automatisk et sikkert token."
+  },
+  "pages.registration_tokens.custom_token_label": {
+    "message": "Egendefinert token"
+  },
+  "pages.registration_tokens.edit_properties": {
+    "message": "Rediger egenskaper"
+  },
+  "pages.registration_tokens.edit_token_title": {
+    "message": "Rediger registreringstoken"
+  },
+  "pages.registration_tokens.expires_at_field": {
+    "message": "Utløper kl."
+  },
+  "pages.registration_tokens.expires_at_help": {
+    "message": "Når tokenet utløper. La feltet være tomt hvis tokenet aldri skal utløpe."
+  },
+  "pages.registration_tokens.expires_at_label": {
+    "message": "Utløper kl."
+  },
+  "pages.registration_tokens.filters.active_only": {
+    "message": "Aktiv"
+  },
+  "pages.registration_tokens.filters.expired_only": {
+    "message": "Utløpt"
+  },
+  "pages.registration_tokens.filters.revoked_only": {
+    "message": "Tilbakekalt"
+  },
+  "pages.registration_tokens.filters.unused_only": {
+    "message": "Ubrukt"
+  },
+  "pages.registration_tokens.filters.used_only": {
+    "message": "Brukt"
+  },
+  "pages.registration_tokens.loading_more": {
+    "message": "Laster inn flere tokener..."
+  },
+  "pages.registration_tokens.never_expires": {
+    "message": "Utløper aldri"
+  },
+  "pages.registration_tokens.no_expiration_placeholder": {
+    "message": "Ingen utløpsdato"
+  },
+  "pages.registration_tokens.not_found.description": {
+    "message": "Det forespurte registreringstokenet ({tokenId}) ble ikke funnet på {serverName}."
+  },
+  "pages.registration_tokens.not_found.title": {
+    "message": "Registreringstoken ikke funnet"
+  },
+  "pages.registration_tokens.revoke_token": {
+    "message": "Tilbakekall token"
+  },
+  "pages.registration_tokens.revoked_at_label": {
+    "message": "Revoked at"
+  },
+  "pages.registration_tokens.save_changes": {
+    "message": "Lagre endringer"
+  },
+  "pages.registration_tokens.status.active": {
+    "message": "Aktiv"
+  },
+  "pages.registration_tokens.status.column": {
+    "message": "Status"
+  },
+  "pages.registration_tokens.status.expired": {
+    "message": "Utløpt"
+  },
+  "pages.registration_tokens.status.invalid": {
+    "message": "Ugyldig"
+  },
+  "pages.registration_tokens.status.label": {
+    "message": "Status"
+  },
+  "pages.registration_tokens.status.revoked": {
+    "message": "Tilbakekalt"
+  },
+  "pages.registration_tokens.status.used_up": {
+    "message": "Brukt opp"
+  },
+  "pages.registration_tokens.title": {
+    "message": "Registreringstokener"
+  },
+  "pages.registration_tokens.token_column": {
+    "message": "Token"
+  },
+  "pages.registration_tokens.token_count": {
+    "message": "{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
+  },
+  "pages.registration_tokens.token_uses.limited": {
+    "message": "{uses, number} / {limit, number}"
+  },
+  "pages.registration_tokens.token_uses.unlimited": {
+    "message": "{uses, number} / ∞"
+  },
+  "pages.registration_tokens.unlimited_placeholder": {
+    "message": "Ubegrenset"
+  },
+  "pages.registration_tokens.unlimited_uses_placeholder": {
+    "message": "La feltet stå tomt for ubegrenset bruk"
+  },
+  "pages.registration_tokens.unrevoke_token": {
+    "message": "Opphev tilbakekalling av token"
+  },
+  "pages.registration_tokens.usage_count_label": {
+    "message": "Usage count"
+  },
+  "pages.registration_tokens.usage_limit_field": {
+    "message": "Bruksbegrensning"
+  },
+  "pages.registration_tokens.usage_limit_help": {
+    "message": "Maksimalt antall ganger dette tokenet kan brukes. La feltet stå tomt for ubegrenset bruk."
+  },
+  "pages.registration_tokens.usage_limit_label": {
+    "message": "Bruksgrense"
+  },
+  "pages.registration_tokens.uses_column": {
+    "message": "Bruksområder"
+  },
+  "pages.registration_tokens.valid_until_column": {
+    "message": "Gyldig til"
+  },
+  "pages.rooms.filters.empty_rooms": {
+    "message": "Tomme rom"
+  },
+  "pages.rooms.filters.non_empty_rooms": {
+    "message": "Ikke-tomme rom"
+  },
+  "pages.rooms.filters.private_rooms": {
+    "message": "Private rom"
+  },
+  "pages.rooms.filters.public_rooms": {
+    "message": "Offentlige rom"
+  },
+  "pages.rooms.not_found.description": {
+    "message": "Det forespurte rommet ({roomId} ) ble ikke funnet på {serverName} ."
+  },
+  "pages.rooms.not_found.title": {
+    "message": "Rom ikke funnet"
+  },
+  "pages.rooms.room_count": {
+    "message": "{COUNT, plural, zero {Ingen rom} one {# rom} other {# rom}}"
+  },
+  "pages.rooms.title": {
+    "message": "Rom"
+  },
+  "pages.users.add_email.button": {
+    "message": "Legg til e-postadresse"
+  },
+  "pages.users.add_email.description": {
+    "message": "Legg til en e-postadresse til denne brukeren"
+  },
+  "pages.users.add_email.error": {
+    "message": "Kunne ikke legge til e-postadresse"
+  },
+  "pages.users.add_email.error.email_invalid": {
+    "message": "Ugyldig e-postadresse"
+  },
+  "pages.users.add_email.error.email_missing": {
+    "message": "Dette feltet er obligatorisk"
+  },
+  "pages.users.add_email.success": {
+    "message": "E-postadresse lagt til"
+  },
+  "pages.users.add_email.title": {
+    "message": "Legg til e-postadresse"
+  },
+  "pages.users.add_upstream_link.error": {
+    "message": "Failed to add link upstream account"
+  },
+  "pages.users.add_upstream_link.success": {
+    "message": "Link to upstream account added"
+  },
+  "pages.users.deactivate_account.alert.description": {
+    "message": "Dette vil automatisk logge brukeren ut av alle enheter, fjerne eventuelle tilgangstokener, slette alle tredjeparts-IDer og permanent slette kontodataene deres."
+  },
+  "pages.users.deactivate_account.alert.title": {
+    "message": "Du er i ferd med å slette brukerdata"
+  },
+  "pages.users.deactivate_account.button": {
+    "message": "Deaktiver konto"
+  },
+  "pages.users.deactivate_account.error": {
+    "message": "Kunne ikke deaktivere kontoen"
+  },
+  "pages.users.deactivate_account.success": {
+    "message": "Kontoen er deaktivert"
+  },
+  "pages.users.deactivate_account.title": {
+    "message": "Deaktivere denne brukeren?"
+  },
+  "pages.users.delete_email.description": {
+    "message": "Er du sikker på at du vil fjerne denne e-postadressen ({email} ) fra denne brukeren ({mxid} )?"
+  },
+  "pages.users.delete_email.error": {
+    "message": "Kunne ikke slette e-postadressen"
+  },
+  "pages.users.delete_email.success": {
+    "message": "E-postadressen er slettet"
+  },
+  "pages.users.delete_email.title": {
+    "message": "Fjerne e-postadressen?"
+  },
+  "pages.users.delete_upstream_link.description": {
+    "message": "Are you sure you want to remove the link between this user ({mxid}) with this upstream account ({subject})?"
+  },
+  "pages.users.delete_upstream_link.error": {
+    "message": "Failed to delete upstream link"
+  },
+  "pages.users.delete_upstream_link.success": {
+    "message": "Upstream link deleted"
+  },
+  "pages.users.delete_upstream_link.title": {
+    "message": "Remove link with upstream account?"
+  },
+  "pages.users.filters.active": {
+    "message": "Aktive brukere"
+  },
+  "pages.users.filters.admins": {
+    "message": "Administratorer"
+  },
+  "pages.users.filters.deactivated": {
+    "message": "Deaktiverte brukere"
+  },
+  "pages.users.filters.guests": {
+    "message": "Gjester (legacy)"
+  },
+  "pages.users.filters.locked": {
+    "message": "Låste brukere"
+  },
+  "pages.users.filters.newest_first": {
+    "message": "Nyeste først"
+  },
+  "pages.users.filters.non_guests": {
+    "message": "Ikke-gjester (legacy)"
+  },
+  "pages.users.lock_account.alert.description": {
+    "message": "Denne brukeren vil automatisk bli låst ute fra alle enheter vedkommende er logget på for øyeblikket, og vil ikke kunne logge på nye enheter før de er låst opp."
+  },
+  "pages.users.lock_account.alert.title": {
+    "message": "Brukeren vil ikke kunne sende eller motta meldinger"
+  },
+  "pages.users.lock_account.button": {
+    "message": "Lås konto"
+  },
+  "pages.users.lock_account.error": {
+    "message": "Kunne ikke låse kontoen"
+  },
+  "pages.users.lock_account.success": {
+    "message": "Kontoen er låst"
+  },
+  "pages.users.lock_account.title": {
+    "message": "Låse denne brukerens konto?"
+  },
+  "pages.users.new_user.add_user": {
+    "message": "Legg til bruker"
+  },
+  "pages.users.new_user.create_account": {
+    "message": "Opprett konto"
+  },
+  "pages.users.new_user.description": {
+    "message": "For å legge til en ny bruker på {serverName} , velg et brukernavn for denne brukeren, som vil være en del av vedkommendes bruker-ID."
+  },
+  "pages.users.new_user.error_message": {
+    "message": "Feil ved oppretting av bruker"
+  },
+  "pages.users.new_user.invalid_localpart": {
+    "message": "Lokal del kan bare inneholde små bokstaver, tall og understrek"
+  },
+  "pages.users.new_user.invalid_localpart_numeric_only": {
+    "message": "Lokal del kan ikke bare inneholde tall"
+  },
+  "pages.users.new_user.localpart": {
+    "message": "Skriv inn navn"
+  },
+  "pages.users.new_user.required_error": {
+    "message": "Dette feltet er obligatorisk"
+  },
+  "pages.users.new_user.success_message": {
+    "message": "Bruker opprettet"
+  },
+  "pages.users.not_found.description": {
+    "message": "Den forespurte brukeren ({userId}) kunne ikke bli funnet på {serverName}."
+  },
+  "pages.users.not_found.title": {
+    "message": "Bruker ikke funnet"
+  },
+  "pages.users.reactivate_account.button": {
+    "message": "Aktiver på nytt"
+  },
+  "pages.users.reactivate_account.error": {
+    "message": "Kunne ikke aktivere kontoen på nytt"
+  },
+  "pages.users.reactivate_account.success": {
+    "message": "Kontoen er aktivert på nytt"
+  },
+  "pages.users.search_placeholder": {
+    "message": "Søk etter brukere"
+  },
+  "pages.users.set_admin.alert.description": {
+    "message": "Brukeren vil kunne se brukerdata og gjøre endringer i bruker- og romtillatelser."
+  },
+  "pages.users.set_admin.alert.title": {
+    "message": "Brukeren vil ha tilgang til sensitive data"
+  },
+  "pages.users.set_admin.error": {
+    "message": "Kunne ikke endre administratorrettigheter for {mxid}"
+  },
+  "pages.users.set_admin.label": {
+    "message": "Administrator"
+  },
+  "pages.users.set_admin.make_admin_button": {
+    "message": "Gjør til administrator"
+  },
+  "pages.users.set_admin.successfully_demoted": {
+    "message": "{mxid} har ikke lenger administratorrettigheter"
+  },
+  "pages.users.set_admin.successfully_promoted": {
+    "message": "{mxid} har nå administratorrettigheter"
+  },
+  "pages.users.set_admin.title": {
+    "message": "Vil du gjøre denne brukeren til administrator?"
+  },
+  "pages.users.set_password.button": {
+    "message": "Endre passord"
+  },
+  "pages.users.set_password.confirm_password_label": {
+    "message": "Skriv inn passordet på nytt"
+  },
+  "pages.users.set_password.error": {
+    "message": "Kunne sette nytt passord"
+  },
+  "pages.users.set_password.error.password_missing": {
+    "message": "Dette feltet er obligatorisk"
+  },
+  "pages.users.set_password.error.passwords_mismatch": {
+    "message": "Passordene samsvarer ikke"
+  },
+  "pages.users.set_password.password_label": {
+    "message": "Passord"
+  },
+  "pages.users.set_password.password_match": {
+    "message": "Passordene stemmer overens!"
+  },
+  "pages.users.set_password.submit": {
+    "message": "Angi nytt passord"
+  },
+  "pages.users.set_password.success": {
+    "message": "Passordet er angitt"
+  },
+  "pages.users.set_password.title": {
+    "message": "Angi et nytt passord for denne brukeren"
+  },
+  "pages.users.title": {
+    "message": "Brukere"
+  },
+  "pages.users.unlock_account.button": {
+    "message": "Lås opp kontoen"
+  },
+  "pages.users.unlock_account.error": {
+    "message": "Kunne ikke låse opp kontoen"
+  },
+  "pages.users.unlock_account.success": {
+    "message": "Kontoen er låst opp"
+  },
+  "pages.users.user_count": {
+    "message": "{COUNT, plural, zero {Ingen brukere} one {# bruker} other {# brukere}}"
+  },
+  "product.element": {
+    "message": "Element"
+  },
+  "product.title": {
+    "message": "Element Admin"
+  },
+  "product.title.community": {
+    "message": "Element Community"
+  },
+  "product.title.pro": {
+    "message": "Element Pro"
+  },
+  "product.title.ti-m": {
+    "message": "Element TI-Messenger"
+  },
+  "room_info.empty_room": {
+    "message": "Tomt rom"
+  },
+  "room_info.empty_space": {
+    "message": "Tomt område"
+  },
+  "room_info.room_with": {
+    "message": "Rom med {members}"
+  },
+  "room_info.space_with": {
+    "message": "Område med {members}"
+  },
+  "room_info.unknown_user": {
+    "message": "Ukjent bruker"
+  },
+  "rooms_info.other_members": {
+    "message": "{COUNT, plural, one {# annen} other {# andre}}"
+  },
+  "ui.data.failed_to_load": {
+    "message": "Kunne ikke laste inn"
+  },
+  "ui.data.loading": {
+    "message": "Laster inn verdi"
+  },
+  "ui.language_switcher.browser_default": {
+    "message": "Bruk nettleserinnstillingene ({language} )"
+  },
+  "ui.language_switcher.button_label": {
+    "message": "Språkinnstillinger"
+  },
+  "ui.language_switcher.description": {
+    "message": "Velg ditt foretrukne språk for grensesnittet."
+  },
+  "ui.language_switcher.title": {
+    "message": "Språkinnstillinger"
+  }
+}
