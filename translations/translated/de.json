@@ -423,10 +423,10 @@
     "message": "Fehler beim Anlegen des Nutzers"
   },
   "pages.users.new_user.invalid_localpart": {
-    "message": "Der lokale Teil darf nur Kleinbuchstaben, Zahlen und Unterstriche enthalten"
+    "message": "Der lokale Teil darf nur Kleinbuchstaben, Zahlen, Punkte, Unterstriche, Bindestriche und Schrägstriche enthalten"
   },
   "pages.users.new_user.invalid_localpart_numeric_only": {
-    "message": "Localpart cannot only contain numbers"
+    "message": "Der lokale Teil darf nicht nur Zahlen enthalten"
   },
   "pages.users.new_user.localpart": {
     "message": "Name eingeben"

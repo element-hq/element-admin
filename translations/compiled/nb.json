@@ -2,67 +2,67 @@
   "action.add": [
     {
       "type": 0,
-      "value": "Hinzufügen"
+      "value": "Legg til"
     }
   ],
   "action.cancel": [
     {
       "type": 0,
-      "value": "Abbrechen"
+      "value": "Avbryt"
     }
   ],
   "action.clear": [
     {
       "type": 0,
-      "value": "Zurücksetzen"
+      "value": "Tøm"
     }
   ],
   "action.close": [
     {
       "type": 0,
-      "value": "Schließen"
+      "value": "Lukk"
     }
   ],
   "action.go_back": [
     {
       "type": 0,
-      "value": "Zurück"
+      "value": "Gå tilbake"
     }
   ],
   "action.remove": [
     {
       "type": 0,
-      "value": "Entfernen"
+      "value": "Fjern"
     }
   ],
   "action.retry": [
     {
       "type": 0,
-      "value": "Erneut versuchen"
+      "value": "Prøv på nytt"
     }
   ],
   "action.sign_out": [
     {
       "type": 0,
-      "value": "Abmelden"
+      "value": "Logg ut"
     }
   ],
   "common.email_address": [
     {
       "type": 0,
-      "value": "E-Mail Adresse"
+      "value": "E-postadresse"
     }
   ],
   "common.filter": [
     {
       "type": 0,
-      "value": "Filter"
+      "value": "Filtre"
     }
   ],
   "errors.http_fetch": [
     {
       "type": 0,
-      "value": "Anfrage an "
+      "value": "Forespørsel til "
     },
     {
       "type": 1,
@@ -70,27 +70,23 @@
     },
     {
       "type": 0,
-      "value": " fehlgeschlagen"
+      "value": " mislyktes"
     }
   ],
   "errors.http_fetch_json_decoding": [
     {
       "type": 0,
-      "value": "JSON-Antwort von "
+      "value": "Kunne ikke dekode JSON-svaret fra "
     },
     {
       "type": 1,
       "value": "url"
-    },
-    {
-      "type": 0,
-      "value": " konnte nicht dekodiert werden"
     }
   ],
   "errors.http_status": [
     {
       "type": 0,
-      "value": "Anfrage an "
+      "value": "Forespørsel til "
     },
     {
       "type": 1,
@@ -98,7 +94,7 @@
     },
     {
       "type": 0,
-      "value": " fehlgeschlagen mit Statuscode "
+      "value": " mislyktes med statuskode "
     },
     {
       "type": 1,
@@ -116,15 +112,7 @@
   "errors.matrix_standard": [
     {
       "type": 0,
-      "value": "Die Anfrage an den Homeserver ist mit dem Fehlercode „"
-    },
-    {
-      "type": 1,
-      "value": "errorCode"
-    },
-    {
-      "type": 0,
-      "value": "” fehlgeschlagen. Zusätzlich hat der Server die folgende Fehlernachricht ausgegeben: "
+      "value": "Forespørsel til homeserveren mislyktes med feilkode {errorCode}. I tillegg ga serveren følgende feilmelding: "
     },
     {
       "type": 1,
@@ -134,7 +122,7 @@
   "errors.not_logged_in": [
     {
       "type": 0,
-      "value": "Nicht angemeldet"
+      "value": "Ikke pålogget"
     }
   ],
   "footer.copyright_notice": [
@@ -157,115 +145,115 @@
   "footer.help_and_support": [
     {
       "type": 0,
-      "value": "Hilfe & Support"
+      "value": "Hjelp og støtte"
     }
   ],
   "footer.legal": [
     {
       "type": 0,
-      "value": "Rechtliche Hinweise"
+      "value": "Juridisk"
     }
   ],
   "footer.privacy": [
     {
       "type": 0,
-      "value": "Datenschutz"
+      "value": "Personvern"
     }
   ],
   "header.user_menu.title": [
     {
       "type": 0,
-      "value": "Konto-Menü"
+      "value": "Konto-meny"
     }
   ],
   "navigation.dashboard": [
     {
       "type": 0,
-      "value": "Dashboard"
+      "value": "Dashbord"
     }
   ],
   "navigation.documentation": [
     {
       "type": 0,
-      "value": "Dokumentation"
+      "value": "Dokumentasjon"
     }
   ],
   "navigation.registration_tokens": [
     {
       "type": 0,
-      "value": "Registrierungstoken"
+      "value": "Registreringstokener"
     }
   ],
   "navigation.rooms": [
     {
       "type": 0,
-      "value": "Chats"
+      "value": "Rom"
     }
   ],
   "navigation.users": [
     {
       "type": 0,
-      "value": "Nutzer"
+      "value": "Brukere"
     }
   ],
   "pages.dashboard.current_ess_version": [
     {
       "type": 0,
-      "value": "ESS-Version"
+      "value": "ESS-versjon"
     }
   ],
   "pages.dashboard.latest_ess_version": [
     {
       "type": 0,
-      "value": "Neueste ESS-Version"
+      "value": "Siste ESS-versjon"
     }
   ],
   "pages.dashboard.new_ess_release": [
     {
       "type": 0,
-      "value": "(Neues Release)"
+      "value": "(Ny versjon)"
     }
   ],
   "pages.dashboard.registered_users_count": [
     {
       "type": 0,
-      "value": "Registrierte Nutzer"
+      "value": "Brukere registrert"
     }
   ],
   "pages.dashboard.rooms_count": [
     {
       "type": 0,
-      "value": "Gesamtzahl der Chats"
+      "value": "Totalt antall rom"
     }
   ],
   "pages.dashboard.running_latest_ess": [
     {
       "type": 0,
-      "value": "(Du verwendest die neueste Version)"
+      "value": "(Du kjører den nyeste versjonen)"
     }
   ],
   "pages.dashboard.synapse_version": [
     {
       "type": 0,
-      "value": "Synapse-Version"
+      "value": "Synapse-versjon"
     }
   ],
   "pages.dashboard.title": [
     {
       "type": 0,
-      "value": "Dashboard"
+      "value": "Dashbord"
     }
   ],
   "pages.generic_error.go_home": [
     {
       "type": 0,
-      "value": "Gehe zur Startseite"
+      "value": "Gå hjem"
     }
   ],
   "pages.generic_error.sign_out_and_reload": [
     {
       "type": 0,
-      "value": "Abmelden und neu laden"
+      "value": "Logg ut og last inn på nytt"
     }
   ],
   "pages.generic_error.technical_details.item": [
@@ -275,7 +263,7 @@
     },
     {
       "type": 0,
-      "value": ": "
+      "value": ":"
     },
     {
       "type": 1,
@@ -285,139 +273,139 @@
   "pages.generic_error.text": [
     {
       "type": 0,
-      "value": "Das könnte an einem Fehler liegen oder daran, dass der Homeserver nicht erreichbar ist. Du kannst versuchen, die Seite nochmal zu laden, zur vorherigen Seite zurückgehen oder alles zurücksetzen und zur Startseite zurückkehren."
+      "value": "Dette kan være et resultat av en feil eller at det ikke lykkes å nå hjemmeserveren. Du kan prøve å laste inn siden på nytt, gå tilbake til forrige side eller tilbakestille alt og gå tilbake til hjemmesiden."
     }
   ],
   "pages.generic_error.title": [
     {
       "type": 0,
-      "value": "Ein unerwarteter Fehler ist aufgetreten"
+      "value": "Det oppsto en uventet feil"
     }
   ],
   "pages.landing.description": [
     {
       "type": 0,
-      "value": "Verwalte die Bereitstellung der Element-App für deine Organisation oder Community."
+      "value": "Administrer utrullingen av Element-appen for organisasjonen eller fellesskapet ditt."
     }
   ],
   "pages.login.errors.no_auth_metadata": [
     {
       "type": 0,
-      "value": "Das Laden der Metadaten des Servers für die Authentifizierung ist fehlgeschlagen. Der Homeserver ist möglicherweise nicht erreichbar oder nicht für die Verwendung des Matrix Authentication Service konfiguriert."
+      "value": "Kunne ikke laste inn serverens autentiseringsmetadata. Synapse kan være utilgjengelig eller ikke konfigurert til å bruke Matrix Authentication Service."
     }
   ],
   "pages.login.errors.no_client_metadata": [
     {
       "type": 0,
-      "value": "Die Registrierung der Anwendung ist fehlgeschlagen. Der Matrix Authentication Service ist möglicherweise nicht erreichbar oder falsch konfiguriert."
+      "value": "Kunne ikke registrere klienten. Matrix Authentication Service kan være utilgjengelig eller feilkonfigurert."
     }
   ],
   "pages.login.errors.no_well_known": [
     {
       "type": 0,
-      "value": "Das \"well-known\" Dokument des Servers konnte nicht geladen werden. Der Servername ist möglicherweise ungültig."
+      "value": "Failed to load the server's well-known document. The server name may be invalid."
     }
   ],
   "pages.login.get_started": [
     {
       "type": 0,
-      "value": "Los geht's"
+      "value": "Kom i gang"
     }
   ],
   "pages.login.server_name": [
     {
       "type": 0,
-      "value": "Servername"
+      "value": "Navn på server"
     }
   ],
   "pages.login.title": [
     {
       "type": 0,
-      "value": "Login"
+      "value": "Logg inn"
     }
   ],
   "pages.registration_tokens.auto_generate_placeholder": [
     {
       "type": 0,
-      "value": "Automatisch generieren, wenn leer gelassen"
+      "value": "Generer automatisk hvis feltet står tomt"
     }
   ],
   "pages.registration_tokens.create_token.error": [
     {
       "type": 0,
-      "value": "Token konnte nicht erstellt werden"
+      "value": "Kunne ikke opprette token"
     }
   ],
   "pages.registration_tokens.create_token.submit": [
     {
       "type": 0,
-      "value": "Token erstellen"
+      "value": "Opprett token"
     }
   ],
   "pages.registration_tokens.create_token.success": [
     {
       "type": 0,
-      "value": "Token erfolgreich erstellt"
+      "value": "Token opprettet"
     }
   ],
   "pages.registration_tokens.create_token.title": [
     {
       "type": 0,
-      "value": "Registrierungstoken erstellen"
+      "value": "Opprett registreringstoken"
     }
   ],
   "pages.registration_tokens.created_at_column": [
     {
       "type": 0,
-      "value": "Erstellt am"
+      "value": "Created at"
     }
   ],
   "pages.registration_tokens.created_at_label": [
     {
       "type": 0,
-      "value": "Erstellt am"
+      "value": "Created at"
     }
   ],
   "pages.registration_tokens.custom_token_help": [
     {
       "type": 0,
-      "value": "Optionales benutzerdefiniertes Token. Wenn das Feld leer bleibt, wird automatisch ein sicheres Token generiert."
+      "value": "Valgfri tilpasset tokenstreng. Hvis feltet er tomt, genereres det automatisk et sikkert token."
     }
   ],
   "pages.registration_tokens.custom_token_label": [
     {
       "type": 0,
-      "value": "Benutzerdefiniertes Token"
+      "value": "Egendefinert token"
     }
   ],
   "pages.registration_tokens.edit_properties": [
     {
       "type": 0,
-      "value": "Eigenschaften bearbeiten"
+      "value": "Rediger egenskaper"
     }
   ],
   "pages.registration_tokens.edit_token_title": [
     {
       "type": 0,
-      "value": "Registrierungstoken bearbeiten"
+      "value": "Rediger registreringstoken"
     }
   ],
   "pages.registration_tokens.expires_at_field": [
     {
       "type": 0,
-      "value": "Ablaufdatum"
+      "value": "Utløper kl."
     }
   ],
   "pages.registration_tokens.expires_at_help": [
     {
       "type": 0,
-      "value": "Ablaufdatum. Lass das Feld leer, wenn das Token nie ablaufen soll."
+      "value": "Når tokenet utløper. La feltet være tomt hvis tokenet aldri skal utløpe."
     }
   ],
   "pages.registration_tokens.expires_at_label": [
     {
       "type": 0,
-      "value": "Ablaufdatum"
+      "value": "Utløper kl."
     }
   ],
   "pages.registration_tokens.filters.active_only": [
@@ -429,49 +417,49 @@
   "pages.registration_tokens.filters.expired_only": [
     {
       "type": 0,
-      "value": "Abgelaufen"
+      "value": "Utløpt"
     }
   ],
   "pages.registration_tokens.filters.revoked_only": [
     {
       "type": 0,
-      "value": "Widerrufen"
+      "value": "Tilbakekalt"
     }
   ],
   "pages.registration_tokens.filters.unused_only": [
     {
       "type": 0,
-      "value": "Ungenutzt"
+      "value": "Ubrukt"
     }
   ],
   "pages.registration_tokens.filters.used_only": [
     {
       "type": 0,
-      "value": "Genutzt"
+      "value": "Brukt"
     }
   ],
   "pages.registration_tokens.loading_more": [
     {
       "type": 0,
-      "value": "Weitere Token werden geladen …"
+      "value": "Laster inn flere tokener..."
     }
   ],
   "pages.registration_tokens.never_expires": [
     {
       "type": 0,
-      "value": "Läuft nie ab"
+      "value": "Utløper aldri"
     }
   ],
   "pages.registration_tokens.no_expiration_placeholder": [
     {
       "type": 0,
-      "value": "Kein Ablaufdatum"
+      "value": "Ingen utløpsdato"
     }
   ],
   "pages.registration_tokens.not_found.description": [
     {
       "type": 0,
-      "value": "Das angeforderte Registrierungstoken ("
+      "value": "Det forespurte registreringstokenet ("
     },
     {
       "type": 1,
@@ -479,7 +467,7 @@
     },
     {
       "type": 0,
-      "value": ") konnte auf "
+      "value": ") ble ikke funnet på "
     },
     {
       "type": 1,
@@ -487,31 +475,31 @@
     },
     {
       "type": 0,
-      "value": " nicht gefunden werden."
+      "value": "."
     }
   ],
   "pages.registration_tokens.not_found.title": [
     {
       "type": 0,
-      "value": "Registrierungstoken nicht gefunden"
+      "value": "Registreringstoken ikke funnet"
     }
   ],
   "pages.registration_tokens.revoke_token": [
     {
       "type": 0,
-      "value": "Token widerrufen"
+      "value": "Tilbakekall token"
     }
   ],
   "pages.registration_tokens.revoked_at_label": [
     {
       "type": 0,
-      "value": "Widerrufen am"
+      "value": "Revoked at"
     }
   ],
   "pages.registration_tokens.save_changes": [
     {
       "type": 0,
-      "value": "Speichern"
+      "value": "Lagre endringer"
     }
   ],
   "pages.registration_tokens.status.active": [
@@ -529,13 +517,13 @@
   "pages.registration_tokens.status.expired": [
     {
       "type": 0,
-      "value": "Abgelaufen"
+      "value": "Utløpt"
     }
   ],
   "pages.registration_tokens.status.invalid": [
     {
       "type": 0,
-      "value": "Ungültig"
+      "value": "Ugyldig"
     }
   ],
   "pages.registration_tokens.status.label": [
@@ -547,19 +535,19 @@
   "pages.registration_tokens.status.revoked": [
     {
       "type": 0,
-      "value": "Widerrufen"
+      "value": "Tilbakekalt"
     }
   ],
   "pages.registration_tokens.status.used_up": [
     {
       "type": 0,
-      "value": "Aufgebraucht"
+      "value": "Brukt opp"
     }
   ],
   "pages.registration_tokens.title": [
     {
       "type": 0,
-      "value": "Registrierungstoken"
+      "value": "Registreringstokener"
     }
   ],
   "pages.registration_tokens.token_column": [
@@ -579,7 +567,7 @@
             },
             {
               "type": 0,
-              "value": " Token"
+              "value": " token"
             }
           ]
         },
@@ -590,7 +578,7 @@
             },
             {
               "type": 0,
-              "value": " Token"
+              "value": " tokens"
             }
           ]
         },
@@ -598,7 +586,7 @@
           "value": [
             {
               "type": 0,
-              "value": "Keine Token"
+              "value": "No tokens"
             }
           ]
         }
@@ -638,85 +626,85 @@
   "pages.registration_tokens.unlimited_placeholder": [
     {
       "type": 0,
-      "value": "Unbegrenzt"
+      "value": "Ubegrenset"
     }
   ],
   "pages.registration_tokens.unlimited_uses_placeholder": [
     {
       "type": 0,
-      "value": "Für unbegrenzte Nutzung leer lassen"
+      "value": "La feltet stå tomt for ubegrenset bruk"
     }
   ],
   "pages.registration_tokens.unrevoke_token": [
     {
       "type": 0,
-      "value": "Widerruf des Tokens rückgängig machen"
+      "value": "Opphev tilbakekalling av token"
     }
   ],
   "pages.registration_tokens.usage_count_label": [
     {
       "type": 0,
-      "value": "Nutzungsanzahl"
+      "value": "Usage count"
     }
   ],
   "pages.registration_tokens.usage_limit_field": [
     {
       "type": 0,
-      "value": "Nutzungslimit"
+      "value": "Bruksbegrensning"
     }
   ],
   "pages.registration_tokens.usage_limit_help": [
     {
       "type": 0,
-      "value": "Maximale Anzahl der Verwendungen dieses Tokens. Für unbegrenzte Verwendungen leer lassen."
+      "value": "Maksimalt antall ganger dette tokenet kan brukes. La feltet stå tomt for ubegrenset bruk."
     }
   ],
   "pages.registration_tokens.usage_limit_label": [
     {
       "type": 0,
-      "value": "Nutzungslimit"
+      "value": "Bruksgrense"
     }
   ],
   "pages.registration_tokens.uses_column": [
     {
       "type": 0,
-      "value": "Verwendungen"
+      "value": "Bruksområder"
     }
   ],
   "pages.registration_tokens.valid_until_column": [
     {
       "type": 0,
-      "value": "Gültig bis"
+      "value": "Gyldig til"
     }
   ],
   "pages.rooms.filters.empty_rooms": [
     {
       "type": 0,
-      "value": "Leere Chats"
+      "value": "Tomme rom"
     }
   ],
   "pages.rooms.filters.non_empty_rooms": [
     {
       "type": 0,
-      "value": "Genutzte Chats"
+      "value": "Ikke-tomme rom"
     }
   ],
   "pages.rooms.filters.private_rooms": [
     {
       "type": 0,
-      "value": "Private Chats"
+      "value": "Private rom"
     }
   ],
   "pages.rooms.filters.public_rooms": [
     {
       "type": 0,
-      "value": "Öffentliche Chats"
+      "value": "Offentlige rom"
     }
   ],
   "pages.rooms.not_found.description": [
     {
       "type": 0,
-      "value": "Der angeforderte Chat ("
+      "value": "Det forespurte rommet ("
     },
     {
       "type": 1,
@@ -724,7 +712,7 @@
     },
     {
       "type": 0,
-      "value": ") konnte auf "
+      "value": " ) ble ikke funnet på "
     },
     {
       "type": 1,
@@ -732,27 +720,19 @@
     },
     {
       "type": 0,
-      "value": " nicht gefunden werden."
+      "value": " ."
     }
   ],
   "pages.rooms.not_found.title": [
     {
       "type": 0,
-      "value": "Chat nicht gefunden"
+      "value": "Rom ikke funnet"
     }
   ],
   "pages.rooms.room_count": [
     {
       "offset": 0,
       "options": {
-        "=0": {
-          "value": [
-            {
-              "type": 0,
-              "value": "Keine Chats"
-            }
-          ]
-        },
         "one": {
           "value": [
             {
@@ -760,7 +740,7 @@
             },
             {
               "type": 0,
-              "value": " Chat"
+              "value": " rom"
             }
           ]
         },
@@ -771,7 +751,15 @@
             },
             {
               "type": 0,
-              "value": " Chats"
+              "value": " rom"
+            }
+          ]
+        },
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Ingen rom"
             }
           ]
         }
@@ -784,103 +772,103 @@
   "pages.rooms.title": [
     {
       "type": 0,
-      "value": "Chats"
+      "value": "Rom"
     }
   ],
   "pages.users.add_email.button": [
     {
       "type": 0,
-      "value": "E-Mail hinzufügen"
+      "value": "Legg til e-postadresse"
     }
   ],
   "pages.users.add_email.description": [
     {
       "type": 0,
-      "value": "Füge diesem Nutzer eine E-Mail-Adresse hinzu"
+      "value": "Legg til en e-postadresse til denne brukeren"
     }
   ],
   "pages.users.add_email.error": [
     {
       "type": 0,
-      "value": "E-Mail-Adresse konnte nicht hinzugefügt werden"
+      "value": "Kunne ikke legge til e-postadresse"
     }
   ],
   "pages.users.add_email.error.email_invalid": [
     {
       "type": 0,
-      "value": "Ungültige E-Mail Adresse"
+      "value": "Ugyldig e-postadresse"
     }
   ],
   "pages.users.add_email.error.email_missing": [
     {
       "type": 0,
-      "value": "Dies ist ein Pflichtfeld"
+      "value": "Dette feltet er obligatorisk"
     }
   ],
   "pages.users.add_email.success": [
     {
       "type": 0,
-      "value": "E-Mail Adresse hinzugefügt"
+      "value": "E-postadresse lagt til"
     }
   ],
   "pages.users.add_email.title": [
     {
       "type": 0,
-      "value": "E-Mail Adresse hinzufügen"
+      "value": "Legg til e-postadresse"
     }
   ],
   "pages.users.add_upstream_link.error": [
     {
       "type": 0,
-      "value": "Fehler beim Verbinden des Upstream-Kontos"
+      "value": "Failed to add link upstream account"
     }
   ],
   "pages.users.add_upstream_link.success": [
     {
       "type": 0,
-      "value": "Link zum Upstream-Konto hinzugefügt"
+      "value": "Link to upstream account added"
     }
   ],
   "pages.users.deactivate_account.alert.description": [
     {
       "type": 0,
-      "value": "Der Nutzer wird durch diese Aktion automatisch von allen Geräten abgemeldet, alle Zugriffstoken werden entfernt, alle IDs von Drittanbietern werden entfernt und die Kontodaten werden dauerhaft entfernt."
+      "value": "Dette vil automatisk logge brukeren ut av alle enheter, fjerne eventuelle tilgangstokener, slette alle tredjeparts-IDer og permanent slette kontodataene deres."
     }
   ],
   "pages.users.deactivate_account.alert.title": [
     {
       "type": 0,
-      "value": "Du bist dabei, Nutzerdaten zu entfernen"
+      "value": "Du er i ferd med å slette brukerdata"
     }
   ],
   "pages.users.deactivate_account.button": [
     {
       "type": 0,
-      "value": "Nutzerkonto deaktivieren"
+      "value": "Deaktiver konto"
     }
   ],
   "pages.users.deactivate_account.error": [
     {
       "type": 0,
-      "value": "Konto konnte nicht deaktiviert werden"
+      "value": "Kunne ikke deaktivere kontoen"
     }
   ],
   "pages.users.deactivate_account.success": [
     {
       "type": 0,
-      "value": "Konto deaktiviert"
+      "value": "Kontoen er deaktivert"
     }
   ],
   "pages.users.deactivate_account.title": [
     {
       "type": 0,
-      "value": "Diesen Nutzer deaktivieren?"
+      "value": "Deaktivere denne brukeren?"
     }
   ],
   "pages.users.delete_email.description": [
     {
       "type": 0,
-      "value": "Soll diese E-Mail-Adresse ("
+      "value": "Er du sikker på at du vil fjerne denne e-postadressen ("
     },
     {
       "type": 1,
@@ -888,7 +876,7 @@
     },
     {
       "type": 0,
-      "value": ") von diesem Nutzer ("
+      "value": " ) fra denne brukeren ("
     },
     {
       "type": 1,
@@ -896,31 +884,31 @@
     },
     {
       "type": 0,
-      "value": ") wirklich entfernt werden?"
+      "value": " )?"
     }
   ],
   "pages.users.delete_email.error": [
     {
       "type": 0,
-      "value": "E-Mail Adresse konnte nicht entfernt werden"
+      "value": "Kunne ikke slette e-postadressen"
     }
   ],
   "pages.users.delete_email.success": [
     {
       "type": 0,
-      "value": "E-Mail Adresse entfernt"
+      "value": "E-postadressen er slettet"
     }
   ],
   "pages.users.delete_email.title": [
     {
       "type": 0,
-      "value": "E-Mail Adresse entfernen?"
+      "value": "Fjerne e-postadressen?"
     }
   ],
   "pages.users.delete_upstream_link.description": [
     {
       "type": 0,
-      "value": "Soll die Verbindung zwischen diesem Nutzer ("
+      "value": "Are you sure you want to remove the link between this user ("
     },
     {
       "type": 1,
@@ -928,7 +916,7 @@
     },
     {
       "type": 0,
-      "value": ") mit diesem Upstream-Konto ("
+      "value": ") with this upstream account ("
     },
     {
       "type": 1,
@@ -936,121 +924,121 @@
     },
     {
       "type": 0,
-      "value": ") wirklich entfernt werden?"
+      "value": ")?"
     }
   ],
   "pages.users.delete_upstream_link.error": [
     {
       "type": 0,
-      "value": "Upstream-Verbindung konnte nicht entfernt werden"
+      "value": "Failed to delete upstream link"
     }
   ],
   "pages.users.delete_upstream_link.success": [
     {
       "type": 0,
-      "value": "Upstream-Verbindung entfernt"
+      "value": "Upstream link deleted"
     }
   ],
   "pages.users.delete_upstream_link.title": [
     {
       "type": 0,
-      "value": "Verbindung mit dem Upstream-Konto entfernen?"
+      "value": "Remove link with upstream account?"
     }
   ],
   "pages.users.filters.active": [
     {
       "type": 0,
-      "value": "Aktive Nutzer"
+      "value": "Aktive brukere"
     }
   ],
   "pages.users.filters.admins": [
     {
       "type": 0,
-      "value": "Admins"
+      "value": "Administratorer"
     }
   ],
   "pages.users.filters.deactivated": [
     {
       "type": 0,
-      "value": "Deaktivierte Nutzer"
+      "value": "Deaktiverte brukere"
     }
   ],
   "pages.users.filters.guests": [
     {
       "type": 0,
-      "value": "Gäste (Legacy)"
+      "value": "Gjester (legacy)"
     }
   ],
   "pages.users.filters.locked": [
     {
       "type": 0,
-      "value": "Gesperrte Nutzer"
+      "value": "Låste brukere"
     }
   ],
   "pages.users.filters.newest_first": [
     {
       "type": 0,
-      "value": "Neueste zuerst"
+      "value": "Nyeste først"
     }
   ],
   "pages.users.filters.non_guests": [
     {
       "type": 0,
-      "value": "Nicht-Gäste (Legacy)"
+      "value": "Ikke-gjester (legacy)"
     }
   ],
   "pages.users.lock_account.alert.description": [
     {
       "type": 0,
-      "value": "Dieser Nutzer wird automatisch auf allen angemeldeten Geräten gesperrt und kann sich erst bei neuen Geräten anmelden, wenn diese entsperrt wurden."
+      "value": "Denne brukeren vil automatisk bli låst ute fra alle enheter vedkommende er logget på for øyeblikket, og vil ikke kunne logge på nye enheter før de er låst opp."
     }
   ],
   "pages.users.lock_account.alert.title": [
     {
       "type": 0,
-      "value": "Der Nutzer kann keine Nachrichten mehr senden oder empfangen."
+      "value": "Brukeren vil ikke kunne sende eller motta meldinger"
     }
   ],
   "pages.users.lock_account.button": [
     {
       "type": 0,
-      "value": "Konto sperren"
+      "value": "Lås konto"
     }
   ],
   "pages.users.lock_account.error": [
     {
       "type": 0,
-      "value": "Konto konnte nicht gesperrt werden"
+      "value": "Kunne ikke låse kontoen"
     }
   ],
   "pages.users.lock_account.success": [
     {
       "type": 0,
-      "value": "Konto gesperrt"
+      "value": "Kontoen er låst"
     }
   ],
   "pages.users.lock_account.title": [
     {
       "type": 0,
-      "value": "Das Konto dieses Nutzers sperren?"
+      "value": "Låse denne brukerens konto?"
     }
   ],
   "pages.users.new_user.add_user": [
     {
       "type": 0,
-      "value": "Nutzer hinzufügen"
+      "value": "Legg til bruker"
     }
   ],
   "pages.users.new_user.create_account": [
     {
       "type": 0,
-      "value": "Konto erstellen"
+      "value": "Opprett konto"
     }
   ],
   "pages.users.new_user.description": [
     {
       "type": 0,
-      "value": "Um einen neuen Nutzer zu "
+      "value": "For å legge til en ny bruker på "
     },
     {
       "type": 1,
@@ -1058,49 +1046,49 @@
     },
     {
       "type": 0,
-      "value": " hinzuzufügen, wähle einen Nutzernamen aus, der Teil der Nutzer-ID sein wird."
+      "value": " , velg et brukernavn for denne brukeren, som vil være en del av vedkommendes bruker-ID."
     }
   ],
   "pages.users.new_user.error_message": [
     {
       "type": 0,
-      "value": "Fehler beim Anlegen des Nutzers"
+      "value": "Feil ved oppretting av bruker"
     }
   ],
   "pages.users.new_user.invalid_localpart": [
     {
       "type": 0,
-      "value": "Der lokale Teil darf nur Kleinbuchstaben, Zahlen, Punkte, Unterstriche, Bindestriche und Schrägstriche enthalten"
+      "value": "Lokal del kan bare inneholde små bokstaver, tall og understrek"
     }
   ],
   "pages.users.new_user.invalid_localpart_numeric_only": [
     {
       "type": 0,
-      "value": "Der lokale Teil darf nicht nur Zahlen enthalten"
+      "value": "Lokal del kan ikke bare inneholde tall"
     }
   ],
   "pages.users.new_user.localpart": [
     {
       "type": 0,
-      "value": "Name eingeben"
+      "value": "Skriv inn navn"
     }
   ],
   "pages.users.new_user.required_error": [
     {
       "type": 0,
-      "value": "Dies ist ein Pflichtfeld"
+      "value": "Dette feltet er obligatorisk"
     }
   ],
   "pages.users.new_user.success_message": [
     {
       "type": 0,
-      "value": "Nutzer angelegt"
+      "value": "Bruker opprettet"
     }
   ],
   "pages.users.not_found.description": [
     {
       "type": 0,
-      "value": "Der angeforderte Nutzer ("
+      "value": "Den forespurte brukeren ("
     },
     {
       "type": 1,
@@ -1108,7 +1096,7 @@
     },
     {
       "type": 0,
-      "value": ") konnte auf "
+      "value": ") kunne ikke bli funnet på "
     },
     {
       "type": 1,
@@ -1116,55 +1104,55 @@
     },
     {
       "type": 0,
-      "value": " nicht gefunden werden."
+      "value": "."
     }
   ],
   "pages.users.not_found.title": [
     {
       "type": 0,
-      "value": "Nutzer nicht gefunden"
+      "value": "Bruker ikke funnet"
     }
   ],
   "pages.users.reactivate_account.button": [
     {
       "type": 0,
-      "value": "Reaktivieren"
+      "value": "Aktiver på nytt"
     }
   ],
   "pages.users.reactivate_account.error": [
     {
       "type": 0,
-      "value": "Reaktivierung des Kontos fehlgeschlagen"
+      "value": "Kunne ikke aktivere kontoen på nytt"
     }
   ],
   "pages.users.reactivate_account.success": [
     {
       "type": 0,
-      "value": "Konto reaktiviert"
+      "value": "Kontoen er aktivert på nytt"
     }
   ],
   "pages.users.search_placeholder": [
     {
       "type": 0,
-      "value": "Nutzer suchen..."
+      "value": "Søk etter brukere"
     }
   ],
   "pages.users.set_admin.alert.description": [
     {
       "type": 0,
-      "value": "Der Nutzer kann Nutzerdaten einsehen und Änderungen an Nutzer- und Chat-Berechtigungen vornehmen."
+      "value": "Brukeren vil kunne se brukerdata og gjøre endringer i bruker- og romtillatelser."
     }
   ],
   "pages.users.set_admin.alert.title": [
     {
       "type": 0,
-      "value": "Nutzer erhält Zugriff auf sensible Daten"
+      "value": "Brukeren vil ha tilgang til sensitive data"
     }
   ],
   "pages.users.set_admin.error": [
     {
       "type": 0,
-      "value": "Fehler beim Ändern der Adminrechte für "
+      "value": "Kunne ikke endre administratorrettigheter for "
     },
     {
       "type": 1,
@@ -1174,13 +1162,13 @@
   "pages.users.set_admin.label": [
     {
       "type": 0,
-      "value": "Admin"
+      "value": "Administrator"
     }
   ],
   "pages.users.set_admin.make_admin_button": [
     {
       "type": 0,
-      "value": "Zum Admin machen"
+      "value": "Gjør til administrator"
     }
   ],
   "pages.users.set_admin.successfully_demoted": [
@@ -1190,7 +1178,7 @@
     },
     {
       "type": 0,
-      "value": " hat keine Adminrechte mehr"
+      "value": " har ikke lenger administratorrettigheter"
     }
   ],
   "pages.users.set_admin.successfully_promoted": [
@@ -1200,97 +1188,97 @@
     },
     {
       "type": 0,
-      "value": " hat jetzt Adminrechte"
+      "value": " har nå administratorrettigheter"
     }
   ],
   "pages.users.set_admin.title": [
     {
       "type": 0,
-      "value": "Diesen Nutzer zum Admin machen?"
+      "value": "Vil du gjøre denne brukeren til administrator?"
     }
   ],
   "pages.users.set_password.button": [
     {
       "type": 0,
-      "value": "Passwort ändern"
+      "value": "Endre passord"
     }
   ],
   "pages.users.set_password.confirm_password_label": [
     {
       "type": 0,
-      "value": "Passwort erneut eingeben"
+      "value": "Skriv inn passordet på nytt"
     }
   ],
   "pages.users.set_password.error": [
     {
       "type": 0,
-      "value": "Passwort konnte nicht festgelegt werden"
+      "value": "Kunne sette nytt passord"
     }
   ],
   "pages.users.set_password.error.password_missing": [
     {
       "type": 0,
-      "value": "Dies ist ein Pflichtfeld"
+      "value": "Dette feltet er obligatorisk"
     }
   ],
   "pages.users.set_password.error.passwords_mismatch": [
     {
       "type": 0,
-      "value": "Passwörter stimmen nicht überein"
+      "value": "Passordene samsvarer ikke"
     }
   ],
   "pages.users.set_password.password_label": [
     {
       "type": 0,
-      "value": "Passwort"
+      "value": "Passord"
     }
   ],
   "pages.users.set_password.password_match": [
     {
       "type": 0,
-      "value": "Passwörter stimmen überein"
+      "value": "Passordene stemmer overens!"
     }
   ],
   "pages.users.set_password.submit": [
     {
       "type": 0,
-      "value": "Neues Passwort festlegen"
+      "value": "Angi nytt passord"
     }
   ],
   "pages.users.set_password.success": [
     {
       "type": 0,
-      "value": "Passwort erfolgreich festgelegt"
+      "value": "Passordet er angitt"
     }
   ],
   "pages.users.set_password.title": [
     {
       "type": 0,
-      "value": "Neues Passwort für diesen Nutzer festlegen"
+      "value": "Angi et nytt passord for denne brukeren"
     }
   ],
   "pages.users.title": [
     {
       "type": 0,
-      "value": "Nutzer"
+      "value": "Brukere"
     }
   ],
   "pages.users.unlock_account.button": [
     {
       "type": 0,
-      "value": "Konto entsperren"
+      "value": "Lås opp kontoen"
     }
   ],
   "pages.users.unlock_account.error": [
     {
       "type": 0,
-      "value": "Entsperren des Kontos ist fehlgeschlagen."
+      "value": "Kunne ikke låse opp kontoen"
     }
   ],
   "pages.users.unlock_account.success": [
     {
       "type": 0,
-      "value": "Konto entsperrt"
+      "value": "Kontoen er låst opp"
     }
   ],
   "pages.users.user_count": [
@@ -1304,7 +1292,7 @@
             },
             {
               "type": 0,
-              "value": " Nutzer"
+              "value": " bruker"
             }
           ]
         },
@@ -1315,7 +1303,7 @@
             },
             {
               "type": 0,
-              "value": " Nutzer"
+              "value": " brukere"
             }
           ]
         },
@@ -1323,7 +1311,7 @@
           "value": [
             {
               "type": 0,
-              "value": "Keine Nutzer"
+              "value": "Ingen brukere"
             }
           ]
         }
@@ -1366,19 +1354,19 @@
   "room_info.empty_room": [
     {
       "type": 0,
-      "value": "Leerer Chat"
+      "value": "Tomt rom"
     }
   ],
   "room_info.empty_space": [
     {
       "type": 0,
-      "value": "Leerer Space"
+      "value": "Tomt område"
     }
   ],
   "room_info.room_with": [
     {
       "type": 0,
-      "value": "Chat mit "
+      "value": "Rom med "
     },
     {
       "type": 1,
@@ -1388,7 +1376,7 @@
   "room_info.space_with": [
     {
       "type": 0,
-      "value": "Space mit "
+      "value": "Område med "
     },
     {
       "type": 1,
@@ -1398,7 +1386,7 @@
   "room_info.unknown_user": [
     {
       "type": 0,
-      "value": "Unbekannter Nutzer."
+      "value": "Ukjent bruker"
     }
   ],
   "rooms_info.other_members": [
@@ -1412,7 +1400,7 @@
             },
             {
               "type": 0,
-              "value": " weiteren"
+              "value": " annen"
             }
           ]
         },
@@ -1423,7 +1411,7 @@
             },
             {
               "type": 0,
-              "value": " weiteren"
+              "value": " andre"
             }
           ]
         }
@@ -1436,19 +1424,19 @@
   "ui.data.failed_to_load": [
     {
       "type": 0,
-      "value": "Laden fehlgeschlagen"
+      "value": "Kunne ikke laste inn"
     }
   ],
   "ui.data.loading": [
     {
       "type": 0,
-      "value": "Wert wird geladen"
+      "value": "Laster inn verdi"
     }
   ],
   "ui.language_switcher.browser_default": [
     {
       "type": 0,
-      "value": "Browser-Einstellungen verwenden ("
+      "value": "Bruk nettleserinnstillingene ("
     },
     {
       "type": 1,
@@ -1456,25 +1444,25 @@
     },
     {
       "type": 0,
-      "value": ")"
+      "value": " )"
     }
   ],
   "ui.language_switcher.button_label": [
     {
       "type": 0,
-      "value": "Spracheinstellungen"
+      "value": "Språkinnstillinger"
     }
   ],
   "ui.language_switcher.description": [
     {
       "type": 0,
-      "value": "Wähle deine bevorzugte Sprache für die Benutzeroberfläche"
+      "value": "Velg ditt foretrukne språk for grensesnittet."
     }
   ],
   "ui.language_switcher.title": [
     {
       "type": 0,
-      "value": "Spracheinstellungen"
+      "value": "Språkinnstillinger"
     }
   ]
 }
