@@ -13,11 +13,11 @@ const AppFooter = () => (
     <Footer.ElementLogo />
 
     <Footer.Section>
-      <Link href="https://ems.element.io/support" size="small">
+      <Link href="https://customer.element.io/support" size="small">
         <FormattedMessage
           id="footer.help_and_support"
           defaultMessage="Help & Support"
-          description="Label for the help and support (to https://ems.element.io/support) link in the footer"
+          description="Label for the help and support (to https://customer.element.io/support) link in the footer"
         />
       </Link>
       <Footer.Divider />
