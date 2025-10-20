@@ -186,6 +186,7 @@ export const siteConfigQuery = (serverName: string) =>
           password_change_allowed: true,
           password_login_enabled: true,
           password_registration_enabled: true,
+          password_registration_email_required: true,
           registration_token_required: true,
           server_name: serverName,
         };

@@ -24,6 +24,15 @@ import type {
   DeleteUserEmailData,
   DeleteUserEmailErrors,
   DeleteUserEmailResponses,
+  FinishCompatSessionData,
+  FinishCompatSessionErrors,
+  FinishCompatSessionResponses,
+  FinishOAuth2SessionData,
+  FinishOAuth2SessionErrors,
+  FinishOAuth2SessionResponses,
+  FinishUserSessionData,
+  FinishUserSessionErrors,
+  FinishUserSessionResponses,
   GetCompatSessionData,
   GetCompatSessionErrors,
   GetCompatSessionResponses,
@@ -107,6 +116,8 @@ import type {
   UserSetAdminData,
   UserSetAdminErrors,
   UserSetAdminResponses,
+  VersionData,
+  VersionResponses,
 } from "./types.gen";
 import {
   vAddUpstreamOAuthLinkData,
@@ -123,6 +134,12 @@ import {
   vDeleteUpstreamOAuthLinkResponse,
   vDeleteUserEmailData,
   vDeleteUserEmailResponse,
+  vFinishCompatSessionData,
+  vFinishCompatSessionResponse,
+  vFinishOAuth2SessionData,
+  vFinishOAuth2SessionResponse,
+  vFinishUserSessionData,
+  vFinishUserSessionResponse,
   vGetCompatSessionData,
   vGetCompatSessionResponse,
   vGetLatestPolicyDataData,
@@ -181,6 +198,8 @@ import {
   vUpdateUserRegistrationTokenResponse,
   vUserSetAdminData,
   vUserSetAdminResponse,
+  vVersionData,
+  vVersionResponse,
 } from "./valibot.gen";
 
 export type Options<
@@ -220,6 +239,30 @@ export const siteConfig = <ThrowOnError extends boolean = false>(
       },
     ],
     url: "/api/admin/v1/site-config",
+    ...options,
+  });
+};
+
+/**
+ * Get the version currently running
+ */
+export const version = <ThrowOnError extends boolean = false>(
+  options: Options<VersionData, ThrowOnError>,
+) => {
+  return options.client.get<VersionResponses, unknown, ThrowOnError>({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vVersionData, data);
+    },
+    responseValidator: async (data) => {
+      return await v.parseAsync(vVersionResponse, data);
+    },
+    security: [
+      {
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
+    url: "/api/admin/v1/version",
     ...options,
   });
 };
@@ -284,6 +327,35 @@ export const getCompatSession = <ThrowOnError extends boolean = false>(
 };
 
 /**
+ * Finish a compatibility session
+ * Calling this endpoint will finish the compatibility session, preventing any further use. A job will be scheduled to sync the user's devices with the homeserver.
+ */
+export const finishCompatSession = <ThrowOnError extends boolean = false>(
+  options: Options<FinishCompatSessionData, ThrowOnError>,
+) => {
+  return options.client.post<
+    FinishCompatSessionResponses,
+    FinishCompatSessionErrors,
+    ThrowOnError
+  >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vFinishCompatSessionData, data);
+    },
+    responseValidator: async (data) => {
+      return await v.parseAsync(vFinishCompatSessionResponse, data);
+    },
+    security: [
+      {
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
+    url: "/api/admin/v1/compat-sessions/{id}/finish",
+    ...options,
+  });
+};
+
+/**
  * List OAuth 2.0 sessions
  * Retrieve a list of OAuth 2.0 sessions.
  * Note that by default, all sessions, including finished ones are returned, with the oldest first.
@@ -338,6 +410,35 @@ export const getOAuth2Session = <ThrowOnError extends boolean = false>(
       },
     ],
     url: "/api/admin/v1/oauth2-sessions/{id}",
+    ...options,
+  });
+};
+
+/**
+ * Finish an OAuth 2.0 session
+ * Calling this endpoint will finish the OAuth 2.0 session, preventing any further use. If the session has a user associated with it, a job will be scheduled to sync the user's devices with the homeserver.
+ */
+export const finishOAuth2Session = <ThrowOnError extends boolean = false>(
+  options: Options<FinishOAuth2SessionData, ThrowOnError>,
+) => {
+  return options.client.post<
+    FinishOAuth2SessionResponses,
+    FinishOAuth2SessionErrors,
+    ThrowOnError
+  >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vFinishOAuth2SessionData, data);
+    },
+    responseValidator: async (data) => {
+      return await v.parseAsync(vFinishOAuth2SessionResponse, data);
+    },
+    security: [
+      {
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
+    url: "/api/admin/v1/oauth2-sessions/{id}/finish",
     ...options,
   });
 };
@@ -897,6 +998,35 @@ export const getUserSession = <ThrowOnError extends boolean = false>(
       },
     ],
     url: "/api/admin/v1/user-sessions/{id}",
+    ...options,
+  });
+};
+
+/**
+ * Finish a user session
+ * Calling this endpoint will finish the user session, preventing any further use.
+ */
+export const finishUserSession = <ThrowOnError extends boolean = false>(
+  options: Options<FinishUserSessionData, ThrowOnError>,
+) => {
+  return options.client.post<
+    FinishUserSessionResponses,
+    FinishUserSessionErrors,
+    ThrowOnError
+  >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vFinishUserSessionData, data);
+    },
+    responseValidator: async (data) => {
+      return await v.parseAsync(vFinishUserSessionResponse, data);
+    },
+    security: [
+      {
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
+    url: "/api/admin/v1/user-sessions/{id}/finish",
     ...options,
   });
 };

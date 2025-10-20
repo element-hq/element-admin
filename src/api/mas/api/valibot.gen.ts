@@ -4,23 +4,30 @@ import * as v from "valibot";
 
 export const vSiteConfig = v.object({
   server_name: v.string(),
-  password_login_enabled: v.boolean(),
-  password_registration_enabled: v.boolean(),
-  registration_token_required: v.boolean(),
-  email_change_allowed: v.boolean(),
-  displayname_change_allowed: v.boolean(),
-  password_change_allowed: v.boolean(),
-  account_recovery_allowed: v.boolean(),
-  account_deactivation_allowed: v.boolean(),
-  captcha_enabled: v.boolean(),
-  minimum_password_complexity: v.pipe(
-    v.number(),
-    v.integer(),
-    v.minValue(0, "Invalid value: Expected uint8 to be >= 0"),
-    v.maxValue(255, "Invalid value: Expected uint8 to be <= 2^8-1"),
-    v.minValue(0),
-    v.maxValue(4),
+  password_login_enabled: v.optional(v.boolean()),
+  password_registration_enabled: v.optional(v.boolean()),
+  password_registration_email_required: v.optional(v.boolean()),
+  registration_token_required: v.optional(v.boolean()),
+  email_change_allowed: v.optional(v.boolean()),
+  displayname_change_allowed: v.optional(v.boolean()),
+  password_change_allowed: v.optional(v.boolean()),
+  account_recovery_allowed: v.optional(v.boolean()),
+  account_deactivation_allowed: v.optional(v.boolean()),
+  captcha_enabled: v.optional(v.boolean()),
+  minimum_password_complexity: v.optional(
+    v.pipe(
+      v.number(),
+      v.integer(),
+      v.minValue(0, "Invalid value: Expected uint8 to be >= 0"),
+      v.maxValue(255, "Invalid value: Expected uint8 to be <= 2^8-1"),
+      v.minValue(0),
+      v.maxValue(4),
+    ),
   ),
+});
+
+export const vVersion = v.object({
+  version: v.string(),
 });
 
 /**
@@ -695,6 +702,14 @@ export const vSiteConfigData = v.object({
 
 export const vSiteConfigResponse = vSiteConfig;
 
+export const vVersionData = v.object({
+  body: v.optional(v.never()),
+  path: v.optional(v.never()),
+  query: v.optional(v.never()),
+});
+
+export const vVersionResponse = vVersion;
+
 export const vListCompatSessionsData = v.object({
   body: v.optional(v.never()),
   path: v.optional(v.never()),
@@ -733,6 +748,19 @@ export const vGetCompatSessionData = v.object({
  * Compatibility session was found
  */
 export const vGetCompatSessionResponse = vSingleResponseForCompatSession;
+
+export const vFinishCompatSessionData = v.object({
+  body: v.optional(v.never()),
+  path: v.object({
+    id: vUlid,
+  }),
+  query: v.optional(v.never()),
+});
+
+/**
+ * Compatibility session was finished
+ */
+export const vFinishCompatSessionResponse = vSingleResponseForCompatSession;
 
 export const vListOAuth2SessionsData = v.object({
   body: v.optional(v.never()),
@@ -775,6 +803,19 @@ export const vGetOAuth2SessionData = v.object({
  * OAuth 2.0 session was found
  */
 export const vGetOAuth2SessionResponse = vSingleResponseForOAuth2Session;
+
+export const vFinishOAuth2SessionData = v.object({
+  body: v.optional(v.never()),
+  path: v.object({
+    id: vUlid,
+  }),
+  query: v.optional(v.never()),
+});
+
+/**
+ * OAuth 2.0 session was finished
+ */
+export const vFinishOAuth2SessionResponse = vSingleResponseForOAuth2Session;
 
 export const vSetPolicyDataData = v.object({
   body: vSetPolicyDataRequest,
@@ -1052,6 +1093,19 @@ export const vGetUserSessionData = v.object({
  * User session was found
  */
 export const vGetUserSessionResponse = vSingleResponseForUserSession;
+
+export const vFinishUserSessionData = v.object({
+  body: v.optional(v.never()),
+  path: v.object({
+    id: vUlid,
+  }),
+  query: v.optional(v.never()),
+});
+
+/**
+ * User session was finished
+ */
+export const vFinishUserSessionResponse = vSingleResponseForUserSession;
 
 export const vListUserRegistrationTokensData = v.object({
   body: v.optional(v.never()),
