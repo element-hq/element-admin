@@ -32,6 +32,11 @@ export default defineConfig({
             ? schema.required.filter((property) => property !== "legacy_guest")
             : undefined;
         },
+
+        SiteConfig: (schema) => {
+          // Only make the `server_name` required, rest can be optional
+          schema.required = ["server_name"];
+        },
       },
     },
   },

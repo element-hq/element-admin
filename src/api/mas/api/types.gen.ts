@@ -12,47 +12,47 @@ export type SiteConfig = {
   /**
    * Whether password login is enabled.
    */
-  password_login_enabled: boolean;
+  password_login_enabled?: boolean;
   /**
    * Whether password registration is enabled.
    */
-  password_registration_enabled: boolean;
+  password_registration_enabled?: boolean;
   /**
    * Whether a valid email address is required for password registrations.
    */
-  password_registration_email_required: boolean;
+  password_registration_email_required?: boolean;
   /**
    * Whether registration tokens are required for password registrations.
    */
-  registration_token_required: boolean;
+  registration_token_required?: boolean;
   /**
    * Whether users can change their email.
    */
-  email_change_allowed: boolean;
+  email_change_allowed?: boolean;
   /**
    * Whether users can change their display name.
    */
-  displayname_change_allowed: boolean;
+  displayname_change_allowed?: boolean;
   /**
    * Whether users can change their password.
    */
-  password_change_allowed: boolean;
+  password_change_allowed?: boolean;
   /**
    * Whether users can recover their account via email.
    */
-  account_recovery_allowed: boolean;
+  account_recovery_allowed?: boolean;
   /**
    * Whether users can delete their own account.
    */
-  account_deactivation_allowed: boolean;
+  account_deactivation_allowed?: boolean;
   /**
    * Whether CAPTCHA during registration is enabled.
    */
-  captcha_enabled: boolean;
+  captcha_enabled?: boolean;
   /**
    * Minimum password complexity, between 0 and 4. This is a score from zxcvbn.
    */
-  minimum_password_complexity: number;
+  minimum_password_complexity?: number;
 };
 
 export type Version = {

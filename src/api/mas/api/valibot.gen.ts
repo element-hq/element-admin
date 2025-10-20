@@ -4,23 +4,25 @@ import * as v from "valibot";
 
 export const vSiteConfig = v.object({
   server_name: v.string(),
-  password_login_enabled: v.boolean(),
-  password_registration_enabled: v.boolean(),
-  password_registration_email_required: v.boolean(),
-  registration_token_required: v.boolean(),
-  email_change_allowed: v.boolean(),
-  displayname_change_allowed: v.boolean(),
-  password_change_allowed: v.boolean(),
-  account_recovery_allowed: v.boolean(),
-  account_deactivation_allowed: v.boolean(),
-  captcha_enabled: v.boolean(),
-  minimum_password_complexity: v.pipe(
-    v.number(),
-    v.integer(),
-    v.minValue(0, "Invalid value: Expected uint8 to be >= 0"),
-    v.maxValue(255, "Invalid value: Expected uint8 to be <= 2^8-1"),
-    v.minValue(0),
-    v.maxValue(4),
+  password_login_enabled: v.optional(v.boolean()),
+  password_registration_enabled: v.optional(v.boolean()),
+  password_registration_email_required: v.optional(v.boolean()),
+  registration_token_required: v.optional(v.boolean()),
+  email_change_allowed: v.optional(v.boolean()),
+  displayname_change_allowed: v.optional(v.boolean()),
+  password_change_allowed: v.optional(v.boolean()),
+  account_recovery_allowed: v.optional(v.boolean()),
+  account_deactivation_allowed: v.optional(v.boolean()),
+  captcha_enabled: v.optional(v.boolean()),
+  minimum_password_complexity: v.optional(
+    v.pipe(
+      v.number(),
+      v.integer(),
+      v.minValue(0, "Invalid value: Expected uint8 to be >= 0"),
+      v.maxValue(255, "Invalid value: Expected uint8 to be <= 2^8-1"),
+      v.minValue(0),
+      v.maxValue(4),
+    ),
   ),
 });
 
