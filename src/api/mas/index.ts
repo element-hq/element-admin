@@ -157,6 +157,24 @@ export interface EditTokenParameters {
   expires_at?: string | null; // ISO date string
 }
 
+export interface PersonalSessionListParameters extends PageParameters {
+  status?: api.PersonalSessionStatus;
+  actor_user?: api.Ulid;
+  expires_before?: string;
+  expires_after?: string;
+}
+
+export interface CreatePersonalSessionParameters {
+  actor_user_id: api.Ulid;
+  human_name: string;
+  scope: string;
+  expires_in?: number | null;
+}
+
+export interface RegeneratePersonalSessionParameters {
+  expires_in?: number | null;
+}
+
 // FIXME: pagination direction is temporary until MAS gets proper ordering in the API
 type PaginationDirection = "forward" | "backward";
 
@@ -643,6 +661,151 @@ export const unrevokeRegistrationToken = async (
   const result = await api.unrevokeUserRegistrationToken({
     ...(await masBaseOptions(queryClient, serverName, signal)),
     path: { id: tokenId },
+  });
+  ensureNoError(result);
+  return result.data;
+};
+
+export const personalSessionsInfiniteQuery = (
+  serverName: string,
+  parameters: PersonalSessionListParameters = {},
+) =>
+  infiniteQueryOptions({
+    queryKey: ["mas", "personal-sessions", serverName, parameters],
+    queryFn: async ({
+      client,
+      signal,
+      pageParam,
+    }): Promise<WithData<api.PaginatedResponseForPersonalSession>> => {
+      const query: api.ListPersonalSessionsData["query"] = {
+        "page[first]": PAGE_SIZE,
+        count: "false",
+      };
+
+      if (pageParam) query["page[after]"] = pageParam;
+
+      if (parameters.status !== undefined)
+        query["filter[status]"] = parameters.status;
+      if (parameters.actor_user !== undefined)
+        query["filter[actor_user]"] = parameters.actor_user;
+      if (parameters.expires_before !== undefined)
+        query["filter[expires_before]"] = parameters.expires_before;
+      if (parameters.expires_after !== undefined)
+        query["filter[expires_after]"] = parameters.expires_after;
+
+      const result = await api.listPersonalSessions({
+        ...(await masBaseOptions(client, serverName, signal)),
+        query,
+      });
+      ensureNoError(result);
+      ensureHasData(result.data);
+      return result.data;
+    },
+    initialPageParam: null as api.Ulid | null,
+    getNextPageParam: (lastPage): api.Ulid | null =>
+      (lastPage.links.next && cursorForSingleResource(lastPage.data?.at(-1))) ??
+      null,
+  });
+
+export const personalSessionsCountQuery = (
+  serverName: string,
+  parameters: PersonalSessionListParameters = {},
+) =>
+  queryOptions({
+    queryKey: ["mas", "personal-sessions", serverName, parameters, "count"],
+    queryFn: async ({ client, signal }): Promise<number> => {
+      const query: api.ListPersonalSessionsData["query"] = {
+        count: "only",
+      };
+
+      if (parameters.status !== undefined)
+        query["filter[status]"] = parameters.status;
+      if (parameters.actor_user !== undefined)
+        query["filter[actor_user]"] = parameters.actor_user;
+      if (parameters.expires_before !== undefined)
+        query["filter[expires_before]"] = parameters.expires_before;
+      if (parameters.expires_after !== undefined)
+        query["filter[expires_after]"] = parameters.expires_after;
+
+      const result = await api.listPersonalSessions({
+        ...(await masBaseOptions(client, serverName, signal)),
+        query,
+      });
+      ensureNoError(result);
+      ensureHasCount(result.data);
+      return result.data.meta.count;
+    },
+  });
+
+export const personalSessionQuery = (serverName: string, sessionId: string) =>
+  queryOptions({
+    queryKey: ["mas", "personal-session", serverName, sessionId],
+    queryFn: async ({
+      client,
+      signal,
+    }): Promise<api.SingleResponseForPersonalSession> => {
+      const result = await api.getPersonalSession({
+        ...(await masBaseOptions(client, serverName, signal)),
+        path: { id: sessionId },
+      });
+      ensureNoError(result, true);
+      return result.data;
+    },
+  });
+
+export const createPersonalSession = async (
+  queryClient: QueryClient,
+  serverName: string,
+  parameters: CreatePersonalSessionParameters,
+  signal?: AbortSignal,
+): Promise<api.SingleResponseForPersonalSession> => {
+  const body: api.CreatePersonalSessionData["body"] = {
+    actor_user_id: parameters.actor_user_id,
+    human_name: parameters.human_name,
+    scope: parameters.scope,
+  };
+
+  if (parameters.expires_in !== undefined)
+    body.expires_in = parameters.expires_in;
+
+  const result = await api.createPersonalSession({
+    ...(await masBaseOptions(queryClient, serverName, signal)),
+    body,
+  });
+  ensureNoError(result);
+  return result.data;
+};
+
+export const revokePersonalSession = async (
+  queryClient: QueryClient,
+  serverName: string,
+  sessionId: api.Ulid,
+  signal?: AbortSignal,
+): Promise<api.SingleResponseForPersonalSession> => {
+  const result = await api.revokePersonalSession({
+    ...(await masBaseOptions(queryClient, serverName, signal)),
+    path: { id: sessionId },
+  });
+  ensureNoError(result);
+  return result.data;
+};
+
+export const regeneratePersonalSession = async (
+  queryClient: QueryClient,
+  serverName: string,
+  sessionId: api.Ulid,
+  parameters: RegeneratePersonalSessionParameters = {},
+  signal?: AbortSignal,
+): Promise<api.SingleResponseForPersonalSession> => {
+  const body: api.RegeneratePersonalSessionData["body"] = {};
+
+  if (parameters.expires_in !== undefined)
+    body.expires_in = parameters.expires_in;
+
+  const result = await api.regeneratePersonalSession({
+    ...(await masBaseOptions(queryClient, serverName, signal)),
+    path: { id: sessionId },
+    body,
   });
   ensureNoError(result);
   return result.data;

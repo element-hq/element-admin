@@ -37,6 +37,13 @@ const AppNavigation = () => (
       />
     </Navigation.NavLink>
     <Navigation.Divider />
+    <Navigation.NavLink Icon={KeyIcon} to="/personal-tokens">
+      <FormattedMessage
+        id="navigation.personal_tokens"
+        defaultMessage="Personal tokens"
+        description="Label for the personal tokens navigation item in the main navigation sidebar"
+      />
+    </Navigation.NavLink>
     <Navigation.NavLink Icon={KeyIcon} to="/registration-tokens">
       <FormattedMessage
         id="navigation.registration_tokens"

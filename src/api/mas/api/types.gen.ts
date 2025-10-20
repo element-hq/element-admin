@@ -398,8 +398,8 @@ export type PersonalSession = {
    * When the session was revoked, if applicable
    */
   revoked_at?: string | null;
-  owner_user_id: Ulid;
-  owner_client_id: Ulid;
+  owner_user_id?: Ulid;
+  owner_client_id?: Ulid;
   actor_user_id: Ulid;
   /**
    * Human-readable name for the session

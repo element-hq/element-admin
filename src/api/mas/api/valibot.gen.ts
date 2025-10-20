@@ -265,8 +265,8 @@ export const vPersonalSession = v.object({
   revoked_at: v.optional(
     v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
   ),
-  owner_user_id: vUlid,
-  owner_client_id: vUlid,
+  owner_user_id: v.optional(v.union([vUlid, v.null()])),
+  owner_client_id: v.optional(v.union([vUlid, v.null()])),
   actor_user_id: vUlid,
   human_name: v.string(),
   scope: v.string(),
