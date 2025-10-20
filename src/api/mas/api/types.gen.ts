@@ -18,6 +18,10 @@ export type SiteConfig = {
    */
   password_registration_enabled: boolean;
   /**
+   * Whether a valid email address is required for password registrations.
+   */
+  password_registration_email_required: boolean;
+  /**
    * Whether registration tokens are required for password registrations.
    */
   registration_token_required: boolean;
@@ -49,6 +53,13 @@ export type SiteConfig = {
    * Minimum password complexity, between 0 and 4. This is a score from zxcvbn.
    */
   minimum_password_complexity: number;
+};
+
+export type Version = {
+  /**
+   * The semver version of the app
+   */
+  version: string;
 };
 
 export type PaginationParams = {
@@ -936,6 +947,19 @@ export type SiteConfigResponses = {
 
 export type SiteConfigResponse = SiteConfigResponses[keyof SiteConfigResponses];
 
+export type VersionData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: "/api/admin/v1/version";
+};
+
+export type VersionResponses = {
+  200: Version;
+};
+
+export type VersionResponse = VersionResponses[keyof VersionResponses];
+
 export type ListCompatSessionsData = {
   body?: never;
   path?: never;
@@ -1030,6 +1054,39 @@ export type GetCompatSessionResponses = {
 
 export type GetCompatSessionResponse =
   GetCompatSessionResponses[keyof GetCompatSessionResponses];
+
+export type FinishCompatSessionData = {
+  body?: never;
+  path: {
+    id: Ulid;
+  };
+  query?: never;
+  url: "/api/admin/v1/compat-sessions/{id}/finish";
+};
+
+export type FinishCompatSessionErrors = {
+  /**
+   * Session is already finished
+   */
+  400: ErrorResponse;
+  /**
+   * Compatibility session was not found
+   */
+  404: ErrorResponse;
+};
+
+export type FinishCompatSessionError =
+  FinishCompatSessionErrors[keyof FinishCompatSessionErrors];
+
+export type FinishCompatSessionResponses = {
+  /**
+   * Compatibility session was finished
+   */
+  200: SingleResponseForCompatSession;
+};
+
+export type FinishCompatSessionResponse =
+  FinishCompatSessionResponses[keyof FinishCompatSessionResponses];
 
 export type ListOAuth2SessionsData = {
   body?: never;
@@ -1141,6 +1198,39 @@ export type GetOAuth2SessionResponses = {
 
 export type GetOAuth2SessionResponse =
   GetOAuth2SessionResponses[keyof GetOAuth2SessionResponses];
+
+export type FinishOAuth2SessionData = {
+  body?: never;
+  path: {
+    id: Ulid;
+  };
+  query?: never;
+  url: "/api/admin/v1/oauth2-sessions/{id}/finish";
+};
+
+export type FinishOAuth2SessionErrors = {
+  /**
+   * Session is already finished
+   */
+  400: ErrorResponse;
+  /**
+   * OAuth 2.0 session was not found
+   */
+  404: ErrorResponse;
+};
+
+export type FinishOAuth2SessionError =
+  FinishOAuth2SessionErrors[keyof FinishOAuth2SessionErrors];
+
+export type FinishOAuth2SessionResponses = {
+  /**
+   * OAuth 2.0 session was finished
+   */
+  200: SingleResponseForOAuth2Session;
+};
+
+export type FinishOAuth2SessionResponse =
+  FinishOAuth2SessionResponses[keyof FinishOAuth2SessionResponses];
 
 export type SetPolicyDataData = {
   body: SetPolicyDataRequest;
@@ -1788,6 +1878,39 @@ export type GetUserSessionResponses = {
 
 export type GetUserSessionResponse =
   GetUserSessionResponses[keyof GetUserSessionResponses];
+
+export type FinishUserSessionData = {
+  body?: never;
+  path: {
+    id: Ulid;
+  };
+  query?: never;
+  url: "/api/admin/v1/user-sessions/{id}/finish";
+};
+
+export type FinishUserSessionErrors = {
+  /**
+   * Session is already finished
+   */
+  400: ErrorResponse;
+  /**
+   * User session was not found
+   */
+  404: ErrorResponse;
+};
+
+export type FinishUserSessionError =
+  FinishUserSessionErrors[keyof FinishUserSessionErrors];
+
+export type FinishUserSessionResponses = {
+  /**
+   * User session was finished
+   */
+  200: SingleResponseForUserSession;
+};
+
+export type FinishUserSessionResponse =
+  FinishUserSessionResponses[keyof FinishUserSessionResponses];
 
 export type ListUserRegistrationTokensData = {
   body?: never;
