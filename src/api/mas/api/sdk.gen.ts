@@ -12,6 +12,9 @@ import type {
   AddUserEmailResponses,
   AddUserRegistrationTokenData,
   AddUserRegistrationTokenResponses,
+  CreatePersonalSessionData,
+  CreatePersonalSessionErrors,
+  CreatePersonalSessionResponses,
   CreateUserData,
   CreateUserErrors,
   CreateUserResponses,
@@ -42,6 +45,9 @@ import type {
   GetOAuth2SessionData,
   GetOAuth2SessionErrors,
   GetOAuth2SessionResponses,
+  GetPersonalSessionData,
+  GetPersonalSessionErrors,
+  GetPersonalSessionResponses,
   GetPolicyDataData,
   GetPolicyDataErrors,
   GetPolicyDataResponses,
@@ -72,6 +78,9 @@ import type {
   ListOAuth2SessionsData,
   ListOAuth2SessionsErrors,
   ListOAuth2SessionsResponses,
+  ListPersonalSessionsData,
+  ListPersonalSessionsErrors,
+  ListPersonalSessionsResponses,
   ListUpstreamOAuthLinksData,
   ListUpstreamOAuthLinksErrors,
   ListUpstreamOAuthLinksResponses,
@@ -93,6 +102,12 @@ import type {
   ReactivateUserData,
   ReactivateUserErrors,
   ReactivateUserResponses,
+  RegeneratePersonalSessionData,
+  RegeneratePersonalSessionErrors,
+  RegeneratePersonalSessionResponses,
+  RevokePersonalSessionData,
+  RevokePersonalSessionErrors,
+  RevokePersonalSessionResponses,
   RevokeUserRegistrationTokenData,
   RevokeUserRegistrationTokenErrors,
   RevokeUserRegistrationTokenResponses,
@@ -126,6 +141,8 @@ import {
   vAddUserEmailResponse,
   vAddUserRegistrationTokenData,
   vAddUserRegistrationTokenResponse,
+  vCreatePersonalSessionData,
+  vCreatePersonalSessionResponse,
   vCreateUserData,
   vCreateUserResponse,
   vDeactivateUserData,
@@ -146,6 +163,8 @@ import {
   vGetLatestPolicyDataResponse,
   vGetOAuth2SessionData,
   vGetOAuth2SessionResponse,
+  vGetPersonalSessionData,
+  vGetPersonalSessionResponse,
   vGetPolicyDataData,
   vGetPolicyDataResponse,
   vGetUpstreamOAuthLinkData,
@@ -166,6 +185,8 @@ import {
   vListCompatSessionsResponse,
   vListOAuth2SessionsData,
   vListOAuth2SessionsResponse,
+  vListPersonalSessionsData,
+  vListPersonalSessionsResponse,
   vListUpstreamOAuthLinksData,
   vListUpstreamOAuthLinksResponse,
   vListUpstreamOAuthProvidersData,
@@ -182,6 +203,10 @@ import {
   vLockUserResponse,
   vReactivateUserData,
   vReactivateUserResponse,
+  vRegeneratePersonalSessionData,
+  vRegeneratePersonalSessionResponse,
+  vRevokePersonalSessionData,
+  vRevokePersonalSessionResponse,
   vRevokeUserRegistrationTokenData,
   vRevokeUserRegistrationTokenResponse,
   vSetPolicyDataData,
@@ -440,6 +465,157 @@ export const finishOAuth2Session = <ThrowOnError extends boolean = false>(
     ],
     url: "/api/admin/v1/oauth2-sessions/{id}/finish",
     ...options,
+  });
+};
+
+/**
+ * List personal sessions
+ * Retrieve a list of personal sessions.
+ * Note that by default, all sessions, including revoked ones are returned, with the oldest first.
+ * Use the `filter[status]` parameter to filter the sessions by their status and `page[last]` parameter to retrieve the last N sessions.
+ */
+export const listPersonalSessions = <ThrowOnError extends boolean = false>(
+  options: Options<ListPersonalSessionsData, ThrowOnError>,
+) => {
+  return options.client.get<
+    ListPersonalSessionsResponses,
+    ListPersonalSessionsErrors,
+    ThrowOnError
+  >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vListPersonalSessionsData, data);
+    },
+    responseValidator: async (data) => {
+      return await v.parseAsync(vListPersonalSessionsResponse, data);
+    },
+    security: [
+      {
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
+    url: "/api/admin/v1/personal-sessions",
+    ...options,
+  });
+};
+
+/**
+ * Create a new personal session with personal access token
+ */
+export const createPersonalSession = <ThrowOnError extends boolean = false>(
+  options: Options<CreatePersonalSessionData, ThrowOnError>,
+) => {
+  return options.client.post<
+    CreatePersonalSessionResponses,
+    CreatePersonalSessionErrors,
+    ThrowOnError
+  >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vCreatePersonalSessionData, data);
+    },
+    responseValidator: async (data) => {
+      return await v.parseAsync(vCreatePersonalSessionResponse, data);
+    },
+    security: [
+      {
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
+    url: "/api/admin/v1/personal-sessions",
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      ...options.headers,
+    },
+  });
+};
+
+/**
+ * Get a personal session
+ */
+export const getPersonalSession = <ThrowOnError extends boolean = false>(
+  options: Options<GetPersonalSessionData, ThrowOnError>,
+) => {
+  return options.client.get<
+    GetPersonalSessionResponses,
+    GetPersonalSessionErrors,
+    ThrowOnError
+  >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vGetPersonalSessionData, data);
+    },
+    responseValidator: async (data) => {
+      return await v.parseAsync(vGetPersonalSessionResponse, data);
+    },
+    security: [
+      {
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
+    url: "/api/admin/v1/personal-sessions/{id}",
+    ...options,
+  });
+};
+
+/**
+ * Revoke a personal session
+ */
+export const revokePersonalSession = <ThrowOnError extends boolean = false>(
+  options: Options<RevokePersonalSessionData, ThrowOnError>,
+) => {
+  return options.client.post<
+    RevokePersonalSessionResponses,
+    RevokePersonalSessionErrors,
+    ThrowOnError
+  >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vRevokePersonalSessionData, data);
+    },
+    responseValidator: async (data) => {
+      return await v.parseAsync(vRevokePersonalSessionResponse, data);
+    },
+    security: [
+      {
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
+    url: "/api/admin/v1/personal-sessions/{id}/revoke",
+    ...options,
+  });
+};
+
+/**
+ * Regenerate a personal session by replacing its personal access token
+ */
+export const regeneratePersonalSession = <ThrowOnError extends boolean = false>(
+  options: Options<RegeneratePersonalSessionData, ThrowOnError>,
+) => {
+  return options.client.post<
+    RegeneratePersonalSessionResponses,
+    RegeneratePersonalSessionErrors,
+    ThrowOnError
+  >({
+    requestValidator: async (data) => {
+      return await v.parseAsync(vRegeneratePersonalSessionData, data);
+    },
+    responseValidator: async (data) => {
+      return await v.parseAsync(vRegeneratePersonalSessionResponse, data);
+    },
+    security: [
+      {
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
+    url: "/api/admin/v1/personal-sessions/{id}/regenerate",
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      ...options.headers,
+    },
   });
 };
 

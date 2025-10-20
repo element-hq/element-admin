@@ -343,6 +343,127 @@ export type SingleResponseForOAuth2Session = {
   links: SelfLinks;
 };
 
+export type PersonalSessionFilter = {
+  "filter[owner_user]"?: Ulid;
+  "filter[owner_client]"?: Ulid;
+  "filter[actor_user]"?: Ulid;
+  "filter[status]"?: PersonalSessionStatus;
+  /**
+   * Filter by access token expiry date
+   */
+  "filter[expires_before]"?: string | null;
+  /**
+   * Filter by access token expiry date
+   */
+  "filter[expires_after]"?: string | null;
+};
+
+export type PersonalSessionStatus = "active" | "revoked";
+
+/**
+ * A top-level response with a page of resources
+ */
+export type PaginatedResponseForPersonalSession = {
+  meta?: PaginationMeta;
+  /**
+   * The list of resources
+   */
+  data?: Array<SingleResourceForPersonalSession> | null;
+  links: PaginationLinks;
+};
+
+/**
+ * A single resource, with its type, ID, attributes and related links
+ */
+export type SingleResourceForPersonalSession = {
+  /**
+   * The type of the resource
+   */
+  type: string;
+  id: Ulid;
+  attributes: PersonalSession;
+  links: SelfLinks;
+  meta?: SingleResourceMeta;
+};
+
+/**
+ * A personal session (session using personal access tokens)
+ */
+export type PersonalSession = {
+  /**
+   * When the session was created
+   */
+  created_at: string;
+  /**
+   * When the session was revoked, if applicable
+   */
+  revoked_at?: string | null;
+  owner_user_id: Ulid;
+  owner_client_id: Ulid;
+  actor_user_id: Ulid;
+  /**
+   * Human-readable name for the session
+   */
+  human_name: string;
+  /**
+   * `OAuth2` scopes for this session
+   */
+  scope: string;
+  /**
+   * When the session was last active
+   */
+  last_active_at?: string | null;
+  /**
+   * IP address of last activity
+   */
+  last_active_ip?: string | null;
+  /**
+   * When the current token for this session expires. The session will need to be regenerated, producing a new access token, after this time. None if the current token won't expire or if the session is revoked.
+   */
+  expires_at?: string | null;
+  /**
+   * The actual access token (only returned on creation)
+   */
+  access_token?: string | null;
+};
+
+/**
+ * JSON payload for the `POST /api/admin/v1/personal-sessions` endpoint
+ */
+export type CreatePersonalSessionRequest = {
+  actor_user_id: Ulid;
+  /**
+   * Human-readable name for the session
+   */
+  human_name: string;
+  /**
+   * `OAuth2` scopes for this session
+   */
+  scope: string;
+  /**
+   * Token expiry time in seconds. If not set, the token won't expire.
+   */
+  expires_in?: number | null;
+};
+
+/**
+ * A top-level response with a single resource
+ */
+export type SingleResponseForPersonalSession = {
+  data: SingleResourceForPersonalSession;
+  links: SelfLinks;
+};
+
+/**
+ * JSON payload for the `POST /api/admin/v1/personal-sessions/{id}/regenerate` endpoint
+ */
+export type RegeneratePersonalSessionRequest = {
+  /**
+   * Token expiry time in seconds. If not set, the token will default to the same lifetime as when originally issued.
+   */
+  expires_in?: number | null;
+};
+
 /**
  * JSON payload for the `POST /api/admin/v1/policy-data`
  */
@@ -1231,6 +1352,200 @@ export type FinishOAuth2SessionResponses = {
 
 export type FinishOAuth2SessionResponse =
   FinishOAuth2SessionResponses[keyof FinishOAuth2SessionResponses];
+
+export type ListPersonalSessionsData = {
+  body?: never;
+  path?: never;
+  query?: {
+    /**
+     * Retrieve the items before the given ID
+     */
+    "page[before]"?: Ulid;
+    /**
+     * Retrieve the items after the given ID
+     */
+    "page[after]"?: Ulid;
+    /**
+     * Retrieve the first N items
+     */
+    "page[first]"?: number | null;
+    /**
+     * Retrieve the last N items
+     */
+    "page[last]"?: number | null;
+    /**
+     * Include the total number of items. Defaults to `true`.
+     */
+    count?: IncludeCount;
+    /**
+     * Filter by owner user ID
+     */
+    "filter[owner_user]"?: Ulid;
+    /**
+     * Filter by owner `OAuth2` client ID
+     */
+    "filter[owner_client]"?: Ulid;
+    /**
+     * Filter by actor user ID
+     */
+    "filter[actor_user]"?: Ulid;
+    /**
+     * Filter by session status
+     */
+    "filter[status]"?: PersonalSessionStatus;
+    /**
+     * Filter by access token expiry date
+     */
+    "filter[expires_before]"?: string | null;
+    /**
+     * Filter by access token expiry date
+     */
+    "filter[expires_after]"?: string | null;
+  };
+  url: "/api/admin/v1/personal-sessions";
+};
+
+export type ListPersonalSessionsErrors = {
+  /**
+   * Client was not found
+   */
+  404: ErrorResponse;
+};
+
+export type ListPersonalSessionsError =
+  ListPersonalSessionsErrors[keyof ListPersonalSessionsErrors];
+
+export type ListPersonalSessionsResponses = {
+  /**
+   * Paginated response of personal sessions
+   */
+  200: PaginatedResponseForPersonalSession;
+};
+
+export type ListPersonalSessionsResponse =
+  ListPersonalSessionsResponses[keyof ListPersonalSessionsResponses];
+
+export type CreatePersonalSessionData = {
+  body: CreatePersonalSessionRequest;
+  path?: never;
+  query?: never;
+  url: "/api/admin/v1/personal-sessions";
+};
+
+export type CreatePersonalSessionErrors = {
+  /**
+   * Invalid scope provided
+   */
+  400: ErrorResponse;
+  /**
+   * User was not found
+   */
+  404: ErrorResponse;
+};
+
+export type CreatePersonalSessionError =
+  CreatePersonalSessionErrors[keyof CreatePersonalSessionErrors];
+
+export type CreatePersonalSessionResponses = {
+  /**
+   * Personal session and personal access token were created
+   */
+  201: SingleResponseForPersonalSession;
+};
+
+export type CreatePersonalSessionResponse =
+  CreatePersonalSessionResponses[keyof CreatePersonalSessionResponses];
+
+export type GetPersonalSessionData = {
+  body?: never;
+  path: {
+    id: Ulid;
+  };
+  query?: never;
+  url: "/api/admin/v1/personal-sessions/{id}";
+};
+
+export type GetPersonalSessionErrors = {
+  /**
+   * Personal session not found
+   */
+  404: ErrorResponse;
+};
+
+export type GetPersonalSessionError =
+  GetPersonalSessionErrors[keyof GetPersonalSessionErrors];
+
+export type GetPersonalSessionResponses = {
+  /**
+   * Personal session details
+   */
+  200: SingleResponseForPersonalSession;
+};
+
+export type GetPersonalSessionResponse =
+  GetPersonalSessionResponses[keyof GetPersonalSessionResponses];
+
+export type RevokePersonalSessionData = {
+  body?: never;
+  path: {
+    id: Ulid;
+  };
+  query?: never;
+  url: "/api/admin/v1/personal-sessions/{id}/revoke";
+};
+
+export type RevokePersonalSessionErrors = {
+  /**
+   * Personal session not found
+   */
+  404: ErrorResponse;
+  /**
+   * Personal session already revoked
+   */
+  409: ErrorResponse;
+};
+
+export type RevokePersonalSessionError =
+  RevokePersonalSessionErrors[keyof RevokePersonalSessionErrors];
+
+export type RevokePersonalSessionResponses = {
+  /**
+   * Personal session was revoked
+   */
+  200: SingleResponseForPersonalSession;
+};
+
+export type RevokePersonalSessionResponse =
+  RevokePersonalSessionResponses[keyof RevokePersonalSessionResponses];
+
+export type RegeneratePersonalSessionData = {
+  body: RegeneratePersonalSessionRequest;
+  path: {
+    id: Ulid;
+  };
+  query?: never;
+  url: "/api/admin/v1/personal-sessions/{id}/regenerate";
+};
+
+export type RegeneratePersonalSessionErrors = {
+  /**
+   * User was not found
+   */
+  404: ErrorResponse;
+};
+
+export type RegeneratePersonalSessionError =
+  RegeneratePersonalSessionErrors[keyof RegeneratePersonalSessionErrors];
+
+export type RegeneratePersonalSessionResponses = {
+  /**
+   * Personal session was regenerated and a personal access token was created
+   */
+  201: SingleResponseForPersonalSession;
+};
+
+export type RegeneratePersonalSessionResponse =
+  RegeneratePersonalSessionResponses[keyof RegeneratePersonalSessionResponses];
 
 export type SetPolicyDataData = {
   body: SetPolicyDataRequest;
