@@ -48,7 +48,13 @@ import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 import { useFilters } from "@/utils/filters";
+import { randomString } from "@/utils/random";
 import { useCurrentChildRoutePath } from "@/utils/routes";
+
+const SYNAPSE_ADMIN_SCOPE = "urn:synapse:admin:*";
+const MATRIX_API_SCOPE = "urn:matrix:client:api:*";
+const DEVICE_SCOPE = "urn:matrix:client:device:";
+const MAS_ADMIN_SCOPE = "urn:mas:admin";
 
 const PersonalTokenSearchParameters = v.object({
   status: v.optional(v.picklist(["active", "revoked"])),
@@ -184,8 +190,53 @@ const PersonalTokenAddButton = ({
     token: string;
     tokenName: string;
   } | null>(null);
+
+  // State for conditional rendering and dependencies
+  const [matrixClientChecked, setMatrixClientChecked] = useState(false);
+  const [deviceChecked, setDeviceChecked] = useState(false);
+  const [synapseAdminChecked, setSynapseAdminChecked] = useState(false);
+
   const queryClient = useQueryClient();
   const intl = useIntl();
+  const from = useCurrentChildRoutePath(Route.id);
+  const navigate = useNavigate({ from });
+
+  // Checkbox handlers with dependency logic
+  const onMatrixClientChecked = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = event.currentTarget.checked;
+      setMatrixClientChecked(newValue);
+      if (!newValue) {
+        setDeviceChecked(false);
+        setSynapseAdminChecked(false);
+      }
+    },
+    [],
+  );
+
+  const onDeviceChecked = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = event.currentTarget.checked;
+      setDeviceChecked(newValue);
+      if (newValue) {
+        setMatrixClientChecked(true);
+      }
+      return newValue;
+    },
+    [],
+  );
+
+  const onSynapseAdminChecked = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = event.currentTarget.checked;
+      setSynapseAdminChecked(newValue);
+      if (newValue) {
+        setMatrixClientChecked(true);
+      }
+      return newValue;
+    },
+    [],
+  );
 
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
@@ -195,8 +246,19 @@ const PersonalTokenAddButton = ({
       const formData = new FormData(event.currentTarget);
       const humanName = formData.get("human_name") as string;
       const actorUserId = formData.get("actor_user_id") as string;
-      const scope = formData.get("scope") as string;
       const expiresInDays = formData.get("expires_in_days") as string;
+
+      // Build scope string from form data
+      const scopes = [];
+      if (formData.get("scope_mas_admin")) scopes.push(MAS_ADMIN_SCOPE);
+      if (formData.get("scope_matrix_client")) scopes.push(MATRIX_API_SCOPE);
+      if (formData.get("scope_synapse_admin")) scopes.push(SYNAPSE_ADMIN_SCOPE);
+      if (formData.get("scope_device")) {
+        const deviceId = (formData.get("device_id") as string) || "";
+        const finalDeviceId = deviceId.trim() || randomString(10);
+        scopes.push(`${DEVICE_SCOPE}${finalDeviceId}`);
+      }
+      const scope = scopes.join(" ");
 
       const parameters: CreatePersonalSessionParameters = {
         actor_user_id: actorUserId,
@@ -224,11 +286,6 @@ const PersonalTokenAddButton = ({
           });
         }
 
-        // Invalidate the list to refresh the data
-        await queryClient.invalidateQueries({
-          queryKey: ["mas", "personal-sessions", serverName],
-        });
-
         toast.success(
           intl.formatMessage({
             id: "pages.personal_tokens.create_success",
@@ -236,6 +293,16 @@ const PersonalTokenAddButton = ({
             description: "Success message when a personal token is created",
           }),
         );
+
+        // Invalidate the list to refresh the data
+        await queryClient.invalidateQueries({
+          queryKey: ["mas", "personal-sessions", serverName],
+        });
+
+        await navigate({
+          to: "/personal-tokens/$tokenId",
+          params: { tokenId: result.data.id },
+        });
       } catch (error) {
         console.error("Failed to create personal token:", error);
         toast.error(
@@ -249,12 +316,15 @@ const PersonalTokenAddButton = ({
         setIsSubmitting(false);
       }
     },
-    [queryClient, serverName, intl],
+    [queryClient, serverName, navigate, intl],
   );
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
     setTokenResponse(null);
+    setMatrixClientChecked(false);
+    setDeviceChecked(false);
+    setSynapseAdminChecked(false);
   }, []);
 
   return (
@@ -309,102 +379,174 @@ const PersonalTokenAddButton = ({
             </div>
           ) : (
             <Form.Root onSubmit={handleSubmit}>
-              <div className="space-y-4">
-                <Form.Field name="human_name" serverInvalid={false}>
-                  <Form.Label>
-                    <FormattedMessage
-                      id="pages.personal_tokens.name_label"
-                      defaultMessage="Token name"
-                      description="Label for the personal token name field"
-                    />
-                  </Form.Label>
-                  <Form.TextControl
-                    required
-                    placeholder={intl.formatMessage({
-                      id: "pages.personal_tokens.name_placeholder",
-                      defaultMessage: "My application token",
-                      description:
-                        "Placeholder for the personal token name field",
-                    })}
+              <Form.Field name="human_name" serverInvalid={false}>
+                <Form.Label>
+                  <FormattedMessage
+                    id="pages.personal_tokens.name_label"
+                    defaultMessage="Token name"
+                    description="Label for the personal token name field"
                   />
-                </Form.Field>
+                </Form.Label>
+                <Form.TextControl
+                  required
+                  placeholder={intl.formatMessage({
+                    id: "pages.personal_tokens.name_placeholder",
+                    defaultMessage: "My application token",
+                    description:
+                      "Placeholder for the personal token name field",
+                  })}
+                />
+              </Form.Field>
 
-                <Form.Field name="actor_user_id" serverInvalid={false}>
+              <Form.Field name="actor_user_id" serverInvalid={false}>
+                <Form.Label>
+                  <FormattedMessage
+                    id="pages.personal_tokens.actor_user_label"
+                    defaultMessage="Acting user ID"
+                    description="Label for the acting user ID field"
+                  />
+                </Form.Label>
+                <Form.TextControl
+                  required
+                  placeholder={intl.formatMessage({
+                    id: "pages.personal_tokens.actor_user_placeholder",
+                    defaultMessage: "01234567890123456789012345",
+                    description: "Placeholder for the acting user ID field",
+                  })}
+                />
+                <Form.HelpMessage>
+                  <FormattedMessage
+                    id="pages.personal_tokens.actor_user_help"
+                    defaultMessage="The ULID of the user this token will act on behalf of"
+                    description="Help text for the acting user ID field"
+                  />
+                </Form.HelpMessage>
+              </Form.Field>
+
+              <Form.InlineField
+                name="scope_mas_admin"
+                control={<Form.CheckboxControl />}
+              >
+                <Form.Label>{MAS_ADMIN_SCOPE}</Form.Label>
+                <Form.HelpMessage>
+                  <FormattedMessage
+                    id="pages.personal_tokens.scope_mas_admin_help"
+                    defaultMessage="Access to the MAS administration API"
+                    description="Help text for MAS admin scope"
+                  />
+                </Form.HelpMessage>
+              </Form.InlineField>
+
+              <Form.InlineField
+                name="scope_matrix_client"
+                control={
+                  <Form.CheckboxControl
+                    readOnly={deviceChecked || synapseAdminChecked}
+                    checked={matrixClientChecked}
+                    onChange={onMatrixClientChecked}
+                  />
+                }
+              >
+                <Form.Label>{MATRIX_API_SCOPE}</Form.Label>
+                <Form.HelpMessage>
+                  <FormattedMessage
+                    id="pages.personal_tokens.scope_matrix_client_help"
+                    defaultMessage="Access to the Matrix Client-Server API"
+                    description="Help text for Matrix Client API scope"
+                  />
+                </Form.HelpMessage>
+              </Form.InlineField>
+
+              <Form.InlineField
+                name="scope_synapse_admin"
+                control={
+                  <Form.CheckboxControl
+                    checked={synapseAdminChecked}
+                    onChange={onSynapseAdminChecked}
+                  />
+                }
+              >
+                <Form.Label>{SYNAPSE_ADMIN_SCOPE}</Form.Label>
+                <Form.HelpMessage>
+                  <FormattedMessage
+                    id="pages.personal_tokens.scope_synapse_admin_help"
+                    defaultMessage="Access to Synapse administration"
+                    description="Help text for Synapse admin scope"
+                  />
+                </Form.HelpMessage>
+              </Form.InlineField>
+
+              <Form.InlineField
+                name="scope_device"
+                control={
+                  <Form.CheckboxControl
+                    checked={deviceChecked}
+                    onChange={onDeviceChecked}
+                    disabled={!matrixClientChecked}
+                  />
+                }
+              >
+                <Form.Label>{DEVICE_SCOPE}</Form.Label>
+                <Form.HelpMessage>
+                  <FormattedMessage
+                    id="pages.personal_tokens.scope_device_help"
+                    defaultMessage="Provision a Matrix device"
+                    description="Help text for device scope"
+                  />
+                </Form.HelpMessage>
+              </Form.InlineField>
+
+              {deviceChecked && (
+                <Form.Field name="device_id" serverInvalid={false}>
                   <Form.Label>
                     <FormattedMessage
-                      id="pages.personal_tokens.actor_user_label"
-                      defaultMessage="Acting user ID"
-                      description="Label for the acting user ID field"
+                      id="pages.personal_tokens.device_id_label"
+                      defaultMessage="Device ID"
+                      description="Label for device ID field"
                     />
                   </Form.Label>
                   <Form.TextControl
-                    required
                     placeholder={intl.formatMessage({
-                      id: "pages.personal_tokens.actor_user_placeholder",
-                      defaultMessage: "01234567890123456789012345",
-                      description: "Placeholder for the acting user ID field",
+                      id: "pages.personal_tokens.device_id_placeholder",
+                      defaultMessage: "ABCDEFGHIJ",
+                      description: "Placeholder for device ID field",
                     })}
                   />
                   <Form.HelpMessage>
                     <FormattedMessage
-                      id="pages.personal_tokens.actor_user_help"
-                      defaultMessage="The ULID of the user this token will act on behalf of"
-                      description="Help text for the acting user ID field"
+                      id="pages.personal_tokens.device_id_help"
+                      defaultMessage="Leave empty to generate a random 10-character device ID"
+                      description="Help text for device ID field"
                     />
                   </Form.HelpMessage>
                 </Form.Field>
+              )}
 
-                <Form.Field name="scope" serverInvalid={false}>
-                  <Form.Label>
-                    <FormattedMessage
-                      id="pages.personal_tokens.scope_label"
-                      defaultMessage="Scopes"
-                      description="Label for the scopes field"
-                    />
-                  </Form.Label>
-                  <Form.TextControl
-                    required
-                    placeholder={intl.formatMessage({
-                      id: "pages.personal_tokens.scope_placeholder",
-                      defaultMessage: "openid profile",
-                      description: "Placeholder for the scopes field",
-                    })}
+              <Form.Field name="expires_in_days" serverInvalid={false}>
+                <Form.Label>
+                  <FormattedMessage
+                    id="pages.personal_tokens.expires_in_label"
+                    defaultMessage="Expires in (days)"
+                    description="Label for the expiry field"
                   />
-                  <Form.HelpMessage>
-                    <FormattedMessage
-                      id="pages.personal_tokens.scope_help"
-                      defaultMessage="Space-separated list of OAuth2 scopes"
-                      description="Help text for the scopes field"
-                    />
-                  </Form.HelpMessage>
-                </Form.Field>
-
-                <Form.Field name="expires_in_days" serverInvalid={false}>
-                  <Form.Label>
-                    <FormattedMessage
-                      id="pages.personal_tokens.expires_in_label"
-                      defaultMessage="Expires in (days)"
-                      description="Label for the expiry field"
-                    />
-                  </Form.Label>
-                  <Form.TextControl
-                    type="number"
-                    min="1"
-                    placeholder={intl.formatMessage({
-                      id: "pages.personal_tokens.expires_in_placeholder",
-                      defaultMessage: "30",
-                      description: "Placeholder for the expiry field",
-                    })}
+                </Form.Label>
+                <Form.TextControl
+                  type="number"
+                  min="1"
+                  placeholder={intl.formatMessage({
+                    id: "pages.personal_tokens.expires_in_placeholder",
+                    defaultMessage: "30",
+                    description: "Placeholder for the expiry field",
+                  })}
+                />
+                <Form.HelpMessage>
+                  <FormattedMessage
+                    id="pages.personal_tokens.expires_in_help"
+                    defaultMessage="Leave empty for tokens that never expire"
+                    description="Help text for the expiry field"
                   />
-                  <Form.HelpMessage>
-                    <FormattedMessage
-                      id="pages.personal_tokens.expires_in_help"
-                      defaultMessage="Leave empty for tokens that never expire"
-                      description="Help text for the expiry field"
-                    />
-                  </Form.HelpMessage>
-                </Form.Field>
-              </div>
+                </Form.HelpMessage>
+              </Form.Field>
 
               <Form.Submit disabled={isSubmitting}>
                 {isSubmitting && <InlineSpinner />}

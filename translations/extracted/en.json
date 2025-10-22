@@ -235,6 +235,18 @@
     "description": "Label for the token creation date field",
     "message": "Created at"
   },
+  "pages.personal_tokens.device_id_help": {
+    "description": "Help text for device ID field",
+    "message": "Leave empty to generate a random 10-character device ID"
+  },
+  "pages.personal_tokens.device_id_label": {
+    "description": "Label for device ID field",
+    "message": "Device ID"
+  },
+  "pages.personal_tokens.device_id_placeholder": {
+    "description": "Placeholder for device ID field",
+    "message": "ABCDEFGHIJ"
+  },
   "pages.personal_tokens.expires_at_column": {
     "description": "Column header for expires at column",
     "message": "Expires at"
@@ -339,17 +351,21 @@
     "description": "Label for the token revocation date field",
     "message": "Revoked at"
   },
-  "pages.personal_tokens.scope_help": {
-    "description": "Help text for the scopes field",
-    "message": "Space-separated list of OAuth2 scopes"
+  "pages.personal_tokens.scope_device_help": {
+    "description": "Help text for device scope",
+    "message": "Provision a Matrix device"
   },
-  "pages.personal_tokens.scope_label": {
-    "description": "Label for the scopes field",
-    "message": "Scopes"
+  "pages.personal_tokens.scope_mas_admin_help": {
+    "description": "Help text for MAS admin scope",
+    "message": "Access to the MAS administration API"
   },
-  "pages.personal_tokens.scope_placeholder": {
-    "description": "Placeholder for the scopes field",
-    "message": "openid profile"
+  "pages.personal_tokens.scope_matrix_client_help": {
+    "description": "Help text for Matrix Client API scope",
+    "message": "Access to the Matrix Client-Server API"
+  },
+  "pages.personal_tokens.scope_synapse_admin_help": {
+    "description": "Help text for Synapse admin scope",
+    "message": "Access to Synapse administration"
   },
   "pages.personal_tokens.scopes_column": {
     "description": "Column header for scopes column",
