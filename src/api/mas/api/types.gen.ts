@@ -347,6 +347,10 @@ export type PersonalSessionFilter = {
   "filter[owner_user]"?: Ulid;
   "filter[owner_client]"?: Ulid;
   "filter[actor_user]"?: Ulid;
+  /**
+   * Retrieve the items with the given scope
+   */
+  "filter[scope]"?: Array<string>;
   "filter[status]"?: PersonalSessionStatus;
   /**
    * Filter by access token expiry date
@@ -356,6 +360,10 @@ export type PersonalSessionFilter = {
    * Filter by access token expiry date
    */
   "filter[expires_after]"?: string | null;
+  /**
+   * Filter by whether the access token has an expiry time
+   */
+  "filter[expires]"?: boolean | null;
 };
 
 export type PersonalSessionStatus = "active" | "revoked";
@@ -398,8 +406,14 @@ export type PersonalSession = {
    * When the session was revoked, if applicable
    */
   revoked_at?: string | null;
-  owner_user_id?: Ulid;
-  owner_client_id?: Ulid;
+  /**
+   * The ID of the user who owns this session (if user-owned)
+   */
+  owner_user_id?: string | null;
+  /**
+   * The ID of the `OAuth2` client who owns this session (if client-owned)
+   */
+  owner_client_id?: string | null;
   actor_user_id: Ulid;
   /**
    * Human-readable name for the session
@@ -459,7 +473,7 @@ export type SingleResponseForPersonalSession = {
  */
 export type RegeneratePersonalSessionRequest = {
   /**
-   * Token expiry time in seconds. If not set, the token will default to the same lifetime as when originally issued.
+   * Token expiry time in seconds. If not set, the token won't expire.
    */
   expires_in?: number | null;
 };
@@ -1390,6 +1404,10 @@ export type ListPersonalSessionsData = {
      */
     "filter[actor_user]"?: Ulid;
     /**
+     * Retrieve the items with the given scope
+     */
+    "filter[scope]"?: Array<string>;
+    /**
      * Filter by session status
      */
     "filter[status]"?: PersonalSessionStatus;
@@ -1401,6 +1419,10 @@ export type ListPersonalSessionsData = {
      * Filter by access token expiry date
      */
     "filter[expires_after]"?: string | null;
+    /**
+     * Filter by whether the access token has an expiry time
+     */
+    "filter[expires]"?: boolean | null;
   };
   url: "/api/admin/v1/personal-sessions";
 };

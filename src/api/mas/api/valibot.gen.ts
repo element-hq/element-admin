@@ -248,6 +248,7 @@ export const vPersonalSessionFilter = v.object({
   "filter[owner_user]": v.optional(vUlid),
   "filter[owner_client]": v.optional(vUlid),
   "filter[actor_user]": v.optional(vUlid),
+  "filter[scope]": v.optional(v.array(v.string()), []),
   "filter[status]": v.optional(vPersonalSessionStatus),
   "filter[expires_before]": v.optional(
     v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
@@ -255,6 +256,7 @@ export const vPersonalSessionFilter = v.object({
   "filter[expires_after]": v.optional(
     v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
   ),
+  "filter[expires]": v.optional(v.union([v.boolean(), v.null()])),
 });
 
 /**
@@ -265,8 +267,8 @@ export const vPersonalSession = v.object({
   revoked_at: v.optional(
     v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
   ),
-  owner_user_id: v.optional(v.union([vUlid, v.null()])),
-  owner_client_id: v.optional(v.union([vUlid, v.null()])),
+  owner_user_id: v.optional(v.union([v.string(), v.null()])),
+  owner_client_id: v.optional(v.union([v.string(), v.null()])),
   actor_user_id: vUlid,
   human_name: v.string(),
   scope: v.string(),
@@ -947,6 +949,7 @@ export const vListPersonalSessionsData = v.object({
       "filter[owner_user]": v.optional(vUlid),
       "filter[owner_client]": v.optional(vUlid),
       "filter[actor_user]": v.optional(vUlid),
+      "filter[scope]": v.optional(v.array(v.string()), []),
       "filter[status]": v.optional(vPersonalSessionStatus),
       "filter[expires_before]": v.optional(
         v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
@@ -954,6 +957,7 @@ export const vListPersonalSessionsData = v.object({
       "filter[expires_after]": v.optional(
         v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
       ),
+      "filter[expires]": v.optional(v.union([v.boolean(), v.null()])),
     }),
   ),
 });

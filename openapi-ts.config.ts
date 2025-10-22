@@ -33,6 +33,26 @@ export default defineConfig({
             : undefined;
         },
 
+        PersonalSession: (schema) => {
+          if (!schema.properties)
+            throw new Error("PersonalSession schema has no properties");
+
+          // openapi-ts doesn't like the nullable ref, so we make this a string
+          // instead instead of the reference to the ULID type
+          schema.properties["owner_user_id"] = {
+            description:
+              "The ID of the user who owns this session (if user-owned)",
+            type: "string",
+            nullable: true,
+          };
+          schema.properties["owner_client_id"] = {
+            description:
+              "The ID of the `OAuth2` client who owns this session (if client-owned)",
+            type: "string",
+            nullable: true,
+          };
+        },
+
         SiteConfig: (schema) => {
           // Only make the `server_name` required, rest can be optional
           schema.required = ["server_name"];
