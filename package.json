@@ -75,7 +75,7 @@
     "@types/react-dom": "19.2.1",
     "@types/semver": "7.7.1",
     "@vitejs/plugin-react": "5.0.4",
-    "babel-plugin-formatjs": "10.5.40",
+    "babel-plugin-formatjs": "10.5.41",
     "babel-plugin-react-compiler": "19.1.0-rc.3",
     "browserslist": "4.26.3",
     "browserslist-to-esbuild": "2.1.1",
