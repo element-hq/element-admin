@@ -227,10 +227,6 @@
     "description": "Button text to create a personal token",
     "message": "Create token"
   },
-  "pages.personal_tokens.created_at_column": {
-    "description": "Column header for created at column",
-    "message": "Created at"
-  },
   "pages.personal_tokens.created_at_label": {
     "description": "Label for the token creation date field",
     "message": "Created at"
@@ -271,9 +267,29 @@
     "description": "Filter label for active personal tokens",
     "message": "Active"
   },
+  "pages.personal_tokens.filter.expires": {
+    "description": "Filter label for tokens that expire",
+    "message": "With an expiry date"
+  },
+  "pages.personal_tokens.filter.no_expiry": {
+    "description": "Filter label for tokens that never expire",
+    "message": "Never expires"
+  },
   "pages.personal_tokens.filter.revoked": {
     "description": "Filter label for revoked personal tokens",
     "message": "Revoked"
+  },
+  "pages.personal_tokens.filter.scope_mas_admin": {
+    "description": "Filter label for MAS admin scope",
+    "message": "Access to the MAS admin API"
+  },
+  "pages.personal_tokens.filter.scope_matrix_client": {
+    "description": "Filter label for Matrix Client API scope",
+    "message": "Access to the Matrix Client-Server API"
+  },
+  "pages.personal_tokens.filter.scope_synapse_admin": {
+    "description": "Filter label for synapse admin scope",
+    "message": "Access to the Synapse admin API"
   },
   "pages.personal_tokens.last_active_column": {
     "description": "Column header for last active column",
@@ -319,13 +335,25 @@
     "description": "Title shown when a personal token is not found",
     "message": "Personal token not found"
   },
+  "pages.personal_tokens.owner_user_label": {
+    "description": "Label for the owner user field",
+    "message": "Owner"
+  },
   "pages.personal_tokens.regenerate_confirm": {
     "description": "Button text to confirm regenerating a personal token",
     "message": "Regenerate token"
   },
+  "pages.personal_tokens.regenerate_error": {
+    "description": "Error message when regenerating a personal token fails",
+    "message": "Failed to regenerate personal token"
+  },
   "pages.personal_tokens.regenerate_expires_help": {
     "description": "Help text for the expiry field when regenerating",
     "message": "Leave empty to keep the same expiry as before, or set a new expiry time"
+  },
+  "pages.personal_tokens.regenerate_success": {
+    "description": "Success message when a personal token is regenerated",
+    "message": "Personal token regenerated successfully"
   },
   "pages.personal_tokens.regenerate_token": {
     "description": "Button text to regenerate a token",
@@ -357,7 +385,7 @@
   },
   "pages.personal_tokens.scope_mas_admin_help": {
     "description": "Help text for MAS admin scope",
-    "message": "Access to the MAS administration API"
+    "message": "Access to the MAS admin API"
   },
   "pages.personal_tokens.scope_matrix_client_help": {
     "description": "Help text for Matrix Client API scope",
@@ -365,11 +393,7 @@
   },
   "pages.personal_tokens.scope_synapse_admin_help": {
     "description": "Help text for Synapse admin scope",
-    "message": "Access to Synapse administration"
-  },
-  "pages.personal_tokens.scopes_column": {
-    "description": "Column header for scopes column",
-    "message": "Scopes"
+    "message": "Access to the Synapse admin API"
   },
   "pages.personal_tokens.scopes_label": {
     "description": "Label for the scopes field",

@@ -4,6 +4,7 @@
 
 import {
   useMutation,
+  useQuery,
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
@@ -11,7 +12,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
   ArrowLeftIcon,
   CloseIcon,
-  PlusIcon,
+  RestartIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
   Badge,
@@ -30,9 +31,9 @@ import {
   personalSessionQuery,
   regeneratePersonalSession,
   revokePersonalSession,
-  type RegeneratePersonalSessionParameters,
+  userQuery,
 } from "@/api/mas";
-import type { SingleResourceForPersonalSession } from "@/api/mas/api/types.gen";
+import type { SingleResourceForPersonalSession } from "@/api/mas/api";
 import { CopyToClipboard } from "@/components/copy";
 import * as Data from "@/components/data";
 import * as Dialog from "@/components/dialog";
@@ -43,9 +44,17 @@ import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 export const Route = createFileRoute("/_console/personal-tokens/$tokenId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
-    await queryClient.ensureQueryData(
+    const { data: session } = await queryClient.ensureQueryData(
       personalSessionQuery(credentials.serverName, params.tokenId),
     );
+    await queryClient.ensureQueryData(
+      userQuery(credentials.serverName, session.attributes.actor_user_id),
+    );
+    if (session.attributes.owner_user_id) {
+      await queryClient.ensureQueryData(
+        userQuery(credentials.serverName, session.attributes.owner_user_id),
+      );
+    }
   },
   component: TokenDetailComponent,
   notFoundComponent: NotFoundComponent,
@@ -103,15 +112,68 @@ const CloseSidebar = () => {
   );
 };
 
+const Scope = ({ scope }: { scope: string }) => {
+  switch (scope) {
+    case "urn:mas:admin": {
+      return (
+        <FormattedMessage
+          id="pages.personal_tokens.scope_mas_admin_help"
+          defaultMessage="Access to the MAS admin API"
+          description="Help text for MAS admin scope"
+        />
+      );
+    }
+    case "urn:matrix:client:api:*": {
+      return (
+        <FormattedMessage
+          id="pages.personal_tokens.scope_matrix_client_help"
+          defaultMessage="Access to the Matrix Client-Server API"
+          description="Help text for Matrix Client API scope"
+        />
+      );
+    }
+    case "urn:synapse:admin:*": {
+      return (
+        <FormattedMessage
+          id="pages.personal_tokens.scope_synapse_admin_help"
+          defaultMessage="Access to the Synapse admin API"
+          description="Help text for Synapse admin scope"
+        />
+      );
+    }
+    default: {
+      return scope;
+    }
+  }
+};
+
 function TokenDetailComponent() {
   const intl = useIntl();
   const { credentials } = Route.useRouteContext();
   const parameters = Route.useParams();
   const queryClient = useQueryClient();
 
-  const { data } = useSuspenseQuery(
+  const {
+    data: { data: token },
+  } = useSuspenseQuery(
     personalSessionQuery(credentials.serverName, parameters.tokenId),
   );
+
+  const {
+    data: { data: actor },
+  } = useSuspenseQuery(
+    userQuery(credentials.serverName, token.attributes.actor_user_id),
+  );
+
+  const { data: ownerData } = useQuery({
+    ...userQuery(credentials.serverName, token.attributes.owner_user_id || ""),
+    enabled: !!token.attributes.owner_user_id,
+  });
+
+  const actorMxid = `@${actor.attributes.username}:${credentials.serverName}`;
+  const ownerMxid = ownerData
+    ? `@${ownerData.data.attributes.username}:${credentials.serverName}`
+    : undefined;
 
   const revokeTokenMutation = useMutation({
     mutationFn: async () =>
@@ -142,41 +204,14 @@ function TokenDetailComponent() {
     },
   });
 
-  const regenerateTokenMutation = useMutation({
-    mutationFn: async (
-      regenerateParameters: RegeneratePersonalSessionParameters,
-    ) =>
-      regeneratePersonalSession(
-        queryClient,
-        credentials.serverName,
-        parameters.tokenId,
-        regenerateParameters,
-      ),
-    onSuccess: (data) => {
-      // Update the token query data
-      queryClient.setQueryData(
-        ["mas", "personal-session", credentials.serverName, parameters.tokenId],
-        data,
-      );
-
-      // Invalidate tokens list query to reflect new data
-      queryClient.invalidateQueries({
-        queryKey: ["mas", "personal-sessions", credentials.serverName],
-      });
-    },
-  });
-
-  const token = data.data;
-  const tokenAttributes = token.attributes;
+  const scope = token.attributes.scope.split(" ");
 
   return (
     <Navigation.Details>
       <CloseSidebar />
 
       <div className="flex flex-col gap-4">
-        <H3 className="flex items-center gap-2">
-          {tokenAttributes.human_name}
-        </H3>
+        <H3 className="text-center">{token.attributes.human_name}</H3>
 
         <Data.Grid>
           <Data.Item>
@@ -188,7 +223,7 @@ function TokenDetailComponent() {
               />
             </Data.Title>
             <Data.Value>
-              <PersonalTokenStatusBadge token={tokenAttributes} />
+              <PersonalTokenStatusBadge token={token} />
             </Data.Value>
           </Data.Item>
 
@@ -200,12 +235,21 @@ function TokenDetailComponent() {
                 description="Label for the acting user field"
               />
             </Data.Title>
-            <Data.Value>
-              <Text family="mono" size="sm">
-                {tokenAttributes.actor_user_id}
-              </Text>
-            </Data.Value>
+            <Data.Value>{actorMxid}</Data.Value>
           </Data.Item>
+
+          {ownerData && (
+            <Data.Item>
+              <Data.Title>
+                <FormattedMessage
+                  id="pages.personal_tokens.owner_user_label"
+                  defaultMessage="Owner"
+                  description="Label for the owner user field"
+                />
+              </Data.Title>
+              <Data.Value>{ownerMxid}</Data.Value>
+            </Data.Item>
+          )}
 
           <Data.Item>
             <Data.Title>
@@ -215,7 +259,11 @@ function TokenDetailComponent() {
                 description="Label for the scopes field"
               />
             </Data.Title>
-            <Data.Value>{tokenAttributes.scope}</Data.Value>
+            {scope.map((scope) => (
+              <Data.Value key={scope}>
+                <Scope scope={scope} />
+              </Data.Value>
+            ))}
           </Data.Item>
 
           <Data.Item>
@@ -228,7 +276,7 @@ function TokenDetailComponent() {
             </Data.Title>
             <Data.Value>
               {computeHumanReadableDateTimeStringFromUtc(
-                tokenAttributes.created_at,
+                token.attributes.created_at,
               )}
             </Data.Value>
           </Data.Item>
@@ -242,9 +290,9 @@ function TokenDetailComponent() {
               />
             </Data.Title>
             <Data.Value>
-              {tokenAttributes.expires_at
+              {token.attributes.expires_at
                 ? computeHumanReadableDateTimeStringFromUtc(
-                    tokenAttributes.expires_at,
+                    token.attributes.expires_at,
                   )
                 : intl.formatMessage({
                     id: "pages.personal_tokens.never_expires",
@@ -255,7 +303,7 @@ function TokenDetailComponent() {
             </Data.Value>
           </Data.Item>
 
-          {tokenAttributes.last_active_at && (
+          {token.attributes.last_active_at && (
             <Data.Item>
               <Data.Title>
                 <FormattedMessage
@@ -266,13 +314,13 @@ function TokenDetailComponent() {
               </Data.Title>
               <Data.Value>
                 {computeHumanReadableDateTimeStringFromUtc(
-                  tokenAttributes.last_active_at,
+                  token.attributes.last_active_at,
                 )}
               </Data.Value>
             </Data.Item>
           )}
 
-          {tokenAttributes.last_active_ip && (
+          {token.attributes.last_active_ip && (
             <Data.Item>
               <Data.Title>
                 <FormattedMessage
@@ -281,15 +329,11 @@ function TokenDetailComponent() {
                   description="Label for the last active IP field"
                 />
               </Data.Title>
-              <Data.Value>
-                <Text family="mono" size="sm">
-                  {tokenAttributes.last_active_ip}
-                </Text>
-              </Data.Value>
+              <Data.Value>{token.attributes.last_active_ip}</Data.Value>
             </Data.Item>
           )}
 
-          {tokenAttributes.revoked_at && (
+          {token.attributes.revoked_at && (
             <Data.Item>
               <Data.Title>
                 <FormattedMessage
@@ -300,63 +344,52 @@ function TokenDetailComponent() {
               </Data.Title>
               <Data.Value>
                 {computeHumanReadableDateTimeStringFromUtc(
-                  tokenAttributes.revoked_at,
+                  token.attributes.revoked_at,
                 )}
               </Data.Value>
             </Data.Item>
           )}
         </Data.Grid>
 
-        <div className="flex flex-col gap-3">
-          {!tokenAttributes.revoked_at && (
-            <>
-              <RegenerateTokenModal
-                token={token}
-                serverName={credentials.serverName}
-                tokenId={parameters.tokenId}
-                onRegenerate={(parameters) =>
-                  regenerateTokenMutation.mutate(parameters)
-                }
-                isLoading={regenerateTokenMutation.isPending}
-                regeneratedToken={
-                  regenerateTokenMutation.data?.data.attributes.access_token ||
-                  undefined
-                }
-              />
+        {!token.attributes.revoked_at && (
+          <>
+            <RegenerateTokenModal
+              token={token}
+              serverName={credentials.serverName}
+            />
 
-              <Button
-                type="button"
-                size="sm"
-                kind="secondary"
-                destructive
-                disabled={revokeTokenMutation.isPending}
-                onClick={() => revokeTokenMutation.mutate()}
-              >
-                {revokeTokenMutation.isPending && (
-                  <InlineSpinner className="mr-2" />
-                )}
-                <FormattedMessage
-                  id="pages.personal_tokens.revoke_token"
-                  defaultMessage="Revoke token"
-                  description="Button text to revoke a token"
-                />
-              </Button>
-            </>
-          )}
-        </div>
+            <Button
+              type="button"
+              size="sm"
+              kind="secondary"
+              destructive
+              disabled={revokeTokenMutation.isPending}
+              onClick={() => revokeTokenMutation.mutate()}
+            >
+              {revokeTokenMutation.isPending && (
+                <InlineSpinner className="mr-2" />
+              )}
+              <FormattedMessage
+                id="pages.personal_tokens.revoke_token"
+                defaultMessage="Revoke token"
+                description="Button text to revoke a token"
+              />
+            </Button>
+          </>
+        )}
       </div>
     </Navigation.Details>
   );
 }
 
 interface PersonalTokenStatusBadgeProps {
-  token: SingleResourceForPersonalSession["attributes"];
+  token: SingleResourceForPersonalSession;
 }
 
 function PersonalTokenStatusBadge({
   token,
 }: PersonalTokenStatusBadgeProps): React.ReactElement {
-  if (token.revoked_at) {
+  if (token.attributes.revoked_at) {
     return (
       <Badge kind="grey">
         <FormattedMessage
@@ -368,8 +401,8 @@ function PersonalTokenStatusBadge({
     );
   }
 
-  if (token.expires_at) {
-    const expiryDate = new Date(token.expires_at);
+  if (token.attributes.expires_at) {
+    const expiryDate = new Date(token.attributes.expires_at);
     const now = new Date();
     if (expiryDate <= now) {
       return (
@@ -398,155 +431,211 @@ function PersonalTokenStatusBadge({
 interface RegenerateTokenModalProps {
   token: SingleResourceForPersonalSession;
   serverName: string;
-  tokenId: string;
-  onRegenerate: (parameters: RegeneratePersonalSessionParameters) => void;
-  isLoading: boolean;
-  regeneratedToken?: string;
 }
 
 function RegenerateTokenModal({
-  onRegenerate,
-  isLoading,
-  regeneratedToken,
+  token,
+  serverName,
 }: RegenerateTokenModalProps) {
+  const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
   const intl = useIntl();
+
+  const regenerateTokenMutation = useMutation({
+    mutationFn: async (expiresIn: null | number) =>
+      regeneratePersonalSession(queryClient, serverName, token.id, {
+        expires_in: expiresIn,
+      }),
+    onError: () => {
+      toast.error(
+        intl.formatMessage({
+          id: "pages.personal_tokens.regenerate_error",
+          defaultMessage: "Failed to regenerate personal token",
+          description: "Error message when regenerating a personal token fails",
+        }),
+      );
+    },
+    onSuccess: (data) => {
+      toast.success(
+        intl.formatMessage({
+          id: "pages.personal_tokens.regenerate_success",
+          defaultMessage: "Personal token regenerated successfully",
+          description: "Success message when a personal token is regenerated",
+        }),
+      );
+
+      // Update the token query data
+      queryClient.setQueryData(
+        ["mas", "personal-session", serverName, token.id],
+        data,
+      );
+
+      // Invalidate tokens list query to reflect new data
+      queryClient.invalidateQueries({
+        queryKey: ["mas", "personal-sessions", serverName],
+      });
+    },
+  });
+
+  const {
+    mutate,
+    isPending,
+    data: mutationData,
+    reset,
+  } = regenerateTokenMutation;
 
   const handleSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
+      if (isPending) {
+        return;
+      }
 
       const formData = new FormData(event.currentTarget);
       const expiresInDays = formData.get("expires_in_days") as string;
 
-      const parameters: RegeneratePersonalSessionParameters = {};
+      const expiresIn =
+        expiresInDays && expiresInDays !== ""
+          ? Number.parseInt(expiresInDays, 10) * 24 * 60 * 60
+          : null;
 
-      if (expiresInDays && expiresInDays !== "") {
-        parameters.expires_in =
-          Number.parseInt(expiresInDays, 10) * 24 * 60 * 60; // Convert days to seconds
-      }
-
-      onRegenerate(parameters);
+      mutate(expiresIn);
     },
-    [onRegenerate],
+    [mutate, isPending],
   );
 
   const handleClose = useCallback(() => {
+    if (isPending) {
+      return;
+    }
+
     setIsOpen(false);
-  }, []);
+    reset();
+  }, [isPending, reset]);
 
   return (
-    <>
-      <Button
-        type="button"
-        size="sm"
-        kind="secondary"
-        Icon={PlusIcon}
-        onClick={() => setIsOpen(true)}
-      >
-        <FormattedMessage
-          id="pages.personal_tokens.regenerate_token"
-          defaultMessage="Regenerate token"
-          description="Button text to regenerate a token"
-        />
-      </Button>
+    <Dialog.Root
+      open={isOpen}
+      onOpenChange={setIsOpen}
+      trigger={
+        <Button
+          type="button"
+          size="sm"
+          kind="secondary"
+          Icon={RestartIcon}
+          onClick={() => setIsOpen(true)}
+        >
+          <FormattedMessage
+            id="pages.personal_tokens.regenerate_token"
+            defaultMessage="Regenerate token"
+            description="Button text to regenerate a token"
+          />
+        </Button>
+      }
+    >
+      <Dialog.Title>
+        {mutationData?.data.attributes.access_token ? (
+          <FormattedMessage
+            id="pages.personal_tokens.token_regenerated_title"
+            defaultMessage="Token regenerated"
+            description="Title of the dialog when a personal token is successfully regenerated"
+          />
+        ) : (
+          <FormattedMessage
+            id="pages.personal_tokens.regenerate_token_title"
+            defaultMessage="Regenerate personal token"
+            description="Title of the regenerate personal token dialog"
+          />
+        )}
+      </Dialog.Title>
 
-      <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-        <Dialog.Title>
-          {regeneratedToken ? (
-            <FormattedMessage
-              id="pages.personal_tokens.token_regenerated_title"
-              defaultMessage="Token regenerated"
-              description="Title of the dialog when a personal token is successfully regenerated"
-            />
-          ) : (
-            <FormattedMessage
-              id="pages.personal_tokens.regenerate_token_title"
-              defaultMessage="Regenerate personal token"
-              description="Title of the regenerate personal token dialog"
-            />
-          )}
-        </Dialog.Title>
+      <Dialog.Description asChild>
+        {mutationData?.data.attributes.access_token ? (
+          <div className="space-y-4">
+            <Text className="text-text-secondary">
+              <FormattedMessage
+                id="pages.personal_tokens.token_regenerated_description"
+                defaultMessage="Your personal token has been regenerated. Copy it now as it will not be shown again."
+                description="Description shown when a personal token is regenerated"
+              />
+            </Text>
 
-        <Dialog.Description asChild>
-          {regeneratedToken ? (
+            <div className="flex gap-4 items-center">
+              <Form.TextInput
+                className="flex-1"
+                readOnly
+                value={mutationData?.data.attributes.access_token || ""}
+              />
+              <CopyToClipboard
+                value={mutationData?.data.attributes.access_token || ""}
+              />
+            </div>
+          </div>
+        ) : (
+          <Form.Root onSubmit={handleSubmit}>
             <div className="space-y-4">
               <Text className="text-text-secondary">
                 <FormattedMessage
-                  id="pages.personal_tokens.token_regenerated_description"
-                  defaultMessage="Your personal token has been regenerated. Copy it now as it will not be shown again."
-                  description="Description shown when a personal token is regenerated"
+                  id="pages.personal_tokens.regenerate_warning"
+                  defaultMessage="This will generate a new access token and invalidate the current one. Any applications using the current token will need to be updated."
+                  description="Warning message shown when regenerating a personal token"
                 />
               </Text>
 
-              <div className="flex items-center gap-2 p-3 bg-bg-subtle rounded border">
-                <Text family="mono" size="sm" className="flex-1 break-all">
-                  {regeneratedToken}
-                </Text>
-                <CopyToClipboard value={regeneratedToken} />
-              </div>
-            </div>
-          ) : (
-            <Form.Root onSubmit={handleSubmit}>
-              <div className="space-y-4">
-                <Text className="text-text-secondary">
+              <Form.Field name="expires_in_days" serverInvalid={false}>
+                <Form.Label>
                   <FormattedMessage
-                    id="pages.personal_tokens.regenerate_warning"
-                    defaultMessage="This will generate a new access token and invalidate the current one. Any applications using the current token will need to be updated."
-                    description="Warning message shown when regenerating a personal token"
+                    id="pages.personal_tokens.expires_in_label"
+                    defaultMessage="Expires in (days)"
+                    description="Label for the expiry field"
                   />
-                </Text>
-
-                <Form.Field name="expires_in_days" serverInvalid={false}>
-                  <Form.Label>
-                    <FormattedMessage
-                      id="pages.personal_tokens.expires_in_label"
-                      defaultMessage="Expires in (days)"
-                      description="Label for the expiry field"
-                    />
-                  </Form.Label>
-                  <Form.TextControl
-                    type="number"
-                    min="1"
-                    placeholder={intl.formatMessage({
-                      id: "pages.personal_tokens.expires_in_placeholder",
-                      defaultMessage: "30",
-                      description: "Placeholder for the expiry field",
-                    })}
-                  />
-                  <Form.HelpMessage>
-                    <FormattedMessage
-                      id="pages.personal_tokens.regenerate_expires_help"
-                      defaultMessage="Leave empty to keep the same expiry as before, or set a new expiry time"
-                      description="Help text for the expiry field when regenerating"
-                    />
-                  </Form.HelpMessage>
-                </Form.Field>
-              </div>
-
-              <Form.Submit disabled={isLoading} destructive>
-                {isLoading && <InlineSpinner />}
-                <FormattedMessage
-                  id="pages.personal_tokens.regenerate_confirm"
-                  defaultMessage="Regenerate token"
-                  description="Button text to confirm regenerating a personal token"
+                </Form.Label>
+                <Form.TextControl
+                  type="number"
+                  min="1"
+                  placeholder={intl.formatMessage({
+                    id: "pages.personal_tokens.expires_in_placeholder",
+                    defaultMessage: "30",
+                    description: "Placeholder for the expiry field",
+                  })}
                 />
-              </Form.Submit>
-            </Form.Root>
-          )}
-        </Dialog.Description>
+                <Form.HelpMessage>
+                  <FormattedMessage
+                    id="pages.personal_tokens.regenerate_expires_help"
+                    defaultMessage="Leave empty to keep the same expiry as before, or set a new expiry time"
+                    description="Help text for the expiry field when regenerating"
+                  />
+                </Form.HelpMessage>
+              </Form.Field>
+            </div>
 
-        <Dialog.Close asChild>
-          <Button
-            type="button"
-            kind="tertiary"
-            onClick={handleClose}
-            disabled={isLoading}
-          >
-            <FormattedMessage {...messages.actionCancel} />
-          </Button>
-        </Dialog.Close>
-      </Dialog.Root>
-    </>
+            <Form.Submit
+              disabled={isPending}
+              Icon={isPending ? undefined : RestartIcon}
+              kind="secondary"
+              destructive
+            >
+              {isPending && <InlineSpinner />}
+              <FormattedMessage
+                id="pages.personal_tokens.regenerate_confirm"
+                defaultMessage="Regenerate token"
+                description="Button text to confirm regenerating a personal token"
+              />
+            </Form.Submit>
+          </Form.Root>
+        )}
+      </Dialog.Description>
+
+      <Dialog.Close asChild>
+        <Button
+          type="button"
+          kind="tertiary"
+          onClick={handleClose}
+          disabled={isPending}
+        >
+          <FormattedMessage {...messages.actionCancel} />
+        </Button>
+      </Dialog.Close>
+    </Dialog.Root>
   );
 }

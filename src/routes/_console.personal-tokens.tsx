@@ -3,6 +3,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 import {
+  useMutation,
+  useQuery,
   useQueryClient,
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
@@ -13,10 +15,11 @@ import {
   createFileRoute,
   useNavigate,
 } from "@tanstack/react-router";
-import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import type { ColumnDef } from "@tanstack/react-table";
+import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { PlusIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
+  Avatar,
   Badge,
   Button,
   CheckboxMenuItem,
@@ -24,19 +27,25 @@ import {
   InlineSpinner,
   Text,
 } from "@vector-im/compound-web";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { Suspense, useCallback, useMemo, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
-import { defineMessage, FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage, defineMessage, useIntl } from "react-intl";
 import * as v from "valibot";
 
 import {
   type CreatePersonalSessionParameters,
-  createPersonalSession,
-  personalSessionsInfiniteQuery,
   type PersonalSessionListParameters,
+  createPersonalSession,
   personalSessionsCountQuery,
+  personalSessionsInfiniteQuery,
+  userQuery,
 } from "@/api/mas";
 import type { SingleResourceForPersonalSession } from "@/api/mas/api/types.gen";
+import {
+  mediaThumbnailQuery,
+  profileQuery,
+  wellKnownQuery,
+} from "@/api/matrix";
 import { CopyToClipboard } from "@/components/copy";
 import * as Dialog from "@/components/dialog";
 import { TextLink } from "@/components/link";
@@ -46,6 +55,7 @@ import * as Placeholder from "@/components/placeholder";
 import * as Table from "@/components/table";
 import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
+import { useImageBlob } from "@/utils/blob";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 import { useFilters } from "@/utils/filters";
 import { randomString } from "@/utils/random";
@@ -59,8 +69,8 @@ const MAS_ADMIN_SCOPE = "urn:mas:admin";
 const PersonalTokenSearchParameters = v.object({
   status: v.optional(v.picklist(["active", "revoked"])),
   actor_user: v.optional(v.string()),
-  expires_before: v.optional(v.string()),
-  expires_after: v.optional(v.string()),
+  expires: v.optional(v.boolean()),
+  scope: v.optional(v.string()),
 });
 
 const titleMessage = defineMessage({
@@ -82,12 +92,8 @@ export const Route = createFileRoute("/_console/personal-tokens")({
     parameters: {
       ...(search.status !== undefined && { status: search.status }),
       ...(search.actor_user !== undefined && { actor_user: search.actor_user }),
-      ...(search.expires_before !== undefined && {
-        expires_before: search.expires_before,
-      }),
-      ...(search.expires_after !== undefined && {
-        expires_after: search.expires_after,
-      }),
+      ...(search.expires !== undefined && { expires: search.expires }),
+      ...(search.scope !== undefined && { scope: search.scope.split(" ") }),
     } satisfies PersonalSessionListParameters,
   }),
   loader: async ({
@@ -185,11 +191,6 @@ const PersonalTokenAddButton = ({
   serverName,
 }: PersonalTokenAddButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [tokenResponse, setTokenResponse] = useState<{
-    token: string;
-    tokenName: string;
-  } | null>(null);
 
   // State for conditional rendering and dependencies
   const [matrixClientChecked, setMatrixClientChecked] = useState(false);
@@ -238,10 +239,50 @@ const PersonalTokenAddButton = ({
     [],
   );
 
-  const handleSubmit = useCallback(
-    async (event: React.FormEvent<HTMLFormElement>) => {
+  const {
+    mutate,
+    isPending,
+    data: mutationData,
+    reset,
+  } = useMutation({
+    mutationFn: (parameters: CreatePersonalSessionParameters) =>
+      createPersonalSession(queryClient, serverName, parameters),
+    onError: () => {
+      toast.error(
+        intl.formatMessage({
+          id: "pages.personal_tokens.create_error",
+          defaultMessage: "Failed to create personal token",
+          description: "Error message when creating a personal token fails",
+        }),
+      );
+    },
+    onSuccess: async (result) => {
+      toast.success(
+        intl.formatMessage({
+          id: "pages.personal_tokens.create_success",
+          defaultMessage: "Personal token created successfully",
+          description: "Success message when a personal token is created",
+        }),
+      );
+
+      // Invalidate the list to refresh the data
+      await queryClient.invalidateQueries({
+        queryKey: ["mas", "personal-sessions", serverName],
+      });
+
+      await navigate({
+        to: "/personal-tokens/$tokenId",
+        params: { tokenId: result.data.id },
+      });
+    },
+  });
+
+  const onSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      setIsSubmitting(true);
+      if (isPending) {
+        return;
+      }
 
       const formData = new FormData(event.currentTarget);
       const humanName = formData.get("human_name") as string;
@@ -271,61 +312,24 @@ const PersonalTokenAddButton = ({
           Number.parseInt(expiresInDays, 10) * 24 * 60 * 60; // Convert days to seconds
       }
 
-      try {
-        const result = await createPersonalSession(
-          queryClient,
-          serverName,
-          parameters,
-        );
-
-        // Show the token once
-        if (result.data.attributes.access_token) {
-          setTokenResponse({
-            token: result.data.attributes.access_token,
-            tokenName: humanName,
-          });
-        }
-
-        toast.success(
-          intl.formatMessage({
-            id: "pages.personal_tokens.create_success",
-            defaultMessage: "Personal token created successfully",
-            description: "Success message when a personal token is created",
-          }),
-        );
-
-        // Invalidate the list to refresh the data
-        await queryClient.invalidateQueries({
-          queryKey: ["mas", "personal-sessions", serverName],
-        });
-
-        await navigate({
-          to: "/personal-tokens/$tokenId",
-          params: { tokenId: result.data.id },
-        });
-      } catch (error) {
-        console.error("Failed to create personal token:", error);
-        toast.error(
-          intl.formatMessage({
-            id: "pages.personal_tokens.create_error",
-            defaultMessage: "Failed to create personal token",
-            description: "Error message when creating a personal token fails",
-          }),
-        );
-      } finally {
-        setIsSubmitting(false);
-      }
+      mutate(parameters);
     },
-    [queryClient, serverName, navigate, intl],
+    [mutate, isPending],
   );
 
   const handleClose = useCallback(() => {
+    // Prevent closing if mutation is pending
+    if (isPending) {
+      return;
+    }
+
     setIsOpen(false);
-    setTokenResponse(null);
+    // Reset mutation data and form state
+    reset();
     setMatrixClientChecked(false);
     setDeviceChecked(false);
     setSynapseAdminChecked(false);
-  }, []);
+  }, [isPending, reset]);
 
   return (
     <>
@@ -344,7 +348,7 @@ const PersonalTokenAddButton = ({
 
       <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
         <Dialog.Title>
-          {tokenResponse ? (
+          {mutationData?.data.attributes.access_token ? (
             <FormattedMessage
               id="pages.personal_tokens.token_created_title"
               defaultMessage="Personal token created"
@@ -360,7 +364,7 @@ const PersonalTokenAddButton = ({
         </Dialog.Title>
 
         <Dialog.Description asChild>
-          {tokenResponse ? (
+          {mutationData?.data.attributes.access_token ? (
             <div className="space-y-4">
               <Text className="text-text-secondary">
                 <FormattedMessage
@@ -370,15 +374,19 @@ const PersonalTokenAddButton = ({
                 />
               </Text>
 
-              <div className="flex items-center gap-2 p-3 bg-bg-subtle rounded border">
-                <Text family="mono" size="sm" className="flex-1 break-all">
-                  {tokenResponse.token}
-                </Text>
-                <CopyToClipboard value={tokenResponse.token} />
+              <div className="flex gap-4 items-center">
+                <Form.TextInput
+                  className="flex-1"
+                  readOnly
+                  value={mutationData?.data.attributes.access_token}
+                />
+                <CopyToClipboard
+                  value={mutationData?.data.attributes.access_token || ""}
+                />
               </div>
             </div>
           ) : (
-            <Form.Root onSubmit={handleSubmit}>
+            <Form.Root onSubmit={onSubmit}>
               <Form.Field name="human_name" serverInvalid={false}>
                 <Form.Label>
                   <FormattedMessage
@@ -431,7 +439,7 @@ const PersonalTokenAddButton = ({
                 <Form.HelpMessage>
                   <FormattedMessage
                     id="pages.personal_tokens.scope_mas_admin_help"
-                    defaultMessage="Access to the MAS administration API"
+                    defaultMessage="Access to the MAS admin API"
                     description="Help text for MAS admin scope"
                   />
                 </Form.HelpMessage>
@@ -470,7 +478,7 @@ const PersonalTokenAddButton = ({
                 <Form.HelpMessage>
                   <FormattedMessage
                     id="pages.personal_tokens.scope_synapse_admin_help"
-                    defaultMessage="Access to Synapse administration"
+                    defaultMessage="Access to the Synapse admin API"
                     description="Help text for Synapse admin scope"
                   />
                 </Form.HelpMessage>
@@ -548,8 +556,8 @@ const PersonalTokenAddButton = ({
                 </Form.HelpMessage>
               </Form.Field>
 
-              <Form.Submit disabled={isSubmitting}>
-                {isSubmitting && <InlineSpinner />}
+              <Form.Submit disabled={isPending}>
+                {isPending && <InlineSpinner />}
                 <FormattedMessage
                   id="pages.personal_tokens.create_token"
                   defaultMessage="Create token"
@@ -565,13 +573,70 @@ const PersonalTokenAddButton = ({
             type="button"
             kind="tertiary"
             onClick={handleClose}
-            disabled={isSubmitting}
+            disabled={isPending}
           >
             <FormattedMessage {...messages.actionCancel} />
           </Button>
         </Dialog.Close>
       </Dialog.Root>
     </>
+  );
+};
+
+const useMxid = (serverName: string, userId: string): string => {
+  const { data } = useSuspenseQuery(userQuery(serverName, userId));
+  return `@${data.data.attributes.username}:${serverName}`;
+};
+
+const useUserAvatar = (
+  synapseRoot: string,
+  userId: string,
+): string | undefined => {
+  const { data: profile } = useQuery(profileQuery(synapseRoot, userId));
+  const { data: avatarBlob } = useQuery(
+    mediaThumbnailQuery(synapseRoot, profile?.avatar_url),
+  );
+  return useImageBlob(avatarBlob);
+};
+
+const useUserDisplayName = (
+  synapseRoot: string,
+  userId: string,
+): string | undefined => {
+  const { data: profile } = useQuery(profileQuery(synapseRoot, userId));
+  return profile?.displayname;
+};
+
+interface UserCellProps {
+  userId: string;
+  serverName: string;
+}
+const UserCell = ({ userId, serverName }: UserCellProps) => {
+  const { data: wellKnown } = useSuspenseQuery(wellKnownQuery(serverName));
+  const synapseRoot = wellKnown["m.homeserver"].base_url;
+  const mxid = useMxid(serverName, userId);
+  const displayName = useUserDisplayName(synapseRoot, mxid);
+  const avatar = useUserAvatar(synapseRoot, mxid);
+  return (
+    <div className="flex items-center gap-3">
+      <Avatar id={mxid} name={displayName || mxid} src={avatar} size="32px" />
+      <div className="flex flex-1 flex-col min-w-0">
+        {displayName ? (
+          <>
+            <Text size="md" weight="semibold" className="text-text-primary">
+              {displayName}
+            </Text>
+            <Text size="sm" className="text-text-secondary">
+              {mxid}
+            </Text>
+          </>
+        ) : (
+          <Text size="md" weight="semibold" className="text-text-primary">
+            {mxid}
+          </Text>
+        )}
+      </div>
+    </div>
   );
 };
 
@@ -605,6 +670,51 @@ const filtersDefinition = [
       id: "pages.personal_tokens.filter.revoked",
       defaultMessage: "Revoked",
       description: "Filter label for revoked personal tokens",
+    }),
+  },
+  {
+    key: "expires",
+    value: true,
+    message: defineMessage({
+      id: "pages.personal_tokens.filter.expires",
+      defaultMessage: "With an expiry date",
+      description: "Filter label for tokens that expire",
+    }),
+  },
+  {
+    key: "expires",
+    value: false,
+    message: defineMessage({
+      id: "pages.personal_tokens.filter.no_expiry",
+      defaultMessage: "Never expires",
+      description: "Filter label for tokens that never expire",
+    }),
+  },
+  {
+    key: "scope",
+    value: SYNAPSE_ADMIN_SCOPE,
+    message: defineMessage({
+      id: "pages.personal_tokens.filter.scope_synapse_admin",
+      defaultMessage: "Access to the Synapse admin API",
+      description: "Filter label for synapse admin scope",
+    }),
+  },
+  {
+    key: "scope",
+    value: MAS_ADMIN_SCOPE,
+    message: defineMessage({
+      id: "pages.personal_tokens.filter.scope_mas_admin",
+      defaultMessage: "Access to the MAS admin API",
+      description: "Filter label for MAS admin scope",
+    }),
+  },
+  {
+    key: "scope",
+    value: MATRIX_API_SCOPE,
+    message: defineMessage({
+      id: "pages.personal_tokens.filter.scope_matrix_client",
+      defaultMessage: "Access to the Matrix Client-Server API",
+      description: "Filter label for Matrix Client API scope",
     }),
   },
 ] as const;
@@ -666,42 +776,47 @@ function RouteComponent() {
         cell: ({ row }) => {
           const token = row.original;
           return (
-            <Text size="sm" className="text-text-secondary font-mono">
-              {token.attributes.actor_user_id}
-            </Text>
+            <Suspense fallback={<Placeholder.Text />}>
+              <UserCell
+                userId={token.attributes.actor_user_id}
+                serverName={credentials.serverName}
+              />
+            </Suspense>
           );
         },
       },
       {
-        id: "scopes",
+        id: "status",
         header: intl.formatMessage({
-          id: "pages.personal_tokens.scopes_column",
-          defaultMessage: "Scopes",
-          description: "Column header for scopes column",
+          id: "pages.personal_tokens.status.column",
+          defaultMessage: "Status",
+          description: "Column header for status column",
+        }),
+        cell: ({ row }) => {
+          const token = row.original;
+          return <PersonalTokenStatusBadge token={token.attributes} />;
+        },
+      },
+      {
+        id: "lastActive",
+        header: intl.formatMessage({
+          id: "pages.personal_tokens.last_active_column",
+          defaultMessage: "Last Active",
+          description: "Column header for last active column",
         }),
         cell: ({ row }) => {
           const token = row.original;
           return (
             <Text size="sm" className="text-text-secondary">
-              {token.attributes.scope}
-            </Text>
-          );
-        },
-      },
-      {
-        id: "createdAt",
-        header: intl.formatMessage({
-          id: "pages.personal_tokens.created_at_column",
-          defaultMessage: "Created at",
-          description: "Column header for created at column",
-        }),
-        cell: ({ row }) => {
-          const token = row.original;
-          return (
-            <Text size="sm" className="text-text-secondary">
-              {computeHumanReadableDateTimeStringFromUtc(
-                token.attributes.created_at,
-              )}
+              {token.attributes.last_active_at
+                ? computeHumanReadableDateTimeStringFromUtc(
+                    token.attributes.last_active_at,
+                  )
+                : intl.formatMessage({
+                    id: "pages.personal_tokens.never_used",
+                    defaultMessage: "Never used",
+                    description: "Text shown when a token has never been used",
+                  })}
             </Text>
           );
         },
@@ -731,44 +846,8 @@ function RouteComponent() {
           );
         },
       },
-      {
-        id: "lastActive",
-        header: intl.formatMessage({
-          id: "pages.personal_tokens.last_active_column",
-          defaultMessage: "Last Active",
-          description: "Column header for last active column",
-        }),
-        cell: ({ row }) => {
-          const token = row.original;
-          return (
-            <Text size="sm" className="text-text-secondary">
-              {token.attributes.last_active_at
-                ? computeHumanReadableDateTimeStringFromUtc(
-                    token.attributes.last_active_at,
-                  )
-                : intl.formatMessage({
-                    id: "pages.personal_tokens.never_used",
-                    defaultMessage: "Never used",
-                    description: "Text shown when a token has never been used",
-                  })}
-            </Text>
-          );
-        },
-      },
-      {
-        id: "status",
-        header: intl.formatMessage({
-          id: "pages.personal_tokens.status.column",
-          defaultMessage: "Status",
-          description: "Column header for status column",
-        }),
-        cell: ({ row }) => {
-          const token = row.original;
-          return <PersonalTokenStatusBadge token={token.attributes} />;
-        },
-      },
     ],
-    [search, intl],
+    [search, intl, credentials.serverName],
   );
 
   // eslint-disable-next-line react-hooks/incompatible-library -- We pass things as a ref to avoid this problem

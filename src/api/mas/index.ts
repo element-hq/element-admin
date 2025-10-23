@@ -160,8 +160,8 @@ export interface EditTokenParameters {
 export interface PersonalSessionListParameters extends PageParameters {
   status?: api.PersonalSessionStatus;
   actor_user?: api.Ulid;
-  expires_before?: string;
-  expires_after?: string;
+  expires?: boolean;
+  scope?: string[];
 }
 
 export interface CreatePersonalSessionParameters {
@@ -171,7 +171,7 @@ export interface CreatePersonalSessionParameters {
   expires_in?: number | null;
 }
 
-export interface RegeneratePersonalSessionParameters {
+interface RegeneratePersonalSessionParameters {
   expires_in?: number | null;
 }
 
@@ -688,10 +688,10 @@ export const personalSessionsInfiniteQuery = (
         query["filter[status]"] = parameters.status;
       if (parameters.actor_user !== undefined)
         query["filter[actor_user]"] = parameters.actor_user;
-      if (parameters.expires_before !== undefined)
-        query["filter[expires_before]"] = parameters.expires_before;
-      if (parameters.expires_after !== undefined)
-        query["filter[expires_after]"] = parameters.expires_after;
+      if (parameters.expires !== undefined)
+        query["filter[expires]"] = parameters.expires;
+      if (parameters.scope !== undefined)
+        query["filter[scope]"] = parameters.scope;
 
       const result = await api.listPersonalSessions({
         ...(await masBaseOptions(client, serverName, signal)),
@@ -722,10 +722,10 @@ export const personalSessionsCountQuery = (
         query["filter[status]"] = parameters.status;
       if (parameters.actor_user !== undefined)
         query["filter[actor_user]"] = parameters.actor_user;
-      if (parameters.expires_before !== undefined)
-        query["filter[expires_before]"] = parameters.expires_before;
-      if (parameters.expires_after !== undefined)
-        query["filter[expires_after]"] = parameters.expires_after;
+      if (parameters.expires !== undefined)
+        query["filter[expires]"] = parameters.expires;
+      if (parameters.scope !== undefined)
+        query["filter[scope]"] = parameters.scope;
 
       const result = await api.listPersonalSessions({
         ...(await masBaseOptions(client, serverName, signal)),
