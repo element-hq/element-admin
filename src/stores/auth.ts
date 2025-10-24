@@ -12,6 +12,7 @@ import { wellKnownQuery } from "@/api/matrix";
 import { NotLoggedInError } from "@/errors";
 import { reset } from "@/query";
 import { router } from "@/router";
+import { randomString } from "@/utils/random";
 import { addTimeout } from "@/utils/signal";
 
 const REFRESH_LOCK = "element-admin-refresh-lock";
@@ -19,19 +20,6 @@ const REFRESH_LOCK = "element-admin-refresh-lock";
 // Normalize the server name. For now it only lowercases and trim
 function normalizeServerName(serverName: string): string {
   return serverName.toLocaleLowerCase().trim();
-}
-
-function randomString(length: number): string {
-  const possible =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  const randomValues = new Uint8Array(length);
-  globalThis.crypto.getRandomValues(randomValues);
-
-  let codeVerifier = "";
-  for (const value of randomValues) {
-    codeVerifier += possible[value % possible.length];
-  }
-  return codeVerifier;
 }
 
 async function sha256(plain: string): Promise<ArrayBuffer> {

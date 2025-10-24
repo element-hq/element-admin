@@ -242,6 +242,121 @@ export const vSingleResponseForOAuth2Session = v.object({
   links: vSelfLinks,
 });
 
+export const vPersonalSessionStatus = v.picklist(["active", "revoked"]);
+
+export const vPersonalSessionFilter = v.object({
+  "filter[owner_user]": v.optional(vUlid),
+  "filter[owner_client]": v.optional(vUlid),
+  "filter[actor_user]": v.optional(vUlid),
+  "filter[scope]": v.optional(v.array(v.string()), []),
+  "filter[status]": v.optional(vPersonalSessionStatus),
+  "filter[expires_before]": v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
+  "filter[expires_after]": v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
+  "filter[expires]": v.optional(v.union([v.boolean(), v.null()])),
+});
+
+/**
+ * A personal session (session using personal access tokens)
+ */
+export const vPersonalSession = v.object({
+  created_at: v.pipe(v.string(), v.isoTimestamp()),
+  revoked_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
+  owner_user_id: v.optional(v.union([v.string(), v.null()])),
+  owner_client_id: v.optional(v.union([v.string(), v.null()])),
+  actor_user_id: vUlid,
+  human_name: v.string(),
+  scope: v.string(),
+  last_active_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
+  last_active_ip: v.optional(v.union([v.string(), v.null()])),
+  expires_at: v.optional(
+    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+  ),
+  access_token: v.optional(v.union([v.string(), v.null()])),
+});
+
+/**
+ * A single resource, with its type, ID, attributes and related links
+ */
+export const vSingleResourceForPersonalSession = v.object({
+  type: v.string(),
+  id: vUlid,
+  attributes: vPersonalSession,
+  links: vSelfLinks,
+  meta: v.optional(vSingleResourceMeta),
+});
+
+/**
+ * A top-level response with a page of resources
+ */
+export const vPaginatedResponseForPersonalSession = v.object({
+  meta: v.optional(vPaginationMeta),
+  data: v.optional(
+    v.union([v.array(vSingleResourceForPersonalSession), v.null()]),
+  ),
+  links: vPaginationLinks,
+});
+
+/**
+ * JSON payload for the `POST /api/admin/v1/personal-sessions` endpoint
+ */
+export const vCreatePersonalSessionRequest = v.object({
+  actor_user_id: vUlid,
+  human_name: v.string(),
+  scope: v.string(),
+  expires_in: v.optional(
+    v.union([
+      v.pipe(
+        v.number(),
+        v.integer(),
+        v.minValue(0, "Invalid value: Expected uint32 to be >= 0"),
+        v.maxValue(
+          4294967295,
+          "Invalid value: Expected uint32 to be <= 2^32-1",
+        ),
+        v.minValue(0),
+      ),
+      v.null(),
+    ]),
+  ),
+});
+
+/**
+ * A top-level response with a single resource
+ */
+export const vSingleResponseForPersonalSession = v.object({
+  data: vSingleResourceForPersonalSession,
+  links: vSelfLinks,
+});
+
+/**
+ * JSON payload for the `POST /api/admin/v1/personal-sessions/{id}/regenerate` endpoint
+ */
+export const vRegeneratePersonalSessionRequest = v.object({
+  expires_in: v.optional(
+    v.union([
+      v.pipe(
+        v.number(),
+        v.integer(),
+        v.minValue(0, "Invalid value: Expected uint32 to be >= 0"),
+        v.maxValue(
+          4294967295,
+          "Invalid value: Expected uint32 to be <= 2^32-1",
+        ),
+        v.minValue(0),
+      ),
+      v.null(),
+    ]),
+  ),
+});
+
 /**
  * JSON payload for the `POST /api/admin/v1/policy-data`
  */
@@ -816,6 +931,93 @@ export const vFinishOAuth2SessionData = v.object({
  * OAuth 2.0 session was finished
  */
 export const vFinishOAuth2SessionResponse = vSingleResponseForOAuth2Session;
+
+export const vListPersonalSessionsData = v.object({
+  body: v.optional(v.never()),
+  path: v.optional(v.never()),
+  query: v.optional(
+    v.object({
+      "page[before]": v.optional(vUlid),
+      "page[after]": v.optional(vUlid),
+      "page[first]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
+      "page[last]": v.optional(
+        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
+      ),
+      count: v.optional(vIncludeCount),
+      "filter[owner_user]": v.optional(vUlid),
+      "filter[owner_client]": v.optional(vUlid),
+      "filter[actor_user]": v.optional(vUlid),
+      "filter[scope]": v.optional(v.array(v.string()), []),
+      "filter[status]": v.optional(vPersonalSessionStatus),
+      "filter[expires_before]": v.optional(
+        v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+      ),
+      "filter[expires_after]": v.optional(
+        v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
+      ),
+      "filter[expires]": v.optional(v.union([v.boolean(), v.null()])),
+    }),
+  ),
+});
+
+/**
+ * Paginated response of personal sessions
+ */
+export const vListPersonalSessionsResponse =
+  vPaginatedResponseForPersonalSession;
+
+export const vCreatePersonalSessionData = v.object({
+  body: vCreatePersonalSessionRequest,
+  path: v.optional(v.never()),
+  query: v.optional(v.never()),
+});
+
+/**
+ * Personal session and personal access token were created
+ */
+export const vCreatePersonalSessionResponse = vSingleResponseForPersonalSession;
+
+export const vGetPersonalSessionData = v.object({
+  body: v.optional(v.never()),
+  path: v.object({
+    id: vUlid,
+  }),
+  query: v.optional(v.never()),
+});
+
+/**
+ * Personal session details
+ */
+export const vGetPersonalSessionResponse = vSingleResponseForPersonalSession;
+
+export const vRevokePersonalSessionData = v.object({
+  body: v.optional(v.never()),
+  path: v.object({
+    id: vUlid,
+  }),
+  query: v.optional(v.never()),
+});
+
+/**
+ * Personal session was revoked
+ */
+export const vRevokePersonalSessionResponse = vSingleResponseForPersonalSession;
+
+export const vRegeneratePersonalSessionData = v.object({
+  body: vRegeneratePersonalSessionRequest,
+  path: v.object({
+    id: vUlid,
+  }),
+  query: v.optional(v.never()),
+});
+
+/**
+ * Personal session was regenerated and a personal access token was created
+ */
+export const vRegeneratePersonalSessionResponse =
+  vSingleResponseForPersonalSession;
 
 export const vSetPolicyDataData = v.object({
   body: vSetPolicyDataRequest,

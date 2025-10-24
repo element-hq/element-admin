@@ -87,6 +87,10 @@
     "description": "Label for the documentation navigation link (to https://docs.element.io/) in the main navigation sidebar",
     "message": "Documentation"
   },
+  "navigation.personal_tokens": {
+    "description": "Label for the personal tokens navigation item in the main navigation sidebar",
+    "message": "Personal tokens"
+  },
   "navigation.registration_tokens": {
     "description": "Label for the registration tokens navigation item in the main navigation sidebar",
     "message": "Registration tokens"
@@ -178,6 +182,258 @@
   "pages.login.title": {
     "description": "Title for the login page",
     "message": "Login"
+  },
+  "pages.personal_tokens.acting_user_column": {
+    "description": "Column header for acting user column",
+    "message": "Acting User"
+  },
+  "pages.personal_tokens.acting_user_label": {
+    "description": "Label for the acting user field",
+    "message": "Acting user"
+  },
+  "pages.personal_tokens.actor_user_help": {
+    "description": "Help text for the acting user field",
+    "message": "The user this token will act on behalf of"
+  },
+  "pages.personal_tokens.actor_user_label": {
+    "description": "Label for the acting user field",
+    "message": "Acting user"
+  },
+  "pages.personal_tokens.add_token_title": {
+    "description": "Title of the add personal token dialog",
+    "message": "Add personal token"
+  },
+  "pages.personal_tokens.count": {
+    "description": "Shows the number of personal tokens",
+    "message": "{count, plural, =0 {No personal tokens} one {# personal token} other {# personal tokens}}"
+  },
+  "pages.personal_tokens.create_error": {
+    "description": "Error message when creating a personal token fails",
+    "message": "Failed to create personal token"
+  },
+  "pages.personal_tokens.create_success": {
+    "description": "Success message when a personal token is created",
+    "message": "Personal token created successfully"
+  },
+  "pages.personal_tokens.create_token": {
+    "description": "Button text to create a personal token",
+    "message": "Create token"
+  },
+  "pages.personal_tokens.created_at_label": {
+    "description": "Label for the token creation date field",
+    "message": "Created at"
+  },
+  "pages.personal_tokens.device_id_help": {
+    "description": "Help text for device ID field",
+    "message": "Leave empty to generate a random 10-character device ID"
+  },
+  "pages.personal_tokens.device_id_label": {
+    "description": "Label for device ID field",
+    "message": "Device ID"
+  },
+  "pages.personal_tokens.device_id_placeholder": {
+    "description": "Placeholder for device ID field",
+    "message": "ABCDEFGHIJ"
+  },
+  "pages.personal_tokens.expires_at_column": {
+    "description": "Column header for expires at column",
+    "message": "Expires at"
+  },
+  "pages.personal_tokens.expires_at_label": {
+    "description": "Label for the token expiration date field",
+    "message": "Expires at"
+  },
+  "pages.personal_tokens.expires_in_help": {
+    "description": "Help text for the expiry field",
+    "message": "Leave empty for tokens that never expire"
+  },
+  "pages.personal_tokens.expires_in_label": {
+    "description": "Label for the expiry field",
+    "message": "Expires in (days)"
+  },
+  "pages.personal_tokens.expires_in_placeholder": {
+    "description": "Placeholder for the expiry field",
+    "message": "30"
+  },
+  "pages.personal_tokens.filter.active": {
+    "description": "Filter label for active personal tokens",
+    "message": "Active"
+  },
+  "pages.personal_tokens.filter.expires": {
+    "description": "Filter label for tokens that expire",
+    "message": "With an expiry date"
+  },
+  "pages.personal_tokens.filter.no_expiry": {
+    "description": "Filter label for tokens that never expire",
+    "message": "Never expires"
+  },
+  "pages.personal_tokens.filter.revoked": {
+    "description": "Filter label for revoked personal tokens",
+    "message": "Revoked"
+  },
+  "pages.personal_tokens.filter.scope_mas_admin": {
+    "description": "Filter label for MAS admin scope",
+    "message": "Access to the MAS admin API"
+  },
+  "pages.personal_tokens.filter.scope_matrix_client": {
+    "description": "Filter label for Matrix Client API scope",
+    "message": "Access to the Matrix Client-Server API"
+  },
+  "pages.personal_tokens.filter.scope_synapse_admin": {
+    "description": "Filter label for synapse admin scope",
+    "message": "Access to the Synapse admin API"
+  },
+  "pages.personal_tokens.last_active_column": {
+    "description": "Column header for last active column",
+    "message": "Last Active"
+  },
+  "pages.personal_tokens.last_active_ip_label": {
+    "description": "Label for the last active IP field",
+    "message": "Last active IP"
+  },
+  "pages.personal_tokens.last_active_label": {
+    "description": "Label for the last active date field",
+    "message": "Last active"
+  },
+  "pages.personal_tokens.loading_more": {
+    "description": "Text shown when loading more tokens",
+    "message": "Loading more tokens..."
+  },
+  "pages.personal_tokens.name_column": {
+    "description": "Column header for token name column",
+    "message": "Name"
+  },
+  "pages.personal_tokens.name_help": {
+    "description": "Help text for the token name field",
+    "message": "A human-readable name for the token, to help you identify it"
+  },
+  "pages.personal_tokens.name_label": {
+    "description": "Label for the personal token name field",
+    "message": "Token name"
+  },
+  "pages.personal_tokens.name_placeholder": {
+    "description": "Placeholder for the personal token name field",
+    "message": "My application token"
+  },
+  "pages.personal_tokens.never_expires": {
+    "description": "Text shown when a token has no expiration date",
+    "message": "Never expires"
+  },
+  "pages.personal_tokens.never_used": {
+    "description": "Text shown when a token has never been used",
+    "message": "Never used"
+  },
+  "pages.personal_tokens.not_found.description": {
+    "description": "Description shown when a personal token is not found",
+    "message": "The personal token you're looking for doesn't exist or has been removed."
+  },
+  "pages.personal_tokens.not_found.title": {
+    "description": "Title shown when a personal token is not found",
+    "message": "Personal token not found"
+  },
+  "pages.personal_tokens.owner_user_label": {
+    "description": "Label for the owner user field",
+    "message": "Owner"
+  },
+  "pages.personal_tokens.regenerate_confirm": {
+    "description": "Button text to confirm regenerating a personal token",
+    "message": "Regenerate token"
+  },
+  "pages.personal_tokens.regenerate_error": {
+    "description": "Error message when regenerating a personal token fails",
+    "message": "Failed to regenerate personal token"
+  },
+  "pages.personal_tokens.regenerate_expires_help": {
+    "description": "Help text for the expiry field when regenerating",
+    "message": "Leave empty to keep the same expiry as before, or set a new expiry time"
+  },
+  "pages.personal_tokens.regenerate_success": {
+    "description": "Success message when a personal token is regenerated",
+    "message": "Personal token regenerated successfully"
+  },
+  "pages.personal_tokens.regenerate_token": {
+    "description": "Button text to regenerate a token",
+    "message": "Regenerate token"
+  },
+  "pages.personal_tokens.regenerate_token_title": {
+    "description": "Title of the regenerate personal token dialog",
+    "message": "Regenerate personal token"
+  },
+  "pages.personal_tokens.regenerate_warning": {
+    "description": "Warning message shown when regenerating a personal token",
+    "message": "This will generate a new access token and invalidate the current one. Any applications using the current token will need to be updated."
+  },
+  "pages.personal_tokens.revoke_success": {
+    "description": "Success message when a personal token is revoked",
+    "message": "Personal token revoked successfully"
+  },
+  "pages.personal_tokens.revoke_token": {
+    "description": "Button text to revoke a token",
+    "message": "Revoke token"
+  },
+  "pages.personal_tokens.revoked_at_label": {
+    "description": "Label for the token revocation date field",
+    "message": "Revoked at"
+  },
+  "pages.personal_tokens.scope_device_help": {
+    "description": "Help text for device scope",
+    "message": "Provision a Matrix device"
+  },
+  "pages.personal_tokens.scope_mas_admin_help": {
+    "description": "Help text for MAS admin scope",
+    "message": "Access to the MAS admin API"
+  },
+  "pages.personal_tokens.scope_matrix_client_help": {
+    "description": "Help text for Matrix Client API scope",
+    "message": "Access to the Matrix Client-Server API"
+  },
+  "pages.personal_tokens.scope_synapse_admin_help": {
+    "description": "Help text for Synapse admin scope",
+    "message": "Access to the Synapse admin API"
+  },
+  "pages.personal_tokens.scopes_label": {
+    "description": "Label for the scopes field",
+    "message": "Scopes"
+  },
+  "pages.personal_tokens.status.active": {
+    "description": "Status badge for active personal tokens",
+    "message": "Active"
+  },
+  "pages.personal_tokens.status.column": {
+    "description": "Column header for status column",
+    "message": "Status"
+  },
+  "pages.personal_tokens.status.expired": {
+    "description": "Status badge for expired personal tokens",
+    "message": "Expired"
+  },
+  "pages.personal_tokens.status.label": {
+    "description": "Label for the personal token status field",
+    "message": "Status"
+  },
+  "pages.personal_tokens.status.revoked": {
+    "description": "Status badge for revoked personal tokens",
+    "message": "Revoked"
+  },
+  "pages.personal_tokens.title": {
+    "description": "The title of the personal tokens list page",
+    "message": "Personal tokens"
+  },
+  "pages.personal_tokens.token_created_description": {
+    "description": "Description shown when a personal token is created",
+    "message": "Your personal token has been created. Copy it now as it will not be shown again."
+  },
+  "pages.personal_tokens.token_created_title": {
+    "description": "Title of the dialog when a personal token is successfully created",
+    "message": "Personal token created"
+  },
+  "pages.personal_tokens.token_regenerated_description": {
+    "description": "Description shown when a personal token is regenerated",
+    "message": "Your personal token has been regenerated. Copy it now as it will not be shown again."
+  },
+  "pages.personal_tokens.token_regenerated_title": {
+    "description": "Title of the dialog when a personal token is successfully regenerated",
+    "message": "Token regenerated"
   },
   "pages.registration_tokens.auto_generate_placeholder": {
     "description": "Placeholder text for custom token field",
@@ -766,5 +1022,17 @@
   "ui.language_switcher.title": {
     "description": "Title of the language switcher modal",
     "message": "Language settings"
+  },
+  "ui.user_picker.loading_list": {
+    "description": "On the user-picker list, this is the placeholder shown whilst things are loading",
+    "message": "Loading…"
+  },
+  "ui.user_picker.no_match": {
+    "description": "On the user-picker list, this is the placeholder shown when there are no results",
+    "message": "No match"
+  },
+  "ui.user_picker.no_match_help": {
+    "description": "On the user-picker list, this is the help text shown when there are no results",
+    "message": "Try a different search term. This can only lookup active users on {serverName} using their localpart."
   }
 }

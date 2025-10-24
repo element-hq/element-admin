@@ -5,6 +5,7 @@
 import {
   DocumentIcon,
   HomeIcon,
+  InlineCodeIcon,
   KeyIcon,
   LeaveIcon,
   UserProfileIcon,
@@ -22,7 +23,12 @@ const AppNavigation = () => (
         description="Label for the dashboard navigation item in the main navigation sidebar"
       />
     </Navigation.NavLink>
-    <Navigation.NavLink Icon={UserProfileIcon} to="/users">
+    <Navigation.NavLink
+      Icon={UserProfileIcon}
+      to="/users"
+      search={{ status: "active" }}
+      activeOptions={{ includeSearch: false }}
+    >
       <FormattedMessage
         id="navigation.users"
         defaultMessage="Users"
@@ -37,7 +43,24 @@ const AppNavigation = () => (
       />
     </Navigation.NavLink>
     <Navigation.Divider />
-    <Navigation.NavLink Icon={KeyIcon} to="/registration-tokens">
+    <Navigation.NavLink
+      Icon={InlineCodeIcon}
+      to="/personal-tokens"
+      search={{ status: "active" }}
+      activeOptions={{ includeSearch: false }}
+    >
+      <FormattedMessage
+        id="navigation.personal_tokens"
+        defaultMessage="Personal tokens"
+        description="Label for the personal tokens navigation item in the main navigation sidebar"
+      />
+    </Navigation.NavLink>
+    <Navigation.NavLink
+      Icon={KeyIcon}
+      to="/registration-tokens"
+      search={{ revoked: false }}
+      activeOptions={{ includeSearch: false }}
+    >
       <FormattedMessage
         id="navigation.registration_tokens"
         defaultMessage="Registration tokens"
