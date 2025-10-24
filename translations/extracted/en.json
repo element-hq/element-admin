@@ -192,20 +192,12 @@
     "message": "Acting user"
   },
   "pages.personal_tokens.actor_user_help": {
-    "description": "Help text for the acting user ID field",
-    "message": "The ULID of the user this token will act on behalf of"
+    "description": "Help text for the acting user field",
+    "message": "The user this token will act on behalf of"
   },
   "pages.personal_tokens.actor_user_label": {
-    "description": "Label for the acting user ID field",
-    "message": "Acting user ID"
-  },
-  "pages.personal_tokens.actor_user_placeholder": {
-    "description": "Placeholder for the acting user ID field",
-    "message": "01234567890123456789012345"
-  },
-  "pages.personal_tokens.add_token": {
-    "description": "Button text to add a new personal token",
-    "message": "Add personal token"
+    "description": "Label for the acting user field",
+    "message": "Acting user"
   },
   "pages.personal_tokens.add_token_title": {
     "description": "Title of the add personal token dialog",
@@ -310,6 +302,10 @@
   "pages.personal_tokens.name_column": {
     "description": "Column header for token name column",
     "message": "Name"
+  },
+  "pages.personal_tokens.name_help": {
+    "description": "Help text for the token name field",
+    "message": "A human-readable name for the token, to help you identify it"
   },
   "pages.personal_tokens.name_label": {
     "description": "Label for the personal token name field",
@@ -1026,5 +1022,17 @@
   "ui.language_switcher.title": {
     "description": "Title of the language switcher modal",
     "message": "Language settings"
+  },
+  "ui.user_picker.loading_list": {
+    "description": "On the user-picker list, this is the placeholder shown whilst things are loading",
+    "message": "Loading…"
+  },
+  "ui.user_picker.no_match": {
+    "description": "On the user-picker list, this is the placeholder shown when there are no results",
+    "message": "No match"
+  },
+  "ui.user_picker.no_match_help": {
+    "description": "On the user-picker list, this is the help text shown when there are no results",
+    "message": "Try a different search term. This can only lookup active users on {serverName} using their localpart."
   }
 }

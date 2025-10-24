@@ -55,6 +55,7 @@ import * as Placeholder from "@/components/placeholder";
 import * as Table from "@/components/table";
 import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
+import { UserPicker } from "@/ui/user-picker";
 import { useImageBlob } from "@/utils/blob";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 import { useFilters } from "@/utils/filters";
@@ -105,9 +106,12 @@ export const Route = createFileRoute("/_console/personal-tokens")({
       personalSessionsCountQuery(credentials.serverName, parameters),
     );
 
-    await queryClient.ensureInfiniteQueryData(
-      personalSessionsInfiniteQuery(credentials.serverName, parameters),
-    );
+    await Promise.all([
+      queryClient.ensureQueryData(wellKnownQuery(credentials.serverName)),
+      queryClient.ensureInfiniteQueryData(
+        personalSessionsInfiniteQuery(credentials.serverName, parameters),
+      ),
+    ]);
   },
 
   pendingComponent: () => (
@@ -185,10 +189,12 @@ function PersonalTokenStatusBadge({
 
 interface PersonalTokenAddButtonProps {
   serverName: string;
+  synapseRoot: string;
 }
 
 const PersonalTokenAddButton = ({
   serverName,
+  synapseRoot,
 }: PersonalTokenAddButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -201,6 +207,7 @@ const PersonalTokenAddButton = ({
   const intl = useIntl();
   const from = useCurrentChildRoutePath(Route.id);
   const navigate = useNavigate({ from });
+  const [missingActor, setMissingActor] = useState(false);
 
   // Checkbox handlers with dependency logic
   const onMatrixClientChecked = useCallback(
@@ -289,6 +296,12 @@ const PersonalTokenAddButton = ({
       const actorUserId = formData.get("actor_user_id") as string;
       const expiresInDays = formData.get("expires_in_days") as string;
 
+      // Somewhat of a hack to show the input as invalid if no user is selected
+      if (!actorUserId) {
+        setMissingActor(true);
+        return;
+      }
+
       // Build scope string from form data
       const scopes = [];
       if (formData.get("scope_mas_admin")) scopes.push(MAS_ADMIN_SCOPE);
@@ -317,75 +330,82 @@ const PersonalTokenAddButton = ({
     [mutate, isPending],
   );
 
-  const handleClose = useCallback(() => {
-    // Prevent closing if mutation is pending
-    if (isPending) {
-      return;
-    }
+  const onOpenChange = useCallback(
+    (open: boolean) => {
+      // Prevent closing if mutation is pending
+      if (isPending) {
+        return;
+      }
 
-    setIsOpen(false);
-    // Reset mutation data and form state
-    reset();
-    setMatrixClientChecked(false);
-    setDeviceChecked(false);
-    setSynapseAdminChecked(false);
-  }, [isPending, reset]);
+      setIsOpen(open);
+      // Reset mutation data and form state
+      reset();
+      setMatrixClientChecked(false);
+      setDeviceChecked(false);
+      setSynapseAdminChecked(false);
+      setMissingActor(false);
+    },
+    [isPending, reset],
+  );
 
   return (
-    <>
-      <Button
-        Icon={PlusIcon}
-        onClick={() => setIsOpen(true)}
-        size="sm"
-        kind="primary"
-      >
-        <FormattedMessage
-          id="pages.personal_tokens.add_token"
-          defaultMessage="Add personal token"
-          description="Button text to add a new personal token"
-        />
-      </Button>
+    <Dialog.Root
+      open={isOpen}
+      onOpenChange={onOpenChange}
+      trigger={
+        <Button Icon={PlusIcon} size="sm" kind="primary">
+          <FormattedMessage {...messages.actionAdd} />
+        </Button>
+      }
+    >
+      <Dialog.Title>
+        {mutationData?.data.attributes.access_token ? (
+          <FormattedMessage
+            id="pages.personal_tokens.token_created_title"
+            defaultMessage="Personal token created"
+            description="Title of the dialog when a personal token is successfully created"
+          />
+        ) : (
+          <FormattedMessage
+            id="pages.personal_tokens.add_token_title"
+            defaultMessage="Add personal token"
+            description="Title of the add personal token dialog"
+          />
+        )}
+      </Dialog.Title>
 
-      <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-        <Dialog.Title>
-          {mutationData?.data.attributes.access_token ? (
-            <FormattedMessage
-              id="pages.personal_tokens.token_created_title"
-              defaultMessage="Personal token created"
-              description="Title of the dialog when a personal token is successfully created"
-            />
-          ) : (
-            <FormattedMessage
-              id="pages.personal_tokens.add_token_title"
-              defaultMessage="Add personal token"
-              description="Title of the add personal token dialog"
-            />
-          )}
-        </Dialog.Title>
+      {mutationData?.data.attributes.access_token ? (
+        <>
+          <Dialog.Description className="space-y-4">
+            <Text className="text-text-secondary">
+              <FormattedMessage
+                id="pages.personal_tokens.token_created_description"
+                defaultMessage="Your personal token has been created. Copy it now as it will not be shown again."
+                description="Description shown when a personal token is created"
+              />
+            </Text>
 
-        <Dialog.Description asChild>
-          {mutationData?.data.attributes.access_token ? (
-            <div className="space-y-4">
-              <Text className="text-text-secondary">
-                <FormattedMessage
-                  id="pages.personal_tokens.token_created_description"
-                  defaultMessage="Your personal token has been created. Copy it now as it will not be shown again."
-                  description="Description shown when a personal token is created"
-                />
-              </Text>
-
-              <div className="flex gap-4 items-center">
-                <Form.TextInput
-                  className="flex-1"
-                  readOnly
-                  value={mutationData?.data.attributes.access_token}
-                />
-                <CopyToClipboard
-                  value={mutationData?.data.attributes.access_token || ""}
-                />
-              </div>
+            <div className="flex gap-4 items-center">
+              <Form.TextInput
+                className="flex-1"
+                readOnly
+                value={mutationData?.data.attributes.access_token}
+              />
+              <CopyToClipboard
+                value={mutationData?.data.attributes.access_token || ""}
+              />
             </div>
-          ) : (
+          </Dialog.Description>
+
+          <Dialog.Close asChild>
+            <Button type="button" kind="tertiary" disabled={isPending}>
+              <FormattedMessage {...messages.actionClose} />
+            </Button>
+          </Dialog.Close>
+        </>
+      ) : (
+        <>
+          <Dialog.Description asChild>
             <Form.Root onSubmit={onSubmit}>
               <Form.Field name="human_name" serverInvalid={false}>
                 <Form.Label>
@@ -404,29 +424,29 @@ const PersonalTokenAddButton = ({
                       "Placeholder for the personal token name field",
                   })}
                 />
+                <Form.HelpMessage>
+                  <FormattedMessage
+                    id="pages.personal_tokens.name_help"
+                    defaultMessage="A human-readable name for the token, to help you identify it"
+                    description="Help text for the token name field"
+                  />
+                </Form.HelpMessage>
               </Form.Field>
 
-              <Form.Field name="actor_user_id" serverInvalid={false}>
+              <Form.Field name="actor_user_id" serverInvalid={missingActor}>
                 <Form.Label>
                   <FormattedMessage
                     id="pages.personal_tokens.actor_user_label"
-                    defaultMessage="Acting user ID"
-                    description="Label for the acting user ID field"
+                    defaultMessage="Acting user"
+                    description="Label for the acting user field"
                   />
                 </Form.Label>
-                <Form.TextControl
-                  required
-                  placeholder={intl.formatMessage({
-                    id: "pages.personal_tokens.actor_user_placeholder",
-                    defaultMessage: "01234567890123456789012345",
-                    description: "Placeholder for the acting user ID field",
-                  })}
-                />
+                <UserPicker serverName={serverName} synapseRoot={synapseRoot} />
                 <Form.HelpMessage>
                   <FormattedMessage
                     id="pages.personal_tokens.actor_user_help"
-                    defaultMessage="The ULID of the user this token will act on behalf of"
-                    description="Help text for the acting user ID field"
+                    defaultMessage="The user this token will act on behalf of"
+                    description="Help text for the acting user field"
                   />
                 </Form.HelpMessage>
               </Form.Field>
@@ -565,21 +585,16 @@ const PersonalTokenAddButton = ({
                 />
               </Form.Submit>
             </Form.Root>
-          )}
-        </Dialog.Description>
+          </Dialog.Description>
 
-        <Dialog.Close asChild>
-          <Button
-            type="button"
-            kind="tertiary"
-            onClick={handleClose}
-            disabled={isPending}
-          >
-            <FormattedMessage {...messages.actionCancel} />
-          </Button>
-        </Dialog.Close>
-      </Dialog.Root>
-    </>
+          <Dialog.Close asChild>
+            <Button type="button" kind="tertiary" disabled={isPending}>
+              <FormattedMessage {...messages.actionCancel} />
+            </Button>
+          </Dialog.Close>
+        </>
+      )}
+    </Dialog.Root>
   );
 };
 
@@ -727,6 +742,11 @@ function RouteComponent() {
   const navigate = useNavigate({ from });
   const intl = useIntl();
 
+  const { data: wellKnown } = useSuspenseQuery(
+    wellKnownQuery(credentials.serverName),
+  );
+  const synapseRoot = wellKnown["m.homeserver"].base_url;
+
   const { data, hasNextPage, fetchNextPage, isFetching } =
     useSuspenseInfiniteQuery(
       personalSessionsInfiniteQuery(credentials.serverName, parameters),
@@ -873,7 +893,10 @@ function RouteComponent() {
               <FormattedMessage {...titleMessage} />
             </Page.Title>
             <Page.Controls>
-              <PersonalTokenAddButton serverName={credentials.serverName} />
+              <PersonalTokenAddButton
+                serverName={credentials.serverName}
+                synapseRoot={synapseRoot}
+              />
             </Page.Controls>
           </Page.Header>
 
