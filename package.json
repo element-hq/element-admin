@@ -60,7 +60,7 @@
     "@hey-api/openapi-ts": "0.88.2",
     "@localazy/cli": "2.0.8",
     "@playwright/test": "1.57.0",
-    "@tailwindcss/vite": "4.1.17",
+    "@tailwindcss/vite": "4.1.18",
     "@tanstack/devtools-vite": "0.3.12",
     "@tanstack/eslint-plugin-query": "5.91.2",
     "@tanstack/eslint-plugin-router": "1.140.0",
