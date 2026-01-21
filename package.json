@@ -57,7 +57,7 @@
     "@axe-core/playwright": "4.11.0",
     "@eslint/js": "9.39.2",
     "@formatjs/cli": "6.12.0",
-    "@hey-api/openapi-ts": "0.90.4",
+    "@hey-api/openapi-ts": "0.90.6",
     "@localazy/cli": "2.0.8",
     "@playwright/test": "1.57.0",
     "@tailwindcss/vite": "4.1.18",
