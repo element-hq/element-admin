@@ -18,8 +18,8 @@ importers:
         specifier: 5.2.8
         version: 5.2.8
       '@formatjs/intl-localematcher':
-        specifier: 0.7.5
-        version: 0.7.5
+        specifier: 0.8.0
+        version: 0.8.0
       '@js-temporal/polyfill':
         specifier: 0.5.1
         version: 0.5.1
@@ -69,8 +69,8 @@ importers:
         specifier: 2.6.0
         version: 2.6.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react-intl:
-        specifier: 8.0.11
-        version: 8.0.11(@types/react@19.2.9)(react@19.2.3)(typescript@5.9.3)
+        specifier: 8.1.1
+        version: 8.1.1(@types/react@19.2.9)(react@19.2.3)(typescript@5.9.3)
       semver:
         specifier: 7.7.3
         version: 7.7.3
@@ -94,8 +94,8 @@ importers:
         specifier: 9.39.2
         version: 9.39.2
       '@formatjs/cli':
-        specifier: 6.10.0
-        version: 6.10.0
+        specifier: 6.12.0
+        version: 6.12.0
       '@hey-api/openapi-ts':
         specifier: 0.90.4
         version: 0.90.4(typescript@5.9.3)
@@ -154,8 +154,8 @@ importers:
         specifier: 5.1.2
         version: 5.1.2(vite@7.3.1(@types/node@25.0.9)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0)(yaml@2.8.2))
       babel-plugin-formatjs:
-        specifier: 11.1.1
-        version: 11.1.1
+        specifier: 11.2.1
+        version: 11.2.1
       babel-plugin-react-compiler:
         specifier: 19.1.0-rc.3
         version: 19.1.0-rc.3
@@ -178,8 +178,8 @@ importers:
         specifier: 6.0.2
         version: 6.0.2(eslint@9.39.2(jiti@2.6.1))
       eslint-plugin-formatjs:
-        specifier: 6.0.10
-        version: 6.0.10(@types/eslint@9.6.1)(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
+        specifier: 6.1.1
+        version: 6.1.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       eslint-plugin-import-x:
         specifier: 4.16.1
         version: 4.16.1(@typescript-eslint/utils@8.53.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))
@@ -306,10 +306,6 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0
 
-  '@babel/helper-plugin-utils@7.27.1':
-    resolution: {integrity: sha512-1gn1Up5YXka3YYAHGKpbideQ5Yjf1tDa9qYcgysz+cNCXukyLl6DjPXhD3VRwSb8c0J9tA4b2+rHEZtc6R0tlw==}
-    engines: {node: '>=6.9.0'}
-
   '@babel/helper-plugin-utils@7.28.6':
     resolution: {integrity: sha512-S9gzZ/bz83GRysI7gAD4wPT/AI3uCnY+9xn+Mx/KPs2JwHJIz1W8PZkg2cqyt3RNOBM8ejcXhV6y8Og7ly/Dug==}
     engines: {node: '>=6.9.0'}
@@ -343,12 +339,6 @@ packages:
     resolution: {integrity: sha512-TeR9zWR18BvbfPmGbLampPMW+uW1NZnJlRuuHso8i87QZNq2JRF9i6RgxRqtEq+wQGsS19NNTWr2duhnE49mfQ==}
     engines: {node: '>=6.0.0'}
     hasBin: true
-
-  '@babel/plugin-syntax-jsx@7.27.1':
-    resolution: {integrity: sha512-y8YTNIeKoyhGd9O0Jiyzyyqk8gdjnumGTQPsz0xOZOQ2RmkVJeZ1vmmfIvFEKqucBG6axJGBZDE/7iI5suUI/w==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
 
   '@babel/plugin-syntax-jsx@7.28.6':
     resolution: {integrity: sha512-wgEmr06G6sIpqr8YDwA2dSRTE3bJ+V0IfpzfSY3Lfgd7YWOaAdlykvJi13ZKBt8cZHfgH1IXN+CL656W3uUa4w==}
@@ -663,19 +653,18 @@ packages:
   '@fontsource/inter@5.2.8':
     resolution: {integrity: sha512-P6r5WnJoKiNVV+zvW2xM13gNdFhAEpQ9dQJHt3naLvfg+LkF2ldgSLiF4T41lf1SQCM9QmkqPTn4TH568IRagg==}
 
-  '@formatjs/cli@6.10.0':
-    resolution: {integrity: sha512-TLNf/U7ARxTMaXzodr8InPuKp8r42R1z7sKAEBrZPZ+UmoL+UVYEECY+ZZJLZRN9NugT4VNFw2ODlthUl8FSeQ==}
+  '@formatjs/cli@6.12.0':
+    resolution: {integrity: sha512-mF3U8XxwEWR+ttlG5e4onYO+M5T22jnnQq7Ce/WK10CTVYR8Us433hbML6vgBLkiTS/MuCq61L0op3yNRSp2Kg==}
     engines: {node: '>= 16'}
     hasBin: true
     peerDependencies:
       '@glimmer/env': '*'
       '@glimmer/reference': '*'
-      '@glimmer/syntax': ^0.95.0
+      '@glimmer/syntax': ^0.84.3 || ^0.95.0
       '@glimmer/validator': '*'
-      '@vue/compiler-core': ^3.5.12
-      content-tag: '4'
-      ember-template-recast: ^6.1.5
-      vue: ^3.5.12
+      '@vue/compiler-core': 3.5.27
+      content-tag: ^4.1.0
+      vue: 3.5.27
     peerDependenciesMeta:
       '@glimmer/env':
         optional: true
@@ -689,36 +678,34 @@ packages:
         optional: true
       content-tag:
         optional: true
-      ember-template-recast:
-        optional: true
       vue:
         optional: true
 
-  '@formatjs/ecma402-abstract@3.0.8':
-    resolution: {integrity: sha512-NRiqvxAvhbARZRFSRFPjN0y8txxmVutv2vMYvW2HSdCVf58w9l4osLj6Ujif643vImwZBcbKqhiKE0IOhY+DvA==}
+  '@formatjs/ecma402-abstract@3.1.0':
+    resolution: {integrity: sha512-CjP1sUzM7XiQW6YluDreN+dMvcKZysO/J4ikvuDjDyd6nSOoSqAK9gvD1s75ZFaJVXtYOsz+y3CUXPZ1sKxcxw==}
 
-  '@formatjs/fast-memoize@3.0.3':
-    resolution: {integrity: sha512-CArYtQKGLAOruCMeq5/RxCg6vUXFx3OuKBdTm30Wn/+gCefehmZ8Y2xSMxMrO2iel7hRyE3HKfV56t3vAU6D4Q==}
+  '@formatjs/fast-memoize@3.1.0':
+    resolution: {integrity: sha512-b5mvSWCI+XVKiz5WhnBCY3RJ4ZwfjAidU0yVlKa3d3MSgKmH1hC3tBGEAtYyN5mqL7N0G5x0BOUYyO8CEupWgg==}
 
-  '@formatjs/icu-messageformat-parser@3.3.0':
-    resolution: {integrity: sha512-dqxGSwH22ZfBwa6EVvrrIo+8kHHUSjuw9iZy6HkkN5XgH5/8ny9zDGhvC6ZOFYp01PAbwHvUTIHqznC6Z1nIbA==}
+  '@formatjs/icu-messageformat-parser@3.5.0':
+    resolution: {integrity: sha512-Q01XuvtbDVCJQsG/E2MSfMZ+UdUoZV8v4Aex8tTH44SqKJZCeu5LjuclaKFUS0o1YoXndfEinJen5k1T1GR1vg==}
 
-  '@formatjs/icu-skeleton-parser@2.0.8':
-    resolution: {integrity: sha512-Z493tGxtKu0xNcSZjS8HrWNfq25HMscqbq5qwRFBYz14b70k1DHmhqVAwYDdDK0Ytj9YG1nvY4+IRq53LVNFdA==}
+  '@formatjs/icu-skeleton-parser@2.1.0':
+    resolution: {integrity: sha512-wNer4imHDFBVAJnMb2OGoSyM4wL/uuLnuo5mrenliqkDaNjRbG4jzlJcwTTDEBhai8iCjnzUsE7xwNJC29SfWw==}
 
-  '@formatjs/intl-localematcher@0.7.5':
-    resolution: {integrity: sha512-7/nd90cn5CT7SVF71/ybUKAcnvBlr9nZlJJp8O8xIZHXFgYOC4SXExZlSdgHv2l6utjw1byidL06QzChvQMHwA==}
+  '@formatjs/intl-localematcher@0.8.0':
+    resolution: {integrity: sha512-zgMYWdUlmEZpX2Io+v3LHrfq9xZ6khpQVf9UAw2xYWhGerGgI9XgH1HvL/A34jWiruUJpYlP5pk4g8nIcaDrXQ==}
 
-  '@formatjs/intl@4.0.9':
-    resolution: {integrity: sha512-/pr9mPXtSaO6irgC4A7upRW8ZCJ3YTpN7T/JRyg55NJ8RW/6fhgy6NUzzCLqNggRRM1xP7oR4ndAVWArRKGJGw==}
+  '@formatjs/intl@4.1.1':
+    resolution: {integrity: sha512-88qfxk5XK5UApY3I8ocY2WJyA64MlVQKwmqAjkaVkX25mZb9qZokDDH4+MWD6UX67uqZlsrwUg36yZr/R4X3Jw==}
     peerDependencies:
       typescript: ^5.6.0
     peerDependenciesMeta:
       typescript:
         optional: true
 
-  '@formatjs/ts-transformer@4.2.0':
-    resolution: {integrity: sha512-i5Z173W2WgJof+U/iEh3HoVy09Xv5Ae+qA6tfefvj8+L942PlwnZoC4hv8xv1peFYEe3noY6O1AhAug+nK0NUw==}
+  '@formatjs/ts-transformer@4.3.1':
+    resolution: {integrity: sha512-uQR0QniJ4+OymrMlVTfiam+eNBtHyIEyWnu9YYYGn6M2qQyyOR3PsRqy4AhDIRVoXAOWZfcpYPMOFZDEtNRNQg==}
     peerDependencies:
       ts-jest: ^29
     peerDependenciesMeta:
@@ -1828,9 +1815,6 @@ packages:
   '@types/babel__traverse@7.28.0':
     resolution: {integrity: sha512-8PvcXf70gTDZBgt9ptxJ8elBeBjcLOAcOtoO/mPJjtji1+CdGbHgm77om1GrsPxsiE+uXIpNSK64UYaIwQXd4Q==}
 
-  '@types/eslint@9.6.1':
-    resolution: {integrity: sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==}
-
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
@@ -1957,6 +1941,9 @@ packages:
   '@typescript-eslint/visitor-keys@8.53.1':
     resolution: {integrity: sha512-oy+wV7xDKFPRyNggmXuZQSBzvoLnpmJs+GhzRhPjrxl2b/jIlyjVokzm47CZCDUdXKr2zd7ZLodPfOBpOPyPlg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@unicode/unicode-17.0.0@1.6.16':
+    resolution: {integrity: sha512-advq5p36zZ+PDRUpDkWcHHR++R19kx0LYB5iG3bj0KB8mYVKg0ywS996e2bXeXxDb8XdOF7KTivcx7VkYie1pg==}
 
   '@unrs/resolver-binding-android-arm-eabi@1.11.1':
     resolution: {integrity: sha512-ppLRUgHVaGRWUx0R0Ut06Mjo9gBaBkg3v/8AxusGLhsIotbBLuRk51rAzqLC8gq6NyyAojEXglNjzf6R948DNw==}
@@ -2210,8 +2197,8 @@ packages:
   babel-dead-code-elimination@1.0.12:
     resolution: {integrity: sha512-GERT7L2TiYcYDtYk1IpD+ASAYXjKbLTDPhBtYj7X1NuRMDTMtAx9kyBenub1Ev41lo91OHCKdmP+egTDmfQ7Ig==}
 
-  babel-plugin-formatjs@11.1.1:
-    resolution: {integrity: sha512-rYOry7SVSTXn8ECjlsP3oW0mG0jplKPDvwFGQkWOjuPzvTrLrEaYGJhc2eo8sWP5djODT1oTewwiiHTjA0xXbA==}
+  babel-plugin-formatjs@11.2.1:
+    resolution: {integrity: sha512-mBzy52lVJRSDkRa4QAaDzWYfVsl0r/r+k/mRlAKuGo7pHUerz/uXbhscpXzmqQKNeIspJCkZGeP0Cp4MfXE/Cw==}
 
   babel-plugin-react-compiler@19.1.0-rc.3:
     resolution: {integrity: sha512-mjRn69WuTz4adL0bXGx8Rsyk1086zFJeKmes6aK0xPuK3aaXmDJdLHqwKKMrpm6KAI1MCoUK72d2VeqQbu8YIA==}
@@ -2494,10 +2481,6 @@ packages:
   electron-to-chromium@1.5.267:
     resolution: {integrity: sha512-0Drusm6MVRXSOJpGbaSVgcQsuB4hEkMpHXaVstcPmhu5LIedxs1xNK/nIxmQIU/RPC0+1/o0AVZfBTkTNJOdUw==}
 
-  emoji-regex-xs@2.0.1:
-    resolution: {integrity: sha512-1QFuh8l7LqUcKe24LsPUNzjrzJQ7pgRwp1QMcZ5MX6mFplk2zQ08NVCM84++1cveaUUYtcCYHmeFEuNg16sU4g==}
-    engines: {node: '>=10.0.0'}
-
   emoji-regex@10.6.0:
     resolution: {integrity: sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==}
 
@@ -2605,10 +2588,9 @@ packages:
     peerDependencies:
       eslint: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
 
-  eslint-plugin-formatjs@6.0.10:
-    resolution: {integrity: sha512-VNmIEkEgYIgDv8FQi8Y/VxmVxiMJF6DDsgAR1usG5F6wxSbU8XtrG9aK9mhyGuGwEuAOLxn/pVID6/no5kWe6g==}
+  eslint-plugin-formatjs@6.1.1:
+    resolution: {integrity: sha512-mdz7toBHactmQZcOe4QNvMIqvDUt4vpaDVBJq3qCb/EF4Gr6eLn+nC3EHw8IwBwRjGq7Ocm8EeFRPzNp5PB4NA==}
     peerDependencies:
-      '@types/eslint': '9'
       eslint: '9'
 
   eslint-plugin-import-x@4.16.1:
@@ -2977,8 +2959,8 @@ packages:
     resolution: {integrity: sha512-4gd7VpWNQNB4UKKCFFVcp1AVv+FMOgs9NKzjHKusc8jTMhd5eL1NqQqOpE0KzMds804/yHlglp3uxgluOqAPLw==}
     engines: {node: '>= 0.4'}
 
-  intl-messageformat@11.0.9:
-    resolution: {integrity: sha512-xA4aCCMnCxynKV5kI7V0GlMf+BGJxsXQRwr5tfEgmcB791eDEQa4r+s4wU7GqMR0jx7+K4jyEH2UfBpVGTDNPQ==}
+  intl-messageformat@11.1.1:
+    resolution: {integrity: sha512-vnrF2f4vfsdaFY6tuLZfzGcx1GZFMFAq6c7QdK3HSXNcGXEIQncNgbeAcnpjAOszQzq3Jbol2SwgshIGY08WyA==}
 
   is-array-buffer@3.0.5:
     resolution: {integrity: sha512-DDfANUiiG2wC1qawP66qlTugJeL5HyzMpfr8lLK+jMQirGzNod0B12cFB/9q838Ru27sBwfw78/rdoU7RERz6A==}
@@ -3606,10 +3588,10 @@ packages:
       react: '>=16'
       react-dom: '>=16'
 
-  react-intl@8.0.11:
-    resolution: {integrity: sha512-j30yAvd2HrTgqUvzdzHUlHppF479LlIiE5P+M5iw8C5R4TRcpRaNHOXmBVlkSt2W32avLW46qfTwXG1BAjTqWg==}
+  react-intl@8.1.1:
+    resolution: {integrity: sha512-mXqmFZ5SCvUk1NUgRBBtCKPB8oPs0dLfWGhYf71FbP9XTF6UGdWQzkH5kE+iIu9twIqiomiLTOuNEymUH2S1IQ==}
     peerDependencies:
-      '@types/react': '19'
+      '@types/react': ^19.2.8
       react: 16 || 17 || 18 || 19
       typescript: ^5.6.0
     peerDependenciesMeta:
@@ -4049,9 +4031,6 @@ packages:
   undici-types@7.16.0:
     resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
 
-  unicode-emoji-utils@1.3.1:
-    resolution: {integrity: sha512-6PiQxmnlsOsqzZCZz0sykSyMy/r1HiJiOWWXV98+BDva583DU4CtBeyDNsi4wMYUIbjUtMs4RgAuyft0EKLoVw==}
-
   unicorn-magic@0.4.0:
     resolution: {integrity: sha512-wH590V9VNgYH9g3lH9wWjTrUoKsjLF6sGLjhR4sH1LWpLmCOH0Zf7PukhDA8BiS7KHe4oPNkcTHqYkj7SOGUOw==}
     engines: {node: '>=20'}
@@ -4408,8 +4387,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/helper-plugin-utils@7.27.1': {}
-
   '@babel/helper-plugin-utils@7.28.6': {}
 
   '@babel/helper-string-parser@7.27.1': {}
@@ -4436,11 +4413,6 @@ snapshots:
     dependencies:
       '@babel/types': 7.28.6
 
-  '@babel/plugin-syntax-jsx@7.27.1(@babel/core@7.28.5)':
-    dependencies:
-      '@babel/core': 7.28.5
-      '@babel/helper-plugin-utils': 7.27.1
-
   '@babel/plugin-syntax-jsx@7.28.6(@babel/core@7.28.6)':
     dependencies:
       '@babel/core': 7.28.6
@@ -4454,12 +4426,12 @@ snapshots:
   '@babel/plugin-transform-react-jsx-self@7.27.1(@babel/core@7.28.5)':
     dependencies:
       '@babel/core': 7.28.5
-      '@babel/helper-plugin-utils': 7.27.1
+      '@babel/helper-plugin-utils': 7.28.6
 
   '@babel/plugin-transform-react-jsx-source@7.27.1(@babel/core@7.28.5)':
     dependencies:
       '@babel/core': 7.28.5
-      '@babel/helper-plugin-utils': 7.27.1
+      '@babel/helper-plugin-utils': 7.28.6
 
   '@babel/template@7.28.6':
     dependencies:
@@ -4703,48 +4675,48 @@ snapshots:
 
   '@fontsource/inter@5.2.8': {}
 
-  '@formatjs/cli@6.10.0': {}
+  '@formatjs/cli@6.12.0': {}
 
-  '@formatjs/ecma402-abstract@3.0.8':
+  '@formatjs/ecma402-abstract@3.1.0':
     dependencies:
-      '@formatjs/fast-memoize': 3.0.3
-      '@formatjs/intl-localematcher': 0.7.5
+      '@formatjs/fast-memoize': 3.1.0
+      '@formatjs/intl-localematcher': 0.8.0
       decimal.js: 10.6.0
       tslib: 2.8.1
 
-  '@formatjs/fast-memoize@3.0.3':
+  '@formatjs/fast-memoize@3.1.0':
     dependencies:
       tslib: 2.8.1
 
-  '@formatjs/icu-messageformat-parser@3.3.0':
+  '@formatjs/icu-messageformat-parser@3.5.0':
     dependencies:
-      '@formatjs/ecma402-abstract': 3.0.8
-      '@formatjs/icu-skeleton-parser': 2.0.8
+      '@formatjs/ecma402-abstract': 3.1.0
+      '@formatjs/icu-skeleton-parser': 2.1.0
       tslib: 2.8.1
 
-  '@formatjs/icu-skeleton-parser@2.0.8':
+  '@formatjs/icu-skeleton-parser@2.1.0':
     dependencies:
-      '@formatjs/ecma402-abstract': 3.0.8
+      '@formatjs/ecma402-abstract': 3.1.0
       tslib: 2.8.1
 
-  '@formatjs/intl-localematcher@0.7.5':
+  '@formatjs/intl-localematcher@0.8.0':
     dependencies:
-      '@formatjs/fast-memoize': 3.0.3
+      '@formatjs/fast-memoize': 3.1.0
       tslib: 2.8.1
 
-  '@formatjs/intl@4.0.9(typescript@5.9.3)':
+  '@formatjs/intl@4.1.1(typescript@5.9.3)':
     dependencies:
-      '@formatjs/ecma402-abstract': 3.0.8
-      '@formatjs/fast-memoize': 3.0.3
-      '@formatjs/icu-messageformat-parser': 3.3.0
-      intl-messageformat: 11.0.9
+      '@formatjs/ecma402-abstract': 3.1.0
+      '@formatjs/fast-memoize': 3.1.0
+      '@formatjs/icu-messageformat-parser': 3.5.0
+      intl-messageformat: 11.1.1
       tslib: 2.8.1
     optionalDependencies:
       typescript: 5.9.3
 
-  '@formatjs/ts-transformer@4.2.0':
+  '@formatjs/ts-transformer@4.3.1':
     dependencies:
-      '@formatjs/icu-messageformat-parser': 3.3.0
+      '@formatjs/icu-messageformat-parser': 3.5.0
       '@types/node': 22.19.7
       chalk: 4.1.2
       json-stable-stringify: 1.3.0
@@ -5743,7 +5715,7 @@ snapshots:
 
   '@types/babel__core@7.20.5':
     dependencies:
-      '@babel/parser': 7.28.5
+      '@babel/parser': 7.28.6
       '@babel/types': 7.28.6
       '@types/babel__generator': 7.27.0
       '@types/babel__template': 7.4.4
@@ -5759,17 +5731,12 @@ snapshots:
 
   '@types/babel__template@7.4.4':
     dependencies:
-      '@babel/parser': 7.28.5
+      '@babel/parser': 7.28.6
       '@babel/types': 7.28.6
 
   '@types/babel__traverse@7.28.0':
     dependencies:
-      '@babel/types': 7.28.5
-
-  '@types/eslint@9.6.1':
-    dependencies:
-      '@types/estree': 1.0.8
-      '@types/json-schema': 7.0.15
+      '@babel/types': 7.28.6
 
   '@types/estree@1.0.8': {}
 
@@ -5941,6 +5908,8 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.53.1
       eslint-visitor-keys: 4.2.1
+
+  '@unicode/unicode-17.0.0@1.6.16': {}
 
   '@unrs/resolver-binding-android-arm-eabi@1.11.1':
     optional: true
@@ -6178,15 +6147,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-plugin-formatjs@11.1.1:
+  babel-plugin-formatjs@11.2.1:
     dependencies:
-      '@babel/core': 7.28.5
-      '@babel/helper-plugin-utils': 7.27.1
-      '@babel/plugin-syntax-jsx': 7.27.1(@babel/core@7.28.5)
-      '@babel/traverse': 7.28.5
-      '@babel/types': 7.28.5
-      '@formatjs/icu-messageformat-parser': 3.3.0
-      '@formatjs/ts-transformer': 4.2.0
+      '@babel/core': 7.28.6
+      '@babel/helper-plugin-utils': 7.28.6
+      '@babel/plugin-syntax-jsx': 7.28.6(@babel/core@7.28.6)
+      '@babel/traverse': 7.28.6
+      '@babel/types': 7.28.6
+      '@formatjs/icu-messageformat-parser': 3.5.0
+      '@formatjs/ts-transformer': 4.3.1
       '@types/babel__core': 7.20.5
       '@types/babel__helper-plugin-utils': 7.10.3
       '@types/babel__traverse': 7.28.0
@@ -6462,8 +6431,6 @@ snapshots:
 
   electron-to-chromium@1.5.267: {}
 
-  emoji-regex-xs@2.0.1: {}
-
   emoji-regex@10.6.0: {}
 
   emoji-regex@8.0.0: {}
@@ -6657,18 +6624,17 @@ snapshots:
       lodash.memoize: 4.1.2
       semver: 7.7.3
 
-  eslint-plugin-formatjs@6.0.10(@types/eslint@9.6.1)(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3):
+  eslint-plugin-formatjs@6.1.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3):
     dependencies:
-      '@formatjs/icu-messageformat-parser': 3.3.0
-      '@formatjs/ts-transformer': 4.2.0
-      '@types/eslint': 9.6.1
+      '@formatjs/icu-messageformat-parser': 3.5.0
+      '@formatjs/ts-transformer': 4.3.1
       '@types/picomatch': 4.0.2
-      '@typescript-eslint/utils': 8.52.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
+      '@typescript-eslint/utils': 8.53.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
+      '@unicode/unicode-17.0.0': 1.6.16
       eslint: 9.39.2(jiti@2.6.1)
       magic-string: 0.30.21
       picomatch: 4.0.3
       tslib: 2.8.1
-      unicode-emoji-utils: 1.3.1
     transitivePeerDependencies:
       - supports-color
       - ts-jest
@@ -7096,11 +7062,11 @@ snapshots:
       hasown: 2.0.2
       side-channel: 1.1.0
 
-  intl-messageformat@11.0.9:
+  intl-messageformat@11.1.1:
     dependencies:
-      '@formatjs/ecma402-abstract': 3.0.8
-      '@formatjs/fast-memoize': 3.0.3
-      '@formatjs/icu-messageformat-parser': 3.3.0
+      '@formatjs/ecma402-abstract': 3.1.0
+      '@formatjs/fast-memoize': 3.1.0
+      '@formatjs/icu-messageformat-parser': 3.5.0
       tslib: 2.8.1
 
   is-array-buffer@3.0.5:
@@ -7709,15 +7675,15 @@ snapshots:
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
 
-  react-intl@8.0.11(@types/react@19.2.9)(react@19.2.3)(typescript@5.9.3):
+  react-intl@8.1.1(@types/react@19.2.9)(react@19.2.3)(typescript@5.9.3):
     dependencies:
-      '@formatjs/ecma402-abstract': 3.0.8
-      '@formatjs/icu-messageformat-parser': 3.3.0
-      '@formatjs/intl': 4.0.9(typescript@5.9.3)
+      '@formatjs/ecma402-abstract': 3.1.0
+      '@formatjs/icu-messageformat-parser': 3.5.0
+      '@formatjs/intl': 4.1.1(typescript@5.9.3)
       '@types/hoist-non-react-statics': 3.3.7(@types/react@19.2.9)
       '@types/react': 19.2.9
       hoist-non-react-statics: 3.3.2
-      intl-messageformat: 11.0.9
+      intl-messageformat: 11.1.1
       react: 19.2.3
       tslib: 2.8.1
     optionalDependencies:
@@ -8247,10 +8213,6 @@ snapshots:
   undici-types@6.21.0: {}
 
   undici-types@7.16.0: {}
-
-  unicode-emoji-utils@1.3.1:
-    dependencies:
-      emoji-regex-xs: 2.0.1
 
   unicorn-magic@0.4.0: {}
 
