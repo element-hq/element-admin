@@ -4,6 +4,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 import { defineConfig } from "eslint/config";
+import { fixupConfigRules } from "@eslint/compat";
 import js from "@eslint/js";
 import * as tseslint from "typescript-eslint";
 import reactPlugin from "eslint-plugin-react";
@@ -23,8 +24,12 @@ export default defineConfig(
   js.configs.recommended,
   tseslint.configs.strict,
   tseslint.configs.stylistic,
-  reactPlugin.configs.flat.recommended,
-  reactPlugin.configs.flat["jsx-runtime"],
+  // eslint-plugin-react doesn't support ESLint v10 yet, use @eslint/compat shim.
+  // Tracking: https://github.com/jsx-eslint/eslint-plugin-react/issues/3977
+  // PRs: https://github.com/jsx-eslint/eslint-plugin-react/pull/3972
+  //      https://github.com/jsx-eslint/eslint-plugin-react/pull/3979
+  ...fixupConfigRules(reactPlugin.configs.flat.recommended),
+  ...fixupConfigRules(reactPlugin.configs.flat["jsx-runtime"]),
   reactHooksPlugin.configs.flat["recommended-latest"],
   reactRefreshPlugin.configs.vite,
   jsxA11yPlugin.flatConfigs.strict,
