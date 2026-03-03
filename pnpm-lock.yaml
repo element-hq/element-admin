@@ -94,8 +94,8 @@ importers:
         specifier: 9.39.2
         version: 9.39.2
       '@formatjs/cli':
-        specifier: 6.12.2
-        version: 6.12.2
+        specifier: 6.13.0
+        version: 6.13.0
       '@hey-api/openapi-ts':
         specifier: 0.92.3
         version: 0.92.3(typescript@5.9.3)
@@ -154,8 +154,8 @@ importers:
         specifier: 5.1.4
         version: 5.1.4(vite@7.3.1(@types/node@25.2.3)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0)(yaml@2.8.2))
       babel-plugin-formatjs:
-        specifier: 11.2.3
-        version: 11.2.3
+        specifier: 11.2.4
+        version: 11.2.4
       babel-plugin-react-compiler:
         specifier: 19.1.0-rc.3
         version: 19.1.0-rc.3
@@ -178,8 +178,8 @@ importers:
         specifier: 6.1.0
         version: 6.1.0(eslint@9.39.2(jiti@2.6.1))
       eslint-plugin-formatjs:
-        specifier: 6.1.3
-        version: 6.1.3(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
+        specifier: 6.2.0
+        version: 6.2.0(eslint@9.39.2(jiti@2.6.1))
       eslint-plugin-import-x:
         specifier: 4.16.1
         version: 4.16.1(@typescript-eslint/utils@8.56.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))
@@ -612,9 +612,9 @@ packages:
   '@fontsource/inter@5.2.8':
     resolution: {integrity: sha512-P6r5WnJoKiNVV+zvW2xM13gNdFhAEpQ9dQJHt3naLvfg+LkF2ldgSLiF4T41lf1SQCM9QmkqPTn4TH568IRagg==}
 
-  '@formatjs/cli@6.12.2':
-    resolution: {integrity: sha512-y215aarLZXei3u1WDRAiet/VajgvUXzvz4ifPENDSPXfIog0aBJKtFvIU7EWbcFWy7rstbn5GcwwQW4F1G3TJg==}
-    engines: {node: '>= 16'}
+  '@formatjs/cli@6.13.0':
+    resolution: {integrity: sha512-bl4+FNg7S6RPNa9cSAE8HqdXu84n7LpzDdkDAPqS0sk58XNbY/1Le6GdWqCKzELWX+FhI58gyZtZecmWsZ+Bhg==}
+    engines: {node: '>= 20.12.0'}
     hasBin: true
     peerDependencies:
       '@glimmer/env': '*'
@@ -663,8 +663,9 @@ packages:
       typescript:
         optional: true
 
-  '@formatjs/ts-transformer@4.3.3':
-    resolution: {integrity: sha512-jXh2NRP1wwYt57KAHaMiI8qZ6m6HFkPSOuAoVbOIzI+cP4++X1CVAtoQhTdEAyHhn04T4IyMdsFIGjYvtTZSAA==}
+  '@formatjs/ts-transformer@4.4.0':
+    resolution: {integrity: sha512-lFDp9Rbpxk5Dt8O1/I9VG5btqKbOkjT4snSa73HO1YTJ9KGeXPKA7aWVgHFXJVVq0KluhbZiCoPJVHC4ZREgxw==}
+    engines: {node: '>= 20.12.0'}
     peerDependencies:
       ts-jest: ^29
     peerDependenciesMeta:
@@ -1815,8 +1816,8 @@ packages:
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
-  '@types/node@22.19.11':
-    resolution: {integrity: sha512-BH7YwL6rA93ReqeQS1c4bsPpcfOmJasG+Fkr6Y59q83f9M1WcBRHR2vM+P9eOisYRcN3ujQoiZY8uk5W+1WL8w==}
+  '@types/node@22.19.13':
+    resolution: {integrity: sha512-akNQMv0wW5uyRpD2v2IEyRSZiR+BeGuoB6L310EgGObO44HSMNT8z1xzio28V8qOrgYaopIDNA18YgdXd+qTiw==}
 
   '@types/node@25.2.3':
     resolution: {integrity: sha512-m0jEgYlYz+mDJZ2+F4v8D1AyQb+QzsNqRuI7xg1VQX/KlKS0qT9r1Mo16yo5F/MtifXFgaofIFsdFMox2SxIbQ==}
@@ -2191,8 +2192,8 @@ packages:
   babel-dead-code-elimination@1.0.12:
     resolution: {integrity: sha512-GERT7L2TiYcYDtYk1IpD+ASAYXjKbLTDPhBtYj7X1NuRMDTMtAx9kyBenub1Ev41lo91OHCKdmP+egTDmfQ7Ig==}
 
-  babel-plugin-formatjs@11.2.3:
-    resolution: {integrity: sha512-M3XGQ5DknIVc3S7UOFrSWtgTh9uUwZcHCQDSfkrVyV8+GICD1wxCapOAA6yWmeMw52Vh8N/i1/VvANhk3T7gkw==}
+  babel-plugin-formatjs@11.2.4:
+    resolution: {integrity: sha512-cKS43F4sNNbqZInzG7c2J5KRV8PUAnakKSIXVimjcT+5byajoNoTSj5aNBJaBqVIqwYq+MWeNvTacMSeFoMeUQ==}
 
   babel-plugin-react-compiler@19.1.0-rc.3:
     resolution: {integrity: sha512-mjRn69WuTz4adL0bXGx8Rsyk1086zFJeKmes6aK0xPuK3aaXmDJdLHqwKKMrpm6KAI1MCoUK72d2VeqQbu8YIA==}
@@ -2589,8 +2590,8 @@ packages:
     peerDependencies:
       eslint: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
 
-  eslint-plugin-formatjs@6.1.3:
-    resolution: {integrity: sha512-JZnRP76EZAfbVFluNuK5hM2AlxlsYkgjZRkMoUq+QXobCuCs3AQ7ywlRVn1ni+Os14ccPuv44o6LRw7dlW/32A==}
+  eslint-plugin-formatjs@6.2.0:
+    resolution: {integrity: sha512-JftP9glJrS4qdviqTyZ0Kk14hcHB8AJn2FP2W7dsMugOIHDgra30mTvGjRMohivDIaFXnPGCAOv/AYm55BMUBQ==}
     peerDependencies:
       eslint: '9'
 
@@ -4595,7 +4596,7 @@ snapshots:
 
   '@fontsource/inter@5.2.8': {}
 
-  '@formatjs/cli@6.12.2': {}
+  '@formatjs/cli@6.13.0': {}
 
   '@formatjs/ecma402-abstract@3.1.1':
     dependencies:
@@ -4634,11 +4635,10 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
 
-  '@formatjs/ts-transformer@4.3.3':
+  '@formatjs/ts-transformer@4.4.0':
     dependencies:
       '@formatjs/icu-messageformat-parser': 3.5.1
-      '@types/node': 22.19.11
-      chalk: 4.1.2
+      '@types/node': 22.19.13
       json-stable-stringify: 1.3.0
       tslib: 2.8.1
       typescript: 5.9.3
@@ -5702,7 +5702,7 @@ snapshots:
 
   '@types/json-schema@7.0.15': {}
 
-  '@types/node@22.19.11':
+  '@types/node@22.19.13':
     dependencies:
       undici-types: 6.21.0
 
@@ -6104,7 +6104,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-plugin-formatjs@11.2.3:
+  babel-plugin-formatjs@11.2.4:
     dependencies:
       '@babel/core': 7.29.0
       '@babel/helper-plugin-utils': 7.28.6
@@ -6112,7 +6112,7 @@ snapshots:
       '@babel/traverse': 7.29.0
       '@babel/types': 7.29.0
       '@formatjs/icu-messageformat-parser': 3.5.1
-      '@formatjs/ts-transformer': 4.3.3
+      '@formatjs/ts-transformer': 4.4.0
       '@types/babel__core': 7.20.5
       '@types/babel__helper-plugin-utils': 7.10.3
       '@types/babel__traverse': 7.28.0
@@ -6587,21 +6587,18 @@ snapshots:
       lodash.memoize: 4.1.2
       semver: 7.7.4
 
-  eslint-plugin-formatjs@6.1.3(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3):
+  eslint-plugin-formatjs@6.2.0(eslint@9.39.2(jiti@2.6.1)):
     dependencies:
       '@formatjs/icu-messageformat-parser': 3.5.1
-      '@formatjs/ts-transformer': 4.3.3
+      '@formatjs/ts-transformer': 4.4.0
       '@types/picomatch': 4.0.2
-      '@typescript-eslint/utils': 8.54.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       '@unicode/unicode-17.0.0': 1.6.16
       eslint: 9.39.2(jiti@2.6.1)
       magic-string: 0.30.21
       picomatch: 4.0.3
       tslib: 2.8.1
     transitivePeerDependencies:
-      - supports-color
       - ts-jest
-      - typescript
 
   eslint-plugin-import-x@4.16.1(@typescript-eslint/utils@8.56.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1)):
     dependencies:

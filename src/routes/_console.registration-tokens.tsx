@@ -549,7 +549,7 @@ const filtersDefinition = [
     value: true,
     message: defineMessage({
       id: "pages.registration_tokens.filters.expired_only",
-      defaultMessage: "Expired ",
+      defaultMessage: "Expired",
       description: "Filter option for expired registration tokens only",
     }),
   },
