@@ -2,6 +2,8 @@
 # SPDX-FileCopyrightText: Copyright 2025, 2026 Element Creations Ltd.
 #
 # SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+#
+# $schema: https://www.schemastore.org/pnpm-workspace.json
 
 trustPolicy: no-downgrade
 
@@ -16,6 +18,8 @@ ignoredBuiltDependencies:
   - esbuild
   - unrs-resolver
 
+strictPeerDependencies: true
+
 peerDependencyRules:
-  ignoreMissing:
-    - eslint
+  allowedVersions:
+    eslint: "10"
