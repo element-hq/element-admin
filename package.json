@@ -68,7 +68,7 @@
     "@tanstack/react-pacer-devtools": "0.5.2",
     "@tanstack/react-query-devtools": "5.91.3",
     "@tanstack/react-router-devtools": "1.163.3",
-    "@tanstack/router-plugin": "1.163.3",
+    "@tanstack/router-plugin": "1.164.0",
     "@tsconfig/strictest": "2.0.8",
     "@tsconfig/vite-react": "7.0.2",
     "@types/node": "25.2.3",
