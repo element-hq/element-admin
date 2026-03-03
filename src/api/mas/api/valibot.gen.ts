@@ -40,29 +40,23 @@ export const vIncludeCount = v.union([
 ]);
 
 export const vPaginationParams = v.object({
-  "page[before]": v.optional(v.union([vUlid, v.null()])),
-  "page[after]": v.optional(v.union([vUlid, v.null()])),
-  "page[first]": v.optional(
-    v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-  ),
-  "page[last]": v.optional(
-    v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-  ),
-  count: v.optional(v.union([vIncludeCount, v.null()])),
+  "page[before]": v.nullish(vUlid),
+  "page[after]": v.nullish(vUlid),
+  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.nullish(vIncludeCount),
 });
 
 export const vCompatSessionStatus = v.picklist(["active", "finished"]);
 
 export const vCompatSessionFilter = v.object({
-  "filter[user]": v.optional(v.union([vUlid, v.null()])),
-  "filter[user-session]": v.optional(v.union([vUlid, v.null()])),
-  "filter[status]": v.optional(v.union([vCompatSessionStatus, v.null()])),
+  "filter[user]": v.nullish(vUlid),
+  "filter[user-session]": v.nullish(vUlid),
+  "filter[status]": v.nullish(vCompatSessionStatus),
 });
 
 export const vPaginationMeta = v.object({
-  count: v.optional(
-    v.union([v.pipe(v.number(), v.integer(), v.minValue(0)), v.null()]),
-  ),
+  count: v.nullish(v.pipe(v.number(), v.integer(), v.minValue(0))),
 });
 
 /**
@@ -82,17 +76,13 @@ export const vCompatSession = v.object({
   user_id: vUlid,
   device_id: vDeviceId,
   user_session_id: vUlid,
-  redirect_uri: v.optional(v.union([v.pipe(v.string(), v.url()), v.null()])),
+  redirect_uri: v.nullish(v.pipe(v.string(), v.url())),
   created_at: v.pipe(v.string(), v.isoTimestamp()),
-  user_agent: v.optional(v.union([v.string(), v.null()])),
-  last_active_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
-  last_active_ip: v.optional(v.union([v.string(), v.null()])),
-  finished_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
-  human_name: v.optional(v.union([v.string(), v.null()])),
+  user_agent: v.nullish(v.string()),
+  last_active_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  last_active_ip: v.nullish(v.string()),
+  finished_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  human_name: v.nullish(v.string()),
 });
 
 /**
@@ -113,7 +103,7 @@ export const vSingleResourceMetaPage = v.object({
  * Metadata associated with a resource
  */
 export const vSingleResourceMeta = v.object({
-  page: v.optional(v.union([vSingleResourceMetaPage, v.null()])),
+  page: v.nullish(vSingleResourceMetaPage),
 });
 
 /**
@@ -124,7 +114,7 @@ export const vSingleResourceForCompatSession = v.object({
   id: vUlid,
   attributes: vCompatSession,
   links: vSelfLinks,
-  meta: v.optional(v.union([vSingleResourceMeta, v.null()])),
+  meta: v.nullish(vSingleResourceMeta),
 });
 
 /**
@@ -132,20 +122,18 @@ export const vSingleResourceForCompatSession = v.object({
  */
 export const vPaginationLinks = v.object({
   self: v.string(),
-  first: v.optional(v.union([v.string(), v.null()])),
-  last: v.optional(v.union([v.string(), v.null()])),
-  next: v.optional(v.union([v.string(), v.null()])),
-  prev: v.optional(v.union([v.string(), v.null()])),
+  first: v.nullish(v.string()),
+  last: v.nullish(v.string()),
+  next: v.nullish(v.string()),
+  prev: v.nullish(v.string()),
 });
 
 /**
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForCompatSession = v.object({
-  meta: v.optional(v.union([vPaginationMeta, v.null()])),
-  data: v.optional(
-    v.union([v.array(vSingleResourceForCompatSession), v.null()]),
-  ),
+  meta: v.nullish(vPaginationMeta),
+  data: v.nullish(v.array(vSingleResourceForCompatSession)),
   links: vPaginationLinks,
 });
 
@@ -180,12 +168,12 @@ export const vOAuth2ClientKind = v.picklist(["dynamic", "static"]);
 export const vOAuth2SessionStatus = v.picklist(["active", "finished"]);
 
 export const vOAuth2SessionFilter = v.object({
-  "filter[user]": v.optional(v.union([vUlid, v.null()])),
-  "filter[client]": v.optional(v.union([vUlid, v.null()])),
-  "filter[client-kind]": v.optional(v.union([vOAuth2ClientKind, v.null()])),
-  "filter[user-session]": v.optional(v.union([vUlid, v.null()])),
+  "filter[user]": v.nullish(vUlid),
+  "filter[client]": v.nullish(vUlid),
+  "filter[client-kind]": v.nullish(vOAuth2ClientKind),
+  "filter[user-session]": v.nullish(vUlid),
   "filter[scope]": v.optional(v.array(v.string()), []),
-  "filter[status]": v.optional(v.union([vOAuth2SessionStatus, v.null()])),
+  "filter[status]": v.nullish(vOAuth2SessionStatus),
 });
 
 /**
@@ -193,19 +181,15 @@ export const vOAuth2SessionFilter = v.object({
  */
 export const vOAuth2Session = v.object({
   created_at: v.pipe(v.string(), v.isoTimestamp()),
-  finished_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
-  user_id: v.optional(v.union([vUlid, v.null()])),
-  user_session_id: v.optional(v.union([vUlid, v.null()])),
+  finished_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  user_id: v.nullish(vUlid),
+  user_session_id: v.nullish(vUlid),
   client_id: vUlid,
   scope: v.string(),
-  user_agent: v.optional(v.union([v.string(), v.null()])),
-  last_active_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
-  last_active_ip: v.optional(v.union([v.string(), v.null()])),
-  human_name: v.optional(v.union([v.string(), v.null()])),
+  user_agent: v.nullish(v.string()),
+  last_active_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  last_active_ip: v.nullish(v.string()),
+  human_name: v.nullish(v.string()),
 });
 
 /**
@@ -216,17 +200,15 @@ export const vSingleResourceForOAuth2Session = v.object({
   id: vUlid,
   attributes: vOAuth2Session,
   links: vSelfLinks,
-  meta: v.optional(v.union([vSingleResourceMeta, v.null()])),
+  meta: v.nullish(vSingleResourceMeta),
 });
 
 /**
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForOAuth2Session = v.object({
-  meta: v.optional(v.union([vPaginationMeta, v.null()])),
-  data: v.optional(
-    v.union([v.array(vSingleResourceForOAuth2Session), v.null()]),
-  ),
+  meta: v.nullish(vPaginationMeta),
+  data: v.nullish(v.array(vSingleResourceForOAuth2Session)),
   links: vPaginationLinks,
 });
 
@@ -241,18 +223,14 @@ export const vSingleResponseForOAuth2Session = v.object({
 export const vPersonalSessionStatus = v.picklist(["active", "revoked"]);
 
 export const vPersonalSessionFilter = v.object({
-  "filter[owner_user]": v.optional(v.union([vUlid, v.null()])),
-  "filter[owner_client]": v.optional(v.union([vUlid, v.null()])),
-  "filter[actor_user]": v.optional(v.union([vUlid, v.null()])),
+  "filter[owner_user]": v.nullish(vUlid),
+  "filter[owner_client]": v.nullish(vUlid),
+  "filter[actor_user]": v.nullish(vUlid),
   "filter[scope]": v.optional(v.array(v.string()), []),
-  "filter[status]": v.optional(v.union([vPersonalSessionStatus, v.null()])),
-  "filter[expires_before]": v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
-  "filter[expires_after]": v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
-  "filter[expires]": v.optional(v.union([v.boolean(), v.null()])),
+  "filter[status]": v.nullish(vPersonalSessionStatus),
+  "filter[expires_before]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[expires_after]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[expires]": v.nullish(v.boolean()),
 });
 
 /**
@@ -260,22 +238,16 @@ export const vPersonalSessionFilter = v.object({
  */
 export const vPersonalSession = v.object({
   created_at: v.pipe(v.string(), v.isoTimestamp()),
-  revoked_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
-  owner_user_id: v.optional(v.union([vUlid, v.null()])),
-  owner_client_id: v.optional(v.union([vUlid, v.null()])),
+  revoked_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  owner_user_id: v.nullish(vUlid),
+  owner_client_id: v.nullish(vUlid),
   actor_user_id: vUlid,
   human_name: v.string(),
   scope: v.string(),
-  last_active_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
-  last_active_ip: v.optional(v.union([v.string(), v.null()])),
-  expires_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
-  access_token: v.optional(v.union([v.string(), v.null()])),
+  last_active_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  last_active_ip: v.nullish(v.string()),
+  expires_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  access_token: v.nullish(v.string()),
 });
 
 /**
@@ -286,17 +258,15 @@ export const vSingleResourceForPersonalSession = v.object({
   id: vUlid,
   attributes: vPersonalSession,
   links: vSelfLinks,
-  meta: v.optional(v.union([vSingleResourceMeta, v.null()])),
+  meta: v.nullish(vSingleResourceMeta),
 });
 
 /**
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForPersonalSession = v.object({
-  meta: v.optional(v.union([vPaginationMeta, v.null()])),
-  data: v.optional(
-    v.union([v.array(vSingleResourceForPersonalSession), v.null()]),
-  ),
+  meta: v.nullish(vPaginationMeta),
+  data: v.nullish(v.array(vSingleResourceForPersonalSession)),
   links: vPaginationLinks,
 });
 
@@ -307,19 +277,16 @@ export const vCreatePersonalSessionRequest = v.object({
   actor_user_id: vUlid,
   human_name: v.string(),
   scope: v.string(),
-  expires_in: v.optional(
-    v.union([
-      v.pipe(
-        v.number(),
-        v.integer(),
-        v.minValue(0),
-        v.maxValue(
-          4294967295,
-          "Invalid value: Expected uint32 to be <= 4294967295",
-        ),
+  expires_in: v.nullish(
+    v.pipe(
+      v.number(),
+      v.integer(),
+      v.minValue(0),
+      v.maxValue(
+        4294967295,
+        "Invalid value: Expected uint32 to be <= 4294967295",
       ),
-      v.null(),
-    ]),
+    ),
   ),
 });
 
@@ -335,19 +302,16 @@ export const vSingleResponseForPersonalSession = v.object({
  * JSON payload for the `POST /api/admin/v1/personal-sessions/{id}/regenerate` endpoint
  */
 export const vRegeneratePersonalSessionRequest = v.object({
-  expires_in: v.optional(
-    v.union([
-      v.pipe(
-        v.number(),
-        v.integer(),
-        v.minValue(0),
-        v.maxValue(
-          4294967295,
-          "Invalid value: Expected uint32 to be <= 4294967295",
-        ),
+  expires_in: v.nullish(
+    v.pipe(
+      v.number(),
+      v.integer(),
+      v.minValue(0),
+      v.maxValue(
+        4294967295,
+        "Invalid value: Expected uint32 to be <= 4294967295",
       ),
-      v.null(),
-    ]),
+    ),
   ),
 });
 
@@ -374,7 +338,7 @@ export const vSingleResourceForPolicyData = v.object({
   id: vUlid,
   attributes: vPolicyData,
   links: vSelfLinks,
-  meta: v.optional(v.union([vSingleResourceMeta, v.null()])),
+  meta: v.nullish(vSingleResourceMeta),
 });
 
 /**
@@ -388,10 +352,10 @@ export const vSingleResponseForPolicyData = v.object({
 export const vUserStatus = v.picklist(["active", "locked", "deactivated"]);
 
 export const vUserFilter = v.object({
-  "filter[admin]": v.optional(v.union([v.boolean(), v.null()])),
-  "filter[legacy-guest]": v.optional(v.union([v.boolean(), v.null()])),
-  "filter[search]": v.optional(v.union([v.string(), v.null()])),
-  "filter[status]": v.optional(v.union([vUserStatus, v.null()])),
+  "filter[admin]": v.nullish(v.boolean()),
+  "filter[legacy-guest]": v.nullish(v.boolean()),
+  "filter[search]": v.nullish(v.string()),
+  "filter[status]": v.nullish(vUserStatus),
 });
 
 /**
@@ -400,12 +364,8 @@ export const vUserFilter = v.object({
 export const vUser = v.object({
   username: v.string(),
   created_at: v.pipe(v.string(), v.isoTimestamp()),
-  locked_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
-  deactivated_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
+  locked_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  deactivated_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
   admin: v.boolean(),
   legacy_guest: v.optional(v.boolean()),
 });
@@ -418,15 +378,15 @@ export const vSingleResourceForUser = v.object({
   id: vUlid,
   attributes: vUser,
   links: vSelfLinks,
-  meta: v.optional(v.union([vSingleResourceMeta, v.null()])),
+  meta: v.nullish(vSingleResourceMeta),
 });
 
 /**
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForUser = v.object({
-  meta: v.optional(v.union([vPaginationMeta, v.null()])),
-  data: v.optional(v.union([v.array(vSingleResourceForUser), v.null()])),
+  meta: v.nullish(vPaginationMeta),
+  data: v.nullish(v.array(vSingleResourceForUser)),
   links: vPaginationLinks,
 });
 
@@ -451,7 +411,7 @@ export const vSingleResponseForUser = v.object({
  */
 export const vSetUserPasswordRequest = v.object({
   password: v.string(),
-  skip_password_check: v.optional(v.union([v.boolean(), v.null()])),
+  skip_password_check: v.nullish(v.boolean()),
 });
 
 export const vUsernamePathParam = v.object({
@@ -473,8 +433,8 @@ export const vDeactivateUserRequest = v.object({
 });
 
 export const vUserEmailFilter = v.object({
-  "filter[user]": v.optional(v.union([vUlid, v.null()])),
-  "filter[email]": v.optional(v.union([v.string(), v.null()])),
+  "filter[user]": v.nullish(vUlid),
+  "filter[email]": v.nullish(v.string()),
 });
 
 /**
@@ -494,15 +454,15 @@ export const vSingleResourceForUserEmail = v.object({
   id: vUlid,
   attributes: vUserEmail,
   links: vSelfLinks,
-  meta: v.optional(v.union([vSingleResourceMeta, v.null()])),
+  meta: v.nullish(vSingleResourceMeta),
 });
 
 /**
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForUserEmail = v.object({
-  meta: v.optional(v.union([vPaginationMeta, v.null()])),
-  data: v.optional(v.union([v.array(vSingleResourceForUserEmail), v.null()])),
+  meta: v.nullish(vPaginationMeta),
+  data: v.nullish(v.array(vSingleResourceForUserEmail)),
   links: vPaginationLinks,
 });
 
@@ -525,8 +485,8 @@ export const vSingleResponseForUserEmail = v.object({
 export const vUserSessionStatus = v.picklist(["active", "finished"]);
 
 export const vUserSessionFilter = v.object({
-  "filter[user]": v.optional(v.union([vUlid, v.null()])),
-  "filter[status]": v.optional(v.union([vUserSessionStatus, v.null()])),
+  "filter[user]": v.nullish(vUlid),
+  "filter[status]": v.nullish(vUserSessionStatus),
 });
 
 /**
@@ -534,15 +494,11 @@ export const vUserSessionFilter = v.object({
  */
 export const vUserSession = v.object({
   created_at: v.pipe(v.string(), v.isoTimestamp()),
-  finished_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
+  finished_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
   user_id: vUlid,
-  user_agent: v.optional(v.union([v.string(), v.null()])),
-  last_active_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
-  last_active_ip: v.optional(v.union([v.string(), v.null()])),
+  user_agent: v.nullish(v.string()),
+  last_active_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  last_active_ip: v.nullish(v.string()),
 });
 
 /**
@@ -553,15 +509,15 @@ export const vSingleResourceForUserSession = v.object({
   id: vUlid,
   attributes: vUserSession,
   links: vSelfLinks,
-  meta: v.optional(v.union([vSingleResourceMeta, v.null()])),
+  meta: v.nullish(vSingleResourceMeta),
 });
 
 /**
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForUserSession = v.object({
-  meta: v.optional(v.union([vPaginationMeta, v.null()])),
-  data: v.optional(v.union([v.array(vSingleResourceForUserSession), v.null()])),
+  meta: v.nullish(vPaginationMeta),
+  data: v.nullish(v.array(vSingleResourceForUserSession)),
   links: vPaginationLinks,
 });
 
@@ -574,10 +530,10 @@ export const vSingleResponseForUserSession = v.object({
 });
 
 export const vRegistrationTokenFilter = v.object({
-  "filter[used]": v.optional(v.union([v.boolean(), v.null()])),
-  "filter[revoked]": v.optional(v.union([v.boolean(), v.null()])),
-  "filter[expired]": v.optional(v.union([v.boolean(), v.null()])),
-  "filter[valid]": v.optional(v.union([v.boolean(), v.null()])),
+  "filter[used]": v.nullish(v.boolean()),
+  "filter[revoked]": v.nullish(v.boolean()),
+  "filter[expired]": v.nullish(v.boolean()),
+  "filter[valid]": v.nullish(v.boolean()),
 });
 
 /**
@@ -586,19 +542,16 @@ export const vRegistrationTokenFilter = v.object({
 export const vUserRegistrationToken = v.object({
   token: v.string(),
   valid: v.boolean(),
-  usage_limit: v.optional(
-    v.union([
-      v.pipe(
-        v.number(),
-        v.integer(),
-        v.minValue(0),
-        v.maxValue(
-          4294967295,
-          "Invalid value: Expected uint32 to be <= 4294967295",
-        ),
+  usage_limit: v.nullish(
+    v.pipe(
+      v.number(),
+      v.integer(),
+      v.minValue(0),
+      v.maxValue(
+        4294967295,
+        "Invalid value: Expected uint32 to be <= 4294967295",
       ),
-      v.null(),
-    ]),
+    ),
   ),
   times_used: v.pipe(
     v.number(),
@@ -610,15 +563,9 @@ export const vUserRegistrationToken = v.object({
     ),
   ),
   created_at: v.pipe(v.string(), v.isoTimestamp()),
-  last_used_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
-  expires_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
-  revoked_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
+  last_used_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  expires_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  revoked_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
 });
 
 /**
@@ -629,17 +576,15 @@ export const vSingleResourceForUserRegistrationToken = v.object({
   id: vUlid,
   attributes: vUserRegistrationToken,
   links: vSelfLinks,
-  meta: v.optional(v.union([vSingleResourceMeta, v.null()])),
+  meta: v.nullish(vSingleResourceMeta),
 });
 
 /**
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForUserRegistrationToken = v.object({
-  meta: v.optional(v.union([vPaginationMeta, v.null()])),
-  data: v.optional(
-    v.union([v.array(vSingleResourceForUserRegistrationToken), v.null()]),
-  ),
+  meta: v.nullish(vPaginationMeta),
+  data: v.nullish(v.array(vSingleResourceForUserRegistrationToken)),
   links: vPaginationLinks,
 });
 
@@ -647,24 +592,19 @@ export const vPaginatedResponseForUserRegistrationToken = v.object({
  * JSON payload for the `POST /api/admin/v1/user-registration-tokens`
  */
 export const vAddUserRegistrationTokenRequest = v.object({
-  token: v.optional(v.union([v.string(), v.null()])),
-  usage_limit: v.optional(
-    v.union([
-      v.pipe(
-        v.number(),
-        v.integer(),
-        v.minValue(0),
-        v.maxValue(
-          4294967295,
-          "Invalid value: Expected uint32 to be <= 4294967295",
-        ),
+  token: v.nullish(v.string()),
+  usage_limit: v.nullish(
+    v.pipe(
+      v.number(),
+      v.integer(),
+      v.minValue(0),
+      v.maxValue(
+        4294967295,
+        "Invalid value: Expected uint32 to be <= 4294967295",
       ),
-      v.null(),
-    ]),
+    ),
   ),
-  expires_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
+  expires_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
 });
 
 /**
@@ -679,29 +619,24 @@ export const vSingleResponseForUserRegistrationToken = v.object({
  * JSON payload for the `PUT /api/admin/v1/user-registration-tokens/{id}` endpoint
  */
 export const vEditUserRegistrationTokenRequest = v.object({
-  expires_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
-  usage_limit: v.optional(
-    v.union([
-      v.pipe(
-        v.number(),
-        v.integer(),
-        v.minValue(0),
-        v.maxValue(
-          4294967295,
-          "Invalid value: Expected uint32 to be <= 4294967295",
-        ),
+  expires_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  usage_limit: v.nullish(
+    v.pipe(
+      v.number(),
+      v.integer(),
+      v.minValue(0),
+      v.maxValue(
+        4294967295,
+        "Invalid value: Expected uint32 to be <= 4294967295",
       ),
-      v.null(),
-    ]),
+    ),
   ),
 });
 
 export const vUpstreamOAuthLinkFilter = v.object({
-  "filter[user]": v.optional(v.union([vUlid, v.null()])),
-  "filter[provider]": v.optional(v.union([vUlid, v.null()])),
-  "filter[subject]": v.optional(v.union([v.string(), v.null()])),
+  "filter[user]": v.nullish(vUlid),
+  "filter[provider]": v.nullish(vUlid),
+  "filter[subject]": v.nullish(v.string()),
 });
 
 /**
@@ -711,8 +646,8 @@ export const vUpstreamOAuthLink = v.object({
   created_at: v.pipe(v.string(), v.isoTimestamp()),
   provider_id: vUlid,
   subject: v.string(),
-  user_id: v.optional(v.union([vUlid, v.null()])),
-  human_account_name: v.optional(v.union([v.string(), v.null()])),
+  user_id: v.nullish(vUlid),
+  human_account_name: v.nullish(v.string()),
 });
 
 /**
@@ -723,17 +658,15 @@ export const vSingleResourceForUpstreamOAuthLink = v.object({
   id: vUlid,
   attributes: vUpstreamOAuthLink,
   links: vSelfLinks,
-  meta: v.optional(v.union([vSingleResourceMeta, v.null()])),
+  meta: v.nullish(vSingleResourceMeta),
 });
 
 /**
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForUpstreamOAuthLink = v.object({
-  meta: v.optional(v.union([vPaginationMeta, v.null()])),
-  data: v.optional(
-    v.union([v.array(vSingleResourceForUpstreamOAuthLink), v.null()]),
-  ),
+  meta: v.nullish(vPaginationMeta),
+  data: v.nullish(v.array(vSingleResourceForUpstreamOAuthLink)),
   links: vPaginationLinks,
 });
 
@@ -744,7 +677,7 @@ export const vAddUpstreamOauthLinkRequest = v.object({
   user_id: vUlid,
   provider_id: vUlid,
   subject: v.string(),
-  human_account_name: v.optional(v.union([v.string(), v.null()])),
+  human_account_name: v.nullish(v.string()),
 });
 
 /**
@@ -756,20 +689,18 @@ export const vSingleResponseForUpstreamOAuthLink = v.object({
 });
 
 export const vUpstreamOAuthProviderFilter = v.object({
-  "filter[enabled]": v.optional(v.union([v.boolean(), v.null()])),
+  "filter[enabled]": v.nullish(v.boolean()),
 });
 
 /**
  * An upstream OAuth 2.0 provider
  */
 export const vUpstreamOAuthProvider = v.object({
-  issuer: v.optional(v.union([v.string(), v.null()])),
-  human_name: v.optional(v.union([v.string(), v.null()])),
-  brand_name: v.optional(v.union([v.string(), v.null()])),
+  issuer: v.nullish(v.string()),
+  human_name: v.nullish(v.string()),
+  brand_name: v.nullish(v.string()),
   created_at: v.pipe(v.string(), v.isoTimestamp()),
-  disabled_at: v.optional(
-    v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-  ),
+  disabled_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
 });
 
 /**
@@ -780,17 +711,15 @@ export const vSingleResourceForUpstreamOAuthProvider = v.object({
   id: vUlid,
   attributes: vUpstreamOAuthProvider,
   links: vSelfLinks,
-  meta: v.optional(v.union([vSingleResourceMeta, v.null()])),
+  meta: v.nullish(vSingleResourceMeta),
 });
 
 /**
  * A top-level response with a page of resources
  */
 export const vPaginatedResponseForUpstreamOAuthProvider = v.object({
-  meta: v.optional(v.union([vPaginationMeta, v.null()])),
-  data: v.optional(
-    v.union([v.array(vSingleResourceForUpstreamOAuthProvider), v.null()]),
-  ),
+  meta: v.nullish(vPaginationMeta),
+  data: v.nullish(v.array(vSingleResourceForUpstreamOAuthProvider)),
   links: vPaginationLinks,
 });
 
@@ -823,18 +752,14 @@ export const vListCompatSessionsData = v.object({
   path: v.optional(v.never()),
   query: v.optional(
     v.object({
-      "page[before]": v.optional(v.union([vUlid, v.null()])),
-      "page[after]": v.optional(v.union([vUlid, v.null()])),
-      "page[first]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      "page[last]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      count: v.optional(v.union([vIncludeCount, v.null()])),
-      "filter[user]": v.optional(v.union([vUlid, v.null()])),
-      "filter[user-session]": v.optional(v.union([vUlid, v.null()])),
-      "filter[status]": v.optional(v.union([vCompatSessionStatus, v.null()])),
+      "page[before]": v.nullish(vUlid),
+      "page[after]": v.nullish(vUlid),
+      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      count: v.nullish(vIncludeCount),
+      "filter[user]": v.nullish(vUlid),
+      "filter[user-session]": v.nullish(vUlid),
+      "filter[status]": v.nullish(vCompatSessionStatus),
     }),
   ),
 });
@@ -875,21 +800,17 @@ export const vListOAuth2SessionsData = v.object({
   path: v.optional(v.never()),
   query: v.optional(
     v.object({
-      "page[before]": v.optional(v.union([vUlid, v.null()])),
-      "page[after]": v.optional(v.union([vUlid, v.null()])),
-      "page[first]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      "page[last]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      count: v.optional(v.union([vIncludeCount, v.null()])),
-      "filter[user]": v.optional(v.union([vUlid, v.null()])),
-      "filter[client]": v.optional(v.union([vUlid, v.null()])),
-      "filter[client-kind]": v.optional(v.union([vOAuth2ClientKind, v.null()])),
-      "filter[user-session]": v.optional(v.union([vUlid, v.null()])),
+      "page[before]": v.nullish(vUlid),
+      "page[after]": v.nullish(vUlid),
+      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      count: v.nullish(vIncludeCount),
+      "filter[user]": v.nullish(vUlid),
+      "filter[client]": v.nullish(vUlid),
+      "filter[client-kind]": v.nullish(vOAuth2ClientKind),
+      "filter[user-session]": v.nullish(vUlid),
       "filter[scope]": v.optional(v.array(v.string()), []),
-      "filter[status]": v.optional(v.union([vOAuth2SessionStatus, v.null()])),
+      "filter[status]": v.nullish(vOAuth2SessionStatus),
     }),
   ),
 });
@@ -930,27 +851,19 @@ export const vListPersonalSessionsData = v.object({
   path: v.optional(v.never()),
   query: v.optional(
     v.object({
-      "page[before]": v.optional(v.union([vUlid, v.null()])),
-      "page[after]": v.optional(v.union([vUlid, v.null()])),
-      "page[first]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      "page[last]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      count: v.optional(v.union([vIncludeCount, v.null()])),
-      "filter[owner_user]": v.optional(v.union([vUlid, v.null()])),
-      "filter[owner_client]": v.optional(v.union([vUlid, v.null()])),
-      "filter[actor_user]": v.optional(v.union([vUlid, v.null()])),
+      "page[before]": v.nullish(vUlid),
+      "page[after]": v.nullish(vUlid),
+      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      count: v.nullish(vIncludeCount),
+      "filter[owner_user]": v.nullish(vUlid),
+      "filter[owner_client]": v.nullish(vUlid),
+      "filter[actor_user]": v.nullish(vUlid),
       "filter[scope]": v.optional(v.array(v.string()), []),
-      "filter[status]": v.optional(v.union([vPersonalSessionStatus, v.null()])),
-      "filter[expires_before]": v.optional(
-        v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-      ),
-      "filter[expires_after]": v.optional(
-        v.union([v.pipe(v.string(), v.isoTimestamp()), v.null()]),
-      ),
-      "filter[expires]": v.optional(v.union([v.boolean(), v.null()])),
+      "filter[status]": v.nullish(vPersonalSessionStatus),
+      "filter[expires_before]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+      "filter[expires_after]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+      "filter[expires]": v.nullish(v.boolean()),
     }),
   ),
 });
@@ -1052,19 +965,15 @@ export const vListUsersData = v.object({
   path: v.optional(v.never()),
   query: v.optional(
     v.object({
-      "page[before]": v.optional(v.union([vUlid, v.null()])),
-      "page[after]": v.optional(v.union([vUlid, v.null()])),
-      "page[first]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      "page[last]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      count: v.optional(v.union([vIncludeCount, v.null()])),
-      "filter[admin]": v.optional(v.union([v.boolean(), v.null()])),
-      "filter[legacy-guest]": v.optional(v.union([v.boolean(), v.null()])),
-      "filter[search]": v.optional(v.union([v.string(), v.null()])),
-      "filter[status]": v.optional(v.union([vUserStatus, v.null()])),
+      "page[before]": v.nullish(vUlid),
+      "page[after]": v.nullish(vUlid),
+      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      count: v.nullish(vIncludeCount),
+      "filter[admin]": v.nullish(v.boolean()),
+      "filter[legacy-guest]": v.nullish(v.boolean()),
+      "filter[search]": v.nullish(v.string()),
+      "filter[status]": v.nullish(vUserStatus),
     }),
   ),
 });
@@ -1194,17 +1103,13 @@ export const vListUserEmailsData = v.object({
   path: v.optional(v.never()),
   query: v.optional(
     v.object({
-      "page[before]": v.optional(v.union([vUlid, v.null()])),
-      "page[after]": v.optional(v.union([vUlid, v.null()])),
-      "page[first]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      "page[last]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      count: v.optional(v.union([vIncludeCount, v.null()])),
-      "filter[user]": v.optional(v.union([vUlid, v.null()])),
-      "filter[email]": v.optional(v.union([v.string(), v.null()])),
+      "page[before]": v.nullish(vUlid),
+      "page[after]": v.nullish(vUlid),
+      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      count: v.nullish(vIncludeCount),
+      "filter[user]": v.nullish(vUlid),
+      "filter[email]": v.nullish(v.string()),
     }),
   ),
 });
@@ -1256,17 +1161,13 @@ export const vListUserSessionsData = v.object({
   path: v.optional(v.never()),
   query: v.optional(
     v.object({
-      "page[before]": v.optional(v.union([vUlid, v.null()])),
-      "page[after]": v.optional(v.union([vUlid, v.null()])),
-      "page[first]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      "page[last]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      count: v.optional(v.union([vIncludeCount, v.null()])),
-      "filter[user]": v.optional(v.union([vUlid, v.null()])),
-      "filter[status]": v.optional(v.union([vUserSessionStatus, v.null()])),
+      "page[before]": v.nullish(vUlid),
+      "page[after]": v.nullish(vUlid),
+      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      count: v.nullish(vIncludeCount),
+      "filter[user]": v.nullish(vUlid),
+      "filter[status]": v.nullish(vUserSessionStatus),
     }),
   ),
 });
@@ -1307,19 +1208,15 @@ export const vListUserRegistrationTokensData = v.object({
   path: v.optional(v.never()),
   query: v.optional(
     v.object({
-      "page[before]": v.optional(v.union([vUlid, v.null()])),
-      "page[after]": v.optional(v.union([vUlid, v.null()])),
-      "page[first]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      "page[last]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      count: v.optional(v.union([vIncludeCount, v.null()])),
-      "filter[used]": v.optional(v.union([v.boolean(), v.null()])),
-      "filter[revoked]": v.optional(v.union([v.boolean(), v.null()])),
-      "filter[expired]": v.optional(v.union([v.boolean(), v.null()])),
-      "filter[valid]": v.optional(v.union([v.boolean(), v.null()])),
+      "page[before]": v.nullish(vUlid),
+      "page[after]": v.nullish(vUlid),
+      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      count: v.nullish(vIncludeCount),
+      "filter[used]": v.nullish(v.boolean()),
+      "filter[revoked]": v.nullish(v.boolean()),
+      "filter[expired]": v.nullish(v.boolean()),
+      "filter[valid]": v.nullish(v.boolean()),
     }),
   ),
 });
@@ -1403,18 +1300,14 @@ export const vListUpstreamOAuthLinksData = v.object({
   path: v.optional(v.never()),
   query: v.optional(
     v.object({
-      "page[before]": v.optional(v.union([vUlid, v.null()])),
-      "page[after]": v.optional(v.union([vUlid, v.null()])),
-      "page[first]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      "page[last]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      count: v.optional(v.union([vIncludeCount, v.null()])),
-      "filter[user]": v.optional(v.union([vUlid, v.null()])),
-      "filter[provider]": v.optional(v.union([vUlid, v.null()])),
-      "filter[subject]": v.optional(v.union([v.string(), v.null()])),
+      "page[before]": v.nullish(vUlid),
+      "page[after]": v.nullish(vUlid),
+      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      count: v.nullish(vIncludeCount),
+      "filter[user]": v.nullish(vUlid),
+      "filter[provider]": v.nullish(vUlid),
+      "filter[subject]": v.nullish(v.string()),
     }),
   ),
 });
@@ -1469,16 +1362,12 @@ export const vListUpstreamOAuthProvidersData = v.object({
   path: v.optional(v.never()),
   query: v.optional(
     v.object({
-      "page[before]": v.optional(v.union([vUlid, v.null()])),
-      "page[after]": v.optional(v.union([vUlid, v.null()])),
-      "page[first]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      "page[last]": v.optional(
-        v.union([v.pipe(v.number(), v.integer(), v.minValue(1)), v.null()]),
-      ),
-      count: v.optional(v.union([vIncludeCount, v.null()])),
-      "filter[enabled]": v.optional(v.union([v.boolean(), v.null()])),
+      "page[before]": v.nullish(vUlid),
+      "page[after]": v.nullish(vUlid),
+      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+      count: v.nullish(vIncludeCount),
+      "filter[enabled]": v.nullish(v.boolean()),
     }),
   ),
 });
