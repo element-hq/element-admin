@@ -29,8 +29,7 @@ export const AlsoAvailableInPro = () => (
     <Card.Body>
       <FormattedMessage
         id="marketing.also_available_in_pro.description"
-        defaultMessage="
-<p><link>ESS Pro</link> is the commercial backend distribution from Element.</p>
+        defaultMessage="<p><link>ESS Pro</link> is the commercial backend distribution from Element.</p>
 <p>It includes everything in ESS Community plus additional features and
 services that are tailored to professional environments with more than 100 users
 up to massive scale in the millions.</p>
@@ -86,18 +85,15 @@ export const SupervisionCard = ({ proBadge }: { proBadge?: boolean }) => (
 
     <FormattedMessage
       id="marketing.supervision.description"
-      defaultMessage="
-<p>Supervision enables an organisation to administer all rooms from a central
+      defaultMessage="<p>Supervision enables an organisation to administer all rooms from a central
 point. A 'supervisor' account will join defined rooms with room admin privileges.
 Server administrators can seamlessly impersonate the account from the admin
 console to manage and supervise their rooms.</p>
-<ul>
-<li>Manage rooms and their settings (name, topic, permissions, etc.)</li>
+<ul><li>Manage rooms and their settings (name, topic, permissions, etc.)</li>
 <li>Manage room memberships</li>
 <li>Remove unwanted messages and uploaded media</li>
 <li>Recover abandoned rooms (all users have left)</li>
-<li>Supervisor account can or cannot read encrypted message contents (configurable)</li>
-</ul>"
+<li>Supervisor account can or cannot read encrypted message contents (configurable)</li></ul>"
       values={{
         p: (chunks) => <Card.Body>{...chunks}</Card.Body>,
         ul: (chunks) => <Card.Checklist>{...chunks}</Card.Checklist>,
@@ -125,8 +121,7 @@ export const AuditingCard = ({ proBadge }: { proBadge?: boolean }) => (
     <Card.Body>
       <FormattedMessage
         id="marketing.auditing.description"
-        defaultMessage="
-<p>Auditing gives organizations the ability to keep records of end-to-end
+        defaultMessage="<p>Auditing gives organizations the ability to keep records of end-to-end
 encrypted conversations and room events to meet compliance or legal
 requirements.</p>
 <p>When enabled, it is visible to all end users which rooms are being recorded
