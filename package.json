@@ -26,7 +26,7 @@
     "test": "playwright test"
   },
   "dependencies": {
-    "@floating-ui/react": "0.27.17",
+    "@floating-ui/react": "0.27.19",
     "@fontsource/inconsolata": "5.2.8",
     "@fontsource/inter": "5.2.8",
     "@formatjs/intl-localematcher": "0.8.1",
