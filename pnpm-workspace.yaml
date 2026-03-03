@@ -15,3 +15,7 @@ strictDepBuilds: true
 ignoredBuiltDependencies:
   - esbuild
   - unrs-resolver
+
+peerDependencyRules:
+  ignoreMissing:
+    - eslint
