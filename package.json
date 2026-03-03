@@ -92,7 +92,7 @@
     "eslint-plugin-react-refresh": "0.5.0",
     "eslint-plugin-unicorn": "62.0.0",
     "husky": "9.1.7",
-    "knip": "5.83.1",
+    "knip": "5.85.0",
     "lint-staged": "16.3.1",
     "prettier": "3.8.1",
     "stylelint": "17.4.0",
@@ -118,11 +118,9 @@
   "knip": {
     "entry": [
       "src/base.css",
-      "src/main.tsx",
       "src/prerender.tsx"
     ],
     "ignore": [
-      "src/routeTree.gen.ts",
       "src/api/mas/api/**/*",
       "src/api/synapse.ts",
       "openapi-ts.config.ts"
