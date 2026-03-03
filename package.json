@@ -118,11 +118,9 @@
   "knip": {
     "entry": [
       "src/base.css",
-      "src/main.tsx",
       "src/prerender.tsx"
     ],
     "ignore": [
-      "src/routeTree.gen.ts",
       "src/api/mas/api/**/*",
       "src/api/synapse.ts",
       "openapi-ts.config.ts"
