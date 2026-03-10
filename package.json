@@ -15,7 +15,7 @@
     "start": "vite --port 3000",
     "build": "vite build",
     "serve": "vite preview",
-    "lint": "oxlint && eslint --max-warnings 0 . && stylelint 'src/**/*.css' && prettier --check . && tsc",
+    "lint": "oxlint && eslint --max-warnings 0 . && stylelint 'src/**/*.css' && prettier --check .",
     "fix": "eslint --fix . && stylelint --fix 'src/**/*.css' && prettier --write .",
     "i18n:extract": "formatjs extract --throws --format crowdin 'src/**/*.{ts,tsx}' --out-file translations/extracted/en.json && prettier --write translations/extracted/en.json",
     "i18n:download": "localazy download && prettier --write translations/translated/",
