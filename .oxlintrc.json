@@ -1,6 +1,9 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": ["typescript", "react", "jsx-a11y", "import", "unicorn"],
+  "options": {
+    "typeAware": true
+  },
   "categories": {
     "correctness": "error",
     "suspicious": "error"
@@ -16,6 +19,9 @@
     "react/exhaustive-deps": "warn",
     "no-shadow": "off",
     "react/react-in-jsx-scope": "off",
+    "typescript/no-unsafe-type-assertion": "off",
+    "typescript/no-floating-promises": "off",
+    "typescript/no-misused-spread": "off",
     "import/no-duplicates": "warn",
     "no-array-constructor": "error",
     "no-case-declarations": "error",
@@ -278,7 +284,9 @@
         "unicorn/prefer-string-slice": "off",
         "unicorn/prefer-type-error": "off",
         "unicorn/switch-case-braces": "off",
-        "no-useless-escape": "off"
+        "no-useless-escape": "off",
+        "typescript/no-unnecessary-type-assertion": "off",
+        "typescript/no-redundant-type-constituents": "off"
       }
     }
   ]
