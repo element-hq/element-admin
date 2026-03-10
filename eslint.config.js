@@ -19,6 +19,7 @@ import tanstackRouterPlugin from "@tanstack/eslint-plugin-router";
 import tanstackQueryPlugin from "@tanstack/eslint-plugin-query";
 import compatPlugin from "eslint-plugin-compat";
 import formatjsPlugin from "eslint-plugin-formatjs";
+import oxlint from "eslint-plugin-oxlint";
 
 export default defineConfig(
   js.configs.recommended,
@@ -42,6 +43,7 @@ export default defineConfig(
   formatjsPlugin.configs.strict,
   eslintConfigPrettier,
   compatPlugin.configs["flat/recommended"],
+  ...oxlint.buildFromOxlintConfigFile(".oxlintrc.json"),
 
   // Global configuration
   {
