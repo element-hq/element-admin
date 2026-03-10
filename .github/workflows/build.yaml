@@ -51,7 +51,7 @@ jobs:
             services/backend-repositories/secret/data/oci.element.io password | OCI_PASSWORD ;
 
       - name: Login to Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: oci-push.vpn.infra.element.io
           username: ${{ steps.import-secrets.outputs.OCI_USERNAME }}
