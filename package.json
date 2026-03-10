@@ -15,11 +15,11 @@
     "start": "vite --port 3000",
     "build": "vite build",
     "serve": "vite preview",
-    "lint": "oxlint && eslint --max-warnings 0 . && stylelint 'src/**/*.css' && prettier --check .",
-    "fix": "eslint --fix . && stylelint --fix 'src/**/*.css' && prettier --write .",
-    "i18n:extract": "formatjs extract --throws --format crowdin 'src/**/*.{ts,tsx}' --out-file translations/extracted/en.json && prettier --write translations/extracted/en.json",
-    "i18n:download": "localazy download && prettier --write translations/translated/",
-    "i18n:compile": "formatjs compile-folder --format crowdin --ast translations/translated/ translations/compiled/ && prettier --write translations/compiled",
+    "lint": "oxlint && eslint --max-warnings 0 . && stylelint 'src/**/*.css' && oxfmt --check",
+    "fix": "eslint --fix . && stylelint --fix 'src/**/*.css' && oxfmt",
+    "i18n:extract": "formatjs extract --throws --format crowdin 'src/**/*.{ts,tsx}' --out-file translations/extracted/en.json && oxfmt translations/extracted/en.json",
+    "i18n:download": "localazy download && oxfmt translations/translated/",
+    "i18n:compile": "formatjs compile-folder --format crowdin --ast translations/translated/ translations/compiled/ && oxfmt translations/compiled",
     "openapi-ts": "openapi-ts",
     "prepare": "husky",
     "browserslist": "browserslist",
@@ -95,9 +95,9 @@
     "husky": "9.1.7",
     "knip": "5.86.0",
     "lint-staged": "16.3.2",
+    "oxfmt": "0.37.0",
     "oxlint": "1.52.0",
     "oxlint-tsgolint": "0.16.0",
-    "prettier": "3.8.1",
     "stylelint": "17.4.0",
     "stylelint-config-standard": "40.0.0",
     "stylelint-config-tailwindcss": "1.0.1",
@@ -113,7 +113,7 @@
   },
   "lint-staged": {
     "*": [
-      "prettier --write --ignore-unknown"
+      "oxfmt"
     ],
     "*.{ts,tsx,js,jsx}": [
       "oxlint",

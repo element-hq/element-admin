@@ -7,34 +7,34 @@ version = 1
 
 [[annotations]]
 path = [
-    # Configuration files
-    "package.json",
-    "localazy.json",
-    "tsconfig.json",
-    ".stylelintrc.json",
+  # Configuration files
+  "package.json",
+  "localazy.json",
+  "tsconfig.json",
+  ".stylelintrc.json",
 
-    # Lock file
-    "pnpm-lock.yaml",
+  # Lock file
+  "pnpm-lock.yaml",
 
-    # Translations
-    "translations/**/*.json",
+  # Translations
+  "translations/**/*.json",
 
-    # Image snapshots
-    "tests/**/*.png",
+  # Image snapshots
+  "tests/**/*.png",
 
-    # Images
-    "src/background/*",
+  # Images
+  "src/background/*",
 
-    # Docs images
-    "docs/**/*.png",
+  # Docs images
+  "docs/**/*.png",
 
-    # Generated files
-    "src/api/mas/api/**/*",
-    "src/routeTree.gen.ts",
+  # Generated files
+  "src/api/mas/api/**/*",
+  "src/routeTree.gen.ts",
 ]
 
 SPDX-FileCopyrightText = [
-    "Copyright 2025 New Vector Ltd.",
-    "Copyright 2025, 2026 Element Creations Ltd.",
+  "Copyright 2025 New Vector Ltd.",
+  "Copyright 2025, 2026 Element Creations Ltd.",
 ]
 SPDX-License-Identifier = "AGPL-3.0-only OR LicenseRef-Element-Commercial"
