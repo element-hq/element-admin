@@ -58,7 +58,7 @@
     "@eslint/compat": "2.0.3",
     "@eslint/js": "10.0.1",
     "@formatjs/cli": "6.13.1",
-    "@hey-api/openapi-ts": "0.93.1",
+    "@hey-api/openapi-ts": "0.94.0",
     "@localazy/cli": "2.0.8",
     "@playwright/test": "1.58.2",
     "@tailwindcss/vite": "4.2.1",
