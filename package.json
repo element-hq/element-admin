@@ -80,7 +80,6 @@
     "babel-plugin-formatjs": "11.2.4",
     "babel-plugin-react-compiler": "19.1.0-rc.3",
     "browserslist": "4.28.1",
-    "browserslist-to-esbuild": "2.1.1",
     "eslint": "10.0.3",
     "eslint-config-prettier": "10.1.8",
     "eslint-import-resolver-typescript": "4.4.4",
@@ -102,8 +101,12 @@
     "tailwindcss": "4.2.1",
     "typescript": "5.9.3",
     "typescript-eslint": "8.56.1",
-    "vite": "7.3.1",
-    "vite-tsconfig-paths": "6.1.1"
+    "vite": "8.0.0-beta.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "8.0.0-beta.0"
+    }
   },
   "lint-staged": {
     "*": [
