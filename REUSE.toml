@@ -11,6 +11,8 @@ path = [
   "package.json",
   "localazy.json",
   "tsconfig.json",
+  ".oxfmtrc.json",
+  ".oxlintrc.json",
   ".stylelintrc.json",
 
   # Lock file
