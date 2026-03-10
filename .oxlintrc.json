@@ -202,13 +202,29 @@
     ],
     "formatjs/blocklist-elements": ["error", ["selectordinal"]],
     "formatjs/prefer-full-sentence": "error",
-    "compat/compat": "error"
+
+    "react-compiler/component-hook-factories": "error",
+    "react-compiler/config": "error",
+    "react-compiler/error-boundaries": "error",
+    "react-compiler/gating": "error",
+    "react-compiler/globals": "error",
+    "react-compiler/immutability": "error",
+    "react-compiler/incompatible-library": "warn",
+    "react-compiler/preserve-manual-memoization": "error",
+    "react-compiler/purity": "error",
+    "react-compiler/refs": "error",
+    "react-compiler/set-state-in-effect": "error",
+    "react-compiler/set-state-in-render": "error",
+    "react-compiler/static-components": "error",
+    "react-compiler/unsupported-syntax": "warn",
+    "react-compiler/use-memo": "error",
+    "react-compiler/void-use-memo": "error"
   },
   "jsPlugins": [
     "@tanstack/eslint-plugin-router",
     "@tanstack/eslint-plugin-query",
     "eslint-plugin-formatjs",
-    "eslint-plugin-compat"
+    { "name": "react-compiler", "specifier": "eslint-plugin-react-hooks" }
   ],
   "ignorePatterns": ["dist/**", "node_modules/**", ".tanstack/**"],
   "overrides": [

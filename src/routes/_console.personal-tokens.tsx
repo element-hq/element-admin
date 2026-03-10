@@ -883,7 +883,7 @@ function RouteComponent() {
     [search, intl, credentials.serverName],
   );
 
-  // eslint-disable-next-line react-hooks/incompatible-library -- We pass things as a ref to avoid this problem
+  // oxlint-disable-next-line react-compiler/incompatible-library -- We pass things as a ref to avoid this problem
   const table = useReactTable({
     data: flatData,
     columns,
