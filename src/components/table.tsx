@@ -154,7 +154,7 @@ const RemoveFilterButton = forwardRef<
 export const RemoveFilterLink = createLink(RemoveFilterButton);
 
 interface ListHeaderProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line @typescript-eslint/no-explicit-any
   table: Table<any>;
 }
 const ListHeader = forwardRef<HTMLTableSectionElement, ListHeaderProps>(
@@ -179,7 +179,7 @@ interface ListHeaderCellProps extends Omit<
   React.ComponentProps<"th">,
   "children"
 > {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line @typescript-eslint/no-explicit-any
   header: THeader<any, any>;
 }
 const ListHeaderCell = forwardRef<HTMLTableCellElement, ListHeaderCellProps>(
@@ -202,7 +202,7 @@ interface VirtualizedListProps extends Omit<
   React.ComponentProps<"div">,
   "children"
 > {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line @typescript-eslint/no-explicit-any
   table: Table<any>;
   fetchNextPage?: () => void;
   canFetchNextPage?: boolean;
@@ -228,7 +228,7 @@ export const VirtualizedList = forwardRef<HTMLDivElement, VirtualizedListProps>(
       // this component will re-render anyway when the window resizes, so we
       // don't have to look for that ourselves.
       scrollMargin:
-        // eslint-disable-next-line react-hooks/refs
+        // oxlint-disable-next-line react-compiler/refs
         (listRef.current?.getBoundingClientRect().top ?? 0) +
         globalThis.window.scrollY,
     });
@@ -237,7 +237,7 @@ export const VirtualizedList = forwardRef<HTMLDivElement, VirtualizedListProps>(
     // See https://github.com/TanStack/virtual/issues/743
     const rowVirtualizerRef = useRef(rowVirtualizer);
 
-    // eslint-disable-next-line react-hooks/refs
+    // oxlint-disable-next-line react-compiler/refs
     const virtualItems = rowVirtualizerRef.current.getVirtualItems();
 
     useEffect(() => {
@@ -254,7 +254,7 @@ export const VirtualizedList = forwardRef<HTMLDivElement, VirtualizedListProps>(
       <div
         className={cx(styles["list"], className)}
         style={{
-          // eslint-disable-next-line react-hooks/refs
+          // oxlint-disable-next-line react-compiler/refs
           height: `${rowVirtualizerRef.current.getTotalSize() + (headerRef.current?.clientHeight ?? 40)}px`,
           ...style,
         }}
@@ -264,7 +264,7 @@ export const VirtualizedList = forwardRef<HTMLDivElement, VirtualizedListProps>(
         <table cellSpacing="0" cellPadding="0" className={styles["table"]}>
           <ListHeader table={table} ref={headerRef} />
           <tbody className={styles["tbody"]} ref={listRef}>
-            {/* eslint-disable-next-line react-hooks/refs */}
+            {/* oxlint-disable-next-line react-compiler/refs */}
             {virtualItems.map((virtualRow, index) => {
               const row = rows[virtualRow.index];
               if (!row)
@@ -298,7 +298,7 @@ export const VirtualizedList = forwardRef<HTMLDivElement, VirtualizedListProps>(
 
 // Table Cell
 interface ListCellProps extends Omit<React.ComponentProps<"td">, "children"> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line @typescript-eslint/no-explicit-any
   cell: Cell<any, any>;
 }
 

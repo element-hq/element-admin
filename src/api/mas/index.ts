@@ -29,7 +29,7 @@ export const isErrorResponse = (t: unknown): t is api.ErrorResponse =>
 function ensureNoError<
   R extends {
     data: unknown;
-    error: unknown | undefined;
+    error: unknown;
     response: Response;
     request: Request;
   },

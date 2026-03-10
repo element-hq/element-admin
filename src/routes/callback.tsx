@@ -33,6 +33,7 @@ export const Route = createFileRoute("/callback")({
   loader: async ({ deps: { search }, context }) => {
     const state = useAuthStore.getState();
     const session = state.authorizationSession;
+    // oxlint-disable-next-line typescript/unbound-method -- zustand store methods don't use `this`
     const saveCredentials = state.saveCredentials;
     if (!session) {
       throw new Error("No session");

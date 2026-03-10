@@ -20,7 +20,7 @@ import type messages from "../translations/extracted/en.json";
 import { queryClient } from "./query";
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
+  // oxlint-disable-next-line @typescript-eslint/no-namespace
   namespace FormatjsIntl {
     interface Message {
       ids: keyof typeof messages;

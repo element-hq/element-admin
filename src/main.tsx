@@ -17,7 +17,7 @@ if (!rootElement) {
 // If there is something in the root element, hydrate, else fallback to
 // creating a new root
 if (rootElement.innerHTML) {
-  // eslint-disable-next-line unicorn/prefer-top-level-await -- Top-level await doesn't work in this case
+  // oxlint-disable-next-line unicorn/prefer-top-level-await
   (async () => {
     // This will trigger the loading everything in the router.
     // We do this before trying to render/hydrate, to avoid flickering to a blank
