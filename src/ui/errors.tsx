@@ -71,6 +71,7 @@ function RenderError({ error }: { error: unknown }) {
     return <Text>{stringified}</Text>;
   }
 
+  // oxlint-disable-next-line typescript/no-base-to-string -- intentional fallback for unknown error types
   return <Text>{String(error)}</Text>;
 }
 

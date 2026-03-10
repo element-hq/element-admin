@@ -16,9 +16,12 @@ function assignRef<T>(ref: StrictRef<T>, value: T | null): RefCleanup<T> {
   try {
     ref.current = value;
   } catch (error) {
-    throw new Error(`Cannot assign value '${value}' to ref '${ref}'`, {
-      cause: error,
-    });
+    throw new Error(
+      `Cannot assign value '${String(value)}' to ref '${JSON.stringify(ref)}'`,
+      {
+        cause: error,
+      },
+    );
   }
 }
 
