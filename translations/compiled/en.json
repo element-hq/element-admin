@@ -324,10 +324,6 @@
     {
       "children": [
         {
-          "type": 0,
-          "value": " "
-        },
-        {
           "children": [
             {
               "type": 0,
@@ -392,10 +388,6 @@
           ],
           "type": 8,
           "value": "li"
-        },
-        {
-          "type": 0,
-          "value": " "
         }
       ],
       "type": 8,

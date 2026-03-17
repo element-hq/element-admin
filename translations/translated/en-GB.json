@@ -78,7 +78,7 @@
     "message": "Upgrade to Pro"
   },
   "marketing.auditing.description": {
-    "message": "<p>Auditing gives organizations the ability to keep records of end-to-end encrypted conversations and room events to meet compliance or legal requirements.</p> <p>When enabled, it is visible to all end users which rooms are being recorded to ensure transparency of the auditing process.</p> <p>Auditing can be configured to suit an organization’s specific requirements. For instance direct messages between two individuals can be excluded so that only group conversations are recorded.</p> <p>Audit data is being stored as a stream of machine-readable events in the JSON format either on file storage or S3 and can be forwarded to log analyzer tooling for further filtering and analysis.</p>"
+    "message": "<p>Auditing gives organisations the ability to keep records of end-to-end encrypted conversations and room events to meet compliance or legal requirements.</p> <p>When enabled, it is visible to all end users which rooms are being recorded to ensure transparency of the auditing process.</p> <p>Auditing can be configured to suit an organisation’s specific requirements. For instance direct messages between two individuals can be excluded so that only group conversations are recorded.</p> <p>Audit data is being stored as a stream of machine-readable events in the JSON format either on file storage or S3 and can be forwarded to log analyzer tooling for further filtering and analysis.</p>"
   },
   "marketing.auditing.title": {
     "message": "Auditing"
@@ -162,7 +162,7 @@
     "message": "An unexpected error occurred"
   },
   "pages.landing.description": {
-    "message": "Manage the deployment of the element app for your organization or community."
+    "message": "Manage the deployment of the element app for your organisation or community."
   },
   "pages.login.errors.no_auth_metadata": {
     "message": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."

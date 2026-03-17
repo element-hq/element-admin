@@ -26,13 +26,13 @@
   "action.copy": [
     {
       "type": 0,
-      "value": "Copy"
+      "value": "Kopier"
     }
   ],
   "action.delete": [
     {
       "type": 0,
-      "value": "Delete"
+      "value": "Slett"
     }
   ],
   "action.go_back": [
@@ -56,7 +56,7 @@
   "action.sign_in": [
     {
       "type": 0,
-      "value": "Sign in"
+      "value": "Logg på"
     }
   ],
   "action.sign_out": [
@@ -199,7 +199,7 @@
         },
         {
           "type": 0,
-          "value": " is the commercial backend distribution from Element."
+          "value": " er den kommersielle backend-distribusjonen fra Element."
         }
       ],
       "type": 8,
@@ -213,7 +213,7 @@
       "children": [
         {
           "type": 0,
-          "value": "It includes everything in ESS Community plus additional features and services that are tailored to professional environments with more than 100 users up to massive scale in the millions."
+          "value": "Den inkluderer alt i ESS Community, i tillegg til funksjoner og tjenester som er skreddersydd for profesjonelle miljøer med alt fra over 100 brukere til massive installasjoner med flere millioner brukere."
         }
       ],
       "type": 8,
@@ -227,7 +227,7 @@
       "children": [
         {
           "type": 0,
-          "value": "It is designed to support enterprise requirements in terms of advanced IAM, compliance, scalability, high availability and multi-tenancy."
+          "value": "Den er utviklet for å støtte virksomhetskrav knyttet til avansert identitets- og tilgangsstyring (IAM), etterlevelse (compliance), skalerbarhet, høy tilgjengelighet og støtte for flere leietakere (multi-tenancy)."
         }
       ],
       "type": 8,
@@ -237,13 +237,13 @@
   "marketing.also_available_in_pro.title": [
     {
       "type": 0,
-      "value": "Also available in Pro…"
+      "value": "Også tilgjengelig i Pro..."
     }
   ],
   "marketing.also_available_in_pro.upgrade": [
     {
       "type": 0,
-      "value": "Upgrade to Pro"
+      "value": "Oppgrader til Pro"
     }
   ],
   "marketing.auditing.description": [
@@ -303,7 +303,7 @@
   "marketing.auditing.title": [
     {
       "type": 0,
-      "value": "Auditing"
+      "value": "Revisjon"
     }
   ],
   "marketing.supervision.description": [
@@ -311,7 +311,7 @@
       "children": [
         {
           "type": 0,
-          "value": "Supervision enables an organisation to administer all rooms from a central point. A 'supervisor' account will join defined rooms with room admin privileges. Server administrators can seamlessly impersonate the account from the admin console to manage and supervise their rooms."
+          "value": "Tilsyn (supervision) gjør det mulig for en organisasjon å administrere alle rom fra et sentralt punkt. En «tilsynskonto» vil bli med i definerte rom med romadministrator-rettigheter. Serveradministratorer kan sømløst opptre som denne kontoen (impersonate) fra administrasjonskonsollen for å administrere og føre tilsyn med rommene sine."
         }
       ],
       "type": 8,
@@ -331,7 +331,17 @@
           "children": [
             {
               "type": 0,
-              "value": "Manage rooms and their settings (name, topic, permissions, etc.)"
+              "value": "Administrer rom og deres innstillinger (navn, emne, tillatelser, osv.)"
+            }
+          ],
+          "type": 8,
+          "value": "li"
+        },
+        {
+          "children": [
+            {
+              "type": 0,
+              "value": "Administrer rommedlemskap"
             }
           ],
           "type": 8,
@@ -345,7 +355,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Manage room memberships"
+              "value": "Fjern uønskede meldinger og opplastede medier"
             }
           ],
           "type": 8,
@@ -359,7 +369,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Remove unwanted messages and uploaded media"
+              "value": "Gjenopprett forlatte rom (der alle brukere har gått ut)"
             }
           ],
           "type": 8,
@@ -373,21 +383,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Recover abandoned rooms (all users have left)"
-            }
-          ],
-          "type": 8,
-          "value": "li"
-        },
-        {
-          "type": 0,
-          "value": " "
-        },
-        {
-          "children": [
-            {
-              "type": 0,
-              "value": "Supervisor account can or cannot read encrypted message contents (configurable)"
+              "value": "Tilsynskontoen kan eller kan ikke lese kryptert meldingsinnhold (konfigurerbart)"
             }
           ],
           "type": 8,
@@ -405,13 +401,13 @@
   "marketing.supervision.title": [
     {
       "type": 0,
-      "value": "Supervision"
+      "value": "Tilsyn"
     }
   ],
   "navigation.auditing": [
     {
       "type": 0,
-      "value": "Auditing"
+      "value": "Revisjon"
     }
   ],
   "navigation.dashboard": [
@@ -447,7 +443,7 @@
   "navigation.supervision": [
     {
       "type": 0,
-      "value": "Supervision"
+      "value": "Tilsyn"
     }
   ],
   "navigation.users": [
@@ -459,19 +455,19 @@
   "pages.auditing.title": [
     {
       "type": 0,
-      "value": "Auditing"
+      "value": "Revisjon"
     }
   ],
   "pages.auditing.unavailable_alert.description": [
     {
       "type": 0,
-      "value": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
+      "value": "Denne funksjonen er ikke tilgjengelig i ESS Community. Oppgrader til ESS Pro for å aktivere den."
     }
   ],
   "pages.auditing.unavailable_alert.title": [
     {
       "type": 0,
-      "value": "Auditing is a feature available in ESS Pro"
+      "value": "Revisjon er en funksjon som er tilgjengelig i ESS Pro."
     }
   ],
   "pages.dashboard.current_ess_version": [
@@ -605,13 +601,13 @@
   "pages.personal_tokens.acting_user_column": [
     {
       "type": 0,
-      "value": "Acting User"
+      "value": "Utførende bruker"
     }
   ],
   "pages.personal_tokens.acting_user_label": [
     {
       "type": 0,
-      "value": "Acting user"
+      "value": "Utførende bruker"
     }
   ],
   "pages.personal_tokens.actor_user_help": [
@@ -623,7 +619,7 @@
   "pages.personal_tokens.actor_user_label": [
     {
       "type": 0,
-      "value": "Acting user"
+      "value": "Utførende bruker"
     }
   ],
   "pages.personal_tokens.add_token_title": [
@@ -660,7 +656,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No personal tokens"
+              "value": "Ingen personlige tokener"
             }
           ]
         },
@@ -671,7 +667,7 @@
             },
             {
               "type": 0,
-              "value": " personal token"
+              "value": " personlig token"
             }
           ]
         },
@@ -682,7 +678,7 @@
             },
             {
               "type": 0,
-              "value": " personal tokens"
+              "value": " personlige tokener"
             }
           ]
         }
@@ -713,7 +709,7 @@
   "pages.personal_tokens.created_at_label": [
     {
       "type": 0,
-      "value": "Created at"
+      "value": "Opprettet kl."
     }
   ],
   "pages.personal_tokens.description": [
@@ -743,13 +739,13 @@
   "pages.personal_tokens.expires_at_column": [
     {
       "type": 0,
-      "value": "Expires at"
+      "value": "Utløper kl."
     }
   ],
   "pages.personal_tokens.expires_at_label": [
     {
       "type": 0,
-      "value": "Expires at"
+      "value": "Utløper kl."
     }
   ],
   "pages.personal_tokens.expires_in_help": [
@@ -875,115 +871,115 @@
   "pages.personal_tokens.not_found.description": [
     {
       "type": 0,
-      "value": "The personal token you're looking for doesn't exist or has been removed."
+      "value": "Den personlige tokenen du leter etter finnes ikke eller er fjernet."
     }
   ],
   "pages.personal_tokens.not_found.title": [
     {
       "type": 0,
-      "value": "Personal token not found"
+      "value": "Personlig token ikke funnet"
     }
   ],
   "pages.personal_tokens.owner_user_label": [
     {
       "type": 0,
-      "value": "Owner"
+      "value": "Eier"
     }
   ],
   "pages.personal_tokens.regenerate_confirm": [
     {
       "type": 0,
-      "value": "Regenerate token"
+      "value": "Generer token på nytt"
     }
   ],
   "pages.personal_tokens.regenerate_error": [
     {
       "type": 0,
-      "value": "Failed to regenerate personal token"
+      "value": "Kunne ikke regenerere personlig token"
     }
   ],
   "pages.personal_tokens.regenerate_expires_help": [
     {
       "type": 0,
-      "value": "Leave empty to keep the same expiry as before, or set a new expiry time"
+      "value": "La feltet stå tomt for å beholde samme utløpsdato som før, eller angi en ny utløpsdato."
     }
   ],
   "pages.personal_tokens.regenerate_success": [
     {
       "type": 0,
-      "value": "Personal token regenerated successfully"
+      "value": "Personlig token regenerert"
     }
   ],
   "pages.personal_tokens.regenerate_token": [
     {
       "type": 0,
-      "value": "Regenerate token"
+      "value": "Generer token på nytt"
     }
   ],
   "pages.personal_tokens.regenerate_token_title": [
     {
       "type": 0,
-      "value": "Regenerate personal token"
+      "value": "Generer personlig token på nytt"
     }
   ],
   "pages.personal_tokens.regenerate_warning": [
     {
       "type": 0,
-      "value": "This will generate a new access token and invalidate the current one. Any applications using the current token will need to be updated."
+      "value": "Dette vil generere et nytt tilgangstoken og ugyldiggjøre det nåværende. Alle applikasjoner som bruker det nåværende tokenet må oppdateres."
     }
   ],
   "pages.personal_tokens.revoke_success": [
     {
       "type": 0,
-      "value": "Personal token revoked successfully"
+      "value": "Personlig token tilbakekalt"
     }
   ],
   "pages.personal_tokens.revoke_token": [
     {
       "type": 0,
-      "value": "Revoke token"
+      "value": "Tilbakekall token"
     }
   ],
   "pages.personal_tokens.revoked_at_label": [
     {
       "type": 0,
-      "value": "Revoked at"
+      "value": "Tilbakekalt kl."
     }
   ],
   "pages.personal_tokens.scope_device_help": [
     {
       "type": 0,
-      "value": "Provision a Matrix device"
+      "value": "Provisjoner en Matrix-enhet"
     }
   ],
   "pages.personal_tokens.scope_mas_admin_help": [
     {
       "type": 0,
-      "value": "Access to the MAS admin API"
+      "value": "Tilgang til MAS admin APIet"
     }
   ],
   "pages.personal_tokens.scope_matrix_client_help": [
     {
       "type": 0,
-      "value": "Access to the Matrix Client-Server API"
+      "value": "Tilgang til Matrix Client-Server APIet"
     }
   ],
   "pages.personal_tokens.scope_synapse_admin_help": [
     {
       "type": 0,
-      "value": "Access to the Synapse admin API"
+      "value": "Tilgang til Synapse admin APIet"
     }
   ],
   "pages.personal_tokens.scopes_label": [
     {
       "type": 0,
-      "value": "Scopes"
+      "value": "Omfang"
     }
   ],
   "pages.personal_tokens.status.active": [
     {
       "type": 0,
-      "value": "Active"
+      "value": "Aktiv"
     }
   ],
   "pages.personal_tokens.status.column": [
@@ -995,7 +991,7 @@
   "pages.personal_tokens.status.expired": [
     {
       "type": 0,
-      "value": "Expired"
+      "value": "Utløpt"
     }
   ],
   "pages.personal_tokens.status.label": [
@@ -1007,7 +1003,7 @@
   "pages.personal_tokens.status.revoked": [
     {
       "type": 0,
-      "value": "Revoked"
+      "value": "Tilbakekalt"
     }
   ],
   "pages.personal_tokens.title": [
@@ -1019,25 +1015,25 @@
   "pages.personal_tokens.token_created_description": [
     {
       "type": 0,
-      "value": "Your personal token has been created. Copy it now as it will not be shown again."
+      "value": "Ditt personlige token er opprettet. Kopier den nå, da den ikke vil bli vist igjen."
     }
   ],
   "pages.personal_tokens.token_created_title": [
     {
       "type": 0,
-      "value": "Personal token created"
+      "value": "Personlig token opprettet"
     }
   ],
   "pages.personal_tokens.token_regenerated_description": [
     {
       "type": 0,
-      "value": "Your personal token has been regenerated. Copy it now as it will not be shown again."
+      "value": "Ditt personlige token er generert på nytt. Kopier den nå, da den ikke vil vises igjen."
     }
   ],
   "pages.personal_tokens.token_regenerated_title": [
     {
       "type": 0,
-      "value": "Token regenerated"
+      "value": "Token regenerert"
     }
   ],
   "pages.registration_tokens.auto_generate_placeholder": [
@@ -1402,25 +1398,25 @@
   "pages.rooms.delete_room.alert.title": [
     {
       "type": 0,
-      "value": "You’re about to delete room data"
+      "value": "Du er i ferd med å slette romdata"
     }
   ],
   "pages.rooms.delete_room.block.help": [
     {
       "type": 0,
-      "value": "Prevent users from rejoining the room after deletion."
+      "value": "Hindre brukere i å bli med i rommet igjen etter sletting."
     }
   ],
   "pages.rooms.delete_room.block.label": [
     {
       "type": 0,
-      "value": "Block room"
+      "value": "Blokker rom"
     }
   ],
   "pages.rooms.delete_room.button": [
     {
       "type": 0,
-      "value": "Delete permanently"
+      "value": "Slett permanent"
     }
   ],
   "pages.rooms.delete_room.error": [
@@ -1438,7 +1434,7 @@
   "pages.rooms.delete_room.title": [
     {
       "type": 0,
-      "value": "Delete this room?"
+      "value": "Slette dette rommet?"
     }
   ],
   "pages.rooms.deletion.failure.description": [
@@ -1472,7 +1468,7 @@
   "pages.rooms.deletion.failure.title": [
     {
       "type": 0,
-      "value": "Deletion failed"
+      "value": "Slettingen mislyktes"
     }
   ],
   "pages.rooms.deletion.in_progress.description": [
@@ -1502,7 +1498,7 @@
   "pages.rooms.deletion.in_progress.title": [
     {
       "type": 0,
-      "value": "Deletion in progress"
+      "value": "Sletting pågår"
     }
   ],
   "pages.rooms.deletion.success.description": [
@@ -1532,7 +1528,7 @@
   "pages.rooms.deletion.success.title": [
     {
       "type": 0,
-      "value": "Deletion successful"
+      "value": "Sletting fullført"
     }
   ],
   "pages.rooms.filters.empty_rooms": [
@@ -1636,7 +1632,7 @@
   "pages.supervision.description": [
     {
       "type": 0,
-      "value": "Sign in as "
+      "value": "Logg inn som "
     },
     {
       "children": [
@@ -1650,49 +1646,49 @@
     },
     {
       "type": 0,
-      "value": " to perform administrative actions in any room."
+      "value": " for å utføre administrative handlinger i alle rom."
     }
   ],
   "pages.supervision.disabled_alert.description": [
     {
       "type": 0,
-      "value": "This feature is part of your subscription. You can ask an administrator to enable it."
+      "value": "Denne funksjonen er en del av abonnementet ditt. Du kan be en administrator om å aktivere den."
     }
   ],
   "pages.supervision.disabled_alert.title": [
     {
       "type": 0,
-      "value": "Supervision is currently disabled"
+      "value": "Tilsyn (supervision) er for øyeblikket deaktivert"
     }
   ],
   "pages.supervision.errors.cant_open.description": [
     {
       "type": 0,
-      "value": "Your browser is blocking the opening of pop-up windows. Please make sure you allow pop-ups from this site."
+      "value": "Nettleseren din blokkerer åpningen av popup-vinduer. Sørg for at du tillater popup-vinduer fra dette nettstedet."
     }
   ],
   "pages.supervision.errors.cant_open.title": [
     {
       "type": 0,
-      "value": "Failed to open the supervision interface in a new window"
+      "value": "Kunne ikke åpne tilsynsgrensesnittet i et nytt vindu"
     }
   ],
   "pages.supervision.errors.closed.description": [
     {
       "type": 0,
-      "value": "Failed to sign in the supervision interface, as it closed before it could finish signing in"
+      "value": "Kunne ikke logge på tilsynsgrensesnittet, da det ble lukket før det kunne fullføre påloggingen."
     }
   ],
   "pages.supervision.errors.closed.title": [
     {
       "type": 0,
-      "value": "The supervision interface was closed too quickly"
+      "value": "Tilsynsgrensesnittet ble lukket for raskt"
     }
   ],
   "pages.supervision.errors.generic.title": [
     {
       "type": 0,
-      "value": "An unexpected error occurred whilst opening the supervision interface"
+      "value": "Det oppstod en uventet feil under åpningen av tilsynsgrensesnittet"
     }
   ],
   "pages.supervision.missing_ui_address.description": [
@@ -1710,37 +1706,37 @@
   "pages.supervision.recovery_key.copied": [
     {
       "type": 0,
-      "value": "Recovery key copied"
+      "value": "Gjenopprettingsnøkkel kopiert"
     }
   ],
   "pages.supervision.recovery_key.copy_failed": [
     {
       "type": 0,
-      "value": "Could not copy recovery key"
+      "value": "Kunne ikke kopiere gjenopprettingsnøkkelen"
     }
   ],
   "pages.supervision.recovery_key.help": [
     {
       "type": 0,
-      "value": "This is the recovery key used to enable reading encrypted messages."
+      "value": "Dette er gjenopprettingsnøkkelen som brukes til å aktivere lesing av krypterte meldinger."
     }
   ],
   "pages.supervision.recovery_key.label": [
     {
       "type": 0,
-      "value": "Recovery key"
+      "value": "Gjenopprettingsnøkkel"
     }
   ],
   "pages.supervision.title": [
     {
       "type": 0,
-      "value": "Supervision"
+      "value": "Tilsyn"
     }
   ],
   "pages.supervision.unavailable_alert.description": [
     {
       "type": 0,
-      "value": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
+      "value": "Denne funksjonen er ikke tilgjengelig i ESS Community. Oppgrader til ESS Pro for å aktivere den."
     }
   ],
   "pages.supervision.unavailable_alert.title": [
@@ -2436,7 +2432,7 @@
   "ui.language_switcher.language_list_label": [
     {
       "type": 0,
-      "value": "List of available languages"
+      "value": "Liste over tilgjengelige språk"
     }
   ],
   "ui.language_switcher.title": [
@@ -2448,19 +2444,19 @@
   "ui.user_picker.loading_list": [
     {
       "type": 0,
-      "value": "Loading…"
+      "value": "Laster inn..."
     }
   ],
   "ui.user_picker.no_match": [
     {
       "type": 0,
-      "value": "No match"
+      "value": "Ingen treff"
     }
   ],
   "ui.user_picker.no_match_help": [
     {
       "type": 0,
-      "value": "Try a different search term. This can only lookup active users on "
+      "value": "Prøv et annet søkeord. Dette kan bare søke etter aktive brukere på "
     },
     {
       "type": 1,
@@ -2468,7 +2464,7 @@
     },
     {
       "type": 0,
-      "value": " using their localpart."
+      "value": " ved hjelp av deres lokale del."
     }
   ]
 }

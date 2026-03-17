@@ -84,7 +84,7 @@
     "message": "Auditing"
   },
   "marketing.supervision.description": {
-    "message": "<p>Supervision enables an organisation to administer all rooms from a central point. A 'supervisor' account will join defined rooms with room admin privileges. Server administrators can seamlessly impersonate the account from the admin console to manage and supervise their rooms.</p> <ul> <li>Manage rooms and their settings (name, topic, permissions, etc.)</li> <li>Manage room memberships</li> <li>Remove unwanted messages and uploaded media</li> <li>Recover abandoned rooms (all users have left)</li> <li>Supervisor account can or cannot read encrypted message contents (configurable)</li> </ul>"
+    "message": "<p>Supervision enables an organisation to administer all rooms from a central point. A 'supervisor' account will join defined rooms with room admin privileges. Server administrators can seamlessly impersonate the account from the admin console to manage and supervise their rooms.</p> <ul><li>Manage rooms and their settings (name, topic, permissions, etc.)</li> <li>Manage room memberships</li> <li>Remove unwanted messages and uploaded media</li> <li>Recover abandoned rooms (all users have left)</li> <li>Supervisor account can or cannot read encrypted message contents (configurable)</li></ul>"
   },
   "marketing.supervision.title": {
     "message": "Supervision"

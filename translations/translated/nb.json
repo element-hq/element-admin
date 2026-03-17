@@ -12,10 +12,10 @@
     "message": "Lukk"
   },
   "action.copy": {
-    "message": "Copy"
+    "message": "Kopier"
   },
   "action.delete": {
-    "message": "Delete"
+    "message": "Slett"
   },
   "action.go_back": {
     "message": "Gå tilbake"
@@ -27,7 +27,7 @@
     "message": "Prøv på nytt"
   },
   "action.sign_in": {
-    "message": "Sign in"
+    "message": "Logg på"
   },
   "action.sign_out": {
     "message": "Logg ut"
@@ -69,28 +69,28 @@
     "message": "Konto-meny"
   },
   "marketing.also_available_in_pro.description": {
-    "message": "<p><link>ESS Pro</link> is the commercial backend distribution from Element.</p> <p>It includes everything in ESS Community plus additional features and services that are tailored to professional environments with more than 100 users up to massive scale in the millions.</p> <p>It is designed to support enterprise requirements in terms of advanced IAM, compliance, scalability, high availability and multi-tenancy.</p>"
+    "message": "<p><link>ESS Pro</link> er den kommersielle backend-distribusjonen fra Element.</p> <p>Den inkluderer alt i ESS Community, i tillegg til funksjoner og tjenester som er skreddersydd for profesjonelle miljøer med alt fra over 100 brukere til massive installasjoner med flere millioner brukere.</p> <p>Den er utviklet for å støtte virksomhetskrav knyttet til avansert identitets- og tilgangsstyring (IAM), etterlevelse (compliance), skalerbarhet, høy tilgjengelighet og støtte for flere leietakere (multi-tenancy).</p>"
   },
   "marketing.also_available_in_pro.title": {
-    "message": "Also available in Pro…"
+    "message": "Også tilgjengelig i Pro..."
   },
   "marketing.also_available_in_pro.upgrade": {
-    "message": "Upgrade to Pro"
+    "message": "Oppgrader til Pro"
   },
   "marketing.auditing.description": {
     "message": "<p>Auditing gives organizations the ability to keep records of end-to-end encrypted conversations and room events to meet compliance or legal requirements.</p> <p>When enabled, it is visible to all end users which rooms are being recorded to ensure transparency of the auditing process.</p> <p>Auditing can be configured to suit an organization’s specific requirements. For instance direct messages between two individuals can be excluded so that only group conversations are recorded.</p> <p>Audit data is being stored as a stream of machine-readable events in the JSON format either on file storage or S3 and can be forwarded to log analyzer tooling for further filtering and analysis.</p>"
   },
   "marketing.auditing.title": {
-    "message": "Auditing"
+    "message": "Revisjon"
   },
   "marketing.supervision.description": {
-    "message": "<p>Supervision enables an organisation to administer all rooms from a central point. A 'supervisor' account will join defined rooms with room admin privileges. Server administrators can seamlessly impersonate the account from the admin console to manage and supervise their rooms.</p> <ul> <li>Manage rooms and their settings (name, topic, permissions, etc.)</li> <li>Manage room memberships</li> <li>Remove unwanted messages and uploaded media</li> <li>Recover abandoned rooms (all users have left)</li> <li>Supervisor account can or cannot read encrypted message contents (configurable)</li> </ul>"
+    "message": "<p>Tilsyn (supervision) gjør det mulig for en organisasjon å administrere alle rom fra et sentralt punkt. En «tilsynskonto» vil bli med i definerte rom med romadministrator-rettigheter. Serveradministratorer kan sømløst opptre som denne kontoen (impersonate) fra administrasjonskonsollen for å administrere og føre tilsyn med rommene sine.</p> <ul> <li>Administrer rom og deres innstillinger (navn, emne, tillatelser, osv.)</li><li>Administrer rommedlemskap</li> <li>Fjern uønskede meldinger og opplastede medier</li> <li>Gjenopprett forlatte rom (der alle brukere har gått ut)</li> <li>Tilsynskontoen kan eller kan ikke lese kryptert meldingsinnhold (konfigurerbart)</li> </ul>"
   },
   "marketing.supervision.title": {
-    "message": "Supervision"
+    "message": "Tilsyn"
   },
   "navigation.auditing": {
-    "message": "Auditing"
+    "message": "Revisjon"
   },
   "navigation.dashboard": {
     "message": "Dashbord"
@@ -108,19 +108,19 @@
     "message": "Rom"
   },
   "navigation.supervision": {
-    "message": "Supervision"
+    "message": "Tilsyn"
   },
   "navigation.users": {
     "message": "Brukere"
   },
   "pages.auditing.title": {
-    "message": "Auditing"
+    "message": "Revisjon"
   },
   "pages.auditing.unavailable_alert.description": {
-    "message": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
+    "message": "Denne funksjonen er ikke tilgjengelig i ESS Community. Oppgrader til ESS Pro for å aktivere den."
   },
   "pages.auditing.unavailable_alert.title": {
-    "message": "Auditing is a feature available in ESS Pro"
+    "message": "Revisjon er en funksjon som er tilgjengelig i ESS Pro."
   },
   "pages.dashboard.current_ess_version": {
     "message": "ESS-versjon"
@@ -183,16 +183,16 @@
     "message": "Logg inn"
   },
   "pages.personal_tokens.acting_user_column": {
-    "message": "Acting User"
+    "message": "Utførende bruker"
   },
   "pages.personal_tokens.acting_user_label": {
-    "message": "Acting user"
+    "message": "Utførende bruker"
   },
   "pages.personal_tokens.actor_user_help": {
     "message": "Brukeren dette tokenet vil handle på vegne av"
   },
   "pages.personal_tokens.actor_user_label": {
-    "message": "Acting user"
+    "message": "Utførende bruker"
   },
   "pages.personal_tokens.add_token_title": {
     "message": "Legg til personlig token"
@@ -204,7 +204,7 @@
     "message": "Bare eieren av tokenet kan generere det på nytt"
   },
   "pages.personal_tokens.count": {
-    "message": "{count, plural, =0 {No personal tokens} one {# personal token} other {# personal tokens}}"
+    "message": "{count, plural, =0 {Ingen personlige tokener} one {# personlig token} other {# personlige tokener}}"
   },
   "pages.personal_tokens.create_error": {
     "message": "Kunne ikke opprette personlig token"
@@ -216,7 +216,7 @@
     "message": "Opprett token"
   },
   "pages.personal_tokens.created_at_label": {
-    "message": "Created at"
+    "message": "Opprettet kl."
   },
   "pages.personal_tokens.description": {
     "message": "Personlige tokener er tilgangstokener med lang levetid og spesifikk tilgang, inkludert Synapse- og MAS-administrasjons-API-tilgang. De er nyttige for å automatisere oppgaver og for å lage integrasjoner."
@@ -231,10 +231,10 @@
     "message": "ABCDEFGHIJ"
   },
   "pages.personal_tokens.expires_at_column": {
-    "message": "Expires at"
+    "message": "Utløper kl."
   },
   "pages.personal_tokens.expires_at_label": {
-    "message": "Expires at"
+    "message": "Utløper kl."
   },
   "pages.personal_tokens.expires_in_help": {
     "message": "La feltet stå tomt for tokens som aldri utløper"
@@ -297,88 +297,88 @@
     "message": "Aldri brukt"
   },
   "pages.personal_tokens.not_found.description": {
-    "message": "The personal token you're looking for doesn't exist or has been removed."
+    "message": "Den personlige tokenen du leter etter finnes ikke eller er fjernet."
   },
   "pages.personal_tokens.not_found.title": {
-    "message": "Personal token not found"
+    "message": "Personlig token ikke funnet"
   },
   "pages.personal_tokens.owner_user_label": {
-    "message": "Owner"
+    "message": "Eier"
   },
   "pages.personal_tokens.regenerate_confirm": {
-    "message": "Regenerate token"
+    "message": "Generer token på nytt"
   },
   "pages.personal_tokens.regenerate_error": {
-    "message": "Failed to regenerate personal token"
+    "message": "Kunne ikke regenerere personlig token"
   },
   "pages.personal_tokens.regenerate_expires_help": {
-    "message": "Leave empty to keep the same expiry as before, or set a new expiry time"
+    "message": "La feltet stå tomt for å beholde samme utløpsdato som før, eller angi en ny utløpsdato."
   },
   "pages.personal_tokens.regenerate_success": {
-    "message": "Personal token regenerated successfully"
+    "message": "Personlig token regenerert"
   },
   "pages.personal_tokens.regenerate_token": {
-    "message": "Regenerate token"
+    "message": "Generer token på nytt"
   },
   "pages.personal_tokens.regenerate_token_title": {
-    "message": "Regenerate personal token"
+    "message": "Generer personlig token på nytt"
   },
   "pages.personal_tokens.regenerate_warning": {
-    "message": "This will generate a new access token and invalidate the current one. Any applications using the current token will need to be updated."
+    "message": "Dette vil generere et nytt tilgangstoken og ugyldiggjøre det nåværende. Alle applikasjoner som bruker det nåværende tokenet må oppdateres."
   },
   "pages.personal_tokens.revoke_success": {
-    "message": "Personal token revoked successfully"
+    "message": "Personlig token tilbakekalt"
   },
   "pages.personal_tokens.revoke_token": {
-    "message": "Revoke token"
+    "message": "Tilbakekall token"
   },
   "pages.personal_tokens.revoked_at_label": {
-    "message": "Revoked at"
+    "message": "Tilbakekalt kl."
   },
   "pages.personal_tokens.scope_device_help": {
-    "message": "Provision a Matrix device"
+    "message": "Provisjoner en Matrix-enhet"
   },
   "pages.personal_tokens.scope_mas_admin_help": {
-    "message": "Access to the MAS admin API"
+    "message": "Tilgang til MAS admin APIet"
   },
   "pages.personal_tokens.scope_matrix_client_help": {
-    "message": "Access to the Matrix Client-Server API"
+    "message": "Tilgang til Matrix Client-Server APIet"
   },
   "pages.personal_tokens.scope_synapse_admin_help": {
-    "message": "Access to the Synapse admin API"
+    "message": "Tilgang til Synapse admin APIet"
   },
   "pages.personal_tokens.scopes_label": {
-    "message": "Scopes"
+    "message": "Omfang"
   },
   "pages.personal_tokens.status.active": {
-    "message": "Active"
+    "message": "Aktiv"
   },
   "pages.personal_tokens.status.column": {
     "message": "Status"
   },
   "pages.personal_tokens.status.expired": {
-    "message": "Expired"
+    "message": "Utløpt"
   },
   "pages.personal_tokens.status.label": {
     "message": "Status"
   },
   "pages.personal_tokens.status.revoked": {
-    "message": "Revoked"
+    "message": "Tilbakekalt"
   },
   "pages.personal_tokens.title": {
     "message": "Personlige tokens"
   },
   "pages.personal_tokens.token_created_description": {
-    "message": "Your personal token has been created. Copy it now as it will not be shown again."
+    "message": "Ditt personlige token er opprettet. Kopier den nå, da den ikke vil bli vist igjen."
   },
   "pages.personal_tokens.token_created_title": {
-    "message": "Personal token created"
+    "message": "Personlig token opprettet"
   },
   "pages.personal_tokens.token_regenerated_description": {
-    "message": "Your personal token has been regenerated. Copy it now as it will not be shown again."
+    "message": "Ditt personlige token er generert på nytt. Kopier den nå, da den ikke vil vises igjen."
   },
   "pages.personal_tokens.token_regenerated_title": {
-    "message": "Token regenerated"
+    "message": "Token regenerert"
   },
   "pages.registration_tokens.auto_generate_placeholder": {
     "message": "Generer automatisk hvis feltet står tomt"
@@ -528,16 +528,16 @@
     "message": "This will permanently delete all messages or media uploaded to the server and remove this room from the directory. Members will lose access to their messages and the room will be removed from their room list."
   },
   "pages.rooms.delete_room.alert.title": {
-    "message": "You’re about to delete room data"
+    "message": "Du er i ferd med å slette romdata"
   },
   "pages.rooms.delete_room.block.help": {
-    "message": "Prevent users from rejoining the room after deletion."
+    "message": "Hindre brukere i å bli med i rommet igjen etter sletting."
   },
   "pages.rooms.delete_room.block.label": {
-    "message": "Block room"
+    "message": "Blokker rom"
   },
   "pages.rooms.delete_room.button": {
-    "message": "Delete permanently"
+    "message": "Slett permanent"
   },
   "pages.rooms.delete_room.error": {
     "message": "Failed to schedule room deletion"
@@ -546,25 +546,25 @@
     "message": "Room deletion scheduled"
   },
   "pages.rooms.delete_room.title": {
-    "message": "Delete this room?"
+    "message": "Slette dette rommet?"
   },
   "pages.rooms.deletion.failure.description": {
     "message": "Room deletion task failed on {timestamp, date, short} at {timestamp, time, short} with error: {error}"
   },
   "pages.rooms.deletion.failure.title": {
-    "message": "Deletion failed"
+    "message": "Slettingen mislyktes"
   },
   "pages.rooms.deletion.in_progress.description": {
     "message": "Room deletion task is in progress since {timestamp, date, short} at {timestamp, time, short}."
   },
   "pages.rooms.deletion.in_progress.title": {
-    "message": "Deletion in progress"
+    "message": "Sletting pågår"
   },
   "pages.rooms.deletion.success.description": {
     "message": "Room deletion task completed successfully on {timestamp, date, short} at {timestamp, time, short}."
   },
   "pages.rooms.deletion.success.title": {
-    "message": "Deletion successful"
+    "message": "Sletting fullført"
   },
   "pages.rooms.filters.empty_rooms": {
     "message": "Tomme rom"
@@ -591,28 +591,28 @@
     "message": "Rom"
   },
   "pages.supervision.description": {
-    "message": "Sign in as <b>{mxid}</b> to perform administrative actions in any room."
+    "message": "Logg inn som <b>{mxid}</b> for å utføre administrative handlinger i alle rom."
   },
   "pages.supervision.disabled_alert.description": {
-    "message": "This feature is part of your subscription. You can ask an administrator to enable it."
+    "message": "Denne funksjonen er en del av abonnementet ditt. Du kan be en administrator om å aktivere den."
   },
   "pages.supervision.disabled_alert.title": {
-    "message": "Supervision is currently disabled"
+    "message": "Tilsyn (supervision) er for øyeblikket deaktivert"
   },
   "pages.supervision.errors.cant_open.description": {
-    "message": "Your browser is blocking the opening of pop-up windows. Please make sure you allow pop-ups from this site."
+    "message": "Nettleseren din blokkerer åpningen av popup-vinduer. Sørg for at du tillater popup-vinduer fra dette nettstedet."
   },
   "pages.supervision.errors.cant_open.title": {
-    "message": "Failed to open the supervision interface in a new window"
+    "message": "Kunne ikke åpne tilsynsgrensesnittet i et nytt vindu"
   },
   "pages.supervision.errors.closed.description": {
-    "message": "Failed to sign in the supervision interface, as it closed before it could finish signing in"
+    "message": "Kunne ikke logge på tilsynsgrensesnittet, da det ble lukket før det kunne fullføre påloggingen."
   },
   "pages.supervision.errors.closed.title": {
-    "message": "The supervision interface was closed too quickly"
+    "message": "Tilsynsgrensesnittet ble lukket for raskt"
   },
   "pages.supervision.errors.generic.title": {
-    "message": "An unexpected error occurred whilst opening the supervision interface"
+    "message": "Det oppstod en uventet feil under åpningen av tilsynsgrensesnittet"
   },
   "pages.supervision.missing_ui_address.description": {
     "message": "Supervision is enabled in your deployment, but not Element Web, which is required for the supervision interface to work."
@@ -621,22 +621,22 @@
     "message": "The supervision interface requires Element Web to be enabled"
   },
   "pages.supervision.recovery_key.copied": {
-    "message": "Recovery key copied"
+    "message": "Gjenopprettingsnøkkel kopiert"
   },
   "pages.supervision.recovery_key.copy_failed": {
-    "message": "Could not copy recovery key"
+    "message": "Kunne ikke kopiere gjenopprettingsnøkkelen"
   },
   "pages.supervision.recovery_key.help": {
-    "message": "This is the recovery key used to enable reading encrypted messages."
+    "message": "Dette er gjenopprettingsnøkkelen som brukes til å aktivere lesing av krypterte meldinger."
   },
   "pages.supervision.recovery_key.label": {
-    "message": "Recovery key"
+    "message": "Gjenopprettingsnøkkel"
   },
   "pages.supervision.title": {
-    "message": "Supervision"
+    "message": "Tilsyn"
   },
   "pages.supervision.unavailable_alert.description": {
-    "message": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
+    "message": "Denne funksjonen er ikke tilgjengelig i ESS Community. Oppgrader til ESS Pro for å aktivere den."
   },
   "pages.supervision.unavailable_alert.title": {
     "message": "Supervision is a feature available in ESS Pro"
@@ -912,18 +912,18 @@
     "message": "Velg ditt foretrukne språk for grensesnittet."
   },
   "ui.language_switcher.language_list_label": {
-    "message": "List of available languages"
+    "message": "Liste over tilgjengelige språk"
   },
   "ui.language_switcher.title": {
     "message": "Språkinnstillinger"
   },
   "ui.user_picker.loading_list": {
-    "message": "Loading…"
+    "message": "Laster inn..."
   },
   "ui.user_picker.no_match": {
-    "message": "No match"
+    "message": "Ingen treff"
   },
   "ui.user_picker.no_match_help": {
-    "message": "Try a different search term. This can only lookup active users on {serverName} using their localpart."
+    "message": "Prøv et annet søkeord. Dette kan bare søke etter aktive brukere på {serverName} ved hjelp av deres lokale del."
   }
 }
