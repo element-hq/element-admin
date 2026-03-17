@@ -3,7 +3,6 @@
 import { createSseClient } from "../core/serverSentEvents.gen";
 import type { HttpMethod } from "../core/types.gen";
 import { getValidRequestBody } from "../core/utils.gen";
-
 import type {
   Client,
   Config,

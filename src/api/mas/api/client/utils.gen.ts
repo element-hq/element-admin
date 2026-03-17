@@ -9,7 +9,6 @@ import {
   serializePrimitiveParam,
 } from "../core/pathSerializer.gen";
 import { getUrl } from "../core/utils.gen";
-
 import type {
   Client,
   ClientOptions,
