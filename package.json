@@ -57,7 +57,7 @@
     "@axe-core/playwright": "4.11.1",
     "@formatjs/cli": "6.13.3",
     "@formatjs/unplugin": "1.1.0",
-    "@hey-api/openapi-ts": "0.94.1",
+    "@hey-api/openapi-ts": "0.94.2",
     "@localazy/cli": "2.0.8",
     "@playwright/test": "1.58.2",
     "@rolldown/plugin-babel": "0.2.1",
