@@ -95,11 +95,6 @@
     "typescript": "5.9.3",
     "vite": "8.0.0"
   },
-  "pnpm": {
-    "overrides": {
-      "vite": "8.0.0"
-    }
-  },
   "lint-staged": {
     "*": [
       "oxfmt"
