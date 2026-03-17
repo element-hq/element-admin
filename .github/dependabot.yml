@@ -11,6 +11,8 @@ updates:
       - "A-Dependencies"
     schedule:
       interval: "daily"
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: "npm"
     directory: "/"
@@ -80,3 +82,5 @@ updates:
       types:
         patterns:
           - "@types/*"
+    cooldown:
+      default-days: 7
