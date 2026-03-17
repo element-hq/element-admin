@@ -84,10 +84,10 @@
     "message": "Audit"
   },
   "marketing.supervision.description": {
-    "message": "<p>La modération permet à une organisation de gérer tous les salons de manière centralisée. Un compte « modérateur » rejoindra les salons définis avec des privilèges d'administrateur de salon. Les administrateurs de serveur peuvent ainsi facilement utiliser ce compte depuis la console d'administration afin de gérer et de modérer leurs salons.</p> <ul> <li>Gestion les salons et leurs paramètres (nom, topic, autorisation, etc.)</li> <li>Gestion des membres des salons</li> <li>Suppression des messages et médias indésirables</li> <li>Récupération des salons abandonnés (dont tous les membres sont partis)</li> <li>Accès (ou non) aux messages chiffrés par le compte de modération (configurable)</li> </ul>"
+    "message": "<p>La supervision permet à une organisation de gérer tous les salons de manière centralisée. Un compte de « supervision » rejoindra les salons définis avec des privilèges d'administrateur de salon. Les administrateurs de serveur peuvent ainsi facilement utiliser ce compte depuis la console d'administration afin de gérer et de modérer leurs salons.</p> <ul> <li>Gestion les salons et leurs paramètres (nom, topic, autorisation, etc.)</li> <li>Gestion des membres des salons</li> <li>Suppression des messages et médias indésirables</li> <li>Récupération des salons abandonnés (dont tous les membres sont partis)</li> <li>Accès (ou non) aux messages chiffrés par le compte de modération (configurable)</li> </ul>"
   },
   "marketing.supervision.title": {
-    "message": "Modération"
+    "message": "Supervision"
   },
   "navigation.auditing": {
     "message": "Audit"
@@ -108,7 +108,7 @@
     "message": "Salons"
   },
   "navigation.supervision": {
-    "message": "Modération"
+    "message": "Supervision"
   },
   "navigation.users": {
     "message": "Utilisateurs"
@@ -597,28 +597,28 @@
     "message": "Cette fonctionnalité est incluse dans votre souscription. Vous pouvez demander à un administrateur de l'activer."
   },
   "pages.supervision.disabled_alert.title": {
-    "message": "La modération est actuellement désactivée."
+    "message": "La supervision est actuellement désactivée."
   },
   "pages.supervision.errors.cant_open.description": {
     "message": "Votre navigateur bloque l'ouverture des fenêtres pop-up. Veuillez vous assurer que vous autorisez les fenêtres pop-up provenant de ce site."
   },
   "pages.supervision.errors.cant_open.title": {
-    "message": "Impossible d'ouvrir l'interface de modération dans une nouvelle fenêtre"
+    "message": "Impossible d'ouvrir l'interface de supervision dans une nouvelle fenêtre"
   },
   "pages.supervision.errors.closed.description": {
-    "message": "Impossible de se connecter à l'interface de modération, car celle-ci s'est fermée avant la fin de la connexion."
+    "message": "Impossible de se connecter à l'interface de supervision, car celle-ci s'est fermée avant la fin de la connexion."
   },
   "pages.supervision.errors.closed.title": {
-    "message": "L'interface de modération a été fermée prématurément."
+    "message": "L'interface de supervision a été fermée prématurément."
   },
   "pages.supervision.errors.generic.title": {
-    "message": "Une erreur inattendue s'est produite lors de l'ouverture de l'interface de modération."
+    "message": "Une erreur inattendue s'est produite lors de l'ouverture de l'interface de supervision."
   },
   "pages.supervision.missing_ui_address.description": {
-    "message": "La modération est activée dans votre déploiement, mais pas Element Web, qui est nécessaire au fonctionnement de l'interface de modération."
+    "message": "La supervision est activée dans votre déploiement, mais pas Element Web, qui est nécessaire au fonctionnement de l'interface de modération."
   },
   "pages.supervision.missing_ui_address.title": {
-    "message": "L'interface de modération nécessite qu'Element Web soit activé."
+    "message": "L'interface de supervision nécessite qu'Element Web soit activé."
   },
   "pages.supervision.recovery_key.copied": {
     "message": "Clé de récupération copiée"
@@ -633,13 +633,13 @@
     "message": "Clé de récupération"
   },
   "pages.supervision.title": {
-    "message": "Modération"
+    "message": "Supervision"
   },
   "pages.supervision.unavailable_alert.description": {
     "message": "Cette fonctionnalité n'est pas disponible dans ESS Community. Passez à ESS Pro pour l'activer."
   },
   "pages.supervision.unavailable_alert.title": {
-    "message": "La modération est une fonctionnalité disponible dans ESS Pro"
+    "message": "La supervision est une fonctionnalité disponible dans ESS Pro"
   },
   "pages.users.add_email.button": {
     "message": "Ajouter une adresse e-mail"

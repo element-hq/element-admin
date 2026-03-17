@@ -311,7 +311,7 @@
       "children": [
         {
           "type": 0,
-          "value": "La modération permet à une organisation de gérer tous les salons de manière centralisée. Un compte « modérateur » rejoindra les salons définis avec des privilèges d'administrateur de salon. Les administrateurs de serveur peuvent ainsi facilement utiliser ce compte depuis la console d'administration afin de gérer et de modérer leurs salons."
+          "value": "La supervision permet à une organisation de gérer tous les salons de manière centralisée. Un compte de « supervision » rejoindra les salons définis avec des privilèges d'administrateur de salon. Les administrateurs de serveur peuvent ainsi facilement utiliser ce compte depuis la console d'administration afin de gérer et de modérer leurs salons."
         }
       ],
       "type": 8,
@@ -405,7 +405,7 @@
   "marketing.supervision.title": [
     {
       "type": 0,
-      "value": "Modération"
+      "value": "Supervision"
     }
   ],
   "navigation.auditing": [
@@ -447,7 +447,7 @@
   "navigation.supervision": [
     {
       "type": 0,
-      "value": "Modération"
+      "value": "Supervision"
     }
   ],
   "navigation.users": [
@@ -1662,7 +1662,7 @@
   "pages.supervision.disabled_alert.title": [
     {
       "type": 0,
-      "value": "La modération est actuellement désactivée."
+      "value": "La supervision est actuellement désactivée."
     }
   ],
   "pages.supervision.errors.cant_open.description": [
@@ -1674,37 +1674,37 @@
   "pages.supervision.errors.cant_open.title": [
     {
       "type": 0,
-      "value": "Impossible d'ouvrir l'interface de modération dans une nouvelle fenêtre"
+      "value": "Impossible d'ouvrir l'interface de supervision dans une nouvelle fenêtre"
     }
   ],
   "pages.supervision.errors.closed.description": [
     {
       "type": 0,
-      "value": "Impossible de se connecter à l'interface de modération, car celle-ci s'est fermée avant la fin de la connexion."
+      "value": "Impossible de se connecter à l'interface de supervision, car celle-ci s'est fermée avant la fin de la connexion."
     }
   ],
   "pages.supervision.errors.closed.title": [
     {
       "type": 0,
-      "value": "L'interface de modération a été fermée prématurément."
+      "value": "L'interface de supervision a été fermée prématurément."
     }
   ],
   "pages.supervision.errors.generic.title": [
     {
       "type": 0,
-      "value": "Une erreur inattendue s'est produite lors de l'ouverture de l'interface de modération."
+      "value": "Une erreur inattendue s'est produite lors de l'ouverture de l'interface de supervision."
     }
   ],
   "pages.supervision.missing_ui_address.description": [
     {
       "type": 0,
-      "value": "La modération est activée dans votre déploiement, mais pas Element Web, qui est nécessaire au fonctionnement de l'interface de modération."
+      "value": "La supervision est activée dans votre déploiement, mais pas Element Web, qui est nécessaire au fonctionnement de l'interface de modération."
     }
   ],
   "pages.supervision.missing_ui_address.title": [
     {
       "type": 0,
-      "value": "L'interface de modération nécessite qu'Element Web soit activé."
+      "value": "L'interface de supervision nécessite qu'Element Web soit activé."
     }
   ],
   "pages.supervision.recovery_key.copied": [
@@ -1734,7 +1734,7 @@
   "pages.supervision.title": [
     {
       "type": 0,
-      "value": "Modération"
+      "value": "Supervision"
     }
   ],
   "pages.supervision.unavailable_alert.description": [
@@ -1746,7 +1746,7 @@
   "pages.supervision.unavailable_alert.title": [
     {
       "type": 0,
-      "value": "La modération est une fonctionnalité disponible dans ESS Pro"
+      "value": "La supervision est une fonctionnalité disponible dans ESS Pro"
     }
   ],
   "pages.users.add_email.button": [
