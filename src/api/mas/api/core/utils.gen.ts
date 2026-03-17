@@ -130,7 +130,7 @@ export function getValidRequestBody(options: {
     }
 
     // not all clients implement a serializedBody property (i.e. client-axios)
-    return options.body === "" ? null : options.body;
+    return options.body !== "" ? options.body : null;
   }
 
   // plain/text body
