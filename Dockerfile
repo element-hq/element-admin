@@ -22,7 +22,10 @@ RUN ln -s /tmp/index.runtime.html dist/
 FROM ghcr.io/nginx/nginx-unprivileged:1.29.3-alpine-slim
 
 COPY --from=builder /app/dist /dist
-COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
-COPY docker/replace-config.sh /docker-entrypoint.d/replace-config.sh
+COPY docker/default.conf /etc/nginx/conf.d/default.conf
+COPY docker/security_headers.conf /etc/nginx/security_headers.conf
+COPY docker/http_customisations.conf /etc/nginx/conf.d/http_customisations.conf
+COPY docker/configure-listen.sh /docker-entrypoint.d/05-configure-listen.sh
+COPY docker/replace-config.sh /docker-entrypoint.d/50-replace-config.sh
 
 EXPOSE 8080
