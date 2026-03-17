@@ -95,11 +95,6 @@
     "typescript": "5.9.3",
     "vite": "8.0.0"
   },
-  "pnpm": {
-    "overrides": {
-      "vite": "8.0.0"
-    }
-  },
   "lint-staged": {
     "*": [
       "oxfmt"
@@ -124,9 +119,8 @@
     ],
     "ignore": [
       "src/api/mas/api/**/*",
-      "src/api/synapse.ts",
-      "openapi-ts.config.ts"
+      "src/api/synapse.ts"
     ]
   },
-  "packageManager": "pnpm@10.30.3+sha512.c961d1e0a2d8e354ecaa5166b822516668b7f44cb5bd95122d590dd81922f606f5473b6d23ec4a5be05e7fcd18e8488d47d978bbe981872f1145d06e9a740017"
+  "packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be"
 }

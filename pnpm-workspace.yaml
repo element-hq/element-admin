@@ -24,3 +24,4 @@ peerDependencyRules:
   allowedVersions:
     eslint: "10"
     "@vector-im/compound-design-tokens": "7"
+    vite: "8"
