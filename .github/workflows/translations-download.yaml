@@ -10,6 +10,7 @@ on:
 jobs:
   download:
     runs-on: ubuntu-24.04
+    environment: translations
     permissions:
       contents: write
 

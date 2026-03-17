@@ -12,6 +12,7 @@ on:
 jobs:
   upload:
     runs-on: ubuntu-24.04
+    environment: translations
     permissions:
       contents: read
 
