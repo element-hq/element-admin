@@ -28,8 +28,8 @@ jobs:
       - name: Tailscale
         uses: tailscale/github-action@306e68a486fd2350f2bfc3b19fcd143891a4a2d8 # v4
         with:
-          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }} # zizmor: ignore[secrets-inherit] org-wide secret
-          audience: ${{ secrets.TS_AUDIENCE }} # zizmor: ignore[secrets-inherit] org-wide secret
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }} # zizmor: ignore[secrets-outside-env] org-wide secret
+          audience: ${{ secrets.TS_AUDIENCE }} # zizmor: ignore[secrets-outside-env] org-wide secret
           tags: tag:github-actions
 
       - name: Compute vault jwt role name
