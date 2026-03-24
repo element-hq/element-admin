@@ -334,6 +334,138 @@ const ScheduledTaskList = v.object({
   scheduled_tasks: v.array(ScheduledTask),
 });
 
+// Federation destinations
+
+const Destination = v.object({
+  destination: v.string(),
+  retry_last_ts: v.number(),
+  retry_interval: v.number(),
+  failure_ts: v.nullable(v.number()),
+  last_successful_stream_ordering: v.nullable(v.number()),
+});
+
+export type Destination = v.InferOutput<typeof Destination>;
+
+const DestinationsListResponse = v.object({
+  destinations: v.array(Destination),
+  next_token: v.optional(v.union([v.string(), v.number()])),
+  total: v.number(),
+});
+
+export type DestinationsListResponse = v.InferOutput<
+  typeof DestinationsListResponse
+>;
+
+export interface DestinationListFilters {
+  order_by?:
+    | "destination"
+    | "retry_last_ts"
+    | "retry_interval"
+    | "failure_ts"
+    | "last_successful_stream_ordering";
+  dir?: "f" | "b";
+  // Undocumented Synapse param: filters destinations with a
+  // `LOWER(destination) LIKE '%<destination>%'` match.
+  destination?: string;
+}
+
+export const federationDestinationsInfiniteQuery = (
+  synapseRoot: string,
+  parameters: DestinationListFilters = {},
+) =>
+  infiniteQueryOptions({
+    queryKey: [
+      "synapse",
+      "federation",
+      "destinations",
+      "infinite",
+      synapseRoot,
+      parameters,
+    ],
+    queryFn: async ({ client, signal, pageParam }) => {
+      const url = new URL(
+        "/_synapse/admin/v1/federation/destinations",
+        synapseRoot,
+      );
+
+      url.searchParams.set("limit", String(PAGE_SIZE));
+
+      if (pageParam !== null) {
+        url.searchParams.set("from", String(pageParam));
+      }
+
+      if (parameters.order_by)
+        url.searchParams.set("order_by", parameters.order_by);
+      if (parameters.dir) url.searchParams.set("dir", parameters.dir);
+      if (parameters.destination)
+        url.searchParams.set("destination", parameters.destination);
+
+      const response = await fetch(url, await baseOptions(client, signal));
+
+      await ensureNotError(response);
+
+      const destinations = v.parse(
+        DestinationsListResponse,
+        await response.json(),
+      );
+
+      return destinations;
+    },
+    initialPageParam: null as number | string | null,
+    getNextPageParam: (lastPage): number | string | null =>
+      lastPage.next_token ?? null,
+  });
+
+export const federationDestinationsCountQuery = (synapseRoot: string) =>
+  queryOptions({
+    queryKey: ["synapse", "federation", "destinations-count", synapseRoot],
+    queryFn: async ({ client, signal }) => {
+      const url = new URL(
+        "/_synapse/admin/v1/federation/destinations?limit=0",
+        synapseRoot,
+      );
+
+      const response = await fetch(url, await baseOptions(client, signal));
+
+      await ensureNotError(response);
+
+      const destinations = v.parse(
+        DestinationsListResponse,
+        await response.json(),
+      );
+
+      return destinations.total;
+    },
+  });
+
+export const federationDestinationQuery = (
+  synapseRoot: string,
+  destination: string,
+) =>
+  queryOptions({
+    queryKey: [
+      "synapse",
+      "federation",
+      "destination",
+      synapseRoot,
+      destination,
+    ],
+    queryFn: async ({ client, signal }) => {
+      const url = new URL(
+        `/_synapse/admin/v1/federation/destinations/${encodeURIComponent(destination)}`,
+        synapseRoot,
+      );
+
+      const response = await fetch(url, await baseOptions(client, signal));
+
+      await ensureNotError(response, true);
+
+      const dest = v.parse(Destination, await response.json());
+
+      return dest;
+    },
+  });
+
 export const scheduledTasksForResource = (
   synapseRoot: string,
   resourceId: string,
