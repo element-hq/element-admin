@@ -131,6 +131,10 @@
     "description": "Label for the documentation navigation link (to https://docs.element.io/) in the main navigation sidebar",
     "message": "Documentation"
   },
+  "navigation.federation": {
+    "description": "Label for the federation navigation item in the main navigation sidebar",
+    "message": "Federation"
+  },
   "navigation.personal_tokens": {
     "description": "Label for the personal tokens navigation item in the main navigation sidebar",
     "message": "Personal tokens"
