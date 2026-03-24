@@ -52,7 +52,7 @@ export function App() {
             },
             {
               name: "TanStack Pacer",
-              render: (_element, theme) => <PacerDevtoolsPanel theme={theme} />,
+              render: () => <PacerDevtoolsPanel />,
             },
           ]}
         />
