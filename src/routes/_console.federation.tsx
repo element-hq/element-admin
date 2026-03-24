@@ -46,6 +46,13 @@ export const Heading = ({ search }: { search?: React.ReactNode }) => {
             description="Tab label for the known federation domains list"
           />
         </SubTabs.Tab>
+        <SubTabs.Tab to="/federation/allowed-domains">
+          <FormattedMessage
+            id="pages.federation.tab.allowed_domains"
+            defaultMessage="Allowed domains"
+            description="Tab label for the allowed federation domains list"
+          />
+        </SubTabs.Tab>
       </SubTabs.Root>
     </>
   );
