@@ -199,6 +199,74 @@
     "description": "The title of the dashboard page",
     "message": "Dashboard"
   },
+  "pages.federation.detail.contact": {
+    "description": "Label for the contact email of a federation destination",
+    "message": "Contact"
+  },
+  "pages.federation.detail.destination": {
+    "description": "Label for the destination name of a federation destination",
+    "message": "Destination"
+  },
+  "pages.federation.detail.last_retry": {
+    "description": "Label for the last retry timestamp of a federation destination",
+    "message": "Last retry timestamp"
+  },
+  "pages.federation.detail.last_successful_stream": {
+    "description": "Label for the last successful stream ordering of a federation destination",
+    "message": "Last successful stream"
+  },
+  "pages.federation.detail.retry_interval": {
+    "description": "Label for the retry interval of a federation destination",
+    "message": "Retry interval"
+  },
+  "pages.federation.detail.security": {
+    "description": "Label for the security contact of a federation destination",
+    "message": "Security"
+  },
+  "pages.federation.detail.support_page": {
+    "description": "Label for the support page URL of a federation destination",
+    "message": "Support page"
+  },
+  "pages.federation.domain_count": {
+    "description": "On the federation page, this heading shows the total number of known domains",
+    "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
+  },
+  "pages.federation.loading": {
+    "description": "The loading message for the federation known domains page",
+    "message": "Loading more domains…"
+  },
+  "pages.federation.not_found.description": {
+    "description": "The description of the alert when a federation destination could not be found",
+    "message": "The requested destination ({destination}) could not be found."
+  },
+  "pages.federation.not_found.title": {
+    "description": "The title of the alert when a federation destination could not be found",
+    "message": "Destination not found"
+  },
+  "pages.federation.search_placeholder": {
+    "description": "The placeholder text for the search input on the federation known domains page",
+    "message": "Search domains…"
+  },
+  "pages.federation.tab.known_domains": {
+    "description": "Tab label for the known federation domains list",
+    "message": "Known domains"
+  },
+  "pages.federation.tab.section": {
+    "description": "The label for the federation tabs section",
+    "message": "Federation views"
+  },
+  "pages.federation.table.server_name": {
+    "description": "In the list of destinations, the name of the server",
+    "message": "Server name"
+  },
+  "pages.federation.table.status": {
+    "description": "In the list of destinations, the status of the destination (e.g. connected, disconnected)",
+    "message": "Status"
+  },
+  "pages.federation.title": {
+    "description": "The title of the federation page",
+    "message": "Federation"
+  },
   "pages.generic_error.go_home": {
     "description": "When an unxpected error happen, one option is to go back to the homepage",
     "message": "Go home"
@@ -1206,6 +1274,22 @@
   "ui.data.loading": {
     "description": "In a data grid, aria label for when a data value is loading",
     "message": "Loading value"
+  },
+  "ui.destination_status.failing": {
+    "description": "Badge label for a federation destination that is failing",
+    "message": "Failing"
+  },
+  "ui.destination_status.inactive": {
+    "description": "Badge label for a federation destination that is inactive",
+    "message": "Inactive"
+  },
+  "ui.destination_status.never_worked": {
+    "description": "Badge label for a federation destination that has never successfully received any data",
+    "message": "Never worked"
+  },
+  "ui.destination_status.working": {
+    "description": "Badge label for a federation destination that is working",
+    "message": "Working"
   },
   "ui.language_switcher.browser_default": {
     "description": "Option to use browser's default language in the language switcher",
