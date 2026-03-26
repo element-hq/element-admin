@@ -88,7 +88,7 @@
     "oxfmt": "0.41.0",
     "oxlint": "1.56.0",
     "oxlint-tsgolint": "0.17.0",
-    "stylelint": "17.4.0",
+    "stylelint": "17.5.0",
     "stylelint-config-standard": "40.0.0",
     "stylelint-config-tailwindcss": "1.0.1",
     "tailwindcss": "4.2.1",
