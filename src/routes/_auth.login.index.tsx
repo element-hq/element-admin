@@ -44,6 +44,7 @@ function RouteComponent() {
     useDebouncedState(
       config.serverName ?? "",
       {
+        key: "server-discovery",
         wait: 250,
       },
       (state) => ({ isPending: state.isPending }),
