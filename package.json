@@ -38,7 +38,7 @@
     "@tanstack/react-router": "1.167.4",
     "@tanstack/react-table": "8.21.3",
     "@tanstack/react-virtual": "3.13.23",
-    "@vector-im/compound-design-tokens": "7.0.0",
+    "@vector-im/compound-design-tokens": "8.0.0",
     "@vector-im/compound-web": "8.4.0",
     "classnames": "2.5.1",
     "idb-keyval": "6.2.2",
