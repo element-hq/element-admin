@@ -508,6 +508,7 @@ function RouteComponent() {
       });
     },
     {
+      key: "user-search",
       wait: 200,
     },
   );

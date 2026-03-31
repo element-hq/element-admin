@@ -169,6 +169,7 @@ function RouteComponent() {
       });
     },
     {
+      key: "room-search",
       wait: 400,
     },
   );

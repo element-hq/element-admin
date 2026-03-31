@@ -79,7 +79,7 @@ export const UserPicker = ({
   const [userSearch, setUserSearch] = useState("");
   const [debouncedUserSearch, { state }] = useDebouncedValue(
     normalizeSearch(userSearch),
-    { wait: 200 },
+    { key: "user-picker", wait: 200 },
     ({ isPending }) => ({ isPending }),
   );
 
