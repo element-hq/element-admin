@@ -60,7 +60,7 @@
     "@hey-api/openapi-ts": "0.94.2",
     "@localazy/cli": "2.0.8",
     "@playwright/test": "1.58.2",
-    "@rolldown/plugin-babel": "0.2.1",
+    "@rolldown/plugin-babel": "0.2.2",
     "@tailwindcss/vite": "4.2.2",
     "@tanstack/devtools-vite": "0.6.0",
     "@tanstack/eslint-plugin-query": "5.95.2",
