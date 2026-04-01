@@ -86,7 +86,7 @@
     "knip": "6.0.4",
     "lint-staged": "16.4.0",
     "oxfmt": "0.41.0",
-    "oxlint": "1.56.0",
+    "oxlint": "1.57.0",
     "oxlint-tsgolint": "0.17.3",
     "stylelint": "17.5.0",
     "stylelint-config-standard": "40.0.0",
