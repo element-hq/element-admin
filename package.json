@@ -83,7 +83,7 @@
     "eslint-plugin-formatjs": "6.4.3",
     "eslint-plugin-react-hooks": "7.0.1",
     "husky": "9.1.7",
-    "knip": "6.0.4",
+    "knip": "6.0.5",
     "lint-staged": "16.4.0",
     "oxfmt": "0.41.0",
     "oxlint": "1.57.0",
