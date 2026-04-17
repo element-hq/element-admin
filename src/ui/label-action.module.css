@@ -1,0 +1,25 @@
+/*
+ * SPDX-FileCopyrightText: Copyright 2026 just-doks
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+ */
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.text {
+  grid-column: 2;
+  justify-self: center;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.icon {
+  grid-column: 3;
+  justify-self: start;
+  margin-left: 6px;
+}

@@ -891,6 +891,34 @@
     "description": "The success message for adding an upstream link",
     "message": "Link to upstream account added"
   },
+  "pages.users.change_displayname.description": {
+    "description": "The description of the modal for changing a user displayname",
+    "message": "Change a display name of this user"
+  },
+  "pages.users.change_displayname.displayname_label": {
+    "description": "Label for the displayname field in set displayname modal",
+    "message": "Display name"
+  },
+  "pages.users.change_displayname.error": {
+    "description": "The error message for changing a user displayname",
+    "message": "Failed to change display name"
+  },
+  "pages.users.change_displayname.set_displayname_button": {
+    "description": "The label of the button for setting a user displayname",
+    "message": "Set display name"
+  },
+  "pages.users.change_displayname.submit": {
+    "description": "The submit button text in the set displayname modal",
+    "message": "Change display name"
+  },
+  "pages.users.change_displayname.success": {
+    "description": "The success message for changing a user displayname",
+    "message": "Display name changed"
+  },
+  "pages.users.change_displayname.title": {
+    "description": "The title of the modal for changing a user displayname",
+    "message": "Change a Display Name"
+  },
   "pages.users.deactivate_account.alert.description": {
     "description": "In the modal to deactivate a user, the description of the alert",
     "message": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
