@@ -59,6 +59,7 @@ import { useImageBlob } from "@/utils/blob";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 import { useFilters } from "@/utils/filters";
 import { useCurrentChildRoutePath } from "@/utils/routes";
+import type { ErrorResponse, Error as ErrorMAS } from "@/api/mas/api";
 
 const UserSearchParameters = v.object({
   admin: v.optional(v.boolean()),
@@ -208,11 +209,18 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
   const intl = useIntl();
   const [open, setOpen] = useState(false);
   const [localpart, setLocalpart] = useState("");
+  const [errors, setErrors] = useState<ErrorMAS[]>([]);
 
-  const { mutate, isPending, isError, error } = useMutation({
+  const normalizeError = useCallback((error: ErrorResponse | Error | null) => {
+    if (isErrorResponse(error)) return error.errors;
+    if (error === null) return [];
+    return [{ title: error?.message ?? "Unknown error" }];
+  }, []);
+
+  const { mutate, isPending, isError, reset } = useMutation({
     mutationFn: (username: string) =>
       createUser(queryClient, serverName, username),
-    onError: () => {
+    onError: (error) => {
       toast.error(
         intl.formatMessage({
           id: "pages.users.new_user.error_message",
@@ -221,6 +229,7 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
             "The error message shown in a toast when a user fails to be created",
         }),
       );
+      setErrors(normalizeError(error));
     },
     onSuccess: async (response) => {
       // Set the user query data so that we avoid one round trip
@@ -250,16 +259,8 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
         search: (previous) => previous,
       });
       setOpen(false);
-      setLocalpart("");
     },
   });
-
-  // TODO: have a generic way to normalize those errors
-  const errors = isErrorResponse(error)
-    ? error.errors
-    : error === null
-      ? []
-      : [{ title: error.message }];
 
   const onOpenChange = useCallback(
     (open: boolean) => {
@@ -269,16 +270,26 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
       }
 
       setOpen(open);
-      setLocalpart("");
+      // clear state on dialog close
+      if (!open) {
+        setLocalpart("");
+        setErrors([]);
+        reset();
+      }
     },
-    [isPending],
+    [isPending, reset],
   );
 
   const onLocalpartInput = useCallback(
     (event: React.InputEvent<HTMLInputElement>) => {
       setLocalpart(event.currentTarget.value);
+      // clear error state on typing
+      if (isError) {
+        setErrors([]);
+        reset();
+      }
     },
-    [setLocalpart],
+    [isError, reset],
   );
 
   const onSubmit = useCallback(
@@ -290,9 +301,10 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
 
       const data = new FormData(event.currentTarget);
       const localpart = data.get("new-user-localpart") as string;
+
       mutate(localpart);
     },
-    [mutate, isPending],
+    [isPending, mutate],
   );
 
   return (
@@ -334,7 +346,7 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
           <Form.TextControl
             onInput={onLocalpartInput}
             required
-            pattern="[a-z0-9.=_/-]+"
+            pattern="[a-z0-9.=_\/\-]+"
             autoCapitalize="off"
             autoComplete="off"
           />
@@ -362,7 +374,6 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
               description="The error message shown when the localpart input only has numbers, which are reserved for guests"
             />
           </Form.ErrorMessage>
-
           {errors.map((error, index) => (
             <Form.ErrorMessage key={index}>{error.title}</Form.ErrorMessage>
           ))}
