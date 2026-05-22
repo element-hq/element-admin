@@ -111,12 +111,6 @@
       "src/base.css",
       "src/prerender.tsx"
     ],
-    "ignoreDependencies": [
-      "@tanstack/eslint-plugin-query",
-      "@tanstack/eslint-plugin-router",
-      "eslint-plugin-formatjs",
-      "eslint-plugin-react-hooks"
-    ],
     "ignore": [
       "src/api/mas/api/**/*",
       "src/api/synapse.ts"
