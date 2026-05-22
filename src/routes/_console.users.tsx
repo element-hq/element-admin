@@ -658,7 +658,7 @@ function RouteComponent() {
                     from={from}
                     replace={true}
                     search={filters.clearedState}
-                    size="small"
+                    size="sm"
                   >
                     <FormattedMessage {...messages.actionClear} />
                   </TextLink>

@@ -408,7 +408,7 @@ function UnlockButton({ user, serverName }: LockUnlockButtonProps) {
     <Button
       type="button"
       kind="secondary"
-      size="sm"
+      size="md"
       disabled={isPending}
       onClick={onClick}
     >
@@ -474,7 +474,7 @@ function ReactivateButton({
       kind="secondary"
       disabled={isPending}
       onClick={onClick}
-      size="sm"
+      size="md"
       Icon={isPending ? undefined : CheckCircleIcon}
     >
       {isPending && <InlineSpinner />}
@@ -560,7 +560,7 @@ function DeactivateButton({
       trigger={
         <Button
           type="button"
-          size="sm"
+          size="md"
           kind="secondary"
           destructive
           Icon={DeleteIcon}
@@ -687,7 +687,7 @@ function LockButton({
       trigger={
         <Button
           type="button"
-          size="sm"
+          size="md"
           kind="secondary"
           destructive
           Icon={LockIcon}
@@ -832,7 +832,7 @@ function SetPasswordButton({
       open={open}
       onOpenChange={onOpenChange}
       trigger={
-        <Button type="button" size="sm" kind="secondary" Icon={KeyIcon}>
+        <Button type="button" size="md" kind="secondary" Icon={KeyIcon}>
           <FormattedMessage
             id="pages.users.set_password.button"
             defaultMessage="Change password"
@@ -1010,7 +1010,7 @@ function UpstreamLinkListItem({
           <Button
             destructive
             kind="secondary"
-            size="sm"
+            size="md"
             className="self-stretch"
           >
             <FormattedMessage {...messages.actionRemove} />
@@ -1167,7 +1167,7 @@ function UpstreamLinksList({
           trigger={
             <Button
               kind="secondary"
-              size="sm"
+              size="md"
               Icon={PlusIcon}
               className="self-stretch"
             >
@@ -1317,7 +1317,7 @@ function EmailListItem({
           <Button
             destructive
             kind="secondary"
-            size="sm"
+            size="md"
             className="self-stretch"
           >
             <FormattedMessage {...messages.actionRemove} />
@@ -1428,7 +1428,7 @@ function EmailsList({ userId, mxid, serverName }: EmailsListProps) {
         trigger={
           <Button
             kind="secondary"
-            size="sm"
+            size="md"
             Icon={PlusIcon}
             className="self-stretch"
           >
@@ -1502,7 +1502,7 @@ const CloseSidebar: React.FC = () => {
           to="/users"
           search={search}
           kind="tertiary"
-          size="sm"
+          size="md"
           Icon={CloseIcon}
         />
       </Tooltip>

@@ -9,7 +9,7 @@ import { type PropsWithChildren, forwardRef } from "react";
 
 interface ButtonLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   kind?: "primary" | "secondary" | "tertiary";
-  size?: "sm" | "lg";
+  size?: "md" | "lg";
   Icon?: React.ComponentType<React.SVGAttributes<SVGElement>>;
   iconOnly?: boolean;
   destructive?: boolean;

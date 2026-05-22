@@ -100,7 +100,7 @@ const CloseSidebar: React.FC = () => {
           to="/registration-tokens"
           search={search}
           kind="tertiary"
-          size="sm"
+          size="md"
           Icon={CloseIcon}
         />
       </Tooltip>
@@ -288,7 +288,7 @@ function TokenDetailComponent() {
           {tokenAttributes.revoked_at ? (
             <Button
               type="button"
-              size="sm"
+              size="md"
               kind="secondary"
               disabled={unrevokeTokenMutation.isPending}
               onClick={() => unrevokeTokenMutation.mutate()}
@@ -305,7 +305,7 @@ function TokenDetailComponent() {
           ) : (
             <Button
               type="button"
-              size="sm"
+              size="md"
               kind="secondary"
               destructive
               disabled={revokeTokenMutation.isPending}
@@ -520,7 +520,7 @@ function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
       trigger={
         <Button
           type="button"
-          size="sm"
+          size="md"
           kind="secondary"
           disabled={!!tokenAttributes.revoked_at}
           Icon={EditIcon}

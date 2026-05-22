@@ -14,7 +14,7 @@ const AppFooter = () => (
     <Footer.ElementLogo />
 
     <Footer.Section>
-      <Link href="https://customer.element.io/support" size="small">
+      <Link href="https://customer.element.io/support" size="sm">
         <FormattedMessage
           id="footer.help_and_support"
           defaultMessage="Help & Support"
@@ -22,7 +22,7 @@ const AppFooter = () => (
         />
       </Link>
       <Footer.Divider />
-      <Link href="https://element.io/legal" size="small">
+      <Link href="https://element.io/legal" size="sm">
         <FormattedMessage
           id="footer.legal"
           defaultMessage="Legal"
@@ -30,7 +30,7 @@ const AppFooter = () => (
         />
       </Link>
       <Footer.Divider />
-      <Link href="https://element.io/legal/privacy" size="small">
+      <Link href="https://element.io/legal/privacy" size="sm">
         <FormattedMessage
           id="footer.privacy"
           defaultMessage="Privacy"
