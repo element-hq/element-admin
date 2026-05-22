@@ -70,18 +70,18 @@ function vitePluginPrerender(): Plugin {
       return environment.name === "client";
     },
 
-    config(config_) {
+    config(resolvedConfig) {
       config = {
-        ...config_,
+        ...resolvedConfig,
         dev: {
-          ...config_.dev,
+          ...resolvedConfig.dev,
           moduleRunnerTransform: true,
         },
         server: {
-          ...config_.server,
+          ...resolvedConfig.server,
           perEnvironmentStartEndDuringDev: true,
         },
-        ssr: { ...config_.ssr, target: "node" },
+        ssr: { ...resolvedConfig.ssr, target: "node" },
         appType: "custom",
         environments: {
           prerender: {},

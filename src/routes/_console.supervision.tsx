@@ -324,6 +324,7 @@ function AdminbotContent({ config, synapseRoot }: AdminbotContentProps) {
             description="The description of the supervision page"
             values={{
               mxid: config.mxid,
+              // oxlint-disable-next-line react/no-unstable-nested-components
               b: (chunks) => <b>{...chunks}</b>,
             }}
           />

@@ -60,7 +60,7 @@ export class HttpStatusError extends LocalizedError {
     this.values = {
       status: response.status,
       statusText: response.statusText,
-      url: response.url.toString(),
+      url: response.url,
     };
   }
 }

@@ -284,6 +284,7 @@ export const UserPicker = ({
                     })}
                     className={styles["item"]}
                     data-active={index === activeIndex}
+                    // oxlint-disable-next-line jsx-a11y/no-noninteractive-tabindex
                     tabIndex={index === activeIndex ? 0 : -1}
                   >
                     <UserChipContent

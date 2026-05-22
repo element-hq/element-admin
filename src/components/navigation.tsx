@@ -17,6 +17,7 @@ export const Root: React.FC<Props> = ({ children }: Props) => (
 );
 
 export const Divider: React.FC = () => (
+  // oxlint-disable-next-line jsx-a11y/control-has-associated-label jsx-a11y/prefer-tag-over-role
   <div className={styles["divider"]} role="separator" />
 );
 

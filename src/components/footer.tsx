@@ -29,7 +29,9 @@ export const ElementLogo: React.FC = () => (
 );
 
 export const Divider: React.FC = () => (
+  // oxlint-disable-next-line jsx-a11y/control-has-associated-label
   <div
+    // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
     role="separator"
     aria-orientation="vertical"
     className={styles["divider"]}

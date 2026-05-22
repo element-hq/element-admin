@@ -34,6 +34,7 @@ interface Filters<State extends Record<string, unknown>> {
 
 export const useFilters = <
   State extends Record<string, unknown>,
+  // oxlint-disable-next-line typescript/no-unnecessary-type-parameters
   D extends readonly FilterDefinition<State, keyof State>[],
 >(
   state: State,

@@ -107,6 +107,7 @@ export const LanguageSwitcher: React.FC = () => {
         orientation="vertical"
         activeIndex={activeIndex}
         onNavigate={selectItem}
+        // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
         role="listbox"
         className={styles["language-row-list"]}
         aria-busy={pending}
@@ -120,6 +121,7 @@ export const LanguageSwitcher: React.FC = () => {
         {CHOICES.map((locale, index) => (
           <CompositeItem
             key={locale}
+            // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
             role="option"
             aria-selected={index === activeIndex}
             className={styles["language-row"]}

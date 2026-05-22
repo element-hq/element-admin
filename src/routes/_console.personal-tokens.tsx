@@ -783,6 +783,7 @@ function RouteComponent() {
           defaultMessage: "Name",
           description: "Column header for token name column",
         }),
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const token = row.original;
           return (
@@ -806,6 +807,7 @@ function RouteComponent() {
           defaultMessage: "Acting User",
           description: "Column header for acting user column",
         }),
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const token = row.original;
           return (
@@ -825,6 +827,7 @@ function RouteComponent() {
           defaultMessage: "Status",
           description: "Column header for status column",
         }),
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const token = row.original;
           return <PersonalTokenStatusBadge token={token.attributes} />;
@@ -837,6 +840,7 @@ function RouteComponent() {
           defaultMessage: "Last Active",
           description: "Column header for last active column",
         }),
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const token = row.original;
           return (
@@ -861,6 +865,7 @@ function RouteComponent() {
           defaultMessage: "Expires at",
           description: "Column header for expires at column",
         }),
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const token = row.original;
           return (

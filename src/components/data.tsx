@@ -23,6 +23,7 @@ export const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
   return (
     <div
       ref={ref}
+      // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
       role="list"
       className={clsx(styles["grid"], className)}
       {...props}
@@ -40,6 +41,7 @@ export const Item = forwardRef<HTMLDivElement, ItemProps>(function Item(
   return (
     <div
       ref={ref}
+      // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
       role="listitem"
       className={clsx(styles["item"], className)}
       {...props}
@@ -57,6 +59,7 @@ export const Title = forwardRef<HTMLDivElement, TitleProps>(function Title(
   return (
     <div
       ref={ref}
+      // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
       role="term"
       className={clsx(styles["title"], className)}
       {...props}
@@ -94,6 +97,7 @@ export const DynamicValue = ({ children, ...props }: DynamicValueProps) => {
   return (
     <ErrorBoundary
       onReset={queryError.reset}
+      // oxlint-disable-next-line react/no-unstable-nested-components
       fallbackRender={({ resetErrorBoundary }) => (
         <Error {...props} onRetry={resetErrorBoundary} />
       )}

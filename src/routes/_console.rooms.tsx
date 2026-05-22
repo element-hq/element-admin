@@ -198,6 +198,7 @@ function RouteComponent() {
       {
         id: "roomName",
         header: "Room",
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const room = row.original;
           return (
@@ -234,6 +235,7 @@ function RouteComponent() {
       {
         id: "alias",
         header: "Alias",
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const room = row.original;
           const displayAlias = room.canonical_alias || room.room_id;
@@ -247,6 +249,7 @@ function RouteComponent() {
       {
         id: "members",
         header: "Members",
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const room = row.original;
           return <Text size="sm">{room.joined_members}</Text>;
@@ -255,6 +258,7 @@ function RouteComponent() {
       {
         id: "type",
         header: "Type",
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const room = row.original;
           let type = "Private";
