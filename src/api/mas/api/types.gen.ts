@@ -805,6 +805,14 @@ export type AddUserRequest = {
    * tokens (like with admin access) for them
    */
   skip_homeserver_check?: boolean;
+  /**
+   * The displayname of the user to add.
+   */
+  displayname?: string | null;
+  /**
+   * The avatar URL of the user to add.
+   */
+  avatar_url?: string | null;
 };
 
 /**

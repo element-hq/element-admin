@@ -30,16 +30,16 @@ function ensureNoError<
   R extends {
     data: unknown;
     error: unknown;
-    response: Response;
-    request: Request;
+    response?: Response;
+    request?: Request;
   },
 >(
   result: R,
   handleNotFound = false,
 ): asserts result is R & { data: NonNullable<R["data"]>; error: undefined } {
-  if (handleNotFound && result.response.status === 404) {
+  if (handleNotFound && result.response?.status === 404) {
     console.warn(
-      `MAS replied with a 404 on ${result.request.method} request to ${result.request.url}, throwing a 'not found' error`,
+      `MAS replied with a 404 on ${result.request?.method} request to ${result.request?.url}, throwing a 'not found' error`,
     );
     throw notFound({
       data: result.error,
