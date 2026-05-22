@@ -292,16 +292,16 @@ export const deleteRoom = async (
     synapseRoot,
   );
 
-  const baseOptions_ = await baseOptions(client, signal);
+  const options = await baseOptions(client, signal);
   const response = await fetch(url, {
-    ...baseOptions_,
+    ...options,
     method: "DELETE",
     body: JSON.stringify({
       block: parameters.block,
       purge: true,
     }),
     headers: {
-      ...baseOptions_.headers,
+      ...options.headers,
       "Content-Type": "application/json",
     },
   });

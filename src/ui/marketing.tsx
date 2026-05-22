@@ -37,8 +37,10 @@ up to massive scale in the millions.</p>
 compliance, scalability, high availability and multi-tenancy.</p>"
         description="When we show off a feature that is only available in ESS Pro, this is the description of the card explaining what ESS Pro is"
         values={{
+          // oxlint-disable react/no-unstable-nested-components
           p: (chunks) => <p>{...chunks}</p>,
           link: (chunks) => (
+            // oxlint-disable-next-line jsx-a11y/control-has-associated-label
             <a
               target="_blank"
               href="https://element.io/pro"
@@ -47,6 +49,7 @@ compliance, scalability, high availability and multi-tenancy.</p>"
               {...chunks}
             </a>
           ),
+          // oxlint-enable react/no-unstable-nested-components
         }}
       />
     </Card.Body>
@@ -95,9 +98,11 @@ console to manage and supervise their rooms.</p>
 <li>Recover abandoned rooms (all users have left)</li>
 <li>Supervisor account can or cannot read encrypted message contents (configurable)</li></ul>"
       values={{
+        // oxlint-disable react/no-unstable-nested-components
         p: (chunks) => <Card.Body>{...chunks}</Card.Body>,
         ul: (chunks) => <Card.Checklist>{...chunks}</Card.Checklist>,
         li: (chunks) => <Card.ChecklistItem>{...chunks}</Card.ChecklistItem>,
+        // oxlint-enable react/no-unstable-nested-components
       }}
       description="Description of the card explaining what supervision is"
     />
@@ -133,6 +138,7 @@ only group conversations are recorded.</p>
 format either on file storage or S3 and can be forwarded to log analyzer tooling
 for further filtering and analysis.</p>"
         values={{
+          // oxlint-disable-next-line react/no-unstable-nested-components
           p: (chunks) => <p>{...chunks}</p>,
         }}
         description="Description of the card explaining what auditing is"

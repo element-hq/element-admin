@@ -586,6 +586,7 @@ function RouteComponent() {
           defaultMessage: "Token",
           description: "Column header for token column",
         }),
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const token = row.original;
           return (
@@ -612,6 +613,7 @@ function RouteComponent() {
           defaultMessage: "Created at",
           description: "Column header for created at column",
         }),
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const token = row.original;
           return (
@@ -630,6 +632,7 @@ function RouteComponent() {
           defaultMessage: "Valid Until",
           description: "Column header for valid until column",
         }),
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const token = row.original;
           return (
@@ -655,6 +658,7 @@ function RouteComponent() {
           defaultMessage: "Uses",
           description: "Column header for uses column",
         }),
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const token = row.original;
           return (
@@ -690,6 +694,7 @@ function RouteComponent() {
           defaultMessage: "Status",
           description: "Column header for status column",
         }),
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const token = row.original;
           return <TokenStatusBadge token={token.attributes} />;

@@ -30,12 +30,12 @@ async function sha256(plain: string): Promise<ArrayBuffer> {
 }
 
 function base64urlencode(buffer: ArrayBuffer) {
-  let string_ = "";
+  let string = "";
   const bytes = new Uint8Array(buffer);
   for (const byte of bytes) {
-    string_ += String.fromCodePoint(byte);
+    string += String.fromCodePoint(byte);
   }
-  return btoa(string_)
+  return btoa(string)
     .replaceAll("+", "-")
     .replaceAll("/", "_")
     .replace(/=+$/, "");

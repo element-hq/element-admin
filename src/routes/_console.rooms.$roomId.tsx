@@ -367,7 +367,7 @@ const ScheduledTaskDisplay: React.FC<ScheduledTaskProps> = ({
     }
 
     default: {
-      assertNever(task.status);
+      return assertNever(task.status);
     }
   }
 };

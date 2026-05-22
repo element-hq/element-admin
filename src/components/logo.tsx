@@ -24,6 +24,7 @@ export const ElementLogotype: React.FC = () => {
       height="16"
       viewBox="0 0 74 16"
       fill="none"
+      // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
       role="img"
       aria-label={title}
       xmlns="http://www.w3.org/2000/svg"
@@ -145,6 +146,7 @@ export const ElementLogo: React.FC<ElementLogoProps> = ({
   return (
     <div
       className={styles["element-logo-container"]}
+      // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
       role="img"
       aria-label={title}
       data-variant={variant}
@@ -292,6 +294,7 @@ export const EssLogotypeVertical: React.FC = () => {
       height="102"
       viewBox="0 0 301 102"
       fill="none"
+      // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
       role="img"
       aria-label={title}
       className="max-w-full h-auto"

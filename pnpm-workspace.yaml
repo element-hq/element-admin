@@ -14,9 +14,9 @@ trustPolicyExclude:
 
 strictDepBuilds: true
 
-ignoredBuiltDependencies:
-  - esbuild
-  - unrs-resolver
+allowBuilds:
+  esbuild: false
+  unrs-resolver: false
 
 strictPeerDependencies: true
 

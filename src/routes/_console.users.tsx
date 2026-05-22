@@ -528,6 +528,7 @@ function RouteComponent() {
       {
         id: "matrixId",
         header: "Matrix ID",
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const user = row.original;
           // TODO: factor this out
@@ -540,6 +541,7 @@ function RouteComponent() {
       {
         id: "createdAt",
         header: "Created at",
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const user = row.original;
           return (
@@ -554,6 +556,7 @@ function RouteComponent() {
       {
         id: "status",
         header: "Account status",
+        // oxlint-disable-next-line react/no-unstable-nested-components
         cell: ({ row }) => {
           const user = row.original;
           if (user.attributes.deactivated_at) {
