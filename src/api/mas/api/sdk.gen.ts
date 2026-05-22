@@ -135,102 +135,105 @@ import type {
   VersionResponses,
 } from "./types.gen";
 import {
-  vAddUpstreamOAuthLinkData,
+  vAddUpstreamOAuthLinkBody,
   vAddUpstreamOAuthLinkResponse,
-  vAddUserEmailData,
+  vAddUserEmailBody,
   vAddUserEmailResponse,
-  vAddUserRegistrationTokenData,
+  vAddUserRegistrationTokenBody,
   vAddUserRegistrationTokenResponse,
-  vCreatePersonalSessionData,
+  vCreatePersonalSessionBody,
   vCreatePersonalSessionResponse,
-  vCreateUserData,
+  vCreateUserBody,
   vCreateUserResponse,
-  vDeactivateUserData,
+  vDeactivateUserBody,
+  vDeactivateUserPath,
   vDeactivateUserResponse,
-  vDeleteUpstreamOAuthLinkData,
+  vDeleteUpstreamOAuthLinkPath,
   vDeleteUpstreamOAuthLinkResponse,
-  vDeleteUserEmailData,
+  vDeleteUserEmailPath,
   vDeleteUserEmailResponse,
-  vFinishCompatSessionData,
+  vFinishCompatSessionPath,
   vFinishCompatSessionResponse,
-  vFinishOAuth2SessionData,
+  vFinishOAuth2SessionPath,
   vFinishOAuth2SessionResponse,
-  vFinishUserSessionData,
+  vFinishUserSessionPath,
   vFinishUserSessionResponse,
-  vGetCompatSessionData,
+  vGetCompatSessionPath,
   vGetCompatSessionResponse,
-  vGetLatestPolicyDataData,
   vGetLatestPolicyDataResponse,
-  vGetOAuth2SessionData,
+  vGetOAuth2SessionPath,
   vGetOAuth2SessionResponse,
-  vGetPersonalSessionData,
+  vGetPersonalSessionPath,
   vGetPersonalSessionResponse,
-  vGetPolicyDataData,
+  vGetPolicyDataPath,
   vGetPolicyDataResponse,
-  vGetUpstreamOAuthLinkData,
+  vGetUpstreamOAuthLinkPath,
   vGetUpstreamOAuthLinkResponse,
-  vGetUpstreamOAuthProviderData,
+  vGetUpstreamOAuthProviderPath,
   vGetUpstreamOAuthProviderResponse,
-  vGetUserByUsernameData,
+  vGetUserByUsernamePath,
   vGetUserByUsernameResponse,
-  vGetUserData,
-  vGetUserEmailData,
+  vGetUserEmailPath,
   vGetUserEmailResponse,
-  vGetUserRegistrationTokenData,
+  vGetUserPath,
+  vGetUserRegistrationTokenPath,
   vGetUserRegistrationTokenResponse,
   vGetUserResponse,
-  vGetUserSessionData,
+  vGetUserSessionPath,
   vGetUserSessionResponse,
-  vListCompatSessionsData,
+  vListCompatSessionsQuery,
   vListCompatSessionsResponse,
-  vListOAuth2SessionsData,
+  vListOAuth2SessionsQuery,
   vListOAuth2SessionsResponse,
-  vListPersonalSessionsData,
+  vListPersonalSessionsQuery,
   vListPersonalSessionsResponse,
-  vListUpstreamOAuthLinksData,
+  vListUpstreamOAuthLinksQuery,
   vListUpstreamOAuthLinksResponse,
-  vListUpstreamOAuthProvidersData,
+  vListUpstreamOAuthProvidersQuery,
   vListUpstreamOAuthProvidersResponse,
-  vListUserEmailsData,
+  vListUserEmailsQuery,
   vListUserEmailsResponse,
-  vListUserRegistrationTokensData,
+  vListUserRegistrationTokensQuery,
   vListUserRegistrationTokensResponse,
-  vListUsersData,
-  vListUserSessionsData,
+  vListUserSessionsQuery,
   vListUserSessionsResponse,
+  vListUsersQuery,
   vListUsersResponse,
-  vLockUserData,
+  vLockUserPath,
   vLockUserResponse,
-  vReactivateUserData,
+  vReactivateUserPath,
   vReactivateUserResponse,
-  vRegeneratePersonalSessionData,
+  vRegeneratePersonalSessionBody,
+  vRegeneratePersonalSessionPath,
   vRegeneratePersonalSessionResponse,
-  vRevokePersonalSessionData,
+  vRevokePersonalSessionPath,
   vRevokePersonalSessionResponse,
-  vRevokeUserRegistrationTokenData,
+  vRevokeUserRegistrationTokenPath,
   vRevokeUserRegistrationTokenResponse,
-  vSetPolicyDataData,
+  vSetPolicyDataBody,
   vSetPolicyDataResponse,
-  vSetUserPasswordData,
+  vSetUserPasswordBody,
+  vSetUserPasswordPath,
   vSetUserPasswordResponse,
-  vSiteConfigData,
   vSiteConfigResponse,
-  vUnlockUserData,
+  vUnlockUserPath,
   vUnlockUserResponse,
-  vUnrevokeUserRegistrationTokenData,
+  vUnrevokeUserRegistrationTokenPath,
   vUnrevokeUserRegistrationTokenResponse,
-  vUpdateUserRegistrationTokenData,
+  vUpdateUserRegistrationTokenBody,
+  vUpdateUserRegistrationTokenPath,
   vUpdateUserRegistrationTokenResponse,
-  vUserSetAdminData,
+  vUserSetAdminBody,
+  vUserSetAdminPath,
   vUserSetAdminResponse,
-  vVersionData,
   vVersionResponse,
 } from "./valibot.gen";
 
 export type Options<
   TData extends TDataShape = TDataShape,
   ThrowOnError extends boolean = boolean,
-> = Options2<TData, ThrowOnError> & {
+  TResponse = unknown,
+> = Options2<TData, ThrowOnError, TResponse> & {
   /**
    * You can provide a client instance returned by `createClient()` instead of
    * individual options. This might be also useful if you want to implement a
@@ -251,7 +254,15 @@ export const siteConfig = <ThrowOnError extends boolean = false>(
   options: Options<SiteConfigData, ThrowOnError>,
 ) =>
   options.client.get<SiteConfigResponses, unknown, ThrowOnError>({
-    requestValidator: async (data) => await v.parseAsync(vSiteConfigData, data),
+    requestValidator: async (data) =>
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: v.optional(v.never()),
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vSiteConfigResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -266,7 +277,15 @@ export const version = <ThrowOnError extends boolean = false>(
   options: Options<VersionData, ThrowOnError>,
 ) =>
   options.client.get<VersionResponses, unknown, ThrowOnError>({
-    requestValidator: async (data) => await v.parseAsync(vVersionData, data),
+    requestValidator: async (data) =>
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: v.optional(v.never()),
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vVersionResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -290,7 +309,14 @@ export const listCompatSessions = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vListCompatSessionsData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: v.optional(v.never()),
+          query: v.optional(vListCompatSessionsQuery),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vListCompatSessionsResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -310,7 +336,14 @@ export const getCompatSession = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vGetCompatSessionData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vGetCompatSessionPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetCompatSessionResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -332,7 +365,14 @@ export const finishCompatSession = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vFinishCompatSessionData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vFinishCompatSessionPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vFinishCompatSessionResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -356,7 +396,14 @@ export const listOAuth2Sessions = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vListOAuth2SessionsData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: v.optional(v.never()),
+          query: v.optional(vListOAuth2SessionsQuery),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vListOAuth2SessionsResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -376,7 +423,14 @@ export const getOAuth2Session = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vGetOAuth2SessionData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vGetOAuth2SessionPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetOAuth2SessionResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -398,7 +452,14 @@ export const finishOAuth2Session = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vFinishOAuth2SessionData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vFinishOAuth2SessionPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vFinishOAuth2SessionResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -422,7 +483,14 @@ export const listPersonalSessions = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vListPersonalSessionsData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: v.optional(v.never()),
+          query: v.optional(vListPersonalSessionsQuery),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vListPersonalSessionsResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -442,7 +510,14 @@ export const createPersonalSession = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vCreatePersonalSessionData, data),
+      await v.parseAsync(
+        v.object({
+          body: vCreatePersonalSessionBody,
+          path: v.optional(v.never()),
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vCreatePersonalSessionResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -466,7 +541,14 @@ export const getPersonalSession = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vGetPersonalSessionData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vGetPersonalSessionPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetPersonalSessionResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -486,7 +568,14 @@ export const revokePersonalSession = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vRevokePersonalSessionData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vRevokePersonalSessionPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vRevokePersonalSessionResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -506,7 +595,14 @@ export const regeneratePersonalSession = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vRegeneratePersonalSessionData, data),
+      await v.parseAsync(
+        v.object({
+          body: vRegeneratePersonalSessionBody,
+          path: vRegeneratePersonalSessionPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vRegeneratePersonalSessionResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -530,7 +626,14 @@ export const setPolicyData = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vSetPolicyDataData, data),
+      await v.parseAsync(
+        v.object({
+          body: vSetPolicyDataBody,
+          path: v.optional(v.never()),
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vSetPolicyDataResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -554,7 +657,14 @@ export const getLatestPolicyData = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vGetLatestPolicyDataData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: v.optional(v.never()),
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetLatestPolicyDataResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -571,7 +681,14 @@ export const getPolicyData = <ThrowOnError extends boolean = false>(
   options.client.get<GetPolicyDataResponses, GetPolicyDataErrors, ThrowOnError>(
     {
       requestValidator: async (data) =>
-        await v.parseAsync(vGetPolicyDataData, data),
+        await v.parseAsync(
+          v.object({
+            body: v.optional(v.never()),
+            path: vGetPolicyDataPath,
+            query: v.optional(v.never()),
+          }),
+          data,
+        ),
       responseValidator: async (data) =>
         await v.parseAsync(vGetPolicyDataResponse, data),
       security: [{ scheme: "bearer", type: "http" }],
@@ -587,7 +704,15 @@ export const listUsers = <ThrowOnError extends boolean = false>(
   options: Options<ListUsersData, ThrowOnError>,
 ) =>
   options.client.get<ListUsersResponses, unknown, ThrowOnError>({
-    requestValidator: async (data) => await v.parseAsync(vListUsersData, data),
+    requestValidator: async (data) =>
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: v.optional(v.never()),
+          query: v.optional(vListUsersQuery),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vListUsersResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -602,7 +727,15 @@ export const createUser = <ThrowOnError extends boolean = false>(
   options: Options<CreateUserData, ThrowOnError>,
 ) =>
   options.client.post<CreateUserResponses, CreateUserErrors, ThrowOnError>({
-    requestValidator: async (data) => await v.parseAsync(vCreateUserData, data),
+    requestValidator: async (data) =>
+      await v.parseAsync(
+        v.object({
+          body: vCreateUserBody,
+          path: v.optional(v.never()),
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vCreateUserResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -621,7 +754,15 @@ export const getUser = <ThrowOnError extends boolean = false>(
   options: Options<GetUserData, ThrowOnError>,
 ) =>
   options.client.get<GetUserResponses, GetUserErrors, ThrowOnError>({
-    requestValidator: async (data) => await v.parseAsync(vGetUserData, data),
+    requestValidator: async (data) =>
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vGetUserPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetUserResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -641,7 +782,14 @@ export const setUserPassword = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vSetUserPasswordData, data),
+      await v.parseAsync(
+        v.object({
+          body: vSetUserPasswordBody,
+          path: vSetUserPasswordPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vSetUserPasswordResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -665,7 +813,14 @@ export const getUserByUsername = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vGetUserByUsernameData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vGetUserByUsernamePath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetUserByUsernameResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -683,7 +838,14 @@ export const userSetAdmin = <ThrowOnError extends boolean = false>(
 ) =>
   options.client.post<UserSetAdminResponses, UserSetAdminErrors, ThrowOnError>({
     requestValidator: async (data) =>
-      await v.parseAsync(vUserSetAdminData, data),
+      await v.parseAsync(
+        v.object({
+          body: vUserSetAdminBody,
+          path: vUserSetAdminPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vUserSetAdminResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -710,7 +872,14 @@ export const deactivateUser = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vDeactivateUserData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(vDeactivateUserBody),
+          path: vDeactivateUserPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vDeactivateUserResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -737,7 +906,14 @@ export const reactivateUser = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vReactivateUserData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vReactivateUserPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vReactivateUserResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -755,7 +931,15 @@ export const lockUser = <ThrowOnError extends boolean = false>(
   options: Options<LockUserData, ThrowOnError>,
 ) =>
   options.client.post<LockUserResponses, LockUserErrors, ThrowOnError>({
-    requestValidator: async (data) => await v.parseAsync(vLockUserData, data),
+    requestValidator: async (data) =>
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vLockUserPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vLockUserResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -773,7 +957,15 @@ export const unlockUser = <ThrowOnError extends boolean = false>(
   options: Options<UnlockUserData, ThrowOnError>,
 ) =>
   options.client.post<UnlockUserResponses, UnlockUserErrors, ThrowOnError>({
-    requestValidator: async (data) => await v.parseAsync(vUnlockUserData, data),
+    requestValidator: async (data) =>
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vUnlockUserPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vUnlockUserResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -795,7 +987,14 @@ export const listUserEmails = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vListUserEmailsData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: v.optional(v.never()),
+          query: v.optional(vListUserEmailsQuery),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vListUserEmailsResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -814,7 +1013,14 @@ export const addUserEmail = <ThrowOnError extends boolean = false>(
 ) =>
   options.client.post<AddUserEmailResponses, AddUserEmailErrors, ThrowOnError>({
     requestValidator: async (data) =>
-      await v.parseAsync(vAddUserEmailData, data),
+      await v.parseAsync(
+        v.object({
+          body: vAddUserEmailBody,
+          path: v.optional(v.never()),
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vAddUserEmailResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -838,7 +1044,14 @@ export const deleteUserEmail = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vDeleteUserEmailData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vDeleteUserEmailPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vDeleteUserEmailResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -854,7 +1067,14 @@ export const getUserEmail = <ThrowOnError extends boolean = false>(
 ) =>
   options.client.get<GetUserEmailResponses, GetUserEmailErrors, ThrowOnError>({
     requestValidator: async (data) =>
-      await v.parseAsync(vGetUserEmailData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vGetUserEmailPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetUserEmailResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -878,7 +1098,14 @@ export const listUserSessions = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vListUserSessionsData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: v.optional(v.never()),
+          query: v.optional(vListUserSessionsQuery),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vListUserSessionsResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -898,7 +1125,14 @@ export const getUserSession = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vGetUserSessionData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vGetUserSessionPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetUserSessionResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -920,7 +1154,14 @@ export const finishUserSession = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vFinishUserSessionData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vFinishUserSessionPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vFinishUserSessionResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -942,7 +1183,14 @@ export const listUserRegistrationTokens = <
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vListUserRegistrationTokensData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: v.optional(v.never()),
+          query: v.optional(vListUserRegistrationTokensQuery),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vListUserRegistrationTokensResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -959,7 +1207,14 @@ export const addUserRegistrationToken = <ThrowOnError extends boolean = false>(
   options.client.post<AddUserRegistrationTokenResponses, unknown, ThrowOnError>(
     {
       requestValidator: async (data) =>
-        await v.parseAsync(vAddUserRegistrationTokenData, data),
+        await v.parseAsync(
+          v.object({
+            body: vAddUserRegistrationTokenBody,
+            path: v.optional(v.never()),
+            query: v.optional(v.never()),
+          }),
+          data,
+        ),
       responseValidator: async (data) =>
         await v.parseAsync(vAddUserRegistrationTokenResponse, data),
       security: [{ scheme: "bearer", type: "http" }],
@@ -984,7 +1239,14 @@ export const getUserRegistrationToken = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vGetUserRegistrationTokenData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vGetUserRegistrationTokenPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetUserRegistrationTokenResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -1008,7 +1270,14 @@ export const updateUserRegistrationToken = <
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vUpdateUserRegistrationTokenData, data),
+      await v.parseAsync(
+        v.object({
+          body: vUpdateUserRegistrationTokenBody,
+          path: vUpdateUserRegistrationTokenPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vUpdateUserRegistrationTokenResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -1036,7 +1305,14 @@ export const revokeUserRegistrationToken = <
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vRevokeUserRegistrationTokenData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vRevokeUserRegistrationTokenPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vRevokeUserRegistrationTokenResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -1060,7 +1336,14 @@ export const unrevokeUserRegistrationToken = <
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vUnrevokeUserRegistrationTokenData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vUnrevokeUserRegistrationTokenPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vUnrevokeUserRegistrationTokenResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -1082,7 +1365,14 @@ export const listUpstreamOAuthLinks = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vListUpstreamOAuthLinksData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: v.optional(v.never()),
+          query: v.optional(vListUpstreamOAuthLinksQuery),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vListUpstreamOAuthLinksResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -1102,7 +1392,14 @@ export const addUpstreamOAuthLink = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vAddUpstreamOAuthLinkData, data),
+      await v.parseAsync(
+        v.object({
+          body: vAddUpstreamOAuthLinkBody,
+          path: v.optional(v.never()),
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vAddUpstreamOAuthLinkResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -1126,7 +1423,14 @@ export const deleteUpstreamOAuthLink = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vDeleteUpstreamOAuthLinkData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vDeleteUpstreamOAuthLinkPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vDeleteUpstreamOAuthLinkResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -1146,7 +1450,14 @@ export const getUpstreamOAuthLink = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vGetUpstreamOAuthLinkData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vGetUpstreamOAuthLinkPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetUpstreamOAuthLinkResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -1168,7 +1479,14 @@ export const listUpstreamOAuthProviders = <
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vListUpstreamOAuthProvidersData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: v.optional(v.never()),
+          query: v.optional(vListUpstreamOAuthProvidersQuery),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vListUpstreamOAuthProvidersResponse, data),
     security: [{ scheme: "bearer", type: "http" }],
@@ -1188,7 +1506,14 @@ export const getUpstreamOAuthProvider = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     requestValidator: async (data) =>
-      await v.parseAsync(vGetUpstreamOAuthProviderData, data),
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vGetUpstreamOAuthProviderPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetUpstreamOAuthProviderResponse, data),
     security: [{ scheme: "bearer", type: "http" }],

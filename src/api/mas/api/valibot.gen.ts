@@ -396,6 +396,8 @@ export const vPaginatedResponseForUser = v.object({
 export const vAddUserRequest = v.object({
   username: v.string(),
   skip_homeserver_check: v.optional(v.boolean(), false),
+  displayname: v.nullish(v.string()),
+  avatar_url: v.nullish(v.string()),
 });
 
 /**
@@ -731,37 +733,19 @@ export const vSingleResponseForUpstreamOAuthProvider = v.object({
   links: vSelfLinks,
 });
 
-export const vSiteConfigData = v.object({
-  body: v.optional(v.never()),
-  path: v.optional(v.never()),
-  query: v.optional(v.never()),
-});
-
 export const vSiteConfigResponse = vSiteConfig;
-
-export const vVersionData = v.object({
-  body: v.optional(v.never()),
-  path: v.optional(v.never()),
-  query: v.optional(v.never()),
-});
 
 export const vVersionResponse = vVersion;
 
-export const vListCompatSessionsData = v.object({
-  body: v.optional(v.never()),
-  path: v.optional(v.never()),
-  query: v.optional(
-    v.object({
-      "page[before]": v.nullish(vUlid),
-      "page[after]": v.nullish(vUlid),
-      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      count: v.nullish(vIncludeCount),
-      "filter[user]": v.nullish(vUlid),
-      "filter[user-session]": v.nullish(vUlid),
-      "filter[status]": v.nullish(vCompatSessionStatus),
-    }),
-  ),
+export const vListCompatSessionsQuery = v.object({
+  "page[before]": v.nullish(vUlid),
+  "page[after]": v.nullish(vUlid),
+  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.nullish(vIncludeCount),
+  "filter[user]": v.nullish(vUlid),
+  "filter[user-session]": v.nullish(vUlid),
+  "filter[status]": v.nullish(vCompatSessionStatus),
 });
 
 /**
@@ -769,12 +753,8 @@ export const vListCompatSessionsData = v.object({
  */
 export const vListCompatSessionsResponse = vPaginatedResponseForCompatSession;
 
-export const vGetCompatSessionData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vGetCompatSessionPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -782,12 +762,8 @@ export const vGetCompatSessionData = v.object({
  */
 export const vGetCompatSessionResponse = vSingleResponseForCompatSession;
 
-export const vFinishCompatSessionData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vFinishCompatSessionPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -795,24 +771,18 @@ export const vFinishCompatSessionData = v.object({
  */
 export const vFinishCompatSessionResponse = vSingleResponseForCompatSession;
 
-export const vListOAuth2SessionsData = v.object({
-  body: v.optional(v.never()),
-  path: v.optional(v.never()),
-  query: v.optional(
-    v.object({
-      "page[before]": v.nullish(vUlid),
-      "page[after]": v.nullish(vUlid),
-      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      count: v.nullish(vIncludeCount),
-      "filter[user]": v.nullish(vUlid),
-      "filter[client]": v.nullish(vUlid),
-      "filter[client-kind]": v.nullish(vOAuth2ClientKind),
-      "filter[user-session]": v.nullish(vUlid),
-      "filter[scope]": v.optional(v.array(v.string()), []),
-      "filter[status]": v.nullish(vOAuth2SessionStatus),
-    }),
-  ),
+export const vListOAuth2SessionsQuery = v.object({
+  "page[before]": v.nullish(vUlid),
+  "page[after]": v.nullish(vUlid),
+  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.nullish(vIncludeCount),
+  "filter[user]": v.nullish(vUlid),
+  "filter[client]": v.nullish(vUlid),
+  "filter[client-kind]": v.nullish(vOAuth2ClientKind),
+  "filter[user-session]": v.nullish(vUlid),
+  "filter[scope]": v.optional(v.array(v.string()), []),
+  "filter[status]": v.nullish(vOAuth2SessionStatus),
 });
 
 /**
@@ -820,12 +790,8 @@ export const vListOAuth2SessionsData = v.object({
  */
 export const vListOAuth2SessionsResponse = vPaginatedResponseForOAuth2Session;
 
-export const vGetOAuth2SessionData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vGetOAuth2SessionPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -833,12 +799,8 @@ export const vGetOAuth2SessionData = v.object({
  */
 export const vGetOAuth2SessionResponse = vSingleResponseForOAuth2Session;
 
-export const vFinishOAuth2SessionData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vFinishOAuth2SessionPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -846,26 +808,20 @@ export const vFinishOAuth2SessionData = v.object({
  */
 export const vFinishOAuth2SessionResponse = vSingleResponseForOAuth2Session;
 
-export const vListPersonalSessionsData = v.object({
-  body: v.optional(v.never()),
-  path: v.optional(v.never()),
-  query: v.optional(
-    v.object({
-      "page[before]": v.nullish(vUlid),
-      "page[after]": v.nullish(vUlid),
-      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      count: v.nullish(vIncludeCount),
-      "filter[owner_user]": v.nullish(vUlid),
-      "filter[owner_client]": v.nullish(vUlid),
-      "filter[actor_user]": v.nullish(vUlid),
-      "filter[scope]": v.optional(v.array(v.string()), []),
-      "filter[status]": v.nullish(vPersonalSessionStatus),
-      "filter[expires_before]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
-      "filter[expires_after]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
-      "filter[expires]": v.nullish(v.boolean()),
-    }),
-  ),
+export const vListPersonalSessionsQuery = v.object({
+  "page[before]": v.nullish(vUlid),
+  "page[after]": v.nullish(vUlid),
+  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.nullish(vIncludeCount),
+  "filter[owner_user]": v.nullish(vUlid),
+  "filter[owner_client]": v.nullish(vUlid),
+  "filter[actor_user]": v.nullish(vUlid),
+  "filter[scope]": v.optional(v.array(v.string()), []),
+  "filter[status]": v.nullish(vPersonalSessionStatus),
+  "filter[expires_before]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[expires_after]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[expires]": v.nullish(v.boolean()),
 });
 
 /**
@@ -874,23 +830,15 @@ export const vListPersonalSessionsData = v.object({
 export const vListPersonalSessionsResponse =
   vPaginatedResponseForPersonalSession;
 
-export const vCreatePersonalSessionData = v.object({
-  body: vCreatePersonalSessionRequest,
-  path: v.optional(v.never()),
-  query: v.optional(v.never()),
-});
+export const vCreatePersonalSessionBody = vCreatePersonalSessionRequest;
 
 /**
  * Personal session and personal access token were created
  */
 export const vCreatePersonalSessionResponse = vSingleResponseForPersonalSession;
 
-export const vGetPersonalSessionData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vGetPersonalSessionPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -898,12 +846,8 @@ export const vGetPersonalSessionData = v.object({
  */
 export const vGetPersonalSessionResponse = vSingleResponseForPersonalSession;
 
-export const vRevokePersonalSessionData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vRevokePersonalSessionPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -911,12 +855,10 @@ export const vRevokePersonalSessionData = v.object({
  */
 export const vRevokePersonalSessionResponse = vSingleResponseForPersonalSession;
 
-export const vRegeneratePersonalSessionData = v.object({
-  body: vRegeneratePersonalSessionRequest,
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vRegeneratePersonalSessionBody = vRegeneratePersonalSessionRequest;
+
+export const vRegeneratePersonalSessionPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -925,34 +867,20 @@ export const vRegeneratePersonalSessionData = v.object({
 export const vRegeneratePersonalSessionResponse =
   vSingleResponseForPersonalSession;
 
-export const vSetPolicyDataData = v.object({
-  body: vSetPolicyDataRequest,
-  path: v.optional(v.never()),
-  query: v.optional(v.never()),
-});
+export const vSetPolicyDataBody = vSetPolicyDataRequest;
 
 /**
  * Policy data was successfully set
  */
 export const vSetPolicyDataResponse = vSingleResponseForPolicyData;
 
-export const vGetLatestPolicyDataData = v.object({
-  body: v.optional(v.never()),
-  path: v.optional(v.never()),
-  query: v.optional(v.never()),
-});
-
 /**
  * Latest policy data was found
  */
 export const vGetLatestPolicyDataResponse = vSingleResponseForPolicyData;
 
-export const vGetPolicyDataData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vGetPolicyDataPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -960,22 +888,16 @@ export const vGetPolicyDataData = v.object({
  */
 export const vGetPolicyDataResponse = vSingleResponseForPolicyData;
 
-export const vListUsersData = v.object({
-  body: v.optional(v.never()),
-  path: v.optional(v.never()),
-  query: v.optional(
-    v.object({
-      "page[before]": v.nullish(vUlid),
-      "page[after]": v.nullish(vUlid),
-      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      count: v.nullish(vIncludeCount),
-      "filter[admin]": v.nullish(v.boolean()),
-      "filter[legacy-guest]": v.nullish(v.boolean()),
-      "filter[search]": v.nullish(v.string()),
-      "filter[status]": v.nullish(vUserStatus),
-    }),
-  ),
+export const vListUsersQuery = v.object({
+  "page[before]": v.nullish(vUlid),
+  "page[after]": v.nullish(vUlid),
+  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.nullish(vIncludeCount),
+  "filter[admin]": v.nullish(v.boolean()),
+  "filter[legacy-guest]": v.nullish(v.boolean()),
+  "filter[search]": v.nullish(v.string()),
+  "filter[status]": v.nullish(vUserStatus),
 });
 
 /**
@@ -983,23 +905,15 @@ export const vListUsersData = v.object({
  */
 export const vListUsersResponse = vPaginatedResponseForUser;
 
-export const vCreateUserData = v.object({
-  body: vAddUserRequest,
-  path: v.optional(v.never()),
-  query: v.optional(v.never()),
-});
+export const vCreateUserBody = vAddUserRequest;
 
 /**
  * User was created
  */
 export const vCreateUserResponse = vSingleResponseForUser;
 
-export const vGetUserData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vGetUserPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1007,12 +921,10 @@ export const vGetUserData = v.object({
  */
 export const vGetUserResponse = vSingleResponseForUser;
 
-export const vSetUserPasswordData = v.object({
-  body: vSetUserPasswordRequest,
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vSetUserPasswordBody = vSetUserPasswordRequest;
+
+export const vSetUserPasswordPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1020,12 +932,8 @@ export const vSetUserPasswordData = v.object({
  */
 export const vSetUserPasswordResponse = v.void();
 
-export const vGetUserByUsernameData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    username: v.string(),
-  }),
-  query: v.optional(v.never()),
+export const vGetUserByUsernamePath = v.object({
+  username: v.string(),
 });
 
 /**
@@ -1033,12 +941,10 @@ export const vGetUserByUsernameData = v.object({
  */
 export const vGetUserByUsernameResponse = vSingleResponseForUser;
 
-export const vUserSetAdminData = v.object({
-  body: vUserSetAdminRequest,
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vUserSetAdminBody = vUserSetAdminRequest;
+
+export const vUserSetAdminPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1046,12 +952,10 @@ export const vUserSetAdminData = v.object({
  */
 export const vUserSetAdminResponse = vSingleResponseForUser;
 
-export const vDeactivateUserData = v.object({
-  body: v.optional(vDeactivateUserRequest),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vDeactivateUserBody = vDeactivateUserRequest;
+
+export const vDeactivateUserPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1059,12 +963,8 @@ export const vDeactivateUserData = v.object({
  */
 export const vDeactivateUserResponse = vSingleResponseForUser;
 
-export const vReactivateUserData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vReactivateUserPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1072,12 +972,8 @@ export const vReactivateUserData = v.object({
  */
 export const vReactivateUserResponse = vSingleResponseForUser;
 
-export const vLockUserData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vLockUserPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1085,12 +981,8 @@ export const vLockUserData = v.object({
  */
 export const vLockUserResponse = vSingleResponseForUser;
 
-export const vUnlockUserData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vUnlockUserPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1098,20 +990,14 @@ export const vUnlockUserData = v.object({
  */
 export const vUnlockUserResponse = vSingleResponseForUser;
 
-export const vListUserEmailsData = v.object({
-  body: v.optional(v.never()),
-  path: v.optional(v.never()),
-  query: v.optional(
-    v.object({
-      "page[before]": v.nullish(vUlid),
-      "page[after]": v.nullish(vUlid),
-      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      count: v.nullish(vIncludeCount),
-      "filter[user]": v.nullish(vUlid),
-      "filter[email]": v.nullish(v.string()),
-    }),
-  ),
+export const vListUserEmailsQuery = v.object({
+  "page[before]": v.nullish(vUlid),
+  "page[after]": v.nullish(vUlid),
+  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.nullish(vIncludeCount),
+  "filter[user]": v.nullish(vUlid),
+  "filter[email]": v.nullish(v.string()),
 });
 
 /**
@@ -1119,23 +1005,15 @@ export const vListUserEmailsData = v.object({
  */
 export const vListUserEmailsResponse = vPaginatedResponseForUserEmail;
 
-export const vAddUserEmailData = v.object({
-  body: vAddUserEmailRequest,
-  path: v.optional(v.never()),
-  query: v.optional(v.never()),
-});
+export const vAddUserEmailBody = vAddUserEmailRequest;
 
 /**
  * User email was created
  */
 export const vAddUserEmailResponse = vSingleResponseForUserEmail;
 
-export const vDeleteUserEmailData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vDeleteUserEmailPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1143,12 +1021,8 @@ export const vDeleteUserEmailData = v.object({
  */
 export const vDeleteUserEmailResponse = v.void();
 
-export const vGetUserEmailData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vGetUserEmailPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1156,20 +1030,14 @@ export const vGetUserEmailData = v.object({
  */
 export const vGetUserEmailResponse = vSingleResponseForUserEmail;
 
-export const vListUserSessionsData = v.object({
-  body: v.optional(v.never()),
-  path: v.optional(v.never()),
-  query: v.optional(
-    v.object({
-      "page[before]": v.nullish(vUlid),
-      "page[after]": v.nullish(vUlid),
-      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      count: v.nullish(vIncludeCount),
-      "filter[user]": v.nullish(vUlid),
-      "filter[status]": v.nullish(vUserSessionStatus),
-    }),
-  ),
+export const vListUserSessionsQuery = v.object({
+  "page[before]": v.nullish(vUlid),
+  "page[after]": v.nullish(vUlid),
+  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.nullish(vIncludeCount),
+  "filter[user]": v.nullish(vUlid),
+  "filter[status]": v.nullish(vUserSessionStatus),
 });
 
 /**
@@ -1177,12 +1045,8 @@ export const vListUserSessionsData = v.object({
  */
 export const vListUserSessionsResponse = vPaginatedResponseForUserSession;
 
-export const vGetUserSessionData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vGetUserSessionPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1190,12 +1054,8 @@ export const vGetUserSessionData = v.object({
  */
 export const vGetUserSessionResponse = vSingleResponseForUserSession;
 
-export const vFinishUserSessionData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vFinishUserSessionPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1203,22 +1063,16 @@ export const vFinishUserSessionData = v.object({
  */
 export const vFinishUserSessionResponse = vSingleResponseForUserSession;
 
-export const vListUserRegistrationTokensData = v.object({
-  body: v.optional(v.never()),
-  path: v.optional(v.never()),
-  query: v.optional(
-    v.object({
-      "page[before]": v.nullish(vUlid),
-      "page[after]": v.nullish(vUlid),
-      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      count: v.nullish(vIncludeCount),
-      "filter[used]": v.nullish(v.boolean()),
-      "filter[revoked]": v.nullish(v.boolean()),
-      "filter[expired]": v.nullish(v.boolean()),
-      "filter[valid]": v.nullish(v.boolean()),
-    }),
-  ),
+export const vListUserRegistrationTokensQuery = v.object({
+  "page[before]": v.nullish(vUlid),
+  "page[after]": v.nullish(vUlid),
+  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.nullish(vIncludeCount),
+  "filter[used]": v.nullish(v.boolean()),
+  "filter[revoked]": v.nullish(v.boolean()),
+  "filter[expired]": v.nullish(v.boolean()),
+  "filter[valid]": v.nullish(v.boolean()),
 });
 
 /**
@@ -1227,11 +1081,7 @@ export const vListUserRegistrationTokensData = v.object({
 export const vListUserRegistrationTokensResponse =
   vPaginatedResponseForUserRegistrationToken;
 
-export const vAddUserRegistrationTokenData = v.object({
-  body: vAddUserRegistrationTokenRequest,
-  path: v.optional(v.never()),
-  query: v.optional(v.never()),
-});
+export const vAddUserRegistrationTokenBody = vAddUserRegistrationTokenRequest;
 
 /**
  * A new user registration token was created
@@ -1239,12 +1089,8 @@ export const vAddUserRegistrationTokenData = v.object({
 export const vAddUserRegistrationTokenResponse =
   vSingleResponseForUserRegistrationToken;
 
-export const vGetUserRegistrationTokenData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vGetUserRegistrationTokenPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1253,12 +1099,11 @@ export const vGetUserRegistrationTokenData = v.object({
 export const vGetUserRegistrationTokenResponse =
   vSingleResponseForUserRegistrationToken;
 
-export const vUpdateUserRegistrationTokenData = v.object({
-  body: vEditUserRegistrationTokenRequest,
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vUpdateUserRegistrationTokenBody =
+  vEditUserRegistrationTokenRequest;
+
+export const vUpdateUserRegistrationTokenPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1267,12 +1112,8 @@ export const vUpdateUserRegistrationTokenData = v.object({
 export const vUpdateUserRegistrationTokenResponse =
   vSingleResponseForUserRegistrationToken;
 
-export const vRevokeUserRegistrationTokenData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vRevokeUserRegistrationTokenPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1281,12 +1122,8 @@ export const vRevokeUserRegistrationTokenData = v.object({
 export const vRevokeUserRegistrationTokenResponse =
   vSingleResponseForUserRegistrationToken;
 
-export const vUnrevokeUserRegistrationTokenData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vUnrevokeUserRegistrationTokenPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1295,21 +1132,15 @@ export const vUnrevokeUserRegistrationTokenData = v.object({
 export const vUnrevokeUserRegistrationTokenResponse =
   vSingleResponseForUserRegistrationToken;
 
-export const vListUpstreamOAuthLinksData = v.object({
-  body: v.optional(v.never()),
-  path: v.optional(v.never()),
-  query: v.optional(
-    v.object({
-      "page[before]": v.nullish(vUlid),
-      "page[after]": v.nullish(vUlid),
-      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      count: v.nullish(vIncludeCount),
-      "filter[user]": v.nullish(vUlid),
-      "filter[provider]": v.nullish(vUlid),
-      "filter[subject]": v.nullish(v.string()),
-    }),
-  ),
+export const vListUpstreamOAuthLinksQuery = v.object({
+  "page[before]": v.nullish(vUlid),
+  "page[after]": v.nullish(vUlid),
+  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.nullish(vIncludeCount),
+  "filter[user]": v.nullish(vUlid),
+  "filter[provider]": v.nullish(vUlid),
+  "filter[subject]": v.nullish(v.string()),
 });
 
 /**
@@ -1318,11 +1149,7 @@ export const vListUpstreamOAuthLinksData = v.object({
 export const vListUpstreamOAuthLinksResponse =
   vPaginatedResponseForUpstreamOAuthLink;
 
-export const vAddUpstreamOAuthLinkData = v.object({
-  body: vAddUpstreamOauthLinkRequest,
-  path: v.optional(v.never()),
-  query: v.optional(v.never()),
-});
+export const vAddUpstreamOAuthLinkBody = vAddUpstreamOauthLinkRequest;
 
 /**
  * An existing Upstream OAuth 2.0 link was associated to a user
@@ -1330,12 +1157,8 @@ export const vAddUpstreamOAuthLinkData = v.object({
 export const vAddUpstreamOAuthLinkResponse =
   vSingleResponseForUpstreamOAuthLink;
 
-export const vDeleteUpstreamOAuthLinkData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vDeleteUpstreamOAuthLinkPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1343,12 +1166,8 @@ export const vDeleteUpstreamOAuthLinkData = v.object({
  */
 export const vDeleteUpstreamOAuthLinkResponse = v.void();
 
-export const vGetUpstreamOAuthLinkData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vGetUpstreamOAuthLinkPath = v.object({
+  id: vUlid,
 });
 
 /**
@@ -1357,19 +1176,13 @@ export const vGetUpstreamOAuthLinkData = v.object({
 export const vGetUpstreamOAuthLinkResponse =
   vSingleResponseForUpstreamOAuthLink;
 
-export const vListUpstreamOAuthProvidersData = v.object({
-  body: v.optional(v.never()),
-  path: v.optional(v.never()),
-  query: v.optional(
-    v.object({
-      "page[before]": v.nullish(vUlid),
-      "page[after]": v.nullish(vUlid),
-      "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-      count: v.nullish(vIncludeCount),
-      "filter[enabled]": v.nullish(v.boolean()),
-    }),
-  ),
+export const vListUpstreamOAuthProvidersQuery = v.object({
+  "page[before]": v.nullish(vUlid),
+  "page[after]": v.nullish(vUlid),
+  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.nullish(vIncludeCount),
+  "filter[enabled]": v.nullish(v.boolean()),
 });
 
 /**
@@ -1378,12 +1191,8 @@ export const vListUpstreamOAuthProvidersData = v.object({
 export const vListUpstreamOAuthProvidersResponse =
   vPaginatedResponseForUpstreamOAuthProvider;
 
-export const vGetUpstreamOAuthProviderData = v.object({
-  body: v.optional(v.never()),
-  path: v.object({
-    id: vUlid,
-  }),
-  query: v.optional(v.never()),
+export const vGetUpstreamOAuthProviderPath = v.object({
+  id: vUlid,
 });
 
 /**
