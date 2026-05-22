@@ -90,7 +90,7 @@ function NotFoundComponent() {
         </Text>
         <Button
           kind="secondary"
-          size="sm"
+          size="md"
           Icon={ArrowLeftIcon}
           onClick={() => navigate({ to: "/personal-tokens" })}
         >
@@ -112,7 +112,7 @@ const CloseSidebar = () => {
           to="/personal-tokens"
           search={search}
           kind="tertiary"
-          size="sm"
+          size="md"
           Icon={CloseIcon}
         />
       </Tooltip>
@@ -410,7 +410,7 @@ function TokenDetailComponent() {
                       })
                 }
               >
-                <Button disabled Icon={RestartIcon} size="sm" kind="secondary">
+                <Button disabled Icon={RestartIcon} size="md" kind="secondary">
                   <FormattedMessage
                     id="pages.personal_tokens.regenerate_token"
                     defaultMessage="Regenerate token"
@@ -422,7 +422,7 @@ function TokenDetailComponent() {
 
             <Button
               type="button"
-              size="sm"
+              size="md"
               kind="secondary"
               destructive
               disabled={revokeTokenMutation.isPending}
@@ -580,7 +580,7 @@ function RegenerateTokenModal({
       open={isOpen}
       onOpenChange={setIsOpen}
       trigger={
-        <Button type="button" size="sm" kind="secondary" Icon={RestartIcon}>
+        <Button type="button" size="md" kind="secondary" Icon={RestartIcon}>
           <FormattedMessage
             id="pages.personal_tokens.regenerate_token"
             defaultMessage="Regenerate token"

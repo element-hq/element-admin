@@ -139,7 +139,7 @@ const CloseSidebar: React.FC = () => {
           to="/rooms"
           search={search}
           kind="tertiary"
-          size="sm"
+          size="md"
           Icon={CloseIcon}
         />
       </Tooltip>
@@ -214,7 +214,7 @@ function DeleteRoomDialog(props: RoomCommonProps) {
       open={open}
       onOpenChange={setOpen}
       trigger={
-        <Button kind="destructive" size="sm" Icon={DeleteIcon}>
+        <Button kind="destructive" size="md" Icon={DeleteIcon}>
           <FormattedMessage {...messages.actionDelete} />
         </Button>
       }

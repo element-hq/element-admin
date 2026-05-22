@@ -365,7 +365,7 @@ const PersonalTokenAddButton = ({
       open={isOpen}
       onOpenChange={onOpenChange}
       trigger={
-        <Button Icon={PlusIcon} size="sm" kind="primary">
+        <Button Icon={PlusIcon} size="md" kind="primary">
           <FormattedMessage {...messages.actionAdd} />
         </Button>
       }
@@ -963,7 +963,7 @@ function RouteComponent() {
                     from={from}
                     replace={true}
                     search={filters.clearedState}
-                    size="small"
+                    size="sm"
                   >
                     <FormattedMessage {...messages.actionClear} />
                   </TextLink>

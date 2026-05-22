@@ -60,7 +60,7 @@ compliance, scalability, high availability and multi-tenancy.</p>"
         target="_blank"
         href="https://try.element.io/upgrade-ess-community"
         kind="primary"
-        size="sm"
+        size="md"
       >
         <FormattedMessage
           id="marketing.also_available_in_pro.upgrade"

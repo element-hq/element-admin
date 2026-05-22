@@ -291,7 +291,7 @@ function LaunchAdminbot({
         onClick={onClick}
         disabled={isPending}
         kind="primary"
-        size="sm"
+        size="md"
         Icon={isPending ? undefined : PopOutIcon}
       >
         {isPending && <InlineSpinner />}
@@ -425,7 +425,7 @@ function SecurePassphrase({ value }: SecurePassphraseProps) {
               Icon={CopyIcon}
               onClick={onCopyClick}
               kind="secondary"
-              size="sm"
+              size="md"
             />
           </Tooltip>
         </div>

@@ -35,7 +35,7 @@ const LanguageSwitcherButton = forwardRef<
         as="button"
         type="button"
         kind="tertiary"
-        size="sm"
+        size="md"
         Icon={PublicIcon}
         iconOnly
       />
