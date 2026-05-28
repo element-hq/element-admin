@@ -48,6 +48,9 @@ import type {
   GetLatestPolicyDataData,
   GetLatestPolicyDataErrors,
   GetLatestPolicyDataResponses,
+  GetOAuth2ClientData,
+  GetOAuth2ClientErrors,
+  GetOAuth2ClientResponses,
   GetOAuth2SessionData,
   GetOAuth2SessionErrors,
   GetOAuth2SessionResponses,
@@ -81,6 +84,9 @@ import type {
   ListCompatSessionsData,
   ListCompatSessionsErrors,
   ListCompatSessionsResponses,
+  ListOAuth2ClientsData,
+  ListOAuth2ClientsErrors,
+  ListOAuth2ClientsResponses,
   ListOAuth2SessionsData,
   ListOAuth2SessionsErrors,
   ListOAuth2SessionsResponses,
@@ -98,6 +104,7 @@ import type {
   ListUserRegistrationTokensData,
   ListUserRegistrationTokensResponses,
   ListUsersData,
+  ListUsersErrors,
   ListUserSessionsData,
   ListUserSessionsErrors,
   ListUserSessionsResponses,
@@ -167,6 +174,8 @@ import {
   vGetCompatSessionPath,
   vGetCompatSessionResponse,
   vGetLatestPolicyDataResponse,
+  vGetOAuth2ClientPath,
+  vGetOAuth2ClientResponse,
   vGetOAuth2SessionPath,
   vGetOAuth2SessionResponse,
   vGetPersonalSessionPath,
@@ -189,6 +198,8 @@ import {
   vGetUserSessionResponse,
   vListCompatSessionsQuery,
   vListCompatSessionsResponse,
+  vListOAuth2ClientsQuery,
+  vListOAuth2ClientsResponse,
   vListOAuth2SessionsQuery,
   vListOAuth2SessionsResponse,
   vListPersonalSessionsQuery,
@@ -429,11 +440,92 @@ export const finishCompatSession = <ThrowOnError extends boolean = false>(
   });
 
 /**
+ * List OAuth 2.0 clients
+ *
+ * Retrieve a paginated list of OAuth 2.0 clients registered with this service.
+ * Use the `filter[client-kind]` parameter to restrict the response to either static (configured) or dynamic (registered at runtime) clients,
+ * the `filter[client-name]`/`filter[client-uri]` parameters for a case-insensitive substring search,
+ * the `filter[grant-type]` parameter to restrict to clients which support a given grant type,
+ * and the `filter[has-active-sessions]` parameter to restrict to clients which have (or don't have) an active session.
+ */
+export const listOAuth2Clients = <ThrowOnError extends boolean = false>(
+  options: Options<ListOAuth2ClientsData, ThrowOnError>,
+): RequestResult<
+  ListOAuth2ClientsResponses,
+  ListOAuth2ClientsErrors,
+  ThrowOnError
+> =>
+  options.client.get<
+    ListOAuth2ClientsResponses,
+    ListOAuth2ClientsErrors,
+    ThrowOnError
+  >({
+    requestValidator: async (data) =>
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: v.optional(v.never()),
+          query: v.optional(vListOAuth2ClientsQuery),
+        }),
+        data,
+      ),
+    responseValidator: async (data) =>
+      await v.parseAsync(vListOAuth2ClientsResponse, data),
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
+    url: "/api/admin/v1/oauth2-clients",
+    ...options,
+  });
+
+/**
+ * Get an OAuth 2.0 client
+ */
+export const getOAuth2Client = <ThrowOnError extends boolean = false>(
+  options: Options<GetOAuth2ClientData, ThrowOnError>,
+): RequestResult<
+  GetOAuth2ClientResponses,
+  GetOAuth2ClientErrors,
+  ThrowOnError
+> =>
+  options.client.get<
+    GetOAuth2ClientResponses,
+    GetOAuth2ClientErrors,
+    ThrowOnError
+  >({
+    requestValidator: async (data) =>
+      await v.parseAsync(
+        v.object({
+          body: v.optional(v.never()),
+          path: vGetOAuth2ClientPath,
+          query: v.optional(v.never()),
+        }),
+        data,
+      ),
+    responseValidator: async (data) =>
+      await v.parseAsync(vGetOAuth2ClientResponse, data),
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
+    url: "/api/admin/v1/oauth2-clients/{id}",
+    ...options,
+  });
+
+/**
  * List OAuth 2.0 sessions
  *
  * Retrieve a list of OAuth 2.0 sessions.
  * Note that by default, all sessions, including finished ones are returned, with the oldest first.
  * Use the `filter[status]` parameter to filter the sessions by their status and `page[last]` parameter to retrieve the last N sessions.
+ * The `filter[client]` parameter may be repeated to filter on multiple clients at once.
  */
 export const listOAuth2Sessions = <ThrowOnError extends boolean = false>(
   options: Options<ListOAuth2SessionsData, ThrowOnError>,
@@ -852,8 +944,8 @@ export const getPolicyData = <ThrowOnError extends boolean = false>(
  */
 export const listUsers = <ThrowOnError extends boolean = false>(
   options: Options<ListUsersData, ThrowOnError>,
-): RequestResult<ListUsersResponses, unknown, ThrowOnError> =>
-  options.client.get<ListUsersResponses, unknown, ThrowOnError>({
+): RequestResult<ListUsersResponses, ListUsersErrors, ThrowOnError> =>
+  options.client.get<ListUsersResponses, ListUsersErrors, ThrowOnError>({
     requestValidator: async (data) =>
       await v.parseAsync(
         v.object({
