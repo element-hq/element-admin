@@ -211,6 +211,118 @@
     "message": "Dashboard",
     "description": "The title of the dashboard page"
   },
+  "pages.devices.legacy.count": {
+    "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}",
+    "description": "On the legacy devices list page, this heading shows the total number of legacy devices"
+  },
+  "pages.devices.legacy.created_at_label": {
+    "message": "Signed in at",
+    "description": "Label for the date a legacy device first signed in"
+  },
+  "pages.devices.legacy.description": {
+    "message": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0.",
+    "description": "The description of the legacy devices list page"
+  },
+  "pages.devices.legacy.device_column": {
+    "message": "Device",
+    "description": "Column header for the legacy device name and ID"
+  },
+  "pages.devices.legacy.device_id_label": {
+    "message": "Device ID",
+    "description": "Label for the device id field of a legacy device"
+  },
+  "pages.devices.legacy.filters.activity_active": {
+    "message": "Active",
+    "description": "Filter label for active legacy devices used in the last few months"
+  },
+  "pages.devices.legacy.filters.activity_inactive": {
+    "message": "Inactive",
+    "description": "Filter label for legacy devices not used in 90+ days"
+  },
+  "pages.devices.legacy.filters.activity_recently_used": {
+    "message": "Recently used",
+    "description": "Filter label for legacy devices used in the last couple of weeks"
+  },
+  "pages.devices.legacy.filters.activity_signed_out": {
+    "message": "Signed out",
+    "description": "Filter label for signed-out (finished) legacy devices"
+  },
+  "pages.devices.legacy.filters.newest_first": {
+    "message": "Newest first",
+    "description": "Filter label for sorting legacy devices newest first"
+  },
+  "pages.devices.legacy.filters.user_chip": {
+    "message": "User: @{localpart}:{server}",
+    "description": "Active filter chip showing the currently filtered user"
+  },
+  "pages.devices.legacy.finish.button": {
+    "message": "Remove device",
+    "description": "Button label to remove (sign out) a legacy device"
+  },
+  "pages.devices.legacy.finish.confirm": {
+    "message": "Remove device",
+    "description": "Confirmation button label for removing (signing out) a legacy device"
+  },
+  "pages.devices.legacy.finish.description": {
+    "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately.",
+    "description": "Description of the confirmation dialog when signing out (finishing) a legacy device"
+  },
+  "pages.devices.legacy.finish.error": {
+    "message": "Failed to remove the legacy device",
+    "description": "Error toast when removing (signing out) a legacy device fails"
+  },
+  "pages.devices.legacy.finish.success": {
+    "message": "Legacy device removed",
+    "description": "Success toast when a legacy device was removed (signed out)"
+  },
+  "pages.devices.legacy.finish.title": {
+    "message": "Remove this legacy device?",
+    "description": "Title of the confirmation dialog when removing (signing out) a legacy device"
+  },
+  "pages.devices.legacy.finished_at_label": {
+    "message": "Signed out at",
+    "description": "Label for the sign-out date of a legacy device"
+  },
+  "pages.devices.legacy.last_active_ip_label": {
+    "message": "Last active IP",
+    "description": "Label for the last-active IP of a legacy device"
+  },
+  "pages.devices.legacy.last_active_label": {
+    "message": "Last active",
+    "description": "Label for the last-active date of a legacy device"
+  },
+  "pages.devices.legacy.not_found.description": {
+    "message": "The requested legacy device ({sessionId}) could not be found on {serverName}.",
+    "description": "The description of the alert when a legacy device could not be found"
+  },
+  "pages.devices.legacy.not_found.title": {
+    "message": "Legacy device not found",
+    "description": "The title of the alert when a legacy device could not be found"
+  },
+  "pages.devices.legacy.redirect_uri_label": {
+    "message": "Redirect URI",
+    "description": "Label for the redirect URI of a legacy device"
+  },
+  "pages.devices.legacy.status_column": {
+    "message": "Status",
+    "description": "Column header for legacy device status"
+  },
+  "pages.devices.legacy.technical_details": {
+    "message": "Technical details",
+    "description": "Summary of the collapsed section with technical details (user agent, redirect URI) of a legacy device"
+  },
+  "pages.devices.legacy.title": {
+    "message": "Legacy devices",
+    "description": "The title of the legacy devices tab"
+  },
+  "pages.devices.legacy.user_agent_label": {
+    "message": "User agent",
+    "description": "Label for the user-agent of a legacy device"
+  },
+  "pages.devices.legacy.user_column": {
+    "message": "User",
+    "description": "Column header for the user of a legacy device"
+  },
   "pages.devices.tabs.applications": {
     "message": "Applications",
     "description": "Label for the applications tab on the Devices page"
