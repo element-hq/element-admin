@@ -5,29 +5,33 @@
 
 import { type QueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
-import { parse, gte } from "semver";
+import { coerce, parseRange, satisfies, type SemVerRange } from "verkit";
 
 import { versionQuery } from "@/api/mas";
 
-type SemverString =
-  | `v${number}.${number}.${number}`
-  | `v${number}.${number}.${number}-${string}`;
+// The MAS release range in which each feature is available
+const masFeaturesRanges = {
+  personalTokens: parseRange(">=1.5.0"),
+} as const satisfies Record<string, SemVerRange>;
 
-const masFeaturesMinVersions = {
-  personalTokens: "v1.5.0-rc.0",
-} as const satisfies Record<string, SemverString>;
-
-type MasFeature = keyof typeof masFeaturesMinVersions;
+type MasFeature = keyof typeof masFeaturesRanges;
 
 export type MasFeaturesStatus = Record<MasFeature, boolean>;
 
 const computeFeaturesStatus = (version: string): MasFeaturesStatus => {
-  const semver = parse(version, {}, true);
+  const coerced = coerce(version);
+
+  // If we can't parse the version, conservatively assume no feature is available.
+  if (!coerced) {
+    return Object.fromEntries(
+      Object.keys(masFeaturesRanges).map((feature) => [feature, false]),
+    ) as MasFeaturesStatus;
+  }
 
   return Object.fromEntries(
-    Object.entries(masFeaturesMinVersions).map(([feature, minVersion]) => [
+    Object.entries(masFeaturesRanges).map(([feature, range]) => [
       feature,
-      gte(semver, minVersion),
+      satisfies(coerced, range, { includePrerelease: true }),
     ]),
   ) as MasFeaturesStatus;
 };

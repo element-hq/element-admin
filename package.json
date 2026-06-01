@@ -48,10 +48,10 @@
     "react-error-boundary": "6.1.2",
     "react-hot-toast": "2.6.0",
     "react-intl": "10.1.20",
-    "semver": "7.8.5",
     "use-broadcast-ts": "2.0.1",
     "valibot": "1.4.2",
     "vaul": "1.1.2",
+    "verkit": "^0.3.1",
     "zustand": "5.0.14"
   },
   "devDependencies": {
@@ -78,7 +78,6 @@
     "@types/node": "26.1.2",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.4",
-    "@types/semver": "7.8.0",
     "@vitejs/plugin-react": "6.0.5",
     "babel-plugin-react-compiler": "1.0.0",
     "browserslist": "4.28.7",

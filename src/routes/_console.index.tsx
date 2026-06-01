@@ -17,6 +17,7 @@ import * as Data from "@/components/data";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import AppFooter from "@/ui/footer";
+import { compareMain, normalize } from "verkit";
 
 const titleMessage = defineMessage({
   id: "pages.dashboard.title",
@@ -130,7 +131,7 @@ function RouteComponent() {
   const { data: latestEssRelease } = useQuery(latestEssReleaseQuery);
   let isUsingLatest = false;
   if (latestEssRelease?.tag_name && essVersion) {
-    isUsingLatest = essVersion.compareMain(latestEssRelease.tag_name) >= 0;
+    isUsingLatest = compareMain(essVersion, latestEssRelease.tag_name) >= 0;
   }
 
   return (
@@ -160,7 +161,7 @@ function RouteComponent() {
                         description="On the dashboard, this shows the current ESS version"
                       />
                     </Data.Title>
-                    <Data.Value>{essVersion.toString()}</Data.Value>
+                    <Data.Value>{normalize(essVersion)}</Data.Value>
                   </Data.Item>
 
                   <Data.Item>
