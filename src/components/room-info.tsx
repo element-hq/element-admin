@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { Avatar, AvatarStack } from "@vector-im/compound-web";
+import { Avatar, AvatarStack, Text } from "@vector-im/compound-web";
 import { useIntl } from "react-intl";
 
 import { profileQuery, mediaThumbnailQuery } from "@/api/matrix";
@@ -282,5 +282,44 @@ export const UserAvatar: React.FC<UserAvatarProps> = ({
       size={size}
       className={className}
     />
+  );
+};
+
+interface UserInfoProps {
+  synapseRoot: string;
+  mxid: string;
+}
+// Compact "avatar + display name + mxid" block, suitable for rendering inside
+// table rows or as a row in a sidebar.
+export const UserInfo: React.FC<UserInfoProps> = ({
+  synapseRoot,
+  mxid,
+}: UserInfoProps) => {
+  const displayName = useUserDisplayName(synapseRoot, mxid);
+  const avatar = useUserAvatar(synapseRoot, mxid);
+  return (
+    <div className="flex items-center gap-3 min-w-0">
+      <Avatar
+        id={mxid}
+        name={displayName || mxid}
+        src={avatar}
+        size="32px"
+        className="shrink-0"
+      />
+      <div className="flex flex-col min-w-0">
+        <Text
+          size="md"
+          weight="semibold"
+          className="text-text-primary truncate"
+        >
+          {displayName || mxid}
+        </Text>
+        {displayName && (
+          <Text size="sm" className="text-text-secondary truncate">
+            {mxid}
+          </Text>
+        )}
+      </div>
+    </div>
   );
 };

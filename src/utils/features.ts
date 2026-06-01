@@ -12,6 +12,7 @@ import { versionQuery } from "@/api/mas";
 // The MAS release range in which each feature is available
 const masFeaturesRanges = {
   personalTokens: parseRange(">=1.5.0"),
+  devices: parseRange(">=1.20.0"),
 } as const satisfies Record<string, SemVerRange>;
 
 type MasFeature = keyof typeof masFeaturesRanges;

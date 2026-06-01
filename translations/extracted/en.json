@@ -135,6 +135,10 @@
     "message": "Dashboard",
     "description": "Label for the dashboard navigation item in the main navigation sidebar"
   },
+  "navigation.devices": {
+    "message": "Devices",
+    "description": "Label for the devices navigation item in the main navigation sidebar"
+  },
   "navigation.documentation": {
     "message": "Documentation",
     "description": "Label for the documentation navigation link (to https://docs.element.io/) in the main navigation sidebar"
@@ -206,6 +210,26 @@
   "pages.dashboard.title": {
     "message": "Dashboard",
     "description": "The title of the dashboard page"
+  },
+  "pages.devices.tabs.applications": {
+    "message": "Applications",
+    "description": "Label for the applications tab on the Devices page"
+  },
+  "pages.devices.tabs.legacy": {
+    "message": "Legacy devices",
+    "description": "Label for the legacy-devices tab on the Devices page"
+  },
+  "pages.devices.tabs.section": {
+    "message": "Device views",
+    "description": "The label for the devices tabs section"
+  },
+  "pages.devices.tabs.user": {
+    "message": "User devices",
+    "description": "Label for the user-devices tab on the Devices page"
+  },
+  "pages.devices.title": {
+    "message": "Devices",
+    "description": "The title of the Devices section"
   },
   "pages.federation.allowlist.add.error": {
     "message": "Failed to add domain to allowlist",
@@ -1414,6 +1438,66 @@
   "ui.destination_status.working": {
     "message": "Working",
     "description": "Badge label for a federation destination that is working"
+  },
+  "ui.device_info.name_on_platform": {
+    "message": "{name} on {platform}",
+    "description": "Name of a device derived from its user-agent, e.g. 'Firefox on macOS'"
+  },
+  "ui.device_info.type.mobile": {
+    "message": "Mobile device",
+    "description": "Device type icon label for mobile devices"
+  },
+  "ui.device_info.type.pc": {
+    "message": "Computer",
+    "description": "Device type icon label for computers"
+  },
+  "ui.device_info.type.tablet": {
+    "message": "Tablet",
+    "description": "Device type icon label for tablets"
+  },
+  "ui.device_info.type.unknown": {
+    "message": "Unknown device type",
+    "description": "Device type icon label for unknown device types"
+  },
+  "ui.device_info.unknown_device": {
+    "message": "Unknown device",
+    "description": "Shown when we can't figure out the name of a device"
+  },
+  "ui.device_status.active": {
+    "message": "Active",
+    "description": "Device status badge: the device is signed in and was used in the last few months"
+  },
+  "ui.device_status.inactive": {
+    "message": "Inactive",
+    "description": "Device status badge: the device has not been used in a long time"
+  },
+  "ui.device_status.last_active.tooltip": {
+    "message": "Last active on {date}.",
+    "description": "Tooltip on a device status badge, giving the date the device was last active"
+  },
+  "ui.device_status.never_used": {
+    "message": "Never used",
+    "description": "Device status badge: the device has never been used"
+  },
+  "ui.device_status.never_used.tooltip": {
+    "message": "This device has not been used yet.",
+    "description": "Tooltip on the 'Never used' device status badge"
+  },
+  "ui.device_status.recently_used": {
+    "message": "Recently used",
+    "description": "Device status badge: the device was used in the last couple of weeks"
+  },
+  "ui.device_status.signed_out": {
+    "message": "Signed out",
+    "description": "Device status badge: the device has been signed out"
+  },
+  "ui.device_status.signed_out.tooltip": {
+    "message": "This device has been signed out and no longer has access.",
+    "description": "Tooltip on the 'Signed out' device status badge, when the date is unknown"
+  },
+  "ui.device_status.signed_out.tooltip_at": {
+    "message": "Signed out on {date}.",
+    "description": "Tooltip on the 'Signed out' device status badge, giving the date it was signed out"
   },
   "ui.language_switcher.browser_default": {
     "message": "Use browser settings ({language})",
