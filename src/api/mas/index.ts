@@ -146,6 +146,8 @@ export interface OAuth2ClientListParameters {
   kind?: api.OAuth2ClientKind;
   name?: string;
   uri?: string;
+  grantType?: string;
+  hasActiveSessions?: boolean;
 }
 
 export interface OAuth2SessionListParameters {
@@ -913,6 +915,9 @@ const applyOauth2ClientFilters = (
   if (parameters.kind) query["filter[client-kind]"] = parameters.kind;
   if (parameters.name) query["filter[client-name]"] = parameters.name;
   if (parameters.uri) query["filter[client-uri]"] = parameters.uri;
+  if (parameters.grantType) query["filter[grant-type]"] = parameters.grantType;
+  if (parameters.hasActiveSessions !== undefined)
+    query["filter[has-active-sessions]"] = parameters.hasActiveSessions;
 };
 
 export const oauth2ClientsInfiniteQuery = (

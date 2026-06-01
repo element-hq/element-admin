@@ -23,6 +23,7 @@ import { Route as ConsoleSupervisionRouteImport } from './routes/_console.superv
 import { Route as ConsoleUsersRouteImport } from './routes/_console.users'
 import { Route as AuthLoginIndexRouteImport } from './routes/_auth.login.index'
 import { Route as ConsoleDevicesIndexRouteImport } from './routes/_console.devices.index'
+import { Route as ConsoleDevicesApplicationsRouteImport } from './routes/_console.devices.applications'
 import { Route as ConsoleFederationIndexRouteImport } from './routes/_console.federation.index'
 import { Route as ConsoleFederationAllowedDomainsRouteImport } from './routes/_console.federation.allowed-domains'
 import { Route as ConsoleFederationKnownDomainsRouteImport } from './routes/_console.federation.known-domains'
@@ -30,6 +31,7 @@ import { Route as ConsolePersonalTokensTokenIdRouteImport } from './routes/_cons
 import { Route as ConsoleRegistrationTokensTokenIdRouteImport } from './routes/_console.registration-tokens.$tokenId'
 import { Route as ConsoleRoomsRoomIdRouteImport } from './routes/_console.rooms.$roomId'
 import { Route as ConsoleUsersUserIdRouteImport } from './routes/_console.users.$userId'
+import { Route as ConsoleDevicesApplicationsClientIdRouteImport } from './routes/_console.devices.applications.$clientId'
 import { Route as ConsoleFederationKnownDomainsDestinationRouteImport } from './routes/_console.federation.known-domains.$destination'
 
 const AuthRoute = AuthRouteImport.update({
@@ -101,6 +103,12 @@ const ConsoleDevicesIndexRoute = ConsoleDevicesIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ConsoleDevicesRoute,
 } as any)
+const ConsoleDevicesApplicationsRoute =
+  ConsoleDevicesApplicationsRouteImport.update({
+    id: '/applications',
+    path: '/applications',
+    getParentRoute: () => ConsoleDevicesRoute,
+  } as any)
 const ConsoleFederationIndexRoute = ConsoleFederationIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -140,6 +148,12 @@ const ConsoleUsersUserIdRoute = ConsoleUsersUserIdRouteImport.update({
   path: '/$userId',
   getParentRoute: () => ConsoleUsersRoute,
 } as any)
+const ConsoleDevicesApplicationsClientIdRoute =
+  ConsoleDevicesApplicationsClientIdRouteImport.update({
+    id: '/$clientId',
+    path: '/$clientId',
+    getParentRoute: () => ConsoleDevicesApplicationsRoute,
+  } as any)
 const ConsoleFederationKnownDomainsDestinationRoute =
   ConsoleFederationKnownDomainsDestinationRouteImport.update({
     id: '/$destination',
@@ -158,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/rooms': typeof ConsoleRoomsRouteWithChildren
   '/supervision': typeof ConsoleSupervisionRoute
   '/users': typeof ConsoleUsersRouteWithChildren
+  '/devices/applications': typeof ConsoleDevicesApplicationsRouteWithChildren
   '/federation/allowed-domains': typeof ConsoleFederationAllowedDomainsRoute
   '/federation/known-domains': typeof ConsoleFederationKnownDomainsRouteWithChildren
   '/personal-tokens/$tokenId': typeof ConsolePersonalTokensTokenIdRoute
@@ -167,6 +182,7 @@ export interface FileRoutesByFullPath {
   '/login/': typeof AuthLoginIndexRoute
   '/devices/': typeof ConsoleDevicesIndexRoute
   '/federation/': typeof ConsoleFederationIndexRoute
+  '/devices/applications/$clientId': typeof ConsoleDevicesApplicationsClientIdRoute
   '/federation/known-domains/$destination': typeof ConsoleFederationKnownDomainsDestinationRoute
 }
 export interface FileRoutesByTo {
@@ -178,6 +194,7 @@ export interface FileRoutesByTo {
   '/rooms': typeof ConsoleRoomsRouteWithChildren
   '/supervision': typeof ConsoleSupervisionRoute
   '/users': typeof ConsoleUsersRouteWithChildren
+  '/devices/applications': typeof ConsoleDevicesApplicationsRouteWithChildren
   '/federation/allowed-domains': typeof ConsoleFederationAllowedDomainsRoute
   '/federation/known-domains': typeof ConsoleFederationKnownDomainsRouteWithChildren
   '/personal-tokens/$tokenId': typeof ConsolePersonalTokensTokenIdRoute
@@ -187,6 +204,7 @@ export interface FileRoutesByTo {
   '/login': typeof AuthLoginIndexRoute
   '/devices': typeof ConsoleDevicesIndexRoute
   '/federation': typeof ConsoleFederationIndexRoute
+  '/devices/applications/$clientId': typeof ConsoleDevicesApplicationsClientIdRoute
   '/federation/known-domains/$destination': typeof ConsoleFederationKnownDomainsDestinationRoute
 }
 export interface FileRoutesById {
@@ -203,6 +221,7 @@ export interface FileRoutesById {
   '/_console/supervision': typeof ConsoleSupervisionRoute
   '/_console/users': typeof ConsoleUsersRouteWithChildren
   '/_console/': typeof ConsoleIndexRoute
+  '/_console/devices/applications': typeof ConsoleDevicesApplicationsRouteWithChildren
   '/_console/federation/allowed-domains': typeof ConsoleFederationAllowedDomainsRoute
   '/_console/federation/known-domains': typeof ConsoleFederationKnownDomainsRouteWithChildren
   '/_console/personal-tokens/$tokenId': typeof ConsolePersonalTokensTokenIdRoute
@@ -212,6 +231,7 @@ export interface FileRoutesById {
   '/_auth/login/': typeof AuthLoginIndexRoute
   '/_console/devices/': typeof ConsoleDevicesIndexRoute
   '/_console/federation/': typeof ConsoleFederationIndexRoute
+  '/_console/devices/applications/$clientId': typeof ConsoleDevicesApplicationsClientIdRoute
   '/_console/federation/known-domains/$destination': typeof ConsoleFederationKnownDomainsDestinationRoute
 }
 export interface FileRouteTypes {
@@ -227,6 +247,7 @@ export interface FileRouteTypes {
     | '/rooms'
     | '/supervision'
     | '/users'
+    | '/devices/applications'
     | '/federation/allowed-domains'
     | '/federation/known-domains'
     | '/personal-tokens/$tokenId'
@@ -236,6 +257,7 @@ export interface FileRouteTypes {
     | '/login/'
     | '/devices/'
     | '/federation/'
+    | '/devices/applications/$clientId'
     | '/federation/known-domains/$destination'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -247,6 +269,7 @@ export interface FileRouteTypes {
     | '/rooms'
     | '/supervision'
     | '/users'
+    | '/devices/applications'
     | '/federation/allowed-domains'
     | '/federation/known-domains'
     | '/personal-tokens/$tokenId'
@@ -256,6 +279,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/devices'
     | '/federation'
+    | '/devices/applications/$clientId'
     | '/federation/known-domains/$destination'
   id:
     | '__root__'
@@ -271,6 +295,7 @@ export interface FileRouteTypes {
     | '/_console/supervision'
     | '/_console/users'
     | '/_console/'
+    | '/_console/devices/applications'
     | '/_console/federation/allowed-domains'
     | '/_console/federation/known-domains'
     | '/_console/personal-tokens/$tokenId'
@@ -280,6 +305,7 @@ export interface FileRouteTypes {
     | '/_auth/login/'
     | '/_console/devices/'
     | '/_console/federation/'
+    | '/_console/devices/applications/$clientId'
     | '/_console/federation/known-domains/$destination'
   fileRoutesById: FileRoutesById
 }
@@ -389,6 +415,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConsoleDevicesIndexRouteImport
       parentRoute: typeof ConsoleDevicesRoute
     }
+    '/_console/devices/applications': {
+      id: '/_console/devices/applications'
+      path: '/applications'
+      fullPath: '/devices/applications'
+      preLoaderRoute: typeof ConsoleDevicesApplicationsRouteImport
+      parentRoute: typeof ConsoleDevicesRoute
+    }
     '/_console/federation/': {
       id: '/_console/federation/'
       path: '/'
@@ -438,6 +471,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConsoleUsersUserIdRouteImport
       parentRoute: typeof ConsoleUsersRoute
     }
+    '/_console/devices/applications/$clientId': {
+      id: '/_console/devices/applications/$clientId'
+      path: '/$clientId'
+      fullPath: '/devices/applications/$clientId'
+      preLoaderRoute: typeof ConsoleDevicesApplicationsClientIdRouteImport
+      parentRoute: typeof ConsoleDevicesApplicationsRoute
+    }
     '/_console/federation/known-domains/$destination': {
       id: '/_console/federation/known-domains/$destination'
       path: '/$destination'
@@ -458,11 +498,28 @@ const AuthRouteChildren: AuthRouteChildren = {
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
+interface ConsoleDevicesApplicationsRouteChildren {
+  ConsoleDevicesApplicationsClientIdRoute: typeof ConsoleDevicesApplicationsClientIdRoute
+}
+
+const ConsoleDevicesApplicationsRouteChildren: ConsoleDevicesApplicationsRouteChildren =
+  {
+    ConsoleDevicesApplicationsClientIdRoute:
+      ConsoleDevicesApplicationsClientIdRoute,
+  }
+
+const ConsoleDevicesApplicationsRouteWithChildren =
+  ConsoleDevicesApplicationsRoute._addFileChildren(
+    ConsoleDevicesApplicationsRouteChildren,
+  )
+
 interface ConsoleDevicesRouteChildren {
+  ConsoleDevicesApplicationsRoute: typeof ConsoleDevicesApplicationsRouteWithChildren
   ConsoleDevicesIndexRoute: typeof ConsoleDevicesIndexRoute
 }
 
 const ConsoleDevicesRouteChildren: ConsoleDevicesRouteChildren = {
+  ConsoleDevicesApplicationsRoute: ConsoleDevicesApplicationsRouteWithChildren,
   ConsoleDevicesIndexRoute: ConsoleDevicesIndexRoute,
 }
 

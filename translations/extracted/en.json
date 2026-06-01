@@ -211,6 +211,78 @@
     "message": "Dashboard",
     "description": "The title of the dashboard page"
   },
+  "pages.devices.applications.client_id_label": {
+    "message": "Client ID",
+    "description": "Label for the OAuth 2.0 client identifier (technical term, shown on application details)"
+  },
+  "pages.devices.applications.count": {
+    "message": "{COUNT, plural, =0 {No applications} one {# application} other {# applications}}",
+    "description": "On the applications list page, this heading shows the total number of applications"
+  },
+  "pages.devices.applications.description": {
+    "message": "Applications are OAuth 2.0 clients that users sign in to.",
+    "description": "The description of the applications list page"
+  },
+  "pages.devices.applications.filters.has_active_sessions": {
+    "message": "With active devices",
+    "description": "Filter label for applications which have at least one active device"
+  },
+  "pages.devices.applications.filters.no_active_sessions": {
+    "message": "Without active devices",
+    "description": "Filter label for applications which have no active devices"
+  },
+  "pages.devices.applications.grant_types_label": {
+    "message": "Grant types",
+    "description": "Label for the grant types an application supports"
+  },
+  "pages.devices.applications.name_column": {
+    "message": "Name",
+    "description": "Column header for application name"
+  },
+  "pages.devices.applications.not_found.description": {
+    "message": "The requested application ({clientId}) could not be found on {serverName}.",
+    "description": "The description of the alert when an application could not be found"
+  },
+  "pages.devices.applications.not_found.title": {
+    "message": "Application not found",
+    "description": "The title of the alert when an application could not be found"
+  },
+  "pages.devices.applications.redirect_uris_label": {
+    "message": "Redirect URIs",
+    "description": "Label for the application's redirect URIs"
+  },
+  "pages.devices.applications.search_placeholder": {
+    "message": "Search by name…",
+    "description": "The placeholder text for the application name search input"
+  },
+  "pages.devices.applications.statistics.active_recently": {
+    "message": "Active in the past 7 days",
+    "description": "Stat label: devices currently active and last seen in the past 7 days for this application"
+  },
+  "pages.devices.applications.statistics.created_recently": {
+    "message": "Devices added in the past 7 days",
+    "description": "Stat label: devices created in the past 7 days for this application"
+  },
+  "pages.devices.applications.statistics.heading": {
+    "message": "Device statistics",
+    "description": "Heading for the device statistics section on the application details page"
+  },
+  "pages.devices.applications.statistics.total_active": {
+    "message": "Active devices",
+    "description": "Stat label: total active devices for this application"
+  },
+  "pages.devices.applications.title": {
+    "message": "Applications",
+    "description": "The title of the applications tab"
+  },
+  "pages.devices.applications.uri_label": {
+    "message": "Homepage",
+    "description": "Label for the application's homepage URI"
+  },
+  "pages.devices.applications.view_sessions": {
+    "message": "View all devices",
+    "description": "Button on the application details sidebar that navigates to the devices list filtered to this application"
+  },
   "pages.devices.tabs.applications": {
     "message": "Applications",
     "description": "Label for the applications tab on the Devices page"
