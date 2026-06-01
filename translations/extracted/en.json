@@ -1475,6 +1475,10 @@
     "message": "Active users",
     "description": "The label for the 'Active users' filter in the user list"
   },
+  "pages.users.filters.active_client_chip": {
+    "message": "Has active device on: {name}",
+    "description": "Active filter chip showing the currently filtered application in the user list"
+  },
   "pages.users.filters.admins": {
     "message": "Admins",
     "description": "The label for the 'Admins' filter in the user list"
@@ -1487,6 +1491,10 @@
     "message": "Guests (legacy)",
     "description": "The label for the 'Guests (legacy)' filter in the user list"
   },
+  "pages.users.filters.has_legacy_session": {
+    "message": "Has active legacy device",
+    "description": "The label for the 'has an active legacy device' filter in the user list"
+  },
   "pages.users.filters.locked": {
     "message": "Locked users",
     "description": "The label for the 'Locked users' filter in the user list"
@@ -1494,6 +1502,10 @@
   "pages.users.filters.newest_first": {
     "message": "Newest first",
     "description": "The label for the 'Newest first' filter in the user list"
+  },
+  "pages.users.filters.no_legacy_session": {
+    "message": "No active legacy device",
+    "description": "The label for the 'no active legacy device' filter in the user list"
   },
   "pages.users.filters.non_guests": {
     "message": "Non-guests (legacy)",
@@ -1654,6 +1666,14 @@
   "pages.users.set_password.title": {
     "message": "Set a new password for this user",
     "description": "The title of the modal for setting a user password"
+  },
+  "pages.users.statistics.devices": {
+    "message": "Devices",
+    "description": "Stat label: total number of devices (OAuth 2.0 sessions) for this user"
+  },
+  "pages.users.statistics.legacy_devices": {
+    "message": "Legacy devices",
+    "description": "Stat label: total number of legacy devices (compat sessions) for this user"
   },
   "pages.users.title": {
     "message": "Users",
