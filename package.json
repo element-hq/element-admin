@@ -58,7 +58,7 @@
     "@formatjs/cli": "6.16.1",
     "@formatjs/unplugin": "1.1.13",
     "@hey-api/openapi-ts": "0.97.2",
-    "@localazy/cli": "2.0.10",
+    "@localazy/cli": "2.0.11",
     "@playwright/test": "1.60.0",
     "@rolldown/plugin-babel": "0.2.3",
     "@tailwindcss/vite": "4.3.0",
