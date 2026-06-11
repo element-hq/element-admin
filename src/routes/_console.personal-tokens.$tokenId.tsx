@@ -39,9 +39,10 @@ import { wellKnownQuery, whoamiQuery } from "@/api/matrix";
 import { CopyToClipboard } from "@/components/copy";
 import * as Data from "@/components/data";
 import * as Dialog from "@/components/dialog";
-import { ButtonLink, TextLink } from "@/components/link";
+import { ButtonLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import * as messages from "@/messages";
+import { UserCard } from "@/ui/entity-cards";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 export const Route = createFileRoute("/_console/personal-tokens/$tokenId")({
@@ -184,7 +185,6 @@ function TokenDetailComponent() {
     enabled: !!token.attributes.owner_user_id,
   });
 
-  const actorMxid = `@${actor.attributes.username}:${credentials.serverName}`;
   const ownerMxid = ownerData
     ? `@${ownerData.data.attributes.username}:${credentials.serverName}`
     : undefined;
@@ -229,6 +229,35 @@ function TokenDetailComponent() {
       <div className="flex flex-col gap-4">
         <H3 className="text-center">{token.attributes.human_name}</H3>
 
+        {/* The user cards are links, not values, so they live outside of the
+            data grid, which pairs each title with a `role="definition"` value */}
+        <div className="flex flex-col gap-2 items-start">
+          <Text size="sm" weight="semibold" className="text-text-secondary">
+            <FormattedMessage
+              id="pages.personal_tokens.acting_user_label"
+              defaultMessage="Acting user"
+              description="Label for the acting user field"
+            />
+          </Text>
+          <UserCard serverName={credentials.serverName} userId={actor.id} />
+        </div>
+
+        {ownerData && (
+          <div className="flex flex-col gap-2 items-start">
+            <Text size="sm" weight="semibold" className="text-text-secondary">
+              <FormattedMessage
+                id="pages.personal_tokens.owner_user_label"
+                defaultMessage="Owner"
+                description="Label for the owner user field"
+              />
+            </Text>
+            <UserCard
+              serverName={credentials.serverName}
+              userId={ownerData.data.id}
+            />
+          </div>
+        )}
+
         <Data.Grid>
           <Data.Item>
             <Data.Title>
@@ -242,41 +271,6 @@ function TokenDetailComponent() {
               <PersonalTokenStatusBadge token={token} />
             </Data.Value>
           </Data.Item>
-
-          <Data.Item>
-            <Data.Title>
-              <FormattedMessage
-                id="pages.personal_tokens.acting_user_label"
-                defaultMessage="Acting user"
-                description="Label for the acting user field"
-              />
-            </Data.Title>
-            <Data.Value>
-              <TextLink to="/users/$userId" params={{ userId: actor.id }}>
-                {actorMxid}
-              </TextLink>
-            </Data.Value>
-          </Data.Item>
-
-          {ownerData && (
-            <Data.Item>
-              <Data.Title>
-                <FormattedMessage
-                  id="pages.personal_tokens.owner_user_label"
-                  defaultMessage="Owner"
-                  description="Label for the owner user field"
-                />
-              </Data.Title>
-              <Data.Value>
-                <TextLink
-                  to="/users/$userId"
-                  params={{ userId: ownerData.data.id }}
-                >
-                  {ownerMxid}
-                </TextLink>
-              </Data.Value>
-            </Data.Item>
-          )}
 
           <Data.Item>
             <Data.Title>
