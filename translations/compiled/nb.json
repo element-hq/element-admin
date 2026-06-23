@@ -149,15 +149,15 @@
       "value": "Copyright © "
     },
     {
+      "type": 3,
+      "value": "now",
       "style": {
+        "type": 1,
+        "pattern": "yyyy",
         "parsedOptions": {
           "year": "numeric"
-        },
-        "pattern": "yyyy",
-        "type": 1
-      },
-      "type": 3,
-      "value": "now"
+        }
+      }
     }
   ],
   "footer.help_and_support": [
@@ -186,52 +186,52 @@
   ],
   "marketing.also_available_in_pro.description": [
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
+          "type": 8,
+          "value": "link",
           "children": [
             {
               "type": 0,
               "value": "ESS Pro"
             }
-          ],
-          "type": 8,
-          "value": "link"
+          ]
         },
         {
           "type": 0,
           "value": " er den kommersielle backend-distribusjonen fra Element."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Den inkluderer alt i ESS Community, i tillegg til funksjoner og tjenester som er skreddersydd for profesjonelle miljøer med alt fra over 100 brukere til massive installasjoner med flere millioner brukere."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Den er utviklet for å støtte virksomhetskrav knyttet til avansert identitets- og tilgangsstyring (IAM), etterlevelse (compliance), skalerbarhet, høy tilgjengelighet og støtte for flere leietakere (multi-tenancy)."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     }
   ],
   "marketing.also_available_in_pro.title": [
@@ -248,56 +248,56 @@
   ],
   "marketing.auditing.description": [
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Auditing gives organizations the ability to keep records of end-to-end encrypted conversations and room events to meet compliance or legal requirements."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "When enabled, it is visible to all end users which rooms are being recorded to ensure transparency of the auditing process."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Auditing can be configured to suit an organization’s specific requirements. For instance direct messages between two individuals can be excluded so that only group conversations are recorded."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Audit data is being stored as a stream of machine-readable events in the JSON format either on file storage or S3 and can be forwarded to log analyzer tooling for further filtering and analysis."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     }
   ],
   "marketing.auditing.title": [
@@ -306,96 +306,176 @@
       "value": "Revisjon"
     }
   ],
-  "marketing.supervision.description": [
+  "marketing.sbg.description": [
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
-          "value": "Tilsyn (supervision) gjør det mulig for en organisasjon å administrere alle rom fra et sentralt punkt. En «tilsynskonto» vil bli med i definerte rom med romadministrator-rettigheter. Serveradministratorer kan sømløst opptre som denne kontoen (impersonate) fra administrasjonskonsollen for å administrere og føre tilsyn med rommene sine."
+          "value": "Secure Border Gateway is an application-level firewall for Matrix servers."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "ul",
+      "children": [
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Inspects all requests to and from the server"
+            }
+          ]
+        },
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Can use all request metadata to enforce rules"
+            }
+          ]
+        },
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Pipeline-based approach to connect APIs and rule sets"
+            }
+          ]
+        },
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Pluggable rules engine that can be applied to the pipelines"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "marketing.sbg.title": [
+    {
+      "type": 0,
+      "value": "Secure Border Gateway"
+    }
+  ],
+  "marketing.supervision.description": [
+    {
+      "type": 8,
+      "value": "p",
+      "children": [
+        {
+          "type": 0,
+          "value": "Tilsyn (supervision) gjør det mulig for en organisasjon å administrere alle rom fra et sentralt punkt. En «tilsynskonto» vil bli med i definerte rom med romadministrator-rettigheter. Serveradministratorer kan sømløst opptre som denne kontoen (impersonate) fra administrasjonskonsollen for å administrere og føre tilsyn med rommene sine."
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 8,
+      "value": "ul",
       "children": [
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Administrer rom og deres innstillinger (navn, emne, tillatelser, osv.)"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Administrer rommedlemskap"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Fjern uønskede meldinger og opplastede medier"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Gjenopprett forlatte rom (der alle brukere har gått ut)"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Tilsynskontoen kan eller kan ikke lese kryptert meldingsinnhold (konfigurerbart)"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         }
-      ],
-      "type": 8,
-      "value": "ul"
+      ]
     }
   ],
   "marketing.supervision.title": [
@@ -420,6 +500,12 @@
     {
       "type": 0,
       "value": "Dokumentasjon"
+    }
+  ],
+  "navigation.federation": [
+    {
+      "type": 0,
+      "value": "Federation"
     }
   ],
   "navigation.personal_tokens": [
@@ -516,6 +602,240 @@
     {
       "type": 0,
       "value": "Dashbord"
+    }
+  ],
+  "pages.federation.allowlist.add.error": [
+    {
+      "type": 0,
+      "value": "Failed to add domain to allowlist"
+    }
+  ],
+  "pages.federation.allowlist.add.success": [
+    {
+      "type": 0,
+      "value": "Domain added to allowlist"
+    }
+  ],
+  "pages.federation.allowlist.add_domain": [
+    {
+      "type": 0,
+      "value": "Add domain"
+    }
+  ],
+  "pages.federation.allowlist.add_pattern": [
+    {
+      "type": 0,
+      "value": "Add pattern"
+    }
+  ],
+  "pages.federation.allowlist.add_pattern.help": [
+    {
+      "type": 0,
+      "value": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
+    }
+  ],
+  "pages.federation.allowlist.empty": [
+    {
+      "type": 0,
+      "value": "No domains in the allowlist yet. Add a domain pattern above to get started."
+    }
+  ],
+  "pages.federation.allowlist.heading": [
+    {
+      "type": 0,
+      "value": "List of patterns allowed to federate with you"
+    }
+  ],
+  "pages.federation.allowlist.remove.error": [
+    {
+      "type": 0,
+      "value": "Failed to remove domain from allowlist"
+    }
+  ],
+  "pages.federation.allowlist.remove.success": [
+    {
+      "type": 0,
+      "value": "Domain removed from allowlist"
+    }
+  ],
+  "pages.federation.allowlist.remove_tooltip": [
+    {
+      "type": 0,
+      "value": "Remove from allowlist"
+    }
+  ],
+  "pages.federation.detail.contact": [
+    {
+      "type": 0,
+      "value": "Contact"
+    }
+  ],
+  "pages.federation.detail.destination": [
+    {
+      "type": 0,
+      "value": "Destination"
+    }
+  ],
+  "pages.federation.detail.last_retry": [
+    {
+      "type": 0,
+      "value": "Last retry timestamp"
+    }
+  ],
+  "pages.federation.detail.last_successful_stream": [
+    {
+      "type": 0,
+      "value": "Last successful stream"
+    }
+  ],
+  "pages.federation.detail.retry_interval": [
+    {
+      "type": 0,
+      "value": "Retry interval"
+    }
+  ],
+  "pages.federation.detail.security": [
+    {
+      "type": 0,
+      "value": "Security"
+    }
+  ],
+  "pages.federation.detail.support_page": [
+    {
+      "type": 0,
+      "value": "Support page"
+    }
+  ],
+  "pages.federation.domain_count": [
+    {
+      "type": 6,
+      "value": "COUNT",
+      "options": {
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "No domains"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " domain"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " domains"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "pages.federation.loading": [
+    {
+      "type": 0,
+      "value": "Loading more domains…"
+    }
+  ],
+  "pages.federation.not_found.description": [
+    {
+      "type": 0,
+      "value": "The requested destination ("
+    },
+    {
+      "type": 1,
+      "value": "destination"
+    },
+    {
+      "type": 0,
+      "value": ") could not be found."
+    }
+  ],
+  "pages.federation.not_found.title": [
+    {
+      "type": 0,
+      "value": "Destination not found"
+    }
+  ],
+  "pages.federation.sbg_not_enabled.description": [
+    {
+      "type": 0,
+      "value": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+    }
+  ],
+  "pages.federation.sbg_not_enabled.title": [
+    {
+      "type": 0,
+      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+    }
+  ],
+  "pages.federation.search_placeholder": [
+    {
+      "type": 0,
+      "value": "Search domains…"
+    }
+  ],
+  "pages.federation.tab.allowed_domains": [
+    {
+      "type": 0,
+      "value": "Allowed domains"
+    }
+  ],
+  "pages.federation.tab.known_domains": [
+    {
+      "type": 0,
+      "value": "Known domains"
+    }
+  ],
+  "pages.federation.tab.section": [
+    {
+      "type": 0,
+      "value": "Federation views"
+    }
+  ],
+  "pages.federation.table.server_name": [
+    {
+      "type": 0,
+      "value": "Server name"
+    }
+  ],
+  "pages.federation.table.status": [
+    {
+      "type": 0,
+      "value": "Status"
+    }
+  ],
+  "pages.federation.title": [
+    {
+      "type": 0,
+      "value": "Federation"
+    }
+  ],
+  "pages.federation.unavailable_alert.description": [
+    {
+      "type": 0,
+      "value": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
+    }
+  ],
+  "pages.federation.unavailable_alert.title": [
+    {
+      "type": 0,
+      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
     }
   ],
   "pages.generic_error.go_home": [
@@ -650,7 +970,8 @@
   ],
   "pages.personal_tokens.count": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "count",
       "options": {
         "=0": {
           "value": [
@@ -683,9 +1004,8 @@
           ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "count"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "pages.personal_tokens.create_error": [
@@ -1270,8 +1590,17 @@
   ],
   "pages.registration_tokens.token_count": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "COUNT",
       "options": {
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Ingen token"
+            }
+          ]
+        },
         "one": {
           "value": [
             {
@@ -1293,42 +1622,33 @@
               "value": " token"
             }
           ]
-        },
-        "zero": {
-          "value": [
-            {
-              "type": 0,
-              "value": "Ingen token"
-            }
-          ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "COUNT"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "pages.registration_tokens.token_uses.limited": [
     {
-      "style": null,
       "type": 2,
-      "value": "uses"
+      "value": "uses",
+      "style": null
     },
     {
       "type": 0,
       "value": " / "
     },
     {
-      "style": null,
       "type": 2,
-      "value": "limit"
+      "value": "limit",
+      "style": null
     }
   ],
   "pages.registration_tokens.token_uses.unlimited": [
     {
-      "style": null,
       "type": 2,
-      "value": "uses"
+      "value": "uses",
+      "style": null
     },
     {
       "type": 0,
@@ -1443,18 +1763,18 @@
       "value": "Room deletion task failed on "
     },
     {
-      "style": "short",
       "type": 3,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
       "value": " at "
     },
     {
-      "style": "short",
       "type": 4,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
@@ -1477,18 +1797,18 @@
       "value": "Room deletion task is in progress since "
     },
     {
-      "style": "short",
       "type": 3,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
       "value": " at "
     },
     {
-      "style": "short",
       "type": 4,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
@@ -1507,18 +1827,18 @@
       "value": "Room deletion task completed successfully on "
     },
     {
-      "style": "short",
       "type": 3,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
       "value": " at "
     },
     {
-      "style": "short",
       "type": 4,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
@@ -1585,8 +1905,17 @@
   ],
   "pages.rooms.room_count": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "COUNT",
       "options": {
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Ingen rom"
+            }
+          ]
+        },
         "one": {
           "value": [
             {
@@ -1608,19 +1937,10 @@
               "value": " rom"
             }
           ]
-        },
-        "zero": {
-          "value": [
-            {
-              "type": 0,
-              "value": "Ingen rom"
-            }
-          ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "COUNT"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "pages.rooms.title": [
@@ -1635,14 +1955,14 @@
       "value": "Logg inn som "
     },
     {
+      "type": 8,
+      "value": "b",
       "children": [
         {
           "type": 1,
           "value": "mxid"
         }
-      ],
-      "type": 8,
-      "value": "b"
+      ]
     },
     {
       "type": 0,
@@ -2253,8 +2573,17 @@
   ],
   "pages.users.user_count": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "COUNT",
       "options": {
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Ingen brukere"
+            }
+          ]
+        },
         "one": {
           "value": [
             {
@@ -2276,19 +2605,10 @@
               "value": " brukere"
             }
           ]
-        },
-        "zero": {
-          "value": [
-            {
-              "type": 0,
-              "value": "Ingen brukere"
-            }
-          ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "COUNT"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "product.element": [
@@ -2361,7 +2681,8 @@
   ],
   "rooms_info.other_members": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "COUNT",
       "options": {
         "one": {
           "value": [
@@ -2386,9 +2707,8 @@
           ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "COUNT"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "ui.data.failed_to_load": [
@@ -2401,6 +2721,30 @@
     {
       "type": 0,
       "value": "Laster inn verdi"
+    }
+  ],
+  "ui.destination_status.failing": [
+    {
+      "type": 0,
+      "value": "Failing"
+    }
+  ],
+  "ui.destination_status.inactive": [
+    {
+      "type": 0,
+      "value": "Inactive"
+    }
+  ],
+  "ui.destination_status.never_worked": [
+    {
+      "type": 0,
+      "value": "Never worked"
+    }
+  ],
+  "ui.destination_status.working": [
+    {
+      "type": 0,
+      "value": "Working"
     }
   ],
   "ui.language_switcher.browser_default": [

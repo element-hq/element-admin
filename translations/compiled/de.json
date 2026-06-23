@@ -161,15 +161,15 @@
       "value": "Copyright © "
     },
     {
+      "type": 3,
+      "value": "now",
       "style": {
+        "type": 1,
+        "pattern": "yyyy",
         "parsedOptions": {
           "year": "numeric"
-        },
-        "pattern": "yyyy",
-        "type": 1
-      },
-      "type": 3,
-      "value": "now"
+        }
+      }
     }
   ],
   "footer.help_and_support": [
@@ -198,52 +198,52 @@
   ],
   "marketing.also_available_in_pro.description": [
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
+          "type": 8,
+          "value": "link",
           "children": [
             {
               "type": 0,
               "value": "ESS Pro"
             }
-          ],
-          "type": 8,
-          "value": "link"
+          ]
         },
         {
           "type": 0,
           "value": " ist die kommerzielle Backend-Distribution von Element."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Sie umfasst alle Funktionen von ESS Community sowie zusätzliche Funktionen und Dienste, die auf professionelle Umgebungen mit mehr als 100 Benutzern bis hin zu Millionen von Benutzern zugeschnitten sind."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Sie wurde entwickelt, um Unternehmensanforderungen in Bezug auf erweiterte IAM, Compliance, Skalierbarkeit, Hochverfügbarkeit und Mandantenfähigkeit zu unterstützen."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     }
   ],
   "marketing.also_available_in_pro.title": [
@@ -260,56 +260,56 @@
   ],
   "marketing.auditing.description": [
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Auditing ermöglicht es Unternehmen, Aufzeichnungen von verschlüsselten Unterhaltungen und Chat-Events zu führen, um Compliance- oder gesetzliche Anforderungen zu erfüllen."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Wenn diese Funktion aktiviert ist, ist für alle Endbenutzer sichtbar, welche Chats aufgezeichnet werden, um die Transparenz des Auditing-Prozesses zu gewährleisten."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Das Auditing kann entsprechend den spezifischen Anforderungen einer Organisation konfiguriert werden. So können beispielsweise Direktnachrichten zwischen zwei Personen ausgeschlossen werden, sodass nur Gruppengespräche aufgezeichnet werden."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Audit-Daten werden als Stream maschinenlesbarer Events im JSON-Format entweder im Dateispeicher oder in S3 gespeichert und können zur weiteren Filterung und Analyse an Log-Analyse-Tools weitergeleitet werden."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     }
   ],
   "marketing.auditing.title": [
@@ -318,100 +318,180 @@
       "value": "Auditing"
     }
   ],
-  "marketing.supervision.description": [
+  "marketing.sbg.description": [
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
-          "value": "Moderation ermöglicht es einer Organisation, alle Chats von einem zentralen Punkt aus zu verwalten. Ein „Moderator”-Konto tritt definierten Chats mit Administratorrechten bei. Serveradministratoren können sich nahtlos über die Adminkonsole in das Konto einloggen, um ihre Chats zu verwalten und zu moderieren."
+          "value": "Secure Border Gateway is an application-level firewall for Matrix servers."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "ul",
+      "children": [
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Inspects all requests to and from the server"
+            }
+          ]
+        },
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Can use all request metadata to enforce rules"
+            }
+          ]
+        },
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Pipeline-based approach to connect APIs and rule sets"
+            }
+          ]
+        },
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Pluggable rules engine that can be applied to the pipelines"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "marketing.sbg.title": [
+    {
+      "type": 0,
+      "value": "Secure Border Gateway"
+    }
+  ],
+  "marketing.supervision.description": [
+    {
+      "type": 8,
+      "value": "p",
+      "children": [
+        {
+          "type": 0,
+          "value": "Moderation ermöglicht es einer Organisation, alle Chats von einem zentralen Punkt aus zu verwalten. Ein „Moderator”-Konto tritt definierten Chats mit Administratorrechten bei. Serveradministratoren können sich nahtlos über die Adminkonsole in das Konto einloggen, um ihre Chats zu verwalten und zu moderieren."
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 8,
+      "value": "ul",
       "children": [
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Chats und deren Einstellungen verwalten (Name, Thema, Berechtigungen usw.)"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Raummitgliedschaften verwalten"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Unerwünschte Nachrichten und hochgeladene Medien entfernen"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Verlassene Chats wiederherstellen (alle Benutzer haben den Chat verlassen)"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Das Moderator-Konto kann entweder verschlüsselte Nachrichtinhalte lesen oder nicht (konfigurierbar)"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         }
-      ],
-      "type": 8,
-      "value": "ul"
+      ]
     }
   ],
   "marketing.supervision.title": [
@@ -436,6 +516,12 @@
     {
       "type": 0,
       "value": "Dokumentation"
+    }
+  ],
+  "navigation.federation": [
+    {
+      "type": 0,
+      "value": "Federation"
     }
   ],
   "navigation.personal_tokens": [
@@ -532,6 +618,240 @@
     {
       "type": 0,
       "value": "Dashboard"
+    }
+  ],
+  "pages.federation.allowlist.add.error": [
+    {
+      "type": 0,
+      "value": "Failed to add domain to allowlist"
+    }
+  ],
+  "pages.federation.allowlist.add.success": [
+    {
+      "type": 0,
+      "value": "Domain added to allowlist"
+    }
+  ],
+  "pages.federation.allowlist.add_domain": [
+    {
+      "type": 0,
+      "value": "Add domain"
+    }
+  ],
+  "pages.federation.allowlist.add_pattern": [
+    {
+      "type": 0,
+      "value": "Add pattern"
+    }
+  ],
+  "pages.federation.allowlist.add_pattern.help": [
+    {
+      "type": 0,
+      "value": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
+    }
+  ],
+  "pages.federation.allowlist.empty": [
+    {
+      "type": 0,
+      "value": "No domains in the allowlist yet. Add a domain pattern above to get started."
+    }
+  ],
+  "pages.federation.allowlist.heading": [
+    {
+      "type": 0,
+      "value": "List of patterns allowed to federate with you"
+    }
+  ],
+  "pages.federation.allowlist.remove.error": [
+    {
+      "type": 0,
+      "value": "Failed to remove domain from allowlist"
+    }
+  ],
+  "pages.federation.allowlist.remove.success": [
+    {
+      "type": 0,
+      "value": "Domain removed from allowlist"
+    }
+  ],
+  "pages.federation.allowlist.remove_tooltip": [
+    {
+      "type": 0,
+      "value": "Remove from allowlist"
+    }
+  ],
+  "pages.federation.detail.contact": [
+    {
+      "type": 0,
+      "value": "Contact"
+    }
+  ],
+  "pages.federation.detail.destination": [
+    {
+      "type": 0,
+      "value": "Destination"
+    }
+  ],
+  "pages.federation.detail.last_retry": [
+    {
+      "type": 0,
+      "value": "Last retry timestamp"
+    }
+  ],
+  "pages.federation.detail.last_successful_stream": [
+    {
+      "type": 0,
+      "value": "Last successful stream"
+    }
+  ],
+  "pages.federation.detail.retry_interval": [
+    {
+      "type": 0,
+      "value": "Retry interval"
+    }
+  ],
+  "pages.federation.detail.security": [
+    {
+      "type": 0,
+      "value": "Security"
+    }
+  ],
+  "pages.federation.detail.support_page": [
+    {
+      "type": 0,
+      "value": "Support page"
+    }
+  ],
+  "pages.federation.domain_count": [
+    {
+      "type": 6,
+      "value": "COUNT",
+      "options": {
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "No domains"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " domain"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " domains"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "pages.federation.loading": [
+    {
+      "type": 0,
+      "value": "Loading more domains…"
+    }
+  ],
+  "pages.federation.not_found.description": [
+    {
+      "type": 0,
+      "value": "The requested destination ("
+    },
+    {
+      "type": 1,
+      "value": "destination"
+    },
+    {
+      "type": 0,
+      "value": ") could not be found."
+    }
+  ],
+  "pages.federation.not_found.title": [
+    {
+      "type": 0,
+      "value": "Destination not found"
+    }
+  ],
+  "pages.federation.sbg_not_enabled.description": [
+    {
+      "type": 0,
+      "value": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+    }
+  ],
+  "pages.federation.sbg_not_enabled.title": [
+    {
+      "type": 0,
+      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+    }
+  ],
+  "pages.federation.search_placeholder": [
+    {
+      "type": 0,
+      "value": "Search domains…"
+    }
+  ],
+  "pages.federation.tab.allowed_domains": [
+    {
+      "type": 0,
+      "value": "Allowed domains"
+    }
+  ],
+  "pages.federation.tab.known_domains": [
+    {
+      "type": 0,
+      "value": "Known domains"
+    }
+  ],
+  "pages.federation.tab.section": [
+    {
+      "type": 0,
+      "value": "Federation views"
+    }
+  ],
+  "pages.federation.table.server_name": [
+    {
+      "type": 0,
+      "value": "Server name"
+    }
+  ],
+  "pages.federation.table.status": [
+    {
+      "type": 0,
+      "value": "Status"
+    }
+  ],
+  "pages.federation.title": [
+    {
+      "type": 0,
+      "value": "Federation"
+    }
+  ],
+  "pages.federation.unavailable_alert.description": [
+    {
+      "type": 0,
+      "value": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
+    }
+  ],
+  "pages.federation.unavailable_alert.title": [
+    {
+      "type": 0,
+      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
     }
   ],
   "pages.generic_error.go_home": [
@@ -666,7 +986,8 @@
   ],
   "pages.personal_tokens.count": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "count",
       "options": {
         "=0": {
           "value": [
@@ -699,9 +1020,8 @@
           ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "count"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "pages.personal_tokens.create_error": [
@@ -1286,8 +1606,17 @@
   ],
   "pages.registration_tokens.token_count": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "COUNT",
       "options": {
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Keine Token"
+            }
+          ]
+        },
         "one": {
           "value": [
             {
@@ -1309,42 +1638,33 @@
               "value": " Token"
             }
           ]
-        },
-        "zero": {
-          "value": [
-            {
-              "type": 0,
-              "value": "Keine Token"
-            }
-          ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "COUNT"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "pages.registration_tokens.token_uses.limited": [
     {
-      "style": null,
       "type": 2,
-      "value": "uses"
+      "value": "uses",
+      "style": null
     },
     {
       "type": 0,
       "value": " / "
     },
     {
-      "style": null,
       "type": 2,
-      "value": "limit"
+      "value": "limit",
+      "style": null
     }
   ],
   "pages.registration_tokens.token_uses.unlimited": [
     {
-      "style": null,
       "type": 2,
-      "value": "uses"
+      "value": "uses",
+      "style": null
     },
     {
       "type": 0,
@@ -1459,18 +1779,18 @@
       "value": "Der Vorgang zum Löschen eines Chats ist am "
     },
     {
-      "style": "short",
       "type": 3,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
       "value": " um "
     },
     {
-      "style": "short",
       "type": 4,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
@@ -1493,18 +1813,18 @@
       "value": "Der Vorgang zum Löschen eines Chats läuft seit "
     },
     {
-      "style": "short",
       "type": 3,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
       "value": " um "
     },
     {
-      "style": "short",
       "type": 4,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
@@ -1523,18 +1843,18 @@
       "value": "Die Aufgabe zum Löschen eines Chats wurde erfolgreich am "
     },
     {
-      "style": "short",
       "type": 3,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
       "value": " um "
     },
     {
-      "style": "short",
       "type": 4,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
@@ -1601,7 +1921,8 @@
   ],
   "pages.rooms.room_count": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "COUNT",
       "options": {
         "=0": {
           "value": [
@@ -1634,9 +1955,8 @@
           ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "COUNT"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "pages.rooms.title": [
@@ -1651,14 +1971,14 @@
       "value": "Melden Sie sich als "
     },
     {
+      "type": 8,
+      "value": "b",
       "children": [
         {
           "type": 1,
           "value": "mxid"
         }
-      ],
-      "type": 8,
-      "value": "b"
+      ]
     },
     {
       "type": 0,
@@ -2269,8 +2589,17 @@
   ],
   "pages.users.user_count": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "COUNT",
       "options": {
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Keine Nutzer"
+            }
+          ]
+        },
         "one": {
           "value": [
             {
@@ -2292,19 +2621,10 @@
               "value": " Nutzer"
             }
           ]
-        },
-        "zero": {
-          "value": [
-            {
-              "type": 0,
-              "value": "Keine Nutzer"
-            }
-          ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "COUNT"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "product.element": [
@@ -2377,7 +2697,8 @@
   ],
   "rooms_info.other_members": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "COUNT",
       "options": {
         "one": {
           "value": [
@@ -2402,9 +2723,8 @@
           ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "COUNT"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "ui.data.failed_to_load": [
@@ -2417,6 +2737,30 @@
     {
       "type": 0,
       "value": "Wert wird geladen"
+    }
+  ],
+  "ui.destination_status.failing": [
+    {
+      "type": 0,
+      "value": "Failing"
+    }
+  ],
+  "ui.destination_status.inactive": [
+    {
+      "type": 0,
+      "value": "Inactive"
+    }
+  ],
+  "ui.destination_status.never_worked": [
+    {
+      "type": 0,
+      "value": "Never worked"
+    }
+  ],
+  "ui.destination_status.working": [
+    {
+      "type": 0,
+      "value": "Working"
     }
   ],
   "ui.language_switcher.browser_default": [
