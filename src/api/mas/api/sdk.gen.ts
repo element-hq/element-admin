@@ -2,7 +2,13 @@
 
 import * as v from "valibot";
 
-import type { Client, Options as Options2, TDataShape } from "./client";
+import type {
+  Client,
+  ClientMeta,
+  Options as Options2,
+  RequestResult,
+  TDataShape,
+} from "./client";
 import type {
   AddUpstreamOAuthLinkData,
   AddUpstreamOAuthLinkErrors,
@@ -244,7 +250,7 @@ export type Options<
    * You can pass arbitrary values through the `meta` object. This can be
    * used to access values that aren't defined as part of the SDK function.
    */
-  meta?: Record<string, unknown>;
+  meta?: keyof ClientMeta extends never ? Record<string, unknown> : ClientMeta;
 };
 
 /**
@@ -252,7 +258,7 @@ export type Options<
  */
 export const siteConfig = <ThrowOnError extends boolean = false>(
   options: Options<SiteConfigData, ThrowOnError>,
-) =>
+): RequestResult<SiteConfigResponses, unknown, ThrowOnError> =>
   options.client.get<SiteConfigResponses, unknown, ThrowOnError>({
     requestValidator: async (data) =>
       await v.parseAsync(
@@ -265,7 +271,13 @@ export const siteConfig = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vSiteConfigResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/site-config",
     ...options,
   });
@@ -275,7 +287,7 @@ export const siteConfig = <ThrowOnError extends boolean = false>(
  */
 export const version = <ThrowOnError extends boolean = false>(
   options: Options<VersionData, ThrowOnError>,
-) =>
+): RequestResult<VersionResponses, unknown, ThrowOnError> =>
   options.client.get<VersionResponses, unknown, ThrowOnError>({
     requestValidator: async (data) =>
       await v.parseAsync(
@@ -288,7 +300,13 @@ export const version = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vVersionResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/version",
     ...options,
   });
@@ -302,7 +320,11 @@ export const version = <ThrowOnError extends boolean = false>(
  */
 export const listCompatSessions = <ThrowOnError extends boolean = false>(
   options: Options<ListCompatSessionsData, ThrowOnError>,
-) =>
+): RequestResult<
+  ListCompatSessionsResponses,
+  ListCompatSessionsErrors,
+  ThrowOnError
+> =>
   options.client.get<
     ListCompatSessionsResponses,
     ListCompatSessionsErrors,
@@ -319,7 +341,13 @@ export const listCompatSessions = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vListCompatSessionsResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/compat-sessions",
     ...options,
   });
@@ -329,7 +357,11 @@ export const listCompatSessions = <ThrowOnError extends boolean = false>(
  */
 export const getCompatSession = <ThrowOnError extends boolean = false>(
   options: Options<GetCompatSessionData, ThrowOnError>,
-) =>
+): RequestResult<
+  GetCompatSessionResponses,
+  GetCompatSessionErrors,
+  ThrowOnError
+> =>
   options.client.get<
     GetCompatSessionResponses,
     GetCompatSessionErrors,
@@ -346,7 +378,13 @@ export const getCompatSession = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetCompatSessionResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/compat-sessions/{id}",
     ...options,
   });
@@ -358,7 +396,11 @@ export const getCompatSession = <ThrowOnError extends boolean = false>(
  */
 export const finishCompatSession = <ThrowOnError extends boolean = false>(
   options: Options<FinishCompatSessionData, ThrowOnError>,
-) =>
+): RequestResult<
+  FinishCompatSessionResponses,
+  FinishCompatSessionErrors,
+  ThrowOnError
+> =>
   options.client.post<
     FinishCompatSessionResponses,
     FinishCompatSessionErrors,
@@ -375,7 +417,13 @@ export const finishCompatSession = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vFinishCompatSessionResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/compat-sessions/{id}/finish",
     ...options,
   });
@@ -389,7 +437,11 @@ export const finishCompatSession = <ThrowOnError extends boolean = false>(
  */
 export const listOAuth2Sessions = <ThrowOnError extends boolean = false>(
   options: Options<ListOAuth2SessionsData, ThrowOnError>,
-) =>
+): RequestResult<
+  ListOAuth2SessionsResponses,
+  ListOAuth2SessionsErrors,
+  ThrowOnError
+> =>
   options.client.get<
     ListOAuth2SessionsResponses,
     ListOAuth2SessionsErrors,
@@ -406,7 +458,13 @@ export const listOAuth2Sessions = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vListOAuth2SessionsResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/oauth2-sessions",
     ...options,
   });
@@ -416,7 +474,11 @@ export const listOAuth2Sessions = <ThrowOnError extends boolean = false>(
  */
 export const getOAuth2Session = <ThrowOnError extends boolean = false>(
   options: Options<GetOAuth2SessionData, ThrowOnError>,
-) =>
+): RequestResult<
+  GetOAuth2SessionResponses,
+  GetOAuth2SessionErrors,
+  ThrowOnError
+> =>
   options.client.get<
     GetOAuth2SessionResponses,
     GetOAuth2SessionErrors,
@@ -433,7 +495,13 @@ export const getOAuth2Session = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetOAuth2SessionResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/oauth2-sessions/{id}",
     ...options,
   });
@@ -445,7 +513,11 @@ export const getOAuth2Session = <ThrowOnError extends boolean = false>(
  */
 export const finishOAuth2Session = <ThrowOnError extends boolean = false>(
   options: Options<FinishOAuth2SessionData, ThrowOnError>,
-) =>
+): RequestResult<
+  FinishOAuth2SessionResponses,
+  FinishOAuth2SessionErrors,
+  ThrowOnError
+> =>
   options.client.post<
     FinishOAuth2SessionResponses,
     FinishOAuth2SessionErrors,
@@ -462,7 +534,13 @@ export const finishOAuth2Session = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vFinishOAuth2SessionResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/oauth2-sessions/{id}/finish",
     ...options,
   });
@@ -476,7 +554,11 @@ export const finishOAuth2Session = <ThrowOnError extends boolean = false>(
  */
 export const listPersonalSessions = <ThrowOnError extends boolean = false>(
   options: Options<ListPersonalSessionsData, ThrowOnError>,
-) =>
+): RequestResult<
+  ListPersonalSessionsResponses,
+  ListPersonalSessionsErrors,
+  ThrowOnError
+> =>
   options.client.get<
     ListPersonalSessionsResponses,
     ListPersonalSessionsErrors,
@@ -493,7 +575,13 @@ export const listPersonalSessions = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vListPersonalSessionsResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/personal-sessions",
     ...options,
   });
@@ -503,7 +591,11 @@ export const listPersonalSessions = <ThrowOnError extends boolean = false>(
  */
 export const createPersonalSession = <ThrowOnError extends boolean = false>(
   options: Options<CreatePersonalSessionData, ThrowOnError>,
-) =>
+): RequestResult<
+  CreatePersonalSessionResponses,
+  CreatePersonalSessionErrors,
+  ThrowOnError
+> =>
   options.client.post<
     CreatePersonalSessionResponses,
     CreatePersonalSessionErrors,
@@ -520,7 +612,13 @@ export const createPersonalSession = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vCreatePersonalSessionResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/personal-sessions",
     ...options,
     headers: {
@@ -534,7 +632,11 @@ export const createPersonalSession = <ThrowOnError extends boolean = false>(
  */
 export const getPersonalSession = <ThrowOnError extends boolean = false>(
   options: Options<GetPersonalSessionData, ThrowOnError>,
-) =>
+): RequestResult<
+  GetPersonalSessionResponses,
+  GetPersonalSessionErrors,
+  ThrowOnError
+> =>
   options.client.get<
     GetPersonalSessionResponses,
     GetPersonalSessionErrors,
@@ -551,7 +653,13 @@ export const getPersonalSession = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetPersonalSessionResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/personal-sessions/{id}",
     ...options,
   });
@@ -561,7 +669,11 @@ export const getPersonalSession = <ThrowOnError extends boolean = false>(
  */
 export const revokePersonalSession = <ThrowOnError extends boolean = false>(
   options: Options<RevokePersonalSessionData, ThrowOnError>,
-) =>
+): RequestResult<
+  RevokePersonalSessionResponses,
+  RevokePersonalSessionErrors,
+  ThrowOnError
+> =>
   options.client.post<
     RevokePersonalSessionResponses,
     RevokePersonalSessionErrors,
@@ -578,7 +690,13 @@ export const revokePersonalSession = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vRevokePersonalSessionResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/personal-sessions/{id}/revoke",
     ...options,
   });
@@ -588,7 +706,11 @@ export const revokePersonalSession = <ThrowOnError extends boolean = false>(
  */
 export const regeneratePersonalSession = <ThrowOnError extends boolean = false>(
   options: Options<RegeneratePersonalSessionData, ThrowOnError>,
-) =>
+): RequestResult<
+  RegeneratePersonalSessionResponses,
+  RegeneratePersonalSessionErrors,
+  ThrowOnError
+> =>
   options.client.post<
     RegeneratePersonalSessionResponses,
     RegeneratePersonalSessionErrors,
@@ -605,7 +727,13 @@ export const regeneratePersonalSession = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vRegeneratePersonalSessionResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/personal-sessions/{id}/regenerate",
     ...options,
     headers: {
@@ -619,7 +747,7 @@ export const regeneratePersonalSession = <ThrowOnError extends boolean = false>(
  */
 export const setPolicyData = <ThrowOnError extends boolean = false>(
   options: Options<SetPolicyDataData, ThrowOnError>,
-) =>
+): RequestResult<SetPolicyDataResponses, SetPolicyDataErrors, ThrowOnError> =>
   options.client.post<
     SetPolicyDataResponses,
     SetPolicyDataErrors,
@@ -636,7 +764,13 @@ export const setPolicyData = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vSetPolicyDataResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/policy-data",
     ...options,
     headers: {
@@ -650,7 +784,11 @@ export const setPolicyData = <ThrowOnError extends boolean = false>(
  */
 export const getLatestPolicyData = <ThrowOnError extends boolean = false>(
   options: Options<GetLatestPolicyDataData, ThrowOnError>,
-) =>
+): RequestResult<
+  GetLatestPolicyDataResponses,
+  GetLatestPolicyDataErrors,
+  ThrowOnError
+> =>
   options.client.get<
     GetLatestPolicyDataResponses,
     GetLatestPolicyDataErrors,
@@ -667,7 +805,13 @@ export const getLatestPolicyData = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetLatestPolicyDataResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/policy-data/latest",
     ...options,
   });
@@ -677,7 +821,7 @@ export const getLatestPolicyData = <ThrowOnError extends boolean = false>(
  */
 export const getPolicyData = <ThrowOnError extends boolean = false>(
   options: Options<GetPolicyDataData, ThrowOnError>,
-) =>
+): RequestResult<GetPolicyDataResponses, GetPolicyDataErrors, ThrowOnError> =>
   options.client.get<GetPolicyDataResponses, GetPolicyDataErrors, ThrowOnError>(
     {
       requestValidator: async (data) =>
@@ -691,7 +835,13 @@ export const getPolicyData = <ThrowOnError extends boolean = false>(
         ),
       responseValidator: async (data) =>
         await v.parseAsync(vGetPolicyDataResponse, data),
-      security: [{ scheme: "bearer", type: "http" }],
+      security: [
+        {
+          key: "oauth2",
+          scheme: "bearer",
+          type: "http",
+        },
+      ],
       url: "/api/admin/v1/policy-data/{id}",
       ...options,
     },
@@ -702,7 +852,7 @@ export const getPolicyData = <ThrowOnError extends boolean = false>(
  */
 export const listUsers = <ThrowOnError extends boolean = false>(
   options: Options<ListUsersData, ThrowOnError>,
-) =>
+): RequestResult<ListUsersResponses, unknown, ThrowOnError> =>
   options.client.get<ListUsersResponses, unknown, ThrowOnError>({
     requestValidator: async (data) =>
       await v.parseAsync(
@@ -715,7 +865,13 @@ export const listUsers = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vListUsersResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/users",
     ...options,
   });
@@ -725,7 +881,7 @@ export const listUsers = <ThrowOnError extends boolean = false>(
  */
 export const createUser = <ThrowOnError extends boolean = false>(
   options: Options<CreateUserData, ThrowOnError>,
-) =>
+): RequestResult<CreateUserResponses, CreateUserErrors, ThrowOnError> =>
   options.client.post<CreateUserResponses, CreateUserErrors, ThrowOnError>({
     requestValidator: async (data) =>
       await v.parseAsync(
@@ -738,7 +894,13 @@ export const createUser = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vCreateUserResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/users",
     ...options,
     headers: {
@@ -752,7 +914,7 @@ export const createUser = <ThrowOnError extends boolean = false>(
  */
 export const getUser = <ThrowOnError extends boolean = false>(
   options: Options<GetUserData, ThrowOnError>,
-) =>
+): RequestResult<GetUserResponses, GetUserErrors, ThrowOnError> =>
   options.client.get<GetUserResponses, GetUserErrors, ThrowOnError>({
     requestValidator: async (data) =>
       await v.parseAsync(
@@ -765,7 +927,13 @@ export const getUser = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetUserResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/users/{id}",
     ...options,
   });
@@ -775,7 +943,11 @@ export const getUser = <ThrowOnError extends boolean = false>(
  */
 export const setUserPassword = <ThrowOnError extends boolean = false>(
   options: Options<SetUserPasswordData, ThrowOnError>,
-) =>
+): RequestResult<
+  SetUserPasswordResponses,
+  SetUserPasswordErrors,
+  ThrowOnError
+> =>
   options.client.post<
     SetUserPasswordResponses,
     SetUserPasswordErrors,
@@ -792,7 +964,13 @@ export const setUserPassword = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vSetUserPasswordResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/users/{id}/set-password",
     ...options,
     headers: {
@@ -806,7 +984,11 @@ export const setUserPassword = <ThrowOnError extends boolean = false>(
  */
 export const getUserByUsername = <ThrowOnError extends boolean = false>(
   options: Options<GetUserByUsernameData, ThrowOnError>,
-) =>
+): RequestResult<
+  GetUserByUsernameResponses,
+  GetUserByUsernameErrors,
+  ThrowOnError
+> =>
   options.client.get<
     GetUserByUsernameResponses,
     GetUserByUsernameErrors,
@@ -823,7 +1005,13 @@ export const getUserByUsername = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetUserByUsernameResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/users/by-username/{username}",
     ...options,
   });
@@ -835,7 +1023,7 @@ export const getUserByUsername = <ThrowOnError extends boolean = false>(
  */
 export const userSetAdmin = <ThrowOnError extends boolean = false>(
   options: Options<UserSetAdminData, ThrowOnError>,
-) =>
+): RequestResult<UserSetAdminResponses, UserSetAdminErrors, ThrowOnError> =>
   options.client.post<UserSetAdminResponses, UserSetAdminErrors, ThrowOnError>({
     requestValidator: async (data) =>
       await v.parseAsync(
@@ -848,7 +1036,13 @@ export const userSetAdmin = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vUserSetAdminResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/users/{id}/set-admin",
     ...options,
     headers: {
@@ -865,7 +1059,7 @@ export const userSetAdmin = <ThrowOnError extends boolean = false>(
  */
 export const deactivateUser = <ThrowOnError extends boolean = false>(
   options: Options<DeactivateUserData, ThrowOnError>,
-) =>
+): RequestResult<DeactivateUserResponses, DeactivateUserErrors, ThrowOnError> =>
   options.client.post<
     DeactivateUserResponses,
     DeactivateUserErrors,
@@ -882,7 +1076,13 @@ export const deactivateUser = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vDeactivateUserResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/users/{id}/deactivate",
     ...options,
     headers: {
@@ -899,7 +1099,7 @@ export const deactivateUser = <ThrowOnError extends boolean = false>(
  */
 export const reactivateUser = <ThrowOnError extends boolean = false>(
   options: Options<ReactivateUserData, ThrowOnError>,
-) =>
+): RequestResult<ReactivateUserResponses, ReactivateUserErrors, ThrowOnError> =>
   options.client.post<
     ReactivateUserResponses,
     ReactivateUserErrors,
@@ -916,7 +1116,13 @@ export const reactivateUser = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vReactivateUserResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/users/{id}/reactivate",
     ...options,
   });
@@ -929,7 +1135,7 @@ export const reactivateUser = <ThrowOnError extends boolean = false>(
  */
 export const lockUser = <ThrowOnError extends boolean = false>(
   options: Options<LockUserData, ThrowOnError>,
-) =>
+): RequestResult<LockUserResponses, LockUserErrors, ThrowOnError> =>
   options.client.post<LockUserResponses, LockUserErrors, ThrowOnError>({
     requestValidator: async (data) =>
       await v.parseAsync(
@@ -942,7 +1148,13 @@ export const lockUser = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vLockUserResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/users/{id}/lock",
     ...options,
   });
@@ -955,7 +1167,7 @@ export const lockUser = <ThrowOnError extends boolean = false>(
  */
 export const unlockUser = <ThrowOnError extends boolean = false>(
   options: Options<UnlockUserData, ThrowOnError>,
-) =>
+): RequestResult<UnlockUserResponses, UnlockUserErrors, ThrowOnError> =>
   options.client.post<UnlockUserResponses, UnlockUserErrors, ThrowOnError>({
     requestValidator: async (data) =>
       await v.parseAsync(
@@ -968,7 +1180,13 @@ export const unlockUser = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vUnlockUserResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/users/{id}/unlock",
     ...options,
   });
@@ -980,7 +1198,7 @@ export const unlockUser = <ThrowOnError extends boolean = false>(
  */
 export const listUserEmails = <ThrowOnError extends boolean = false>(
   options: Options<ListUserEmailsData, ThrowOnError>,
-) =>
+): RequestResult<ListUserEmailsResponses, ListUserEmailsErrors, ThrowOnError> =>
   options.client.get<
     ListUserEmailsResponses,
     ListUserEmailsErrors,
@@ -997,7 +1215,13 @@ export const listUserEmails = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vListUserEmailsResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/user-emails",
     ...options,
   });
@@ -1010,7 +1234,7 @@ export const listUserEmails = <ThrowOnError extends boolean = false>(
  */
 export const addUserEmail = <ThrowOnError extends boolean = false>(
   options: Options<AddUserEmailData, ThrowOnError>,
-) =>
+): RequestResult<AddUserEmailResponses, AddUserEmailErrors, ThrowOnError> =>
   options.client.post<AddUserEmailResponses, AddUserEmailErrors, ThrowOnError>({
     requestValidator: async (data) =>
       await v.parseAsync(
@@ -1023,7 +1247,13 @@ export const addUserEmail = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vAddUserEmailResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/user-emails",
     ...options,
     headers: {
@@ -1037,7 +1267,11 @@ export const addUserEmail = <ThrowOnError extends boolean = false>(
  */
 export const deleteUserEmail = <ThrowOnError extends boolean = false>(
   options: Options<DeleteUserEmailData, ThrowOnError>,
-) =>
+): RequestResult<
+  DeleteUserEmailResponses,
+  DeleteUserEmailErrors,
+  ThrowOnError
+> =>
   options.client.delete<
     DeleteUserEmailResponses,
     DeleteUserEmailErrors,
@@ -1054,7 +1288,13 @@ export const deleteUserEmail = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vDeleteUserEmailResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/user-emails/{id}",
     ...options,
   });
@@ -1064,7 +1304,7 @@ export const deleteUserEmail = <ThrowOnError extends boolean = false>(
  */
 export const getUserEmail = <ThrowOnError extends boolean = false>(
   options: Options<GetUserEmailData, ThrowOnError>,
-) =>
+): RequestResult<GetUserEmailResponses, GetUserEmailErrors, ThrowOnError> =>
   options.client.get<GetUserEmailResponses, GetUserEmailErrors, ThrowOnError>({
     requestValidator: async (data) =>
       await v.parseAsync(
@@ -1077,7 +1317,13 @@ export const getUserEmail = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetUserEmailResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/user-emails/{id}",
     ...options,
   });
@@ -1091,7 +1337,11 @@ export const getUserEmail = <ThrowOnError extends boolean = false>(
  */
 export const listUserSessions = <ThrowOnError extends boolean = false>(
   options: Options<ListUserSessionsData, ThrowOnError>,
-) =>
+): RequestResult<
+  ListUserSessionsResponses,
+  ListUserSessionsErrors,
+  ThrowOnError
+> =>
   options.client.get<
     ListUserSessionsResponses,
     ListUserSessionsErrors,
@@ -1108,7 +1358,13 @@ export const listUserSessions = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vListUserSessionsResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/user-sessions",
     ...options,
   });
@@ -1118,7 +1374,7 @@ export const listUserSessions = <ThrowOnError extends boolean = false>(
  */
 export const getUserSession = <ThrowOnError extends boolean = false>(
   options: Options<GetUserSessionData, ThrowOnError>,
-) =>
+): RequestResult<GetUserSessionResponses, GetUserSessionErrors, ThrowOnError> =>
   options.client.get<
     GetUserSessionResponses,
     GetUserSessionErrors,
@@ -1135,7 +1391,13 @@ export const getUserSession = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetUserSessionResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/user-sessions/{id}",
     ...options,
   });
@@ -1147,7 +1409,11 @@ export const getUserSession = <ThrowOnError extends boolean = false>(
  */
 export const finishUserSession = <ThrowOnError extends boolean = false>(
   options: Options<FinishUserSessionData, ThrowOnError>,
-) =>
+): RequestResult<
+  FinishUserSessionResponses,
+  FinishUserSessionErrors,
+  ThrowOnError
+> =>
   options.client.post<
     FinishUserSessionResponses,
     FinishUserSessionErrors,
@@ -1164,7 +1430,13 @@ export const finishUserSession = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vFinishUserSessionResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/user-sessions/{id}/finish",
     ...options,
   });
@@ -1176,7 +1448,7 @@ export const listUserRegistrationTokens = <
   ThrowOnError extends boolean = false,
 >(
   options: Options<ListUserRegistrationTokensData, ThrowOnError>,
-) =>
+): RequestResult<ListUserRegistrationTokensResponses, unknown, ThrowOnError> =>
   options.client.get<
     ListUserRegistrationTokensResponses,
     unknown,
@@ -1193,7 +1465,13 @@ export const listUserRegistrationTokens = <
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vListUserRegistrationTokensResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/user-registration-tokens",
     ...options,
   });
@@ -1203,7 +1481,7 @@ export const listUserRegistrationTokens = <
  */
 export const addUserRegistrationToken = <ThrowOnError extends boolean = false>(
   options: Options<AddUserRegistrationTokenData, ThrowOnError>,
-) =>
+): RequestResult<AddUserRegistrationTokenResponses, unknown, ThrowOnError> =>
   options.client.post<AddUserRegistrationTokenResponses, unknown, ThrowOnError>(
     {
       requestValidator: async (data) =>
@@ -1217,7 +1495,13 @@ export const addUserRegistrationToken = <ThrowOnError extends boolean = false>(
         ),
       responseValidator: async (data) =>
         await v.parseAsync(vAddUserRegistrationTokenResponse, data),
-      security: [{ scheme: "bearer", type: "http" }],
+      security: [
+        {
+          key: "oauth2",
+          scheme: "bearer",
+          type: "http",
+        },
+      ],
       url: "/api/admin/v1/user-registration-tokens",
       ...options,
       headers: {
@@ -1232,7 +1516,11 @@ export const addUserRegistrationToken = <ThrowOnError extends boolean = false>(
  */
 export const getUserRegistrationToken = <ThrowOnError extends boolean = false>(
   options: Options<GetUserRegistrationTokenData, ThrowOnError>,
-) =>
+): RequestResult<
+  GetUserRegistrationTokenResponses,
+  GetUserRegistrationTokenErrors,
+  ThrowOnError
+> =>
   options.client.get<
     GetUserRegistrationTokenResponses,
     GetUserRegistrationTokenErrors,
@@ -1249,7 +1537,13 @@ export const getUserRegistrationToken = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetUserRegistrationTokenResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/user-registration-tokens/{id}",
     ...options,
   });
@@ -1263,7 +1557,11 @@ export const updateUserRegistrationToken = <
   ThrowOnError extends boolean = false,
 >(
   options: Options<UpdateUserRegistrationTokenData, ThrowOnError>,
-) =>
+): RequestResult<
+  UpdateUserRegistrationTokenResponses,
+  UpdateUserRegistrationTokenErrors,
+  ThrowOnError
+> =>
   options.client.put<
     UpdateUserRegistrationTokenResponses,
     UpdateUserRegistrationTokenErrors,
@@ -1280,7 +1578,13 @@ export const updateUserRegistrationToken = <
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vUpdateUserRegistrationTokenResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/user-registration-tokens/{id}",
     ...options,
     headers: {
@@ -1298,7 +1602,11 @@ export const revokeUserRegistrationToken = <
   ThrowOnError extends boolean = false,
 >(
   options: Options<RevokeUserRegistrationTokenData, ThrowOnError>,
-) =>
+): RequestResult<
+  RevokeUserRegistrationTokenResponses,
+  RevokeUserRegistrationTokenErrors,
+  ThrowOnError
+> =>
   options.client.post<
     RevokeUserRegistrationTokenResponses,
     RevokeUserRegistrationTokenErrors,
@@ -1315,7 +1623,13 @@ export const revokeUserRegistrationToken = <
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vRevokeUserRegistrationTokenResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/user-registration-tokens/{id}/revoke",
     ...options,
   });
@@ -1329,7 +1643,11 @@ export const unrevokeUserRegistrationToken = <
   ThrowOnError extends boolean = false,
 >(
   options: Options<UnrevokeUserRegistrationTokenData, ThrowOnError>,
-) =>
+): RequestResult<
+  UnrevokeUserRegistrationTokenResponses,
+  UnrevokeUserRegistrationTokenErrors,
+  ThrowOnError
+> =>
   options.client.post<
     UnrevokeUserRegistrationTokenResponses,
     UnrevokeUserRegistrationTokenErrors,
@@ -1346,7 +1664,13 @@ export const unrevokeUserRegistrationToken = <
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vUnrevokeUserRegistrationTokenResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/user-registration-tokens/{id}/unrevoke",
     ...options,
   });
@@ -1358,7 +1682,11 @@ export const unrevokeUserRegistrationToken = <
  */
 export const listUpstreamOAuthLinks = <ThrowOnError extends boolean = false>(
   options: Options<ListUpstreamOAuthLinksData, ThrowOnError>,
-) =>
+): RequestResult<
+  ListUpstreamOAuthLinksResponses,
+  ListUpstreamOAuthLinksErrors,
+  ThrowOnError
+> =>
   options.client.get<
     ListUpstreamOAuthLinksResponses,
     ListUpstreamOAuthLinksErrors,
@@ -1375,7 +1703,13 @@ export const listUpstreamOAuthLinks = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vListUpstreamOAuthLinksResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/upstream-oauth-links",
     ...options,
   });
@@ -1385,7 +1719,11 @@ export const listUpstreamOAuthLinks = <ThrowOnError extends boolean = false>(
  */
 export const addUpstreamOAuthLink = <ThrowOnError extends boolean = false>(
   options: Options<AddUpstreamOAuthLinkData, ThrowOnError>,
-) =>
+): RequestResult<
+  AddUpstreamOAuthLinkResponses,
+  AddUpstreamOAuthLinkErrors,
+  ThrowOnError
+> =>
   options.client.post<
     AddUpstreamOAuthLinkResponses,
     AddUpstreamOAuthLinkErrors,
@@ -1402,7 +1740,13 @@ export const addUpstreamOAuthLink = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vAddUpstreamOAuthLinkResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/upstream-oauth-links",
     ...options,
     headers: {
@@ -1416,7 +1760,11 @@ export const addUpstreamOAuthLink = <ThrowOnError extends boolean = false>(
  */
 export const deleteUpstreamOAuthLink = <ThrowOnError extends boolean = false>(
   options: Options<DeleteUpstreamOAuthLinkData, ThrowOnError>,
-) =>
+): RequestResult<
+  DeleteUpstreamOAuthLinkResponses,
+  DeleteUpstreamOAuthLinkErrors,
+  ThrowOnError
+> =>
   options.client.delete<
     DeleteUpstreamOAuthLinkResponses,
     DeleteUpstreamOAuthLinkErrors,
@@ -1433,7 +1781,13 @@ export const deleteUpstreamOAuthLink = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vDeleteUpstreamOAuthLinkResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/upstream-oauth-links/{id}",
     ...options,
   });
@@ -1443,7 +1797,11 @@ export const deleteUpstreamOAuthLink = <ThrowOnError extends boolean = false>(
  */
 export const getUpstreamOAuthLink = <ThrowOnError extends boolean = false>(
   options: Options<GetUpstreamOAuthLinkData, ThrowOnError>,
-) =>
+): RequestResult<
+  GetUpstreamOAuthLinkResponses,
+  GetUpstreamOAuthLinkErrors,
+  ThrowOnError
+> =>
   options.client.get<
     GetUpstreamOAuthLinkResponses,
     GetUpstreamOAuthLinkErrors,
@@ -1460,7 +1818,13 @@ export const getUpstreamOAuthLink = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetUpstreamOAuthLinkResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/upstream-oauth-links/{id}",
     ...options,
   });
@@ -1472,7 +1836,7 @@ export const listUpstreamOAuthProviders = <
   ThrowOnError extends boolean = false,
 >(
   options: Options<ListUpstreamOAuthProvidersData, ThrowOnError>,
-) =>
+): RequestResult<ListUpstreamOAuthProvidersResponses, unknown, ThrowOnError> =>
   options.client.get<
     ListUpstreamOAuthProvidersResponses,
     unknown,
@@ -1489,7 +1853,13 @@ export const listUpstreamOAuthProviders = <
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vListUpstreamOAuthProvidersResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/upstream-oauth-providers",
     ...options,
   });
@@ -1499,7 +1869,11 @@ export const listUpstreamOAuthProviders = <
  */
 export const getUpstreamOAuthProvider = <ThrowOnError extends boolean = false>(
   options: Options<GetUpstreamOAuthProviderData, ThrowOnError>,
-) =>
+): RequestResult<
+  GetUpstreamOAuthProviderResponses,
+  GetUpstreamOAuthProviderErrors,
+  ThrowOnError
+> =>
   options.client.get<
     GetUpstreamOAuthProviderResponses,
     GetUpstreamOAuthProviderErrors,
@@ -1516,7 +1890,13 @@ export const getUpstreamOAuthProvider = <ThrowOnError extends boolean = false>(
       ),
     responseValidator: async (data) =>
       await v.parseAsync(vGetUpstreamOAuthProviderResponse, data),
-    security: [{ scheme: "bearer", type: "http" }],
+    security: [
+      {
+        key: "oauth2",
+        scheme: "bearer",
+        type: "http",
+      },
+    ],
     url: "/api/admin/v1/upstream-oauth-providers/{id}",
     ...options,
   });

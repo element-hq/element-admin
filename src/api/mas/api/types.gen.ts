@@ -21,8 +21,12 @@ export type SiteConfig = {
    * Whether a valid email address is required for password registrations.
    */
   password_registration_email_required?: boolean;
+  password_registration_token_required?: boolean;
   /**
    * Whether registration tokens are required for password registrations.
+   * Deprecated in favor of `password_registration_token_required`
+   *
+   * @deprecated
    */
   registration_token_required?: boolean;
   /**
@@ -1396,6 +1400,11 @@ export type UpstreamOAuthProvider = {
    * When the provider was disabled. If null, the provider is enabled.
    */
   disabled_at?: string | null;
+  /**
+   * Whether a registration token is required for registrations via this
+   * provider.
+   */
+  registration_token_required: boolean;
 };
 
 /**
