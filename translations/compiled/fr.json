@@ -149,15 +149,15 @@
       "value": "Copyright © "
     },
     {
+      "type": 3,
+      "value": "now",
       "style": {
+        "type": 1,
+        "pattern": "yyyy",
         "parsedOptions": {
           "year": "numeric"
-        },
-        "pattern": "yyyy",
-        "type": 1
-      },
-      "type": 3,
-      "value": "now"
+        }
+      }
     }
   ],
   "footer.help_and_support": [
@@ -186,52 +186,52 @@
   ],
   "marketing.also_available_in_pro.description": [
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
+          "type": 8,
+          "value": "link",
           "children": [
             {
               "type": 0,
               "value": "ESS Pro"
             }
-          ],
-          "type": 8,
-          "value": "link"
+          ]
         },
         {
           "type": 0,
           "value": " est la distribution serveur commerciale d'Element."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Elle comprend tout ce qui se trouve dans ESS Community, ainsi que des fonctionnalités et services supplémentaires adaptés aux environnements professionnels comptant plus de 100 utilisateurs, jusqu'à des millions."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Elle est conçue pour répondre aux exigences des entreprises en matière de gestion d'accès avancé, de conformité, de passage à l'échelle, de haute disponibilité et de mutualisation."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     }
   ],
   "marketing.also_available_in_pro.title": [
@@ -248,56 +248,56 @@
   ],
   "marketing.auditing.description": [
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "L'audit permet aux organisations de conserver des enregistrements des conversations chiffrées de bout en bout et des événements dans les salons afin de respecter des exigences légales ou de conformité."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Lorsqu'il est activé, tous les utilisateurs du serveur peuvent voir quelles salles sont enregistrées afin de garantir la transparence du processus d'audit."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "L'audit peut être configuré pour répondre aux exigences spécifiques d'une organisation. Par exemple, les messages directs entre deux personnes peuvent être exclus afin que seules les conversations de groupe soient enregistrées."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Les données d'audit sont stockées sous forme de flux d'événements lisibles par machine au format JSON, soit sur un stockage de fichiers, soit sur S3, et peuvent être transmises à des outils d'analyse de journaux pour un filtrage et une analyse plus approfondis."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     }
   ],
   "marketing.auditing.title": [
@@ -306,100 +306,180 @@
       "value": "Audit"
     }
   ],
-  "marketing.supervision.description": [
+  "marketing.sbg.description": [
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
-          "value": "La supervision permet à une organisation de gérer tous les salons de manière centralisée. Un compte de « supervision » rejoindra les salons définis avec des privilèges d'administrateur de salon. Les administrateurs de serveur peuvent ainsi facilement utiliser ce compte depuis la console d'administration afin de gérer et de modérer leurs salons."
+          "value": "Secure Border Gateway is an application-level firewall for Matrix servers."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "ul",
+      "children": [
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Inspects all requests to and from the server"
+            }
+          ]
+        },
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Can use all request metadata to enforce rules"
+            }
+          ]
+        },
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Pipeline-based approach to connect APIs and rule sets"
+            }
+          ]
+        },
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Pluggable rules engine that can be applied to the pipelines"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "marketing.sbg.title": [
+    {
+      "type": 0,
+      "value": "Secure Border Gateway"
+    }
+  ],
+  "marketing.supervision.description": [
+    {
+      "type": 8,
+      "value": "p",
+      "children": [
+        {
+          "type": 0,
+          "value": "La supervision permet à une organisation de gérer tous les salons de manière centralisée. Un compte de « supervision » rejoindra les salons définis avec des privilèges d'administrateur de salon. Les administrateurs de serveur peuvent ainsi facilement utiliser ce compte depuis la console d'administration afin de gérer et de modérer leurs salons."
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 8,
+      "value": "ul",
       "children": [
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Gestion les salons et leurs paramètres (nom, topic, autorisation, etc.)"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Gestion des membres des salons"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Suppression des messages et médias indésirables"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Récupération des salons abandonnés (dont tous les membres sont partis)"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Accès (ou non) aux messages chiffrés par le compte de modération (configurable)"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         }
-      ],
-      "type": 8,
-      "value": "ul"
+      ]
     }
   ],
   "marketing.supervision.title": [
@@ -424,6 +504,12 @@
     {
       "type": 0,
       "value": "Documentation"
+    }
+  ],
+  "navigation.federation": [
+    {
+      "type": 0,
+      "value": "Federation"
     }
   ],
   "navigation.personal_tokens": [
@@ -520,6 +606,240 @@
     {
       "type": 0,
       "value": "Tableau de bord"
+    }
+  ],
+  "pages.federation.allowlist.add.error": [
+    {
+      "type": 0,
+      "value": "Failed to add domain to allowlist"
+    }
+  ],
+  "pages.federation.allowlist.add.success": [
+    {
+      "type": 0,
+      "value": "Domain added to allowlist"
+    }
+  ],
+  "pages.federation.allowlist.add_domain": [
+    {
+      "type": 0,
+      "value": "Add domain"
+    }
+  ],
+  "pages.federation.allowlist.add_pattern": [
+    {
+      "type": 0,
+      "value": "Add pattern"
+    }
+  ],
+  "pages.federation.allowlist.add_pattern.help": [
+    {
+      "type": 0,
+      "value": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
+    }
+  ],
+  "pages.federation.allowlist.empty": [
+    {
+      "type": 0,
+      "value": "No domains in the allowlist yet. Add a domain pattern above to get started."
+    }
+  ],
+  "pages.federation.allowlist.heading": [
+    {
+      "type": 0,
+      "value": "List of patterns allowed to federate with you"
+    }
+  ],
+  "pages.federation.allowlist.remove.error": [
+    {
+      "type": 0,
+      "value": "Failed to remove domain from allowlist"
+    }
+  ],
+  "pages.federation.allowlist.remove.success": [
+    {
+      "type": 0,
+      "value": "Domain removed from allowlist"
+    }
+  ],
+  "pages.federation.allowlist.remove_tooltip": [
+    {
+      "type": 0,
+      "value": "Remove from allowlist"
+    }
+  ],
+  "pages.federation.detail.contact": [
+    {
+      "type": 0,
+      "value": "Contact"
+    }
+  ],
+  "pages.federation.detail.destination": [
+    {
+      "type": 0,
+      "value": "Destination"
+    }
+  ],
+  "pages.federation.detail.last_retry": [
+    {
+      "type": 0,
+      "value": "Last retry timestamp"
+    }
+  ],
+  "pages.federation.detail.last_successful_stream": [
+    {
+      "type": 0,
+      "value": "Last successful stream"
+    }
+  ],
+  "pages.federation.detail.retry_interval": [
+    {
+      "type": 0,
+      "value": "Retry interval"
+    }
+  ],
+  "pages.federation.detail.security": [
+    {
+      "type": 0,
+      "value": "Security"
+    }
+  ],
+  "pages.federation.detail.support_page": [
+    {
+      "type": 0,
+      "value": "Support page"
+    }
+  ],
+  "pages.federation.domain_count": [
+    {
+      "type": 6,
+      "value": "COUNT",
+      "options": {
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "No domains"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " domain"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " domains"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "pages.federation.loading": [
+    {
+      "type": 0,
+      "value": "Loading more domains…"
+    }
+  ],
+  "pages.federation.not_found.description": [
+    {
+      "type": 0,
+      "value": "The requested destination ("
+    },
+    {
+      "type": 1,
+      "value": "destination"
+    },
+    {
+      "type": 0,
+      "value": ") could not be found."
+    }
+  ],
+  "pages.federation.not_found.title": [
+    {
+      "type": 0,
+      "value": "Destination not found"
+    }
+  ],
+  "pages.federation.sbg_not_enabled.description": [
+    {
+      "type": 0,
+      "value": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+    }
+  ],
+  "pages.federation.sbg_not_enabled.title": [
+    {
+      "type": 0,
+      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+    }
+  ],
+  "pages.federation.search_placeholder": [
+    {
+      "type": 0,
+      "value": "Search domains…"
+    }
+  ],
+  "pages.federation.tab.allowed_domains": [
+    {
+      "type": 0,
+      "value": "Allowed domains"
+    }
+  ],
+  "pages.federation.tab.known_domains": [
+    {
+      "type": 0,
+      "value": "Known domains"
+    }
+  ],
+  "pages.federation.tab.section": [
+    {
+      "type": 0,
+      "value": "Federation views"
+    }
+  ],
+  "pages.federation.table.server_name": [
+    {
+      "type": 0,
+      "value": "Server name"
+    }
+  ],
+  "pages.federation.table.status": [
+    {
+      "type": 0,
+      "value": "Status"
+    }
+  ],
+  "pages.federation.title": [
+    {
+      "type": 0,
+      "value": "Federation"
+    }
+  ],
+  "pages.federation.unavailable_alert.description": [
+    {
+      "type": 0,
+      "value": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
+    }
+  ],
+  "pages.federation.unavailable_alert.title": [
+    {
+      "type": 0,
+      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
     }
   ],
   "pages.generic_error.go_home": [
@@ -654,7 +974,8 @@
   ],
   "pages.personal_tokens.count": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "count",
       "options": {
         "=0": {
           "value": [
@@ -687,9 +1008,8 @@
           ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "count"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "pages.personal_tokens.create_error": [
@@ -1274,8 +1594,17 @@
   ],
   "pages.registration_tokens.token_count": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "COUNT",
       "options": {
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Aucun jeton"
+            }
+          ]
+        },
         "one": {
           "value": [
             {
@@ -1297,42 +1626,33 @@
               "value": " jetons"
             }
           ]
-        },
-        "zero": {
-          "value": [
-            {
-              "type": 0,
-              "value": "Aucun jeton"
-            }
-          ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "COUNT"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "pages.registration_tokens.token_uses.limited": [
     {
-      "style": null,
       "type": 2,
-      "value": "uses"
+      "value": "uses",
+      "style": null
     },
     {
       "type": 0,
       "value": "/"
     },
     {
-      "style": null,
       "type": 2,
-      "value": "limit"
+      "value": "limit",
+      "style": null
     }
   ],
   "pages.registration_tokens.token_uses.unlimited": [
     {
-      "style": null,
       "type": 2,
-      "value": "uses"
+      "value": "uses",
+      "style": null
     },
     {
       "type": 0,
@@ -1447,18 +1767,18 @@
       "value": "La tâche de suppression de la salle a échoué le "
     },
     {
-      "style": "short",
       "type": 3,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
       "value": " à "
     },
     {
-      "style": "short",
       "type": 4,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
@@ -1481,18 +1801,18 @@
       "value": "La suppression des salles est en cours depuis le "
     },
     {
-      "style": "short",
       "type": 3,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
       "value": " "
     },
     {
-      "style": "short",
       "type": 4,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
@@ -1511,18 +1831,18 @@
       "value": "Suppression du salon effectuée avec succès le "
     },
     {
-      "style": "short",
       "type": 3,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
       "value": " à "
     },
     {
-      "style": "short",
       "type": 4,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
@@ -1589,8 +1909,17 @@
   ],
   "pages.rooms.room_count": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "COUNT",
       "options": {
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Aucun salon"
+            }
+          ]
+        },
         "one": {
           "value": [
             {
@@ -1612,19 +1941,10 @@
               "value": " salons"
             }
           ]
-        },
-        "zero": {
-          "value": [
-            {
-              "type": 0,
-              "value": "Aucun salon"
-            }
-          ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "COUNT"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "pages.rooms.title": [
@@ -1639,14 +1959,14 @@
       "value": "Veuillez vous connecter en tant que "
     },
     {
+      "type": 8,
+      "value": "b",
       "children": [
         {
           "type": 1,
           "value": "mxid"
         }
-      ],
-      "type": 8,
-      "value": "b"
+      ]
     },
     {
       "type": 0,
@@ -2257,8 +2577,17 @@
   ],
   "pages.users.user_count": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "COUNT",
       "options": {
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Aucun utilisateur"
+            }
+          ]
+        },
         "one": {
           "value": [
             {
@@ -2280,19 +2609,10 @@
               "value": " utilisateurs"
             }
           ]
-        },
-        "zero": {
-          "value": [
-            {
-              "type": 0,
-              "value": "Aucun utilisateur"
-            }
-          ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "COUNT"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "product.element": [
@@ -2365,7 +2685,8 @@
   ],
   "rooms_info.other_members": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "COUNT",
       "options": {
         "one": {
           "value": [
@@ -2390,9 +2711,8 @@
           ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "COUNT"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "ui.data.failed_to_load": [
@@ -2405,6 +2725,30 @@
     {
       "type": 0,
       "value": "Chargement de l'information"
+    }
+  ],
+  "ui.destination_status.failing": [
+    {
+      "type": 0,
+      "value": "Failing"
+    }
+  ],
+  "ui.destination_status.inactive": [
+    {
+      "type": 0,
+      "value": "Inactive"
+    }
+  ],
+  "ui.destination_status.never_worked": [
+    {
+      "type": 0,
+      "value": "Never worked"
+    }
+  ],
+  "ui.destination_status.working": [
+    {
+      "type": 0,
+      "value": "Working"
     }
   ],
   "ui.language_switcher.browser_default": [

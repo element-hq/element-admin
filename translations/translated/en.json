@@ -83,6 +83,12 @@
   "marketing.auditing.title": {
     "message": "Auditing"
   },
+  "marketing.sbg.description": {
+    "message": "<p>Secure Border Gateway is an application-level firewall for Matrix servers.</p> <ul><li>Inspects all requests to and from the server</li> <li>Can use all request metadata to enforce rules</li> <li>Pipeline-based approach to connect APIs and rule sets</li> <li>Pluggable rules engine that can be applied to the pipelines</li></ul>"
+  },
+  "marketing.sbg.title": {
+    "message": "Secure Border Gateway"
+  },
   "marketing.supervision.description": {
     "message": "<p>Supervision enables an organisation to administer all rooms from a central point. A 'supervisor' account will join defined rooms with room admin privileges. Server administrators can seamlessly impersonate the account from the admin console to manage and supervise their rooms.</p> <ul><li>Manage rooms and their settings (name, topic, permissions, etc.)</li> <li>Manage room memberships</li> <li>Remove unwanted messages and uploaded media</li> <li>Recover abandoned rooms (all users have left)</li> <li>Supervisor account can or cannot read encrypted message contents (configurable)</li></ul>"
   },
@@ -97,6 +103,9 @@
   },
   "navigation.documentation": {
     "message": "Documentation"
+  },
+  "navigation.federation": {
+    "message": "Federation"
   },
   "navigation.personal_tokens": {
     "message": "Personal tokens"
@@ -145,6 +154,102 @@
   },
   "pages.dashboard.title": {
     "message": "Dashboard"
+  },
+  "pages.federation.allowlist.add.error": {
+    "message": "Failed to add domain to allowlist"
+  },
+  "pages.federation.allowlist.add.success": {
+    "message": "Domain added to allowlist"
+  },
+  "pages.federation.allowlist.add_domain": {
+    "message": "Add domain"
+  },
+  "pages.federation.allowlist.add_pattern": {
+    "message": "Add pattern"
+  },
+  "pages.federation.allowlist.add_pattern.help": {
+    "message": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
+  },
+  "pages.federation.allowlist.empty": {
+    "message": "No domains in the allowlist yet. Add a domain pattern above to get started."
+  },
+  "pages.federation.allowlist.heading": {
+    "message": "List of patterns allowed to federate with you"
+  },
+  "pages.federation.allowlist.remove.error": {
+    "message": "Failed to remove domain from allowlist"
+  },
+  "pages.federation.allowlist.remove.success": {
+    "message": "Domain removed from allowlist"
+  },
+  "pages.federation.allowlist.remove_tooltip": {
+    "message": "Remove from allowlist"
+  },
+  "pages.federation.detail.contact": {
+    "message": "Contact"
+  },
+  "pages.federation.detail.destination": {
+    "message": "Destination"
+  },
+  "pages.federation.detail.last_retry": {
+    "message": "Last retry timestamp"
+  },
+  "pages.federation.detail.last_successful_stream": {
+    "message": "Last successful stream"
+  },
+  "pages.federation.detail.retry_interval": {
+    "message": "Retry interval"
+  },
+  "pages.federation.detail.security": {
+    "message": "Security"
+  },
+  "pages.federation.detail.support_page": {
+    "message": "Support page"
+  },
+  "pages.federation.domain_count": {
+    "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
+  },
+  "pages.federation.loading": {
+    "message": "Loading more domains…"
+  },
+  "pages.federation.not_found.description": {
+    "message": "The requested destination ({destination}) could not be found."
+  },
+  "pages.federation.not_found.title": {
+    "message": "Destination not found"
+  },
+  "pages.federation.sbg_not_enabled.description": {
+    "message": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+  },
+  "pages.federation.sbg_not_enabled.title": {
+    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+  },
+  "pages.federation.search_placeholder": {
+    "message": "Search domains…"
+  },
+  "pages.federation.tab.allowed_domains": {
+    "message": "Allowed domains"
+  },
+  "pages.federation.tab.known_domains": {
+    "message": "Known domains"
+  },
+  "pages.federation.tab.section": {
+    "message": "Federation views"
+  },
+  "pages.federation.table.server_name": {
+    "message": "Server name"
+  },
+  "pages.federation.table.status": {
+    "message": "Status"
+  },
+  "pages.federation.title": {
+    "message": "Federation"
+  },
+  "pages.federation.unavailable_alert.description": {
+    "message": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
+  },
+  "pages.federation.unavailable_alert.title": {
+    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
   },
   "pages.generic_error.go_home": {
     "message": "Go home"
@@ -901,6 +1006,18 @@
   },
   "ui.data.loading": {
     "message": "Loading value"
+  },
+  "ui.destination_status.failing": {
+    "message": "Failing"
+  },
+  "ui.destination_status.inactive": {
+    "message": "Inactive"
+  },
+  "ui.destination_status.never_worked": {
+    "message": "Never worked"
+  },
+  "ui.destination_status.working": {
+    "message": "Working"
   },
   "ui.language_switcher.browser_default": {
     "message": "Use browser settings ({language})"

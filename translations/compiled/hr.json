@@ -157,15 +157,15 @@
       "value": "Autorsko pravo © "
     },
     {
+      "type": 3,
+      "value": "now",
       "style": {
+        "type": 1,
+        "pattern": "yyyy",
         "parsedOptions": {
           "year": "numeric"
-        },
-        "pattern": "yyyy",
-        "type": 1
-      },
-      "type": 3,
-      "value": "now"
+        }
+      }
     }
   ],
   "footer.help_and_support": [
@@ -194,52 +194,52 @@
   ],
   "marketing.also_available_in_pro.description": [
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
+          "type": 8,
+          "value": "link",
           "children": [
             {
               "type": 0,
               "value": "ESS Pro"
             }
-          ],
-          "type": 8,
-          "value": "link"
+          ]
         },
         {
           "type": 0,
           "value": " komercijalna je pozadinska distribucija tvrtke Element."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Uključuje sve što nudi ESS Community, a i dodatne značajke i usluge prilagođene profesionalnim okruženjima s više od 100 korisnika pa sve do masovnih sustava s milijunima korisnika."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Dizajniran je tako da podrži zahtjeve velikih organizacija u pogledu naprednog IAM-a, usklađenosti, skalabilnosti, visoke dostupnosti i rada s više odvojenih zakupaca."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     }
   ],
   "marketing.also_available_in_pro.title": [
@@ -256,56 +256,56 @@
   ],
   "marketing.auditing.description": [
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Revizija organizacijama omogućuje vođenje evidencije o sveobuhvatno šifriranim razgovorima i događajima u sobama kako bi se ispunili zahtjevi usklađenosti ili udovoljilo zakonskim propisima."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Kada je ova značajka omogućena, svim je krajnjim korisnicima vidljivo koje se sobe snimaju kako bi se osigurala transparentnost procesa revizije."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Revizija se može konfigurirati tako da odgovara specifičnim zahtjevima organizacije. Na primjer, izravne poruke između dvije osobe mogu se isključiti tako da se snimaju samo grupni razgovori."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
           "value": "Podatci revizije pohranjuju se kao niz strojno čitljivih događaja u JSON obliku na lokalnoj pohrani ili S3 servisu te se mogu proslijediti alatima za analizu zapisnika radi daljnjeg filtriranja i obrade."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     }
   ],
   "marketing.auditing.title": [
@@ -314,100 +314,180 @@
       "value": "Revizija"
     }
   ],
-  "marketing.supervision.description": [
+  "marketing.sbg.description": [
     {
+      "type": 8,
+      "value": "p",
       "children": [
         {
           "type": 0,
-          "value": "Moderiranje omogućuje organizaciji upravljanje svim sobama s jedne središnje točke. Moderatorski račun pridružit će se definiranim sobama s administratorskim ovlastima. Administratori poslužitelja mogu se neprimjetno prijaviti u ime tog računa putem administratorske konzole kako bi upravljali svojim sobama i moderirali ih."
+          "value": "Secure Border Gateway is an application-level firewall for Matrix servers."
         }
-      ],
-      "type": 8,
-      "value": "p"
+      ]
     },
     {
       "type": 0,
       "value": " "
     },
     {
+      "type": 8,
+      "value": "ul",
+      "children": [
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Inspects all requests to and from the server"
+            }
+          ]
+        },
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Can use all request metadata to enforce rules"
+            }
+          ]
+        },
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Pipeline-based approach to connect APIs and rule sets"
+            }
+          ]
+        },
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Pluggable rules engine that can be applied to the pipelines"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "marketing.sbg.title": [
+    {
+      "type": 0,
+      "value": "Secure Border Gateway"
+    }
+  ],
+  "marketing.supervision.description": [
+    {
+      "type": 8,
+      "value": "p",
+      "children": [
+        {
+          "type": 0,
+          "value": "Moderiranje omogućuje organizaciji upravljanje svim sobama s jedne središnje točke. Moderatorski račun pridružit će se definiranim sobama s administratorskim ovlastima. Administratori poslužitelja mogu se neprimjetno prijaviti u ime tog računa putem administratorske konzole kako bi upravljali svojim sobama i moderirali ih."
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 8,
+      "value": "ul",
       "children": [
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Upravljanje sobama i njihovim postavkama (naziv, tema, dopuštenja itd.)"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Upravljanje članstvom u sobama"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Uklanjanje neželjenih poruka i prenesenih medija"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Vraćanje napuštene sobe (svi korisnici su otišli)"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         },
         {
+          "type": 8,
+          "value": "li",
           "children": [
             {
               "type": 0,
               "value": "Moderatorski račun može ili ne može čitati sadržaj šifriranih poruka (podesivo)"
             }
-          ],
-          "type": 8,
-          "value": "li"
+          ]
         },
         {
           "type": 0,
           "value": " "
         }
-      ],
-      "type": 8,
-      "value": "ul"
+      ]
     }
   ],
   "marketing.supervision.title": [
@@ -432,6 +512,12 @@
     {
       "type": 0,
       "value": "Dokumentacija"
+    }
+  ],
+  "navigation.federation": [
+    {
+      "type": 0,
+      "value": "Federation"
     }
   ],
   "navigation.personal_tokens": [
@@ -528,6 +614,240 @@
     {
       "type": 0,
       "value": "Nadzorna ploča"
+    }
+  ],
+  "pages.federation.allowlist.add.error": [
+    {
+      "type": 0,
+      "value": "Failed to add domain to allowlist"
+    }
+  ],
+  "pages.federation.allowlist.add.success": [
+    {
+      "type": 0,
+      "value": "Domain added to allowlist"
+    }
+  ],
+  "pages.federation.allowlist.add_domain": [
+    {
+      "type": 0,
+      "value": "Add domain"
+    }
+  ],
+  "pages.federation.allowlist.add_pattern": [
+    {
+      "type": 0,
+      "value": "Add pattern"
+    }
+  ],
+  "pages.federation.allowlist.add_pattern.help": [
+    {
+      "type": 0,
+      "value": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
+    }
+  ],
+  "pages.federation.allowlist.empty": [
+    {
+      "type": 0,
+      "value": "No domains in the allowlist yet. Add a domain pattern above to get started."
+    }
+  ],
+  "pages.federation.allowlist.heading": [
+    {
+      "type": 0,
+      "value": "List of patterns allowed to federate with you"
+    }
+  ],
+  "pages.federation.allowlist.remove.error": [
+    {
+      "type": 0,
+      "value": "Failed to remove domain from allowlist"
+    }
+  ],
+  "pages.federation.allowlist.remove.success": [
+    {
+      "type": 0,
+      "value": "Domain removed from allowlist"
+    }
+  ],
+  "pages.federation.allowlist.remove_tooltip": [
+    {
+      "type": 0,
+      "value": "Remove from allowlist"
+    }
+  ],
+  "pages.federation.detail.contact": [
+    {
+      "type": 0,
+      "value": "Contact"
+    }
+  ],
+  "pages.federation.detail.destination": [
+    {
+      "type": 0,
+      "value": "Destination"
+    }
+  ],
+  "pages.federation.detail.last_retry": [
+    {
+      "type": 0,
+      "value": "Last retry timestamp"
+    }
+  ],
+  "pages.federation.detail.last_successful_stream": [
+    {
+      "type": 0,
+      "value": "Last successful stream"
+    }
+  ],
+  "pages.federation.detail.retry_interval": [
+    {
+      "type": 0,
+      "value": "Retry interval"
+    }
+  ],
+  "pages.federation.detail.security": [
+    {
+      "type": 0,
+      "value": "Security"
+    }
+  ],
+  "pages.federation.detail.support_page": [
+    {
+      "type": 0,
+      "value": "Support page"
+    }
+  ],
+  "pages.federation.domain_count": [
+    {
+      "type": 6,
+      "value": "COUNT",
+      "options": {
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "No domains"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " domain"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " domains"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "pages.federation.loading": [
+    {
+      "type": 0,
+      "value": "Loading more domains…"
+    }
+  ],
+  "pages.federation.not_found.description": [
+    {
+      "type": 0,
+      "value": "The requested destination ("
+    },
+    {
+      "type": 1,
+      "value": "destination"
+    },
+    {
+      "type": 0,
+      "value": ") could not be found."
+    }
+  ],
+  "pages.federation.not_found.title": [
+    {
+      "type": 0,
+      "value": "Destination not found"
+    }
+  ],
+  "pages.federation.sbg_not_enabled.description": [
+    {
+      "type": 0,
+      "value": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+    }
+  ],
+  "pages.federation.sbg_not_enabled.title": [
+    {
+      "type": 0,
+      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+    }
+  ],
+  "pages.federation.search_placeholder": [
+    {
+      "type": 0,
+      "value": "Search domains…"
+    }
+  ],
+  "pages.federation.tab.allowed_domains": [
+    {
+      "type": 0,
+      "value": "Allowed domains"
+    }
+  ],
+  "pages.federation.tab.known_domains": [
+    {
+      "type": 0,
+      "value": "Known domains"
+    }
+  ],
+  "pages.federation.tab.section": [
+    {
+      "type": 0,
+      "value": "Federation views"
+    }
+  ],
+  "pages.federation.table.server_name": [
+    {
+      "type": 0,
+      "value": "Server name"
+    }
+  ],
+  "pages.federation.table.status": [
+    {
+      "type": 0,
+      "value": "Status"
+    }
+  ],
+  "pages.federation.title": [
+    {
+      "type": 0,
+      "value": "Federation"
+    }
+  ],
+  "pages.federation.unavailable_alert.description": [
+    {
+      "type": 0,
+      "value": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
+    }
+  ],
+  "pages.federation.unavailable_alert.title": [
+    {
+      "type": 0,
+      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
     }
   ],
   "pages.generic_error.go_home": [
@@ -662,7 +982,8 @@
   ],
   "pages.personal_tokens.count": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "count",
       "options": {
         "=0": {
           "value": [
@@ -695,9 +1016,8 @@
           ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "count"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "pages.personal_tokens.create_error": [
@@ -1282,8 +1602,17 @@
   ],
   "pages.registration_tokens.token_count": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "COUNT",
       "options": {
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Nema tokena"
+            }
+          ]
+        },
         "one": {
           "value": [
             {
@@ -1305,42 +1634,33 @@
               "value": " tokena"
             }
           ]
-        },
-        "zero": {
-          "value": [
-            {
-              "type": 0,
-              "value": "Nema tokena"
-            }
-          ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "COUNT"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "pages.registration_tokens.token_uses.limited": [
     {
-      "style": null,
       "type": 2,
-      "value": "uses"
+      "value": "uses",
+      "style": null
     },
     {
       "type": 0,
       "value": "/"
     },
     {
-      "style": null,
       "type": 2,
-      "value": "limit"
+      "value": "limit",
+      "style": null
     }
   ],
   "pages.registration_tokens.token_uses.unlimited": [
     {
-      "style": null,
       "type": 2,
-      "value": "uses"
+      "value": "uses",
+      "style": null
     },
     {
       "type": 0,
@@ -1455,18 +1775,18 @@
       "value": "Zadatak brisanja sobe nije uspio dana "
     },
     {
-      "style": "short",
       "type": 3,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
       "value": " u "
     },
     {
-      "style": "short",
       "type": 4,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
@@ -1489,18 +1809,18 @@
       "value": "Zadatak brisanja sobe u tijeku je od "
     },
     {
-      "style": "short",
       "type": 3,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
       "value": " u "
     },
     {
-      "style": "short",
       "type": 4,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
@@ -1519,18 +1839,18 @@
       "value": "Zadatak brisanja sobe uspješno je završen dana "
     },
     {
-      "style": "short",
       "type": 3,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
       "value": " u "
     },
     {
-      "style": "short",
       "type": 4,
-      "value": "timestamp"
+      "value": "timestamp",
+      "style": "short"
     },
     {
       "type": 0,
@@ -1597,8 +1917,17 @@
   ],
   "pages.rooms.room_count": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "COUNT",
       "options": {
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Nema soba"
+            }
+          ]
+        },
         "one": {
           "value": [
             {
@@ -1620,19 +1949,10 @@
               "value": " soba"
             }
           ]
-        },
-        "zero": {
-          "value": [
-            {
-              "type": 0,
-              "value": "Nema soba"
-            }
-          ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "COUNT"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "pages.rooms.title": [
@@ -1647,14 +1967,14 @@
       "value": "Prijavite se kao "
     },
     {
+      "type": 8,
+      "value": "b",
       "children": [
         {
           "type": 1,
           "value": "mxid"
         }
-      ],
-      "type": 8,
-      "value": "b"
+      ]
     },
     {
       "type": 0,
@@ -2265,8 +2585,17 @@
   ],
   "pages.users.user_count": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "COUNT",
       "options": {
+        "zero": {
+          "value": [
+            {
+              "type": 0,
+              "value": "Nema korisnika"
+            }
+          ]
+        },
         "one": {
           "value": [
             {
@@ -2288,19 +2617,10 @@
               "value": " korisnika"
             }
           ]
-        },
-        "zero": {
-          "value": [
-            {
-              "type": 0,
-              "value": "Nema korisnika"
-            }
-          ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "COUNT"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "product.element": [
@@ -2373,9 +2693,10 @@
   ],
   "rooms_info.other_members": [
     {
-      "offset": 0,
+      "type": 6,
+      "value": "COUNT",
       "options": {
-        "few": {
+        "one": {
           "value": [
             {
               "type": 0,
@@ -2386,7 +2707,7 @@
             }
           ]
         },
-        "one": {
+        "few": {
           "value": [
             {
               "type": 0,
@@ -2409,9 +2730,8 @@
           ]
         }
       },
-      "pluralType": "cardinal",
-      "type": 6,
-      "value": "COUNT"
+      "offset": 0,
+      "pluralType": "cardinal"
     }
   ],
   "ui.data.failed_to_load": [
@@ -2424,6 +2744,30 @@
     {
       "type": 0,
       "value": "Učitavanje vrijednosti"
+    }
+  ],
+  "ui.destination_status.failing": [
+    {
+      "type": 0,
+      "value": "Failing"
+    }
+  ],
+  "ui.destination_status.inactive": [
+    {
+      "type": 0,
+      "value": "Inactive"
+    }
+  ],
+  "ui.destination_status.never_worked": [
+    {
+      "type": 0,
+      "value": "Never worked"
+    }
+  ],
+  "ui.destination_status.working": [
+    {
+      "type": 0,
+      "value": "Working"
     }
   ],
   "ui.language_switcher.browser_default": [
