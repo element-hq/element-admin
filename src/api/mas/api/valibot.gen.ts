@@ -7,6 +7,7 @@ export const vSiteConfig = v.object({
   password_login_enabled: v.optional(v.boolean()),
   password_registration_enabled: v.optional(v.boolean()),
   password_registration_email_required: v.optional(v.boolean()),
+  password_registration_token_required: v.optional(v.boolean()),
   registration_token_required: v.optional(v.boolean()),
   email_change_allowed: v.optional(v.boolean()),
   displayname_change_allowed: v.optional(v.boolean()),
@@ -703,6 +704,7 @@ export const vUpstreamOAuthProvider = v.object({
   brand_name: v.nullish(v.string()),
   created_at: v.pipe(v.string(), v.isoTimestamp()),
   disabled_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  registration_token_required: v.boolean(),
 });
 
 /**

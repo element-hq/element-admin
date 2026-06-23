@@ -306,6 +306,7 @@
         "no-useless-escape": "off",
         "no-negated-condition": "off",
         "typescript/consistent-return": "off",
+        "typescript/no-inferrable-types": "off",
         "typescript/no-unnecessary-type-assertion": "off",
         "typescript/no-unnecessary-type-parameters": "off",
         "typescript/no-redundant-type-constituents": "off"
