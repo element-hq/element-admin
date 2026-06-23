@@ -5,6 +5,8 @@
 
 import { Temporal } from "@js-temporal/polyfill";
 
+import { useLocaleStore } from "@/stores/locale";
+
 export function computeUtcIsoStringFromLocal(
   localDateTimeString: string,
 ): string {
@@ -45,15 +47,10 @@ export function computeLocalDateTimeStringFromUtc(
 export function computeHumanReadableDateTimeStringFromUtc(
   utcDateTimeString: string,
 ): string {
-  // 1. Create an instant from the input string.
-  const instant = Temporal.Instant.from(utcDateTimeString);
-
-  // 2. Get the user's current system timezone.
-  const systemTimeZone = Temporal.Now.timeZoneId();
-
-  // 3. Attach the system timezone to the Instant to create a ZonedDateTime.
-  const zonedDateTime = instant.toZonedDateTimeISO(systemTimeZone);
-
-  // 4. Format it as a string.
-  return zonedDateTime.toLocaleString();
+  // TODO: this should be a React component and use the store live
+  const locale = useLocaleStore.getState().selectedLocale ?? undefined;
+  return Temporal.Instant.from(utcDateTimeString).toLocaleString(locale, {
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
 }

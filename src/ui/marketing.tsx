@@ -1,11 +1,13 @@
-// SPDX-FileCopyrightText: Copyright 2025 New Vector Ltd.
-// SPDX-FileCopyrightText: Copyright 2025, 2026 Element Creations Ltd.
+// Copyright 2025, 2026 Element Creations Ltd.
+// Copyright 2025 New Vector Ltd.
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+// Please see LICENSE files in the repository root for full details.
 
 import {
   AdminIcon,
   ExportArchiveIcon,
+  LeaveIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Button } from "@vector-im/compound-web";
 import { FormattedMessage } from "react-intl";
@@ -105,6 +107,39 @@ console to manage and supervise their rooms.</p>
         // oxlint-enable react/no-unstable-nested-components
       }}
       description="Description of the card explaining what supervision is"
+    />
+  </Card.Root>
+);
+
+export const SBGCard = ({ proBadge }: { proBadge?: boolean }) => (
+  <Card.Root kind="secondary">
+    <Card.Header>
+      <Card.Icon icon={LeaveIcon} />
+      <Card.Title>
+        <FormattedMessage
+          id="marketing.sbg.title"
+          defaultMessage="Secure Border Gateway"
+          description="Title of the card explaining what the Secure Border Gateway is"
+        />
+      </Card.Title>
+      {proBadge && <ProBadge />}
+    </Card.Header>
+
+    <FormattedMessage
+      id="marketing.sbg.description"
+      defaultMessage="<p>Secure Border Gateway is an application-level firewall for Matrix servers.</p>
+<ul><li>Inspects all requests to and from the server</li>
+<li>Can use all request metadata to enforce rules</li>
+<li>Pipeline-based approach to connect APIs and rule sets</li>
+<li>Pluggable rules engine that can be applied to the pipelines</li></ul>"
+      values={{
+        // oxlint-disable react/no-unstable-nested-components
+        p: (chunks) => <Card.Body>{...chunks}</Card.Body>,
+        ul: (chunks) => <Card.Checklist>{...chunks}</Card.Checklist>,
+        li: (chunks) => <Card.ChecklistItem>{...chunks}</Card.ChecklistItem>,
+        // oxlint-enable react/no-unstable-nested-components
+      }}
+      description="Description of the card explaining what the Secure Border Gateway is"
     />
   </Card.Root>
 );
