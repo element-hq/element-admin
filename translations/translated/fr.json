@@ -48,7 +48,7 @@
     "message": "La requête vers {url} n'a pas abouti avec le code d'état {status} {statusText}"
   },
   "errors.matrix_standard": {
-    "message": "La requête adressée au serveur d’accueil a échoué avec le code d'erreur '{errorCode}'. De plus, le serveur a renvoyé le message d'erreur suivant : {errorMessage}"
+    "message": "La requête adressée au serveur d’accueil a échoué avec le code d'erreur ''{errorCode}''. De plus, le serveur a renvoyé le message d'erreur suivant : {errorMessage}"
   },
   "errors.not_logged_in": {
     "message": "Déconnecté"

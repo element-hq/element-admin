@@ -130,7 +130,15 @@
   "errors.matrix_standard": [
     {
       "type": 0,
-      "value": "Request to the homeserver failed with error code {errorCode}. Additionally, the server gave the following error message: "
+      "value": "Request to the homeserver failed with error code '"
+    },
+    {
+      "type": 1,
+      "value": "errorCode"
+    },
+    {
+      "type": 0,
+      "value": "'. Additionally, the server gave the following error message: "
     },
     {
       "type": 1,

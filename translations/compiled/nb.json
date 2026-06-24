@@ -130,7 +130,15 @@
   "errors.matrix_standard": [
     {
       "type": 0,
-      "value": "Forespørsel til homeserveren mislyktes med feilkode {errorCode}. I tillegg ga serveren følgende feilmelding: "
+      "value": "Forespørsel til homeserveren mislyktes med feilkode '"
+    },
+    {
+      "type": 1,
+      "value": "errorCode"
+    },
+    {
+      "type": 0,
+      "value": "'. I tillegg ga serveren følgende feilmelding: "
     },
     {
       "type": 1,
