@@ -69,7 +69,7 @@ export class MatrixStandardError extends LocalizedError {
   localizedMessage = defineMessage({
     id: "errors.matrix_standard",
     defaultMessage:
-      "Request to the homeserver failed with error code '{errorCode}'. Additionally, the server gave the following error message: {errorMessage}",
+      "Request to the homeserver failed with error code ''{errorCode}''. Additionally, the server gave the following error message: {errorMessage}",
     description:
       "Generic error message when Synapse returned a rich error, with an error code (M_FORBIDDEN, etc.) and a human-readable error message, usually in english.",
   });
