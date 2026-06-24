@@ -77,7 +77,7 @@
   gap: var(--cpd-space-2x);
   align-items: center;
   padding: var(--cpd-space-3x) var(--cpd-space-4x);
-  border-block-start: 1px solid var(--cpd-color-bg-subtle-secondary);
+  border-block-start: 1px solid var(--cpd-color-separator-secondary);
 
   & .text {
     flex: 1;
@@ -88,14 +88,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-block-end: 2px solid var(--cpd-color-bg-subtle-secondary);
+  border-block-end: 2px solid var(--cpd-color-separator-secondary);
   padding-block-end: var(--cpd-space-2x);
   margin-block-end: var(--cpd-space-6x);
 }
 
 .table-header {
   height: var(--cpd-space-10x);
-  border-block-end: 1px solid var(--cpd-color-bg-subtle-secondary);
+  border-block-end: 1px solid var(--cpd-color-separator-primary);
 }
 
 .loading-table {

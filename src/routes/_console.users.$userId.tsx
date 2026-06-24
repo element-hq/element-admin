@@ -146,7 +146,7 @@ function UserChip({ mxid, synapseRoot }: UserChipProps) {
   const { data: profile } = useQuery(profileQuery(synapseRoot, mxid));
   const displayName = profile?.displayname;
   return (
-    <div className="border border-bg-subtle-primary p-3 flex gap-3 items-center">
+    <div className="border border-separator-primary p-3 flex gap-3 items-center">
       <UserAvatar synapseRoot={synapseRoot} userId={mxid} size="32px" />
       <div className="flex flex-col">
         <Text size="md" weight="semibold" className="text-text-primary">

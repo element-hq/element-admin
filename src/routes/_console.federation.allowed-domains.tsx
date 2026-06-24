@@ -290,7 +290,7 @@ function AllowlistManagement({ synapseRoot }: { synapseRoot: string }) {
         {allowlist.server_names.map((entry) => (
           <div
             key={entry.server_name}
-            className="flex items-center justify-between border-b border-bg-subtle-secondary px-4 py-4"
+            className="flex items-center justify-between border-b border-separator-primary px-4 py-4"
           >
             <Text size="md" weight="semibold" className="text-text-primary">
               {entry.server_name}

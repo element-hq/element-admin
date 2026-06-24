@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: var(--cpd-space-2x);
-  border-bottom: 2px solid var(--cpd-color-border-interactive-secondary);
+  border-bottom: 2px solid var(--cpd-color-separator-primary);
 
   & .header-title {
     font: var(--cpd-font-heading-sm-semibold);

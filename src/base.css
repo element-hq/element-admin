@@ -37,6 +37,8 @@ body {
   --color-text-success-primary: var(--cpd-color-text-success-primary);
   --color-text-info-primary: var(--cpd-color-text-info-primary);
   --color-text-on-solid-primary: var(--cpd-color-text-on-solid-primary);
+  --color-separator-primary: var(--cpd-color-separator-primary);
+  --color-separator-secondary: var(--cpd-color-separator-secondary);
   --color-bg-subtle-primary: var(--cpd-color-bg-subtle-primary);
   --color-bg-subtle-secondary: var(--cpd-color-bg-subtle-secondary);
   --color-bg-canvas-default: var(--cpd-color-bg-canvas-default);

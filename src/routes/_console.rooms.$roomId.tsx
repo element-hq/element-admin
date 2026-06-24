@@ -401,7 +401,7 @@ const RoomDeletionStatusDisplay: React.FC<RoomCommonProps> = (
 
 function RoomChip(props: RoomCommonProps) {
   return (
-    <div className="border border-bg-subtle-primary p-3 flex gap-3 items-center">
+    <div className="border border-separator-primary p-3 flex gap-3 items-center">
       <RoomAvatar {...props} size="32px" />
       <div className="flex flex-col">
         <Text size="md" weight="semibold" className="text-text-primary">
