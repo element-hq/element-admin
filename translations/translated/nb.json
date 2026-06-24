@@ -48,7 +48,7 @@
     "message": "Forespørsel til {url} mislyktes med statuskode {status} {statusText}"
   },
   "errors.matrix_standard": {
-    "message": "Forespørsel til homeserveren mislyktes med feilkode '{errorCode}'. I tillegg ga serveren følgende feilmelding: {errorMessage}"
+    "message": "Forespørsel til homeserveren mislyktes med feilkode ''{errorCode}''. I tillegg ga serveren følgende feilmelding: {errorMessage}"
   },
   "errors.not_logged_in": {
     "message": "Ikke pålogget"

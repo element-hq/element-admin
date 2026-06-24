@@ -130,7 +130,15 @@
   "errors.matrix_standard": [
     {
       "type": 0,
-      "value": "La requête adressée au serveur d’accueil a échoué avec le code d'erreur {errorCode}. De plus, le serveur a renvoyé le message d'erreur suivant : "
+      "value": "La requête adressée au serveur d’accueil a échoué avec le code d'erreur '"
+    },
+    {
+      "type": 1,
+      "value": "errorCode"
+    },
+    {
+      "type": 0,
+      "value": "'. De plus, le serveur a renvoyé le message d'erreur suivant : "
     },
     {
       "type": 1,

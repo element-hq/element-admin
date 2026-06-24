@@ -48,7 +48,7 @@
     "message": "Request to {url} failed with status code {status} {statusText}"
   },
   "errors.matrix_standard": {
-    "message": "Request to the homeserver failed with error code '{errorCode}'. Additionally, the server gave the following error message: {errorMessage}"
+    "message": "Request to the homeserver failed with error code ''{errorCode}''. Additionally, the server gave the following error message: {errorMessage}"
   },
   "errors.not_logged_in": {
     "message": "Not logged in"

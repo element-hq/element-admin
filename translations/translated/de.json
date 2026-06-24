@@ -207,7 +207,7 @@
     "message": "Support-Seite"
   },
   "pages.federation.domain_count": {
-    "message": "{COUNT,plural,zero{No domains} eine{# domain} weitere{# domains} other{No domains}}"
+    "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
   },
   "pages.federation.loading": {
     "message": "Weitere Domains werden geladen…"

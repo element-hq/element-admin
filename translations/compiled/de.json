@@ -735,7 +735,7 @@
             }
           ]
         },
-        "eine": {
+        "one": {
           "value": [
             {
               "type": 7
@@ -746,7 +746,7 @@
             }
           ]
         },
-        "weitere": {
+        "other": {
           "value": [
             {
               "type": 7
@@ -754,14 +754,6 @@
             {
               "type": 0,
               "value": " domains"
-            }
-          ]
-        },
-        "other": {
-          "value": [
-            {
-              "type": 0,
-              "value": "No domains"
             }
           ]
         }
