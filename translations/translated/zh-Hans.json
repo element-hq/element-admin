@@ -12,10 +12,10 @@
     "message": "关闭"
   },
   "action.copy": {
-    "message": "Copy"
+    "message": "复制"
   },
   "action.delete": {
-    "message": "Delete"
+    "message": "删除"
   },
   "action.go_back": {
     "message": "后退"
@@ -27,7 +27,7 @@
     "message": "重试"
   },
   "action.sign_in": {
-    "message": "Sign in"
+    "message": "登录"
   },
   "action.sign_out": {
     "message": "注销"
@@ -48,13 +48,13 @@
     "message": "{url} 请求失败，状态码：{status} {statusText}"
   },
   "errors.matrix_standard": {
-    "message": "对主服务器的请求失败，错误代码：{errorCode}。另外服务器还返回了以下错误信息：{errorMessage}"
+    "message": "对家服务器的请求失败，错误代码：{errorCode}。另外服务器还返回了以下错误信息：{errorMessage}"
   },
   "errors.not_logged_in": {
     "message": "未登录"
   },
   "footer.copyright_notice": {
-    "message": "Copyright © {now, date, ::yyyy}"
+    "message": "版权所有 © {now, date, ::yyyy}"
   },
   "footer.help_and_support": {
     "message": "帮助与支持"
@@ -69,34 +69,34 @@
     "message": "账户菜单"
   },
   "marketing.also_available_in_pro.description": {
-    "message": "<p><link>ESS Pro</link> is the commercial backend distribution from Element.</p> <p>It includes everything in ESS Community plus additional features and services that are tailored to professional environments with more than 100 users up to massive scale in the millions.</p> <p>It is designed to support enterprise requirements in terms of advanced IAM, compliance, scalability, high availability and multi-tenancy.</p>"
+    "message": "<p><link>ESS Pro</link> 是 Element 的商业后端发行版。</p><p> 其包含了 ESS Community 的所有内容，以及专为专业环境量身定制的附加功能和服务，可支持从 100 到数百万用户的部署。</p><p> 旨在满足企业在高级身份和访问管理 (IAM)、合规性、可扩展性、高可用性和多租户方面的需求。</p>"
   },
   "marketing.also_available_in_pro.title": {
-    "message": "Also available in Pro…"
+    "message": "Pro 版还提供……"
   },
   "marketing.also_available_in_pro.upgrade": {
-    "message": "Upgrade to Pro"
+    "message": "升级到专业版"
   },
   "marketing.auditing.description": {
-    "message": "<p>Auditing gives organizations the ability to keep records of end-to-end encrypted conversations and room events to meet compliance or legal requirements.</p> <p>When enabled, it is visible to all end users which rooms are being recorded to ensure transparency of the auditing process.</p> <p>Auditing can be configured to suit an organization’s specific requirements. For instance direct messages between two individuals can be excluded so that only group conversations are recorded.</p> <p>Audit data is being stored as a stream of machine-readable events in the JSON format either on file storage or S3 and can be forwarded to log analyzer tooling for further filtering and analysis.</p>"
+    "message": "<p> 审计功能使组织能够记录端到端加密的对话和聊天室事件，以满足合规性或法律要求。</p><p> 启用后，所有最终用户都可以看到哪些聊天室正在被录制以确保审计过程的透明度。</p><p> 审计功能可以根据组织的具体需求进行配置。例如，可以排除两个人之间的直接消息，从而仅记录群组对话。</p><p> 审计数据以 JSON 格式的机器可读事件流的形式存储在文件存储或 S3 上，并可以转发到日志分析工具进行进一步的过滤和分析。</p>"
   },
   "marketing.auditing.title": {
-    "message": "Auditing"
+    "message": "审计"
   },
   "marketing.sbg.description": {
-    "message": "<p>Secure Border Gateway is an application-level firewall for Matrix servers.</p> <ul><li>Inspects all requests to and from the server</li> <li>Can use all request metadata to enforce rules</li> <li>Pipeline-based approach to connect APIs and rule sets</li> <li>Pluggable rules engine that can be applied to the pipelines</li></ul>"
+    "message": "<p> 安全边界网关是 Matrix 服务器的应用层防火墙。</p><ul><li>检查所有进出服务器的请求。</li> <li> 可以使用所有请求元数据来强制执行规则。</li> <li> 采用基于管道的方法连接 API 和规则集。</li> <li> 提供可应用于管道的可插拔规则引擎。</li> </ul>"
   },
   "marketing.sbg.title": {
-    "message": "Secure Border Gateway"
+    "message": "安全边境网关"
   },
   "marketing.supervision.description": {
-    "message": "<p>Supervision enables an organisation to administer all rooms from a central point. A 'supervisor' account will join defined rooms with room admin privileges. Server administrators can seamlessly impersonate the account from the admin console to manage and supervise their rooms.</p> <ul><li>Manage rooms and their settings (name, topic, permissions, etc.)</li> <li>Manage room memberships</li> <li>Remove unwanted messages and uploaded media</li> <li>Recover abandoned rooms (all users have left)</li> <li>Supervisor account can or cannot read encrypted message contents (configurable)</li></ul>"
+    "message": "<p> 监控功能使组织能够从一个中心点管理所有房间。监控帐户将加入已定义的房间并拥有房间管理员权限。服务器管理员可以从管理控制台无缝地模拟该帐户来管理和监控其房间。</p> <ul> <li> 管理房间及其设置（名称、主题、权限等）</li> <li> 管理房间成员 </li> <li> 删除不需要的消息和上传的媒体 </li> <li> 恢复已废弃的房间（所有用户均已离开）</li> <li> 通过配置管理员帐户可以读取加密消息内容</li> </ul>"
   },
   "marketing.supervision.title": {
-    "message": "Supervision"
+    "message": "监控"
   },
   "navigation.auditing": {
-    "message": "Auditing"
+    "message": "审计"
   },
   "navigation.dashboard": {
     "message": "仪表盘"
@@ -105,31 +105,31 @@
     "message": "文档"
   },
   "navigation.federation": {
-    "message": "Federation"
+    "message": "联邦"
   },
   "navigation.personal_tokens": {
     "message": "个人 Token"
   },
   "navigation.registration_tokens": {
-    "message": "注册 Tokens"
+    "message": "注册 Token"
   },
   "navigation.rooms": {
     "message": "房间"
   },
   "navigation.supervision": {
-    "message": "Supervision"
+    "message": "监控"
   },
   "navigation.users": {
     "message": "用户"
   },
   "pages.auditing.title": {
-    "message": "Auditing"
+    "message": "审计"
   },
   "pages.auditing.unavailable_alert.description": {
-    "message": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
+    "message": "此功能在 ESS Community 中不可用。请升级至 ESS Pro 以启用该功能。"
   },
   "pages.auditing.unavailable_alert.title": {
-    "message": "Auditing is a feature available in ESS Pro"
+    "message": "审计是 ESS Pro 中的一个功能"
   },
   "pages.dashboard.current_ess_version": {
     "message": "ESS 版本"
@@ -147,7 +147,7 @@
     "message": "房间总数"
   },
   "pages.dashboard.running_latest_ess": {
-    "message": "（你已在运行最新版本）"
+    "message": "（您正在运行最新版本）"
   },
   "pages.dashboard.synapse_version": {
     "message": "Synapse 版本"
@@ -156,100 +156,100 @@
     "message": "仪表盘"
   },
   "pages.federation.allowlist.add.error": {
-    "message": "Failed to add domain to allowlist"
+    "message": "无法将域名添加到白名单"
   },
   "pages.federation.allowlist.add.success": {
-    "message": "Domain added to allowlist"
+    "message": "域名已添加到白名单"
   },
   "pages.federation.allowlist.add_domain": {
-    "message": "Add domain"
+    "message": "添加域名"
   },
   "pages.federation.allowlist.add_pattern": {
-    "message": "Add pattern"
+    "message": "添加模式"
   },
   "pages.federation.allowlist.add_pattern.help": {
-    "message": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
+    "message": "请输入类似 example.com 的域名，或使用 * 来允许所有子域名，例如 *.example.com"
   },
   "pages.federation.allowlist.empty": {
-    "message": "No domains in the allowlist yet. Add a domain pattern above to get started."
+    "message": "白名单中尚无任何域名。请在上方添加一个域名模式以开始。"
   },
   "pages.federation.allowlist.heading": {
-    "message": "List of patterns allowed to federate with you"
+    "message": "允许与您进行联合的模式列表"
   },
   "pages.federation.allowlist.remove.error": {
-    "message": "Failed to remove domain from allowlist"
+    "message": "从白名单中移除域名失败"
   },
   "pages.federation.allowlist.remove.success": {
-    "message": "Domain removed from allowlist"
+    "message": "域名已从白名单中移除"
   },
   "pages.federation.allowlist.remove_tooltip": {
-    "message": "Remove from allowlist"
+    "message": "从白名单中移除"
   },
   "pages.federation.detail.contact": {
-    "message": "Contact"
+    "message": "联系方式"
   },
   "pages.federation.detail.destination": {
-    "message": "Destination"
+    "message": "目标"
   },
   "pages.federation.detail.last_retry": {
-    "message": "Last retry timestamp"
+    "message": "最后重试时间戳"
   },
   "pages.federation.detail.last_successful_stream": {
-    "message": "Last successful stream"
+    "message": "最后一次成功的流"
   },
   "pages.federation.detail.retry_interval": {
-    "message": "Retry interval"
+    "message": "重试间隔"
   },
   "pages.federation.detail.security": {
-    "message": "Security"
+    "message": "安全"
   },
   "pages.federation.detail.support_page": {
-    "message": "Support page"
+    "message": "支持页面"
   },
   "pages.federation.domain_count": {
-    "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
+    "message": "{COUNT, plural, zero {无域名} other {# 个域名}}"
   },
   "pages.federation.loading": {
-    "message": "Loading more domains…"
+    "message": "正在加载更多域名……"
   },
   "pages.federation.not_found.description": {
-    "message": "The requested destination ({destination}) could not be found."
+    "message": "无法找到所请求的目标（{destination}）。"
   },
   "pages.federation.not_found.title": {
-    "message": "Destination not found"
+    "message": "未找到目标"
   },
   "pages.federation.sbg_not_enabled.description": {
-    "message": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+    "message": "此部署中未启用安全边界网关。请联系管理员以启用该功能。"
   },
   "pages.federation.sbg_not_enabled.title": {
-    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+    "message": "“允许的域名”是 Secure Border Gateway 的一项功能，可在 ESS Pro 中使用"
   },
   "pages.federation.search_placeholder": {
-    "message": "Search domains…"
+    "message": "搜索域名…"
   },
   "pages.federation.tab.allowed_domains": {
-    "message": "Allowed domains"
+    "message": "允许的域名"
   },
   "pages.federation.tab.known_domains": {
-    "message": "Known domains"
+    "message": "已知域名"
   },
   "pages.federation.tab.section": {
-    "message": "Federation views"
+    "message": "联邦视图"
   },
   "pages.federation.table.server_name": {
-    "message": "Server name"
+    "message": "服务器名称"
   },
   "pages.federation.table.status": {
-    "message": "Status"
+    "message": "状态"
   },
   "pages.federation.title": {
-    "message": "Federation"
+    "message": "联邦"
   },
   "pages.federation.unavailable_alert.description": {
-    "message": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
+    "message": "ESS Community 版本中不提供“安全边界网关”功能。请升级至 ESS Pro 以启用该功能。"
   },
   "pages.federation.unavailable_alert.title": {
-    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+    "message": "“允许的域名”是 Secure Border Gateway 的一项功能，仅在 ESS Pro 中提供"
   },
   "pages.generic_error.go_home": {
     "message": "返回首页"
@@ -261,16 +261,16 @@
     "message": "{name}：{message}"
   },
   "pages.generic_error.text": {
-    "message": "这可能是由某个 bug 或无法连接到主服务器导致的。你可以重新加载页面、返回上一页或重置所有内容并返回到主页。"
+    "message": "这可能是由某个 bug 或无法连接到家服务器导致的。你可以重新加载页面、返回上一页或重置所有内容并返回到主页。"
   },
   "pages.generic_error.title": {
     "message": "发生意外错误"
   },
   "pages.landing.description": {
-    "message": "管理你的组织或社区内 Element 应用程序的部署。"
+    "message": "管理您的组织或社区内 Element 应用程序的部署。"
   },
   "pages.login.errors.no_auth_metadata": {
-    "message": "载入服务器认证元数据失败。Synapse 可能无法访问或未被配置对接 Matrix Authentication Service。"
+    "message": "载入服务器认证元数据失败。可能无法访问 Synapse 或 Synapse 未被配置为使用 Matrix Authentication Service。"
   },
   "pages.login.errors.no_client_metadata": {
     "message": "无法注册客户端。Matrix Authentication Service 可能无法访问或配置错误。"
@@ -288,16 +288,16 @@
     "message": "登录"
   },
   "pages.personal_tokens.acting_user_column": {
-    "message": "Acting User"
+    "message": "代理用户"
   },
   "pages.personal_tokens.acting_user_label": {
-    "message": "Acting user"
+    "message": "代理用户"
   },
   "pages.personal_tokens.actor_user_help": {
-    "message": "此 Token 将以用户的名义执行以下操作"
+    "message": "此 Token 将代表的用户"
   },
   "pages.personal_tokens.actor_user_label": {
-    "message": "Acting user"
+    "message": "代理用户"
   },
   "pages.personal_tokens.add_token_title": {
     "message": "添加个人 Token"
@@ -309,7 +309,7 @@
     "message": "仅 Token 的所有者可以重新生成"
   },
   "pages.personal_tokens.count": {
-    "message": "{count, plural, =0 {No personal tokens} one {# personal token} other {# personal tokens}}"
+    "message": "{count, plural, =0 {无个人 Token} other {#个个人 Token}}"
   },
   "pages.personal_tokens.create_error": {
     "message": "个人 Token 创建失败"
@@ -324,7 +324,7 @@
     "message": "创建于"
   },
   "pages.personal_tokens.description": {
-    "message": "个人 Token是具有特定权限的长效访问 Token，包括 Synapse 与 MAS 管理 API 的访问权限。他们可以用于自动化任务与集成的创建。"
+    "message": "个人 Token是具有特定权限的长期 Token，包括用于访问 Synapse 与 MAS 管理 API 。可以用于自动化任务与集成的创建。"
   },
   "pages.personal_tokens.device_id_help": {
     "message": "留空以随机生成 10 个字符的设备 ID"
@@ -435,55 +435,55 @@
     "message": "个人 Token 已成功撤消"
   },
   "pages.personal_tokens.revoke_token": {
-    "message": "Revoke token"
+    "message": "撤消 Token"
   },
   "pages.personal_tokens.revoked_at_label": {
-    "message": "Revoked at"
+    "message": "撤消于"
   },
   "pages.personal_tokens.scope_device_help": {
-    "message": "Provision a Matrix device"
+    "message": "配置 Matrix 设备"
   },
   "pages.personal_tokens.scope_mas_admin_help": {
-    "message": "Access to the MAS admin API"
+    "message": "访问 MAS 管理 API"
   },
   "pages.personal_tokens.scope_matrix_client_help": {
-    "message": "Access to the Matrix Client-Server API"
+    "message": "访问 Matrix 客户端 - 服务器 API"
   },
   "pages.personal_tokens.scope_synapse_admin_help": {
-    "message": "Access to the Synapse admin API"
+    "message": "访问 Synapse 管理 API"
   },
   "pages.personal_tokens.scopes_label": {
-    "message": "Scopes"
+    "message": "范围"
   },
   "pages.personal_tokens.status.active": {
-    "message": "Active"
+    "message": "激活"
   },
   "pages.personal_tokens.status.column": {
-    "message": "Status"
+    "message": "状态"
   },
   "pages.personal_tokens.status.expired": {
-    "message": "Expired"
+    "message": "已过期"
   },
   "pages.personal_tokens.status.label": {
-    "message": "Status"
+    "message": "状态"
   },
   "pages.personal_tokens.status.revoked": {
-    "message": "Revoked"
+    "message": "已撤消"
   },
   "pages.personal_tokens.title": {
     "message": "个人 Token"
   },
   "pages.personal_tokens.token_created_description": {
-    "message": "Your personal token has been created. Copy it now as it will not be shown again."
+    "message": "您的个人 Token已创建。请立即复制，此 Token 此后将不再显示。"
   },
   "pages.personal_tokens.token_created_title": {
-    "message": "Personal token created"
+    "message": "个人 Token已创建"
   },
   "pages.personal_tokens.token_regenerated_description": {
-    "message": "Your personal token has been regenerated. Copy it now as it will not be shown again."
+    "message": "您的个人 Token已重新生成。请立即复制，此 Token 此后将不再显示。"
   },
   "pages.personal_tokens.token_regenerated_title": {
-    "message": "Token regenerated"
+    "message": "Token已重新生成"
   },
   "pages.registration_tokens.auto_generate_placeholder": {
     "message": "留空则自动生成"
@@ -588,13 +588,13 @@
     "message": "已用尽"
   },
   "pages.registration_tokens.title": {
-    "message": "注册 Tokens"
+    "message": "注册 Token"
   },
   "pages.registration_tokens.token_column": {
     "message": "Token"
   },
   "pages.registration_tokens.token_count": {
-    "message": "{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
+    "message": "{COUNT, plural, zero {无 Token} other {# 个Token}}"
   },
   "pages.registration_tokens.token_uses.limited": {
     "message": "{uses, number} / {limit, number}"
@@ -630,46 +630,46 @@
     "message": "有效期到"
   },
   "pages.rooms.delete_room.alert.description": {
-    "message": "This will permanently delete all messages or media uploaded to the server and remove this room from the directory. Members will lose access to their messages and the room will be removed from their room list."
+    "message": "这将永久删除从此房间上传至服务器的所有消息及媒体文件，并从目录中移除此房间。房间成员将无法再访问其消息，且该房间将从他们的房间列表中移除。"
   },
   "pages.rooms.delete_room.alert.title": {
-    "message": "You’re about to delete room data"
+    "message": "您即将删除聊天室数据"
   },
   "pages.rooms.delete_room.block.help": {
-    "message": "Prevent users from rejoining the room after deletion."
+    "message": "防止用户在房间被删除后重新加入。"
   },
   "pages.rooms.delete_room.block.label": {
-    "message": "Block room"
+    "message": "屏蔽房间"
   },
   "pages.rooms.delete_room.button": {
-    "message": "Delete permanently"
+    "message": "永久删除"
   },
   "pages.rooms.delete_room.error": {
-    "message": "Failed to schedule room deletion"
+    "message": "无法安排房间删除任务"
   },
   "pages.rooms.delete_room.success": {
-    "message": "Room deletion scheduled"
+    "message": "已安排房间删除任务"
   },
   "pages.rooms.delete_room.title": {
-    "message": "Delete this room?"
+    "message": "删除这个房间吗？"
   },
   "pages.rooms.deletion.failure.description": {
-    "message": "Room deletion task failed on {timestamp, date, short} at {timestamp, time, short} with error: {error}"
+    "message": "房间删除任务于{timestamp, date, short} {timestamp, time, short}失败，错误：{error}"
   },
   "pages.rooms.deletion.failure.title": {
-    "message": "Deletion failed"
+    "message": "删除失败"
   },
   "pages.rooms.deletion.in_progress.description": {
-    "message": "Room deletion task is in progress since {timestamp, date, short} at {timestamp, time, short}."
+    "message": "房间删除任务于{timestamp, date, short} {timestamp, time, short}开始，正在进行中。"
   },
   "pages.rooms.deletion.in_progress.title": {
-    "message": "Deletion in progress"
+    "message": "正在删除"
   },
   "pages.rooms.deletion.success.description": {
-    "message": "Room deletion task completed successfully on {timestamp, date, short} at {timestamp, time, short}."
+    "message": "房间删除任务已于{timestamp, date, short} {timestamp, time, short}成功完成。"
   },
   "pages.rooms.deletion.success.title": {
-    "message": "Deletion successful"
+    "message": "删除成功"
   },
   "pages.rooms.filters.empty_rooms": {
     "message": "空房间"
@@ -690,61 +690,61 @@
     "message": "未找到房间"
   },
   "pages.rooms.room_count": {
-    "message": "{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
+    "message": "{COUNT, plural, zero {无房间} other {#个房间}}"
   },
   "pages.rooms.title": {
     "message": "房间"
   },
   "pages.supervision.description": {
-    "message": "Sign in as <b>{mxid}</b> to perform administrative actions in any room."
+    "message": "以 <b>{mxid}</b> 用户登录，即可在任何房间执行管理操作。"
   },
   "pages.supervision.disabled_alert.description": {
-    "message": "This feature is part of your subscription. You can ask an administrator to enable it."
+    "message": "此功能包含在您的订阅中。您可以联系管理员启用此功能。"
   },
   "pages.supervision.disabled_alert.title": {
-    "message": "Supervision is currently disabled"
+    "message": "监控功能当前已禁用"
   },
   "pages.supervision.errors.cant_open.description": {
-    "message": "Your browser is blocking the opening of pop-up windows. Please make sure you allow pop-ups from this site."
+    "message": "您的浏览器阻止了弹出窗口的打开。请确保允许来自此网站的弹出窗口。"
   },
   "pages.supervision.errors.cant_open.title": {
-    "message": "Failed to open the supervision interface in a new window"
+    "message": "无法在新窗口中打开监控界面"
   },
   "pages.supervision.errors.closed.description": {
-    "message": "Failed to sign in the supervision interface, as it closed before it could finish signing in"
+    "message": "无法登录监督界面，因为该界面在登录完成前已关闭"
   },
   "pages.supervision.errors.closed.title": {
-    "message": "The supervision interface was closed too quickly"
+    "message": "监控界面关闭得太快了"
   },
   "pages.supervision.errors.generic.title": {
-    "message": "An unexpected error occurred whilst opening the supervision interface"
+    "message": "打开监控界面时发生意外错误"
   },
   "pages.supervision.missing_ui_address.description": {
-    "message": "Supervision is enabled in your deployment, but not Element Web, which is required for the supervision interface to work."
+    "message": "您的部署中已启用监控功能，但未启用 Element Web，而监控界面需要 Element Web 才能正常工作。"
   },
   "pages.supervision.missing_ui_address.title": {
-    "message": "The supervision interface requires Element Web to be enabled"
+    "message": "监控界面需要启用 Element Web"
   },
   "pages.supervision.recovery_key.copied": {
-    "message": "Recovery key copied"
+    "message": "已复制 Recovery key"
   },
   "pages.supervision.recovery_key.copy_failed": {
-    "message": "Could not copy recovery key"
+    "message": "无法复制 recovery key"
   },
   "pages.supervision.recovery_key.help": {
-    "message": "This is the recovery key used to enable reading encrypted messages."
+    "message": "这是用于读取加密信息的 recovery key。"
   },
   "pages.supervision.recovery_key.label": {
     "message": "Recovery key"
   },
   "pages.supervision.title": {
-    "message": "Supervision"
+    "message": "监控"
   },
   "pages.supervision.unavailable_alert.description": {
-    "message": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
+    "message": "此功能在 ESS Community 中不可用。请升级至 ESS Pro 以启用该功能。"
   },
   "pages.supervision.unavailable_alert.title": {
-    "message": "Supervision is a feature available in ESS Pro"
+    "message": "监控是 ESS Pro 中的一项功能"
   },
   "pages.users.add_email.button": {
     "message": "添加邮件地址"
@@ -774,7 +774,7 @@
     "message": "已与上游账户关联"
   },
   "pages.users.deactivate_account.alert.description": {
-    "message": "这会自动从用户的所有设备中注销、移除所有访问 token、删除所有第三方 ID 并永久删除其账户数据。"
+    "message": "这会自动从用户的所有设备中注销、移除所有访问 Token、删除所有第三方 ID 并永久删除其账户数据。"
   },
   "pages.users.deactivate_account.alert.title": {
     "message": "你即将删除用户数据"
@@ -852,7 +852,7 @@
     "message": "账户已锁定"
   },
   "pages.users.lock_account.title": {
-    "message": "锁定此用户的账户？"
+    "message": "锁定此用户？"
   },
   "pages.users.new_user.add_user": {
     "message": "添加用户"
@@ -870,7 +870,7 @@
     "message": "Localpart 只能包含小写字母、数字与下划线"
   },
   "pages.users.new_user.invalid_localpart_numeric_only": {
-    "message": "Localpart cannot only contain numbers"
+    "message": "Localpart 不能仅包含数字"
   },
   "pages.users.new_user.localpart": {
     "message": "输入名称"
@@ -966,7 +966,7 @@
     "message": "账户已解锁"
   },
   "pages.users.user_count": {
-    "message": "{COUNT, plural, zero {No users} one {# user} other {# users}}"
+    "message": "{COUNT, plural, zero {无用户} other {#个用户}}"
   },
   "product.element": {
     "message": "Element"
@@ -1008,16 +1008,16 @@
     "message": "正在载入值"
   },
   "ui.destination_status.failing": {
-    "message": "Failing"
+    "message": "失败"
   },
   "ui.destination_status.inactive": {
-    "message": "Inactive"
+    "message": "未激活"
   },
   "ui.destination_status.never_worked": {
-    "message": "Never worked"
+    "message": "从未工作过"
   },
   "ui.destination_status.working": {
-    "message": "Working"
+    "message": "正在工作"
   },
   "ui.language_switcher.browser_default": {
     "message": "跟随浏览器设置（{language}）"
@@ -1026,21 +1026,21 @@
     "message": "语言设置"
   },
   "ui.language_switcher.description": {
-    "message": "为界面更改你偏好的语言。"
+    "message": "更改界面为您希望使用的语言。"
   },
   "ui.language_switcher.language_list_label": {
-    "message": "List of available languages"
+    "message": "可用语言列表"
   },
   "ui.language_switcher.title": {
     "message": "语言设置"
   },
   "ui.user_picker.loading_list": {
-    "message": "Loading…"
+    "message": "正在加载…"
   },
   "ui.user_picker.no_match": {
-    "message": "No match"
+    "message": "没有匹配"
   },
   "ui.user_picker.no_match_help": {
-    "message": "Try a different search term. This can only lookup active users on {serverName} using their localpart."
+    "message": "请尝试使用其他搜索词。此功能仅能通过用户的localpart在{serverName}上查找活跃用户。"
   }
 }

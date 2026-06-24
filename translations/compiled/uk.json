@@ -2,113 +2,117 @@
   "action.add": [
     {
       "type": 0,
-      "value": "添加"
+      "value": "Додати"
     }
   ],
   "action.cancel": [
     {
       "type": 0,
-      "value": "取消"
+      "value": "Скасувати"
     }
   ],
   "action.clear": [
     {
       "type": 0,
-      "value": "清除"
+      "value": "Очистити"
     }
   ],
   "action.close": [
     {
       "type": 0,
-      "value": "关闭"
+      "value": "Закрити"
     }
   ],
   "action.copy": [
     {
       "type": 0,
-      "value": "复制"
+      "value": "Копіювати"
     }
   ],
   "action.delete": [
     {
       "type": 0,
-      "value": "删除"
+      "value": "Видалити"
     }
   ],
   "action.go_back": [
     {
       "type": 0,
-      "value": "后退"
+      "value": "Назад"
     }
   ],
   "action.remove": [
     {
       "type": 0,
-      "value": "移除"
+      "value": "Видалити"
     }
   ],
   "action.retry": [
     {
       "type": 0,
-      "value": "重试"
+      "value": "Повторити спробу"
     }
   ],
   "action.sign_in": [
     {
       "type": 0,
-      "value": "登录"
+      "value": "Увійти"
     }
   ],
   "action.sign_out": [
     {
       "type": 0,
-      "value": "注销"
+      "value": "Вийти"
     }
   ],
   "common.email_address": [
     {
       "type": 0,
-      "value": "邮件地址"
+      "value": "Адреса електронної пошти"
     }
   ],
   "common.filter": [
     {
       "type": 0,
-      "value": "筛选"
+      "value": "Фільтр"
     }
   ],
   "errors.http_fetch": [
+    {
+      "type": 0,
+      "value": "Запит до "
+    },
     {
       "type": 1,
       "value": "url"
     },
     {
       "type": 0,
-      "value": " 请求失败"
+      "value": " не вдався"
     }
   ],
   "errors.http_fetch_json_decoding": [
     {
       "type": 0,
-      "value": "来自 "
+      "value": "Не вдалося декодувати JSON у відповіді з "
     },
     {
       "type": 1,
       "value": "url"
-    },
-    {
-      "type": 0,
-      "value": " 的 JSON 响应解码失败"
     }
   ],
   "errors.http_status": [
     {
+      "type": 0,
+      "value": "Запит до "
+    },
+    {
       "type": 1,
       "value": "url"
     },
     {
       "type": 0,
-      "value": " 请求失败，状态码："
+      "value": " завершився невдало з кодом статусу "
     },
     {
       "type": 1,
@@ -126,7 +130,7 @@
   "errors.matrix_standard": [
     {
       "type": 0,
-      "value": "对家服务器的请求失败，错误代码："
+      "value": "Запит до домашнього сервера не вдався з кодом помилки \""
     },
     {
       "type": 1,
@@ -134,7 +138,7 @@
     },
     {
       "type": 0,
-      "value": "。另外服务器还返回了以下错误信息："
+      "value": "\". Додатково, сервер видав таке повідомлення про помилку: "
     },
     {
       "type": 1,
@@ -144,13 +148,13 @@
   "errors.not_logged_in": [
     {
       "type": 0,
-      "value": "未登录"
+      "value": "Вхід не виконано"
     }
   ],
   "footer.copyright_notice": [
     {
       "type": 0,
-      "value": "版权所有 © "
+      "value": "Авторські права © "
     },
     {
       "type": 3,
@@ -167,25 +171,25 @@
   "footer.help_and_support": [
     {
       "type": 0,
-      "value": "帮助与支持"
+      "value": "Довідка та підтримка"
     }
   ],
   "footer.legal": [
     {
       "type": 0,
-      "value": "法律信息"
+      "value": "Юридична інформація"
     }
   ],
   "footer.privacy": [
     {
       "type": 0,
-      "value": "隐私"
+      "value": "Конфіденційність"
     }
   ],
   "header.user_menu.title": [
     {
       "type": 0,
-      "value": "账户菜单"
+      "value": "Меню облікового запису"
     }
   ],
   "marketing.also_available_in_pro.description": [
@@ -205,9 +209,13 @@
         },
         {
           "type": 0,
-          "value": " 是 Element 的商业后端发行版。"
+          "value": " це комерційна версія серверного програмного забезпечення від розробників Element."
         }
       ]
+    },
+    {
+      "type": 0,
+      "value": " "
     },
     {
       "type": 8,
@@ -215,9 +223,13 @@
       "children": [
         {
           "type": 0,
-          "value": " 其包含了 ESS Community 的所有内容，以及专为专业环境量身定制的附加功能和服务，可支持从 100 到数百万用户的部署。"
+          "value": "Вона включає в себе всі компоненти із ESS Community, а також додаткові функції та сервіси, що підходять для професійних середовищ із кількістю користувачів від 100 до мільонів."
         }
       ]
+    },
+    {
+      "type": 0,
+      "value": " "
     },
     {
       "type": 8,
@@ -225,7 +237,7 @@
       "children": [
         {
           "type": 0,
-          "value": " 旨在满足企业在高级身份和访问管理 (IAM)、合规性、可扩展性、高可用性和多租户方面的需求。"
+          "value": "Ця версія розроблена із врахуванням корпоративних вимог, таких як розширений IAM, комплаєнс, покращена масштабованість, висока доступність та мультиорендність."
         }
       ]
     }
@@ -233,13 +245,13 @@
   "marketing.also_available_in_pro.title": [
     {
       "type": 0,
-      "value": "Pro 版还提供……"
+      "value": "Також доступно у версії Pro…"
     }
   ],
   "marketing.also_available_in_pro.upgrade": [
     {
       "type": 0,
-      "value": "升级到专业版"
+      "value": "Перейти на версію Pro"
     }
   ],
   "marketing.auditing.description": [
@@ -249,9 +261,13 @@
       "children": [
         {
           "type": 0,
-          "value": " 审计功能使组织能够记录端到端加密的对话和聊天室事件，以满足合规性或法律要求。"
+          "value": "Аудит надає організаціям можливість вести записи розмов та подій у кімнатах із наскрізним шифруванням для дотримання вимог комплаєнсу, або законодавства."
         }
       ]
+    },
+    {
+      "type": 0,
+      "value": " "
     },
     {
       "type": 8,
@@ -259,9 +275,13 @@
       "children": [
         {
           "type": 0,
-          "value": " 启用后，所有最终用户都可以看到哪些聊天室正在被录制以确保审计过程的透明度。"
+          "value": "Якщо функцію увімкнено, то для забезпечення прозорості усі кінцеві користувачі будуть бучити які кімнати записуються для аудиту."
         }
       ]
+    },
+    {
+      "type": 0,
+      "value": " "
     },
     {
       "type": 8,
@@ -269,9 +289,13 @@
       "children": [
         {
           "type": 0,
-          "value": " 审计功能可以根据组织的具体需求进行配置。例如，可以排除两个人之间的直接消息，从而仅记录群组对话。"
+          "value": "Аудит може бути налаштований у відповідності до специфічних умов організації. Наприклад, можна не відслідковувати прямі повідомлення між двома користувачами, а лише групові розмови."
         }
       ]
+    },
+    {
+      "type": 0,
+      "value": " "
     },
     {
       "type": 8,
@@ -279,7 +303,7 @@
       "children": [
         {
           "type": 0,
-          "value": " 审计数据以 JSON 格式的机器可读事件流的形式存储在文件存储或 S3 上，并可以转发到日志分析工具进行进一步的过滤和分析。"
+          "value": "Дані аудиту будуть зберігатися у вигляді потоку машиночитних подій у форматі JSON-файлів локально, або в сховищах типу S3, та може бути перенаправлений в інструментарій аналізу журналів для подальшої фільтрації та аналізу."
         }
       ]
     }
@@ -287,7 +311,7 @@
   "marketing.auditing.title": [
     {
       "type": 0,
-      "value": "审计"
+      "value": "Аудит"
     }
   ],
   "marketing.sbg.description": [
@@ -297,87 +321,7 @@
       "children": [
         {
           "type": 0,
-          "value": " 安全边界网关是 Matrix 服务器的应用层防火墙。"
-        }
-      ]
-    },
-    {
-      "type": 8,
-      "value": "ul",
-      "children": [
-        {
-          "type": 8,
-          "value": "li",
-          "children": [
-            {
-              "type": 0,
-              "value": "检查所有进出服务器的请求。"
-            }
-          ]
-        },
-        {
-          "type": 0,
-          "value": " "
-        },
-        {
-          "type": 8,
-          "value": "li",
-          "children": [
-            {
-              "type": 0,
-              "value": " 可以使用所有请求元数据来强制执行规则。"
-            }
-          ]
-        },
-        {
-          "type": 0,
-          "value": " "
-        },
-        {
-          "type": 8,
-          "value": "li",
-          "children": [
-            {
-              "type": 0,
-              "value": " 采用基于管道的方法连接 API 和规则集。"
-            }
-          ]
-        },
-        {
-          "type": 0,
-          "value": " "
-        },
-        {
-          "type": 8,
-          "value": "li",
-          "children": [
-            {
-              "type": 0,
-              "value": " 提供可应用于管道的可插拔规则引擎。"
-            }
-          ]
-        },
-        {
-          "type": 0,
-          "value": " "
-        }
-      ]
-    }
-  ],
-  "marketing.sbg.title": [
-    {
-      "type": 0,
-      "value": "安全边境网关"
-    }
-  ],
-  "marketing.supervision.description": [
-    {
-      "type": 8,
-      "value": "p",
-      "children": [
-        {
-          "type": 0,
-          "value": " 监控功能使组织能够从一个中心点管理所有房间。监控帐户将加入已定义的房间并拥有房间管理员权限。服务器管理员可以从管理控制台无缝地模拟该帐户来管理和监控其房间。"
+          "value": "Secure Border Gateway is an application-level firewall for Matrix servers."
         }
       ]
     },
@@ -390,16 +334,12 @@
       "value": "ul",
       "children": [
         {
-          "type": 0,
-          "value": " "
-        },
-        {
           "type": 8,
           "value": "li",
           "children": [
             {
               "type": 0,
-              "value": " 管理房间及其设置（名称、主题、权限等）"
+              "value": "Inspects all requests to and from the server"
             }
           ]
         },
@@ -413,7 +353,7 @@
           "children": [
             {
               "type": 0,
-              "value": " 管理房间成员 "
+              "value": "Can use all request metadata to enforce rules"
             }
           ]
         },
@@ -427,7 +367,7 @@
           "children": [
             {
               "type": 0,
-              "value": " 删除不需要的消息和上传的媒体 "
+              "value": "Pipeline-based approach to connect APIs and rule sets"
             }
           ]
         },
@@ -441,7 +381,45 @@
           "children": [
             {
               "type": 0,
-              "value": " 恢复已废弃的房间（所有用户均已离开）"
+              "value": "Pluggable rules engine that can be applied to the pipelines"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "marketing.sbg.title": [
+    {
+      "type": 0,
+      "value": "Secure Border Gateway"
+    }
+  ],
+  "marketing.supervision.description": [
+    {
+      "type": 8,
+      "value": "p",
+      "children": [
+        {
+          "type": 0,
+          "value": "Наглядання дозволяє організації адмініструвати всі кімнати з центральної точки. Обліковий запис «супервізора» буде приєднаний до визначених кімнат з правами адміністратора кімнати. Адміністратори сервера можуть легко видавати себе за цей обліковий запис з консолі адміністратора, щоб керувати цими кімнатами та контролювати їх."
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 8,
+      "value": "ul",
+      "children": [
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Керувати кімнатами та їх налаштуваннями (назва, тема, дозволи тощо)"
             }
           ]
         },
@@ -455,13 +433,51 @@
           "children": [
             {
               "type": 0,
-              "value": " 通过配置管理员帐户可以读取加密消息内容"
+              "value": "Керувати користувачами у кімнатах"
             }
           ]
         },
         {
           "type": 0,
           "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Видаляти небажані повідомлення та завантажені медіа"
+            }
+          ]
+        },
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Відновлювати покинуті кімнати (звідки вийшли всі користувачі)"
+            }
+          ]
+        },
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Обліковий запис супервізора може як читати так і не читати зашифровані повідомлення, це налаштовується"
+            }
+          ]
         }
       ]
     }
@@ -469,229 +485,229 @@
   "marketing.supervision.title": [
     {
       "type": 0,
-      "value": "监控"
+      "value": "Наглядання"
     }
   ],
   "navigation.auditing": [
     {
       "type": 0,
-      "value": "审计"
+      "value": "Аудит"
     }
   ],
   "navigation.dashboard": [
     {
       "type": 0,
-      "value": "仪表盘"
+      "value": "Інформаційна панель"
     }
   ],
   "navigation.documentation": [
     {
       "type": 0,
-      "value": "文档"
+      "value": "Документація"
     }
   ],
   "navigation.federation": [
     {
       "type": 0,
-      "value": "联邦"
+      "value": "Federation"
     }
   ],
   "navigation.personal_tokens": [
     {
       "type": 0,
-      "value": "个人 Token"
+      "value": "Персональні токени"
     }
   ],
   "navigation.registration_tokens": [
     {
       "type": 0,
-      "value": "注册 Token"
+      "value": "Реєстраційні токени"
     }
   ],
   "navigation.rooms": [
     {
       "type": 0,
-      "value": "房间"
+      "value": "Кімнати"
     }
   ],
   "navigation.supervision": [
     {
       "type": 0,
-      "value": "监控"
+      "value": "Наглядання"
     }
   ],
   "navigation.users": [
     {
       "type": 0,
-      "value": "用户"
+      "value": "Користувачі"
     }
   ],
   "pages.auditing.title": [
     {
       "type": 0,
-      "value": "审计"
+      "value": "Аудит"
     }
   ],
   "pages.auditing.unavailable_alert.description": [
     {
       "type": 0,
-      "value": "此功能在 ESS Community 中不可用。请升级至 ESS Pro 以启用该功能。"
+      "value": "Ця функція недоступна в ESS Community. Щоб її увімкнути, перейдіть на ESS Pro."
     }
   ],
   "pages.auditing.unavailable_alert.title": [
     {
       "type": 0,
-      "value": "审计是 ESS Pro 中的一个功能"
+      "value": "Аудит — функція, що доступна в ESS Pro"
     }
   ],
   "pages.dashboard.current_ess_version": [
     {
       "type": 0,
-      "value": "ESS 版本"
+      "value": "Версія ESS"
     }
   ],
   "pages.dashboard.latest_ess_version": [
     {
       "type": 0,
-      "value": "最新的 ESS 版本"
+      "value": "Остання версія ESS"
     }
   ],
   "pages.dashboard.new_ess_release": [
     {
       "type": 0,
-      "value": "（新版本）"
+      "value": "(Нова версія)"
     }
   ],
   "pages.dashboard.registered_users_count": [
     {
       "type": 0,
-      "value": "已注册的用户"
+      "value": "Загальна кількість зареєстрованих користувачів"
     }
   ],
   "pages.dashboard.rooms_count": [
     {
       "type": 0,
-      "value": "房间总数"
+      "value": "Загальна кількість кімнат"
     }
   ],
   "pages.dashboard.running_latest_ess": [
     {
       "type": 0,
-      "value": "（您正在运行最新版本）"
+      "value": "(Ви використовуєте останню версію)"
     }
   ],
   "pages.dashboard.synapse_version": [
     {
       "type": 0,
-      "value": "Synapse 版本"
+      "value": "Версія Synapse"
     }
   ],
   "pages.dashboard.title": [
     {
       "type": 0,
-      "value": "仪表盘"
+      "value": "Інформаційна панель"
     }
   ],
   "pages.federation.allowlist.add.error": [
     {
       "type": 0,
-      "value": "无法将域名添加到白名单"
+      "value": "Failed to add domain to allowlist"
     }
   ],
   "pages.federation.allowlist.add.success": [
     {
       "type": 0,
-      "value": "域名已添加到白名单"
+      "value": "Domain added to allowlist"
     }
   ],
   "pages.federation.allowlist.add_domain": [
     {
       "type": 0,
-      "value": "添加域名"
+      "value": "Add domain"
     }
   ],
   "pages.federation.allowlist.add_pattern": [
     {
       "type": 0,
-      "value": "添加模式"
+      "value": "Add pattern"
     }
   ],
   "pages.federation.allowlist.add_pattern.help": [
     {
       "type": 0,
-      "value": "请输入类似 example.com 的域名，或使用 * 来允许所有子域名，例如 *.example.com"
+      "value": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
     }
   ],
   "pages.federation.allowlist.empty": [
     {
       "type": 0,
-      "value": "白名单中尚无任何域名。请在上方添加一个域名模式以开始。"
+      "value": "No domains in the allowlist yet. Add a domain pattern above to get started."
     }
   ],
   "pages.federation.allowlist.heading": [
     {
       "type": 0,
-      "value": "允许与您进行联合的模式列表"
+      "value": "List of patterns allowed to federate with you"
     }
   ],
   "pages.federation.allowlist.remove.error": [
     {
       "type": 0,
-      "value": "从白名单中移除域名失败"
+      "value": "Failed to remove domain from allowlist"
     }
   ],
   "pages.federation.allowlist.remove.success": [
     {
       "type": 0,
-      "value": "域名已从白名单中移除"
+      "value": "Domain removed from allowlist"
     }
   ],
   "pages.federation.allowlist.remove_tooltip": [
     {
       "type": 0,
-      "value": "从白名单中移除"
+      "value": "Remove from allowlist"
     }
   ],
   "pages.federation.detail.contact": [
     {
       "type": 0,
-      "value": "联系方式"
+      "value": "Contact"
     }
   ],
   "pages.federation.detail.destination": [
     {
       "type": 0,
-      "value": "目标"
+      "value": "Destination"
     }
   ],
   "pages.federation.detail.last_retry": [
     {
       "type": 0,
-      "value": "最后重试时间戳"
+      "value": "Last retry timestamp"
     }
   ],
   "pages.federation.detail.last_successful_stream": [
     {
       "type": 0,
-      "value": "最后一次成功的流"
+      "value": "Last successful stream"
     }
   ],
   "pages.federation.detail.retry_interval": [
     {
       "type": 0,
-      "value": "重试间隔"
+      "value": "Retry interval"
     }
   ],
   "pages.federation.detail.security": [
     {
       "type": 0,
-      "value": "安全"
+      "value": "Security"
     }
   ],
   "pages.federation.detail.support_page": [
     {
       "type": 0,
-      "value": "支持页面"
+      "value": "Support page"
     }
   ],
   "pages.federation.domain_count": [
@@ -703,7 +719,18 @@
           "value": [
             {
               "type": 0,
-              "value": "无域名"
+              "value": "No domains"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " domain"
             }
           ]
         },
@@ -714,7 +741,7 @@
             },
             {
               "type": 0,
-              "value": " 个域名"
+              "value": " domains"
             }
           ]
         }
@@ -726,13 +753,13 @@
   "pages.federation.loading": [
     {
       "type": 0,
-      "value": "正在加载更多域名……"
+      "value": "Loading more domains…"
     }
   ],
   "pages.federation.not_found.description": [
     {
       "type": 0,
-      "value": "无法找到所请求的目标（"
+      "value": "The requested destination ("
     },
     {
       "type": 1,
@@ -740,91 +767,91 @@
     },
     {
       "type": 0,
-      "value": "）。"
+      "value": ") could not be found."
     }
   ],
   "pages.federation.not_found.title": [
     {
       "type": 0,
-      "value": "未找到目标"
+      "value": "Destination not found"
     }
   ],
   "pages.federation.sbg_not_enabled.description": [
     {
       "type": 0,
-      "value": "此部署中未启用安全边界网关。请联系管理员以启用该功能。"
+      "value": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
     }
   ],
   "pages.federation.sbg_not_enabled.title": [
     {
       "type": 0,
-      "value": "“允许的域名”是 Secure Border Gateway 的一项功能，可在 ESS Pro 中使用"
+      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
     }
   ],
   "pages.federation.search_placeholder": [
     {
       "type": 0,
-      "value": "搜索域名…"
+      "value": "Search domains…"
     }
   ],
   "pages.federation.tab.allowed_domains": [
     {
       "type": 0,
-      "value": "允许的域名"
+      "value": "Allowed domains"
     }
   ],
   "pages.federation.tab.known_domains": [
     {
       "type": 0,
-      "value": "已知域名"
+      "value": "Known domains"
     }
   ],
   "pages.federation.tab.section": [
     {
       "type": 0,
-      "value": "联邦视图"
+      "value": "Federation views"
     }
   ],
   "pages.federation.table.server_name": [
     {
       "type": 0,
-      "value": "服务器名称"
+      "value": "Server name"
     }
   ],
   "pages.federation.table.status": [
     {
       "type": 0,
-      "value": "状态"
+      "value": "Status"
     }
   ],
   "pages.federation.title": [
     {
       "type": 0,
-      "value": "联邦"
+      "value": "Federation"
     }
   ],
   "pages.federation.unavailable_alert.description": [
     {
       "type": 0,
-      "value": "ESS Community 版本中不提供“安全边界网关”功能。请升级至 ESS Pro 以启用该功能。"
+      "value": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
     }
   ],
   "pages.federation.unavailable_alert.title": [
     {
       "type": 0,
-      "value": "“允许的域名”是 Secure Border Gateway 的一项功能，仅在 ESS Pro 中提供"
+      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
     }
   ],
   "pages.generic_error.go_home": [
     {
       "type": 0,
-      "value": "返回首页"
+      "value": "На головну"
     }
   ],
   "pages.generic_error.sign_out_and_reload": [
     {
       "type": 0,
-      "value": "注销并重载"
+      "value": "Вийти та перезавантажити"
     }
   ],
   "pages.generic_error.technical_details.item": [
@@ -834,7 +861,7 @@
     },
     {
       "type": 0,
-      "value": "："
+      "value": ": "
     },
     {
       "type": 1,
@@ -844,91 +871,91 @@
   "pages.generic_error.text": [
     {
       "type": 0,
-      "value": "这可能是由某个 bug 或无法连接到家服务器导致的。你可以重新加载页面、返回上一页或重置所有内容并返回到主页。"
+      "value": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
     }
   ],
   "pages.generic_error.title": [
     {
       "type": 0,
-      "value": "发生意外错误"
+      "value": "Сталася неочікувана помилка"
     }
   ],
   "pages.landing.description": [
     {
       "type": 0,
-      "value": "管理您的组织或社区内 Element 应用程序的部署。"
+      "value": "Керуйте розгортанням додатка element для вашої організації або спільноти."
     }
   ],
   "pages.login.errors.no_auth_metadata": [
     {
       "type": 0,
-      "value": "载入服务器认证元数据失败。可能无法访问 Synapse 或 Synapse 未被配置为使用 Matrix Authentication Service。"
+      "value": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
     }
   ],
   "pages.login.errors.no_client_metadata": [
     {
       "type": 0,
-      "value": "无法注册客户端。Matrix Authentication Service 可能无法访问或配置错误。"
+      "value": "Failed to register the client. Matrix Authentication Service may be unreachable or misconfigured."
     }
   ],
   "pages.login.errors.no_well_known": [
     {
       "type": 0,
-      "value": "加载服务器 well-known 文档失败，服务器名称可能无效。"
+      "value": "Failed to load the server's well-known document. The server name may be invalid."
     }
   ],
   "pages.login.get_started": [
     {
       "type": 0,
-      "value": "开始"
+      "value": "Почати"
     }
   ],
   "pages.login.server_name": [
     {
       "type": 0,
-      "value": "服务器名称"
+      "value": "Ім’я сервера"
     }
   ],
   "pages.login.title": [
     {
       "type": 0,
-      "value": "登录"
+      "value": "Вхід"
     }
   ],
   "pages.personal_tokens.acting_user_column": [
     {
       "type": 0,
-      "value": "代理用户"
+      "value": "Acting User"
     }
   ],
   "pages.personal_tokens.acting_user_label": [
     {
       "type": 0,
-      "value": "代理用户"
+      "value": "Acting user"
     }
   ],
   "pages.personal_tokens.actor_user_help": [
     {
       "type": 0,
-      "value": "此 Token 将代表的用户"
+      "value": "The user this token will act on behalf of"
     }
   ],
   "pages.personal_tokens.actor_user_label": [
     {
       "type": 0,
-      "value": "代理用户"
+      "value": "Acting user"
     }
   ],
   "pages.personal_tokens.add_token_title": [
     {
       "type": 0,
-      "value": "添加个人 Token"
+      "value": "Додати персональний токен"
     }
   ],
   "pages.personal_tokens.cant_regenerate_tooltip": [
     {
       "type": 0,
-      "value": "仅"
+      "value": "Тільки "
     },
     {
       "type": 1,
@@ -936,13 +963,13 @@
     },
     {
       "type": 0,
-      "value": " 可重新生成此 Token"
+      "value": " може регенерувати цей токен"
     }
   ],
   "pages.personal_tokens.cant_regenerate_tooltip_generic": [
     {
       "type": 0,
-      "value": "仅 Token 的所有者可以重新生成"
+      "value": "Тільки власник токена може його регенерувати"
     }
   ],
   "pages.personal_tokens.count": [
@@ -954,7 +981,18 @@
           "value": [
             {
               "type": 0,
-              "value": "无个人 Token"
+              "value": "No personal tokens"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " personal token"
             }
           ]
         },
@@ -965,7 +1003,7 @@
             },
             {
               "type": 0,
-              "value": "个个人 Token"
+              "value": " personal tokens"
             }
           ]
         }
@@ -977,43 +1015,43 @@
   "pages.personal_tokens.create_error": [
     {
       "type": 0,
-      "value": "个人 Token 创建失败"
+      "value": "Не вдалося створити персональний токен"
     }
   ],
   "pages.personal_tokens.create_success": [
     {
       "type": 0,
-      "value": "个人 Token 创建成功"
+      "value": "Персональний токен успішно створено"
     }
   ],
   "pages.personal_tokens.create_token": [
     {
       "type": 0,
-      "value": "创建 Token"
+      "value": "Створити токен"
     }
   ],
   "pages.personal_tokens.created_at_label": [
     {
       "type": 0,
-      "value": "创建于"
+      "value": "Створено о"
     }
   ],
   "pages.personal_tokens.description": [
     {
       "type": 0,
-      "value": "个人 Token是具有特定权限的长期 Token，包括用于访问 Synapse 与 MAS 管理 API 。可以用于自动化任务与集成的创建。"
+      "value": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations."
     }
   ],
   "pages.personal_tokens.device_id_help": [
     {
       "type": 0,
-      "value": "留空以随机生成 10 个字符的设备 ID"
+      "value": "Leave empty to generate a random 10-character device ID"
     }
   ],
   "pages.personal_tokens.device_id_label": [
     {
       "type": 0,
-      "value": "设备 ID"
+      "value": "ID пристрою"
     }
   ],
   "pages.personal_tokens.device_id_placeholder": [
@@ -1025,25 +1063,25 @@
   "pages.personal_tokens.expires_at_column": [
     {
       "type": 0,
-      "value": "有效期到"
+      "value": "Термін дії закінчується о"
     }
   ],
   "pages.personal_tokens.expires_at_label": [
     {
       "type": 0,
-      "value": "有效期到"
+      "value": "Термін дії закінчується о"
     }
   ],
   "pages.personal_tokens.expires_in_help": [
     {
       "type": 0,
-      "value": "留空表示 Token 永不过期"
+      "value": "Залиште порожнім для токенів, які ніколи не втрачають чинності"
     }
   ],
   "pages.personal_tokens.expires_in_label": [
     {
       "type": 0,
-      "value": "剩余有效期（天）"
+      "value": "Втрачає чинність через (дні)"
     }
   ],
   "pages.personal_tokens.expires_in_placeholder": [
@@ -1055,417 +1093,409 @@
   "pages.personal_tokens.filter.active": [
     {
       "type": 0,
-      "value": "活跃"
+      "value": "Активні"
     }
   ],
   "pages.personal_tokens.filter.expires": [
     {
       "type": 0,
-      "value": "含有效期"
+      "value": "З датою закінчення терміну дії"
     }
   ],
   "pages.personal_tokens.filter.no_expiry": [
     {
       "type": 0,
-      "value": "永不过期"
+      "value": "Ніколи не втрачає чинності"
     }
   ],
   "pages.personal_tokens.filter.revoked": [
     {
       "type": 0,
-      "value": "已撤消"
+      "value": "Відкликані"
     }
   ],
   "pages.personal_tokens.filter.scope_mas_admin": [
     {
       "type": 0,
-      "value": "访问 MAS 管理 API"
+      "value": "Доступ до адміністративного API в MAS"
     }
   ],
   "pages.personal_tokens.filter.scope_matrix_client": [
     {
       "type": 0,
-      "value": "访问 Matrix 客户端 - 服务器 API"
+      "value": "Доступ до клієнт-серверного API Matrix"
     }
   ],
   "pages.personal_tokens.filter.scope_synapse_admin": [
     {
       "type": 0,
-      "value": "访问 Synapse 管理 API"
+      "value": "Доступ до адміністративного API в Synapse"
     }
   ],
   "pages.personal_tokens.last_active_column": [
     {
       "type": 0,
-      "value": "最后活跃"
+      "value": "Остання активність"
     }
   ],
   "pages.personal_tokens.last_active_ip_label": [
     {
       "type": 0,
-      "value": "最后活跃 IP"
+      "value": "Остання активна IP-адреса"
     }
   ],
   "pages.personal_tokens.last_active_label": [
     {
       "type": 0,
-      "value": "最后活跃"
+      "value": "Остання активність"
     }
   ],
   "pages.personal_tokens.loading_more": [
     {
       "type": 0,
-      "value": "载入更多 Token…"
+      "value": "Завантаження додаткових токенів..."
     }
   ],
   "pages.personal_tokens.name_column": [
     {
       "type": 0,
-      "value": "名称"
+      "value": "Ім’я"
     }
   ],
   "pages.personal_tokens.name_help": [
     {
       "type": 0,
-      "value": "为 Token 添加一个易于理解的名称以用于识别"
+      "value": "Зрозуміла для людини назва токена, щоб допомогти вам його ідентифікувати"
     }
   ],
   "pages.personal_tokens.name_label": [
     {
       "type": 0,
-      "value": "Token 名称"
+      "value": "Ім’я токена"
     }
   ],
   "pages.personal_tokens.name_placeholder": [
     {
       "type": 0,
-      "value": "我的应用程序 Token"
+      "value": "Токен мого додатка"
     }
   ],
   "pages.personal_tokens.never_expires": [
     {
       "type": 0,
-      "value": "永不过期"
+      "value": "Не має терміну дії"
     }
   ],
   "pages.personal_tokens.never_used": [
     {
       "type": 0,
-      "value": "从未使用过"
+      "value": "Ніколи не використовувався"
     }
   ],
   "pages.personal_tokens.not_found.description": [
     {
       "type": 0,
-      "value": "你要查找的 Token 不存在或已被删除。"
+      "value": "The personal token you're looking for doesn't exist or has been removed."
     }
   ],
   "pages.personal_tokens.not_found.title": [
     {
       "type": 0,
-      "value": "个人 Token 未找到"
+      "value": "Персональний токен не знайдено"
     }
   ],
   "pages.personal_tokens.owner_user_label": [
     {
       "type": 0,
-      "value": "所有者"
+      "value": "Власник"
     }
   ],
   "pages.personal_tokens.regenerate_confirm": [
     {
       "type": 0,
-      "value": "重新生成 Token"
+      "value": "Перегенерувати токен"
     }
   ],
   "pages.personal_tokens.regenerate_error": [
     {
       "type": 0,
-      "value": "个人 Token 重新生成失败"
+      "value": "Failed to regenerate personal token"
     }
   ],
   "pages.personal_tokens.regenerate_expires_help": [
     {
       "type": 0,
-      "value": "留空以保持与之前相同的有效期，或设置新的有效期"
+      "value": "Leave empty to keep the same expiry as before, or set a new expiry time"
     }
   ],
   "pages.personal_tokens.regenerate_success": [
     {
       "type": 0,
-      "value": "个人 Token 已成功重新生成"
+      "value": "Персональний токен успішно перегенеровано"
     }
   ],
   "pages.personal_tokens.regenerate_token": [
     {
       "type": 0,
-      "value": "重新生成 Token"
+      "value": "Перегенерувати токен"
     }
   ],
   "pages.personal_tokens.regenerate_token_title": [
     {
       "type": 0,
-      "value": "重新生成个人 Token"
+      "value": "Перегенерувати персональний токен"
     }
   ],
   "pages.personal_tokens.regenerate_warning": [
     {
       "type": 0,
-      "value": "将生成新的访问 Token，并使当前的访问 Token 失效。所有使用当前 Token 的应用程序都需要更新。"
+      "value": "Це призведе до створення нового токена доступу та анулювання поточного. Поточний токен, що використовується у інших програмах, потрібно буде всюди оновити."
     }
   ],
   "pages.personal_tokens.revoke_success": [
     {
       "type": 0,
-      "value": "个人 Token 已成功撤消"
+      "value": "Персональний токен успішно відкликано"
     }
   ],
   "pages.personal_tokens.revoke_token": [
     {
       "type": 0,
-      "value": "撤消 Token"
+      "value": "Відкликати токен"
     }
   ],
   "pages.personal_tokens.revoked_at_label": [
     {
       "type": 0,
-      "value": "撤消于"
+      "value": "Відкликано о"
     }
   ],
   "pages.personal_tokens.scope_device_help": [
     {
       "type": 0,
-      "value": "配置 Matrix 设备"
+      "value": "Provision a Matrix device"
     }
   ],
   "pages.personal_tokens.scope_mas_admin_help": [
     {
       "type": 0,
-      "value": "访问 MAS 管理 API"
+      "value": "Access to the MAS admin API"
     }
   ],
   "pages.personal_tokens.scope_matrix_client_help": [
     {
       "type": 0,
-      "value": "访问 Matrix 客户端 - 服务器 API"
+      "value": "Access to the Matrix Client-Server API"
     }
   ],
   "pages.personal_tokens.scope_synapse_admin_help": [
     {
       "type": 0,
-      "value": "访问 Synapse 管理 API"
+      "value": "Access to the Synapse admin API"
     }
   ],
   "pages.personal_tokens.scopes_label": [
     {
       "type": 0,
-      "value": "范围"
+      "value": "Області дії (scopes)"
     }
   ],
   "pages.personal_tokens.status.active": [
     {
       "type": 0,
-      "value": "激活"
+      "value": "Активний"
     }
   ],
   "pages.personal_tokens.status.column": [
     {
       "type": 0,
-      "value": "状态"
+      "value": "Статус"
     }
   ],
   "pages.personal_tokens.status.expired": [
     {
       "type": 0,
-      "value": "已过期"
+      "value": "Термін дії закінчився"
     }
   ],
   "pages.personal_tokens.status.label": [
     {
       "type": 0,
-      "value": "状态"
+      "value": "Статус"
     }
   ],
   "pages.personal_tokens.status.revoked": [
     {
       "type": 0,
-      "value": "已撤消"
+      "value": "Відкликано"
     }
   ],
   "pages.personal_tokens.title": [
     {
       "type": 0,
-      "value": "个人 Token"
+      "value": "Персональні токени"
     }
   ],
   "pages.personal_tokens.token_created_description": [
     {
       "type": 0,
-      "value": "您的个人 Token已创建。请立即复制，此 Token 此后将不再显示。"
+      "value": "Your personal token has been created. Copy it now as it will not be shown again."
     }
   ],
   "pages.personal_tokens.token_created_title": [
     {
       "type": 0,
-      "value": "个人 Token已创建"
+      "value": "Персональний токен створено"
     }
   ],
   "pages.personal_tokens.token_regenerated_description": [
     {
       "type": 0,
-      "value": "您的个人 Token已重新生成。请立即复制，此 Token 此后将不再显示。"
+      "value": "Your personal token has been regenerated. Copy it now as it will not be shown again."
     }
   ],
   "pages.personal_tokens.token_regenerated_title": [
     {
       "type": 0,
-      "value": "Token已重新生成"
+      "value": "Token regenerated"
     }
   ],
   "pages.registration_tokens.auto_generate_placeholder": [
     {
       "type": 0,
-      "value": "留空则自动生成"
+      "value": "Auto-generate if left empty"
     }
   ],
   "pages.registration_tokens.create_token.error": [
     {
       "type": 0,
-      "value": "Token 创建失败"
+      "value": "Не вдалося створити токен"
     }
   ],
   "pages.registration_tokens.create_token.submit": [
     {
       "type": 0,
-      "value": "创建 Token"
+      "value": "Створити токен"
     }
   ],
   "pages.registration_tokens.create_token.success": [
     {
       "type": 0,
-      "value": "Token 创建成功"
+      "value": "Токен успішно створено"
     }
   ],
   "pages.registration_tokens.create_token.title": [
     {
       "type": 0,
-      "value": "创建注册 Token"
+      "value": "Створити токен реєстрації"
     }
   ],
   "pages.registration_tokens.created_at_column": [
     {
       "type": 0,
-      "value": "创建于"
+      "value": "Створено"
     }
   ],
   "pages.registration_tokens.created_at_label": [
     {
       "type": 0,
-      "value": "创建于"
+      "value": "Створено"
     }
   ],
   "pages.registration_tokens.custom_token_help": [
     {
       "type": 0,
-      "value": "自定义 Token 字符串为可选。若留空则自动生成。"
+      "value": "Optional custom token string. If left empty, a secure token will be auto-generated."
     }
   ],
   "pages.registration_tokens.custom_token_label": [
     {
       "type": 0,
-      "value": "自定义 Token"
+      "value": "Спеціальний токен"
     }
   ],
   "pages.registration_tokens.edit_properties": [
     {
       "type": 0,
-      "value": "编辑属性"
+      "value": "Редагувати властивості"
     }
   ],
   "pages.registration_tokens.edit_token_title": [
     {
       "type": 0,
-      "value": "编辑注册 Token"
+      "value": "Редагувати токен реєстрації"
     }
   ],
   "pages.registration_tokens.expires_at_field": [
     {
       "type": 0,
-      "value": "有效期到"
+      "value": "Термін дії"
     }
   ],
   "pages.registration_tokens.expires_at_help": [
     {
       "type": 0,
-      "value": "当 Token 何时过期。若要使 Token 永不过期请留空。"
+      "value": "When the token expires. Leave empty if the token should never expire."
     }
   ],
   "pages.registration_tokens.expires_at_label": [
     {
       "type": 0,
-      "value": "有效期到"
+      "value": "Термін дії закінчується о"
     }
   ],
   "pages.registration_tokens.filters.active_only": [
     {
       "type": 0,
-      "value": "激活"
+      "value": "Активні"
     }
   ],
   "pages.registration_tokens.filters.expired_only": [
     {
       "type": 0,
-      "value": "已过期"
+      "value": "Термін дії минув"
     }
   ],
   "pages.registration_tokens.filters.revoked_only": [
     {
       "type": 0,
-      "value": "已撤消"
+      "value": "Відкликано"
     }
   ],
   "pages.registration_tokens.filters.unused_only": [
     {
       "type": 0,
-      "value": "未使用"
+      "value": "Невикористані"
     }
   ],
   "pages.registration_tokens.filters.used_only": [
     {
       "type": 0,
-      "value": "已使用"
+      "value": "Використані"
     }
   ],
   "pages.registration_tokens.loading_more": [
     {
       "type": 0,
-      "value": "载入更多 Token…"
+      "value": "Завантаження токенів..."
     }
   ],
   "pages.registration_tokens.never_expires": [
     {
       "type": 0,
-      "value": "永不过期"
+      "value": "Не має терміну дії"
     }
   ],
   "pages.registration_tokens.no_expiration_placeholder": [
     {
       "type": 0,
-      "value": "无过期时间"
+      "value": "Без терміну дії"
     }
   ],
   "pages.registration_tokens.not_found.description": [
     {
       "type": 0,
-      "value": "在 "
-    },
-    {
-      "type": 1,
-      "value": "serverName"
-    },
-    {
-      "type": 0,
-      "value": " 上无法找到请求的 Token（"
+      "value": "The requested registration token ("
     },
     {
       "type": 1,
@@ -1473,85 +1503,93 @@
     },
     {
       "type": 0,
-      "value": "）。"
+      "value": ") could not be found on "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": "."
     }
   ],
   "pages.registration_tokens.not_found.title": [
     {
       "type": 0,
-      "value": "未找到注册 Token"
+      "value": "Registration token not found"
     }
   ],
   "pages.registration_tokens.revoke_token": [
     {
       "type": 0,
-      "value": "撤消 Token"
+      "value": "Відкликати токен"
     }
   ],
   "pages.registration_tokens.revoked_at_label": [
     {
       "type": 0,
-      "value": "撤消于"
+      "value": "Відкликано о"
     }
   ],
   "pages.registration_tokens.save_changes": [
     {
       "type": 0,
-      "value": "保存更改"
+      "value": "Зберегти зміни"
     }
   ],
   "pages.registration_tokens.status.active": [
     {
       "type": 0,
-      "value": "活跃"
+      "value": "Активний"
     }
   ],
   "pages.registration_tokens.status.column": [
     {
       "type": 0,
-      "value": "状态"
+      "value": "Статус"
     }
   ],
   "pages.registration_tokens.status.expired": [
     {
       "type": 0,
-      "value": "已过期"
+      "value": "Термін дії закінчився"
     }
   ],
   "pages.registration_tokens.status.invalid": [
     {
       "type": 0,
-      "value": "无效"
+      "value": "Недійсний"
     }
   ],
   "pages.registration_tokens.status.label": [
     {
       "type": 0,
-      "value": "状态"
+      "value": "Статус"
     }
   ],
   "pages.registration_tokens.status.revoked": [
     {
       "type": 0,
-      "value": "已撤消"
+      "value": "Скасовано"
     }
   ],
   "pages.registration_tokens.status.used_up": [
     {
       "type": 0,
-      "value": "已用尽"
+      "value": "Використано"
     }
   ],
   "pages.registration_tokens.title": [
     {
       "type": 0,
-      "value": "注册 Token"
+      "value": "Реєстраційні токени"
     }
   ],
   "pages.registration_tokens.token_column": [
     {
       "type": 0,
-      "value": "Token"
+      "value": "Токен"
     }
   ],
   "pages.registration_tokens.token_count": [
@@ -1563,7 +1601,18 @@
           "value": [
             {
               "type": 0,
-              "value": "无 Token"
+              "value": "No tokens"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " token"
             }
           ]
         },
@@ -1574,7 +1623,7 @@
             },
             {
               "type": 0,
-              "value": " 个Token"
+              "value": " tokens"
             }
           ]
         }
@@ -1613,109 +1662,109 @@
   "pages.registration_tokens.unlimited_placeholder": [
     {
       "type": 0,
-      "value": "无限制"
+      "value": "Необмежений"
     }
   ],
   "pages.registration_tokens.unlimited_uses_placeholder": [
     {
       "type": 0,
-      "value": "留空则不限制使用量"
+      "value": "Залиште порожнім для необмеженого використання"
     }
   ],
   "pages.registration_tokens.unrevoke_token": [
     {
       "type": 0,
-      "value": "反转撤消 Token"
+      "value": "Скасувати відкликання токена"
     }
   ],
   "pages.registration_tokens.usage_count_label": [
     {
       "type": 0,
-      "value": "使用次数"
+      "value": "Лічильник використань"
     }
   ],
   "pages.registration_tokens.usage_limit_field": [
     {
       "type": 0,
-      "value": "使用次数限制"
+      "value": "Ліміт викликів"
     }
   ],
   "pages.registration_tokens.usage_limit_help": [
     {
       "type": 0,
-      "value": "此 Token 的最大使用次数。留空则表示不限制使用次数。"
+      "value": "Максимальна кількість використань цього токена. Залиште поле порожнім для необмеженого використання."
     }
   ],
   "pages.registration_tokens.usage_limit_label": [
     {
       "type": 0,
-      "value": "使用次数限制"
+      "value": "Кількість викликів"
     }
   ],
   "pages.registration_tokens.uses_column": [
     {
       "type": 0,
-      "value": "使用次数"
+      "value": "Використання"
     }
   ],
   "pages.registration_tokens.valid_until_column": [
     {
       "type": 0,
-      "value": "有效期到"
+      "value": "Дійсний до"
     }
   ],
   "pages.rooms.delete_room.alert.description": [
     {
       "type": 0,
-      "value": "这将永久删除从此房间上传至服务器的所有消息及媒体文件，并从目录中移除此房间。房间成员将无法再访问其消息，且该房间将从他们的房间列表中移除。"
+      "value": "This will permanently delete all messages or media uploaded to the server and remove this room from the directory. Members will lose access to their messages and the room will be removed from their room list."
     }
   ],
   "pages.rooms.delete_room.alert.title": [
     {
       "type": 0,
-      "value": "您即将删除聊天室数据"
+      "value": "Ви збираєтеся видалити дані кімнати"
     }
   ],
   "pages.rooms.delete_room.block.help": [
     {
       "type": 0,
-      "value": "防止用户在房间被删除后重新加入。"
+      "value": "Prevent users from rejoining the room after deletion."
     }
   ],
   "pages.rooms.delete_room.block.label": [
     {
       "type": 0,
-      "value": "屏蔽房间"
+      "value": "Block room"
     }
   ],
   "pages.rooms.delete_room.button": [
     {
       "type": 0,
-      "value": "永久删除"
+      "value": "Delete permanently"
     }
   ],
   "pages.rooms.delete_room.error": [
     {
       "type": 0,
-      "value": "无法安排房间删除任务"
+      "value": "Failed to schedule room deletion"
     }
   ],
   "pages.rooms.delete_room.success": [
     {
       "type": 0,
-      "value": "已安排房间删除任务"
+      "value": "Room deletion scheduled"
     }
   ],
   "pages.rooms.delete_room.title": [
     {
       "type": 0,
-      "value": "删除这个房间吗？"
+      "value": "Видалити цю кімнату?"
     }
   ],
   "pages.rooms.deletion.failure.description": [
     {
       "type": 0,
-      "value": "房间删除任务于"
+      "value": "Видалення кімнати не вдалося "
     },
     {
       "type": 3,
@@ -1724,7 +1773,7 @@
     },
     {
       "type": 0,
-      "value": " "
+      "value": " о "
     },
     {
       "type": 4,
@@ -1733,7 +1782,7 @@
     },
     {
       "type": 0,
-      "value": "失败，错误："
+      "value": " з помилкою: "
     },
     {
       "type": 1,
@@ -1743,13 +1792,13 @@
   "pages.rooms.deletion.failure.title": [
     {
       "type": 0,
-      "value": "删除失败"
+      "value": "Видалення не вдалося"
     }
   ],
   "pages.rooms.deletion.in_progress.description": [
     {
       "type": 0,
-      "value": "房间删除任务于"
+      "value": "Room deletion task is in progress since "
     },
     {
       "type": 3,
@@ -1758,7 +1807,7 @@
     },
     {
       "type": 0,
-      "value": " "
+      "value": " at "
     },
     {
       "type": 4,
@@ -1767,19 +1816,19 @@
     },
     {
       "type": 0,
-      "value": "开始，正在进行中。"
+      "value": "."
     }
   ],
   "pages.rooms.deletion.in_progress.title": [
     {
       "type": 0,
-      "value": "正在删除"
+      "value": "Триває видалення"
     }
   ],
   "pages.rooms.deletion.success.description": [
     {
       "type": 0,
-      "value": "房间删除任务已于"
+      "value": "Room deletion task completed successfully on "
     },
     {
       "type": 3,
@@ -1788,7 +1837,7 @@
     },
     {
       "type": 0,
-      "value": " "
+      "value": " at "
     },
     {
       "type": 4,
@@ -1797,51 +1846,43 @@
     },
     {
       "type": 0,
-      "value": "成功完成。"
+      "value": "."
     }
   ],
   "pages.rooms.deletion.success.title": [
     {
       "type": 0,
-      "value": "删除成功"
+      "value": "Видалення успішне"
     }
   ],
   "pages.rooms.filters.empty_rooms": [
     {
       "type": 0,
-      "value": "空房间"
+      "value": "Порожні кімнати"
     }
   ],
   "pages.rooms.filters.non_empty_rooms": [
     {
       "type": 0,
-      "value": "非空房间"
+      "value": "Непорожні кімнати"
     }
   ],
   "pages.rooms.filters.private_rooms": [
     {
       "type": 0,
-      "value": "私有房间"
+      "value": "Приватні кімнати"
     }
   ],
   "pages.rooms.filters.public_rooms": [
     {
       "type": 0,
-      "value": "公共房间"
+      "value": "Загальнодоступні кімнати"
     }
   ],
   "pages.rooms.not_found.description": [
     {
       "type": 0,
-      "value": "在 "
-    },
-    {
-      "type": 1,
-      "value": "serverName"
-    },
-    {
-      "type": 0,
-      "value": " 上无法找到房间（"
+      "value": "Запитану кімнату ("
     },
     {
       "type": 1,
@@ -1849,13 +1890,21 @@
     },
     {
       "type": 0,
-      "value": "）。"
+      "value": ") не вдалося знайти на "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": "."
     }
   ],
   "pages.rooms.not_found.title": [
     {
       "type": 0,
-      "value": "未找到房间"
+      "value": "Кімнату не знайдено"
     }
   ],
   "pages.rooms.room_count": [
@@ -1867,7 +1916,18 @@
           "value": [
             {
               "type": 0,
-              "value": "无房间"
+              "value": "No rooms"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " room"
             }
           ]
         },
@@ -1878,7 +1938,7 @@
             },
             {
               "type": 0,
-              "value": "个房间"
+              "value": " rooms"
             }
           ]
         }
@@ -1890,13 +1950,13 @@
   "pages.rooms.title": [
     {
       "type": 0,
-      "value": "房间"
+      "value": "Кімнати"
     }
   ],
   "pages.supervision.description": [
     {
       "type": 0,
-      "value": "以 "
+      "value": "Увійдіть як "
     },
     {
       "type": 8,
@@ -1910,207 +1970,199 @@
     },
     {
       "type": 0,
-      "value": " 用户登录，即可在任何房间执行管理操作。"
+      "value": ", щоб виконувати адміністративні дії в будь-якій кімнаті."
     }
   ],
   "pages.supervision.disabled_alert.description": [
     {
       "type": 0,
-      "value": "此功能包含在您的订阅中。您可以联系管理员启用此功能。"
+      "value": "Ця функція є частиною вашої підписки. Ви можете попросити адміністратора увімкнути її."
     }
   ],
   "pages.supervision.disabled_alert.title": [
     {
       "type": 0,
-      "value": "监控功能当前已禁用"
+      "value": "Наглядання наразі вимкнено"
     }
   ],
   "pages.supervision.errors.cant_open.description": [
     {
       "type": 0,
-      "value": "您的浏览器阻止了弹出窗口的打开。请确保允许来自此网站的弹出窗口。"
+      "value": "Ваш браузер блокує відкриття спливаючих вікон. Будь ласка, переконайтеся, що ви дозволили спливаючі вікна з цього сайту."
     }
   ],
   "pages.supervision.errors.cant_open.title": [
     {
       "type": 0,
-      "value": "无法在新窗口中打开监控界面"
+      "value": "Не вдалося відкрити інтерфейс наглядання в новому вікні"
     }
   ],
   "pages.supervision.errors.closed.description": [
     {
       "type": 0,
-      "value": "无法登录监督界面，因为该界面在登录完成前已关闭"
+      "value": "Не вдалося увійти в інтерфейс нагляду, оскільки він закрився до завершення входу"
     }
   ],
   "pages.supervision.errors.closed.title": [
     {
       "type": 0,
-      "value": "监控界面关闭得太快了"
+      "value": "Інтерфейс нагляду закрився занадто швидко"
     }
   ],
   "pages.supervision.errors.generic.title": [
     {
       "type": 0,
-      "value": "打开监控界面时发生意外错误"
+      "value": "Під час відкриття інтерфейсу нагляду сталася неочікувана помилка"
     }
   ],
   "pages.supervision.missing_ui_address.description": [
     {
       "type": 0,
-      "value": "您的部署中已启用监控功能，但未启用 Element Web，而监控界面需要 Element Web 才能正常工作。"
+      "value": "На вашому сервері увімкнено наглядання, але не Element Web, що необхідний для роботи інтерфейсу нагляду."
     }
   ],
   "pages.supervision.missing_ui_address.title": [
     {
       "type": 0,
-      "value": "监控界面需要启用 Element Web"
+      "value": "Інтерфейс нагляду потребує, щоб Element Web був увімкнений"
     }
   ],
   "pages.supervision.recovery_key.copied": [
     {
       "type": 0,
-      "value": "已复制 Recovery key"
+      "value": "Ключ відновлення скопійовано"
     }
   ],
   "pages.supervision.recovery_key.copy_failed": [
     {
       "type": 0,
-      "value": "无法复制 recovery key"
+      "value": "Не вдалося скопіювати ключ відновлення"
     }
   ],
   "pages.supervision.recovery_key.help": [
     {
       "type": 0,
-      "value": "这是用于读取加密信息的 recovery key。"
+      "value": "Це ключ відновлення, який використовується для читання зашифрованих повідомлень."
     }
   ],
   "pages.supervision.recovery_key.label": [
     {
       "type": 0,
-      "value": "Recovery key"
+      "value": "Ключ відновлення"
     }
   ],
   "pages.supervision.title": [
     {
       "type": 0,
-      "value": "监控"
+      "value": "Наглядання"
     }
   ],
   "pages.supervision.unavailable_alert.description": [
     {
       "type": 0,
-      "value": "此功能在 ESS Community 中不可用。请升级至 ESS Pro 以启用该功能。"
+      "value": "Ця функція недоступна в ESS Community. Оновіться до ESS Pro, щоб увімкнути її."
     }
   ],
   "pages.supervision.unavailable_alert.title": [
     {
       "type": 0,
-      "value": "监控是 ESS Pro 中的一项功能"
+      "value": "Нагляд – функція, що доступна в ESS Pro"
     }
   ],
   "pages.users.add_email.button": [
     {
       "type": 0,
-      "value": "添加邮件地址"
+      "value": "Додати адресу електронної пошти"
     }
   ],
   "pages.users.add_email.description": [
     {
       "type": 0,
-      "value": "为此用户添加邮件地址"
+      "value": "Додати адресу електронної пошти для цього користувача"
     }
   ],
   "pages.users.add_email.error": [
     {
       "type": 0,
-      "value": "邮件地址添加失败"
+      "value": "Не вдалося додати адресу електронної пошти"
     }
   ],
   "pages.users.add_email.error.email_invalid": [
     {
       "type": 0,
-      "value": "邮件地址无效"
+      "value": "Неправильна адреса електронної пошти"
     }
   ],
   "pages.users.add_email.error.email_missing": [
     {
       "type": 0,
-      "value": "此字段为必填项"
+      "value": "Це поле обов’язкове"
     }
   ],
   "pages.users.add_email.success": [
     {
       "type": 0,
-      "value": "已添加邮件地址"
+      "value": "Адресу електронної пошти додано"
     }
   ],
   "pages.users.add_email.title": [
     {
       "type": 0,
-      "value": "添加邮件地址"
+      "value": "Додати адресу електронної пошти"
     }
   ],
   "pages.users.add_upstream_link.error": [
     {
       "type": 0,
-      "value": "上游账户关联失败"
+      "value": "Failed to add link upstream account"
     }
   ],
   "pages.users.add_upstream_link.success": [
     {
       "type": 0,
-      "value": "已与上游账户关联"
+      "value": "Link to upstream account added"
     }
   ],
   "pages.users.deactivate_account.alert.description": [
     {
       "type": 0,
-      "value": "这会自动从用户的所有设备中注销、移除所有访问 Token、删除所有第三方 ID 并永久删除其账户数据。"
+      "value": "Ця дія призведе до виходу користувача з усіх його пристроїв, видалить усі токени доступу, видалить усі ідентифікатори на сторонніх пов’язаних сервісах, та назавжди видалить дані його облікового запису."
     }
   ],
   "pages.users.deactivate_account.alert.title": [
     {
       "type": 0,
-      "value": "你即将删除用户数据"
+      "value": "Ви збираєтеся видалити дані користувача"
     }
   ],
   "pages.users.deactivate_account.button": [
     {
       "type": 0,
-      "value": "停用账户"
+      "value": "Деактивувати обліковий запис"
     }
   ],
   "pages.users.deactivate_account.error": [
     {
       "type": 0,
-      "value": "停用账户失败"
+      "value": "Не вдалося деактивувати обліковий запис"
     }
   ],
   "pages.users.deactivate_account.success": [
     {
       "type": 0,
-      "value": "账户已停用"
+      "value": "Обліковий запис деактивовано"
     }
   ],
   "pages.users.deactivate_account.title": [
     {
       "type": 0,
-      "value": "停用此用户？"
+      "value": "Деактивувати цього користувача?"
     }
   ],
   "pages.users.delete_email.description": [
     {
       "type": 0,
-      "value": "你确定要为该用户（"
-    },
-    {
-      "type": 1,
-      "value": "mxid"
-    },
-    {
-      "type": 0,
-      "value": "）移除此邮件地址（"
+      "value": "Ви впевнені, що хочете видалити адресу електронної пошти ("
     },
     {
       "type": 1,
@@ -2118,31 +2170,7 @@
     },
     {
       "type": 0,
-      "value": "）？"
-    }
-  ],
-  "pages.users.delete_email.error": [
-    {
-      "type": 0,
-      "value": "删除邮件地址失败"
-    }
-  ],
-  "pages.users.delete_email.success": [
-    {
-      "type": 0,
-      "value": "邮件地址已删除"
-    }
-  ],
-  "pages.users.delete_email.title": [
-    {
-      "type": 0,
-      "value": "移除邮件地址？"
-    }
-  ],
-  "pages.users.delete_upstream_link.description": [
-    {
-      "type": 0,
-      "value": "你确定要删除此用户（"
+      "value": ") у користувача ("
     },
     {
       "type": 1,
@@ -2150,7 +2178,39 @@
     },
     {
       "type": 0,
-      "value": "）与该上游账户（"
+      "value": ")?"
+    }
+  ],
+  "pages.users.delete_email.error": [
+    {
+      "type": 0,
+      "value": "Не вдалося видалити адресу електронної пошти"
+    }
+  ],
+  "pages.users.delete_email.success": [
+    {
+      "type": 0,
+      "value": "Адресу електронної пошти видалено"
+    }
+  ],
+  "pages.users.delete_email.title": [
+    {
+      "type": 0,
+      "value": "Видалити адресу електронної пошти?"
+    }
+  ],
+  "pages.users.delete_upstream_link.description": [
+    {
+      "type": 0,
+      "value": "Are you sure you want to remove the link between this user ("
+    },
+    {
+      "type": 1,
+      "value": "mxid"
+    },
+    {
+      "type": 0,
+      "value": ") with this upstream account ("
     },
     {
       "type": 1,
@@ -2158,121 +2218,121 @@
     },
     {
       "type": 0,
-      "value": " ）的关联？"
+      "value": ")?"
     }
   ],
   "pages.users.delete_upstream_link.error": [
     {
       "type": 0,
-      "value": "上游关联删除失败"
+      "value": "Failed to delete upstream link"
     }
   ],
   "pages.users.delete_upstream_link.success": [
     {
       "type": 0,
-      "value": "上游关联已删除"
+      "value": "Upstream link deleted"
     }
   ],
   "pages.users.delete_upstream_link.title": [
     {
       "type": 0,
-      "value": "删除与上游账户的关联？"
+      "value": "Remove link with upstream account?"
     }
   ],
   "pages.users.filters.active": [
     {
       "type": 0,
-      "value": "激活用户"
+      "value": "Активні користувачі"
     }
   ],
   "pages.users.filters.admins": [
     {
       "type": 0,
-      "value": "管理员"
+      "value": "Адміністратори"
     }
   ],
   "pages.users.filters.deactivated": [
     {
       "type": 0,
-      "value": "已停用的用户"
+      "value": "Деактивовані користувачі"
     }
   ],
   "pages.users.filters.guests": [
     {
       "type": 0,
-      "value": "访客（旧版）"
+      "value": "Гості (стара версія)"
     }
   ],
   "pages.users.filters.locked": [
     {
       "type": 0,
-      "value": "已锁定的用户"
+      "value": "Заблоковані користувачі"
     }
   ],
   "pages.users.filters.newest_first": [
     {
       "type": 0,
-      "value": "最新的优先"
+      "value": "Спочатку новіші"
     }
   ],
   "pages.users.filters.non_guests": [
     {
       "type": 0,
-      "value": "非访客（旧版）"
+      "value": "Non-guests (legacy)"
     }
   ],
   "pages.users.lock_account.alert.description": [
     {
       "type": 0,
-      "value": "此用户将自动在其登录的所有设备中锁定，并且在解锁前无法登录到任何新设备。"
+      "value": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."
     }
   ],
   "pages.users.lock_account.alert.title": [
     {
       "type": 0,
-      "value": "用户将无法发送或接收消息"
+      "value": "The user will not be able to send or receive messages"
     }
   ],
   "pages.users.lock_account.button": [
     {
       "type": 0,
-      "value": "锁定账户"
+      "value": "Заблокувати обліковий запис"
     }
   ],
   "pages.users.lock_account.error": [
     {
       "type": 0,
-      "value": "锁定账户失败"
+      "value": "Не вдалося заблокувати обліковий запис"
     }
   ],
   "pages.users.lock_account.success": [
     {
       "type": 0,
-      "value": "账户已锁定"
+      "value": "Обліковий запис заблоковано"
     }
   ],
   "pages.users.lock_account.title": [
     {
       "type": 0,
-      "value": "锁定此用户？"
+      "value": "Заблокувати обліковий запис цього користувача?"
     }
   ],
   "pages.users.new_user.add_user": [
     {
       "type": 0,
-      "value": "添加用户"
+      "value": "Додати користувача"
     }
   ],
   "pages.users.new_user.create_account": [
     {
       "type": 0,
-      "value": "创建账户"
+      "value": "Створити обліковий запис"
     }
   ],
   "pages.users.new_user.description": [
     {
       "type": 0,
-      "value": "为此用户指定用户名以新增用户到 "
+      "value": "To add a new user to "
     },
     {
       "type": 1,
@@ -2280,57 +2340,49 @@
     },
     {
       "type": 0,
-      "value": "，该用户名将成为其用户 ID 的一部分。"
+      "value": ", choose a user name for this user, which will be part of their user ID."
     }
   ],
   "pages.users.new_user.error_message": [
     {
       "type": 0,
-      "value": "创建用户时出错"
+      "value": "Помилка створення користувача"
     }
   ],
   "pages.users.new_user.invalid_localpart": [
     {
       "type": 0,
-      "value": "Localpart 只能包含小写字母、数字与下划线"
+      "value": "Localpart can only contain lowercase letters, numbers, dots, underscores, dashes and slashes"
     }
   ],
   "pages.users.new_user.invalid_localpart_numeric_only": [
     {
       "type": 0,
-      "value": "Localpart 不能仅包含数字"
+      "value": "Localpart cannot only contain numbers"
     }
   ],
   "pages.users.new_user.localpart": [
     {
       "type": 0,
-      "value": "输入名称"
+      "value": "Enter name"
     }
   ],
   "pages.users.new_user.required_error": [
     {
       "type": 0,
-      "value": "此字段为必填"
+      "value": "Це поле обов’язкове."
     }
   ],
   "pages.users.new_user.success_message": [
     {
       "type": 0,
-      "value": "用户已创建"
+      "value": "Користувача створено"
     }
   ],
   "pages.users.not_found.description": [
     {
       "type": 0,
-      "value": "在 "
-    },
-    {
-      "type": 1,
-      "value": "serverName"
-    },
-    {
-      "type": 0,
-      "value": " 上无法找到请求的用户（"
+      "value": "The requested user ("
     },
     {
       "type": 1,
@@ -2338,75 +2390,79 @@
     },
     {
       "type": 0,
-      "value": "）。"
+      "value": ") could not be found on "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": "."
     }
   ],
   "pages.users.not_found.title": [
     {
       "type": 0,
-      "value": "用户未找到"
+      "value": "Користувача не знайдено"
     }
   ],
   "pages.users.reactivate_account.button": [
     {
       "type": 0,
-      "value": "重新激活"
+      "value": "Повторно активувати"
     }
   ],
   "pages.users.reactivate_account.error": [
     {
       "type": 0,
-      "value": "重新激活账户失败"
+      "value": "Не вдалося повторно активувати обліковий запис"
     }
   ],
   "pages.users.reactivate_account.success": [
     {
       "type": 0,
-      "value": "账户已重新激活"
+      "value": "Обліковий запис повторно активовано"
     }
   ],
   "pages.users.search_placeholder": [
     {
       "type": 0,
-      "value": "搜索用户…"
+      "value": "Пошук користувачів…"
     }
   ],
   "pages.users.set_admin.alert.description": [
     {
       "type": 0,
-      "value": "用户将能够查看用户数据，并修改用户和房间权限。"
+      "value": "The user will be able to view user data and make changes to user and room permissions."
     }
   ],
   "pages.users.set_admin.alert.title": [
     {
       "type": 0,
-      "value": "用户将有权访问敏感数据"
+      "value": "User will have access to sensitive data"
     }
   ],
   "pages.users.set_admin.error": [
     {
       "type": 0,
-      "value": "为 "
+      "value": "Не вдалося змінити права адміністратора для "
     },
     {
       "type": 1,
       "value": "mxid"
-    },
-    {
-      "type": 0,
-      "value": " 更改管理员权限失败"
     }
   ],
   "pages.users.set_admin.label": [
     {
       "type": 0,
-      "value": "管理员"
+      "value": "Адміністратор"
     }
   ],
   "pages.users.set_admin.make_admin_button": [
     {
       "type": 0,
-      "value": "设为管理员"
+      "value": "Зробити адміністратором"
     }
   ],
   "pages.users.set_admin.successfully_demoted": [
@@ -2416,7 +2472,7 @@
     },
     {
       "type": 0,
-      "value": " 已不再具有管理员权限"
+      "value": " більше не має прав адміністратора"
     }
   ],
   "pages.users.set_admin.successfully_promoted": [
@@ -2426,97 +2482,97 @@
     },
     {
       "type": 0,
-      "value": " 现在拥有管理员权限"
+      "value": " тепер має права адміністратора"
     }
   ],
   "pages.users.set_admin.title": [
     {
       "type": 0,
-      "value": "将此用户设为管理员？"
+      "value": "Зробити цього користувача адміністратором?"
     }
   ],
   "pages.users.set_password.button": [
     {
       "type": 0,
-      "value": "更改密码"
+      "value": "Змінити пароль"
     }
   ],
   "pages.users.set_password.confirm_password_label": [
     {
       "type": 0,
-      "value": "再次输入密码"
+      "value": "Введіть пароль ще раз"
     }
   ],
   "pages.users.set_password.error": [
     {
       "type": 0,
-      "value": "密码设置失败"
+      "value": "Не вдалося встановити пароль"
     }
   ],
   "pages.users.set_password.error.password_missing": [
     {
       "type": 0,
-      "value": "此字段为必填"
+      "value": "Це поле обовʼязкове"
     }
   ],
   "pages.users.set_password.error.passwords_mismatch": [
     {
       "type": 0,
-      "value": "密码不匹配"
+      "value": "Паролі не збігаються"
     }
   ],
   "pages.users.set_password.password_label": [
     {
       "type": 0,
-      "value": "密码"
+      "value": "Пароль"
     }
   ],
   "pages.users.set_password.password_match": [
     {
       "type": 0,
-      "value": "密码匹配！"
+      "value": "Паролі збігаються!"
     }
   ],
   "pages.users.set_password.submit": [
     {
       "type": 0,
-      "value": "设置新密码"
+      "value": "Встановити новий пароль"
     }
   ],
   "pages.users.set_password.success": [
     {
       "type": 0,
-      "value": "密码设置成功"
+      "value": "Пароль встановлено успішно"
     }
   ],
   "pages.users.set_password.title": [
     {
       "type": 0,
-      "value": "为此用户设置新密码"
+      "value": "Встановити новий пароль для цього користувача"
     }
   ],
   "pages.users.title": [
     {
       "type": 0,
-      "value": "用户"
+      "value": "Користувачі"
     }
   ],
   "pages.users.unlock_account.button": [
     {
       "type": 0,
-      "value": "解锁账户"
+      "value": "Розблокувати обліковий запис"
     }
   ],
   "pages.users.unlock_account.error": [
     {
       "type": 0,
-      "value": "解锁账户失败"
+      "value": "Не вдалося розблокувати обліковий запис"
     }
   ],
   "pages.users.unlock_account.success": [
     {
       "type": 0,
-      "value": "账户已解锁"
+      "value": "Обліковий запис розблоковано"
     }
   ],
   "pages.users.user_count": [
@@ -2528,7 +2584,18 @@
           "value": [
             {
               "type": 0,
-              "value": "无用户"
+              "value": "No users"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " user"
             }
           ]
         },
@@ -2539,7 +2606,7 @@
             },
             {
               "type": 0,
-              "value": "个用户"
+              "value": " users"
             }
           ]
         }
@@ -2581,39 +2648,39 @@
   "room_info.empty_room": [
     {
       "type": 0,
-      "value": "空房间"
+      "value": "Порожня кімната"
     }
   ],
   "room_info.empty_space": [
     {
       "type": 0,
-      "value": "空闲空间"
+      "value": "Порожній простір"
     }
   ],
   "room_info.room_with": [
     {
-      "type": 1,
-      "value": "members"
+      "type": 0,
+      "value": "Кімната з "
     },
     {
-      "type": 0,
-      "value": " 位成员的房间"
+      "type": 1,
+      "value": "members"
     }
   ],
   "room_info.space_with": [
     {
-      "type": 1,
-      "value": "members"
+      "type": 0,
+      "value": "Простір з "
     },
     {
-      "type": 0,
-      "value": " 位成员的空间"
+      "type": 1,
+      "value": "members"
     }
   ],
   "room_info.unknown_user": [
     {
       "type": 0,
-      "value": "未知用户"
+      "value": "Невідомий користувач"
     }
   ],
   "rooms_info.other_members": [
@@ -2621,11 +2688,47 @@
       "type": 6,
       "value": "COUNT",
       "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " інший"
+            }
+          ]
+        },
+        "few": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " інших"
+            }
+          ]
+        },
+        "many": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " інших"
+            }
+          ]
+        },
         "other": {
           "value": [
             {
+              "type": 7
+            },
+            {
               "type": 0,
-              "value": "其他"
+              "value": " інших"
             }
           ]
         }
@@ -2637,43 +2740,43 @@
   "ui.data.failed_to_load": [
     {
       "type": 0,
-      "value": "载入失败"
+      "value": "Не вдалося завантажити"
     }
   ],
   "ui.data.loading": [
     {
       "type": 0,
-      "value": "正在载入值"
+      "value": "Завантаження значення"
     }
   ],
   "ui.destination_status.failing": [
     {
       "type": 0,
-      "value": "失败"
+      "value": "Failing"
     }
   ],
   "ui.destination_status.inactive": [
     {
       "type": 0,
-      "value": "未激活"
+      "value": "Inactive"
     }
   ],
   "ui.destination_status.never_worked": [
     {
       "type": 0,
-      "value": "从未工作过"
+      "value": "Never worked"
     }
   ],
   "ui.destination_status.working": [
     {
       "type": 0,
-      "value": "正在工作"
+      "value": "Working"
     }
   ],
   "ui.language_switcher.browser_default": [
     {
       "type": 0,
-      "value": "跟随浏览器设置（"
+      "value": "Використовувати налаштування браузера ("
     },
     {
       "type": 1,
@@ -2681,49 +2784,49 @@
     },
     {
       "type": 0,
-      "value": "）"
+      "value": ")"
     }
   ],
   "ui.language_switcher.button_label": [
     {
       "type": 0,
-      "value": "语言设置"
+      "value": "Мовні налаштування"
     }
   ],
   "ui.language_switcher.description": [
     {
       "type": 0,
-      "value": "更改界面为您希望使用的语言。"
+      "value": "Виберіть бажану мову інтерфейсу."
     }
   ],
   "ui.language_switcher.language_list_label": [
     {
       "type": 0,
-      "value": "可用语言列表"
+      "value": "Список доступних мов"
     }
   ],
   "ui.language_switcher.title": [
     {
       "type": 0,
-      "value": "语言设置"
+      "value": "Мовні налаштування"
     }
   ],
   "ui.user_picker.loading_list": [
     {
       "type": 0,
-      "value": "正在加载…"
+      "value": "Завантаження…"
     }
   ],
   "ui.user_picker.no_match": [
     {
       "type": 0,
-      "value": "没有匹配"
+      "value": "Немає збігів"
     }
   ],
   "ui.user_picker.no_match_help": [
     {
       "type": 0,
-      "value": "请尝试使用其他搜索词。此功能仅能通过用户的localpart在"
+      "value": "Спробуйте інший пошуковий запит. Ця функція дозволяє шукати лише активних користувачів на "
     },
     {
       "type": 1,
@@ -2731,7 +2834,7 @@
     },
     {
       "type": 0,
-      "value": "上查找活跃用户。"
+      "value": " за їхнім локальним ідентифікатором."
     }
   ]
 }

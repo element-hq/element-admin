@@ -1,0 +1,1046 @@
+{
+  "action.add": {
+    "message": "Додати"
+  },
+  "action.cancel": {
+    "message": "Скасувати"
+  },
+  "action.clear": {
+    "message": "Очистити"
+  },
+  "action.close": {
+    "message": "Закрити"
+  },
+  "action.copy": {
+    "message": "Копіювати"
+  },
+  "action.delete": {
+    "message": "Видалити"
+  },
+  "action.go_back": {
+    "message": "Назад"
+  },
+  "action.remove": {
+    "message": "Видалити"
+  },
+  "action.retry": {
+    "message": "Повторити спробу"
+  },
+  "action.sign_in": {
+    "message": "Увійти"
+  },
+  "action.sign_out": {
+    "message": "Вийти"
+  },
+  "common.email_address": {
+    "message": "Адреса електронної пошти"
+  },
+  "common.filter": {
+    "message": "Фільтр"
+  },
+  "errors.http_fetch": {
+    "message": "Запит до {url} не вдався"
+  },
+  "errors.http_fetch_json_decoding": {
+    "message": "Не вдалося декодувати JSON у відповіді з {url}"
+  },
+  "errors.http_status": {
+    "message": "Запит до {url} завершився невдало з кодом статусу {status} {statusText}"
+  },
+  "errors.matrix_standard": {
+    "message": "Запит до домашнього сервера не вдався з кодом помилки \"{errorCode}\". Додатково, сервер видав таке повідомлення про помилку: {errorMessage}"
+  },
+  "errors.not_logged_in": {
+    "message": "Вхід не виконано"
+  },
+  "footer.copyright_notice": {
+    "message": "Авторські права © {now, date, ::yyyy}"
+  },
+  "footer.help_and_support": {
+    "message": "Довідка та підтримка"
+  },
+  "footer.legal": {
+    "message": "Юридична інформація"
+  },
+  "footer.privacy": {
+    "message": "Конфіденційність"
+  },
+  "header.user_menu.title": {
+    "message": "Меню облікового запису"
+  },
+  "marketing.also_available_in_pro.description": {
+    "message": "<p><link>ESS Pro</link> це комерційна версія серверного програмного забезпечення від розробників Element.</p> <p>Вона включає в себе всі компоненти із ESS Community, а також додаткові функції та сервіси, що підходять для професійних середовищ із кількістю користувачів від 100 до мільонів.</p> <p>Ця версія розроблена із врахуванням корпоративних вимог, таких як розширений IAM, комплаєнс, покращена масштабованість, висока доступність та мультиорендність.</p>"
+  },
+  "marketing.also_available_in_pro.title": {
+    "message": "Також доступно у версії Pro…"
+  },
+  "marketing.also_available_in_pro.upgrade": {
+    "message": "Перейти на версію Pro"
+  },
+  "marketing.auditing.description": {
+    "message": "<p>Аудит надає організаціям можливість вести записи розмов та подій у кімнатах із наскрізним шифруванням для дотримання вимог комплаєнсу, або законодавства.</p> <p>Якщо функцію увімкнено, то для забезпечення прозорості усі кінцеві користувачі будуть бучити які кімнати записуються для аудиту.</p> <p>Аудит може бути налаштований у відповідності до специфічних умов організації. Наприклад, можна не відслідковувати прямі повідомлення між двома користувачами, а лише групові розмови.</p> <p>Дані аудиту будуть зберігатися у вигляді потоку машиночитних подій у форматі JSON-файлів локально, або в сховищах типу S3, та може бути перенаправлений в інструментарій аналізу журналів для подальшої фільтрації та аналізу.</p>"
+  },
+  "marketing.auditing.title": {
+    "message": "Аудит"
+  },
+  "marketing.sbg.description": {
+    "message": "<p>Secure Border Gateway is an application-level firewall for Matrix servers.</p> <ul><li>Inspects all requests to and from the server</li> <li>Can use all request metadata to enforce rules</li> <li>Pipeline-based approach to connect APIs and rule sets</li> <li>Pluggable rules engine that can be applied to the pipelines</li></ul>"
+  },
+  "marketing.sbg.title": {
+    "message": "Secure Border Gateway"
+  },
+  "marketing.supervision.description": {
+    "message": "<p>Наглядання дозволяє організації адмініструвати всі кімнати з центральної точки. Обліковий запис «супервізора» буде приєднаний до визначених кімнат з правами адміністратора кімнати. Адміністратори сервера можуть легко видавати себе за цей обліковий запис з консолі адміністратора, щоб керувати цими кімнатами та контролювати їх.</p> <ul><li>Керувати кімнатами та їх налаштуваннями (назва, тема, дозволи тощо)</li> <li>Керувати користувачами у кімнатах</li> <li>Видаляти небажані повідомлення та завантажені медіа</li> <li>Відновлювати покинуті кімнати (звідки вийшли всі користувачі)</li> <li>Обліковий запис супервізора може як читати так і не читати зашифровані повідомлення, це налаштовується</li></ul>"
+  },
+  "marketing.supervision.title": {
+    "message": "Наглядання"
+  },
+  "navigation.auditing": {
+    "message": "Аудит"
+  },
+  "navigation.dashboard": {
+    "message": "Інформаційна панель"
+  },
+  "navigation.documentation": {
+    "message": "Документація"
+  },
+  "navigation.federation": {
+    "message": "Federation"
+  },
+  "navigation.personal_tokens": {
+    "message": "Персональні токени"
+  },
+  "navigation.registration_tokens": {
+    "message": "Реєстраційні токени"
+  },
+  "navigation.rooms": {
+    "message": "Кімнати"
+  },
+  "navigation.supervision": {
+    "message": "Наглядання"
+  },
+  "navigation.users": {
+    "message": "Користувачі"
+  },
+  "pages.auditing.title": {
+    "message": "Аудит"
+  },
+  "pages.auditing.unavailable_alert.description": {
+    "message": "Ця функція недоступна в ESS Community. Щоб її увімкнути, перейдіть на ESS Pro."
+  },
+  "pages.auditing.unavailable_alert.title": {
+    "message": "Аудит — функція, що доступна в ESS Pro"
+  },
+  "pages.dashboard.current_ess_version": {
+    "message": "Версія ESS"
+  },
+  "pages.dashboard.latest_ess_version": {
+    "message": "Остання версія ESS"
+  },
+  "pages.dashboard.new_ess_release": {
+    "message": "(Нова версія)"
+  },
+  "pages.dashboard.registered_users_count": {
+    "message": "Загальна кількість зареєстрованих користувачів"
+  },
+  "pages.dashboard.rooms_count": {
+    "message": "Загальна кількість кімнат"
+  },
+  "pages.dashboard.running_latest_ess": {
+    "message": "(Ви використовуєте останню версію)"
+  },
+  "pages.dashboard.synapse_version": {
+    "message": "Версія Synapse"
+  },
+  "pages.dashboard.title": {
+    "message": "Інформаційна панель"
+  },
+  "pages.federation.allowlist.add.error": {
+    "message": "Failed to add domain to allowlist"
+  },
+  "pages.federation.allowlist.add.success": {
+    "message": "Domain added to allowlist"
+  },
+  "pages.federation.allowlist.add_domain": {
+    "message": "Add domain"
+  },
+  "pages.federation.allowlist.add_pattern": {
+    "message": "Add pattern"
+  },
+  "pages.federation.allowlist.add_pattern.help": {
+    "message": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
+  },
+  "pages.federation.allowlist.empty": {
+    "message": "No domains in the allowlist yet. Add a domain pattern above to get started."
+  },
+  "pages.federation.allowlist.heading": {
+    "message": "List of patterns allowed to federate with you"
+  },
+  "pages.federation.allowlist.remove.error": {
+    "message": "Failed to remove domain from allowlist"
+  },
+  "pages.federation.allowlist.remove.success": {
+    "message": "Domain removed from allowlist"
+  },
+  "pages.federation.allowlist.remove_tooltip": {
+    "message": "Remove from allowlist"
+  },
+  "pages.federation.detail.contact": {
+    "message": "Contact"
+  },
+  "pages.federation.detail.destination": {
+    "message": "Destination"
+  },
+  "pages.federation.detail.last_retry": {
+    "message": "Last retry timestamp"
+  },
+  "pages.federation.detail.last_successful_stream": {
+    "message": "Last successful stream"
+  },
+  "pages.federation.detail.retry_interval": {
+    "message": "Retry interval"
+  },
+  "pages.federation.detail.security": {
+    "message": "Security"
+  },
+  "pages.federation.detail.support_page": {
+    "message": "Support page"
+  },
+  "pages.federation.domain_count": {
+    "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
+  },
+  "pages.federation.loading": {
+    "message": "Loading more domains…"
+  },
+  "pages.federation.not_found.description": {
+    "message": "The requested destination ({destination}) could not be found."
+  },
+  "pages.federation.not_found.title": {
+    "message": "Destination not found"
+  },
+  "pages.federation.sbg_not_enabled.description": {
+    "message": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+  },
+  "pages.federation.sbg_not_enabled.title": {
+    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+  },
+  "pages.federation.search_placeholder": {
+    "message": "Search domains…"
+  },
+  "pages.federation.tab.allowed_domains": {
+    "message": "Allowed domains"
+  },
+  "pages.federation.tab.known_domains": {
+    "message": "Known domains"
+  },
+  "pages.federation.tab.section": {
+    "message": "Federation views"
+  },
+  "pages.federation.table.server_name": {
+    "message": "Server name"
+  },
+  "pages.federation.table.status": {
+    "message": "Status"
+  },
+  "pages.federation.title": {
+    "message": "Federation"
+  },
+  "pages.federation.unavailable_alert.description": {
+    "message": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
+  },
+  "pages.federation.unavailable_alert.title": {
+    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+  },
+  "pages.generic_error.go_home": {
+    "message": "На головну"
+  },
+  "pages.generic_error.sign_out_and_reload": {
+    "message": "Вийти та перезавантажити"
+  },
+  "pages.generic_error.technical_details.item": {
+    "message": "{name}: {message}"
+  },
+  "pages.generic_error.text": {
+    "message": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
+  },
+  "pages.generic_error.title": {
+    "message": "Сталася неочікувана помилка"
+  },
+  "pages.landing.description": {
+    "message": "Керуйте розгортанням додатка element для вашої організації або спільноти."
+  },
+  "pages.login.errors.no_auth_metadata": {
+    "message": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
+  },
+  "pages.login.errors.no_client_metadata": {
+    "message": "Failed to register the client. Matrix Authentication Service may be unreachable or misconfigured."
+  },
+  "pages.login.errors.no_well_known": {
+    "message": "Failed to load the server's well-known document. The server name may be invalid."
+  },
+  "pages.login.get_started": {
+    "message": "Почати"
+  },
+  "pages.login.server_name": {
+    "message": "Ім’я сервера"
+  },
+  "pages.login.title": {
+    "message": "Вхід"
+  },
+  "pages.personal_tokens.acting_user_column": {
+    "message": "Acting User"
+  },
+  "pages.personal_tokens.acting_user_label": {
+    "message": "Acting user"
+  },
+  "pages.personal_tokens.actor_user_help": {
+    "message": "The user this token will act on behalf of"
+  },
+  "pages.personal_tokens.actor_user_label": {
+    "message": "Acting user"
+  },
+  "pages.personal_tokens.add_token_title": {
+    "message": "Додати персональний токен"
+  },
+  "pages.personal_tokens.cant_regenerate_tooltip": {
+    "message": "Тільки {ownerMxid} може регенерувати цей токен"
+  },
+  "pages.personal_tokens.cant_regenerate_tooltip_generic": {
+    "message": "Тільки власник токена може його регенерувати"
+  },
+  "pages.personal_tokens.count": {
+    "message": "{count, plural, =0 {No personal tokens} one {# personal token} other {# personal tokens}}"
+  },
+  "pages.personal_tokens.create_error": {
+    "message": "Не вдалося створити персональний токен"
+  },
+  "pages.personal_tokens.create_success": {
+    "message": "Персональний токен успішно створено"
+  },
+  "pages.personal_tokens.create_token": {
+    "message": "Створити токен"
+  },
+  "pages.personal_tokens.created_at_label": {
+    "message": "Створено о"
+  },
+  "pages.personal_tokens.description": {
+    "message": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations."
+  },
+  "pages.personal_tokens.device_id_help": {
+    "message": "Leave empty to generate a random 10-character device ID"
+  },
+  "pages.personal_tokens.device_id_label": {
+    "message": "ID пристрою"
+  },
+  "pages.personal_tokens.device_id_placeholder": {
+    "message": "ABCDEFGHIJ"
+  },
+  "pages.personal_tokens.expires_at_column": {
+    "message": "Термін дії закінчується о"
+  },
+  "pages.personal_tokens.expires_at_label": {
+    "message": "Термін дії закінчується о"
+  },
+  "pages.personal_tokens.expires_in_help": {
+    "message": "Залиште порожнім для токенів, які ніколи не втрачають чинності"
+  },
+  "pages.personal_tokens.expires_in_label": {
+    "message": "Втрачає чинність через (дні)"
+  },
+  "pages.personal_tokens.expires_in_placeholder": {
+    "message": "30"
+  },
+  "pages.personal_tokens.filter.active": {
+    "message": "Активні"
+  },
+  "pages.personal_tokens.filter.expires": {
+    "message": "З датою закінчення терміну дії"
+  },
+  "pages.personal_tokens.filter.no_expiry": {
+    "message": "Ніколи не втрачає чинності"
+  },
+  "pages.personal_tokens.filter.revoked": {
+    "message": "Відкликані"
+  },
+  "pages.personal_tokens.filter.scope_mas_admin": {
+    "message": "Доступ до адміністративного API в MAS"
+  },
+  "pages.personal_tokens.filter.scope_matrix_client": {
+    "message": "Доступ до клієнт-серверного API Matrix"
+  },
+  "pages.personal_tokens.filter.scope_synapse_admin": {
+    "message": "Доступ до адміністративного API в Synapse"
+  },
+  "pages.personal_tokens.last_active_column": {
+    "message": "Остання активність"
+  },
+  "pages.personal_tokens.last_active_ip_label": {
+    "message": "Остання активна IP-адреса"
+  },
+  "pages.personal_tokens.last_active_label": {
+    "message": "Остання активність"
+  },
+  "pages.personal_tokens.loading_more": {
+    "message": "Завантаження додаткових токенів..."
+  },
+  "pages.personal_tokens.name_column": {
+    "message": "Ім’я"
+  },
+  "pages.personal_tokens.name_help": {
+    "message": "Зрозуміла для людини назва токена, щоб допомогти вам його ідентифікувати"
+  },
+  "pages.personal_tokens.name_label": {
+    "message": "Ім’я токена"
+  },
+  "pages.personal_tokens.name_placeholder": {
+    "message": "Токен мого додатка"
+  },
+  "pages.personal_tokens.never_expires": {
+    "message": "Не має терміну дії"
+  },
+  "pages.personal_tokens.never_used": {
+    "message": "Ніколи не використовувався"
+  },
+  "pages.personal_tokens.not_found.description": {
+    "message": "The personal token you're looking for doesn't exist or has been removed."
+  },
+  "pages.personal_tokens.not_found.title": {
+    "message": "Персональний токен не знайдено"
+  },
+  "pages.personal_tokens.owner_user_label": {
+    "message": "Власник"
+  },
+  "pages.personal_tokens.regenerate_confirm": {
+    "message": "Перегенерувати токен"
+  },
+  "pages.personal_tokens.regenerate_error": {
+    "message": "Failed to regenerate personal token"
+  },
+  "pages.personal_tokens.regenerate_expires_help": {
+    "message": "Leave empty to keep the same expiry as before, or set a new expiry time"
+  },
+  "pages.personal_tokens.regenerate_success": {
+    "message": "Персональний токен успішно перегенеровано"
+  },
+  "pages.personal_tokens.regenerate_token": {
+    "message": "Перегенерувати токен"
+  },
+  "pages.personal_tokens.regenerate_token_title": {
+    "message": "Перегенерувати персональний токен"
+  },
+  "pages.personal_tokens.regenerate_warning": {
+    "message": "Це призведе до створення нового токена доступу та анулювання поточного. Поточний токен, що використовується у інших програмах, потрібно буде всюди оновити."
+  },
+  "pages.personal_tokens.revoke_success": {
+    "message": "Персональний токен успішно відкликано"
+  },
+  "pages.personal_tokens.revoke_token": {
+    "message": "Відкликати токен"
+  },
+  "pages.personal_tokens.revoked_at_label": {
+    "message": "Відкликано о"
+  },
+  "pages.personal_tokens.scope_device_help": {
+    "message": "Provision a Matrix device"
+  },
+  "pages.personal_tokens.scope_mas_admin_help": {
+    "message": "Access to the MAS admin API"
+  },
+  "pages.personal_tokens.scope_matrix_client_help": {
+    "message": "Access to the Matrix Client-Server API"
+  },
+  "pages.personal_tokens.scope_synapse_admin_help": {
+    "message": "Access to the Synapse admin API"
+  },
+  "pages.personal_tokens.scopes_label": {
+    "message": "Області дії (scopes)"
+  },
+  "pages.personal_tokens.status.active": {
+    "message": "Активний"
+  },
+  "pages.personal_tokens.status.column": {
+    "message": "Статус"
+  },
+  "pages.personal_tokens.status.expired": {
+    "message": "Термін дії закінчився"
+  },
+  "pages.personal_tokens.status.label": {
+    "message": "Статус"
+  },
+  "pages.personal_tokens.status.revoked": {
+    "message": "Відкликано"
+  },
+  "pages.personal_tokens.title": {
+    "message": "Персональні токени"
+  },
+  "pages.personal_tokens.token_created_description": {
+    "message": "Your personal token has been created. Copy it now as it will not be shown again."
+  },
+  "pages.personal_tokens.token_created_title": {
+    "message": "Персональний токен створено"
+  },
+  "pages.personal_tokens.token_regenerated_description": {
+    "message": "Your personal token has been regenerated. Copy it now as it will not be shown again."
+  },
+  "pages.personal_tokens.token_regenerated_title": {
+    "message": "Token regenerated"
+  },
+  "pages.registration_tokens.auto_generate_placeholder": {
+    "message": "Auto-generate if left empty"
+  },
+  "pages.registration_tokens.create_token.error": {
+    "message": "Не вдалося створити токен"
+  },
+  "pages.registration_tokens.create_token.submit": {
+    "message": "Створити токен"
+  },
+  "pages.registration_tokens.create_token.success": {
+    "message": "Токен успішно створено"
+  },
+  "pages.registration_tokens.create_token.title": {
+    "message": "Створити токен реєстрації"
+  },
+  "pages.registration_tokens.created_at_column": {
+    "message": "Створено"
+  },
+  "pages.registration_tokens.created_at_label": {
+    "message": "Створено"
+  },
+  "pages.registration_tokens.custom_token_help": {
+    "message": "Optional custom token string. If left empty, a secure token will be auto-generated."
+  },
+  "pages.registration_tokens.custom_token_label": {
+    "message": "Спеціальний токен"
+  },
+  "pages.registration_tokens.edit_properties": {
+    "message": "Редагувати властивості"
+  },
+  "pages.registration_tokens.edit_token_title": {
+    "message": "Редагувати токен реєстрації"
+  },
+  "pages.registration_tokens.expires_at_field": {
+    "message": "Термін дії"
+  },
+  "pages.registration_tokens.expires_at_help": {
+    "message": "When the token expires. Leave empty if the token should never expire."
+  },
+  "pages.registration_tokens.expires_at_label": {
+    "message": "Термін дії закінчується о"
+  },
+  "pages.registration_tokens.filters.active_only": {
+    "message": "Активні"
+  },
+  "pages.registration_tokens.filters.expired_only": {
+    "message": "Термін дії минув"
+  },
+  "pages.registration_tokens.filters.revoked_only": {
+    "message": "Відкликано"
+  },
+  "pages.registration_tokens.filters.unused_only": {
+    "message": "Невикористані"
+  },
+  "pages.registration_tokens.filters.used_only": {
+    "message": "Використані"
+  },
+  "pages.registration_tokens.loading_more": {
+    "message": "Завантаження токенів..."
+  },
+  "pages.registration_tokens.never_expires": {
+    "message": "Не має терміну дії"
+  },
+  "pages.registration_tokens.no_expiration_placeholder": {
+    "message": "Без терміну дії"
+  },
+  "pages.registration_tokens.not_found.description": {
+    "message": "The requested registration token ({tokenId}) could not be found on {serverName}."
+  },
+  "pages.registration_tokens.not_found.title": {
+    "message": "Registration token not found"
+  },
+  "pages.registration_tokens.revoke_token": {
+    "message": "Відкликати токен"
+  },
+  "pages.registration_tokens.revoked_at_label": {
+    "message": "Відкликано о"
+  },
+  "pages.registration_tokens.save_changes": {
+    "message": "Зберегти зміни"
+  },
+  "pages.registration_tokens.status.active": {
+    "message": "Активний"
+  },
+  "pages.registration_tokens.status.column": {
+    "message": "Статус"
+  },
+  "pages.registration_tokens.status.expired": {
+    "message": "Термін дії закінчився"
+  },
+  "pages.registration_tokens.status.invalid": {
+    "message": "Недійсний"
+  },
+  "pages.registration_tokens.status.label": {
+    "message": "Статус"
+  },
+  "pages.registration_tokens.status.revoked": {
+    "message": "Скасовано"
+  },
+  "pages.registration_tokens.status.used_up": {
+    "message": "Використано"
+  },
+  "pages.registration_tokens.title": {
+    "message": "Реєстраційні токени"
+  },
+  "pages.registration_tokens.token_column": {
+    "message": "Токен"
+  },
+  "pages.registration_tokens.token_count": {
+    "message": "{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
+  },
+  "pages.registration_tokens.token_uses.limited": {
+    "message": "{uses, number} / {limit, number}"
+  },
+  "pages.registration_tokens.token_uses.unlimited": {
+    "message": "{uses, number} / ∞"
+  },
+  "pages.registration_tokens.unlimited_placeholder": {
+    "message": "Необмежений"
+  },
+  "pages.registration_tokens.unlimited_uses_placeholder": {
+    "message": "Залиште порожнім для необмеженого використання"
+  },
+  "pages.registration_tokens.unrevoke_token": {
+    "message": "Скасувати відкликання токена"
+  },
+  "pages.registration_tokens.usage_count_label": {
+    "message": "Лічильник використань"
+  },
+  "pages.registration_tokens.usage_limit_field": {
+    "message": "Ліміт викликів"
+  },
+  "pages.registration_tokens.usage_limit_help": {
+    "message": "Максимальна кількість використань цього токена. Залиште поле порожнім для необмеженого використання."
+  },
+  "pages.registration_tokens.usage_limit_label": {
+    "message": "Кількість викликів"
+  },
+  "pages.registration_tokens.uses_column": {
+    "message": "Використання"
+  },
+  "pages.registration_tokens.valid_until_column": {
+    "message": "Дійсний до"
+  },
+  "pages.rooms.delete_room.alert.description": {
+    "message": "This will permanently delete all messages or media uploaded to the server and remove this room from the directory. Members will lose access to their messages and the room will be removed from their room list."
+  },
+  "pages.rooms.delete_room.alert.title": {
+    "message": "Ви збираєтеся видалити дані кімнати"
+  },
+  "pages.rooms.delete_room.block.help": {
+    "message": "Prevent users from rejoining the room after deletion."
+  },
+  "pages.rooms.delete_room.block.label": {
+    "message": "Block room"
+  },
+  "pages.rooms.delete_room.button": {
+    "message": "Delete permanently"
+  },
+  "pages.rooms.delete_room.error": {
+    "message": "Failed to schedule room deletion"
+  },
+  "pages.rooms.delete_room.success": {
+    "message": "Room deletion scheduled"
+  },
+  "pages.rooms.delete_room.title": {
+    "message": "Видалити цю кімнату?"
+  },
+  "pages.rooms.deletion.failure.description": {
+    "message": "Видалення кімнати не вдалося {timestamp, date, short} о {timestamp, time, short} з помилкою: {error}"
+  },
+  "pages.rooms.deletion.failure.title": {
+    "message": "Видалення не вдалося"
+  },
+  "pages.rooms.deletion.in_progress.description": {
+    "message": "Room deletion task is in progress since {timestamp, date, short} at {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.in_progress.title": {
+    "message": "Триває видалення"
+  },
+  "pages.rooms.deletion.success.description": {
+    "message": "Room deletion task completed successfully on {timestamp, date, short} at {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.success.title": {
+    "message": "Видалення успішне"
+  },
+  "pages.rooms.filters.empty_rooms": {
+    "message": "Порожні кімнати"
+  },
+  "pages.rooms.filters.non_empty_rooms": {
+    "message": "Непорожні кімнати"
+  },
+  "pages.rooms.filters.private_rooms": {
+    "message": "Приватні кімнати"
+  },
+  "pages.rooms.filters.public_rooms": {
+    "message": "Загальнодоступні кімнати"
+  },
+  "pages.rooms.not_found.description": {
+    "message": "Запитану кімнату ({roomId}) не вдалося знайти на {serverName}."
+  },
+  "pages.rooms.not_found.title": {
+    "message": "Кімнату не знайдено"
+  },
+  "pages.rooms.room_count": {
+    "message": "{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
+  },
+  "pages.rooms.title": {
+    "message": "Кімнати"
+  },
+  "pages.supervision.description": {
+    "message": "Увійдіть як <b>{mxid}</b>, щоб виконувати адміністративні дії в будь-якій кімнаті."
+  },
+  "pages.supervision.disabled_alert.description": {
+    "message": "Ця функція є частиною вашої підписки. Ви можете попросити адміністратора увімкнути її."
+  },
+  "pages.supervision.disabled_alert.title": {
+    "message": "Наглядання наразі вимкнено"
+  },
+  "pages.supervision.errors.cant_open.description": {
+    "message": "Ваш браузер блокує відкриття спливаючих вікон. Будь ласка, переконайтеся, що ви дозволили спливаючі вікна з цього сайту."
+  },
+  "pages.supervision.errors.cant_open.title": {
+    "message": "Не вдалося відкрити інтерфейс наглядання в новому вікні"
+  },
+  "pages.supervision.errors.closed.description": {
+    "message": "Не вдалося увійти в інтерфейс нагляду, оскільки він закрився до завершення входу"
+  },
+  "pages.supervision.errors.closed.title": {
+    "message": "Інтерфейс нагляду закрився занадто швидко"
+  },
+  "pages.supervision.errors.generic.title": {
+    "message": "Під час відкриття інтерфейсу нагляду сталася неочікувана помилка"
+  },
+  "pages.supervision.missing_ui_address.description": {
+    "message": "На вашому сервері увімкнено наглядання, але не Element Web, що необхідний для роботи інтерфейсу нагляду."
+  },
+  "pages.supervision.missing_ui_address.title": {
+    "message": "Інтерфейс нагляду потребує, щоб Element Web був увімкнений"
+  },
+  "pages.supervision.recovery_key.copied": {
+    "message": "Ключ відновлення скопійовано"
+  },
+  "pages.supervision.recovery_key.copy_failed": {
+    "message": "Не вдалося скопіювати ключ відновлення"
+  },
+  "pages.supervision.recovery_key.help": {
+    "message": "Це ключ відновлення, який використовується для читання зашифрованих повідомлень."
+  },
+  "pages.supervision.recovery_key.label": {
+    "message": "Ключ відновлення"
+  },
+  "pages.supervision.title": {
+    "message": "Наглядання"
+  },
+  "pages.supervision.unavailable_alert.description": {
+    "message": "Ця функція недоступна в ESS Community. Оновіться до ESS Pro, щоб увімкнути її."
+  },
+  "pages.supervision.unavailable_alert.title": {
+    "message": "Нагляд – функція, що доступна в ESS Pro"
+  },
+  "pages.users.add_email.button": {
+    "message": "Додати адресу електронної пошти"
+  },
+  "pages.users.add_email.description": {
+    "message": "Додати адресу електронної пошти для цього користувача"
+  },
+  "pages.users.add_email.error": {
+    "message": "Не вдалося додати адресу електронної пошти"
+  },
+  "pages.users.add_email.error.email_invalid": {
+    "message": "Неправильна адреса електронної пошти"
+  },
+  "pages.users.add_email.error.email_missing": {
+    "message": "Це поле обов’язкове"
+  },
+  "pages.users.add_email.success": {
+    "message": "Адресу електронної пошти додано"
+  },
+  "pages.users.add_email.title": {
+    "message": "Додати адресу електронної пошти"
+  },
+  "pages.users.add_upstream_link.error": {
+    "message": "Failed to add link upstream account"
+  },
+  "pages.users.add_upstream_link.success": {
+    "message": "Link to upstream account added"
+  },
+  "pages.users.deactivate_account.alert.description": {
+    "message": "Ця дія призведе до виходу користувача з усіх його пристроїв, видалить усі токени доступу, видалить усі ідентифікатори на сторонніх пов’язаних сервісах, та назавжди видалить дані його облікового запису."
+  },
+  "pages.users.deactivate_account.alert.title": {
+    "message": "Ви збираєтеся видалити дані користувача"
+  },
+  "pages.users.deactivate_account.button": {
+    "message": "Деактивувати обліковий запис"
+  },
+  "pages.users.deactivate_account.error": {
+    "message": "Не вдалося деактивувати обліковий запис"
+  },
+  "pages.users.deactivate_account.success": {
+    "message": "Обліковий запис деактивовано"
+  },
+  "pages.users.deactivate_account.title": {
+    "message": "Деактивувати цього користувача?"
+  },
+  "pages.users.delete_email.description": {
+    "message": "Ви впевнені, що хочете видалити адресу електронної пошти ({email}) у користувача ({mxid})?"
+  },
+  "pages.users.delete_email.error": {
+    "message": "Не вдалося видалити адресу електронної пошти"
+  },
+  "pages.users.delete_email.success": {
+    "message": "Адресу електронної пошти видалено"
+  },
+  "pages.users.delete_email.title": {
+    "message": "Видалити адресу електронної пошти?"
+  },
+  "pages.users.delete_upstream_link.description": {
+    "message": "Are you sure you want to remove the link between this user ({mxid}) with this upstream account ({subject})?"
+  },
+  "pages.users.delete_upstream_link.error": {
+    "message": "Failed to delete upstream link"
+  },
+  "pages.users.delete_upstream_link.success": {
+    "message": "Upstream link deleted"
+  },
+  "pages.users.delete_upstream_link.title": {
+    "message": "Remove link with upstream account?"
+  },
+  "pages.users.filters.active": {
+    "message": "Активні користувачі"
+  },
+  "pages.users.filters.admins": {
+    "message": "Адміністратори"
+  },
+  "pages.users.filters.deactivated": {
+    "message": "Деактивовані користувачі"
+  },
+  "pages.users.filters.guests": {
+    "message": "Гості (стара версія)"
+  },
+  "pages.users.filters.locked": {
+    "message": "Заблоковані користувачі"
+  },
+  "pages.users.filters.newest_first": {
+    "message": "Спочатку новіші"
+  },
+  "pages.users.filters.non_guests": {
+    "message": "Non-guests (legacy)"
+  },
+  "pages.users.lock_account.alert.description": {
+    "message": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."
+  },
+  "pages.users.lock_account.alert.title": {
+    "message": "The user will not be able to send or receive messages"
+  },
+  "pages.users.lock_account.button": {
+    "message": "Заблокувати обліковий запис"
+  },
+  "pages.users.lock_account.error": {
+    "message": "Не вдалося заблокувати обліковий запис"
+  },
+  "pages.users.lock_account.success": {
+    "message": "Обліковий запис заблоковано"
+  },
+  "pages.users.lock_account.title": {
+    "message": "Заблокувати обліковий запис цього користувача?"
+  },
+  "pages.users.new_user.add_user": {
+    "message": "Додати користувача"
+  },
+  "pages.users.new_user.create_account": {
+    "message": "Створити обліковий запис"
+  },
+  "pages.users.new_user.description": {
+    "message": "To add a new user to {serverName}, choose a user name for this user, which will be part of their user ID."
+  },
+  "pages.users.new_user.error_message": {
+    "message": "Помилка створення користувача"
+  },
+  "pages.users.new_user.invalid_localpart": {
+    "message": "Localpart can only contain lowercase letters, numbers, dots, underscores, dashes and slashes"
+  },
+  "pages.users.new_user.invalid_localpart_numeric_only": {
+    "message": "Localpart cannot only contain numbers"
+  },
+  "pages.users.new_user.localpart": {
+    "message": "Enter name"
+  },
+  "pages.users.new_user.required_error": {
+    "message": "Це поле обов’язкове."
+  },
+  "pages.users.new_user.success_message": {
+    "message": "Користувача створено"
+  },
+  "pages.users.not_found.description": {
+    "message": "The requested user ({userId}) could not be found on {serverName}."
+  },
+  "pages.users.not_found.title": {
+    "message": "Користувача не знайдено"
+  },
+  "pages.users.reactivate_account.button": {
+    "message": "Повторно активувати"
+  },
+  "pages.users.reactivate_account.error": {
+    "message": "Не вдалося повторно активувати обліковий запис"
+  },
+  "pages.users.reactivate_account.success": {
+    "message": "Обліковий запис повторно активовано"
+  },
+  "pages.users.search_placeholder": {
+    "message": "Пошук користувачів…"
+  },
+  "pages.users.set_admin.alert.description": {
+    "message": "The user will be able to view user data and make changes to user and room permissions."
+  },
+  "pages.users.set_admin.alert.title": {
+    "message": "User will have access to sensitive data"
+  },
+  "pages.users.set_admin.error": {
+    "message": "Не вдалося змінити права адміністратора для {mxid}"
+  },
+  "pages.users.set_admin.label": {
+    "message": "Адміністратор"
+  },
+  "pages.users.set_admin.make_admin_button": {
+    "message": "Зробити адміністратором"
+  },
+  "pages.users.set_admin.successfully_demoted": {
+    "message": "{mxid} більше не має прав адміністратора"
+  },
+  "pages.users.set_admin.successfully_promoted": {
+    "message": "{mxid} тепер має права адміністратора"
+  },
+  "pages.users.set_admin.title": {
+    "message": "Зробити цього користувача адміністратором?"
+  },
+  "pages.users.set_password.button": {
+    "message": "Змінити пароль"
+  },
+  "pages.users.set_password.confirm_password_label": {
+    "message": "Введіть пароль ще раз"
+  },
+  "pages.users.set_password.error": {
+    "message": "Не вдалося встановити пароль"
+  },
+  "pages.users.set_password.error.password_missing": {
+    "message": "Це поле обовʼязкове"
+  },
+  "pages.users.set_password.error.passwords_mismatch": {
+    "message": "Паролі не збігаються"
+  },
+  "pages.users.set_password.password_label": {
+    "message": "Пароль"
+  },
+  "pages.users.set_password.password_match": {
+    "message": "Паролі збігаються!"
+  },
+  "pages.users.set_password.submit": {
+    "message": "Встановити новий пароль"
+  },
+  "pages.users.set_password.success": {
+    "message": "Пароль встановлено успішно"
+  },
+  "pages.users.set_password.title": {
+    "message": "Встановити новий пароль для цього користувача"
+  },
+  "pages.users.title": {
+    "message": "Користувачі"
+  },
+  "pages.users.unlock_account.button": {
+    "message": "Розблокувати обліковий запис"
+  },
+  "pages.users.unlock_account.error": {
+    "message": "Не вдалося розблокувати обліковий запис"
+  },
+  "pages.users.unlock_account.success": {
+    "message": "Обліковий запис розблоковано"
+  },
+  "pages.users.user_count": {
+    "message": "{COUNT, plural, zero {No users} one {# user} other {# users}}"
+  },
+  "product.element": {
+    "message": "Element"
+  },
+  "product.title": {
+    "message": "Element Admin"
+  },
+  "product.title.community": {
+    "message": "Element Community"
+  },
+  "product.title.pro": {
+    "message": "Element Pro"
+  },
+  "product.title.ti-m": {
+    "message": "Element TI-Messenger"
+  },
+  "room_info.empty_room": {
+    "message": "Порожня кімната"
+  },
+  "room_info.empty_space": {
+    "message": "Порожній простір"
+  },
+  "room_info.room_with": {
+    "message": "Кімната з {members}"
+  },
+  "room_info.space_with": {
+    "message": "Простір з {members}"
+  },
+  "room_info.unknown_user": {
+    "message": "Невідомий користувач"
+  },
+  "rooms_info.other_members": {
+    "message": "{COUNT,plural,one{# інший} few{# інших} many{# інших} other{# інших}}"
+  },
+  "ui.data.failed_to_load": {
+    "message": "Не вдалося завантажити"
+  },
+  "ui.data.loading": {
+    "message": "Завантаження значення"
+  },
+  "ui.destination_status.failing": {
+    "message": "Failing"
+  },
+  "ui.destination_status.inactive": {
+    "message": "Inactive"
+  },
+  "ui.destination_status.never_worked": {
+    "message": "Never worked"
+  },
+  "ui.destination_status.working": {
+    "message": "Working"
+  },
+  "ui.language_switcher.browser_default": {
+    "message": "Використовувати налаштування браузера ({language})"
+  },
+  "ui.language_switcher.button_label": {
+    "message": "Мовні налаштування"
+  },
+  "ui.language_switcher.description": {
+    "message": "Виберіть бажану мову інтерфейсу."
+  },
+  "ui.language_switcher.language_list_label": {
+    "message": "Список доступних мов"
+  },
+  "ui.language_switcher.title": {
+    "message": "Мовні налаштування"
+  },
+  "ui.user_picker.loading_list": {
+    "message": "Завантаження…"
+  },
+  "ui.user_picker.no_match": {
+    "message": "Немає збігів"
+  },
+  "ui.user_picker.no_match_help": {
+    "message": "Спробуйте інший пошуковий запит. Ця функція дозволяє шукати лише активних користувачів на {serverName} за їхнім локальним ідентифікатором."
+  }
+}
