@@ -46,6 +46,9 @@ jobs:
       - name: Run the linters
         run: pnpm lint
 
+      - name: Check for unused files, exports and dependencies
+        run: pnpm knip
+
   playwright:
     name: E2E tests
     runs-on: ubuntu-24.04

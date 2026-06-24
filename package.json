@@ -12,9 +12,9 @@
   "license": "SEE LICENSE IN README.md",
   "scripts": {
     "dev": "vite --port 3000",
-    "start": "vite --port 3000",
     "build": "vite build",
     "serve": "vite preview",
+    "knip": "knip && knip --production",
     "lint": "oxlint && stylelint 'src/**/*.css' && oxfmt --check",
     "fix": "oxlint --fix && stylelint --fix 'src/**/*.css' && oxfmt",
     "i18n:extract": "formatjs extract --throws --format crowdin 'src/**/*.{ts,tsx}' --out-file translations/extracted/en.json && oxfmt translations/extracted/en.json",
@@ -108,8 +108,11 @@
   },
   "knip": {
     "entry": [
-      "src/base.css",
-      "src/prerender.tsx"
+      "src/base.css!",
+      "src/prerender.tsx!"
+    ],
+    "project": [
+      "src/**/*!"
     ],
     "ignore": [
       "src/api/mas/api/**/*",
