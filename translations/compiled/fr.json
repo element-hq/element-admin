@@ -313,7 +313,7 @@
       "children": [
         {
           "type": 0,
-          "value": "Secure Border Gateway is an application-level firewall for Matrix servers."
+          "value": "Secure Border Gateway est un pare-feu applicatif pour les serveurs Matrix."
         }
       ]
     },
@@ -331,7 +331,17 @@
           "children": [
             {
               "type": 0,
-              "value": "Inspects all requests to and from the server"
+              "value": "Inspecte toutes les requêtes entrantes et sortantes du serveur. "
+            }
+          ]
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Peut utiliser toutes les métadonnées des requêtes pour appliquer les règles."
             }
           ]
         },
@@ -345,7 +355,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Can use all request metadata to enforce rules"
+              "value": "Approche par pipeline pour connecter les API et les ensembles de règles."
             }
           ]
         },
@@ -359,21 +369,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Pipeline-based approach to connect APIs and rule sets"
-            }
-          ]
-        },
-        {
-          "type": 0,
-          "value": " "
-        },
-        {
-          "type": 8,
-          "value": "li",
-          "children": [
-            {
-              "type": 0,
-              "value": "Pluggable rules engine that can be applied to the pipelines"
+              "value": "Moteur de règles modulaire appliqué dans ces pipelines. "
             }
           ]
         }
@@ -509,7 +505,7 @@
   "navigation.federation": [
     {
       "type": 0,
-      "value": "Federation"
+      "value": "Fédération"
     }
   ],
   "navigation.personal_tokens": [
@@ -611,61 +607,61 @@
   "pages.federation.allowlist.add.error": [
     {
       "type": 0,
-      "value": "Failed to add domain to allowlist"
+      "value": "Échec de l'ajout du domaine à la liste blanche"
     }
   ],
   "pages.federation.allowlist.add.success": [
     {
       "type": 0,
-      "value": "Domain added to allowlist"
+      "value": "Domaine ajouté à la liste blanche"
     }
   ],
   "pages.federation.allowlist.add_domain": [
     {
       "type": 0,
-      "value": "Add domain"
+      "value": "Ajouter un domaine"
     }
   ],
   "pages.federation.allowlist.add_pattern": [
     {
       "type": 0,
-      "value": "Add pattern"
+      "value": "Ajouter un motif"
     }
   ],
   "pages.federation.allowlist.add_pattern.help": [
     {
       "type": 0,
-      "value": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
+      "value": "Saisir un domaine, comme example.com ou utiliser * pour autoriser tous les sous-domaines, par exemple *.example.com"
     }
   ],
   "pages.federation.allowlist.empty": [
     {
       "type": 0,
-      "value": "No domains in the allowlist yet. Add a domain pattern above to get started."
+      "value": "La liste blanche ne contient encore aucun domaine. Ajoutez un motif de domaine ci-dessus pour commencer."
     }
   ],
   "pages.federation.allowlist.heading": [
     {
       "type": 0,
-      "value": "List of patterns allowed to federate with you"
+      "value": "Liste des motifs autorisés à fédérer avec ce serveur"
     }
   ],
   "pages.federation.allowlist.remove.error": [
     {
       "type": 0,
-      "value": "Failed to remove domain from allowlist"
+      "value": "Échec de la suppression du domaine de la liste blanche"
     }
   ],
   "pages.federation.allowlist.remove.success": [
     {
       "type": 0,
-      "value": "Domain removed from allowlist"
+      "value": "Domaine supprimé de la liste blanche"
     }
   ],
   "pages.federation.allowlist.remove_tooltip": [
     {
       "type": 0,
-      "value": "Remove from allowlist"
+      "value": "Supprimer de la liste blanche"
     }
   ],
   "pages.federation.detail.contact": [
@@ -683,31 +679,31 @@
   "pages.federation.detail.last_retry": [
     {
       "type": 0,
-      "value": "Last retry timestamp"
+      "value": "Horodatage de la dernière tentative"
     }
   ],
   "pages.federation.detail.last_successful_stream": [
     {
       "type": 0,
-      "value": "Last successful stream"
+      "value": "Dernier entrée réussie"
     }
   ],
   "pages.federation.detail.retry_interval": [
     {
       "type": 0,
-      "value": "Retry interval"
+      "value": "Intervalle de nouvelle tentative"
     }
   ],
   "pages.federation.detail.security": [
     {
       "type": 0,
-      "value": "Security"
+      "value": "Sécurité"
     }
   ],
   "pages.federation.detail.support_page": [
     {
       "type": 0,
-      "value": "Support page"
+      "value": "Page d'assistance"
     }
   ],
   "pages.federation.domain_count": [
@@ -719,7 +715,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No domains"
+              "value": "Aucun domaine"
             }
           ]
         },
@@ -730,7 +726,7 @@
             },
             {
               "type": 0,
-              "value": " domain"
+              "value": " domaine"
             }
           ]
         },
@@ -741,7 +737,7 @@
             },
             {
               "type": 0,
-              "value": " domains"
+              "value": " domaines"
             }
           ]
         }
@@ -753,13 +749,13 @@
   "pages.federation.loading": [
     {
       "type": 0,
-      "value": "Loading more domains…"
+      "value": "Chargement de domaines supplémentaires…"
     }
   ],
   "pages.federation.not_found.description": [
     {
       "type": 0,
-      "value": "The requested destination ("
+      "value": "La destination demandée ("
     },
     {
       "type": 1,
@@ -767,79 +763,79 @@
     },
     {
       "type": 0,
-      "value": ") could not be found."
+      "value": ") est introuvable."
     }
   ],
   "pages.federation.not_found.title": [
     {
       "type": 0,
-      "value": "Destination not found"
+      "value": "Destination introuvable"
     }
   ],
   "pages.federation.sbg_not_enabled.description": [
     {
       "type": 0,
-      "value": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+      "value": "La passerelle de sécurité (Secure Border Gateway) n'est pas activée sur ce déploiement. Veuillez contacter votre administrateur pour l'activer."
     }
   ],
   "pages.federation.sbg_not_enabled.title": [
     {
       "type": 0,
-      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+      "value": "La fonctionnalité « Domaines autorisés » est une fonctionnalité de Secure Border Gateway disponible dans ESS Pro"
     }
   ],
   "pages.federation.search_placeholder": [
     {
       "type": 0,
-      "value": "Search domains…"
+      "value": "Rechercher des domaines…"
     }
   ],
   "pages.federation.tab.allowed_domains": [
     {
       "type": 0,
-      "value": "Allowed domains"
+      "value": "Domaines autorisés"
     }
   ],
   "pages.federation.tab.known_domains": [
     {
       "type": 0,
-      "value": "Known domains"
+      "value": "Domaines connus"
     }
   ],
   "pages.federation.tab.section": [
     {
       "type": 0,
-      "value": "Federation views"
+      "value": "Sections de fédération"
     }
   ],
   "pages.federation.table.server_name": [
     {
       "type": 0,
-      "value": "Server name"
+      "value": "Nom du serveur"
     }
   ],
   "pages.federation.table.status": [
     {
       "type": 0,
-      "value": "Status"
+      "value": "Statut"
     }
   ],
   "pages.federation.title": [
     {
       "type": 0,
-      "value": "Federation"
+      "value": "Fédération"
     }
   ],
   "pages.federation.unavailable_alert.description": [
     {
       "type": 0,
-      "value": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
+      "value": "Secure Border Gateway n'est pas disponible dans ESS Community. Effectuez une mise à niveau vers ESS Pro pour l'activer."
     }
   ],
   "pages.federation.unavailable_alert.title": [
     {
       "type": 0,
-      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+      "value": "La fonctionnalité « Domaines autorisés » est une fonctionnalité de Secure Border Gateway disponible dans ESS Pro"
     }
   ],
   "pages.generic_error.go_home": [
@@ -2730,25 +2726,25 @@
   "ui.destination_status.failing": [
     {
       "type": 0,
-      "value": "Failing"
+      "value": "En échec"
     }
   ],
   "ui.destination_status.inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "Inactif"
     }
   ],
   "ui.destination_status.never_worked": [
     {
       "type": 0,
-      "value": "Never worked"
+      "value": "N'a jamais fonctionné"
     }
   ],
   "ui.destination_status.working": [
     {
       "type": 0,
-      "value": "Working"
+      "value": "Fonctionne"
     }
   ],
   "ui.language_switcher.browser_default": [

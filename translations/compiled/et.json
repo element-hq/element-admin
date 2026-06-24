@@ -2,95 +2,99 @@
   "action.add": [
     {
       "type": 0,
-      "value": "添加"
+      "value": "Lisa"
     }
   ],
   "action.cancel": [
     {
       "type": 0,
-      "value": "取消"
+      "value": "Katkesta"
     }
   ],
   "action.clear": [
     {
       "type": 0,
-      "value": "清除"
+      "value": "Eemalda"
     }
   ],
   "action.close": [
     {
       "type": 0,
-      "value": "关闭"
+      "value": "Sulge"
     }
   ],
   "action.copy": [
     {
       "type": 0,
-      "value": "复制"
+      "value": "Kopeeri"
     }
   ],
   "action.delete": [
     {
       "type": 0,
-      "value": "删除"
+      "value": "Kustuta"
     }
   ],
   "action.go_back": [
     {
       "type": 0,
-      "value": "后退"
+      "value": "Mine tagasi"
     }
   ],
   "action.remove": [
     {
       "type": 0,
-      "value": "移除"
+      "value": "Eemalda"
     }
   ],
   "action.retry": [
     {
       "type": 0,
-      "value": "重试"
+      "value": "Proovi uuesti"
     }
   ],
   "action.sign_in": [
     {
       "type": 0,
-      "value": "登录"
+      "value": "Logi sisse"
     }
   ],
   "action.sign_out": [
     {
       "type": 0,
-      "value": "注销"
+      "value": "Logi välja"
     }
   ],
   "common.email_address": [
     {
       "type": 0,
-      "value": "邮件地址"
+      "value": "E-posti aadress"
     }
   ],
   "common.filter": [
     {
       "type": 0,
-      "value": "筛选"
+      "value": "Filter"
     }
   ],
   "errors.http_fetch": [
+    {
+      "type": 0,
+      "value": "Request to "
+    },
     {
       "type": 1,
       "value": "url"
     },
     {
       "type": 0,
-      "value": " 请求失败"
+      "value": " failed"
     }
   ],
   "errors.http_fetch_json_decoding": [
     {
       "type": 0,
-      "value": "来自 "
+      "value": "„"
     },
     {
       "type": 1,
@@ -98,17 +102,21 @@
     },
     {
       "type": 0,
-      "value": " 的 JSON 响应解码失败"
+      "value": "“ võrguaadressilt JSON-vormingus saadud vastuse dekodeerimine ei õnnestunud"
     }
   ],
   "errors.http_status": [
     {
+      "type": 0,
+      "value": "Request to "
+    },
+    {
       "type": 1,
       "value": "url"
     },
     {
       "type": 0,
-      "value": " 请求失败，状态码："
+      "value": " failed with status code "
     },
     {
       "type": 1,
@@ -126,15 +134,7 @@
   "errors.matrix_standard": [
     {
       "type": 0,
-      "value": "对家服务器的请求失败，错误代码："
-    },
-    {
-      "type": 1,
-      "value": "errorCode"
-    },
-    {
-      "type": 0,
-      "value": "。另外服务器还返回了以下错误信息："
+      "value": "Request to the homeserver failed with error code {errorCode}. Additionally, the server gave the following error message: "
     },
     {
       "type": 1,
@@ -144,13 +144,13 @@
   "errors.not_logged_in": [
     {
       "type": 0,
-      "value": "未登录"
+      "value": "Sa pole loginud sisse"
     }
   ],
   "footer.copyright_notice": [
     {
       "type": 0,
-      "value": "版权所有 © "
+      "value": "Autoriõigused © "
     },
     {
       "type": 3,
@@ -167,25 +167,25 @@
   "footer.help_and_support": [
     {
       "type": 0,
-      "value": "帮助与支持"
+      "value": "Abiteave ja kasutajatugi"
     }
   ],
   "footer.legal": [
     {
       "type": 0,
-      "value": "法律信息"
+      "value": "Juriidiline teave"
     }
   ],
   "footer.privacy": [
     {
       "type": 0,
-      "value": "隐私"
+      "value": "Privaatsus"
     }
   ],
   "header.user_menu.title": [
     {
       "type": 0,
-      "value": "账户菜单"
+      "value": "Kasutajakonto menüü"
     }
   ],
   "marketing.also_available_in_pro.description": [
@@ -205,9 +205,13 @@
         },
         {
           "type": 0,
-          "value": " 是 Element 的商业后端发行版。"
+          "value": " is the commercial backend distribution from Element."
         }
       ]
+    },
+    {
+      "type": 0,
+      "value": " "
     },
     {
       "type": 8,
@@ -215,9 +219,13 @@
       "children": [
         {
           "type": 0,
-          "value": " 其包含了 ESS Community 的所有内容，以及专为专业环境量身定制的附加功能和服务，可支持从 100 到数百万用户的部署。"
+          "value": "It includes everything in ESS Community plus additional features and services that are tailored to professional environments with more than 100 users up to massive scale in the millions."
         }
       ]
+    },
+    {
+      "type": 0,
+      "value": " "
     },
     {
       "type": 8,
@@ -225,7 +233,7 @@
       "children": [
         {
           "type": 0,
-          "value": " 旨在满足企业在高级身份和访问管理 (IAM)、合规性、可扩展性、高可用性和多租户方面的需求。"
+          "value": "It is designed to support enterprise requirements in terms of advanced IAM, compliance, scalability, high availability and multi-tenancy."
         }
       ]
     }
@@ -233,13 +241,13 @@
   "marketing.also_available_in_pro.title": [
     {
       "type": 0,
-      "value": "Pro 版还提供……"
+      "value": "Lisaks on Pro-versioonis saadaval…"
     }
   ],
   "marketing.also_available_in_pro.upgrade": [
     {
       "type": 0,
-      "value": "升级到专业版"
+      "value": "Uuenda Pro-versiooniks"
     }
   ],
   "marketing.auditing.description": [
@@ -249,9 +257,13 @@
       "children": [
         {
           "type": 0,
-          "value": " 审计功能使组织能够记录端到端加密的对话和聊天室事件，以满足合规性或法律要求。"
+          "value": "Auditing gives organizations the ability to keep records of end-to-end encrypted conversations and room events to meet compliance or legal requirements."
         }
       ]
+    },
+    {
+      "type": 0,
+      "value": " "
     },
     {
       "type": 8,
@@ -259,9 +271,13 @@
       "children": [
         {
           "type": 0,
-          "value": " 启用后，所有最终用户都可以看到哪些聊天室正在被录制以确保审计过程的透明度。"
+          "value": "When enabled, it is visible to all end users which rooms are being recorded to ensure transparency of the auditing process."
         }
       ]
+    },
+    {
+      "type": 0,
+      "value": " "
     },
     {
       "type": 8,
@@ -269,9 +285,13 @@
       "children": [
         {
           "type": 0,
-          "value": " 审计功能可以根据组织的具体需求进行配置。例如，可以排除两个人之间的直接消息，从而仅记录群组对话。"
+          "value": "Auditing can be configured to suit an organization’s specific requirements. For instance direct messages between two individuals can be excluded so that only group conversations are recorded."
         }
       ]
+    },
+    {
+      "type": 0,
+      "value": " "
     },
     {
       "type": 8,
@@ -279,7 +299,7 @@
       "children": [
         {
           "type": 0,
-          "value": " 审计数据以 JSON 格式的机器可读事件流的形式存储在文件存储或 S3 上，并可以转发到日志分析工具进行进一步的过滤和分析。"
+          "value": "Audit data is being stored as a stream of machine-readable events in the JSON format either on file storage or S3 and can be forwarded to log analyzer tooling for further filtering and analysis."
         }
       ]
     }
@@ -287,7 +307,7 @@
   "marketing.auditing.title": [
     {
       "type": 0,
-      "value": "审计"
+      "value": "Auditeerimine"
     }
   ],
   "marketing.sbg.description": [
@@ -297,87 +317,7 @@
       "children": [
         {
           "type": 0,
-          "value": " 安全边界网关是 Matrix 服务器的应用层防火墙。"
-        }
-      ]
-    },
-    {
-      "type": 8,
-      "value": "ul",
-      "children": [
-        {
-          "type": 8,
-          "value": "li",
-          "children": [
-            {
-              "type": 0,
-              "value": "检查所有进出服务器的请求。"
-            }
-          ]
-        },
-        {
-          "type": 0,
-          "value": " "
-        },
-        {
-          "type": 8,
-          "value": "li",
-          "children": [
-            {
-              "type": 0,
-              "value": " 可以使用所有请求元数据来强制执行规则。"
-            }
-          ]
-        },
-        {
-          "type": 0,
-          "value": " "
-        },
-        {
-          "type": 8,
-          "value": "li",
-          "children": [
-            {
-              "type": 0,
-              "value": " 采用基于管道的方法连接 API 和规则集。"
-            }
-          ]
-        },
-        {
-          "type": 0,
-          "value": " "
-        },
-        {
-          "type": 8,
-          "value": "li",
-          "children": [
-            {
-              "type": 0,
-              "value": " 提供可应用于管道的可插拔规则引擎。"
-            }
-          ]
-        },
-        {
-          "type": 0,
-          "value": " "
-        }
-      ]
-    }
-  ],
-  "marketing.sbg.title": [
-    {
-      "type": 0,
-      "value": "安全边境网关"
-    }
-  ],
-  "marketing.supervision.description": [
-    {
-      "type": 8,
-      "value": "p",
-      "children": [
-        {
-          "type": 0,
-          "value": " 监控功能使组织能够从一个中心点管理所有房间。监控帐户将加入已定义的房间并拥有房间管理员权限。服务器管理员可以从管理控制台无缝地模拟该帐户来管理和监控其房间。"
+          "value": "Secure Border Gateway is an application-level firewall for Matrix servers."
         }
       ]
     },
@@ -390,16 +330,12 @@
       "value": "ul",
       "children": [
         {
-          "type": 0,
-          "value": " "
-        },
-        {
           "type": 8,
           "value": "li",
           "children": [
             {
               "type": 0,
-              "value": " 管理房间及其设置（名称、主题、权限等）"
+              "value": "Inspects all requests to and from the server"
             }
           ]
         },
@@ -413,7 +349,7 @@
           "children": [
             {
               "type": 0,
-              "value": " 管理房间成员 "
+              "value": "Can use all request metadata to enforce rules"
             }
           ]
         },
@@ -427,7 +363,7 @@
           "children": [
             {
               "type": 0,
-              "value": " 删除不需要的消息和上传的媒体 "
+              "value": "Pipeline-based approach to connect APIs and rule sets"
             }
           ]
         },
@@ -441,7 +377,45 @@
           "children": [
             {
               "type": 0,
-              "value": " 恢复已废弃的房间（所有用户均已离开）"
+              "value": "Pluggable rules engine that can be applied to the pipelines"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "marketing.sbg.title": [
+    {
+      "type": 0,
+      "value": "Secure Border Gateway"
+    }
+  ],
+  "marketing.supervision.description": [
+    {
+      "type": 8,
+      "value": "p",
+      "children": [
+        {
+          "type": 0,
+          "value": "Supervision enables an organisation to administer all rooms from a central point. A 'supervisor' account will join defined rooms with room admin privileges. Server administrators can seamlessly impersonate the account from the admin console to manage and supervise their rooms."
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 8,
+      "value": "ul",
+      "children": [
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Manage rooms and their settings (name, topic, permissions, etc.)"
             }
           ]
         },
@@ -455,13 +429,51 @@
           "children": [
             {
               "type": 0,
-              "value": " 通过配置管理员帐户可以读取加密消息内容"
+              "value": "Manage room memberships"
             }
           ]
         },
         {
           "type": 0,
           "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Remove unwanted messages and uploaded media"
+            }
+          ]
+        },
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Recover abandoned rooms (all users have left)"
+            }
+          ]
+        },
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 8,
+          "value": "li",
+          "children": [
+            {
+              "type": 0,
+              "value": "Supervisor account can or cannot read encrypted message contents (configurable)"
+            }
+          ]
         }
       ]
     }
@@ -469,229 +481,229 @@
   "marketing.supervision.title": [
     {
       "type": 0,
-      "value": "监控"
+      "value": "Supervision"
     }
   ],
   "navigation.auditing": [
     {
       "type": 0,
-      "value": "审计"
+      "value": "Auditeerimine"
     }
   ],
   "navigation.dashboard": [
     {
       "type": 0,
-      "value": "仪表盘"
+      "value": "Juhtpaneel"
     }
   ],
   "navigation.documentation": [
     {
       "type": 0,
-      "value": "文档"
+      "value": "Dokumentatsioon"
     }
   ],
   "navigation.federation": [
     {
       "type": 0,
-      "value": "联邦"
+      "value": "Federation"
     }
   ],
   "navigation.personal_tokens": [
     {
       "type": 0,
-      "value": "个人 Token"
+      "value": "Isiklikud tunnusload"
     }
   ],
   "navigation.registration_tokens": [
     {
       "type": 0,
-      "value": "注册 Token"
+      "value": "Registration tokens"
     }
   ],
   "navigation.rooms": [
     {
       "type": 0,
-      "value": "房间"
+      "value": "Jututoad"
     }
   ],
   "navigation.supervision": [
     {
       "type": 0,
-      "value": "监控"
+      "value": "Supervision"
     }
   ],
   "navigation.users": [
     {
       "type": 0,
-      "value": "用户"
+      "value": "Kasutajad"
     }
   ],
   "pages.auditing.title": [
     {
       "type": 0,
-      "value": "审计"
+      "value": "Auditeerimine"
     }
   ],
   "pages.auditing.unavailable_alert.description": [
     {
       "type": 0,
-      "value": "此功能在 ESS Community 中不可用。请升级至 ESS Pro 以启用该功能。"
+      "value": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
     }
   ],
   "pages.auditing.unavailable_alert.title": [
     {
       "type": 0,
-      "value": "审计是 ESS Pro 中的一个功能"
+      "value": "Auditeerimine on ESS Pro versioonis saadaval olev funktsionaalsus."
     }
   ],
   "pages.dashboard.current_ess_version": [
     {
       "type": 0,
-      "value": "ESS 版本"
+      "value": "ESS-i versioon"
     }
   ],
   "pages.dashboard.latest_ess_version": [
     {
       "type": 0,
-      "value": "最新的 ESS 版本"
+      "value": "Latest ESS version"
     }
   ],
   "pages.dashboard.new_ess_release": [
     {
       "type": 0,
-      "value": "（新版本）"
+      "value": "(Uus versioon)"
     }
   ],
   "pages.dashboard.registered_users_count": [
     {
       "type": 0,
-      "value": "已注册的用户"
+      "value": "Registreeritud kasutajaid"
     }
   ],
   "pages.dashboard.rooms_count": [
     {
       "type": 0,
-      "value": "房间总数"
+      "value": "Jututube kokku"
     }
   ],
   "pages.dashboard.running_latest_ess": [
     {
       "type": 0,
-      "value": "（您正在运行最新版本）"
+      "value": "(Sa kasutad viimast versiooni)"
     }
   ],
   "pages.dashboard.synapse_version": [
     {
       "type": 0,
-      "value": "Synapse 版本"
+      "value": "Synapse'i versioon"
     }
   ],
   "pages.dashboard.title": [
     {
       "type": 0,
-      "value": "仪表盘"
+      "value": "Juhtpaneel"
     }
   ],
   "pages.federation.allowlist.add.error": [
     {
       "type": 0,
-      "value": "无法将域名添加到白名单"
+      "value": "Failed to add domain to allowlist"
     }
   ],
   "pages.federation.allowlist.add.success": [
     {
       "type": 0,
-      "value": "域名已添加到白名单"
+      "value": "Domain added to allowlist"
     }
   ],
   "pages.federation.allowlist.add_domain": [
     {
       "type": 0,
-      "value": "添加域名"
+      "value": "Add domain"
     }
   ],
   "pages.federation.allowlist.add_pattern": [
     {
       "type": 0,
-      "value": "添加模式"
+      "value": "Add pattern"
     }
   ],
   "pages.federation.allowlist.add_pattern.help": [
     {
       "type": 0,
-      "value": "请输入类似 example.com 的域名，或使用 * 来允许所有子域名，例如 *.example.com"
+      "value": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
     }
   ],
   "pages.federation.allowlist.empty": [
     {
       "type": 0,
-      "value": "白名单中尚无任何域名。请在上方添加一个域名模式以开始。"
+      "value": "No domains in the allowlist yet. Add a domain pattern above to get started."
     }
   ],
   "pages.federation.allowlist.heading": [
     {
       "type": 0,
-      "value": "允许与您进行联合的模式列表"
+      "value": "List of patterns allowed to federate with you"
     }
   ],
   "pages.federation.allowlist.remove.error": [
     {
       "type": 0,
-      "value": "从白名单中移除域名失败"
+      "value": "Failed to remove domain from allowlist"
     }
   ],
   "pages.federation.allowlist.remove.success": [
     {
       "type": 0,
-      "value": "域名已从白名单中移除"
+      "value": "Domain removed from allowlist"
     }
   ],
   "pages.federation.allowlist.remove_tooltip": [
     {
       "type": 0,
-      "value": "从白名单中移除"
+      "value": "Remove from allowlist"
     }
   ],
   "pages.federation.detail.contact": [
     {
       "type": 0,
-      "value": "联系方式"
+      "value": "Contact"
     }
   ],
   "pages.federation.detail.destination": [
     {
       "type": 0,
-      "value": "目标"
+      "value": "Destination"
     }
   ],
   "pages.federation.detail.last_retry": [
     {
       "type": 0,
-      "value": "最后重试时间戳"
+      "value": "Last retry timestamp"
     }
   ],
   "pages.federation.detail.last_successful_stream": [
     {
       "type": 0,
-      "value": "最后一次成功的流"
+      "value": "Last successful stream"
     }
   ],
   "pages.federation.detail.retry_interval": [
     {
       "type": 0,
-      "value": "重试间隔"
+      "value": "Retry interval"
     }
   ],
   "pages.federation.detail.security": [
     {
       "type": 0,
-      "value": "安全"
+      "value": "Security"
     }
   ],
   "pages.federation.detail.support_page": [
     {
       "type": 0,
-      "value": "支持页面"
+      "value": "Support page"
     }
   ],
   "pages.federation.domain_count": [
@@ -703,7 +715,18 @@
           "value": [
             {
               "type": 0,
-              "value": "无域名"
+              "value": "No domains"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " domain"
             }
           ]
         },
@@ -714,7 +737,7 @@
             },
             {
               "type": 0,
-              "value": " 个域名"
+              "value": " domains"
             }
           ]
         }
@@ -726,13 +749,13 @@
   "pages.federation.loading": [
     {
       "type": 0,
-      "value": "正在加载更多域名……"
+      "value": "Loading more domains…"
     }
   ],
   "pages.federation.not_found.description": [
     {
       "type": 0,
-      "value": "无法找到所请求的目标（"
+      "value": "The requested destination ("
     },
     {
       "type": 1,
@@ -740,91 +763,91 @@
     },
     {
       "type": 0,
-      "value": "）。"
+      "value": ") could not be found."
     }
   ],
   "pages.federation.not_found.title": [
     {
       "type": 0,
-      "value": "未找到目标"
+      "value": "Destination not found"
     }
   ],
   "pages.federation.sbg_not_enabled.description": [
     {
       "type": 0,
-      "value": "此部署中未启用安全边界网关。请联系管理员以启用该功能。"
+      "value": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
     }
   ],
   "pages.federation.sbg_not_enabled.title": [
     {
       "type": 0,
-      "value": "“允许的域名”是 Secure Border Gateway 的一项功能，可在 ESS Pro 中使用"
+      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
     }
   ],
   "pages.federation.search_placeholder": [
     {
       "type": 0,
-      "value": "搜索域名…"
+      "value": "Search domains…"
     }
   ],
   "pages.federation.tab.allowed_domains": [
     {
       "type": 0,
-      "value": "允许的域名"
+      "value": "Allowed domains"
     }
   ],
   "pages.federation.tab.known_domains": [
     {
       "type": 0,
-      "value": "已知域名"
+      "value": "Known domains"
     }
   ],
   "pages.federation.tab.section": [
     {
       "type": 0,
-      "value": "联邦视图"
+      "value": "Federation views"
     }
   ],
   "pages.federation.table.server_name": [
     {
       "type": 0,
-      "value": "服务器名称"
+      "value": "Server name"
     }
   ],
   "pages.federation.table.status": [
     {
       "type": 0,
-      "value": "状态"
+      "value": "Status"
     }
   ],
   "pages.federation.title": [
     {
       "type": 0,
-      "value": "联邦"
+      "value": "Federation"
     }
   ],
   "pages.federation.unavailable_alert.description": [
     {
       "type": 0,
-      "value": "ESS Community 版本中不提供“安全边界网关”功能。请升级至 ESS Pro 以启用该功能。"
+      "value": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
     }
   ],
   "pages.federation.unavailable_alert.title": [
     {
       "type": 0,
-      "value": "“允许的域名”是 Secure Border Gateway 的一项功能，仅在 ESS Pro 中提供"
+      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
     }
   ],
   "pages.generic_error.go_home": [
     {
       "type": 0,
-      "value": "返回首页"
+      "value": "Mine avalehele"
     }
   ],
   "pages.generic_error.sign_out_and_reload": [
     {
       "type": 0,
-      "value": "注销并重载"
+      "value": "Logi välja ja laadi leht uuesti"
     }
   ],
   "pages.generic_error.technical_details.item": [
@@ -834,7 +857,7 @@
     },
     {
       "type": 0,
-      "value": "："
+      "value": ": "
     },
     {
       "type": 1,
@@ -844,91 +867,91 @@
   "pages.generic_error.text": [
     {
       "type": 0,
-      "value": "这可能是由某个 bug 或无法连接到家服务器导致的。你可以重新加载页面、返回上一页或重置所有内容并返回到主页。"
+      "value": "See võib olla tingitud veast või koduserveriga ühenduse katkemisest. Võid proovida lehte uuesti laadida, minna tagasi eelmisele lehele või kõik tühistada ja minna tagasi avalehele."
     }
   ],
   "pages.generic_error.title": [
     {
       "type": 0,
-      "value": "发生意外错误"
+      "value": "Tekkis ootamatu viga"
     }
   ],
   "pages.landing.description": [
     {
       "type": 0,
-      "value": "管理您的组织或社区内 Element 应用程序的部署。"
+      "value": "Manage the deployment of the element app for your organization or community."
     }
   ],
   "pages.login.errors.no_auth_metadata": [
     {
       "type": 0,
-      "value": "载入服务器认证元数据失败。可能无法访问 Synapse 或 Synapse 未被配置为使用 Matrix Authentication Service。"
+      "value": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
     }
   ],
   "pages.login.errors.no_client_metadata": [
     {
       "type": 0,
-      "value": "无法注册客户端。Matrix Authentication Service 可能无法访问或配置错误。"
+      "value": "Failed to register the client. Matrix Authentication Service may be unreachable or misconfigured."
     }
   ],
   "pages.login.errors.no_well_known": [
     {
       "type": 0,
-      "value": "加载服务器 well-known 文档失败，服务器名称可能无效。"
+      "value": "Failed to load the server's well-known document. The server name may be invalid."
     }
   ],
   "pages.login.get_started": [
     {
       "type": 0,
-      "value": "开始"
+      "value": "Get started"
     }
   ],
   "pages.login.server_name": [
     {
       "type": 0,
-      "value": "服务器名称"
+      "value": "Serveri nimi"
     }
   ],
   "pages.login.title": [
     {
       "type": 0,
-      "value": "登录"
+      "value": "Logi sisse"
     }
   ],
   "pages.personal_tokens.acting_user_column": [
     {
       "type": 0,
-      "value": "代理用户"
+      "value": "Acting User"
     }
   ],
   "pages.personal_tokens.acting_user_label": [
     {
       "type": 0,
-      "value": "代理用户"
+      "value": "Acting user"
     }
   ],
   "pages.personal_tokens.actor_user_help": [
     {
       "type": 0,
-      "value": "此 Token 将代表的用户"
+      "value": "The user this token will act on behalf of"
     }
   ],
   "pages.personal_tokens.actor_user_label": [
     {
       "type": 0,
-      "value": "代理用户"
+      "value": "Acting user"
     }
   ],
   "pages.personal_tokens.add_token_title": [
     {
       "type": 0,
-      "value": "添加个人 Token"
+      "value": "Add personal token"
     }
   ],
   "pages.personal_tokens.cant_regenerate_tooltip": [
     {
       "type": 0,
-      "value": "仅"
+      "value": "Ainult "
     },
     {
       "type": 1,
@@ -936,13 +959,13 @@
     },
     {
       "type": 0,
-      "value": " 可重新生成此 Token"
+      "value": " saab seda tunnusluba uuesti luua"
     }
   ],
   "pages.personal_tokens.cant_regenerate_tooltip_generic": [
     {
       "type": 0,
-      "value": "仅 Token 的所有者可以重新生成"
+      "value": "Ainult tunnusloa omanik saab seda uuesti luua"
     }
   ],
   "pages.personal_tokens.count": [
@@ -954,7 +977,18 @@
           "value": [
             {
               "type": 0,
-              "value": "无个人 Token"
+              "value": "No personal tokens"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " personal token"
             }
           ]
         },
@@ -965,7 +999,7 @@
             },
             {
               "type": 0,
-              "value": "个个人 Token"
+              "value": " personal tokens"
             }
           ]
         }
@@ -977,43 +1011,43 @@
   "pages.personal_tokens.create_error": [
     {
       "type": 0,
-      "value": "个人 Token 创建失败"
+      "value": "Failed to create personal token"
     }
   ],
   "pages.personal_tokens.create_success": [
     {
       "type": 0,
-      "value": "个人 Token 创建成功"
+      "value": "Personal token created successfully"
     }
   ],
   "pages.personal_tokens.create_token": [
     {
       "type": 0,
-      "value": "创建 Token"
+      "value": "Create token"
     }
   ],
   "pages.personal_tokens.created_at_label": [
     {
       "type": 0,
-      "value": "创建于"
+      "value": "Created at"
     }
   ],
   "pages.personal_tokens.description": [
     {
       "type": 0,
-      "value": "个人 Token是具有特定权限的长期 Token，包括用于访问 Synapse 与 MAS 管理 API 。可以用于自动化任务与集成的创建。"
+      "value": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations."
     }
   ],
   "pages.personal_tokens.device_id_help": [
     {
       "type": 0,
-      "value": "留空以随机生成 10 个字符的设备 ID"
+      "value": "Leave empty to generate a random 10-character device ID"
     }
   ],
   "pages.personal_tokens.device_id_label": [
     {
       "type": 0,
-      "value": "设备 ID"
+      "value": "Seadme tunnus"
     }
   ],
   "pages.personal_tokens.device_id_placeholder": [
@@ -1025,25 +1059,25 @@
   "pages.personal_tokens.expires_at_column": [
     {
       "type": 0,
-      "value": "有效期到"
+      "value": "Aegumine"
     }
   ],
   "pages.personal_tokens.expires_at_label": [
     {
       "type": 0,
-      "value": "有效期到"
+      "value": "Aegub"
     }
   ],
   "pages.personal_tokens.expires_in_help": [
     {
       "type": 0,
-      "value": "留空表示 Token 永不过期"
+      "value": "Leave empty for tokens that never expire"
     }
   ],
   "pages.personal_tokens.expires_in_label": [
     {
       "type": 0,
-      "value": "剩余有效期（天）"
+      "value": "Aegumine (päevades)"
     }
   ],
   "pages.personal_tokens.expires_in_placeholder": [
@@ -1055,417 +1089,409 @@
   "pages.personal_tokens.filter.active": [
     {
       "type": 0,
-      "value": "活跃"
+      "value": "Aktiivne"
     }
   ],
   "pages.personal_tokens.filter.expires": [
     {
       "type": 0,
-      "value": "含有效期"
+      "value": "With an expiry date"
     }
   ],
   "pages.personal_tokens.filter.no_expiry": [
     {
       "type": 0,
-      "value": "永不过期"
+      "value": "Never expires"
     }
   ],
   "pages.personal_tokens.filter.revoked": [
     {
       "type": 0,
-      "value": "已撤消"
+      "value": "Tühistatud"
     }
   ],
   "pages.personal_tokens.filter.scope_mas_admin": [
     {
       "type": 0,
-      "value": "访问 MAS 管理 API"
+      "value": "Access to the MAS admin API"
     }
   ],
   "pages.personal_tokens.filter.scope_matrix_client": [
     {
       "type": 0,
-      "value": "访问 Matrix 客户端 - 服务器 API"
+      "value": "Access to the Matrix Client-Server API"
     }
   ],
   "pages.personal_tokens.filter.scope_synapse_admin": [
     {
       "type": 0,
-      "value": "访问 Synapse 管理 API"
+      "value": "Access to the Synapse admin API"
     }
   ],
   "pages.personal_tokens.last_active_column": [
     {
       "type": 0,
-      "value": "最后活跃"
+      "value": "Viimati kasutusel"
     }
   ],
   "pages.personal_tokens.last_active_ip_label": [
     {
       "type": 0,
-      "value": "最后活跃 IP"
+      "value": "Viimatikasutatud IP-aadress"
     }
   ],
   "pages.personal_tokens.last_active_label": [
     {
       "type": 0,
-      "value": "最后活跃"
+      "value": "Viimati kasutusel"
     }
   ],
   "pages.personal_tokens.loading_more": [
     {
       "type": 0,
-      "value": "载入更多 Token…"
+      "value": "Loading more tokens..."
     }
   ],
   "pages.personal_tokens.name_column": [
     {
       "type": 0,
-      "value": "名称"
+      "value": "Nimi"
     }
   ],
   "pages.personal_tokens.name_help": [
     {
       "type": 0,
-      "value": "为 Token 添加一个易于理解的名称以用于识别"
+      "value": "A human-readable name for the token, to help you identify it"
     }
   ],
   "pages.personal_tokens.name_label": [
     {
       "type": 0,
-      "value": "Token 名称"
+      "value": "Tunnusloa nimi"
     }
   ],
   "pages.personal_tokens.name_placeholder": [
     {
       "type": 0,
-      "value": "我的应用程序 Token"
+      "value": "Minu rakenduse tunnusluba"
     }
   ],
   "pages.personal_tokens.never_expires": [
     {
       "type": 0,
-      "value": "永不过期"
+      "value": "Never expires"
     }
   ],
   "pages.personal_tokens.never_used": [
     {
       "type": 0,
-      "value": "从未使用过"
+      "value": "Mitte kunagi kasutatud"
     }
   ],
   "pages.personal_tokens.not_found.description": [
     {
       "type": 0,
-      "value": "你要查找的 Token 不存在或已被删除。"
+      "value": "The personal token you're looking for doesn't exist or has been removed."
     }
   ],
   "pages.personal_tokens.not_found.title": [
     {
       "type": 0,
-      "value": "个人 Token 未找到"
+      "value": "Isiklikku tunnusluba ei leidu"
     }
   ],
   "pages.personal_tokens.owner_user_label": [
     {
       "type": 0,
-      "value": "所有者"
+      "value": "Omanik"
     }
   ],
   "pages.personal_tokens.regenerate_confirm": [
     {
       "type": 0,
-      "value": "重新生成 Token"
+      "value": "Loo tunnusluba uuesti"
     }
   ],
   "pages.personal_tokens.regenerate_error": [
     {
       "type": 0,
-      "value": "个人 Token 重新生成失败"
+      "value": "Isikliku tunnusloa uuesti loomine ei õnnestunud"
     }
   ],
   "pages.personal_tokens.regenerate_expires_help": [
     {
       "type": 0,
-      "value": "留空以保持与之前相同的有效期，或设置新的有效期"
+      "value": "Leave empty to keep the same expiry as before, or set a new expiry time"
     }
   ],
   "pages.personal_tokens.regenerate_success": [
     {
       "type": 0,
-      "value": "个人 Token 已成功重新生成"
+      "value": "Isikliku tunnusloa uuesti loomine õnnestus"
     }
   ],
   "pages.personal_tokens.regenerate_token": [
     {
       "type": 0,
-      "value": "重新生成 Token"
+      "value": "Loo tunnusluba uuesti"
     }
   ],
   "pages.personal_tokens.regenerate_token_title": [
     {
       "type": 0,
-      "value": "重新生成个人 Token"
+      "value": "Loo isiklik tunnusluba uuesti"
     }
   ],
   "pages.personal_tokens.regenerate_warning": [
     {
       "type": 0,
-      "value": "将生成新的访问 Token，并使当前的访问 Token 失效。所有使用当前 Token 的应用程序都需要更新。"
+      "value": "This will generate a new access token and invalidate the current one. Any applications using the current token will need to be updated."
     }
   ],
   "pages.personal_tokens.revoke_success": [
     {
       "type": 0,
-      "value": "个人 Token 已成功撤消"
+      "value": "Isikliku tunnusloa tühistamine õnnestus"
     }
   ],
   "pages.personal_tokens.revoke_token": [
     {
       "type": 0,
-      "value": "撤消 Token"
+      "value": "Revoke token"
     }
   ],
   "pages.personal_tokens.revoked_at_label": [
     {
       "type": 0,
-      "value": "撤消于"
+      "value": "Revoked at"
     }
   ],
   "pages.personal_tokens.scope_device_help": [
     {
       "type": 0,
-      "value": "配置 Matrix 设备"
+      "value": "Provision a Matrix device"
     }
   ],
   "pages.personal_tokens.scope_mas_admin_help": [
     {
       "type": 0,
-      "value": "访问 MAS 管理 API"
+      "value": "Access to the MAS admin API"
     }
   ],
   "pages.personal_tokens.scope_matrix_client_help": [
     {
       "type": 0,
-      "value": "访问 Matrix 客户端 - 服务器 API"
+      "value": "Access to the Matrix Client-Server API"
     }
   ],
   "pages.personal_tokens.scope_synapse_admin_help": [
     {
       "type": 0,
-      "value": "访问 Synapse 管理 API"
+      "value": "Access to the Synapse admin API"
     }
   ],
   "pages.personal_tokens.scopes_label": [
     {
       "type": 0,
-      "value": "范围"
+      "value": "Scopes"
     }
   ],
   "pages.personal_tokens.status.active": [
     {
       "type": 0,
-      "value": "激活"
+      "value": "Aktiivne"
     }
   ],
   "pages.personal_tokens.status.column": [
     {
       "type": 0,
-      "value": "状态"
+      "value": "Status"
     }
   ],
   "pages.personal_tokens.status.expired": [
     {
       "type": 0,
-      "value": "已过期"
+      "value": "Expired"
     }
   ],
   "pages.personal_tokens.status.label": [
     {
       "type": 0,
-      "value": "状态"
+      "value": "Status"
     }
   ],
   "pages.personal_tokens.status.revoked": [
     {
       "type": 0,
-      "value": "已撤消"
+      "value": "Revoked"
     }
   ],
   "pages.personal_tokens.title": [
     {
       "type": 0,
-      "value": "个人 Token"
+      "value": "Isiklikud tunnusload"
     }
   ],
   "pages.personal_tokens.token_created_description": [
     {
       "type": 0,
-      "value": "您的个人 Token已创建。请立即复制，此 Token 此后将不再显示。"
+      "value": "Your personal token has been created. Copy it now as it will not be shown again."
     }
   ],
   "pages.personal_tokens.token_created_title": [
     {
       "type": 0,
-      "value": "个人 Token已创建"
+      "value": "Personal token created"
     }
   ],
   "pages.personal_tokens.token_regenerated_description": [
     {
       "type": 0,
-      "value": "您的个人 Token已重新生成。请立即复制，此 Token 此后将不再显示。"
+      "value": "Your personal token has been regenerated. Copy it now as it will not be shown again."
     }
   ],
   "pages.personal_tokens.token_regenerated_title": [
     {
       "type": 0,
-      "value": "Token已重新生成"
+      "value": "Token regenerated"
     }
   ],
   "pages.registration_tokens.auto_generate_placeholder": [
     {
       "type": 0,
-      "value": "留空则自动生成"
+      "value": "Auto-generate if left empty"
     }
   ],
   "pages.registration_tokens.create_token.error": [
     {
       "type": 0,
-      "value": "Token 创建失败"
+      "value": "Failed to create token"
     }
   ],
   "pages.registration_tokens.create_token.submit": [
     {
       "type": 0,
-      "value": "创建 Token"
+      "value": "Create Token"
     }
   ],
   "pages.registration_tokens.create_token.success": [
     {
       "type": 0,
-      "value": "Token 创建成功"
+      "value": "Token created successfully"
     }
   ],
   "pages.registration_tokens.create_token.title": [
     {
       "type": 0,
-      "value": "创建注册 Token"
+      "value": "Create Registration Token"
     }
   ],
   "pages.registration_tokens.created_at_column": [
     {
       "type": 0,
-      "value": "创建于"
+      "value": "Created at"
     }
   ],
   "pages.registration_tokens.created_at_label": [
     {
       "type": 0,
-      "value": "创建于"
+      "value": "Created at"
     }
   ],
   "pages.registration_tokens.custom_token_help": [
     {
       "type": 0,
-      "value": "自定义 Token 字符串为可选。若留空则自动生成。"
+      "value": "Optional custom token string. If left empty, a secure token will be auto-generated."
     }
   ],
   "pages.registration_tokens.custom_token_label": [
     {
       "type": 0,
-      "value": "自定义 Token"
+      "value": "Custom Token"
     }
   ],
   "pages.registration_tokens.edit_properties": [
     {
       "type": 0,
-      "value": "编辑属性"
+      "value": "Edit properties"
     }
   ],
   "pages.registration_tokens.edit_token_title": [
     {
       "type": 0,
-      "value": "编辑注册 Token"
+      "value": "Edit registration token"
     }
   ],
   "pages.registration_tokens.expires_at_field": [
     {
       "type": 0,
-      "value": "有效期到"
+      "value": "Expires at"
     }
   ],
   "pages.registration_tokens.expires_at_help": [
     {
       "type": 0,
-      "value": "当 Token 何时过期。若要使 Token 永不过期请留空。"
+      "value": "When the token expires. Leave empty if the token should never expire."
     }
   ],
   "pages.registration_tokens.expires_at_label": [
     {
       "type": 0,
-      "value": "有效期到"
+      "value": "Expires at"
     }
   ],
   "pages.registration_tokens.filters.active_only": [
     {
       "type": 0,
-      "value": "激活"
+      "value": "Active"
     }
   ],
   "pages.registration_tokens.filters.expired_only": [
     {
       "type": 0,
-      "value": "已过期"
+      "value": "Expired"
     }
   ],
   "pages.registration_tokens.filters.revoked_only": [
     {
       "type": 0,
-      "value": "已撤消"
+      "value": "Revoked"
     }
   ],
   "pages.registration_tokens.filters.unused_only": [
     {
       "type": 0,
-      "value": "未使用"
+      "value": "Unused"
     }
   ],
   "pages.registration_tokens.filters.used_only": [
     {
       "type": 0,
-      "value": "已使用"
+      "value": "Used"
     }
   ],
   "pages.registration_tokens.loading_more": [
     {
       "type": 0,
-      "value": "载入更多 Token…"
+      "value": "Loading more tokens..."
     }
   ],
   "pages.registration_tokens.never_expires": [
     {
       "type": 0,
-      "value": "永不过期"
+      "value": "Never expires"
     }
   ],
   "pages.registration_tokens.no_expiration_placeholder": [
     {
       "type": 0,
-      "value": "无过期时间"
+      "value": "No expiration"
     }
   ],
   "pages.registration_tokens.not_found.description": [
     {
       "type": 0,
-      "value": "在 "
-    },
-    {
-      "type": 1,
-      "value": "serverName"
-    },
-    {
-      "type": 0,
-      "value": " 上无法找到请求的 Token（"
+      "value": "The requested registration token ("
     },
     {
       "type": 1,
@@ -1473,79 +1499,87 @@
     },
     {
       "type": 0,
-      "value": "）。"
+      "value": ") could not be found on "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": "."
     }
   ],
   "pages.registration_tokens.not_found.title": [
     {
       "type": 0,
-      "value": "未找到注册 Token"
+      "value": "Registration token not found"
     }
   ],
   "pages.registration_tokens.revoke_token": [
     {
       "type": 0,
-      "value": "撤消 Token"
+      "value": "Revoke token"
     }
   ],
   "pages.registration_tokens.revoked_at_label": [
     {
       "type": 0,
-      "value": "撤消于"
+      "value": "Revoked at"
     }
   ],
   "pages.registration_tokens.save_changes": [
     {
       "type": 0,
-      "value": "保存更改"
+      "value": "Save Changes"
     }
   ],
   "pages.registration_tokens.status.active": [
     {
       "type": 0,
-      "value": "活跃"
+      "value": "Active"
     }
   ],
   "pages.registration_tokens.status.column": [
     {
       "type": 0,
-      "value": "状态"
+      "value": "Status"
     }
   ],
   "pages.registration_tokens.status.expired": [
     {
       "type": 0,
-      "value": "已过期"
+      "value": "Expired"
     }
   ],
   "pages.registration_tokens.status.invalid": [
     {
       "type": 0,
-      "value": "无效"
+      "value": "Invalid"
     }
   ],
   "pages.registration_tokens.status.label": [
     {
       "type": 0,
-      "value": "状态"
+      "value": "Status"
     }
   ],
   "pages.registration_tokens.status.revoked": [
     {
       "type": 0,
-      "value": "已撤消"
+      "value": "Revoked"
     }
   ],
   "pages.registration_tokens.status.used_up": [
     {
       "type": 0,
-      "value": "已用尽"
+      "value": "Used up"
     }
   ],
   "pages.registration_tokens.title": [
     {
       "type": 0,
-      "value": "注册 Token"
+      "value": "Registration tokens"
     }
   ],
   "pages.registration_tokens.token_column": [
@@ -1563,7 +1597,18 @@
           "value": [
             {
               "type": 0,
-              "value": "无 Token"
+              "value": "No tokens"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " token"
             }
           ]
         },
@@ -1574,7 +1619,7 @@
             },
             {
               "type": 0,
-              "value": " 个Token"
+              "value": " tokens"
             }
           ]
         }
@@ -1613,109 +1658,109 @@
   "pages.registration_tokens.unlimited_placeholder": [
     {
       "type": 0,
-      "value": "无限制"
+      "value": "Unlimited"
     }
   ],
   "pages.registration_tokens.unlimited_uses_placeholder": [
     {
       "type": 0,
-      "value": "留空则不限制使用量"
+      "value": "Leave empty for unlimited uses"
     }
   ],
   "pages.registration_tokens.unrevoke_token": [
     {
       "type": 0,
-      "value": "反转撤消 Token"
+      "value": "Unrevoke token"
     }
   ],
   "pages.registration_tokens.usage_count_label": [
     {
       "type": 0,
-      "value": "使用次数"
+      "value": "Usage count"
     }
   ],
   "pages.registration_tokens.usage_limit_field": [
     {
       "type": 0,
-      "value": "使用次数限制"
+      "value": "Usage limit"
     }
   ],
   "pages.registration_tokens.usage_limit_help": [
     {
       "type": 0,
-      "value": "此 Token 的最大使用次数。留空则表示不限制使用次数。"
+      "value": "Maximum number of times this token can be used. Leave empty for unlimited uses."
     }
   ],
   "pages.registration_tokens.usage_limit_label": [
     {
       "type": 0,
-      "value": "使用次数限制"
+      "value": "Usage Limit"
     }
   ],
   "pages.registration_tokens.uses_column": [
     {
       "type": 0,
-      "value": "使用次数"
+      "value": "Uses"
     }
   ],
   "pages.registration_tokens.valid_until_column": [
     {
       "type": 0,
-      "value": "有效期到"
+      "value": "Valid Until"
     }
   ],
   "pages.rooms.delete_room.alert.description": [
     {
       "type": 0,
-      "value": "这将永久删除从此房间上传至服务器的所有消息及媒体文件，并从目录中移除此房间。房间成员将无法再访问其消息，且该房间将从他们的房间列表中移除。"
+      "value": "Järgnevaga kustutatakse kõiki selle jututoa sõnumid ja serverisse üleslaaditud meediafailid ning eemaldatakse jututuba serveri jututubade kataloogist. Kõik senised liikmed kaotavad ligipääsu oma sõnumitele ja jututuba kaob kasutaja jututubade loendist."
     }
   ],
   "pages.rooms.delete_room.alert.title": [
     {
       "type": 0,
-      "value": "您即将删除聊天室数据"
+      "value": "Sa oled kustutamas jututoa andmeid"
     }
   ],
   "pages.rooms.delete_room.block.help": [
     {
       "type": 0,
-      "value": "防止用户在房间被删除后重新加入。"
+      "value": "Takista kasutajatel pärast kustutamist jututoaga uuesti liitumist."
     }
   ],
   "pages.rooms.delete_room.block.label": [
     {
       "type": 0,
-      "value": "屏蔽房间"
+      "value": "Blokeeri jututuba"
     }
   ],
   "pages.rooms.delete_room.button": [
     {
       "type": 0,
-      "value": "永久删除"
+      "value": "Kustuta jäädavalt"
     }
   ],
   "pages.rooms.delete_room.error": [
     {
       "type": 0,
-      "value": "无法安排房间删除任务"
+      "value": "Jututoa kustutamise ajastamine ei õnnestunud"
     }
   ],
   "pages.rooms.delete_room.success": [
     {
       "type": 0,
-      "value": "已安排房间删除任务"
+      "value": "Jututoa kustutamine on ajastatud"
     }
   ],
   "pages.rooms.delete_room.title": [
     {
       "type": 0,
-      "value": "删除这个房间吗？"
+      "value": "Kas kustutad selle jututoa?"
     }
   ],
   "pages.rooms.deletion.failure.description": [
     {
       "type": 0,
-      "value": "房间删除任务于"
+      "value": "Ruumi kustutamise ülesanne lõppes ebaõnnestumisega "
     },
     {
       "type": 3,
@@ -1733,7 +1778,7 @@
     },
     {
       "type": 0,
-      "value": "失败，错误："
+      "value": ", veateade oli: "
     },
     {
       "type": 1,
@@ -1743,13 +1788,13 @@
   "pages.rooms.deletion.failure.title": [
     {
       "type": 0,
-      "value": "删除失败"
+      "value": "Kustutamine ei õnnestunud"
     }
   ],
   "pages.rooms.deletion.in_progress.description": [
     {
       "type": 0,
-      "value": "房间删除任务于"
+      "value": "Jututoa kustutamine on töös alates "
     },
     {
       "type": 3,
@@ -1767,19 +1812,19 @@
     },
     {
       "type": 0,
-      "value": "开始，正在进行中。"
+      "value": "."
     }
   ],
   "pages.rooms.deletion.in_progress.title": [
     {
       "type": 0,
-      "value": "正在删除"
+      "value": "Kustutamine on töös"
     }
   ],
   "pages.rooms.deletion.success.description": [
     {
       "type": 0,
-      "value": "房间删除任务已于"
+      "value": "Jututoa kustutamine õnnestus "
     },
     {
       "type": 3,
@@ -1788,7 +1833,7 @@
     },
     {
       "type": 0,
-      "value": " "
+      "value": " kell "
     },
     {
       "type": 4,
@@ -1797,51 +1842,43 @@
     },
     {
       "type": 0,
-      "value": "成功完成。"
+      "value": "."
     }
   ],
   "pages.rooms.deletion.success.title": [
     {
       "type": 0,
-      "value": "删除成功"
+      "value": "Kustutamine õnnestus"
     }
   ],
   "pages.rooms.filters.empty_rooms": [
     {
       "type": 0,
-      "value": "空房间"
+      "value": "Tühjad jututoad"
     }
   ],
   "pages.rooms.filters.non_empty_rooms": [
     {
       "type": 0,
-      "value": "非空房间"
+      "value": "Mittetühjad jututoad"
     }
   ],
   "pages.rooms.filters.private_rooms": [
     {
       "type": 0,
-      "value": "私有房间"
+      "value": "Privaatsed jututoad"
     }
   ],
   "pages.rooms.filters.public_rooms": [
     {
       "type": 0,
-      "value": "公共房间"
+      "value": "Avalikud jututoad"
     }
   ],
   "pages.rooms.not_found.description": [
     {
       "type": 0,
-      "value": "在 "
-    },
-    {
-      "type": 1,
-      "value": "serverName"
-    },
-    {
-      "type": 0,
-      "value": " 上无法找到房间（"
+      "value": "Soovitud jututuba ("
     },
     {
       "type": 1,
@@ -1849,13 +1886,21 @@
     },
     {
       "type": 0,
-      "value": "）。"
+      "value": ") ei leidu "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": " serveris."
     }
   ],
   "pages.rooms.not_found.title": [
     {
       "type": 0,
-      "value": "未找到房间"
+      "value": "Jututuba ei leidu"
     }
   ],
   "pages.rooms.room_count": [
@@ -1867,7 +1912,18 @@
           "value": [
             {
               "type": 0,
-              "value": "无房间"
+              "value": "Jututube pole"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " jututuba"
             }
           ]
         },
@@ -1878,7 +1934,7 @@
             },
             {
               "type": 0,
-              "value": "个房间"
+              "value": " jututuba"
             }
           ]
         }
@@ -1890,13 +1946,13 @@
   "pages.rooms.title": [
     {
       "type": 0,
-      "value": "房间"
+      "value": "Jututoad"
     }
   ],
   "pages.supervision.description": [
     {
       "type": 0,
-      "value": "以 "
+      "value": "Sign in as "
     },
     {
       "type": 8,
@@ -1910,79 +1966,79 @@
     },
     {
       "type": 0,
-      "value": " 用户登录，即可在任何房间执行管理操作。"
+      "value": " to perform administrative actions in any room."
     }
   ],
   "pages.supervision.disabled_alert.description": [
     {
       "type": 0,
-      "value": "此功能包含在您的订阅中。您可以联系管理员启用此功能。"
+      "value": "This feature is part of your subscription. You can ask an administrator to enable it."
     }
   ],
   "pages.supervision.disabled_alert.title": [
     {
       "type": 0,
-      "value": "监控功能当前已禁用"
+      "value": "Supervision is currently disabled"
     }
   ],
   "pages.supervision.errors.cant_open.description": [
     {
       "type": 0,
-      "value": "您的浏览器阻止了弹出窗口的打开。请确保允许来自此网站的弹出窗口。"
+      "value": "Sinu veebibrauser blokeerib hüpikakende avamist. Palun veendu, et hüpikakende kasutamine on sellel veebisaidil lubatud."
     }
   ],
   "pages.supervision.errors.cant_open.title": [
     {
       "type": 0,
-      "value": "无法在新窗口中打开监控界面"
+      "value": "Failed to open the supervision interface in a new window"
     }
   ],
   "pages.supervision.errors.closed.description": [
     {
       "type": 0,
-      "value": "无法登录监督界面，因为该界面在登录完成前已关闭"
+      "value": "Failed to sign in the supervision interface, as it closed before it could finish signing in"
     }
   ],
   "pages.supervision.errors.closed.title": [
     {
       "type": 0,
-      "value": "监控界面关闭得太快了"
+      "value": "The supervision interface was closed too quickly"
     }
   ],
   "pages.supervision.errors.generic.title": [
     {
       "type": 0,
-      "value": "打开监控界面时发生意外错误"
+      "value": "An unexpected error occurred whilst opening the supervision interface"
     }
   ],
   "pages.supervision.missing_ui_address.description": [
     {
       "type": 0,
-      "value": "您的部署中已启用监控功能，但未启用 Element Web，而监控界面需要 Element Web 才能正常工作。"
+      "value": "Supervision is enabled in your deployment, but not Element Web, which is required for the supervision interface to work."
     }
   ],
   "pages.supervision.missing_ui_address.title": [
     {
       "type": 0,
-      "value": "监控界面需要启用 Element Web"
+      "value": "The supervision interface requires Element Web to be enabled"
     }
   ],
   "pages.supervision.recovery_key.copied": [
     {
       "type": 0,
-      "value": "已复制 Recovery key"
+      "value": "Recovery key copied"
     }
   ],
   "pages.supervision.recovery_key.copy_failed": [
     {
       "type": 0,
-      "value": "无法复制 recovery key"
+      "value": "Could not copy recovery key"
     }
   ],
   "pages.supervision.recovery_key.help": [
     {
       "type": 0,
-      "value": "这是用于读取加密信息的 recovery key。"
+      "value": "This is the recovery key used to enable reading encrypted messages."
     }
   ],
   "pages.supervision.recovery_key.label": [
@@ -1994,123 +2050,115 @@
   "pages.supervision.title": [
     {
       "type": 0,
-      "value": "监控"
+      "value": "Supervision"
     }
   ],
   "pages.supervision.unavailable_alert.description": [
     {
       "type": 0,
-      "value": "此功能在 ESS Community 中不可用。请升级至 ESS Pro 以启用该功能。"
+      "value": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
     }
   ],
   "pages.supervision.unavailable_alert.title": [
     {
       "type": 0,
-      "value": "监控是 ESS Pro 中的一项功能"
+      "value": "Supervision is a feature available in ESS Pro"
     }
   ],
   "pages.users.add_email.button": [
     {
       "type": 0,
-      "value": "添加邮件地址"
+      "value": "Add email address"
     }
   ],
   "pages.users.add_email.description": [
     {
       "type": 0,
-      "value": "为此用户添加邮件地址"
+      "value": "Add an email address to this user"
     }
   ],
   "pages.users.add_email.error": [
     {
       "type": 0,
-      "value": "邮件地址添加失败"
+      "value": "E-posti aadressi lisamine ei õnnestunud"
     }
   ],
   "pages.users.add_email.error.email_invalid": [
     {
       "type": 0,
-      "value": "邮件地址无效"
+      "value": "Vigane e-posti aadress"
     }
   ],
   "pages.users.add_email.error.email_missing": [
     {
       "type": 0,
-      "value": "此字段为必填项"
+      "value": "Selle välja täitmine on kohustuslik"
     }
   ],
   "pages.users.add_email.success": [
     {
       "type": 0,
-      "value": "已添加邮件地址"
+      "value": "E-posti aadress on lisatud"
     }
   ],
   "pages.users.add_email.title": [
     {
       "type": 0,
-      "value": "添加邮件地址"
+      "value": "Lisa e-posti aadress"
     }
   ],
   "pages.users.add_upstream_link.error": [
     {
       "type": 0,
-      "value": "上游账户关联失败"
+      "value": "Failed to add link upstream account"
     }
   ],
   "pages.users.add_upstream_link.success": [
     {
       "type": 0,
-      "value": "已与上游账户关联"
+      "value": "Link to upstream account added"
     }
   ],
   "pages.users.deactivate_account.alert.description": [
     {
       "type": 0,
-      "value": "这会自动从用户的所有设备中注销、移除所有访问 Token、删除所有第三方 ID 并永久删除其账户数据。"
+      "value": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
     }
   ],
   "pages.users.deactivate_account.alert.title": [
     {
       "type": 0,
-      "value": "你即将删除用户数据"
+      "value": "Sa oled kustutamas kasutaja andmeid"
     }
   ],
   "pages.users.deactivate_account.button": [
     {
       "type": 0,
-      "value": "停用账户"
+      "value": "Deactivate account"
     }
   ],
   "pages.users.deactivate_account.error": [
     {
       "type": 0,
-      "value": "停用账户失败"
+      "value": "Failed to deactivate account"
     }
   ],
   "pages.users.deactivate_account.success": [
     {
       "type": 0,
-      "value": "账户已停用"
+      "value": "Account deactivated"
     }
   ],
   "pages.users.deactivate_account.title": [
     {
       "type": 0,
-      "value": "停用此用户？"
+      "value": "Deactivate this user?"
     }
   ],
   "pages.users.delete_email.description": [
     {
       "type": 0,
-      "value": "你确定要为该用户（"
-    },
-    {
-      "type": 1,
-      "value": "mxid"
-    },
-    {
-      "type": 0,
-      "value": "）移除此邮件地址（"
+      "value": "Kas oled kindel, et soovid selle e-posti aadressi ("
     },
     {
       "type": 1,
@@ -2118,31 +2166,7 @@
     },
     {
       "type": 0,
-      "value": "）？"
-    }
-  ],
-  "pages.users.delete_email.error": [
-    {
-      "type": 0,
-      "value": "删除邮件地址失败"
-    }
-  ],
-  "pages.users.delete_email.success": [
-    {
-      "type": 0,
-      "value": "邮件地址已删除"
-    }
-  ],
-  "pages.users.delete_email.title": [
-    {
-      "type": 0,
-      "value": "移除邮件地址？"
-    }
-  ],
-  "pages.users.delete_upstream_link.description": [
-    {
-      "type": 0,
-      "value": "你确定要删除此用户（"
+      "value": ") sellelt kasutajalt ("
     },
     {
       "type": 1,
@@ -2150,7 +2174,39 @@
     },
     {
       "type": 0,
-      "value": "）与该上游账户（"
+      "value": ") eemaldada?"
+    }
+  ],
+  "pages.users.delete_email.error": [
+    {
+      "type": 0,
+      "value": "E-posti aadressi kustutamine ei õnnestunud"
+    }
+  ],
+  "pages.users.delete_email.success": [
+    {
+      "type": 0,
+      "value": "E-posti aadress on kustutatud"
+    }
+  ],
+  "pages.users.delete_email.title": [
+    {
+      "type": 0,
+      "value": "Kas eemaldad selle e-posti aadressi?"
+    }
+  ],
+  "pages.users.delete_upstream_link.description": [
+    {
+      "type": 0,
+      "value": "Are you sure you want to remove the link between this user ("
+    },
+    {
+      "type": 1,
+      "value": "mxid"
+    },
+    {
+      "type": 0,
+      "value": ") with this upstream account ("
     },
     {
       "type": 1,
@@ -2158,121 +2214,121 @@
     },
     {
       "type": 0,
-      "value": " ）的关联？"
+      "value": ")?"
     }
   ],
   "pages.users.delete_upstream_link.error": [
     {
       "type": 0,
-      "value": "上游关联删除失败"
+      "value": "Failed to delete upstream link"
     }
   ],
   "pages.users.delete_upstream_link.success": [
     {
       "type": 0,
-      "value": "上游关联已删除"
+      "value": "Upstream link deleted"
     }
   ],
   "pages.users.delete_upstream_link.title": [
     {
       "type": 0,
-      "value": "删除与上游账户的关联？"
+      "value": "Remove link with upstream account?"
     }
   ],
   "pages.users.filters.active": [
     {
       "type": 0,
-      "value": "激活用户"
+      "value": "Aktiivsed kasutajad"
     }
   ],
   "pages.users.filters.admins": [
     {
       "type": 0,
-      "value": "管理员"
+      "value": "Peakasutajad"
     }
   ],
   "pages.users.filters.deactivated": [
     {
       "type": 0,
-      "value": "已停用的用户"
+      "value": "Deaktiveeritud kasutajad"
     }
   ],
   "pages.users.filters.guests": [
     {
       "type": 0,
-      "value": "访客（旧版）"
+      "value": "Guests (legacy)"
     }
   ],
   "pages.users.filters.locked": [
     {
       "type": 0,
-      "value": "已锁定的用户"
+      "value": "Lukustatud kasutajad"
     }
   ],
   "pages.users.filters.newest_first": [
     {
       "type": 0,
-      "value": "最新的优先"
+      "value": "Esmalt uuemad"
     }
   ],
   "pages.users.filters.non_guests": [
     {
       "type": 0,
-      "value": "非访客（旧版）"
+      "value": "Non-guests (legacy)"
     }
   ],
   "pages.users.lock_account.alert.description": [
     {
       "type": 0,
-      "value": "此用户将自动在其登录的所有设备中锁定，并且在解锁前无法登录到任何新设备。"
+      "value": "Selle kasutaja tegevus lukustub automaatselt kõikides seadmetes, kuhu ta on praegu sisse logitud ja ta ei saa enne lukustuse avamist uutesse seadmetesse sisse logida."
     }
   ],
   "pages.users.lock_account.alert.title": [
     {
       "type": 0,
-      "value": "用户将无法发送或接收消息"
+      "value": "Kasutaja ei saa sõnumeid saata ega vastu võtta"
     }
   ],
   "pages.users.lock_account.button": [
     {
       "type": 0,
-      "value": "锁定账户"
+      "value": "Lukusta kasutajakonto"
     }
   ],
   "pages.users.lock_account.error": [
     {
       "type": 0,
-      "value": "锁定账户失败"
+      "value": "Kasutajakonto lukustamine ei õnnestunud"
     }
   ],
   "pages.users.lock_account.success": [
     {
       "type": 0,
-      "value": "账户已锁定"
+      "value": "Kasutajakonto on lukustatud"
     }
   ],
   "pages.users.lock_account.title": [
     {
       "type": 0,
-      "value": "锁定此用户？"
+      "value": "Kas lukustad selle kasutajakonto?"
     }
   ],
   "pages.users.new_user.add_user": [
     {
       "type": 0,
-      "value": "添加用户"
+      "value": "Lisa kasutaja"
     }
   ],
   "pages.users.new_user.create_account": [
     {
       "type": 0,
-      "value": "创建账户"
+      "value": "Loo kasutajakonto"
     }
   ],
   "pages.users.new_user.description": [
     {
       "type": 0,
-      "value": "为此用户指定用户名以新增用户到 "
+      "value": "To add a new user to "
     },
     {
       "type": 1,
@@ -2280,57 +2336,49 @@
     },
     {
       "type": 0,
-      "value": "，该用户名将成为其用户 ID 的一部分。"
+      "value": ", choose a user name for this user, which will be part of their user ID."
     }
   ],
   "pages.users.new_user.error_message": [
     {
       "type": 0,
-      "value": "创建用户时出错"
+      "value": "Viga kasutaja lisamisel"
     }
   ],
   "pages.users.new_user.invalid_localpart": [
     {
       "type": 0,
-      "value": "Localpart 只能包含小写字母、数字与下划线"
+      "value": "Localpart can only contain lowercase letters, numbers, dots, underscores, dashes and slashes"
     }
   ],
   "pages.users.new_user.invalid_localpart_numeric_only": [
     {
       "type": 0,
-      "value": "Localpart 不能仅包含数字"
+      "value": "Localpart cannot only contain numbers"
     }
   ],
   "pages.users.new_user.localpart": [
     {
       "type": 0,
-      "value": "输入名称"
+      "value": "Sisesta nimi"
     }
   ],
   "pages.users.new_user.required_error": [
     {
       "type": 0,
-      "value": "此字段为必填"
+      "value": "Selle välja täitmine on kohustuslik"
     }
   ],
   "pages.users.new_user.success_message": [
     {
       "type": 0,
-      "value": "用户已创建"
+      "value": "Kasutaja on loodud"
     }
   ],
   "pages.users.not_found.description": [
     {
       "type": 0,
-      "value": "在 "
-    },
-    {
-      "type": 1,
-      "value": "serverName"
-    },
-    {
-      "type": 0,
-      "value": " 上无法找到请求的用户（"
+      "value": "Soovitud kasutajat ("
     },
     {
       "type": 1,
@@ -2338,185 +2386,197 @@
     },
     {
       "type": 0,
-      "value": "）。"
+      "value": ") ei leidu serveris "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": "."
     }
   ],
   "pages.users.not_found.title": [
     {
       "type": 0,
-      "value": "用户未找到"
+      "value": "Kasutajat ei leidu"
     }
   ],
   "pages.users.reactivate_account.button": [
     {
       "type": 0,
-      "value": "重新激活"
+      "value": "Võta konto uuesti kasutusele"
     }
   ],
   "pages.users.reactivate_account.error": [
     {
       "type": 0,
-      "value": "重新激活账户失败"
+      "value": "Konto uuesti kasutuselevõtmine ei õnnestunud"
     }
   ],
   "pages.users.reactivate_account.success": [
     {
       "type": 0,
-      "value": "账户已重新激活"
+      "value": "Konto on uuesti võetud kasutusele"
     }
   ],
   "pages.users.search_placeholder": [
     {
       "type": 0,
-      "value": "搜索用户…"
+      "value": "Otsi kasutajaid…"
     }
   ],
   "pages.users.set_admin.alert.description": [
     {
       "type": 0,
-      "value": "用户将能够查看用户数据，并修改用户和房间权限。"
+      "value": "The user will be able to view user data and make changes to user and room permissions."
     }
   ],
   "pages.users.set_admin.alert.title": [
     {
       "type": 0,
-      "value": "用户将有权访问敏感数据"
+      "value": "User will have access to sensitive data"
     }
   ],
   "pages.users.set_admin.error": [
-    {
-      "type": 0,
-      "value": "为 "
-    },
     {
       "type": 1,
       "value": "mxid"
     },
     {
       "type": 0,
-      "value": " 更改管理员权限失败"
+      "value": " kasutaja peakasutaja õiguste muutmine ei õnnestunud"
     }
   ],
   "pages.users.set_admin.label": [
     {
       "type": 0,
-      "value": "管理员"
+      "value": "Peakasutaja"
     }
   ],
   "pages.users.set_admin.make_admin_button": [
     {
       "type": 0,
-      "value": "设为管理员"
+      "value": "Määra peakasutajaks"
     }
   ],
   "pages.users.set_admin.successfully_demoted": [
     {
+      "type": 0,
+      "value": "Kasutajal "
+    },
+    {
       "type": 1,
       "value": "mxid"
     },
     {
       "type": 0,
-      "value": " 已不再具有管理员权限"
+      "value": " pole enam peakasutaja õigusi"
     }
   ],
   "pages.users.set_admin.successfully_promoted": [
     {
+      "type": 0,
+      "value": "Kasutajal "
+    },
+    {
       "type": 1,
       "value": "mxid"
     },
     {
       "type": 0,
-      "value": " 现在拥有管理员权限"
+      "value": " on nüüd peakasutaja õigused"
     }
   ],
   "pages.users.set_admin.title": [
     {
       "type": 0,
-      "value": "将此用户设为管理员？"
+      "value": "Kas muudad selle kasutaja peakasutajaks?"
     }
   ],
   "pages.users.set_password.button": [
     {
       "type": 0,
-      "value": "更改密码"
+      "value": "Muuda salasõna"
     }
   ],
   "pages.users.set_password.confirm_password_label": [
     {
       "type": 0,
-      "value": "再次输入密码"
+      "value": "Sisesta salasõna uuesti"
     }
   ],
   "pages.users.set_password.error": [
     {
       "type": 0,
-      "value": "密码设置失败"
+      "value": "Salasõna sisestamine ei õnnestunud"
     }
   ],
   "pages.users.set_password.error.password_missing": [
     {
       "type": 0,
-      "value": "此字段为必填"
+      "value": "Selle välja täitmine on kohustuslik"
     }
   ],
   "pages.users.set_password.error.passwords_mismatch": [
     {
       "type": 0,
-      "value": "密码不匹配"
+      "value": "Salasõnad ei klapi omavahel"
     }
   ],
   "pages.users.set_password.password_label": [
     {
       "type": 0,
-      "value": "密码"
+      "value": "Salasõna"
     }
   ],
   "pages.users.set_password.password_match": [
     {
       "type": 0,
-      "value": "密码匹配！"
+      "value": "Salasõnad klapivad omavahel!"
     }
   ],
   "pages.users.set_password.submit": [
     {
       "type": 0,
-      "value": "设置新密码"
+      "value": "Sisesta uus salasõna"
     }
   ],
   "pages.users.set_password.success": [
     {
       "type": 0,
-      "value": "密码设置成功"
+      "value": "Salasõna sisestamine õnnestus"
     }
   ],
   "pages.users.set_password.title": [
     {
       "type": 0,
-      "value": "为此用户设置新密码"
+      "value": "Sisesta sellele kasutajale uus salasõna"
     }
   ],
   "pages.users.title": [
     {
       "type": 0,
-      "value": "用户"
+      "value": "Kasutajad"
     }
   ],
   "pages.users.unlock_account.button": [
     {
       "type": 0,
-      "value": "解锁账户"
+      "value": "Ava kasutajakonto lukustus"
     }
   ],
   "pages.users.unlock_account.error": [
     {
       "type": 0,
-      "value": "解锁账户失败"
+      "value": "Kasutajakonto lukustuse avamine ei õnnestunud"
     }
   ],
   "pages.users.unlock_account.success": [
     {
       "type": 0,
-      "value": "账户已解锁"
+      "value": "Kasutajakonto lukustus on eemaldatud"
     }
   ],
   "pages.users.user_count": [
@@ -2528,7 +2588,18 @@
           "value": [
             {
               "type": 0,
-              "value": "无用户"
+              "value": "No users"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " user"
             }
           ]
         },
@@ -2539,7 +2610,7 @@
             },
             {
               "type": 0,
-              "value": "个用户"
+              "value": " users"
             }
           ]
         }
@@ -2563,7 +2634,7 @@
   "product.title.community": [
     {
       "type": 0,
-      "value": "Element Community"
+      "value": "Element - kogukond"
     }
   ],
   "product.title.pro": [
@@ -2581,39 +2652,39 @@
   "room_info.empty_room": [
     {
       "type": 0,
-      "value": "空房间"
+      "value": "Tühi jututuba"
     }
   ],
   "room_info.empty_space": [
     {
       "type": 0,
-      "value": "空闲空间"
+      "value": "Tühi kogukond"
     }
   ],
   "room_info.room_with": [
     {
-      "type": 1,
-      "value": "members"
+      "type": 0,
+      "value": "Jututuba liikmetega: "
     },
     {
-      "type": 0,
-      "value": " 位成员的房间"
+      "type": 1,
+      "value": "members"
     }
   ],
   "room_info.space_with": [
     {
-      "type": 1,
-      "value": "members"
+      "type": 0,
+      "value": "Kogukond liikmetega: "
     },
     {
-      "type": 0,
-      "value": " 位成员的空间"
+      "type": 1,
+      "value": "members"
     }
   ],
   "room_info.unknown_user": [
     {
       "type": 0,
-      "value": "未知用户"
+      "value": "Tundmatu kasutaja"
     }
   ],
   "rooms_info.other_members": [
@@ -2621,11 +2692,25 @@
       "type": 6,
       "value": "COUNT",
       "options": {
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " muu kasutaja"
+            }
+          ]
+        },
         "other": {
           "value": [
             {
+              "type": 7
+            },
+            {
               "type": 0,
-              "value": "其他"
+              "value": " muud kasutajat"
             }
           ]
         }
@@ -2637,43 +2722,43 @@
   "ui.data.failed_to_load": [
     {
       "type": 0,
-      "value": "载入失败"
+      "value": "Laadimine ei õnnestunud"
     }
   ],
   "ui.data.loading": [
     {
       "type": 0,
-      "value": "正在载入值"
+      "value": "Laadin väärtust"
     }
   ],
   "ui.destination_status.failing": [
     {
       "type": 0,
-      "value": "失败"
+      "value": "Failing"
     }
   ],
   "ui.destination_status.inactive": [
     {
       "type": 0,
-      "value": "未激活"
+      "value": "Inactive"
     }
   ],
   "ui.destination_status.never_worked": [
     {
       "type": 0,
-      "value": "从未工作过"
+      "value": "Never worked"
     }
   ],
   "ui.destination_status.working": [
     {
       "type": 0,
-      "value": "正在工作"
+      "value": "Working"
     }
   ],
   "ui.language_switcher.browser_default": [
     {
       "type": 0,
-      "value": "跟随浏览器设置（"
+      "value": "Kasuta veebibrauseri seadistusi ("
     },
     {
       "type": 1,
@@ -2681,49 +2766,49 @@
     },
     {
       "type": 0,
-      "value": "）"
+      "value": ")"
     }
   ],
   "ui.language_switcher.button_label": [
     {
       "type": 0,
-      "value": "语言设置"
+      "value": "Keeleseadistused"
     }
   ],
   "ui.language_switcher.description": [
     {
       "type": 0,
-      "value": "更改界面为您希望使用的语言。"
+      "value": "Vali keel, mida eelistad kasutajaliideses näha."
     }
   ],
   "ui.language_switcher.language_list_label": [
     {
       "type": 0,
-      "value": "可用语言列表"
+      "value": "Saadaval olevate keelte loend"
     }
   ],
   "ui.language_switcher.title": [
     {
       "type": 0,
-      "value": "语言设置"
+      "value": "Keeleseadistused"
     }
   ],
   "ui.user_picker.loading_list": [
     {
       "type": 0,
-      "value": "正在加载…"
+      "value": "Laadin…"
     }
   ],
   "ui.user_picker.no_match": [
     {
       "type": 0,
-      "value": "没有匹配"
+      "value": "Vastet pole"
     }
   ],
   "ui.user_picker.no_match_help": [
     {
       "type": 0,
-      "value": "请尝试使用其他搜索词。此功能仅能通过用户的localpart在"
+      "value": "Proovi teist otsinguterminit. Selle otsinguga saad leida aktiivseid kasutajaid ainult "
     },
     {
       "type": 1,
@@ -2731,7 +2816,7 @@
     },
     {
       "type": 0,
-      "value": "上查找活跃用户。"
+      "value": " koduserveris, kasutades nende Matrixi tunnus serverikohast osa."
     }
   ]
 }

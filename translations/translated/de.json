@@ -84,7 +84,7 @@
     "message": "Auditing"
   },
   "marketing.sbg.description": {
-    "message": "<p>Secure Border Gateway is an application-level firewall for Matrix servers.</p> <ul><li>Inspects all requests to and from the server</li> <li>Can use all request metadata to enforce rules</li> <li>Pipeline-based approach to connect APIs and rule sets</li> <li>Pluggable rules engine that can be applied to the pipelines</li></ul>"
+    "message": "<p>Secure Border Gateway ist eine Firewall auf Anwendungsebene für Matrix-Server.</p> <ul><li>Überprüft alle Anfragen an und vom Server.</li> <li>Kann alle Anfragemetadaten zur Durchsetzung von Regeln verwenden.</li> <li>Pipeline-basierter Ansatz zur Verbindung von APIs und Regelsätzen.</li> <li>Unterstützt Regel-Engine, die auf die Pipelines angewendet werden kann.</li></ul>"
   },
   "marketing.sbg.title": {
     "message": "Secure Border Gateway"
@@ -93,7 +93,7 @@
     "message": "<p>Moderation ermöglicht es einer Organisation, alle Chats von einem zentralen Punkt aus zu verwalten. Ein „Moderator”-Konto tritt definierten Chats mit Administratorrechten bei. Serveradministratoren können sich nahtlos über die Adminkonsole in das Konto einloggen, um ihre Chats zu verwalten und zu moderieren.</p> <ul> <li>Chats und deren Einstellungen verwalten (Name, Thema, Berechtigungen usw.)</li> <li>Raummitgliedschaften verwalten</li> <li>Unerwünschte Nachrichten und hochgeladene Medien entfernen</li> <li>Verlassene Chats wiederherstellen (alle Benutzer haben den Chat verlassen)</li> <li>Das Moderator-Konto kann entweder verschlüsselte Nachrichtinhalte lesen oder nicht (konfigurierbar)</li> </ul>"
   },
   "marketing.supervision.title": {
-    "message": "Moderation"
+    "message": "Supervision"
   },
   "navigation.auditing": {
     "message": "Auditing"
@@ -105,7 +105,7 @@
     "message": "Dokumentation"
   },
   "navigation.federation": {
-    "message": "Federation"
+    "message": "Föderation"
   },
   "navigation.personal_tokens": {
     "message": "Persönliche Token"
@@ -117,7 +117,7 @@
     "message": "Chats"
   },
   "navigation.supervision": {
-    "message": "Moderation"
+    "message": "Supervision"
   },
   "navigation.users": {
     "message": "Nutzer"
@@ -156,100 +156,100 @@
     "message": "Dashboard"
   },
   "pages.federation.allowlist.add.error": {
-    "message": "Failed to add domain to allowlist"
+    "message": "Domain konnte nicht zur Zulassungsliste hinzugefügt werden"
   },
   "pages.federation.allowlist.add.success": {
-    "message": "Domain added to allowlist"
+    "message": "Domain zur Zulassungsliste hinzugefügt"
   },
   "pages.federation.allowlist.add_domain": {
-    "message": "Add domain"
+    "message": "Domain hinzufügen"
   },
   "pages.federation.allowlist.add_pattern": {
-    "message": "Add pattern"
+    "message": "Muster hinzufügen"
   },
   "pages.federation.allowlist.add_pattern.help": {
-    "message": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
+    "message": "Geben Sie eine Domain wie example.com ein oder verwenden Sie *, um alle Subdomains zuzulassen, z. B. *.example.com."
   },
   "pages.federation.allowlist.empty": {
-    "message": "No domains in the allowlist yet. Add a domain pattern above to get started."
+    "message": "Noch keine Domains in der Zulassungsliste. Fügen Sie oben ein Domainmuster hinzu, um zu beginnen."
   },
   "pages.federation.allowlist.heading": {
-    "message": "List of patterns allowed to federate with you"
+    "message": "Liste der Muster, die für eine Föderation mit Ihnen zugelassen sind"
   },
   "pages.federation.allowlist.remove.error": {
-    "message": "Failed to remove domain from allowlist"
+    "message": "Domain konnte nicht von der Zulassungsliste entfernt werden."
   },
   "pages.federation.allowlist.remove.success": {
-    "message": "Domain removed from allowlist"
+    "message": "Domain von der Zulassungsliste entfernt"
   },
   "pages.federation.allowlist.remove_tooltip": {
-    "message": "Remove from allowlist"
+    "message": "Von der Zulassungsliste entfernen"
   },
   "pages.federation.detail.contact": {
-    "message": "Contact"
+    "message": "Kontakt"
   },
   "pages.federation.detail.destination": {
-    "message": "Destination"
+    "message": "Ziel"
   },
   "pages.federation.detail.last_retry": {
-    "message": "Last retry timestamp"
+    "message": "Letzter Wiederholungsversuch"
   },
   "pages.federation.detail.last_successful_stream": {
-    "message": "Last successful stream"
+    "message": "Letzter erfolgreicher Stream"
   },
   "pages.federation.detail.retry_interval": {
-    "message": "Retry interval"
+    "message": "Wiederholungsintervall"
   },
   "pages.federation.detail.security": {
-    "message": "Security"
+    "message": "Sicherheit"
   },
   "pages.federation.detail.support_page": {
-    "message": "Support page"
+    "message": "Support-Seite"
   },
   "pages.federation.domain_count": {
-    "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
+    "message": "{COUNT,plural,zero{No domains} eine{# domain} weitere{# domains} other{No domains}}"
   },
   "pages.federation.loading": {
-    "message": "Loading more domains…"
+    "message": "Weitere Domains werden geladen…"
   },
   "pages.federation.not_found.description": {
-    "message": "The requested destination ({destination}) could not be found."
+    "message": "Das angeforderte Ziel ({destination}) konnte nicht gefunden werden."
   },
   "pages.federation.not_found.title": {
-    "message": "Destination not found"
+    "message": "Ziel nicht gefunden"
   },
   "pages.federation.sbg_not_enabled.description": {
-    "message": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+    "message": "Secure Border Gateway ist in dieser Umgebung nicht aktiviert. Wenden Sie sich an Ihren Administrator, um es zu aktivieren."
   },
   "pages.federation.sbg_not_enabled.title": {
-    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+    "message": "Die Funktion „Zulässige Domains“ ist eine Funktion des Secure Border Gateway, das in ESS Pro verfügbar ist."
   },
   "pages.federation.search_placeholder": {
-    "message": "Search domains…"
+    "message": "Domains suchen..."
   },
   "pages.federation.tab.allowed_domains": {
-    "message": "Allowed domains"
+    "message": "Zulässige Domains"
   },
   "pages.federation.tab.known_domains": {
-    "message": "Known domains"
+    "message": "Bekannte Domains"
   },
   "pages.federation.tab.section": {
-    "message": "Federation views"
+    "message": "Föderation"
   },
   "pages.federation.table.server_name": {
-    "message": "Server name"
+    "message": "Servername"
   },
   "pages.federation.table.status": {
     "message": "Status"
   },
   "pages.federation.title": {
-    "message": "Federation"
+    "message": "Föderation"
   },
   "pages.federation.unavailable_alert.description": {
-    "message": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
+    "message": "Secure Border Gateway ist in ESS Community nicht verfügbar. Zum Aktivieren aktualisieren Sie bitte auf ESS Pro."
   },
   "pages.federation.unavailable_alert.title": {
-    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+    "message": "Zulässige Domains ist eine Funktion des Secure Border Gateway, das in ESS Pro verfügbar ist."
   },
   "pages.generic_error.go_home": {
     "message": "Gehe zur Startseite"
@@ -702,13 +702,13 @@
     "message": "Diese Funktion ist Bestandteil Ihres Abonnements. Sie können einen Administrator bitten, sie zu aktivieren."
   },
   "pages.supervision.disabled_alert.title": {
-    "message": "Moderation ist derzeit deaktiviert"
+    "message": "Supervision ist derzeit deaktiviert"
   },
   "pages.supervision.errors.cant_open.description": {
     "message": "Ihr Browser blockiert das Öffnen von Popup-Fenstern. Bitte stellen Sie sicher, dass Sie Popups von dieser Website zulassen."
   },
   "pages.supervision.errors.cant_open.title": {
-    "message": "Die Moderationsoberfläche konnte nicht in einem neuen Fenster geöffnet werden."
+    "message": "Die Supervision-Oberfläche konnte nicht in einem neuen Fenster geöffnet werden."
   },
   "pages.supervision.errors.closed.description": {
     "message": "Die Anmeldung bei der Moderationsschnittstelle ist fehlgeschlagen, da diese geschlossen wurde, bevor die Anmeldung abgeschlossen werden konnte."
@@ -738,7 +738,7 @@
     "message": "Wiederherstellungsschlüssel"
   },
   "pages.supervision.title": {
-    "message": "Moderation"
+    "message": "Supervision"
   },
   "pages.supervision.unavailable_alert.description": {
     "message": "Diese Funktion ist in ESS Community nicht verfügbar. Wechseln Sie zu ESS Pro, um sie zu aktivieren."
@@ -1008,16 +1008,16 @@
     "message": "Wert wird geladen"
   },
   "ui.destination_status.failing": {
-    "message": "Failing"
+    "message": "Fehlgeschlagen"
   },
   "ui.destination_status.inactive": {
-    "message": "Inactive"
+    "message": "Inaktiv"
   },
   "ui.destination_status.never_worked": {
-    "message": "Never worked"
+    "message": "Hat noch nie funktioniert"
   },
   "ui.destination_status.working": {
-    "message": "Working"
+    "message": "Funktioniert"
   },
   "ui.language_switcher.browser_default": {
     "message": "Browser-Einstellungen verwenden ({language})"

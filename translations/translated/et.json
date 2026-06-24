@@ -1,0 +1,1046 @@
+{
+  "action.add": {
+    "message": "Lisa"
+  },
+  "action.cancel": {
+    "message": "Katkesta"
+  },
+  "action.clear": {
+    "message": "Eemalda"
+  },
+  "action.close": {
+    "message": "Sulge"
+  },
+  "action.copy": {
+    "message": "Kopeeri"
+  },
+  "action.delete": {
+    "message": "Kustuta"
+  },
+  "action.go_back": {
+    "message": "Mine tagasi"
+  },
+  "action.remove": {
+    "message": "Eemalda"
+  },
+  "action.retry": {
+    "message": "Proovi uuesti"
+  },
+  "action.sign_in": {
+    "message": "Logi sisse"
+  },
+  "action.sign_out": {
+    "message": "Logi välja"
+  },
+  "common.email_address": {
+    "message": "E-posti aadress"
+  },
+  "common.filter": {
+    "message": "Filter"
+  },
+  "errors.http_fetch": {
+    "message": "Request to {url} failed"
+  },
+  "errors.http_fetch_json_decoding": {
+    "message": "„{url}“ võrguaadressilt JSON-vormingus saadud vastuse dekodeerimine ei õnnestunud"
+  },
+  "errors.http_status": {
+    "message": "Request to {url} failed with status code {status} {statusText}"
+  },
+  "errors.matrix_standard": {
+    "message": "Request to the homeserver failed with error code '{errorCode}'. Additionally, the server gave the following error message: {errorMessage}"
+  },
+  "errors.not_logged_in": {
+    "message": "Sa pole loginud sisse"
+  },
+  "footer.copyright_notice": {
+    "message": "Autoriõigused © {now, date, ::yyyy}"
+  },
+  "footer.help_and_support": {
+    "message": "Abiteave ja kasutajatugi"
+  },
+  "footer.legal": {
+    "message": "Juriidiline teave"
+  },
+  "footer.privacy": {
+    "message": "Privaatsus"
+  },
+  "header.user_menu.title": {
+    "message": "Kasutajakonto menüü"
+  },
+  "marketing.also_available_in_pro.description": {
+    "message": "<p><link>ESS Pro</link> is the commercial backend distribution from Element.</p> <p>It includes everything in ESS Community plus additional features and services that are tailored to professional environments with more than 100 users up to massive scale in the millions.</p> <p>It is designed to support enterprise requirements in terms of advanced IAM, compliance, scalability, high availability and multi-tenancy.</p>"
+  },
+  "marketing.also_available_in_pro.title": {
+    "message": "Lisaks on Pro-versioonis saadaval…"
+  },
+  "marketing.also_available_in_pro.upgrade": {
+    "message": "Uuenda Pro-versiooniks"
+  },
+  "marketing.auditing.description": {
+    "message": "<p>Auditing gives organizations the ability to keep records of end-to-end encrypted conversations and room events to meet compliance or legal requirements.</p> <p>When enabled, it is visible to all end users which rooms are being recorded to ensure transparency of the auditing process.</p> <p>Auditing can be configured to suit an organization’s specific requirements. For instance direct messages between two individuals can be excluded so that only group conversations are recorded.</p> <p>Audit data is being stored as a stream of machine-readable events in the JSON format either on file storage or S3 and can be forwarded to log analyzer tooling for further filtering and analysis.</p>"
+  },
+  "marketing.auditing.title": {
+    "message": "Auditeerimine"
+  },
+  "marketing.sbg.description": {
+    "message": "<p>Secure Border Gateway is an application-level firewall for Matrix servers.</p> <ul><li>Inspects all requests to and from the server</li> <li>Can use all request metadata to enforce rules</li> <li>Pipeline-based approach to connect APIs and rule sets</li> <li>Pluggable rules engine that can be applied to the pipelines</li></ul>"
+  },
+  "marketing.sbg.title": {
+    "message": "Secure Border Gateway"
+  },
+  "marketing.supervision.description": {
+    "message": "<p>Supervision enables an organisation to administer all rooms from a central point. A 'supervisor' account will join defined rooms with room admin privileges. Server administrators can seamlessly impersonate the account from the admin console to manage and supervise their rooms.</p> <ul><li>Manage rooms and their settings (name, topic, permissions, etc.)</li> <li>Manage room memberships</li> <li>Remove unwanted messages and uploaded media</li> <li>Recover abandoned rooms (all users have left)</li> <li>Supervisor account can or cannot read encrypted message contents (configurable)</li></ul>"
+  },
+  "marketing.supervision.title": {
+    "message": "Supervision"
+  },
+  "navigation.auditing": {
+    "message": "Auditeerimine"
+  },
+  "navigation.dashboard": {
+    "message": "Juhtpaneel"
+  },
+  "navigation.documentation": {
+    "message": "Dokumentatsioon"
+  },
+  "navigation.federation": {
+    "message": "Federation"
+  },
+  "navigation.personal_tokens": {
+    "message": "Isiklikud tunnusload"
+  },
+  "navigation.registration_tokens": {
+    "message": "Registration tokens"
+  },
+  "navigation.rooms": {
+    "message": "Jututoad"
+  },
+  "navigation.supervision": {
+    "message": "Supervision"
+  },
+  "navigation.users": {
+    "message": "Kasutajad"
+  },
+  "pages.auditing.title": {
+    "message": "Auditeerimine"
+  },
+  "pages.auditing.unavailable_alert.description": {
+    "message": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
+  },
+  "pages.auditing.unavailable_alert.title": {
+    "message": "Auditeerimine on ESS Pro versioonis saadaval olev funktsionaalsus."
+  },
+  "pages.dashboard.current_ess_version": {
+    "message": "ESS-i versioon"
+  },
+  "pages.dashboard.latest_ess_version": {
+    "message": "Latest ESS version"
+  },
+  "pages.dashboard.new_ess_release": {
+    "message": "(Uus versioon)"
+  },
+  "pages.dashboard.registered_users_count": {
+    "message": "Registreeritud kasutajaid"
+  },
+  "pages.dashboard.rooms_count": {
+    "message": "Jututube kokku"
+  },
+  "pages.dashboard.running_latest_ess": {
+    "message": "(Sa kasutad viimast versiooni)"
+  },
+  "pages.dashboard.synapse_version": {
+    "message": "Synapse'i versioon"
+  },
+  "pages.dashboard.title": {
+    "message": "Juhtpaneel"
+  },
+  "pages.federation.allowlist.add.error": {
+    "message": "Failed to add domain to allowlist"
+  },
+  "pages.federation.allowlist.add.success": {
+    "message": "Domain added to allowlist"
+  },
+  "pages.federation.allowlist.add_domain": {
+    "message": "Add domain"
+  },
+  "pages.federation.allowlist.add_pattern": {
+    "message": "Add pattern"
+  },
+  "pages.federation.allowlist.add_pattern.help": {
+    "message": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
+  },
+  "pages.federation.allowlist.empty": {
+    "message": "No domains in the allowlist yet. Add a domain pattern above to get started."
+  },
+  "pages.federation.allowlist.heading": {
+    "message": "List of patterns allowed to federate with you"
+  },
+  "pages.federation.allowlist.remove.error": {
+    "message": "Failed to remove domain from allowlist"
+  },
+  "pages.federation.allowlist.remove.success": {
+    "message": "Domain removed from allowlist"
+  },
+  "pages.federation.allowlist.remove_tooltip": {
+    "message": "Remove from allowlist"
+  },
+  "pages.federation.detail.contact": {
+    "message": "Contact"
+  },
+  "pages.federation.detail.destination": {
+    "message": "Destination"
+  },
+  "pages.federation.detail.last_retry": {
+    "message": "Last retry timestamp"
+  },
+  "pages.federation.detail.last_successful_stream": {
+    "message": "Last successful stream"
+  },
+  "pages.federation.detail.retry_interval": {
+    "message": "Retry interval"
+  },
+  "pages.federation.detail.security": {
+    "message": "Security"
+  },
+  "pages.federation.detail.support_page": {
+    "message": "Support page"
+  },
+  "pages.federation.domain_count": {
+    "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
+  },
+  "pages.federation.loading": {
+    "message": "Loading more domains…"
+  },
+  "pages.federation.not_found.description": {
+    "message": "The requested destination ({destination}) could not be found."
+  },
+  "pages.federation.not_found.title": {
+    "message": "Destination not found"
+  },
+  "pages.federation.sbg_not_enabled.description": {
+    "message": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+  },
+  "pages.federation.sbg_not_enabled.title": {
+    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+  },
+  "pages.federation.search_placeholder": {
+    "message": "Search domains…"
+  },
+  "pages.federation.tab.allowed_domains": {
+    "message": "Allowed domains"
+  },
+  "pages.federation.tab.known_domains": {
+    "message": "Known domains"
+  },
+  "pages.federation.tab.section": {
+    "message": "Federation views"
+  },
+  "pages.federation.table.server_name": {
+    "message": "Server name"
+  },
+  "pages.federation.table.status": {
+    "message": "Status"
+  },
+  "pages.federation.title": {
+    "message": "Federation"
+  },
+  "pages.federation.unavailable_alert.description": {
+    "message": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
+  },
+  "pages.federation.unavailable_alert.title": {
+    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+  },
+  "pages.generic_error.go_home": {
+    "message": "Mine avalehele"
+  },
+  "pages.generic_error.sign_out_and_reload": {
+    "message": "Logi välja ja laadi leht uuesti"
+  },
+  "pages.generic_error.technical_details.item": {
+    "message": "{name}: {message}"
+  },
+  "pages.generic_error.text": {
+    "message": "See võib olla tingitud veast või koduserveriga ühenduse katkemisest. Võid proovida lehte uuesti laadida, minna tagasi eelmisele lehele või kõik tühistada ja minna tagasi avalehele."
+  },
+  "pages.generic_error.title": {
+    "message": "Tekkis ootamatu viga"
+  },
+  "pages.landing.description": {
+    "message": "Manage the deployment of the element app for your organization or community."
+  },
+  "pages.login.errors.no_auth_metadata": {
+    "message": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
+  },
+  "pages.login.errors.no_client_metadata": {
+    "message": "Failed to register the client. Matrix Authentication Service may be unreachable or misconfigured."
+  },
+  "pages.login.errors.no_well_known": {
+    "message": "Failed to load the server's well-known document. The server name may be invalid."
+  },
+  "pages.login.get_started": {
+    "message": "Get started"
+  },
+  "pages.login.server_name": {
+    "message": "Serveri nimi"
+  },
+  "pages.login.title": {
+    "message": "Logi sisse"
+  },
+  "pages.personal_tokens.acting_user_column": {
+    "message": "Acting User"
+  },
+  "pages.personal_tokens.acting_user_label": {
+    "message": "Acting user"
+  },
+  "pages.personal_tokens.actor_user_help": {
+    "message": "The user this token will act on behalf of"
+  },
+  "pages.personal_tokens.actor_user_label": {
+    "message": "Acting user"
+  },
+  "pages.personal_tokens.add_token_title": {
+    "message": "Add personal token"
+  },
+  "pages.personal_tokens.cant_regenerate_tooltip": {
+    "message": "Ainult {ownerMxid} saab seda tunnusluba uuesti luua"
+  },
+  "pages.personal_tokens.cant_regenerate_tooltip_generic": {
+    "message": "Ainult tunnusloa omanik saab seda uuesti luua"
+  },
+  "pages.personal_tokens.count": {
+    "message": "{count, plural, =0 {No personal tokens} one {# personal token} other {# personal tokens}}"
+  },
+  "pages.personal_tokens.create_error": {
+    "message": "Failed to create personal token"
+  },
+  "pages.personal_tokens.create_success": {
+    "message": "Personal token created successfully"
+  },
+  "pages.personal_tokens.create_token": {
+    "message": "Create token"
+  },
+  "pages.personal_tokens.created_at_label": {
+    "message": "Created at"
+  },
+  "pages.personal_tokens.description": {
+    "message": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations."
+  },
+  "pages.personal_tokens.device_id_help": {
+    "message": "Leave empty to generate a random 10-character device ID"
+  },
+  "pages.personal_tokens.device_id_label": {
+    "message": "Seadme tunnus"
+  },
+  "pages.personal_tokens.device_id_placeholder": {
+    "message": "ABCDEFGHIJ"
+  },
+  "pages.personal_tokens.expires_at_column": {
+    "message": "Aegumine"
+  },
+  "pages.personal_tokens.expires_at_label": {
+    "message": "Aegub"
+  },
+  "pages.personal_tokens.expires_in_help": {
+    "message": "Leave empty for tokens that never expire"
+  },
+  "pages.personal_tokens.expires_in_label": {
+    "message": "Aegumine (päevades)"
+  },
+  "pages.personal_tokens.expires_in_placeholder": {
+    "message": "30"
+  },
+  "pages.personal_tokens.filter.active": {
+    "message": "Aktiivne"
+  },
+  "pages.personal_tokens.filter.expires": {
+    "message": "With an expiry date"
+  },
+  "pages.personal_tokens.filter.no_expiry": {
+    "message": "Never expires"
+  },
+  "pages.personal_tokens.filter.revoked": {
+    "message": "Tühistatud"
+  },
+  "pages.personal_tokens.filter.scope_mas_admin": {
+    "message": "Access to the MAS admin API"
+  },
+  "pages.personal_tokens.filter.scope_matrix_client": {
+    "message": "Access to the Matrix Client-Server API"
+  },
+  "pages.personal_tokens.filter.scope_synapse_admin": {
+    "message": "Access to the Synapse admin API"
+  },
+  "pages.personal_tokens.last_active_column": {
+    "message": "Viimati kasutusel"
+  },
+  "pages.personal_tokens.last_active_ip_label": {
+    "message": "Viimatikasutatud IP-aadress"
+  },
+  "pages.personal_tokens.last_active_label": {
+    "message": "Viimati kasutusel"
+  },
+  "pages.personal_tokens.loading_more": {
+    "message": "Loading more tokens..."
+  },
+  "pages.personal_tokens.name_column": {
+    "message": "Nimi"
+  },
+  "pages.personal_tokens.name_help": {
+    "message": "A human-readable name for the token, to help you identify it"
+  },
+  "pages.personal_tokens.name_label": {
+    "message": "Tunnusloa nimi"
+  },
+  "pages.personal_tokens.name_placeholder": {
+    "message": "Minu rakenduse tunnusluba"
+  },
+  "pages.personal_tokens.never_expires": {
+    "message": "Never expires"
+  },
+  "pages.personal_tokens.never_used": {
+    "message": "Mitte kunagi kasutatud"
+  },
+  "pages.personal_tokens.not_found.description": {
+    "message": "The personal token you're looking for doesn't exist or has been removed."
+  },
+  "pages.personal_tokens.not_found.title": {
+    "message": "Isiklikku tunnusluba ei leidu"
+  },
+  "pages.personal_tokens.owner_user_label": {
+    "message": "Omanik"
+  },
+  "pages.personal_tokens.regenerate_confirm": {
+    "message": "Loo tunnusluba uuesti"
+  },
+  "pages.personal_tokens.regenerate_error": {
+    "message": "Isikliku tunnusloa uuesti loomine ei õnnestunud"
+  },
+  "pages.personal_tokens.regenerate_expires_help": {
+    "message": "Leave empty to keep the same expiry as before, or set a new expiry time"
+  },
+  "pages.personal_tokens.regenerate_success": {
+    "message": "Isikliku tunnusloa uuesti loomine õnnestus"
+  },
+  "pages.personal_tokens.regenerate_token": {
+    "message": "Loo tunnusluba uuesti"
+  },
+  "pages.personal_tokens.regenerate_token_title": {
+    "message": "Loo isiklik tunnusluba uuesti"
+  },
+  "pages.personal_tokens.regenerate_warning": {
+    "message": "This will generate a new access token and invalidate the current one. Any applications using the current token will need to be updated."
+  },
+  "pages.personal_tokens.revoke_success": {
+    "message": "Isikliku tunnusloa tühistamine õnnestus"
+  },
+  "pages.personal_tokens.revoke_token": {
+    "message": "Revoke token"
+  },
+  "pages.personal_tokens.revoked_at_label": {
+    "message": "Revoked at"
+  },
+  "pages.personal_tokens.scope_device_help": {
+    "message": "Provision a Matrix device"
+  },
+  "pages.personal_tokens.scope_mas_admin_help": {
+    "message": "Access to the MAS admin API"
+  },
+  "pages.personal_tokens.scope_matrix_client_help": {
+    "message": "Access to the Matrix Client-Server API"
+  },
+  "pages.personal_tokens.scope_synapse_admin_help": {
+    "message": "Access to the Synapse admin API"
+  },
+  "pages.personal_tokens.scopes_label": {
+    "message": "Scopes"
+  },
+  "pages.personal_tokens.status.active": {
+    "message": "Aktiivne"
+  },
+  "pages.personal_tokens.status.column": {
+    "message": "Status"
+  },
+  "pages.personal_tokens.status.expired": {
+    "message": "Expired"
+  },
+  "pages.personal_tokens.status.label": {
+    "message": "Status"
+  },
+  "pages.personal_tokens.status.revoked": {
+    "message": "Revoked"
+  },
+  "pages.personal_tokens.title": {
+    "message": "Isiklikud tunnusload"
+  },
+  "pages.personal_tokens.token_created_description": {
+    "message": "Your personal token has been created. Copy it now as it will not be shown again."
+  },
+  "pages.personal_tokens.token_created_title": {
+    "message": "Personal token created"
+  },
+  "pages.personal_tokens.token_regenerated_description": {
+    "message": "Your personal token has been regenerated. Copy it now as it will not be shown again."
+  },
+  "pages.personal_tokens.token_regenerated_title": {
+    "message": "Token regenerated"
+  },
+  "pages.registration_tokens.auto_generate_placeholder": {
+    "message": "Auto-generate if left empty"
+  },
+  "pages.registration_tokens.create_token.error": {
+    "message": "Failed to create token"
+  },
+  "pages.registration_tokens.create_token.submit": {
+    "message": "Create Token"
+  },
+  "pages.registration_tokens.create_token.success": {
+    "message": "Token created successfully"
+  },
+  "pages.registration_tokens.create_token.title": {
+    "message": "Create Registration Token"
+  },
+  "pages.registration_tokens.created_at_column": {
+    "message": "Created at"
+  },
+  "pages.registration_tokens.created_at_label": {
+    "message": "Created at"
+  },
+  "pages.registration_tokens.custom_token_help": {
+    "message": "Optional custom token string. If left empty, a secure token will be auto-generated."
+  },
+  "pages.registration_tokens.custom_token_label": {
+    "message": "Custom Token"
+  },
+  "pages.registration_tokens.edit_properties": {
+    "message": "Edit properties"
+  },
+  "pages.registration_tokens.edit_token_title": {
+    "message": "Edit registration token"
+  },
+  "pages.registration_tokens.expires_at_field": {
+    "message": "Expires at"
+  },
+  "pages.registration_tokens.expires_at_help": {
+    "message": "When the token expires. Leave empty if the token should never expire."
+  },
+  "pages.registration_tokens.expires_at_label": {
+    "message": "Expires at"
+  },
+  "pages.registration_tokens.filters.active_only": {
+    "message": "Active"
+  },
+  "pages.registration_tokens.filters.expired_only": {
+    "message": "Expired"
+  },
+  "pages.registration_tokens.filters.revoked_only": {
+    "message": "Revoked"
+  },
+  "pages.registration_tokens.filters.unused_only": {
+    "message": "Unused"
+  },
+  "pages.registration_tokens.filters.used_only": {
+    "message": "Used"
+  },
+  "pages.registration_tokens.loading_more": {
+    "message": "Loading more tokens..."
+  },
+  "pages.registration_tokens.never_expires": {
+    "message": "Never expires"
+  },
+  "pages.registration_tokens.no_expiration_placeholder": {
+    "message": "No expiration"
+  },
+  "pages.registration_tokens.not_found.description": {
+    "message": "The requested registration token ({tokenId}) could not be found on {serverName}."
+  },
+  "pages.registration_tokens.not_found.title": {
+    "message": "Registration token not found"
+  },
+  "pages.registration_tokens.revoke_token": {
+    "message": "Revoke token"
+  },
+  "pages.registration_tokens.revoked_at_label": {
+    "message": "Revoked at"
+  },
+  "pages.registration_tokens.save_changes": {
+    "message": "Save Changes"
+  },
+  "pages.registration_tokens.status.active": {
+    "message": "Active"
+  },
+  "pages.registration_tokens.status.column": {
+    "message": "Status"
+  },
+  "pages.registration_tokens.status.expired": {
+    "message": "Expired"
+  },
+  "pages.registration_tokens.status.invalid": {
+    "message": "Invalid"
+  },
+  "pages.registration_tokens.status.label": {
+    "message": "Status"
+  },
+  "pages.registration_tokens.status.revoked": {
+    "message": "Revoked"
+  },
+  "pages.registration_tokens.status.used_up": {
+    "message": "Used up"
+  },
+  "pages.registration_tokens.title": {
+    "message": "Registration tokens"
+  },
+  "pages.registration_tokens.token_column": {
+    "message": "Token"
+  },
+  "pages.registration_tokens.token_count": {
+    "message": "{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
+  },
+  "pages.registration_tokens.token_uses.limited": {
+    "message": "{uses, number} / {limit, number}"
+  },
+  "pages.registration_tokens.token_uses.unlimited": {
+    "message": "{uses, number} / ∞"
+  },
+  "pages.registration_tokens.unlimited_placeholder": {
+    "message": "Unlimited"
+  },
+  "pages.registration_tokens.unlimited_uses_placeholder": {
+    "message": "Leave empty for unlimited uses"
+  },
+  "pages.registration_tokens.unrevoke_token": {
+    "message": "Unrevoke token"
+  },
+  "pages.registration_tokens.usage_count_label": {
+    "message": "Usage count"
+  },
+  "pages.registration_tokens.usage_limit_field": {
+    "message": "Usage limit"
+  },
+  "pages.registration_tokens.usage_limit_help": {
+    "message": "Maximum number of times this token can be used. Leave empty for unlimited uses."
+  },
+  "pages.registration_tokens.usage_limit_label": {
+    "message": "Usage Limit"
+  },
+  "pages.registration_tokens.uses_column": {
+    "message": "Uses"
+  },
+  "pages.registration_tokens.valid_until_column": {
+    "message": "Valid Until"
+  },
+  "pages.rooms.delete_room.alert.description": {
+    "message": "Järgnevaga kustutatakse kõiki selle jututoa sõnumid ja serverisse üleslaaditud meediafailid ning eemaldatakse jututuba serveri jututubade kataloogist. Kõik senised liikmed kaotavad ligipääsu oma sõnumitele ja jututuba kaob kasutaja jututubade loendist."
+  },
+  "pages.rooms.delete_room.alert.title": {
+    "message": "Sa oled kustutamas jututoa andmeid"
+  },
+  "pages.rooms.delete_room.block.help": {
+    "message": "Takista kasutajatel pärast kustutamist jututoaga uuesti liitumist."
+  },
+  "pages.rooms.delete_room.block.label": {
+    "message": "Blokeeri jututuba"
+  },
+  "pages.rooms.delete_room.button": {
+    "message": "Kustuta jäädavalt"
+  },
+  "pages.rooms.delete_room.error": {
+    "message": "Jututoa kustutamise ajastamine ei õnnestunud"
+  },
+  "pages.rooms.delete_room.success": {
+    "message": "Jututoa kustutamine on ajastatud"
+  },
+  "pages.rooms.delete_room.title": {
+    "message": "Kas kustutad selle jututoa?"
+  },
+  "pages.rooms.deletion.failure.description": {
+    "message": "Ruumi kustutamise ülesanne lõppes ebaõnnestumisega {timestamp, date, short} {timestamp, time, short}, veateade oli: {error}"
+  },
+  "pages.rooms.deletion.failure.title": {
+    "message": "Kustutamine ei õnnestunud"
+  },
+  "pages.rooms.deletion.in_progress.description": {
+    "message": "Jututoa kustutamine on töös alates {timestamp, date, short} {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.in_progress.title": {
+    "message": "Kustutamine on töös"
+  },
+  "pages.rooms.deletion.success.description": {
+    "message": "Jututoa kustutamine õnnestus {timestamp, date, short} kell {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.success.title": {
+    "message": "Kustutamine õnnestus"
+  },
+  "pages.rooms.filters.empty_rooms": {
+    "message": "Tühjad jututoad"
+  },
+  "pages.rooms.filters.non_empty_rooms": {
+    "message": "Mittetühjad jututoad"
+  },
+  "pages.rooms.filters.private_rooms": {
+    "message": "Privaatsed jututoad"
+  },
+  "pages.rooms.filters.public_rooms": {
+    "message": "Avalikud jututoad"
+  },
+  "pages.rooms.not_found.description": {
+    "message": "Soovitud jututuba ({roomId}) ei leidu {serverName} serveris."
+  },
+  "pages.rooms.not_found.title": {
+    "message": "Jututuba ei leidu"
+  },
+  "pages.rooms.room_count": {
+    "message": "{COUNT, plural, zero {Jututube pole} one {# jututuba} other {# jututuba}}"
+  },
+  "pages.rooms.title": {
+    "message": "Jututoad"
+  },
+  "pages.supervision.description": {
+    "message": "Sign in as <b>{mxid}</b> to perform administrative actions in any room."
+  },
+  "pages.supervision.disabled_alert.description": {
+    "message": "This feature is part of your subscription. You can ask an administrator to enable it."
+  },
+  "pages.supervision.disabled_alert.title": {
+    "message": "Supervision is currently disabled"
+  },
+  "pages.supervision.errors.cant_open.description": {
+    "message": "Sinu veebibrauser blokeerib hüpikakende avamist. Palun veendu, et hüpikakende kasutamine on sellel veebisaidil lubatud."
+  },
+  "pages.supervision.errors.cant_open.title": {
+    "message": "Failed to open the supervision interface in a new window"
+  },
+  "pages.supervision.errors.closed.description": {
+    "message": "Failed to sign in the supervision interface, as it closed before it could finish signing in"
+  },
+  "pages.supervision.errors.closed.title": {
+    "message": "The supervision interface was closed too quickly"
+  },
+  "pages.supervision.errors.generic.title": {
+    "message": "An unexpected error occurred whilst opening the supervision interface"
+  },
+  "pages.supervision.missing_ui_address.description": {
+    "message": "Supervision is enabled in your deployment, but not Element Web, which is required for the supervision interface to work."
+  },
+  "pages.supervision.missing_ui_address.title": {
+    "message": "The supervision interface requires Element Web to be enabled"
+  },
+  "pages.supervision.recovery_key.copied": {
+    "message": "Recovery key copied"
+  },
+  "pages.supervision.recovery_key.copy_failed": {
+    "message": "Could not copy recovery key"
+  },
+  "pages.supervision.recovery_key.help": {
+    "message": "This is the recovery key used to enable reading encrypted messages."
+  },
+  "pages.supervision.recovery_key.label": {
+    "message": "Recovery key"
+  },
+  "pages.supervision.title": {
+    "message": "Supervision"
+  },
+  "pages.supervision.unavailable_alert.description": {
+    "message": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
+  },
+  "pages.supervision.unavailable_alert.title": {
+    "message": "Supervision is a feature available in ESS Pro"
+  },
+  "pages.users.add_email.button": {
+    "message": "Add email address"
+  },
+  "pages.users.add_email.description": {
+    "message": "Add an email address to this user"
+  },
+  "pages.users.add_email.error": {
+    "message": "E-posti aadressi lisamine ei õnnestunud"
+  },
+  "pages.users.add_email.error.email_invalid": {
+    "message": "Vigane e-posti aadress"
+  },
+  "pages.users.add_email.error.email_missing": {
+    "message": "Selle välja täitmine on kohustuslik"
+  },
+  "pages.users.add_email.success": {
+    "message": "E-posti aadress on lisatud"
+  },
+  "pages.users.add_email.title": {
+    "message": "Lisa e-posti aadress"
+  },
+  "pages.users.add_upstream_link.error": {
+    "message": "Failed to add link upstream account"
+  },
+  "pages.users.add_upstream_link.success": {
+    "message": "Link to upstream account added"
+  },
+  "pages.users.deactivate_account.alert.description": {
+    "message": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
+  },
+  "pages.users.deactivate_account.alert.title": {
+    "message": "Sa oled kustutamas kasutaja andmeid"
+  },
+  "pages.users.deactivate_account.button": {
+    "message": "Deactivate account"
+  },
+  "pages.users.deactivate_account.error": {
+    "message": "Failed to deactivate account"
+  },
+  "pages.users.deactivate_account.success": {
+    "message": "Account deactivated"
+  },
+  "pages.users.deactivate_account.title": {
+    "message": "Deactivate this user?"
+  },
+  "pages.users.delete_email.description": {
+    "message": "Kas oled kindel, et soovid selle e-posti aadressi ({email}) sellelt kasutajalt ({mxid}) eemaldada?"
+  },
+  "pages.users.delete_email.error": {
+    "message": "E-posti aadressi kustutamine ei õnnestunud"
+  },
+  "pages.users.delete_email.success": {
+    "message": "E-posti aadress on kustutatud"
+  },
+  "pages.users.delete_email.title": {
+    "message": "Kas eemaldad selle e-posti aadressi?"
+  },
+  "pages.users.delete_upstream_link.description": {
+    "message": "Are you sure you want to remove the link between this user ({mxid}) with this upstream account ({subject})?"
+  },
+  "pages.users.delete_upstream_link.error": {
+    "message": "Failed to delete upstream link"
+  },
+  "pages.users.delete_upstream_link.success": {
+    "message": "Upstream link deleted"
+  },
+  "pages.users.delete_upstream_link.title": {
+    "message": "Remove link with upstream account?"
+  },
+  "pages.users.filters.active": {
+    "message": "Aktiivsed kasutajad"
+  },
+  "pages.users.filters.admins": {
+    "message": "Peakasutajad"
+  },
+  "pages.users.filters.deactivated": {
+    "message": "Deaktiveeritud kasutajad"
+  },
+  "pages.users.filters.guests": {
+    "message": "Guests (legacy)"
+  },
+  "pages.users.filters.locked": {
+    "message": "Lukustatud kasutajad"
+  },
+  "pages.users.filters.newest_first": {
+    "message": "Esmalt uuemad"
+  },
+  "pages.users.filters.non_guests": {
+    "message": "Non-guests (legacy)"
+  },
+  "pages.users.lock_account.alert.description": {
+    "message": "Selle kasutaja tegevus lukustub automaatselt kõikides seadmetes, kuhu ta on praegu sisse logitud ja ta ei saa enne lukustuse avamist uutesse seadmetesse sisse logida."
+  },
+  "pages.users.lock_account.alert.title": {
+    "message": "Kasutaja ei saa sõnumeid saata ega vastu võtta"
+  },
+  "pages.users.lock_account.button": {
+    "message": "Lukusta kasutajakonto"
+  },
+  "pages.users.lock_account.error": {
+    "message": "Kasutajakonto lukustamine ei õnnestunud"
+  },
+  "pages.users.lock_account.success": {
+    "message": "Kasutajakonto on lukustatud"
+  },
+  "pages.users.lock_account.title": {
+    "message": "Kas lukustad selle kasutajakonto?"
+  },
+  "pages.users.new_user.add_user": {
+    "message": "Lisa kasutaja"
+  },
+  "pages.users.new_user.create_account": {
+    "message": "Loo kasutajakonto"
+  },
+  "pages.users.new_user.description": {
+    "message": "To add a new user to {serverName}, choose a user name for this user, which will be part of their user ID."
+  },
+  "pages.users.new_user.error_message": {
+    "message": "Viga kasutaja lisamisel"
+  },
+  "pages.users.new_user.invalid_localpart": {
+    "message": "Localpart can only contain lowercase letters, numbers, dots, underscores, dashes and slashes"
+  },
+  "pages.users.new_user.invalid_localpart_numeric_only": {
+    "message": "Localpart cannot only contain numbers"
+  },
+  "pages.users.new_user.localpart": {
+    "message": "Sisesta nimi"
+  },
+  "pages.users.new_user.required_error": {
+    "message": "Selle välja täitmine on kohustuslik"
+  },
+  "pages.users.new_user.success_message": {
+    "message": "Kasutaja on loodud"
+  },
+  "pages.users.not_found.description": {
+    "message": "Soovitud kasutajat ({userId}) ei leidu serveris {serverName}."
+  },
+  "pages.users.not_found.title": {
+    "message": "Kasutajat ei leidu"
+  },
+  "pages.users.reactivate_account.button": {
+    "message": "Võta konto uuesti kasutusele"
+  },
+  "pages.users.reactivate_account.error": {
+    "message": "Konto uuesti kasutuselevõtmine ei õnnestunud"
+  },
+  "pages.users.reactivate_account.success": {
+    "message": "Konto on uuesti võetud kasutusele"
+  },
+  "pages.users.search_placeholder": {
+    "message": "Otsi kasutajaid…"
+  },
+  "pages.users.set_admin.alert.description": {
+    "message": "The user will be able to view user data and make changes to user and room permissions."
+  },
+  "pages.users.set_admin.alert.title": {
+    "message": "User will have access to sensitive data"
+  },
+  "pages.users.set_admin.error": {
+    "message": "{mxid} kasutaja peakasutaja õiguste muutmine ei õnnestunud"
+  },
+  "pages.users.set_admin.label": {
+    "message": "Peakasutaja"
+  },
+  "pages.users.set_admin.make_admin_button": {
+    "message": "Määra peakasutajaks"
+  },
+  "pages.users.set_admin.successfully_demoted": {
+    "message": "Kasutajal {mxid} pole enam peakasutaja õigusi"
+  },
+  "pages.users.set_admin.successfully_promoted": {
+    "message": "Kasutajal {mxid} on nüüd peakasutaja õigused"
+  },
+  "pages.users.set_admin.title": {
+    "message": "Kas muudad selle kasutaja peakasutajaks?"
+  },
+  "pages.users.set_password.button": {
+    "message": "Muuda salasõna"
+  },
+  "pages.users.set_password.confirm_password_label": {
+    "message": "Sisesta salasõna uuesti"
+  },
+  "pages.users.set_password.error": {
+    "message": "Salasõna sisestamine ei õnnestunud"
+  },
+  "pages.users.set_password.error.password_missing": {
+    "message": "Selle välja täitmine on kohustuslik"
+  },
+  "pages.users.set_password.error.passwords_mismatch": {
+    "message": "Salasõnad ei klapi omavahel"
+  },
+  "pages.users.set_password.password_label": {
+    "message": "Salasõna"
+  },
+  "pages.users.set_password.password_match": {
+    "message": "Salasõnad klapivad omavahel!"
+  },
+  "pages.users.set_password.submit": {
+    "message": "Sisesta uus salasõna"
+  },
+  "pages.users.set_password.success": {
+    "message": "Salasõna sisestamine õnnestus"
+  },
+  "pages.users.set_password.title": {
+    "message": "Sisesta sellele kasutajale uus salasõna"
+  },
+  "pages.users.title": {
+    "message": "Kasutajad"
+  },
+  "pages.users.unlock_account.button": {
+    "message": "Ava kasutajakonto lukustus"
+  },
+  "pages.users.unlock_account.error": {
+    "message": "Kasutajakonto lukustuse avamine ei õnnestunud"
+  },
+  "pages.users.unlock_account.success": {
+    "message": "Kasutajakonto lukustus on eemaldatud"
+  },
+  "pages.users.user_count": {
+    "message": "{COUNT, plural, zero {No users} one {# user} other {# users}}"
+  },
+  "product.element": {
+    "message": "Element"
+  },
+  "product.title": {
+    "message": "Element Admin"
+  },
+  "product.title.community": {
+    "message": "Element - kogukond"
+  },
+  "product.title.pro": {
+    "message": "Element Pro"
+  },
+  "product.title.ti-m": {
+    "message": "Element TI-Messenger"
+  },
+  "room_info.empty_room": {
+    "message": "Tühi jututuba"
+  },
+  "room_info.empty_space": {
+    "message": "Tühi kogukond"
+  },
+  "room_info.room_with": {
+    "message": "Jututuba liikmetega: {members}"
+  },
+  "room_info.space_with": {
+    "message": "Kogukond liikmetega: {members}"
+  },
+  "room_info.unknown_user": {
+    "message": "Tundmatu kasutaja"
+  },
+  "rooms_info.other_members": {
+    "message": "{COUNT, plural, one {# muu kasutaja} other {# muud kasutajat}}"
+  },
+  "ui.data.failed_to_load": {
+    "message": "Laadimine ei õnnestunud"
+  },
+  "ui.data.loading": {
+    "message": "Laadin väärtust"
+  },
+  "ui.destination_status.failing": {
+    "message": "Failing"
+  },
+  "ui.destination_status.inactive": {
+    "message": "Inactive"
+  },
+  "ui.destination_status.never_worked": {
+    "message": "Never worked"
+  },
+  "ui.destination_status.working": {
+    "message": "Working"
+  },
+  "ui.language_switcher.browser_default": {
+    "message": "Kasuta veebibrauseri seadistusi ({language})"
+  },
+  "ui.language_switcher.button_label": {
+    "message": "Keeleseadistused"
+  },
+  "ui.language_switcher.description": {
+    "message": "Vali keel, mida eelistad kasutajaliideses näha."
+  },
+  "ui.language_switcher.language_list_label": {
+    "message": "Saadaval olevate keelte loend"
+  },
+  "ui.language_switcher.title": {
+    "message": "Keeleseadistused"
+  },
+  "ui.user_picker.loading_list": {
+    "message": "Laadin…"
+  },
+  "ui.user_picker.no_match": {
+    "message": "Vastet pole"
+  },
+  "ui.user_picker.no_match_help": {
+    "message": "Proovi teist otsinguterminit. Selle otsinguga saad leida aktiivseid kasutajaid ainult {serverName} koduserveris, kasutades nende Matrixi tunnus serverikohast osa."
+  }
+}

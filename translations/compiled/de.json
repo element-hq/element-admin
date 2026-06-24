@@ -325,7 +325,7 @@
       "children": [
         {
           "type": 0,
-          "value": "Secure Border Gateway is an application-level firewall for Matrix servers."
+          "value": "Secure Border Gateway ist eine Firewall auf Anwendungsebene für Matrix-Server."
         }
       ]
     },
@@ -343,7 +343,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Inspects all requests to and from the server"
+              "value": "Überprüft alle Anfragen an und vom Server."
             }
           ]
         },
@@ -357,7 +357,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Can use all request metadata to enforce rules"
+              "value": "Kann alle Anfragemetadaten zur Durchsetzung von Regeln verwenden."
             }
           ]
         },
@@ -371,7 +371,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Pipeline-based approach to connect APIs and rule sets"
+              "value": "Pipeline-basierter Ansatz zur Verbindung von APIs und Regelsätzen."
             }
           ]
         },
@@ -385,7 +385,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Pluggable rules engine that can be applied to the pipelines"
+              "value": "Unterstützt Regel-Engine, die auf die Pipelines angewendet werden kann."
             }
           ]
         }
@@ -497,7 +497,7 @@
   "marketing.supervision.title": [
     {
       "type": 0,
-      "value": "Moderation"
+      "value": "Supervision"
     }
   ],
   "navigation.auditing": [
@@ -521,7 +521,7 @@
   "navigation.federation": [
     {
       "type": 0,
-      "value": "Federation"
+      "value": "Föderation"
     }
   ],
   "navigation.personal_tokens": [
@@ -545,7 +545,7 @@
   "navigation.supervision": [
     {
       "type": 0,
-      "value": "Moderation"
+      "value": "Supervision"
     }
   ],
   "navigation.users": [
@@ -623,103 +623,103 @@
   "pages.federation.allowlist.add.error": [
     {
       "type": 0,
-      "value": "Failed to add domain to allowlist"
+      "value": "Domain konnte nicht zur Zulassungsliste hinzugefügt werden"
     }
   ],
   "pages.federation.allowlist.add.success": [
     {
       "type": 0,
-      "value": "Domain added to allowlist"
+      "value": "Domain zur Zulassungsliste hinzugefügt"
     }
   ],
   "pages.federation.allowlist.add_domain": [
     {
       "type": 0,
-      "value": "Add domain"
+      "value": "Domain hinzufügen"
     }
   ],
   "pages.federation.allowlist.add_pattern": [
     {
       "type": 0,
-      "value": "Add pattern"
+      "value": "Muster hinzufügen"
     }
   ],
   "pages.federation.allowlist.add_pattern.help": [
     {
       "type": 0,
-      "value": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
+      "value": "Geben Sie eine Domain wie example.com ein oder verwenden Sie *, um alle Subdomains zuzulassen, z. B. *.example.com."
     }
   ],
   "pages.federation.allowlist.empty": [
     {
       "type": 0,
-      "value": "No domains in the allowlist yet. Add a domain pattern above to get started."
+      "value": "Noch keine Domains in der Zulassungsliste. Fügen Sie oben ein Domainmuster hinzu, um zu beginnen."
     }
   ],
   "pages.federation.allowlist.heading": [
     {
       "type": 0,
-      "value": "List of patterns allowed to federate with you"
+      "value": "Liste der Muster, die für eine Föderation mit Ihnen zugelassen sind"
     }
   ],
   "pages.federation.allowlist.remove.error": [
     {
       "type": 0,
-      "value": "Failed to remove domain from allowlist"
+      "value": "Domain konnte nicht von der Zulassungsliste entfernt werden."
     }
   ],
   "pages.federation.allowlist.remove.success": [
     {
       "type": 0,
-      "value": "Domain removed from allowlist"
+      "value": "Domain von der Zulassungsliste entfernt"
     }
   ],
   "pages.federation.allowlist.remove_tooltip": [
     {
       "type": 0,
-      "value": "Remove from allowlist"
+      "value": "Von der Zulassungsliste entfernen"
     }
   ],
   "pages.federation.detail.contact": [
     {
       "type": 0,
-      "value": "Contact"
+      "value": "Kontakt"
     }
   ],
   "pages.federation.detail.destination": [
     {
       "type": 0,
-      "value": "Destination"
+      "value": "Ziel"
     }
   ],
   "pages.federation.detail.last_retry": [
     {
       "type": 0,
-      "value": "Last retry timestamp"
+      "value": "Letzter Wiederholungsversuch"
     }
   ],
   "pages.federation.detail.last_successful_stream": [
     {
       "type": 0,
-      "value": "Last successful stream"
+      "value": "Letzter erfolgreicher Stream"
     }
   ],
   "pages.federation.detail.retry_interval": [
     {
       "type": 0,
-      "value": "Retry interval"
+      "value": "Wiederholungsintervall"
     }
   ],
   "pages.federation.detail.security": [
     {
       "type": 0,
-      "value": "Security"
+      "value": "Sicherheit"
     }
   ],
   "pages.federation.detail.support_page": [
     {
       "type": 0,
-      "value": "Support page"
+      "value": "Support-Seite"
     }
   ],
   "pages.federation.domain_count": [
@@ -735,7 +735,7 @@
             }
           ]
         },
-        "one": {
+        "eine": {
           "value": [
             {
               "type": 7
@@ -746,7 +746,7 @@
             }
           ]
         },
-        "other": {
+        "weitere": {
           "value": [
             {
               "type": 7
@@ -754,6 +754,14 @@
             {
               "type": 0,
               "value": " domains"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 0,
+              "value": "No domains"
             }
           ]
         }
@@ -765,13 +773,13 @@
   "pages.federation.loading": [
     {
       "type": 0,
-      "value": "Loading more domains…"
+      "value": "Weitere Domains werden geladen…"
     }
   ],
   "pages.federation.not_found.description": [
     {
       "type": 0,
-      "value": "The requested destination ("
+      "value": "Das angeforderte Ziel ("
     },
     {
       "type": 1,
@@ -779,55 +787,55 @@
     },
     {
       "type": 0,
-      "value": ") could not be found."
+      "value": ") konnte nicht gefunden werden."
     }
   ],
   "pages.federation.not_found.title": [
     {
       "type": 0,
-      "value": "Destination not found"
+      "value": "Ziel nicht gefunden"
     }
   ],
   "pages.federation.sbg_not_enabled.description": [
     {
       "type": 0,
-      "value": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+      "value": "Secure Border Gateway ist in dieser Umgebung nicht aktiviert. Wenden Sie sich an Ihren Administrator, um es zu aktivieren."
     }
   ],
   "pages.federation.sbg_not_enabled.title": [
     {
       "type": 0,
-      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+      "value": "Die Funktion „Zulässige Domains“ ist eine Funktion des Secure Border Gateway, das in ESS Pro verfügbar ist."
     }
   ],
   "pages.federation.search_placeholder": [
     {
       "type": 0,
-      "value": "Search domains…"
+      "value": "Domains suchen..."
     }
   ],
   "pages.federation.tab.allowed_domains": [
     {
       "type": 0,
-      "value": "Allowed domains"
+      "value": "Zulässige Domains"
     }
   ],
   "pages.federation.tab.known_domains": [
     {
       "type": 0,
-      "value": "Known domains"
+      "value": "Bekannte Domains"
     }
   ],
   "pages.federation.tab.section": [
     {
       "type": 0,
-      "value": "Federation views"
+      "value": "Föderation"
     }
   ],
   "pages.federation.table.server_name": [
     {
       "type": 0,
-      "value": "Server name"
+      "value": "Servername"
     }
   ],
   "pages.federation.table.status": [
@@ -839,19 +847,19 @@
   "pages.federation.title": [
     {
       "type": 0,
-      "value": "Federation"
+      "value": "Föderation"
     }
   ],
   "pages.federation.unavailable_alert.description": [
     {
       "type": 0,
-      "value": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
+      "value": "Secure Border Gateway ist in ESS Community nicht verfügbar. Zum Aktivieren aktualisieren Sie bitte auf ESS Pro."
     }
   ],
   "pages.federation.unavailable_alert.title": [
     {
       "type": 0,
-      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+      "value": "Zulässige Domains ist eine Funktion des Secure Border Gateway, das in ESS Pro verfügbar ist."
     }
   ],
   "pages.generic_error.go_home": [
@@ -1994,7 +2002,7 @@
   "pages.supervision.disabled_alert.title": [
     {
       "type": 0,
-      "value": "Moderation ist derzeit deaktiviert"
+      "value": "Supervision ist derzeit deaktiviert"
     }
   ],
   "pages.supervision.errors.cant_open.description": [
@@ -2006,7 +2014,7 @@
   "pages.supervision.errors.cant_open.title": [
     {
       "type": 0,
-      "value": "Die Moderationsoberfläche konnte nicht in einem neuen Fenster geöffnet werden."
+      "value": "Die Supervision-Oberfläche konnte nicht in einem neuen Fenster geöffnet werden."
     }
   ],
   "pages.supervision.errors.closed.description": [
@@ -2066,7 +2074,7 @@
   "pages.supervision.title": [
     {
       "type": 0,
-      "value": "Moderation"
+      "value": "Supervision"
     }
   ],
   "pages.supervision.unavailable_alert.description": [
@@ -2742,25 +2750,25 @@
   "ui.destination_status.failing": [
     {
       "type": 0,
-      "value": "Failing"
+      "value": "Fehlgeschlagen"
     }
   ],
   "ui.destination_status.inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "Inaktiv"
     }
   ],
   "ui.destination_status.never_worked": [
     {
       "type": 0,
-      "value": "Never worked"
+      "value": "Hat noch nie funktioniert"
     }
   ],
   "ui.destination_status.working": [
     {
       "type": 0,
-      "value": "Working"
+      "value": "Funktioniert"
     }
   ],
   "ui.language_switcher.browser_default": [
