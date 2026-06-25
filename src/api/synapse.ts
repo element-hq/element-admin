@@ -497,3 +497,31 @@ export const scheduledTasksForResource = (
         : false;
     },
   });
+
+export const changeDisplayName = async (
+  queryClient: QueryClient,
+  synapseRoot: string,
+  mxid: string,
+  displayname: string,
+  signal?: AbortSignal,
+): Promise<Response> => {
+  const url = new URL(
+    `/_synapse/admin/v2/users/${encodeURIComponent(mxid)}`,
+    synapseRoot,
+  );
+
+  const baseOptions_ = await baseOptions(queryClient, signal);
+  const response = await fetch(url, {
+    ...baseOptions_,
+    method: "PUT",
+    body: JSON.stringify({ displayname }),
+    headers: {
+      ...baseOptions_.headers,
+      "Content-Type": "application/json",
+    },
+  });
+
+  await ensureNotError(response);
+
+  return response;
+};

@@ -18,6 +18,7 @@ import {
   KeyIcon,
   LockIcon,
   PlusIcon,
+  EditIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
   Alert,
@@ -29,7 +30,7 @@ import {
   Text,
   Tooltip,
 } from "@vector-im/compound-web";
-import { useCallback, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
@@ -57,6 +58,7 @@ import type {
   UserEmail,
 } from "@/api/mas/api";
 import { profileQuery, wellKnownQuery } from "@/api/matrix";
+import { changeDisplayName } from "@/api/synapse";
 import * as Data from "@/components/data";
 import * as Dialog from "@/components/dialog";
 import { ButtonLink } from "@/components/link";
@@ -65,6 +67,7 @@ import { UserAvatar } from "@/components/room-info";
 import * as messages from "@/messages";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 import { ensureParametersAreUlids } from "@/utils/parameters";
+import { LabelAction } from "@/ui/label-action";
 
 export const Route = createFileRoute("/_console/users/$userId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
@@ -1510,6 +1513,166 @@ const CloseSidebar: React.FC = () => {
   );
 };
 
+interface DisplayNameEditProps {
+  serverName: string;
+  synapseRoot: string;
+  mxid: string;
+}
+const DisplayNameEdit = ({
+  serverName,
+  synapseRoot,
+  mxid,
+}: DisplayNameEditProps) => {
+  const queryClient = useQueryClient();
+  const intl = useIntl();
+  const [open, setOpen] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const { data: profile } = useQuery(profileQuery(synapseRoot, mxid));
+  const displayName = profile?.displayname;
+
+  const { mutate, isPending, error, isError, reset } = useMutation({
+    mutationFn: (displayname: string) =>
+      changeDisplayName(queryClient, synapseRoot, mxid, displayname),
+    onError: () => {
+      toast.error(
+        intl.formatMessage({
+          id: "pages.users.change_displayname.error",
+          defaultMessage: "Failed to change display name",
+          description: "The error message for changing a user displayname",
+        }),
+      );
+    },
+    async onSuccess(): Promise<void> {
+      toast.success(
+        intl.formatMessage({
+          id: "pages.users.change_displayname.success",
+          defaultMessage: "Display name changed",
+          description: "The success message for changing a user displayname",
+        }),
+      );
+
+      // // Invalidate both the individual user query and the users list
+      queryClient.invalidateQueries({
+        queryKey: ["mas", "users", serverName],
+      });
+
+      // Await on the individual user invalidation query invalidation so that
+      // the query stays in a pending state until the new data is loaded
+      await queryClient.invalidateQueries({
+        queryKey: profileQuery(synapseRoot, mxid).queryKey,
+      });
+
+      setOpen(false);
+    },
+  });
+
+  const onOpenChange = useCallback(
+    (open: boolean) => {
+      if (isPending) {
+        return;
+      }
+      setOpen(open);
+      if (!open) {
+        formRef.current?.reset();
+        reset();
+      }
+    },
+    [isPending, reset],
+  );
+
+  const onDisplayNameInput = useCallback(() => {
+    if (isError) reset();
+  }, [isError, reset]);
+
+  const handleSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      const displayname = formData.get("displayname") as string;
+      mutate(displayname);
+    },
+    [mutate],
+  );
+
+  return (
+    <Dialog.Root
+      open={open}
+      onOpenChange={onOpenChange}
+      trigger={
+        displayName ? (
+          <LabelAction Icon={EditIcon}>
+            <Text size="md" className="truncate">
+              {displayName}
+            </Text>
+          </LabelAction>
+        ) : (
+          <Button kind="secondary" Icon={EditIcon} size="sm">
+            <FormattedMessage
+              id="pages.users.change_displayname.set_displayname_button"
+              defaultMessage="Set display name"
+              description="The label of the button for setting a user displayname"
+            />
+          </Button>
+        )
+      }
+    >
+      <Dialog.Title>
+        <FormattedMessage
+          id="pages.users.change_displayname.title"
+          defaultMessage="Change a Display Name"
+          description="The title of the modal for changing a user displayname"
+        />
+      </Dialog.Title>
+      <Dialog.Description>
+        <FormattedMessage
+          id="pages.users.change_displayname.description"
+          defaultMessage="Change a display name of this user"
+          description="The description of the modal for changing a user displayname"
+        />
+      </Dialog.Description>
+      <Form.Root ref={formRef} onSubmit={handleSubmit}>
+        <Form.Field name="displayname" serverInvalid={isError}>
+          <Form.Label>
+            <FormattedMessage
+              id="pages.users.change_displayname.displayname_label"
+              defaultMessage="Display name"
+              description="Label for the displayname field in set displayname modal"
+            />
+          </Form.Label>
+          <Form.TextControl
+            onInput={onDisplayNameInput}
+            disabled={isPending}
+            defaultValue={displayName}
+            spellCheck={false}
+            autoComplete="off"
+            autoCapitalize="off"
+            maxLength={256}
+          />
+          {isError && <Form.ErrorMessage>{error.message}</Form.ErrorMessage>}
+        </Form.Field>
+        <Form.Submit disabled={isPending}>
+          {isPending && <InlineSpinner />}
+          <FormattedMessage
+            id="pages.users.change_displayname.submit"
+            defaultMessage="Change display name"
+            description="The submit button text in the set displayname modal"
+          />
+        </Form.Submit>
+      </Form.Root>
+      <Dialog.Close asChild>
+        <Button
+          type="button"
+          kind="tertiary"
+          disabled={isPending}
+          onPointerDown={(e) => e.preventDefault()}
+        >
+          <FormattedMessage {...messages.actionCancel} />
+        </Button>
+      </Dialog.Close>
+    </Dialog.Root>
+  );
+};
+
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const { userId } = Route.useParams();
@@ -1524,9 +1687,6 @@ function RouteComponent() {
   } = useSuspenseQuery(userQuery(credentials.serverName, userId));
   // TODO: this should be in a helper
   const mxid = `@${user.attributes.username}:${credentials.serverName}`;
-
-  const { data: profile } = useQuery(profileQuery(synapseRoot, mxid));
-  const displayName = profile?.displayname;
 
   const { data: siteConfig } = useSuspenseQuery(
     siteConfigQuery(credentials.serverName),
@@ -1546,11 +1706,11 @@ function RouteComponent() {
             <Text size="lg" weight="semibold" className="truncate">
               {mxid}
             </Text>
-            {displayName && (
-              <Text size="md" className="truncate">
-                {displayName}
-              </Text>
-            )}
+            <DisplayNameEdit
+              mxid={mxid}
+              synapseRoot={synapseRoot}
+              serverName={credentials.serverName}
+            />
           </div>
           <AdminCheckbox
             mxid={mxid}
