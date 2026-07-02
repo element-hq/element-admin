@@ -16,7 +16,7 @@ import {
   createColumnHelper,
   tableFeatures,
   useTable,
-} from "@tanstack/react-table-v9";
+} from "@tanstack/react-table";
 import { PlusIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
   Avatar,

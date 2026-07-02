@@ -12,7 +12,7 @@ import {
   type RowData,
   type Table,
   type TableFeatures,
-} from "@tanstack/react-table-v9";
+} from "@tanstack/react-table";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import {
   CloseIcon,
@@ -167,7 +167,7 @@ export const RemoveFilterLink = createLink(RemoveFilterButton);
 
 export type ColumnWidth = { min: number; fr?: number } | { px: number };
 
-declare module "@tanstack/react-table-v9" {
+declare module "@tanstack/react-table" {
   interface ColumnMeta<
     TFeatures extends TableFeatures,
     TData extends RowData,

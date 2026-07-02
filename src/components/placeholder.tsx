@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
+import { FilterButton } from "./data-table";
 import styles from "./placeholder.module.css";
-import { FilterButton } from "./table";
 
 export const Text = () => <div className={styles["text"]} aria-hidden="true" />;
 

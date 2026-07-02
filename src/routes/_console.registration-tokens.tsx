@@ -15,7 +15,7 @@ import {
   createColumnHelper,
   tableFeatures,
   useTable,
-} from "@tanstack/react-table-v9";
+} from "@tanstack/react-table";
 import {
   CloseIcon,
   PlusIcon,

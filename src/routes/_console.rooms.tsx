@@ -13,7 +13,7 @@ import {
   createColumnHelper,
   tableFeatures,
   useTable,
-} from "@tanstack/react-table-v9";
+} from "@tanstack/react-table";
 import { Badge, CheckboxMenuItem, Text } from "@vector-im/compound-web";
 import { useCallback, useMemo } from "react";
 import { defineMessage, FormattedMessage, useIntl } from "react-intl";
