@@ -1027,6 +1027,26 @@
     "message": "Supervision is a feature available in ESS Pro",
     "description": "Title of the alert explaining that the supervision feature is only available in ESS Pro"
   },
+  "pages.users.account_status.active": {
+    "message": "Active",
+    "description": "Badge label for an active user account in the users list table"
+  },
+  "pages.users.account_status.admin": {
+    "message": "Admin",
+    "description": "Badge label for an admin user account in the users list table"
+  },
+  "pages.users.account_status.deactivated": {
+    "message": "Deactivated",
+    "description": "Badge label for a deactivated user account in the users list table"
+  },
+  "pages.users.account_status.guest": {
+    "message": "Guest",
+    "description": "Badge label for a legacy guest user account in the users list table"
+  },
+  "pages.users.account_status.locked": {
+    "message": "Locked",
+    "description": "Badge label for a locked user account in the users list table"
+  },
   "pages.users.add_email.button": {
     "message": "Add email address",
     "description": "The label of the button for adding an email address to a user"
@@ -1062,6 +1082,18 @@
   "pages.users.add_upstream_link.success": {
     "message": "Link to upstream account added",
     "description": "The success message for adding an upstream link"
+  },
+  "pages.users.columns.account_status": {
+    "message": "Account status",
+    "description": "Column header for the account status in the users list table"
+  },
+  "pages.users.columns.created_at": {
+    "message": "Created at",
+    "description": "Column header for the account creation date in the users list table"
+  },
+  "pages.users.columns.matrix_id": {
+    "message": "Matrix ID",
+    "description": "Column header for the Matrix ID in the users list table"
   },
   "pages.users.deactivate_account.alert.description": {
     "message": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data.",
