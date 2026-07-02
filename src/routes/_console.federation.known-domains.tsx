@@ -8,16 +8,14 @@ import {
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
+import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
 import {
-  createFileRoute,
-  Link,
-  Outlet,
-  useNavigate,
-} from "@tanstack/react-router";
-import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import type { ColumnDef } from "@tanstack/react-table";
+  createColumnHelper,
+  tableFeatures,
+  useTable,
+} from "@tanstack/react-table-v9";
 import { Avatar, Text } from "@vector-im/compound-web";
-import { useCallback, useMemo, useRef } from "react";
+import { useCallback, useMemo } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import * as v from "valibot";
 
@@ -27,14 +25,17 @@ import {
   type DestinationListFilters,
   federationDestinationsInfiniteQuery,
 } from "@/api/synapse";
+import * as DataTable from "@/components/data-table";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import * as Placeholder from "@/components/placeholder";
-import * as Table from "@/components/table";
 import AppFooter from "@/ui/footer";
 import { Heading } from "./_console.federation";
 import { useCurrentChildRoutePath } from "@/utils/routes";
 import { getDestinationStatus, StatusBadge } from "@/ui/destination-status";
+
+const features = tableFeatures({});
+const columnHelper = createColumnHelper<typeof features, Destination>();
 
 const FederationSearchParameters = v.object({
   search_term: v.optional(v.string()),
@@ -132,72 +133,66 @@ function RouteComponent() {
 
   const totalCount = data.pages[0]?.total ?? 0;
 
-  const columns = useMemo<ColumnDef<Destination>[]>(
-    () => [
-      {
-        id: "serverName",
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        header: () => (
-          <FormattedMessage
-            id="pages.federation.table.server_name"
-            defaultMessage="Server name"
-            description="In the list of destinations, the name of the server"
-          />
-        ),
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        cell: ({ row }) => {
-          const dest = row.original;
-          return (
-            <Link
-              to="/federation/known-domains/$destination"
-              params={{ destination: dest.destination }}
-              search={search}
-              resetScroll={false}
-              className="flex items-center gap-3"
-            >
-              <Avatar
-                id={dest.destination}
-                name={dest.destination}
-                type="square"
-                size="32px"
-              />
-              <Text size="md" weight="semibold" className="text-text-primary">
-                {dest.destination}
-              </Text>
-            </Link>
-          );
-        },
-      },
-      {
-        id: "status",
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        header: () => (
-          <FormattedMessage
-            id="pages.federation.table.status"
-            defaultMessage="Status"
-            description="In the list of destinations, the status of the destination (e.g. connected, disconnected)"
-          />
-        ),
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        cell: ({ row }) => {
-          const dest = row.original;
-          const status = getDestinationStatus(dest);
-          return <StatusBadge status={status} />;
-        },
-      },
-    ],
-    [search],
+  const columns = useMemo(
+    () =>
+      columnHelper.columns([
+        columnHelper.display({
+          id: "serverName",
+          meta: { width: DataTable.columnWidth.primary },
+          header: intl.formatMessage({
+            id: "pages.federation.table.server_name",
+            defaultMessage: "Server name",
+            description: "In the list of destinations, the name of the server",
+          }),
+          // oxlint-disable-next-line react/no-unstable-nested-components
+          cell: ({ row }) => {
+            const dest = row.original;
+            return (
+              <DataTable.RowLink
+                to="/federation/known-domains/$destination"
+                params={{ destination: dest.destination }}
+                search={search}
+                resetScroll={false}
+                className="flex items-center gap-3"
+              >
+                <Avatar
+                  id={dest.destination}
+                  name={dest.destination}
+                  type="square"
+                  size="32px"
+                />
+                <Text size="md" weight="semibold" className="text-text-primary">
+                  {dest.destination}
+                </Text>
+              </DataTable.RowLink>
+            );
+          },
+        }),
+        columnHelper.display({
+          id: "status",
+          meta: { width: DataTable.columnWidth.status },
+          header: intl.formatMessage({
+            id: "pages.federation.table.status",
+            defaultMessage: "Status",
+            description:
+              "In the list of destinations, the status of the destination (e.g. connected, disconnected)",
+          }),
+          // oxlint-disable-next-line react/no-unstable-nested-components
+          cell: ({ row }) => {
+            const dest = row.original;
+            const status = getDestinationStatus(dest);
+            return <StatusBadge status={status} />;
+          },
+        }),
+      ]),
+    [search, intl],
   );
 
-  // oxlint-disable-next-line react-compiler/incompatible-library -- We pass things as a ref to avoid this problem
-  const table = useReactTable({
+  const table = useTable({
+    features,
     data: flatData,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    manualSorting: true,
   });
-
-  const tableRef = useRef(table);
 
   return (
     <>
@@ -220,36 +215,26 @@ function RouteComponent() {
             }
           />
 
-          <Table.Root>
-            <Table.Header>
-              <Table.Title>
+          <DataTable.Root>
+            <DataTable.Header>
+              <DataTable.Title>
                 <FormattedMessage
                   id="pages.federation.domain_count"
                   defaultMessage="{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
                   description="On the federation page, this heading shows the total number of known domains"
                   values={{ COUNT: totalCount }}
                 />
-              </Table.Title>
-            </Table.Header>
+              </DataTable.Title>
+            </DataTable.Header>
 
-            <Table.VirtualizedList
-              table={tableRef.current}
-              canFetchNextPage={hasNextPage && !isFetching}
+            <DataTable.List
+              table={table}
+              totalCount={totalCount}
+              hasNextPage={hasNextPage}
+              isFetching={isFetching}
               fetchNextPage={fetchNextPage}
             />
-
-            {isFetching && (
-              <div className="flex justify-center py-4">
-                <Text size="sm" className="text-text-secondary">
-                  <FormattedMessage
-                    id="pages.federation.loading"
-                    defaultMessage="Loading more domains…"
-                    description="The loading message for the federation known domains page"
-                  />
-                </Text>
-              </div>
-            )}
-          </Table.Root>
+          </DataTable.Root>
         </Navigation.Main>
 
         <AppFooter />

@@ -279,10 +279,6 @@
     "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}",
     "description": "On the federation page, this heading shows the total number of known domains"
   },
-  "pages.federation.loading": {
-    "message": "Loading more domains…",
-    "description": "The loading message for the federation known domains page"
-  },
   "pages.federation.not_found.description": {
     "message": "The requested destination ({destination}) could not be found.",
     "description": "The description of the alert when a federation destination could not be found"
