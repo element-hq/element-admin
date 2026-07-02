@@ -715,10 +715,6 @@
     "message": "Used",
     "description": "Filter option for used registration tokens only"
   },
-  "pages.registration_tokens.loading_more": {
-    "message": "Loading more tokens...",
-    "description": "Text shown when loading more tokens"
-  },
   "pages.registration_tokens.never_expires": {
     "message": "Never expires",
     "description": "Text shown when a token has no expiration date"

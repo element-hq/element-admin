@@ -4,19 +4,18 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 import {
+  keepPreviousData,
   useMutation,
+  useQuery,
   useQueryClient,
   useSuspenseInfiniteQuery,
-  useSuspenseQuery,
 } from "@tanstack/react-query";
+import { Outlet, createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
-  Link,
-  Outlet,
-  createFileRoute,
-  useNavigate,
-} from "@tanstack/react-router";
-import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import type { ColumnDef } from "@tanstack/react-table";
+  createColumnHelper,
+  tableFeatures,
+  useTable,
+} from "@tanstack/react-table-v9";
 import {
   CloseIcon,
   PlusIcon,
@@ -43,12 +42,12 @@ import {
 } from "@/api/mas";
 import type { SingleResourceForUserRegistrationToken } from "@/api/mas/api/types.gen";
 import { CopyToClipboard } from "@/components/copy";
+import * as DataTable from "@/components/data-table";
 import * as Dialog from "@/components/dialog";
 import { TextLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import * as Placeholder from "@/components/placeholder";
-import * as Table from "@/components/table";
 import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
 import {
@@ -57,6 +56,12 @@ import {
 } from "@/utils/datetime";
 import { useFilters } from "@/utils/filters";
 import { useCurrentChildRoutePath } from "@/utils/routes";
+
+const features = tableFeatures({});
+const columnHelper = createColumnHelper<
+  typeof features,
+  SingleResourceForUserRegistrationToken
+>();
 
 const TokenSearchParameters = v.object({
   used: v.optional(v.boolean()),
@@ -491,22 +496,6 @@ const TokenAddButton: React.FC<TokenAddButtonProps> = ({
   );
 };
 
-const TokenCount = ({ serverName }: { serverName: string }) => {
-  const { parameters } = Route.useLoaderDeps();
-  const { data: totalCount } = useSuspenseQuery(
-    registrationTokensCountQuery(serverName, parameters),
-  );
-
-  return (
-    <FormattedMessage
-      id="pages.registration_tokens.token_count"
-      defaultMessage="{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
-      description="On the registration tokens list page, this heading shows the total number of tokens"
-      values={{ COUNT: totalCount }}
-    />
-  );
-};
-
 const filtersDefinition = [
   {
     key: "valid",
@@ -563,6 +552,11 @@ function RouteComponent() {
   const navigate = useNavigate({ from });
   const intl = useIntl();
 
+  const { data: totalCount } = useQuery({
+    ...registrationTokensCountQuery(credentials.serverName, parameters),
+    placeholderData: keepPreviousData,
+  });
+
   const { data, hasNextPage, fetchNextPage, isFetching } =
     useSuspenseInfiniteQuery(
       registrationTokensInfiniteQuery(credentials.serverName, parameters),
@@ -577,144 +571,144 @@ function RouteComponent() {
   const filters = useFilters(search, filtersDefinition);
 
   // Column definitions
-  const columns = useMemo<ColumnDef<SingleResourceForUserRegistrationToken>[]>(
-    () => [
-      {
-        id: "token",
-        header: intl.formatMessage({
-          id: "pages.registration_tokens.token_column",
-          defaultMessage: "Token",
-          description: "Column header for token column",
+  const columns = useMemo(
+    () =>
+      columnHelper.columns([
+        columnHelper.display({
+          id: "token",
+          header: intl.formatMessage({
+            id: "pages.registration_tokens.token_column",
+            defaultMessage: "Token",
+            description: "Column header for token column",
+          }),
+          meta: { width: DataTable.columnWidth.primary },
+          // oxlint-disable-next-line react/no-unstable-nested-components
+          cell: ({ row }) => {
+            const token = row.original;
+            return (
+              <div className="flex items-center gap-2">
+                <DataTable.RowLink
+                  to="/registration-tokens/$tokenId"
+                  params={{ tokenId: token.id }}
+                  search={search}
+                  resetScroll={false}
+                >
+                  <Text size="md" weight="semibold">
+                    {token.attributes.token}
+                  </Text>
+                </DataTable.RowLink>
+                <CopyToClipboard value={token.attributes.token} />
+              </div>
+            );
+          },
         }),
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        cell: ({ row }) => {
-          const token = row.original;
-          return (
-            <div className="flex items-center gap-2">
-              <Link
-                to="/registration-tokens/$tokenId"
-                params={{ tokenId: token.id }}
-                search={search}
-                resetScroll={false}
-              >
-                <Text size="md" weight="semibold">
-                  {token.attributes.token}
-                </Text>
-              </Link>
-              <CopyToClipboard value={token.attributes.token} />
-            </div>
-          );
-        },
-      },
-      {
-        id: "createdAt",
-        header: intl.formatMessage({
-          id: "pages.registration_tokens.created_at_column",
-          defaultMessage: "Created at",
-          description: "Column header for created at column",
+        columnHelper.display({
+          id: "createdAt",
+          header: intl.formatMessage({
+            id: "pages.registration_tokens.created_at_column",
+            defaultMessage: "Created at",
+            description: "Column header for created at column",
+          }),
+          meta: { width: DataTable.columnWidth.date },
+          // oxlint-disable-next-line react/no-unstable-nested-components
+          cell: ({ row }) => {
+            const token = row.original;
+            return (
+              <Text size="sm" className="text-text-secondary">
+                {computeHumanReadableDateTimeStringFromUtc(
+                  token.attributes.created_at,
+                )}
+              </Text>
+            );
+          },
         }),
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        cell: ({ row }) => {
-          const token = row.original;
-          return (
-            <Text size="sm" className="text-text-secondary">
-              {computeHumanReadableDateTimeStringFromUtc(
-                token.attributes.created_at,
-              )}
-            </Text>
-          );
-        },
-      },
-      {
-        id: "validUntil",
-        header: intl.formatMessage({
-          id: "pages.registration_tokens.valid_until_column",
-          defaultMessage: "Valid Until",
-          description: "Column header for valid until column",
+        columnHelper.display({
+          id: "validUntil",
+          header: intl.formatMessage({
+            id: "pages.registration_tokens.valid_until_column",
+            defaultMessage: "Valid Until",
+            description: "Column header for valid until column",
+          }),
+          meta: { width: DataTable.columnWidth.date },
+          // oxlint-disable-next-line react/no-unstable-nested-components
+          cell: ({ row }) => {
+            const token = row.original;
+            return (
+              <Text size="sm" className="text-text-secondary">
+                {token.attributes.expires_at
+                  ? computeHumanReadableDateTimeStringFromUtc(
+                      token.attributes.expires_at,
+                    )
+                  : intl.formatMessage({
+                      id: "pages.registration_tokens.never_expires",
+                      defaultMessage: "Never expires",
+                      description:
+                        "Text shown when a token has no expiration date",
+                    })}
+              </Text>
+            );
+          },
         }),
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        cell: ({ row }) => {
-          const token = row.original;
-          return (
-            <Text size="sm" className="text-text-secondary">
-              {token.attributes.expires_at
-                ? computeHumanReadableDateTimeStringFromUtc(
-                    token.attributes.expires_at,
-                  )
-                : intl.formatMessage({
-                    id: "pages.registration_tokens.never_expires",
-                    defaultMessage: "Never expires",
-                    description:
-                      "Text shown when a token has no expiration date",
-                  })}
-            </Text>
-          );
-        },
-      },
-      {
-        id: "uses",
-        header: intl.formatMessage({
-          id: "pages.registration_tokens.uses_column",
-          defaultMessage: "Uses",
-          description: "Column header for uses column",
+        columnHelper.display({
+          id: "uses",
+          header: intl.formatMessage({
+            id: "pages.registration_tokens.uses_column",
+            defaultMessage: "Uses",
+            description: "Column header for uses column",
+          }),
+          meta: { width: { min: 120, fr: 1 } },
+          // oxlint-disable-next-line react/no-unstable-nested-components
+          cell: ({ row }) => {
+            const token = row.original;
+            return (
+              <Text size="sm" className="text-text-secondary">
+                {token.attributes.usage_limit === null ? (
+                  <FormattedMessage
+                    id="pages.registration_tokens.token_uses.unlimited"
+                    defaultMessage="{uses, number} / ∞"
+                    description="Shows the number of uses of a registration token, when there is no usage limit"
+                    values={{
+                      uses: token.attributes.times_used,
+                    }}
+                  />
+                ) : (
+                  <FormattedMessage
+                    id="pages.registration_tokens.token_uses.limited"
+                    defaultMessage="{uses, number} / {limit, number}"
+                    description="Shows the number of uses of a registration token, when there is a usage limit"
+                    values={{
+                      uses: token.attributes.times_used,
+                      limit: token.attributes.usage_limit,
+                    }}
+                  />
+                )}
+              </Text>
+            );
+          },
         }),
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        cell: ({ row }) => {
-          const token = row.original;
-          return (
-            <Text size="sm" className="text-text-secondary">
-              {token.attributes.usage_limit === null ? (
-                <FormattedMessage
-                  id="pages.registration_tokens.token_uses.unlimited"
-                  defaultMessage="{uses, number} / ∞"
-                  description="Shows the number of uses of a registration token, when there is no usage limit"
-                  values={{
-                    uses: token.attributes.times_used,
-                  }}
-                />
-              ) : (
-                <FormattedMessage
-                  id="pages.registration_tokens.token_uses.limited"
-                  defaultMessage="{uses, number} / {limit, number}"
-                  description="Shows the number of uses of a registration token, when there is a usage limit"
-                  values={{
-                    uses: token.attributes.times_used,
-                    limit: token.attributes.usage_limit,
-                  }}
-                />
-              )}
-            </Text>
-          );
-        },
-      },
-      {
-        id: "status",
-        header: intl.formatMessage({
-          id: "pages.registration_tokens.status.column",
-          defaultMessage: "Status",
-          description: "Column header for status column",
+        columnHelper.display({
+          id: "status",
+          header: intl.formatMessage({
+            id: "pages.registration_tokens.status.column",
+            defaultMessage: "Status",
+            description: "Column header for status column",
+          }),
+          meta: { width: DataTable.columnWidth.status },
+          // oxlint-disable-next-line react/no-unstable-nested-components
+          cell: ({ row }) => {
+            const token = row.original;
+            return <TokenStatusBadge token={token.attributes} />;
+          },
         }),
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        cell: ({ row }) => {
-          const token = row.original;
-          return <TokenStatusBadge token={token.attributes} />;
-        },
-      },
-    ],
+      ]),
     [search, intl],
   );
 
-  // oxlint-disable-next-line react-compiler/incompatible-library -- We pass things as a ref to avoid this problem
-  const table = useReactTable({
+  const table = useTable({
+    features,
     data: flatData,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    manualSorting: true,
   });
-
-  // This prevents the compiler from optimizing the table
-  // See https://github.com/TanStack/table/issues/5567
-  const tableRef = useRef(table);
 
   return (
     <>
@@ -731,13 +725,22 @@ function RouteComponent() {
             </Page.Controls>
           </Page.Header>
 
-          <Table.Root>
-            <Table.Header>
-              <Table.DynamicTitle>
-                <TokenCount serverName={credentials.serverName} />
-              </Table.DynamicTitle>
+          <DataTable.Root>
+            <DataTable.Header>
+              <DataTable.Title>
+                {totalCount === undefined ? (
+                  <Placeholder.Text />
+                ) : (
+                  <FormattedMessage
+                    id="pages.registration_tokens.token_count"
+                    defaultMessage="{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
+                    description="On the registration tokens list page, this heading shows the total number of tokens"
+                    values={{ COUNT: totalCount }}
+                  />
+                )}
+              </DataTable.Title>
 
-              <Table.FilterMenu>
+              <DataTable.FilterMenu>
                 {filters.all.map((filter) => (
                   <CheckboxMenuItem
                     key={filter.key}
@@ -752,19 +755,19 @@ function RouteComponent() {
                     checked={filter.enabled}
                   />
                 ))}
-              </Table.FilterMenu>
+              </DataTable.FilterMenu>
 
               {filters.active.length > 0 && (
-                <Table.ActiveFilterList>
+                <DataTable.ActiveFilterList>
                   {filters.active.map((filter) => (
-                    <Table.ActiveFilter key={filter.key}>
+                    <DataTable.ActiveFilter key={filter.key}>
                       <FormattedMessage {...filter.message} />
-                      <Table.RemoveFilterLink
+                      <DataTable.RemoveFilterLink
                         from={from}
                         replace={true}
                         search={filter.toggledState}
                       />
-                    </Table.ActiveFilter>
+                    </DataTable.ActiveFilter>
                   ))}
 
                   <TextLink
@@ -775,29 +778,18 @@ function RouteComponent() {
                   >
                     <FormattedMessage {...messages.actionClear} />
                   </TextLink>
-                </Table.ActiveFilterList>
+                </DataTable.ActiveFilterList>
               )}
-            </Table.Header>
+            </DataTable.Header>
 
-            <Table.VirtualizedList
-              table={tableRef.current}
-              canFetchNextPage={hasNextPage && !isFetching}
+            <DataTable.List
+              table={table}
+              totalCount={totalCount}
+              hasNextPage={hasNextPage}
+              isFetching={isFetching}
               fetchNextPage={fetchNextPage}
             />
-
-            {/* Loading indicator */}
-            {isFetching && (
-              <div className="flex justify-center py-4">
-                <Text size="sm" className="text-text-secondary">
-                  <FormattedMessage
-                    id="pages.registration_tokens.loading_more"
-                    defaultMessage="Loading more tokens..."
-                    description="Text shown when loading more tokens"
-                  />
-                </Text>
-              </div>
-            )}
-          </Table.Root>
+          </DataTable.Root>
         </Navigation.Main>
         <AppFooter />
       </Navigation.Content>
