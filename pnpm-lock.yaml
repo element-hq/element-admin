@@ -178,8 +178,8 @@ importers:
         specifier: 9.1.7
         version: 9.1.7
       knip:
-        specifier: 6.20.0
-        version: 6.20.0
+        specifier: 6.21.0
+        version: 6.21.0
       lint-staged:
         specifier: 17.0.8
         version: 17.0.8
@@ -3093,8 +3093,8 @@ packages:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
 
-  knip@6.20.0:
-    resolution: {integrity: sha512-q+HYrS7FOERk32GM7g43IdTG7TurN7+YMLZrNpCxubZPYZyQwliBgd18yH4oYQL7YgGtOxP2fCqess3K2XaK2Q==}
+  knip@6.21.0:
+    resolution: {integrity: sha512-q7K9VGSFfdVaCjhj9u+5aI2t5CZt3edZeLi+1wjnGAvYB2WfW6+T9UWAREsTR88aB8YeDqkKVZiVMV7va3oTmg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
 
@@ -3366,6 +3366,10 @@ packages:
 
   picomatch@4.0.4:
     resolution: {integrity: sha512-QP88BAKvMam/3NxH6vj2o21R6MjxZUAd6nlwAS/pnGvN9IVLocLHxGYIzFhg6fUQ+5th6P4dv4eW9jX3DSIj7A==}
+    engines: {node: '>=12'}
+
+  picomatch@4.0.5:
+    resolution: {integrity: sha512-RvwwcruNjI1ncT5xRakeyS9Lf8lcItv34KD+aif+VH9kduAyfYBipGh12274xtenIPZ119/R9BdTBa8gAwSh0A==}
     engines: {node: '>=12'}
 
   pkg-types@2.3.1:
@@ -3716,8 +3720,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  unbash@4.0.1:
-    resolution: {integrity: sha512-1ajSo3813sDoVIHx4inJdUS4l5L2ic5cFiddemPiyjb/PZEoBAhFwHtbaEdRDFxbAKy7FCG7s5ww3/uCFawuIA==}
+  unbash@4.0.2:
+    resolution: {integrity: sha512-8gwNZ29+0/3zmXw7ToIHZtg6wK37xnniRUdBt7B27xZxaxfgR5tGMaGHT0t0dLtBV9fXE7zurh0s6Z1DHVjfWg==}
     engines: {node: '>=14'}
 
   undici-types@7.18.2:
@@ -6163,9 +6167,9 @@ snapshots:
     dependencies:
       walk-up-path: 4.0.0
 
-  fdir@6.5.0(picomatch@4.0.4):
+  fdir@6.5.0(picomatch@4.0.5):
     optionalDependencies:
-      picomatch: 4.0.4
+      picomatch: 4.0.5
 
   file-entry-cache@11.1.5:
     dependencies:
@@ -6416,19 +6420,19 @@ snapshots:
 
   kind-of@6.0.3: {}
 
-  knip@6.20.0:
+  knip@6.21.0:
     dependencies:
-      fdir: 6.5.0(picomatch@4.0.4)
+      fdir: 6.5.0(picomatch@4.0.5)
       formatly: 0.3.0
       get-tsconfig: 4.14.0
       jiti: 2.7.0
       oxc-parser: 0.137.0
       oxc-resolver: 11.21.3
-      picomatch: 4.0.4
+      picomatch: 4.0.5
       smol-toml: 1.7.0
       strip-json-comments: 5.0.3
       tinyglobby: 0.2.17
-      unbash: 4.0.1
+      unbash: 4.0.2
       yaml: 2.9.0
       zod: 4.4.3
 
@@ -6784,6 +6788,8 @@ snapshots:
 
   picomatch@4.0.4: {}
 
+  picomatch@4.0.5: {}
+
   pkg-types@2.3.1:
     dependencies:
       confbox: 0.2.4
@@ -7115,8 +7121,8 @@ snapshots:
 
   tinyglobby@0.2.17:
     dependencies:
-      fdir: 6.5.0(picomatch@4.0.4)
-      picomatch: 4.0.4
+      fdir: 6.5.0(picomatch@4.0.5)
+      picomatch: 4.0.5
 
   tinypool@2.1.0: {}
 
@@ -7136,7 +7142,7 @@ snapshots:
 
   typescript@6.0.3: {}
 
-  unbash@4.0.1: {}
+  unbash@4.0.2: {}
 
   undici-types@7.18.2: {}
 
