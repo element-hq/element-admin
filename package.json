@@ -50,7 +50,7 @@
     "react-intl": "10.1.13",
     "semver": "7.8.5",
     "use-broadcast-ts": "2.0.1",
-    "valibot": "1.4.1",
+    "valibot": "1.4.2",
     "vaul": "1.1.2",
     "zustand": "5.0.14"
   },
