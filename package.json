@@ -28,8 +28,8 @@
   },
   "dependencies": {
     "@floating-ui/react": "0.27.19",
-    "@fontsource/inconsolata": "5.2.8",
-    "@fontsource/inter": "5.2.8",
+    "@fontsource/inconsolata": "5.3.0",
+    "@fontsource/inter": "5.3.0",
     "@formatjs/intl-localematcher": "0.8.13",
     "@js-temporal/polyfill": "0.5.1",
     "@radix-ui/react-dialog": "1.1.17",
