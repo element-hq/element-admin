@@ -89,7 +89,7 @@
     "lint-staged": "17.2.0",
     "oxfmt": "0.59.0",
     "oxlint": "1.71.0",
-    "oxlint-tsgolint": "0.24.0",
+    "oxlint-tsgolint": "7.0.2001",
     "stylelint": "17.14.1",
     "stylelint-config-standard": "40.0.0",
     "stylelint-config-tailwindcss": "1.0.1",
