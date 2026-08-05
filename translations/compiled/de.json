@@ -512,6 +512,12 @@
       "value": "Dashboard"
     }
   ],
+  "navigation.devices": [
+    {
+      "type": 0,
+      "value": "Devices"
+    }
+  ],
   "navigation.documentation": [
     {
       "type": 0,
@@ -618,6 +624,676 @@
     {
       "type": 0,
       "value": "Dashboard"
+    }
+  ],
+  "pages.devices.applications.client_id_label": [
+    {
+      "type": 0,
+      "value": "Client ID"
+    }
+  ],
+  "pages.devices.applications.count": [
+    {
+      "type": 6,
+      "value": "COUNT",
+      "options": {
+        "=0": {
+          "value": [
+            {
+              "type": 0,
+              "value": "No applications"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " application"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " applications"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "pages.devices.applications.description": [
+    {
+      "type": 0,
+      "value": "Applications are OAuth 2.0 clients that users sign in to."
+    }
+  ],
+  "pages.devices.applications.filters.has_active_sessions": [
+    {
+      "type": 0,
+      "value": "With active devices"
+    }
+  ],
+  "pages.devices.applications.filters.no_active_sessions": [
+    {
+      "type": 0,
+      "value": "Without active devices"
+    }
+  ],
+  "pages.devices.applications.grant_types_label": [
+    {
+      "type": 0,
+      "value": "Grant types"
+    }
+  ],
+  "pages.devices.applications.name_column": [
+    {
+      "type": 0,
+      "value": "Name"
+    }
+  ],
+  "pages.devices.applications.not_found.description": [
+    {
+      "type": 0,
+      "value": "The requested application ("
+    },
+    {
+      "type": 1,
+      "value": "clientId"
+    },
+    {
+      "type": 0,
+      "value": ") could not be found on "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "pages.devices.applications.not_found.title": [
+    {
+      "type": 0,
+      "value": "Application not found"
+    }
+  ],
+  "pages.devices.applications.redirect_uris_label": [
+    {
+      "type": 0,
+      "value": "Redirect URIs"
+    }
+  ],
+  "pages.devices.applications.search_placeholder": [
+    {
+      "type": 0,
+      "value": "Search by name…"
+    }
+  ],
+  "pages.devices.applications.statistics.active_recently": [
+    {
+      "type": 0,
+      "value": "Active in the past 7 days"
+    }
+  ],
+  "pages.devices.applications.statistics.created_recently": [
+    {
+      "type": 0,
+      "value": "Devices added in the past 7 days"
+    }
+  ],
+  "pages.devices.applications.statistics.heading": [
+    {
+      "type": 0,
+      "value": "Device statistics"
+    }
+  ],
+  "pages.devices.applications.statistics.total_active": [
+    {
+      "type": 0,
+      "value": "Active devices"
+    }
+  ],
+  "pages.devices.applications.title": [
+    {
+      "type": 0,
+      "value": "Applications"
+    }
+  ],
+  "pages.devices.applications.uri_label": [
+    {
+      "type": 0,
+      "value": "Homepage"
+    }
+  ],
+  "pages.devices.applications.view_sessions": [
+    {
+      "type": 0,
+      "value": "View all devices"
+    }
+  ],
+  "pages.devices.legacy.count": [
+    {
+      "type": 6,
+      "value": "COUNT",
+      "options": {
+        "=0": {
+          "value": [
+            {
+              "type": 0,
+              "value": "No legacy devices"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " legacy device"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " legacy devices"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "pages.devices.legacy.created_at_label": [
+    {
+      "type": 0,
+      "value": "Signed in at"
+    }
+  ],
+  "pages.devices.legacy.description": [
+    {
+      "type": 0,
+      "value": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
+    }
+  ],
+  "pages.devices.legacy.device_column": [
+    {
+      "type": 0,
+      "value": "Device"
+    }
+  ],
+  "pages.devices.legacy.device_id_label": [
+    {
+      "type": 0,
+      "value": "Device ID"
+    }
+  ],
+  "pages.devices.legacy.filters.activity_active": [
+    {
+      "type": 0,
+      "value": "Active"
+    }
+  ],
+  "pages.devices.legacy.filters.activity_inactive": [
+    {
+      "type": 0,
+      "value": "Inactive"
+    }
+  ],
+  "pages.devices.legacy.filters.activity_recently_used": [
+    {
+      "type": 0,
+      "value": "Recently used"
+    }
+  ],
+  "pages.devices.legacy.filters.activity_signed_out": [
+    {
+      "type": 0,
+      "value": "Signed out"
+    }
+  ],
+  "pages.devices.legacy.filters.newest_first": [
+    {
+      "type": 0,
+      "value": "Newest first"
+    }
+  ],
+  "pages.devices.legacy.filters.user_chip": [
+    {
+      "type": 0,
+      "value": "User: @"
+    },
+    {
+      "type": 1,
+      "value": "localpart"
+    },
+    {
+      "type": 0,
+      "value": ":"
+    },
+    {
+      "type": 1,
+      "value": "server"
+    }
+  ],
+  "pages.devices.legacy.finish.button": [
+    {
+      "type": 0,
+      "value": "Remove device"
+    }
+  ],
+  "pages.devices.legacy.finish.confirm": [
+    {
+      "type": 0,
+      "value": "Remove device"
+    }
+  ],
+  "pages.devices.legacy.finish.description": [
+    {
+      "type": 0,
+      "value": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
+    }
+  ],
+  "pages.devices.legacy.finish.error": [
+    {
+      "type": 0,
+      "value": "Failed to remove the legacy device"
+    }
+  ],
+  "pages.devices.legacy.finish.success": [
+    {
+      "type": 0,
+      "value": "Legacy device removed"
+    }
+  ],
+  "pages.devices.legacy.finish.title": [
+    {
+      "type": 0,
+      "value": "Remove this legacy device?"
+    }
+  ],
+  "pages.devices.legacy.finished_at_label": [
+    {
+      "type": 0,
+      "value": "Signed out at"
+    }
+  ],
+  "pages.devices.legacy.last_active_ip_label": [
+    {
+      "type": 0,
+      "value": "Last active IP"
+    }
+  ],
+  "pages.devices.legacy.last_active_label": [
+    {
+      "type": 0,
+      "value": "Last active"
+    }
+  ],
+  "pages.devices.legacy.not_found.description": [
+    {
+      "type": 0,
+      "value": "The requested legacy device ("
+    },
+    {
+      "type": 1,
+      "value": "sessionId"
+    },
+    {
+      "type": 0,
+      "value": ") could not be found on "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "pages.devices.legacy.not_found.title": [
+    {
+      "type": 0,
+      "value": "Legacy device not found"
+    }
+  ],
+  "pages.devices.legacy.redirect_uri_label": [
+    {
+      "type": 0,
+      "value": "Redirect URI"
+    }
+  ],
+  "pages.devices.legacy.status_column": [
+    {
+      "type": 0,
+      "value": "Status"
+    }
+  ],
+  "pages.devices.legacy.technical_details": [
+    {
+      "type": 0,
+      "value": "Technical details"
+    }
+  ],
+  "pages.devices.legacy.title": [
+    {
+      "type": 0,
+      "value": "Legacy devices"
+    }
+  ],
+  "pages.devices.legacy.user_agent_label": [
+    {
+      "type": 0,
+      "value": "User agent"
+    }
+  ],
+  "pages.devices.legacy.user_column": [
+    {
+      "type": 0,
+      "value": "User"
+    }
+  ],
+  "pages.devices.tabs.applications": [
+    {
+      "type": 0,
+      "value": "Applications"
+    }
+  ],
+  "pages.devices.tabs.legacy": [
+    {
+      "type": 0,
+      "value": "Legacy devices"
+    }
+  ],
+  "pages.devices.tabs.section": [
+    {
+      "type": 0,
+      "value": "Device views"
+    }
+  ],
+  "pages.devices.tabs.user": [
+    {
+      "type": 0,
+      "value": "User devices"
+    }
+  ],
+  "pages.devices.title": [
+    {
+      "type": 0,
+      "value": "Devices"
+    }
+  ],
+  "pages.devices.user.client_column": [
+    {
+      "type": 0,
+      "value": "Application"
+    }
+  ],
+  "pages.devices.user.count": [
+    {
+      "type": 6,
+      "value": "COUNT",
+      "options": {
+        "=0": {
+          "value": [
+            {
+              "type": 0,
+              "value": "No devices"
+            }
+          ]
+        },
+        "one": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " device"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " devices"
+            }
+          ]
+        }
+      },
+      "offset": 0,
+      "pluralType": "cardinal"
+    }
+  ],
+  "pages.devices.user.created_at_label": [
+    {
+      "type": 0,
+      "value": "Signed in at"
+    }
+  ],
+  "pages.devices.user.description": [
+    {
+      "type": 0,
+      "value": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
+    }
+  ],
+  "pages.devices.user.device_column": [
+    {
+      "type": 0,
+      "value": "Device"
+    }
+  ],
+  "pages.devices.user.device_id_label": [
+    {
+      "type": 0,
+      "value": "Device ID"
+    }
+  ],
+  "pages.devices.user.filters.activity_active": [
+    {
+      "type": 0,
+      "value": "Active"
+    }
+  ],
+  "pages.devices.user.filters.activity_inactive": [
+    {
+      "type": 0,
+      "value": "Inactive"
+    }
+  ],
+  "pages.devices.user.filters.activity_recently_used": [
+    {
+      "type": 0,
+      "value": "Recently used"
+    }
+  ],
+  "pages.devices.user.filters.activity_signed_out": [
+    {
+      "type": 0,
+      "value": "Signed out"
+    }
+  ],
+  "pages.devices.user.filters.client_chip": [
+    {
+      "type": 0,
+      "value": "Application: "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "pages.devices.user.filters.newest_first": [
+    {
+      "type": 0,
+      "value": "Newest first"
+    }
+  ],
+  "pages.devices.user.filters.user_chip": [
+    {
+      "type": 0,
+      "value": "User: @"
+    },
+    {
+      "type": 1,
+      "value": "localpart"
+    },
+    {
+      "type": 0,
+      "value": ":"
+    },
+    {
+      "type": 1,
+      "value": "server"
+    }
+  ],
+  "pages.devices.user.finish.button": [
+    {
+      "type": 0,
+      "value": "Remove device"
+    }
+  ],
+  "pages.devices.user.finish.confirm": [
+    {
+      "type": 0,
+      "value": "Remove device"
+    }
+  ],
+  "pages.devices.user.finish.description": [
+    {
+      "type": 0,
+      "value": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
+    }
+  ],
+  "pages.devices.user.finish.error": [
+    {
+      "type": 0,
+      "value": "Failed to remove the device"
+    }
+  ],
+  "pages.devices.user.finish.success": [
+    {
+      "type": 0,
+      "value": "Device removed"
+    }
+  ],
+  "pages.devices.user.finish.title": [
+    {
+      "type": 0,
+      "value": "Remove this device?"
+    }
+  ],
+  "pages.devices.user.finished_at_label": [
+    {
+      "type": 0,
+      "value": "Signed out at"
+    }
+  ],
+  "pages.devices.user.last_active_ip_label": [
+    {
+      "type": 0,
+      "value": "Last active IP"
+    }
+  ],
+  "pages.devices.user.last_active_label": [
+    {
+      "type": 0,
+      "value": "Last active"
+    }
+  ],
+  "pages.devices.user.not_found.description": [
+    {
+      "type": 0,
+      "value": "The requested device ("
+    },
+    {
+      "type": 1,
+      "value": "sessionId"
+    },
+    {
+      "type": 0,
+      "value": ") could not be found on "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "pages.devices.user.not_found.title": [
+    {
+      "type": 0,
+      "value": "Device not found"
+    }
+  ],
+  "pages.devices.user.scope_label": [
+    {
+      "type": 0,
+      "value": "Scope"
+    }
+  ],
+  "pages.devices.user.status_column": [
+    {
+      "type": 0,
+      "value": "Status"
+    }
+  ],
+  "pages.devices.user.technical_details": [
+    {
+      "type": 0,
+      "value": "Technical details"
+    }
+  ],
+  "pages.devices.user.title": [
+    {
+      "type": 0,
+      "value": "User devices"
+    }
+  ],
+  "pages.devices.user.user_agent_label": [
+    {
+      "type": 0,
+      "value": "User agent"
+    }
+  ],
+  "pages.devices.user.user_column": [
+    {
+      "type": 0,
+      "value": "User"
+    }
+  ],
+  "pages.devices.user.user_none": [
+    {
+      "type": 0,
+      "value": "No user"
     }
   ],
   "pages.federation.allowlist.add.error": [
@@ -2335,6 +3011,16 @@
       "value": "Aktive Nutzer"
     }
   ],
+  "pages.users.filters.active_client_chip": [
+    {
+      "type": 0,
+      "value": "Has active device on: "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
   "pages.users.filters.admins": [
     {
       "type": 0,
@@ -2353,6 +3039,12 @@
       "value": "Gäste (Legacy)"
     }
   ],
+  "pages.users.filters.has_legacy_session": [
+    {
+      "type": 0,
+      "value": "Has active legacy device"
+    }
+  ],
   "pages.users.filters.locked": [
     {
       "type": 0,
@@ -2363,6 +3055,12 @@
     {
       "type": 0,
       "value": "Neueste zuerst"
+    }
+  ],
+  "pages.users.filters.no_legacy_session": [
+    {
+      "type": 0,
+      "value": "No active legacy device"
     }
   ],
   "pages.users.filters.non_guests": [
@@ -2641,6 +3339,18 @@
       "value": "Neues Passwort für diesen Nutzer festlegen"
     }
   ],
+  "pages.users.statistics.devices": [
+    {
+      "type": 0,
+      "value": "Devices"
+    }
+  ],
+  "pages.users.statistics.legacy_devices": [
+    {
+      "type": 0,
+      "value": "Legacy devices"
+    }
+  ],
   "pages.users.title": [
     {
       "type": 0,
@@ -2845,6 +3555,120 @@
     {
       "type": 0,
       "value": "Funktioniert"
+    }
+  ],
+  "ui.device_info.name_on_platform": [
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " on "
+    },
+    {
+      "type": 1,
+      "value": "platform"
+    }
+  ],
+  "ui.device_info.type.mobile": [
+    {
+      "type": 0,
+      "value": "Mobile device"
+    }
+  ],
+  "ui.device_info.type.pc": [
+    {
+      "type": 0,
+      "value": "Computer"
+    }
+  ],
+  "ui.device_info.type.tablet": [
+    {
+      "type": 0,
+      "value": "Tablet"
+    }
+  ],
+  "ui.device_info.type.unknown": [
+    {
+      "type": 0,
+      "value": "Unknown device type"
+    }
+  ],
+  "ui.device_info.unknown_device": [
+    {
+      "type": 0,
+      "value": "Unknown device"
+    }
+  ],
+  "ui.device_status.active": [
+    {
+      "type": 0,
+      "value": "Active"
+    }
+  ],
+  "ui.device_status.inactive": [
+    {
+      "type": 0,
+      "value": "Inactive"
+    }
+  ],
+  "ui.device_status.last_active.tooltip": [
+    {
+      "type": 0,
+      "value": "Last active on "
+    },
+    {
+      "type": 1,
+      "value": "date"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "ui.device_status.never_used": [
+    {
+      "type": 0,
+      "value": "Never used"
+    }
+  ],
+  "ui.device_status.never_used.tooltip": [
+    {
+      "type": 0,
+      "value": "This device has not been used yet."
+    }
+  ],
+  "ui.device_status.recently_used": [
+    {
+      "type": 0,
+      "value": "Recently used"
+    }
+  ],
+  "ui.device_status.signed_out": [
+    {
+      "type": 0,
+      "value": "Signed out"
+    }
+  ],
+  "ui.device_status.signed_out.tooltip": [
+    {
+      "type": 0,
+      "value": "This device has been signed out and no longer has access."
+    }
+  ],
+  "ui.device_status.signed_out.tooltip_at": [
+    {
+      "type": 0,
+      "value": "Signed out on "
+    },
+    {
+      "type": 1,
+      "value": "date"
+    },
+    {
+      "type": 0,
+      "value": "."
     }
   ],
   "ui.language_switcher.browser_default": [
