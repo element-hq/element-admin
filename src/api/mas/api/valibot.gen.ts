@@ -54,6 +54,10 @@ export const vCompatSessionFilter = v.object({
   "filter[user]": v.nullish(vUlid),
   "filter[user-session]": v.nullish(vUlid),
   "filter[status]": v.nullish(vCompatSessionStatus),
+  "filter[created-before]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[created-after]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[last-active-before]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[last-active-after]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
 });
 
 export const vPaginationMeta = v.object({
@@ -75,8 +79,8 @@ export const vDeviceId = v.pipe(
  */
 export const vCompatSession = v.object({
   user_id: vUlid,
-  device_id: vDeviceId,
-  user_session_id: vUlid,
+  device_id: v.nullish(vDeviceId),
+  user_session_id: v.nullish(vUlid),
   redirect_uri: v.nullish(v.pipe(v.string(), v.url())),
   created_at: v.pipe(v.string(), v.isoTimestamp()),
   user_agent: v.nullish(v.string()),
@@ -166,15 +170,70 @@ export const vSingleResponseForCompatSession = v.object({
 
 export const vOAuth2ClientKind = v.picklist(["dynamic", "static"]);
 
+export const vOAuth2ClientFilter = v.object({
+  "filter[client-kind]": v.nullish(vOAuth2ClientKind),
+  "filter[client-name]": v.nullish(v.string()),
+  "filter[client-uri]": v.nullish(v.string()),
+  "filter[grant-type]": v.nullish(v.string()),
+  "filter[has-active-sessions]": v.nullish(v.boolean()),
+});
+
+/**
+ * An OAuth 2.0 client registered with this service
+ */
+export const vOAuth2Client = v.object({
+  client_id: v.string(),
+  client_name: v.nullish(v.string()),
+  client_uri: v.nullish(v.pipe(v.string(), v.url())),
+  logo_uri: v.nullish(v.pipe(v.string(), v.url())),
+  redirect_uris: v.array(v.pipe(v.string(), v.url())),
+  grant_types: v.array(v.string()),
+  is_static: v.boolean(),
+});
+
+/**
+ * A single resource, with its type, ID, attributes and related links
+ */
+export const vSingleResourceForOAuth2Client = v.object({
+  type: v.string(),
+  id: vUlid,
+  attributes: vOAuth2Client,
+  links: vSelfLinks,
+  meta: v.nullish(vSingleResourceMeta),
+});
+
+/**
+ * A top-level response with a page of resources
+ */
+export const vPaginatedResponseForOAuth2Client = v.object({
+  meta: v.nullish(vPaginationMeta),
+  data: v.nullish(v.array(vSingleResourceForOAuth2Client)),
+  links: vPaginationLinks,
+});
+
+/**
+ * A top-level response with a single resource
+ */
+export const vSingleResponseForOAuth2Client = v.object({
+  data: vSingleResourceForOAuth2Client,
+  links: vSelfLinks,
+});
+
+export const vOAuth2ClientKind2 = v.picklist(["dynamic", "static"]);
+
 export const vOAuth2SessionStatus = v.picklist(["active", "finished"]);
 
 export const vOAuth2SessionFilter = v.object({
   "filter[user]": v.nullish(vUlid),
-  "filter[client]": v.nullish(vUlid),
-  "filter[client-kind]": v.nullish(vOAuth2ClientKind),
+  "filter[client]": v.optional(v.array(vUlid), []),
+  "filter[client-kind]": v.nullish(vOAuth2ClientKind2),
   "filter[user-session]": v.nullish(vUlid),
   "filter[scope]": v.optional(v.array(v.string()), []),
   "filter[status]": v.nullish(vOAuth2SessionStatus),
+  "filter[created-before]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[created-after]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[last-active-before]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[last-active-after]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
 });
 
 /**
@@ -357,6 +416,9 @@ export const vUserFilter = v.object({
   "filter[legacy-guest]": v.nullish(v.boolean()),
   "filter[search]": v.nullish(v.string()),
   "filter[status]": v.nullish(vUserStatus),
+  "filter[active-oauth2-client]": v.optional(v.array(vUlid), []),
+  "filter[has-active-oauth2-session]": v.nullish(v.boolean()),
+  "filter[has-active-compat-session]": v.nullish(v.boolean()),
 });
 
 /**
@@ -490,6 +552,10 @@ export const vUserSessionStatus = v.picklist(["active", "finished"]);
 export const vUserSessionFilter = v.object({
   "filter[user]": v.nullish(vUlid),
   "filter[status]": v.nullish(vUserSessionStatus),
+  "filter[created-before]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[created-after]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[last-active-before]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[last-active-after]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
 });
 
 /**
@@ -640,6 +706,7 @@ export const vUpstreamOAuthLinkFilter = v.object({
   "filter[user]": v.nullish(vUlid),
   "filter[provider]": v.nullish(vUlid),
   "filter[subject]": v.nullish(v.string()),
+  "filter[human-account-name]": v.nullish(v.string()),
 });
 
 /**
@@ -740,14 +807,20 @@ export const vSiteConfigResponse = vSiteConfig;
 export const vVersionResponse = vVersion;
 
 export const vListCompatSessionsQuery = v.object({
-  "page[before]": v.nullish(vUlid),
-  "page[after]": v.nullish(vUlid),
-  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  count: v.nullish(vIncludeCount),
-  "filter[user]": v.nullish(vUlid),
-  "filter[user-session]": v.nullish(vUlid),
-  "filter[status]": v.nullish(vCompatSessionStatus),
+  "page[before]": v.optional(vUlid),
+  "page[after]": v.optional(vUlid),
+  "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.optional(vIncludeCount),
+  "filter[user]": v.optional(vUlid),
+  "filter[user-session]": v.optional(vUlid),
+  "filter[status]": v.optional(vCompatSessionStatus),
+  "filter[created-before]": v.optional(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[created-after]": v.optional(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[last-active-before]": v.optional(
+    v.pipe(v.string(), v.isoTimestamp()),
+  ),
+  "filter[last-active-after]": v.optional(v.pipe(v.string(), v.isoTimestamp())),
 });
 
 /**
@@ -773,18 +846,51 @@ export const vFinishCompatSessionPath = v.object({
  */
 export const vFinishCompatSessionResponse = vSingleResponseForCompatSession;
 
+export const vListOAuth2ClientsQuery = v.object({
+  "page[before]": v.optional(vUlid),
+  "page[after]": v.optional(vUlid),
+  "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.optional(vIncludeCount),
+  "filter[client-kind]": v.optional(vOAuth2ClientKind),
+  "filter[client-name]": v.optional(v.string()),
+  "filter[client-uri]": v.optional(v.string()),
+  "filter[grant-type]": v.optional(v.string()),
+  "filter[has-active-sessions]": v.optional(v.boolean()),
+});
+
+/**
+ * Paginated response of OAuth 2.0 clients
+ */
+export const vListOAuth2ClientsResponse = vPaginatedResponseForOAuth2Client;
+
+export const vGetOAuth2ClientPath = v.object({
+  id: vUlid,
+});
+
+/**
+ * OAuth 2.0 client was found
+ */
+export const vGetOAuth2ClientResponse = vSingleResponseForOAuth2Client;
+
 export const vListOAuth2SessionsQuery = v.object({
-  "page[before]": v.nullish(vUlid),
-  "page[after]": v.nullish(vUlid),
-  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  count: v.nullish(vIncludeCount),
-  "filter[user]": v.nullish(vUlid),
-  "filter[client]": v.nullish(vUlid),
-  "filter[client-kind]": v.nullish(vOAuth2ClientKind),
-  "filter[user-session]": v.nullish(vUlid),
+  "page[before]": v.optional(vUlid),
+  "page[after]": v.optional(vUlid),
+  "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.optional(vIncludeCount),
+  "filter[user]": v.optional(vUlid),
+  "filter[client]": v.optional(v.array(vUlid), []),
+  "filter[client-kind]": v.optional(vOAuth2ClientKind2),
+  "filter[user-session]": v.optional(vUlid),
   "filter[scope]": v.optional(v.array(v.string()), []),
-  "filter[status]": v.nullish(vOAuth2SessionStatus),
+  "filter[status]": v.optional(vOAuth2SessionStatus),
+  "filter[created-before]": v.optional(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[created-after]": v.optional(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[last-active-before]": v.optional(
+    v.pipe(v.string(), v.isoTimestamp()),
+  ),
+  "filter[last-active-after]": v.optional(v.pipe(v.string(), v.isoTimestamp())),
 });
 
 /**
@@ -811,19 +917,19 @@ export const vFinishOAuth2SessionPath = v.object({
 export const vFinishOAuth2SessionResponse = vSingleResponseForOAuth2Session;
 
 export const vListPersonalSessionsQuery = v.object({
-  "page[before]": v.nullish(vUlid),
-  "page[after]": v.nullish(vUlid),
-  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  count: v.nullish(vIncludeCount),
-  "filter[owner_user]": v.nullish(vUlid),
-  "filter[owner_client]": v.nullish(vUlid),
-  "filter[actor_user]": v.nullish(vUlid),
+  "page[before]": v.optional(vUlid),
+  "page[after]": v.optional(vUlid),
+  "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.optional(vIncludeCount),
+  "filter[owner_user]": v.optional(vUlid),
+  "filter[owner_client]": v.optional(vUlid),
+  "filter[actor_user]": v.optional(vUlid),
   "filter[scope]": v.optional(v.array(v.string()), []),
-  "filter[status]": v.nullish(vPersonalSessionStatus),
-  "filter[expires_before]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
-  "filter[expires_after]": v.nullish(v.pipe(v.string(), v.isoTimestamp())),
-  "filter[expires]": v.nullish(v.boolean()),
+  "filter[status]": v.optional(vPersonalSessionStatus),
+  "filter[expires_before]": v.optional(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[expires_after]": v.optional(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[expires]": v.optional(v.boolean()),
 });
 
 /**
@@ -891,15 +997,18 @@ export const vGetPolicyDataPath = v.object({
 export const vGetPolicyDataResponse = vSingleResponseForPolicyData;
 
 export const vListUsersQuery = v.object({
-  "page[before]": v.nullish(vUlid),
-  "page[after]": v.nullish(vUlid),
-  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  count: v.nullish(vIncludeCount),
-  "filter[admin]": v.nullish(v.boolean()),
-  "filter[legacy-guest]": v.nullish(v.boolean()),
-  "filter[search]": v.nullish(v.string()),
-  "filter[status]": v.nullish(vUserStatus),
+  "page[before]": v.optional(vUlid),
+  "page[after]": v.optional(vUlid),
+  "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.optional(vIncludeCount),
+  "filter[admin]": v.optional(v.boolean()),
+  "filter[legacy-guest]": v.optional(v.boolean()),
+  "filter[search]": v.optional(v.string()),
+  "filter[status]": v.optional(vUserStatus),
+  "filter[active-oauth2-client]": v.optional(v.array(vUlid), []),
+  "filter[has-active-oauth2-session]": v.optional(v.boolean()),
+  "filter[has-active-compat-session]": v.optional(v.boolean()),
 });
 
 /**
@@ -993,13 +1102,13 @@ export const vUnlockUserPath = v.object({
 export const vUnlockUserResponse = vSingleResponseForUser;
 
 export const vListUserEmailsQuery = v.object({
-  "page[before]": v.nullish(vUlid),
-  "page[after]": v.nullish(vUlid),
-  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  count: v.nullish(vIncludeCount),
-  "filter[user]": v.nullish(vUlid),
-  "filter[email]": v.nullish(v.string()),
+  "page[before]": v.optional(vUlid),
+  "page[after]": v.optional(vUlid),
+  "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.optional(vIncludeCount),
+  "filter[user]": v.optional(vUlid),
+  "filter[email]": v.optional(v.string()),
 });
 
 /**
@@ -1033,13 +1142,19 @@ export const vGetUserEmailPath = v.object({
 export const vGetUserEmailResponse = vSingleResponseForUserEmail;
 
 export const vListUserSessionsQuery = v.object({
-  "page[before]": v.nullish(vUlid),
-  "page[after]": v.nullish(vUlid),
-  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  count: v.nullish(vIncludeCount),
-  "filter[user]": v.nullish(vUlid),
-  "filter[status]": v.nullish(vUserSessionStatus),
+  "page[before]": v.optional(vUlid),
+  "page[after]": v.optional(vUlid),
+  "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.optional(vIncludeCount),
+  "filter[user]": v.optional(vUlid),
+  "filter[status]": v.optional(vUserSessionStatus),
+  "filter[created-before]": v.optional(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[created-after]": v.optional(v.pipe(v.string(), v.isoTimestamp())),
+  "filter[last-active-before]": v.optional(
+    v.pipe(v.string(), v.isoTimestamp()),
+  ),
+  "filter[last-active-after]": v.optional(v.pipe(v.string(), v.isoTimestamp())),
 });
 
 /**
@@ -1066,15 +1181,15 @@ export const vFinishUserSessionPath = v.object({
 export const vFinishUserSessionResponse = vSingleResponseForUserSession;
 
 export const vListUserRegistrationTokensQuery = v.object({
-  "page[before]": v.nullish(vUlid),
-  "page[after]": v.nullish(vUlid),
-  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  count: v.nullish(vIncludeCount),
-  "filter[used]": v.nullish(v.boolean()),
-  "filter[revoked]": v.nullish(v.boolean()),
-  "filter[expired]": v.nullish(v.boolean()),
-  "filter[valid]": v.nullish(v.boolean()),
+  "page[before]": v.optional(vUlid),
+  "page[after]": v.optional(vUlid),
+  "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.optional(vIncludeCount),
+  "filter[used]": v.optional(v.boolean()),
+  "filter[revoked]": v.optional(v.boolean()),
+  "filter[expired]": v.optional(v.boolean()),
+  "filter[valid]": v.optional(v.boolean()),
 });
 
 /**
@@ -1135,14 +1250,15 @@ export const vUnrevokeUserRegistrationTokenResponse =
   vSingleResponseForUserRegistrationToken;
 
 export const vListUpstreamOAuthLinksQuery = v.object({
-  "page[before]": v.nullish(vUlid),
-  "page[after]": v.nullish(vUlid),
-  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  count: v.nullish(vIncludeCount),
-  "filter[user]": v.nullish(vUlid),
-  "filter[provider]": v.nullish(vUlid),
-  "filter[subject]": v.nullish(v.string()),
+  "page[before]": v.optional(vUlid),
+  "page[after]": v.optional(vUlid),
+  "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.optional(vIncludeCount),
+  "filter[user]": v.optional(vUlid),
+  "filter[provider]": v.optional(vUlid),
+  "filter[subject]": v.optional(v.string()),
+  "filter[human-account-name]": v.optional(v.string()),
 });
 
 /**
@@ -1179,12 +1295,12 @@ export const vGetUpstreamOAuthLinkResponse =
   vSingleResponseForUpstreamOAuthLink;
 
 export const vListUpstreamOAuthProvidersQuery = v.object({
-  "page[before]": v.nullish(vUlid),
-  "page[after]": v.nullish(vUlid),
-  "page[first]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  "page[last]": v.nullish(v.pipe(v.number(), v.integer(), v.minValue(1))),
-  count: v.nullish(vIncludeCount),
-  "filter[enabled]": v.nullish(v.boolean()),
+  "page[before]": v.optional(vUlid),
+  "page[after]": v.optional(vUlid),
+  "page[first]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  "page[last]": v.optional(v.pipe(v.number(), v.integer(), v.minValue(1))),
+  count: v.optional(vIncludeCount),
+  "filter[enabled]": v.optional(v.boolean()),
 });
 
 /**

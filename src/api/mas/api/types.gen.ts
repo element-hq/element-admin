@@ -118,6 +118,22 @@ export type CompatSessionFilter = {
    * * `finished`: Only retrieve finished sessions
    */
   "filter[status]"?: CompatSessionStatus | null;
+  /**
+   * Retrieve sessions created strictly before the given time
+   */
+  "filter[created-before]"?: string | null;
+  /**
+   * Retrieve sessions created strictly after the given time
+   */
+  "filter[created-after]"?: string | null;
+  /**
+   * Retrieve sessions last active strictly before the given time
+   */
+  "filter[last-active-before]"?: string | null;
+  /**
+   * Retrieve sessions last active strictly after the given time
+   */
+  "filter[last-active-after]"?: string | null;
 };
 
 export type CompatSessionStatus = "active" | "finished";
@@ -184,11 +200,11 @@ export type CompatSession = {
   /**
    * The Matrix device ID of this session
    */
-  device_id: DeviceId;
+  device_id?: DeviceId | null;
   /**
    * The ID of the user session that started this session, if any
    */
-  user_session_id: Ulid;
+  user_session_id?: Ulid | null;
   /**
    * The redirect URI used to login in the client, if it was an SSO login
    */
@@ -321,19 +337,143 @@ export type SingleResponseForCompatSession = {
   links: SelfLinks;
 };
 
+export type OAuth2ClientFilter = {
+  /**
+   * Retrieve only clients of the given kind
+   *
+   * * `dynamic`: clients registered via the dynamic-client-registration
+   * endpoint
+   *
+   * * `static`: clients declared in the configuration file
+   */
+  "filter[client-kind]"?: OAuth2ClientKind | null;
+  /**
+   * Substring (case-insensitive) match on the client's `client_name`
+   */
+  "filter[client-name]"?: string | null;
+  /**
+   * Substring (case-insensitive) match on the client's `client_uri`
+   */
+  "filter[client-uri]"?: string | null;
+  /**
+   * Retrieve only clients which support the given grant type
+   *
+   * e.g. `authorization_code`, `client_credentials`,
+   * `urn:ietf:params:oauth:grant-type:device_code`
+   */
+  "filter[grant-type]"?: string | null;
+  /**
+   * Retrieve only clients which have (`true`) or don't have (`false`) at
+   * least one active OAuth 2.0 session
+   */
+  "filter[has-active-sessions]"?: boolean | null;
+};
+
+export type OAuth2ClientKind = "dynamic" | "static";
+
+/**
+ * A top-level response with a page of resources
+ */
+export type PaginatedResponseForOAuth2Client = {
+  /**
+   * Response metadata
+   */
+  meta?: PaginationMeta | null;
+  /**
+   * The list of resources
+   */
+  data?: Array<SingleResourceForOAuth2Client> | null;
+  /**
+   * Related links
+   */
+  links: PaginationLinks;
+};
+
+/**
+ * A single resource, with its type, ID, attributes and related links
+ */
+export type SingleResourceForOAuth2Client = {
+  /**
+   * The type of the resource
+   */
+  type: string;
+  /**
+   * The ID of the resource
+   */
+  id: Ulid;
+  /**
+   * The attributes of the resource
+   */
+  attributes: OAuth2Client;
+  /**
+   * Related links
+   */
+  links: SelfLinks;
+  /**
+   * Metadata about the resource
+   */
+  meta?: SingleResourceMeta | null;
+};
+
+/**
+ * An OAuth 2.0 client registered with this service
+ */
+export type OAuth2Client = {
+  /**
+   * The OAuth 2.0 client identifier
+   */
+  client_id: string;
+  /**
+   * The human-readable name of the client, if registered
+   */
+  client_name?: string | null;
+  /**
+   * The homepage URL of the client, if registered
+   */
+  client_uri?: string | null;
+  /**
+   * The URL of the client's logo, if registered
+   */
+  logo_uri?: string | null;
+  /**
+   * The list of redirect URIs registered by the client
+   */
+  redirect_uris: Array<string>;
+  /**
+   * The list of grant types the client is allowed to use
+   */
+  grant_types: Array<string>;
+  /**
+   * Whether the client is statically configured (defined in the
+   * configuration file) rather than dynamically registered.
+   */
+  is_static: boolean;
+};
+
+/**
+ * A top-level response with a single resource
+ */
+export type SingleResponseForOAuth2Client = {
+  data: SingleResourceForOAuth2Client;
+  links: SelfLinks;
+};
+
 export type OAuth2SessionFilter = {
   /**
    * Retrieve the items for the given user
    */
   "filter[user]"?: Ulid | null;
   /**
-   * Retrieve the items for the given client
+   * Retrieve the items for the given client(s)
+   *
+   * This parameter may be repeated to filter on multiple clients at
+   * once (sessions matching any of the given clients are returned).
    */
-  "filter[client]"?: Ulid | null;
+  "filter[client]"?: Array<Ulid>;
   /**
    * Retrieve the items only for a specific client kind
    */
-  "filter[client-kind]"?: OAuth2ClientKind | null;
+  "filter[client-kind]"?: OAuth2ClientKind2 | null;
   /**
    * Retrieve the items started from the given browser session
    */
@@ -352,9 +492,25 @@ export type OAuth2SessionFilter = {
    * * `finished`: Only retrieve finished sessions
    */
   "filter[status]"?: OAuth2SessionStatus | null;
+  /**
+   * Retrieve sessions created strictly before the given time
+   */
+  "filter[created-before]"?: string | null;
+  /**
+   * Retrieve sessions created strictly after the given time
+   */
+  "filter[created-after]"?: string | null;
+  /**
+   * Retrieve sessions last active strictly before the given time
+   */
+  "filter[last-active-before]"?: string | null;
+  /**
+   * Retrieve sessions last active strictly after the given time
+   */
+  "filter[last-active-after]"?: string | null;
 };
 
-export type OAuth2ClientKind = "dynamic" | "static";
+export type OAuth2ClientKind2 = "dynamic" | "static";
 
 export type OAuth2SessionStatus = "active" | "finished";
 
@@ -715,6 +871,25 @@ export type UserFilter = {
    * * `deactivated`: Only retrieve deactivated users
    */
   "filter[status]"?: UserStatus | null;
+  /**
+   * Retrieve users which have at least one active OAuth 2.0 session
+   * belonging to any of the given client IDs.
+   *
+   * This filter may be repeated; the semantics are OR across the supplied
+   * clients (a user matches if they have an active session for *any* of
+   * them).
+   */
+  "filter[active-oauth2-client]"?: Array<Ulid>;
+  /**
+   * Retrieve users which have (or don't have) at least one active
+   * (non-finished) OAuth 2.0 session, regardless of the client.
+   */
+  "filter[has-active-oauth2-session]"?: boolean | null;
+  /**
+   * Retrieve users which have (or don't have) at least one active
+   * (non-finished) compatibility session.
+   */
+  "filter[has-active-compat-session]"?: boolean | null;
 };
 
 export type UserStatus = "active" | "locked" | "deactivated";
@@ -979,6 +1154,22 @@ export type UserSessionFilter = {
    * * `finished`: Only retrieve finished sessions
    */
   "filter[status]"?: UserSessionStatus | null;
+  /**
+   * Retrieve sessions created strictly before the given time
+   */
+  "filter[created-before]"?: string | null;
+  /**
+   * Retrieve sessions created strictly after the given time
+   */
+  "filter[created-after]"?: string | null;
+  /**
+   * Retrieve sessions last active strictly before the given time
+   */
+  "filter[last-active-before]"?: string | null;
+  /**
+   * Retrieve sessions last active strictly after the given time
+   */
+  "filter[last-active-after]"?: string | null;
 };
 
 export type UserSessionStatus = "active" | "finished";
@@ -1223,6 +1414,11 @@ export type UpstreamOAuthLinkFilter = {
    * Retrieve the items with the given subject
    */
   "filter[subject]"?: string | null;
+  /**
+   * Retrieve the items with a human account name matching the given
+   * substring (case-insensitive)
+   */
+  "filter[human-account-name]"?: string | null;
 };
 
 /**
@@ -1448,31 +1644,31 @@ export type ListCompatSessionsData = {
     /**
      * Retrieve the items before the given ID
      */
-    "page[before]"?: Ulid | null;
+    "page[before]"?: Ulid;
     /**
      * Retrieve the items after the given ID
      */
-    "page[after]"?: Ulid | null;
+    "page[after]"?: Ulid;
     /**
      * Retrieve the first N items
      */
-    "page[first]"?: number | null;
+    "page[first]"?: number;
     /**
      * Retrieve the last N items
      */
-    "page[last]"?: number | null;
+    "page[last]"?: number;
     /**
      * Include the total number of items. Defaults to `true`.
      */
-    count?: IncludeCount | null;
+    count?: IncludeCount;
     /**
      * Retrieve the items for the given user
      */
-    "filter[user]"?: Ulid | null;
+    "filter[user]"?: Ulid;
     /**
      * Retrieve the items started from the given browser session
      */
-    "filter[user-session]"?: Ulid | null;
+    "filter[user-session]"?: Ulid;
     /**
      * Retrieve the items with the given status
      *
@@ -1482,7 +1678,23 @@ export type ListCompatSessionsData = {
      *
      * * `finished`: Only retrieve finished sessions
      */
-    "filter[status]"?: CompatSessionStatus | null;
+    "filter[status]"?: CompatSessionStatus;
+    /**
+     * Retrieve sessions created strictly before the given time
+     */
+    "filter[created-before]"?: string;
+    /**
+     * Retrieve sessions created strictly after the given time
+     */
+    "filter[created-after]"?: string;
+    /**
+     * Retrieve sessions last active strictly before the given time
+     */
+    "filter[last-active-before]"?: string;
+    /**
+     * Retrieve sessions last active strictly after the given time
+     */
+    "filter[last-active-after]"?: string;
   };
   url: "/api/admin/v1/compat-sessions";
 };
@@ -1575,6 +1787,115 @@ export type FinishCompatSessionResponses = {
 export type FinishCompatSessionResponse =
   FinishCompatSessionResponses[keyof FinishCompatSessionResponses];
 
+export type ListOAuth2ClientsData = {
+  body?: never;
+  path?: never;
+  query?: {
+    /**
+     * Retrieve the items before the given ID
+     */
+    "page[before]"?: Ulid;
+    /**
+     * Retrieve the items after the given ID
+     */
+    "page[after]"?: Ulid;
+    /**
+     * Retrieve the first N items
+     */
+    "page[first]"?: number;
+    /**
+     * Retrieve the last N items
+     */
+    "page[last]"?: number;
+    /**
+     * Include the total number of items. Defaults to `true`.
+     */
+    count?: IncludeCount;
+    /**
+     * Retrieve only clients of the given kind
+     *
+     * * `dynamic`: clients registered via the dynamic-client-registration
+     * endpoint
+     *
+     * * `static`: clients declared in the configuration file
+     */
+    "filter[client-kind]"?: OAuth2ClientKind;
+    /**
+     * Substring (case-insensitive) match on the client's `client_name`
+     */
+    "filter[client-name]"?: string;
+    /**
+     * Substring (case-insensitive) match on the client's `client_uri`
+     */
+    "filter[client-uri]"?: string;
+    /**
+     * Retrieve only clients which support the given grant type
+     *
+     * e.g. `authorization_code`, `client_credentials`,
+     * `urn:ietf:params:oauth:grant-type:device_code`
+     */
+    "filter[grant-type]"?: string;
+    /**
+     * Retrieve only clients which have (`true`) or don't have (`false`) at
+     * least one active OAuth 2.0 session
+     */
+    "filter[has-active-sessions]"?: boolean;
+  };
+  url: "/api/admin/v1/oauth2-clients";
+};
+
+export type ListOAuth2ClientsErrors = {
+  /**
+   * Invalid filter parameters
+   */
+  400: ErrorResponse;
+};
+
+export type ListOAuth2ClientsError =
+  ListOAuth2ClientsErrors[keyof ListOAuth2ClientsErrors];
+
+export type ListOAuth2ClientsResponses = {
+  /**
+   * Paginated response of OAuth 2.0 clients
+   */
+  200: PaginatedResponseForOAuth2Client;
+};
+
+export type ListOAuth2ClientsResponse =
+  ListOAuth2ClientsResponses[keyof ListOAuth2ClientsResponses];
+
+export type GetOAuth2ClientData = {
+  body?: never;
+  path: {
+    /**
+     * The ID of the resource
+     */
+    id: Ulid;
+  };
+  query?: never;
+  url: "/api/admin/v1/oauth2-clients/{id}";
+};
+
+export type GetOAuth2ClientErrors = {
+  /**
+   * OAuth 2.0 client was not found
+   */
+  404: ErrorResponse;
+};
+
+export type GetOAuth2ClientError =
+  GetOAuth2ClientErrors[keyof GetOAuth2ClientErrors];
+
+export type GetOAuth2ClientResponses = {
+  /**
+   * OAuth 2.0 client was found
+   */
+  200: SingleResponseForOAuth2Client;
+};
+
+export type GetOAuth2ClientResponse =
+  GetOAuth2ClientResponses[keyof GetOAuth2ClientResponses];
+
 export type ListOAuth2SessionsData = {
   body?: never;
   path?: never;
@@ -1582,39 +1903,42 @@ export type ListOAuth2SessionsData = {
     /**
      * Retrieve the items before the given ID
      */
-    "page[before]"?: Ulid | null;
+    "page[before]"?: Ulid;
     /**
      * Retrieve the items after the given ID
      */
-    "page[after]"?: Ulid | null;
+    "page[after]"?: Ulid;
     /**
      * Retrieve the first N items
      */
-    "page[first]"?: number | null;
+    "page[first]"?: number;
     /**
      * Retrieve the last N items
      */
-    "page[last]"?: number | null;
+    "page[last]"?: number;
     /**
      * Include the total number of items. Defaults to `true`.
      */
-    count?: IncludeCount | null;
+    count?: IncludeCount;
     /**
      * Retrieve the items for the given user
      */
-    "filter[user]"?: Ulid | null;
+    "filter[user]"?: Ulid;
     /**
-     * Retrieve the items for the given client
+     * Retrieve the items for the given client(s)
+     *
+     * This parameter may be repeated to filter on multiple clients at
+     * once (sessions matching any of the given clients are returned).
      */
-    "filter[client]"?: Ulid | null;
+    "filter[client]"?: Array<Ulid>;
     /**
      * Retrieve the items only for a specific client kind
      */
-    "filter[client-kind]"?: OAuth2ClientKind | null;
+    "filter[client-kind]"?: OAuth2ClientKind2;
     /**
      * Retrieve the items started from the given browser session
      */
-    "filter[user-session]"?: Ulid | null;
+    "filter[user-session]"?: Ulid;
     /**
      * Retrieve the items with the given scope
      */
@@ -1628,7 +1952,23 @@ export type ListOAuth2SessionsData = {
      *
      * * `finished`: Only retrieve finished sessions
      */
-    "filter[status]"?: OAuth2SessionStatus | null;
+    "filter[status]"?: OAuth2SessionStatus;
+    /**
+     * Retrieve sessions created strictly before the given time
+     */
+    "filter[created-before]"?: string;
+    /**
+     * Retrieve sessions created strictly after the given time
+     */
+    "filter[created-after]"?: string;
+    /**
+     * Retrieve sessions last active strictly before the given time
+     */
+    "filter[last-active-before]"?: string;
+    /**
+     * Retrieve sessions last active strictly after the given time
+     */
+    "filter[last-active-after]"?: string;
   };
   url: "/api/admin/v1/oauth2-sessions";
 };
@@ -1732,35 +2072,35 @@ export type ListPersonalSessionsData = {
     /**
      * Retrieve the items before the given ID
      */
-    "page[before]"?: Ulid | null;
+    "page[before]"?: Ulid;
     /**
      * Retrieve the items after the given ID
      */
-    "page[after]"?: Ulid | null;
+    "page[after]"?: Ulid;
     /**
      * Retrieve the first N items
      */
-    "page[first]"?: number | null;
+    "page[first]"?: number;
     /**
      * Retrieve the last N items
      */
-    "page[last]"?: number | null;
+    "page[last]"?: number;
     /**
      * Include the total number of items. Defaults to `true`.
      */
-    count?: IncludeCount | null;
+    count?: IncludeCount;
     /**
      * Filter by owner user ID
      */
-    "filter[owner_user]"?: Ulid | null;
+    "filter[owner_user]"?: Ulid;
     /**
      * Filter by owner `OAuth2` client ID
      */
-    "filter[owner_client]"?: Ulid | null;
+    "filter[owner_client]"?: Ulid;
     /**
      * Filter by actor user ID
      */
-    "filter[actor_user]"?: Ulid | null;
+    "filter[actor_user]"?: Ulid;
     /**
      * Retrieve the items with the given scope
      */
@@ -1768,19 +2108,19 @@ export type ListPersonalSessionsData = {
     /**
      * Filter by session status
      */
-    "filter[status]"?: PersonalSessionStatus | null;
+    "filter[status]"?: PersonalSessionStatus;
     /**
      * Filter by access token expiry date
      */
-    "filter[expires_before]"?: string | null;
+    "filter[expires_before]"?: string;
     /**
      * Filter by access token expiry date
      */
-    "filter[expires_after]"?: string | null;
+    "filter[expires_after]"?: string;
     /**
      * Filter by whether the access token has an expiry time
      */
-    "filter[expires]"?: boolean | null;
+    "filter[expires]"?: boolean;
   };
   url: "/api/admin/v1/personal-sessions";
 };
@@ -2027,38 +2367,38 @@ export type ListUsersData = {
     /**
      * Retrieve the items before the given ID
      */
-    "page[before]"?: Ulid | null;
+    "page[before]"?: Ulid;
     /**
      * Retrieve the items after the given ID
      */
-    "page[after]"?: Ulid | null;
+    "page[after]"?: Ulid;
     /**
      * Retrieve the first N items
      */
-    "page[first]"?: number | null;
+    "page[first]"?: number;
     /**
      * Retrieve the last N items
      */
-    "page[last]"?: number | null;
+    "page[last]"?: number;
     /**
      * Include the total number of items. Defaults to `true`.
      */
-    count?: IncludeCount | null;
+    count?: IncludeCount;
     /**
      * Retrieve users with (or without) the `admin` flag set
      */
-    "filter[admin]"?: boolean | null;
+    "filter[admin]"?: boolean;
     /**
      * Retrieve users with (or without) the `legacy_guest` flag set
      */
-    "filter[legacy-guest]"?: boolean | null;
+    "filter[legacy-guest]"?: boolean;
     /**
      * Retrieve users where the username matches contains the given string
      *
      * Note that this doesn't change the ordering of the result, which are
      * still ordered by ID.
      */
-    "filter[search]"?: string | null;
+    "filter[search]"?: string;
     /**
      * Retrieve the items with the given status
      *
@@ -2070,10 +2410,38 @@ export type ListUsersData = {
      *
      * * `deactivated`: Only retrieve deactivated users
      */
-    "filter[status]"?: UserStatus | null;
+    "filter[status]"?: UserStatus;
+    /**
+     * Retrieve users which have at least one active OAuth 2.0 session
+     * belonging to any of the given client IDs.
+     *
+     * This filter may be repeated; the semantics are OR across the supplied
+     * clients (a user matches if they have an active session for *any* of
+     * them).
+     */
+    "filter[active-oauth2-client]"?: Array<Ulid>;
+    /**
+     * Retrieve users which have (or don't have) at least one active
+     * (non-finished) OAuth 2.0 session, regardless of the client.
+     */
+    "filter[has-active-oauth2-session]"?: boolean;
+    /**
+     * Retrieve users which have (or don't have) at least one active
+     * (non-finished) compatibility session.
+     */
+    "filter[has-active-compat-session]"?: boolean;
   };
   url: "/api/admin/v1/users";
 };
+
+export type ListUsersErrors = {
+  /**
+   * Client was not found
+   */
+  404: ErrorResponse;
+};
+
+export type ListUsersError = ListUsersErrors[keyof ListUsersErrors];
 
 export type ListUsersResponses = {
   /**
@@ -2377,31 +2745,31 @@ export type ListUserEmailsData = {
     /**
      * Retrieve the items before the given ID
      */
-    "page[before]"?: Ulid | null;
+    "page[before]"?: Ulid;
     /**
      * Retrieve the items after the given ID
      */
-    "page[after]"?: Ulid | null;
+    "page[after]"?: Ulid;
     /**
      * Retrieve the first N items
      */
-    "page[first]"?: number | null;
+    "page[first]"?: number;
     /**
      * Retrieve the last N items
      */
-    "page[last]"?: number | null;
+    "page[last]"?: number;
     /**
      * Include the total number of items. Defaults to `true`.
      */
-    count?: IncludeCount | null;
+    count?: IncludeCount;
     /**
      * Retrieve the items for the given user
      */
-    "filter[user]"?: Ulid | null;
+    "filter[user]"?: Ulid;
     /**
      * Retrieve the user email with the given email address
      */
-    "filter[email]"?: string | null;
+    "filter[email]"?: string;
   };
   url: "/api/admin/v1/user-emails";
 };
@@ -2530,27 +2898,27 @@ export type ListUserSessionsData = {
     /**
      * Retrieve the items before the given ID
      */
-    "page[before]"?: Ulid | null;
+    "page[before]"?: Ulid;
     /**
      * Retrieve the items after the given ID
      */
-    "page[after]"?: Ulid | null;
+    "page[after]"?: Ulid;
     /**
      * Retrieve the first N items
      */
-    "page[first]"?: number | null;
+    "page[first]"?: number;
     /**
      * Retrieve the last N items
      */
-    "page[last]"?: number | null;
+    "page[last]"?: number;
     /**
      * Include the total number of items. Defaults to `true`.
      */
-    count?: IncludeCount | null;
+    count?: IncludeCount;
     /**
      * Retrieve the items for the given user
      */
-    "filter[user]"?: Ulid | null;
+    "filter[user]"?: Ulid;
     /**
      * Retrieve the items with the given status
      *
@@ -2560,7 +2928,23 @@ export type ListUserSessionsData = {
      *
      * * `finished`: Only retrieve finished sessions
      */
-    "filter[status]"?: UserSessionStatus | null;
+    "filter[status]"?: UserSessionStatus;
+    /**
+     * Retrieve sessions created strictly before the given time
+     */
+    "filter[created-before]"?: string;
+    /**
+     * Retrieve sessions created strictly after the given time
+     */
+    "filter[created-after]"?: string;
+    /**
+     * Retrieve sessions last active strictly before the given time
+     */
+    "filter[last-active-before]"?: string;
+    /**
+     * Retrieve sessions last active strictly after the given time
+     */
+    "filter[last-active-after]"?: string;
   };
   url: "/api/admin/v1/user-sessions";
 };
@@ -2660,42 +3044,42 @@ export type ListUserRegistrationTokensData = {
     /**
      * Retrieve the items before the given ID
      */
-    "page[before]"?: Ulid | null;
+    "page[before]"?: Ulid;
     /**
      * Retrieve the items after the given ID
      */
-    "page[after]"?: Ulid | null;
+    "page[after]"?: Ulid;
     /**
      * Retrieve the first N items
      */
-    "page[first]"?: number | null;
+    "page[first]"?: number;
     /**
      * Retrieve the last N items
      */
-    "page[last]"?: number | null;
+    "page[last]"?: number;
     /**
      * Include the total number of items. Defaults to `true`.
      */
-    count?: IncludeCount | null;
+    count?: IncludeCount;
     /**
      * Retrieve tokens that have (or have not) been used at least once
      */
-    "filter[used]"?: boolean | null;
+    "filter[used]"?: boolean;
     /**
      * Retrieve tokens that are (or are not) revoked
      */
-    "filter[revoked]"?: boolean | null;
+    "filter[revoked]"?: boolean;
     /**
      * Retrieve tokens that are (or are not) expired
      */
-    "filter[expired]"?: boolean | null;
+    "filter[expired]"?: boolean;
     /**
      * Retrieve tokens that are (or are not) valid
      *
      * Valid means that the token has not expired, is not revoked, and has not
      * reached its usage limit.
      */
-    "filter[valid]"?: boolean | null;
+    "filter[valid]"?: boolean;
   };
   url: "/api/admin/v1/user-registration-tokens";
 };
@@ -2870,35 +3254,40 @@ export type ListUpstreamOAuthLinksData = {
     /**
      * Retrieve the items before the given ID
      */
-    "page[before]"?: Ulid | null;
+    "page[before]"?: Ulid;
     /**
      * Retrieve the items after the given ID
      */
-    "page[after]"?: Ulid | null;
+    "page[after]"?: Ulid;
     /**
      * Retrieve the first N items
      */
-    "page[first]"?: number | null;
+    "page[first]"?: number;
     /**
      * Retrieve the last N items
      */
-    "page[last]"?: number | null;
+    "page[last]"?: number;
     /**
      * Include the total number of items. Defaults to `true`.
      */
-    count?: IncludeCount | null;
+    count?: IncludeCount;
     /**
      * Retrieve the items for the given user
      */
-    "filter[user]"?: Ulid | null;
+    "filter[user]"?: Ulid;
     /**
      * Retrieve the items for the given provider
      */
-    "filter[provider]"?: Ulid | null;
+    "filter[provider]"?: Ulid;
     /**
      * Retrieve the items with the given subject
      */
-    "filter[subject]"?: string | null;
+    "filter[subject]"?: string;
+    /**
+     * Retrieve the items with a human account name matching the given
+     * substring (case-insensitive)
+     */
+    "filter[human-account-name]"?: string;
   };
   url: "/api/admin/v1/upstream-oauth-links";
 };
@@ -3029,27 +3418,27 @@ export type ListUpstreamOAuthProvidersData = {
     /**
      * Retrieve the items before the given ID
      */
-    "page[before]"?: Ulid | null;
+    "page[before]"?: Ulid;
     /**
      * Retrieve the items after the given ID
      */
-    "page[after]"?: Ulid | null;
+    "page[after]"?: Ulid;
     /**
      * Retrieve the first N items
      */
-    "page[first]"?: number | null;
+    "page[first]"?: number;
     /**
      * Retrieve the last N items
      */
-    "page[last]"?: number | null;
+    "page[last]"?: number;
     /**
      * Include the total number of items. Defaults to `true`.
      */
-    count?: IncludeCount | null;
+    count?: IncludeCount;
     /**
      * Retrieve providers that are (or are not) enabled
      */
-    "filter[enabled]"?: boolean | null;
+    "filter[enabled]"?: boolean;
   };
   url: "/api/admin/v1/upstream-oauth-providers";
 };
