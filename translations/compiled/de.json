@@ -405,7 +405,7 @@
       "children": [
         {
           "type": 0,
-          "value": "Moderation ermöglicht es einer Organisation, alle Chats von einem zentralen Punkt aus zu verwalten. Ein „Moderator”-Konto tritt definierten Chats mit Administratorrechten bei. Serveradministratoren können sich nahtlos über die Adminkonsole in das Konto einloggen, um ihre Chats zu verwalten und zu moderieren."
+          "value": "Supervision ermöglicht es einer Organisation, alle Chats von einem zentralen Punkt aus zu verwalten. Ein „Supervisor”-Konto tritt definierten Chats mit Administratorrechten bei. Serveradministratoren können sich nahtlos über die Adminkonsole in das Konto einloggen, um ihre Chats zu verwalten und zu moderieren."
         }
       ]
     },
@@ -483,7 +483,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Das Moderator-Konto kann entweder verschlüsselte Nachrichtinhalte lesen oder nicht (konfigurierbar)"
+              "value": "Das Supervisor-Konto kann entweder verschlüsselte Nachrichtinhalte lesen oder nicht (konfigurierbar)"
             }
           ]
         },
@@ -563,7 +563,7 @@
   "pages.auditing.unavailable_alert.description": [
     {
       "type": 0,
-      "value": "Diese Funktion ist in ESS Community nicht verfügbar. Wechseln Sie zu ESS Pro, um sie zu aktivieren."
+      "value": "Diese Funktion ist in ESS Community nicht verfügbar. Wechsel zu ESS Pro, um sie zu aktivieren."
     }
   ],
   "pages.auditing.unavailable_alert.title": [
@@ -647,13 +647,13 @@
   "pages.federation.allowlist.add_pattern.help": [
     {
       "type": 0,
-      "value": "Geben Sie eine Domain wie example.com ein oder verwenden Sie *, um alle Subdomains zuzulassen, z. B. *.example.com."
+      "value": "Gib eine Domäne wie example.com ein oder verwende *, um alle Subdomänen zuzulassen, z. B. *.example.com."
     }
   ],
   "pages.federation.allowlist.empty": [
     {
       "type": 0,
-      "value": "Noch keine Domains in der Zulassungsliste. Fügen Sie oben ein Domainmuster hinzu, um zu beginnen."
+      "value": "Noch keine Domäne in der Zulassungsliste. Füge oben ein Domänen-Muster hinzu, um zu beginnen."
     }
   ],
   "pages.federation.allowlist.heading": [
@@ -762,12 +762,6 @@
       "pluralType": "cardinal"
     }
   ],
-  "pages.federation.loading": [
-    {
-      "type": 0,
-      "value": "Weitere Domains werden geladen…"
-    }
-  ],
   "pages.federation.not_found.description": [
     {
       "type": 0,
@@ -791,7 +785,7 @@
   "pages.federation.sbg_not_enabled.description": [
     {
       "type": 0,
-      "value": "Secure Border Gateway ist in dieser Umgebung nicht aktiviert. Wenden Sie sich an Ihren Administrator, um es zu aktivieren."
+      "value": "Secure Border Gateway ist in dieser Umgebung nicht aktiviert. Wende dich an den Administrator, um es zu aktivieren."
     }
   ],
   "pages.federation.sbg_not_enabled.title": [
@@ -1162,12 +1156,6 @@
       "value": "Zuletzt aktiv"
     }
   ],
-  "pages.personal_tokens.loading_more": [
-    {
-      "type": 0,
-      "value": "Weitere Token werden geladen …"
-    }
-  ],
   "pages.personal_tokens.name_column": [
     {
       "type": 0,
@@ -1486,12 +1474,6 @@
       "value": "Genutzt"
     }
   ],
-  "pages.registration_tokens.loading_more": [
-    {
-      "type": 0,
-      "value": "Weitere Token werden geladen …"
-    }
-  ],
   "pages.registration_tokens.never_expires": [
     {
       "type": 0,
@@ -1723,6 +1705,30 @@
     {
       "type": 0,
       "value": "Gültig bis"
+    }
+  ],
+  "pages.rooms.columns.alias": [
+    {
+      "type": 0,
+      "value": "Alias"
+    }
+  ],
+  "pages.rooms.columns.members": [
+    {
+      "type": 0,
+      "value": "Members"
+    }
+  ],
+  "pages.rooms.columns.room": [
+    {
+      "type": 0,
+      "value": "Room"
+    }
+  ],
+  "pages.rooms.columns.type": [
+    {
+      "type": 0,
+      "value": "Type"
     }
   ],
   "pages.rooms.delete_room.alert.description": [
@@ -1959,6 +1965,30 @@
       "pluralType": "cardinal"
     }
   ],
+  "pages.rooms.room_type.private": [
+    {
+      "type": 0,
+      "value": "Private"
+    }
+  ],
+  "pages.rooms.room_type.public": [
+    {
+      "type": 0,
+      "value": "Public"
+    }
+  ],
+  "pages.rooms.room_type.restricted": [
+    {
+      "type": 0,
+      "value": "Restricted"
+    }
+  ],
+  "pages.rooms.search_placeholder": [
+    {
+      "type": 0,
+      "value": "Search…"
+    }
+  ],
   "pages.rooms.title": [
     {
       "type": 0,
@@ -1968,7 +1998,7 @@
   "pages.supervision.description": [
     {
       "type": 0,
-      "value": "Melden Sie sich als "
+      "value": "Melde dich als "
     },
     {
       "type": 8,
@@ -1988,7 +2018,7 @@
   "pages.supervision.disabled_alert.description": [
     {
       "type": 0,
-      "value": "Diese Funktion ist Bestandteil Ihres Abonnements. Sie können einen Administrator bitten, sie zu aktivieren."
+      "value": "Diese Funktion ist Bestandteil deiner Subskription. Du kannst einen Administrator bitten, sie zu aktivieren."
     }
   ],
   "pages.supervision.disabled_alert.title": [
@@ -2000,7 +2030,7 @@
   "pages.supervision.errors.cant_open.description": [
     {
       "type": 0,
-      "value": "Ihr Browser blockiert das Öffnen von Popup-Fenstern. Bitte stellen Sie sicher, dass Sie Popups von dieser Website zulassen."
+      "value": "Dein Browser blockiert das Öffnen von Popup-Fenstern. Bitte stelle sicher, dass Popups von dieser Website zugelassen werden."
     }
   ],
   "pages.supervision.errors.cant_open.title": [
@@ -2012,31 +2042,31 @@
   "pages.supervision.errors.closed.description": [
     {
       "type": 0,
-      "value": "Die Anmeldung bei der Moderationsschnittstelle ist fehlgeschlagen, da diese geschlossen wurde, bevor die Anmeldung abgeschlossen werden konnte."
+      "value": "Supervision konnte nicht geöffnet werden – das Anmeldefenster wurde geschlossen, bevor die Anmeldung abgeschlossen war. Bitte erneut versuchen."
     }
   ],
   "pages.supervision.errors.closed.title": [
     {
       "type": 0,
-      "value": "Die Moderationsoberfläche wurde vorzeitig geschlossen."
+      "value": "Das Supervision-Fenster wurde vorzeitig geschlossen."
     }
   ],
   "pages.supervision.errors.generic.title": [
     {
       "type": 0,
-      "value": "Beim Öffnen der Moderationsoberfläche ist ein unerwarteter Fehler aufgetreten."
+      "value": "Beim Öffnen von Supervision ist ein unerwarteter Fehler aufgetreten."
     }
   ],
   "pages.supervision.missing_ui_address.description": [
     {
       "type": 0,
-      "value": "Moderation ist in Ihrer Umgebung aktiviert, jedoch nicht in Element Web, das für die Funktion der Moderationsoberfläche erforderlich ist."
+      "value": "In deiner Bereitstellung ist Supervision aktiviert, Element Web jedoch nicht. Element Web wird für die Supervision-Oberfläche benötigt."
     }
   ],
   "pages.supervision.missing_ui_address.title": [
     {
       "type": 0,
-      "value": "Die Moderationsoberfläche erfordert, dass Element Web aktiviert ist."
+      "value": "Für die Supervision-Oberfläche muss Element Web aktiviert sein."
     }
   ],
   "pages.supervision.recovery_key.copied": [
@@ -2072,13 +2102,43 @@
   "pages.supervision.unavailable_alert.description": [
     {
       "type": 0,
-      "value": "Diese Funktion ist in ESS Community nicht verfügbar. Wechseln Sie zu ESS Pro, um sie zu aktivieren."
+      "value": "Diese Funktion ist in ESS Community nicht verfügbar. Wechsel zu ESS Pro, um sie zu aktivieren."
     }
   ],
   "pages.supervision.unavailable_alert.title": [
     {
       "type": 0,
-      "value": "Moderation ist eine Funktion, die in ESS Pro verfügbar ist."
+      "value": "Supervision ist eine Funktion von ESS Pro"
+    }
+  ],
+  "pages.users.account_status.active": [
+    {
+      "type": 0,
+      "value": "Active"
+    }
+  ],
+  "pages.users.account_status.admin": [
+    {
+      "type": 0,
+      "value": "Admin"
+    }
+  ],
+  "pages.users.account_status.deactivated": [
+    {
+      "type": 0,
+      "value": "Deactivated"
+    }
+  ],
+  "pages.users.account_status.guest": [
+    {
+      "type": 0,
+      "value": "Guest"
+    }
+  ],
+  "pages.users.account_status.locked": [
+    {
+      "type": 0,
+      "value": "Locked"
     }
   ],
   "pages.users.add_email.button": [
@@ -2133,6 +2193,24 @@
     {
       "type": 0,
       "value": "Link zum Upstream-Konto hinzugefügt"
+    }
+  ],
+  "pages.users.columns.account_status": [
+    {
+      "type": 0,
+      "value": "Account status"
+    }
+  ],
+  "pages.users.columns.created_at": [
+    {
+      "type": 0,
+      "value": "Created at"
+    }
+  ],
+  "pages.users.columns.matrix_id": [
+    {
+      "type": 0,
+      "value": "Matrix ID"
     }
   ],
   "pages.users.deactivate_account.alert.description": [
@@ -2737,6 +2815,12 @@
     {
       "type": 0,
       "value": "Wert wird geladen"
+    }
+  ],
+  "ui.data_table.loading_more": [
+    {
+      "type": 0,
+      "value": "Loading more…"
     }
   ],
   "ui.destination_status.failing": [

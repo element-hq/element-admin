@@ -754,12 +754,6 @@
       "pluralType": "cardinal"
     }
   ],
-  "pages.federation.loading": [
-    {
-      "type": 0,
-      "value": "Loading more domains…"
-    }
-  ],
   "pages.federation.not_found.description": [
     {
       "type": 0,
@@ -1154,12 +1148,6 @@
       "value": "Sist aktiv"
     }
   ],
-  "pages.personal_tokens.loading_more": [
-    {
-      "type": 0,
-      "value": "Laster inn flere tokens..."
-    }
-  ],
   "pages.personal_tokens.name_column": [
     {
       "type": 0,
@@ -1478,12 +1466,6 @@
       "value": "Brukt"
     }
   ],
-  "pages.registration_tokens.loading_more": [
-    {
-      "type": 0,
-      "value": "Laster inn flere tokener..."
-    }
-  ],
   "pages.registration_tokens.never_expires": [
     {
       "type": 0,
@@ -1715,6 +1697,30 @@
     {
       "type": 0,
       "value": "Gyldig til"
+    }
+  ],
+  "pages.rooms.columns.alias": [
+    {
+      "type": 0,
+      "value": "Alias"
+    }
+  ],
+  "pages.rooms.columns.members": [
+    {
+      "type": 0,
+      "value": "Members"
+    }
+  ],
+  "pages.rooms.columns.room": [
+    {
+      "type": 0,
+      "value": "Room"
+    }
+  ],
+  "pages.rooms.columns.type": [
+    {
+      "type": 0,
+      "value": "Type"
     }
   ],
   "pages.rooms.delete_room.alert.description": [
@@ -1951,6 +1957,30 @@
       "pluralType": "cardinal"
     }
   ],
+  "pages.rooms.room_type.private": [
+    {
+      "type": 0,
+      "value": "Private"
+    }
+  ],
+  "pages.rooms.room_type.public": [
+    {
+      "type": 0,
+      "value": "Public"
+    }
+  ],
+  "pages.rooms.room_type.restricted": [
+    {
+      "type": 0,
+      "value": "Restricted"
+    }
+  ],
+  "pages.rooms.search_placeholder": [
+    {
+      "type": 0,
+      "value": "Search…"
+    }
+  ],
   "pages.rooms.title": [
     {
       "type": 0,
@@ -2073,6 +2103,36 @@
       "value": "Supervision is a feature available in ESS Pro"
     }
   ],
+  "pages.users.account_status.active": [
+    {
+      "type": 0,
+      "value": "Active"
+    }
+  ],
+  "pages.users.account_status.admin": [
+    {
+      "type": 0,
+      "value": "Admin"
+    }
+  ],
+  "pages.users.account_status.deactivated": [
+    {
+      "type": 0,
+      "value": "Deactivated"
+    }
+  ],
+  "pages.users.account_status.guest": [
+    {
+      "type": 0,
+      "value": "Guest"
+    }
+  ],
+  "pages.users.account_status.locked": [
+    {
+      "type": 0,
+      "value": "Locked"
+    }
+  ],
   "pages.users.add_email.button": [
     {
       "type": 0,
@@ -2125,6 +2185,24 @@
     {
       "type": 0,
       "value": "Lenke til upstream-konto lagt til"
+    }
+  ],
+  "pages.users.columns.account_status": [
+    {
+      "type": 0,
+      "value": "Account status"
+    }
+  ],
+  "pages.users.columns.created_at": [
+    {
+      "type": 0,
+      "value": "Created at"
+    }
+  ],
+  "pages.users.columns.matrix_id": [
+    {
+      "type": 0,
+      "value": "Matrix ID"
     }
   ],
   "pages.users.deactivate_account.alert.description": [
@@ -2729,6 +2807,12 @@
     {
       "type": 0,
       "value": "Laster inn verdi"
+    }
+  ],
+  "ui.data_table.loading_more": [
+    {
+      "type": 0,
+      "value": "Loading more…"
     }
   ],
   "ui.destination_status.failing": [

@@ -90,7 +90,7 @@
     "message": "Secure Border Gateway"
   },
   "marketing.supervision.description": {
-    "message": "<p>Moderation ermöglicht es einer Organisation, alle Chats von einem zentralen Punkt aus zu verwalten. Ein „Moderator”-Konto tritt definierten Chats mit Administratorrechten bei. Serveradministratoren können sich nahtlos über die Adminkonsole in das Konto einloggen, um ihre Chats zu verwalten und zu moderieren.</p> <ul> <li>Chats und deren Einstellungen verwalten (Name, Thema, Berechtigungen usw.)</li> <li>Raummitgliedschaften verwalten</li> <li>Unerwünschte Nachrichten und hochgeladene Medien entfernen</li> <li>Verlassene Chats wiederherstellen (alle Benutzer haben den Chat verlassen)</li> <li>Das Moderator-Konto kann entweder verschlüsselte Nachrichtinhalte lesen oder nicht (konfigurierbar)</li> </ul>"
+    "message": "<p>Supervision ermöglicht es einer Organisation, alle Chats von einem zentralen Punkt aus zu verwalten. Ein „Supervisor”-Konto tritt definierten Chats mit Administratorrechten bei. Serveradministratoren können sich nahtlos über die Adminkonsole in das Konto einloggen, um ihre Chats zu verwalten und zu moderieren.</p> <ul> <li>Chats und deren Einstellungen verwalten (Name, Thema, Berechtigungen usw.)</li> <li>Raummitgliedschaften verwalten</li> <li>Unerwünschte Nachrichten und hochgeladene Medien entfernen</li> <li>Verlassene Chats wiederherstellen (alle Benutzer haben den Chat verlassen)</li> <li>Das Supervisor-Konto kann entweder verschlüsselte Nachrichtinhalte lesen oder nicht (konfigurierbar)</li> </ul>"
   },
   "marketing.supervision.title": {
     "message": "Supervision"
@@ -126,7 +126,7 @@
     "message": "Auditing"
   },
   "pages.auditing.unavailable_alert.description": {
-    "message": "Diese Funktion ist in ESS Community nicht verfügbar. Wechseln Sie zu ESS Pro, um sie zu aktivieren."
+    "message": "Diese Funktion ist in ESS Community nicht verfügbar. Wechsel zu ESS Pro, um sie zu aktivieren."
   },
   "pages.auditing.unavailable_alert.title": {
     "message": "Auditing ist in ESS Pro verfügbar."
@@ -168,10 +168,10 @@
     "message": "Muster hinzufügen"
   },
   "pages.federation.allowlist.add_pattern.help": {
-    "message": "Geben Sie eine Domain wie example.com ein oder verwenden Sie *, um alle Subdomains zuzulassen, z. B. *.example.com."
+    "message": "Gib eine Domäne wie example.com ein oder verwende *, um alle Subdomänen zuzulassen, z. B. *.example.com."
   },
   "pages.federation.allowlist.empty": {
-    "message": "Noch keine Domains in der Zulassungsliste. Fügen Sie oben ein Domainmuster hinzu, um zu beginnen."
+    "message": "Noch keine Domäne in der Zulassungsliste. Füge oben ein Domänen-Muster hinzu, um zu beginnen."
   },
   "pages.federation.allowlist.heading": {
     "message": "Liste der Muster, die für eine Föderation mit Ihnen zugelassen sind"
@@ -209,9 +209,6 @@
   "pages.federation.domain_count": {
     "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
   },
-  "pages.federation.loading": {
-    "message": "Weitere Domains werden geladen…"
-  },
   "pages.federation.not_found.description": {
     "message": "Das angeforderte Ziel ({destination}) konnte nicht gefunden werden."
   },
@@ -219,7 +216,7 @@
     "message": "Ziel nicht gefunden"
   },
   "pages.federation.sbg_not_enabled.description": {
-    "message": "Secure Border Gateway ist in dieser Umgebung nicht aktiviert. Wenden Sie sich an Ihren Administrator, um es zu aktivieren."
+    "message": "Secure Border Gateway ist in dieser Umgebung nicht aktiviert. Wende dich an den Administrator, um es zu aktivieren."
   },
   "pages.federation.sbg_not_enabled.title": {
     "message": "Die Funktion „Zulässige Domains“ ist eine Funktion des Secure Border Gateway, das in ESS Pro verfügbar ist."
@@ -380,9 +377,6 @@
   "pages.personal_tokens.last_active_label": {
     "message": "Zuletzt aktiv"
   },
-  "pages.personal_tokens.loading_more": {
-    "message": "Weitere Token werden geladen …"
-  },
   "pages.personal_tokens.name_column": {
     "message": "Name"
   },
@@ -542,9 +536,6 @@
   "pages.registration_tokens.filters.used_only": {
     "message": "Genutzt"
   },
-  "pages.registration_tokens.loading_more": {
-    "message": "Weitere Token werden geladen …"
-  },
   "pages.registration_tokens.never_expires": {
     "message": "Läuft nie ab"
   },
@@ -629,6 +620,18 @@
   "pages.registration_tokens.valid_until_column": {
     "message": "Gültig bis"
   },
+  "pages.rooms.columns.alias": {
+    "message": "Alias"
+  },
+  "pages.rooms.columns.members": {
+    "message": "Members"
+  },
+  "pages.rooms.columns.room": {
+    "message": "Room"
+  },
+  "pages.rooms.columns.type": {
+    "message": "Type"
+  },
   "pages.rooms.delete_room.alert.description": {
     "message": "Dadurch werden alle auf den Server hochgeladenen Nachrichten und Medien endgültig entfernt und diese Gruppe wird aus dem Verzeichnis entfernt. Mitglieder verlieren den Zugriff auf ihre Nachrichten, und die Gruppe wird aus ihrer Chatliste gelöscht."
   },
@@ -692,38 +695,50 @@
   "pages.rooms.room_count": {
     "message": "{COUNT, plural, =0 {Keine Chats} one {# Chat} other {# Chats}}"
   },
+  "pages.rooms.room_type.private": {
+    "message": "Private"
+  },
+  "pages.rooms.room_type.public": {
+    "message": "Public"
+  },
+  "pages.rooms.room_type.restricted": {
+    "message": "Restricted"
+  },
+  "pages.rooms.search_placeholder": {
+    "message": "Search…"
+  },
   "pages.rooms.title": {
     "message": "Chats"
   },
   "pages.supervision.description": {
-    "message": "Melden Sie sich als <b>{mxid}</b> an, um administrative Aktionen in jedem beliebigen Chat durchzuführen."
+    "message": "Melde dich als <b>{mxid}</b> an, um administrative Aktionen in jedem beliebigen Chat durchzuführen."
   },
   "pages.supervision.disabled_alert.description": {
-    "message": "Diese Funktion ist Bestandteil Ihres Abonnements. Sie können einen Administrator bitten, sie zu aktivieren."
+    "message": "Diese Funktion ist Bestandteil deiner Subskription. Du kannst einen Administrator bitten, sie zu aktivieren."
   },
   "pages.supervision.disabled_alert.title": {
     "message": "Supervision ist derzeit deaktiviert"
   },
   "pages.supervision.errors.cant_open.description": {
-    "message": "Ihr Browser blockiert das Öffnen von Popup-Fenstern. Bitte stellen Sie sicher, dass Sie Popups von dieser Website zulassen."
+    "message": "Dein Browser blockiert das Öffnen von Popup-Fenstern. Bitte stelle sicher, dass Popups von dieser Website zugelassen werden."
   },
   "pages.supervision.errors.cant_open.title": {
     "message": "Die Supervision-Oberfläche konnte nicht in einem neuen Fenster geöffnet werden."
   },
   "pages.supervision.errors.closed.description": {
-    "message": "Die Anmeldung bei der Moderationsschnittstelle ist fehlgeschlagen, da diese geschlossen wurde, bevor die Anmeldung abgeschlossen werden konnte."
+    "message": "Supervision konnte nicht geöffnet werden – das Anmeldefenster wurde geschlossen, bevor die Anmeldung abgeschlossen war. Bitte erneut versuchen."
   },
   "pages.supervision.errors.closed.title": {
-    "message": "Die Moderationsoberfläche wurde vorzeitig geschlossen."
+    "message": "Das Supervision-Fenster wurde vorzeitig geschlossen."
   },
   "pages.supervision.errors.generic.title": {
-    "message": "Beim Öffnen der Moderationsoberfläche ist ein unerwarteter Fehler aufgetreten."
+    "message": "Beim Öffnen von Supervision ist ein unerwarteter Fehler aufgetreten."
   },
   "pages.supervision.missing_ui_address.description": {
-    "message": "Moderation ist in Ihrer Umgebung aktiviert, jedoch nicht in Element Web, das für die Funktion der Moderationsoberfläche erforderlich ist."
+    "message": "In deiner Bereitstellung ist Supervision aktiviert, Element Web jedoch nicht. Element Web wird für die Supervision-Oberfläche benötigt."
   },
   "pages.supervision.missing_ui_address.title": {
-    "message": "Die Moderationsoberfläche erfordert, dass Element Web aktiviert ist."
+    "message": "Für die Supervision-Oberfläche muss Element Web aktiviert sein."
   },
   "pages.supervision.recovery_key.copied": {
     "message": "Wiederherstellungsschlüssel kopiert"
@@ -741,10 +756,25 @@
     "message": "Supervision"
   },
   "pages.supervision.unavailable_alert.description": {
-    "message": "Diese Funktion ist in ESS Community nicht verfügbar. Wechseln Sie zu ESS Pro, um sie zu aktivieren."
+    "message": "Diese Funktion ist in ESS Community nicht verfügbar. Wechsel zu ESS Pro, um sie zu aktivieren."
   },
   "pages.supervision.unavailable_alert.title": {
-    "message": "Moderation ist eine Funktion, die in ESS Pro verfügbar ist."
+    "message": "Supervision ist eine Funktion von ESS Pro"
+  },
+  "pages.users.account_status.active": {
+    "message": "Active"
+  },
+  "pages.users.account_status.admin": {
+    "message": "Admin"
+  },
+  "pages.users.account_status.deactivated": {
+    "message": "Deactivated"
+  },
+  "pages.users.account_status.guest": {
+    "message": "Guest"
+  },
+  "pages.users.account_status.locked": {
+    "message": "Locked"
   },
   "pages.users.add_email.button": {
     "message": "E-Mail hinzufügen"
@@ -772,6 +802,15 @@
   },
   "pages.users.add_upstream_link.success": {
     "message": "Link zum Upstream-Konto hinzugefügt"
+  },
+  "pages.users.columns.account_status": {
+    "message": "Account status"
+  },
+  "pages.users.columns.created_at": {
+    "message": "Created at"
+  },
+  "pages.users.columns.matrix_id": {
+    "message": "Matrix ID"
   },
   "pages.users.deactivate_account.alert.description": {
     "message": "Der Nutzer wird durch diese Aktion automatisch von allen Geräten abgemeldet, alle Zugriffstoken werden entfernt, alle IDs von Drittanbietern werden entfernt und die Kontodaten werden dauerhaft entfernt."
@@ -1006,6 +1045,9 @@
   },
   "ui.data.loading": {
     "message": "Wert wird geladen"
+  },
+  "ui.data_table.loading_more": {
+    "message": "Loading more…"
   },
   "ui.destination_status.failing": {
     "message": "Fehlgeschlagen"
