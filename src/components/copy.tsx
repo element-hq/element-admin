@@ -7,6 +7,8 @@ import { useMutation } from "@tanstack/react-query";
 import { CopyIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { IconButton } from "@vector-im/compound-web";
 
+import { useRowTabIndex } from "./data-table";
+
 interface Props {
   value: string;
 }
@@ -17,8 +19,13 @@ export const CopyToClipboard: React.FC<Props> = ({ value }: Props) => {
     onSuccess: () => setTimeout(() => copyMutation.reset(), 2000),
   });
 
+  // Joins the roving tabindex when rendered in a data table row, so the row it
+  // sits in doesn't become an extra tab stop. Outside a row this is always 0.
+  const tabIndex = useRowTabIndex();
+
   return (
     <IconButton
+      tabIndex={tabIndex}
       disabled={copyMutation.isSuccess}
       onClick={() => copyMutation.mutate()}
       tooltip={copyMutation.isSuccess ? "Copied!" : "Copy to clipboard"}

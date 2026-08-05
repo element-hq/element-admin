@@ -31,8 +31,8 @@ import {
 } from "@/api/federation-allowlist";
 import { wellKnownQuery } from "@/api/matrix";
 import * as Card from "@/components/card";
+import * as DataTable from "@/components/data-table";
 import * as Navigation from "@/components/navigation";
-import * as Table from "@/components/table";
 import AppFooter from "@/ui/footer";
 import * as Marketing from "@/ui/marketing";
 import { Heading } from "./_console.federation";
@@ -233,15 +233,15 @@ function AllowlistManagement({ synapseRoot }: { synapseRoot: string }) {
 
   return (
     <div className="flex flex-col gap-6">
-      <Table.Header>
-        <Table.Title>
+      <DataTable.Header>
+        <DataTable.Title>
           <FormattedMessage
             id="pages.federation.allowlist.heading"
             defaultMessage="List of patterns allowed to federate with you"
             description="Heading for the federation allowlist section"
           />
-        </Table.Title>
-      </Table.Header>
+        </DataTable.Title>
+      </DataTable.Header>
 
       <Form.Root onSubmit={handleSubmit} ref={formRef}>
         <div className="flex flex-col gap-2 max-w-xl">

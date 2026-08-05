@@ -3,23 +3,21 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
-/* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
 import { useDebouncedCallback } from "@tanstack/react-pacer";
 import {
+  keepPreviousData,
   useMutation,
   useQuery,
   useQueryClient,
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
+import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
 import {
-  createFileRoute,
-  Link,
-  Outlet,
-  useNavigate,
-} from "@tanstack/react-router";
-import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import type { ColumnDef } from "@tanstack/react-table";
+  createColumnHelper,
+  tableFeatures,
+  useTable,
+} from "@tanstack/react-table";
 import { UserAddIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
   Avatar,
@@ -29,7 +27,7 @@ import {
   InlineSpinner,
   Text,
 } from "@vector-im/compound-web";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
 import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 import * as v from "valibot";
@@ -47,18 +45,24 @@ import {
   profileQuery,
   wellKnownQuery,
 } from "@/api/matrix";
+import * as DataTable from "@/components/data-table";
 import * as Dialog from "@/components/dialog";
 import { TextLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import * as Placeholder from "@/components/placeholder";
-import * as Table from "@/components/table";
 import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
 import { useImageBlob } from "@/utils/blob";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 import { useFilters } from "@/utils/filters";
 import { useCurrentChildRoutePath } from "@/utils/routes";
+
+const features = tableFeatures({});
+const columnHelper = createColumnHelper<
+  typeof features,
+  SingleResourceForUser
+>();
 
 const UserSearchParameters = v.object({
   admin: v.optional(v.boolean()),
@@ -73,6 +77,58 @@ const titleMessage = defineMessage({
   defaultMessage: "Users",
   description: "The title of the users list page",
 });
+
+const columnMessages = {
+  matrix_id: defineMessage({
+    id: "pages.users.columns.matrix_id",
+    defaultMessage: "Matrix ID",
+    description: "Column header for the Matrix ID in the users list table",
+  }),
+  created_at: defineMessage({
+    id: "pages.users.columns.created_at",
+    defaultMessage: "Created at",
+    description:
+      "Column header for the account creation date in the users list table",
+  }),
+  account_status: defineMessage({
+    id: "pages.users.columns.account_status",
+    defaultMessage: "Account status",
+    description: "Column header for the account status in the users list table",
+  }),
+};
+
+const accountStatusMessages = {
+  deactivated: defineMessage({
+    id: "pages.users.account_status.deactivated",
+    defaultMessage: "Deactivated",
+    description:
+      "Badge label for a deactivated user account in the users list table",
+  }),
+  locked: defineMessage({
+    id: "pages.users.account_status.locked",
+    defaultMessage: "Locked",
+    description:
+      "Badge label for a locked user account in the users list table",
+  }),
+  guest: defineMessage({
+    id: "pages.users.account_status.guest",
+    defaultMessage: "Guest",
+    description:
+      "Badge label for a legacy guest user account in the users list table",
+  }),
+  admin: defineMessage({
+    id: "pages.users.account_status.admin",
+    defaultMessage: "Admin",
+    description:
+      "Badge label for an admin user account in the users list table",
+  }),
+  active: defineMessage({
+    id: "pages.users.account_status.active",
+    defaultMessage: "Active",
+    description:
+      "Badge label for an active user account in the users list table",
+  }),
+};
 
 export const Route = createFileRoute("/_console/users")({
   staticData: {
@@ -161,7 +217,7 @@ const UserCell = ({ userId, mxid, synapseRoot }: UserCellProps) => {
   const avatar = useUserAvatar(synapseRoot, mxid);
   const search = Route.useSearch();
   return (
-    <Link
+    <DataTable.RowLink
       to="/users/$userId"
       params={{ userId }}
       search={search}
@@ -193,7 +249,7 @@ const UserCell = ({ userId, mxid, synapseRoot }: UserCellProps) => {
           </Text>
         )}
       </div>
-    </Link>
+    </DataTable.RowLink>
   );
 };
 
@@ -339,6 +395,7 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
             autoComplete="off"
           />
           <Form.HelpMessage>
+            {/* oxlint-disable-next-line formatjs/no-literal-string-in-jsx -- Matrix ID format preview, not translatable */}
             @{localpart || "---"}:{serverName}
           </Form.HelpMessage>
           <Form.ErrorMessage match="patternMismatch">
@@ -378,22 +435,6 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
         </Form.Submit>
       </Form.Root>
     </Dialog.Root>
-  );
-};
-
-const UserCount = ({ serverName }: { serverName: string }) => {
-  const { parameters } = Route.useLoaderDeps();
-  const { data: totalCount } = useSuspenseQuery(
-    usersCountQuery(serverName, parameters),
-  );
-
-  return (
-    <FormattedMessage
-      id="pages.users.user_count"
-      defaultMessage="{COUNT, plural, zero {No users} one {# user} other {# users}}"
-      description="On the user list page, this heading shows the total number of users"
-      values={{ COUNT: totalCount }}
-    />
   );
 };
 
@@ -479,6 +520,11 @@ function RouteComponent() {
   );
   const synapseRoot = wellKnown["m.homeserver"].base_url;
 
+  const { data: totalCount } = useQuery({
+    ...usersCountQuery(credentials.serverName, parameters),
+    placeholderData: keepPreviousData,
+  });
+
   const isBackward = search.dir === "backward";
   const { data, hasNextPage, fetchNextPage, isFetching } =
     useSuspenseInfiniteQuery(
@@ -523,76 +569,98 @@ function RouteComponent() {
   const filters = useFilters(search, filtersDefinition);
 
   // Column definitions
-  const columns = useMemo<ColumnDef<SingleResourceForUser>[]>(
-    () => [
-      {
-        id: "matrixId",
-        header: "Matrix ID",
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        cell: ({ row }) => {
-          const user = row.original;
-          // TODO: factor this out
-          const mxid = `@${user.attributes.username}:${credentials.serverName}`;
-          return (
-            <UserCell userId={user.id} mxid={mxid} synapseRoot={synapseRoot} />
-          );
-        },
-      },
-      {
-        id: "createdAt",
-        header: "Created at",
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        cell: ({ row }) => {
-          const user = row.original;
-          return (
-            <Text size="sm" className="text-text-secondary">
-              {computeHumanReadableDateTimeStringFromUtc(
-                user.attributes.created_at,
-              )}
-            </Text>
-          );
-        },
-      },
-      {
-        id: "status",
-        header: "Account status",
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        cell: ({ row }) => {
-          const user = row.original;
-          if (user.attributes.deactivated_at) {
-            return <Badge kind="red">Deactivated</Badge>;
-          }
+  const columns = useMemo(
+    () =>
+      columnHelper.columns([
+        columnHelper.display({
+          id: "matrixId",
+          header: intl.formatMessage(columnMessages.matrix_id),
+          meta: { width: DataTable.columnWidth.primary },
+          // oxlint-disable-next-line react/no-unstable-nested-components
+          cell: ({ row }) => {
+            const user = row.original;
+            // TODO: factor this out
+            const mxid = `@${user.attributes.username}:${credentials.serverName}`;
+            return (
+              <UserCell
+                userId={user.id}
+                mxid={mxid}
+                synapseRoot={synapseRoot}
+              />
+            );
+          },
+        }),
+        columnHelper.display({
+          id: "createdAt",
+          header: intl.formatMessage(columnMessages.created_at),
+          meta: { width: DataTable.columnWidth.date },
+          // oxlint-disable-next-line react/no-unstable-nested-components
+          cell: ({ row }) => {
+            const user = row.original;
+            return (
+              <Text size="sm" className="text-text-secondary">
+                {computeHumanReadableDateTimeStringFromUtc(
+                  user.attributes.created_at,
+                )}
+              </Text>
+            );
+          },
+        }),
+        columnHelper.display({
+          id: "status",
+          header: intl.formatMessage(columnMessages.account_status),
+          meta: { width: DataTable.columnWidth.status },
+          // oxlint-disable-next-line react/no-unstable-nested-components
+          cell: ({ row }) => {
+            const user = row.original;
+            if (user.attributes.deactivated_at) {
+              return (
+                <Badge kind="red">
+                  {intl.formatMessage(accountStatusMessages.deactivated)}
+                </Badge>
+              );
+            }
 
-          if (user.attributes.locked_at) {
-            return <Badge kind="grey">Locked</Badge>;
-          }
+            if (user.attributes.locked_at) {
+              return (
+                <Badge kind="grey">
+                  {intl.formatMessage(accountStatusMessages.locked)}
+                </Badge>
+              );
+            }
 
-          if (user.attributes.legacy_guest) {
-            return <Badge kind="grey">Guest</Badge>;
-          }
+            if (user.attributes.legacy_guest) {
+              return (
+                <Badge kind="grey">
+                  {intl.formatMessage(accountStatusMessages.guest)}
+                </Badge>
+              );
+            }
 
-          if (user.attributes.admin) {
-            return <Badge kind="green">Admin</Badge>;
-          }
+            if (user.attributes.admin) {
+              return (
+                <Badge kind="green">
+                  {intl.formatMessage(accountStatusMessages.admin)}
+                </Badge>
+              );
+            }
 
-          return <Badge kind="default">Active</Badge>;
-        },
-      },
-    ],
-    [credentials.serverName, synapseRoot],
+            return (
+              <Badge kind="default">
+                {intl.formatMessage(accountStatusMessages.active)}
+              </Badge>
+            );
+          },
+        }),
+      ]),
+    [credentials.serverName, synapseRoot, intl],
   );
 
-  // oxlint-disable-next-line react-compiler/incompatible-library -- We pass things as a ref to avoid this problem
-  const table = useReactTable({
+  const table = useTable({
+    features,
     data: flatData,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    manualSorting: true,
   });
-
-  // This prevents the compiler from optimizing the table
-  // See https://github.com/TanStack/table/issues/5567
-  const tableRef = useRef(table);
 
   return (
     <>
@@ -618,13 +686,22 @@ function RouteComponent() {
             </Page.Controls>
           </Page.Header>
 
-          <Table.Root>
-            <Table.Header>
-              <Table.DynamicTitle>
-                <UserCount serverName={credentials.serverName} />
-              </Table.DynamicTitle>
+          <DataTable.Root>
+            <DataTable.Header>
+              <DataTable.Title>
+                {totalCount === undefined ? (
+                  <Placeholder.Text />
+                ) : (
+                  <FormattedMessage
+                    id="pages.users.user_count"
+                    defaultMessage="{COUNT, plural, zero {No users} one {# user} other {# users}}"
+                    description="On the user list page, this heading shows the total number of users"
+                    values={{ COUNT: totalCount }}
+                  />
+                )}
+              </DataTable.Title>
 
-              <Table.FilterMenu>
+              <DataTable.FilterMenu>
                 {filters.all.map((filter) => (
                   <CheckboxMenuItem
                     key={filter.key}
@@ -639,19 +716,19 @@ function RouteComponent() {
                     checked={filter.enabled}
                   />
                 ))}
-              </Table.FilterMenu>
+              </DataTable.FilterMenu>
 
               {filters.active.length > 0 && (
-                <Table.ActiveFilterList>
+                <DataTable.ActiveFilterList>
                   {filters.active.map((filter) => (
-                    <Table.ActiveFilter key={filter.key}>
+                    <DataTable.ActiveFilter key={filter.key}>
                       <FormattedMessage {...filter.message} />
-                      <Table.RemoveFilterLink
+                      <DataTable.RemoveFilterLink
                         from={from}
                         replace={true}
                         search={filter.toggledState}
                       />
-                    </Table.ActiveFilter>
+                    </DataTable.ActiveFilter>
                   ))}
 
                   <TextLink
@@ -662,25 +739,18 @@ function RouteComponent() {
                   >
                     <FormattedMessage {...messages.actionClear} />
                   </TextLink>
-                </Table.ActiveFilterList>
+                </DataTable.ActiveFilterList>
               )}
-            </Table.Header>
+            </DataTable.Header>
 
-            <Table.VirtualizedList
-              table={tableRef.current}
-              canFetchNextPage={hasNextPage && !isFetching}
+            <DataTable.List
+              table={table}
+              totalCount={totalCount}
+              hasNextPage={hasNextPage}
+              isFetching={isFetching}
               fetchNextPage={fetchNextPage}
             />
-
-            {/* Loading indicator */}
-            {isFetching && (
-              <div className="flex justify-center py-4">
-                <Text size="sm" className="text-text-secondary">
-                  Loading more users...
-                </Text>
-              </div>
-            )}
-          </Table.Root>
+          </DataTable.Root>
         </Navigation.Main>
 
         <AppFooter />

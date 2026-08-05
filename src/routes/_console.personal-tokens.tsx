@@ -4,20 +4,19 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 import {
+  keepPreviousData,
   useMutation,
   useQuery,
   useQueryClient,
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
+import { Outlet, createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
-  Link,
-  Outlet,
-  createFileRoute,
-  useNavigate,
-} from "@tanstack/react-router";
-import type { ColumnDef } from "@tanstack/react-table";
-import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
+  createColumnHelper,
+  tableFeatures,
+  useTable,
+} from "@tanstack/react-table";
 import { PlusIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
   Avatar,
@@ -28,7 +27,7 @@ import {
   InlineSpinner,
   Text,
 } from "@vector-im/compound-web";
-import { Suspense, useCallback, useMemo, useRef, useState } from "react";
+import { Suspense, useCallback, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
 import { FormattedMessage, defineMessage, useIntl } from "react-intl";
 import * as v from "valibot";
@@ -48,12 +47,12 @@ import {
   wellKnownQuery,
 } from "@/api/matrix";
 import { CopyToClipboard } from "@/components/copy";
+import * as DataTable from "@/components/data-table";
 import * as Dialog from "@/components/dialog";
 import { TextLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import * as Placeholder from "@/components/placeholder";
-import * as Table from "@/components/table";
 import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
 import { UserPicker } from "@/ui/user-picker";
@@ -62,6 +61,12 @@ import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 import { useFilters } from "@/utils/filters";
 import { randomString } from "@/utils/random";
 import { useCurrentChildRoutePath } from "@/utils/routes";
+
+const features = tableFeatures({});
+const columnHelper = createColumnHelper<
+  typeof features,
+  SingleResourceForPersonalSession
+>();
 
 const SYNAPSE_ADMIN_SCOPE = "urn:synapse:admin:*";
 const MATRIX_API_SCOPE = "urn:matrix:client:api:*";
@@ -665,22 +670,6 @@ const UserCell = ({ userId, serverName }: UserCellProps) => {
   );
 };
 
-const PersonalTokenCount = ({ serverName }: { serverName: string }) => {
-  const { parameters } = Route.useLoaderDeps();
-  const { data } = useSuspenseQuery(
-    personalSessionsCountQuery(serverName, parameters),
-  );
-
-  return (
-    <FormattedMessage
-      id="pages.personal_tokens.count"
-      defaultMessage="{count, plural, =0 {No personal tokens} one {# personal token} other {# personal tokens}}"
-      description="Shows the number of personal tokens"
-      values={{ count: data }}
-    />
-  );
-};
-
 const filtersDefinition = [
   {
     key: "status",
@@ -760,6 +749,11 @@ function RouteComponent() {
   );
   const synapseRoot = wellKnown["m.homeserver"].base_url;
 
+  const { data: totalCount } = useQuery({
+    ...personalSessionsCountQuery(credentials.serverName, parameters),
+    placeholderData: keepPreviousData,
+  });
+
   const { data, hasNextPage, fetchNextPage, isFetching } =
     useSuspenseInfiniteQuery(
       personalSessionsInfiniteQuery(credentials.serverName, parameters),
@@ -774,131 +768,132 @@ function RouteComponent() {
   const filters = useFilters(search, filtersDefinition);
 
   // Column definitions
-  const columns = useMemo<ColumnDef<SingleResourceForPersonalSession>[]>(
-    () => [
-      {
-        id: "name",
-        header: intl.formatMessage({
-          id: "pages.personal_tokens.name_column",
-          defaultMessage: "Name",
-          description: "Column header for token name column",
+  const columns = useMemo(
+    () =>
+      columnHelper.columns([
+        columnHelper.display({
+          id: "name",
+          header: intl.formatMessage({
+            id: "pages.personal_tokens.name_column",
+            defaultMessage: "Name",
+            description: "Column header for token name column",
+          }),
+          meta: { width: DataTable.columnWidth.primary },
+          // oxlint-disable-next-line react/no-unstable-nested-components
+          cell: ({ row }) => {
+            const token = row.original;
+            return (
+              <DataTable.RowLink
+                to="/personal-tokens/$tokenId"
+                params={{ tokenId: token.id }}
+                search={search}
+                resetScroll={false}
+              >
+                <Text size="md" weight="semibold">
+                  {token.attributes.human_name}
+                </Text>
+              </DataTable.RowLink>
+            );
+          },
         }),
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        cell: ({ row }) => {
-          const token = row.original;
-          return (
-            <Link
-              to="/personal-tokens/$tokenId"
-              params={{ tokenId: token.id }}
-              search={search}
-              resetScroll={false}
-            >
-              <Text size="md" weight="semibold">
-                {token.attributes.human_name}
+        columnHelper.display({
+          id: "actingUser",
+          header: intl.formatMessage({
+            id: "pages.personal_tokens.acting_user_column",
+            defaultMessage: "Acting User",
+            description: "Column header for acting user column",
+          }),
+          meta: { width: { min: 200, fr: 2 } },
+          // oxlint-disable-next-line react/no-unstable-nested-components
+          cell: ({ row }) => {
+            const token = row.original;
+            return (
+              <Suspense fallback={<Placeholder.Text />}>
+                <UserCell
+                  userId={token.attributes.actor_user_id}
+                  serverName={credentials.serverName}
+                />
+              </Suspense>
+            );
+          },
+        }),
+        columnHelper.display({
+          id: "status",
+          header: intl.formatMessage({
+            id: "pages.personal_tokens.status.column",
+            defaultMessage: "Status",
+            description: "Column header for status column",
+          }),
+          meta: { width: DataTable.columnWidth.status },
+          // oxlint-disable-next-line react/no-unstable-nested-components
+          cell: ({ row }) => {
+            const token = row.original;
+            return <PersonalTokenStatusBadge token={token.attributes} />;
+          },
+        }),
+        columnHelper.display({
+          id: "lastActive",
+          header: intl.formatMessage({
+            id: "pages.personal_tokens.last_active_column",
+            defaultMessage: "Last Active",
+            description: "Column header for last active column",
+          }),
+          meta: { width: DataTable.columnWidth.date },
+          // oxlint-disable-next-line react/no-unstable-nested-components
+          cell: ({ row }) => {
+            const token = row.original;
+            return (
+              <Text size="sm" className="text-text-secondary">
+                {token.attributes.last_active_at
+                  ? computeHumanReadableDateTimeStringFromUtc(
+                      token.attributes.last_active_at,
+                    )
+                  : intl.formatMessage({
+                      id: "pages.personal_tokens.never_used",
+                      defaultMessage: "Never used",
+                      description:
+                        "Text shown when a token has never been used",
+                    })}
               </Text>
-            </Link>
-          );
-        },
-      },
-      {
-        id: "actingUser",
-        header: intl.formatMessage({
-          id: "pages.personal_tokens.acting_user_column",
-          defaultMessage: "Acting User",
-          description: "Column header for acting user column",
+            );
+          },
         }),
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        cell: ({ row }) => {
-          const token = row.original;
-          return (
-            <Suspense fallback={<Placeholder.Text />}>
-              <UserCell
-                userId={token.attributes.actor_user_id}
-                serverName={credentials.serverName}
-              />
-            </Suspense>
-          );
-        },
-      },
-      {
-        id: "status",
-        header: intl.formatMessage({
-          id: "pages.personal_tokens.status.column",
-          defaultMessage: "Status",
-          description: "Column header for status column",
+        columnHelper.display({
+          id: "expiresAt",
+          header: intl.formatMessage({
+            id: "pages.personal_tokens.expires_at_column",
+            defaultMessage: "Expires at",
+            description: "Column header for expires at column",
+          }),
+          meta: { width: DataTable.columnWidth.date },
+          // oxlint-disable-next-line react/no-unstable-nested-components
+          cell: ({ row }) => {
+            const token = row.original;
+            return (
+              <Text size="sm" className="text-text-secondary">
+                {token.attributes.expires_at
+                  ? computeHumanReadableDateTimeStringFromUtc(
+                      token.attributes.expires_at,
+                    )
+                  : intl.formatMessage({
+                      id: "pages.personal_tokens.never_expires",
+                      defaultMessage: "Never expires",
+                      description:
+                        "Text shown when a token has no expiration date",
+                    })}
+              </Text>
+            );
+          },
         }),
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        cell: ({ row }) => {
-          const token = row.original;
-          return <PersonalTokenStatusBadge token={token.attributes} />;
-        },
-      },
-      {
-        id: "lastActive",
-        header: intl.formatMessage({
-          id: "pages.personal_tokens.last_active_column",
-          defaultMessage: "Last Active",
-          description: "Column header for last active column",
-        }),
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        cell: ({ row }) => {
-          const token = row.original;
-          return (
-            <Text size="sm" className="text-text-secondary">
-              {token.attributes.last_active_at
-                ? computeHumanReadableDateTimeStringFromUtc(
-                    token.attributes.last_active_at,
-                  )
-                : intl.formatMessage({
-                    id: "pages.personal_tokens.never_used",
-                    defaultMessage: "Never used",
-                    description: "Text shown when a token has never been used",
-                  })}
-            </Text>
-          );
-        },
-      },
-      {
-        id: "expiresAt",
-        header: intl.formatMessage({
-          id: "pages.personal_tokens.expires_at_column",
-          defaultMessage: "Expires at",
-          description: "Column header for expires at column",
-        }),
-        // oxlint-disable-next-line react/no-unstable-nested-components
-        cell: ({ row }) => {
-          const token = row.original;
-          return (
-            <Text size="sm" className="text-text-secondary">
-              {token.attributes.expires_at
-                ? computeHumanReadableDateTimeStringFromUtc(
-                    token.attributes.expires_at,
-                  )
-                : intl.formatMessage({
-                    id: "pages.personal_tokens.never_expires",
-                    defaultMessage: "Never expires",
-                    description:
-                      "Text shown when a token has no expiration date",
-                  })}
-            </Text>
-          );
-        },
-      },
-    ],
+      ]),
     [search, intl, credentials.serverName],
   );
 
-  // oxlint-disable-next-line react-compiler/incompatible-library -- We pass things as a ref to avoid this problem
-  const table = useReactTable({
+  const table = useTable({
+    features,
     data: flatData,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    manualSorting: true,
   });
-
-  // This prevents the compiler from optimizing the table
-  // See https://github.com/TanStack/table/issues/5567
-  const tableRef = useRef(table);
 
   return (
     <>
@@ -923,13 +918,22 @@ function RouteComponent() {
             </Page.Description>
           </Page.Header>
 
-          <Table.Root>
-            <Table.Header>
-              <Table.DynamicTitle>
-                <PersonalTokenCount serverName={credentials.serverName} />
-              </Table.DynamicTitle>
+          <DataTable.Root>
+            <DataTable.Header>
+              <DataTable.Title>
+                {totalCount === undefined ? (
+                  <Placeholder.Text />
+                ) : (
+                  <FormattedMessage
+                    id="pages.personal_tokens.count"
+                    defaultMessage="{count, plural, =0 {No personal tokens} one {# personal token} other {# personal tokens}}"
+                    description="Shows the number of personal tokens"
+                    values={{ count: totalCount }}
+                  />
+                )}
+              </DataTable.Title>
 
-              <Table.FilterMenu>
+              <DataTable.FilterMenu>
                 {filters.all.map((filter) => (
                   <CheckboxMenuItem
                     key={filter.key}
@@ -944,19 +948,19 @@ function RouteComponent() {
                     checked={filter.enabled}
                   />
                 ))}
-              </Table.FilterMenu>
+              </DataTable.FilterMenu>
 
               {filters.active.length > 0 && (
-                <Table.ActiveFilterList>
+                <DataTable.ActiveFilterList>
                   {filters.active.map((filter) => (
-                    <Table.ActiveFilter key={filter.key}>
+                    <DataTable.ActiveFilter key={filter.key}>
                       <FormattedMessage {...filter.message} />
-                      <Table.RemoveFilterLink
+                      <DataTable.RemoveFilterLink
                         from={from}
                         replace={true}
                         search={filter.toggledState}
                       />
-                    </Table.ActiveFilter>
+                    </DataTable.ActiveFilter>
                   ))}
 
                   <TextLink
@@ -967,29 +971,18 @@ function RouteComponent() {
                   >
                     <FormattedMessage {...messages.actionClear} />
                   </TextLink>
-                </Table.ActiveFilterList>
+                </DataTable.ActiveFilterList>
               )}
-            </Table.Header>
+            </DataTable.Header>
 
-            <Table.VirtualizedList
-              table={tableRef.current}
-              canFetchNextPage={hasNextPage && !isFetching}
+            <DataTable.List
+              table={table}
+              totalCount={totalCount}
+              hasNextPage={hasNextPage}
+              isFetching={isFetching}
               fetchNextPage={fetchNextPage}
             />
-
-            {/* Loading indicator */}
-            {isFetching && (
-              <div className="flex justify-center py-4">
-                <Text size="sm" className="text-text-secondary">
-                  <FormattedMessage
-                    id="pages.personal_tokens.loading_more"
-                    defaultMessage="Loading more tokens..."
-                    description="Text shown when loading more tokens"
-                  />
-                </Text>
-              </div>
-            )}
-          </Table.Root>
+          </DataTable.Root>
         </Navigation.Main>
         <AppFooter />
       </Navigation.Content>

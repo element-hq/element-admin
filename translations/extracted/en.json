@@ -279,10 +279,6 @@
     "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}",
     "description": "On the federation page, this heading shows the total number of known domains"
   },
-  "pages.federation.loading": {
-    "message": "Loading more domains…",
-    "description": "The loading message for the federation known domains page"
-  },
   "pages.federation.not_found.description": {
     "message": "The requested destination ({destination}) could not be found.",
     "description": "The description of the alert when a federation destination could not be found"
@@ -507,10 +503,6 @@
     "message": "Last active",
     "description": "Label for the last active date field"
   },
-  "pages.personal_tokens.loading_more": {
-    "message": "Loading more tokens...",
-    "description": "Text shown when loading more tokens"
-  },
   "pages.personal_tokens.name_column": {
     "message": "Name",
     "description": "Column header for token name column"
@@ -723,10 +715,6 @@
     "message": "Used",
     "description": "Filter option for used registration tokens only"
   },
-  "pages.registration_tokens.loading_more": {
-    "message": "Loading more tokens...",
-    "description": "Text shown when loading more tokens"
-  },
   "pages.registration_tokens.never_expires": {
     "message": "Never expires",
     "description": "Text shown when a token has no expiration date"
@@ -839,6 +827,22 @@
     "message": "Valid Until",
     "description": "Column header for valid until column"
   },
+  "pages.rooms.columns.alias": {
+    "message": "Alias",
+    "description": "Column header for the room alias in the rooms list table"
+  },
+  "pages.rooms.columns.members": {
+    "message": "Members",
+    "description": "Column header for the number of members in the rooms list table"
+  },
+  "pages.rooms.columns.room": {
+    "message": "Room",
+    "description": "Column header for the room name in the rooms list table"
+  },
+  "pages.rooms.columns.type": {
+    "message": "Type",
+    "description": "Column header for the room type in the rooms list table"
+  },
   "pages.rooms.delete_room.alert.description": {
     "message": "This will permanently delete all messages or media uploaded to the server and remove this room from the directory. Members will lose access to their messages and the room will be removed from their room list.",
     "description": "Description of the alert in the delete room dialog"
@@ -923,6 +927,22 @@
     "message": "{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}",
     "description": "On the room list page, this heading shows the total number of rooms"
   },
+  "pages.rooms.room_type.private": {
+    "message": "Private",
+    "description": "Badge label for a private room in the rooms list table"
+  },
+  "pages.rooms.room_type.public": {
+    "message": "Public",
+    "description": "Badge label for a public room in the rooms list table"
+  },
+  "pages.rooms.room_type.restricted": {
+    "message": "Restricted",
+    "description": "Badge label for a restricted room in the rooms list table"
+  },
+  "pages.rooms.search_placeholder": {
+    "message": "Search…",
+    "description": "Placeholder for the search input on the rooms list page"
+  },
   "pages.rooms.title": {
     "message": "Rooms",
     "description": "The title of the rooms list page"
@@ -995,6 +1015,26 @@
     "message": "Supervision is a feature available in ESS Pro",
     "description": "Title of the alert explaining that the supervision feature is only available in ESS Pro"
   },
+  "pages.users.account_status.active": {
+    "message": "Active",
+    "description": "Badge label for an active user account in the users list table"
+  },
+  "pages.users.account_status.admin": {
+    "message": "Admin",
+    "description": "Badge label for an admin user account in the users list table"
+  },
+  "pages.users.account_status.deactivated": {
+    "message": "Deactivated",
+    "description": "Badge label for a deactivated user account in the users list table"
+  },
+  "pages.users.account_status.guest": {
+    "message": "Guest",
+    "description": "Badge label for a legacy guest user account in the users list table"
+  },
+  "pages.users.account_status.locked": {
+    "message": "Locked",
+    "description": "Badge label for a locked user account in the users list table"
+  },
   "pages.users.add_email.button": {
     "message": "Add email address",
     "description": "The label of the button for adding an email address to a user"
@@ -1030,6 +1070,18 @@
   "pages.users.add_upstream_link.success": {
     "message": "Link to upstream account added",
     "description": "The success message for adding an upstream link"
+  },
+  "pages.users.columns.account_status": {
+    "message": "Account status",
+    "description": "Column header for the account status in the users list table"
+  },
+  "pages.users.columns.created_at": {
+    "message": "Created at",
+    "description": "Column header for the account creation date in the users list table"
+  },
+  "pages.users.columns.matrix_id": {
+    "message": "Matrix ID",
+    "description": "Column header for the Matrix ID in the users list table"
   },
   "pages.users.deactivate_account.alert.description": {
     "message": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data.",
@@ -1342,6 +1394,10 @@
   "ui.data.loading": {
     "message": "Loading value",
     "description": "In a data grid, aria label for when a data value is loading"
+  },
+  "ui.data_table.loading_more": {
+    "message": "Loading more…",
+    "description": "Label shown in a table row while the next page of results is being loaded"
   },
   "ui.destination_status.failing": {
     "message": "Failing",
