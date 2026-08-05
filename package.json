@@ -47,7 +47,7 @@
     "react-dom": "19.2.8",
     "react-error-boundary": "6.1.2",
     "react-hot-toast": "2.6.0",
-    "react-intl": "10.1.18",
+    "react-intl": "10.1.20",
     "semver": "7.8.5",
     "use-broadcast-ts": "2.0.1",
     "valibot": "1.4.2",
@@ -56,12 +56,12 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "4.12.1",
-    "@formatjs/cli": "6.16.14",
-    "@formatjs/icu-messageformat-parser": "3.5.15",
-    "@formatjs/unplugin": "1.2.3",
+    "@formatjs/cli": "6.16.16",
+    "@formatjs/icu-messageformat-parser": "3.5.16",
+    "@formatjs/unplugin": "1.2.4",
     "@hey-api/openapi-ts": "0.99.0",
-    "@localazy/cli": "2.0.11",
-    "@playwright/test": "1.62.0",
+    "@localazy/cli": "2.0.12",
+    "@playwright/test": "1.62.1",
     "@rolldown/plugin-babel": "0.2.3",
     "@tailwindcss/vite": "4.3.3",
     "@tanstack/devtools-vite": "0.8.3",
@@ -76,26 +76,25 @@
     "@tsconfig/vite-react": "8.1.1",
     "@types/babel__core": "7.20.5",
     "@types/node": "26.1.2",
-    "@types/react": "19.2.17",
-    "@types/react-dom": "19.2.3",
-    "@types/semver": "7.7.1",
-    "@vitejs/plugin-react": "6.0.4",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "@types/semver": "7.8.0",
+    "@vitejs/plugin-react": "6.0.5",
     "babel-plugin-react-compiler": "1.0.0",
     "browserslist": "4.28.7",
-    "eslint-plugin-formatjs": "6.4.19",
-    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-formatjs": "6.4.20",
     "husky": "9.1.7",
-    "knip": "6.29.0",
-    "lint-staged": "17.2.0",
-    "oxfmt": "0.61.0",
-    "oxlint": "1.76.0",
+    "knip": "6.31.0",
+    "lint-staged": "17.3.0",
+    "oxfmt": "0.62.0",
+    "oxlint": "1.77.0",
     "oxlint-tsgolint": "7.0.2001",
     "stylelint": "17.14.1",
     "stylelint-config-standard": "40.0.0",
     "stylelint-config-tailwindcss": "1.0.1",
     "tailwindcss": "4.3.3",
-    "typescript": "6.0.3",
-    "vite": "8.1.5"
+    "typescript": "7.0.2",
+    "vite": "8.2.0"
   },
   "lint-staged": {
     "*": [
@@ -121,5 +120,5 @@
       "src/api/synapse.ts"
     ]
   },
-  "packageManager": "pnpm@11.9.0+sha512.bd682d5d03fe525ef7c9fd6780c6884d1e756ac4c9c9fe00c538782824310dcf90e3ddc4f53835f06dfaebd5085e41855e0bcbb3b60de2ac5bbab89e5036f03b"
+  "packageManager": "pnpm@11.20.0+sha512.9a6f330a95b66446ea088faf1521405a8a01f07fde7124cc9958dfed52d4bb436737e65b08f85f37b46fcba375092558ac51262b816844b22f63406ed166bfee"
 }

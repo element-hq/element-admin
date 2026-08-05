@@ -25,3 +25,4 @@ peerDependencyRules:
     eslint: "10"
     "@vector-im/compound-design-tokens": "8"
     vite: "8"
+    typescript: "7"
