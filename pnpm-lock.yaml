@@ -71,9 +71,6 @@ importers:
       react-intl:
         specifier: 10.1.20
         version: 10.1.20(@types/react@19.2.18)(react@19.2.8)
-      semver:
-        specifier: 7.8.5
-        version: 7.8.5
       use-broadcast-ts:
         specifier: 2.0.1
         version: 2.0.1(@types/react@19.2.18)(use-sync-external-store@1.6.0(react@19.2.8))
@@ -83,6 +80,9 @@ importers:
       vaul:
         specifier: 1.1.2
         version: 1.1.2(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      verkit:
+        specifier: ^0.3.1
+        version: 0.3.1
       zustand:
         specifier: 5.0.14
         version: 5.0.14(@types/react@19.2.18)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))
@@ -156,9 +156,6 @@ importers:
       '@types/react-dom':
         specifier: 19.2.4
         version: 19.2.4(@types/react@19.2.18)
-      '@types/semver':
-        specifier: 7.8.0
-        version: 7.8.0
       '@vitejs/plugin-react':
         specifier: 6.0.5
         version: 6.0.5(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@10.2.2))(rolldown@1.2.2)(vite@8.2.0(@types/node@26.1.2)(jiti@2.7.0)(yaml@2.9.0)))(babel-plugin-react-compiler@1.0.0)(vite@8.2.0(@types/node@26.1.2)(jiti@2.7.0)(yaml@2.9.0))
@@ -2277,9 +2274,6 @@ packages:
   '@types/react@19.2.18':
     resolution: {integrity: sha512-AnzbBERsrLKtk2XSfTbYRLjQPdy116Sty4q+T+Bp3IC4l6jNBvreVPAHmpq9qhXQM7CXZPjLVmGMw9sy+hxQ3w==}
 
-  '@types/semver@7.8.0':
-    resolution: {integrity: sha512-1mAINjtQCXXeLkJ9ehXkwOcBpqtLxiVtKhpUf83DdRNdQKV0iXZpaHYqRr7nj+wvxuJzoAmAwXI+sCNMv1CzLQ==}
-
   '@typescript-eslint/project-service@8.66.0':
     resolution: {integrity: sha512-7MthGPTt4BP69lSryqpqq8HQqxuzynssckL/jyDyk3+TNMQ3y2jFWkptCrktWvBrP+EH787Nl5N5Qpw7WZg+5g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -3915,6 +3909,10 @@ packages:
     peerDependencies:
       react: ^16.8 || ^17.0 || ^18.0 || ^19.0.0 || ^19.0.0-rc
       react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0.0 || ^19.0.0-rc
+
+  verkit@0.3.1:
+    resolution: {integrity: sha512-w2Eo8LSIIoW7qxNBzT7/17k+bh8plXo7G3dHjEIDqPlnluhzaxr9JX8F28VSYEtDvc1/a3WBDih6xNUZseebXg==}
+    engines: {node: '>=18.12.0'}
 
   vite@8.2.0:
     resolution: {integrity: sha512-pn+CFpM0lwDeKwmOq1ZaBK/9sjorZcgqxki6MbY/jPEVd9vichIlmlD4HmQ5wdP5EgqQCFRaACBxMC7uEGc6lQ==}
@@ -5711,8 +5709,6 @@ snapshots:
     dependencies:
       csstype: 3.2.3
 
-  '@types/semver@7.8.0': {}
-
   '@typescript-eslint/project-service@8.66.0(supports-color@10.2.2)(typescript@7.0.2)':
     dependencies:
       '@typescript-eslint/tsconfig-utils': 8.66.0(typescript@7.0.2)
@@ -7293,6 +7289,8 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
+
+  verkit@0.3.1: {}
 
   vite@8.2.0(@types/node@26.1.2)(jiti@2.7.0)(yaml@2.9.0):
     dependencies:

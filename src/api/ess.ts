@@ -4,9 +4,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import type SemVer from "semver/classes/semver";
-import parseSemver from "semver/functions/parse";
 import * as v from "valibot";
+import { parse, type SemVer } from "verkit";
 
 import { accessToken } from "@/stores/auth";
 import { ensureResponseOk, fetch } from "@/utils/fetch";
@@ -57,8 +56,8 @@ export const useEssVariant = (
 
 export const useEssVersion = (synapseRoot: string): null | SemVer => {
   const { data } = useSuspenseQuery(essVersionQuery(synapseRoot));
-  if (!data) return null;
-  return parseSemver(data.version);
+  if (!data || !data.version) return null;
+  return parse(data.version);
 };
 
 const AdminbotResponse = v.object({
