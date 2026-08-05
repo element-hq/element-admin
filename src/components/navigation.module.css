@@ -24,7 +24,7 @@
 
   & .sidebar-inner {
     block-size: 100%;
-    border-inline-end: 1px solid var(--cpd-color-bg-subtle-primary);
+    border-inline-end: 1px solid var(--cpd-color-separator-primary);
     background-color: var(--cpd-color-bg-canvas-default);
 
     & .sidebar-sticky {
@@ -66,7 +66,7 @@
   /* In the DOM, the details view is first, but it's on the right side, hence
      the explicit ordering */
   order: 1;
-  border-inline-start: solid 1px var(--cpd-color-bg-subtle-secondary);
+  border-inline-start: solid 1px var(--cpd-color-separator-primary);
 
   & .details-inner {
     position: sticky;
@@ -81,7 +81,7 @@
 
 .divider {
   block-size: 1px;
-  background-color: var(--cpd-color-bg-subtle-secondary);
+  background-color: var(--cpd-color-separator-primary);
   margin: var(--cpd-space-6x) var(--cpd-space-4x);
 }
 

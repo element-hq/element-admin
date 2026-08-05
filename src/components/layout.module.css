@@ -41,7 +41,7 @@
 @media screen and (width >= 1920px) {
   .layout {
     margin: auto;
-    border-inline: solid 1px var(--cpd-color-bg-subtle-primary);
+    border-inline: solid 1px var(--cpd-color-separator-primary);
     max-width: 1920px;
   }
 }

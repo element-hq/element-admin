@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--cpd-space-4x) var(--cpd-space-5x);
-  border-block-end: solid 1px var(--cpd-color-bg-subtle-secondary);
+  border-block-end: solid 1px var(--cpd-color-separator-secondary);
   background-color: var(--cpd-color-bg-canvas-default);
 
   /** This is to position the header above the content, sticky at the top */
