@@ -9,38 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as CallbackRouteImport } from './routes/callback'
-import { Route as ConsoleRouteImport } from './routes/_console'
 import { Route as AuthRouteImport } from './routes/_auth'
+import { Route as ConsoleRouteImport } from './routes/_console'
+import { Route as CallbackRouteImport } from './routes/callback'
 import { Route as ConsoleIndexRouteImport } from './routes/_console.index'
-import { Route as ConsoleUsersRouteImport } from './routes/_console.users'
-import { Route as ConsoleSupervisionRouteImport } from './routes/_console.supervision'
-import { Route as ConsoleRoomsRouteImport } from './routes/_console.rooms'
-import { Route as ConsoleRegistrationTokensRouteImport } from './routes/_console.registration-tokens'
-import { Route as ConsolePersonalTokensRouteImport } from './routes/_console.personal-tokens'
-import { Route as ConsoleFederationRouteImport } from './routes/_console.federation'
 import { Route as ConsoleAuditingRouteImport } from './routes/_console.auditing'
-import { Route as ConsoleFederationIndexRouteImport } from './routes/_console.federation.index'
+import { Route as ConsoleFederationRouteImport } from './routes/_console.federation'
+import { Route as ConsolePersonalTokensRouteImport } from './routes/_console.personal-tokens'
+import { Route as ConsoleRegistrationTokensRouteImport } from './routes/_console.registration-tokens'
+import { Route as ConsoleRoomsRouteImport } from './routes/_console.rooms'
+import { Route as ConsoleSupervisionRouteImport } from './routes/_console.supervision'
+import { Route as ConsoleUsersRouteImport } from './routes/_console.users'
 import { Route as AuthLoginIndexRouteImport } from './routes/_auth.login.index'
-import { Route as ConsoleUsersUserIdRouteImport } from './routes/_console.users.$userId'
-import { Route as ConsoleRoomsRoomIdRouteImport } from './routes/_console.rooms.$roomId'
-import { Route as ConsoleRegistrationTokensTokenIdRouteImport } from './routes/_console.registration-tokens.$tokenId'
-import { Route as ConsolePersonalTokensTokenIdRouteImport } from './routes/_console.personal-tokens.$tokenId'
-import { Route as ConsoleFederationKnownDomainsRouteImport } from './routes/_console.federation.known-domains'
+import { Route as ConsoleFederationIndexRouteImport } from './routes/_console.federation.index'
 import { Route as ConsoleFederationAllowedDomainsRouteImport } from './routes/_console.federation.allowed-domains'
+import { Route as ConsoleFederationKnownDomainsRouteImport } from './routes/_console.federation.known-domains'
+import { Route as ConsolePersonalTokensTokenIdRouteImport } from './routes/_console.personal-tokens.$tokenId'
+import { Route as ConsoleRegistrationTokensTokenIdRouteImport } from './routes/_console.registration-tokens.$tokenId'
+import { Route as ConsoleRoomsRoomIdRouteImport } from './routes/_console.rooms.$roomId'
+import { Route as ConsoleUsersUserIdRouteImport } from './routes/_console.users.$userId'
 import { Route as ConsoleFederationKnownDomainsDestinationRouteImport } from './routes/_console.federation.known-domains.$destination'
 
-const CallbackRoute = CallbackRouteImport.update({
-  id: '/callback',
-  path: '/callback',
+const AuthRoute = AuthRouteImport.update({
+  id: '/_auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConsoleRoute = ConsoleRouteImport.update({
   id: '/_console',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/_auth',
+const CallbackRoute = CallbackRouteImport.update({
+  id: '/callback',
+  path: '/callback',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConsoleIndexRoute = ConsoleIndexRouteImport.update({
@@ -48,19 +48,19 @@ const ConsoleIndexRoute = ConsoleIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ConsoleRoute,
 } as any)
-const ConsoleUsersRoute = ConsoleUsersRouteImport.update({
-  id: '/users',
-  path: '/users',
+const ConsoleAuditingRoute = ConsoleAuditingRouteImport.update({
+  id: '/auditing',
+  path: '/auditing',
   getParentRoute: () => ConsoleRoute,
 } as any)
-const ConsoleSupervisionRoute = ConsoleSupervisionRouteImport.update({
-  id: '/supervision',
-  path: '/supervision',
+const ConsoleFederationRoute = ConsoleFederationRouteImport.update({
+  id: '/federation',
+  path: '/federation',
   getParentRoute: () => ConsoleRoute,
 } as any)
-const ConsoleRoomsRoute = ConsoleRoomsRouteImport.update({
-  id: '/rooms',
-  path: '/rooms',
+const ConsolePersonalTokensRoute = ConsolePersonalTokensRouteImport.update({
+  id: '/personal-tokens',
+  path: '/personal-tokens',
   getParentRoute: () => ConsoleRoute,
 } as any)
 const ConsoleRegistrationTokensRoute =
@@ -69,52 +69,36 @@ const ConsoleRegistrationTokensRoute =
     path: '/registration-tokens',
     getParentRoute: () => ConsoleRoute,
   } as any)
-const ConsolePersonalTokensRoute = ConsolePersonalTokensRouteImport.update({
-  id: '/personal-tokens',
-  path: '/personal-tokens',
+const ConsoleRoomsRoute = ConsoleRoomsRouteImport.update({
+  id: '/rooms',
+  path: '/rooms',
   getParentRoute: () => ConsoleRoute,
 } as any)
-const ConsoleFederationRoute = ConsoleFederationRouteImport.update({
-  id: '/federation',
-  path: '/federation',
+const ConsoleSupervisionRoute = ConsoleSupervisionRouteImport.update({
+  id: '/supervision',
+  path: '/supervision',
   getParentRoute: () => ConsoleRoute,
 } as any)
-const ConsoleAuditingRoute = ConsoleAuditingRouteImport.update({
-  id: '/auditing',
-  path: '/auditing',
+const ConsoleUsersRoute = ConsoleUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
   getParentRoute: () => ConsoleRoute,
-} as any)
-const ConsoleFederationIndexRoute = ConsoleFederationIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => ConsoleFederationRoute,
 } as any)
 const AuthLoginIndexRoute = AuthLoginIndexRouteImport.update({
   id: '/login/',
   path: '/login/',
   getParentRoute: () => AuthRoute,
 } as any)
-const ConsoleUsersUserIdRoute = ConsoleUsersUserIdRouteImport.update({
-  id: '/$userId',
-  path: '/$userId',
-  getParentRoute: () => ConsoleUsersRoute,
+const ConsoleFederationIndexRoute = ConsoleFederationIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ConsoleFederationRoute,
 } as any)
-const ConsoleRoomsRoomIdRoute = ConsoleRoomsRoomIdRouteImport.update({
-  id: '/$roomId',
-  path: '/$roomId',
-  getParentRoute: () => ConsoleRoomsRoute,
-} as any)
-const ConsoleRegistrationTokensTokenIdRoute =
-  ConsoleRegistrationTokensTokenIdRouteImport.update({
-    id: '/$tokenId',
-    path: '/$tokenId',
-    getParentRoute: () => ConsoleRegistrationTokensRoute,
-  } as any)
-const ConsolePersonalTokensTokenIdRoute =
-  ConsolePersonalTokensTokenIdRouteImport.update({
-    id: '/$tokenId',
-    path: '/$tokenId',
-    getParentRoute: () => ConsolePersonalTokensRoute,
+const ConsoleFederationAllowedDomainsRoute =
+  ConsoleFederationAllowedDomainsRouteImport.update({
+    id: '/allowed-domains',
+    path: '/allowed-domains',
+    getParentRoute: () => ConsoleFederationRoute,
   } as any)
 const ConsoleFederationKnownDomainsRoute =
   ConsoleFederationKnownDomainsRouteImport.update({
@@ -122,12 +106,28 @@ const ConsoleFederationKnownDomainsRoute =
     path: '/known-domains',
     getParentRoute: () => ConsoleFederationRoute,
   } as any)
-const ConsoleFederationAllowedDomainsRoute =
-  ConsoleFederationAllowedDomainsRouteImport.update({
-    id: '/allowed-domains',
-    path: '/allowed-domains',
-    getParentRoute: () => ConsoleFederationRoute,
+const ConsolePersonalTokensTokenIdRoute =
+  ConsolePersonalTokensTokenIdRouteImport.update({
+    id: '/$tokenId',
+    path: '/$tokenId',
+    getParentRoute: () => ConsolePersonalTokensRoute,
   } as any)
+const ConsoleRegistrationTokensTokenIdRoute =
+  ConsoleRegistrationTokensTokenIdRouteImport.update({
+    id: '/$tokenId',
+    path: '/$tokenId',
+    getParentRoute: () => ConsoleRegistrationTokensRoute,
+  } as any)
+const ConsoleRoomsRoomIdRoute = ConsoleRoomsRoomIdRouteImport.update({
+  id: '/$roomId',
+  path: '/$roomId',
+  getParentRoute: () => ConsoleRoomsRoute,
+} as any)
+const ConsoleUsersUserIdRoute = ConsoleUsersUserIdRouteImport.update({
+  id: '/$userId',
+  path: '/$userId',
+  getParentRoute: () => ConsoleUsersRoute,
+} as any)
 const ConsoleFederationKnownDomainsDestinationRoute =
   ConsoleFederationKnownDomainsDestinationRouteImport.update({
     id: '/$destination',
@@ -269,11 +269,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/callback': {
-      id: '/callback'
-      path: '/callback'
-      fullPath: '/callback'
-      preLoaderRoute: typeof CallbackRouteImport
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_console': {
@@ -283,11 +283,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConsoleRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth': {
-      id: '/_auth'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthRouteImport
+    '/callback': {
+      id: '/callback'
+      path: '/callback'
+      fullPath: '/callback'
+      preLoaderRoute: typeof CallbackRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_console/': {
@@ -297,39 +297,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConsoleIndexRouteImport
       parentRoute: typeof ConsoleRoute
     }
-    '/_console/users': {
-      id: '/_console/users'
-      path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof ConsoleUsersRouteImport
-      parentRoute: typeof ConsoleRoute
-    }
-    '/_console/supervision': {
-      id: '/_console/supervision'
-      path: '/supervision'
-      fullPath: '/supervision'
-      preLoaderRoute: typeof ConsoleSupervisionRouteImport
-      parentRoute: typeof ConsoleRoute
-    }
-    '/_console/rooms': {
-      id: '/_console/rooms'
-      path: '/rooms'
-      fullPath: '/rooms'
-      preLoaderRoute: typeof ConsoleRoomsRouteImport
-      parentRoute: typeof ConsoleRoute
-    }
-    '/_console/registration-tokens': {
-      id: '/_console/registration-tokens'
-      path: '/registration-tokens'
-      fullPath: '/registration-tokens'
-      preLoaderRoute: typeof ConsoleRegistrationTokensRouteImport
-      parentRoute: typeof ConsoleRoute
-    }
-    '/_console/personal-tokens': {
-      id: '/_console/personal-tokens'
-      path: '/personal-tokens'
-      fullPath: '/personal-tokens'
-      preLoaderRoute: typeof ConsolePersonalTokensRouteImport
+    '/_console/auditing': {
+      id: '/_console/auditing'
+      path: '/auditing'
+      fullPath: '/auditing'
+      preLoaderRoute: typeof ConsoleAuditingRouteImport
       parentRoute: typeof ConsoleRoute
     }
     '/_console/federation': {
@@ -339,19 +311,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConsoleFederationRouteImport
       parentRoute: typeof ConsoleRoute
     }
-    '/_console/auditing': {
-      id: '/_console/auditing'
-      path: '/auditing'
-      fullPath: '/auditing'
-      preLoaderRoute: typeof ConsoleAuditingRouteImport
+    '/_console/personal-tokens': {
+      id: '/_console/personal-tokens'
+      path: '/personal-tokens'
+      fullPath: '/personal-tokens'
+      preLoaderRoute: typeof ConsolePersonalTokensRouteImport
       parentRoute: typeof ConsoleRoute
     }
-    '/_console/federation/': {
-      id: '/_console/federation/'
-      path: '/'
-      fullPath: '/federation/'
-      preLoaderRoute: typeof ConsoleFederationIndexRouteImport
-      parentRoute: typeof ConsoleFederationRoute
+    '/_console/registration-tokens': {
+      id: '/_console/registration-tokens'
+      path: '/registration-tokens'
+      fullPath: '/registration-tokens'
+      preLoaderRoute: typeof ConsoleRegistrationTokensRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/rooms': {
+      id: '/_console/rooms'
+      path: '/rooms'
+      fullPath: '/rooms'
+      preLoaderRoute: typeof ConsoleRoomsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/supervision': {
+      id: '/_console/supervision'
+      path: '/supervision'
+      fullPath: '/supervision'
+      preLoaderRoute: typeof ConsoleSupervisionRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/users': {
+      id: '/_console/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof ConsoleUsersRouteImport
+      parentRoute: typeof ConsoleRoute
     }
     '/_auth/login/': {
       id: '/_auth/login/'
@@ -360,39 +353,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginIndexRouteImport
       parentRoute: typeof AuthRoute
     }
-    '/_console/users/$userId': {
-      id: '/_console/users/$userId'
-      path: '/$userId'
-      fullPath: '/users/$userId'
-      preLoaderRoute: typeof ConsoleUsersUserIdRouteImport
-      parentRoute: typeof ConsoleUsersRoute
-    }
-    '/_console/rooms/$roomId': {
-      id: '/_console/rooms/$roomId'
-      path: '/$roomId'
-      fullPath: '/rooms/$roomId'
-      preLoaderRoute: typeof ConsoleRoomsRoomIdRouteImport
-      parentRoute: typeof ConsoleRoomsRoute
-    }
-    '/_console/registration-tokens/$tokenId': {
-      id: '/_console/registration-tokens/$tokenId'
-      path: '/$tokenId'
-      fullPath: '/registration-tokens/$tokenId'
-      preLoaderRoute: typeof ConsoleRegistrationTokensTokenIdRouteImport
-      parentRoute: typeof ConsoleRegistrationTokensRoute
-    }
-    '/_console/personal-tokens/$tokenId': {
-      id: '/_console/personal-tokens/$tokenId'
-      path: '/$tokenId'
-      fullPath: '/personal-tokens/$tokenId'
-      preLoaderRoute: typeof ConsolePersonalTokensTokenIdRouteImport
-      parentRoute: typeof ConsolePersonalTokensRoute
-    }
-    '/_console/federation/known-domains': {
-      id: '/_console/federation/known-domains'
-      path: '/known-domains'
-      fullPath: '/federation/known-domains'
-      preLoaderRoute: typeof ConsoleFederationKnownDomainsRouteImport
+    '/_console/federation/': {
+      id: '/_console/federation/'
+      path: '/'
+      fullPath: '/federation/'
+      preLoaderRoute: typeof ConsoleFederationIndexRouteImport
       parentRoute: typeof ConsoleFederationRoute
     }
     '/_console/federation/allowed-domains': {
@@ -401,6 +366,41 @@ declare module '@tanstack/react-router' {
       fullPath: '/federation/allowed-domains'
       preLoaderRoute: typeof ConsoleFederationAllowedDomainsRouteImport
       parentRoute: typeof ConsoleFederationRoute
+    }
+    '/_console/federation/known-domains': {
+      id: '/_console/federation/known-domains'
+      path: '/known-domains'
+      fullPath: '/federation/known-domains'
+      preLoaderRoute: typeof ConsoleFederationKnownDomainsRouteImport
+      parentRoute: typeof ConsoleFederationRoute
+    }
+    '/_console/personal-tokens/$tokenId': {
+      id: '/_console/personal-tokens/$tokenId'
+      path: '/$tokenId'
+      fullPath: '/personal-tokens/$tokenId'
+      preLoaderRoute: typeof ConsolePersonalTokensTokenIdRouteImport
+      parentRoute: typeof ConsolePersonalTokensRoute
+    }
+    '/_console/registration-tokens/$tokenId': {
+      id: '/_console/registration-tokens/$tokenId'
+      path: '/$tokenId'
+      fullPath: '/registration-tokens/$tokenId'
+      preLoaderRoute: typeof ConsoleRegistrationTokensTokenIdRouteImport
+      parentRoute: typeof ConsoleRegistrationTokensRoute
+    }
+    '/_console/rooms/$roomId': {
+      id: '/_console/rooms/$roomId'
+      path: '/$roomId'
+      fullPath: '/rooms/$roomId'
+      preLoaderRoute: typeof ConsoleRoomsRoomIdRouteImport
+      parentRoute: typeof ConsoleRoomsRoute
+    }
+    '/_console/users/$userId': {
+      id: '/_console/users/$userId'
+      path: '/$userId'
+      fullPath: '/users/$userId'
+      preLoaderRoute: typeof ConsoleUsersUserIdRouteImport
+      parentRoute: typeof ConsoleUsersRoute
     }
     '/_console/federation/known-domains/$destination': {
       id: '/_console/federation/known-domains/$destination'
