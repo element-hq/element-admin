@@ -101,6 +101,9 @@
   "navigation.dashboard": {
     "message": "Dashboard"
   },
+  "navigation.devices": {
+    "message": "Devices"
+  },
   "navigation.documentation": {
     "message": "Dokumentation"
   },
@@ -154,6 +157,252 @@
   },
   "pages.dashboard.title": {
     "message": "Dashboard"
+  },
+  "pages.devices.applications.client_id_label": {
+    "message": "Client ID"
+  },
+  "pages.devices.applications.count": {
+    "message": "{COUNT, plural, =0 {No applications} one {# application} other {# applications}}"
+  },
+  "pages.devices.applications.description": {
+    "message": "Applications are OAuth 2.0 clients that users sign in to."
+  },
+  "pages.devices.applications.filters.has_active_sessions": {
+    "message": "With active devices"
+  },
+  "pages.devices.applications.filters.no_active_sessions": {
+    "message": "Without active devices"
+  },
+  "pages.devices.applications.grant_types_label": {
+    "message": "Grant types"
+  },
+  "pages.devices.applications.name_column": {
+    "message": "Name"
+  },
+  "pages.devices.applications.not_found.description": {
+    "message": "The requested application ({clientId}) could not be found on {serverName}."
+  },
+  "pages.devices.applications.not_found.title": {
+    "message": "Application not found"
+  },
+  "pages.devices.applications.redirect_uris_label": {
+    "message": "Redirect URIs"
+  },
+  "pages.devices.applications.search_placeholder": {
+    "message": "Search by name…"
+  },
+  "pages.devices.applications.statistics.active_recently": {
+    "message": "Active in the past 7 days"
+  },
+  "pages.devices.applications.statistics.created_recently": {
+    "message": "Devices added in the past 7 days"
+  },
+  "pages.devices.applications.statistics.heading": {
+    "message": "Device statistics"
+  },
+  "pages.devices.applications.statistics.total_active": {
+    "message": "Active devices"
+  },
+  "pages.devices.applications.title": {
+    "message": "Applications"
+  },
+  "pages.devices.applications.uri_label": {
+    "message": "Homepage"
+  },
+  "pages.devices.applications.view_sessions": {
+    "message": "View all devices"
+  },
+  "pages.devices.legacy.count": {
+    "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}"
+  },
+  "pages.devices.legacy.created_at_label": {
+    "message": "Signed in at"
+  },
+  "pages.devices.legacy.description": {
+    "message": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
+  },
+  "pages.devices.legacy.device_column": {
+    "message": "Device"
+  },
+  "pages.devices.legacy.device_id_label": {
+    "message": "Device ID"
+  },
+  "pages.devices.legacy.filters.activity_active": {
+    "message": "Active"
+  },
+  "pages.devices.legacy.filters.activity_inactive": {
+    "message": "Inactive"
+  },
+  "pages.devices.legacy.filters.activity_recently_used": {
+    "message": "Recently used"
+  },
+  "pages.devices.legacy.filters.activity_signed_out": {
+    "message": "Signed out"
+  },
+  "pages.devices.legacy.filters.newest_first": {
+    "message": "Newest first"
+  },
+  "pages.devices.legacy.filters.user_chip": {
+    "message": "User: @{localpart}:{server}"
+  },
+  "pages.devices.legacy.finish.button": {
+    "message": "Remove device"
+  },
+  "pages.devices.legacy.finish.confirm": {
+    "message": "Remove device"
+  },
+  "pages.devices.legacy.finish.description": {
+    "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
+  },
+  "pages.devices.legacy.finish.error": {
+    "message": "Failed to remove the legacy device"
+  },
+  "pages.devices.legacy.finish.success": {
+    "message": "Legacy device removed"
+  },
+  "pages.devices.legacy.finish.title": {
+    "message": "Remove this legacy device?"
+  },
+  "pages.devices.legacy.finished_at_label": {
+    "message": "Signed out at"
+  },
+  "pages.devices.legacy.last_active_ip_label": {
+    "message": "Last active IP"
+  },
+  "pages.devices.legacy.last_active_label": {
+    "message": "Last active"
+  },
+  "pages.devices.legacy.not_found.description": {
+    "message": "The requested legacy device ({sessionId}) could not be found on {serverName}."
+  },
+  "pages.devices.legacy.not_found.title": {
+    "message": "Legacy device not found"
+  },
+  "pages.devices.legacy.redirect_uri_label": {
+    "message": "Redirect URI"
+  },
+  "pages.devices.legacy.status_column": {
+    "message": "Status"
+  },
+  "pages.devices.legacy.technical_details": {
+    "message": "Technical details"
+  },
+  "pages.devices.legacy.title": {
+    "message": "Legacy devices"
+  },
+  "pages.devices.legacy.user_agent_label": {
+    "message": "User agent"
+  },
+  "pages.devices.legacy.user_column": {
+    "message": "User"
+  },
+  "pages.devices.tabs.applications": {
+    "message": "Applications"
+  },
+  "pages.devices.tabs.legacy": {
+    "message": "Legacy devices"
+  },
+  "pages.devices.tabs.section": {
+    "message": "Device views"
+  },
+  "pages.devices.tabs.user": {
+    "message": "User devices"
+  },
+  "pages.devices.title": {
+    "message": "Devices"
+  },
+  "pages.devices.user.client_column": {
+    "message": "Application"
+  },
+  "pages.devices.user.count": {
+    "message": "{COUNT, plural, =0 {No devices} one {# device} other {# devices}}"
+  },
+  "pages.devices.user.created_at_label": {
+    "message": "Signed in at"
+  },
+  "pages.devices.user.description": {
+    "message": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
+  },
+  "pages.devices.user.device_column": {
+    "message": "Device"
+  },
+  "pages.devices.user.device_id_label": {
+    "message": "Device ID"
+  },
+  "pages.devices.user.filters.activity_active": {
+    "message": "Active"
+  },
+  "pages.devices.user.filters.activity_inactive": {
+    "message": "Inactive"
+  },
+  "pages.devices.user.filters.activity_recently_used": {
+    "message": "Recently used"
+  },
+  "pages.devices.user.filters.activity_signed_out": {
+    "message": "Signed out"
+  },
+  "pages.devices.user.filters.client_chip": {
+    "message": "Application: {name}"
+  },
+  "pages.devices.user.filters.newest_first": {
+    "message": "Newest first"
+  },
+  "pages.devices.user.filters.user_chip": {
+    "message": "User: @{localpart}:{server}"
+  },
+  "pages.devices.user.finish.button": {
+    "message": "Remove device"
+  },
+  "pages.devices.user.finish.confirm": {
+    "message": "Remove device"
+  },
+  "pages.devices.user.finish.description": {
+    "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
+  },
+  "pages.devices.user.finish.error": {
+    "message": "Failed to remove the device"
+  },
+  "pages.devices.user.finish.success": {
+    "message": "Device removed"
+  },
+  "pages.devices.user.finish.title": {
+    "message": "Remove this device?"
+  },
+  "pages.devices.user.finished_at_label": {
+    "message": "Signed out at"
+  },
+  "pages.devices.user.last_active_ip_label": {
+    "message": "Last active IP"
+  },
+  "pages.devices.user.last_active_label": {
+    "message": "Last active"
+  },
+  "pages.devices.user.not_found.description": {
+    "message": "The requested device ({sessionId}) could not be found on {serverName}."
+  },
+  "pages.devices.user.not_found.title": {
+    "message": "Device not found"
+  },
+  "pages.devices.user.scope_label": {
+    "message": "Scope"
+  },
+  "pages.devices.user.status_column": {
+    "message": "Status"
+  },
+  "pages.devices.user.technical_details": {
+    "message": "Technical details"
+  },
+  "pages.devices.user.title": {
+    "message": "User devices"
+  },
+  "pages.devices.user.user_agent_label": {
+    "message": "User agent"
+  },
+  "pages.devices.user.user_column": {
+    "message": "User"
+  },
+  "pages.devices.user.user_none": {
+    "message": "No user"
   },
   "pages.federation.allowlist.add.error": {
     "message": "Domain konnte nicht zur Zulassungsliste hinzugefügt werden"
@@ -857,6 +1106,9 @@
   "pages.users.filters.active": {
     "message": "Aktive Nutzer"
   },
+  "pages.users.filters.active_client_chip": {
+    "message": "Has active device on: {name}"
+  },
   "pages.users.filters.admins": {
     "message": "Admins"
   },
@@ -866,11 +1118,17 @@
   "pages.users.filters.guests": {
     "message": "Gäste (Legacy)"
   },
+  "pages.users.filters.has_legacy_session": {
+    "message": "Has active legacy device"
+  },
   "pages.users.filters.locked": {
     "message": "Gesperrte Nutzer"
   },
   "pages.users.filters.newest_first": {
     "message": "Neueste zuerst"
+  },
+  "pages.users.filters.no_legacy_session": {
+    "message": "No active legacy device"
   },
   "pages.users.filters.non_guests": {
     "message": "Nicht-Gäste (Legacy)"
@@ -992,6 +1250,12 @@
   "pages.users.set_password.title": {
     "message": "Neues Passwort für diesen Nutzer festlegen"
   },
+  "pages.users.statistics.devices": {
+    "message": "Devices"
+  },
+  "pages.users.statistics.legacy_devices": {
+    "message": "Legacy devices"
+  },
   "pages.users.title": {
     "message": "Nutzer"
   },
@@ -1060,6 +1324,51 @@
   },
   "ui.destination_status.working": {
     "message": "Funktioniert"
+  },
+  "ui.device_info.name_on_platform": {
+    "message": "{name} on {platform}"
+  },
+  "ui.device_info.type.mobile": {
+    "message": "Mobile device"
+  },
+  "ui.device_info.type.pc": {
+    "message": "Computer"
+  },
+  "ui.device_info.type.tablet": {
+    "message": "Tablet"
+  },
+  "ui.device_info.type.unknown": {
+    "message": "Unknown device type"
+  },
+  "ui.device_info.unknown_device": {
+    "message": "Unknown device"
+  },
+  "ui.device_status.active": {
+    "message": "Active"
+  },
+  "ui.device_status.inactive": {
+    "message": "Inactive"
+  },
+  "ui.device_status.last_active.tooltip": {
+    "message": "Last active on {date}."
+  },
+  "ui.device_status.never_used": {
+    "message": "Never used"
+  },
+  "ui.device_status.never_used.tooltip": {
+    "message": "This device has not been used yet."
+  },
+  "ui.device_status.recently_used": {
+    "message": "Recently used"
+  },
+  "ui.device_status.signed_out": {
+    "message": "Signed out"
+  },
+  "ui.device_status.signed_out.tooltip": {
+    "message": "This device has been signed out and no longer has access."
+  },
+  "ui.device_status.signed_out.tooltip_at": {
+    "message": "Signed out on {date}."
   },
   "ui.language_switcher.browser_default": {
     "message": "Browser-Einstellungen verwenden ({language})"

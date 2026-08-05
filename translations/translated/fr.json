@@ -101,6 +101,9 @@
   "navigation.dashboard": {
     "message": "Tableau de bord"
   },
+  "navigation.devices": {
+    "message": "Appareils"
+  },
   "navigation.documentation": {
     "message": "Documentation"
   },
@@ -154,6 +157,252 @@
   },
   "pages.dashboard.title": {
     "message": "Tableau de bord"
+  },
+  "pages.devices.applications.client_id_label": {
+    "message": "Identifiant de l'application"
+  },
+  "pages.devices.applications.count": {
+    "message": "{COUNT, plural, =0 {Aucune application} one {# application} other {# applications}}"
+  },
+  "pages.devices.applications.description": {
+    "message": "Les applications sont des clients OAuth 2.0 auxquels les utilisateurs se connectent."
+  },
+  "pages.devices.applications.filters.has_active_sessions": {
+    "message": "Avec des appareils actifs"
+  },
+  "pages.devices.applications.filters.no_active_sessions": {
+    "message": "Sans appareil actif"
+  },
+  "pages.devices.applications.grant_types_label": {
+    "message": "Type d'autorisation"
+  },
+  "pages.devices.applications.name_column": {
+    "message": "Nom"
+  },
+  "pages.devices.applications.not_found.description": {
+    "message": "L'application demandée ({clientId}) est introuvable sur {serverName}."
+  },
+  "pages.devices.applications.not_found.title": {
+    "message": "Application introuvable"
+  },
+  "pages.devices.applications.redirect_uris_label": {
+    "message": "URLs de redirection"
+  },
+  "pages.devices.applications.search_placeholder": {
+    "message": "Rechercher par nom…"
+  },
+  "pages.devices.applications.statistics.active_recently": {
+    "message": "Actif au cours des 7 derniers jours"
+  },
+  "pages.devices.applications.statistics.created_recently": {
+    "message": "Appareils ajoutés au cours des 7 derniers jours"
+  },
+  "pages.devices.applications.statistics.heading": {
+    "message": "Statistiques de l'appareil"
+  },
+  "pages.devices.applications.statistics.total_active": {
+    "message": "Appareils actifs"
+  },
+  "pages.devices.applications.title": {
+    "message": "Applications"
+  },
+  "pages.devices.applications.uri_label": {
+    "message": "Page d'accueil"
+  },
+  "pages.devices.applications.view_sessions": {
+    "message": "Afficher tous les appareils"
+  },
+  "pages.devices.legacy.count": {
+    "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}"
+  },
+  "pages.devices.legacy.created_at_label": {
+    "message": "Connexion effectuée le"
+  },
+  "pages.devices.legacy.description": {
+    "message": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
+  },
+  "pages.devices.legacy.device_column": {
+    "message": "Appareil"
+  },
+  "pages.devices.legacy.device_id_label": {
+    "message": "Identifiant de l'appareil"
+  },
+  "pages.devices.legacy.filters.activity_active": {
+    "message": "Actif"
+  },
+  "pages.devices.legacy.filters.activity_inactive": {
+    "message": "Inactif"
+  },
+  "pages.devices.legacy.filters.activity_recently_used": {
+    "message": "Utilisé récemment"
+  },
+  "pages.devices.legacy.filters.activity_signed_out": {
+    "message": "Déconnecté"
+  },
+  "pages.devices.legacy.filters.newest_first": {
+    "message": "Plus récent en premier"
+  },
+  "pages.devices.legacy.filters.user_chip": {
+    "message": "Utilisateur : @{localpart}:{server}"
+  },
+  "pages.devices.legacy.finish.button": {
+    "message": "Supprimer l’appareil"
+  },
+  "pages.devices.legacy.finish.confirm": {
+    "message": "Supprimer l’appareil"
+  },
+  "pages.devices.legacy.finish.description": {
+    "message": "L'utilisateur sera déconnecté de cet appareil. Les jetons d'accès et d'actualisation seront immédiatement révoqués."
+  },
+  "pages.devices.legacy.finish.error": {
+    "message": "Failed to remove the legacy device"
+  },
+  "pages.devices.legacy.finish.success": {
+    "message": "Legacy device removed"
+  },
+  "pages.devices.legacy.finish.title": {
+    "message": "Remove this legacy device?"
+  },
+  "pages.devices.legacy.finished_at_label": {
+    "message": "Déconnecté le"
+  },
+  "pages.devices.legacy.last_active_ip_label": {
+    "message": "Dernière adresse IP active"
+  },
+  "pages.devices.legacy.last_active_label": {
+    "message": "Dernière activité"
+  },
+  "pages.devices.legacy.not_found.description": {
+    "message": "The requested legacy device ({sessionId}) could not be found on {serverName}."
+  },
+  "pages.devices.legacy.not_found.title": {
+    "message": "Legacy device not found"
+  },
+  "pages.devices.legacy.redirect_uri_label": {
+    "message": "URI de redirection"
+  },
+  "pages.devices.legacy.status_column": {
+    "message": "Statut"
+  },
+  "pages.devices.legacy.technical_details": {
+    "message": "Détails techniques"
+  },
+  "pages.devices.legacy.title": {
+    "message": "Legacy devices"
+  },
+  "pages.devices.legacy.user_agent_label": {
+    "message": "Agent utilisateur"
+  },
+  "pages.devices.legacy.user_column": {
+    "message": "Utilisateur"
+  },
+  "pages.devices.tabs.applications": {
+    "message": "Applications"
+  },
+  "pages.devices.tabs.legacy": {
+    "message": "Legacy devices"
+  },
+  "pages.devices.tabs.section": {
+    "message": "Device views"
+  },
+  "pages.devices.tabs.user": {
+    "message": "Appareils utilisateur"
+  },
+  "pages.devices.title": {
+    "message": "Appareils"
+  },
+  "pages.devices.user.client_column": {
+    "message": "Application"
+  },
+  "pages.devices.user.count": {
+    "message": "{COUNT, plural, =0 {Aucun appareil} one {# appareil} other {# appareils}}"
+  },
+  "pages.devices.user.created_at_label": {
+    "message": "Connexion effectuée le"
+  },
+  "pages.devices.user.description": {
+    "message": "Une appareil correspond à une connexion unique d'un utilisateur à une application. La déconnexion d'un appareil révoque immédiatement son accès."
+  },
+  "pages.devices.user.device_column": {
+    "message": "Appareil"
+  },
+  "pages.devices.user.device_id_label": {
+    "message": "ID de l’appareil"
+  },
+  "pages.devices.user.filters.activity_active": {
+    "message": "Actif"
+  },
+  "pages.devices.user.filters.activity_inactive": {
+    "message": "Inactif"
+  },
+  "pages.devices.user.filters.activity_recently_used": {
+    "message": "Utilisé récemment"
+  },
+  "pages.devices.user.filters.activity_signed_out": {
+    "message": "Déconnecté"
+  },
+  "pages.devices.user.filters.client_chip": {
+    "message": "Application : {name}"
+  },
+  "pages.devices.user.filters.newest_first": {
+    "message": "Plus récent en premier"
+  },
+  "pages.devices.user.filters.user_chip": {
+    "message": "Utilisateur : @{localpart}:{server}"
+  },
+  "pages.devices.user.finish.button": {
+    "message": "Supprimer l’appareil"
+  },
+  "pages.devices.user.finish.confirm": {
+    "message": "Supprimer l’appareil"
+  },
+  "pages.devices.user.finish.description": {
+    "message": "L'utilisateur sera déconnecté de cet appareil. Les jetons d'accès et d'actualisation seront immédiatement révoqués."
+  },
+  "pages.devices.user.finish.error": {
+    "message": "Échec de la suppression de l'appareil"
+  },
+  "pages.devices.user.finish.success": {
+    "message": "Appareil supprimé"
+  },
+  "pages.devices.user.finish.title": {
+    "message": "Supprimer cet appareil ?"
+  },
+  "pages.devices.user.finished_at_label": {
+    "message": "Déconnecté le"
+  },
+  "pages.devices.user.last_active_ip_label": {
+    "message": "Dernière adresse IP active"
+  },
+  "pages.devices.user.last_active_label": {
+    "message": "Dernière activité"
+  },
+  "pages.devices.user.not_found.description": {
+    "message": "L'appareil demandé ({sessionId}) n'a pas pu être trouvé sur {serverName}."
+  },
+  "pages.devices.user.not_found.title": {
+    "message": "Appareil introuvable"
+  },
+  "pages.devices.user.scope_label": {
+    "message": "Scope"
+  },
+  "pages.devices.user.status_column": {
+    "message": "Statut"
+  },
+  "pages.devices.user.technical_details": {
+    "message": "Détails techniques"
+  },
+  "pages.devices.user.title": {
+    "message": "Appareils utilisateur"
+  },
+  "pages.devices.user.user_agent_label": {
+    "message": "Agent utilisateur"
+  },
+  "pages.devices.user.user_column": {
+    "message": "Utilisateur"
+  },
+  "pages.devices.user.user_none": {
+    "message": "Aucun utilisateur"
   },
   "pages.federation.allowlist.add.error": {
     "message": "Échec de l'ajout du domaine à la liste blanche"
@@ -857,6 +1106,9 @@
   "pages.users.filters.active": {
     "message": "Utilisateurs actifs"
   },
+  "pages.users.filters.active_client_chip": {
+    "message": "Appareil actif sur : {name}"
+  },
   "pages.users.filters.admins": {
     "message": "Administrateurs"
   },
@@ -866,11 +1118,17 @@
   "pages.users.filters.guests": {
     "message": "Invités (legacy)"
   },
+  "pages.users.filters.has_legacy_session": {
+    "message": "Has active legacy device"
+  },
   "pages.users.filters.locked": {
     "message": "Utilisateurs verrouillés"
   },
   "pages.users.filters.newest_first": {
     "message": "Plus récent en premier"
+  },
+  "pages.users.filters.no_legacy_session": {
+    "message": "No active legacy device"
   },
   "pages.users.filters.non_guests": {
     "message": "Non-invités (leagacy)"
@@ -992,6 +1250,12 @@
   "pages.users.set_password.title": {
     "message": "Définir un nouveau mot de passe pour cet utilisateur"
   },
+  "pages.users.statistics.devices": {
+    "message": "Appareils"
+  },
+  "pages.users.statistics.legacy_devices": {
+    "message": "Legacy devices"
+  },
   "pages.users.title": {
     "message": "Utilisateurs"
   },
@@ -1060,6 +1324,51 @@
   },
   "ui.destination_status.working": {
     "message": "Fonctionne"
+  },
+  "ui.device_info.name_on_platform": {
+    "message": "{name} sur {platform}"
+  },
+  "ui.device_info.type.mobile": {
+    "message": "Appareil mobile"
+  },
+  "ui.device_info.type.pc": {
+    "message": "Ordinateur"
+  },
+  "ui.device_info.type.tablet": {
+    "message": "Tablette"
+  },
+  "ui.device_info.type.unknown": {
+    "message": "Type d’appareil inconnu"
+  },
+  "ui.device_info.unknown_device": {
+    "message": "Appareil inconnu"
+  },
+  "ui.device_status.active": {
+    "message": "Actif"
+  },
+  "ui.device_status.inactive": {
+    "message": "Inactive"
+  },
+  "ui.device_status.last_active.tooltip": {
+    "message": "Dernière activité le {date}."
+  },
+  "ui.device_status.never_used": {
+    "message": "Jamais utilisé"
+  },
+  "ui.device_status.never_used.tooltip": {
+    "message": "Cet appareil n'a pas encore été utilisé."
+  },
+  "ui.device_status.recently_used": {
+    "message": "Utilisé récemment"
+  },
+  "ui.device_status.signed_out": {
+    "message": "Déconnecté"
+  },
+  "ui.device_status.signed_out.tooltip": {
+    "message": "Cet appareil a été déconnecté et n'a plus accès au compte."
+  },
+  "ui.device_status.signed_out.tooltip_at": {
+    "message": "Déconnecté le {date}."
   },
   "ui.language_switcher.browser_default": {
     "message": "Utiliser les paramètres du navigateur ({language})"
