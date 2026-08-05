@@ -15,6 +15,8 @@ import {
   CheckCircleIcon,
   CloseIcon,
   DeleteIcon,
+  DevicesIcon,
+  HistoryIcon,
   KeyIcon,
   LockIcon,
   PlusIcon,
@@ -29,14 +31,21 @@ import {
   Text,
   Tooltip,
 } from "@vector-im/compound-web";
-import { useCallback, useRef, useState } from "react";
+import { Suspense, useCallback, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
-import { defineMessage, FormattedMessage, useIntl } from "react-intl";
+import {
+  defineMessage,
+  FormattedMessage,
+  FormattedNumber,
+  useIntl,
+} from "react-intl";
 
 import {
+  compatSessionsCountQuery,
   deactivateUser,
   deleteUpstreamOAuthLink,
   lockUser,
+  oauth2SessionsCountQuery,
   reactivateUser,
   setUserCanRequestAdmin,
   setUserPassword,
@@ -59,11 +68,17 @@ import type {
 import { profileQuery, wellKnownQuery } from "@/api/matrix";
 import * as Data from "@/components/data";
 import * as Dialog from "@/components/dialog";
+import { EntityCard, EntityCardSkeleton } from "@/components/entity-card";
 import { ButtonLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import { UserAvatar } from "@/components/room-info";
 import * as messages from "@/messages";
+import {
+  defaultLegacyDevicesSearch,
+  defaultUserDevicesSearch,
+} from "@/ui/device-tabs";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
+import { getFeaturesStatus, useFeaturesStatus } from "@/utils/features";
 import { ensureParametersAreUlids } from "@/utils/parameters";
 
 export const Route = createFileRoute("/_console/users/$userId")({
@@ -88,10 +103,37 @@ export const Route = createFileRoute("/_console/users/$userId")({
     const userPromise = queryClient.ensureQueryData(
       userQuery(credentials.serverName, params.userId),
     );
+    const featuresPromise = getFeaturesStatus(
+      queryClient,
+      credentials.serverName,
+    );
     const wellKnown = await queryClient.ensureQueryData(
       wellKnownQuery(credentials.serverName),
     );
     const synapseRoot = wellKnown["m.homeserver"].base_url;
+
+    // The sessions APIs only exist on recent MAS versions, and the two device
+    // cards are hidden without them, so don't even ask for the counts there.
+    // Keep the parameters in sync with the ones used by the cards themselves,
+    // else the query keys diverge and we fetch everything twice.
+    const { devices: hasDevices } = await featuresPromise;
+    const sessionsCountsPromise = hasDevices
+      ? Promise.all([
+          queryClient.ensureQueryData(
+            oauth2SessionsCountQuery(credentials.serverName, {
+              clientKind: "dynamic",
+              user: params.userId,
+              status: "active",
+            }),
+          ),
+          queryClient.ensureQueryData(
+            compatSessionsCountQuery(credentials.serverName, {
+              user: params.userId,
+              status: "active",
+            }),
+          ),
+        ])
+      : undefined;
 
     const { data: user } = await userPromise;
     const mxid = `@${user.attributes.username}:${credentials.serverName}`;
@@ -100,6 +142,7 @@ export const Route = createFileRoute("/_console/users/$userId")({
     await upstreamLinksPromise;
     await upstreamProvidersPromise;
     await siteConfigPromise;
+    await sessionsCountsPromise;
   },
   component: RouteComponent,
   notFoundComponent: NotFoundComponent,
@@ -1491,6 +1534,123 @@ function EmailsList({ userId, mxid, serverName }: EmailsListProps) {
   );
 }
 
+interface SessionsCardBodyProps {
+  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  label: React.ReactNode;
+  count: number;
+}
+
+// The shared contents of the two device cards: a round icon, a label, and the
+// number of devices as a badge
+function SessionsCardBody({ Icon, label, count }: SessionsCardBodyProps) {
+  return (
+    <div className="flex items-center gap-3 min-w-0">
+      <div className="flex items-center justify-center size-8 rounded-full bg-bg-subtle-secondary shrink-0">
+        <Icon className="size-5 text-icon-secondary" />
+      </div>
+      <Text
+        size="md"
+        weight="semibold"
+        className="text-text-primary truncate flex-1"
+      >
+        {label}
+      </Text>
+      <Badge kind="grey">
+        <FormattedNumber value={count} />
+      </Badge>
+    </div>
+  );
+}
+
+interface DevicesCardProps {
+  serverName: string;
+  userId: string;
+}
+
+function DevicesCardInner({ serverName, userId }: DevicesCardProps) {
+  // Count only active (not signed-out) sessions, so the badge reflects how many
+  // devices the user currently has rather than every session they ever had.
+  // Devices from statically-registered applications are hidden from the list we
+  // link to, so exclude them here as well, else the badge over-counts.
+  const { data: count } = useSuspenseQuery(
+    oauth2SessionsCountQuery(serverName, {
+      clientKind: "dynamic",
+      user: userId,
+      status: "active",
+    }),
+  );
+
+  return (
+    <EntityCard
+      to="/devices/user"
+      search={{ ...defaultUserDevicesSearch, user: userId }}
+      resetScroll={false}
+    >
+      <SessionsCardBody
+        Icon={DevicesIcon}
+        count={count}
+        label={
+          <FormattedMessage
+            id="pages.users.statistics.devices"
+            defaultMessage="Devices"
+            description="Stat label: total number of devices (OAuth 2.0 sessions) for this user"
+          />
+        }
+      />
+    </EntityCard>
+  );
+}
+
+// A card linking to the devices list filtered to a user, showing how many
+// devices they currently have
+function DevicesCard(props: DevicesCardProps) {
+  return (
+    <Suspense fallback={<EntityCardSkeleton />}>
+      <DevicesCardInner {...props} />
+    </Suspense>
+  );
+}
+
+function LegacyDevicesCardInner({ serverName, userId }: DevicesCardProps) {
+  // Like above: only the sessions which haven't been signed out yet
+  const { data: count } = useSuspenseQuery(
+    compatSessionsCountQuery(serverName, {
+      user: userId,
+      status: "active",
+    }),
+  );
+
+  return (
+    <EntityCard
+      to="/devices/legacy"
+      search={{ ...defaultLegacyDevicesSearch, user: userId }}
+      resetScroll={false}
+    >
+      <SessionsCardBody
+        Icon={HistoryIcon}
+        count={count}
+        label={
+          <FormattedMessage
+            id="pages.users.statistics.legacy_devices"
+            defaultMessage="Legacy devices"
+            description="Stat label: total number of legacy devices (compat sessions) for this user"
+          />
+        }
+      />
+    </EntityCard>
+  );
+}
+
+// A card linking to the legacy devices list filtered to a user, showing how
+// many legacy devices they currently have
+function LegacyDevicesCard(props: DevicesCardProps) {
+  return (
+    <Suspense fallback={<EntityCardSkeleton />}>
+      <LegacyDevicesCardInner {...props} />
+    </Suspense>
+  );
+}
+
 const CloseSidebar: React.FC = () => {
   const intl = useIntl();
   const search = Route.useSearch();
@@ -1531,6 +1691,10 @@ function RouteComponent() {
   const { data: siteConfig } = useSuspenseQuery(
     siteConfigQuery(credentials.serverName),
   );
+
+  // The devices and legacy devices lists (and their counts) don't exist on
+  // older MAS versions
+  const { devices: hasDevices } = useFeaturesStatus(credentials.serverName);
 
   const deactivated = user.attributes.deactivated_at !== null;
   const locked = user.attributes.locked_at !== null;
@@ -1647,6 +1811,23 @@ function RouteComponent() {
             </Data.Item>
           )}
         </Data.Grid>
+
+        {hasDevices && (
+          <>
+            <Separator />
+
+            <div className="flex flex-col gap-2">
+              <DevicesCard
+                serverName={credentials.serverName}
+                userId={userId}
+              />
+              <LegacyDevicesCard
+                serverName={credentials.serverName}
+                userId={userId}
+              />
+            </div>
+          </>
+        )}
 
         <Separator />
 

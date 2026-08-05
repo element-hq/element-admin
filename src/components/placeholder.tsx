@@ -8,7 +8,9 @@ import styles from "./placeholder.module.css";
 
 export const Text = () => <div className={styles["text"]} aria-hidden="true" />;
 
-const Avatar = () => <div className={styles["avatar"]} aria-hidden="true" />;
+export const Avatar = () => (
+  <div className={styles["avatar"]} aria-hidden="true" />
+);
 
 type GroupProps = React.PropsWithChildren;
 const Group = ({ children }: GroupProps) => (

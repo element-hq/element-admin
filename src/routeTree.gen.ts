@@ -14,6 +14,7 @@ import { Route as ConsoleRouteImport } from './routes/_console'
 import { Route as CallbackRouteImport } from './routes/callback'
 import { Route as ConsoleIndexRouteImport } from './routes/_console.index'
 import { Route as ConsoleAuditingRouteImport } from './routes/_console.auditing'
+import { Route as ConsoleDevicesRouteImport } from './routes/_console.devices'
 import { Route as ConsoleFederationRouteImport } from './routes/_console.federation'
 import { Route as ConsolePersonalTokensRouteImport } from './routes/_console.personal-tokens'
 import { Route as ConsoleRegistrationTokensRouteImport } from './routes/_console.registration-tokens'
@@ -21,6 +22,10 @@ import { Route as ConsoleRoomsRouteImport } from './routes/_console.rooms'
 import { Route as ConsoleSupervisionRouteImport } from './routes/_console.supervision'
 import { Route as ConsoleUsersRouteImport } from './routes/_console.users'
 import { Route as AuthLoginIndexRouteImport } from './routes/_auth.login.index'
+import { Route as ConsoleDevicesIndexRouteImport } from './routes/_console.devices.index'
+import { Route as ConsoleDevicesApplicationsRouteImport } from './routes/_console.devices.applications'
+import { Route as ConsoleDevicesLegacyRouteImport } from './routes/_console.devices.legacy'
+import { Route as ConsoleDevicesUserRouteImport } from './routes/_console.devices.user'
 import { Route as ConsoleFederationIndexRouteImport } from './routes/_console.federation.index'
 import { Route as ConsoleFederationAllowedDomainsRouteImport } from './routes/_console.federation.allowed-domains'
 import { Route as ConsoleFederationKnownDomainsRouteImport } from './routes/_console.federation.known-domains'
@@ -28,6 +33,9 @@ import { Route as ConsolePersonalTokensTokenIdRouteImport } from './routes/_cons
 import { Route as ConsoleRegistrationTokensTokenIdRouteImport } from './routes/_console.registration-tokens.$tokenId'
 import { Route as ConsoleRoomsRoomIdRouteImport } from './routes/_console.rooms.$roomId'
 import { Route as ConsoleUsersUserIdRouteImport } from './routes/_console.users.$userId'
+import { Route as ConsoleDevicesApplicationsClientIdRouteImport } from './routes/_console.devices.applications.$clientId'
+import { Route as ConsoleDevicesLegacySessionIdRouteImport } from './routes/_console.devices.legacy.$sessionId'
+import { Route as ConsoleDevicesUserSessionIdRouteImport } from './routes/_console.devices.user.$sessionId'
 import { Route as ConsoleFederationKnownDomainsDestinationRouteImport } from './routes/_console.federation.known-domains.$destination'
 
 const AuthRoute = AuthRouteImport.update({
@@ -51,6 +59,11 @@ const ConsoleIndexRoute = ConsoleIndexRouteImport.update({
 const ConsoleAuditingRoute = ConsoleAuditingRouteImport.update({
   id: '/auditing',
   path: '/auditing',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleDevicesRoute = ConsoleDevicesRouteImport.update({
+  id: '/devices',
+  path: '/devices',
   getParentRoute: () => ConsoleRoute,
 } as any)
 const ConsoleFederationRoute = ConsoleFederationRouteImport.update({
@@ -88,6 +101,27 @@ const AuthLoginIndexRoute = AuthLoginIndexRouteImport.update({
   id: '/login/',
   path: '/login/',
   getParentRoute: () => AuthRoute,
+} as any)
+const ConsoleDevicesIndexRoute = ConsoleDevicesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ConsoleDevicesRoute,
+} as any)
+const ConsoleDevicesApplicationsRoute =
+  ConsoleDevicesApplicationsRouteImport.update({
+    id: '/applications',
+    path: '/applications',
+    getParentRoute: () => ConsoleDevicesRoute,
+  } as any)
+const ConsoleDevicesLegacyRoute = ConsoleDevicesLegacyRouteImport.update({
+  id: '/legacy',
+  path: '/legacy',
+  getParentRoute: () => ConsoleDevicesRoute,
+} as any)
+const ConsoleDevicesUserRoute = ConsoleDevicesUserRouteImport.update({
+  id: '/user',
+  path: '/user',
+  getParentRoute: () => ConsoleDevicesRoute,
 } as any)
 const ConsoleFederationIndexRoute = ConsoleFederationIndexRouteImport.update({
   id: '/',
@@ -128,6 +162,24 @@ const ConsoleUsersUserIdRoute = ConsoleUsersUserIdRouteImport.update({
   path: '/$userId',
   getParentRoute: () => ConsoleUsersRoute,
 } as any)
+const ConsoleDevicesApplicationsClientIdRoute =
+  ConsoleDevicesApplicationsClientIdRouteImport.update({
+    id: '/$clientId',
+    path: '/$clientId',
+    getParentRoute: () => ConsoleDevicesApplicationsRoute,
+  } as any)
+const ConsoleDevicesLegacySessionIdRoute =
+  ConsoleDevicesLegacySessionIdRouteImport.update({
+    id: '/$sessionId',
+    path: '/$sessionId',
+    getParentRoute: () => ConsoleDevicesLegacyRoute,
+  } as any)
+const ConsoleDevicesUserSessionIdRoute =
+  ConsoleDevicesUserSessionIdRouteImport.update({
+    id: '/$sessionId',
+    path: '/$sessionId',
+    getParentRoute: () => ConsoleDevicesUserRoute,
+  } as any)
 const ConsoleFederationKnownDomainsDestinationRoute =
   ConsoleFederationKnownDomainsDestinationRouteImport.update({
     id: '/$destination',
@@ -139,12 +191,16 @@ export interface FileRoutesByFullPath {
   '/': typeof ConsoleIndexRoute
   '/callback': typeof CallbackRoute
   '/auditing': typeof ConsoleAuditingRoute
+  '/devices': typeof ConsoleDevicesRouteWithChildren
   '/federation': typeof ConsoleFederationRouteWithChildren
   '/personal-tokens': typeof ConsolePersonalTokensRouteWithChildren
   '/registration-tokens': typeof ConsoleRegistrationTokensRouteWithChildren
   '/rooms': typeof ConsoleRoomsRouteWithChildren
   '/supervision': typeof ConsoleSupervisionRoute
   '/users': typeof ConsoleUsersRouteWithChildren
+  '/devices/applications': typeof ConsoleDevicesApplicationsRouteWithChildren
+  '/devices/legacy': typeof ConsoleDevicesLegacyRouteWithChildren
+  '/devices/user': typeof ConsoleDevicesUserRouteWithChildren
   '/federation/allowed-domains': typeof ConsoleFederationAllowedDomainsRoute
   '/federation/known-domains': typeof ConsoleFederationKnownDomainsRouteWithChildren
   '/personal-tokens/$tokenId': typeof ConsolePersonalTokensTokenIdRoute
@@ -152,7 +208,11 @@ export interface FileRoutesByFullPath {
   '/rooms/$roomId': typeof ConsoleRoomsRoomIdRoute
   '/users/$userId': typeof ConsoleUsersUserIdRoute
   '/login/': typeof AuthLoginIndexRoute
+  '/devices/': typeof ConsoleDevicesIndexRoute
   '/federation/': typeof ConsoleFederationIndexRoute
+  '/devices/applications/$clientId': typeof ConsoleDevicesApplicationsClientIdRoute
+  '/devices/legacy/$sessionId': typeof ConsoleDevicesLegacySessionIdRoute
+  '/devices/user/$sessionId': typeof ConsoleDevicesUserSessionIdRoute
   '/federation/known-domains/$destination': typeof ConsoleFederationKnownDomainsDestinationRoute
 }
 export interface FileRoutesByTo {
@@ -164,6 +224,9 @@ export interface FileRoutesByTo {
   '/rooms': typeof ConsoleRoomsRouteWithChildren
   '/supervision': typeof ConsoleSupervisionRoute
   '/users': typeof ConsoleUsersRouteWithChildren
+  '/devices/applications': typeof ConsoleDevicesApplicationsRouteWithChildren
+  '/devices/legacy': typeof ConsoleDevicesLegacyRouteWithChildren
+  '/devices/user': typeof ConsoleDevicesUserRouteWithChildren
   '/federation/allowed-domains': typeof ConsoleFederationAllowedDomainsRoute
   '/federation/known-domains': typeof ConsoleFederationKnownDomainsRouteWithChildren
   '/personal-tokens/$tokenId': typeof ConsolePersonalTokensTokenIdRoute
@@ -171,7 +234,11 @@ export interface FileRoutesByTo {
   '/rooms/$roomId': typeof ConsoleRoomsRoomIdRoute
   '/users/$userId': typeof ConsoleUsersUserIdRoute
   '/login': typeof AuthLoginIndexRoute
+  '/devices': typeof ConsoleDevicesIndexRoute
   '/federation': typeof ConsoleFederationIndexRoute
+  '/devices/applications/$clientId': typeof ConsoleDevicesApplicationsClientIdRoute
+  '/devices/legacy/$sessionId': typeof ConsoleDevicesLegacySessionIdRoute
+  '/devices/user/$sessionId': typeof ConsoleDevicesUserSessionIdRoute
   '/federation/known-domains/$destination': typeof ConsoleFederationKnownDomainsDestinationRoute
 }
 export interface FileRoutesById {
@@ -180,6 +247,7 @@ export interface FileRoutesById {
   '/_console': typeof ConsoleRouteWithChildren
   '/callback': typeof CallbackRoute
   '/_console/auditing': typeof ConsoleAuditingRoute
+  '/_console/devices': typeof ConsoleDevicesRouteWithChildren
   '/_console/federation': typeof ConsoleFederationRouteWithChildren
   '/_console/personal-tokens': typeof ConsolePersonalTokensRouteWithChildren
   '/_console/registration-tokens': typeof ConsoleRegistrationTokensRouteWithChildren
@@ -187,6 +255,9 @@ export interface FileRoutesById {
   '/_console/supervision': typeof ConsoleSupervisionRoute
   '/_console/users': typeof ConsoleUsersRouteWithChildren
   '/_console/': typeof ConsoleIndexRoute
+  '/_console/devices/applications': typeof ConsoleDevicesApplicationsRouteWithChildren
+  '/_console/devices/legacy': typeof ConsoleDevicesLegacyRouteWithChildren
+  '/_console/devices/user': typeof ConsoleDevicesUserRouteWithChildren
   '/_console/federation/allowed-domains': typeof ConsoleFederationAllowedDomainsRoute
   '/_console/federation/known-domains': typeof ConsoleFederationKnownDomainsRouteWithChildren
   '/_console/personal-tokens/$tokenId': typeof ConsolePersonalTokensTokenIdRoute
@@ -194,7 +265,11 @@ export interface FileRoutesById {
   '/_console/rooms/$roomId': typeof ConsoleRoomsRoomIdRoute
   '/_console/users/$userId': typeof ConsoleUsersUserIdRoute
   '/_auth/login/': typeof AuthLoginIndexRoute
+  '/_console/devices/': typeof ConsoleDevicesIndexRoute
   '/_console/federation/': typeof ConsoleFederationIndexRoute
+  '/_console/devices/applications/$clientId': typeof ConsoleDevicesApplicationsClientIdRoute
+  '/_console/devices/legacy/$sessionId': typeof ConsoleDevicesLegacySessionIdRoute
+  '/_console/devices/user/$sessionId': typeof ConsoleDevicesUserSessionIdRoute
   '/_console/federation/known-domains/$destination': typeof ConsoleFederationKnownDomainsDestinationRoute
 }
 export interface FileRouteTypes {
@@ -203,12 +278,16 @@ export interface FileRouteTypes {
     | '/'
     | '/callback'
     | '/auditing'
+    | '/devices'
     | '/federation'
     | '/personal-tokens'
     | '/registration-tokens'
     | '/rooms'
     | '/supervision'
     | '/users'
+    | '/devices/applications'
+    | '/devices/legacy'
+    | '/devices/user'
     | '/federation/allowed-domains'
     | '/federation/known-domains'
     | '/personal-tokens/$tokenId'
@@ -216,7 +295,11 @@ export interface FileRouteTypes {
     | '/rooms/$roomId'
     | '/users/$userId'
     | '/login/'
+    | '/devices/'
     | '/federation/'
+    | '/devices/applications/$clientId'
+    | '/devices/legacy/$sessionId'
+    | '/devices/user/$sessionId'
     | '/federation/known-domains/$destination'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -228,6 +311,9 @@ export interface FileRouteTypes {
     | '/rooms'
     | '/supervision'
     | '/users'
+    | '/devices/applications'
+    | '/devices/legacy'
+    | '/devices/user'
     | '/federation/allowed-domains'
     | '/federation/known-domains'
     | '/personal-tokens/$tokenId'
@@ -235,7 +321,11 @@ export interface FileRouteTypes {
     | '/rooms/$roomId'
     | '/users/$userId'
     | '/login'
+    | '/devices'
     | '/federation'
+    | '/devices/applications/$clientId'
+    | '/devices/legacy/$sessionId'
+    | '/devices/user/$sessionId'
     | '/federation/known-domains/$destination'
   id:
     | '__root__'
@@ -243,6 +333,7 @@ export interface FileRouteTypes {
     | '/_console'
     | '/callback'
     | '/_console/auditing'
+    | '/_console/devices'
     | '/_console/federation'
     | '/_console/personal-tokens'
     | '/_console/registration-tokens'
@@ -250,6 +341,9 @@ export interface FileRouteTypes {
     | '/_console/supervision'
     | '/_console/users'
     | '/_console/'
+    | '/_console/devices/applications'
+    | '/_console/devices/legacy'
+    | '/_console/devices/user'
     | '/_console/federation/allowed-domains'
     | '/_console/federation/known-domains'
     | '/_console/personal-tokens/$tokenId'
@@ -257,7 +351,11 @@ export interface FileRouteTypes {
     | '/_console/rooms/$roomId'
     | '/_console/users/$userId'
     | '/_auth/login/'
+    | '/_console/devices/'
     | '/_console/federation/'
+    | '/_console/devices/applications/$clientId'
+    | '/_console/devices/legacy/$sessionId'
+    | '/_console/devices/user/$sessionId'
     | '/_console/federation/known-domains/$destination'
   fileRoutesById: FileRoutesById
 }
@@ -302,6 +400,13 @@ declare module '@tanstack/react-router' {
       path: '/auditing'
       fullPath: '/auditing'
       preLoaderRoute: typeof ConsoleAuditingRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/devices': {
+      id: '/_console/devices'
+      path: '/devices'
+      fullPath: '/devices'
+      preLoaderRoute: typeof ConsoleDevicesRouteImport
       parentRoute: typeof ConsoleRoute
     }
     '/_console/federation': {
@@ -353,6 +458,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginIndexRouteImport
       parentRoute: typeof AuthRoute
     }
+    '/_console/devices/': {
+      id: '/_console/devices/'
+      path: '/'
+      fullPath: '/devices/'
+      preLoaderRoute: typeof ConsoleDevicesIndexRouteImport
+      parentRoute: typeof ConsoleDevicesRoute
+    }
+    '/_console/devices/applications': {
+      id: '/_console/devices/applications'
+      path: '/applications'
+      fullPath: '/devices/applications'
+      preLoaderRoute: typeof ConsoleDevicesApplicationsRouteImport
+      parentRoute: typeof ConsoleDevicesRoute
+    }
+    '/_console/devices/legacy': {
+      id: '/_console/devices/legacy'
+      path: '/legacy'
+      fullPath: '/devices/legacy'
+      preLoaderRoute: typeof ConsoleDevicesLegacyRouteImport
+      parentRoute: typeof ConsoleDevicesRoute
+    }
+    '/_console/devices/user': {
+      id: '/_console/devices/user'
+      path: '/user'
+      fullPath: '/devices/user'
+      preLoaderRoute: typeof ConsoleDevicesUserRouteImport
+      parentRoute: typeof ConsoleDevicesRoute
+    }
     '/_console/federation/': {
       id: '/_console/federation/'
       path: '/'
@@ -402,6 +535,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConsoleUsersUserIdRouteImport
       parentRoute: typeof ConsoleUsersRoute
     }
+    '/_console/devices/applications/$clientId': {
+      id: '/_console/devices/applications/$clientId'
+      path: '/$clientId'
+      fullPath: '/devices/applications/$clientId'
+      preLoaderRoute: typeof ConsoleDevicesApplicationsClientIdRouteImport
+      parentRoute: typeof ConsoleDevicesApplicationsRoute
+    }
+    '/_console/devices/legacy/$sessionId': {
+      id: '/_console/devices/legacy/$sessionId'
+      path: '/$sessionId'
+      fullPath: '/devices/legacy/$sessionId'
+      preLoaderRoute: typeof ConsoleDevicesLegacySessionIdRouteImport
+      parentRoute: typeof ConsoleDevicesLegacyRoute
+    }
+    '/_console/devices/user/$sessionId': {
+      id: '/_console/devices/user/$sessionId'
+      path: '/$sessionId'
+      fullPath: '/devices/user/$sessionId'
+      preLoaderRoute: typeof ConsoleDevicesUserSessionIdRouteImport
+      parentRoute: typeof ConsoleDevicesUserRoute
+    }
     '/_console/federation/known-domains/$destination': {
       id: '/_console/federation/known-domains/$destination'
       path: '/$destination'
@@ -421,6 +575,61 @@ const AuthRouteChildren: AuthRouteChildren = {
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
+interface ConsoleDevicesApplicationsRouteChildren {
+  ConsoleDevicesApplicationsClientIdRoute: typeof ConsoleDevicesApplicationsClientIdRoute
+}
+
+const ConsoleDevicesApplicationsRouteChildren: ConsoleDevicesApplicationsRouteChildren =
+  {
+    ConsoleDevicesApplicationsClientIdRoute:
+      ConsoleDevicesApplicationsClientIdRoute,
+  }
+
+const ConsoleDevicesApplicationsRouteWithChildren =
+  ConsoleDevicesApplicationsRoute._addFileChildren(
+    ConsoleDevicesApplicationsRouteChildren,
+  )
+
+interface ConsoleDevicesLegacyRouteChildren {
+  ConsoleDevicesLegacySessionIdRoute: typeof ConsoleDevicesLegacySessionIdRoute
+}
+
+const ConsoleDevicesLegacyRouteChildren: ConsoleDevicesLegacyRouteChildren = {
+  ConsoleDevicesLegacySessionIdRoute: ConsoleDevicesLegacySessionIdRoute,
+}
+
+const ConsoleDevicesLegacyRouteWithChildren =
+  ConsoleDevicesLegacyRoute._addFileChildren(ConsoleDevicesLegacyRouteChildren)
+
+interface ConsoleDevicesUserRouteChildren {
+  ConsoleDevicesUserSessionIdRoute: typeof ConsoleDevicesUserSessionIdRoute
+}
+
+const ConsoleDevicesUserRouteChildren: ConsoleDevicesUserRouteChildren = {
+  ConsoleDevicesUserSessionIdRoute: ConsoleDevicesUserSessionIdRoute,
+}
+
+const ConsoleDevicesUserRouteWithChildren =
+  ConsoleDevicesUserRoute._addFileChildren(ConsoleDevicesUserRouteChildren)
+
+interface ConsoleDevicesRouteChildren {
+  ConsoleDevicesApplicationsRoute: typeof ConsoleDevicesApplicationsRouteWithChildren
+  ConsoleDevicesLegacyRoute: typeof ConsoleDevicesLegacyRouteWithChildren
+  ConsoleDevicesUserRoute: typeof ConsoleDevicesUserRouteWithChildren
+  ConsoleDevicesIndexRoute: typeof ConsoleDevicesIndexRoute
+}
+
+const ConsoleDevicesRouteChildren: ConsoleDevicesRouteChildren = {
+  ConsoleDevicesApplicationsRoute: ConsoleDevicesApplicationsRouteWithChildren,
+  ConsoleDevicesLegacyRoute: ConsoleDevicesLegacyRouteWithChildren,
+  ConsoleDevicesUserRoute: ConsoleDevicesUserRouteWithChildren,
+  ConsoleDevicesIndexRoute: ConsoleDevicesIndexRoute,
+}
+
+const ConsoleDevicesRouteWithChildren = ConsoleDevicesRoute._addFileChildren(
+  ConsoleDevicesRouteChildren,
+)
 
 interface ConsoleFederationKnownDomainsRouteChildren {
   ConsoleFederationKnownDomainsDestinationRoute: typeof ConsoleFederationKnownDomainsDestinationRoute
@@ -507,6 +716,7 @@ const ConsoleUsersRouteWithChildren = ConsoleUsersRoute._addFileChildren(
 
 interface ConsoleRouteChildren {
   ConsoleAuditingRoute: typeof ConsoleAuditingRoute
+  ConsoleDevicesRoute: typeof ConsoleDevicesRouteWithChildren
   ConsoleFederationRoute: typeof ConsoleFederationRouteWithChildren
   ConsolePersonalTokensRoute: typeof ConsolePersonalTokensRouteWithChildren
   ConsoleRegistrationTokensRoute: typeof ConsoleRegistrationTokensRouteWithChildren
@@ -518,6 +728,7 @@ interface ConsoleRouteChildren {
 
 const ConsoleRouteChildren: ConsoleRouteChildren = {
   ConsoleAuditingRoute: ConsoleAuditingRoute,
+  ConsoleDevicesRoute: ConsoleDevicesRouteWithChildren,
   ConsoleFederationRoute: ConsoleFederationRouteWithChildren,
   ConsolePersonalTokensRoute: ConsolePersonalTokensRouteWithChildren,
   ConsoleRegistrationTokensRoute: ConsoleRegistrationTokensRouteWithChildren,

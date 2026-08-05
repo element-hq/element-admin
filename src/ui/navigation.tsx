@@ -6,6 +6,7 @@
 import {
   AdminIcon,
   CloudIcon,
+  DevicesIcon,
   DocumentIcon,
   ExportArchiveIcon,
   HomeIcon,
@@ -47,6 +48,15 @@ const AppNavigation = ({ features }: { features: MasFeaturesStatus }) => (
         description="Label for the rooms navigation item in the main navigation sidebar"
       />
     </Navigation.NavLink>
+    {features.devices && (
+      <Navigation.NavLink Icon={DevicesIcon} to="/devices">
+        <FormattedMessage
+          id="navigation.devices"
+          defaultMessage="Devices"
+          description="Label for the devices navigation item in the main navigation sidebar"
+        />
+      </Navigation.NavLink>
+    )}
     <Navigation.NavLink Icon={CloudIcon} to="/federation">
       <FormattedMessage
         id="navigation.federation"

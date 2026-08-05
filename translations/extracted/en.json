@@ -135,6 +135,10 @@
     "message": "Dashboard",
     "description": "Label for the dashboard navigation item in the main navigation sidebar"
   },
+  "navigation.devices": {
+    "message": "Devices",
+    "description": "Label for the devices navigation item in the main navigation sidebar"
+  },
   "navigation.documentation": {
     "message": "Documentation",
     "description": "Label for the documentation navigation link (to https://docs.element.io/) in the main navigation sidebar"
@@ -206,6 +210,334 @@
   "pages.dashboard.title": {
     "message": "Dashboard",
     "description": "The title of the dashboard page"
+  },
+  "pages.devices.applications.client_id_label": {
+    "message": "Client ID",
+    "description": "Label for the OAuth 2.0 client identifier (technical term, shown on application details)"
+  },
+  "pages.devices.applications.count": {
+    "message": "{COUNT, plural, =0 {No applications} one {# application} other {# applications}}",
+    "description": "On the applications list page, this heading shows the total number of applications"
+  },
+  "pages.devices.applications.description": {
+    "message": "Applications are OAuth 2.0 clients that users sign in to.",
+    "description": "The description of the applications list page"
+  },
+  "pages.devices.applications.filters.has_active_sessions": {
+    "message": "With active devices",
+    "description": "Filter label for applications which have at least one active device"
+  },
+  "pages.devices.applications.filters.no_active_sessions": {
+    "message": "Without active devices",
+    "description": "Filter label for applications which have no active devices"
+  },
+  "pages.devices.applications.grant_types_label": {
+    "message": "Grant types",
+    "description": "Label for the grant types an application supports"
+  },
+  "pages.devices.applications.name_column": {
+    "message": "Name",
+    "description": "Column header for application name"
+  },
+  "pages.devices.applications.not_found.description": {
+    "message": "The requested application ({clientId}) could not be found on {serverName}.",
+    "description": "The description of the alert when an application could not be found"
+  },
+  "pages.devices.applications.not_found.title": {
+    "message": "Application not found",
+    "description": "The title of the alert when an application could not be found"
+  },
+  "pages.devices.applications.redirect_uris_label": {
+    "message": "Redirect URIs",
+    "description": "Label for the application's redirect URIs"
+  },
+  "pages.devices.applications.search_placeholder": {
+    "message": "Search by name…",
+    "description": "The placeholder text for the application name search input"
+  },
+  "pages.devices.applications.statistics.active_recently": {
+    "message": "Active in the past 7 days",
+    "description": "Stat label: devices currently active and last seen in the past 7 days for this application"
+  },
+  "pages.devices.applications.statistics.created_recently": {
+    "message": "Devices added in the past 7 days",
+    "description": "Stat label: devices created in the past 7 days for this application"
+  },
+  "pages.devices.applications.statistics.heading": {
+    "message": "Device statistics",
+    "description": "Heading for the device statistics section on the application details page"
+  },
+  "pages.devices.applications.statistics.total_active": {
+    "message": "Active devices",
+    "description": "Stat label: total active devices for this application"
+  },
+  "pages.devices.applications.title": {
+    "message": "Applications",
+    "description": "The title of the applications tab"
+  },
+  "pages.devices.applications.uri_label": {
+    "message": "Homepage",
+    "description": "Label for the application's homepage URI"
+  },
+  "pages.devices.applications.view_sessions": {
+    "message": "View all devices",
+    "description": "Button on the application details sidebar that navigates to the devices list filtered to this application"
+  },
+  "pages.devices.legacy.count": {
+    "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}",
+    "description": "On the legacy devices list page, this heading shows the total number of legacy devices"
+  },
+  "pages.devices.legacy.created_at_label": {
+    "message": "Signed in at",
+    "description": "Label for the date a legacy device first signed in"
+  },
+  "pages.devices.legacy.description": {
+    "message": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0.",
+    "description": "The description of the legacy devices list page"
+  },
+  "pages.devices.legacy.device_column": {
+    "message": "Device",
+    "description": "Column header for the legacy device name and ID"
+  },
+  "pages.devices.legacy.device_id_label": {
+    "message": "Device ID",
+    "description": "Label for the device id field of a legacy device"
+  },
+  "pages.devices.legacy.filters.activity_active": {
+    "message": "Active",
+    "description": "Filter label for active legacy devices used in the last few months"
+  },
+  "pages.devices.legacy.filters.activity_inactive": {
+    "message": "Inactive",
+    "description": "Filter label for legacy devices not used in 90+ days"
+  },
+  "pages.devices.legacy.filters.activity_recently_used": {
+    "message": "Recently used",
+    "description": "Filter label for legacy devices used in the last couple of weeks"
+  },
+  "pages.devices.legacy.filters.activity_signed_out": {
+    "message": "Signed out",
+    "description": "Filter label for signed-out (finished) legacy devices"
+  },
+  "pages.devices.legacy.filters.newest_first": {
+    "message": "Newest first",
+    "description": "Filter label for sorting legacy devices newest first"
+  },
+  "pages.devices.legacy.filters.user_chip": {
+    "message": "User: @{localpart}:{server}",
+    "description": "Active filter chip showing the currently filtered user"
+  },
+  "pages.devices.legacy.finish.button": {
+    "message": "Remove device",
+    "description": "Button label to remove (sign out) a legacy device"
+  },
+  "pages.devices.legacy.finish.confirm": {
+    "message": "Remove device",
+    "description": "Confirmation button label for removing (signing out) a legacy device"
+  },
+  "pages.devices.legacy.finish.description": {
+    "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately.",
+    "description": "Description of the confirmation dialog when signing out (finishing) a legacy device"
+  },
+  "pages.devices.legacy.finish.error": {
+    "message": "Failed to remove the legacy device",
+    "description": "Error toast when removing (signing out) a legacy device fails"
+  },
+  "pages.devices.legacy.finish.success": {
+    "message": "Legacy device removed",
+    "description": "Success toast when a legacy device was removed (signed out)"
+  },
+  "pages.devices.legacy.finish.title": {
+    "message": "Remove this legacy device?",
+    "description": "Title of the confirmation dialog when removing (signing out) a legacy device"
+  },
+  "pages.devices.legacy.finished_at_label": {
+    "message": "Signed out at",
+    "description": "Label for the sign-out date of a legacy device"
+  },
+  "pages.devices.legacy.last_active_ip_label": {
+    "message": "Last active IP",
+    "description": "Label for the last-active IP of a legacy device"
+  },
+  "pages.devices.legacy.last_active_label": {
+    "message": "Last active",
+    "description": "Label for the last-active date of a legacy device"
+  },
+  "pages.devices.legacy.not_found.description": {
+    "message": "The requested legacy device ({sessionId}) could not be found on {serverName}.",
+    "description": "The description of the alert when a legacy device could not be found"
+  },
+  "pages.devices.legacy.not_found.title": {
+    "message": "Legacy device not found",
+    "description": "The title of the alert when a legacy device could not be found"
+  },
+  "pages.devices.legacy.redirect_uri_label": {
+    "message": "Redirect URI",
+    "description": "Label for the redirect URI of a legacy device"
+  },
+  "pages.devices.legacy.status_column": {
+    "message": "Status",
+    "description": "Column header for legacy device status"
+  },
+  "pages.devices.legacy.technical_details": {
+    "message": "Technical details",
+    "description": "Summary of the collapsed section with technical details (user agent, redirect URI) of a legacy device"
+  },
+  "pages.devices.legacy.title": {
+    "message": "Legacy devices",
+    "description": "The title of the legacy devices tab"
+  },
+  "pages.devices.legacy.user_agent_label": {
+    "message": "User agent",
+    "description": "Label for the user-agent of a legacy device"
+  },
+  "pages.devices.legacy.user_column": {
+    "message": "User",
+    "description": "Column header for the user of a legacy device"
+  },
+  "pages.devices.tabs.applications": {
+    "message": "Applications",
+    "description": "Label for the applications tab on the Devices page"
+  },
+  "pages.devices.tabs.legacy": {
+    "message": "Legacy devices",
+    "description": "Label for the legacy-devices tab on the Devices page"
+  },
+  "pages.devices.tabs.section": {
+    "message": "Device views",
+    "description": "The label for the devices tabs section"
+  },
+  "pages.devices.tabs.user": {
+    "message": "User devices",
+    "description": "Label for the user-devices tab on the Devices page"
+  },
+  "pages.devices.title": {
+    "message": "Devices",
+    "description": "The title of the Devices section"
+  },
+  "pages.devices.user.client_column": {
+    "message": "Application",
+    "description": "Column header for the application of a device"
+  },
+  "pages.devices.user.count": {
+    "message": "{COUNT, plural, =0 {No devices} one {# device} other {# devices}}",
+    "description": "On the devices list page, this heading shows the total number of devices"
+  },
+  "pages.devices.user.created_at_label": {
+    "message": "Signed in at",
+    "description": "Label for the date a device first signed in"
+  },
+  "pages.devices.user.description": {
+    "message": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately.",
+    "description": "The description of the user devices tab"
+  },
+  "pages.devices.user.device_column": {
+    "message": "Device",
+    "description": "Column header for the device name and ID"
+  },
+  "pages.devices.user.device_id_label": {
+    "message": "Device ID",
+    "description": "Label for the Matrix device ID of a device"
+  },
+  "pages.devices.user.filters.activity_active": {
+    "message": "Active",
+    "description": "Filter label for active devices used in the last few months"
+  },
+  "pages.devices.user.filters.activity_inactive": {
+    "message": "Inactive",
+    "description": "Filter label for devices not used in 90+ days"
+  },
+  "pages.devices.user.filters.activity_recently_used": {
+    "message": "Recently used",
+    "description": "Filter label for devices used in the last couple of weeks"
+  },
+  "pages.devices.user.filters.activity_signed_out": {
+    "message": "Signed out",
+    "description": "Filter label for signed-out (finished) devices"
+  },
+  "pages.devices.user.filters.client_chip": {
+    "message": "Application: {name}",
+    "description": "Active filter chip showing the currently filtered application"
+  },
+  "pages.devices.user.filters.newest_first": {
+    "message": "Newest first",
+    "description": "Filter label for sorting devices newest first"
+  },
+  "pages.devices.user.filters.user_chip": {
+    "message": "User: @{localpart}:{server}",
+    "description": "Active filter chip showing the currently filtered user"
+  },
+  "pages.devices.user.finish.button": {
+    "message": "Remove device",
+    "description": "Button label to remove (sign out) a device"
+  },
+  "pages.devices.user.finish.confirm": {
+    "message": "Remove device",
+    "description": "Confirmation button label for removing (signing out) a device"
+  },
+  "pages.devices.user.finish.description": {
+    "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately.",
+    "description": "Description of the confirmation dialog when signing out (finishing) a device"
+  },
+  "pages.devices.user.finish.error": {
+    "message": "Failed to remove the device",
+    "description": "Error toast when removing (signing out) a device fails"
+  },
+  "pages.devices.user.finish.success": {
+    "message": "Device removed",
+    "description": "Success toast when a device was removed (signed out)"
+  },
+  "pages.devices.user.finish.title": {
+    "message": "Remove this device?",
+    "description": "Title of the confirmation dialog when removing (signing out) a device"
+  },
+  "pages.devices.user.finished_at_label": {
+    "message": "Signed out at",
+    "description": "Label for the sign-out date of a device"
+  },
+  "pages.devices.user.last_active_ip_label": {
+    "message": "Last active IP",
+    "description": "Label for the last-active IP of a device"
+  },
+  "pages.devices.user.last_active_label": {
+    "message": "Last active",
+    "description": "Label for the last-active date of a device"
+  },
+  "pages.devices.user.not_found.description": {
+    "message": "The requested device ({sessionId}) could not be found on {serverName}.",
+    "description": "The description of the alert when a device could not be found"
+  },
+  "pages.devices.user.not_found.title": {
+    "message": "Device not found",
+    "description": "The title of the alert when a device could not be found"
+  },
+  "pages.devices.user.scope_label": {
+    "message": "Scope",
+    "description": "Label for the scope field of a device"
+  },
+  "pages.devices.user.status_column": {
+    "message": "Status",
+    "description": "Column header for device status"
+  },
+  "pages.devices.user.technical_details": {
+    "message": "Technical details",
+    "description": "Summary of the collapsed section with technical details (scope, user agent) of a device"
+  },
+  "pages.devices.user.title": {
+    "message": "User devices",
+    "description": "The title of the user devices tab"
+  },
+  "pages.devices.user.user_agent_label": {
+    "message": "User agent",
+    "description": "Label for the user-agent of a device"
+  },
+  "pages.devices.user.user_column": {
+    "message": "User",
+    "description": "Column header for the user of a device"
+  },
+  "pages.devices.user.user_none": {
+    "message": "No user",
+    "description": "Shown when a device has no associated user"
   },
   "pages.federation.allowlist.add.error": {
     "message": "Failed to add domain to allowlist",
@@ -1143,6 +1475,10 @@
     "message": "Active users",
     "description": "The label for the 'Active users' filter in the user list"
   },
+  "pages.users.filters.active_client_chip": {
+    "message": "Has active device on: {name}",
+    "description": "Active filter chip showing the currently filtered application in the user list"
+  },
   "pages.users.filters.admins": {
     "message": "Admins",
     "description": "The label for the 'Admins' filter in the user list"
@@ -1155,6 +1491,10 @@
     "message": "Guests (legacy)",
     "description": "The label for the 'Guests (legacy)' filter in the user list"
   },
+  "pages.users.filters.has_legacy_session": {
+    "message": "Has active legacy device",
+    "description": "The label for the 'has an active legacy device' filter in the user list"
+  },
   "pages.users.filters.locked": {
     "message": "Locked users",
     "description": "The label for the 'Locked users' filter in the user list"
@@ -1162,6 +1502,10 @@
   "pages.users.filters.newest_first": {
     "message": "Newest first",
     "description": "The label for the 'Newest first' filter in the user list"
+  },
+  "pages.users.filters.no_legacy_session": {
+    "message": "No active legacy device",
+    "description": "The label for the 'no active legacy device' filter in the user list"
   },
   "pages.users.filters.non_guests": {
     "message": "Non-guests (legacy)",
@@ -1323,6 +1667,14 @@
     "message": "Set a new password for this user",
     "description": "The title of the modal for setting a user password"
   },
+  "pages.users.statistics.devices": {
+    "message": "Devices",
+    "description": "Stat label: total number of devices (OAuth 2.0 sessions) for this user"
+  },
+  "pages.users.statistics.legacy_devices": {
+    "message": "Legacy devices",
+    "description": "Stat label: total number of legacy devices (compat sessions) for this user"
+  },
   "pages.users.title": {
     "message": "Users",
     "description": "The title of the users list page"
@@ -1414,6 +1766,66 @@
   "ui.destination_status.working": {
     "message": "Working",
     "description": "Badge label for a federation destination that is working"
+  },
+  "ui.device_info.name_on_platform": {
+    "message": "{name} on {platform}",
+    "description": "Name of a device derived from its user-agent, e.g. 'Firefox on macOS'"
+  },
+  "ui.device_info.type.mobile": {
+    "message": "Mobile device",
+    "description": "Device type icon label for mobile devices"
+  },
+  "ui.device_info.type.pc": {
+    "message": "Computer",
+    "description": "Device type icon label for computers"
+  },
+  "ui.device_info.type.tablet": {
+    "message": "Tablet",
+    "description": "Device type icon label for tablets"
+  },
+  "ui.device_info.type.unknown": {
+    "message": "Unknown device type",
+    "description": "Device type icon label for unknown device types"
+  },
+  "ui.device_info.unknown_device": {
+    "message": "Unknown device",
+    "description": "Shown when we can't figure out the name of a device"
+  },
+  "ui.device_status.active": {
+    "message": "Active",
+    "description": "Device status badge: the device is signed in and was used in the last few months"
+  },
+  "ui.device_status.inactive": {
+    "message": "Inactive",
+    "description": "Device status badge: the device has not been used in a long time"
+  },
+  "ui.device_status.last_active.tooltip": {
+    "message": "Last active on {date}.",
+    "description": "Tooltip on a device status badge, giving the date the device was last active"
+  },
+  "ui.device_status.never_used": {
+    "message": "Never used",
+    "description": "Device status badge: the device has never been used"
+  },
+  "ui.device_status.never_used.tooltip": {
+    "message": "This device has not been used yet.",
+    "description": "Tooltip on the 'Never used' device status badge"
+  },
+  "ui.device_status.recently_used": {
+    "message": "Recently used",
+    "description": "Device status badge: the device was used in the last couple of weeks"
+  },
+  "ui.device_status.signed_out": {
+    "message": "Signed out",
+    "description": "Device status badge: the device has been signed out"
+  },
+  "ui.device_status.signed_out.tooltip": {
+    "message": "This device has been signed out and no longer has access.",
+    "description": "Tooltip on the 'Signed out' device status badge, when the date is unknown"
+  },
+  "ui.device_status.signed_out.tooltip_at": {
+    "message": "Signed out on {date}.",
+    "description": "Tooltip on the 'Signed out' device status badge, giving the date it was signed out"
   },
   "ui.language_switcher.browser_default": {
     "message": "Use browser settings ({language})",

@@ -138,6 +138,39 @@ export interface UserListFilters {
   guest?: boolean;
   status?: "active" | "locked" | "deactivated";
   search?: string;
+  activeOauth2Client?: api.Ulid[];
+  hasActiveCompatSession?: boolean;
+}
+
+export interface OAuth2ClientListParameters {
+  kind?: api.OAuth2ClientKind;
+  name?: string;
+  uri?: string;
+  grantType?: string;
+  hasActiveSessions?: boolean;
+}
+
+export interface OAuth2SessionListParameters {
+  user?: api.Ulid;
+  client?: api.Ulid[];
+  clientKind?: api.OAuth2ClientKind;
+  userSession?: api.Ulid;
+  scope?: string[];
+  status?: api.OAuth2SessionStatus;
+  createdAfter?: string;
+  createdBefore?: string;
+  lastActiveAfter?: string;
+  lastActiveBefore?: string;
+}
+
+export interface CompatSessionListParameters {
+  user?: api.Ulid;
+  userSession?: api.Ulid;
+  status?: api.CompatSessionStatus;
+  createdAfter?: string;
+  createdBefore?: string;
+  lastActiveAfter?: string;
+  lastActiveBefore?: string;
 }
 
 export interface TokenListParameters extends PageParameters {
@@ -267,6 +300,14 @@ export const usersInfiniteQuery = (
         query["filter[legacy-guest]"] = parameters.guest;
       if (parameters.status) query["filter[status]"] = parameters.status;
       if (parameters.search) query["filter[search]"] = parameters.search;
+      if (
+        parameters.activeOauth2Client &&
+        parameters.activeOauth2Client.length > 0
+      )
+        query["filter[active-oauth2-client]"] = parameters.activeOauth2Client;
+      if (parameters.hasActiveCompatSession !== undefined)
+        query["filter[has-active-compat-session]"] =
+          parameters.hasActiveCompatSession;
 
       const result = await api.listUsers({
         ...(await masBaseOptions(client, serverName, signal)),
@@ -314,6 +355,14 @@ export const usersCountQuery = (
         query["filter[legacy-guest]"] = parameters.guest;
       if (parameters.status) query["filter[status]"] = parameters.status;
       if (parameters.search) query["filter[search]"] = parameters.search;
+      if (
+        parameters.activeOauth2Client &&
+        parameters.activeOauth2Client.length > 0
+      )
+        query["filter[active-oauth2-client]"] = parameters.activeOauth2Client;
+      if (parameters.hasActiveCompatSession !== undefined)
+        query["filter[has-active-compat-session]"] =
+          parameters.hasActiveCompatSession;
 
       const result = await api.listUsers({
         ...(await masBaseOptions(client, serverName, signal)),
@@ -854,6 +903,322 @@ export const editRegistrationToken = async (
     ...(await masBaseOptions(queryClient, serverName, signal)),
     path: { id: tokenId },
     body,
+  });
+  ensureNoError(result);
+  return result.data;
+};
+
+const applyOauth2ClientFilters = (
+  query: api.ListOAuth2ClientsData["query"] & {},
+  parameters: OAuth2ClientListParameters,
+): void => {
+  if (parameters.kind) query["filter[client-kind]"] = parameters.kind;
+  if (parameters.name) query["filter[client-name]"] = parameters.name;
+  if (parameters.uri) query["filter[client-uri]"] = parameters.uri;
+  if (parameters.grantType) query["filter[grant-type]"] = parameters.grantType;
+  if (parameters.hasActiveSessions !== undefined)
+    query["filter[has-active-sessions]"] = parameters.hasActiveSessions;
+};
+
+export const oauth2ClientsInfiniteQuery = (
+  serverName: string,
+  parameters: OAuth2ClientListParameters = {},
+) =>
+  infiniteQueryOptions({
+    queryKey: ["mas", "oauth2-clients", serverName, parameters],
+    queryFn: async ({
+      client,
+      signal,
+      pageParam,
+    }): Promise<WithData<api.PaginatedResponseForOAuth2Client>> => {
+      const query: api.ListOAuth2ClientsData["query"] & {} = {
+        "page[first]": PAGE_SIZE,
+        count: "false",
+      };
+
+      if (pageParam) query["page[after]"] = pageParam;
+      applyOauth2ClientFilters(query, parameters);
+
+      const result = await api.listOAuth2Clients({
+        ...(await masBaseOptions(client, serverName, signal)),
+        query,
+      });
+      ensureNoError(result);
+      ensureHasData(result.data);
+      return result.data;
+    },
+    initialPageParam: null as api.Ulid | null,
+    getNextPageParam: (lastPage): api.Ulid | null =>
+      (lastPage.links.next && cursorForSingleResource(lastPage.data?.at(-1))) ??
+      null,
+  });
+
+export const oauth2ClientsCountQuery = (
+  serverName: string,
+  parameters: OAuth2ClientListParameters = {},
+) =>
+  queryOptions({
+    queryKey: ["mas", "oauth2-clients", serverName, parameters, "count"],
+    queryFn: async ({ client, signal }): Promise<number> => {
+      const query: api.ListOAuth2ClientsData["query"] & {} = {
+        count: "only",
+      };
+
+      applyOauth2ClientFilters(query, parameters);
+
+      const result = await api.listOAuth2Clients({
+        ...(await masBaseOptions(client, serverName, signal)),
+        query,
+      });
+      ensureNoError(result);
+      ensureHasCount(result.data);
+      return result.data.meta.count;
+    },
+  });
+
+export const oauth2ClientQuery = (serverName: string, clientId: string) =>
+  queryOptions({
+    queryKey: ["mas", "oauth2-client", serverName, clientId],
+    queryFn: async ({
+      client,
+      signal,
+    }): Promise<api.SingleResponseForOAuth2Client> => {
+      const result = await api.getOAuth2Client({
+        ...(await masBaseOptions(client, serverName, signal)),
+        path: { id: clientId },
+      });
+      ensureNoError(result, true);
+      return result.data;
+    },
+  });
+
+const applyOauth2SessionFilters = (
+  query: api.ListOAuth2SessionsData["query"] & {},
+  parameters: OAuth2SessionListParameters,
+): void => {
+  if (parameters.user) query["filter[user]"] = parameters.user;
+  if (parameters.client && parameters.client.length > 0)
+    query["filter[client]"] = parameters.client;
+  if (parameters.clientKind)
+    query["filter[client-kind]"] = parameters.clientKind;
+  if (parameters.userSession)
+    query["filter[user-session]"] = parameters.userSession;
+  if (parameters.scope && parameters.scope.length > 0)
+    query["filter[scope]"] = parameters.scope;
+  if (parameters.status) query["filter[status]"] = parameters.status;
+  if (parameters.createdAfter)
+    query["filter[created-after]"] = parameters.createdAfter;
+  if (parameters.createdBefore)
+    query["filter[created-before]"] = parameters.createdBefore;
+  if (parameters.lastActiveAfter)
+    query["filter[last-active-after]"] = parameters.lastActiveAfter;
+  if (parameters.lastActiveBefore)
+    query["filter[last-active-before]"] = parameters.lastActiveBefore;
+};
+
+export const oauth2SessionsInfiniteQuery = (
+  serverName: string,
+  parameters: OAuth2SessionListParameters = {},
+  direction: PaginationDirection = "forward",
+) =>
+  infiniteQueryOptions({
+    queryKey: ["mas", "oauth2-sessions", serverName, parameters, direction],
+    queryFn: async ({
+      client,
+      signal,
+      pageParam,
+    }): Promise<WithData<api.PaginatedResponseForOAuth2Session>> => {
+      const query: api.ListOAuth2SessionsData["query"] & {} = {
+        count: "false",
+      };
+
+      if (direction === "forward") {
+        query["page[first]"] = PAGE_SIZE;
+        if (pageParam) query["page[after]"] = pageParam;
+      } else {
+        query["page[last]"] = PAGE_SIZE;
+        if (pageParam) query["page[before]"] = pageParam;
+      }
+
+      applyOauth2SessionFilters(query, parameters);
+
+      const result = await api.listOAuth2Sessions({
+        ...(await masBaseOptions(client, serverName, signal)),
+        query,
+      });
+      ensureNoError(result);
+      ensureHasData(result.data);
+      return result.data;
+    },
+    initialPageParam: null as api.Ulid | null,
+    getNextPageParam: (lastPage): api.Ulid | null =>
+      (direction === "forward"
+        ? lastPage.links.next && cursorForSingleResource(lastPage.data?.at(-1))
+        : lastPage.links.prev &&
+          cursorForSingleResource(lastPage.data?.at(0))) ?? null,
+  });
+
+export const oauth2SessionsCountQuery = (
+  serverName: string,
+  parameters: OAuth2SessionListParameters = {},
+) =>
+  queryOptions({
+    queryKey: ["mas", "oauth2-sessions", serverName, parameters, "count"],
+    queryFn: async ({ client, signal }): Promise<number> => {
+      const query: api.ListOAuth2SessionsData["query"] & {} = {
+        count: "only",
+      };
+
+      applyOauth2SessionFilters(query, parameters);
+
+      const result = await api.listOAuth2Sessions({
+        ...(await masBaseOptions(client, serverName, signal)),
+        query,
+      });
+      ensureNoError(result);
+      ensureHasCount(result.data);
+      return result.data.meta.count;
+    },
+  });
+
+export const oauth2SessionQuery = (serverName: string, sessionId: string) =>
+  queryOptions({
+    queryKey: ["mas", "oauth2-session", serverName, sessionId],
+    queryFn: async ({
+      client,
+      signal,
+    }): Promise<api.SingleResponseForOAuth2Session> => {
+      const result = await api.getOAuth2Session({
+        ...(await masBaseOptions(client, serverName, signal)),
+        path: { id: sessionId },
+      });
+      ensureNoError(result, true);
+      return result.data;
+    },
+  });
+
+export const finishOauth2Session = async (
+  queryClient: QueryClient,
+  serverName: string,
+  sessionId: api.Ulid,
+  signal?: AbortSignal,
+): Promise<api.SingleResponseForOAuth2Session> => {
+  const result = await api.finishOAuth2Session({
+    ...(await masBaseOptions(queryClient, serverName, signal)),
+    path: { id: sessionId },
+  });
+  ensureNoError(result);
+  return result.data;
+};
+
+const applyCompatSessionFilters = (
+  query: api.ListCompatSessionsData["query"] & {},
+  parameters: CompatSessionListParameters,
+): void => {
+  if (parameters.user) query["filter[user]"] = parameters.user;
+  if (parameters.userSession)
+    query["filter[user-session]"] = parameters.userSession;
+  if (parameters.status) query["filter[status]"] = parameters.status;
+  if (parameters.createdAfter)
+    query["filter[created-after]"] = parameters.createdAfter;
+  if (parameters.createdBefore)
+    query["filter[created-before]"] = parameters.createdBefore;
+  if (parameters.lastActiveAfter)
+    query["filter[last-active-after]"] = parameters.lastActiveAfter;
+  if (parameters.lastActiveBefore)
+    query["filter[last-active-before]"] = parameters.lastActiveBefore;
+};
+
+export const compatSessionsInfiniteQuery = (
+  serverName: string,
+  parameters: CompatSessionListParameters = {},
+  direction: PaginationDirection = "forward",
+) =>
+  infiniteQueryOptions({
+    queryKey: ["mas", "compat-sessions", serverName, parameters, direction],
+    queryFn: async ({
+      client,
+      signal,
+      pageParam,
+    }): Promise<WithData<api.PaginatedResponseForCompatSession>> => {
+      const query: api.ListCompatSessionsData["query"] & {} = {
+        count: "false",
+      };
+
+      if (direction === "forward") {
+        query["page[first]"] = PAGE_SIZE;
+        if (pageParam) query["page[after]"] = pageParam;
+      } else {
+        query["page[last]"] = PAGE_SIZE;
+        if (pageParam) query["page[before]"] = pageParam;
+      }
+
+      applyCompatSessionFilters(query, parameters);
+
+      const result = await api.listCompatSessions({
+        ...(await masBaseOptions(client, serverName, signal)),
+        query,
+      });
+      ensureNoError(result);
+      ensureHasData(result.data);
+      return result.data;
+    },
+    initialPageParam: null as api.Ulid | null,
+    getNextPageParam: (lastPage): api.Ulid | null =>
+      (direction === "forward"
+        ? lastPage.links.next && cursorForSingleResource(lastPage.data?.at(-1))
+        : lastPage.links.prev &&
+          cursorForSingleResource(lastPage.data?.at(0))) ?? null,
+  });
+
+export const compatSessionsCountQuery = (
+  serverName: string,
+  parameters: CompatSessionListParameters = {},
+) =>
+  queryOptions({
+    queryKey: ["mas", "compat-sessions", serverName, parameters, "count"],
+    queryFn: async ({ client, signal }): Promise<number> => {
+      const query: api.ListCompatSessionsData["query"] & {} = {
+        count: "only",
+      };
+
+      applyCompatSessionFilters(query, parameters);
+
+      const result = await api.listCompatSessions({
+        ...(await masBaseOptions(client, serverName, signal)),
+        query,
+      });
+      ensureNoError(result);
+      ensureHasCount(result.data);
+      return result.data.meta.count;
+    },
+  });
+
+export const compatSessionQuery = (serverName: string, sessionId: string) =>
+  queryOptions({
+    queryKey: ["mas", "compat-session", serverName, sessionId],
+    queryFn: async ({
+      client,
+      signal,
+    }): Promise<api.SingleResponseForCompatSession> => {
+      const result = await api.getCompatSession({
+        ...(await masBaseOptions(client, serverName, signal)),
+        path: { id: sessionId },
+      });
+      ensureNoError(result, true);
+      return result.data;
+    },
+  });
+
+export const finishCompatSession = async (
+  queryClient: QueryClient,
+  serverName: string,
+  sessionId: api.Ulid,
+  signal?: AbortSignal,
+): Promise<api.SingleResponseForCompatSession> => {
+  const result = await api.finishCompatSession({
+    ...(await masBaseOptions(queryClient, serverName, signal)),
+    path: { id: sessionId },
   });
   ensureNoError(result);
   return result.data;

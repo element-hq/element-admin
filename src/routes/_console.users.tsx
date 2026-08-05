@@ -27,7 +27,7 @@ import {
   InlineSpinner,
   Text,
 } from "@vector-im/compound-web";
-import { useCallback, useMemo, useState } from "react";
+import { Suspense, useCallback, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
 import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 import * as v from "valibot";
@@ -35,6 +35,7 @@ import * as v from "valibot";
 import {
   createUser,
   isErrorResponse,
+  oauth2ClientQuery,
   usersCountQuery,
   usersInfiniteQuery,
 } from "@/api/mas";
@@ -69,8 +70,12 @@ const UserSearchParameters = v.object({
   guest: v.optional(v.boolean()),
   status: v.optional(v.picklist(["active", "locked", "deactivated"])),
   search: v.optional(v.string()),
+  client: v.optional(v.array(v.string())),
+  legacy: v.optional(v.boolean()),
   dir: v.optional(v.picklist(["forward", "backward"])),
 });
+
+type UserSearch = v.InferOutput<typeof UserSearchParameters>;
 
 const titleMessage = defineMessage({
   id: "pages.users.title",
@@ -145,6 +150,11 @@ export const Route = createFileRoute("/_console/users")({
       ...(search.guest !== undefined && { guest: search.guest }),
       ...(search.status && { status: search.status }),
       ...(search.search && { search: search.search }),
+      ...(search.client &&
+        search.client.length > 0 && { activeOauth2Client: search.client }),
+      ...(search.legacy !== undefined && {
+        hasActiveCompatSession: search.legacy,
+      }),
     };
 
     return { parameters, direction: search.dir };
@@ -438,6 +448,28 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
   );
 };
 
+const ClientFilterLabel = ({
+  serverName,
+  clientId,
+}: {
+  serverName: string;
+  clientId: string;
+}) => {
+  const {
+    data: { data: client },
+  } = useSuspenseQuery(oauth2ClientQuery(serverName, clientId));
+  return (
+    <FormattedMessage
+      id="pages.users.filters.active_client_chip"
+      defaultMessage="Has active device on: {name}"
+      description="Active filter chip showing the currently filtered application in the user list"
+      values={{
+        name: client.attributes.client_name ?? client.attributes.client_id,
+      }}
+    />
+  );
+};
+
 const filtersDefinition = [
   {
     key: "dir",
@@ -503,6 +535,26 @@ const filtersDefinition = [
       defaultMessage: "Deactivated users",
       description:
         "The label for the 'Deactivated users' filter in the user list",
+    }),
+  },
+  {
+    key: "legacy",
+    value: true,
+    message: defineMessage({
+      id: "pages.users.filters.has_legacy_session",
+      defaultMessage: "Has active legacy device",
+      description:
+        "The label for the 'has an active legacy device' filter in the user list",
+    }),
+  },
+  {
+    key: "legacy",
+    value: false,
+    message: defineMessage({
+      id: "pages.users.filters.no_legacy_session",
+      defaultMessage: "No active legacy device",
+      description:
+        "The label for the 'no active legacy device' filter in the user list",
     }),
   },
 ] as const;
@@ -718,7 +770,8 @@ function RouteComponent() {
                 ))}
               </DataTable.FilterMenu>
 
-              {filters.active.length > 0 && (
+              {(filters.active.length > 0 ||
+                (search.client && search.client.length > 0)) && (
                 <DataTable.ActiveFilterList>
                   {filters.active.map((filter) => (
                     <DataTable.ActiveFilter key={filter.key}>
@@ -731,10 +784,35 @@ function RouteComponent() {
                     </DataTable.ActiveFilter>
                   ))}
 
+                  {search.client?.map((clientId) => {
+                    const remaining = (search.client ?? []).filter(
+                      (id) => id !== clientId,
+                    );
+                    const next: UserSearch = {
+                      ...search,
+                      client: remaining.length > 0 ? remaining : undefined,
+                    };
+                    return (
+                      <DataTable.ActiveFilter key={`client-${clientId}`}>
+                        <Suspense fallback={<Placeholder.Text />}>
+                          <ClientFilterLabel
+                            serverName={credentials.serverName}
+                            clientId={clientId}
+                          />
+                        </Suspense>
+                        <DataTable.RemoveFilterLink
+                          from={from}
+                          replace={true}
+                          search={next}
+                        />
+                      </DataTable.ActiveFilter>
+                    );
+                  })}
+
                   <TextLink
                     from={from}
                     replace={true}
-                    search={filters.clearedState}
+                    search={{ ...filters.clearedState, client: undefined }}
                     size="sm"
                   >
                     <FormattedMessage {...messages.actionClear} />

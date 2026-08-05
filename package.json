@@ -52,6 +52,7 @@
     "valibot": "1.4.2",
     "vaul": "1.1.2",
     "verkit": "^0.3.1",
+    "woothee": "1.11.1",
     "zustand": "5.0.14"
   },
   "devDependencies": {
@@ -78,6 +79,7 @@
     "@types/node": "26.1.2",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.4",
+    "@types/woothee": "1.11.3",
     "@vitejs/plugin-react": "6.0.5",
     "babel-plugin-react-compiler": "1.0.0",
     "browserslist": "4.28.7",

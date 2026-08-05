@@ -19,7 +19,6 @@ import {
 } from "@tanstack/react-table";
 import { PlusIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
-  Avatar,
   Badge,
   Button,
   CheckboxMenuItem,
@@ -41,11 +40,7 @@ import {
   userQuery,
 } from "@/api/mas";
 import type { SingleResourceForPersonalSession } from "@/api/mas/api/types.gen";
-import {
-  mediaThumbnailQuery,
-  profileQuery,
-  wellKnownQuery,
-} from "@/api/matrix";
+import { wellKnownQuery } from "@/api/matrix";
 import { CopyToClipboard } from "@/components/copy";
 import * as DataTable from "@/components/data-table";
 import * as Dialog from "@/components/dialog";
@@ -53,10 +48,10 @@ import { TextLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import * as Placeholder from "@/components/placeholder";
+import { UserInfo } from "@/components/room-info";
 import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
 import { UserPicker } from "@/ui/user-picker";
-import { useImageBlob } from "@/utils/blob";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 import { useFilters } from "@/utils/filters";
 import { randomString } from "@/utils/random";
@@ -613,30 +608,6 @@ const PersonalTokenAddButton = ({
   );
 };
 
-const useMxid = (serverName: string, userId: string): string => {
-  const { data } = useSuspenseQuery(userQuery(serverName, userId));
-  return `@${data.data.attributes.username}:${serverName}`;
-};
-
-const useUserAvatar = (
-  synapseRoot: string,
-  userId: string,
-): string | undefined => {
-  const { data: profile } = useQuery(profileQuery(synapseRoot, userId));
-  const { data: avatarBlob } = useQuery(
-    mediaThumbnailQuery(synapseRoot, profile?.avatar_url),
-  );
-  return useImageBlob(avatarBlob);
-};
-
-const useUserDisplayName = (
-  synapseRoot: string,
-  userId: string,
-): string | undefined => {
-  const { data: profile } = useQuery(profileQuery(synapseRoot, userId));
-  return profile?.displayname;
-};
-
 interface UserCellProps {
   userId: string;
   serverName: string;
@@ -644,30 +615,9 @@ interface UserCellProps {
 const UserCell = ({ userId, serverName }: UserCellProps) => {
   const { data: wellKnown } = useSuspenseQuery(wellKnownQuery(serverName));
   const synapseRoot = wellKnown["m.homeserver"].base_url;
-  const mxid = useMxid(serverName, userId);
-  const displayName = useUserDisplayName(synapseRoot, mxid);
-  const avatar = useUserAvatar(synapseRoot, mxid);
-  return (
-    <div className="flex items-center gap-3">
-      <Avatar id={mxid} name={displayName || mxid} src={avatar} size="32px" />
-      <div className="flex flex-1 flex-col min-w-0">
-        {displayName ? (
-          <>
-            <Text size="md" weight="semibold" className="text-text-primary">
-              {displayName}
-            </Text>
-            <Text size="sm" className="text-text-secondary">
-              {mxid}
-            </Text>
-          </>
-        ) : (
-          <Text size="md" weight="semibold" className="text-text-primary">
-            {mxid}
-          </Text>
-        )}
-      </div>
-    </div>
-  );
+  const { data } = useSuspenseQuery(userQuery(serverName, userId));
+  const mxid = `@${data.data.attributes.username}:${serverName}`;
+  return <UserInfo synapseRoot={synapseRoot} mxid={mxid} />;
 };
 
 const filtersDefinition = [
