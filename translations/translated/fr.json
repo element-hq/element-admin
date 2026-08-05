@@ -209,9 +209,6 @@
   "pages.federation.domain_count": {
     "message": "{COUNT, plural, zero {Aucun domaine} one {# domaine} other {# domaines}}"
   },
-  "pages.federation.loading": {
-    "message": "Chargement de domaines supplémentaires…"
-  },
   "pages.federation.not_found.description": {
     "message": "La destination demandée ({destination}) est introuvable."
   },
@@ -380,9 +377,6 @@
   "pages.personal_tokens.last_active_label": {
     "message": "Dernière activité"
   },
-  "pages.personal_tokens.loading_more": {
-    "message": "Chargement de plus de jetons..."
-  },
   "pages.personal_tokens.name_column": {
     "message": "Nom"
   },
@@ -542,9 +536,6 @@
   "pages.registration_tokens.filters.used_only": {
     "message": "Utilisé"
   },
-  "pages.registration_tokens.loading_more": {
-    "message": "Chargement de plus de jetons..."
-  },
   "pages.registration_tokens.never_expires": {
     "message": "N'expire jamais"
   },
@@ -629,6 +620,18 @@
   "pages.registration_tokens.valid_until_column": {
     "message": "Valable jusqu'à"
   },
+  "pages.rooms.columns.alias": {
+    "message": "Alias"
+  },
+  "pages.rooms.columns.members": {
+    "message": "Membres"
+  },
+  "pages.rooms.columns.room": {
+    "message": "Salon"
+  },
+  "pages.rooms.columns.type": {
+    "message": "Type"
+  },
   "pages.rooms.delete_room.alert.description": {
     "message": "Cette action supprimera définitivement tous les messages ou fichiers multimédias téléchargés sur le serveur et supprimera ce salon du répertoire. Les membres perdront l'accès à leurs messages et le salon sera supprimée de leur liste de salons."
   },
@@ -692,6 +695,18 @@
   "pages.rooms.room_count": {
     "message": "{COUNT, plural, zero {Aucun salon} one {# salon} other {# salons}}"
   },
+  "pages.rooms.room_type.private": {
+    "message": "Privé"
+  },
+  "pages.rooms.room_type.public": {
+    "message": "Public"
+  },
+  "pages.rooms.room_type.restricted": {
+    "message": "Restreint"
+  },
+  "pages.rooms.search_placeholder": {
+    "message": "Rechercher…"
+  },
   "pages.rooms.title": {
     "message": "Salons"
   },
@@ -746,6 +761,21 @@
   "pages.supervision.unavailable_alert.title": {
     "message": "La supervision est une fonctionnalité disponible dans ESS Pro"
   },
+  "pages.users.account_status.active": {
+    "message": "Actif"
+  },
+  "pages.users.account_status.admin": {
+    "message": "Administrateur"
+  },
+  "pages.users.account_status.deactivated": {
+    "message": "Désactivé"
+  },
+  "pages.users.account_status.guest": {
+    "message": "Visiteur"
+  },
+  "pages.users.account_status.locked": {
+    "message": "Verrouillé"
+  },
   "pages.users.add_email.button": {
     "message": "Ajouter une adresse e-mail"
   },
@@ -772,6 +802,15 @@
   },
   "pages.users.add_upstream_link.success": {
     "message": "Association vers le compte en amont ajoutée"
+  },
+  "pages.users.columns.account_status": {
+    "message": "État du compte"
+  },
+  "pages.users.columns.created_at": {
+    "message": "Date de création"
+  },
+  "pages.users.columns.matrix_id": {
+    "message": "Matrix ID"
   },
   "pages.users.deactivate_account.alert.description": {
     "message": "Cela déconnectera automatiquement l'utilisateur de tous les appareils, invalidera tous les jetons d'accès, supprimera tous les identifiants tiers et effacera définitivement les données de son compte."
@@ -1006,6 +1045,9 @@
   },
   "ui.data.loading": {
     "message": "Chargement de l'information"
+  },
+  "ui.data_table.loading_more": {
+    "message": "Chargement…"
   },
   "ui.destination_status.failing": {
     "message": "En échec"

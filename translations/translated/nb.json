@@ -209,9 +209,6 @@
   "pages.federation.domain_count": {
     "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
   },
-  "pages.federation.loading": {
-    "message": "Loading more domains…"
-  },
   "pages.federation.not_found.description": {
     "message": "The requested destination ({destination}) could not be found."
   },
@@ -380,9 +377,6 @@
   "pages.personal_tokens.last_active_label": {
     "message": "Sist aktiv"
   },
-  "pages.personal_tokens.loading_more": {
-    "message": "Laster inn flere tokens..."
-  },
   "pages.personal_tokens.name_column": {
     "message": "Navn"
   },
@@ -542,9 +536,6 @@
   "pages.registration_tokens.filters.used_only": {
     "message": "Brukt"
   },
-  "pages.registration_tokens.loading_more": {
-    "message": "Laster inn flere tokener..."
-  },
   "pages.registration_tokens.never_expires": {
     "message": "Utløper aldri"
   },
@@ -629,6 +620,18 @@
   "pages.registration_tokens.valid_until_column": {
     "message": "Gyldig til"
   },
+  "pages.rooms.columns.alias": {
+    "message": "Alias"
+  },
+  "pages.rooms.columns.members": {
+    "message": "Members"
+  },
+  "pages.rooms.columns.room": {
+    "message": "Room"
+  },
+  "pages.rooms.columns.type": {
+    "message": "Type"
+  },
   "pages.rooms.delete_room.alert.description": {
     "message": "This will permanently delete all messages or media uploaded to the server and remove this room from the directory. Members will lose access to their messages and the room will be removed from their room list."
   },
@@ -692,6 +695,18 @@
   "pages.rooms.room_count": {
     "message": "{COUNT, plural, zero {Ingen rom} one {# rom} other {# rom}}"
   },
+  "pages.rooms.room_type.private": {
+    "message": "Private"
+  },
+  "pages.rooms.room_type.public": {
+    "message": "Public"
+  },
+  "pages.rooms.room_type.restricted": {
+    "message": "Restricted"
+  },
+  "pages.rooms.search_placeholder": {
+    "message": "Search…"
+  },
   "pages.rooms.title": {
     "message": "Rom"
   },
@@ -746,6 +761,21 @@
   "pages.supervision.unavailable_alert.title": {
     "message": "Supervision is a feature available in ESS Pro"
   },
+  "pages.users.account_status.active": {
+    "message": "Active"
+  },
+  "pages.users.account_status.admin": {
+    "message": "Admin"
+  },
+  "pages.users.account_status.deactivated": {
+    "message": "Deactivated"
+  },
+  "pages.users.account_status.guest": {
+    "message": "Guest"
+  },
+  "pages.users.account_status.locked": {
+    "message": "Locked"
+  },
   "pages.users.add_email.button": {
     "message": "Legg til e-postadresse"
   },
@@ -772,6 +802,15 @@
   },
   "pages.users.add_upstream_link.success": {
     "message": "Lenke til upstream-konto lagt til"
+  },
+  "pages.users.columns.account_status": {
+    "message": "Account status"
+  },
+  "pages.users.columns.created_at": {
+    "message": "Created at"
+  },
+  "pages.users.columns.matrix_id": {
+    "message": "Matrix ID"
   },
   "pages.users.deactivate_account.alert.description": {
     "message": "Dette vil automatisk logge brukeren ut av alle enheter, fjerne eventuelle tilgangstokener, slette alle tredjeparts-IDer og permanent slette kontodataene deres."
@@ -1006,6 +1045,9 @@
   },
   "ui.data.loading": {
     "message": "Laster inn verdi"
+  },
+  "ui.data_table.loading_more": {
+    "message": "Loading more…"
   },
   "ui.destination_status.failing": {
     "message": "Failing"

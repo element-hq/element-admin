@@ -754,12 +754,6 @@
       "pluralType": "cardinal"
     }
   ],
-  "pages.federation.loading": [
-    {
-      "type": 0,
-      "value": "Chargement de domaines supplémentaires…"
-    }
-  ],
   "pages.federation.not_found.description": [
     {
       "type": 0,
@@ -1154,12 +1148,6 @@
       "value": "Dernière activité"
     }
   ],
-  "pages.personal_tokens.loading_more": [
-    {
-      "type": 0,
-      "value": "Chargement de plus de jetons..."
-    }
-  ],
   "pages.personal_tokens.name_column": [
     {
       "type": 0,
@@ -1478,12 +1466,6 @@
       "value": "Utilisé"
     }
   ],
-  "pages.registration_tokens.loading_more": [
-    {
-      "type": 0,
-      "value": "Chargement de plus de jetons..."
-    }
-  ],
   "pages.registration_tokens.never_expires": [
     {
       "type": 0,
@@ -1715,6 +1697,30 @@
     {
       "type": 0,
       "value": "Valable jusqu'à"
+    }
+  ],
+  "pages.rooms.columns.alias": [
+    {
+      "type": 0,
+      "value": "Alias"
+    }
+  ],
+  "pages.rooms.columns.members": [
+    {
+      "type": 0,
+      "value": "Membres"
+    }
+  ],
+  "pages.rooms.columns.room": [
+    {
+      "type": 0,
+      "value": "Salon"
+    }
+  ],
+  "pages.rooms.columns.type": [
+    {
+      "type": 0,
+      "value": "Type"
     }
   ],
   "pages.rooms.delete_room.alert.description": [
@@ -1951,6 +1957,30 @@
       "pluralType": "cardinal"
     }
   ],
+  "pages.rooms.room_type.private": [
+    {
+      "type": 0,
+      "value": "Privé"
+    }
+  ],
+  "pages.rooms.room_type.public": [
+    {
+      "type": 0,
+      "value": "Public"
+    }
+  ],
+  "pages.rooms.room_type.restricted": [
+    {
+      "type": 0,
+      "value": "Restreint"
+    }
+  ],
+  "pages.rooms.search_placeholder": [
+    {
+      "type": 0,
+      "value": "Rechercher…"
+    }
+  ],
   "pages.rooms.title": [
     {
       "type": 0,
@@ -2073,6 +2103,36 @@
       "value": "La supervision est une fonctionnalité disponible dans ESS Pro"
     }
   ],
+  "pages.users.account_status.active": [
+    {
+      "type": 0,
+      "value": "Actif"
+    }
+  ],
+  "pages.users.account_status.admin": [
+    {
+      "type": 0,
+      "value": "Administrateur"
+    }
+  ],
+  "pages.users.account_status.deactivated": [
+    {
+      "type": 0,
+      "value": "Désactivé"
+    }
+  ],
+  "pages.users.account_status.guest": [
+    {
+      "type": 0,
+      "value": "Visiteur"
+    }
+  ],
+  "pages.users.account_status.locked": [
+    {
+      "type": 0,
+      "value": "Verrouillé"
+    }
+  ],
   "pages.users.add_email.button": [
     {
       "type": 0,
@@ -2125,6 +2185,24 @@
     {
       "type": 0,
       "value": "Association vers le compte en amont ajoutée"
+    }
+  ],
+  "pages.users.columns.account_status": [
+    {
+      "type": 0,
+      "value": "État du compte"
+    }
+  ],
+  "pages.users.columns.created_at": [
+    {
+      "type": 0,
+      "value": "Date de création"
+    }
+  ],
+  "pages.users.columns.matrix_id": [
+    {
+      "type": 0,
+      "value": "Matrix ID"
     }
   ],
   "pages.users.deactivate_account.alert.description": [
@@ -2729,6 +2807,12 @@
     {
       "type": 0,
       "value": "Chargement de l'information"
+    }
+  ],
+  "ui.data_table.loading_more": [
+    {
+      "type": 0,
+      "value": "Chargement…"
     }
   ],
   "ui.destination_status.failing": [
