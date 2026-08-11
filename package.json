@@ -51,7 +51,7 @@
     "use-broadcast-ts": "2.0.1",
     "valibot": "1.4.2",
     "vaul": "1.1.2",
-    "verkit": "^0.3.1",
+    "verkit": "^0.3.2",
     "woothee": "1.11.1",
     "zustand": "5.0.14"
   },
