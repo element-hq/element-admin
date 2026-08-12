@@ -10,9 +10,11 @@ import { coerce, parseRange, satisfies, type SemVerRange } from "verkit";
 import { versionQuery } from "@/api/mas";
 
 // The MAS release range in which each feature is available
+const range = (range: string): SemVerRange =>
+  parseRange(range, { includePrerelease: true });
 const masFeaturesRanges = {
-  personalTokens: parseRange(">=1.5.0"),
-  devices: parseRange(">=1.20.0"),
+  personalTokens: range(">=1.5.0"),
+  devices: range(">=1.20.0"),
 } as const satisfies Record<string, SemVerRange>;
 
 type MasFeature = keyof typeof masFeaturesRanges;
@@ -32,7 +34,7 @@ const computeFeaturesStatus = (version: string): MasFeaturesStatus => {
   return Object.fromEntries(
     Object.entries(masFeaturesRanges).map(([feature, range]) => [
       feature,
-      satisfies(coerced, range, { includePrerelease: true }),
+      satisfies(coerced, range),
     ]),
   ) as MasFeaturesStatus;
 };
