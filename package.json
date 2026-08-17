@@ -85,7 +85,7 @@
     "browserslist": "4.28.7",
     "eslint-plugin-formatjs": "6.4.20",
     "husky": "9.1.7",
-    "knip": "6.31.0",
+    "knip": "6.32.1",
     "lint-staged": "17.3.0",
     "oxfmt": "0.62.0",
     "oxlint": "1.77.0",
