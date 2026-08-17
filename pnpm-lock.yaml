@@ -48,8 +48,8 @@ importers:
         specifier: 10.2.3
         version: 10.2.3(@types/react@19.2.18)(react@19.2.8)
       '@vector-im/compound-web':
-        specifier: 9.9.0
-        version: 9.9.0(@fontsource/inconsolata@5.3.0)(@fontsource/inter@5.3.0)(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(@vector-im/compound-design-tokens@10.2.3(@types/react@19.2.18)(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: 10.0.0
+        version: 10.0.0(@fontsource/inconsolata@5.3.0)(@fontsource/inter@5.3.0)(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(@vector-im/compound-design-tokens@10.2.3(@types/react@19.2.18)(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       classnames:
         specifier: 2.5.1
         version: 2.5.1
@@ -2453,8 +2453,8 @@ packages:
       react:
         optional: true
 
-  '@vector-im/compound-web@9.9.0':
-    resolution: {integrity: sha512-GjAEhzB/mt9MA7Y1ySe6/AlW26vodDu4hvTi1ThB5rTrt4KAiHMpvk+T56KV5Lwo0VvBxAyHMtm/IY5tkyH12A==}
+  '@vector-im/compound-web@10.0.0':
+    resolution: {integrity: sha512-Gdxi+MjOTds1QwXw1bFy6NQnTgynNeSCmmOS7Q9c7pogaZQlpEYaEu6mPXww6T6TwBRgK7MNDXvF3k5C8h653Q==}
     peerDependencies:
       '@fontsource/inconsolata': ^5
       '@fontsource/inter': ^5
@@ -5849,7 +5849,7 @@ snapshots:
       '@types/react': 19.2.18
       react: 19.2.8
 
-  '@vector-im/compound-web@9.9.0(@fontsource/inconsolata@5.3.0)(@fontsource/inter@5.3.0)(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(@vector-im/compound-design-tokens@10.2.3(@types/react@19.2.18)(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@vector-im/compound-web@10.0.0(@fontsource/inconsolata@5.3.0)(@fontsource/inter@5.3.0)(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(@vector-im/compound-design-tokens@10.2.3(@types/react@19.2.18)(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@floating-ui/react': 0.27.20(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@floating-ui/react-dom': 2.1.9(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
