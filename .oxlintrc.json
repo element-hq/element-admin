@@ -201,8 +201,7 @@
       { "props": { "include": [["*", "{label,placeholder,title}"]] } }
     ],
     "formatjs/blocklist-elements": ["error", ["selectordinal"]],
-    "formatjs/prefer-full-sentence": "error",
-    "react/react-compiler": "error"
+    "formatjs/prefer-full-sentence": "error"
   },
   "jsPlugins": [
     "@tanstack/eslint-plugin-router",

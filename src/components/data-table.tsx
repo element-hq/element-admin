@@ -356,7 +356,7 @@ export function List<TFeatures extends TableFeatures, TData extends RowData>({
     // this component will re-render anyway when the window resizes, so we
     // don't have to look for that ourselves.
     scrollMargin:
-      // oxlint-disable-next-line react/react-compiler
+      // oxlint-disable-next-line react/refs
       (bodyRef.current?.getBoundingClientRect().top ?? 0) +
       globalThis.window.scrollY,
   });
@@ -365,9 +365,9 @@ export function List<TFeatures extends TableFeatures, TData extends RowData>({
   // See https://github.com/TanStack/virtual/issues/743
   const rowVirtualizerRef = useRef(rowVirtualizer);
 
-  // oxlint-disable-next-line react/react-compiler
+  // oxlint-disable-next-line react/refs
   const virtualItems = rowVirtualizerRef.current.getVirtualItems();
-  // oxlint-disable-next-line react/react-compiler
+  // oxlint-disable-next-line react/refs
   const scrollMargin = rowVirtualizerRef.current.options.scrollMargin;
 
   // Roving tabindex: only one row is tabbable so the grid is a single tab
@@ -530,11 +530,11 @@ export function List<TFeatures extends TableFeatures, TData extends RowData>({
           ref={bodyRef}
           className={styles["body"]}
           style={{
-            // oxlint-disable-next-line react/react-compiler
+            // oxlint-disable-next-line react/refs
             blockSize: `${rowVirtualizerRef.current.getTotalSize()}px`,
           }}
         >
-          {/* oxlint-disable-next-line react/react-compiler */}
+          {/* oxlint-disable-next-line react/refs */}
           {virtualItems.map((virtualRow) => {
             // Rounded to keep the rows on whole-pixel boundaries — the
             // scrollMargin comes from getBoundingClientRect() and is usually
