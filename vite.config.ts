@@ -7,8 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { devtools as tanstackDevtools } from "@tanstack/devtools-vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import formatjs from "@formatjs/unplugin/vite";
-import viteReact, { reactCompilerPreset } from "@vitejs/plugin-react";
-import babel from "@rolldown/plugin-babel";
+import viteReact from "@vitejs/plugin-react";
 import {
   createRunnableDevEnvironment,
   defineConfig,
@@ -41,10 +40,7 @@ export default defineConfig(({ mode }) => ({
       target: "react",
       autoCodeSplitting: true,
     }),
-    viteReact(),
-    babel({
-      presets: [reactCompilerPreset()],
-    }),
+    viteReact({ compiler: true }),
     formatjs({
       // We only remove the default message in production, so that in
       // development we get a feedback even if we did not update the
