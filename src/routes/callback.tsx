@@ -35,12 +35,14 @@ export const Route = createFileRoute("/callback")({
     const session = state.authorizationSession;
     // oxlint-disable-next-line typescript/unbound-method -- zustand store methods don't use `this`
     const saveCredentials = state.saveCredentials;
-    if (!session) {
-      throw new Error("No session");
-    }
-
+    // Checked before the session: a provider error is worth reporting even
+    // if the local session is already gone.
     if ("error" in search) {
       throw new Error(search.error_description || search.error);
+    }
+
+    if (!session) {
+      throw new Error("No session");
     }
 
     if (search.state !== session.state) {
