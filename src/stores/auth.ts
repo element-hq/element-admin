@@ -301,7 +301,14 @@ export const accessToken = (queryClient: QueryClient, signal?: AbortSignal) =>
 
 useAuthStore.subscribe((oldState, newState) => {
   if (!!oldState.credentials !== !!newState.credentials) {
-    router.invalidate();
+    // Everything auth-derived is now stale, *except* the /callback route: it
+    // is not auth-derived data, it is the auth transition itself. This
+    // subscriber fires synchronously from inside its loader (via
+    // `saveCredentials`), and an unscoped invalidate would retire that
+    // in-flight loader and re-run it after the one-shot authorization code
+    // has been consumed. Left alone, it finishes with its own redirect,
+    // which re-evaluates all route guards anyway.
+    router.invalidate({ filter: (match) => match.routeId !== "/callback" });
   }
 });
 
