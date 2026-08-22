@@ -1391,7 +1391,7 @@
       "type": 6,
       "value": "COUNT",
       "options": {
-        "zero": {
+        "=0": {
           "value": [
             {
               "type": 0,
@@ -2255,7 +2255,7 @@
       "type": 6,
       "value": "COUNT",
       "options": {
-        "zero": {
+        "=0": {
           "value": [
             {
               "type": 0,
@@ -2594,7 +2594,7 @@
       "type": 6,
       "value": "COUNT",
       "options": {
-        "zero": {
+        "=0": {
           "value": [
             {
               "type": 0,
@@ -3368,7 +3368,7 @@
       "type": 6,
       "value": "COUNT",
       "options": {
-        "zero": {
+        "=0": {
           "value": [
             {
               "type": 0,

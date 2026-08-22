@@ -733,7 +733,7 @@ function RouteComponent() {
                 ) : (
                   <FormattedMessage
                     id="pages.registration_tokens.token_count"
-                    defaultMessage="{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
+                    defaultMessage="{COUNT, plural, =0 {No tokens} one {# token} other {# tokens}}"
                     description="On the registration tokens list page, this heading shows the total number of tokens"
                     values={{ COUNT: totalCount }}
                   />

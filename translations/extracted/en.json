@@ -609,7 +609,7 @@
   },
   "pages.federation.domain_count": {
     "description": "On the federation page, this heading shows the total number of known domains",
-    "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
+    "message": "{COUNT, plural, =0 {No domains} one {# domain} other {# domains}}"
   },
   "pages.federation.not_found.description": {
     "description": "The description of the alert when a federation destination could not be found",
@@ -1113,7 +1113,7 @@
   },
   "pages.registration_tokens.token_count": {
     "description": "On the registration tokens list page, this heading shows the total number of tokens",
-    "message": "{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
+    "message": "{COUNT, plural, =0 {No tokens} one {# token} other {# tokens}}"
   },
   "pages.registration_tokens.token_uses.limited": {
     "description": "Shows the number of uses of a registration token, when there is a usage limit",
@@ -1257,7 +1257,7 @@
   },
   "pages.rooms.room_count": {
     "description": "On the room list page, this heading shows the total number of rooms",
-    "message": "{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
+    "message": "{COUNT, plural, =0 {No rooms} one {# room} other {# rooms}}"
   },
   "pages.rooms.room_type.private": {
     "description": "Badge label for a private room in the rooms list table",
@@ -1693,7 +1693,7 @@
   },
   "pages.users.user_count": {
     "description": "On the user list page, this heading shows the total number of users",
-    "message": "{COUNT, plural, zero {No users} one {# user} other {# users}}"
+    "message": "{COUNT, plural, =0 {No users} one {# user} other {# users}}"
   },
   "product.element": {
     "description": "Just Element.",

@@ -366,7 +366,7 @@ function RouteComponent() {
               <DataTable.Title>
                 <FormattedMessage
                   id="pages.rooms.room_count"
-                  defaultMessage="{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
+                  defaultMessage="{COUNT, plural, =0 {No rooms} one {# room} other {# rooms}}"
                   description="On the room list page, this heading shows the total number of rooms"
                   values={{ COUNT: totalCount }}
                 />
