@@ -1779,6 +1779,14 @@
     "description": "When a room or space has no name, we show 'Room/Space with Alice, Bob and 3 others'. This is the 'X others' part.",
     "message": "{COUNT, plural, one {# other} other {# others}}"
   },
+  "ui.copy.copied": {
+    "description": "Tooltip on the copy button just after the value was copied to the clipboard",
+    "message": "Copied!"
+  },
+  "ui.copy.copy_to_clipboard": {
+    "description": "Tooltip on the button which copies a value to the clipboard",
+    "message": "Copy to clipboard"
+  },
   "ui.data.failed_to_load": {
     "description": "In a data grid, when a specific data value failed to load",
     "message": "Failed to load"

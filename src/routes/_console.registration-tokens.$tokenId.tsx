@@ -187,11 +187,11 @@ function TokenDetailComponent() {
       <CloseSidebar />
 
       <div className="flex flex-col gap-4">
-        <H3 className="flex items-center gap-2">
-          {tokenAttributes.token}
+        <div className="flex items-center gap-2">
+          <H3>{tokenAttributes.token}</H3>
 
           <CopyToClipboard value={tokenAttributes.token} />
-        </H3>
+        </div>
 
         <Data.Grid>
           <Data.Item>

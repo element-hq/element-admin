@@ -83,7 +83,7 @@ test.describe("registration tokens", () => {
     );
 
     await expect(detail).toMatchAriaSnapshot(`
-      - heading /welcome-2026/ [level=3]
+      - heading "welcome-2026" [level=3]
       - list:
         - listitem:
           - term: Status

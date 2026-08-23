@@ -3563,6 +3563,18 @@
       "pluralType": "cardinal"
     }
   ],
+  "ui.copy.copied": [
+    {
+      "type": 0,
+      "value": "Copied!"
+    }
+  ],
+  "ui.copy.copy_to_clipboard": [
+    {
+      "type": 0,
+      "value": "Copy to clipboard"
+    }
+  ],
   "ui.data.failed_to_load": [
     {
       "type": 0,
