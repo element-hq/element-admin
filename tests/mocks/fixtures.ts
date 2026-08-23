@@ -885,9 +885,8 @@ const registrationTokenCollection = masCollection<UserRegistrationToken>({
   idBase: REGISTRATION_TOKEN_ID_BASE,
   defaults: (index) => ({
     token: `token${index}`,
-    // Server-computed, not derived by MAS from the other attributes, so every
-    // fixture that is not active has to say `valid: false` — `TokenStatusBadge`
-    // short-circuits to "Active" otherwise.
+    // MAS sends `valid` as its own field rather than deriving it from the
+    // expiry and usage counters.
     valid: true,
     usage_limit: null,
     times_used: 0,
@@ -940,8 +939,10 @@ export const DEFAULT_REGISTRATION_TOKENS: RegistrationTokenOverrides[] = [
     last_used_at: "2026-07-10T15:30:00.000000Z",
   },
   {
+    // Real MAS would send `valid: false` for a token past its expiry; `true`
+    // here pins that the badge reads the expiry and not the flag.
     token: "expired-token",
-    valid: false,
+    valid: true,
     expires_at: "2026-02-01T00:00:00.000000Z",
   },
 ];

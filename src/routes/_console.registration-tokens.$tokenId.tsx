@@ -15,7 +15,6 @@ import {
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
   Alert,
-  Badge,
   Button,
   Form,
   H3,
@@ -38,6 +37,7 @@ import * as Dialog from "@/components/dialog";
 import { ButtonLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import * as messages from "@/messages";
+import { RegistrationTokenStatusBadge } from "@/ui/token-status-badge";
 import {
   computeHumanReadableDateTimeStringFromUtc,
   computeLocalDateTimeStringFromUtc,
@@ -203,7 +203,7 @@ function TokenDetailComponent() {
               />
             </Data.Title>
             <Data.Value>
-              <TokenStatusBadge token={tokenAttributes} />
+              <RegistrationTokenStatusBadge token={tokenAttributes} />
             </Data.Value>
           </Data.Item>
 
@@ -339,80 +339,6 @@ function TokenDetailComponent() {
         </div>
       </div>
     </Navigation.Details>
-  );
-}
-
-interface TokenStatusBadgeProps {
-  token: {
-    valid: boolean;
-    expires_at?: string | null;
-    usage_limit?: number | null;
-    times_used: number;
-    revoked_at?: string | null;
-  };
-}
-
-function TokenStatusBadge({ token }: TokenStatusBadgeProps) {
-  if (token.valid) {
-    return (
-      <Badge kind="green">
-        <FormattedMessage
-          id="pages.registration_tokens.status.active"
-          defaultMessage="Active"
-          description="Registration token status: active"
-        />
-      </Badge>
-    );
-  }
-
-  if (token.revoked_at) {
-    return (
-      <Badge kind="red">
-        <FormattedMessage
-          id="pages.registration_tokens.status.revoked"
-          defaultMessage="Revoked"
-          description="Registration token status: revoked"
-        />
-      </Badge>
-    );
-  }
-
-  if (token.expires_at && new Date(token.expires_at) < new Date()) {
-    return (
-      <Badge kind="red">
-        <FormattedMessage
-          id="pages.registration_tokens.status.expired"
-          defaultMessage="Expired"
-          description="Registration token status: expired"
-        />
-      </Badge>
-    );
-  }
-
-  if (
-    token.usage_limit !== null &&
-    token.usage_limit !== undefined &&
-    token.times_used >= token.usage_limit
-  ) {
-    return (
-      <Badge kind="red">
-        <FormattedMessage
-          id="pages.registration_tokens.status.used_up"
-          defaultMessage="Used up"
-          description="Registration token status: used up"
-        />
-      </Badge>
-    );
-  }
-
-  return (
-    <Badge kind="red">
-      <FormattedMessage
-        id="pages.registration_tokens.status.invalid"
-        defaultMessage="Invalid"
-        description="Registration token status: invalid"
-      />
-    </Badge>
   );
 }
 

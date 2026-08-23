@@ -25,13 +25,14 @@ test.describe("registration tokens", () => {
     await expect(
       page.getByRole("heading", heading(registrationTokensHeading)),
     ).toBeVisible();
-    // "Active" comes from the server-computed `valid`, which the badge
-    // short-circuits on, so the three other fixtures set `valid: false`. No
-    // fixture has a future expiry, which is the one thing that would rot.
+    // The badge derives "Revoked", "Expired" and "Used up" from the token's own
+    // attributes and only falls back to the server-computed `valid`, which is
+    // why the expired fixture still says it is valid. No fixture has a future
+    // expiry, which is the one thing that would rot.
     await expect(page.getByRole("grid")).toMatchAriaSnapshot(`
       - grid "4 tokens":
         - rowgroup:
-          - row "Token Created at Valid Until Uses Status"
+          - row "Token Created at Expires at Uses Status"
         - rowgroup:
           - row:
             - gridcell:
@@ -126,7 +127,7 @@ test.describe("personal tokens", () => {
     await expect(page.getByRole("grid")).toMatchAriaSnapshot(`
       - grid "3 personal tokens":
         - rowgroup:
-          - row "Name Acting User Status Last Active Expires at"
+          - row "Name Acting user Status Last active Expires at"
         - rowgroup:
           - row:
             - gridcell:

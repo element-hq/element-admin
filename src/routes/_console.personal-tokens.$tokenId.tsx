@@ -16,7 +16,6 @@ import {
   RestartIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
-  Badge,
   Button,
   Form,
   H3,
@@ -43,6 +42,7 @@ import { ButtonLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import * as messages from "@/messages";
 import { UserCard } from "@/ui/entity-cards";
+import { PersonalTokenStatusBadge } from "@/ui/token-status-badge";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 export const Route = createFileRoute("/_console/personal-tokens/$tokenId")({
@@ -275,7 +275,7 @@ function TokenDetailComponent() {
               />
             </Data.Title>
             <Data.Value>
-              <PersonalTokenStatusBadge token={token} />
+              <PersonalTokenStatusBadge token={token.attributes} />
             </Data.Value>
           </Data.Item>
 
@@ -442,52 +442,6 @@ function TokenDetailComponent() {
         )}
       </div>
     </Navigation.Details>
-  );
-}
-
-interface PersonalTokenStatusBadgeProps {
-  token: SingleResourceForPersonalSession;
-}
-
-function PersonalTokenStatusBadge({
-  token,
-}: PersonalTokenStatusBadgeProps): React.ReactElement {
-  if (token.attributes.revoked_at) {
-    return (
-      <Badge kind="grey">
-        <FormattedMessage
-          id="pages.personal_tokens.status.revoked"
-          defaultMessage="Revoked"
-          description="Status badge for revoked personal tokens"
-        />
-      </Badge>
-    );
-  }
-
-  if (token.attributes.expires_at) {
-    const expiryDate = new Date(token.attributes.expires_at);
-    const now = new Date();
-    if (expiryDate <= now) {
-      return (
-        <Badge kind="red">
-          <FormattedMessage
-            id="pages.personal_tokens.status.expired"
-            defaultMessage="Expired"
-            description="Status badge for expired personal tokens"
-          />
-        </Badge>
-      );
-    }
-  }
-
-  return (
-    <Badge kind="green">
-      <FormattedMessage
-        id="pages.personal_tokens.status.active"
-        defaultMessage="Active"
-        description="Status badge for active personal tokens"
-      />
-    </Badge>
   );
 }
 

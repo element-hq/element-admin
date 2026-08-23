@@ -1669,7 +1669,7 @@
   "pages.personal_tokens.acting_user_column": [
     {
       "type": 0,
-      "value": "Acting User"
+      "value": "Acting user"
     }
   ],
   "pages.personal_tokens.acting_user_label": [
@@ -1885,7 +1885,7 @@
   "pages.personal_tokens.last_active_column": [
     {
       "type": 0,
-      "value": "Last Active"
+      "value": "Last active"
     }
   ],
   "pages.personal_tokens.last_active_ip_label": [
@@ -2454,7 +2454,7 @@
   "pages.registration_tokens.valid_until_column": [
     {
       "type": 0,
-      "value": "Valid Until"
+      "value": "Expires at"
     }
   ],
   "pages.rooms.columns.alias": [

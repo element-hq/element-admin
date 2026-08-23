@@ -757,7 +757,7 @@
   },
   "pages.personal_tokens.acting_user_column": {
     "description": "Column header for acting user column",
-    "message": "Acting User"
+    "message": "Acting user"
   },
   "pages.personal_tokens.acting_user_label": {
     "description": "Label for the acting user field",
@@ -873,7 +873,7 @@
   },
   "pages.personal_tokens.last_active_column": {
     "description": "Column header for last active column",
-    "message": "Last Active"
+    "message": "Last active"
   },
   "pages.personal_tokens.last_active_ip_label": {
     "description": "Label for the last active IP field",
@@ -1208,8 +1208,8 @@
     "message": "Uses"
   },
   "pages.registration_tokens.valid_until_column": {
-    "description": "Column header for valid until column",
-    "message": "Valid Until"
+    "description": "Column header for the token expiration date column",
+    "message": "Expires at"
   },
   "pages.rooms.columns.alias": {
     "description": "Column header for the room alias in the rooms list table",
