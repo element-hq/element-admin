@@ -59,7 +59,8 @@ const TableHeader = () => (
 );
 
 export const LoadingTable = () => (
-  <div className={styles["loading-table"]} aria-hidden="true">
+  <div className={styles["loading-table"]}>
+    <Loading />
     <TableControls />
     <TableHeader />
     <Group>
