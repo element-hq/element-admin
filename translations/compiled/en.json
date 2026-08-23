@@ -666,6 +666,12 @@
       "value": "Applications are OAuth 2.0 clients that users sign in to."
     }
   ],
+  "pages.devices.applications.details_label": [
+    {
+      "type": 0,
+      "value": "Application details"
+    }
+  ],
   "pages.devices.applications.filters.has_active_sessions": [
     {
       "type": 0,
@@ -822,6 +828,12 @@
     {
       "type": 0,
       "value": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
+    }
+  ],
+  "pages.devices.legacy.details_label": [
+    {
+      "type": 0,
+      "value": "Legacy device details"
     }
   ],
   "pages.devices.legacy.device_column": [
@@ -1088,6 +1100,12 @@
     {
       "type": 0,
       "value": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
+    }
+  ],
+  "pages.devices.user.details_label": [
+    {
+      "type": 0,
+      "value": "Device details"
     }
   ],
   "pages.devices.user.device_column": [
@@ -1384,6 +1402,12 @@
     {
       "type": 0,
       "value": "Support page"
+    }
+  ],
+  "pages.federation.details_label": [
+    {
+      "type": 0,
+      "value": "Destination details"
     }
   ],
   "pages.federation.domain_count": [
@@ -1710,6 +1734,12 @@
     {
       "type": 0,
       "value": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations."
+    }
+  ],
+  "pages.personal_tokens.details_label": [
+    {
+      "type": 0,
+      "value": "Personal token details"
     }
   ],
   "pages.personal_tokens.device_id_help": [
@@ -2076,6 +2106,12 @@
     {
       "type": 0,
       "value": "Custom Token"
+    }
+  ],
+  "pages.registration_tokens.details_label": [
+    {
+      "type": 0,
+      "value": "Registration token details"
     }
   ],
   "pages.registration_tokens.edit_properties": [
@@ -2537,6 +2573,12 @@
       "value": "Deletion successful"
     }
   ],
+  "pages.rooms.details_label": [
+    {
+      "type": 0,
+      "value": "Room details"
+    }
+  ],
   "pages.rooms.filters.empty_rooms": [
     {
       "type": 0,
@@ -2991,6 +3033,12 @@
     {
       "type": 0,
       "value": "Remove link with upstream account?"
+    }
+  ],
+  "pages.users.details_label": [
+    {
+      "type": 0,
+      "value": "User details"
     }
   ],
   "pages.users.filters.active": [

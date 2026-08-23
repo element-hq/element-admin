@@ -5,12 +5,12 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 
 /**
- * A detail drawer is an unnamed `<section>` over its list — no landmark role,
- * no heading of its own — so it can only be found through something rendered
- * exclusively inside it.
+ * A detail drawer is a labelled `<section>`, i.e. a `region` landmark, over
+ * its list. The anchor — something rendered exclusively inside the drawer —
+ * keeps the lookup unambiguous on pages with other named regions.
  */
 export const drawer = (page: Page, anchor: Locator): Locator =>
-  page.locator("section").filter({ has: anchor }).last();
+  page.getByRole("region").filter({ has: anchor });
 
 /**
  * `getByRole("heading", …)` options for a page title. Every page title is also

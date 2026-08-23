@@ -8,7 +8,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CloseIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Alert, Avatar, H3, Tooltip } from "@vector-im/compound-web";
 import { Suspense, useMemo } from "react";
-import { FormattedMessage, useIntl } from "react-intl";
+import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
 import { wellKnownQuery } from "@/api/matrix";
 import { federationDestinationQuery } from "@/api/synapse";
@@ -43,11 +43,21 @@ export const Route = createFileRoute(
   notFoundComponent: NotFoundComponent,
 });
 
+const detailsLabel = defineMessage({
+  id: "pages.federation.details_label",
+  defaultMessage: "Destination details",
+  description:
+    "The accessible name of the federation destination details panel",
+});
+
 function NotFoundComponent() {
   const { destination } = Route.useParams();
   const intl = useIntl();
   return (
-    <Navigation.Details className="gap-4">
+    <Navigation.Details
+      className="gap-4"
+      aria-label={intl.formatMessage(detailsLabel)}
+    >
       <CloseSidebar />
 
       <Alert
@@ -222,8 +232,10 @@ function RouteComponent() {
 
   const status = getDestinationStatus(dest);
 
+  const intl = useIntl();
+
   return (
-    <Navigation.Details>
+    <Navigation.Details aria-label={intl.formatMessage(detailsLabel)}>
       <CloseSidebar />
 
       <div className="flex flex-col gap-8">

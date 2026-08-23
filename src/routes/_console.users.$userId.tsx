@@ -148,6 +148,12 @@ export const Route = createFileRoute("/_console/users/$userId")({
   notFoundComponent: NotFoundComponent,
 });
 
+const detailsLabel = defineMessage({
+  id: "pages.users.details_label",
+  defaultMessage: "User details",
+  description: "The accessible name of the user details panel",
+});
+
 function NotFoundComponent() {
   const { userId } = Route.useParams();
   const {
@@ -155,7 +161,10 @@ function NotFoundComponent() {
   } = Route.useRouteContext();
   const intl = useIntl();
   return (
-    <Navigation.Details className="gap-4">
+    <Navigation.Details
+      className="gap-4"
+      aria-label={intl.formatMessage(detailsLabel)}
+    >
       <CloseSidebar />
 
       <Alert
@@ -1699,8 +1708,10 @@ function RouteComponent() {
   const deactivated = user.attributes.deactivated_at !== null;
   const locked = user.attributes.locked_at !== null;
 
+  const intl = useIntl();
+
   return (
-    <Navigation.Details>
+    <Navigation.Details aria-label={intl.formatMessage(detailsLabel)}>
       <CloseSidebar />
 
       <div className="flex flex-col gap-8">

@@ -223,6 +223,10 @@
     "description": "The description of the applications list page",
     "message": "Applications are OAuth 2.0 clients that users sign in to."
   },
+  "pages.devices.applications.details_label": {
+    "description": "The accessible name of the application details panel",
+    "message": "Application details"
+  },
   "pages.devices.applications.filters.has_active_sessions": {
     "description": "Filter label for applications which have at least one active device",
     "message": "With active devices"
@@ -294,6 +298,10 @@
   "pages.devices.legacy.description": {
     "description": "The description of the legacy devices list page",
     "message": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
+  },
+  "pages.devices.legacy.details_label": {
+    "description": "The accessible name of the legacy device details panel",
+    "message": "Legacy device details"
   },
   "pages.devices.legacy.device_column": {
     "description": "Column header for the legacy device name and ID",
@@ -430,6 +438,10 @@
   "pages.devices.user.description": {
     "description": "The description of the user devices tab",
     "message": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
+  },
+  "pages.devices.user.details_label": {
+    "description": "The accessible name of the device details panel",
+    "message": "Device details"
   },
   "pages.devices.user.device_column": {
     "description": "Column header for the device name and ID",
@@ -607,6 +619,10 @@
     "description": "Label for the support page URL of a federation destination",
     "message": "Support page"
   },
+  "pages.federation.details_label": {
+    "description": "The accessible name of the federation destination details panel",
+    "message": "Destination details"
+  },
   "pages.federation.domain_count": {
     "description": "On the federation page, this heading shows the total number of known domains",
     "message": "{COUNT, plural, =0 {No domains} one {# domain} other {# domains}}"
@@ -762,6 +778,10 @@
   "pages.personal_tokens.description": {
     "description": "The description of the personal tokens list page",
     "message": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations."
+  },
+  "pages.personal_tokens.details_label": {
+    "description": "The accessible name of the personal token details panel",
+    "message": "Personal token details"
   },
   "pages.personal_tokens.device_id_help": {
     "description": "Help text for device ID field",
@@ -1007,6 +1027,10 @@
     "description": "Label for the custom token field",
     "message": "Custom Token"
   },
+  "pages.registration_tokens.details_label": {
+    "description": "The accessible name of the registration token details panel",
+    "message": "Registration token details"
+  },
   "pages.registration_tokens.edit_properties": {
     "description": "Button text to edit token properties",
     "message": "Edit properties"
@@ -1230,6 +1254,10 @@
   "pages.rooms.deletion.success.title": {
     "description": "When there is a room deletion task that has completed successfully, this is the title of the alert shown.",
     "message": "Deletion successful"
+  },
+  "pages.rooms.details_label": {
+    "description": "The accessible name of the room details panel",
+    "message": "Room details"
   },
   "pages.rooms.filters.empty_rooms": {
     "description": "Filter option for empty rooms",
@@ -1470,6 +1498,10 @@
   "pages.users.delete_upstream_link.title": {
     "description": "The title of the modal asking for confirmation to delete an upstream account link",
     "message": "Remove link with upstream account?"
+  },
+  "pages.users.details_label": {
+    "description": "The accessible name of the user details panel",
+    "message": "User details"
   },
   "pages.users.filters.active": {
     "description": "The label for the 'Active users' filter in the user list",

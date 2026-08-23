@@ -26,7 +26,7 @@ import {
 } from "@vector-im/compound-web";
 import { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
-import { FormattedMessage, useIntl } from "react-intl";
+import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
 import {
   personalSessionQuery,
@@ -69,11 +69,18 @@ export const Route = createFileRoute("/_console/personal-tokens/$tokenId")({
   notFoundComponent: NotFoundComponent,
 });
 
+const detailsLabel = defineMessage({
+  id: "pages.personal_tokens.details_label",
+  defaultMessage: "Personal token details",
+  description: "The accessible name of the personal token details panel",
+});
+
 function NotFoundComponent() {
   const navigate = useNavigate();
+  const intl = useIntl();
 
   return (
-    <Navigation.Details>
+    <Navigation.Details aria-label={intl.formatMessage(detailsLabel)}>
       <div className="flex flex-col items-center gap-4 p-8 text-center">
         <Text size="lg" weight="semibold" className="text-text-secondary">
           <FormattedMessage
@@ -223,7 +230,7 @@ function TokenDetailComponent() {
   const scope = token.attributes.scope.split(" ");
 
   return (
-    <Navigation.Details>
+    <Navigation.Details aria-label={intl.formatMessage(detailsLabel)}>
       <CloseSidebar />
 
       <div className="flex flex-col gap-4">

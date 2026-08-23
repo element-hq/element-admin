@@ -23,7 +23,7 @@ import {
   Tooltip,
 } from "@vector-im/compound-web";
 import { type FormEvent, useCallback, useRef, useState } from "react";
-import { FormattedMessage, useIntl } from "react-intl";
+import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
 import {
   type EditTokenParameters,
@@ -56,6 +56,12 @@ export const Route = createFileRoute("/_console/registration-tokens/$tokenId")({
   notFoundComponent: NotFoundComponent,
 });
 
+const detailsLabel = defineMessage({
+  id: "pages.registration_tokens.details_label",
+  defaultMessage: "Registration token details",
+  description: "The accessible name of the registration token details panel",
+});
+
 function NotFoundComponent() {
   const { tokenId } = Route.useParams();
   const {
@@ -63,7 +69,10 @@ function NotFoundComponent() {
   } = Route.useRouteContext();
   const intl = useIntl();
   return (
-    <Navigation.Details className="gap-4">
+    <Navigation.Details
+      className="gap-4"
+      aria-label={intl.formatMessage(detailsLabel)}
+    >
       <CloseSidebar />
 
       <Alert
@@ -174,7 +183,7 @@ function TokenDetailComponent() {
   const tokenAttributes = token.attributes;
 
   return (
-    <Navigation.Details>
+    <Navigation.Details aria-label={intl.formatMessage(detailsLabel)}>
       <CloseSidebar />
 
       <div className="flex flex-col gap-4">

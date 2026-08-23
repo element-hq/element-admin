@@ -24,7 +24,7 @@ import {
 } from "@vector-im/compound-web";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { FormattedMessage, useIntl } from "react-intl";
+import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
 import { wellKnownQuery as matrixWellKnownQuery } from "@/api/matrix";
 import {
@@ -59,6 +59,12 @@ export const Route = createFileRoute("/_console/rooms/$roomId")({
   notFoundComponent: NotFoundComponent,
 });
 
+const detailsLabel = defineMessage({
+  id: "pages.rooms.details_label",
+  defaultMessage: "Room details",
+  description: "The accessible name of the room details panel",
+});
+
 function NotFoundComponent() {
   const { roomId } = Route.useParams();
   const {
@@ -66,7 +72,10 @@ function NotFoundComponent() {
   } = Route.useRouteContext();
   const intl = useIntl();
   return (
-    <Navigation.Details className="gap-4">
+    <Navigation.Details
+      className="gap-4"
+      aria-label={intl.formatMessage(detailsLabel)}
+    >
       <CloseSidebar />
 
       <Alert
@@ -426,8 +435,10 @@ function RouteComponent() {
 
   const { data: room } = useSuspenseQuery(roomDetailQuery(synapseRoot, roomId));
 
+  const intl = useIntl();
+
   return (
-    <Navigation.Details>
+    <Navigation.Details aria-label={intl.formatMessage(detailsLabel)}>
       <CloseSidebar />
 
       <div className="py-6 flex flex-col gap-4">

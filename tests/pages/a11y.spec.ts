@@ -89,9 +89,8 @@ test("finds no violations on the users list", async ({ page }) => {
   expect(await scanViolations(page)).toEqual([]);
 });
 
-// A detail drawer is an unlabelled `<section>`, so it is not a landmark and
-// everything inside it sits outside one; the selected list row behind it puts
-// secondary text on a subtle background at 4.17:1.
+// The selected list row behind the drawer puts secondary text on a subtle
+// background at 4.17:1.
 test("finds the known violations on the user detail drawer", async ({
   page,
 }) => {
@@ -99,19 +98,15 @@ test("finds the known violations on the user detail drawer", async ({
   await page.goto(`/users/${userId(DEFAULT_USERS, 1)}`);
 
   await expect(page.getByRole("heading", heading("Users"))).toBeVisible();
-  // The user drawer has no heading of its own, so the account actions — which
-  // exist only in the drawer, and only once the site config resolved — are the
-  // guard.
+  // The account actions exist only in the drawer, and only once the site
+  // config resolved, so they are the guard.
   await expect(
     page.getByRole("button", { name: "Deactivate account" }),
   ).toBeVisible();
   // The display name arrives with the profile query, after the drawer.
   await expect(page.getByText("Alice", { exact: true }).first()).toBeVisible();
 
-  expect(await scanViolations(page)).toEqual([
-    "color-contrast [serious] ×2",
-    "region [moderate] ×9",
-  ]);
+  expect(await scanViolations(page)).toEqual(["color-contrast [serious] ×2"]);
 });
 
 test("finds no violations on the rooms list", async ({ page }) => {
@@ -125,8 +120,7 @@ test("finds no violations on the rooms list", async ({ page }) => {
   expect(await scanViolations(page)).toEqual([]);
 });
 
-// The drawer is an unlabelled `<section>` rather than a landmark, and the
-// selected list row behind it fails contrast.
+// The selected list row behind the drawer fails contrast.
 test("finds the known violations on the room detail drawer", async ({
   page,
 }) => {
@@ -141,10 +135,7 @@ test("finds the known violations on the room detail drawer", async ({
     roomPane.getByRole("heading", { name: "General", exact: true }),
   ).toBeVisible();
 
-  expect(await scanViolations(page)).toEqual([
-    "color-contrast [serious] ×1",
-    "region [moderate] ×3",
-  ]);
+  expect(await scanViolations(page)).toEqual(["color-contrast [serious] ×1"]);
 });
 
 // compound-web's `NavItem` hardcodes `role="presentation"` on its list items,
@@ -167,9 +158,8 @@ test("finds the known violations on the user devices list", async ({
   expect(await scanViolations(page)).toEqual(["list [serious] ×1"]);
 });
 
-// The sub-tab list items carry `role="presentation"` outside a tablist, the
-// drawer is an unlabelled `<section>` rather than a landmark, and the selected
-// list row behind it fails contrast.
+// The sub-tab list items carry `role="presentation"` outside a tablist, and
+// the selected list row behind the drawer fails contrast.
 test("finds the known violations on the device detail drawer", async ({
   page,
 }) => {
@@ -201,7 +191,6 @@ test("finds the known violations on the device detail drawer", async ({
   expect(await scanViolations(page)).toEqual([
     "color-contrast [serious] ×3",
     "list [serious] ×1",
-    "region [moderate] ×5",
   ]);
 });
 
