@@ -32,6 +32,7 @@ import {
   countOnly,
   listLinks,
   MAS_VERSION,
+  masCursorStart,
   masError,
   oauth2ClientPage,
   type OAuth2ClientOverrides,
@@ -54,6 +55,7 @@ import {
   userId,
   userPage,
   type UserOverrides,
+  userPageSlice,
 } from "./fixtures";
 
 /** The part of every `PaginatedResponseFor*` the generic handlers rely on. */
@@ -165,6 +167,72 @@ export const usersList = (users: UserOverrides[]): RequestHandler =>
     (self) => countOnly(users.length, self),
     () => userPage(users),
   );
+
+/**
+ * The users collection, cursor-paginated: the multi-page counterpart of
+ * `usersList`. Prepend it with `network.use()` for a test about pagination;
+ * every deployment keeps the cheap single-page handler.
+ *
+ * MAS's cursor protocol, as the app's infinite query drives it:
+ *
+ * 1. the first request carries no `page[after]` at all;
+ * 2. the app takes the next cursor from the last item of the page it just got
+ *    (`meta.page.cursor ?? id`) and sends it as `page[after]`, so the next page
+ *    starts after that item;
+ * 3. it only does that while the page it got has a `links.next` — which is why
+ *    `userPageSlice` includes one exactly while users remain.
+ *
+ * `onPage` is called with each observed `page[after]` (null for the first
+ * request). Resolvers are plain closures running in the test process, so pushing
+ * into an array is all it takes to assert on the request sequence;
+ * `network.events` is broken on msw >= 2.13 and must not be used.
+ *
+ * Only the forward direction is supported: `/users?dir=backward` sends
+ * `page[last]`/`page[before]` instead, and would get one page of everything.
+ */
+export const usersPaginated = (
+  users: UserOverrides[],
+  onPage?: (after: string | null) => void,
+): RequestHandler =>
+  http.get("*/api/admin/v1/users", ({ request }) => {
+    const parameters = new URL(request.url).searchParams;
+
+    // The header count is a separate request, and has to keep reporting the
+    // whole collection: a per-page count would contradict the rows below it.
+    if (parameters.get("count") === "only") {
+      return HttpResponse.json(
+        countOnly(
+          users.length,
+          "/api/admin/v1/users?count=only",
+        ) satisfies PaginatedResponseForUser,
+      );
+    }
+
+    const after = parameters.get("page[after]");
+    const start = masCursorStart(
+      users.map((_user, index) => userId(users, index)),
+      after,
+    );
+
+    // A cursor no fixture carries cannot be answered with page one: the app
+    // would walk the collection from the top again, forever. A 400 turns that
+    // into a visible failure instead of a hung test.
+    if (start === null) {
+      return HttpResponse.json(masError(`Unknown cursor: ${after}`), {
+        status: 400,
+      });
+    }
+
+    onPage?.(after);
+
+    return HttpResponse.json(
+      userPageSlice(
+        users,
+        start,
+        Number(parameters.get("page[first]") ?? users.length),
+      ) satisfies PaginatedResponseForUser,
+    );
+  });
 
 export const userDetail = (users: UserOverrides[]): RequestHandler =>
   detailHandler(

@@ -138,6 +138,28 @@ export const listLinks = (
   last: path,
 });
 
+/**
+ * Where a MAS `page[after]` cursor lands: the index of the first item of the
+ * page that follows it, or null when the cursor matches nothing.
+ *
+ * A null `after` is the first request of an infinite query, which carries no
+ * cursor at all, and starts at 0. A cursor that matches nothing must not be
+ * answered with page one, or the app pages through the whole collection again
+ * and again forever; callers answer 400 instead.
+ *
+ * `ids` are the cursors, in page order. Ours are the resource IDs, because every
+ * page fixture sets `meta.page.cursor` to the resource's own id and that is what
+ * the app sends back as `page[after]`.
+ */
+export const masCursorStart = (
+  ids: readonly string[],
+  after: string | null,
+): number | null => {
+  if (after === null) return 0;
+  const index = ids.indexOf(after);
+  return index === -1 ? null : index + 1;
+};
+
 /** A typed MAS error body, for 4xx/5xx responses. */
 export const masError = (...titles: string[]): ErrorResponse => ({
   errors: titles.map((title) => ({ title })),
@@ -327,6 +349,12 @@ export const userId: (users: UserOverrides[], index: number) => Ulid =
 
 export const userPage: (users: UserOverrides[]) => PaginatedResponseForUser =
   userCollection.page;
+
+export const userPageSlice: (
+  users: UserOverrides[],
+  start: number,
+  first: number,
+) => PaginatedResponseForUser = userCollection.pageSlice;
 
 export const singleUser: (
   index: number,

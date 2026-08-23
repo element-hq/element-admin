@@ -13,7 +13,12 @@
  * discovery produced.
  */
 
-import { http, HttpResponse, type RequestHandler } from "msw";
+import {
+  http,
+  HttpResponse,
+  type JsonBodyType,
+  type RequestHandler,
+} from "msw";
 
 import type { AdminbotResponse } from "@/api/ess";
 import type {
@@ -33,6 +38,7 @@ import {
   destinationName,
   destinationPage,
   type DestinationOverrides,
+  destinationPageSlice,
   ESS_VERSION,
   FIXTURE_EPOCH_MS,
   LATEST_ESS_RELEASE,
@@ -41,6 +47,7 @@ import {
   roomId,
   roomPage,
   type RoomOverrides,
+  roomPageSlice,
   type ServerSupport,
   singleDestination,
   singleRoom,
@@ -103,6 +110,42 @@ const limitOf = (
   if (limit === null) return fallback;
   return Number.isFinite(Number(limit)) ? Number(limit) : null;
 };
+
+/**
+ * A Synapse list endpoint paginated by offset: `from` is a numeric offset the
+ * app echoes back from the previous page's continuation token, and the
+ * count-only form reports the whole total with no continuation token — one
+ * there would start a pagination nothing asked for.
+ *
+ * `count` and `slice` build the two response shapes; callers name the generated
+ * response type so both are checked against it. `onPage` receives each observed
+ * `from`, null on the first request; the count-only form is not reported.
+ */
+const offsetPaginated = <R extends JsonBodyType>({
+  path,
+  total,
+  count,
+  slice,
+  onPage,
+}: {
+  path: string;
+  total: number;
+  count: () => R;
+  slice: (from: number, limit: number) => R;
+  onPage?: (from: string | null) => void;
+}): RequestHandler =>
+  http.get(`*${path}`, ({ request }) => {
+    const parameters = new URL(request.url).searchParams;
+    if (isCountOnly(parameters)) return HttpResponse.json(count());
+
+    const limit = limitOf(parameters, total);
+    if (limit === null) return badLimit(parameters.get("limit"));
+
+    const from = parameters.get("from");
+    onPage?.(from);
+
+    return HttpResponse.json(slice(Number(from ?? 0), limit));
+  });
 
 export const wellKnown = (): RequestHandler =>
   http.get("*/.well-known/matrix/client", () =>
@@ -267,6 +310,30 @@ export const rooms = (rooms: RoomOverrides[]): RequestHandler =>
   });
 
 /**
+ * The rooms list, paginated: the multi-page counterpart of `rooms`. Prepend it
+ * with `network.use()` for a test about pagination; every deployment keeps the
+ * single-page handler.
+ *
+ * The continuation token is `next_batch`, which the app echoes back as `from`;
+ * `roomsInfiniteQuery`'s `getNextPageParam` is `lastPage.next_batch ?? null`.
+ *
+ * A large fixture array has to be handed to `roomDetail()` too, or the rows
+ * fire that many unhandled per-row requests. See `usersPaginated` in `mas.ts`
+ * for why `onPage` is a closure rather than `network.events`.
+ */
+export const roomsPaginated = (
+  rooms: RoomOverrides[],
+  onPage?: (from: string | null) => void,
+): RequestHandler =>
+  offsetPaginated<RoomsListResponse>({
+    path: "/_synapse/admin/v1/rooms",
+    total: rooms.length,
+    count: () => ({ rooms: [], offset: 0, total_rooms: rooms.length }),
+    slice: (from, limit) => roomPageSlice(rooms, from, limit),
+    onPage,
+  });
+
+/**
  * A single room. Room IDs reach MSW percent-encoded
  * (`%21room0%3Aexample.com`), but MSW decodes path params, so `roomId` is the
  * real `!…:…` form. An unknown room 404s with `M_NOT_FOUND`, which
@@ -343,6 +410,27 @@ export const federationDestinations = (
         ? []
         : page.destinations,
     } satisfies DestinationsListResponse);
+  });
+
+/**
+ * The federation destinations list, paginated: the multi-page counterpart of
+ * `federationDestinations`. Same offset pagination as `roomsPaginated`, except
+ * the continuation token comes back in `next_token`, and a destination row
+ * fires no per-row query.
+ *
+ * The schema types `next_token` as `string | number`; real Synapse sends the
+ * string form, which is what `destinationPageSlice` produces.
+ */
+export const federationDestinationsPaginated = (
+  destinations: DestinationOverrides[],
+  onPage?: (from: string | null) => void,
+): RequestHandler =>
+  offsetPaginated<DestinationsListResponse>({
+    path: "/_synapse/admin/v1/federation/destinations",
+    total: destinations.length,
+    count: () => ({ destinations: [], total: destinations.length }),
+    slice: (from, limit) => destinationPageSlice(destinations, from, limit),
+    onPage,
   });
 
 /**
