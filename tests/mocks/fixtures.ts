@@ -3,8 +3,17 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 import type {
+  CompatSession,
   ErrorResponse,
+  OAuth2Client,
+  OAuth2Session,
+  PaginatedResponseForCompatSession,
+  PaginatedResponseForOAuth2Client,
+  PaginatedResponseForOAuth2Session,
   PaginatedResponseForUser,
+  SingleResponseForCompatSession,
+  SingleResponseForOAuth2Client,
+  SingleResponseForOAuth2Session,
   SingleResponseForUser,
   Ulid,
   User,
@@ -275,6 +284,9 @@ const masCollection = <A>({
  * collection, which is `pagination.spec.ts`'s 250 users.
  */
 const USER_ID_BASE = 0;
+const CLIENT_ID_BASE = 1_000_000;
+const OAUTH2_SESSION_ID_BASE = 2_000_000;
+const COMPAT_SESSION_ID_BASE = 3_000_000;
 
 const userCollection = masCollection<User>({
   type: "user",
@@ -451,5 +463,196 @@ export const DEFAULT_ROOMS: RoomOverrides[] = [
     joined_members: 2,
     joined_local_members: 2,
     state_events: 7,
+  },
+];
+
+const clientCollection = masCollection<OAuth2Client>({
+  type: "oauth2-client",
+  path: "/api/admin/v1/oauth2-clients",
+  idBase: CLIENT_ID_BASE,
+  defaults: (index, id) => ({
+    // A dynamically-registered client's `client_id` is its ULID, and that is
+    // what an OAuth 2.0 session's `client_id` points at.
+    client_id: id,
+    client_name: `Application ${index}`,
+    client_uri: null,
+    // `ClientInfo` feeds `logo_uri` to `Avatar src`, so a real URL would make
+    // the browser fetch a third-party image that no handler covers.
+    logo_uri: null,
+    redirect_uris: [`https://app${index}.example.com/callback`],
+    grant_types: ["authorization_code", "refresh_token"],
+    is_static: false,
+  }),
+});
+
+/** Overrides for an application fixture: any `OAuth2Client` attribute. */
+export type OAuth2ClientOverrides = MasOverrides<OAuth2Client>;
+
+export const clientId: (
+  clients: OAuth2ClientOverrides[],
+  index: number,
+) => Ulid = clientCollection.id;
+
+export const oauth2ClientPage: (
+  clients: OAuth2ClientOverrides[],
+) => PaginatedResponseForOAuth2Client = clientCollection.page;
+
+export const singleOauth2Client: (
+  index: number,
+  overrides?: OAuth2ClientOverrides,
+) => SingleResponseForOAuth2Client = clientCollection.single;
+
+/** The default set of applications served by the `essPro` deployment. */
+export const DEFAULT_OAUTH2_CLIENTS: OAuth2ClientOverrides[] = [
+  {
+    client_name: "Element Web",
+    client_uri: "https://app.element.io/",
+    redirect_uris: ["https://app.element.io/"],
+  },
+  {
+    client_name: "Element X",
+    redirect_uris: ["https://element.io/mobile/callback"],
+    grant_types: ["authorization_code"],
+  },
+  // Neither a name nor a homepage, so every surface falls back to the raw
+  // client ID — the applications equivalent of the nameless room fixture.
+  { client_name: null },
+];
+
+/**
+ * The scope a device-bound OAuth 2.0 session carries. `deviceIdFromScope` in
+ * `src/utils/scope.ts` reads the device ID back out of it, so this is the only
+ * place a session fixture's device ID lives.
+ */
+const deviceScope = (deviceId: string): string =>
+  `urn:matrix:client:api:* urn:matrix:client:device:${deviceId}`;
+
+const oauth2SessionCollection = masCollection<OAuth2Session>({
+  type: "oauth2-session",
+  path: "/api/admin/v1/oauth2-sessions",
+  idBase: OAUTH2_SESSION_ID_BASE,
+  defaults: (index) => ({
+    created_at: "2026-07-01T09:00:00.000000Z",
+    finished_at: null,
+    user_id: userId(DEFAULT_USERS, 1),
+    user_session_id: null,
+    client_id: clientId(DEFAULT_OAUTH2_CLIENTS, 0),
+    scope: deviceScope(`DEVICE${index}`),
+    user_agent: null,
+    last_active_at: null,
+    last_active_ip: null,
+    human_name: null,
+  }),
+});
+
+/** Overrides for a device fixture: any `OAuth2Session` attribute. */
+export type OAuth2SessionOverrides = MasOverrides<OAuth2Session>;
+
+export const oauth2SessionId: (
+  sessions: OAuth2SessionOverrides[],
+  index: number,
+) => Ulid = oauth2SessionCollection.id;
+
+export const oauth2SessionPage: (
+  sessions: OAuth2SessionOverrides[],
+) => PaginatedResponseForOAuth2Session = oauth2SessionCollection.page;
+
+export const singleOauth2Session: (
+  index: number,
+  overrides?: OAuth2SessionOverrides,
+) => SingleResponseForOAuth2Session = oauth2SessionCollection.single;
+
+/**
+ * The default set of devices served by the `essPro` deployment.
+ *
+ * Every fixture sits in a time-independent activity bucket: `DeviceStatusBadge`
+ * classifies a session against cutoffs derived from `Date.now()`, so a fixture
+ * with a fixed `last_active_at` and no `finished_at` would drift from "recently
+ * used" to "active" to "inactive" as the suite ages. A null `last_active_at` is
+ * always "Never used" and a `finished_at` is always "Signed out".
+ */
+export const DEFAULT_OAUTH2_SESSIONS: OAuth2SessionOverrides[] = [
+  {
+    human_name: "Alice's laptop",
+    scope: deviceScope("ELEMENTWEB01"),
+    user_agent:
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+  },
+  {
+    client_id: clientId(DEFAULT_OAUTH2_CLIENTS, 1),
+    scope: deviceScope("ELEMENTX0001"),
+    // No human name, so the display name comes from the user-agent. This custom
+    // (non-`Mozilla/`) form is parsed by the console's own parser rather than by
+    // woothee, so the derived model name is ours to predict.
+    user_agent: "ElementX/1.4.1 (iPhone 14; iOS 17.0.3; Scale/3.00)",
+    last_active_at: "2026-07-20T11:30:00.000000Z",
+    last_active_ip: "203.0.113.42",
+    finished_at: "2026-07-25T08:15:00.000000Z",
+  },
+  {
+    // No user, and a scope with no device token: the list falls back to "No
+    // user" and "Unknown device".
+    user_id: null,
+    client_id: clientId(DEFAULT_OAUTH2_CLIENTS, 2),
+    scope: "urn:matrix:client:api:*",
+  },
+];
+
+const compatSessionCollection = masCollection<CompatSession>({
+  type: "compat-session",
+  path: "/api/admin/v1/compat-sessions",
+  idBase: COMPAT_SESSION_ID_BASE,
+  defaults: (index) => ({
+    user_id: userId(DEFAULT_USERS, 1),
+    device_id: `LEGACYDEVICE${index}`,
+    user_session_id: null,
+    redirect_uri: null,
+    created_at: "2026-06-15T14:20:00.000000Z",
+    user_agent: null,
+    last_active_at: null,
+    last_active_ip: null,
+    finished_at: null,
+    human_name: null,
+  }),
+});
+
+/** Overrides for a legacy-device fixture: any `CompatSession` attribute. */
+export type CompatSessionOverrides = MasOverrides<CompatSession>;
+
+export const compatSessionId: (
+  sessions: CompatSessionOverrides[],
+  index: number,
+) => Ulid = compatSessionCollection.id;
+
+export const compatSessionPage: (
+  sessions: CompatSessionOverrides[],
+) => PaginatedResponseForCompatSession = compatSessionCollection.page;
+
+export const singleCompatSession: (
+  index: number,
+  overrides?: CompatSessionOverrides,
+) => SingleResponseForCompatSession = compatSessionCollection.single;
+
+/**
+ * The default set of legacy devices served by the `essPro` deployment.
+ * Same time-independence rule as `DEFAULT_OAUTH2_SESSIONS`.
+ */
+export const DEFAULT_COMPAT_SESSIONS: CompatSessionOverrides[] = [
+  {
+    // No human name and no user-agent, so the device ID is the display name.
+    device_id: "LEGACYWEB01",
+    redirect_uri: "https://app.element.io/",
+  },
+  {
+    device_id: "LEGACYAND01",
+    human_name: "Riot on Android",
+    // The deactivated user, whose Matrix profile 404s, so the user cell falls
+    // back to a bare Matrix ID.
+    user_id: userId(DEFAULT_USERS, 2),
+    user_agent:
+      "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36",
+    last_active_at: "2026-06-20T09:00:00.000000Z",
+    last_active_ip: "203.0.113.7",
+    finished_at: "2026-07-02T16:45:00.000000Z",
   },
 ];

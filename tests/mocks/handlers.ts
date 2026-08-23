@@ -19,6 +19,9 @@ import * as matrix from "./matrix";
 
 import {
   ADMIN_MXID,
+  DEFAULT_COMPAT_SESSIONS,
+  DEFAULT_OAUTH2_CLIENTS,
+  DEFAULT_OAUTH2_SESSIONS,
   DEFAULT_ROOMS,
   DEFAULT_USERS,
   roomId,
@@ -65,7 +68,13 @@ const common = (): RequestHandler[] => [
   mas.userEmails(),
   mas.upstreamOauthLinks(),
   mas.upstreamOauthProviders(),
+  mas.oauth2ClientsList(DEFAULT_OAUTH2_CLIENTS),
+  mas.oauth2SessionsList(DEFAULT_OAUTH2_SESSIONS),
+  mas.compatSessionsList(DEFAULT_COMPAT_SESSIONS),
   mas.userDetail(DEFAULT_USERS),
+  mas.oauth2ClientDetail(DEFAULT_OAUTH2_CLIENTS),
+  mas.oauth2SessionDetail(DEFAULT_OAUTH2_SESSIONS),
+  mas.compatSessionDetail(DEFAULT_COMPAT_SESSIONS),
 ];
 
 /**

@@ -13,6 +13,9 @@
 import { http, HttpResponse, type RequestHandler } from "msw";
 
 import type {
+  PaginatedResponseForCompatSession,
+  PaginatedResponseForOAuth2Client,
+  PaginatedResponseForOAuth2Session,
   PaginatedResponseForUser,
   SiteConfig,
   Ulid,
@@ -20,11 +23,23 @@ import type {
 } from "@/api/mas/api";
 
 import {
+  clientId,
+  compatSessionId,
+  compatSessionPage,
+  type CompatSessionOverrides,
   countOnly,
   listLinks,
   MAS_VERSION,
   masError,
+  oauth2ClientPage,
+  type OAuth2ClientOverrides,
+  oauth2SessionId,
+  oauth2SessionPage,
+  type OAuth2SessionOverrides,
   SERVER_NAME,
+  singleCompatSession,
+  singleOauth2Client,
+  singleOauth2Session,
   singleUser,
   userId,
   userPage,
@@ -159,3 +174,112 @@ export const upstreamOauthLinks = (): RequestHandler =>
 
 export const upstreamOauthProviders = (): RequestHandler =>
   emptyCollection("/api/admin/v1/upstream-oauth-providers");
+
+/**
+ * The applications collection, behind `/devices/applications`. Filters are
+ * ignored as in `usersList` — the list page always asks for
+ * `filter[client-kind]=dynamic` and the tab bar adds
+ * `filter[has-active-sessions]`, but every fixture client is dynamic anyway.
+ */
+export const oauth2ClientsList = (
+  clients: OAuth2ClientOverrides[],
+): RequestHandler =>
+  listHandler<PaginatedResponseForOAuth2Client>(
+    "/api/admin/v1/oauth2-clients",
+    (self) => countOnly(clients.length, self),
+    () => oauth2ClientPage(clients),
+  );
+
+/**
+ * A single application by ULID. Reached from `/devices/applications/$clientId`,
+ * but also once per row of both device lists (`ClientCell`) and from every
+ * device detail pane (`ClientCard`), all of which resolve a session's
+ * `client_id` through here.
+ */
+export const oauth2ClientDetail = (
+  clients: OAuth2ClientOverrides[],
+): RequestHandler =>
+  detailHandler(
+    "/api/admin/v1/oauth2-clients",
+    clients,
+    clientId,
+    singleOauth2Client,
+    "Client not found",
+  );
+
+/**
+ * The devices collection, behind `/devices/user`. The user detail page also
+ * reads its `count=only` form for the per-user device badge.
+ *
+ * Filters are ignored: `/devices/user` defaults to `filter[status]=active` and
+ * the application detail page asks for three differently-filtered counts, and
+ * all of them see every fixture session.
+ */
+export const oauth2SessionsList = (
+  sessions: OAuth2SessionOverrides[],
+): RequestHandler =>
+  listHandler<PaginatedResponseForOAuth2Session>(
+    "/api/admin/v1/oauth2-sessions",
+    (self) => countOnly(sessions.length, self),
+    () => oauth2SessionPage(sessions),
+  );
+
+export const oauth2SessionDetail = (
+  sessions: OAuth2SessionOverrides[],
+): RequestHandler =>
+  detailHandler(
+    "/api/admin/v1/oauth2-sessions",
+    sessions,
+    oauth2SessionId,
+    singleOauth2Session,
+    "Session not found",
+  );
+
+/**
+ * The legacy-devices collection, behind `/devices/legacy`, plus the `count=only`
+ * form the user detail page reads for its legacy-device badge. Filters are
+ * ignored, as above.
+ */
+export const compatSessionsList = (
+  sessions: CompatSessionOverrides[],
+): RequestHandler =>
+  listHandler<PaginatedResponseForCompatSession>(
+    "/api/admin/v1/compat-sessions",
+    (self) => countOnly(sessions.length, self),
+    () => compatSessionPage(sessions),
+  );
+
+export const compatSessionDetail = (
+  sessions: CompatSessionOverrides[],
+): RequestHandler =>
+  detailHandler(
+    "/api/admin/v1/compat-sessions",
+    sessions,
+    compatSessionId,
+    singleCompatSession,
+    "Session not found",
+  );
+
+/**
+ * Record the query parameters of every `GET *{path}` and then fall through to
+ * whatever handler comes next.
+ *
+ * MSW's `executeHandlers` keeps walking the handler list until one returns a
+ * response, so a resolver that returns nothing observes a request without
+ * answering it. Prepended with `network.use()`, this turns any deployment's
+ * handler into a recorded one without duplicating its response logic — useful
+ * when the assertion is only about the emitted parameters, as on the device and
+ * token lists.
+ *
+ * If nothing else answers the path, MSW treats the request as passed through
+ * rather than unhandled, so `onUnhandledRequest: "error"` does not fire and the
+ * request escapes to the real network. Only point this at a path the current
+ * deployment already serves.
+ */
+export const observeQuery = (
+  path: string,
+  onRequest: (parameters: URLSearchParams) => void,
+): RequestHandler =>
+  http.get(`*${path}`, ({ request }) => {
+    onRequest(new URL(request.url).searchParams);
+  });
