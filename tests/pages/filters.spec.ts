@@ -871,6 +871,48 @@ test.describe("device and token lists — emitted parameters", () => {
     expect(parameters.get("used")).toBe("false");
   });
 
+  test("the sidebar link lands on a removable Not revoked chip", async ({
+    page,
+    network,
+  }) => {
+    // The sidebar's "Registration tokens" entry points at `?revoked=false`, so
+    // the filter it applies on the user's behalf has to be a chip like any
+    // other one: visible, and undone by "Clear".
+    const requests = install(network, "/api/admin/v1/user-registration-tokens");
+
+    await loginAs(page);
+    await page.goto("/");
+
+    await page
+      .getByRole("navigation")
+      .getByRole("link", { name: "Registration tokens", exact: true })
+      .click();
+
+    await expect(
+      page.getByRole("heading", {
+        name: "Registration tokens",
+        exact: true,
+        level: 1,
+      }),
+    ).toBeVisible();
+
+    const chip = page.getByText("Not revoked", { exact: true });
+    await expect(chip).toBeVisible();
+    await expect
+      .poll(() => filtersOf(requests.lastRows()))
+      .toEqual({ "filter[revoked]": ["false"] });
+    await expect
+      .poll(() => filtersOf(requests.lastCount()))
+      .toEqual({ "filter[revoked]": ["false"] });
+
+    await page.getByRole("link", { name: "Clear", exact: true }).click();
+
+    await expect(chip).toBeHidden();
+    await expect.poll(() => filtersOf(requests.lastRows())).toEqual({});
+    await expect.poll(() => filtersOf(requests.lastCount())).toEqual({});
+    expect(searchParameters(page).has("revoked")).toBe(false);
+  });
+
   test("/personal-tokens maps status, expiry and scope", async ({
     page,
     network,

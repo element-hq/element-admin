@@ -1127,6 +1127,10 @@
     "description": "Filter option for expired registration tokens only",
     "message": "Expired"
   },
+  "pages.registration_tokens.filters.not_revoked": {
+    "description": "Filter option hiding revoked registration tokens",
+    "message": "Not revoked"
+  },
   "pages.registration_tokens.filters.revoked_only": {
     "description": "Filter option for revoked registration tokens only",
     "message": "Revoked"

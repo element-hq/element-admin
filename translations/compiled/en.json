@@ -2278,6 +2278,12 @@
       "value": "Expired"
     }
   ],
+  "pages.registration_tokens.filters.not_revoked": [
+    {
+      "type": 0,
+      "value": "Not revoked"
+    }
+  ],
   "pages.registration_tokens.filters.revoked_only": [
     {
       "type": 0,

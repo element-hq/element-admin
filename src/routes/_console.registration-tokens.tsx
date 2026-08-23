@@ -460,6 +460,15 @@ const filtersDefinition = [
     }),
   },
   {
+    key: "revoked",
+    value: false,
+    message: defineMessage({
+      id: "pages.registration_tokens.filters.not_revoked",
+      defaultMessage: "Not revoked",
+      description: "Filter option hiding revoked registration tokens",
+    }),
+  },
+  {
     key: "expired",
     value: true,
     message: defineMessage({
