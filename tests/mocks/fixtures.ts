@@ -18,7 +18,13 @@ import type {
   Ulid,
   User,
 } from "@/api/mas/api";
-import type { Room, RoomDetail, RoomsListResponse } from "@/api/synapse";
+import type {
+  Destination,
+  DestinationsListResponse,
+  Room,
+  RoomDetail,
+  RoomsListResponse,
+} from "@/api/synapse";
 
 /**
  * The Matrix server name every test logs in against. Discovery starts at
@@ -72,6 +78,9 @@ export const PAGE_SIZE = 200;
  * timestamps as ISO strings and does not use it.
  */
 export const FIXTURE_EPOCH_MS = 1_779_987_680_000;
+
+const DAY_MS = 86_400_000;
+const HOUR_MS = 3_600_000;
 
 const ULID_ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
 
@@ -654,5 +663,173 @@ export const DEFAULT_COMPAT_SESSIONS: CompatSessionOverrides[] = [
     last_active_at: "2026-06-20T09:00:00.000000Z",
     last_active_ip: "203.0.113.7",
     finished_at: "2026-07-02T16:45:00.000000Z",
+  },
+];
+
+/** Overrides for a federation destination fixture: any `Destination` field. */
+export type DestinationOverrides = Partial<Destination>;
+
+/** The deterministic name of an override-free destination fixture at `index`. */
+const defaultDestinationName = (index: number): string =>
+  `server${index}.example.net`;
+
+/**
+ * The name the destination fixture at `index` is served under; an index past
+ * the end of `destinations` names a domain no handler serves.
+ *
+ * A destination is a bare Matrix server name — not a ULID and not a sigil
+ * string — and `/federation/known-domains/$destination` passes it straight
+ * through to Synapse.
+ */
+export const destinationName = (
+  destinations: DestinationOverrides[],
+  index: number,
+): string => destinations[index]?.destination ?? defaultDestinationName(index);
+
+/**
+ * A single destination, as
+ * `GET /_synapse/admin/v1/federation/destinations/{destination}` returns it.
+ * Every key of `Destination` is required by the valibot schema — nullable, but
+ * present — so the defaults spell all of them out.
+ *
+ * `retry_last_ts` and `retry_interval` default to 0, which the detail page
+ * renders as an em dash: any other value goes through
+ * `computeHumanReadableDateTimeStringFromUtc` / `Intl.DurationFormat`, whose
+ * output depends on the runner's timezone and locale.
+ */
+export const singleDestination = (
+  index: number,
+  overrides: DestinationOverrides = {},
+): Destination => ({
+  destination: defaultDestinationName(index),
+  retry_last_ts: 0,
+  retry_interval: 0,
+  failure_ts: null,
+  last_successful_stream_ordering: 1000 + index,
+  ...overrides,
+});
+
+/**
+ * One page of at most `limit` destinations starting at the offset `from`, as
+ * `GET /_synapse/admin/v1/federation/destinations` returns it.
+ *
+ * Offset pagination as with rooms, except the continuation token comes back in
+ * `next_token`, which the schema types as `string | number`. This fixture
+ * returns the string form — what Synapse sends here — and is the only place the
+ * suite covers that branch of the union.
+ *
+ * `total` is the whole collection on every page, as with rooms.
+ */
+export const destinationPageSlice = (
+  destinations: DestinationOverrides[],
+  from: number,
+  limit: number,
+): DestinationsListResponse => {
+  const slice = destinations.slice(from, from + limit);
+  return {
+    destinations: slice.map((overrides, index) =>
+      singleDestination(from + index, overrides),
+    ),
+    total: destinations.length,
+    ...(from + slice.length < destinations.length && {
+      next_token: String(from + slice.length),
+    }),
+  };
+};
+
+/**
+ * A page of destinations, as `GET /_synapse/admin/v1/federation/destinations`
+ * returns it — the whole collection at once, so there is no `next_token` and
+ * the app stops after the first request. This is what every fixture deployment
+ * serves.
+ */
+export const destinationPage = (
+  destinations: DestinationOverrides[],
+): DestinationsListResponse =>
+  destinationPageSlice(destinations, 0, destinations.length);
+
+/**
+ * The default set of destinations served by the `essPro` deployment. One
+ * fixture per destination status, and all four are clock-independent — the
+ * status is derived purely from the three numeric fields, never from
+ * `Date.now()`.
+ */
+export const DEFAULT_DESTINATIONS: DestinationOverrides[] = [
+  // No `failure_ts` and a stream ordering: "Working".
+  { destination: "matrix.org", last_successful_stream_ordering: 4_812_003 },
+  // Failed, and still retrying: "Failing".
+  {
+    destination: "flaky.example.net",
+    retry_last_ts: FIXTURE_EPOCH_MS,
+    retry_interval: HOUR_MS,
+    failure_ts: FIXTURE_EPOCH_MS - DAY_MS,
+  },
+  // Failed, but no longer retrying: "Inactive".
+  {
+    destination: "paused.example.net",
+    retry_last_ts: FIXTURE_EPOCH_MS - DAY_MS,
+    failure_ts: FIXTURE_EPOCH_MS - 2 * DAY_MS,
+  },
+  // Never had a successful stream at all: "Never worked".
+  {
+    destination: "unreachable.example.net",
+    last_successful_stream_ordering: null,
+  },
+];
+
+/**
+ * A `/.well-known/matrix/support` document (Matrix spec v1.10). The app's
+ * valibot schema for it is not exported, so this mirrors it by hand: every
+ * field is optional, and `support_page` must be a valid URL.
+ */
+export interface ServerSupport {
+  contacts?: {
+    email_address?: string;
+    matrix_id?: string;
+    role: string;
+  }[];
+  support_page?: string;
+}
+
+/**
+ * Support documents for the fixture destinations, keyed by hostname.
+ *
+ * Only the destination detail page asks for these, and only for the destination
+ * it is showing. Every other fixture destination is absent, so the handler 404s
+ * for it and `ContactInfo` renders nothing.
+ */
+export const DEFAULT_SERVER_SUPPORT: Record<string, ServerSupport> = {
+  "matrix.org": {
+    contacts: [
+      { role: "m.role.admin", email_address: "admin@matrix.org" },
+      { role: "m.role.security", matrix_id: "@security:matrix.org" },
+    ],
+    support_page: "https://matrix.org/support/",
+  },
+};
+
+/**
+ * One entry of the SBG federation allowlist. Like `ServerSupport`, the app's
+ * valibot schema for it is not exported, so this mirrors it. `created_at` is a
+ * number (epoch ms), not the ISO string every MAS resource uses.
+ */
+export interface AllowlistEntry {
+  server_name: string;
+  creator_user_id: string;
+  created_at: number;
+}
+
+/** The default federation allowlist served by the `essPro` deployment. */
+export const DEFAULT_ALLOWLIST: AllowlistEntry[] = [
+  {
+    server_name: "matrix.org",
+    creator_user_id: ADMIN_MXID,
+    created_at: FIXTURE_EPOCH_MS,
+  },
+  // A wildcard pattern, which is the other thing this endpoint accepts.
+  {
+    server_name: "*.example.net",
+    creator_user_id: ADMIN_MXID,
+    created_at: FIXTURE_EPOCH_MS + DAY_MS,
   },
 ];

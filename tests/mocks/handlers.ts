@@ -19,10 +19,13 @@ import * as matrix from "./matrix";
 
 import {
   ADMIN_MXID,
+  DEFAULT_ALLOWLIST,
   DEFAULT_COMPAT_SESSIONS,
+  DEFAULT_DESTINATIONS,
   DEFAULT_OAUTH2_CLIENTS,
   DEFAULT_OAUTH2_SESSIONS,
   DEFAULT_ROOMS,
+  DEFAULT_SERVER_SUPPORT,
   DEFAULT_USERS,
   roomId,
   SERVER_NAME,
@@ -61,6 +64,9 @@ const common = (): RequestHandler[] => [
   matrix.roomDetail(DEFAULT_ROOMS),
   matrix.roomMembers(DEFAULT_ROOM_MEMBERS),
   matrix.scheduledTasks(),
+  matrix.federationDestinations(DEFAULT_DESTINATIONS),
+  matrix.federationDestination(DEFAULT_DESTINATIONS),
+  matrix.serverSupport(DEFAULT_SERVER_SUPPORT),
   matrix.githubLatestRelease(),
 
   mas.siteConfig(),
@@ -85,6 +91,7 @@ const essPro = (): RequestHandler[] => [
   ...common(),
   mas.version(),
   matrix.essVersion(),
+  matrix.federationAllowlist(DEFAULT_ALLOWLIST),
 ];
 
 /**

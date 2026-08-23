@@ -16,6 +16,8 @@
 import { http, HttpResponse, type RequestHandler } from "msw";
 
 import type {
+  Destination,
+  DestinationsListResponse,
   RoomDetail,
   RoomMembers,
   RoomsListResponse,
@@ -25,6 +27,10 @@ import type {
 import {
   ACCESS_TOKEN,
   ADMIN_MXID,
+  type AllowlistEntry,
+  destinationName,
+  destinationPage,
+  type DestinationOverrides,
   ESS_VERSION,
   FIXTURE_EPOCH_MS,
   LATEST_ESS_RELEASE,
@@ -33,6 +39,8 @@ import {
   roomId,
   roomPage,
   type RoomOverrides,
+  type ServerSupport,
+  singleDestination,
   singleRoom,
   SYNAPSE_ROOT,
   SYNAPSE_VERSION,
@@ -69,12 +77,30 @@ export const matrixError = (
 const notFound = () =>
   HttpResponse.json(matrixError("M_NOT_FOUND", "Not found"), { status: 404 });
 
+const badLimit = (limit: string | null) =>
+  HttpResponse.json(matrixError("M_INVALID_PARAM", `Invalid limit: ${limit}`), {
+    status: 400,
+  });
+
 /**
  * Is this the count-only form of a Synapse list request? The console spells it
  * `limit=0` exactly; a `limit` of any other size is a real page.
  */
 const isCountOnly = (parameters: URLSearchParams): boolean =>
   parameters.get("limit") === "0";
+
+/**
+ * The `limit` a request asked for, `fallback` when it sends none, or null for a
+ * `limit` that is not a number; callers answer that with `badLimit`.
+ */
+const limitOf = (
+  parameters: URLSearchParams,
+  fallback: number,
+): number | null => {
+  const limit = parameters.get("limit");
+  if (limit === null) return fallback;
+  return Number.isFinite(Number(limit)) ? Number(limit) : null;
+};
 
 export const wellKnown = (): RequestHandler =>
   http.get("*/.well-known/matrix/client", () =>
@@ -297,6 +323,72 @@ export const scheduledTasks = (): RequestHandler =>
   );
 
 /**
+ * The federation destinations list. The count-only form
+ * (`federationDestinationsCountQuery`) gets the full envelope, with no
+ * destinations in it.
+ *
+ * The undocumented `destination` substring filter is ignored, as are
+ * `order_by`/`dir`.
+ */
+export const federationDestinations = (
+  destinations: DestinationOverrides[],
+): RequestHandler =>
+  http.get("*/_synapse/admin/v1/federation/destinations", ({ request }) => {
+    const page = destinationPage(destinations);
+    return HttpResponse.json({
+      ...page,
+      destinations: isCountOnly(new URL(request.url).searchParams)
+        ? []
+        : page.destinations,
+    } satisfies DestinationsListResponse);
+  });
+
+/**
+ * A single destination. An unknown one 404s with `M_NOT_FOUND`, which
+ * `ensureNotError(response, true)` turns into the route's not-found UI.
+ *
+ * Unlike rooms, the destinations list does not need this handler: a destination
+ * row's avatar is generated from the name.
+ */
+export const federationDestination = (
+  destinations: DestinationOverrides[],
+): RequestHandler =>
+  http.get(
+    "*/_synapse/admin/v1/federation/destinations/:destination",
+    ({ params }) => {
+      const index = destinations.findIndex(
+        (_destination, position) =>
+          destinationName(destinations, position) === params["destination"],
+      );
+
+      return index === -1
+        ? notFound()
+        : HttpResponse.json(
+            singleDestination(index, destinations[index]) satisfies Destination,
+          );
+    },
+  );
+
+/**
+ * `/.well-known/matrix/support` on a third-party server, the one origin the
+ * console reaches without discovering it first, from the destination detail
+ * page. Keyed by hostname, since the request goes to
+ * `https://{destination}/...`.
+ *
+ * A 404 is a normal response here: `serverSupportQuery` swallows every failure
+ * and returns null, and the detail page then renders no contact info. The
+ * request still has to be handled, or `onUnhandledRequest: "error"` fails the
+ * test.
+ */
+export const serverSupport = (
+  support: Record<string, ServerSupport>,
+): RequestHandler =>
+  http.get("*/.well-known/matrix/support", ({ request }) => {
+    const document = support[new URL(request.url).hostname];
+    return document ? HttpResponse.json(document) : notFound();
+  });
+
+/**
  * ESS edition detection. The app treats any failure here as "not an ESS
  * deployment", which is how the `plainMas` deployment is built.
  */
@@ -306,6 +398,48 @@ export const essVersion = (
 ): RequestHandler =>
   http.get("*/_synapse/ess/version", () =>
     HttpResponse.json({ version, edition }),
+  );
+
+/** The SBG federation allowlist module, which is ESS-Pro-only. */
+const ALLOWLIST_PATH = "*/_synapse/io.element/admin/v1/federation/whitelist";
+
+/**
+ * The federation allowlist. One handler serves both request forms:
+ * `federationAllowlistAvailableQuery` probes it with `?page=0&limit=1` and only
+ * cares whether the response is OK, and `federationAllowlistQuery` asks for a
+ * real page with `?page=0&limit=100`. `limit` is honoured so the probe gets the
+ * one-entry response it asked for; `page` is not, because nothing requests a
+ * second page.
+ *
+ * An entry's `created_at` is a number, not the ISO string every MAS timestamp
+ * uses.
+ */
+export const federationAllowlist = (
+  entries: AllowlistEntry[],
+): RequestHandler =>
+  http.get(ALLOWLIST_PATH, ({ request }) => {
+    const parameters = new URL(request.url).searchParams;
+    const limit = limitOf(parameters, entries.length);
+    if (limit === null) return badLimit(parameters.get("limit"));
+
+    return HttpResponse.json({
+      server_names: entries.slice(0, limit),
+      total_count: entries.length,
+    } satisfies { server_names: AllowlistEntry[]; total_count: number });
+  });
+
+/**
+ * The same endpoint with the module not installed. `M_UNRECOGNIZED` is how
+ * Synapse answers a path no module registered; the availability probe swallows
+ * the error and resolves to `false`, so `/federation/allowed-domains` renders
+ * its "Secure Border Gateway is not enabled" alert and marketing cards instead
+ * of the allowlist.
+ */
+export const federationAllowlistMissing = (): RequestHandler =>
+  http.get(ALLOWLIST_PATH, () =>
+    HttpResponse.json(matrixError("M_UNRECOGNIZED", "Unrecognized request"), {
+      status: 404,
+    }),
   );
 
 export const githubLatestRelease = (): RequestHandler =>
