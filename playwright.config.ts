@@ -15,6 +15,12 @@ export default defineConfig({
   use: {
     baseURL: "http://localhost:4173",
     trace: "on-first-retry",
+
+    // Pinned so screenshots are reproducible wherever they are generated.
+    // Without this, a machine in a different zone renders every date one day
+    // off from the CI container's UTC and every baseline mismatches.
+    timezoneId: "UTC",
+    locale: "en-US",
   },
 
   snapshotPathTemplate:
