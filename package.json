@@ -17,7 +17,7 @@
     "knip": "knip && knip --production",
     "lint": "oxlint && stylelint 'src/**/*.css' && oxfmt --check",
     "fix": "oxlint --fix && stylelint --fix 'src/**/*.css' && oxfmt",
-    "i18n:extract": "formatjs extract --throws --format crowdin 'src/**/*.{ts,tsx}' --out-file translations/extracted/en.json && oxfmt translations/extracted/en.json",
+    "i18n:extract": "formatjs extract --throws --format crowdin 'src/**/*.{ts,tsx}' --out-file translations/extracted/en.json && formatjs compile --format crowdin --ast translations/extracted/en.json --out-file translations/compiled/en.json && oxfmt translations/extracted/en.json translations/compiled/en.json",
     "i18n:download": "localazy download && pnpm i18n:normalize && oxfmt translations/translated/",
     "i18n:normalize": "node scripts/i18n-normalize-plurals.mjs",
     "i18n:compile": "pnpm i18n:normalize && formatjs compile-folder --format crowdin --ast translations/translated/ translations/compiled/ && oxfmt translations/compiled",
