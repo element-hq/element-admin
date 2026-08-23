@@ -21,6 +21,7 @@ import {
   ADMIN_MXID,
   DEFAULT_ROOMS,
   DEFAULT_USERS,
+  roomId,
   SERVER_NAME,
 } from "./fixtures";
 
@@ -31,6 +32,14 @@ const DEFAULT_PROFILES = {
     avatar_url: "mxc://example.com/admin-avatar",
   },
   [`@alice:${SERVER_NAME}`]: { displayname: "Alice" },
+};
+
+/**
+ * Members for the default rooms. Only the third room has neither a name nor a
+ * canonical alias, which is the only case that makes the app ask for members.
+ */
+const DEFAULT_ROOM_MEMBERS = {
+  [roomId(DEFAULT_ROOMS, 2)]: [ADMIN_MXID, `@alice:${SERVER_NAME}`],
 };
 
 /** Handlers every page needs, whatever the deployment. */
@@ -46,6 +55,9 @@ const common = (): RequestHandler[] => [
   matrix.mediaThumbnail(),
   matrix.serverVersion(),
   matrix.rooms(DEFAULT_ROOMS),
+  matrix.roomDetail(DEFAULT_ROOMS),
+  matrix.roomMembers(DEFAULT_ROOM_MEMBERS),
+  matrix.scheduledTasks(),
   matrix.githubLatestRelease(),
 
   mas.siteConfig(),

@@ -15,7 +15,12 @@
 
 import { http, HttpResponse, type RequestHandler } from "msw";
 
-import type { RoomsListResponse } from "@/api/synapse";
+import type {
+  RoomDetail,
+  RoomMembers,
+  RoomsListResponse,
+  ScheduledTask,
+} from "@/api/synapse";
 
 import {
   ACCESS_TOKEN,
@@ -25,8 +30,10 @@ import {
   LATEST_ESS_RELEASE,
   MAS_ROOT,
   REFRESH_TOKEN,
+  roomId,
   roomPage,
   type RoomOverrides,
+  singleRoom,
   SYNAPSE_ROOT,
   SYNAPSE_VERSION,
 } from "./fixtures";
@@ -230,6 +237,64 @@ export const rooms = (rooms: RoomOverrides[]): RequestHandler =>
       rooms: isCountOnly(new URL(request.url).searchParams) ? [] : page.rooms,
     } satisfies RoomsListResponse);
   });
+
+/**
+ * A single room. Room IDs reach MSW percent-encoded
+ * (`%21room0%3Aexample.com`), but MSW decodes path params, so `roomId` is the
+ * real `!…:…` form. An unknown room 404s with `M_NOT_FOUND`, which
+ * `ensureNotError(response, true)` turns into the route's not-found UI.
+ *
+ * The rooms list needs this handler too: `RoomAvatar` fires one
+ * `roomDetailQuery` per rendered row to find the room's avatar.
+ */
+export const roomDetail = (rooms: RoomOverrides[]): RequestHandler =>
+  http.get("*/_synapse/admin/v1/rooms/:roomId", ({ params }) => {
+    const index = rooms.findIndex(
+      (_room, position) => roomId(rooms, position) === params["roomId"],
+    );
+
+    return index === -1
+      ? notFound()
+      : HttpResponse.json(singleRoom(index, rooms[index]) satisfies RoomDetail);
+  });
+
+/**
+ * Room members, keyed by room ID. Only a room with neither a `name` nor a
+ * `canonical_alias` reaches this endpoint — that is when the console derives
+ * the display name and avatar heroes from the first few members — so most
+ * fixture rooms need no entry.
+ *
+ * A `:roomId` parameter matches a single path segment, so the `/rooms/:roomId`
+ * handler above cannot swallow this one, whatever the registration order.
+ */
+export const roomMembers = (
+  members: Record<string, string[]>,
+): RequestHandler =>
+  http.get("*/_synapse/admin/v1/rooms/:roomId/members", ({ params }) => {
+    const roomMembers = members[String(params["roomId"])];
+    return roomMembers
+      ? HttpResponse.json({
+          members: roomMembers,
+          total: roomMembers.length,
+        } satisfies RoomMembers)
+      : notFound();
+  });
+
+/**
+ * The scheduled tasks for one resource, which the room detail page reads to
+ * decide between a delete button and a deletion-status alert.
+ *
+ * The list is empty because `scheduledTasksForResource` refetches every second
+ * for as long as any task is `scheduled` or `active`: a live task would poll
+ * for the whole test. The handler ignores `resource_id`, so tasks for one
+ * resource cannot be expressed here at all.
+ */
+export const scheduledTasks = (): RequestHandler =>
+  http.get("*/_synapse/admin/v1/scheduled_tasks", () =>
+    HttpResponse.json({ scheduled_tasks: [] } satisfies {
+      scheduled_tasks: ScheduledTask[];
+    }),
+  );
 
 /**
  * ESS edition detection. The app treats any failure here as "not an ESS
