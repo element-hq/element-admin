@@ -413,7 +413,7 @@ function SecurePassphrase({ value }: SecurePassphraseProps) {
             readOnly
             value={value}
           />
-          <Tooltip description={intl.formatMessage(messages.actionCopy)}>
+          <Tooltip label={intl.formatMessage(messages.actionCopy)}>
             <Button
               iconOnly
               Icon={CopyIcon}

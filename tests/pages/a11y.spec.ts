@@ -304,10 +304,7 @@ test("finds no violations on the auditing page", async ({ page }) => {
   expect(await scanViolations(page)).toEqual([]);
 });
 
-// The recovery-key copy button is icon-only and labelled with a compound
-// `Tooltip description=`, which is `aria-describedby` and only while open,
-// rather than an accessible name.
-test("finds the known violations on the supervision page", async ({ page }) => {
+test("finds no violations on the supervision page", async ({ page }) => {
   await loginAs(page);
   await page.goto("/supervision");
 
@@ -317,5 +314,5 @@ test("finds the known violations on the supervision page", async ({ page }) => {
     ADMINBOT_PASSPHRASE,
   );
 
-  expect(await scanViolations(page)).toEqual(["button-name [critical] ×1"]);
+  expect(await scanViolations(page)).toEqual([]);
 });

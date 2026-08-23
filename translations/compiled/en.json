@@ -3457,6 +3457,12 @@
       "pluralType": "cardinal"
     }
   ],
+  "product.badge.pro": [
+    {
+      "type": 0,
+      "value": "Pro"
+    }
+  ],
   "product.element": [
     {
       "type": 0,
