@@ -1394,6 +1394,32 @@
       "value": "Domain removed from allowlist"
     }
   ],
+  "pages.federation.allowlist.remove_confirm.alert.description": [
+    {
+      "type": 0,
+      "value": "Your server will stop federating with servers matching this pattern."
+    }
+  ],
+  "pages.federation.allowlist.remove_confirm.alert.title": [
+    {
+      "type": 0,
+      "value": "You’re about to stop federating with this server"
+    }
+  ],
+  "pages.federation.allowlist.remove_confirm.title": [
+    {
+      "type": 0,
+      "value": "Remove "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": " from the allowlist?"
+    }
+  ],
   "pages.federation.allowlist.remove_tooltip": [
     {
       "type": 0,
@@ -2008,6 +2034,34 @@
       "value": "Revoke token"
     }
   ],
+  "pages.personal_tokens.revoke_token.alert.description": [
+    {
+      "type": 1,
+      "value": "humanName"
+    },
+    {
+      "type": 0,
+      "value": " will stop working immediately, and anything using it will need a new token."
+    }
+  ],
+  "pages.personal_tokens.revoke_token.alert.title": [
+    {
+      "type": 0,
+      "value": "This cannot be undone"
+    }
+  ],
+  "pages.personal_tokens.revoke_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to revoke the token"
+    }
+  ],
+  "pages.personal_tokens.revoke_token.title": [
+    {
+      "type": 0,
+      "value": "Revoke this personal token?"
+    }
+  ],
   "pages.personal_tokens.revoked_at_label": [
     {
       "type": 0,
@@ -2170,6 +2224,12 @@
       "value": "Edit properties"
     }
   ],
+  "pages.registration_tokens.edit_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to save the changes"
+    }
+  ],
   "pages.registration_tokens.edit_token_title": [
     {
       "type": 0,
@@ -2268,6 +2328,44 @@
     {
       "type": 0,
       "value": "Revoke token"
+    }
+  ],
+  "pages.registration_tokens.revoke_token.alert.description": [
+    {
+      "type": 0,
+      "value": "Nobody will be able to register with "
+    },
+    {
+      "type": 1,
+      "value": "token"
+    },
+    {
+      "type": 0,
+      "value": " until it is unrevoked."
+    }
+  ],
+  "pages.registration_tokens.revoke_token.alert.title": [
+    {
+      "type": 0,
+      "value": "The token will stop working"
+    }
+  ],
+  "pages.registration_tokens.revoke_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to revoke the token"
+    }
+  ],
+  "pages.registration_tokens.revoke_token.success": [
+    {
+      "type": 0,
+      "value": "Token revoked"
+    }
+  ],
+  "pages.registration_tokens.revoke_token.title": [
+    {
+      "type": 0,
+      "value": "Revoke this registration token?"
     }
   ],
   "pages.registration_tokens.revoked_at_label": [
@@ -2419,6 +2517,18 @@
     {
       "type": 0,
       "value": "Unrevoke token"
+    }
+  ],
+  "pages.registration_tokens.unrevoke_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to unrevoke the token"
+    }
+  ],
+  "pages.registration_tokens.unrevoke_token.success": [
+    {
+      "type": 0,
+      "value": "Token unrevoked"
     }
   ],
   "pages.registration_tokens.usage_count_label": [

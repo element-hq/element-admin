@@ -6,8 +6,8 @@
  * Handlers that make one endpoint fail. Prepend one with `network.use()` to
  * break a single query without building a whole deployment for it.
  *
- * Only `GET` is covered: every read path the page tests exercise is a `GET`,
- * and a mutation failure would need its own handler.
+ * Reads are `GET` and take a status and a body; `masFailingPost` covers the
+ * mutation paths, where only the status matters.
  */
 
 import {
@@ -54,6 +54,15 @@ const failingWith =
 export const masFailing = failingWith<ErrorResponse>(
   masError("Something went wrong"),
 );
+
+/**
+ * A MAS admin mutation endpoint, made to fail. The path takes msw parameters,
+ * e.g. `/api/admin/v1/personal-sessions/:id/revoke`.
+ */
+export const masFailingPost = (path: string, status = 500): RequestHandler =>
+  http.post(`*${path}`, () =>
+    HttpResponse.json(masError("Something went wrong"), { status }),
+  );
 
 /**
  * Any Synapse `GET` endpoint, made to fail.

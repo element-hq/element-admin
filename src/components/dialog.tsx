@@ -13,7 +13,7 @@ import {
   Trigger,
 } from "@radix-ui/react-dialog";
 import { CloseIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
-import { Glass, Tooltip } from "@vector-im/compound-web";
+import { Alert, Glass, Tooltip } from "@vector-im/compound-web";
 import type { PropsWithChildren } from "react";
 import { useIntl } from "react-intl";
 import { Drawer } from "vaul";
@@ -102,6 +102,22 @@ export const Root: React.FC<RootProps> = ({
 type TitleProps = PropsWithChildren;
 export const Title: React.FC<TitleProps> = ({ children }: TitleProps) => (
   <DialogTitle className={styles["title"]}>{children}</DialogTitle>
+);
+
+interface ErrorAlertProps {
+  title: string;
+}
+
+// A mutation failure raised while the dialog is open: a toast would render in
+// the app root, which the dialog marks `aria-hidden`, so nothing there reaches
+// a screen reader. `role="alert"` is what announces it — the compound `Alert`
+// is not a live region on its own.
+export const ErrorAlert: React.FC<ErrorAlertProps> = ({
+  title,
+}: ErrorAlertProps) => (
+  <div role="alert">
+    <Alert type="critical" title={title} />
+  </div>
 );
 
 export { Close, Description } from "@radix-ui/react-dialog";

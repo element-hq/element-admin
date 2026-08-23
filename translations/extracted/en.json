@@ -600,15 +600,27 @@
     "message": "List of patterns allowed to federate with you"
   },
   "pages.federation.allowlist.remove.error": {
-    "description": "Toast message when removing a domain from the federation allowlist fails",
+    "description": "Error shown in the confirmation dialog when removing a domain from the federation allowlist fails",
     "message": "Failed to remove domain from allowlist"
   },
   "pages.federation.allowlist.remove.success": {
     "description": "Toast message when a domain is removed from the federation allowlist",
     "message": "Domain removed from allowlist"
   },
+  "pages.federation.allowlist.remove_confirm.alert.description": {
+    "description": "Description of the alert in the confirmation dialog for removing a domain from the federation allowlist",
+    "message": "Your server will stop federating with servers matching this pattern."
+  },
+  "pages.federation.allowlist.remove_confirm.alert.title": {
+    "description": "Title of the alert in the confirmation dialog for removing a domain from the federation allowlist",
+    "message": "You’re about to stop federating with this server"
+  },
+  "pages.federation.allowlist.remove_confirm.title": {
+    "description": "Title of the confirmation dialog for removing a domain from the federation allowlist",
+    "message": "Remove {serverName} from the allowlist?"
+  },
   "pages.federation.allowlist.remove_tooltip": {
-    "description": "Tooltip for the button to remove a domain from the federation allowlist",
+    "description": "Accessible label for the button to remove a domain from the federation allowlist",
     "message": "Remove from allowlist"
   },
   "pages.federation.detail.contact": {
@@ -955,6 +967,22 @@
     "description": "Button text to revoke a token",
     "message": "Revoke token"
   },
+  "pages.personal_tokens.revoke_token.alert.description": {
+    "description": "In the modal to revoke a personal token, the description of the alert",
+    "message": "{humanName} will stop working immediately, and anything using it will need a new token."
+  },
+  "pages.personal_tokens.revoke_token.alert.title": {
+    "description": "In the modal to revoke a personal token, the title of the alert",
+    "message": "This cannot be undone"
+  },
+  "pages.personal_tokens.revoke_token.error": {
+    "description": "Error shown in the confirmation dialog when revoking a personal token fails",
+    "message": "Failed to revoke the token"
+  },
+  "pages.personal_tokens.revoke_token.title": {
+    "description": "Title of the modal asking for confirmation to revoke a personal token",
+    "message": "Revoke this personal token?"
+  },
   "pages.personal_tokens.revoked_at_label": {
     "description": "Label for the token revocation date field",
     "message": "Revoked at"
@@ -1063,6 +1091,10 @@
     "description": "Button text to edit token properties",
     "message": "Edit properties"
   },
+  "pages.registration_tokens.edit_token.error": {
+    "description": "Error shown in the edit dialog when saving a registration token's properties fails",
+    "message": "Failed to save the changes"
+  },
   "pages.registration_tokens.edit_token_title": {
     "description": "Title of the edit token modal",
     "message": "Edit registration token"
@@ -1118,6 +1150,26 @@
   "pages.registration_tokens.revoke_token": {
     "description": "Button text to revoke a token",
     "message": "Revoke token"
+  },
+  "pages.registration_tokens.revoke_token.alert.description": {
+    "description": "In the modal to revoke a registration token, the description of the alert",
+    "message": "Nobody will be able to register with {token} until it is unrevoked."
+  },
+  "pages.registration_tokens.revoke_token.alert.title": {
+    "description": "In the modal to revoke a registration token, the title of the alert",
+    "message": "The token will stop working"
+  },
+  "pages.registration_tokens.revoke_token.error": {
+    "description": "Error shown in the confirmation dialog when revoking a registration token fails",
+    "message": "Failed to revoke the token"
+  },
+  "pages.registration_tokens.revoke_token.success": {
+    "description": "The success message when a registration token is revoked",
+    "message": "Token revoked"
+  },
+  "pages.registration_tokens.revoke_token.title": {
+    "description": "The title of the modal asking for confirmation to revoke a registration token",
+    "message": "Revoke this registration token?"
   },
   "pages.registration_tokens.revoked_at_label": {
     "description": "Label for the token revocation date field",
@@ -1186,6 +1238,14 @@
   "pages.registration_tokens.unrevoke_token": {
     "description": "Button text to unrevoke a token",
     "message": "Unrevoke token"
+  },
+  "pages.registration_tokens.unrevoke_token.error": {
+    "description": "The error message when the request to unrevoke a registration token fails",
+    "message": "Failed to unrevoke the token"
+  },
+  "pages.registration_tokens.unrevoke_token.success": {
+    "description": "The success message when a registration token is unrevoked",
+    "message": "Token unrevoked"
   },
   "pages.registration_tokens.usage_count_label": {
     "description": "Label for the token usage count field",

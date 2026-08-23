@@ -2,8 +2,11 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
+import type { Page } from "@playwright/test";
+
 import { drawer, heading } from "../helpers";
 import { loginAs } from "../mocks/auth";
+import { masFailingPost } from "../mocks/failing";
 import {
   DEFAULT_PERSONAL_SESSIONS,
   DEFAULT_REGISTRATION_TOKENS,
@@ -16,6 +19,31 @@ import { expect, test } from "../mocks/test";
 
 const registrationTokensHeading = "Registration tokens";
 const personalTokensHeading = "Personal tokens";
+
+/**
+ * Open the revoke dialog from a token drawer and cancel it, leaving the token
+ * active. Mutations are unmocked, so the dialog is only ever cancelled here.
+ */
+const expectRevokeCancelled = async (
+  page: Page,
+  dialogTitle: string,
+): Promise<void> => {
+  const detail = drawer(
+    page,
+    page.getByRole("button", { name: "Revoke token" }),
+  );
+  await detail.getByRole("button", { name: "Revoke token" }).click();
+
+  const dialog = page.getByRole("dialog");
+  await expect(
+    dialog.getByRole("heading", { name: dialogTitle }),
+  ).toBeVisible();
+
+  await dialog.getByRole("button", { name: "Cancel" }).click();
+
+  await expect(dialog).toBeHidden();
+  await expect(detail.getByText("Active", { exact: true })).toBeVisible();
+};
 
 test.describe("registration tokens", () => {
   test("lists the mocked registration tokens", async ({ page }) => {
@@ -101,6 +129,15 @@ test.describe("registration tokens", () => {
     await expect(
       detail.getByRole("button", { name: "Edit properties" }),
     ).toBeEnabled();
+  });
+
+  test("cancels revoking a registration token", async ({ page }) => {
+    await loginAs(page);
+    await page.goto(
+      `/registration-tokens/${registrationTokenId(DEFAULT_REGISTRATION_TOKENS, 0)}`,
+    );
+
+    await expectRevokeCancelled(page, "Revoke this registration token?");
   });
 
   test("shows a not-found alert for an unknown registration token", async ({
@@ -201,6 +238,46 @@ test.describe("personal tokens", () => {
     await expect(
       detail.getByRole("button", { name: "Regenerate token" }),
     ).toBeEnabled();
+  });
+
+  test("cancels revoking a personal token", async ({ page }) => {
+    await loginAs(page);
+    await page.goto(
+      `/personal-tokens/${personalSessionId(DEFAULT_PERSONAL_SESSIONS, 0)}`,
+    );
+
+    await expectRevokeCancelled(page, "Revoke this personal token?");
+  });
+
+  test("reports a failed revocation inside the dialog", async ({
+    page,
+    network,
+  }) => {
+    // A toast would render in the app root, which the open dialog marks
+    // aria-hidden, so the failure has to be reported in the dialog itself —
+    // which stays open, with the token untouched.
+    network.use(masFailingPost("/api/admin/v1/personal-sessions/:id/revoke"));
+
+    await loginAs(page);
+    await page.goto(
+      `/personal-tokens/${personalSessionId(DEFAULT_PERSONAL_SESSIONS, 0)}`,
+    );
+
+    const detail = drawer(
+      page,
+      page.getByRole("button", { name: "Revoke token" }),
+    );
+    await detail.getByRole("button", { name: "Revoke token" }).click();
+
+    const dialog = page.getByRole("dialog");
+    await dialog.getByRole("button", { name: "Revoke token" }).click();
+
+    await expect(dialog.getByText("Failed to revoke the token")).toBeVisible();
+
+    // The dialog is still open on the failure; the drawer behind it is
+    // aria-hidden while it is, so the badge is checked once it is dismissed.
+    await dialog.getByRole("button", { name: "Cancel" }).click();
+    await expect(detail.getByText("Active", { exact: true })).toBeVisible();
   });
 
   test("shows a not-found alert for an unknown personal token", async ({

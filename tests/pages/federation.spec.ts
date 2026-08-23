@@ -89,6 +89,42 @@ test.describe("federation", () => {
     ).toBeVisible();
   });
 
+  test("cancels removing an allowlist entry without submitting", async ({
+    page,
+  }) => {
+    // Mutations are unmocked here, so this only exercises cancelling: a DELETE
+    // that actually went out would fail the run under strict mode.
+    await loginAs(page);
+    await page.goto("/federation/allowed-domains");
+
+    await expect(page.getByRole("heading", federationHeading)).toBeVisible();
+
+    await page
+      .getByRole("button", { name: "Remove from allowlist" })
+      .first()
+      .click();
+
+    await expect(
+      page.getByRole("heading", {
+        name: "Remove matrix.org from the allowlist?",
+      }),
+    ).toBeVisible();
+
+    await page.getByRole("button", { name: "Cancel" }).click();
+
+    await expect(
+      page.getByRole("heading", {
+        name: "Remove matrix.org from the allowlist?",
+      }),
+    ).toBeHidden();
+
+    // Counted rather than matched on text: the domain appears elsewhere on the
+    // page, so a bare text assertion would pass with the entry gone.
+    await expect(
+      page.getByRole("button", { name: "Remove from allowlist" }),
+    ).toHaveCount(2);
+  });
+
   test("falls back to marketing when the allowlist module is missing", async ({
     page,
     network,
