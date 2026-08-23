@@ -61,14 +61,14 @@ test.describe("users", () => {
 
     await expect(pane).toMatchAriaSnapshot(`
       - img "@alice:example.com"
+      - heading "Alice" [level=3]
       - paragraph: "@alice:example.com"
-      - paragraph: Alice
       - button "Lock account"
       - button "Deactivate account"
       - list:
         - listitem:
           - term: Status
-          - text: Active
+          - definition: Active
     `);
   });
 

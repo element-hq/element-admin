@@ -26,6 +26,7 @@ import {
   Badge,
   Button,
   Form,
+  H3,
   InlineSpinner,
   Separator,
   Text,
@@ -1718,12 +1719,10 @@ function RouteComponent() {
         <div className="flex flex-col items-center gap-4">
           <UserAvatar synapseRoot={synapseRoot} userId={mxid} size="88px" />
           <div className="flex flex-col gap-2 overflow-hidden self-stretch text-center text-text-primary">
-            <Text size="lg" weight="semibold" className="truncate">
-              {mxid}
-            </Text>
+            <H3 className="truncate">{displayName || mxid}</H3>
             {displayName && (
               <Text size="md" className="truncate">
-                {displayName}
+                {mxid}
               </Text>
             )}
           </div>
@@ -1785,21 +1784,23 @@ function RouteComponent() {
         <Data.Grid>
           <Data.Item>
             <Data.Title>Status</Data.Title>
-            <Badge
-              kind={
-                user.attributes.deactivated_at
-                  ? "red"
+            <Data.Value>
+              <Badge
+                kind={
+                  user.attributes.deactivated_at
+                    ? "red"
+                    : user.attributes.locked_at
+                      ? "grey"
+                      : "blue"
+                }
+              >
+                {user.attributes.deactivated_at
+                  ? "Deactivated"
                   : user.attributes.locked_at
-                    ? "grey"
-                    : "blue"
-              }
-            >
-              {user.attributes.deactivated_at
-                ? "Deactivated"
-                : user.attributes.locked_at
-                  ? "Locked"
-                  : "Active"}
-            </Badge>
+                    ? "Locked"
+                    : "Active"}
+              </Badge>
+            </Data.Value>
           </Data.Item>
 
           <Data.Item>
@@ -1813,7 +1814,7 @@ function RouteComponent() {
 
           {user.attributes.locked_at && (
             <Data.Item>
-              <Data.Title>Locked At</Data.Title>
+              <Data.Title>Locked at</Data.Title>
               <Data.Value>
                 {computeHumanReadableDateTimeStringFromUtc(
                   user.attributes.locked_at,
