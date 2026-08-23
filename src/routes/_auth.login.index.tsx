@@ -50,16 +50,6 @@ function RouteComponent() {
       (state) => ({ isPending: state.isPending }),
     );
 
-  const handleServerNameChange = useCallback(
-    (event: React.InputEvent<HTMLInputElement>) => {
-      event.preventDefault();
-      const newServerName = event.currentTarget.value.toLowerCase().trim();
-      setServerName(newServerName);
-      setDebouncedServerName(newServerName);
-    },
-    [setServerName, setDebouncedServerName],
-  );
-
   const startAuthorizationSession = useAuthStore(
     (store) => store.startAuthorizationSession,
   );
@@ -104,7 +94,14 @@ function RouteComponent() {
     retry: false,
   });
 
-  const { mutate: startAuthorization } = useMutation({
+  // PKCE needs Web Crypto, which browsers only expose on secure origins
+  const isSecureContext = globalThis.isSecureContext;
+
+  const {
+    mutate: startAuthorization,
+    isError: isAuthorizationError,
+    reset: resetAuthorization,
+  } = useMutation({
     mutationFn: async (variables: {
       serverName: string;
       authorizationEndpoint: string;
@@ -132,7 +129,23 @@ function RouteComponent() {
       url.search = parameters.toString();
       globalThis.window.location.href = url.toString();
     },
+
+    onError: (error) => {
+      console.error("Failed to start the authorization flow", error);
+    },
   });
+
+  const handleServerNameChange = useCallback(
+    (event: React.InputEvent<HTMLInputElement>) => {
+      event.preventDefault();
+      const newServerName = event.currentTarget.value.toLowerCase().trim();
+      setServerName(newServerName);
+      setDebouncedServerName(newServerName);
+      // The failure belongs to the server name it was raised for.
+      resetAuthorization();
+    },
+    [setServerName, setDebouncedServerName, resetAuthorization],
+  );
 
   // Create authorize URL if we have all the data
   const onSubmit = useCallback(
@@ -170,6 +183,9 @@ function RouteComponent() {
 
   return (
     <Form.Root onSubmit={onSubmit}>
+      {/* Discovery failing on the typed server name is what marks the field
+          invalid; the insecure-origin and failed-authorization messages below
+          render without doing so. */}
       <Form.Field name="serverName" serverInvalid={isError}>
         <Form.Label>
           <FormattedMessage
@@ -186,6 +202,15 @@ function RouteComponent() {
           type="text"
           size={1}
         />
+        {!isSecureContext && (
+          <Form.ErrorMessage>
+            <FormattedMessage
+              id="pages.login.errors.insecure_context"
+              defaultMessage="Sign-in requires a secure connection. Reload this page over https:// and try again."
+              description="Error message on the login page when the page was loaded over plain HTTP on a non-localhost origin, where the browser withholds the Web Crypto API that the PKCE sign-in flow depends on"
+            />
+          </Form.ErrorMessage>
+        )}
         {isWellKnownError && (
           <Form.ErrorMessage>
             <FormattedMessage
@@ -213,9 +238,18 @@ function RouteComponent() {
             />
           </Form.ErrorMessage>
         )}
+        {isAuthorizationError && (
+          <Form.ErrorMessage>
+            <FormattedMessage
+              id="pages.login.errors.authorization_failed"
+              defaultMessage="Could not start the sign-in process. Please try again."
+              description="Error message on the login page when building the authorization request failed, which leaves the browser on the login page instead of redirecting it to the server"
+            />
+          </Form.ErrorMessage>
+        )}
       </Form.Field>
 
-      <Form.Submit disabled={!isReady}>
+      <Form.Submit disabled={!isReady || !isSecureContext}>
         {isLoading && <InlineSpinner />}
         <FormattedMessage
           id="pages.login.get_started"

@@ -83,6 +83,22 @@
       "value": "Loading…"
     }
   ],
+  "errors.authorization_denied": [
+    {
+      "type": 0,
+      "value": "Sign-in was cancelled."
+    }
+  ],
+  "errors.authorization_error": [
+    {
+      "type": 0,
+      "value": "Sign-in failed: "
+    },
+    {
+      "type": 1,
+      "value": "errorMessage"
+    }
+  ],
   "errors.http_fetch": [
     {
       "type": 0,
@@ -1600,6 +1616,18 @@
     {
       "type": 0,
       "value": "Manage the deployment of the element app for your organization or community."
+    }
+  ],
+  "pages.login.errors.authorization_failed": [
+    {
+      "type": 0,
+      "value": "Could not start the sign-in process. Please try again."
+    }
+  ],
+  "pages.login.errors.insecure_context": [
+    {
+      "type": 0,
+      "value": "Sign-in requires a secure connection. Reload this page over https:// and try again."
     }
   ],
   "pages.login.errors.no_auth_metadata": [

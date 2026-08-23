@@ -55,6 +55,14 @@
     "description": "Announced in place of content which has not finished loading yet",
     "message": "Loading…"
   },
+  "errors.authorization_denied": {
+    "description": "Error message when the authorization server redirected back with an 'access_denied' error, which is what it sends when the user declined the sign-in or the server refused to grant them access.",
+    "message": "Sign-in was cancelled."
+  },
+  "errors.authorization_error": {
+    "description": "Error message when the authorization server redirected back with an OAuth 2.0 error other than 'access_denied'. 'errorMessage' is the description the server gave, usually in english, or the raw error code when it gave none.",
+    "message": "Sign-in failed: {errorMessage}"
+  },
   "errors.http_fetch": {
     "description": "Generic error message when we fail to make a request to the specified URL",
     "message": "Request to {url} failed"
@@ -714,6 +722,14 @@
   "pages.landing.description": {
     "description": "On the landing pages, explains what the app does",
     "message": "Manage the deployment of the element app for your organization or community."
+  },
+  "pages.login.errors.authorization_failed": {
+    "description": "Error message on the login page when building the authorization request failed, which leaves the browser on the login page instead of redirecting it to the server",
+    "message": "Could not start the sign-in process. Please try again."
+  },
+  "pages.login.errors.insecure_context": {
+    "description": "Error message on the login page when the page was loaded over plain HTTP on a non-localhost origin, where the browser withholds the Web Crypto API that the PKCE sign-in flow depends on",
+    "message": "Sign-in requires a secure connection. Reload this page over https:// and try again."
   },
   "pages.login.errors.no_auth_metadata": {
     "description": "Error message on the login page when we couldn't fetch the auth metadata, indicating that either Synapse is down, or not configured to use MAS",

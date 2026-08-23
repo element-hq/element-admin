@@ -9,6 +9,7 @@ import * as v from "valibot";
 import { authMetadataQuery, tokenRequest } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
 import { REDIRECT_URI } from "@/constants";
+import { AuthorizationDeniedError, AuthorizationError } from "@/errors";
 import { useAuthStore } from "@/stores/auth";
 
 const SearchParameters = v.intersect([
@@ -38,7 +39,11 @@ export const Route = createFileRoute("/callback")({
     // Checked before the session: a provider error is worth reporting even
     // if the local session is already gone.
     if ("error" in search) {
-      throw new Error(search.error_description || search.error);
+      if (search.error === "access_denied") {
+        throw new AuthorizationDeniedError(search.error_description);
+      }
+
+      throw new AuthorizationError(search.error_description || search.error);
     }
 
     if (!session) {
