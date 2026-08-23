@@ -15,6 +15,7 @@
 
 import { http, HttpResponse, type RequestHandler } from "msw";
 
+import type { AdminbotResponse } from "@/api/ess";
 import type {
   Destination,
   DestinationsListResponse,
@@ -28,6 +29,7 @@ import {
   ACCESS_TOKEN,
   ADMIN_MXID,
   type AllowlistEntry,
+  DEFAULT_ADMINBOT,
   destinationName,
   destinationPage,
   type DestinationOverrides,
@@ -399,6 +401,30 @@ export const essVersion = (
   http.get("*/_synapse/ess/version", () =>
     HttpResponse.json({ version, edition }),
   );
+
+export const essVersionMissing = (): RequestHandler =>
+  http.get("*/_synapse/ess/version", () => notFound());
+
+/** The ESS supervision ("adminbot") module. */
+const ADMINBOT_PATH = "*/_synapse/ess/adminbot";
+
+/**
+ * The supervision configuration. `/supervision`'s loader always prefetches
+ * this, outside the edition check, so every deployment needs a handler for it
+ * whatever `/_synapse/ess/version` says.
+ */
+export const adminbot = (
+  config: AdminbotResponse = DEFAULT_ADMINBOT,
+): RequestHandler => http.get(ADMINBOT_PATH, () => HttpResponse.json(config));
+
+/**
+ * The same endpoint on a deployment where supervision is not enabled, which is
+ * a 404. `adminbotQuery` special-cases that status and resolves to `null`
+ * rather than throwing, so on ESS Pro the page renders its "Supervision is
+ * currently disabled" alert.
+ */
+export const adminbotDisabled = (): RequestHandler =>
+  http.get(ADMINBOT_PATH, () => notFound());
 
 /** The SBG federation allowlist module, which is ESS-Pro-only. */
 const ALLOWLIST_PATH = "*/_synapse/io.element/admin/v1/federation/whitelist";

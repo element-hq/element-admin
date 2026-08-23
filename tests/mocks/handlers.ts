@@ -97,7 +97,10 @@ const essPro = (): RequestHandler[] => [
   ...common(),
   mas.version(),
   matrix.essVersion(),
+  // The SBG allowlist module and supervision are both ESS-Pro-only, so they
+  // belong to this deployment rather than to `common()`.
   matrix.federationAllowlist(DEFAULT_ALLOWLIST),
+  matrix.adminbot(),
 ];
 
 /**

@@ -2,6 +2,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
+import type { AdminbotResponse } from "@/api/ess";
 import type {
   CompatSession,
   ErrorResponse,
@@ -985,3 +986,34 @@ export const DEFAULT_ALLOWLIST: AllowlistEntry[] = [
     created_at: FIXTURE_EPOCH_MS + DAY_MS,
   },
 ];
+
+/** The Matrix ID of the mocked supervision ("adminbot") account. */
+export const ADMINBOT_MXID = `@adminbot:${SERVER_NAME}`;
+
+/**
+ * The recovery key the mocked supervision config hands out. Exported separately
+ * because `secure_passphrase` is nullish on `AdminbotResponse`, and the spec
+ * asserts the field's exact value.
+ */
+export const ADMINBOT_PASSPHRASE =
+  "EsTc 8Tzn Kk4W 9Xh2 QpLm 3Rvd 7Ybs Ncw5 Jf6t Gz1q Uh";
+
+/**
+ * The ESS supervision configuration, as `GET /_synapse/ess/adminbot` returns it
+ * (`AdminbotResponse`).
+ *
+ * `ui_address` has to be a parseable URL: the schema pipes it through
+ * `v.url()`, and the route feeds it to `new URL(...)` when the launch button is
+ * clicked. `secure_passphrase` is nullish, and the page renders the
+ * "Recovery key" field only when it is present.
+ */
+export const DEFAULT_ADMINBOT: AdminbotResponse = {
+  mxid: ADMINBOT_MXID,
+  access_token: "mock-adminbot-access-token",
+  device_id: "ADMINBOTDEV01",
+  secure_passphrase: ADMINBOT_PASSPHRASE,
+  // ESS deploys the supervision UI as part of Element Web; a deployment without
+  // it sends no `ui_address`, which is the page's "missing UI address" alert
+  // branch.
+  ui_address: "https://chat.example.com/",
+};
