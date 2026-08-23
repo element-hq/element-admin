@@ -86,6 +86,26 @@ export class MatrixStandardError extends LocalizedError {
   }
 }
 
+export class MasApiError extends LocalizedError {
+  localizedMessage = defineMessage({
+    id: "errors.mas_api",
+    defaultMessage:
+      "The homeserver's authentication service returned an error: {errorMessage}",
+    description:
+      "Generic error message when Matrix Authentication Service returned a structured error. 'errorMessage' is the list of human-readable error titles it gave, usually in english.",
+  });
+
+  constructor(errorMessage: string, options?: ErrorOptions) {
+    super(
+      `The homeserver's authentication service returned an error: ${errorMessage}`,
+      options,
+    );
+    this.values = {
+      errorMessage,
+    };
+  }
+}
+
 export class FetchError extends LocalizedError {
   localizedMessage = defineMessage({
     id: "errors.http_fetch",

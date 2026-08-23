@@ -34,14 +34,18 @@ import styles from "./errors.module.css";
 
 function RenderError({ error }: { error: unknown }) {
   if (error instanceof LocalizedError) {
+    // The cause is a sibling rather than a child: it renders a `Text`, which is
+    // a paragraph, and paragraphs don't nest.
     return (
-      <Text title={error.stack}>
-        <FormattedMessage
-          {...error.localizedMessage}
-          values={error.localizedValues}
-        />
+      <>
+        <Text title={error.stack}>
+          <FormattedMessage
+            {...error.localizedMessage}
+            values={error.localizedValues}
+          />
+        </Text>
         {error.cause && <RenderError error={error.cause} />}
-      </Text>
+      </>
     );
   }
 
@@ -68,6 +72,24 @@ function RenderError({ error }: { error: unknown }) {
     } catch (error) {
       console.error("Failed to stringify error", error);
     }
+    // The generated API clients substitute `{}` for an empty error body, which
+    // stringifies to something the reader can do nothing with.
+    if (
+      stringified === undefined ||
+      stringified === "{}" ||
+      stringified === "null"
+    ) {
+      return (
+        <Text>
+          <FormattedMessage
+            id="errors.no_details"
+            description="Shown in place of the technical details when the error carries no information at all, typically an error response with an empty body"
+            defaultMessage="The server returned an error with no details."
+          />
+        </Text>
+      );
+    }
+
     return <Text>{stringified}</Text>;
   }
 

@@ -26,8 +26,9 @@ import { expect, test } from "../mocks/test";
  * while the page survives, and a whole-page failure climbs to the root — no
  * route defines an error component — replacing the console layout. These
  * queries never retry (a loader-started fetch forces retry off), so failures
- * settle immediately. The error body picks among four rendering branches, one
- * per test.
+ * settle immediately. The error body picks the rendering: a decodable one is
+ * quoted back inside the service's own message, an opaque one falls back to the
+ * HTTP status.
  */
 
 /** The error page's `h1`, i.e. "the whole page turned into an error page". */
@@ -77,8 +78,8 @@ test.describe("a single dashboard tile failing", () => {
     network,
   }) => {
     // The same boundary with the other MAS body shape: a decodable error
-    // response, thrown as a plain object. The dashboard only asks this endpoint
-    // for a count, so the failure stays inside one tile.
+    // response. The dashboard only asks this endpoint for a count, so the
+    // failure stays inside one tile.
     network.use(
       masFailing("/api/admin/v1/users", 500, masError("The database is down")),
     );
@@ -118,11 +119,14 @@ test.describe("a list page's main query failing", () => {
 
     await expect(page.getByRole("heading", errorPageTitle)).toBeVisible();
 
-    // The thrown value is a decoded error object rather than an `Error`, so it
-    // is rendered as JSON with the title inside it.
+    // A decodable MAS body becomes a localized error carrying the titles it
+    // listed, so the reader gets a sentence rather than the decoded object.
     await expect(
-      page.getByText("Users are temporarily unavailable"),
+      page.getByText(
+        "The homeserver's authentication service returned an error: Users are temporarily unavailable",
+      ),
     ).toBeVisible();
+    await expect(page.getByText('{"errors"')).toBeHidden();
 
     await expect(page.getByRole("heading", heading("Users"))).toBeHidden();
     await expect(page.getByRole("navigation")).toBeHidden();
@@ -205,8 +209,9 @@ test.describe("a list page's main query failing", () => {
     page,
     network,
   }) => {
-    // The MAS side of the same distinction: a body that is not JSON is thrown
-    // as the raw string, which renders through the last fallback branch.
+    // The MAS side of the same distinction: a body that is not a MAS error
+    // cannot be decoded, so the HTTP status error is thrown with the raw body
+    // as its cause, which the cause chain still renders.
     network.use(
       masFailing(
         "/api/admin/v1/user-registration-tokens",
@@ -219,6 +224,8 @@ test.describe("a list page's main query failing", () => {
     await page.goto("/registration-tokens");
 
     await expect(page.getByRole("heading", errorPageTitle)).toBeVisible();
+    // Status code only, as above.
+    await expect(page.getByText("failed with status code 502")).toBeVisible();
     await expect(
       page.getByText(
         "upstream connect error or disconnect/reset before headers",
