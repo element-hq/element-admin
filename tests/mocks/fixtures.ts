@@ -10,13 +10,19 @@ import type {
   PaginatedResponseForCompatSession,
   PaginatedResponseForOAuth2Client,
   PaginatedResponseForOAuth2Session,
+  PaginatedResponseForPersonalSession,
   PaginatedResponseForUser,
+  PaginatedResponseForUserRegistrationToken,
+  PersonalSession,
   SingleResponseForCompatSession,
   SingleResponseForOAuth2Client,
   SingleResponseForOAuth2Session,
+  SingleResponseForPersonalSession,
   SingleResponseForUser,
+  SingleResponseForUserRegistrationToken,
   Ulid,
   User,
+  UserRegistrationToken,
 } from "@/api/mas/api";
 import type {
   Destination,
@@ -296,6 +302,8 @@ const USER_ID_BASE = 0;
 const CLIENT_ID_BASE = 1_000_000;
 const OAUTH2_SESSION_ID_BASE = 2_000_000;
 const COMPAT_SESSION_ID_BASE = 3_000_000;
+const REGISTRATION_TOKEN_ID_BASE = 4_000_000;
+const PERSONAL_SESSION_ID_BASE = 5_000_000;
 
 const userCollection = masCollection<User>({
   type: "user",
@@ -663,6 +671,150 @@ export const DEFAULT_COMPAT_SESSIONS: CompatSessionOverrides[] = [
     last_active_at: "2026-06-20T09:00:00.000000Z",
     last_active_ip: "203.0.113.7",
     finished_at: "2026-07-02T16:45:00.000000Z",
+  },
+];
+
+const registrationTokenCollection = masCollection<UserRegistrationToken>({
+  type: "user-registration-token",
+  path: "/api/admin/v1/user-registration-tokens",
+  idBase: REGISTRATION_TOKEN_ID_BASE,
+  defaults: (index) => ({
+    token: `token${index}`,
+    // Server-computed, not derived by MAS from the other attributes, so every
+    // fixture that is not active has to say `valid: false` — `TokenStatusBadge`
+    // short-circuits to "Active" otherwise.
+    valid: true,
+    usage_limit: null,
+    times_used: 0,
+    created_at: "2026-06-01T08:00:00.000000Z",
+    last_used_at: null,
+    expires_at: null,
+    revoked_at: null,
+  }),
+});
+
+/** Overrides for a registration-token fixture: any `UserRegistrationToken` field. */
+export type RegistrationTokenOverrides = MasOverrides<UserRegistrationToken>;
+
+export const registrationTokenId: (
+  tokens: RegistrationTokenOverrides[],
+  index: number,
+) => Ulid = registrationTokenCollection.id;
+
+export const registrationTokenPage: (
+  tokens: RegistrationTokenOverrides[],
+) => PaginatedResponseForUserRegistrationToken =
+  registrationTokenCollection.page;
+
+export const singleRegistrationToken: (
+  index: number,
+  overrides?: RegistrationTokenOverrides,
+) => SingleResponseForUserRegistrationToken =
+  registrationTokenCollection.single;
+
+/**
+ * The default set of registration tokens served by the `essPro` deployment. One
+ * fixture per branch of `TokenStatusBadge`, and all four are
+ * clock-independent: "Active" comes from `valid`, "Revoked" from `revoked_at`,
+ * "Used up" from `times_used >= usage_limit`, and "Expired" from an `expires_at`
+ * that is in the past and stays there as the suite ages. A future `expires_at`
+ * is the one thing that would rot, so no fixture has one.
+ */
+export const DEFAULT_REGISTRATION_TOKENS: RegistrationTokenOverrides[] = [
+  { token: "welcome-2026" },
+  {
+    token: "revoked-token",
+    valid: false,
+    revoked_at: "2026-07-04T12:00:00.000000Z",
+  },
+  {
+    token: "used-up-token",
+    valid: false,
+    usage_limit: 5,
+    times_used: 5,
+    last_used_at: "2026-07-10T15:30:00.000000Z",
+  },
+  {
+    token: "expired-token",
+    valid: false,
+    expires_at: "2026-02-01T00:00:00.000000Z",
+  },
+];
+
+const personalSessionCollection = masCollection<PersonalSession>({
+  type: "personal-session",
+  path: "/api/admin/v1/personal-sessions",
+  idBase: PERSONAL_SESSION_ID_BASE,
+  defaults: (index) => ({
+    created_at: "2026-06-10T11:00:00.000000Z",
+    revoked_at: null,
+    // The admin owns the token, which is what makes the detail page's
+    // `amITheOwner` check (`owner` vs. `whoami`) come out true.
+    owner_user_id: userId(DEFAULT_USERS, 0),
+    owner_client_id: null,
+    actor_user_id: userId(DEFAULT_USERS, 1),
+    human_name: `Personal token ${index}`,
+    scope: "urn:mas:admin",
+    last_active_at: null,
+    last_active_ip: null,
+    expires_at: null,
+    // MAS returns `access_token` from the create and regenerate endpoints only,
+    // never from a list or a detail read.
+    access_token: null,
+  }),
+});
+
+/** Overrides for a personal-token fixture: any `PersonalSession` field. */
+export type PersonalSessionOverrides = MasOverrides<PersonalSession>;
+
+export const personalSessionId: (
+  sessions: PersonalSessionOverrides[],
+  index: number,
+) => Ulid = personalSessionCollection.id;
+
+export const personalSessionPage: (
+  sessions: PersonalSessionOverrides[],
+) => PaginatedResponseForPersonalSession = personalSessionCollection.page;
+
+export const singlePersonalSession: (
+  index: number,
+  overrides?: PersonalSessionOverrides,
+) => SingleResponseForPersonalSession = personalSessionCollection.single;
+
+/**
+ * The default set of personal tokens served by the `essPro` deployment.
+ *
+ * Same clock-independence rule as everywhere else: `PersonalTokenStatusBadge`
+ * reads `revoked_at` first and only then compares `expires_at` against
+ * `Date.now()`, so "Revoked" and a past `expires_at` ("Expired") never drift,
+ * and the active fixture has no `expires_at` at all.
+ *
+ * Every `actor_user_id` and `owner_user_id` has to be a user fixture's ULID:
+ * both the list rows and the detail pane resolve them through
+ * `GET /api/admin/v1/users/{id}`.
+ */
+export const DEFAULT_PERSONAL_SESSIONS: PersonalSessionOverrides[] = [
+  {
+    human_name: "CI automation",
+    scope: "urn:mas:admin urn:matrix:client:api:*",
+  },
+  {
+    human_name: "Retired bridge",
+    // Owned by a client rather than a user, so the detail pane renders no owner
+    // card and its "Regenerate token" button is the disabled variant.
+    owner_user_id: null,
+    owner_client_id: clientId(DEFAULT_OAUTH2_CLIENTS, 0),
+    actor_user_id: userId(DEFAULT_USERS, 0),
+    scope: "urn:synapse:admin:*",
+    revoked_at: "2026-07-15T09:00:00.000000Z",
+  },
+  {
+    human_name: "Old migration script",
+    // The deactivated user, whose Matrix profile 404s — the row's acting-user
+    // cell degrades to a bare Matrix ID, as in the legacy devices list.
+    actor_user_id: userId(DEFAULT_USERS, 2),
+    scope: "urn:matrix:client:api:*",
+    expires_at: "2026-03-01T00:00:00.000000Z",
   },
 ];
 

@@ -16,7 +16,9 @@ import type {
   PaginatedResponseForCompatSession,
   PaginatedResponseForOAuth2Client,
   PaginatedResponseForOAuth2Session,
+  PaginatedResponseForPersonalSession,
   PaginatedResponseForUser,
+  PaginatedResponseForUserRegistrationToken,
   SiteConfig,
   Ulid,
   Version,
@@ -36,10 +38,18 @@ import {
   oauth2SessionId,
   oauth2SessionPage,
   type OAuth2SessionOverrides,
+  personalSessionId,
+  personalSessionPage,
+  type PersonalSessionOverrides,
+  registrationTokenId,
+  registrationTokenPage,
+  type RegistrationTokenOverrides,
   SERVER_NAME,
   singleCompatSession,
   singleOauth2Client,
   singleOauth2Session,
+  singlePersonalSession,
+  singleRegistrationToken,
   singleUser,
   userId,
   userPage,
@@ -258,6 +268,56 @@ export const compatSessionDetail = (
     compatSessionId,
     singleCompatSession,
     "Session not found",
+  );
+
+/**
+ * The registration-tokens collection, behind `/registration-tokens`. Filters
+ * (`filter[valid]`, `filter[used]`, `filter[revoked]`, `filter[expired]`) are
+ * ignored as everywhere else; the page starts unfiltered anyway.
+ */
+export const registrationTokensList = (
+  tokens: RegistrationTokenOverrides[],
+): RequestHandler =>
+  listHandler<PaginatedResponseForUserRegistrationToken>(
+    "/api/admin/v1/user-registration-tokens",
+    (self) => countOnly(tokens.length, self),
+    () => registrationTokenPage(tokens),
+  );
+
+export const registrationTokenDetail = (
+  tokens: RegistrationTokenOverrides[],
+): RequestHandler =>
+  detailHandler(
+    "/api/admin/v1/user-registration-tokens",
+    tokens,
+    registrationTokenId,
+    singleRegistrationToken,
+    "mock 404: unknown registration token",
+  );
+
+/**
+ * The personal-tokens collection, behind `/personal-tokens`. Filters
+ * (`filter[status]`, `filter[scope]`, `filter[expires]`, …) are ignored, so a
+ * filtered page shows every fixture.
+ */
+export const personalSessionsList = (
+  sessions: PersonalSessionOverrides[],
+): RequestHandler =>
+  listHandler<PaginatedResponseForPersonalSession>(
+    "/api/admin/v1/personal-sessions",
+    (self) => countOnly(sessions.length, self),
+    () => personalSessionPage(sessions),
+  );
+
+export const personalSessionDetail = (
+  sessions: PersonalSessionOverrides[],
+): RequestHandler =>
+  detailHandler(
+    "/api/admin/v1/personal-sessions",
+    sessions,
+    personalSessionId,
+    singlePersonalSession,
+    "Personal session not found",
   );
 
 /**

@@ -24,6 +24,8 @@ import {
   DEFAULT_DESTINATIONS,
   DEFAULT_OAUTH2_CLIENTS,
   DEFAULT_OAUTH2_SESSIONS,
+  DEFAULT_PERSONAL_SESSIONS,
+  DEFAULT_REGISTRATION_TOKENS,
   DEFAULT_ROOMS,
   DEFAULT_SERVER_SUPPORT,
   DEFAULT_USERS,
@@ -77,10 +79,14 @@ const common = (): RequestHandler[] => [
   mas.oauth2ClientsList(DEFAULT_OAUTH2_CLIENTS),
   mas.oauth2SessionsList(DEFAULT_OAUTH2_SESSIONS),
   mas.compatSessionsList(DEFAULT_COMPAT_SESSIONS),
+  mas.registrationTokensList(DEFAULT_REGISTRATION_TOKENS),
+  mas.personalSessionsList(DEFAULT_PERSONAL_SESSIONS),
   mas.userDetail(DEFAULT_USERS),
   mas.oauth2ClientDetail(DEFAULT_OAUTH2_CLIENTS),
   mas.oauth2SessionDetail(DEFAULT_OAUTH2_SESSIONS),
   mas.compatSessionDetail(DEFAULT_COMPAT_SESSIONS),
+  mas.registrationTokenDetail(DEFAULT_REGISTRATION_TOKENS),
+  mas.personalSessionDetail(DEFAULT_PERSONAL_SESSIONS),
 ];
 
 /**
