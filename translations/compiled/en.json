@@ -2230,6 +2230,12 @@
       "value": "Edit properties"
     }
   ],
+  "pages.registration_tokens.edit_properties.revoked_tooltip": [
+    {
+      "type": 0,
+      "value": "Unrevoke this token before editing its properties"
+    }
+  ],
   "pages.registration_tokens.edit_token.error": [
     {
       "type": 0,

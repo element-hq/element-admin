@@ -1095,6 +1095,10 @@
     "description": "Button text to edit token properties",
     "message": "Edit properties"
   },
+  "pages.registration_tokens.edit_properties.revoked_tooltip": {
+    "description": "Tooltip on the disabled 'Edit properties' button of a revoked registration token",
+    "message": "Unrevoke this token before editing its properties"
+  },
   "pages.registration_tokens.edit_token.error": {
     "description": "Error shown in the edit dialog when saving a registration token's properties fails",
     "message": "Failed to save the changes"

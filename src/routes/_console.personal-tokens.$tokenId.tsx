@@ -493,7 +493,9 @@ function TokenDetailComponent() {
               />
             ) : (
               <Tooltip
-                label={
+                // A description rather than a label: the button already says
+                // "Regenerate token", and a label would replace that name.
+                description={
                   ownerMxid
                     ? intl.formatMessage(
                         {

@@ -565,23 +565,46 @@ function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
     [mutateEditToken],
   );
 
+  const editPropertiesLabel = (
+    <FormattedMessage
+      id="pages.registration_tokens.edit_properties"
+      defaultMessage="Edit properties"
+      description="Button text to edit token properties"
+    />
+  );
+
+  // Returning the disabled button on its own keeps a dialog nobody can open out
+  // of the tree.
+  if (tokenAttributes.revoked_at) {
+    return (
+      <Tooltip
+        description={intl.formatMessage({
+          id: "pages.registration_tokens.edit_properties.revoked_tooltip",
+          defaultMessage: "Unrevoke this token before editing its properties",
+          description:
+            "Tooltip on the disabled 'Edit properties' button of a revoked registration token",
+        })}
+      >
+        <Button
+          type="button"
+          size="md"
+          kind="secondary"
+          disabled
+          Icon={EditIcon}
+        >
+          {editPropertiesLabel}
+        </Button>
+      </Tooltip>
+    );
+  }
+
   return (
     <Dialog.Root
       open={open}
       onOpenChange={onOpenChange}
       trigger={
-        <Button
-          type="button"
-          size="md"
-          kind="secondary"
-          disabled={!!tokenAttributes.revoked_at}
-          Icon={EditIcon}
-        >
-          <FormattedMessage
-            id="pages.registration_tokens.edit_properties"
-            defaultMessage="Edit properties"
-            description="Button text to edit token properties"
-          />
+        <Button type="button" size="md" kind="secondary" Icon={EditIcon}>
+          {editPropertiesLabel}
         </Button>
       }
     >
