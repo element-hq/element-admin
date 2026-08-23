@@ -20,6 +20,10 @@ export const drawer = (page: Page, anchor: Locator): Locator =>
 export const heading = (name: string) =>
   ({ name, exact: true, level: 1 }) as const;
 
+/** The sidebar is the only `<nav>` in the console layout. */
+export const navEntry = (page: Page, name: string): Locator =>
+  page.getByRole("navigation").getByRole("link", { name, exact: true });
+
 /** The SBG allowlist page's subtitle, which identifies that federation tab. */
 export const ALLOWLIST_SUBTITLE =
   "List of patterns allowed to federate with you";

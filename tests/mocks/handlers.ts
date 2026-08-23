@@ -29,6 +29,7 @@ import {
   DEFAULT_ROOMS,
   DEFAULT_SERVER_SUPPORT,
   DEFAULT_USERS,
+  ESS_VERSION,
   roomId,
   SERVER_NAME,
 } from "./fixtures";
@@ -104,6 +105,37 @@ const essPro = (): RequestHandler[] => [
 ];
 
 /**
+ * ESS Community on a recent MAS: every MAS-version-gated route is reachable,
+ * and every ESS-Pro-only surface is not. `plainMas()` is off on both axes,
+ * which is how the two are shown to be independent.
+ */
+const essCommunity = (): RequestHandler[] => [
+  ...common(),
+  mas.version(),
+  matrix.essVersion(ESS_VERSION, "community"),
+  // Both Pro-only endpoints are still probed on a Community deployment, so
+  // they have to be handled — as 404s.
+  matrix.federationAllowlistMissing(),
+  matrix.adminbotDisabled(),
+];
+
+/**
+ * A plain MAS + Synapse deployment on an old MAS: no ESS endpoints, and the
+ * version-gated routes are unreachable.
+ */
+const plainMas = (): RequestHandler[] => [
+  ...common(),
+  mas.version("1.4.0"),
+  matrix.essVersionMissing(),
+  // The `/federation` layout route probes the allowlist whatever the
+  // deployment, and `/supervision`'s loader prefetches the adminbot config
+  // before it knows the edition, so both still need handling — just not
+  // successfully.
+  matrix.federationAllowlistMissing(),
+  matrix.adminbotDisabled(),
+];
+
+/**
  * Every deployment, by name. Playwright collapses an array-valued option passed
  * through `test.use` (any array whose second element is an object is read as a
  * `[value, options]` tuple), so the `deployment` option selects a deployment by
@@ -111,6 +143,8 @@ const essPro = (): RequestHandler[] => [
  */
 export const deployments = {
   essPro,
+  essCommunity,
+  plainMas,
 } satisfies Record<string, () => RequestHandler[]>;
 
 export type DeploymentName = keyof typeof deployments;
