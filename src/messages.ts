@@ -41,6 +41,12 @@ export const actionDelete = defineMessage({
   description: "Label for a delete action/button",
 });
 
+export const actionDone = defineMessage({
+  id: "action.done",
+  defaultMessage: "Done",
+  description: "Label for a done action/button, dismissing a finished dialog",
+});
+
 export const actionGoBack = defineMessage({
   id: "action.go_back",
   defaultMessage: "Go back",

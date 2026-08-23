@@ -627,6 +627,9 @@ function RegenerateTokenModal({
     <Dialog.Root
       open={isOpen}
       onOpenChange={setIsOpen}
+      // The token is shown exactly once, so only the explicit "Done" button
+      // may close the dialog while it is on screen.
+      dismissible={!mutationData?.data.attributes.access_token}
       trigger={
         <Button type="button" size="md" kind="secondary" Icon={RestartIcon}>
           <FormattedMessage
@@ -733,11 +736,17 @@ function RegenerateTokenModal({
       <Dialog.Close asChild>
         <Button
           type="button"
-          kind="tertiary"
+          kind={
+            mutationData?.data.attributes.access_token ? "primary" : "tertiary"
+          }
           onClick={handleClose}
           disabled={isPending}
         >
-          <FormattedMessage {...messages.actionCancel} />
+          {mutationData?.data.attributes.access_token ? (
+            <FormattedMessage {...messages.actionDone} />
+          ) : (
+            <FormattedMessage {...messages.actionCancel} />
+          )}
         </Button>
       </Dialog.Close>
     </Dialog.Root>

@@ -318,6 +318,9 @@ const PersonalTokenAddButton = ({
     <Dialog.Root
       open={isOpen}
       onOpenChange={onOpenChange}
+      // The token is shown exactly once, so only the explicit "Done" button
+      // may close the dialog while it is on screen.
+      dismissible={!mutationData?.data.attributes.access_token}
       trigger={
         <Button Icon={PlusIcon} size="md" kind="primary">
           <FormattedMessage {...messages.actionAdd} />
@@ -361,11 +364,14 @@ const PersonalTokenAddButton = ({
             />
           </div>
 
-          <Dialog.Close asChild>
-            <Button type="button" kind="tertiary" disabled={isPending}>
-              <FormattedMessage {...messages.actionClose} />
-            </Button>
-          </Dialog.Close>
+          <Button
+            type="button"
+            kind="primary"
+            disabled={isPending}
+            onClick={() => onOpenChange(false)}
+          >
+            <FormattedMessage {...messages.actionDone} />
+          </Button>
         </>
       ) : (
         <>

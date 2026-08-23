@@ -35,6 +35,12 @@
       "value": "Delete"
     }
   ],
+  "action.done": [
+    {
+      "type": 0,
+      "value": "Done"
+    }
+  ],
   "action.go_back": [
     {
       "type": 0,

@@ -23,6 +23,10 @@
     "description": "Label for a delete action/button",
     "message": "Delete"
   },
+  "action.done": {
+    "description": "Label for a done action/button, dismissing a finished dialog",
+    "message": "Done"
+  },
   "action.go_back": {
     "description": "Label for a go back action/button",
     "message": "Go back"
