@@ -816,6 +816,12 @@
       "value": "View all devices"
     }
   ],
+  "pages.devices.applications.view_users": [
+    {
+      "type": 0,
+      "value": "View users on this application"
+    }
+  ],
   "pages.devices.legacy.count": [
     {
       "type": 6,

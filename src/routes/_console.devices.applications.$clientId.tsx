@@ -330,6 +330,19 @@ function ClientDetailComponent() {
               description="Button on the application details sidebar that navigates to the devices list filtered to this application"
             />
           </ButtonLink>
+
+          <ButtonLink
+            kind="secondary"
+            size="md"
+            to="/users"
+            search={{ client: [clientId] }}
+          >
+            <FormattedMessage
+              id="pages.devices.applications.view_users"
+              defaultMessage="View users on this application"
+              description="Button on the application details sidebar that navigates to the users list filtered to those with an active device on this application"
+            />
+          </ButtonLink>
         </div>
       </div>
     </Navigation.Details>

@@ -307,6 +307,10 @@
     "description": "Button on the application details sidebar that navigates to the devices list filtered to this application",
     "message": "View all devices"
   },
+  "pages.devices.applications.view_users": {
+    "description": "Button on the application details sidebar that navigates to the users list filtered to those with an active device on this application",
+    "message": "View users on this application"
+  },
   "pages.devices.legacy.count": {
     "description": "On the legacy devices list page, this heading shows the total number of legacy devices",
     "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}"
