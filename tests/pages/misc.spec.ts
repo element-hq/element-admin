@@ -187,8 +187,8 @@ test.describe("supervision", () => {
     page,
     network,
   }) => {
-    // The supervision config still resolves: the route prefetches it before it
-    // knows the edition, but the non-Pro branch never reads it.
+    // The route only prefetches the supervision config once it knows the
+    // deployment is Pro, and the non-Pro branch never reads it anyway.
     network.use(essVersion(ESS_VERSION, "community"));
 
     await loginAs(page);

@@ -148,9 +148,8 @@ Things that bite:
 - List pages need the detail handlers of related collections: rows fire per-row
   queries (room rows fetch room detail and members, device rows fetch the
   client, personal-token rows fetch the user and its profile).
-- Some queries fire regardless of feature gating, so their endpoints need a
-  handler in every deployment even where the feature is off: the adminbot
-  prefetch, the federation allowlist probe, the dashboard's GitHub release query.
+- The federation allowlist probe fires regardless of feature gating, so its
+  endpoint needs a handler in every deployment even where the feature is off.
 - `count=only` is a separate request with a different shape, `{ meta: { count } }`
   and no `data`.
 - Keep fixtures clock- and locale-independent: no future expiry dates, and no

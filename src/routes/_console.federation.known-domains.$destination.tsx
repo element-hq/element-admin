@@ -29,14 +29,14 @@ export const Route = createFileRoute(
     );
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
-    const destPromise = queryClient.ensureQueryData(
+    await queryClient.ensureQueryData(
       federationDestinationQuery(synapseRoot, params.destination),
     );
 
-    // Contact info may fail (CORS); prefetch without blocking
+    // Only prefetch a destination's own well-known once we know Synapse has
+    // heard of it, so an arbitrary route param can't make the admin's browser
+    // fetch an attacker-controlled host.
     queryClient.prefetchQuery(serverSupportQuery(params.destination));
-
-    await destPromise;
   },
 
   component: RouteComponent,

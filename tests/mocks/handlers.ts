@@ -70,7 +70,6 @@ const common = (): RequestHandler[] => [
   matrix.federationDestinations(DEFAULT_DESTINATIONS),
   matrix.federationDestination(DEFAULT_DESTINATIONS),
   matrix.serverSupport(DEFAULT_SERVER_SUPPORT),
-  matrix.githubLatestRelease(),
 
   mas.siteConfig(),
   mas.usersList(DEFAULT_USERS),
@@ -102,6 +101,9 @@ const essPro = (): RequestHandler[] => [
   // belong to this deployment rather than to `common()`.
   matrix.federationAllowlist(DEFAULT_ALLOWLIST),
   matrix.adminbot(),
+  // The dashboard only looks up the latest release where it has an ESS version
+  // to compare it against.
+  matrix.githubLatestRelease(),
 ];
 
 /**
@@ -113,10 +115,10 @@ const essCommunity = (): RequestHandler[] => [
   ...common(),
   mas.version(),
   matrix.essVersion(ESS_VERSION, "community"),
-  // Both Pro-only endpoints are still probed on a Community deployment, so
-  // they have to be handled — as 404s.
+  matrix.githubLatestRelease(),
+  // The allowlist is Pro-only but still probed on a Community deployment, so it
+  // has to be handled — as a 404.
   matrix.federationAllowlistMissing(),
-  matrix.adminbotDisabled(),
 ];
 
 /**
@@ -128,11 +130,10 @@ const plainMas = (): RequestHandler[] => [
   mas.version("1.4.0"),
   matrix.essVersionMissing(),
   // The `/federation` layout route probes the allowlist whatever the
-  // deployment, and `/supervision`'s loader prefetches the adminbot config
-  // before it knows the edition, so both still need handling — just not
-  // successfully.
+  // deployment, so it still needs handling — just not successfully. Nothing
+  // handles the adminbot config or the GitHub release here: an unhandled
+  // request fails the run, which is what pins the gates on those two.
   matrix.federationAllowlistMissing(),
-  matrix.adminbotDisabled(),
 ];
 
 /**

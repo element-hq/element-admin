@@ -56,12 +56,15 @@ export const Route = createFileRoute("/_console/supervision")({
     );
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
-    await Promise.all([
+    const { edition } = await queryClient.ensureQueryData(
+      essVersionQuery(synapseRoot),
+    );
+    if (edition === "pro") {
       // We use prefetchQuery and not ensureQueryData here to avoid failing the
-      // load if the adminbot endpoint fails to fetch
-      queryClient.prefetchQuery(adminbotQuery(synapseRoot)),
-      queryClient.ensureQueryData(essVersionQuery(synapseRoot)),
-    ]);
+      // load if the adminbot endpoint fails to fetch. The endpoint 404s on
+      // non-Pro deployments, so it's only worth calling there.
+      await queryClient.prefetchQuery(adminbotQuery(synapseRoot));
+    }
   },
 
   component: RouteComponent,

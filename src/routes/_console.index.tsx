@@ -8,7 +8,7 @@ import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { Heading, Separator, Text } from "@vector-im/compound-web";
 import { defineMessage, FormattedMessage } from "react-intl";
 
-import { useEssVersion } from "@/api/ess";
+import { essVersionQuery, useEssVersion } from "@/api/ess";
 import { githubReleaseQuery } from "@/api/github";
 import { usersCountQuery } from "@/api/mas";
 import { wellKnownQuery } from "@/api/matrix";
@@ -44,11 +44,19 @@ export const Route = createFileRoute("/_console/")({
 
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
-    // Kick the loading of the 4 queries but don't await them
+    // Kick the loading of these queries but don't await them
     queryClient.prefetchQuery(serverVersionQuery(synapseRoot));
     queryClient.prefetchQuery(roomsCountQuery(synapseRoot));
     queryClient.prefetchQuery(usersCountQuery(credentials.serverName));
-    queryClient.prefetchQuery(latestEssReleaseQuery);
+
+    // The latest-release tile only renders for ESS deployments, so a non-ESS
+    // server skips the request to api.github.com.
+    const { version } = await queryClient.ensureQueryData(
+      essVersionQuery(synapseRoot),
+    );
+    if (version) {
+      queryClient.prefetchQuery(latestEssReleaseQuery);
+    }
   },
   component: RouteComponent,
 });
@@ -128,7 +136,12 @@ function RouteComponent() {
 
   const synapseRoot = wellKnown["m.homeserver"].base_url;
   const essVersion = useEssVersion(synapseRoot);
-  const { data: latestEssRelease } = useQuery(latestEssReleaseQuery);
+  // Same gate as the loader's: the tile which shows this only renders for ESS
+  // deployments.
+  const { data: latestEssRelease } = useQuery({
+    ...latestEssReleaseQuery,
+    enabled: !!essVersion,
+  });
   let isUsingLatest = false;
   if (latestEssRelease?.tag_name && essVersion) {
     isUsingLatest = compareMain(essVersion, latestEssRelease.tag_name) >= 0;
