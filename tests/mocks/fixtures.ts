@@ -1051,7 +1051,7 @@ export const destinationName = (
  * present — so the defaults spell all of them out.
  *
  * `retry_last_ts` and `retry_interval` default to 0, which the detail page
- * renders as an em dash: any other value goes through
+ * renders as "Never" / "None": any other value goes through
  * `computeHumanReadableDateTimeStringFromUtc` / `Intl.DurationFormat`, whose
  * output depends on the runner's timezone and locale.
  */

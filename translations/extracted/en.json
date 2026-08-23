@@ -631,13 +631,13 @@
     "description": "Label for the contact email of a federation destination",
     "message": "Contact"
   },
-  "pages.federation.detail.destination": {
-    "description": "Label for the destination name of a federation destination",
-    "message": "Destination"
-  },
   "pages.federation.detail.last_retry": {
     "description": "Label for the last retry timestamp of a federation destination",
     "message": "Last retry timestamp"
+  },
+  "pages.federation.detail.last_retry.never": {
+    "description": "Value shown for a federation destination's last retry timestamp when it has never been retried",
+    "message": "Never"
   },
   "pages.federation.detail.last_successful_stream": {
     "description": "Label for the last successful stream ordering of a federation destination",
@@ -646,6 +646,10 @@
   "pages.federation.detail.retry_interval": {
     "description": "Label for the retry interval of a federation destination",
     "message": "Retry interval"
+  },
+  "pages.federation.detail.retry_interval.none": {
+    "description": "Value shown for a federation destination's retry interval when there is no backoff, which is the case for a destination that is working",
+    "message": "None"
   },
   "pages.federation.detail.security": {
     "description": "Label for the security contact of a federation destination",

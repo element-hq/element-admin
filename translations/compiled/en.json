@@ -1438,16 +1438,16 @@
       "value": "Contact"
     }
   ],
-  "pages.federation.detail.destination": [
-    {
-      "type": 0,
-      "value": "Destination"
-    }
-  ],
   "pages.federation.detail.last_retry": [
     {
       "type": 0,
       "value": "Last retry timestamp"
+    }
+  ],
+  "pages.federation.detail.last_retry.never": [
+    {
+      "type": 0,
+      "value": "Never"
     }
   ],
   "pages.federation.detail.last_successful_stream": [
@@ -1460,6 +1460,12 @@
     {
       "type": 0,
       "value": "Retry interval"
+    }
+  ],
+  "pages.federation.detail.retry_interval.none": [
+    {
+      "type": 0,
+      "value": "None"
     }
   ],
   "pages.federation.detail.security": [

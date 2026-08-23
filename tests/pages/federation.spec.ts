@@ -49,10 +49,16 @@ test.describe("federation", () => {
     ).toBeVisible();
     await expect(detail.getByText("Working", { exact: true })).toBeVisible();
 
+    // This fixture has never been retried and has no backoff (both fields
+    // default to 0), which the drawer spells out rather than leaving as a bare
+    // dash.
+    await expect(detail.getByText("Never", { exact: true })).toBeVisible();
+    await expect(detail.getByText("None", { exact: true })).toBeVisible();
+
     // The stream ordering is the only drawer field that renders independently
-    // of timezone and locale, and it is interpolated raw, so it is not
-    // group-separated.
-    await expect(detail.getByText("4812003", { exact: true })).toBeVisible();
+    // of timezone, and it goes through Data.NumericValue, so under the
+    // suite's fixed en-US locale it comes out comma-grouped.
+    await expect(detail.getByText("4,812,003", { exact: true })).toBeVisible();
 
     // The contacts come from the destination's own third-party
     // `/.well-known/matrix/support` document, so seeing them proves the

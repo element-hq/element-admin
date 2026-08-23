@@ -99,15 +99,25 @@ const CloseSidebar: React.FC = () => {
   );
 };
 
-/** Format epoch-ms timestamp as a human-readable local datetime string */
-function formatTimestamp(epochMs: number): string {
-  if (epochMs <= 0) return "—";
+/** The last retry as a local datetime, or "Never" when Synapse has not had to
+ * retry this destination. */
+function FormattedLastRetry({ epochMs }: { epochMs: number }): React.ReactNode {
+  if (epochMs <= 0) {
+    return (
+      <FormattedMessage
+        id="pages.federation.detail.last_retry.never"
+        defaultMessage="Never"
+        description="Value shown for a federation destination's last retry timestamp when it has never been retried"
+      />
+    );
+  }
   return computeHumanReadableDateTimeStringFromUtc(
     new Date(epochMs).toISOString(),
   );
 }
 
-/** Format a duration in ms as a relative-time-friendly value */
+/** A backoff interval as a duration, or "None" when there is no backoff — which
+ * is the healthy state, not a fault. */
 function FormattedDuration({ ms }: { ms: number }): React.ReactNode {
   const intl = useIntl();
   const formatter = useMemo(
@@ -115,7 +125,15 @@ function FormattedDuration({ ms }: { ms: number }): React.ReactNode {
     [intl.locale],
   );
 
-  if (ms <= 0) return "—";
+  if (ms <= 0) {
+    return (
+      <FormattedMessage
+        id="pages.federation.detail.retry_interval.none"
+        defaultMessage="None"
+        description="Value shown for a federation destination's retry interval when there is no backoff, which is the case for a destination that is working"
+      />
+    );
+  }
 
   return formatter.format({
     milliseconds: ms % 1000,
@@ -257,23 +275,14 @@ function RouteComponent() {
           <Data.Item>
             <Data.Title>
               <FormattedMessage
-                id="pages.federation.detail.destination"
-                defaultMessage="Destination"
-                description="Label for the destination name of a federation destination"
-              />
-            </Data.Title>
-            <Data.Value>{dest.destination}</Data.Value>
-          </Data.Item>
-
-          <Data.Item>
-            <Data.Title>
-              <FormattedMessage
                 id="pages.federation.detail.last_retry"
                 defaultMessage="Last retry timestamp"
                 description="Label for the last retry timestamp of a federation destination"
               />
             </Data.Title>
-            <Data.Value>{formatTimestamp(dest.retry_last_ts)}</Data.Value>
+            <Data.Value>
+              <FormattedLastRetry epochMs={dest.retry_last_ts} />
+            </Data.Value>
           </Data.Item>
 
           <Data.Item>
@@ -297,12 +306,12 @@ function RouteComponent() {
                 description="Label for the last successful stream ordering of a federation destination"
               />
             </Data.Title>
-            <Data.Value>
-              {
-                // oxlint-disable-next-line formatjs/no-literal-string-in-jsx
-                dest.last_successful_stream_ordering ?? "—"
-              }
-            </Data.Value>
+            {dest.last_successful_stream_ordering === null ? (
+              // oxlint-disable-next-line formatjs/no-literal-string-in-jsx
+              <Data.Value>—</Data.Value>
+            ) : (
+              <Data.NumericValue value={dest.last_successful_stream_ordering} />
+            )}
           </Data.Item>
 
           <Suspense>
