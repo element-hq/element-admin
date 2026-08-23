@@ -310,12 +310,6 @@ function AdminbotContent({ config, synapseRoot }: AdminbotContentProps) {
   const intl = useIntl();
   return (
     <>
-      <Page.Header>
-        <Page.Title>
-          <FormattedMessage {...titleMessage} />
-        </Page.Title>
-      </Page.Header>
-
       <div className="flex flex-col gap-6 max-w-[60ch]">
         <Text size="md" className="text-pretty">
           <FormattedMessage
@@ -513,6 +507,12 @@ function RouteComponent() {
   return (
     <Navigation.Content>
       <Navigation.Main>
+        <Page.Header>
+          <Page.Title>
+            <FormattedMessage {...titleMessage} />
+          </Page.Title>
+        </Page.Header>
+
         {variant === "pro" ? (
           <MaybeAdminbotContent synapseRoot={synapseRoot} />
         ) : (

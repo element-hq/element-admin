@@ -65,9 +65,7 @@ test("finds no violations on the login page", async ({ page }) => {
   expect(await scanViolations(page)).toEqual([]);
 });
 
-// The server name renders as an `h3` directly under the page's `h1`, so the
-// heading level jumps 1 → 3.
-test("finds the known violations on the dashboard", async ({ page }) => {
+test("finds no violations on the dashboard", async ({ page }) => {
   await loginAs(page);
   await page.goto("/");
 
@@ -75,7 +73,7 @@ test("finds the known violations on the dashboard", async ({ page }) => {
   // Each tile is its own data boundary, resolving after the heading.
   await expect(page.getByText(SYNAPSE_VERSION)).toBeVisible();
 
-  expect(await scanViolations(page)).toEqual(["heading-order [moderate] ×1"]);
+  expect(await scanViolations(page)).toEqual([]);
 });
 
 test("finds no violations on the users list", async ({ page }) => {
@@ -292,22 +290,18 @@ test("finds no violations on the personal tokens list", async ({ page }) => {
   expect(await scanViolations(page)).toEqual([]);
 });
 
-// This page renders no page header, so its only heading is the marketing card's
-// `h2`.
-test("finds the known violations on the auditing page", async ({ page }) => {
+test("finds no violations on the auditing page", async ({ page }) => {
   await loginAs(page);
   await page.goto("/auditing");
 
   await expect(
-    page.getByRole("heading", { name: "Auditing", exact: true, level: 2 }),
+    page.getByRole("heading", { name: "Auditing", exact: true, level: 1 }),
   ).toBeVisible();
   await expect(
     page.getByText("keep records of end-to-end encrypted conversations"),
   ).toBeVisible();
 
-  expect(await scanViolations(page)).toEqual([
-    "page-has-heading-one [moderate] ×1",
-  ]);
+  expect(await scanViolations(page)).toEqual([]);
 });
 
 // The recovery-key copy button is icon-only and labelled with a compound
@@ -317,8 +311,6 @@ test("finds the known violations on the supervision page", async ({ page }) => {
   await loginAs(page);
   await page.goto("/supervision");
 
-  // Only the configured-Pro branch renders a page header, which is the branch
-  // the default deployment produces.
   await expect(page.getByRole("heading", heading("Supervision"))).toBeVisible();
   // The recovery key is only in the resolved supervision config.
   await expect(page.getByLabel("Recovery key")).toHaveValue(

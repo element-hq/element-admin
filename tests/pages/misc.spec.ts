@@ -43,8 +43,11 @@ test.describe("auditing", () => {
     await loginAs(page);
     await page.goto("/auditing");
 
-    // This page has no page header, so its only heading is the marketing
-    // card's h2; the sidebar entry and the breadcrumb also say "Auditing".
+    // The page header's h1 and the marketing card's h2 both say "Auditing";
+    // the sidebar entry and the breadcrumb also do.
+    await expect(
+      page.getByRole("heading", { name: "Auditing", exact: true, level: 1 }),
+    ).toBeVisible();
     await expect(
       page.getByRole("heading", { name: "Auditing", exact: true, level: 2 }),
     ).toBeVisible();
@@ -71,7 +74,7 @@ test.describe("auditing", () => {
     await page.goto("/auditing");
 
     await expect(
-      page.getByRole("heading", { name: "Auditing", exact: true, level: 2 }),
+      page.getByRole("heading", { name: "Auditing", exact: true, level: 1 }),
     ).toBeVisible();
     await expect(page.getByRole("img", communityLogo)).toBeVisible();
 
@@ -99,7 +102,7 @@ test.describe("auditing", () => {
     await page.goto("/auditing");
 
     await expect(
-      page.getByRole("heading", { name: "Auditing", exact: true, level: 2 }),
+      page.getByRole("heading", { name: "Auditing", exact: true, level: 1 }),
     ).toBeVisible();
 
     // An unknown edition is not "community", but the logo and every feature
@@ -119,7 +122,6 @@ test.describe("supervision", () => {
     await loginAs(page);
     await page.goto("/supervision");
 
-    // Only this branch renders a page header, so only here is there an h1.
     await expect(
       page.getByRole("heading", heading("Supervision")),
     ).toBeVisible();
@@ -163,10 +165,8 @@ test.describe("supervision", () => {
 
     await expect(page.getByRole("img", proLogo)).toBeVisible();
 
-    // Without the config there is no page header, so the marketing card's h2
-    // is the only "Supervision" heading.
     await expect(
-      page.getByRole("heading", { name: "Supervision", exact: true, level: 2 }),
+      page.getByRole("heading", { name: "Supervision", exact: true, level: 1 }),
     ).toBeVisible();
     await expect(
       page.getByText("Supervision enables an organisation to administer all"),
@@ -196,7 +196,7 @@ test.describe("supervision", () => {
 
     await expect(page.getByRole("img", communityLogo)).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: "Supervision", exact: true, level: 2 }),
+      page.getByRole("heading", { name: "Supervision", exact: true, level: 1 }),
     ).toBeVisible();
 
     await expect(

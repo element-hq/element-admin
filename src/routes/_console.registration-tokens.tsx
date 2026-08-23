@@ -729,7 +729,7 @@ function RouteComponent() {
             <DataTable.Header>
               <DataTable.Title>
                 {totalCount === undefined ? (
-                  <Placeholder.Text />
+                  <Placeholder.LoadingText />
                 ) : (
                   <FormattedMessage
                     id="pages.registration_tokens.token_count"

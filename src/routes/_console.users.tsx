@@ -742,7 +742,7 @@ function RouteComponent() {
             <DataTable.Header>
               <DataTable.Title>
                 {totalCount === undefined ? (
-                  <Placeholder.Text />
+                  <Placeholder.LoadingText />
                 ) : (
                   <FormattedMessage
                     id="pages.users.user_count"

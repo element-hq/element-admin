@@ -82,3 +82,10 @@ export const commonFilter = defineMessage({
   defaultMessage: "Filter",
   description: "Label for a filter section/button",
 });
+
+export const commonLoading = defineMessage({
+  id: "common.loading",
+  defaultMessage: "Loading…",
+  description:
+    "Announced in place of content which has not finished loading yet",
+});

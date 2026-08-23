@@ -66,15 +66,15 @@ export const Header = ({ className, children, ...props }: HeaderProps) => (
   </div>
 );
 
-type TitleProps = React.ComponentProps<"div">;
+type TitleProps = React.ComponentProps<"h2">;
 export const Title = ({ className, children, ...props }: TitleProps) => (
-  <div
+  <h2
     id={useContext(TitleIdContext)}
     className={cx(styles["header-title"], className)}
     {...props}
   >
     {children}
-  </div>
+  </h2>
 );
 
 type FilterMenuProps = React.PropsWithChildren;

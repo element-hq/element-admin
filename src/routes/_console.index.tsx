@@ -5,7 +5,7 @@
 
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { H3, Separator, Text } from "@vector-im/compound-web";
+import { Heading, Separator, Text } from "@vector-im/compound-web";
 import { defineMessage, FormattedMessage } from "react-intl";
 
 import { useEssVersion } from "@/api/ess";
@@ -146,7 +146,11 @@ function RouteComponent() {
 
           <section className="flex flex-col gap-6">
             <div>
-              <H3>{credentials.serverName}</H3>
+              {/* h2 to follow the page's h1 without a gap in heading levels;
+                  size/weight match H3 to keep the established visual weight. */}
+              <Heading as="h2" size="md" weight="semibold">
+                {credentials.serverName}
+              </Heading>
               <Separator kind="section" />
             </div>
 

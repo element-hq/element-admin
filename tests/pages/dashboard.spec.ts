@@ -21,7 +21,7 @@ test.describe("dashboard", () => {
 
     await expect(page.getByRole("heading", heading("Dashboard"))).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: SERVER_NAME }),
+      page.getByRole("heading", { name: SERVER_NAME, level: 2 }),
     ).toBeVisible();
 
     // Each tile is its own suspense boundary, so all of them are asserted: a

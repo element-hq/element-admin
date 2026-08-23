@@ -51,6 +51,10 @@
     "description": "Label for a filter section/button",
     "message": "Filter"
   },
+  "common.loading": {
+    "description": "Announced in place of content which has not finished loading yet",
+    "message": "Loading…"
+  },
   "errors.http_fetch": {
     "description": "Generic error message when we fail to make a request to the specified URL",
     "message": "Request to {url} failed"
@@ -1774,10 +1778,6 @@
   "ui.data.failed_to_load": {
     "description": "In a data grid, when a specific data value failed to load",
     "message": "Failed to load"
-  },
-  "ui.data.loading": {
-    "description": "In a data grid, aria label for when a data value is loading",
-    "message": "Loading value"
   },
   "ui.data_table.loading_more": {
     "description": "Label shown in a table row while the next page of results is being loaded",

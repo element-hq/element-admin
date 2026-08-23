@@ -139,7 +139,7 @@ test.describe("console", () => {
     await loginAs(page);
     await page.goto("/auditing");
     await expect(
-      page.getByRole("heading", { name: "Auditing", exact: true, level: 2 }),
+      page.getByRole("heading", { name: "Auditing", exact: true, level: 1 }),
     ).toBeVisible(READY);
     await expect(page).toHaveScreenshot();
   });

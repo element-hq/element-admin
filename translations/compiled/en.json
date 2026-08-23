@@ -77,6 +77,12 @@
       "value": "Filter"
     }
   ],
+  "common.loading": [
+    {
+      "type": 0,
+      "value": "Loading…"
+    }
+  ],
   "errors.http_fetch": [
     {
       "type": 0,
@@ -3555,12 +3561,6 @@
     {
       "type": 0,
       "value": "Failed to load"
-    }
-  ],
-  "ui.data.loading": [
-    {
-      "type": 0,
-      "value": "Loading value"
     }
   ],
   "ui.data_table.loading_more": [
