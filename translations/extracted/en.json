@@ -1291,9 +1291,9 @@
     "description": "Column header for the room name in the rooms list table",
     "message": "Room"
   },
-  "pages.rooms.columns.type": {
-    "description": "Column header for the room type in the rooms list table",
-    "message": "Type"
+  "pages.rooms.columns.visibility": {
+    "description": "Column header for the room visibility/join-rules (Public/Restricted/Private) in the rooms list table",
+    "message": "Visibility"
   },
   "pages.rooms.delete_room.alert.description": {
     "description": "Description of the alert in the delete room dialog",

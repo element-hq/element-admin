@@ -4,7 +4,7 @@
 
 import { drawer, heading } from "../helpers";
 import { loginAs } from "../mocks/auth";
-import { DEFAULT_ROOMS, roomId } from "../mocks/fixtures";
+import { ADMIN_MXID, DEFAULT_ROOMS, roomId } from "../mocks/fixtures";
 import { expect, test } from "../mocks/test";
 
 const roomsHeading = "Rooms";
@@ -19,11 +19,11 @@ test.describe("rooms", () => {
     ).toBeVisible();
 
     // The third room has neither a name nor an alias, so its display name comes
-    // from the members endpoint and its alias cell falls back to the room ID.
+    // from the members endpoint and its alias cell renders an em dash.
     await expect(page.getByRole("grid")).toMatchAriaSnapshot(`
       - grid "3 rooms":
         - rowgroup:
-          - row "Room Alias Members Type"
+          - row "Room Alias Members Visibility"
         - rowgroup:
           - row:
             - gridcell:
@@ -40,7 +40,7 @@ test.describe("rooms", () => {
             - gridcell:
               - link:
                 - paragraph: Admin, Alice
-            - gridcell "!room2:example.com"
+            - gridcell "—"
             - gridcell "Private"
     `);
   });
@@ -69,6 +69,13 @@ test.describe("rooms", () => {
           - term: History Visibility
           - definition: World Readable
     `);
+
+    // The user list filters on the username, so the creator link carries the
+    // localpart rather than the Matrix ID it shows.
+    await expect(pane.getByRole("link", { name: ADMIN_MXID })).toHaveAttribute(
+      "href",
+      "/users?search=admin",
+    );
   });
 
   test("shows a not-found alert for an unknown room", async ({ page }) => {

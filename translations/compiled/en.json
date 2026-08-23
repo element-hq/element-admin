@@ -2597,10 +2597,10 @@
       "value": "Room"
     }
   ],
-  "pages.rooms.columns.type": [
+  "pages.rooms.columns.visibility": [
     {
       "type": 0,
-      "value": "Type"
+      "value": "Visibility"
     }
   ],
   "pages.rooms.delete_room.alert.description": [

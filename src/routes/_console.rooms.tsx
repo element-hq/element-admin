@@ -16,7 +16,12 @@ import {
 } from "@tanstack/react-table";
 import { Badge, CheckboxMenuItem, Text } from "@vector-im/compound-web";
 import { useCallback, useMemo } from "react";
-import { defineMessage, FormattedMessage, useIntl } from "react-intl";
+import {
+  defineMessage,
+  FormattedMessage,
+  FormattedNumber,
+  useIntl,
+} from "react-intl";
 import * as v from "valibot";
 
 import { wellKnownQuery } from "@/api/matrix";
@@ -68,10 +73,11 @@ const columnMessages = {
     description:
       "Column header for the number of members in the rooms list table",
   }),
-  type: defineMessage({
-    id: "pages.rooms.columns.type",
-    defaultMessage: "Type",
-    description: "Column header for the room type in the rooms list table",
+  visibility: defineMessage({
+    id: "pages.rooms.columns.visibility",
+    defaultMessage: "Visibility",
+    description:
+      "Column header for the room visibility/join-rules (Public/Restricted/Private) in the rooms list table",
   }),
 };
 
@@ -283,10 +289,14 @@ function RouteComponent() {
           // oxlint-disable-next-line react/no-unstable-nested-components
           cell: ({ row }) => {
             const room = row.original;
-            const displayAlias = room.canonical_alias || room.room_id;
             return (
               <Text size="sm" className="text-text-secondary">
-                {displayAlias}
+                {room.canonical_alias || (
+                  // The drawer shows the raw room ID in its own field, so a
+                  // room with no alias renders an em dash here.
+                  // oxlint-disable-next-line formatjs/no-literal-string-in-jsx
+                  <>—</>
+                )}
               </Text>
             );
           },
@@ -298,12 +308,16 @@ function RouteComponent() {
           // oxlint-disable-next-line react/no-unstable-nested-components
           cell: ({ row }) => {
             const room = row.original;
-            return <Text size="sm">{room.joined_members}</Text>;
+            return (
+              <Text size="sm">
+                <FormattedNumber value={room.joined_members} />
+              </Text>
+            );
           },
         }),
         columnHelper.display({
-          id: "type",
-          header: intl.formatMessage(columnMessages.type),
+          id: "visibility",
+          header: intl.formatMessage(columnMessages.visibility),
           meta: { width: DataTable.columnWidth.status },
           // oxlint-disable-next-line react/no-unstable-nested-components
           cell: ({ row }) => {
