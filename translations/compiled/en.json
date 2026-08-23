@@ -59,12 +59,6 @@
       "value": "Retry"
     }
   ],
-  "action.sign_in": [
-    {
-      "type": 0,
-      "value": "Sign in"
-    }
-  ],
   "action.sign_out": [
     {
       "type": 0,
@@ -1549,13 +1543,13 @@
   "pages.federation.sbg_not_enabled.description": [
     {
       "type": 0,
-      "value": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+      "value": "Contact your administrator to enable it in your deployment configuration."
     }
   ],
   "pages.federation.sbg_not_enabled.title": [
     {
       "type": 0,
-      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+      "value": "Secure Border Gateway isn't enabled on this deployment"
     }
   ],
   "pages.federation.search_placeholder": [
@@ -2902,7 +2896,7 @@
   "pages.supervision.disabled_alert.description": [
     {
       "type": 0,
-      "value": "This feature is part of your subscription. You can ask an administrator to enable it."
+      "value": "Supervision is included in your subscription but isn't enabled on this deployment. See the ESS documentation to turn it on."
     }
   ],
   "pages.supervision.disabled_alert.title": [
@@ -2926,19 +2920,25 @@
   "pages.supervision.errors.closed.description": [
     {
       "type": 0,
-      "value": "Failed to sign in the supervision interface, as it closed before it could finish signing in"
+      "value": "The supervision window was closed before sign-in finished. You can try again."
     }
   ],
   "pages.supervision.errors.closed.title": [
     {
       "type": 0,
-      "value": "The supervision interface was closed too quickly"
+      "value": "Supervision sign-in was cancelled"
     }
   ],
   "pages.supervision.errors.generic.title": [
     {
       "type": 0,
       "value": "An unexpected error occurred whilst opening the supervision interface"
+    }
+  ],
+  "pages.supervision.launch": [
+    {
+      "type": 0,
+      "value": "Open supervision interface"
     }
   ],
   "pages.supervision.missing_ui_address.description": [

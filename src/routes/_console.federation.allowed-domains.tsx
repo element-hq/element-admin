@@ -111,15 +111,15 @@ function MarketingFallback({
             title={intl.formatMessage({
               id: "pages.federation.sbg_not_enabled.title",
               description:
-                "Title of the alert explaining that allowed domains is part of the Secure Border Gateway and is not enabled",
+                "Title of the alert explaining that the Secure Border Gateway is not enabled on this deployment, shown to an ESS Pro customer who already owns the feature",
               defaultMessage:
-                "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro",
+                "Secure Border Gateway isn't enabled on this deployment",
             })}
           >
             <FormattedMessage
               id="pages.federation.sbg_not_enabled.description"
-              description="Description of the alert explaining the SBG is not enabled on this deployment"
-              defaultMessage="Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+              description="Description of the alert explaining what to do about the Secure Border Gateway not being enabled, under a title which already says that it isn't"
+              defaultMessage="Contact your administrator to enable it in your deployment configuration."
             />
           </Alert>
         )

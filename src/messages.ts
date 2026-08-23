@@ -65,12 +65,6 @@ export const actionRemove = defineMessage({
   description: "Label for the remove action/button",
 });
 
-export const actionSignIn = defineMessage({
-  id: "action.sign_in",
-  defaultMessage: "Sign in",
-  description: "Label for the sign in action/button",
-});
-
 export const actionSignOut = defineMessage({
   id: "action.sign_out",
   defaultMessage: "Sign out",

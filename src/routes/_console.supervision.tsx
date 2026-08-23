@@ -258,18 +258,18 @@ function LaunchAdminbot({
 
       {data === "closed" && (
         <Alert
-          type="critical"
+          type="info"
           title={intl.formatMessage({
             id: "pages.supervision.errors.closed.title",
-            defaultMessage: "The supervision interface was closed too quickly",
+            defaultMessage: "Supervision sign-in was cancelled",
             description:
-              "The title of the error message when the supervision interface was closed",
+              "The title of the message shown when the supervision popup was closed before it finished signing in",
           })}
         >
           <FormattedMessage
             id="pages.supervision.errors.closed.description"
-            defaultMessage="Failed to sign in the supervision interface, as it closed before it could finish signing in"
-            description="The description of the error message when the supervision interface was closed"
+            defaultMessage="The supervision window was closed before sign-in finished. You can try again."
+            description="The description of the message shown when the supervision popup was closed before it finished signing in"
           />
         </Alert>
       )}
@@ -298,7 +298,11 @@ function LaunchAdminbot({
         Icon={isPending ? undefined : PopOutIcon}
       >
         {isPending && <InlineSpinner />}
-        <FormattedMessage {...messages.actionSignIn} />
+        <FormattedMessage
+          id="pages.supervision.launch"
+          defaultMessage="Open supervision interface"
+          description="Label for the button that opens the supervision interface in a popup"
+        />
       </Button>
     </>
   );
@@ -460,7 +464,7 @@ function AdminbotDisabled({ isPro }: AdminbotDisabledProps) {
           <FormattedMessage
             id="pages.supervision.disabled_alert.description"
             description="When the feature is disabled on an ESS Pro deployment, this is the description of the alert message telling admins to configure it"
-            defaultMessage="This feature is part of your subscription. You can ask an administrator to enable it."
+            defaultMessage="Supervision is included in your subscription but isn't enabled on this deployment. See the ESS documentation to turn it on."
           />
         </Alert>
       ) : (

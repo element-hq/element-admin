@@ -39,10 +39,6 @@
     "description": "Label for a retry action/button",
     "message": "Retry"
   },
-  "action.sign_in": {
-    "description": "Label for the sign in action/button",
-    "message": "Sign in"
-  },
   "action.sign_out": {
     "description": "Label for the sign out menu item",
     "message": "Sign out"
@@ -220,7 +216,7 @@
     "message": "Users registered"
   },
   "pages.dashboard.rooms_count": {
-    "description": "On the dashboard, this shows the Synapse uptime",
+    "description": "On the dashboard, this shows the total number of rooms on the server",
     "message": "Rooms total"
   },
   "pages.dashboard.running_latest_ess": {
@@ -676,12 +672,12 @@
     "message": "Destination not found"
   },
   "pages.federation.sbg_not_enabled.description": {
-    "description": "Description of the alert explaining the SBG is not enabled on this deployment",
-    "message": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+    "description": "Description of the alert explaining what to do about the Secure Border Gateway not being enabled, under a title which already says that it isn't",
+    "message": "Contact your administrator to enable it in your deployment configuration."
   },
   "pages.federation.sbg_not_enabled.title": {
-    "description": "Title of the alert explaining that allowed domains is part of the Secure Border Gateway and is not enabled",
-    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+    "description": "Title of the alert explaining that the Secure Border Gateway is not enabled on this deployment, shown to an ESS Pro customer who already owns the feature",
+    "message": "Secure Border Gateway isn't enabled on this deployment"
   },
   "pages.federation.search_placeholder": {
     "description": "The placeholder text for the search input on the federation known domains page",
@@ -1413,7 +1409,7 @@
   },
   "pages.supervision.disabled_alert.description": {
     "description": "When the feature is disabled on an ESS Pro deployment, this is the description of the alert message telling admins to configure it",
-    "message": "This feature is part of your subscription. You can ask an administrator to enable it."
+    "message": "Supervision is included in your subscription but isn't enabled on this deployment. See the ESS documentation to turn it on."
   },
   "pages.supervision.disabled_alert.title": {
     "description": "When the feature is disabled on an ESS Pro deployment, this is the title of the alert message telling admins to configure it",
@@ -1428,16 +1424,20 @@
     "message": "Failed to open the supervision interface in a new window"
   },
   "pages.supervision.errors.closed.description": {
-    "description": "The description of the error message when the supervision interface was closed",
-    "message": "Failed to sign in the supervision interface, as it closed before it could finish signing in"
+    "description": "The description of the message shown when the supervision popup was closed before it finished signing in",
+    "message": "The supervision window was closed before sign-in finished. You can try again."
   },
   "pages.supervision.errors.closed.title": {
-    "description": "The title of the error message when the supervision interface was closed",
-    "message": "The supervision interface was closed too quickly"
+    "description": "The title of the message shown when the supervision popup was closed before it finished signing in",
+    "message": "Supervision sign-in was cancelled"
   },
   "pages.supervision.errors.generic.title": {
     "description": "The title of the error message when the supervision interface can't be opened",
     "message": "An unexpected error occurred whilst opening the supervision interface"
+  },
+  "pages.supervision.launch": {
+    "description": "Label for the button that opens the supervision interface in a popup",
+    "message": "Open supervision interface"
   },
   "pages.supervision.missing_ui_address.description": {
     "description": "When adminbot is enabled, but the Element Web is not deployed with ESS, we show an alert, as the UI feature relies on it. This is the description of said alert.",

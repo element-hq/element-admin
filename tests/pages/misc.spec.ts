@@ -144,7 +144,9 @@ test.describe("supervision", () => {
     // The config carries a UI address, so the launch button renders instead of
     // the "requires Element Web" alert. It is never clicked, because clicking
     // it opens a real popup at that address.
-    await expect(page.getByRole("button", { name: "Sign in" })).toBeEnabled();
+    await expect(
+      page.getByRole("button", { name: "Open supervision interface" }),
+    ).toBeEnabled();
 
     await expect(page.getByRole("heading", alsoAvailableInPro)).toBeHidden();
     await expect(
@@ -177,10 +179,14 @@ test.describe("supervision", () => {
       page.getByText("Supervision is currently disabled"),
     ).toBeVisible();
     await expect(
-      page.getByText("This feature is part of your subscription."),
+      page.getByText(
+        "Supervision is included in your subscription but isn't enabled on this deployment.",
+      ),
     ).toBeVisible();
     await expect(page.getByRole("heading", alsoAvailableInPro)).toBeHidden();
-    await expect(page.getByRole("button", { name: "Sign in" })).toBeHidden();
+    await expect(
+      page.getByRole("button", { name: "Open supervision interface" }),
+    ).toBeHidden();
   });
 
   test("shows the ESS Pro upsell on ESS Community", async ({
@@ -208,7 +214,9 @@ test.describe("supervision", () => {
       page.getByRole("link", { name: "Upgrade to Pro" }),
     ).toBeVisible();
 
-    await expect(page.getByRole("button", { name: "Sign in" })).toBeHidden();
+    await expect(
+      page.getByRole("button", { name: "Open supervision interface" }),
+    ).toBeHidden();
     await expect(page.getByLabel("Recovery key")).toBeHidden();
     await expect(page.getByText(ADMINBOT_MXID)).toBeHidden();
   });

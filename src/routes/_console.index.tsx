@@ -214,7 +214,7 @@ function RouteComponent() {
                   <FormattedMessage
                     id="pages.dashboard.rooms_count"
                     defaultMessage="Rooms total"
-                    description="On the dashboard, this shows the Synapse uptime"
+                    description="On the dashboard, this shows the total number of rooms on the server"
                   />
                 </Data.Title>
                 <Data.DynamicValue>

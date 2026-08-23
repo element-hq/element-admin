@@ -144,9 +144,14 @@ test.describe("federation", () => {
 
     await expect(page.getByRole("heading", federationHeading)).toBeVisible();
 
+    // This deployment is ESS Pro, so the title points at enabling the
+    // feature rather than the Community upsell copy.
+    await expect(
+      page.getByText("Secure Border Gateway isn't enabled on this deployment"),
+    ).toBeVisible();
     await expect(
       page.getByText(
-        "Secure Border Gateway is not enabled on this deployment.",
+        "Contact your administrator to enable it in your deployment configuration.",
       ),
     ).toBeVisible();
     await expect(page.getByText(ALLOWLIST_SUBTITLE)).toBeHidden();
