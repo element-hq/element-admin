@@ -15,6 +15,7 @@ import type {
   PaginatedResponseForUser,
   PaginatedResponseForUserRegistrationToken,
   PersonalSession,
+  SingleResourceForUser,
   SingleResponseForCompatSession,
   SingleResponseForOAuth2Client,
   SingleResponseForOAuth2Session,
@@ -344,6 +345,11 @@ const userCollection = masCollection<User>({
 
 export type UserOverrides = MasOverrides<User>;
 
+const userResource: (
+  index: number,
+  overrides?: UserOverrides,
+) => SingleResourceForUser = userCollection.resource;
+
 export const userId: (users: UserOverrides[], index: number) => Ulid =
   userCollection.id;
 
@@ -356,10 +362,110 @@ export const userPageSlice: (
   first: number,
 ) => PaginatedResponseForUser = userCollection.pageSlice;
 
+export const userPageOf: (
+  users: UserOverrides[],
+  indices: readonly number[],
+) => PaginatedResponseForUser = userCollection.pageOf;
+
 export const singleUser: (
   index: number,
   overrides?: UserOverrides,
 ) => SingleResponseForUser = userCollection.single;
+
+/**
+ * What the two session-derived user filters should consider a match, keyed by
+ * the user's fixture index.
+ *
+ * `filter[admin]`, `filter[legacy-guest]`, `filter[status]` and
+ * `filter[search]` are answerable from a user's own attributes, so
+ * `userMatchesFilters` derives them. These two are not — MAS resolves them by
+ * joining against the session tables — so a fixture has to state them.
+ */
+export interface UserRelations {
+  /**
+   * `filter[active-oauth2-client]`: the applications each user has an active
+   * device on. A user matches if they have an active device on any of the
+   * requested clients, which is how MAS composes a repeated filter.
+   */
+  activeClients?: Readonly<Record<number, readonly Ulid[]>>;
+  /**
+   * `filter[has-active-compat-session]`: the fixture indices of the users who
+   * have an active legacy device.
+   */
+  activeCompatSessions?: readonly number[];
+}
+
+/**
+ * Does the fixture user at `index` satisfy every `filter[...]` present in
+ * `parameters`?
+ *
+ * Matching is on parsed parameters, never on the query string: the app emits
+ * `count` / `page[first]` / the filters in an order that is not contractual.
+ *
+ * `filter[status]` has an explicit precedence — deactivated, then locked, then
+ * active — because a user can carry both timestamps, and answering "both" would
+ * make a filtered count disagree with its own rows.
+ */
+const userMatchesFilters = (
+  users: UserOverrides[],
+  index: number,
+  parameters: URLSearchParams,
+  relations: UserRelations = {},
+): boolean => {
+  const { attributes } = userResource(index, users[index]);
+
+  const admin = parameters.get("filter[admin]");
+  if (admin !== null && attributes.admin !== (admin === "true")) return false;
+
+  const guest = parameters.get("filter[legacy-guest]");
+  if (guest !== null && attributes.legacy_guest !== (guest === "true")) {
+    return false;
+  }
+
+  const status = parameters.get("filter[status]");
+  if (status !== null) {
+    const actual = attributes.deactivated_at
+      ? "deactivated"
+      : attributes.locked_at
+        ? "locked"
+        : "active";
+    if (actual !== status) return false;
+  }
+
+  // MAS searches the username and the email addresses; the fixtures have no
+  // emails, so a case-insensitive substring of the username covers it.
+  const search = parameters.get("filter[search]");
+  if (
+    search !== null &&
+    !attributes.username.toLowerCase().includes(search.toLowerCase())
+  ) {
+    return false;
+  }
+
+  const compat = parameters.get("filter[has-active-compat-session]");
+  if (compat !== null) {
+    const has = (relations.activeCompatSessions ?? []).includes(index);
+    if (has !== (compat === "true")) return false;
+  }
+
+  const clients = parameters.getAll("filter[active-oauth2-client]");
+  if (clients.length > 0) {
+    const active = relations.activeClients?.[index] ?? [];
+    if (!clients.some((client) => active.includes(client))) return false;
+  }
+
+  return true;
+};
+
+/** The indices of the users matching every filter in `parameters`. */
+export const userIndicesMatching = (
+  users: UserOverrides[],
+  parameters: URLSearchParams,
+  relations: UserRelations = {},
+): number[] =>
+  users
+    .map((_user, index) => index)
+    .filter((index) => userMatchesFilters(users, index, parameters, relations));
 
 /** The default set of users served by the `essPro` deployment. */
 export const DEFAULT_USERS: UserOverrides[] = [
@@ -475,6 +581,76 @@ export const roomPageSlice = (
  */
 export const roomPage = (rooms: RoomOverrides[]): RoomsListResponse =>
   roomPageSlice(rooms, 0, rooms.length);
+
+/**
+ * One page holding exactly the rooms at `indices`, in that order — the rooms
+ * counterpart of `userPageOf`, and for the same reason: `roomListEntry(index,
+ * …)` seeds the room ID and the default name from the index, so filtering has
+ * to select indices rather than slice a filtered array.
+ *
+ * `total_rooms` is the size of the filtered collection, which is what Synapse
+ * reports and what the list heading reads off page one. There is no
+ * `next_batch`, so this is the last page.
+ */
+export const roomPageOf = (
+  rooms: RoomOverrides[],
+  indices: readonly number[],
+): RoomsListResponse => ({
+  rooms: indices.map((index) => roomListEntry(index, rooms[index])),
+  offset: 0,
+  total_rooms: indices.length,
+});
+
+/**
+ * Does the fixture room at `index` satisfy every Synapse room filter present in
+ * `parameters`?
+ *
+ * The three the console can emit, and what Synapse means by them:
+ *
+ * - `search_term` — a case-insensitive substring of the room name or its
+ *   canonical alias (Synapse also matches the room ID, which the fixtures
+ *   exercise through the alias-less room);
+ * - `public_rooms` — the room's published/`public` flag;
+ * - `empty_rooms` — whether the room has no joined members.
+ */
+const roomMatchesFilters = (
+  rooms: RoomOverrides[],
+  index: number,
+  parameters: URLSearchParams,
+): boolean => {
+  const room = roomListEntry(index, rooms[index]);
+
+  const term = parameters.get("search_term");
+  if (term) {
+    const haystack = [room.name, room.canonical_alias, room.room_id]
+      .filter((value): value is string => !!value)
+      .join(" ")
+      .toLowerCase();
+    if (!haystack.includes(term.toLowerCase())) return false;
+  }
+
+  const isPublic = parameters.get("public_rooms");
+  if (isPublic !== null && room.public !== (isPublic === "true")) return false;
+
+  const isEmpty = parameters.get("empty_rooms");
+  if (
+    isEmpty !== null &&
+    (room.joined_members === 0) !== (isEmpty === "true")
+  ) {
+    return false;
+  }
+
+  return true;
+};
+
+/** The indices of the rooms matching every filter in `parameters`. */
+export const roomIndicesMatching = (
+  rooms: RoomOverrides[],
+  parameters: URLSearchParams,
+): number[] =>
+  rooms
+    .map((_room, index) => index)
+    .filter((index) => roomMatchesFilters(rooms, index, parameters));
 
 /** The default set of rooms served by the `essPro` deployment. */
 export const DEFAULT_ROOMS: RoomOverrides[] = [

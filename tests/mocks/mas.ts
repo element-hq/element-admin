@@ -53,9 +53,12 @@ import {
   singleRegistrationToken,
   singleUser,
   userId,
+  userIndicesMatching,
   userPage,
   type UserOverrides,
+  userPageOf,
   userPageSlice,
+  type UserRelations,
 } from "./fixtures";
 
 /** The part of every `PaginatedResponseFor*` the generic handlers rely on. */
@@ -234,6 +237,47 @@ export const usersPaginated = (
     );
   });
 
+/**
+ * The users collection, filter-aware: the counterpart of `usersList` for a test
+ * about filter behaviour rather than render coverage. Prepend it with
+ * `network.use()`; every deployment keeps the filter-blind handler.
+ *
+ * The filters are applied to both request forms. `count=only` is a separate
+ * request from the rows, so a header count that ignored the filters would
+ * contradict the rows beneath it, and a filter wired into only one of the two
+ * queries would look fine in whichever half a test asserted on.
+ *
+ * `onRequest` observes every request, count and list alike; the `count`
+ * parameter tells them apart.
+ */
+export const usersFiltered = (
+  users: UserOverrides[],
+  {
+    onRequest,
+    relations,
+  }: {
+    onRequest?: (parameters: URLSearchParams) => void;
+    relations?: UserRelations;
+  } = {},
+): RequestHandler =>
+  http.get("*/api/admin/v1/users", ({ request }) => {
+    const parameters = new URL(request.url).searchParams;
+    onRequest?.(parameters);
+
+    const indices = userIndicesMatching(users, parameters, relations);
+
+    return parameters.get("count") === "only"
+      ? HttpResponse.json(
+          countOnly(
+            indices.length,
+            "/api/admin/v1/users?count=only",
+          ) satisfies PaginatedResponseForUser,
+        )
+      : HttpResponse.json(
+          userPageOf(users, indices) satisfies PaginatedResponseForUser,
+        );
+  });
+
 export const userDetail = (users: UserOverrides[]): RequestHandler =>
   detailHandler(
     "/api/admin/v1/users",
@@ -403,6 +447,9 @@ export const personalSessionDetail = (
  * rather than unhandled, so `onUnhandledRequest: "error"` does not fire and the
  * request escapes to the real network. Only point this at a path the current
  * deployment already serves.
+ *
+ * `onRequest` can push straight into a local array, as in `usersPaginated` and
+ * for the same reason.
  */
 export const observeQuery = (
   path: string,

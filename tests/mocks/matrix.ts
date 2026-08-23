@@ -45,8 +45,10 @@ import {
   MAS_ROOT,
   REFRESH_TOKEN,
   roomId,
+  roomIndicesMatching,
   roomPage,
   type RoomOverrides,
+  roomPageOf,
   roomPageSlice,
   type ServerSupport,
   singleDestination,
@@ -331,6 +333,35 @@ export const roomsPaginated = (
     count: () => ({ rooms: [], offset: 0, total_rooms: rooms.length }),
     slice: (from, limit) => roomPageSlice(rooms, from, limit),
     onPage,
+  });
+
+/**
+ * The rooms list, filter-aware: the counterpart of `rooms` for a test about
+ * filter behaviour. Prepend it with `network.use()`; every deployment keeps the
+ * filter-blind handler.
+ *
+ * Unlike `/users`, the rooms heading count is not a separate request — the page
+ * reads `total_rooms` off page one — so filtering the rows and reporting the
+ * filtered total is one response, and `roomPageOf` does both. The count-only
+ * form is still the dashboard's.
+ *
+ * A custom fixture array has to be handed to `roomDetail()` too. `onRequest`
+ * observes each request's parsed parameters.
+ */
+export const roomsFiltered = (
+  rooms: RoomOverrides[],
+  onRequest?: (parameters: URLSearchParams) => void,
+): RequestHandler =>
+  http.get("*/_synapse/admin/v1/rooms", ({ request }) => {
+    const parameters = new URL(request.url).searchParams;
+    onRequest?.(parameters);
+
+    const page = roomPageOf(rooms, roomIndicesMatching(rooms, parameters));
+
+    return HttpResponse.json({
+      ...page,
+      rooms: isCountOnly(parameters) ? [] : page.rooms,
+    } satisfies RoomsListResponse);
   });
 
 /**
