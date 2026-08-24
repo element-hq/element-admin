@@ -49,6 +49,15 @@ jobs:
       - name: Check for unused files, exports and dependencies
         run: pnpm knip
 
+      - name: Check that the translation files match the source
+        run: |
+          pnpm i18n:extract
+          git add -A
+          git diff --cached --exit-code || {
+            echo "::error::Translation files are stale. Run 'pnpm i18n:extract' and commit the result."
+            exit 1
+          }
+
   playwright:
     name: E2E tests
     runs-on: ubuntu-24.04

@@ -1,1862 +1,1862 @@
 {
   "action.add": {
-    "message": "Add",
-    "description": "The label for the add action/button"
+    "description": "The label for the add action/button",
+    "message": "Add"
   },
   "action.cancel": {
-    "message": "Cancel",
-    "description": "Label for a cancel action/button"
+    "description": "Label for a cancel action/button",
+    "message": "Cancel"
   },
   "action.clear": {
-    "message": "Clear",
-    "description": "Label for a clear action/button"
+    "description": "Label for a clear action/button",
+    "message": "Clear"
   },
   "action.close": {
-    "message": "Close",
-    "description": "Label for a 'close' action/button"
+    "description": "Label for a 'close' action/button",
+    "message": "Close"
   },
   "action.copy": {
-    "message": "Copy",
-    "description": "Label for a copy action/button"
+    "description": "Label for a copy action/button",
+    "message": "Copy"
   },
   "action.delete": {
-    "message": "Delete",
-    "description": "Label for a delete action/button"
+    "description": "Label for a delete action/button",
+    "message": "Delete"
   },
   "action.go_back": {
-    "message": "Go back",
-    "description": "Label for a go back action/button"
+    "description": "Label for a go back action/button",
+    "message": "Go back"
   },
   "action.remove": {
-    "message": "Remove",
-    "description": "Label for the remove action/button"
+    "description": "Label for the remove action/button",
+    "message": "Remove"
   },
   "action.retry": {
-    "message": "Retry",
-    "description": "Label for a retry action/button"
+    "description": "Label for a retry action/button",
+    "message": "Retry"
   },
   "action.sign_in": {
-    "message": "Sign in",
-    "description": "Label for the sign in action/button"
+    "description": "Label for the sign in action/button",
+    "message": "Sign in"
   },
   "action.sign_out": {
-    "message": "Sign out",
-    "description": "Label for the sign out menu item"
+    "description": "Label for the sign out menu item",
+    "message": "Sign out"
   },
   "common.email_address": {
-    "message": "Email address",
-    "description": "Label for an email address"
+    "description": "Label for an email address",
+    "message": "Email address"
   },
   "common.filter": {
-    "message": "Filter",
-    "description": "Label for a filter section/button"
+    "description": "Label for a filter section/button",
+    "message": "Filter"
   },
   "errors.http_fetch": {
-    "message": "Request to {url} failed",
-    "description": "Generic error message when we fail to make a request to the specified URL"
+    "description": "Generic error message when we fail to make a request to the specified URL",
+    "message": "Request to {url} failed"
   },
   "errors.http_fetch_json_decoding": {
-    "message": "Failed to decode JSON response from {url}",
-    "description": "Error message when we fail to decode a JSON response from the specified URL"
+    "description": "Error message when we fail to decode a JSON response from the specified URL",
+    "message": "Failed to decode JSON response from {url}"
   },
   "errors.http_status": {
-    "message": "Request to {url} failed with status code {status} {statusText}",
-    "description": "Generic error message when we fail to make a request to the specified URL. Typical values for 'status' are '404' or '500', typical values for 'statusText' are 'Not Found' or 'Internal Server Error'"
+    "description": "Generic error message when we fail to make a request to the specified URL. Typical values for 'status' are '404' or '500', typical values for 'statusText' are 'Not Found' or 'Internal Server Error'",
+    "message": "Request to {url} failed with status code {status} {statusText}"
   },
   "errors.matrix_standard": {
-    "message": "Request to the homeserver failed with error code ''{errorCode}''. Additionally, the server gave the following error message: {errorMessage}",
-    "description": "Generic error message when Synapse returned a rich error, with an error code (M_FORBIDDEN, etc.) and a human-readable error message, usually in english."
+    "description": "Generic error message when Synapse returned a rich error, with an error code (M_FORBIDDEN, etc.) and a human-readable error message, usually in english.",
+    "message": "Request to the homeserver failed with error code ''{errorCode}''. Additionally, the server gave the following error message: {errorMessage}"
   },
   "errors.not_logged_in": {
-    "message": "Not logged in",
-    "description": "Error message when a request was sent which was supposed to be authenticated, but turns out that the user is not logged in. This is a rare error, usually because of a race-condition during login or logout."
+    "description": "Error message when a request was sent which was supposed to be authenticated, but turns out that the user is not logged in. This is a rare error, usually because of a race-condition during login or logout.",
+    "message": "Not logged in"
   },
   "footer.copyright_notice": {
-    "message": "Copyright © {now, date, ::yyyy}",
-    "description": "The copyright notice on the footer"
+    "description": "The copyright notice on the footer",
+    "message": "Copyright © {now, date, ::yyyy}"
   },
   "footer.help_and_support": {
-    "message": "Help & Support",
-    "description": "Label for the help and support (to https://customer.element.io/support) link in the footer"
+    "description": "Label for the help and support (to https://customer.element.io/support) link in the footer",
+    "message": "Help & Support"
   },
   "footer.legal": {
-    "message": "Legal",
-    "description": "Label for the legal (to https://element.io/legal) link in the footer"
+    "description": "Label for the legal (to https://element.io/legal) link in the footer",
+    "message": "Legal"
   },
   "footer.privacy": {
-    "message": "Privacy",
-    "description": "Label for the privacy (to https://element.io/legal/privacy) link in the footer"
+    "description": "Label for the privacy (to https://element.io/legal/privacy) link in the footer",
+    "message": "Privacy"
   },
   "header.user_menu.title": {
-    "message": "Account menu",
-    "description": "The title of the menu which shows what account is logged in and have a few options like signing out"
+    "description": "The title of the menu which shows what account is logged in and have a few options like signing out",
+    "message": "Account menu"
   },
   "marketing.also_available_in_pro.description": {
-    "message": "<p><link>ESS Pro</link> is the commercial backend distribution from Element.</p> <p>It includes everything in ESS Community plus additional features and services that are tailored to professional environments with more than 100 users up to massive scale in the millions.</p> <p>It is designed to support enterprise requirements in terms of advanced IAM, compliance, scalability, high availability and multi-tenancy.</p>",
-    "description": "When we show off a feature that is only available in ESS Pro, this is the description of the card explaining what ESS Pro is"
+    "description": "When we show off a feature that is only available in ESS Pro, this is the description of the card explaining what ESS Pro is",
+    "message": "<p><link>ESS Pro</link> is the commercial backend distribution from Element.</p> <p>It includes everything in ESS Community plus additional features and services that are tailored to professional environments with more than 100 users up to massive scale in the millions.</p> <p>It is designed to support enterprise requirements in terms of advanced IAM, compliance, scalability, high availability and multi-tenancy.</p>"
   },
   "marketing.also_available_in_pro.title": {
-    "message": "Also available in Pro…",
-    "description": "When we show off a feature that is only available in ESS Pro, this is the title of the card explaining what ESS Pro is"
+    "description": "When we show off a feature that is only available in ESS Pro, this is the title of the card explaining what ESS Pro is",
+    "message": "Also available in Pro…"
   },
   "marketing.also_available_in_pro.upgrade": {
-    "message": "Upgrade to Pro",
-    "description": "When we show off a feature that is only available in ESS Pro, this is the button to lead the user to the ESS Pro upgrade page"
+    "description": "When we show off a feature that is only available in ESS Pro, this is the button to lead the user to the ESS Pro upgrade page",
+    "message": "Upgrade to Pro"
   },
   "marketing.auditing.description": {
-    "message": "<p>Auditing gives organizations the ability to keep records of end-to-end encrypted conversations and room events to meet compliance or legal requirements.</p> <p>When enabled, it is visible to all end users which rooms are being recorded to ensure transparency of the auditing process.</p> <p>Auditing can be configured to suit an organization’s specific requirements. For instance direct messages between two individuals can be excluded so that only group conversations are recorded.</p> <p>Audit data is being stored as a stream of machine-readable events in the JSON format either on file storage or S3 and can be forwarded to log analyzer tooling for further filtering and analysis.</p>",
-    "description": "Description of the card explaining what auditing is"
+    "description": "Description of the card explaining what auditing is",
+    "message": "<p>Auditing gives organizations the ability to keep records of end-to-end encrypted conversations and room events to meet compliance or legal requirements.</p> <p>When enabled, it is visible to all end users which rooms are being recorded to ensure transparency of the auditing process.</p> <p>Auditing can be configured to suit an organization’s specific requirements. For instance direct messages between two individuals can be excluded so that only group conversations are recorded.</p> <p>Audit data is being stored as a stream of machine-readable events in the JSON format either on file storage or S3 and can be forwarded to log analyzer tooling for further filtering and analysis.</p>"
   },
   "marketing.auditing.title": {
-    "message": "Auditing",
-    "description": "Title of the card explaining what auditing is"
+    "description": "Title of the card explaining what auditing is",
+    "message": "Auditing"
   },
   "marketing.sbg.description": {
-    "message": "<p>Secure Border Gateway is an application-level firewall for Matrix servers.</p> <ul><li>Inspects all requests to and from the server</li> <li>Can use all request metadata to enforce rules</li> <li>Pipeline-based approach to connect APIs and rule sets</li> <li>Pluggable rules engine that can be applied to the pipelines</li></ul>",
-    "description": "Description of the card explaining what the Secure Border Gateway is"
+    "description": "Description of the card explaining what the Secure Border Gateway is",
+    "message": "<p>Secure Border Gateway is an application-level firewall for Matrix servers.</p> <ul><li>Inspects all requests to and from the server</li> <li>Can use all request metadata to enforce rules</li> <li>Pipeline-based approach to connect APIs and rule sets</li> <li>Pluggable rules engine that can be applied to the pipelines</li></ul>"
   },
   "marketing.sbg.title": {
-    "message": "Secure Border Gateway",
-    "description": "Title of the card explaining what the Secure Border Gateway is"
+    "description": "Title of the card explaining what the Secure Border Gateway is",
+    "message": "Secure Border Gateway"
   },
   "marketing.supervision.description": {
-    "message": "<p>Supervision enables an organisation to administer all rooms from a central point. A 'supervisor' account will join defined rooms with room admin privileges. Server administrators can seamlessly impersonate the account from the admin console to manage and supervise their rooms.</p> <ul><li>Manage rooms and their settings (name, topic, permissions, etc.)</li> <li>Manage room memberships</li> <li>Remove unwanted messages and uploaded media</li> <li>Recover abandoned rooms (all users have left)</li> <li>Supervisor account can or cannot read encrypted message contents (configurable)</li></ul>",
-    "description": "Description of the card explaining what supervision is"
+    "description": "Description of the card explaining what supervision is",
+    "message": "<p>Supervision enables an organisation to administer all rooms from a central point. A 'supervisor' account will join defined rooms with room admin privileges. Server administrators can seamlessly impersonate the account from the admin console to manage and supervise their rooms.</p> <ul><li>Manage rooms and their settings (name, topic, permissions, etc.)</li> <li>Manage room memberships</li> <li>Remove unwanted messages and uploaded media</li> <li>Recover abandoned rooms (all users have left)</li> <li>Supervisor account can or cannot read encrypted message contents (configurable)</li></ul>"
   },
   "marketing.supervision.title": {
-    "message": "Supervision",
-    "description": "Title of the card explaining what supervision is"
+    "description": "Title of the card explaining what supervision is",
+    "message": "Supervision"
   },
   "navigation.auditing": {
-    "message": "Auditing",
-    "description": "Label for the auditing navigation item in the main navigation sidebar"
+    "description": "Label for the auditing navigation item in the main navigation sidebar",
+    "message": "Auditing"
   },
   "navigation.dashboard": {
-    "message": "Dashboard",
-    "description": "Label for the dashboard navigation item in the main navigation sidebar"
+    "description": "Label for the dashboard navigation item in the main navigation sidebar",
+    "message": "Dashboard"
   },
   "navigation.devices": {
-    "message": "Devices",
-    "description": "Label for the devices navigation item in the main navigation sidebar"
+    "description": "Label for the devices navigation item in the main navigation sidebar",
+    "message": "Devices"
   },
   "navigation.documentation": {
-    "message": "Documentation",
-    "description": "Label for the documentation navigation link (to https://docs.element.io/) in the main navigation sidebar"
+    "description": "Label for the documentation navigation link (to https://docs.element.io/) in the main navigation sidebar",
+    "message": "Documentation"
   },
   "navigation.federation": {
-    "message": "Federation",
-    "description": "Label for the federation navigation item in the main navigation sidebar"
+    "description": "Label for the federation navigation item in the main navigation sidebar",
+    "message": "Federation"
   },
   "navigation.personal_tokens": {
-    "message": "Personal tokens",
-    "description": "Label for the personal tokens navigation item in the main navigation sidebar"
+    "description": "Label for the personal tokens navigation item in the main navigation sidebar",
+    "message": "Personal tokens"
   },
   "navigation.registration_tokens": {
-    "message": "Registration tokens",
-    "description": "Label for the registration tokens navigation item in the main navigation sidebar"
+    "description": "Label for the registration tokens navigation item in the main navigation sidebar",
+    "message": "Registration tokens"
   },
   "navigation.rooms": {
-    "message": "Rooms",
-    "description": "Label for the rooms navigation item in the main navigation sidebar"
+    "description": "Label for the rooms navigation item in the main navigation sidebar",
+    "message": "Rooms"
   },
   "navigation.supervision": {
-    "message": "Supervision",
-    "description": "Label for the supervision navigation item in the main navigation sidebar"
+    "description": "Label for the supervision navigation item in the main navigation sidebar",
+    "message": "Supervision"
   },
   "navigation.users": {
-    "message": "Users",
-    "description": "Label for the users navigation item in the main navigation sidebar"
+    "description": "Label for the users navigation item in the main navigation sidebar",
+    "message": "Users"
   },
   "pages.auditing.title": {
-    "message": "Auditing",
-    "description": "The title of the auditing page"
+    "description": "The title of the auditing page",
+    "message": "Auditing"
   },
   "pages.auditing.unavailable_alert.description": {
-    "message": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it.",
-    "description": "Description of the alert explaining that the auditing feature is only available in ESS Pro"
+    "description": "Description of the alert explaining that the auditing feature is only available in ESS Pro",
+    "message": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
   },
   "pages.auditing.unavailable_alert.title": {
-    "message": "Auditing is a feature available in ESS Pro",
-    "description": "Title of the alert explaining that the auditing feature is only available in ESS Pro"
+    "description": "Title of the alert explaining that the auditing feature is only available in ESS Pro",
+    "message": "Auditing is a feature available in ESS Pro"
   },
   "pages.dashboard.current_ess_version": {
-    "message": "ESS version",
-    "description": "On the dashboard, this shows the current ESS version"
+    "description": "On the dashboard, this shows the current ESS version",
+    "message": "ESS version"
   },
   "pages.dashboard.latest_ess_version": {
-    "message": "Latest ESS version",
-    "description": "On the dashboard, this shows the latest ESS release"
+    "description": "On the dashboard, this shows the latest ESS release",
+    "message": "Latest ESS version"
   },
   "pages.dashboard.new_ess_release": {
-    "message": "(New release)",
-    "description": "On the dashboard, this shows that there is a new ESS release available"
+    "description": "On the dashboard, this shows that there is a new ESS release available",
+    "message": "(New release)"
   },
   "pages.dashboard.registered_users_count": {
-    "message": "Users registered",
-    "description": "On the dashboard, this shows the number of users registered in MAS"
+    "description": "On the dashboard, this shows the number of users registered in MAS",
+    "message": "Users registered"
   },
   "pages.dashboard.rooms_count": {
-    "message": "Rooms total",
-    "description": "On the dashboard, this shows the Synapse uptime"
+    "description": "On the dashboard, this shows the Synapse uptime",
+    "message": "Rooms total"
   },
   "pages.dashboard.running_latest_ess": {
-    "message": "(You're running the latest version)",
-    "description": "On the dashboard, this shows that you're running the latest ESS version"
+    "description": "On the dashboard, this shows that you're running the latest ESS version",
+    "message": "(You're running the latest version)"
   },
   "pages.dashboard.synapse_version": {
-    "message": "Synapse version",
-    "description": "On the dashboard, this shows the Synapse version"
+    "description": "On the dashboard, this shows the Synapse version",
+    "message": "Synapse version"
   },
   "pages.dashboard.title": {
-    "message": "Dashboard",
-    "description": "The title of the dashboard page"
+    "description": "The title of the dashboard page",
+    "message": "Dashboard"
   },
   "pages.devices.applications.client_id_label": {
-    "message": "Client ID",
-    "description": "Label for the OAuth 2.0 client identifier (technical term, shown on application details)"
+    "description": "Label for the OAuth 2.0 client identifier (technical term, shown on application details)",
+    "message": "Client ID"
   },
   "pages.devices.applications.count": {
-    "message": "{COUNT, plural, =0 {No applications} one {# application} other {# applications}}",
-    "description": "On the applications list page, this heading shows the total number of applications"
+    "description": "On the applications list page, this heading shows the total number of applications",
+    "message": "{COUNT, plural, =0 {No applications} one {# application} other {# applications}}"
   },
   "pages.devices.applications.description": {
-    "message": "Applications are OAuth 2.0 clients that users sign in to.",
-    "description": "The description of the applications list page"
+    "description": "The description of the applications list page",
+    "message": "Applications are OAuth 2.0 clients that users sign in to."
   },
   "pages.devices.applications.filters.has_active_sessions": {
-    "message": "With active devices",
-    "description": "Filter label for applications which have at least one active device"
+    "description": "Filter label for applications which have at least one active device",
+    "message": "With active devices"
   },
   "pages.devices.applications.filters.no_active_sessions": {
-    "message": "Without active devices",
-    "description": "Filter label for applications which have no active devices"
+    "description": "Filter label for applications which have no active devices",
+    "message": "Without active devices"
   },
   "pages.devices.applications.grant_types_label": {
-    "message": "Grant types",
-    "description": "Label for the grant types an application supports"
+    "description": "Label for the grant types an application supports",
+    "message": "Grant types"
   },
   "pages.devices.applications.name_column": {
-    "message": "Name",
-    "description": "Column header for application name"
+    "description": "Column header for application name",
+    "message": "Name"
   },
   "pages.devices.applications.not_found.description": {
-    "message": "The requested application ({clientId}) could not be found on {serverName}.",
-    "description": "The description of the alert when an application could not be found"
+    "description": "The description of the alert when an application could not be found",
+    "message": "The requested application ({clientId}) could not be found on {serverName}."
   },
   "pages.devices.applications.not_found.title": {
-    "message": "Application not found",
-    "description": "The title of the alert when an application could not be found"
+    "description": "The title of the alert when an application could not be found",
+    "message": "Application not found"
   },
   "pages.devices.applications.redirect_uris_label": {
-    "message": "Redirect URIs",
-    "description": "Label for the application's redirect URIs"
+    "description": "Label for the application's redirect URIs",
+    "message": "Redirect URIs"
   },
   "pages.devices.applications.search_placeholder": {
-    "message": "Search by name…",
-    "description": "The placeholder text for the application name search input"
+    "description": "The placeholder text for the application name search input",
+    "message": "Search by name…"
   },
   "pages.devices.applications.statistics.active_recently": {
-    "message": "Active in the past 7 days",
-    "description": "Stat label: devices currently active and last seen in the past 7 days for this application"
+    "description": "Stat label: devices currently active and last seen in the past 7 days for this application",
+    "message": "Active in the past 7 days"
   },
   "pages.devices.applications.statistics.created_recently": {
-    "message": "Devices added in the past 7 days",
-    "description": "Stat label: devices created in the past 7 days for this application"
+    "description": "Stat label: devices created in the past 7 days for this application",
+    "message": "Devices added in the past 7 days"
   },
   "pages.devices.applications.statistics.heading": {
-    "message": "Device statistics",
-    "description": "Heading for the device statistics section on the application details page"
+    "description": "Heading for the device statistics section on the application details page",
+    "message": "Device statistics"
   },
   "pages.devices.applications.statistics.total_active": {
-    "message": "Active devices",
-    "description": "Stat label: total active devices for this application"
+    "description": "Stat label: total active devices for this application",
+    "message": "Active devices"
   },
   "pages.devices.applications.title": {
-    "message": "Applications",
-    "description": "The title of the applications tab"
+    "description": "The title of the applications tab",
+    "message": "Applications"
   },
   "pages.devices.applications.uri_label": {
-    "message": "Homepage",
-    "description": "Label for the application's homepage URI"
+    "description": "Label for the application's homepage URI",
+    "message": "Homepage"
   },
   "pages.devices.applications.view_sessions": {
-    "message": "View all devices",
-    "description": "Button on the application details sidebar that navigates to the devices list filtered to this application"
+    "description": "Button on the application details sidebar that navigates to the devices list filtered to this application",
+    "message": "View all devices"
   },
   "pages.devices.legacy.count": {
-    "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}",
-    "description": "On the legacy devices list page, this heading shows the total number of legacy devices"
+    "description": "On the legacy devices list page, this heading shows the total number of legacy devices",
+    "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}"
   },
   "pages.devices.legacy.created_at_label": {
-    "message": "Signed in at",
-    "description": "Label for the date a legacy device first signed in"
+    "description": "Label for the date a legacy device first signed in",
+    "message": "Signed in at"
   },
   "pages.devices.legacy.description": {
-    "message": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0.",
-    "description": "The description of the legacy devices list page"
+    "description": "The description of the legacy devices list page",
+    "message": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
   },
   "pages.devices.legacy.device_column": {
-    "message": "Device",
-    "description": "Column header for the legacy device name and ID"
+    "description": "Column header for the legacy device name and ID",
+    "message": "Device"
   },
   "pages.devices.legacy.device_id_label": {
-    "message": "Device ID",
-    "description": "Label for the device id field of a legacy device"
+    "description": "Label for the device id field of a legacy device",
+    "message": "Device ID"
   },
   "pages.devices.legacy.filters.activity_active": {
-    "message": "Active",
-    "description": "Filter label for active legacy devices used in the last few months"
+    "description": "Filter label for active legacy devices used in the last few months",
+    "message": "Active"
   },
   "pages.devices.legacy.filters.activity_inactive": {
-    "message": "Inactive",
-    "description": "Filter label for legacy devices not used in 90+ days"
+    "description": "Filter label for legacy devices not used in 90+ days",
+    "message": "Inactive"
   },
   "pages.devices.legacy.filters.activity_recently_used": {
-    "message": "Recently used",
-    "description": "Filter label for legacy devices used in the last couple of weeks"
+    "description": "Filter label for legacy devices used in the last couple of weeks",
+    "message": "Recently used"
   },
   "pages.devices.legacy.filters.activity_signed_out": {
-    "message": "Signed out",
-    "description": "Filter label for signed-out (finished) legacy devices"
+    "description": "Filter label for signed-out (finished) legacy devices",
+    "message": "Signed out"
   },
   "pages.devices.legacy.filters.newest_first": {
-    "message": "Newest first",
-    "description": "Filter label for sorting legacy devices newest first"
+    "description": "Filter label for sorting legacy devices newest first",
+    "message": "Newest first"
   },
   "pages.devices.legacy.filters.user_chip": {
-    "message": "User: @{localpart}:{server}",
-    "description": "Active filter chip showing the currently filtered user"
+    "description": "Active filter chip showing the currently filtered user",
+    "message": "User: @{localpart}:{server}"
   },
   "pages.devices.legacy.finish.button": {
-    "message": "Remove device",
-    "description": "Button label to remove (sign out) a legacy device"
+    "description": "Button label to remove (sign out) a legacy device",
+    "message": "Remove device"
   },
   "pages.devices.legacy.finish.confirm": {
-    "message": "Remove device",
-    "description": "Confirmation button label for removing (signing out) a legacy device"
+    "description": "Confirmation button label for removing (signing out) a legacy device",
+    "message": "Remove device"
   },
   "pages.devices.legacy.finish.description": {
-    "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately.",
-    "description": "Description of the confirmation dialog when signing out (finishing) a legacy device"
+    "description": "Description of the confirmation dialog when signing out (finishing) a legacy device",
+    "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
   },
   "pages.devices.legacy.finish.error": {
-    "message": "Failed to remove the legacy device",
-    "description": "Error toast when removing (signing out) a legacy device fails"
+    "description": "Error toast when removing (signing out) a legacy device fails",
+    "message": "Failed to remove the legacy device"
   },
   "pages.devices.legacy.finish.success": {
-    "message": "Legacy device removed",
-    "description": "Success toast when a legacy device was removed (signed out)"
+    "description": "Success toast when a legacy device was removed (signed out)",
+    "message": "Legacy device removed"
   },
   "pages.devices.legacy.finish.title": {
-    "message": "Remove this legacy device?",
-    "description": "Title of the confirmation dialog when removing (signing out) a legacy device"
+    "description": "Title of the confirmation dialog when removing (signing out) a legacy device",
+    "message": "Remove this legacy device?"
   },
   "pages.devices.legacy.finished_at_label": {
-    "message": "Signed out at",
-    "description": "Label for the sign-out date of a legacy device"
+    "description": "Label for the sign-out date of a legacy device",
+    "message": "Signed out at"
   },
   "pages.devices.legacy.last_active_ip_label": {
-    "message": "Last active IP",
-    "description": "Label for the last-active IP of a legacy device"
+    "description": "Label for the last-active IP of a legacy device",
+    "message": "Last active IP"
   },
   "pages.devices.legacy.last_active_label": {
-    "message": "Last active",
-    "description": "Label for the last-active date of a legacy device"
+    "description": "Label for the last-active date of a legacy device",
+    "message": "Last active"
   },
   "pages.devices.legacy.not_found.description": {
-    "message": "The requested legacy device ({sessionId}) could not be found on {serverName}.",
-    "description": "The description of the alert when a legacy device could not be found"
+    "description": "The description of the alert when a legacy device could not be found",
+    "message": "The requested legacy device ({sessionId}) could not be found on {serverName}."
   },
   "pages.devices.legacy.not_found.title": {
-    "message": "Legacy device not found",
-    "description": "The title of the alert when a legacy device could not be found"
+    "description": "The title of the alert when a legacy device could not be found",
+    "message": "Legacy device not found"
   },
   "pages.devices.legacy.redirect_uri_label": {
-    "message": "Redirect URI",
-    "description": "Label for the redirect URI of a legacy device"
+    "description": "Label for the redirect URI of a legacy device",
+    "message": "Redirect URI"
   },
   "pages.devices.legacy.status_column": {
-    "message": "Status",
-    "description": "Column header for legacy device status"
+    "description": "Column header for legacy device status",
+    "message": "Status"
   },
   "pages.devices.legacy.technical_details": {
-    "message": "Technical details",
-    "description": "Summary of the collapsed section with technical details (user agent, redirect URI) of a legacy device"
+    "description": "Summary of the collapsed section with technical details (user agent, redirect URI) of a legacy device",
+    "message": "Technical details"
   },
   "pages.devices.legacy.title": {
-    "message": "Legacy devices",
-    "description": "The title of the legacy devices tab"
+    "description": "The title of the legacy devices tab",
+    "message": "Legacy devices"
   },
   "pages.devices.legacy.user_agent_label": {
-    "message": "User agent",
-    "description": "Label for the user-agent of a legacy device"
+    "description": "Label for the user-agent of a legacy device",
+    "message": "User agent"
   },
   "pages.devices.legacy.user_column": {
-    "message": "User",
-    "description": "Column header for the user of a legacy device"
+    "description": "Column header for the user of a legacy device",
+    "message": "User"
   },
   "pages.devices.tabs.applications": {
-    "message": "Applications",
-    "description": "Label for the applications tab on the Devices page"
+    "description": "Label for the applications tab on the Devices page",
+    "message": "Applications"
   },
   "pages.devices.tabs.legacy": {
-    "message": "Legacy devices",
-    "description": "Label for the legacy-devices tab on the Devices page"
+    "description": "Label for the legacy-devices tab on the Devices page",
+    "message": "Legacy devices"
   },
   "pages.devices.tabs.section": {
-    "message": "Device views",
-    "description": "The label for the devices tabs section"
+    "description": "The label for the devices tabs section",
+    "message": "Device views"
   },
   "pages.devices.tabs.user": {
-    "message": "User devices",
-    "description": "Label for the user-devices tab on the Devices page"
+    "description": "Label for the user-devices tab on the Devices page",
+    "message": "User devices"
   },
   "pages.devices.title": {
-    "message": "Devices",
-    "description": "The title of the Devices section"
+    "description": "The title of the Devices section",
+    "message": "Devices"
   },
   "pages.devices.user.client_column": {
-    "message": "Application",
-    "description": "Column header for the application of a device"
+    "description": "Column header for the application of a device",
+    "message": "Application"
   },
   "pages.devices.user.count": {
-    "message": "{COUNT, plural, =0 {No devices} one {# device} other {# devices}}",
-    "description": "On the devices list page, this heading shows the total number of devices"
+    "description": "On the devices list page, this heading shows the total number of devices",
+    "message": "{COUNT, plural, =0 {No devices} one {# device} other {# devices}}"
   },
   "pages.devices.user.created_at_label": {
-    "message": "Signed in at",
-    "description": "Label for the date a device first signed in"
+    "description": "Label for the date a device first signed in",
+    "message": "Signed in at"
   },
   "pages.devices.user.description": {
-    "message": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately.",
-    "description": "The description of the user devices tab"
+    "description": "The description of the user devices tab",
+    "message": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
   },
   "pages.devices.user.device_column": {
-    "message": "Device",
-    "description": "Column header for the device name and ID"
+    "description": "Column header for the device name and ID",
+    "message": "Device"
   },
   "pages.devices.user.device_id_label": {
-    "message": "Device ID",
-    "description": "Label for the Matrix device ID of a device"
+    "description": "Label for the Matrix device ID of a device",
+    "message": "Device ID"
   },
   "pages.devices.user.filters.activity_active": {
-    "message": "Active",
-    "description": "Filter label for active devices used in the last few months"
+    "description": "Filter label for active devices used in the last few months",
+    "message": "Active"
   },
   "pages.devices.user.filters.activity_inactive": {
-    "message": "Inactive",
-    "description": "Filter label for devices not used in 90+ days"
+    "description": "Filter label for devices not used in 90+ days",
+    "message": "Inactive"
   },
   "pages.devices.user.filters.activity_recently_used": {
-    "message": "Recently used",
-    "description": "Filter label for devices used in the last couple of weeks"
+    "description": "Filter label for devices used in the last couple of weeks",
+    "message": "Recently used"
   },
   "pages.devices.user.filters.activity_signed_out": {
-    "message": "Signed out",
-    "description": "Filter label for signed-out (finished) devices"
+    "description": "Filter label for signed-out (finished) devices",
+    "message": "Signed out"
   },
   "pages.devices.user.filters.client_chip": {
-    "message": "Application: {name}",
-    "description": "Active filter chip showing the currently filtered application"
+    "description": "Active filter chip showing the currently filtered application",
+    "message": "Application: {name}"
   },
   "pages.devices.user.filters.newest_first": {
-    "message": "Newest first",
-    "description": "Filter label for sorting devices newest first"
+    "description": "Filter label for sorting devices newest first",
+    "message": "Newest first"
   },
   "pages.devices.user.filters.user_chip": {
-    "message": "User: @{localpart}:{server}",
-    "description": "Active filter chip showing the currently filtered user"
+    "description": "Active filter chip showing the currently filtered user",
+    "message": "User: @{localpart}:{server}"
   },
   "pages.devices.user.finish.button": {
-    "message": "Remove device",
-    "description": "Button label to remove (sign out) a device"
+    "description": "Button label to remove (sign out) a device",
+    "message": "Remove device"
   },
   "pages.devices.user.finish.confirm": {
-    "message": "Remove device",
-    "description": "Confirmation button label for removing (signing out) a device"
+    "description": "Confirmation button label for removing (signing out) a device",
+    "message": "Remove device"
   },
   "pages.devices.user.finish.description": {
-    "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately.",
-    "description": "Description of the confirmation dialog when signing out (finishing) a device"
+    "description": "Description of the confirmation dialog when signing out (finishing) a device",
+    "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
   },
   "pages.devices.user.finish.error": {
-    "message": "Failed to remove the device",
-    "description": "Error toast when removing (signing out) a device fails"
+    "description": "Error toast when removing (signing out) a device fails",
+    "message": "Failed to remove the device"
   },
   "pages.devices.user.finish.success": {
-    "message": "Device removed",
-    "description": "Success toast when a device was removed (signed out)"
+    "description": "Success toast when a device was removed (signed out)",
+    "message": "Device removed"
   },
   "pages.devices.user.finish.title": {
-    "message": "Remove this device?",
-    "description": "Title of the confirmation dialog when removing (signing out) a device"
+    "description": "Title of the confirmation dialog when removing (signing out) a device",
+    "message": "Remove this device?"
   },
   "pages.devices.user.finished_at_label": {
-    "message": "Signed out at",
-    "description": "Label for the sign-out date of a device"
+    "description": "Label for the sign-out date of a device",
+    "message": "Signed out at"
   },
   "pages.devices.user.last_active_ip_label": {
-    "message": "Last active IP",
-    "description": "Label for the last-active IP of a device"
+    "description": "Label for the last-active IP of a device",
+    "message": "Last active IP"
   },
   "pages.devices.user.last_active_label": {
-    "message": "Last active",
-    "description": "Label for the last-active date of a device"
+    "description": "Label for the last-active date of a device",
+    "message": "Last active"
   },
   "pages.devices.user.not_found.description": {
-    "message": "The requested device ({sessionId}) could not be found on {serverName}.",
-    "description": "The description of the alert when a device could not be found"
+    "description": "The description of the alert when a device could not be found",
+    "message": "The requested device ({sessionId}) could not be found on {serverName}."
   },
   "pages.devices.user.not_found.title": {
-    "message": "Device not found",
-    "description": "The title of the alert when a device could not be found"
+    "description": "The title of the alert when a device could not be found",
+    "message": "Device not found"
   },
   "pages.devices.user.scope_label": {
-    "message": "Scope",
-    "description": "Label for the scope field of a device"
+    "description": "Label for the scope field of a device",
+    "message": "Scope"
   },
   "pages.devices.user.status_column": {
-    "message": "Status",
-    "description": "Column header for device status"
+    "description": "Column header for device status",
+    "message": "Status"
   },
   "pages.devices.user.technical_details": {
-    "message": "Technical details",
-    "description": "Summary of the collapsed section with technical details (scope, user agent) of a device"
+    "description": "Summary of the collapsed section with technical details (scope, user agent) of a device",
+    "message": "Technical details"
   },
   "pages.devices.user.title": {
-    "message": "User devices",
-    "description": "The title of the user devices tab"
+    "description": "The title of the user devices tab",
+    "message": "User devices"
   },
   "pages.devices.user.user_agent_label": {
-    "message": "User agent",
-    "description": "Label for the user-agent of a device"
+    "description": "Label for the user-agent of a device",
+    "message": "User agent"
   },
   "pages.devices.user.user_column": {
-    "message": "User",
-    "description": "Column header for the user of a device"
+    "description": "Column header for the user of a device",
+    "message": "User"
   },
   "pages.devices.user.user_none": {
-    "message": "No user",
-    "description": "Shown when a device has no associated user"
+    "description": "Shown when a device has no associated user",
+    "message": "No user"
   },
   "pages.federation.allowlist.add.error": {
-    "message": "Failed to add domain to allowlist",
-    "description": "Toast message when adding a domain to the federation allowlist fails"
+    "description": "Toast message when adding a domain to the federation allowlist fails",
+    "message": "Failed to add domain to allowlist"
   },
   "pages.federation.allowlist.add.success": {
-    "message": "Domain added to allowlist",
-    "description": "Toast message when a domain is added to the federation allowlist"
+    "description": "Toast message when a domain is added to the federation allowlist",
+    "message": "Domain added to allowlist"
   },
   "pages.federation.allowlist.add_domain": {
-    "message": "Add domain",
-    "description": "Button to add a domain pattern to the federation allowlist"
+    "description": "Button to add a domain pattern to the federation allowlist",
+    "message": "Add domain"
   },
   "pages.federation.allowlist.add_pattern": {
-    "message": "Add pattern",
-    "description": "Label for the input to add a federation allowlist pattern"
+    "description": "Label for the input to add a federation allowlist pattern",
+    "message": "Add pattern"
   },
   "pages.federation.allowlist.add_pattern.help": {
-    "message": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com",
-    "description": "Help text for the federation allowlist pattern input"
+    "description": "Help text for the federation allowlist pattern input",
+    "message": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
   },
   "pages.federation.allowlist.empty": {
-    "message": "No domains in the allowlist yet. Add a domain pattern above to get started.",
-    "description": "Empty state message for the federation allowlist"
+    "description": "Empty state message for the federation allowlist",
+    "message": "No domains in the allowlist yet. Add a domain pattern above to get started."
   },
   "pages.federation.allowlist.heading": {
-    "message": "List of patterns allowed to federate with you",
-    "description": "Heading for the federation allowlist section"
+    "description": "Heading for the federation allowlist section",
+    "message": "List of patterns allowed to federate with you"
   },
   "pages.federation.allowlist.remove.error": {
-    "message": "Failed to remove domain from allowlist",
-    "description": "Toast message when removing a domain from the federation allowlist fails"
+    "description": "Toast message when removing a domain from the federation allowlist fails",
+    "message": "Failed to remove domain from allowlist"
   },
   "pages.federation.allowlist.remove.success": {
-    "message": "Domain removed from allowlist",
-    "description": "Toast message when a domain is removed from the federation allowlist"
+    "description": "Toast message when a domain is removed from the federation allowlist",
+    "message": "Domain removed from allowlist"
   },
   "pages.federation.allowlist.remove_tooltip": {
-    "message": "Remove from allowlist",
-    "description": "Tooltip for the button to remove a domain from the federation allowlist"
+    "description": "Tooltip for the button to remove a domain from the federation allowlist",
+    "message": "Remove from allowlist"
   },
   "pages.federation.detail.contact": {
-    "message": "Contact",
-    "description": "Label for the contact email of a federation destination"
+    "description": "Label for the contact email of a federation destination",
+    "message": "Contact"
   },
   "pages.federation.detail.destination": {
-    "message": "Destination",
-    "description": "Label for the destination name of a federation destination"
+    "description": "Label for the destination name of a federation destination",
+    "message": "Destination"
   },
   "pages.federation.detail.last_retry": {
-    "message": "Last retry timestamp",
-    "description": "Label for the last retry timestamp of a federation destination"
+    "description": "Label for the last retry timestamp of a federation destination",
+    "message": "Last retry timestamp"
   },
   "pages.federation.detail.last_successful_stream": {
-    "message": "Last successful stream",
-    "description": "Label for the last successful stream ordering of a federation destination"
+    "description": "Label for the last successful stream ordering of a federation destination",
+    "message": "Last successful stream"
   },
   "pages.federation.detail.retry_interval": {
-    "message": "Retry interval",
-    "description": "Label for the retry interval of a federation destination"
+    "description": "Label for the retry interval of a federation destination",
+    "message": "Retry interval"
   },
   "pages.federation.detail.security": {
-    "message": "Security",
-    "description": "Label for the security contact of a federation destination"
+    "description": "Label for the security contact of a federation destination",
+    "message": "Security"
   },
   "pages.federation.detail.support_page": {
-    "message": "Support page",
-    "description": "Label for the support page URL of a federation destination"
+    "description": "Label for the support page URL of a federation destination",
+    "message": "Support page"
   },
   "pages.federation.domain_count": {
-    "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}",
-    "description": "On the federation page, this heading shows the total number of known domains"
+    "description": "On the federation page, this heading shows the total number of known domains",
+    "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
   },
   "pages.federation.not_found.description": {
-    "message": "The requested destination ({destination}) could not be found.",
-    "description": "The description of the alert when a federation destination could not be found"
+    "description": "The description of the alert when a federation destination could not be found",
+    "message": "The requested destination ({destination}) could not be found."
   },
   "pages.federation.not_found.title": {
-    "message": "Destination not found",
-    "description": "The title of the alert when a federation destination could not be found"
+    "description": "The title of the alert when a federation destination could not be found",
+    "message": "Destination not found"
   },
   "pages.federation.sbg_not_enabled.description": {
-    "message": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it.",
-    "description": "Description of the alert explaining the SBG is not enabled on this deployment"
+    "description": "Description of the alert explaining the SBG is not enabled on this deployment",
+    "message": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
   },
   "pages.federation.sbg_not_enabled.title": {
-    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro",
-    "description": "Title of the alert explaining that allowed domains is part of the Secure Border Gateway and is not enabled"
+    "description": "Title of the alert explaining that allowed domains is part of the Secure Border Gateway and is not enabled",
+    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
   },
   "pages.federation.search_placeholder": {
-    "message": "Search domains…",
-    "description": "The placeholder text for the search input on the federation known domains page"
+    "description": "The placeholder text for the search input on the federation known domains page",
+    "message": "Search domains…"
   },
   "pages.federation.tab.allowed_domains": {
-    "message": "Allowed domains",
-    "description": "Tab label for the allowed federation domains list"
+    "description": "Tab label for the allowed federation domains list",
+    "message": "Allowed domains"
   },
   "pages.federation.tab.known_domains": {
-    "message": "Known domains",
-    "description": "Tab label for the known federation domains list"
+    "description": "Tab label for the known federation domains list",
+    "message": "Known domains"
   },
   "pages.federation.tab.section": {
-    "message": "Federation views",
-    "description": "The label for the federation tabs section"
+    "description": "The label for the federation tabs section",
+    "message": "Federation views"
   },
   "pages.federation.table.server_name": {
-    "message": "Server name",
-    "description": "In the list of destinations, the name of the server"
+    "description": "In the list of destinations, the name of the server",
+    "message": "Server name"
   },
   "pages.federation.table.status": {
-    "message": "Status",
-    "description": "In the list of destinations, the status of the destination (e.g. connected, disconnected)"
+    "description": "In the list of destinations, the status of the destination (e.g. connected, disconnected)",
+    "message": "Status"
   },
   "pages.federation.title": {
-    "message": "Federation",
-    "description": "The title of the federation page"
+    "description": "The title of the federation page",
+    "message": "Federation"
   },
   "pages.federation.unavailable_alert.description": {
-    "message": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it.",
-    "description": "Description of the alert explaining that the Secure Border Gateway is only available in ESS Pro"
+    "description": "Description of the alert explaining that the Secure Border Gateway is only available in ESS Pro",
+    "message": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
   },
   "pages.federation.unavailable_alert.title": {
-    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro",
-    "description": "Title of the alert explaining that allowed domains is only available in ESS Pro"
+    "description": "Title of the alert explaining that allowed domains is only available in ESS Pro",
+    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
   },
   "pages.generic_error.go_home": {
-    "message": "Go home",
-    "description": "When an unxpected error happen, one option is to go back to the homepage"
+    "description": "When an unxpected error happen, one option is to go back to the homepage",
+    "message": "Go home"
   },
   "pages.generic_error.sign_out_and_reload": {
-    "message": "Sign out and reload",
-    "description": "When an unxpected error happen, one option is to try to sign out the account and reload the page"
+    "description": "When an unxpected error happen, one option is to try to sign out the account and reload the page",
+    "message": "Sign out and reload"
   },
   "pages.generic_error.technical_details.item": {
-    "message": "{name}: {message}",
-    "description": "Technical details for the error, showing the error name and message"
+    "description": "Technical details for the error, showing the error name and message",
+    "message": "{name}: {message}"
   },
   "pages.generic_error.text": {
-    "message": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage.",
-    "description": "Text of the generic error page"
+    "description": "Text of the generic error page",
+    "message": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
   },
   "pages.generic_error.title": {
-    "message": "An unexpected error occurred",
-    "description": "Title of the generic error page"
+    "description": "Title of the generic error page",
+    "message": "An unexpected error occurred"
   },
   "pages.landing.description": {
-    "message": "Manage the deployment of the element app for your organization or community.",
-    "description": "On the landing pages, explains what the app does"
+    "description": "On the landing pages, explains what the app does",
+    "message": "Manage the deployment of the element app for your organization or community."
   },
   "pages.login.errors.no_auth_metadata": {
-    "message": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service.",
-    "description": "Error message on the login page when we couldn't fetch the auth metadata, indicating that either Synapse is down, or not configured to use MAS"
+    "description": "Error message on the login page when we couldn't fetch the auth metadata, indicating that either Synapse is down, or not configured to use MAS",
+    "message": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
   },
   "pages.login.errors.no_client_metadata": {
-    "message": "Failed to register the client. Matrix Authentication Service may be unreachable or misconfigured.",
-    "description": "Error message on the login page when we couldn't register the client against the auth metadata, indicating that either MAS is down, or refusing the client registration for some reason"
+    "description": "Error message on the login page when we couldn't register the client against the auth metadata, indicating that either MAS is down, or refusing the client registration for some reason",
+    "message": "Failed to register the client. Matrix Authentication Service may be unreachable or misconfigured."
   },
   "pages.login.errors.no_well_known": {
-    "message": "Failed to load the server's well-known document. The server name may be invalid.",
-    "description": "Error message on the login page when we couldn't fetch the well-known document at https://{serverName}/.well-known/matrix/client"
+    "description": "Error message on the login page when we couldn't fetch the well-known document at https://{serverName}/.well-known/matrix/client",
+    "message": "Failed to load the server's well-known document. The server name may be invalid."
   },
   "pages.login.get_started": {
-    "message": "Get started",
-    "description": "On the login page, this starts the authorization process"
+    "description": "On the login page, this starts the authorization process",
+    "message": "Get started"
   },
   "pages.login.server_name": {
-    "message": "Server name",
-    "description": "Label for the server name field"
+    "description": "Label for the server name field",
+    "message": "Server name"
   },
   "pages.login.title": {
-    "message": "Login",
-    "description": "Title for the login page"
+    "description": "Title for the login page",
+    "message": "Login"
   },
   "pages.personal_tokens.acting_user_column": {
-    "message": "Acting User",
-    "description": "Column header for acting user column"
+    "description": "Column header for acting user column",
+    "message": "Acting User"
   },
   "pages.personal_tokens.acting_user_label": {
-    "message": "Acting user",
-    "description": "Label for the acting user field"
+    "description": "Label for the acting user field",
+    "message": "Acting user"
   },
   "pages.personal_tokens.actor_user_help": {
-    "message": "The user this token will act on behalf of",
-    "description": "Help text for the acting user field"
+    "description": "Help text for the acting user field",
+    "message": "The user this token will act on behalf of"
   },
   "pages.personal_tokens.actor_user_label": {
-    "message": "Acting user",
-    "description": "Label for the acting user field"
+    "description": "Label for the acting user field",
+    "message": "Acting user"
   },
   "pages.personal_tokens.add_token_title": {
-    "message": "Add personal token",
-    "description": "Title of the add personal token dialog"
+    "description": "Title of the add personal token dialog",
+    "message": "Add personal token"
   },
   "pages.personal_tokens.cant_regenerate_tooltip": {
-    "message": "Only {ownerMxid} can regenerate this token",
-    "description": "Personal tokens can only be regenerated by the owner of said token. This is the tooltip explaining that on the disabled 'Regenerate token' button when the owner is another user"
+    "description": "Personal tokens can only be regenerated by the owner of said token. This is the tooltip explaining that on the disabled 'Regenerate token' button when the owner is another user",
+    "message": "Only {ownerMxid} can regenerate this token"
   },
   "pages.personal_tokens.cant_regenerate_tooltip_generic": {
-    "message": "Only the owner of the token can regenerate it",
-    "description": "Personal tokens can only be regenerated by the owner of said token. This is the tooltip explaining that on the disabled 'Regenerate token' button when the owner is a client"
+    "description": "Personal tokens can only be regenerated by the owner of said token. This is the tooltip explaining that on the disabled 'Regenerate token' button when the owner is a client",
+    "message": "Only the owner of the token can regenerate it"
   },
   "pages.personal_tokens.count": {
-    "message": "{count, plural, =0 {No personal tokens} one {# personal token} other {# personal tokens}}",
-    "description": "Shows the number of personal tokens"
+    "description": "Shows the number of personal tokens",
+    "message": "{count, plural, =0 {No personal tokens} one {# personal token} other {# personal tokens}}"
   },
   "pages.personal_tokens.create_error": {
-    "message": "Failed to create personal token",
-    "description": "Error message when creating a personal token fails"
+    "description": "Error message when creating a personal token fails",
+    "message": "Failed to create personal token"
   },
   "pages.personal_tokens.create_success": {
-    "message": "Personal token created successfully",
-    "description": "Success message when a personal token is created"
+    "description": "Success message when a personal token is created",
+    "message": "Personal token created successfully"
   },
   "pages.personal_tokens.create_token": {
-    "message": "Create token",
-    "description": "Button text to create a personal token"
+    "description": "Button text to create a personal token",
+    "message": "Create token"
   },
   "pages.personal_tokens.created_at_label": {
-    "message": "Created at",
-    "description": "Label for the token creation date field"
+    "description": "Label for the token creation date field",
+    "message": "Created at"
   },
   "pages.personal_tokens.description": {
-    "message": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations.",
-    "description": "The description of the personal tokens list page"
+    "description": "The description of the personal tokens list page",
+    "message": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations."
   },
   "pages.personal_tokens.device_id_help": {
-    "message": "Leave empty to generate a random 10-character device ID",
-    "description": "Help text for device ID field"
+    "description": "Help text for device ID field",
+    "message": "Leave empty to generate a random 10-character device ID"
   },
   "pages.personal_tokens.device_id_label": {
-    "message": "Device ID",
-    "description": "Label for device ID field"
+    "description": "Label for device ID field",
+    "message": "Device ID"
   },
   "pages.personal_tokens.device_id_placeholder": {
-    "message": "ABCDEFGHIJ",
-    "description": "Placeholder for device ID field"
+    "description": "Placeholder for device ID field",
+    "message": "ABCDEFGHIJ"
   },
   "pages.personal_tokens.expires_at_column": {
-    "message": "Expires at",
-    "description": "Column header for expires at column"
+    "description": "Column header for expires at column",
+    "message": "Expires at"
   },
   "pages.personal_tokens.expires_at_label": {
-    "message": "Expires at",
-    "description": "Label for the token expiration date field"
+    "description": "Label for the token expiration date field",
+    "message": "Expires at"
   },
   "pages.personal_tokens.expires_in_help": {
-    "message": "Leave empty for tokens that never expire",
-    "description": "Help text for the expiry field"
+    "description": "Help text for the expiry field",
+    "message": "Leave empty for tokens that never expire"
   },
   "pages.personal_tokens.expires_in_label": {
-    "message": "Expires in (days)",
-    "description": "Label for the expiry field"
+    "description": "Label for the expiry field",
+    "message": "Expires in (days)"
   },
   "pages.personal_tokens.expires_in_placeholder": {
-    "message": "30",
-    "description": "Placeholder for the expiry field"
+    "description": "Placeholder for the expiry field",
+    "message": "30"
   },
   "pages.personal_tokens.filter.active": {
-    "message": "Active",
-    "description": "Filter label for active personal tokens"
+    "description": "Filter label for active personal tokens",
+    "message": "Active"
   },
   "pages.personal_tokens.filter.expires": {
-    "message": "With an expiry date",
-    "description": "Filter label for tokens that expire"
+    "description": "Filter label for tokens that expire",
+    "message": "With an expiry date"
   },
   "pages.personal_tokens.filter.no_expiry": {
-    "message": "Never expires",
-    "description": "Filter label for tokens that never expire"
+    "description": "Filter label for tokens that never expire",
+    "message": "Never expires"
   },
   "pages.personal_tokens.filter.revoked": {
-    "message": "Revoked",
-    "description": "Filter label for revoked personal tokens"
+    "description": "Filter label for revoked personal tokens",
+    "message": "Revoked"
   },
   "pages.personal_tokens.filter.scope_mas_admin": {
-    "message": "Access to the MAS admin API",
-    "description": "Filter label for MAS admin scope"
+    "description": "Filter label for MAS admin scope",
+    "message": "Access to the MAS admin API"
   },
   "pages.personal_tokens.filter.scope_matrix_client": {
-    "message": "Access to the Matrix Client-Server API",
-    "description": "Filter label for Matrix Client API scope"
+    "description": "Filter label for Matrix Client API scope",
+    "message": "Access to the Matrix Client-Server API"
   },
   "pages.personal_tokens.filter.scope_synapse_admin": {
-    "message": "Access to the Synapse admin API",
-    "description": "Filter label for synapse admin scope"
+    "description": "Filter label for synapse admin scope",
+    "message": "Access to the Synapse admin API"
   },
   "pages.personal_tokens.last_active_column": {
-    "message": "Last Active",
-    "description": "Column header for last active column"
+    "description": "Column header for last active column",
+    "message": "Last Active"
   },
   "pages.personal_tokens.last_active_ip_label": {
-    "message": "Last active IP",
-    "description": "Label for the last active IP field"
+    "description": "Label for the last active IP field",
+    "message": "Last active IP"
   },
   "pages.personal_tokens.last_active_label": {
-    "message": "Last active",
-    "description": "Label for the last active date field"
+    "description": "Label for the last active date field",
+    "message": "Last active"
   },
   "pages.personal_tokens.name_column": {
-    "message": "Name",
-    "description": "Column header for token name column"
+    "description": "Column header for token name column",
+    "message": "Name"
   },
   "pages.personal_tokens.name_help": {
-    "message": "A human-readable name for the token, to help you identify it",
-    "description": "Help text for the token name field"
+    "description": "Help text for the token name field",
+    "message": "A human-readable name for the token, to help you identify it"
   },
   "pages.personal_tokens.name_label": {
-    "message": "Token name",
-    "description": "Label for the personal token name field"
+    "description": "Label for the personal token name field",
+    "message": "Token name"
   },
   "pages.personal_tokens.name_placeholder": {
-    "message": "My application token",
-    "description": "Placeholder for the personal token name field"
+    "description": "Placeholder for the personal token name field",
+    "message": "My application token"
   },
   "pages.personal_tokens.never_expires": {
-    "message": "Never expires",
-    "description": "Text shown when a token has no expiration date"
+    "description": "Text shown when a token has no expiration date",
+    "message": "Never expires"
   },
   "pages.personal_tokens.never_used": {
-    "message": "Never used",
-    "description": "Text shown when a token has never been used"
+    "description": "Text shown when a token has never been used",
+    "message": "Never used"
   },
   "pages.personal_tokens.not_found.description": {
-    "message": "The personal token you're looking for doesn't exist or has been removed.",
-    "description": "Description shown when a personal token is not found"
+    "description": "Description shown when a personal token is not found",
+    "message": "The personal token you're looking for doesn't exist or has been removed."
   },
   "pages.personal_tokens.not_found.title": {
-    "message": "Personal token not found",
-    "description": "Title shown when a personal token is not found"
+    "description": "Title shown when a personal token is not found",
+    "message": "Personal token not found"
   },
   "pages.personal_tokens.owner_user_label": {
-    "message": "Owner",
-    "description": "Label for the owner user field"
+    "description": "Label for the owner user field",
+    "message": "Owner"
   },
   "pages.personal_tokens.regenerate_confirm": {
-    "message": "Regenerate token",
-    "description": "Button text to confirm regenerating a personal token"
+    "description": "Button text to confirm regenerating a personal token",
+    "message": "Regenerate token"
   },
   "pages.personal_tokens.regenerate_error": {
-    "message": "Failed to regenerate personal token",
-    "description": "Error message when regenerating a personal token fails"
+    "description": "Error message when regenerating a personal token fails",
+    "message": "Failed to regenerate personal token"
   },
   "pages.personal_tokens.regenerate_expires_help": {
-    "message": "Leave empty to keep the same expiry as before, or set a new expiry time",
-    "description": "Help text for the expiry field when regenerating"
+    "description": "Help text for the expiry field when regenerating",
+    "message": "Leave empty to keep the same expiry as before, or set a new expiry time"
   },
   "pages.personal_tokens.regenerate_success": {
-    "message": "Personal token regenerated successfully",
-    "description": "Success message when a personal token is regenerated"
+    "description": "Success message when a personal token is regenerated",
+    "message": "Personal token regenerated successfully"
   },
   "pages.personal_tokens.regenerate_token": {
-    "message": "Regenerate token",
-    "description": "Button text to regenerate a token"
+    "description": "Button text to regenerate a token",
+    "message": "Regenerate token"
   },
   "pages.personal_tokens.regenerate_token_title": {
-    "message": "Regenerate personal token",
-    "description": "Title of the regenerate personal token dialog"
+    "description": "Title of the regenerate personal token dialog",
+    "message": "Regenerate personal token"
   },
   "pages.personal_tokens.regenerate_warning": {
-    "message": "This will generate a new access token and invalidate the current one. Any applications using the current token will need to be updated.",
-    "description": "Warning message shown when regenerating a personal token"
+    "description": "Warning message shown when regenerating a personal token",
+    "message": "This will generate a new access token and invalidate the current one. Any applications using the current token will need to be updated."
   },
   "pages.personal_tokens.revoke_success": {
-    "message": "Personal token revoked successfully",
-    "description": "Success message when a personal token is revoked"
+    "description": "Success message when a personal token is revoked",
+    "message": "Personal token revoked successfully"
   },
   "pages.personal_tokens.revoke_token": {
-    "message": "Revoke token",
-    "description": "Button text to revoke a token"
+    "description": "Button text to revoke a token",
+    "message": "Revoke token"
   },
   "pages.personal_tokens.revoked_at_label": {
-    "message": "Revoked at",
-    "description": "Label for the token revocation date field"
+    "description": "Label for the token revocation date field",
+    "message": "Revoked at"
   },
   "pages.personal_tokens.scope_device_help": {
-    "message": "Provision a Matrix device",
-    "description": "Help text for device scope"
+    "description": "Help text for device scope",
+    "message": "Provision a Matrix device"
   },
   "pages.personal_tokens.scope_mas_admin_help": {
-    "message": "Access to the MAS admin API",
-    "description": "Help text for MAS admin scope"
+    "description": "Help text for MAS admin scope",
+    "message": "Access to the MAS admin API"
   },
   "pages.personal_tokens.scope_matrix_client_help": {
-    "message": "Access to the Matrix Client-Server API",
-    "description": "Help text for Matrix Client API scope"
+    "description": "Help text for Matrix Client API scope",
+    "message": "Access to the Matrix Client-Server API"
   },
   "pages.personal_tokens.scope_synapse_admin_help": {
-    "message": "Access to the Synapse admin API",
-    "description": "Help text for Synapse admin scope"
+    "description": "Help text for Synapse admin scope",
+    "message": "Access to the Synapse admin API"
   },
   "pages.personal_tokens.scopes_label": {
-    "message": "Scopes",
-    "description": "Label for the scopes field"
+    "description": "Label for the scopes field",
+    "message": "Scopes"
   },
   "pages.personal_tokens.status.active": {
-    "message": "Active",
-    "description": "Status badge for active personal tokens"
+    "description": "Status badge for active personal tokens",
+    "message": "Active"
   },
   "pages.personal_tokens.status.column": {
-    "message": "Status",
-    "description": "Column header for status column"
+    "description": "Column header for status column",
+    "message": "Status"
   },
   "pages.personal_tokens.status.expired": {
-    "message": "Expired",
-    "description": "Status badge for expired personal tokens"
+    "description": "Status badge for expired personal tokens",
+    "message": "Expired"
   },
   "pages.personal_tokens.status.label": {
-    "message": "Status",
-    "description": "Label for the personal token status field"
+    "description": "Label for the personal token status field",
+    "message": "Status"
   },
   "pages.personal_tokens.status.revoked": {
-    "message": "Revoked",
-    "description": "Status badge for revoked personal tokens"
+    "description": "Status badge for revoked personal tokens",
+    "message": "Revoked"
   },
   "pages.personal_tokens.title": {
-    "message": "Personal tokens",
-    "description": "The title of the personal tokens list page"
+    "description": "The title of the personal tokens list page",
+    "message": "Personal tokens"
   },
   "pages.personal_tokens.token_created_description": {
-    "message": "Your personal token has been created. Copy it now as it will not be shown again.",
-    "description": "Description shown when a personal token is created"
+    "description": "Description shown when a personal token is created",
+    "message": "Your personal token has been created. Copy it now as it will not be shown again."
   },
   "pages.personal_tokens.token_created_title": {
-    "message": "Personal token created",
-    "description": "Title of the dialog when a personal token is successfully created"
+    "description": "Title of the dialog when a personal token is successfully created",
+    "message": "Personal token created"
   },
   "pages.personal_tokens.token_regenerated_description": {
-    "message": "Your personal token has been regenerated. Copy it now as it will not be shown again.",
-    "description": "Description shown when a personal token is regenerated"
+    "description": "Description shown when a personal token is regenerated",
+    "message": "Your personal token has been regenerated. Copy it now as it will not be shown again."
   },
   "pages.personal_tokens.token_regenerated_title": {
-    "message": "Token regenerated",
-    "description": "Title of the dialog when a personal token is successfully regenerated"
+    "description": "Title of the dialog when a personal token is successfully regenerated",
+    "message": "Token regenerated"
   },
   "pages.registration_tokens.auto_generate_placeholder": {
-    "message": "Auto-generate if left empty",
-    "description": "Placeholder text for custom token field"
+    "description": "Placeholder text for custom token field",
+    "message": "Auto-generate if left empty"
   },
   "pages.registration_tokens.create_token.error": {
-    "message": "Failed to create token",
-    "description": "The error message when the request for creating a registration token fails"
+    "description": "The error message when the request for creating a registration token fails",
+    "message": "Failed to create token"
   },
   "pages.registration_tokens.create_token.submit": {
-    "message": "Create Token",
-    "description": "The submit button text in the create registration token dialog"
+    "description": "The submit button text in the create registration token dialog",
+    "message": "Create Token"
   },
   "pages.registration_tokens.create_token.success": {
-    "message": "Token created successfully",
-    "description": "The success message for creating a registration token"
+    "description": "The success message for creating a registration token",
+    "message": "Token created successfully"
   },
   "pages.registration_tokens.create_token.title": {
-    "message": "Create Registration Token",
-    "description": "The title of the create registration token dialog"
+    "description": "The title of the create registration token dialog",
+    "message": "Create Registration Token"
   },
   "pages.registration_tokens.created_at_column": {
-    "message": "Created at",
-    "description": "Column header for created at column"
+    "description": "Column header for created at column",
+    "message": "Created at"
   },
   "pages.registration_tokens.created_at_label": {
-    "message": "Created at",
-    "description": "Label for the token creation date field"
+    "description": "Label for the token creation date field",
+    "message": "Created at"
   },
   "pages.registration_tokens.custom_token_help": {
-    "message": "Optional custom token string. If left empty, a secure token will be auto-generated.",
-    "description": "Help text for the custom token field"
+    "description": "Help text for the custom token field",
+    "message": "Optional custom token string. If left empty, a secure token will be auto-generated."
   },
   "pages.registration_tokens.custom_token_label": {
-    "message": "Custom Token",
-    "description": "Label for the custom token field"
+    "description": "Label for the custom token field",
+    "message": "Custom Token"
   },
   "pages.registration_tokens.edit_properties": {
-    "message": "Edit properties",
-    "description": "Button text to edit token properties"
+    "description": "Button text to edit token properties",
+    "message": "Edit properties"
   },
   "pages.registration_tokens.edit_token_title": {
-    "message": "Edit registration token",
-    "description": "Title of the edit token modal"
+    "description": "Title of the edit token modal",
+    "message": "Edit registration token"
   },
   "pages.registration_tokens.expires_at_field": {
-    "message": "Expires at",
-    "description": "Label for the expires at form field"
+    "description": "Label for the expires at form field",
+    "message": "Expires at"
   },
   "pages.registration_tokens.expires_at_help": {
-    "message": "When the token expires. Leave empty if the token should never expire.",
-    "description": "Help text for the expires at field"
+    "description": "Help text for the expires at field",
+    "message": "When the token expires. Leave empty if the token should never expire."
   },
   "pages.registration_tokens.expires_at_label": {
-    "message": "Expires at",
-    "description": "Label for the token expiration date field"
+    "description": "Label for the token expiration date field",
+    "message": "Expires at"
   },
   "pages.registration_tokens.filters.active_only": {
-    "message": "Active",
-    "description": "Filter option for active registration tokens only"
+    "description": "Filter option for active registration tokens only",
+    "message": "Active"
   },
   "pages.registration_tokens.filters.expired_only": {
-    "message": "Expired",
-    "description": "Filter option for expired registration tokens only"
+    "description": "Filter option for expired registration tokens only",
+    "message": "Expired"
   },
   "pages.registration_tokens.filters.revoked_only": {
-    "message": "Revoked",
-    "description": "Filter option for revoked registration tokens only"
+    "description": "Filter option for revoked registration tokens only",
+    "message": "Revoked"
   },
   "pages.registration_tokens.filters.unused_only": {
-    "message": "Unused",
-    "description": "Filter option for unused registration tokens only"
+    "description": "Filter option for unused registration tokens only",
+    "message": "Unused"
   },
   "pages.registration_tokens.filters.used_only": {
-    "message": "Used",
-    "description": "Filter option for used registration tokens only"
+    "description": "Filter option for used registration tokens only",
+    "message": "Used"
   },
   "pages.registration_tokens.never_expires": {
-    "message": "Never expires",
-    "description": "Text shown when a token has no expiration date"
+    "description": "Text shown when a token has no expiration date",
+    "message": "Never expires"
   },
   "pages.registration_tokens.no_expiration_placeholder": {
-    "message": "No expiration",
-    "description": "Placeholder text for the expires at field"
+    "description": "Placeholder text for the expires at field",
+    "message": "No expiration"
   },
   "pages.registration_tokens.not_found.description": {
-    "message": "The requested registration token ({tokenId}) could not be found on {serverName}.",
-    "description": "The description of the alert when a registration token could not be found"
+    "description": "The description of the alert when a registration token could not be found",
+    "message": "The requested registration token ({tokenId}) could not be found on {serverName}."
   },
   "pages.registration_tokens.not_found.title": {
-    "message": "Registration token not found",
-    "description": "The title of the alert when a registration token could not be found"
+    "description": "The title of the alert when a registration token could not be found",
+    "message": "Registration token not found"
   },
   "pages.registration_tokens.revoke_token": {
-    "message": "Revoke token",
-    "description": "Button text to revoke a token"
+    "description": "Button text to revoke a token",
+    "message": "Revoke token"
   },
   "pages.registration_tokens.revoked_at_label": {
-    "message": "Revoked at",
-    "description": "Label for the token revocation date field"
+    "description": "Label for the token revocation date field",
+    "message": "Revoked at"
   },
   "pages.registration_tokens.save_changes": {
-    "message": "Save Changes",
-    "description": "Submit button text for saving token changes"
+    "description": "Submit button text for saving token changes",
+    "message": "Save Changes"
   },
   "pages.registration_tokens.status.active": {
-    "message": "Active",
-    "description": "Registration token status: active"
+    "description": "Registration token status: active",
+    "message": "Active"
   },
   "pages.registration_tokens.status.column": {
-    "message": "Status",
-    "description": "Column header for status column"
+    "description": "Column header for status column",
+    "message": "Status"
   },
   "pages.registration_tokens.status.expired": {
-    "message": "Expired",
-    "description": "Registration token status: expired"
+    "description": "Registration token status: expired",
+    "message": "Expired"
   },
   "pages.registration_tokens.status.invalid": {
-    "message": "Invalid",
-    "description": "Registration token status: invalid"
+    "description": "Registration token status: invalid",
+    "message": "Invalid"
   },
   "pages.registration_tokens.status.label": {
-    "message": "Status",
-    "description": "Label for the Registration token status field"
+    "description": "Label for the Registration token status field",
+    "message": "Status"
   },
   "pages.registration_tokens.status.revoked": {
-    "message": "Revoked",
-    "description": "Registration token status: revoked"
+    "description": "Registration token status: revoked",
+    "message": "Revoked"
   },
   "pages.registration_tokens.status.used_up": {
-    "message": "Used up",
-    "description": "Registration token status: used up"
+    "description": "Registration token status: used up",
+    "message": "Used up"
   },
   "pages.registration_tokens.title": {
-    "message": "Registration tokens",
-    "description": "The title of the registration tokens list page"
+    "description": "The title of the registration tokens list page",
+    "message": "Registration tokens"
   },
   "pages.registration_tokens.token_column": {
-    "message": "Token",
-    "description": "Column header for token column"
+    "description": "Column header for token column",
+    "message": "Token"
   },
   "pages.registration_tokens.token_count": {
-    "message": "{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}",
-    "description": "On the registration tokens list page, this heading shows the total number of tokens"
+    "description": "On the registration tokens list page, this heading shows the total number of tokens",
+    "message": "{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
   },
   "pages.registration_tokens.token_uses.limited": {
-    "message": "{uses, number} / {limit, number}",
-    "description": "Shows the number of uses of a registration token, when there is a usage limit"
+    "description": "Shows the number of uses of a registration token, when there is a usage limit",
+    "message": "{uses, number} / {limit, number}"
   },
   "pages.registration_tokens.token_uses.unlimited": {
-    "message": "{uses, number} / ∞",
-    "description": "Shows the number of uses of a registration token, when there is no usage limit"
+    "description": "Shows the number of uses of a registration token, when there is no usage limit",
+    "message": "{uses, number} / ∞"
   },
   "pages.registration_tokens.unlimited_placeholder": {
-    "message": "Unlimited",
-    "description": "Placeholder text for the usage limit field"
+    "description": "Placeholder text for the usage limit field",
+    "message": "Unlimited"
   },
   "pages.registration_tokens.unlimited_uses_placeholder": {
-    "message": "Leave empty for unlimited uses",
-    "description": "Placeholder text for usage limit field"
+    "description": "Placeholder text for usage limit field",
+    "message": "Leave empty for unlimited uses"
   },
   "pages.registration_tokens.unrevoke_token": {
-    "message": "Unrevoke token",
-    "description": "Button text to unrevoke a token"
+    "description": "Button text to unrevoke a token",
+    "message": "Unrevoke token"
   },
   "pages.registration_tokens.usage_count_label": {
-    "message": "Usage count",
-    "description": "Label for the token usage count field"
+    "description": "Label for the token usage count field",
+    "message": "Usage count"
   },
   "pages.registration_tokens.usage_limit_field": {
-    "message": "Usage limit",
-    "description": "Label for the usage limit form field"
+    "description": "Label for the usage limit form field",
+    "message": "Usage limit"
   },
   "pages.registration_tokens.usage_limit_help": {
-    "message": "Maximum number of times this token can be used. Leave empty for unlimited uses.",
-    "description": "Help text for the usage limit field"
+    "description": "Help text for the usage limit field",
+    "message": "Maximum number of times this token can be used. Leave empty for unlimited uses."
   },
   "pages.registration_tokens.usage_limit_label": {
-    "message": "Usage Limit",
-    "description": "Label for the usage limit field"
+    "description": "Label for the usage limit field",
+    "message": "Usage Limit"
   },
   "pages.registration_tokens.uses_column": {
-    "message": "Uses",
-    "description": "Column header for uses column"
+    "description": "Column header for uses column",
+    "message": "Uses"
   },
   "pages.registration_tokens.valid_until_column": {
-    "message": "Valid Until",
-    "description": "Column header for valid until column"
+    "description": "Column header for valid until column",
+    "message": "Valid Until"
   },
   "pages.rooms.columns.alias": {
-    "message": "Alias",
-    "description": "Column header for the room alias in the rooms list table"
+    "description": "Column header for the room alias in the rooms list table",
+    "message": "Alias"
   },
   "pages.rooms.columns.members": {
-    "message": "Members",
-    "description": "Column header for the number of members in the rooms list table"
+    "description": "Column header for the number of members in the rooms list table",
+    "message": "Members"
   },
   "pages.rooms.columns.room": {
-    "message": "Room",
-    "description": "Column header for the room name in the rooms list table"
+    "description": "Column header for the room name in the rooms list table",
+    "message": "Room"
   },
   "pages.rooms.columns.type": {
-    "message": "Type",
-    "description": "Column header for the room type in the rooms list table"
+    "description": "Column header for the room type in the rooms list table",
+    "message": "Type"
   },
   "pages.rooms.delete_room.alert.description": {
-    "message": "This will permanently delete all messages or media uploaded to the server and remove this room from the directory. Members will lose access to their messages and the room will be removed from their room list.",
-    "description": "Description of the alert in the delete room dialog"
+    "description": "Description of the alert in the delete room dialog",
+    "message": "This will permanently delete all messages or media uploaded to the server and remove this room from the directory. Members will lose access to their messages and the room will be removed from their room list."
   },
   "pages.rooms.delete_room.alert.title": {
-    "message": "You’re about to delete room data",
-    "description": "Title of the alert in the delete room dialog"
+    "description": "Title of the alert in the delete room dialog",
+    "message": "You’re about to delete room data"
   },
   "pages.rooms.delete_room.block.help": {
-    "message": "Prevent users from rejoining the room after deletion.",
-    "description": "Help message for the block users checkbox in the delete room dialog"
+    "description": "Help message for the block users checkbox in the delete room dialog",
+    "message": "Prevent users from rejoining the room after deletion."
   },
   "pages.rooms.delete_room.block.label": {
-    "message": "Block room",
-    "description": "Label for the block users checkbox in the delete room dialog"
+    "description": "Label for the block users checkbox in the delete room dialog",
+    "message": "Block room"
   },
   "pages.rooms.delete_room.button": {
-    "message": "Delete permanently",
-    "description": "Label for the button to delete a room"
+    "description": "Label for the button to delete a room",
+    "message": "Delete permanently"
   },
   "pages.rooms.delete_room.error": {
-    "message": "Failed to schedule room deletion",
-    "description": "Toast message shown when room deletion scheduling fails"
+    "description": "Toast message shown when room deletion scheduling fails",
+    "message": "Failed to schedule room deletion"
   },
   "pages.rooms.delete_room.success": {
-    "message": "Room deletion scheduled",
-    "description": "Toast message shown when room deletion is successfully scheduled"
+    "description": "Toast message shown when room deletion is successfully scheduled",
+    "message": "Room deletion scheduled"
   },
   "pages.rooms.delete_room.title": {
-    "message": "Delete this room?",
-    "description": "Title for the delete room dialog"
+    "description": "Title for the delete room dialog",
+    "message": "Delete this room?"
   },
   "pages.rooms.deletion.failure.description": {
-    "message": "Room deletion task failed on {timestamp, date, short} at {timestamp, time, short} with error: {error}",
-    "description": "When there is a room deletion task that has failed, this is the description of the alert shown."
+    "description": "When there is a room deletion task that has failed, this is the description of the alert shown.",
+    "message": "Room deletion task failed on {timestamp, date, short} at {timestamp, time, short} with error: {error}"
   },
   "pages.rooms.deletion.failure.title": {
-    "message": "Deletion failed",
-    "description": "When there is a room deletion task that has failed, this is the title of the alert shown."
+    "description": "When there is a room deletion task that has failed, this is the title of the alert shown.",
+    "message": "Deletion failed"
   },
   "pages.rooms.deletion.in_progress.description": {
-    "message": "Room deletion task is in progress since {timestamp, date, short} at {timestamp, time, short}.",
-    "description": "When there is a room deletion task that is in progress, this is the description of the alert shown."
+    "description": "When there is a room deletion task that is in progress, this is the description of the alert shown.",
+    "message": "Room deletion task is in progress since {timestamp, date, short} at {timestamp, time, short}."
   },
   "pages.rooms.deletion.in_progress.title": {
-    "message": "Deletion in progress",
-    "description": "When there is a room deletion task that is in progress, this is the title of the alert shown."
+    "description": "When there is a room deletion task that is in progress, this is the title of the alert shown.",
+    "message": "Deletion in progress"
   },
   "pages.rooms.deletion.success.description": {
-    "message": "Room deletion task completed successfully on {timestamp, date, short} at {timestamp, time, short}.",
-    "description": "When there is a room deletion task that has completed successfully, this is the description of the alert shown."
+    "description": "When there is a room deletion task that has completed successfully, this is the description of the alert shown.",
+    "message": "Room deletion task completed successfully on {timestamp, date, short} at {timestamp, time, short}."
   },
   "pages.rooms.deletion.success.title": {
-    "message": "Deletion successful",
-    "description": "When there is a room deletion task that has completed successfully, this is the title of the alert shown."
+    "description": "When there is a room deletion task that has completed successfully, this is the title of the alert shown.",
+    "message": "Deletion successful"
   },
   "pages.rooms.filters.empty_rooms": {
-    "message": "Empty rooms",
-    "description": "Filter option for empty rooms"
+    "description": "Filter option for empty rooms",
+    "message": "Empty rooms"
   },
   "pages.rooms.filters.non_empty_rooms": {
-    "message": "Non-empty rooms",
-    "description": "Filter option for non-empty rooms"
+    "description": "Filter option for non-empty rooms",
+    "message": "Non-empty rooms"
   },
   "pages.rooms.filters.private_rooms": {
-    "message": "Private rooms",
-    "description": "Filter option for private rooms"
+    "description": "Filter option for private rooms",
+    "message": "Private rooms"
   },
   "pages.rooms.filters.public_rooms": {
-    "message": "Public rooms",
-    "description": "Filter option for public rooms"
+    "description": "Filter option for public rooms",
+    "message": "Public rooms"
   },
   "pages.rooms.not_found.description": {
-    "message": "The requested room ({roomId}) could not be found on {serverName}.",
-    "description": "The description of the alert when a room could not be found"
+    "description": "The description of the alert when a room could not be found",
+    "message": "The requested room ({roomId}) could not be found on {serverName}."
   },
   "pages.rooms.not_found.title": {
-    "message": "Room not found",
-    "description": "The title of the alert when a room could not be found"
+    "description": "The title of the alert when a room could not be found",
+    "message": "Room not found"
   },
   "pages.rooms.room_count": {
-    "message": "{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}",
-    "description": "On the room list page, this heading shows the total number of rooms"
+    "description": "On the room list page, this heading shows the total number of rooms",
+    "message": "{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
   },
   "pages.rooms.room_type.private": {
-    "message": "Private",
-    "description": "Badge label for a private room in the rooms list table"
+    "description": "Badge label for a private room in the rooms list table",
+    "message": "Private"
   },
   "pages.rooms.room_type.public": {
-    "message": "Public",
-    "description": "Badge label for a public room in the rooms list table"
+    "description": "Badge label for a public room in the rooms list table",
+    "message": "Public"
   },
   "pages.rooms.room_type.restricted": {
-    "message": "Restricted",
-    "description": "Badge label for a restricted room in the rooms list table"
+    "description": "Badge label for a restricted room in the rooms list table",
+    "message": "Restricted"
   },
   "pages.rooms.search_placeholder": {
-    "message": "Search…",
-    "description": "Placeholder for the search input on the rooms list page"
+    "description": "Placeholder for the search input on the rooms list page",
+    "message": "Search…"
   },
   "pages.rooms.title": {
-    "message": "Rooms",
-    "description": "The title of the rooms list page"
+    "description": "The title of the rooms list page",
+    "message": "Rooms"
   },
   "pages.supervision.description": {
-    "message": "Sign in as <b>{mxid}</b> to perform administrative actions in any room.",
-    "description": "The description of the supervision page"
+    "description": "The description of the supervision page",
+    "message": "Sign in as <b>{mxid}</b> to perform administrative actions in any room."
   },
   "pages.supervision.disabled_alert.description": {
-    "message": "This feature is part of your subscription. You can ask an administrator to enable it.",
-    "description": "When the feature is disabled on an ESS Pro deployment, this is the description of the alert message telling admins to configure it"
+    "description": "When the feature is disabled on an ESS Pro deployment, this is the description of the alert message telling admins to configure it",
+    "message": "This feature is part of your subscription. You can ask an administrator to enable it."
   },
   "pages.supervision.disabled_alert.title": {
-    "message": "Supervision is currently disabled",
-    "description": "When the feature is disabled on an ESS Pro deployment, this is the title of the alert message telling admins to configure it"
+    "description": "When the feature is disabled on an ESS Pro deployment, this is the title of the alert message telling admins to configure it",
+    "message": "Supervision is currently disabled"
   },
   "pages.supervision.errors.cant_open.description": {
-    "message": "Your browser is blocking the opening of pop-up windows. Please make sure you allow pop-ups from this site.",
-    "description": "The description of the error message when the supervision interface can't be opened in a new window"
+    "description": "The description of the error message when the supervision interface can't be opened in a new window",
+    "message": "Your browser is blocking the opening of pop-up windows. Please make sure you allow pop-ups from this site."
   },
   "pages.supervision.errors.cant_open.title": {
-    "message": "Failed to open the supervision interface in a new window",
-    "description": "The title of the error message when the supervision interface can't be opened"
+    "description": "The title of the error message when the supervision interface can't be opened",
+    "message": "Failed to open the supervision interface in a new window"
   },
   "pages.supervision.errors.closed.description": {
-    "message": "Failed to sign in the supervision interface, as it closed before it could finish signing in",
-    "description": "The description of the error message when the supervision interface was closed"
+    "description": "The description of the error message when the supervision interface was closed",
+    "message": "Failed to sign in the supervision interface, as it closed before it could finish signing in"
   },
   "pages.supervision.errors.closed.title": {
-    "message": "The supervision interface was closed too quickly",
-    "description": "The title of the error message when the supervision interface was closed"
+    "description": "The title of the error message when the supervision interface was closed",
+    "message": "The supervision interface was closed too quickly"
   },
   "pages.supervision.errors.generic.title": {
-    "message": "An unexpected error occurred whilst opening the supervision interface",
-    "description": "The title of the error message when the supervision interface can't be opened"
+    "description": "The title of the error message when the supervision interface can't be opened",
+    "message": "An unexpected error occurred whilst opening the supervision interface"
   },
   "pages.supervision.missing_ui_address.description": {
-    "message": "Supervision is enabled in your deployment, but not Element Web, which is required for the supervision interface to work.",
-    "description": "When adminbot is enabled, but the Element Web is not deployed with ESS, we show an alert, as the UI feature relies on it. This is the description of said alert."
+    "description": "When adminbot is enabled, but the Element Web is not deployed with ESS, we show an alert, as the UI feature relies on it. This is the description of said alert.",
+    "message": "Supervision is enabled in your deployment, but not Element Web, which is required for the supervision interface to work."
   },
   "pages.supervision.missing_ui_address.title": {
-    "message": "The supervision interface requires Element Web to be enabled",
-    "description": "When adminbot is enabled, but the Element Web is not deployed with ESS, we show an alert, as the UI feature relies on it. This is the title of said alert."
+    "description": "When adminbot is enabled, but the Element Web is not deployed with ESS, we show an alert, as the UI feature relies on it. This is the title of said alert.",
+    "message": "The supervision interface requires Element Web to be enabled"
   },
   "pages.supervision.recovery_key.copied": {
-    "message": "Recovery key copied",
-    "description": "On the supervision page, message displayed when the recovery key is copied to the clipboard"
+    "description": "On the supervision page, message displayed when the recovery key is copied to the clipboard",
+    "message": "Recovery key copied"
   },
   "pages.supervision.recovery_key.copy_failed": {
-    "message": "Could not copy recovery key",
-    "description": "On the supervision page, message displayed when the recovery key could not be copied to the clipboard"
+    "description": "On the supervision page, message displayed when the recovery key could not be copied to the clipboard",
+    "message": "Could not copy recovery key"
   },
   "pages.supervision.recovery_key.help": {
-    "message": "This is the recovery key used to enable reading encrypted messages.",
-    "description": "On the supervision page, help text for the recovery key readonly input field"
+    "description": "On the supervision page, help text for the recovery key readonly input field",
+    "message": "This is the recovery key used to enable reading encrypted messages."
   },
   "pages.supervision.recovery_key.label": {
-    "message": "Recovery key",
-    "description": "On the supervision page, label for the recovery key readonly input field"
+    "description": "On the supervision page, label for the recovery key readonly input field",
+    "message": "Recovery key"
   },
   "pages.supervision.title": {
-    "message": "Supervision",
-    "description": "The title of the supervision page"
+    "description": "The title of the supervision page",
+    "message": "Supervision"
   },
   "pages.supervision.unavailable_alert.description": {
-    "message": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it.",
-    "description": "Description of the alert explaining that the supervision feature is only available in ESS Pro"
+    "description": "Description of the alert explaining that the supervision feature is only available in ESS Pro",
+    "message": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
   },
   "pages.supervision.unavailable_alert.title": {
-    "message": "Supervision is a feature available in ESS Pro",
-    "description": "Title of the alert explaining that the supervision feature is only available in ESS Pro"
+    "description": "Title of the alert explaining that the supervision feature is only available in ESS Pro",
+    "message": "Supervision is a feature available in ESS Pro"
   },
   "pages.users.account_status.active": {
-    "message": "Active",
-    "description": "Badge label for an active user account in the users list table"
+    "description": "Badge label for an active user account in the users list table",
+    "message": "Active"
   },
   "pages.users.account_status.admin": {
-    "message": "Admin",
-    "description": "Badge label for an admin user account in the users list table"
+    "description": "Badge label for an admin user account in the users list table",
+    "message": "Admin"
   },
   "pages.users.account_status.deactivated": {
-    "message": "Deactivated",
-    "description": "Badge label for a deactivated user account in the users list table"
+    "description": "Badge label for a deactivated user account in the users list table",
+    "message": "Deactivated"
   },
   "pages.users.account_status.guest": {
-    "message": "Guest",
-    "description": "Badge label for a legacy guest user account in the users list table"
+    "description": "Badge label for a legacy guest user account in the users list table",
+    "message": "Guest"
   },
   "pages.users.account_status.locked": {
-    "message": "Locked",
-    "description": "Badge label for a locked user account in the users list table"
+    "description": "Badge label for a locked user account in the users list table",
+    "message": "Locked"
   },
   "pages.users.add_email.button": {
-    "message": "Add email address",
-    "description": "The label of the button for adding an email address to a user"
+    "description": "The label of the button for adding an email address to a user",
+    "message": "Add email address"
   },
   "pages.users.add_email.description": {
-    "message": "Add an email address to this user",
-    "description": "The description of the modal for adding an email address"
+    "description": "The description of the modal for adding an email address",
+    "message": "Add an email address to this user"
   },
   "pages.users.add_email.error": {
-    "message": "Failed to add email address",
-    "description": "The error message for adding an email address"
+    "description": "The error message for adding an email address",
+    "message": "Failed to add email address"
   },
   "pages.users.add_email.error.email_invalid": {
-    "message": "Invalid email address",
-    "description": "Error message for invalid email address in the modal for adding an email address"
+    "description": "Error message for invalid email address in the modal for adding an email address",
+    "message": "Invalid email address"
   },
   "pages.users.add_email.error.email_missing": {
-    "message": "This field is required",
-    "description": "Error message for missing email address in the modal for adding an email address"
+    "description": "Error message for missing email address in the modal for adding an email address",
+    "message": "This field is required"
   },
   "pages.users.add_email.success": {
-    "message": "Email address added",
-    "description": "The success message for adding an email address"
+    "description": "The success message for adding an email address",
+    "message": "Email address added"
   },
   "pages.users.add_email.title": {
-    "message": "Add email address",
-    "description": "The title of the modal for adding an email address"
+    "description": "The title of the modal for adding an email address",
+    "message": "Add email address"
   },
   "pages.users.add_upstream_link.error": {
-    "message": "Failed to add link upstream account",
-    "description": "The error message for adding an upstream link"
+    "description": "The error message for adding an upstream link",
+    "message": "Failed to add link upstream account"
   },
   "pages.users.add_upstream_link.success": {
-    "message": "Link to upstream account added",
-    "description": "The success message for adding an upstream link"
+    "description": "The success message for adding an upstream link",
+    "message": "Link to upstream account added"
   },
   "pages.users.columns.account_status": {
-    "message": "Account status",
-    "description": "Column header for the account status in the users list table"
+    "description": "Column header for the account status in the users list table",
+    "message": "Account status"
   },
   "pages.users.columns.created_at": {
-    "message": "Created at",
-    "description": "Column header for the account creation date in the users list table"
+    "description": "Column header for the account creation date in the users list table",
+    "message": "Created at"
   },
   "pages.users.columns.matrix_id": {
-    "message": "Matrix ID",
-    "description": "Column header for the Matrix ID in the users list table"
+    "description": "Column header for the Matrix ID in the users list table",
+    "message": "Matrix ID"
   },
   "pages.users.deactivate_account.alert.description": {
-    "message": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data.",
-    "description": "In the modal to deactivate a user, the description of the alert"
+    "description": "In the modal to deactivate a user, the description of the alert",
+    "message": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
   },
   "pages.users.deactivate_account.alert.title": {
-    "message": "You're about to delete user data",
-    "description": "In the modal to deactivate a user, the title of the alert"
+    "description": "In the modal to deactivate a user, the title of the alert",
+    "message": "You're about to delete user data"
   },
   "pages.users.deactivate_account.button": {
-    "message": "Deactivate account",
-    "description": "The label for the deactivate account button on the user panel"
+    "description": "The label for the deactivate account button on the user panel",
+    "message": "Deactivate account"
   },
   "pages.users.deactivate_account.error": {
-    "message": "Failed to deactivate account",
-    "description": "The error message for deactivating a user account"
+    "description": "The error message for deactivating a user account",
+    "message": "Failed to deactivate account"
   },
   "pages.users.deactivate_account.success": {
-    "message": "Account deactivated",
-    "description": "The success message for deactivating a user account"
+    "description": "The success message for deactivating a user account",
+    "message": "Account deactivated"
   },
   "pages.users.deactivate_account.title": {
-    "message": "Deactivate this user?",
-    "description": "The title of the modal asking for confirmation to deactivate a user account"
+    "description": "The title of the modal asking for confirmation to deactivate a user account",
+    "message": "Deactivate this user?"
   },
   "pages.users.delete_email.description": {
-    "message": "Are you sure you want to remove this email address ({email}) from this user ({mxid})?",
-    "description": "The description of the modal asking for confirmation to delete an email address"
+    "description": "The description of the modal asking for confirmation to delete an email address",
+    "message": "Are you sure you want to remove this email address ({email}) from this user ({mxid})?"
   },
   "pages.users.delete_email.error": {
-    "message": "Failed to delete email address",
-    "description": "The error message for deleting an email address"
+    "description": "The error message for deleting an email address",
+    "message": "Failed to delete email address"
   },
   "pages.users.delete_email.success": {
-    "message": "Email address deleted",
-    "description": "The success message for deleting an email address"
+    "description": "The success message for deleting an email address",
+    "message": "Email address deleted"
   },
   "pages.users.delete_email.title": {
-    "message": "Remove email address?",
-    "description": "The title of the modal asking for confirmation to delete an email address"
+    "description": "The title of the modal asking for confirmation to delete an email address",
+    "message": "Remove email address?"
   },
   "pages.users.delete_upstream_link.description": {
-    "message": "Are you sure you want to remove the link between this user ({mxid}) with this upstream account ({subject})?",
-    "description": "The description of the modal asking for confirmation to delete an upstream link"
+    "description": "The description of the modal asking for confirmation to delete an upstream link",
+    "message": "Are you sure you want to remove the link between this user ({mxid}) with this upstream account ({subject})?"
   },
   "pages.users.delete_upstream_link.error": {
-    "message": "Failed to delete upstream link",
-    "description": "The error message for deleting an upstream link"
+    "description": "The error message for deleting an upstream link",
+    "message": "Failed to delete upstream link"
   },
   "pages.users.delete_upstream_link.success": {
-    "message": "Upstream link deleted",
-    "description": "The success message for deleting an upstream link"
+    "description": "The success message for deleting an upstream link",
+    "message": "Upstream link deleted"
   },
   "pages.users.delete_upstream_link.title": {
-    "message": "Remove link with upstream account?",
-    "description": "The title of the modal asking for confirmation to delete an upstream account link"
+    "description": "The title of the modal asking for confirmation to delete an upstream account link",
+    "message": "Remove link with upstream account?"
   },
   "pages.users.filters.active": {
-    "message": "Active users",
-    "description": "The label for the 'Active users' filter in the user list"
+    "description": "The label for the 'Active users' filter in the user list",
+    "message": "Active users"
   },
   "pages.users.filters.active_client_chip": {
-    "message": "Has active device on: {name}",
-    "description": "Active filter chip showing the currently filtered application in the user list"
+    "description": "Active filter chip showing the currently filtered application in the user list",
+    "message": "Has active device on: {name}"
   },
   "pages.users.filters.admins": {
-    "message": "Admins",
-    "description": "The label for the 'Admins' filter in the user list"
+    "description": "The label for the 'Admins' filter in the user list",
+    "message": "Admins"
   },
   "pages.users.filters.deactivated": {
-    "message": "Deactivated users",
-    "description": "The label for the 'Deactivated users' filter in the user list"
+    "description": "The label for the 'Deactivated users' filter in the user list",
+    "message": "Deactivated users"
   },
   "pages.users.filters.guests": {
-    "message": "Guests (legacy)",
-    "description": "The label for the 'Guests (legacy)' filter in the user list"
+    "description": "The label for the 'Guests (legacy)' filter in the user list",
+    "message": "Guests (legacy)"
   },
   "pages.users.filters.has_legacy_session": {
-    "message": "Has active legacy device",
-    "description": "The label for the 'has an active legacy device' filter in the user list"
+    "description": "The label for the 'has an active legacy device' filter in the user list",
+    "message": "Has active legacy device"
   },
   "pages.users.filters.locked": {
-    "message": "Locked users",
-    "description": "The label for the 'Locked users' filter in the user list"
+    "description": "The label for the 'Locked users' filter in the user list",
+    "message": "Locked users"
   },
   "pages.users.filters.newest_first": {
-    "message": "Newest first",
-    "description": "The label for the 'Newest first' filter in the user list"
+    "description": "The label for the 'Newest first' filter in the user list",
+    "message": "Newest first"
   },
   "pages.users.filters.no_legacy_session": {
-    "message": "No active legacy device",
-    "description": "The label for the 'no active legacy device' filter in the user list"
+    "description": "The label for the 'no active legacy device' filter in the user list",
+    "message": "No active legacy device"
   },
   "pages.users.filters.non_guests": {
-    "message": "Non-guests (legacy)",
-    "description": "The label for the 'Non-guests (legacy)' filter in the user list"
+    "description": "The label for the 'Non-guests (legacy)' filter in the user list",
+    "message": "Non-guests (legacy)"
   },
   "pages.users.lock_account.alert.description": {
-    "message": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked.",
-    "description": "In the modal to lock a user, the description of the alert"
+    "description": "In the modal to lock a user, the description of the alert",
+    "message": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."
   },
   "pages.users.lock_account.alert.title": {
-    "message": "The user will not be able to send or receive messages",
-    "description": "In the modal to lock a user, the title of the alert"
+    "description": "In the modal to lock a user, the title of the alert",
+    "message": "The user will not be able to send or receive messages"
   },
   "pages.users.lock_account.button": {
-    "message": "Lock account",
-    "description": "The label for the lock account button on the user panel"
+    "description": "The label for the lock account button on the user panel",
+    "message": "Lock account"
   },
   "pages.users.lock_account.error": {
-    "message": "Failed to lock account",
-    "description": "The error message for locking a user account"
+    "description": "The error message for locking a user account",
+    "message": "Failed to lock account"
   },
   "pages.users.lock_account.success": {
-    "message": "Account locked",
-    "description": "The success message for locking a user account"
+    "description": "The success message for locking a user account",
+    "message": "Account locked"
   },
   "pages.users.lock_account.title": {
-    "message": "Lock this user's account?",
-    "description": "The title of the modal asking for confirmation to lock a user account"
+    "description": "The title of the modal asking for confirmation to lock a user account",
+    "message": "Lock this user's account?"
   },
   "pages.users.new_user.add_user": {
-    "message": "Add user",
-    "description": "The title of the add user dialog"
+    "description": "The title of the add user dialog",
+    "message": "Add user"
   },
   "pages.users.new_user.create_account": {
-    "message": "Create account",
-    "description": "The label for the create account button in the new user form"
+    "description": "The label for the create account button in the new user form",
+    "message": "Create account"
   },
   "pages.users.new_user.description": {
-    "message": "To add a new user to {serverName}, choose a user name for this user, which will be part of their user ID.",
-    "description": "The description of the add user dialog"
+    "description": "The description of the add user dialog",
+    "message": "To add a new user to {serverName}, choose a user name for this user, which will be part of their user ID."
   },
   "pages.users.new_user.error_message": {
-    "message": "Error creating user",
-    "description": "The error message shown in a toast when a user fails to be created"
+    "description": "The error message shown in a toast when a user fails to be created",
+    "message": "Error creating user"
   },
   "pages.users.new_user.invalid_localpart": {
-    "message": "Localpart can only contain lowercase letters, numbers, dots, underscores, dashes and slashes",
-    "description": "The error message shown when the localpart contains invalid characters"
+    "description": "The error message shown when the localpart contains invalid characters",
+    "message": "Localpart can only contain lowercase letters, numbers, dots, underscores, dashes and slashes"
   },
   "pages.users.new_user.invalid_localpart_numeric_only": {
-    "message": "Localpart cannot only contain numbers",
-    "description": "The error message shown when the localpart input only has numbers, which are reserved for guests"
+    "description": "The error message shown when the localpart input only has numbers, which are reserved for guests",
+    "message": "Localpart cannot only contain numbers"
   },
   "pages.users.new_user.localpart": {
-    "message": "Enter name",
-    "description": "The label for the localpart input in the new user form. Careful with the value, some browsers (*cough* Safari) will trigger autocomplete (which we don't want!) if the input label has 'username' or 'user ID' in it"
+    "description": "The label for the localpart input in the new user form. Careful with the value, some browsers (*cough* Safari) will trigger autocomplete (which we don't want!) if the input label has 'username' or 'user ID' in it",
+    "message": "Enter name"
   },
   "pages.users.new_user.required_error": {
-    "message": "This field is required",
-    "description": "The error message shown when the localpart input is empty"
+    "description": "The error message shown when the localpart input is empty",
+    "message": "This field is required"
   },
   "pages.users.new_user.success_message": {
-    "message": "User created",
-    "description": "The success message shown in a toast when a user is created"
+    "description": "The success message shown in a toast when a user is created",
+    "message": "User created"
   },
   "pages.users.not_found.description": {
-    "message": "The requested user ({userId}) could not be found on {serverName}.",
-    "description": "The description of the alert when a user could not be found"
+    "description": "The description of the alert when a user could not be found",
+    "message": "The requested user ({userId}) could not be found on {serverName}."
   },
   "pages.users.not_found.title": {
-    "message": "User not found",
-    "description": "The title of the alert when a user could not be found"
+    "description": "The title of the alert when a user could not be found",
+    "message": "User not found"
   },
   "pages.users.reactivate_account.button": {
-    "message": "Reactivate",
-    "description": "The label for the reactivate account button on the user panel"
+    "description": "The label for the reactivate account button on the user panel",
+    "message": "Reactivate"
   },
   "pages.users.reactivate_account.error": {
-    "message": "Failed to reactivate account",
-    "description": "The error message for reactivating a user account"
+    "description": "The error message for reactivating a user account",
+    "message": "Failed to reactivate account"
   },
   "pages.users.reactivate_account.success": {
-    "message": "Account reactivated",
-    "description": "The success message for reactivating a user account"
+    "description": "The success message for reactivating a user account",
+    "message": "Account reactivated"
   },
   "pages.users.search_placeholder": {
-    "message": "Search users…",
-    "description": "The placeholder text for the user search input"
+    "description": "The placeholder text for the user search input",
+    "message": "Search users…"
   },
   "pages.users.set_admin.alert.description": {
-    "message": "The user will be able to view user data and make changes to user and room permissions.",
-    "description": "In the modal to give admin privileges, the description of the alert"
+    "description": "In the modal to give admin privileges, the description of the alert",
+    "message": "The user will be able to view user data and make changes to user and room permissions."
   },
   "pages.users.set_admin.alert.title": {
-    "message": "User will have access to sensitive data",
-    "description": "In the modal to give admin privileges, the title of the alert"
+    "description": "In the modal to give admin privileges, the title of the alert",
+    "message": "User will have access to sensitive data"
   },
   "pages.users.set_admin.error": {
-    "message": "Failed to change admin privileges for {mxid}",
-    "description": "The error message for changing a user's admin privileges"
+    "description": "The error message for changing a user's admin privileges",
+    "message": "Failed to change admin privileges for {mxid}"
   },
   "pages.users.set_admin.label": {
-    "message": "Admin",
-    "description": "The label for the admin checkbox in the user panel"
+    "description": "The label for the admin checkbox in the user panel",
+    "message": "Admin"
   },
   "pages.users.set_admin.make_admin_button": {
-    "message": "Make admin",
-    "description": "The submit button text in the set admin privileges modal"
+    "description": "The submit button text in the set admin privileges modal",
+    "message": "Make admin"
   },
   "pages.users.set_admin.successfully_demoted": {
-    "message": "{mxid} no longer has admin privileges",
-    "description": "The success message when removing admin privileges from a user"
+    "description": "The success message when removing admin privileges from a user",
+    "message": "{mxid} no longer has admin privileges"
   },
   "pages.users.set_admin.successfully_promoted": {
-    "message": "{mxid} now has admin privileges",
-    "description": "The success message when giving admin privileges to a user"
+    "description": "The success message when giving admin privileges to a user",
+    "message": "{mxid} now has admin privileges"
   },
   "pages.users.set_admin.title": {
-    "message": "Make this user an admin?",
-    "description": "The title of the modal asking for confirmation to give admin privileges to a user"
+    "description": "The title of the modal asking for confirmation to give admin privileges to a user",
+    "message": "Make this user an admin?"
   },
   "pages.users.set_password.button": {
-    "message": "Change password",
-    "description": "The label for the change password button on the user panel"
+    "description": "The label for the change password button on the user panel",
+    "message": "Change password"
   },
   "pages.users.set_password.confirm_password_label": {
-    "message": "Enter password again",
-    "description": "Label for the confirm password field in set password modal"
+    "description": "Label for the confirm password field in set password modal",
+    "message": "Enter password again"
   },
   "pages.users.set_password.error": {
-    "message": "Failed to set password",
-    "description": "The error message when the request for setting a user password fails"
+    "description": "The error message when the request for setting a user password fails",
+    "message": "Failed to set password"
   },
   "pages.users.set_password.error.password_missing": {
-    "message": "This field is required",
-    "description": "Error message for missing password in set password modal"
+    "description": "Error message for missing password in set password modal",
+    "message": "This field is required"
   },
   "pages.users.set_password.error.passwords_mismatch": {
-    "message": "Passwords do not match",
-    "description": "Error message for mismatched passwords in set password modal"
+    "description": "Error message for mismatched passwords in set password modal",
+    "message": "Passwords do not match"
   },
   "pages.users.set_password.password_label": {
-    "message": "Password",
-    "description": "Label for the password field in set password modal"
+    "description": "Label for the password field in set password modal",
+    "message": "Password"
   },
   "pages.users.set_password.password_match": {
-    "message": "Passwords match!",
-    "description": "When the two password input match in the set password modal"
+    "description": "When the two password input match in the set password modal",
+    "message": "Passwords match!"
   },
   "pages.users.set_password.submit": {
-    "message": "Set new password",
-    "description": "The submit button text in the set password modal"
+    "description": "The submit button text in the set password modal",
+    "message": "Set new password"
   },
   "pages.users.set_password.success": {
-    "message": "Password set successfully",
-    "description": "The success message for setting a user password"
+    "description": "The success message for setting a user password",
+    "message": "Password set successfully"
   },
   "pages.users.set_password.title": {
-    "message": "Set a new password for this user",
-    "description": "The title of the modal for setting a user password"
+    "description": "The title of the modal for setting a user password",
+    "message": "Set a new password for this user"
   },
   "pages.users.statistics.devices": {
-    "message": "Devices",
-    "description": "Stat label: total number of devices (OAuth 2.0 sessions) for this user"
+    "description": "Stat label: total number of devices (OAuth 2.0 sessions) for this user",
+    "message": "Devices"
   },
   "pages.users.statistics.legacy_devices": {
-    "message": "Legacy devices",
-    "description": "Stat label: total number of legacy devices (compat sessions) for this user"
+    "description": "Stat label: total number of legacy devices (compat sessions) for this user",
+    "message": "Legacy devices"
   },
   "pages.users.title": {
-    "message": "Users",
-    "description": "The title of the users list page"
+    "description": "The title of the users list page",
+    "message": "Users"
   },
   "pages.users.unlock_account.button": {
-    "message": "Unlock account",
-    "description": "The label for the lock account button on the user panel"
+    "description": "The label for the lock account button on the user panel",
+    "message": "Unlock account"
   },
   "pages.users.unlock_account.error": {
-    "message": "Failed to unlock account",
-    "description": "The error message for unlocking a user account"
+    "description": "The error message for unlocking a user account",
+    "message": "Failed to unlock account"
   },
   "pages.users.unlock_account.success": {
-    "message": "Account unlocked",
-    "description": "The success message for unlocking a user account"
+    "description": "The success message for unlocking a user account",
+    "message": "Account unlocked"
   },
   "pages.users.user_count": {
-    "message": "{COUNT, plural, zero {No users} one {# user} other {# users}}",
-    "description": "On the user list page, this heading shows the total number of users"
+    "description": "On the user list page, this heading shows the total number of users",
+    "message": "{COUNT, plural, zero {No users} one {# user} other {# users}}"
   },
   "product.element": {
-    "message": "Element",
-    "description": "Just Element."
+    "description": "Just Element.",
+    "message": "Element"
   },
   "product.title": {
-    "message": "Element Admin",
-    "description": "The main name of the admin console"
+    "description": "The main name of the admin console",
+    "message": "Element Admin"
   },
   "product.title.community": {
-    "message": "Element Community",
-    "description": "The main name of the admin console, the Community variant"
+    "description": "The main name of the admin console, the Community variant",
+    "message": "Element Community"
   },
   "product.title.pro": {
-    "message": "Element Pro",
-    "description": "The main name of the admin console, the Pro variant"
+    "description": "The main name of the admin console, the Pro variant",
+    "message": "Element Pro"
   },
   "product.title.ti-m": {
-    "message": "Element TI-Messenger",
-    "description": "The main name of the admin console, the TI-Messenger variant"
+    "description": "The main name of the admin console, the TI-Messenger variant",
+    "message": "Element TI-Messenger"
   },
   "room_info.empty_room": {
-    "message": "Empty room",
-    "description": "Name of a room when the room has no explicit name and no member"
+    "description": "Name of a room when the room has no explicit name and no member",
+    "message": "Empty room"
   },
   "room_info.empty_space": {
-    "message": "Empty space",
-    "description": "Name of a space when the space has no explicit name and no member"
+    "description": "Name of a space when the space has no explicit name and no member",
+    "message": "Empty space"
   },
   "room_info.room_with": {
-    "message": "Room with {members}",
-    "description": "Name we display for a room with no explicit name. In this case, we show the list of members, e.g. 'Room with Alice and Bob'"
+    "description": "Name we display for a room with no explicit name. In this case, we show the list of members, e.g. 'Room with Alice and Bob'",
+    "message": "Room with {members}"
   },
   "room_info.space_with": {
-    "message": "Space with {members}",
-    "description": "Name we display for a space with no explicit name. In this case, we show the list of members, e.g. 'Space with Alice and Bob'"
+    "description": "Name we display for a space with no explicit name. In this case, we show the list of members, e.g. 'Space with Alice and Bob'",
+    "message": "Space with {members}"
   },
   "room_info.unknown_user": {
-    "message": "Unknown user",
-    "description": "When showing the room name based on members, this is the fallback when we can't load the member name for some reason"
+    "description": "When showing the room name based on members, this is the fallback when we can't load the member name for some reason",
+    "message": "Unknown user"
   },
   "rooms_info.other_members": {
-    "message": "{COUNT, plural, one {# other} other {# others}}",
-    "description": "When a room or space has no name, we show 'Room/Space with Alice, Bob and 3 others'. This is the 'X others' part."
+    "description": "When a room or space has no name, we show 'Room/Space with Alice, Bob and 3 others'. This is the 'X others' part.",
+    "message": "{COUNT, plural, one {# other} other {# others}}"
   },
   "ui.data.failed_to_load": {
-    "message": "Failed to load",
-    "description": "In a data grid, when a specific data value failed to load"
+    "description": "In a data grid, when a specific data value failed to load",
+    "message": "Failed to load"
   },
   "ui.data.loading": {
-    "message": "Loading value",
-    "description": "In a data grid, aria label for when a data value is loading"
+    "description": "In a data grid, aria label for when a data value is loading",
+    "message": "Loading value"
   },
   "ui.data_table.loading_more": {
-    "message": "Loading more…",
-    "description": "Label shown in a table row while the next page of results is being loaded"
+    "description": "Label shown in a table row while the next page of results is being loaded",
+    "message": "Loading more…"
   },
   "ui.destination_status.failing": {
-    "message": "Failing",
-    "description": "Badge label for a federation destination that is failing"
+    "description": "Badge label for a federation destination that is failing",
+    "message": "Failing"
   },
   "ui.destination_status.inactive": {
-    "message": "Inactive",
-    "description": "Badge label for a federation destination that is inactive"
+    "description": "Badge label for a federation destination that is inactive",
+    "message": "Inactive"
   },
   "ui.destination_status.never_worked": {
-    "message": "Never worked",
-    "description": "Badge label for a federation destination that has never successfully received any data"
+    "description": "Badge label for a federation destination that has never successfully received any data",
+    "message": "Never worked"
   },
   "ui.destination_status.working": {
-    "message": "Working",
-    "description": "Badge label for a federation destination that is working"
+    "description": "Badge label for a federation destination that is working",
+    "message": "Working"
   },
   "ui.device_info.name_on_platform": {
-    "message": "{name} on {platform}",
-    "description": "Name of a device derived from its user-agent, e.g. 'Firefox on macOS'"
+    "description": "Name of a device derived from its user-agent, e.g. 'Firefox on macOS'",
+    "message": "{name} on {platform}"
   },
   "ui.device_info.type.mobile": {
-    "message": "Mobile device",
-    "description": "Device type icon label for mobile devices"
+    "description": "Device type icon label for mobile devices",
+    "message": "Mobile device"
   },
   "ui.device_info.type.pc": {
-    "message": "Computer",
-    "description": "Device type icon label for computers"
+    "description": "Device type icon label for computers",
+    "message": "Computer"
   },
   "ui.device_info.type.tablet": {
-    "message": "Tablet",
-    "description": "Device type icon label for tablets"
+    "description": "Device type icon label for tablets",
+    "message": "Tablet"
   },
   "ui.device_info.type.unknown": {
-    "message": "Unknown device type",
-    "description": "Device type icon label for unknown device types"
+    "description": "Device type icon label for unknown device types",
+    "message": "Unknown device type"
   },
   "ui.device_info.unknown_device": {
-    "message": "Unknown device",
-    "description": "Shown when we can't figure out the name of a device"
+    "description": "Shown when we can't figure out the name of a device",
+    "message": "Unknown device"
   },
   "ui.device_status.active": {
-    "message": "Active",
-    "description": "Device status badge: the device is signed in and was used in the last few months"
+    "description": "Device status badge: the device is signed in and was used in the last few months",
+    "message": "Active"
   },
   "ui.device_status.inactive": {
-    "message": "Inactive",
-    "description": "Device status badge: the device has not been used in a long time"
+    "description": "Device status badge: the device has not been used in a long time",
+    "message": "Inactive"
   },
   "ui.device_status.last_active.tooltip": {
-    "message": "Last active on {date}.",
-    "description": "Tooltip on a device status badge, giving the date the device was last active"
+    "description": "Tooltip on a device status badge, giving the date the device was last active",
+    "message": "Last active on {date}."
   },
   "ui.device_status.never_used": {
-    "message": "Never used",
-    "description": "Device status badge: the device has never been used"
+    "description": "Device status badge: the device has never been used",
+    "message": "Never used"
   },
   "ui.device_status.never_used.tooltip": {
-    "message": "This device has not been used yet.",
-    "description": "Tooltip on the 'Never used' device status badge"
+    "description": "Tooltip on the 'Never used' device status badge",
+    "message": "This device has not been used yet."
   },
   "ui.device_status.recently_used": {
-    "message": "Recently used",
-    "description": "Device status badge: the device was used in the last couple of weeks"
+    "description": "Device status badge: the device was used in the last couple of weeks",
+    "message": "Recently used"
   },
   "ui.device_status.signed_out": {
-    "message": "Signed out",
-    "description": "Device status badge: the device has been signed out"
+    "description": "Device status badge: the device has been signed out",
+    "message": "Signed out"
   },
   "ui.device_status.signed_out.tooltip": {
-    "message": "This device has been signed out and no longer has access.",
-    "description": "Tooltip on the 'Signed out' device status badge, when the date is unknown"
+    "description": "Tooltip on the 'Signed out' device status badge, when the date is unknown",
+    "message": "This device has been signed out and no longer has access."
   },
   "ui.device_status.signed_out.tooltip_at": {
-    "message": "Signed out on {date}.",
-    "description": "Tooltip on the 'Signed out' device status badge, giving the date it was signed out"
+    "description": "Tooltip on the 'Signed out' device status badge, giving the date it was signed out",
+    "message": "Signed out on {date}."
   },
   "ui.language_switcher.browser_default": {
-    "message": "Use browser settings ({language})",
-    "description": "Option to use browser's default language in the language switcher"
+    "description": "Option to use browser's default language in the language switcher",
+    "message": "Use browser settings ({language})"
   },
   "ui.language_switcher.button_label": {
-    "message": "Language settings",
-    "description": "Aria label for the language switcher button"
+    "description": "Aria label for the language switcher button",
+    "message": "Language settings"
   },
   "ui.language_switcher.description": {
-    "message": "Choose your preferred language for the interface.",
-    "description": "Description text in the language switcher modal"
+    "description": "Description text in the language switcher modal",
+    "message": "Choose your preferred language for the interface."
   },
   "ui.language_switcher.language_list_label": {
-    "message": "List of available languages",
-    "description": "Aria label for the list of available languages in the language switcher"
+    "description": "Aria label for the list of available languages in the language switcher",
+    "message": "List of available languages"
   },
   "ui.language_switcher.title": {
-    "message": "Language settings",
-    "description": "Title of the language switcher modal"
+    "description": "Title of the language switcher modal",
+    "message": "Language settings"
   },
   "ui.user_picker.loading_list": {
-    "message": "Loading…",
-    "description": "On the user-picker list, this is the placeholder shown whilst things are loading"
+    "description": "On the user-picker list, this is the placeholder shown whilst things are loading",
+    "message": "Loading…"
   },
   "ui.user_picker.no_match": {
-    "message": "No match",
-    "description": "On the user-picker list, this is the placeholder shown when there are no results"
+    "description": "On the user-picker list, this is the placeholder shown when there are no results",
+    "message": "No match"
   },
   "ui.user_picker.no_match_help": {
-    "message": "Try a different search term. This can only lookup active users on {serverName} using their localpart.",
-    "description": "On the user-picker list, this is the help text shown when there are no results"
+    "description": "On the user-picker list, this is the help text shown when there are no results",
+    "message": "Try a different search term. This can only lookup active users on {serverName} using their localpart."
   }
 }
