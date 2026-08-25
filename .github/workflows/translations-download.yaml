@@ -20,7 +20,10 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: ./.github/actions/setup-node
+      - name: Install pnpm, Node.js and the dependencies
+        uses: pnpm/setup@84cb39b217b10273981911c288cd62326dc7c6d2 # v2.0.2
+        with:
+          runtime: node
 
       - name: Download translations from Localazy
         run: pnpm i18n:download
