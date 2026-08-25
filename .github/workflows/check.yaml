@@ -64,9 +64,6 @@ jobs:
     permissions:
       contents: read
 
-    # Keep in sync with the @playwright/test version in package.json
-    container: mcr.microsoft.com/playwright:v1.62.1-noble
-
     steps:
       - name: Checkout the code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -74,6 +71,9 @@ jobs:
           persist-credentials: false
 
       - uses: ./.github/actions/setup-node
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium webkit
 
       - name: Build frontend
         run: pnpm build
