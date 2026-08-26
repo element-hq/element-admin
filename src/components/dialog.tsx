@@ -86,7 +86,10 @@ export const Root: React.FC<RootProps> = ({
                 {children}
 
                 <Tooltip label={intl.formatMessage(messages.actionClose)}>
-                  <Close className={styles["close"]}>
+                  <Close
+                    className={styles["close"]}
+                    onPointerDown={(e) => e.preventDefault()}
+                  >
                     <CloseIcon />
                   </Close>
                 </Tooltip>
