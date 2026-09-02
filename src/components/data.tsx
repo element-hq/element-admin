@@ -179,12 +179,7 @@ const LoadingValue = forwardRef<HTMLDivElement, LoadingValueProps>(
       <Value
         {...props}
         aria-busy="true"
-        aria-label={intl.formatMessage({
-          id: "ui.data.loading",
-          defaultMessage: "Loading value",
-          description:
-            "In a data grid, aria label for when a data value is loading",
-        })}
+        aria-label={intl.formatMessage(messages.commonLoading)}
         ref={ref}
       >
         <Placeholder.Text />

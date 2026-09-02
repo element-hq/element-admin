@@ -17,7 +17,7 @@
     "knip": "knip && knip --production",
     "lint": "oxlint && stylelint 'src/**/*.css' && oxfmt --check",
     "fix": "oxlint --fix && stylelint --fix 'src/**/*.css' && oxfmt",
-    "i18n:extract": "formatjs extract --throws --format crowdin 'src/**/*.{ts,tsx}' --out-file translations/extracted/en.json && oxfmt translations/extracted/en.json",
+    "i18n:extract": "formatjs extract --throws --format crowdin 'src/**/*.{ts,tsx}' --out-file translations/extracted/en.json && formatjs compile --format crowdin --ast translations/extracted/en.json --out-file translations/compiled/en.json && oxfmt translations/extracted/en.json translations/compiled/en.json",
     "i18n:download": "localazy download && pnpm i18n:normalize && oxfmt translations/translated/",
     "i18n:normalize": "node scripts/i18n-normalize-plurals.mjs",
     "i18n:compile": "pnpm i18n:normalize && formatjs compile-folder --format crowdin --ast translations/translated/ translations/compiled/ && oxfmt translations/compiled",
@@ -62,6 +62,7 @@
     "@formatjs/unplugin": "1.2.6",
     "@hey-api/openapi-ts": "0.99.0",
     "@localazy/cli": "2.0.12",
+    "@msw/playwright": "0.6.7",
     "@playwright/test": "1.62.1",
     "@tailwindcss/vite": "4.3.3",
     "@tanstack/devtools-vite": "0.8.3",
@@ -84,6 +85,7 @@
     "husky": "9.1.7",
     "knip": "6.32.2",
     "lint-staged": "17.3.0",
+    "msw": "2.15.0",
     "oxc-transform-react": "^0.145.0",
     "oxfmt": "0.64.0",
     "oxlint": "1.79.0",
@@ -109,10 +111,12 @@
   "knip": {
     "entry": [
       "src/base.css!",
-      "src/prerender.tsx!"
+      "src/prerender.tsx!",
+      "tests/**/*.spec.ts"
     ],
     "project": [
-      "src/**/*!"
+      "src/**/*!",
+      "tests/**/*"
     ],
     "ignore": [
       "src/api/mas/api/**/*",

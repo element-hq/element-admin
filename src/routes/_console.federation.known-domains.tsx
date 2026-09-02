@@ -220,7 +220,7 @@ function RouteComponent() {
               <DataTable.Title>
                 <FormattedMessage
                   id="pages.federation.domain_count"
-                  defaultMessage="{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
+                  defaultMessage="{COUNT, plural, =0 {No domains} one {# domain} other {# domains}}"
                   description="On the federation page, this heading shows the total number of known domains"
                   values={{ COUNT: totalCount }}
                 />

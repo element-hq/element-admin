@@ -7,7 +7,6 @@
     "deprecate": "project"
   },
   "download": {
-    "files": "translations/translated/${lang}.json",
-    "includeSourceLang": true
+    "files": "translations/translated/${lang}.json"
   }
 }

@@ -43,6 +43,43 @@ export class NotLoggedInError extends LocalizedError {
   }
 }
 
+export class AuthorizationDeniedError extends LocalizedError {
+  localizedMessage = defineMessage({
+    id: "errors.authorization_denied",
+    defaultMessage: "Sign-in was cancelled.",
+    description:
+      "Error message when the authorization server redirected back with an 'access_denied' error, which is what it sends when the user declined the sign-in or the server refused to grant them access.",
+  });
+
+  // The server's description never reaches the user — cancelling is not a
+  // failure to explain — but it stays on the non-localized message, which the
+  // error screen exposes through the stack.
+  constructor(errorDescription?: string, options?: ErrorOptions) {
+    super(
+      errorDescription
+        ? `Sign-in was cancelled: ${errorDescription}`
+        : "Sign-in was cancelled",
+      options,
+    );
+  }
+}
+
+export class AuthorizationError extends LocalizedError {
+  localizedMessage = defineMessage({
+    id: "errors.authorization_error",
+    defaultMessage: "Sign-in failed: {errorMessage}",
+    description:
+      "Error message when the authorization server redirected back with an OAuth 2.0 error other than 'access_denied'. 'errorMessage' is the description the server gave, usually in english, or the raw error code when it gave none.",
+  });
+
+  constructor(errorMessage: string, options?: ErrorOptions) {
+    super(`Sign-in failed: ${errorMessage}`, options);
+    this.values = {
+      errorMessage,
+    };
+  }
+}
+
 export class HttpStatusError extends LocalizedError {
   localizedMessage = defineMessage({
     id: "errors.http_status",
@@ -82,6 +119,26 @@ export class MatrixStandardError extends LocalizedError {
     this.values = {
       errorCode: errcode,
       errorMessage: error,
+    };
+  }
+}
+
+export class MasApiError extends LocalizedError {
+  localizedMessage = defineMessage({
+    id: "errors.mas_api",
+    defaultMessage:
+      "The homeserver's authentication service returned an error: {errorMessage}",
+    description:
+      "Generic error message when Matrix Authentication Service returned a structured error. 'errorMessage' is the list of human-readable error titles it gave, usually in english.",
+  });
+
+  constructor(errorMessage: string, options?: ErrorOptions) {
+    super(
+      `The homeserver's authentication service returned an error: ${errorMessage}`,
+      options,
+    );
+    this.values = {
+      errorMessage,
     };
   }
 }

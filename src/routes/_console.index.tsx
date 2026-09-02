@@ -5,10 +5,10 @@
 
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { H3, Separator, Text } from "@vector-im/compound-web";
+import { Heading, Separator, Text } from "@vector-im/compound-web";
 import { defineMessage, FormattedMessage } from "react-intl";
 
-import { useEssVersion } from "@/api/ess";
+import { essVersionQuery, useEssVersion } from "@/api/ess";
 import { githubReleaseQuery } from "@/api/github";
 import { usersCountQuery } from "@/api/mas";
 import { wellKnownQuery } from "@/api/matrix";
@@ -44,11 +44,19 @@ export const Route = createFileRoute("/_console/")({
 
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
-    // Kick the loading of the 4 queries but don't await them
+    // Kick the loading of these queries but don't await them
     queryClient.prefetchQuery(serverVersionQuery(synapseRoot));
     queryClient.prefetchQuery(roomsCountQuery(synapseRoot));
     queryClient.prefetchQuery(usersCountQuery(credentials.serverName));
-    queryClient.prefetchQuery(latestEssReleaseQuery);
+
+    // The latest-release tile only renders for ESS deployments, so a non-ESS
+    // server skips the request to api.github.com.
+    const { version } = await queryClient.ensureQueryData(
+      essVersionQuery(synapseRoot),
+    );
+    if (version) {
+      queryClient.prefetchQuery(latestEssReleaseQuery);
+    }
   },
   component: RouteComponent,
 });
@@ -128,7 +136,12 @@ function RouteComponent() {
 
   const synapseRoot = wellKnown["m.homeserver"].base_url;
   const essVersion = useEssVersion(synapseRoot);
-  const { data: latestEssRelease } = useQuery(latestEssReleaseQuery);
+  // Same gate as the loader's: the tile which shows this only renders for ESS
+  // deployments.
+  const { data: latestEssRelease } = useQuery({
+    ...latestEssReleaseQuery,
+    enabled: !!essVersion,
+  });
   let isUsingLatest = false;
   if (latestEssRelease?.tag_name && essVersion) {
     isUsingLatest = compareMain(essVersion, latestEssRelease.tag_name) >= 0;
@@ -146,7 +159,11 @@ function RouteComponent() {
 
           <section className="flex flex-col gap-6">
             <div>
-              <H3>{credentials.serverName}</H3>
+              {/* h2 to follow the page's h1 without a gap in heading levels;
+                  size/weight match H3 to keep the established visual weight. */}
+              <Heading as="h2" size="md" weight="semibold">
+                {credentials.serverName}
+              </Heading>
               <Separator kind="section" />
             </div>
 
@@ -197,7 +214,7 @@ function RouteComponent() {
                   <FormattedMessage
                     id="pages.dashboard.rooms_count"
                     defaultMessage="Rooms total"
-                    description="On the dashboard, this shows the Synapse uptime"
+                    description="On the dashboard, this shows the total number of rooms on the server"
                   />
                 </Data.Title>
                 <Data.DynamicValue>

@@ -24,7 +24,7 @@ import {
 } from "@vector-im/compound-web";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { FormattedMessage, useIntl } from "react-intl";
+import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
 import { wellKnownQuery as matrixWellKnownQuery } from "@/api/matrix";
 import {
@@ -35,7 +35,7 @@ import {
 import type { ScheduledTask } from "@/api/synapse";
 import * as Data from "@/components/data";
 import * as Dialog from "@/components/dialog";
-import { ButtonLink } from "@/components/link";
+import { ButtonLink, TextLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import { RoomAvatar, RoomDisplayName } from "@/components/room-info";
 import * as messages from "@/messages";
@@ -59,6 +59,12 @@ export const Route = createFileRoute("/_console/rooms/$roomId")({
   notFoundComponent: NotFoundComponent,
 });
 
+const detailsLabel = defineMessage({
+  id: "pages.rooms.details_label",
+  defaultMessage: "Room details",
+  description: "The accessible name of the room details panel",
+});
+
 function NotFoundComponent() {
   const { roomId } = Route.useParams();
   const {
@@ -66,7 +72,10 @@ function NotFoundComponent() {
   } = Route.useRouteContext();
   const intl = useIntl();
   return (
-    <Navigation.Details className="gap-4">
+    <Navigation.Details
+      className="gap-4"
+      aria-label={intl.formatMessage(detailsLabel)}
+    >
       <CloseSidebar />
 
       <Alert
@@ -415,6 +424,35 @@ function RoomChip(props: RoomCommonProps) {
   );
 }
 
+// The user list searches on the username, not on the full Matrix ID, so only a
+// creator from this server can be looked up there. A room created under room
+// version 11 or later reports no creator at all.
+function RoomCreator({
+  creator,
+  serverName,
+}: {
+  creator: string;
+  serverName: string;
+}) {
+  if (!creator) {
+    // oxlint-disable-next-line formatjs/no-literal-string-in-jsx
+    return <Data.Value>—</Data.Value>;
+  }
+
+  const separator = creator.indexOf(":");
+  if (!creator.startsWith("@") || creator.slice(separator + 1) !== serverName) {
+    return <Data.Value>{creator}</Data.Value>;
+  }
+
+  return (
+    <Data.Value>
+      <TextLink to="/users" search={{ search: creator.slice(1, separator) }}>
+        {creator}
+      </TextLink>
+    </Data.Value>
+  );
+}
+
 function RouteComponent() {
   const { credentials } = Route.useRouteContext();
   const { roomId } = Route.useParams();
@@ -426,8 +464,10 @@ function RouteComponent() {
 
   const { data: room } = useSuspenseQuery(roomDetailQuery(synapseRoot, roomId));
 
+  const intl = useIntl();
+
   return (
-    <Navigation.Details>
+    <Navigation.Details aria-label={intl.formatMessage(detailsLabel)}>
       <CloseSidebar />
 
       <div className="py-6 flex flex-col gap-4">
@@ -524,7 +564,7 @@ function RouteComponent() {
 
         <Data.Item>
           <Data.Title>Total Members</Data.Title>
-          <Data.Value>{room.joined_members.toLocaleString()}</Data.Value>
+          <Data.NumericValue value={room.joined_members} />
         </Data.Item>
 
         <Data.Item>
@@ -539,7 +579,10 @@ function RouteComponent() {
 
         <Data.Item>
           <Data.Title>Creator</Data.Title>
-          <Data.Value>{room.creator}</Data.Value>
+          <RoomCreator
+            creator={room.creator}
+            serverName={credentials.serverName}
+          />
         </Data.Item>
 
         <Data.Item>

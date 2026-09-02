@@ -18,9 +18,11 @@ interface UserCardProps {
 }
 
 // Same shape as the resolved body, so the card it sits in doesn't resize once
-// the user is loaded
+// the user is loaded. The surrounding link is already focusable at this point,
+// so the body carries the only accessible name it has while pending.
 const UserCardBodySkeleton = () => (
-  <div aria-busy="true" className="flex items-center gap-3 min-w-0">
+  <div className="flex items-center gap-3 min-w-0">
+    <Placeholder.Loading />
     <Placeholder.Avatar />
     <div className="flex flex-col gap-1 flex-1 max-w-60">
       <Placeholder.Text />

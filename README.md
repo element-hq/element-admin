@@ -102,7 +102,8 @@ We welcome contributions from the community! If you'd like to suggest changes or
 ### Development workflow
 
 - **Linting & Formatting:** Run `pnpm lint` to check code style and `pnpm fix` to auto-fix issues
-- **Translation extraction:** Run `pnpm i18n:extract` when adding new translatable strings
+- **Translation extraction:** Run `pnpm i18n:extract` when adding or changing translatable strings, and commit the regenerated English files under `translations/`. The other languages are translated on [Localazy](https://localazy.com/p/element-admin): the extracted messages are uploaded there on every push to `main`, and the translations come back through the download workflow's automated pull requests
+- **End-to-end tests:** See [`tests/README.md`](tests/README.md) for how to run and write the Playwright suite
 
 ## ⚖️ Copyright & License
 

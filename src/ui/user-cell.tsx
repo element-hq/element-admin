@@ -29,7 +29,7 @@ const CellBoundary: React.FC<{ fallback: string; children: ReactNode }> = ({
       </Text>
     }
   >
-    <Suspense fallback={<Placeholder.Text />}>{children}</Suspense>
+    <Suspense fallback={<Placeholder.LoadingText />}>{children}</Suspense>
   </ErrorBoundary>
 );
 

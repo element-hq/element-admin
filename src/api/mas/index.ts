@@ -13,6 +13,7 @@ import { notFound } from "@tanstack/react-router";
 import { authMetadataQuery } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
 import { PAGE_SIZE } from "@/constants";
+import { HttpStatusError, MasApiError } from "@/errors";
 import { accessToken } from "@/stores/auth";
 import { fetch } from "@/utils/fetch";
 
@@ -24,7 +25,10 @@ const masClient = createClient({
 });
 
 export const isErrorResponse = (t: unknown): t is api.ErrorResponse =>
-  typeof t === "object" && t !== null && Object.hasOwn(t, "errors");
+  typeof t === "object" &&
+  t !== null &&
+  Object.hasOwn(t, "errors") &&
+  Array.isArray((t as api.ErrorResponse).errors);
 
 function ensureNoError<
   R extends {
@@ -46,6 +50,18 @@ function ensureNoError<
     });
   }
   if (result.error !== undefined) {
+    // MAS errors arrive as a decoded body rather than an `Error`: a structured
+    // one is turned into prose, anything else — including an error list with
+    // nothing in it, which would render as a dangling colon — falls back to the
+    // HTTP status so that the error screen never has to render the body itself.
+    if (isErrorResponse(result.error) && result.error.errors.length > 0) {
+      throw new MasApiError(
+        result.error.errors.map((error) => error.title).join(", "),
+      );
+    }
+    if (result.response) {
+      throw new HttpStatusError(result.response, { cause: result.error });
+    }
     throw result.error;
   }
   if (result.data === undefined) {

@@ -77,7 +77,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ children }: SidebarProps) => (
   </div>
 );
 
-type DetailsProps = React.ComponentProps<"section">;
+// A `<section>` only exposes a region landmark once it has an accessible name,
+// so the label is required rather than optional.
+type DetailsProps = React.ComponentProps<"section"> & { "aria-label": string };
 export const Details: React.FC<DetailsProps> = ({
   children,
   className,

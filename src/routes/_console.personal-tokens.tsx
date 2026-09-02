@@ -19,7 +19,6 @@ import {
 } from "@tanstack/react-table";
 import { PlusIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
-  Badge,
   Button,
   CheckboxMenuItem,
   Form,
@@ -51,6 +50,7 @@ import * as Placeholder from "@/components/placeholder";
 import { UserInfo } from "@/components/room-info";
 import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
+import { PersonalTokenStatusBadge } from "@/ui/token-status-badge";
 import { UserPicker } from "@/ui/user-picker";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 import { useFilters } from "@/utils/filters";
@@ -151,52 +151,6 @@ export const Route = createFileRoute("/_console/personal-tokens")({
 
   component: RouteComponent,
 });
-
-interface PersonalTokenStatusBadgeProps {
-  token: SingleResourceForPersonalSession["attributes"];
-}
-
-function PersonalTokenStatusBadge({
-  token,
-}: PersonalTokenStatusBadgeProps): React.ReactElement {
-  if (token.revoked_at) {
-    return (
-      <Badge kind="grey">
-        <FormattedMessage
-          id="pages.personal_tokens.status.revoked"
-          defaultMessage="Revoked"
-          description="Status badge for revoked personal tokens"
-        />
-      </Badge>
-    );
-  }
-
-  if (token.expires_at) {
-    const expiryDate = new Date(token.expires_at);
-    const now = new Date();
-    if (expiryDate <= now) {
-      return (
-        <Badge kind="red">
-          <FormattedMessage
-            id="pages.personal_tokens.status.expired"
-            defaultMessage="Expired"
-            description="Status badge for expired personal tokens"
-          />
-        </Badge>
-      );
-    }
-  }
-
-  return (
-    <Badge kind="green">
-      <FormattedMessage
-        id="pages.personal_tokens.status.active"
-        defaultMessage="Active"
-        description="Status badge for active personal tokens"
-      />
-    </Badge>
-  );
-}
 
 interface PersonalTokenAddButtonProps {
   serverName: string;
@@ -364,6 +318,9 @@ const PersonalTokenAddButton = ({
     <Dialog.Root
       open={isOpen}
       onOpenChange={onOpenChange}
+      // The token is shown exactly once, so only the explicit "Done" button
+      // may close the dialog while it is on screen.
+      dismissible={!mutationData?.data.attributes.access_token}
       trigger={
         <Button Icon={PlusIcon} size="md" kind="primary">
           <FormattedMessage {...messages.actionAdd} />
@@ -407,11 +364,14 @@ const PersonalTokenAddButton = ({
             />
           </div>
 
-          <Dialog.Close asChild>
-            <Button type="button" kind="tertiary" disabled={isPending}>
-              <FormattedMessage {...messages.actionClose} />
-            </Button>
-          </Dialog.Close>
+          <Button
+            type="button"
+            kind="primary"
+            disabled={isPending}
+            onClick={() => onOpenChange(false)}
+          >
+            <FormattedMessage {...messages.actionDone} />
+          </Button>
         </>
       ) : (
         <>
@@ -750,7 +710,7 @@ function RouteComponent() {
           id: "actingUser",
           header: intl.formatMessage({
             id: "pages.personal_tokens.acting_user_column",
-            defaultMessage: "Acting User",
+            defaultMessage: "Acting user",
             description: "Column header for acting user column",
           }),
           meta: { width: { min: 200, fr: 2 } },
@@ -785,7 +745,7 @@ function RouteComponent() {
           id: "lastActive",
           header: intl.formatMessage({
             id: "pages.personal_tokens.last_active_column",
-            defaultMessage: "Last Active",
+            defaultMessage: "Last active",
             description: "Column header for last active column",
           }),
           meta: { width: DataTable.columnWidth.date },
@@ -872,7 +832,7 @@ function RouteComponent() {
             <DataTable.Header>
               <DataTable.Title>
                 {totalCount === undefined ? (
-                  <Placeholder.Text />
+                  <Placeholder.LoadingText />
                 ) : (
                   <FormattedMessage
                     id="pages.personal_tokens.count"

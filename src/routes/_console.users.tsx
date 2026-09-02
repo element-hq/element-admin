@@ -742,11 +742,11 @@ function RouteComponent() {
             <DataTable.Header>
               <DataTable.Title>
                 {totalCount === undefined ? (
-                  <Placeholder.Text />
+                  <Placeholder.LoadingText />
                 ) : (
                   <FormattedMessage
                     id="pages.users.user_count"
-                    defaultMessage="{COUNT, plural, zero {No users} one {# user} other {# users}}"
+                    defaultMessage="{COUNT, plural, =0 {No users} one {# user} other {# users}}"
                     description="On the user list page, this heading shows the total number of users"
                     values={{ COUNT: totalCount }}
                   />

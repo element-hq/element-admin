@@ -41,7 +41,8 @@ export const StaticEntityCard = ({ children }: { children: ReactNode }) => (
 
 // A loading placeholder with the same shape as an entity card
 export const EntityCardSkeleton = () => (
-  <div aria-busy="true" className={cardClasses}>
+  <div className={cardClasses}>
+    <Placeholder.Loading />
     <Placeholder.Avatar />
     <div className="flex flex-col gap-1 flex-1 max-w-60">
       <Placeholder.Text />
