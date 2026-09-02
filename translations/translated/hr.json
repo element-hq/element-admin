@@ -17,6 +17,9 @@
   "action.delete": {
     "message": "Izbriši"
   },
+  "action.done": {
+    "message": "Done"
+  },
   "action.go_back": {
     "message": "Idi natrag"
   },
@@ -25,9 +28,6 @@
   },
   "action.retry": {
     "message": "Pokušaj ponovno"
-  },
-  "action.sign_in": {
-    "message": "Prijava"
   },
   "action.sign_out": {
     "message": "Odjava"
@@ -38,6 +38,15 @@
   "common.filter": {
     "message": "Filtriraj"
   },
+  "common.loading": {
+    "message": "Loading…"
+  },
+  "errors.authorization_denied": {
+    "message": "Sign-in was cancelled."
+  },
+  "errors.authorization_error": {
+    "message": "Sign-in failed: {errorMessage}"
+  },
   "errors.http_fetch": {
     "message": "Zahtjev za {url} nije uspio"
   },
@@ -47,8 +56,14 @@
   "errors.http_status": {
     "message": "Zahtjev za {url} nije uspio sa statusnim kodom {status} {statusText}"
   },
+  "errors.mas_api": {
+    "message": "The homeserver's authentication service returned an error: {errorMessage}"
+  },
   "errors.matrix_standard": {
     "message": "Zahtjev matičnom poslužitelju nije uspio s kodom pogreške {errorCode}. Osim toga, poslužitelj je dao sljedeću poruku o pogrešci: {errorMessage}"
+  },
+  "errors.no_details": {
+    "message": "The server returned an error with no details."
   },
   "errors.not_logged_in": {
     "message": "Korisnik nije prijavljen"
@@ -167,6 +182,9 @@
   "pages.devices.applications.description": {
     "message": "Applications are OAuth 2.0 clients that users sign in to."
   },
+  "pages.devices.applications.details_label": {
+    "message": "Application details"
+  },
   "pages.devices.applications.filters.has_active_sessions": {
     "message": "With active devices"
   },
@@ -177,7 +195,7 @@
     "message": "Grant types"
   },
   "pages.devices.applications.name_column": {
-    "message": "Name"
+    "message": "Naziv"
   },
   "pages.devices.applications.not_found.description": {
     "message": "The requested application ({clientId}) could not be found on {serverName}."
@@ -212,6 +230,9 @@
   "pages.devices.applications.view_sessions": {
     "message": "View all devices"
   },
+  "pages.devices.applications.view_users": {
+    "message": "View users on this application"
+  },
   "pages.devices.legacy.count": {
     "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}"
   },
@@ -221,14 +242,17 @@
   "pages.devices.legacy.description": {
     "message": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
   },
+  "pages.devices.legacy.details_label": {
+    "message": "Legacy device details"
+  },
   "pages.devices.legacy.device_column": {
     "message": "Device"
   },
   "pages.devices.legacy.device_id_label": {
-    "message": "Device ID"
+    "message": "ID uređaja"
   },
   "pages.devices.legacy.filters.activity_active": {
-    "message": "Active"
+    "message": "Aktivan"
   },
   "pages.devices.legacy.filters.activity_inactive": {
     "message": "Inactive"
@@ -240,7 +264,7 @@
     "message": "Signed out"
   },
   "pages.devices.legacy.filters.newest_first": {
-    "message": "Newest first"
+    "message": "Najprije najnovije"
   },
   "pages.devices.legacy.filters.user_chip": {
     "message": "User: @{localpart}:{server}"
@@ -267,10 +291,10 @@
     "message": "Signed out at"
   },
   "pages.devices.legacy.last_active_ip_label": {
-    "message": "Last active IP"
+    "message": "Posljednji aktivan IP"
   },
   "pages.devices.legacy.last_active_label": {
-    "message": "Last active"
+    "message": "Posljednji aktivan"
   },
   "pages.devices.legacy.not_found.description": {
     "message": "The requested legacy device ({sessionId}) could not be found on {serverName}."
@@ -323,14 +347,17 @@
   "pages.devices.user.description": {
     "message": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
   },
+  "pages.devices.user.details_label": {
+    "message": "Device details"
+  },
   "pages.devices.user.device_column": {
     "message": "Device"
   },
   "pages.devices.user.device_id_label": {
-    "message": "Device ID"
+    "message": "ID uređaja"
   },
   "pages.devices.user.filters.activity_active": {
-    "message": "Active"
+    "message": "Aktivan"
   },
   "pages.devices.user.filters.activity_inactive": {
     "message": "Inactive"
@@ -345,7 +372,7 @@
     "message": "Application: {name}"
   },
   "pages.devices.user.filters.newest_first": {
-    "message": "Newest first"
+    "message": "Najprije najnovije"
   },
   "pages.devices.user.filters.user_chip": {
     "message": "User: @{localpart}:{server}"
@@ -372,10 +399,10 @@
     "message": "Signed out at"
   },
   "pages.devices.user.last_active_ip_label": {
-    "message": "Last active IP"
+    "message": "Posljednji aktivan IP"
   },
   "pages.devices.user.last_active_label": {
-    "message": "Last active"
+    "message": "Posljednji aktivan"
   },
   "pages.devices.user.not_found.description": {
     "message": "The requested device ({sessionId}) could not be found on {serverName}."
@@ -431,17 +458,26 @@
   "pages.federation.allowlist.remove.success": {
     "message": "Domain removed from allowlist"
   },
+  "pages.federation.allowlist.remove_confirm.alert.description": {
+    "message": "Your server will stop federating with servers matching this pattern."
+  },
+  "pages.federation.allowlist.remove_confirm.alert.title": {
+    "message": "You’re about to stop federating with this server"
+  },
+  "pages.federation.allowlist.remove_confirm.title": {
+    "message": "Remove {serverName} from the allowlist?"
+  },
   "pages.federation.allowlist.remove_tooltip": {
     "message": "Remove from allowlist"
   },
   "pages.federation.detail.contact": {
     "message": "Contact"
   },
-  "pages.federation.detail.destination": {
-    "message": "Destination"
-  },
   "pages.federation.detail.last_retry": {
     "message": "Last retry timestamp"
+  },
+  "pages.federation.detail.last_retry.never": {
+    "message": "Never"
   },
   "pages.federation.detail.last_successful_stream": {
     "message": "Last successful stream"
@@ -449,14 +485,20 @@
   "pages.federation.detail.retry_interval": {
     "message": "Retry interval"
   },
+  "pages.federation.detail.retry_interval.none": {
+    "message": "None"
+  },
   "pages.federation.detail.security": {
     "message": "Security"
   },
   "pages.federation.detail.support_page": {
     "message": "Support page"
   },
+  "pages.federation.details_label": {
+    "message": "Destination details"
+  },
   "pages.federation.domain_count": {
-    "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
+    "message": "{COUNT, plural, =0 {No domains} one {# domain} other {# domains}}"
   },
   "pages.federation.not_found.description": {
     "message": "The requested destination ({destination}) could not be found."
@@ -465,10 +507,10 @@
     "message": "Destination not found"
   },
   "pages.federation.sbg_not_enabled.description": {
-    "message": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+    "message": "Contact your administrator to enable it in your deployment configuration."
   },
   "pages.federation.sbg_not_enabled.title": {
-    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+    "message": "Secure Border Gateway isn't enabled on this deployment"
   },
   "pages.federation.search_placeholder": {
     "message": "Search domains…"
@@ -483,7 +525,7 @@
     "message": "Federation views"
   },
   "pages.federation.table.server_name": {
-    "message": "Server name"
+    "message": "Naziv poslužitelja"
   },
   "pages.federation.table.status": {
     "message": "Status"
@@ -495,7 +537,7 @@
     "message": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
   },
   "pages.federation.unavailable_alert.title": {
-    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+    "message": "Secure Border Gateway isn't enabled on this deployment"
   },
   "pages.generic_error.go_home": {
     "message": "Idi na početnu stranicu"
@@ -514,6 +556,12 @@
   },
   "pages.landing.description": {
     "message": "Upravljajte implementacijom aplikacije Element za svoju organizaciju ili zajednicu."
+  },
+  "pages.login.errors.authorization_failed": {
+    "message": "Could not start the sign-in process. Please try again."
+  },
+  "pages.login.errors.insecure_context": {
+    "message": "Sign-in requires a secure connection. Reload this page over https:// and try again."
   },
   "pages.login.errors.no_auth_metadata": {
     "message": "Nije uspjelo učitavanje metapodataka za provjeru autentičnosti poslužitelja. Synapse možda nije dostupan ili nije konfiguriran za korištenje usluge Matrix Authentication Service."
@@ -572,6 +620,9 @@
   "pages.personal_tokens.description": {
     "message": "Osobni tokeni dugotrajni su pristupni tokeni sa specifičnim pristupom, uključujući pristup Synapseovu i MAS-ovu administratorskom API-ju. Korisni su za automatizaciju zadataka i stvaranje integracija."
   },
+  "pages.personal_tokens.details_label": {
+    "message": "Personal token details"
+  },
   "pages.personal_tokens.device_id_help": {
     "message": "Ostavite prazno za generiranje nasumičnih 10-znamenkastih ID-ova uređaja"
   },
@@ -585,7 +636,7 @@
     "message": "Istječe na"
   },
   "pages.personal_tokens.expires_at_label": {
-    "message": "Istječe dana"
+    "message": "Istječe na"
   },
   "pages.personal_tokens.expires_in_help": {
     "message": "Ostavite prazno za tokene koji nikada ne istječu"
@@ -680,6 +731,18 @@
   "pages.personal_tokens.revoke_token": {
     "message": "Opozovi token"
   },
+  "pages.personal_tokens.revoke_token.alert.description": {
+    "message": "{humanName} will stop working immediately, and anything using it will need a new token."
+  },
+  "pages.personal_tokens.revoke_token.alert.title": {
+    "message": "This cannot be undone"
+  },
+  "pages.personal_tokens.revoke_token.error": {
+    "message": "Failed to revoke the token"
+  },
+  "pages.personal_tokens.revoke_token.title": {
+    "message": "Revoke this personal token?"
+  },
   "pages.personal_tokens.revoked_at_label": {
     "message": "Opozvan dana"
   },
@@ -744,7 +807,7 @@
     "message": "Izradi registracijski token"
   },
   "pages.registration_tokens.created_at_column": {
-    "message": "Izrađen u"
+    "message": "Izrađen dana"
   },
   "pages.registration_tokens.created_at_label": {
     "message": "Izrađen dana"
@@ -755,8 +818,17 @@
   "pages.registration_tokens.custom_token_label": {
     "message": "Prilagođeni token"
   },
+  "pages.registration_tokens.details_label": {
+    "message": "Registration token details"
+  },
   "pages.registration_tokens.edit_properties": {
     "message": "Uredi svojstva"
+  },
+  "pages.registration_tokens.edit_properties.revoked_tooltip": {
+    "message": "Unrevoke this token before editing its properties"
+  },
+  "pages.registration_tokens.edit_token.error": {
+    "message": "Failed to save the changes"
   },
   "pages.registration_tokens.edit_token_title": {
     "message": "Uredi registracijski token"
@@ -768,13 +840,16 @@
     "message": "Kada token istekne. Ostavite prazno ako token nikada ne bi trebao isteći."
   },
   "pages.registration_tokens.expires_at_label": {
-    "message": "Istječe dana"
+    "message": "Istječe na"
   },
   "pages.registration_tokens.filters.active_only": {
     "message": "Aktivan"
   },
   "pages.registration_tokens.filters.expired_only": {
     "message": "Istekao"
+  },
+  "pages.registration_tokens.filters.not_revoked": {
+    "message": "Not revoked"
   },
   "pages.registration_tokens.filters.revoked_only": {
     "message": "Opozvan"
@@ -799,6 +874,21 @@
   },
   "pages.registration_tokens.revoke_token": {
     "message": "Opozovi token"
+  },
+  "pages.registration_tokens.revoke_token.alert.description": {
+    "message": "Nobody will be able to register with {token} until it is unrevoked."
+  },
+  "pages.registration_tokens.revoke_token.alert.title": {
+    "message": "The token will stop working"
+  },
+  "pages.registration_tokens.revoke_token.error": {
+    "message": "Failed to revoke the token"
+  },
+  "pages.registration_tokens.revoke_token.success": {
+    "message": "Token revoked"
+  },
+  "pages.registration_tokens.revoke_token.title": {
+    "message": "Revoke this registration token?"
   },
   "pages.registration_tokens.revoked_at_label": {
     "message": "Opozvan dana"
@@ -851,6 +941,12 @@
   "pages.registration_tokens.unrevoke_token": {
     "message": "Poništi opoziv tokena"
   },
+  "pages.registration_tokens.unrevoke_token.error": {
+    "message": "Failed to unrevoke the token"
+  },
+  "pages.registration_tokens.unrevoke_token.success": {
+    "message": "Token unrevoked"
+  },
   "pages.registration_tokens.usage_count_label": {
     "message": "Broj upotreba"
   },
@@ -878,8 +974,8 @@
   "pages.rooms.columns.room": {
     "message": "Room"
   },
-  "pages.rooms.columns.type": {
-    "message": "Type"
+  "pages.rooms.columns.visibility": {
+    "message": "Visibility"
   },
   "pages.rooms.delete_room.alert.description": {
     "message": "Ovim će se trajno izbrisati sve poruke ili mediji preneseni na poslužitelj i ukloniti ova soba iz direktorija. Članovi će izgubiti pristup svojim porukama, a soba će se ukloniti s njihova popisa soba."
@@ -922,6 +1018,9 @@
   },
   "pages.rooms.deletion.success.title": {
     "message": "Brisanje je uspješno završeno"
+  },
+  "pages.rooms.details_label": {
+    "message": "Room details"
   },
   "pages.rooms.filters.empty_rooms": {
     "message": "Prazne sobe"
@@ -983,6 +1082,9 @@
   "pages.supervision.errors.generic.title": {
     "message": "Došlo je do neočekivane pogreške prilikom otvaranja sučelja za moderiranje"
   },
+  "pages.supervision.launch": {
+    "message": "Open supervision interface"
+  },
   "pages.supervision.missing_ui_address.description": {
     "message": "Moderiranje je omogućeno u vašoj instalaciji, ali ne i u Element Webu, koji je neophodan za rad sučelja za moderiranje."
   },
@@ -1011,10 +1113,10 @@
     "message": "Moderiranje je značajka dostupna u inačici ESS Pro"
   },
   "pages.users.account_status.active": {
-    "message": "Active"
+    "message": "Aktivan"
   },
   "pages.users.account_status.admin": {
-    "message": "Admin"
+    "message": "Administrator"
   },
   "pages.users.account_status.deactivated": {
     "message": "Deactivated"
@@ -1056,7 +1158,7 @@
     "message": "Account status"
   },
   "pages.users.columns.created_at": {
-    "message": "Created at"
+    "message": "Izrađen dana"
   },
   "pages.users.columns.matrix_id": {
     "message": "Matrix ID"
@@ -1102,6 +1204,9 @@
   },
   "pages.users.delete_upstream_link.title": {
     "message": "Želite li ukloniti vezu s vanjskim računom?"
+  },
+  "pages.users.details_label": {
+    "message": "User details"
   },
   "pages.users.filters.active": {
     "message": "Aktivni korisnici"
@@ -1271,6 +1376,9 @@
   "pages.users.user_count": {
     "message": "{COUNT, plural, zero {Nema korisnika} one {# korisnik} other {# korisnika}}"
   },
+  "product.badge.pro": {
+    "message": "Pro"
+  },
   "product.element": {
     "message": "Element"
   },
@@ -1304,11 +1412,14 @@
   "rooms_info.other_members": {
     "message": "{COUNT, plural, one {još #} few {još #} other {još #}}"
   },
+  "ui.copy.copied": {
+    "message": "Copied!"
+  },
+  "ui.copy.copy_to_clipboard": {
+    "message": "Copy to clipboard"
+  },
   "ui.data.failed_to_load": {
     "message": "Učitavanje nije uspjelo"
-  },
-  "ui.data.loading": {
-    "message": "Učitavanje vrijednosti"
   },
   "ui.data_table.loading_more": {
     "message": "Loading more…"
@@ -1344,7 +1455,7 @@
     "message": "Unknown device"
   },
   "ui.device_status.active": {
-    "message": "Active"
+    "message": "Aktivan"
   },
   "ui.device_status.inactive": {
     "message": "Inactive"
@@ -1353,7 +1464,7 @@
     "message": "Last active on {date}."
   },
   "ui.device_status.never_used": {
-    "message": "Never used"
+    "message": "Nikad nije korišten"
   },
   "ui.device_status.never_used.tooltip": {
     "message": "This device has not been used yet."

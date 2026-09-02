@@ -35,6 +35,12 @@
       "value": "Delete"
     }
   ],
+  "action.done": [
+    {
+      "type": 0,
+      "value": "Done"
+    }
+  ],
   "action.go_back": [
     {
       "type": 0,
@@ -53,12 +59,6 @@
       "value": "Retry"
     }
   ],
-  "action.sign_in": [
-    {
-      "type": 0,
-      "value": "Sign in"
-    }
-  ],
   "action.sign_out": [
     {
       "type": 0,
@@ -75,6 +75,28 @@
     {
       "type": 0,
       "value": "Filter"
+    }
+  ],
+  "common.loading": [
+    {
+      "type": 0,
+      "value": "Loading…"
+    }
+  ],
+  "errors.authorization_denied": [
+    {
+      "type": 0,
+      "value": "Sign-in was cancelled."
+    }
+  ],
+  "errors.authorization_error": [
+    {
+      "type": 0,
+      "value": "Sign-in failed: "
+    },
+    {
+      "type": 1,
+      "value": "errorMessage"
     }
   ],
   "errors.http_fetch": [
@@ -127,6 +149,16 @@
       "value": "statusText"
     }
   ],
+  "errors.mas_api": [
+    {
+      "type": 0,
+      "value": "The homeserver's authentication service returned an error: "
+    },
+    {
+      "type": 1,
+      "value": "errorMessage"
+    }
+  ],
   "errors.matrix_standard": [
     {
       "type": 0,
@@ -143,6 +175,12 @@
     {
       "type": 1,
       "value": "errorMessage"
+    }
+  ],
+  "errors.no_details": [
+    {
+      "type": 0,
+      "value": "The server returned an error with no details."
     }
   ],
   "errors.not_logged_in": [
@@ -666,6 +704,12 @@
       "value": "Applications are OAuth 2.0 clients that users sign in to."
     }
   ],
+  "pages.devices.applications.details_label": [
+    {
+      "type": 0,
+      "value": "Application details"
+    }
+  ],
   "pages.devices.applications.filters.has_active_sessions": [
     {
       "type": 0,
@@ -772,6 +816,12 @@
       "value": "View all devices"
     }
   ],
+  "pages.devices.applications.view_users": [
+    {
+      "type": 0,
+      "value": "View users on this application"
+    }
+  ],
   "pages.devices.legacy.count": [
     {
       "type": 6,
@@ -822,6 +872,12 @@
     {
       "type": 0,
       "value": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
+    }
+  ],
+  "pages.devices.legacy.details_label": [
+    {
+      "type": 0,
+      "value": "Legacy device details"
     }
   ],
   "pages.devices.legacy.device_column": [
@@ -1090,6 +1146,12 @@
       "value": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
     }
   ],
+  "pages.devices.user.details_label": [
+    {
+      "type": 0,
+      "value": "Device details"
+    }
+  ],
   "pages.devices.user.device_column": [
     {
       "type": 0,
@@ -1338,6 +1400,32 @@
       "value": "Domain removed from allowlist"
     }
   ],
+  "pages.federation.allowlist.remove_confirm.alert.description": [
+    {
+      "type": 0,
+      "value": "Your server will stop federating with servers matching this pattern."
+    }
+  ],
+  "pages.federation.allowlist.remove_confirm.alert.title": [
+    {
+      "type": 0,
+      "value": "You’re about to stop federating with this server"
+    }
+  ],
+  "pages.federation.allowlist.remove_confirm.title": [
+    {
+      "type": 0,
+      "value": "Remove "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": " from the allowlist?"
+    }
+  ],
   "pages.federation.allowlist.remove_tooltip": [
     {
       "type": 0,
@@ -1350,16 +1438,16 @@
       "value": "Contact"
     }
   ],
-  "pages.federation.detail.destination": [
-    {
-      "type": 0,
-      "value": "Destination"
-    }
-  ],
   "pages.federation.detail.last_retry": [
     {
       "type": 0,
       "value": "Last retry timestamp"
+    }
+  ],
+  "pages.federation.detail.last_retry.never": [
+    {
+      "type": 0,
+      "value": "Never"
     }
   ],
   "pages.federation.detail.last_successful_stream": [
@@ -1374,6 +1462,12 @@
       "value": "Retry interval"
     }
   ],
+  "pages.federation.detail.retry_interval.none": [
+    {
+      "type": 0,
+      "value": "None"
+    }
+  ],
   "pages.federation.detail.security": [
     {
       "type": 0,
@@ -1386,12 +1480,18 @@
       "value": "Support page"
     }
   ],
+  "pages.federation.details_label": [
+    {
+      "type": 0,
+      "value": "Destination details"
+    }
+  ],
   "pages.federation.domain_count": [
     {
       "type": 6,
       "value": "COUNT",
       "options": {
-        "zero": {
+        "=0": {
           "value": [
             {
               "type": 0,
@@ -1449,13 +1549,13 @@
   "pages.federation.sbg_not_enabled.description": [
     {
       "type": 0,
-      "value": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+      "value": "Contact your administrator to enable it in your deployment configuration."
     }
   ],
   "pages.federation.sbg_not_enabled.title": [
     {
       "type": 0,
-      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+      "value": "Secure Border Gateway isn't enabled on this deployment"
     }
   ],
   "pages.federation.search_placeholder": [
@@ -1509,7 +1609,7 @@
   "pages.federation.unavailable_alert.title": [
     {
       "type": 0,
-      "value": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+      "value": "Secure Border Gateway isn't enabled on this deployment"
     }
   ],
   "pages.generic_error.go_home": [
@@ -1556,6 +1656,18 @@
       "value": "Manage the deployment of the element app for your organisation or community."
     }
   ],
+  "pages.login.errors.authorization_failed": [
+    {
+      "type": 0,
+      "value": "Could not start the sign-in process. Please try again."
+    }
+  ],
+  "pages.login.errors.insecure_context": [
+    {
+      "type": 0,
+      "value": "Sign-in requires a secure connection. Reload this page over https:// and try again."
+    }
+  ],
   "pages.login.errors.no_auth_metadata": [
     {
       "type": 0,
@@ -1595,7 +1707,7 @@
   "pages.personal_tokens.acting_user_column": [
     {
       "type": 0,
-      "value": "Acting User"
+      "value": "Acting user"
     }
   ],
   "pages.personal_tokens.acting_user_label": [
@@ -1712,6 +1824,12 @@
       "value": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations."
     }
   ],
+  "pages.personal_tokens.details_label": [
+    {
+      "type": 0,
+      "value": "Personal token details"
+    }
+  ],
   "pages.personal_tokens.device_id_help": [
     {
       "type": 0,
@@ -1805,7 +1923,7 @@
   "pages.personal_tokens.last_active_column": [
     {
       "type": 0,
-      "value": "Last Active"
+      "value": "Last active"
     }
   ],
   "pages.personal_tokens.last_active_ip_label": [
@@ -1926,6 +2044,34 @@
     {
       "type": 0,
       "value": "Revoke token"
+    }
+  ],
+  "pages.personal_tokens.revoke_token.alert.description": [
+    {
+      "type": 1,
+      "value": "humanName"
+    },
+    {
+      "type": 0,
+      "value": " will stop working immediately, and anything using it will need a new token."
+    }
+  ],
+  "pages.personal_tokens.revoke_token.alert.title": [
+    {
+      "type": 0,
+      "value": "This cannot be undone"
+    }
+  ],
+  "pages.personal_tokens.revoke_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to revoke the token"
+    }
+  ],
+  "pages.personal_tokens.revoke_token.title": [
+    {
+      "type": 0,
+      "value": "Revoke this personal token?"
     }
   ],
   "pages.personal_tokens.revoked_at_label": [
@@ -2078,10 +2224,28 @@
       "value": "Custom Token"
     }
   ],
+  "pages.registration_tokens.details_label": [
+    {
+      "type": 0,
+      "value": "Registration token details"
+    }
+  ],
   "pages.registration_tokens.edit_properties": [
     {
       "type": 0,
       "value": "Edit properties"
+    }
+  ],
+  "pages.registration_tokens.edit_properties.revoked_tooltip": [
+    {
+      "type": 0,
+      "value": "Unrevoke this token before editing its properties"
+    }
+  ],
+  "pages.registration_tokens.edit_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to save the changes"
     }
   ],
   "pages.registration_tokens.edit_token_title": [
@@ -2118,6 +2282,12 @@
     {
       "type": 0,
       "value": "Expired"
+    }
+  ],
+  "pages.registration_tokens.filters.not_revoked": [
+    {
+      "type": 0,
+      "value": "Not revoked"
     }
   ],
   "pages.registration_tokens.filters.revoked_only": [
@@ -2182,6 +2352,44 @@
     {
       "type": 0,
       "value": "Revoke token"
+    }
+  ],
+  "pages.registration_tokens.revoke_token.alert.description": [
+    {
+      "type": 0,
+      "value": "Nobody will be able to register with "
+    },
+    {
+      "type": 1,
+      "value": "token"
+    },
+    {
+      "type": 0,
+      "value": " until it is unrevoked."
+    }
+  ],
+  "pages.registration_tokens.revoke_token.alert.title": [
+    {
+      "type": 0,
+      "value": "The token will stop working"
+    }
+  ],
+  "pages.registration_tokens.revoke_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to revoke the token"
+    }
+  ],
+  "pages.registration_tokens.revoke_token.success": [
+    {
+      "type": 0,
+      "value": "Token revoked"
+    }
+  ],
+  "pages.registration_tokens.revoke_token.title": [
+    {
+      "type": 0,
+      "value": "Revoke this registration token?"
     }
   ],
   "pages.registration_tokens.revoked_at_label": [
@@ -2255,7 +2463,7 @@
       "type": 6,
       "value": "COUNT",
       "options": {
-        "zero": {
+        "=0": {
           "value": [
             {
               "type": 0,
@@ -2335,6 +2543,18 @@
       "value": "Unrevoke token"
     }
   ],
+  "pages.registration_tokens.unrevoke_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to unrevoke the token"
+    }
+  ],
+  "pages.registration_tokens.unrevoke_token.success": [
+    {
+      "type": 0,
+      "value": "Token unrevoked"
+    }
+  ],
   "pages.registration_tokens.usage_count_label": [
     {
       "type": 0,
@@ -2368,7 +2588,7 @@
   "pages.registration_tokens.valid_until_column": [
     {
       "type": 0,
-      "value": "Valid Until"
+      "value": "Expires at"
     }
   ],
   "pages.rooms.columns.alias": [
@@ -2389,10 +2609,10 @@
       "value": "Room"
     }
   ],
-  "pages.rooms.columns.type": [
+  "pages.rooms.columns.visibility": [
     {
       "type": 0,
-      "value": "Type"
+      "value": "Visibility"
     }
   ],
   "pages.rooms.delete_room.alert.description": [
@@ -2537,6 +2757,12 @@
       "value": "Deletion successful"
     }
   ],
+  "pages.rooms.details_label": [
+    {
+      "type": 0,
+      "value": "Room details"
+    }
+  ],
   "pages.rooms.filters.empty_rooms": [
     {
       "type": 0,
@@ -2594,7 +2820,7 @@
       "type": 6,
       "value": "COUNT",
       "options": {
-        "zero": {
+        "=0": {
           "value": [
             {
               "type": 0,
@@ -2682,7 +2908,7 @@
   "pages.supervision.disabled_alert.description": [
     {
       "type": 0,
-      "value": "This feature is part of your subscription. You can ask an administrator to enable it."
+      "value": "Supervision is included in your subscription but isn't enabled on this deployment. See the ESS documentation to turn it on."
     }
   ],
   "pages.supervision.disabled_alert.title": [
@@ -2706,19 +2932,25 @@
   "pages.supervision.errors.closed.description": [
     {
       "type": 0,
-      "value": "Failed to sign in the supervision interface, as it closed before it could finish signing in"
+      "value": "The supervision window was closed before sign-in finished. You can try again."
     }
   ],
   "pages.supervision.errors.closed.title": [
     {
       "type": 0,
-      "value": "The supervision interface was closed too quickly"
+      "value": "Supervision sign-in was cancelled"
     }
   ],
   "pages.supervision.errors.generic.title": [
     {
       "type": 0,
       "value": "An unexpected error occurred whilst opening the supervision interface"
+    }
+  ],
+  "pages.supervision.launch": [
+    {
+      "type": 0,
+      "value": "Open supervision interface"
     }
   ],
   "pages.supervision.missing_ui_address.description": [
@@ -2991,6 +3223,12 @@
     {
       "type": 0,
       "value": "Remove link with upstream account?"
+    }
+  ],
+  "pages.users.details_label": [
+    {
+      "type": 0,
+      "value": "User details"
     }
   ],
   "pages.users.filters.active": [
@@ -3368,7 +3606,7 @@
       "type": 6,
       "value": "COUNT",
       "options": {
-        "zero": {
+        "=0": {
           "value": [
             {
               "type": 0,
@@ -3401,6 +3639,12 @@
       },
       "offset": 0,
       "pluralType": "cardinal"
+    }
+  ],
+  "product.badge.pro": [
+    {
+      "type": 0,
+      "value": "Pro"
     }
   ],
   "product.element": [
@@ -3503,16 +3747,22 @@
       "pluralType": "cardinal"
     }
   ],
+  "ui.copy.copied": [
+    {
+      "type": 0,
+      "value": "Copied!"
+    }
+  ],
+  "ui.copy.copy_to_clipboard": [
+    {
+      "type": 0,
+      "value": "Copy to clipboard"
+    }
+  ],
   "ui.data.failed_to_load": [
     {
       "type": 0,
       "value": "Failed to load"
-    }
-  ],
-  "ui.data.loading": [
-    {
-      "type": 0,
-      "value": "Loading value"
     }
   ],
   "ui.data_table.loading_more": [
