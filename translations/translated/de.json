@@ -17,6 +17,9 @@
   "action.delete": {
     "message": "Löschen"
   },
+  "action.done": {
+    "message": "Done"
+  },
   "action.go_back": {
     "message": "Zurück"
   },
@@ -26,17 +29,23 @@
   "action.retry": {
     "message": "Erneut versuchen"
   },
-  "action.sign_in": {
-    "message": "Anmelden"
-  },
   "action.sign_out": {
     "message": "Abmelden"
   },
   "common.email_address": {
-    "message": "E-Mail Adresse"
+    "message": "E-Mail-Adresse"
   },
   "common.filter": {
     "message": "Filter"
+  },
+  "common.loading": {
+    "message": "Loading…"
+  },
+  "errors.authorization_denied": {
+    "message": "Sign-in was cancelled."
+  },
+  "errors.authorization_error": {
+    "message": "Sign-in failed: {errorMessage}"
   },
   "errors.http_fetch": {
     "message": "Anfrage an {url} fehlgeschlagen"
@@ -47,8 +56,14 @@
   "errors.http_status": {
     "message": "Anfrage an {url} fehlgeschlagen mit Statuscode {status} {statusText}"
   },
+  "errors.mas_api": {
+    "message": "The homeserver's authentication service returned an error: {errorMessage}"
+  },
   "errors.matrix_standard": {
-    "message": "Die Anfrage an den Homeserver ist mit dem Fehlercode „{errorCode}” fehlgeschlagen. Zusätzlich hat der Server die folgende Fehlernachricht ausgegeben: {errorMessage}"
+    "message": "Die Anfrage an den Homeserver ist mit dem Fehlercode „{errorCode}“ fehlgeschlagen. Der Server hat zusätzlich folgende Fehlermeldung zurückgegeben: {errorMessage}"
+  },
+  "errors.no_details": {
+    "message": "The server returned an error with no details."
   },
   "errors.not_logged_in": {
     "message": "Nicht angemeldet"
@@ -69,7 +84,7 @@
     "message": "Konto-Menü"
   },
   "marketing.also_available_in_pro.description": {
-    "message": "<p><link>ESS Pro</link> ist die kommerzielle Backend-Distribution von Element.</p> <p>Sie umfasst alle Funktionen von ESS Community sowie zusätzliche Funktionen und Dienste, die auf professionelle Umgebungen mit mehr als 100 Benutzern bis hin zu Millionen von Benutzern zugeschnitten sind.</p> <p>Sie wurde entwickelt, um Unternehmensanforderungen in Bezug auf erweiterte IAM, Compliance, Skalierbarkeit, Hochverfügbarkeit und Mandantenfähigkeit zu unterstützen.</p>"
+    "message": "<p><link>ESS Pro</link> ist die kommerzielle Backend-Distribution von Element.</p> <p>Sie umfasst alle Funktionen von ESS Community sowie zusätzliche Funktionen und Dienste, die auf professionelle Umgebungen mit mehr als 100 Nutzern bis hin zu Millionen von Nutzern zugeschnitten sind.</p> <p>Sie wurde entwickelt, um Unternehmensanforderungen in Bezug auf erweiterte IAM, Compliance, Skalierbarkeit, Hochverfügbarkeit und Mandantenfähigkeit zu unterstützen.</p>"
   },
   "marketing.also_available_in_pro.title": {
     "message": "Auch in Pro verfügbar…"
@@ -78,7 +93,7 @@
     "message": "Upgrade auf Pro"
   },
   "marketing.auditing.description": {
-    "message": "<p>Auditing ermöglicht es Unternehmen, Aufzeichnungen von verschlüsselten Unterhaltungen und Chat-Events zu führen, um Compliance- oder gesetzliche Anforderungen zu erfüllen.</p> <p>Wenn diese Funktion aktiviert ist, ist für alle Endbenutzer sichtbar, welche Chats aufgezeichnet werden, um die Transparenz des Auditing-Prozesses zu gewährleisten.</p> <p>Das Auditing kann entsprechend den spezifischen Anforderungen einer Organisation konfiguriert werden. So können beispielsweise Direktnachrichten zwischen zwei Personen ausgeschlossen werden, sodass nur Gruppengespräche aufgezeichnet werden.</p> <p>Audit-Daten werden als Stream maschinenlesbarer Events im JSON-Format entweder im Dateispeicher oder in S3 gespeichert und können zur weiteren Filterung und Analyse an Log-Analyse-Tools weitergeleitet werden.</p>"
+    "message": "<p>Auditing ermöglicht es Unternehmen, Aufzeichnungen von verschlüsselten Unterhaltungen und Chat-Events zu führen, um Compliance- oder gesetzliche Anforderungen zu erfüllen.</p> <p>Wenn diese Funktion aktiviert ist, ist für alle Endnutzer sichtbar, welche Chats aufgezeichnet werden, um die Transparenz des Auditing-Prozesses zu gewährleisten.</p> <p>Das Auditing kann entsprechend den spezifischen Anforderungen einer Organisation konfiguriert werden. So können beispielsweise Direktnachrichten zwischen zwei Personen ausgeschlossen werden, sodass nur Gruppengespräche aufgezeichnet werden.</p> <p>Audit-Daten werden als Stream maschinenlesbarer Events im JSON-Format entweder im Dateispeicher oder in S3 gespeichert und können zur weiteren Filterung und Analyse an Log-Analyse-Tools weitergeleitet werden.</p>"
   },
   "marketing.auditing.title": {
     "message": "Auditing"
@@ -90,7 +105,7 @@
     "message": "Secure Border Gateway"
   },
   "marketing.supervision.description": {
-    "message": "<p>Supervision ermöglicht es einer Organisation, alle Chats von einem zentralen Punkt aus zu verwalten. Ein „Supervisor”-Konto tritt definierten Chats mit Administratorrechten bei. Serveradministratoren können sich nahtlos über die Adminkonsole in das Konto einloggen, um ihre Chats zu verwalten und zu moderieren.</p> <ul> <li>Chats und deren Einstellungen verwalten (Name, Thema, Berechtigungen usw.)</li> <li>Raummitgliedschaften verwalten</li> <li>Unerwünschte Nachrichten und hochgeladene Medien entfernen</li> <li>Verlassene Chats wiederherstellen (alle Benutzer haben den Chat verlassen)</li> <li>Das Supervisor-Konto kann entweder verschlüsselte Nachrichtinhalte lesen oder nicht (konfigurierbar)</li> </ul>"
+    "message": "<p>Supervision ermöglicht es einer Organisation, alle Chats von einem zentralen Punkt aus zu verwalten. Ein „Supervisor”-Konto tritt definierten Chats mit Administratorrechten bei. Server-Administratoren können sich nahtlos über die Adminkonsole in das Konto einloggen, um ihre Chats zu verwalten und zu moderieren.</p> <ul> <li>Chats und deren Einstellungen verwalten (Name, Thema, Berechtigungen usw.)</li> <li>Chat-Mitgliedschaften verwalten</li> <li>Unerwünschte Nachrichten und hochgeladene Medien entfernen</li> <li>Verlassene Chats wiederherstellen (alle Nutzer haben den Chat verlassen)</li> <li>Das „Supervisor“-Konto kann entweder verschlüsselte Nachrichtinhalte lesen oder nicht (konfigurierbar)</li> </ul>"
   },
   "marketing.supervision.title": {
     "message": "Supervision"
@@ -102,7 +117,7 @@
     "message": "Dashboard"
   },
   "navigation.devices": {
-    "message": "Devices"
+    "message": "Geräte"
   },
   "navigation.documentation": {
     "message": "Dokumentation"
@@ -132,7 +147,7 @@
     "message": "Diese Funktion ist in ESS Community nicht verfügbar. Wechsel zu ESS Pro, um sie zu aktivieren."
   },
   "pages.auditing.unavailable_alert.title": {
-    "message": "Auditing ist in ESS Pro verfügbar."
+    "message": "Auditing ist in ESS Pro verfügbar"
   },
   "pages.dashboard.current_ess_version": {
     "message": "ESS-Version"
@@ -159,124 +174,133 @@
     "message": "Dashboard"
   },
   "pages.devices.applications.client_id_label": {
-    "message": "Client ID"
+    "message": "Geräte ID"
   },
   "pages.devices.applications.count": {
-    "message": "{COUNT, plural, =0 {No applications} one {# application} other {# applications}}"
+    "message": "{COUNT, plural, =0 {Keine Anwendung} one {# Anwendung} other {# Anwendungen}}"
   },
   "pages.devices.applications.description": {
-    "message": "Applications are OAuth 2.0 clients that users sign in to."
+    "message": "Anwendungen sind OAuth 2.0-Clients, bei denen sich Nutzer anmelden."
+  },
+  "pages.devices.applications.details_label": {
+    "message": "Application details"
   },
   "pages.devices.applications.filters.has_active_sessions": {
-    "message": "With active devices"
+    "message": "Mit aktiven Geräten"
   },
   "pages.devices.applications.filters.no_active_sessions": {
-    "message": "Without active devices"
+    "message": "Ohne aktive Geräte"
   },
   "pages.devices.applications.grant_types_label": {
-    "message": "Grant types"
+    "message": "Grant-Typen"
   },
   "pages.devices.applications.name_column": {
     "message": "Name"
   },
   "pages.devices.applications.not_found.description": {
-    "message": "The requested application ({clientId}) could not be found on {serverName}."
+    "message": "Die angeforderte Anwendung ({clientId}) konnte auf {serverName} nicht gefunden werden."
   },
   "pages.devices.applications.not_found.title": {
-    "message": "Application not found"
+    "message": "Anwendung nicht gefunden"
   },
   "pages.devices.applications.redirect_uris_label": {
     "message": "Redirect URIs"
   },
   "pages.devices.applications.search_placeholder": {
-    "message": "Search by name…"
+    "message": "Suche nach Namen …"
   },
   "pages.devices.applications.statistics.active_recently": {
-    "message": "Active in the past 7 days"
+    "message": "In den letzten 7 Tagen aktiv"
   },
   "pages.devices.applications.statistics.created_recently": {
-    "message": "Devices added in the past 7 days"
+    "message": "In den letzten 7 Tagen hinzugefügte Geräte"
   },
   "pages.devices.applications.statistics.heading": {
-    "message": "Device statistics"
+    "message": "Gerätestatistik"
   },
   "pages.devices.applications.statistics.total_active": {
-    "message": "Active devices"
+    "message": "Aktive Geräte"
   },
   "pages.devices.applications.title": {
-    "message": "Applications"
+    "message": "Anwendungen"
   },
   "pages.devices.applications.uri_label": {
-    "message": "Homepage"
+    "message": "Startseite"
   },
   "pages.devices.applications.view_sessions": {
-    "message": "View all devices"
+    "message": "Alle Geräte anzeigen"
+  },
+  "pages.devices.applications.view_users": {
+    "message": "View users on this application"
   },
   "pages.devices.legacy.count": {
-    "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}"
+    "message": "{COUNT, plural, =0 {Keine Legacy-Geräte} one {# Legacy-Gerät} other {# Legacy-Geräte}}"
   },
   "pages.devices.legacy.created_at_label": {
-    "message": "Signed in at"
+    "message": "Angemeldet am"
   },
   "pages.devices.legacy.description": {
-    "message": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
+    "message": "Legacy-Geräte sind Anmeldungen von Clients, die noch nicht auf OAuth 2.0 migriert wurden."
+  },
+  "pages.devices.legacy.details_label": {
+    "message": "Legacy device details"
   },
   "pages.devices.legacy.device_column": {
-    "message": "Device"
+    "message": "Gerät"
   },
   "pages.devices.legacy.device_id_label": {
-    "message": "Device ID"
+    "message": "Geräte-ID"
   },
   "pages.devices.legacy.filters.activity_active": {
-    "message": "Active"
+    "message": "Aktiv"
   },
   "pages.devices.legacy.filters.activity_inactive": {
-    "message": "Inactive"
+    "message": "Inaktiv"
   },
   "pages.devices.legacy.filters.activity_recently_used": {
-    "message": "Recently used"
+    "message": "Kürzlich verwendet"
   },
   "pages.devices.legacy.filters.activity_signed_out": {
-    "message": "Signed out"
+    "message": "Abgemeldet"
   },
   "pages.devices.legacy.filters.newest_first": {
-    "message": "Newest first"
+    "message": "Neueste zuerst"
   },
   "pages.devices.legacy.filters.user_chip": {
-    "message": "User: @{localpart}:{server}"
+    "message": "Nutzer: @{localpart}:{server}"
   },
   "pages.devices.legacy.finish.button": {
-    "message": "Remove device"
+    "message": "Gerät entfernen"
   },
   "pages.devices.legacy.finish.confirm": {
-    "message": "Remove device"
+    "message": "Gerät entfernen"
   },
   "pages.devices.legacy.finish.description": {
-    "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
+    "message": "Der Nutzer wird von diesem Gerät abgemeldet. Access- und Refresh-Token werden sofort widerrufen."
   },
   "pages.devices.legacy.finish.error": {
-    "message": "Failed to remove the legacy device"
+    "message": "Das Legacy-Gerät konnte nicht entfernt werden"
   },
   "pages.devices.legacy.finish.success": {
-    "message": "Legacy device removed"
+    "message": "Legacy-Gerät entfernt"
   },
   "pages.devices.legacy.finish.title": {
-    "message": "Remove this legacy device?"
+    "message": "Legacy-Gerät entfernen?"
   },
   "pages.devices.legacy.finished_at_label": {
-    "message": "Signed out at"
+    "message": "Abgemeldet um"
   },
   "pages.devices.legacy.last_active_ip_label": {
-    "message": "Last active IP"
+    "message": "Letzte aktive IP-Adresse"
   },
   "pages.devices.legacy.last_active_label": {
-    "message": "Last active"
+    "message": "Zuletzt aktiv"
   },
   "pages.devices.legacy.not_found.description": {
-    "message": "The requested legacy device ({sessionId}) could not be found on {serverName}."
+    "message": "Das angeforderte Legacy-Gerät ({sessionId}) wurde auf {serverName} nicht gefunden."
   },
   "pages.devices.legacy.not_found.title": {
-    "message": "Legacy device not found"
+    "message": "Legacy-Gerät nicht gefunden"
   },
   "pages.devices.legacy.redirect_uri_label": {
     "message": "Redirect URI"
@@ -285,103 +309,106 @@
     "message": "Status"
   },
   "pages.devices.legacy.technical_details": {
-    "message": "Technical details"
+    "message": "Technische Details"
   },
   "pages.devices.legacy.title": {
-    "message": "Legacy devices"
+    "message": "Legacy-Geräte"
   },
   "pages.devices.legacy.user_agent_label": {
-    "message": "User agent"
+    "message": "User-Agent"
   },
   "pages.devices.legacy.user_column": {
-    "message": "User"
+    "message": "Nutzer"
   },
   "pages.devices.tabs.applications": {
-    "message": "Applications"
+    "message": "Anwendungen"
   },
   "pages.devices.tabs.legacy": {
-    "message": "Legacy devices"
+    "message": "Legacy-Geräte"
   },
   "pages.devices.tabs.section": {
-    "message": "Device views"
+    "message": "Geräteansichten"
   },
   "pages.devices.tabs.user": {
-    "message": "User devices"
+    "message": "Nutzergeräte"
   },
   "pages.devices.title": {
-    "message": "Devices"
+    "message": "Geräte"
   },
   "pages.devices.user.client_column": {
-    "message": "Application"
+    "message": "Anwendung"
   },
   "pages.devices.user.count": {
-    "message": "{COUNT, plural, =0 {No devices} one {# device} other {# devices}}"
+    "message": "{COUNT, plural, =0 {Keine Geräte} one {# Gerät} other {# Geräte}}"
   },
   "pages.devices.user.created_at_label": {
-    "message": "Signed in at"
+    "message": "Angemeldet am"
   },
   "pages.devices.user.description": {
-    "message": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
+    "message": "Ein Gerät stellt eine einzelne Anmeldung eines Nutzers in einer Anwendung dar. Beim Abmelden eines Geräts wird dessen Zugriff sofort widerrufen."
+  },
+  "pages.devices.user.details_label": {
+    "message": "Device details"
   },
   "pages.devices.user.device_column": {
-    "message": "Device"
+    "message": "Gerät"
   },
   "pages.devices.user.device_id_label": {
-    "message": "Device ID"
+    "message": "Geräte-ID"
   },
   "pages.devices.user.filters.activity_active": {
-    "message": "Active"
+    "message": "Aktiv"
   },
   "pages.devices.user.filters.activity_inactive": {
-    "message": "Inactive"
+    "message": "Inaktiv"
   },
   "pages.devices.user.filters.activity_recently_used": {
-    "message": "Recently used"
+    "message": "Kürzlich verwendet"
   },
   "pages.devices.user.filters.activity_signed_out": {
-    "message": "Signed out"
+    "message": "Abgemeldet"
   },
   "pages.devices.user.filters.client_chip": {
-    "message": "Application: {name}"
+    "message": "Anwendung: {name}"
   },
   "pages.devices.user.filters.newest_first": {
-    "message": "Newest first"
+    "message": "Neueste zuerst"
   },
   "pages.devices.user.filters.user_chip": {
-    "message": "User: @{localpart}:{server}"
+    "message": "Nutzer: @{localpart}:{server}"
   },
   "pages.devices.user.finish.button": {
-    "message": "Remove device"
+    "message": "Gerät entfernen"
   },
   "pages.devices.user.finish.confirm": {
-    "message": "Remove device"
+    "message": "Gerät entfernen"
   },
   "pages.devices.user.finish.description": {
-    "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
+    "message": "Der Nutzer wird von diesem Gerät abgemeldet. Access- und Refresh-Token werden sofort widerrufen."
   },
   "pages.devices.user.finish.error": {
-    "message": "Failed to remove the device"
+    "message": "Das Gerät konnte nicht entfernt werden"
   },
   "pages.devices.user.finish.success": {
-    "message": "Device removed"
+    "message": "Gerät entfernt"
   },
   "pages.devices.user.finish.title": {
-    "message": "Remove this device?"
+    "message": "Dieses Gerät entfernen?"
   },
   "pages.devices.user.finished_at_label": {
-    "message": "Signed out at"
+    "message": "Abgemeldet um"
   },
   "pages.devices.user.last_active_ip_label": {
-    "message": "Last active IP"
+    "message": "Letzte aktive IP-Adresse"
   },
   "pages.devices.user.last_active_label": {
-    "message": "Last active"
+    "message": "Zuletzt aktiv"
   },
   "pages.devices.user.not_found.description": {
-    "message": "The requested device ({sessionId}) could not be found on {serverName}."
+    "message": "Das angeforderte Gerät ({sessionId}) wurde auf {serverName} nicht gefunden."
   },
   "pages.devices.user.not_found.title": {
-    "message": "Device not found"
+    "message": "Gerät nicht gefunden"
   },
   "pages.devices.user.scope_label": {
     "message": "Scope"
@@ -390,19 +417,19 @@
     "message": "Status"
   },
   "pages.devices.user.technical_details": {
-    "message": "Technical details"
+    "message": "Technische Details"
   },
   "pages.devices.user.title": {
-    "message": "User devices"
+    "message": "Nutzergeräte"
   },
   "pages.devices.user.user_agent_label": {
-    "message": "User agent"
+    "message": "User-Agent"
   },
   "pages.devices.user.user_column": {
-    "message": "User"
+    "message": "Nutzer"
   },
   "pages.devices.user.user_none": {
-    "message": "No user"
+    "message": "Kein Nutzer"
   },
   "pages.federation.allowlist.add.error": {
     "message": "Domain konnte nicht zur Zulassungsliste hinzugefügt werden"
@@ -417,19 +444,28 @@
     "message": "Muster hinzufügen"
   },
   "pages.federation.allowlist.add_pattern.help": {
-    "message": "Gib eine Domäne wie example.com ein oder verwende *, um alle Subdomänen zuzulassen, z. B. *.example.com."
+    "message": "Gib eine Domäne wie example.com ein oder verwende *, um alle Subdomänen zuzulassen, z. B. *.example.com"
   },
   "pages.federation.allowlist.empty": {
     "message": "Noch keine Domäne in der Zulassungsliste. Füge oben ein Domänen-Muster hinzu, um zu beginnen."
   },
   "pages.federation.allowlist.heading": {
-    "message": "Liste der Muster, die für eine Föderation mit Ihnen zugelassen sind"
+    "message": "Liste der Muster, die für eine Föderation mit dir zugelassen sind"
   },
   "pages.federation.allowlist.remove.error": {
-    "message": "Domain konnte nicht von der Zulassungsliste entfernt werden."
+    "message": "Domain konnte nicht von der Zulassungsliste entfernt werden"
   },
   "pages.federation.allowlist.remove.success": {
     "message": "Domain von der Zulassungsliste entfernt"
+  },
+  "pages.federation.allowlist.remove_confirm.alert.description": {
+    "message": "Your server will stop federating with servers matching this pattern."
+  },
+  "pages.federation.allowlist.remove_confirm.alert.title": {
+    "message": "You’re about to stop federating with this server"
+  },
+  "pages.federation.allowlist.remove_confirm.title": {
+    "message": "Remove {serverName} from the allowlist?"
   },
   "pages.federation.allowlist.remove_tooltip": {
     "message": "Von der Zulassungsliste entfernen"
@@ -437,11 +473,11 @@
   "pages.federation.detail.contact": {
     "message": "Kontakt"
   },
-  "pages.federation.detail.destination": {
-    "message": "Ziel"
-  },
   "pages.federation.detail.last_retry": {
     "message": "Letzter Wiederholungsversuch"
+  },
+  "pages.federation.detail.last_retry.never": {
+    "message": "Never"
   },
   "pages.federation.detail.last_successful_stream": {
     "message": "Letzter erfolgreicher Stream"
@@ -449,11 +485,17 @@
   "pages.federation.detail.retry_interval": {
     "message": "Wiederholungsintervall"
   },
+  "pages.federation.detail.retry_interval.none": {
+    "message": "None"
+  },
   "pages.federation.detail.security": {
     "message": "Sicherheit"
   },
   "pages.federation.detail.support_page": {
     "message": "Support-Seite"
+  },
+  "pages.federation.details_label": {
+    "message": "Destination details"
   },
   "pages.federation.domain_count": {
     "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
@@ -468,10 +510,10 @@
     "message": "Secure Border Gateway ist in dieser Umgebung nicht aktiviert. Wende dich an den Administrator, um es zu aktivieren."
   },
   "pages.federation.sbg_not_enabled.title": {
-    "message": "Die Funktion „Zulässige Domains“ ist eine Funktion des Secure Border Gateway, das in ESS Pro verfügbar ist."
+    "message": "Die Funktion „Zulässige Domains“ ist eine Funktion des Secure Border Gateway, das in ESS Pro verfügbar ist"
   },
   "pages.federation.search_placeholder": {
-    "message": "Domains suchen..."
+    "message": "Domains suchen …"
   },
   "pages.federation.tab.allowed_domains": {
     "message": "Zulässige Domains"
@@ -492,10 +534,10 @@
     "message": "Föderation"
   },
   "pages.federation.unavailable_alert.description": {
-    "message": "Secure Border Gateway ist in ESS Community nicht verfügbar. Zum Aktivieren aktualisieren Sie bitte auf ESS Pro."
+    "message": "Secure Border Gateway ist in ESS Community nicht verfügbar. Aktualisiere bitte auf ESS Pro, um es zu aktivieren."
   },
   "pages.federation.unavailable_alert.title": {
-    "message": "Zulässige Domains ist eine Funktion des Secure Border Gateway, das in ESS Pro verfügbar ist."
+    "message": "Die Funktion „Zulässige Domains“ ist eine Funktion des Secure Border Gateway, das in ESS Pro verfügbar ist"
   },
   "pages.generic_error.go_home": {
     "message": "Gehe zur Startseite"
@@ -515,6 +557,12 @@
   "pages.landing.description": {
     "message": "Verwalte die Bereitstellung der Element-App für deine Organisation oder Community."
   },
+  "pages.login.errors.authorization_failed": {
+    "message": "Could not start the sign-in process. Please try again."
+  },
+  "pages.login.errors.insecure_context": {
+    "message": "Sign-in requires a secure connection. Reload this page over https:// and try again."
+  },
   "pages.login.errors.no_auth_metadata": {
     "message": "Das Laden der Metadaten des Servers für die Authentifizierung ist fehlgeschlagen. Der Homeserver ist möglicherweise nicht erreichbar oder nicht für die Verwendung des Matrix Authentication Service konfiguriert."
   },
@@ -522,10 +570,10 @@
     "message": "Die Registrierung der Anwendung ist fehlgeschlagen. Der Matrix Authentication Service ist möglicherweise nicht erreichbar oder falsch konfiguriert."
   },
   "pages.login.errors.no_well_known": {
-    "message": "Das \"well-known\" Dokument des Servers konnte nicht geladen werden. Der Servername ist möglicherweise ungültig."
+    "message": "Das well-known-Dokument des Servers konnte nicht geladen werden. Der Servername ist möglicherweise ungültig."
   },
   "pages.login.get_started": {
-    "message": "Los geht's"
+    "message": "Los geht’s"
   },
   "pages.login.server_name": {
     "message": "Servername"
@@ -549,16 +597,16 @@
     "message": "Persönliches Token hinzufügen"
   },
   "pages.personal_tokens.cant_regenerate_tooltip": {
-    "message": "Nur {ownerMxid} kann dieses Token neu generieren."
+    "message": "Nur {ownerMxid} kann dieses Token neu generieren"
   },
   "pages.personal_tokens.cant_regenerate_tooltip_generic": {
-    "message": "Nur der Eigentümer des Tokens kann es neu generieren."
+    "message": "Nur der Eigentümer des Tokens kann es neu generieren"
   },
   "pages.personal_tokens.count": {
     "message": "{count, plural, =0 {Kein persönliches Token} one {# persönliches Token} other {# persönliche Token}}"
   },
   "pages.personal_tokens.create_error": {
-    "message": "Es konnte kein persönliches Token erstellt werden."
+    "message": "Es konnte kein persönliches Token erstellt werden"
   },
   "pages.personal_tokens.create_success": {
     "message": "Persönliches Token erfolgreich erstellt"
@@ -572,8 +620,11 @@
   "pages.personal_tokens.description": {
     "message": "Persönliche Token sind langlebige Zugriffstoken mit spezifischen Berechtigungen, darunter der Zugriff auf die Synapse- und MAS-Admin-API. Sie eignen sich zur Automatisierung von Aufgaben und zur Erstellung von Integrationen."
   },
+  "pages.personal_tokens.details_label": {
+    "message": "Personal token details"
+  },
   "pages.personal_tokens.device_id_help": {
-    "message": "Bitte leer lassen, um eine zufällige 10-stellige Geräte-ID zu generieren."
+    "message": "Bitte leer lassen, um eine zufällige 10-stellige Geräte-ID zu generieren"
   },
   "pages.personal_tokens.device_id_label": {
     "message": "Geräte-ID"
@@ -588,7 +639,7 @@
     "message": "Ablaufdatum"
   },
   "pages.personal_tokens.expires_in_help": {
-    "message": "Bitte für Token, die nicht verfallen, leer lassen."
+    "message": "Bitte für Token, die nicht verfallen, leer lassen"
   },
   "pages.personal_tokens.expires_in_label": {
     "message": "Läuft ab in (Tagen)"
@@ -630,7 +681,7 @@
     "message": "Name"
   },
   "pages.personal_tokens.name_help": {
-    "message": "Ein für Menschen lesbarer Name für das Token, der hilft, es zu identifizieren."
+    "message": "Ein für Menschen lesbarer Name für das Token, der hilft, es zu identifizieren"
   },
   "pages.personal_tokens.name_label": {
     "message": "Token-Name"
@@ -660,7 +711,7 @@
     "message": "Fehler beim Regenerieren des persönlichen Tokens"
   },
   "pages.personal_tokens.regenerate_expires_help": {
-    "message": "Bitte leer lassen, um das gleiche Ablaufdatum wie zuvor beizubehalten, oder lege ein neues Ablaufdatum fest."
+    "message": "Bitte leer lassen, um das gleiche Ablaufdatum wie zuvor beizubehalten, oder lege ein neues Ablaufdatum fest"
   },
   "pages.personal_tokens.regenerate_success": {
     "message": "Persönliches Token erfolgreich neu generiert"
@@ -679,6 +730,18 @@
   },
   "pages.personal_tokens.revoke_token": {
     "message": "Token widerrufen"
+  },
+  "pages.personal_tokens.revoke_token.alert.description": {
+    "message": "{humanName} will stop working immediately, and anything using it will need a new token."
+  },
+  "pages.personal_tokens.revoke_token.alert.title": {
+    "message": "This cannot be undone"
+  },
+  "pages.personal_tokens.revoke_token.error": {
+    "message": "Failed to revoke the token"
+  },
+  "pages.personal_tokens.revoke_token.title": {
+    "message": "Revoke this personal token?"
   },
   "pages.personal_tokens.revoked_at_label": {
     "message": "Widerrufen am"
@@ -755,8 +818,17 @@
   "pages.registration_tokens.custom_token_label": {
     "message": "Benutzerdefiniertes Token"
   },
+  "pages.registration_tokens.details_label": {
+    "message": "Registration token details"
+  },
   "pages.registration_tokens.edit_properties": {
     "message": "Eigenschaften bearbeiten"
+  },
+  "pages.registration_tokens.edit_properties.revoked_tooltip": {
+    "message": "Unrevoke this token before editing its properties"
+  },
+  "pages.registration_tokens.edit_token.error": {
+    "message": "Failed to save the changes"
   },
   "pages.registration_tokens.edit_token_title": {
     "message": "Registrierungstoken bearbeiten"
@@ -775,6 +847,9 @@
   },
   "pages.registration_tokens.filters.expired_only": {
     "message": "Abgelaufen"
+  },
+  "pages.registration_tokens.filters.not_revoked": {
+    "message": "Not revoked"
   },
   "pages.registration_tokens.filters.revoked_only": {
     "message": "Widerrufen"
@@ -799,6 +874,21 @@
   },
   "pages.registration_tokens.revoke_token": {
     "message": "Token widerrufen"
+  },
+  "pages.registration_tokens.revoke_token.alert.description": {
+    "message": "Nobody will be able to register with {token} until it is unrevoked."
+  },
+  "pages.registration_tokens.revoke_token.alert.title": {
+    "message": "The token will stop working"
+  },
+  "pages.registration_tokens.revoke_token.error": {
+    "message": "Failed to revoke the token"
+  },
+  "pages.registration_tokens.revoke_token.success": {
+    "message": "Token revoked"
+  },
+  "pages.registration_tokens.revoke_token.title": {
+    "message": "Revoke this registration token?"
   },
   "pages.registration_tokens.revoked_at_label": {
     "message": "Widerrufen am"
@@ -851,6 +941,12 @@
   "pages.registration_tokens.unrevoke_token": {
     "message": "Widerruf des Tokens rückgängig machen"
   },
+  "pages.registration_tokens.unrevoke_token.error": {
+    "message": "Failed to unrevoke the token"
+  },
+  "pages.registration_tokens.unrevoke_token.success": {
+    "message": "Token unrevoked"
+  },
   "pages.registration_tokens.usage_count_label": {
     "message": "Nutzungsanzahl"
   },
@@ -870,25 +966,25 @@
     "message": "Gültig bis"
   },
   "pages.rooms.columns.alias": {
-    "message": "Alias"
+    "message": "Adresse"
   },
   "pages.rooms.columns.members": {
-    "message": "Members"
+    "message": "Mitglieder"
   },
   "pages.rooms.columns.room": {
-    "message": "Room"
+    "message": "Chat"
   },
-  "pages.rooms.columns.type": {
-    "message": "Type"
+  "pages.rooms.columns.visibility": {
+    "message": "Visibility"
   },
   "pages.rooms.delete_room.alert.description": {
     "message": "Dadurch werden alle auf den Server hochgeladenen Nachrichten und Medien endgültig entfernt und diese Gruppe wird aus dem Verzeichnis entfernt. Mitglieder verlieren den Zugriff auf ihre Nachrichten, und die Gruppe wird aus ihrer Chatliste gelöscht."
   },
   "pages.rooms.delete_room.alert.title": {
-    "message": "Du bist im Begriff, Chat Daten zu löschen."
+    "message": "Du bist im Begriff, Chat-Daten zu löschen"
   },
   "pages.rooms.delete_room.block.help": {
-    "message": "Nutzern nicht gestatten, die Gruppe nach dem Löschen wieder zu betreten."
+    "message": "Verhindern, dass Nutzer dem Raum nach dem Löschen wieder beitreten."
   },
   "pages.rooms.delete_room.block.label": {
     "message": "Chat sperren"
@@ -897,7 +993,7 @@
     "message": "Dauerhaft löschen"
   },
   "pages.rooms.delete_room.error": {
-    "message": "Das Löschen des Chats konnte nicht geplant werden."
+    "message": "Das Löschen des Chats konnte nicht geplant werden"
   },
   "pages.rooms.delete_room.success": {
     "message": "Löschen des Chats geplant"
@@ -923,6 +1019,9 @@
   "pages.rooms.deletion.success.title": {
     "message": "Löschung erfolgreich"
   },
+  "pages.rooms.details_label": {
+    "message": "Room details"
+  },
   "pages.rooms.filters.empty_rooms": {
     "message": "Leere Chats"
   },
@@ -945,16 +1044,16 @@
     "message": "{COUNT, plural, =0 {Keine Chats} one {# Chat} other {# Chats}}"
   },
   "pages.rooms.room_type.private": {
-    "message": "Private"
+    "message": "Privat"
   },
   "pages.rooms.room_type.public": {
-    "message": "Public"
+    "message": "Öffentlich"
   },
   "pages.rooms.room_type.restricted": {
-    "message": "Restricted"
+    "message": "Eingeschränkt"
   },
   "pages.rooms.search_placeholder": {
-    "message": "Search…"
+    "message": "Suchen …"
   },
   "pages.rooms.title": {
     "message": "Chats"
@@ -975,25 +1074,28 @@
     "message": "Die Supervision-Oberfläche konnte nicht in einem neuen Fenster geöffnet werden."
   },
   "pages.supervision.errors.closed.description": {
-    "message": "Supervision konnte nicht geöffnet werden – das Anmeldefenster wurde geschlossen, bevor die Anmeldung abgeschlossen war. Bitte erneut versuchen."
+    "message": "Supervision konnte nicht geöffnet werden – das Anmeldefenster wurde geschlossen, bevor die Anmeldung abgeschlossen war"
   },
   "pages.supervision.errors.closed.title": {
-    "message": "Das Supervision-Fenster wurde vorzeitig geschlossen."
+    "message": "Das Supervision-Fenster wurde vorzeitig geschlossen"
   },
   "pages.supervision.errors.generic.title": {
-    "message": "Beim Öffnen von Supervision ist ein unerwarteter Fehler aufgetreten."
+    "message": "Beim Öffnen von Supervision ist ein unerwarteter Fehler aufgetreten"
+  },
+  "pages.supervision.launch": {
+    "message": "Open supervision interface"
   },
   "pages.supervision.missing_ui_address.description": {
     "message": "In deiner Bereitstellung ist Supervision aktiviert, Element Web jedoch nicht. Element Web wird für die Supervision-Oberfläche benötigt."
   },
   "pages.supervision.missing_ui_address.title": {
-    "message": "Für die Supervision-Oberfläche muss Element Web aktiviert sein."
+    "message": "Für die Supervision-Oberfläche muss Element Web aktiviert sein"
   },
   "pages.supervision.recovery_key.copied": {
     "message": "Wiederherstellungsschlüssel kopiert"
   },
   "pages.supervision.recovery_key.copy_failed": {
-    "message": "Der Wiederherstellungsschlüssel konnte nicht kopiert werden."
+    "message": "Der Wiederherstellungsschlüssel konnte nicht kopiert werden"
   },
   "pages.supervision.recovery_key.help": {
     "message": "Dies ist der Wiederherstellungsschlüssel, der zum Lesen verschlüsselter Nachrichten benötigt wird."
@@ -1011,19 +1113,19 @@
     "message": "Supervision ist eine Funktion von ESS Pro"
   },
   "pages.users.account_status.active": {
-    "message": "Active"
+    "message": "Aktiv"
   },
   "pages.users.account_status.admin": {
     "message": "Admin"
   },
   "pages.users.account_status.deactivated": {
-    "message": "Deactivated"
+    "message": "Deaktiviert"
   },
   "pages.users.account_status.guest": {
-    "message": "Guest"
+    "message": "Gast"
   },
   "pages.users.account_status.locked": {
-    "message": "Locked"
+    "message": "Gesperrt"
   },
   "pages.users.add_email.button": {
     "message": "E-Mail hinzufügen"
@@ -1038,13 +1140,13 @@
     "message": "Ungültige E-Mail Adresse"
   },
   "pages.users.add_email.error.email_missing": {
-    "message": "Dies ist ein Pflichtfeld"
+    "message": "Dieses Feld ist ein Pflichtfeld"
   },
   "pages.users.add_email.success": {
     "message": "E-Mail Adresse hinzugefügt"
   },
   "pages.users.add_email.title": {
-    "message": "E-Mail Adresse hinzufügen"
+    "message": "E-Mail hinzufügen"
   },
   "pages.users.add_upstream_link.error": {
     "message": "Fehler beim Verbinden des Upstream-Kontos"
@@ -1053,13 +1155,13 @@
     "message": "Link zum Upstream-Konto hinzugefügt"
   },
   "pages.users.columns.account_status": {
-    "message": "Account status"
+    "message": "Kontostatus"
   },
   "pages.users.columns.created_at": {
-    "message": "Created at"
+    "message": "Erstellt am"
   },
   "pages.users.columns.matrix_id": {
-    "message": "Matrix ID"
+    "message": "Matrix-ID"
   },
   "pages.users.deactivate_account.alert.description": {
     "message": "Der Nutzer wird durch diese Aktion automatisch von allen Geräten abgemeldet, alle Zugriffstoken werden entfernt, alle IDs von Drittanbietern werden entfernt und die Kontodaten werden dauerhaft entfernt."
@@ -1068,7 +1170,7 @@
     "message": "Du bist dabei, Nutzerdaten zu entfernen"
   },
   "pages.users.deactivate_account.button": {
-    "message": "Nutzerkonto deaktivieren"
+    "message": "Konto deaktivieren"
   },
   "pages.users.deactivate_account.error": {
     "message": "Konto konnte nicht deaktiviert werden"
@@ -1103,11 +1205,14 @@
   "pages.users.delete_upstream_link.title": {
     "message": "Verbindung mit dem Upstream-Konto entfernen?"
   },
+  "pages.users.details_label": {
+    "message": "User details"
+  },
   "pages.users.filters.active": {
     "message": "Aktive Nutzer"
   },
   "pages.users.filters.active_client_chip": {
-    "message": "Has active device on: {name}"
+    "message": "Hat aktives Gerät in: {name}"
   },
   "pages.users.filters.admins": {
     "message": "Admins"
@@ -1119,7 +1224,7 @@
     "message": "Gäste (Legacy)"
   },
   "pages.users.filters.has_legacy_session": {
-    "message": "Has active legacy device"
+    "message": "Hat ein aktives Legacy-Gerät"
   },
   "pages.users.filters.locked": {
     "message": "Gesperrte Nutzer"
@@ -1128,7 +1233,7 @@
     "message": "Neueste zuerst"
   },
   "pages.users.filters.no_legacy_session": {
-    "message": "No active legacy device"
+    "message": "Kein aktives Legacy-Gerät"
   },
   "pages.users.filters.non_guests": {
     "message": "Nicht-Gäste (Legacy)"
@@ -1137,7 +1242,7 @@
     "message": "Dieser Nutzer wird automatisch auf allen angemeldeten Geräten gesperrt und kann sich erst bei neuen Geräten anmelden, wenn diese entsperrt wurden."
   },
   "pages.users.lock_account.alert.title": {
-    "message": "Der Nutzer kann keine Nachrichten mehr senden oder empfangen."
+    "message": "Der Nutzer kann keine Nachrichten mehr senden oder empfangen"
   },
   "pages.users.lock_account.button": {
     "message": "Konto sperren"
@@ -1173,7 +1278,7 @@
     "message": "Name eingeben"
   },
   "pages.users.new_user.required_error": {
-    "message": "Dies ist ein Pflichtfeld"
+    "message": "Dieses Feld ist ein Pflichtfeld"
   },
   "pages.users.new_user.success_message": {
     "message": "Nutzer angelegt"
@@ -1194,7 +1299,7 @@
     "message": "Konto reaktiviert"
   },
   "pages.users.search_placeholder": {
-    "message": "Nutzer suchen..."
+    "message": "Nutzer suchen …"
   },
   "pages.users.set_admin.alert.description": {
     "message": "Der Nutzer kann Nutzerdaten einsehen und Änderungen an Nutzer- und Chat-Berechtigungen vornehmen."
@@ -1230,7 +1335,7 @@
     "message": "Passwort konnte nicht festgelegt werden"
   },
   "pages.users.set_password.error.password_missing": {
-    "message": "Dies ist ein Pflichtfeld"
+    "message": "Dieses Feld ist ein Pflichtfeld"
   },
   "pages.users.set_password.error.passwords_mismatch": {
     "message": "Passwörter stimmen nicht überein"
@@ -1251,10 +1356,10 @@
     "message": "Neues Passwort für diesen Nutzer festlegen"
   },
   "pages.users.statistics.devices": {
-    "message": "Devices"
+    "message": "Geräte"
   },
   "pages.users.statistics.legacy_devices": {
-    "message": "Legacy devices"
+    "message": "Legacy-Geräte"
   },
   "pages.users.title": {
     "message": "Nutzer"
@@ -1263,13 +1368,16 @@
     "message": "Konto entsperren"
   },
   "pages.users.unlock_account.error": {
-    "message": "Entsperren des Kontos ist fehlgeschlagen."
+    "message": "Entsperren des Kontos ist fehlgeschlagen"
   },
   "pages.users.unlock_account.success": {
     "message": "Konto entsperrt"
   },
   "pages.users.user_count": {
     "message": "{COUNT, plural, zero {Keine Nutzer} one {# Nutzer} other {# Nutzer}}"
+  },
+  "product.badge.pro": {
+    "message": "Pro"
   },
   "product.element": {
     "message": "Element"
@@ -1299,22 +1407,25 @@
     "message": "Space mit {members}"
   },
   "room_info.unknown_user": {
-    "message": "Unbekannter Nutzer."
+    "message": "Unbekannter Nutzer"
   },
   "rooms_info.other_members": {
     "message": "{COUNT, plural, one {# weiteren} other {# weiteren}}"
   },
+  "ui.copy.copied": {
+    "message": "Copied!"
+  },
+  "ui.copy.copy_to_clipboard": {
+    "message": "Copy to clipboard"
+  },
   "ui.data.failed_to_load": {
     "message": "Laden fehlgeschlagen"
   },
-  "ui.data.loading": {
-    "message": "Wert wird geladen"
-  },
   "ui.data_table.loading_more": {
-    "message": "Loading more…"
+    "message": "Weitere werden geladen …"
   },
   "ui.destination_status.failing": {
-    "message": "Fehlgeschlagen"
+    "message": "Fehlerhaft"
   },
   "ui.destination_status.inactive": {
     "message": "Inaktiv"
@@ -1326,10 +1437,10 @@
     "message": "Funktioniert"
   },
   "ui.device_info.name_on_platform": {
-    "message": "{name} on {platform}"
+    "message": "{name} auf {platform}"
   },
   "ui.device_info.type.mobile": {
-    "message": "Mobile device"
+    "message": "Mobilgerät"
   },
   "ui.device_info.type.pc": {
     "message": "Computer"
@@ -1338,37 +1449,37 @@
     "message": "Tablet"
   },
   "ui.device_info.type.unknown": {
-    "message": "Unknown device type"
+    "message": "Unbekannter Gerätetyp"
   },
   "ui.device_info.unknown_device": {
-    "message": "Unknown device"
+    "message": "Unbekanntes Gerät"
   },
   "ui.device_status.active": {
-    "message": "Active"
+    "message": "Aktiv"
   },
   "ui.device_status.inactive": {
-    "message": "Inactive"
+    "message": "Inaktiv"
   },
   "ui.device_status.last_active.tooltip": {
-    "message": "Last active on {date}."
+    "message": "Zuletzt aktiv am {date}."
   },
   "ui.device_status.never_used": {
-    "message": "Never used"
+    "message": "Noch nie verwendet"
   },
   "ui.device_status.never_used.tooltip": {
-    "message": "This device has not been used yet."
+    "message": "Dieses Gerät wurde noch nicht benutzt."
   },
   "ui.device_status.recently_used": {
-    "message": "Recently used"
+    "message": "Kürzlich verwendet"
   },
   "ui.device_status.signed_out": {
-    "message": "Signed out"
+    "message": "Abgemeldet"
   },
   "ui.device_status.signed_out.tooltip": {
-    "message": "This device has been signed out and no longer has access."
+    "message": "Dieses Gerät wurde abgemeldet und hat keinen Zugriff mehr."
   },
   "ui.device_status.signed_out.tooltip_at": {
-    "message": "Signed out on {date}."
+    "message": "Abgemeldet am {date}."
   },
   "ui.language_switcher.browser_default": {
     "message": "Browser-Einstellungen verwenden ({language})"
@@ -1377,7 +1488,7 @@
     "message": "Spracheinstellungen"
   },
   "ui.language_switcher.description": {
-    "message": "Wähle deine bevorzugte Sprache für die Benutzeroberfläche"
+    "message": "Wähle deine bevorzugte Sprache für die Benutzeroberfläche."
   },
   "ui.language_switcher.language_list_label": {
     "message": "Liste der verfügbaren Sprachen"
@@ -1386,7 +1497,7 @@
     "message": "Spracheinstellungen"
   },
   "ui.user_picker.loading_list": {
-    "message": "Lade …"
+    "message": "Wird geladen …"
   },
   "ui.user_picker.no_match": {
     "message": "Keine Übereinstimmung"

@@ -17,6 +17,9 @@
   "action.delete": {
     "message": "Видалити"
   },
+  "action.done": {
+    "message": "Done"
+  },
   "action.go_back": {
     "message": "Назад"
   },
@@ -25,9 +28,6 @@
   },
   "action.retry": {
     "message": "Повторити спробу"
-  },
-  "action.sign_in": {
-    "message": "Увійти"
   },
   "action.sign_out": {
     "message": "Вийти"
@@ -38,6 +38,15 @@
   "common.filter": {
     "message": "Фільтр"
   },
+  "common.loading": {
+    "message": "Loading…"
+  },
+  "errors.authorization_denied": {
+    "message": "Sign-in was cancelled."
+  },
+  "errors.authorization_error": {
+    "message": "Sign-in failed: {errorMessage}"
+  },
   "errors.http_fetch": {
     "message": "Запит до {url} не вдався"
   },
@@ -47,8 +56,14 @@
   "errors.http_status": {
     "message": "Запит до {url} завершився невдало з кодом статусу {status} {statusText}"
   },
+  "errors.mas_api": {
+    "message": "The homeserver's authentication service returned an error: {errorMessage}"
+  },
   "errors.matrix_standard": {
     "message": "Запит до домашнього сервера не вдався з кодом помилки \"{errorCode}\". Додатково, сервер видав таке повідомлення про помилку: {errorMessage}"
+  },
+  "errors.no_details": {
+    "message": "The server returned an error with no details."
   },
   "errors.not_logged_in": {
     "message": "Вхід не виконано"
@@ -167,6 +182,9 @@
   "pages.devices.applications.description": {
     "message": "Applications are OAuth 2.0 clients that users sign in to."
   },
+  "pages.devices.applications.details_label": {
+    "message": "Application details"
+  },
   "pages.devices.applications.filters.has_active_sessions": {
     "message": "With active devices"
   },
@@ -177,7 +195,7 @@
     "message": "Grant types"
   },
   "pages.devices.applications.name_column": {
-    "message": "Name"
+    "message": "Ім’я"
   },
   "pages.devices.applications.not_found.description": {
     "message": "The requested application ({clientId}) could not be found on {serverName}."
@@ -212,6 +230,9 @@
   "pages.devices.applications.view_sessions": {
     "message": "View all devices"
   },
+  "pages.devices.applications.view_users": {
+    "message": "View users on this application"
+  },
   "pages.devices.legacy.count": {
     "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}"
   },
@@ -221,14 +242,17 @@
   "pages.devices.legacy.description": {
     "message": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
   },
+  "pages.devices.legacy.details_label": {
+    "message": "Legacy device details"
+  },
   "pages.devices.legacy.device_column": {
     "message": "Device"
   },
   "pages.devices.legacy.device_id_label": {
-    "message": "Device ID"
+    "message": "ID пристрою"
   },
   "pages.devices.legacy.filters.activity_active": {
-    "message": "Active"
+    "message": "Активні"
   },
   "pages.devices.legacy.filters.activity_inactive": {
     "message": "Inactive"
@@ -240,7 +264,7 @@
     "message": "Signed out"
   },
   "pages.devices.legacy.filters.newest_first": {
-    "message": "Newest first"
+    "message": "Спочатку новіші"
   },
   "pages.devices.legacy.filters.user_chip": {
     "message": "User: @{localpart}:{server}"
@@ -267,10 +291,10 @@
     "message": "Signed out at"
   },
   "pages.devices.legacy.last_active_ip_label": {
-    "message": "Last active IP"
+    "message": "Остання активна IP-адреса"
   },
   "pages.devices.legacy.last_active_label": {
-    "message": "Last active"
+    "message": "Остання активність"
   },
   "pages.devices.legacy.not_found.description": {
     "message": "The requested legacy device ({sessionId}) could not be found on {serverName}."
@@ -282,7 +306,7 @@
     "message": "Redirect URI"
   },
   "pages.devices.legacy.status_column": {
-    "message": "Status"
+    "message": "Статус"
   },
   "pages.devices.legacy.technical_details": {
     "message": "Technical details"
@@ -323,14 +347,17 @@
   "pages.devices.user.description": {
     "message": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
   },
+  "pages.devices.user.details_label": {
+    "message": "Device details"
+  },
   "pages.devices.user.device_column": {
     "message": "Device"
   },
   "pages.devices.user.device_id_label": {
-    "message": "Device ID"
+    "message": "ID пристрою"
   },
   "pages.devices.user.filters.activity_active": {
-    "message": "Active"
+    "message": "Активні"
   },
   "pages.devices.user.filters.activity_inactive": {
     "message": "Inactive"
@@ -345,7 +372,7 @@
     "message": "Application: {name}"
   },
   "pages.devices.user.filters.newest_first": {
-    "message": "Newest first"
+    "message": "Спочатку новіші"
   },
   "pages.devices.user.filters.user_chip": {
     "message": "User: @{localpart}:{server}"
@@ -372,10 +399,10 @@
     "message": "Signed out at"
   },
   "pages.devices.user.last_active_ip_label": {
-    "message": "Last active IP"
+    "message": "Остання активна IP-адреса"
   },
   "pages.devices.user.last_active_label": {
-    "message": "Last active"
+    "message": "Остання активність"
   },
   "pages.devices.user.not_found.description": {
     "message": "The requested device ({sessionId}) could not be found on {serverName}."
@@ -387,7 +414,7 @@
     "message": "Scope"
   },
   "pages.devices.user.status_column": {
-    "message": "Status"
+    "message": "Статус"
   },
   "pages.devices.user.technical_details": {
     "message": "Technical details"
@@ -431,17 +458,26 @@
   "pages.federation.allowlist.remove.success": {
     "message": "Domain removed from allowlist"
   },
+  "pages.federation.allowlist.remove_confirm.alert.description": {
+    "message": "Your server will stop federating with servers matching this pattern."
+  },
+  "pages.federation.allowlist.remove_confirm.alert.title": {
+    "message": "You’re about to stop federating with this server"
+  },
+  "pages.federation.allowlist.remove_confirm.title": {
+    "message": "Remove {serverName} from the allowlist?"
+  },
   "pages.federation.allowlist.remove_tooltip": {
     "message": "Remove from allowlist"
   },
   "pages.federation.detail.contact": {
     "message": "Contact"
   },
-  "pages.federation.detail.destination": {
-    "message": "Destination"
-  },
   "pages.federation.detail.last_retry": {
     "message": "Last retry timestamp"
+  },
+  "pages.federation.detail.last_retry.never": {
+    "message": "Never"
   },
   "pages.federation.detail.last_successful_stream": {
     "message": "Last successful stream"
@@ -449,14 +485,20 @@
   "pages.federation.detail.retry_interval": {
     "message": "Retry interval"
   },
+  "pages.federation.detail.retry_interval.none": {
+    "message": "None"
+  },
   "pages.federation.detail.security": {
     "message": "Security"
   },
   "pages.federation.detail.support_page": {
     "message": "Support page"
   },
+  "pages.federation.details_label": {
+    "message": "Destination details"
+  },
   "pages.federation.domain_count": {
-    "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
+    "message": "{COUNT, plural, =0 {No domains} one {# domain} other {# domains}}"
   },
   "pages.federation.not_found.description": {
     "message": "The requested destination ({destination}) could not be found."
@@ -465,10 +507,10 @@
     "message": "Destination not found"
   },
   "pages.federation.sbg_not_enabled.description": {
-    "message": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+    "message": "Contact your administrator to enable it in your deployment configuration."
   },
   "pages.federation.sbg_not_enabled.title": {
-    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+    "message": "Secure Border Gateway isn't enabled on this deployment"
   },
   "pages.federation.search_placeholder": {
     "message": "Search domains…"
@@ -483,10 +525,10 @@
     "message": "Federation views"
   },
   "pages.federation.table.server_name": {
-    "message": "Server name"
+    "message": "Ім’я сервера"
   },
   "pages.federation.table.status": {
-    "message": "Status"
+    "message": "Статус"
   },
   "pages.federation.title": {
     "message": "Federation"
@@ -495,7 +537,7 @@
     "message": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
   },
   "pages.federation.unavailable_alert.title": {
-    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+    "message": "Secure Border Gateway isn't enabled on this deployment"
   },
   "pages.generic_error.go_home": {
     "message": "На головну"
@@ -514,6 +556,12 @@
   },
   "pages.landing.description": {
     "message": "Керуйте розгортанням додатка element для вашої організації або спільноти."
+  },
+  "pages.login.errors.authorization_failed": {
+    "message": "Could not start the sign-in process. Please try again."
+  },
+  "pages.login.errors.insecure_context": {
+    "message": "Sign-in requires a secure connection. Reload this page over https:// and try again."
   },
   "pages.login.errors.no_auth_metadata": {
     "message": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
@@ -534,7 +582,7 @@
     "message": "Вхід"
   },
   "pages.personal_tokens.acting_user_column": {
-    "message": "Acting User"
+    "message": "Acting user"
   },
   "pages.personal_tokens.acting_user_label": {
     "message": "Acting user"
@@ -572,6 +620,9 @@
   "pages.personal_tokens.description": {
     "message": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations."
   },
+  "pages.personal_tokens.details_label": {
+    "message": "Personal token details"
+  },
   "pages.personal_tokens.device_id_help": {
     "message": "Leave empty to generate a random 10-character device ID"
   },
@@ -606,13 +657,13 @@
     "message": "Ніколи не втрачає чинності"
   },
   "pages.personal_tokens.filter.revoked": {
-    "message": "Відкликані"
+    "message": "Відкликано"
   },
   "pages.personal_tokens.filter.scope_mas_admin": {
     "message": "Доступ до адміністративного API в MAS"
   },
   "pages.personal_tokens.filter.scope_matrix_client": {
-    "message": "Доступ до клієнт-серверного API Matrix"
+    "message": "Access to the Matrix Client-Server API"
   },
   "pages.personal_tokens.filter.scope_synapse_admin": {
     "message": "Доступ до адміністративного API в Synapse"
@@ -639,7 +690,7 @@
     "message": "Токен мого додатка"
   },
   "pages.personal_tokens.never_expires": {
-    "message": "Не має терміну дії"
+    "message": "Ніколи не втрачає чинності"
   },
   "pages.personal_tokens.never_used": {
     "message": "Ніколи не використовувався"
@@ -680,6 +731,18 @@
   "pages.personal_tokens.revoke_token": {
     "message": "Відкликати токен"
   },
+  "pages.personal_tokens.revoke_token.alert.description": {
+    "message": "{humanName} will stop working immediately, and anything using it will need a new token."
+  },
+  "pages.personal_tokens.revoke_token.alert.title": {
+    "message": "This cannot be undone"
+  },
+  "pages.personal_tokens.revoke_token.error": {
+    "message": "Failed to revoke the token"
+  },
+  "pages.personal_tokens.revoke_token.title": {
+    "message": "Revoke this personal token?"
+  },
   "pages.personal_tokens.revoked_at_label": {
     "message": "Відкликано о"
   },
@@ -687,19 +750,19 @@
     "message": "Provision a Matrix device"
   },
   "pages.personal_tokens.scope_mas_admin_help": {
-    "message": "Access to the MAS admin API"
+    "message": "Доступ до адміністративного API в MAS"
   },
   "pages.personal_tokens.scope_matrix_client_help": {
     "message": "Access to the Matrix Client-Server API"
   },
   "pages.personal_tokens.scope_synapse_admin_help": {
-    "message": "Access to the Synapse admin API"
+    "message": "Доступ до адміністративного API в Synapse"
   },
   "pages.personal_tokens.scopes_label": {
     "message": "Області дії (scopes)"
   },
   "pages.personal_tokens.status.active": {
-    "message": "Активний"
+    "message": "Активні"
   },
   "pages.personal_tokens.status.column": {
     "message": "Статус"
@@ -744,10 +807,10 @@
     "message": "Створити токен реєстрації"
   },
   "pages.registration_tokens.created_at_column": {
-    "message": "Створено"
+    "message": "Створено о"
   },
   "pages.registration_tokens.created_at_label": {
-    "message": "Створено"
+    "message": "Створено о"
   },
   "pages.registration_tokens.custom_token_help": {
     "message": "Optional custom token string. If left empty, a secure token will be auto-generated."
@@ -755,14 +818,23 @@
   "pages.registration_tokens.custom_token_label": {
     "message": "Спеціальний токен"
   },
+  "pages.registration_tokens.details_label": {
+    "message": "Registration token details"
+  },
   "pages.registration_tokens.edit_properties": {
     "message": "Редагувати властивості"
+  },
+  "pages.registration_tokens.edit_properties.revoked_tooltip": {
+    "message": "Unrevoke this token before editing its properties"
+  },
+  "pages.registration_tokens.edit_token.error": {
+    "message": "Failed to save the changes"
   },
   "pages.registration_tokens.edit_token_title": {
     "message": "Редагувати токен реєстрації"
   },
   "pages.registration_tokens.expires_at_field": {
-    "message": "Термін дії"
+    "message": "Термін дії закінчується о"
   },
   "pages.registration_tokens.expires_at_help": {
     "message": "When the token expires. Leave empty if the token should never expire."
@@ -774,7 +846,10 @@
     "message": "Активні"
   },
   "pages.registration_tokens.filters.expired_only": {
-    "message": "Термін дії минув"
+    "message": "Термін дії закінчився"
+  },
+  "pages.registration_tokens.filters.not_revoked": {
+    "message": "Not revoked"
   },
   "pages.registration_tokens.filters.revoked_only": {
     "message": "Відкликано"
@@ -786,7 +861,7 @@
     "message": "Використані"
   },
   "pages.registration_tokens.never_expires": {
-    "message": "Не має терміну дії"
+    "message": "Ніколи не втрачає чинності"
   },
   "pages.registration_tokens.no_expiration_placeholder": {
     "message": "Без терміну дії"
@@ -800,6 +875,21 @@
   "pages.registration_tokens.revoke_token": {
     "message": "Відкликати токен"
   },
+  "pages.registration_tokens.revoke_token.alert.description": {
+    "message": "Nobody will be able to register with {token} until it is unrevoked."
+  },
+  "pages.registration_tokens.revoke_token.alert.title": {
+    "message": "The token will stop working"
+  },
+  "pages.registration_tokens.revoke_token.error": {
+    "message": "Failed to revoke the token"
+  },
+  "pages.registration_tokens.revoke_token.success": {
+    "message": "Token revoked"
+  },
+  "pages.registration_tokens.revoke_token.title": {
+    "message": "Revoke this registration token?"
+  },
   "pages.registration_tokens.revoked_at_label": {
     "message": "Відкликано о"
   },
@@ -807,7 +897,7 @@
     "message": "Зберегти зміни"
   },
   "pages.registration_tokens.status.active": {
-    "message": "Активний"
+    "message": "Активні"
   },
   "pages.registration_tokens.status.column": {
     "message": "Статус"
@@ -822,7 +912,7 @@
     "message": "Статус"
   },
   "pages.registration_tokens.status.revoked": {
-    "message": "Скасовано"
+    "message": "Відкликано"
   },
   "pages.registration_tokens.status.used_up": {
     "message": "Використано"
@@ -834,7 +924,7 @@
     "message": "Токен"
   },
   "pages.registration_tokens.token_count": {
-    "message": "{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
+    "message": "{COUNT, plural, =0 {No tokens} one {# token} other {# tokens}}"
   },
   "pages.registration_tokens.token_uses.limited": {
     "message": "{uses, number} / {limit, number}"
@@ -850,6 +940,12 @@
   },
   "pages.registration_tokens.unrevoke_token": {
     "message": "Скасувати відкликання токена"
+  },
+  "pages.registration_tokens.unrevoke_token.error": {
+    "message": "Failed to unrevoke the token"
+  },
+  "pages.registration_tokens.unrevoke_token.success": {
+    "message": "Token unrevoked"
   },
   "pages.registration_tokens.usage_count_label": {
     "message": "Лічильник використань"
@@ -878,8 +974,8 @@
   "pages.rooms.columns.room": {
     "message": "Room"
   },
-  "pages.rooms.columns.type": {
-    "message": "Type"
+  "pages.rooms.columns.visibility": {
+    "message": "Visibility"
   },
   "pages.rooms.delete_room.alert.description": {
     "message": "This will permanently delete all messages or media uploaded to the server and remove this room from the directory. Members will lose access to their messages and the room will be removed from their room list."
@@ -923,6 +1019,9 @@
   "pages.rooms.deletion.success.title": {
     "message": "Видалення успішне"
   },
+  "pages.rooms.details_label": {
+    "message": "Room details"
+  },
   "pages.rooms.filters.empty_rooms": {
     "message": "Порожні кімнати"
   },
@@ -942,7 +1041,7 @@
     "message": "Кімнату не знайдено"
   },
   "pages.rooms.room_count": {
-    "message": "{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
+    "message": "{COUNT, plural, =0 {No rooms} one {# room} other {# rooms}}"
   },
   "pages.rooms.room_type.private": {
     "message": "Private"
@@ -983,6 +1082,9 @@
   "pages.supervision.errors.generic.title": {
     "message": "Під час відкриття інтерфейсу нагляду сталася неочікувана помилка"
   },
+  "pages.supervision.launch": {
+    "message": "Open supervision interface"
+  },
   "pages.supervision.missing_ui_address.description": {
     "message": "На вашому сервері увімкнено наглядання, але не Element Web, що необхідний для роботи інтерфейсу нагляду."
   },
@@ -1005,16 +1107,16 @@
     "message": "Наглядання"
   },
   "pages.supervision.unavailable_alert.description": {
-    "message": "Ця функція недоступна в ESS Community. Оновіться до ESS Pro, щоб увімкнути її."
+    "message": "Ця функція недоступна в ESS Community. Щоб її увімкнути, перейдіть на ESS Pro."
   },
   "pages.supervision.unavailable_alert.title": {
     "message": "Нагляд – функція, що доступна в ESS Pro"
   },
   "pages.users.account_status.active": {
-    "message": "Active"
+    "message": "Активні"
   },
   "pages.users.account_status.admin": {
-    "message": "Admin"
+    "message": "Адміністратор"
   },
   "pages.users.account_status.deactivated": {
     "message": "Deactivated"
@@ -1038,7 +1140,7 @@
     "message": "Неправильна адреса електронної пошти"
   },
   "pages.users.add_email.error.email_missing": {
-    "message": "Це поле обов’язкове"
+    "message": "Це поле обов’язкове."
   },
   "pages.users.add_email.success": {
     "message": "Адресу електронної пошти додано"
@@ -1056,7 +1158,7 @@
     "message": "Account status"
   },
   "pages.users.columns.created_at": {
-    "message": "Created at"
+    "message": "Створено о"
   },
   "pages.users.columns.matrix_id": {
     "message": "Matrix ID"
@@ -1102,6 +1204,9 @@
   },
   "pages.users.delete_upstream_link.title": {
     "message": "Remove link with upstream account?"
+  },
+  "pages.users.details_label": {
+    "message": "User details"
   },
   "pages.users.filters.active": {
     "message": "Активні користувачі"
@@ -1230,7 +1335,7 @@
     "message": "Не вдалося встановити пароль"
   },
   "pages.users.set_password.error.password_missing": {
-    "message": "Це поле обовʼязкове"
+    "message": "Це поле обов’язкове."
   },
   "pages.users.set_password.error.passwords_mismatch": {
     "message": "Паролі не збігаються"
@@ -1269,7 +1374,10 @@
     "message": "Обліковий запис розблоковано"
   },
   "pages.users.user_count": {
-    "message": "{COUNT, plural, zero {No users} one {# user} other {# users}}"
+    "message": "{COUNT, plural, =0 {No users} one {# user} other {# users}}"
+  },
+  "product.badge.pro": {
+    "message": "Pro"
   },
   "product.element": {
     "message": "Element"
@@ -1304,11 +1412,14 @@
   "rooms_info.other_members": {
     "message": "{COUNT,plural,one{# інший} few{# інших} many{# інших} other{# інших}}"
   },
+  "ui.copy.copied": {
+    "message": "Copied!"
+  },
+  "ui.copy.copy_to_clipboard": {
+    "message": "Copy to clipboard"
+  },
   "ui.data.failed_to_load": {
     "message": "Не вдалося завантажити"
-  },
-  "ui.data.loading": {
-    "message": "Завантаження значення"
   },
   "ui.data_table.loading_more": {
     "message": "Loading more…"
@@ -1344,7 +1455,7 @@
     "message": "Unknown device"
   },
   "ui.device_status.active": {
-    "message": "Active"
+    "message": "Активні"
   },
   "ui.device_status.inactive": {
     "message": "Inactive"
@@ -1353,7 +1464,7 @@
     "message": "Last active on {date}."
   },
   "ui.device_status.never_used": {
-    "message": "Never used"
+    "message": "Ніколи не використовувався"
   },
   "ui.device_status.never_used.tooltip": {
     "message": "This device has not been used yet."

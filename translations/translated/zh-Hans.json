@@ -17,6 +17,9 @@
   "action.delete": {
     "message": "删除"
   },
+  "action.done": {
+    "message": "Done"
+  },
   "action.go_back": {
     "message": "后退"
   },
@@ -25,9 +28,6 @@
   },
   "action.retry": {
     "message": "重试"
-  },
-  "action.sign_in": {
-    "message": "登录"
   },
   "action.sign_out": {
     "message": "注销"
@@ -38,6 +38,15 @@
   "common.filter": {
     "message": "筛选"
   },
+  "common.loading": {
+    "message": "Loading…"
+  },
+  "errors.authorization_denied": {
+    "message": "Sign-in was cancelled."
+  },
+  "errors.authorization_error": {
+    "message": "Sign-in failed: {errorMessage}"
+  },
   "errors.http_fetch": {
     "message": "{url} 请求失败"
   },
@@ -47,8 +56,14 @@
   "errors.http_status": {
     "message": "{url} 请求失败，状态码：{status} {statusText}"
   },
+  "errors.mas_api": {
+    "message": "The homeserver's authentication service returned an error: {errorMessage}"
+  },
   "errors.matrix_standard": {
     "message": "对家服务器的请求失败，错误代码：{errorCode}。另外服务器还返回了以下错误信息：{errorMessage}"
+  },
+  "errors.no_details": {
+    "message": "The server returned an error with no details."
   },
   "errors.not_logged_in": {
     "message": "未登录"
@@ -167,6 +182,9 @@
   "pages.devices.applications.description": {
     "message": "Applications are OAuth 2.0 clients that users sign in to."
   },
+  "pages.devices.applications.details_label": {
+    "message": "Application details"
+  },
   "pages.devices.applications.filters.has_active_sessions": {
     "message": "With active devices"
   },
@@ -177,7 +195,7 @@
     "message": "Grant types"
   },
   "pages.devices.applications.name_column": {
-    "message": "Name"
+    "message": "名称"
   },
   "pages.devices.applications.not_found.description": {
     "message": "The requested application ({clientId}) could not be found on {serverName}."
@@ -212,6 +230,9 @@
   "pages.devices.applications.view_sessions": {
     "message": "View all devices"
   },
+  "pages.devices.applications.view_users": {
+    "message": "View users on this application"
+  },
   "pages.devices.legacy.count": {
     "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}"
   },
@@ -221,14 +242,17 @@
   "pages.devices.legacy.description": {
     "message": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
   },
+  "pages.devices.legacy.details_label": {
+    "message": "Legacy device details"
+  },
   "pages.devices.legacy.device_column": {
     "message": "Device"
   },
   "pages.devices.legacy.device_id_label": {
-    "message": "Device ID"
+    "message": "设备 ID"
   },
   "pages.devices.legacy.filters.activity_active": {
-    "message": "Active"
+    "message": "活跃"
   },
   "pages.devices.legacy.filters.activity_inactive": {
     "message": "Inactive"
@@ -240,7 +264,7 @@
     "message": "Signed out"
   },
   "pages.devices.legacy.filters.newest_first": {
-    "message": "Newest first"
+    "message": "最新的优先"
   },
   "pages.devices.legacy.filters.user_chip": {
     "message": "User: @{localpart}:{server}"
@@ -267,10 +291,10 @@
     "message": "Signed out at"
   },
   "pages.devices.legacy.last_active_ip_label": {
-    "message": "Last active IP"
+    "message": "最后活跃 IP"
   },
   "pages.devices.legacy.last_active_label": {
-    "message": "Last active"
+    "message": "最后活跃"
   },
   "pages.devices.legacy.not_found.description": {
     "message": "The requested legacy device ({sessionId}) could not be found on {serverName}."
@@ -282,7 +306,7 @@
     "message": "Redirect URI"
   },
   "pages.devices.legacy.status_column": {
-    "message": "Status"
+    "message": "状态"
   },
   "pages.devices.legacy.technical_details": {
     "message": "Technical details"
@@ -323,14 +347,17 @@
   "pages.devices.user.description": {
     "message": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
   },
+  "pages.devices.user.details_label": {
+    "message": "Device details"
+  },
   "pages.devices.user.device_column": {
     "message": "Device"
   },
   "pages.devices.user.device_id_label": {
-    "message": "Device ID"
+    "message": "设备 ID"
   },
   "pages.devices.user.filters.activity_active": {
-    "message": "Active"
+    "message": "活跃"
   },
   "pages.devices.user.filters.activity_inactive": {
     "message": "Inactive"
@@ -345,7 +372,7 @@
     "message": "Application: {name}"
   },
   "pages.devices.user.filters.newest_first": {
-    "message": "Newest first"
+    "message": "最新的优先"
   },
   "pages.devices.user.filters.user_chip": {
     "message": "User: @{localpart}:{server}"
@@ -372,10 +399,10 @@
     "message": "Signed out at"
   },
   "pages.devices.user.last_active_ip_label": {
-    "message": "Last active IP"
+    "message": "最后活跃 IP"
   },
   "pages.devices.user.last_active_label": {
-    "message": "Last active"
+    "message": "最后活跃"
   },
   "pages.devices.user.not_found.description": {
     "message": "The requested device ({sessionId}) could not be found on {serverName}."
@@ -387,7 +414,7 @@
     "message": "Scope"
   },
   "pages.devices.user.status_column": {
-    "message": "Status"
+    "message": "状态"
   },
   "pages.devices.user.technical_details": {
     "message": "Technical details"
@@ -431,17 +458,26 @@
   "pages.federation.allowlist.remove.success": {
     "message": "域名已从白名单中移除"
   },
+  "pages.federation.allowlist.remove_confirm.alert.description": {
+    "message": "Your server will stop federating with servers matching this pattern."
+  },
+  "pages.federation.allowlist.remove_confirm.alert.title": {
+    "message": "You’re about to stop federating with this server"
+  },
+  "pages.federation.allowlist.remove_confirm.title": {
+    "message": "Remove {serverName} from the allowlist?"
+  },
   "pages.federation.allowlist.remove_tooltip": {
     "message": "从白名单中移除"
   },
   "pages.federation.detail.contact": {
     "message": "联系方式"
   },
-  "pages.federation.detail.destination": {
-    "message": "目标"
-  },
   "pages.federation.detail.last_retry": {
     "message": "最后重试时间戳"
+  },
+  "pages.federation.detail.last_retry.never": {
+    "message": "Never"
   },
   "pages.federation.detail.last_successful_stream": {
     "message": "最后一次成功的流"
@@ -449,11 +485,17 @@
   "pages.federation.detail.retry_interval": {
     "message": "重试间隔"
   },
+  "pages.federation.detail.retry_interval.none": {
+    "message": "None"
+  },
   "pages.federation.detail.security": {
     "message": "安全"
   },
   "pages.federation.detail.support_page": {
     "message": "支持页面"
+  },
+  "pages.federation.details_label": {
+    "message": "Destination details"
   },
   "pages.federation.domain_count": {
     "message": "{COUNT, plural, zero {无域名} other {# 个域名}}"
@@ -495,7 +537,7 @@
     "message": "ESS Community 版本中不提供“安全边界网关”功能。请升级至 ESS Pro 以启用该功能。"
   },
   "pages.federation.unavailable_alert.title": {
-    "message": "“允许的域名”是 Secure Border Gateway 的一项功能，仅在 ESS Pro 中提供"
+    "message": "“允许的域名”是 Secure Border Gateway 的一项功能，可在 ESS Pro 中使用"
   },
   "pages.generic_error.go_home": {
     "message": "返回首页"
@@ -514,6 +556,12 @@
   },
   "pages.landing.description": {
     "message": "管理您的组织或社区内 Element 应用程序的部署。"
+  },
+  "pages.login.errors.authorization_failed": {
+    "message": "Could not start the sign-in process. Please try again."
+  },
+  "pages.login.errors.insecure_context": {
+    "message": "Sign-in requires a secure connection. Reload this page over https:// and try again."
   },
   "pages.login.errors.no_auth_metadata": {
     "message": "载入服务器认证元数据失败。可能无法访问 Synapse 或 Synapse 未被配置为使用 Matrix Authentication Service。"
@@ -571,6 +619,9 @@
   },
   "pages.personal_tokens.description": {
     "message": "个人 Token是具有特定权限的长期 Token，包括用于访问 Synapse 与 MAS 管理 API 。可以用于自动化任务与集成的创建。"
+  },
+  "pages.personal_tokens.details_label": {
+    "message": "Personal token details"
   },
   "pages.personal_tokens.device_id_help": {
     "message": "留空以随机生成 10 个字符的设备 ID"
@@ -680,6 +731,18 @@
   "pages.personal_tokens.revoke_token": {
     "message": "撤消 Token"
   },
+  "pages.personal_tokens.revoke_token.alert.description": {
+    "message": "{humanName} will stop working immediately, and anything using it will need a new token."
+  },
+  "pages.personal_tokens.revoke_token.alert.title": {
+    "message": "This cannot be undone"
+  },
+  "pages.personal_tokens.revoke_token.error": {
+    "message": "Failed to revoke the token"
+  },
+  "pages.personal_tokens.revoke_token.title": {
+    "message": "Revoke this personal token?"
+  },
   "pages.personal_tokens.revoked_at_label": {
     "message": "撤消于"
   },
@@ -699,7 +762,7 @@
     "message": "范围"
   },
   "pages.personal_tokens.status.active": {
-    "message": "激活"
+    "message": "活跃"
   },
   "pages.personal_tokens.status.column": {
     "message": "状态"
@@ -755,8 +818,17 @@
   "pages.registration_tokens.custom_token_label": {
     "message": "自定义 Token"
   },
+  "pages.registration_tokens.details_label": {
+    "message": "Registration token details"
+  },
   "pages.registration_tokens.edit_properties": {
     "message": "编辑属性"
+  },
+  "pages.registration_tokens.edit_properties.revoked_tooltip": {
+    "message": "Unrevoke this token before editing its properties"
+  },
+  "pages.registration_tokens.edit_token.error": {
+    "message": "Failed to save the changes"
   },
   "pages.registration_tokens.edit_token_title": {
     "message": "编辑注册 Token"
@@ -771,10 +843,13 @@
     "message": "有效期到"
   },
   "pages.registration_tokens.filters.active_only": {
-    "message": "激活"
+    "message": "活跃"
   },
   "pages.registration_tokens.filters.expired_only": {
     "message": "已过期"
+  },
+  "pages.registration_tokens.filters.not_revoked": {
+    "message": "Not revoked"
   },
   "pages.registration_tokens.filters.revoked_only": {
     "message": "已撤消"
@@ -799,6 +874,21 @@
   },
   "pages.registration_tokens.revoke_token": {
     "message": "撤消 Token"
+  },
+  "pages.registration_tokens.revoke_token.alert.description": {
+    "message": "Nobody will be able to register with {token} until it is unrevoked."
+  },
+  "pages.registration_tokens.revoke_token.alert.title": {
+    "message": "The token will stop working"
+  },
+  "pages.registration_tokens.revoke_token.error": {
+    "message": "Failed to revoke the token"
+  },
+  "pages.registration_tokens.revoke_token.success": {
+    "message": "Token revoked"
+  },
+  "pages.registration_tokens.revoke_token.title": {
+    "message": "Revoke this registration token?"
   },
   "pages.registration_tokens.revoked_at_label": {
     "message": "撤消于"
@@ -851,6 +941,12 @@
   "pages.registration_tokens.unrevoke_token": {
     "message": "反转撤消 Token"
   },
+  "pages.registration_tokens.unrevoke_token.error": {
+    "message": "Failed to unrevoke the token"
+  },
+  "pages.registration_tokens.unrevoke_token.success": {
+    "message": "Token unrevoked"
+  },
   "pages.registration_tokens.usage_count_label": {
     "message": "使用次数"
   },
@@ -878,8 +974,8 @@
   "pages.rooms.columns.room": {
     "message": "Room"
   },
-  "pages.rooms.columns.type": {
-    "message": "Type"
+  "pages.rooms.columns.visibility": {
+    "message": "Visibility"
   },
   "pages.rooms.delete_room.alert.description": {
     "message": "这将永久删除从此房间上传至服务器的所有消息及媒体文件，并从目录中移除此房间。房间成员将无法再访问其消息，且该房间将从他们的房间列表中移除。"
@@ -922,6 +1018,9 @@
   },
   "pages.rooms.deletion.success.title": {
     "message": "删除成功"
+  },
+  "pages.rooms.details_label": {
+    "message": "Room details"
   },
   "pages.rooms.filters.empty_rooms": {
     "message": "空房间"
@@ -983,6 +1082,9 @@
   "pages.supervision.errors.generic.title": {
     "message": "打开监控界面时发生意外错误"
   },
+  "pages.supervision.launch": {
+    "message": "Open supervision interface"
+  },
   "pages.supervision.missing_ui_address.description": {
     "message": "您的部署中已启用监控功能，但未启用 Element Web，而监控界面需要 Element Web 才能正常工作。"
   },
@@ -1011,10 +1113,10 @@
     "message": "监控是 ESS Pro 中的一项功能"
   },
   "pages.users.account_status.active": {
-    "message": "Active"
+    "message": "活跃"
   },
   "pages.users.account_status.admin": {
-    "message": "Admin"
+    "message": "管理员"
   },
   "pages.users.account_status.deactivated": {
     "message": "Deactivated"
@@ -1038,7 +1140,7 @@
     "message": "邮件地址无效"
   },
   "pages.users.add_email.error.email_missing": {
-    "message": "此字段为必填项"
+    "message": "此字段为必填"
   },
   "pages.users.add_email.success": {
     "message": "已添加邮件地址"
@@ -1056,7 +1158,7 @@
     "message": "Account status"
   },
   "pages.users.columns.created_at": {
-    "message": "Created at"
+    "message": "创建于"
   },
   "pages.users.columns.matrix_id": {
     "message": "Matrix ID"
@@ -1102,6 +1204,9 @@
   },
   "pages.users.delete_upstream_link.title": {
     "message": "删除与上游账户的关联？"
+  },
+  "pages.users.details_label": {
+    "message": "User details"
   },
   "pages.users.filters.active": {
     "message": "激活用户"
@@ -1271,6 +1376,9 @@
   "pages.users.user_count": {
     "message": "{COUNT, plural, zero {无用户} other {#个用户}}"
   },
+  "product.badge.pro": {
+    "message": "Pro"
+  },
   "product.element": {
     "message": "Element"
   },
@@ -1304,11 +1412,14 @@
   "rooms_info.other_members": {
     "message": "{COUNT, plural, other {其他}}"
   },
+  "ui.copy.copied": {
+    "message": "Copied!"
+  },
+  "ui.copy.copy_to_clipboard": {
+    "message": "Copy to clipboard"
+  },
   "ui.data.failed_to_load": {
     "message": "载入失败"
-  },
-  "ui.data.loading": {
-    "message": "正在载入值"
   },
   "ui.data_table.loading_more": {
     "message": "Loading more…"
@@ -1317,7 +1428,7 @@
     "message": "失败"
   },
   "ui.destination_status.inactive": {
-    "message": "未激活"
+    "message": "Inactive"
   },
   "ui.destination_status.never_worked": {
     "message": "从未工作过"
@@ -1344,7 +1455,7 @@
     "message": "Unknown device"
   },
   "ui.device_status.active": {
-    "message": "Active"
+    "message": "活跃"
   },
   "ui.device_status.inactive": {
     "message": "Inactive"
@@ -1353,7 +1464,7 @@
     "message": "Last active on {date}."
   },
   "ui.device_status.never_used": {
-    "message": "Never used"
+    "message": "从未使用过"
   },
   "ui.device_status.never_used.tooltip": {
     "message": "This device has not been used yet."
