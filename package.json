@@ -79,7 +79,7 @@
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.5",
     "@types/woothee": "1.11.3",
-    "@vitejs/plugin-react": "6.1.0",
+    "@vitejs/plugin-react": "6.1.1",
     "browserslist": "4.28.8",
     "eslint-plugin-formatjs": "6.6.0",
     "husky": "9.1.7",
