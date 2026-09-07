@@ -13,6 +13,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   license:
     name: REUSE license compliance check
@@ -55,8 +59,8 @@ jobs:
       - name: Check that the translation files match the source
         run: |
           pnpm i18n:extract
-          git add -A
-          git diff --cached --exit-code || {
+          git add -- translations/
+          git diff --cached --exit-code -- translations/ || {
             echo "::error::Translation files are stale. Run 'pnpm i18n:extract' and commit the result."
             exit 1
           }
