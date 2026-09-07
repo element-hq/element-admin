@@ -23,7 +23,6 @@
     "i18n:normalize": "node scripts/i18n-normalize-plurals.mjs",
     "i18n:compile": "pnpm i18n:normalize && formatjs compile-folder --format crowdin --ast translations/translated/ translations/compiled/ && oxfmt translations/compiled",
     "openapi-ts": "openapi-ts",
-    "prepare": "husky",
     "browserslist": "browserslist",
     "test": "playwright test"
   },
@@ -83,9 +82,7 @@
     "@vitejs/plugin-react": "6.1.1",
     "browserslist": "4.28.8",
     "eslint-plugin-formatjs": "6.6.0",
-    "husky": "9.1.7",
     "knip": "6.33.0",
-    "lint-staged": "17.3.0",
     "msw": "2.15.0",
     "oxc-transform-react": "^0.145.0",
     "oxfmt": "0.65.0",
@@ -97,17 +94,6 @@
     "tailwindcss": "4.3.3",
     "typescript": "7.0.2",
     "vite": "8.2.2"
-  },
-  "lint-staged": {
-    "*": [
-      "oxfmt"
-    ],
-    "*.{ts,tsx,js,jsx}": [
-      "oxlint --fix"
-    ],
-    "*.css": [
-      "stylelint --fix"
-    ]
   },
   "knip": {
     "entry": [
