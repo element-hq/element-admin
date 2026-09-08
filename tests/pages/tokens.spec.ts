@@ -183,7 +183,7 @@ test.describe("personal tokens", () => {
               - paragraph: "@admin:${SERVER_NAME}"
             - gridcell "Revoked"
             - gridcell "Never used"
-            - gridcell "Never expires"
+            - gridcell "Revoked"
           - row:
             - gridcell:
               - link "Old migration script"
@@ -238,6 +238,31 @@ test.describe("personal tokens", () => {
     await expect(
       detail.getByRole("button", { name: "Regenerate token" }),
     ).toBeEnabled();
+  });
+
+  test("shows a revoked personal token's expiry as revoked", async ({
+    page,
+  }) => {
+    await loginAs(page);
+    await page.goto(
+      `/personal-tokens/${personalSessionId(DEFAULT_PERSONAL_SESSIONS, 1)}`,
+    );
+
+    // A revoked session has no token left, so MAS reports no expiry for it —
+    // which must not read as a token that never expires.
+    const detail = drawer(
+      page,
+      page.getByRole("heading", { name: "Retired bridge" }),
+    );
+
+    await expect(detail).toMatchAriaSnapshot(`
+      - listitem:
+        - term: Expires at
+        - definition: Revoked
+      - listitem:
+        - term: Revoked at
+        - definition: /2026/
+    `);
   });
 
   test("cancels revoking a personal token", async ({ page }) => {

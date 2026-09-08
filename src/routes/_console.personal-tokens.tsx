@@ -50,6 +50,7 @@ import * as Placeholder from "@/components/placeholder";
 import { UserInfo } from "@/components/room-info";
 import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
+import { personalTokenExpiryText } from "@/ui/token-expiry";
 import { PersonalTokenStatusBadge } from "@/ui/token-status-badge";
 import { UserPicker } from "@/ui/user-picker";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
@@ -781,16 +782,7 @@ function RouteComponent() {
             const token = row.original;
             return (
               <Text size="sm" className="text-text-secondary">
-                {token.attributes.expires_at
-                  ? computeHumanReadableDateTimeStringFromUtc(
-                      token.attributes.expires_at,
-                    )
-                  : intl.formatMessage({
-                      id: "pages.personal_tokens.never_expires",
-                      defaultMessage: "Never expires",
-                      description:
-                        "Text shown when a token has no expiration date",
-                    })}
+                {personalTokenExpiryText(intl, token.attributes)}
               </Text>
             );
           },

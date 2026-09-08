@@ -863,6 +863,10 @@
     "description": "Placeholder for the expiry field",
     "message": "30"
   },
+  "pages.personal_tokens.expiry_revoked": {
+    "description": "Text shown in place of the expiry of a revoked token",
+    "message": "Revoked"
+  },
   "pages.personal_tokens.filter.active": {
     "description": "Filter label for active personal tokens",
     "message": "Active"

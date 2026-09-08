@@ -1878,6 +1878,12 @@
       "value": "30"
     }
   ],
+  "pages.personal_tokens.expiry_revoked": [
+    {
+      "type": 0,
+      "value": "Revoked"
+    }
+  ],
   "pages.personal_tokens.filter.active": [
     {
       "type": 0,

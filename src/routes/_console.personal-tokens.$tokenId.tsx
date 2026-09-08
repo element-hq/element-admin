@@ -43,6 +43,7 @@ import { ButtonLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import * as messages from "@/messages";
 import { UserCard } from "@/ui/entity-cards";
+import { personalTokenExpiryText } from "@/ui/token-expiry";
 import { PersonalTokenStatusBadge } from "@/ui/token-status-badge";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
@@ -423,16 +424,7 @@ function TokenDetailComponent() {
               />
             </Data.Title>
             <Data.Value>
-              {token.attributes.expires_at
-                ? computeHumanReadableDateTimeStringFromUtc(
-                    token.attributes.expires_at,
-                  )
-                : intl.formatMessage({
-                    id: "pages.personal_tokens.never_expires",
-                    defaultMessage: "Never expires",
-                    description:
-                      "Text shown when a token has no expiration date",
-                  })}
+              {personalTokenExpiryText(intl, token.attributes)}
             </Data.Value>
           </Data.Item>
 
