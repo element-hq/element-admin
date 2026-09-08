@@ -50,7 +50,11 @@ import * as Placeholder from "@/components/placeholder";
 import { UserInfo } from "@/components/room-info";
 import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
-import { personalTokenExpiryText } from "@/ui/token-expiry";
+import {
+  DEFAULT_EXPIRY_DAYS,
+  TokenExpiryField,
+  personalTokenExpiryText,
+} from "@/ui/token-expiry";
 import { PersonalTokenStatusBadge } from "@/ui/token-status-badge";
 import { UserPicker } from "@/ui/user-picker";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
@@ -168,6 +172,7 @@ const PersonalTokenAddButton = ({
   const [matrixClientChecked, setMatrixClientChecked] = useState(false);
   const [deviceChecked, setDeviceChecked] = useState(false);
   const [synapseAdminChecked, setSynapseAdminChecked] = useState(false);
+  const [expiresChecked, setExpiresChecked] = useState(false);
 
   const queryClient = useQueryClient();
   const intl = useIntl();
@@ -195,6 +200,13 @@ const PersonalTokenAddButton = ({
         setMatrixClientChecked(true);
       }
       return newValue;
+    },
+    [],
+  );
+
+  const onExpiresChecked = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setExpiresChecked(event.currentTarget.checked);
     },
     [],
   );
@@ -261,7 +273,8 @@ const PersonalTokenAddButton = ({
       const formData = new FormData(event.currentTarget);
       const humanName = formData.get("human_name") as string;
       const actorUserId = formData.get("actor_user_id") as string;
-      const expiresInDays = formData.get("expires_in_days") as string;
+      // Absent unless the expiry checkbox was ticked; see `TokenExpiryField`.
+      const expiresInDays = formData.get("expires_in_days") as string | null;
 
       // Somewhat of a hack to show the input as invalid if no user is selected
       if (!actorUserId) {
@@ -287,7 +300,7 @@ const PersonalTokenAddButton = ({
         scope,
       };
 
-      if (expiresInDays && expiresInDays !== "") {
+      if (expiresInDays) {
         parameters.expires_in =
           Number.parseInt(expiresInDays, 10) * 24 * 60 * 60; // Convert days to seconds
       }
@@ -310,6 +323,7 @@ const PersonalTokenAddButton = ({
       setMatrixClientChecked(false);
       setDeviceChecked(false);
       setSynapseAdminChecked(false);
+      setExpiresChecked(false);
       setMissingActor(false);
     },
     [isPending, reset],
@@ -521,31 +535,11 @@ const PersonalTokenAddButton = ({
                 </Form.Field>
               )}
 
-              <Form.Field name="expires_in_days" serverInvalid={false}>
-                <Form.Label>
-                  <FormattedMessage
-                    id="pages.personal_tokens.expires_in_label"
-                    defaultMessage="Expires in (days)"
-                    description="Label for the expiry field"
-                  />
-                </Form.Label>
-                <Form.TextControl
-                  type="number"
-                  min="1"
-                  placeholder={intl.formatMessage({
-                    id: "pages.personal_tokens.expires_in_placeholder",
-                    defaultMessage: "30",
-                    description: "Placeholder for the expiry field",
-                  })}
-                />
-                <Form.HelpMessage>
-                  <FormattedMessage
-                    id="pages.personal_tokens.expires_in_help"
-                    defaultMessage="Leave empty for tokens that never expire"
-                    description="Help text for the expiry field"
-                  />
-                </Form.HelpMessage>
-              </Form.Field>
+              <TokenExpiryField
+                checked={expiresChecked}
+                onChange={onExpiresChecked}
+                defaultDays={DEFAULT_EXPIRY_DAYS}
+              />
 
               <Form.Submit disabled={isPending}>
                 {isPending && <InlineSpinner />}
