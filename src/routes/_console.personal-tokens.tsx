@@ -436,110 +436,122 @@ const PersonalTokenAddButton = ({
                 </Form.HelpMessage>
               </Form.Field>
 
-              <Form.InlineField
-                name="scope_mas_admin"
-                control={<Form.CheckboxControl />}
-              >
-                <Form.Label>{MAS_ADMIN_SCOPE}</Form.Label>
-                <Form.HelpMessage>
-                  <FormattedMessage
-                    id="pages.personal_tokens.scope_mas_admin_help"
-                    defaultMessage="Access to the MAS admin API"
-                    description="Help text for MAS admin scope"
-                  />
-                </Form.HelpMessage>
-              </Form.InlineField>
-
-              <Form.InlineField
-                name="scope_matrix_client"
-                control={
-                  <Form.CheckboxControl
-                    readOnly={deviceChecked || synapseAdminChecked}
-                    checked={matrixClientChecked}
-                    onChange={onMatrixClientChecked}
-                  />
-                }
-              >
-                <Form.Label>{MATRIX_API_SCOPE}</Form.Label>
-                <Form.HelpMessage>
-                  <FormattedMessage
-                    id="pages.personal_tokens.scope_matrix_client_help"
-                    defaultMessage="Access to the Matrix Client-Server API"
-                    description="Help text for Matrix Client API scope"
-                  />
-                </Form.HelpMessage>
-              </Form.InlineField>
-
-              <Form.InlineField
-                name="scope_synapse_admin"
-                control={
-                  <Form.CheckboxControl
-                    checked={synapseAdminChecked}
-                    onChange={onSynapseAdminChecked}
-                  />
-                }
-              >
-                <Form.Label>{SYNAPSE_ADMIN_SCOPE}</Form.Label>
-                <Form.HelpMessage>
-                  <FormattedMessage
-                    id="pages.personal_tokens.scope_synapse_admin_help"
-                    defaultMessage="Access to the Synapse admin API"
-                    description="Help text for Synapse admin scope"
-                  />
-                </Form.HelpMessage>
-              </Form.InlineField>
-
-              <Form.InlineField
-                name="scope_device"
-                control={
-                  <Form.CheckboxControl
-                    checked={deviceChecked}
-                    onChange={onDeviceChecked}
-                    disabled={!matrixClientChecked}
-                  />
-                }
-              >
-                <Form.Label>{DEVICE_SCOPE}</Form.Label>
-                <Form.HelpMessage>
-                  <FormattedMessage
-                    id="pages.personal_tokens.scope_device_help"
-                    defaultMessage="Provision a Matrix device"
-                    description="Help text for device scope"
-                  />
-                </Form.HelpMessage>
-              </Form.InlineField>
-
-              {deviceChecked && (
-                <Form.Field name="device_id" serverInvalid={false}>
-                  <Form.Label>
-                    <FormattedMessage
-                      id="pages.personal_tokens.device_id_label"
-                      defaultMessage="Device ID"
-                      description="Label for device ID field"
-                    />
-                  </Form.Label>
-                  <Form.TextControl
-                    placeholder={intl.formatMessage({
-                      id: "pages.personal_tokens.device_id_placeholder",
-                      defaultMessage: "ABCDEFGHIJ",
-                      description: "Placeholder for device ID field",
-                    })}
-                  />
-                  <Form.HelpMessage>
-                    <FormattedMessage
-                      id="pages.personal_tokens.device_id_help"
-                      defaultMessage="Leave empty to generate a random 10-character device ID"
-                      description="Help text for device ID field"
-                    />
-                  </Form.HelpMessage>
-                </Form.Field>
-              )}
-
               <TokenExpiryField
                 checked={expiresChecked}
                 onChange={onExpiresChecked}
                 defaultDays={DEFAULT_EXPIRY_DAYS}
               />
+
+              <fieldset className="flex flex-col gap-5">
+                {/* A legend sits outside the fieldset's flex flow, so the
+                    gap between it and the first checkbox is set here. */}
+                <Text as="legend" size="md" weight="medium" className="mb-3">
+                  <FormattedMessage
+                    id="pages.personal_tokens.scopes_group_label"
+                    defaultMessage="Scopes"
+                    description="Label for the group of scope checkboxes in the add token dialog"
+                  />
+                </Text>
+
+                <Form.InlineField
+                  name="scope_mas_admin"
+                  control={<Form.CheckboxControl />}
+                >
+                  <Form.Label>{MAS_ADMIN_SCOPE}</Form.Label>
+                  <Form.HelpMessage>
+                    <FormattedMessage
+                      id="pages.personal_tokens.scope_mas_admin_help"
+                      defaultMessage="Access to the MAS admin API"
+                      description="Help text for MAS admin scope"
+                    />
+                  </Form.HelpMessage>
+                </Form.InlineField>
+
+                <Form.InlineField
+                  name="scope_matrix_client"
+                  control={
+                    <Form.CheckboxControl
+                      readOnly={deviceChecked || synapseAdminChecked}
+                      checked={matrixClientChecked}
+                      onChange={onMatrixClientChecked}
+                    />
+                  }
+                >
+                  <Form.Label>{MATRIX_API_SCOPE}</Form.Label>
+                  <Form.HelpMessage>
+                    <FormattedMessage
+                      id="pages.personal_tokens.scope_matrix_client_help"
+                      defaultMessage="Access to the Matrix Client-Server API"
+                      description="Help text for Matrix Client API scope"
+                    />
+                  </Form.HelpMessage>
+                </Form.InlineField>
+
+                <Form.InlineField
+                  name="scope_synapse_admin"
+                  control={
+                    <Form.CheckboxControl
+                      checked={synapseAdminChecked}
+                      onChange={onSynapseAdminChecked}
+                    />
+                  }
+                >
+                  <Form.Label>{SYNAPSE_ADMIN_SCOPE}</Form.Label>
+                  <Form.HelpMessage>
+                    <FormattedMessage
+                      id="pages.personal_tokens.scope_synapse_admin_help"
+                      defaultMessage="Access to the Synapse admin API"
+                      description="Help text for Synapse admin scope"
+                    />
+                  </Form.HelpMessage>
+                </Form.InlineField>
+
+                <Form.InlineField
+                  name="scope_device"
+                  control={
+                    <Form.CheckboxControl
+                      checked={deviceChecked}
+                      onChange={onDeviceChecked}
+                      disabled={!matrixClientChecked}
+                    />
+                  }
+                >
+                  <Form.Label>{DEVICE_SCOPE}</Form.Label>
+                  <Form.HelpMessage>
+                    <FormattedMessage
+                      id="pages.personal_tokens.scope_device_help"
+                      defaultMessage="Provision a Matrix device"
+                      description="Help text for device scope"
+                    />
+                  </Form.HelpMessage>
+                </Form.InlineField>
+
+                {deviceChecked && (
+                  <Form.Field name="device_id" serverInvalid={false}>
+                    <Form.Label>
+                      <FormattedMessage
+                        id="pages.personal_tokens.device_id_label"
+                        defaultMessage="Device ID"
+                        description="Label for device ID field"
+                      />
+                    </Form.Label>
+                    <Form.TextControl
+                      placeholder={intl.formatMessage({
+                        id: "pages.personal_tokens.device_id_placeholder",
+                        defaultMessage: "ABCDEFGHIJ",
+                        description: "Placeholder for device ID field",
+                      })}
+                    />
+                    <Form.HelpMessage>
+                      <FormattedMessage
+                        id="pages.personal_tokens.device_id_help"
+                        defaultMessage="Leave empty to generate a random 10-character device ID"
+                        description="Help text for device ID field"
+                      />
+                    </Form.HelpMessage>
+                  </Form.Field>
+                )}
+              </fieldset>
 
               <Form.Submit disabled={isPending}>
                 {isPending && <InlineSpinner />}

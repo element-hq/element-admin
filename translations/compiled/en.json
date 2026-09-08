@@ -2104,6 +2104,12 @@
       "value": "Access to the Synapse admin API"
     }
   ],
+  "pages.personal_tokens.scopes_group_label": [
+    {
+      "type": 0,
+      "value": "Scopes"
+    }
+  ],
   "pages.personal_tokens.scopes_label": [
     {
       "type": 0,

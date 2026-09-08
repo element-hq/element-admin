@@ -1011,6 +1011,10 @@
     "description": "Help text for Synapse admin scope",
     "message": "Access to the Synapse admin API"
   },
+  "pages.personal_tokens.scopes_group_label": {
+    "description": "Label for the group of scope checkboxes in the add token dialog",
+    "message": "Scopes"
+  },
   "pages.personal_tokens.scopes_label": {
     "description": "Label for the scopes field",
     "message": "Scopes"
