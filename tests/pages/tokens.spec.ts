@@ -2,17 +2,20 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
-import type { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
+import { http, HttpResponse } from "msw";
 
 import { drawer, heading } from "../helpers";
 import { loginAs } from "../mocks/auth";
 import { masFailingPost } from "../mocks/failing";
+import * as mas from "../mocks/mas";
 import {
   DEFAULT_PERSONAL_SESSIONS,
   DEFAULT_REGISTRATION_TOKENS,
   personalSessionId,
   registrationTokenId,
   SERVER_NAME,
+  singlePersonalSession,
   ulid,
 } from "../mocks/fixtures";
 import { expect, test } from "../mocks/test";
@@ -44,6 +47,34 @@ const expectRevokeCancelled = async (
   await expect(dialog).toBeHidden();
   await expect(detail.getByText("Active", { exact: true })).toBeVisible();
 };
+
+/**
+ * Fill the create-token dialog's mandatory fields — a name, an acting user and
+ * one scope — leaving the expiry alone.
+ */
+const fillNewToken = async (dialog: Locator, name: string): Promise<void> => {
+  await dialog.getByRole("textbox", { name: "Token name" }).fill(name);
+  await dialog.getByRole("combobox").fill("alice");
+  await dialog.getByRole("option").first().click();
+  await dialog.getByRole("checkbox", { name: "urn:mas:admin" }).check();
+};
+
+/**
+ * A personal token with ten days left to run, and the handlers serving it. The
+ * shared fixtures are deliberately clock-independent, so none of them has a
+ * future expiry, which is the only thing the regenerate dialog prefills from.
+ */
+const EXPIRING = [
+  {
+    ...DEFAULT_PERSONAL_SESSIONS[0],
+    expires_at: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+];
+
+const expiringSessionHandlers = () => [
+  mas.personalSessionsList(EXPIRING),
+  mas.personalSessionDetail(EXPIRING),
+];
 
 test.describe("registration tokens", () => {
   test("lists the mocked registration tokens", async ({ page }) => {
@@ -183,7 +214,7 @@ test.describe("personal tokens", () => {
               - paragraph: "@admin:${SERVER_NAME}"
             - gridcell "Revoked"
             - gridcell "Never used"
-            - gridcell "Never expires"
+            - gridcell "Revoked"
           - row:
             - gridcell:
               - link "Old migration script"
@@ -238,6 +269,144 @@ test.describe("personal tokens", () => {
     await expect(
       detail.getByRole("button", { name: "Regenerate token" }),
     ).toBeEnabled();
+  });
+
+  test("shows a revoked personal token's expiry as revoked", async ({
+    page,
+  }) => {
+    await loginAs(page);
+    await page.goto(
+      `/personal-tokens/${personalSessionId(DEFAULT_PERSONAL_SESSIONS, 1)}`,
+    );
+
+    // A revoked session has no token left, so MAS reports no expiry for it —
+    // which must not read as a token that never expires.
+    const detail = drawer(
+      page,
+      page.getByRole("heading", { name: "Retired bridge" }),
+    );
+
+    await expect(detail).toMatchAriaSnapshot(`
+      - listitem:
+        - term: Expires at
+        - definition: Revoked
+      - listitem:
+        - term: Revoked at
+        - definition: /2026/
+    `);
+  });
+
+  test("asks for a day count only once an expiry is wanted", async ({
+    page,
+    network,
+  }) => {
+    let body: unknown;
+    network.use(
+      http.post("*/api/admin/v1/personal-sessions", async ({ request }) => {
+        body = await request.json();
+        return HttpResponse.json(singlePersonalSession(0), { status: 201 });
+      }),
+    );
+
+    await loginAs(page);
+    await page.goto("/personal-tokens");
+    await page.getByRole("button", { name: "Add" }).click();
+
+    const dialog = page.getByRole("dialog");
+    const days = dialog.getByRole("spinbutton", { name: "Expires in (days)" });
+    await expect(days).toBeHidden();
+
+    await fillNewToken(dialog, "Expiring token");
+    await dialog.getByRole("checkbox", { name: "Set an expiry" }).check();
+    await expect(days).toHaveValue("30");
+
+    // Radix suppresses the browser's own validation bubble, so an empty day
+    // count has to be reported in the form or the submit does nothing at all.
+    await days.fill("");
+    await dialog.getByRole("button", { name: "Create token" }).click();
+    await expect(
+      dialog.getByText("Enter how many days the token should last"),
+    ).toBeVisible();
+
+    await days.fill("30");
+    await dialog.getByRole("button", { name: "Create token" }).click();
+
+    await expect
+      .poll(() => body)
+      .toEqual(expect.objectContaining({ expires_in: 30 * 24 * 60 * 60 }));
+  });
+
+  test("offers the days a regenerated token has left", async ({
+    page,
+    network,
+  }) => {
+    network.use(...expiringSessionHandlers());
+
+    await loginAs(page);
+    await page.goto(`/personal-tokens/${personalSessionId(EXPIRING, 0)}`);
+
+    await page.getByRole("button", { name: "Regenerate token" }).click();
+    const dialog = page.getByRole("dialog");
+
+    await expect(
+      dialog.getByRole("checkbox", { name: "Set an expiry" }),
+    ).toBeChecked();
+    await expect(
+      dialog.getByRole("spinbutton", { name: "Expires in (days)" }),
+    ).toHaveValue("10");
+  });
+
+  test("forgets an abandoned expiry choice on the next regenerate", async ({
+    page,
+    network,
+  }) => {
+    network.use(...expiringSessionHandlers());
+
+    await loginAs(page);
+    await page.goto(`/personal-tokens/${personalSessionId(EXPIRING, 0)}`);
+
+    const regenerate = page.getByRole("button", { name: "Regenerate token" });
+    await regenerate.click();
+
+    const expires = page
+      .getByRole("dialog")
+      .getByRole("checkbox", { name: "Set an expiry" });
+    await expires.uncheck();
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog")).toBeHidden();
+
+    // Dismissing the dialog abandons the choice: reopening it starts from the
+    // token again, rather than from the never-expires the admin backed out of.
+    await regenerate.click();
+    await expect(expires).toBeChecked();
+  });
+
+  test("asks for no expiry when the checkbox is left unticked", async ({
+    page,
+    network,
+  }) => {
+    let body: unknown;
+    network.use(
+      http.post("*/api/admin/v1/personal-sessions", async ({ request }) => {
+        body = await request.json();
+        return HttpResponse.json(singlePersonalSession(0), { status: 201 });
+      }),
+    );
+
+    await loginAs(page);
+    await page.goto("/personal-tokens");
+    await page.getByRole("button", { name: "Add" }).click();
+
+    const dialog = page.getByRole("dialog");
+    await fillNewToken(dialog, "Never expires");
+    await dialog.getByRole("button", { name: "Create token" }).click();
+
+    // MAS mints a token that never expires when the request carries no
+    // `expires_in` at all.
+    await expect
+      .poll(() => body)
+      .toEqual(expect.objectContaining({ human_name: "Never expires" }));
+    expect(body).not.toHaveProperty("expires_in");
   });
 
   test("cancels revoking a personal token", async ({ page }) => {

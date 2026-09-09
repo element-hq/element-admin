@@ -24,7 +24,7 @@ import {
   Text,
   Tooltip,
 } from "@vector-im/compound-web";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
 import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
@@ -43,6 +43,12 @@ import { ButtonLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import * as messages from "@/messages";
 import { UserCard } from "@/ui/entity-cards";
+import {
+  DEFAULT_EXPIRY_DAYS,
+  TokenExpiryField,
+  daysUntilExpiry,
+  personalTokenExpiryText,
+} from "@/ui/token-expiry";
 import { PersonalTokenStatusBadge } from "@/ui/token-status-badge";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
@@ -423,16 +429,7 @@ function TokenDetailComponent() {
               />
             </Data.Title>
             <Data.Value>
-              {token.attributes.expires_at
-                ? computeHumanReadableDateTimeStringFromUtc(
-                    token.attributes.expires_at,
-                  )
-                : intl.formatMessage({
-                    id: "pages.personal_tokens.never_expires",
-                    defaultMessage: "Never expires",
-                    description:
-                      "Text shown when a token has no expiration date",
-                  })}
+              {personalTokenExpiryText(intl, token.attributes)}
             </Data.Value>
           </Data.Item>
 
@@ -553,6 +550,22 @@ function RegenerateTokenModal({
   const [isOpen, setIsOpen] = useState(false);
   const intl = useIntl();
 
+  // Pinned to the token rather than recomputed every render, so the day count
+  // the field starts at cannot change under a dialog that is already open.
+  const remainingDays = useMemo(
+    () => daysUntilExpiry(token.attributes.expires_at),
+    [token.attributes.expires_at],
+  );
+  const wasExpiring = Boolean(token.attributes.expires_at);
+  const [expiresChecked, setExpiresChecked] = useState(wasExpiring);
+
+  const onExpiresChecked = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setExpiresChecked(event.currentTarget.checked);
+    },
+    [],
+  );
+
   const regenerateTokenMutation = useMutation({
     mutationFn: async (expiresIn: null | number) =>
       regeneratePersonalSession(queryClient, serverName, token.id, {
@@ -604,31 +617,37 @@ function RegenerateTokenModal({
       }
 
       const formData = new FormData(event.currentTarget);
-      const expiresInDays = formData.get("expires_in_days") as string;
+      // Absent unless the expiry checkbox was ticked; see `TokenExpiryField`.
+      const expiresInDays = formData.get("expires_in_days") as string | null;
 
-      const expiresIn =
-        expiresInDays && expiresInDays !== ""
-          ? Number.parseInt(expiresInDays, 10) * 24 * 60 * 60
-          : null;
+      const expiresIn = expiresInDays
+        ? Number.parseInt(expiresInDays, 10) * 24 * 60 * 60
+        : null;
 
       mutate(expiresIn);
     },
     [mutate, isPending],
   );
 
-  const handleClose = useCallback(() => {
-    if (isPending) {
-      return;
-    }
+  // Every open and close goes through here, so a dismissed dialog cannot leave
+  // the expiry checkbox on a choice the admin backed out of.
+  const onOpenChange = useCallback(
+    (open: boolean) => {
+      if (isPending) {
+        return;
+      }
 
-    setIsOpen(false);
-    reset();
-  }, [isPending, reset]);
+      setIsOpen(open);
+      reset();
+      setExpiresChecked(wasExpiring);
+    },
+    [isPending, reset, wasExpiring],
+  );
 
   return (
     <Dialog.Root
       open={isOpen}
-      onOpenChange={setIsOpen}
+      onOpenChange={onOpenChange}
       // The token is shown exactly once, so only the explicit "Done" button
       // may close the dialog while it is on screen.
       dismissible={!mutationData?.data.attributes.access_token}
@@ -691,31 +710,11 @@ function RegenerateTokenModal({
                 />
               </Text>
 
-              <Form.Field name="expires_in_days" serverInvalid={false}>
-                <Form.Label>
-                  <FormattedMessage
-                    id="pages.personal_tokens.expires_in_label"
-                    defaultMessage="Expires in (days)"
-                    description="Label for the expiry field"
-                  />
-                </Form.Label>
-                <Form.TextControl
-                  type="number"
-                  min="1"
-                  placeholder={intl.formatMessage({
-                    id: "pages.personal_tokens.expires_in_placeholder",
-                    defaultMessage: "30",
-                    description: "Placeholder for the expiry field",
-                  })}
-                />
-                <Form.HelpMessage>
-                  <FormattedMessage
-                    id="pages.personal_tokens.regenerate_expires_help"
-                    defaultMessage="Leave empty to keep the same expiry as before, or set a new expiry time"
-                    description="Help text for the expiry field when regenerating"
-                  />
-                </Form.HelpMessage>
-              </Form.Field>
+              <TokenExpiryField
+                checked={expiresChecked}
+                onChange={onExpiresChecked}
+                defaultDays={remainingDays ?? DEFAULT_EXPIRY_DAYS}
+              />
             </div>
 
             <Form.Submit
@@ -741,7 +740,6 @@ function RegenerateTokenModal({
           kind={
             mutationData?.data.attributes.access_token ? "primary" : "tertiary"
           }
-          onClick={handleClose}
           disabled={isPending}
         >
           {mutationData?.data.attributes.access_token ? (

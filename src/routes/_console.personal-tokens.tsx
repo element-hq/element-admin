@@ -50,6 +50,11 @@ import * as Placeholder from "@/components/placeholder";
 import { UserInfo } from "@/components/room-info";
 import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
+import {
+  DEFAULT_EXPIRY_DAYS,
+  TokenExpiryField,
+  personalTokenExpiryText,
+} from "@/ui/token-expiry";
 import { PersonalTokenStatusBadge } from "@/ui/token-status-badge";
 import { UserPicker } from "@/ui/user-picker";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
@@ -167,6 +172,7 @@ const PersonalTokenAddButton = ({
   const [matrixClientChecked, setMatrixClientChecked] = useState(false);
   const [deviceChecked, setDeviceChecked] = useState(false);
   const [synapseAdminChecked, setSynapseAdminChecked] = useState(false);
+  const [expiresChecked, setExpiresChecked] = useState(false);
 
   const queryClient = useQueryClient();
   const intl = useIntl();
@@ -194,6 +200,13 @@ const PersonalTokenAddButton = ({
         setMatrixClientChecked(true);
       }
       return newValue;
+    },
+    [],
+  );
+
+  const onExpiresChecked = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setExpiresChecked(event.currentTarget.checked);
     },
     [],
   );
@@ -260,7 +273,8 @@ const PersonalTokenAddButton = ({
       const formData = new FormData(event.currentTarget);
       const humanName = formData.get("human_name") as string;
       const actorUserId = formData.get("actor_user_id") as string;
-      const expiresInDays = formData.get("expires_in_days") as string;
+      // Absent unless the expiry checkbox was ticked; see `TokenExpiryField`.
+      const expiresInDays = formData.get("expires_in_days") as string | null;
 
       // Somewhat of a hack to show the input as invalid if no user is selected
       if (!actorUserId) {
@@ -286,7 +300,7 @@ const PersonalTokenAddButton = ({
         scope,
       };
 
-      if (expiresInDays && expiresInDays !== "") {
+      if (expiresInDays) {
         parameters.expires_in =
           Number.parseInt(expiresInDays, 10) * 24 * 60 * 60; // Convert days to seconds
       }
@@ -309,6 +323,7 @@ const PersonalTokenAddButton = ({
       setMatrixClientChecked(false);
       setDeviceChecked(false);
       setSynapseAdminChecked(false);
+      setExpiresChecked(false);
       setMissingActor(false);
     },
     [isPending, reset],
@@ -421,130 +436,122 @@ const PersonalTokenAddButton = ({
                 </Form.HelpMessage>
               </Form.Field>
 
-              <Form.InlineField
-                name="scope_mas_admin"
-                control={<Form.CheckboxControl />}
-              >
-                <Form.Label>{MAS_ADMIN_SCOPE}</Form.Label>
-                <Form.HelpMessage>
-                  <FormattedMessage
-                    id="pages.personal_tokens.scope_mas_admin_help"
-                    defaultMessage="Access to the MAS admin API"
-                    description="Help text for MAS admin scope"
-                  />
-                </Form.HelpMessage>
-              </Form.InlineField>
+              <TokenExpiryField
+                checked={expiresChecked}
+                onChange={onExpiresChecked}
+                defaultDays={DEFAULT_EXPIRY_DAYS}
+              />
 
-              <Form.InlineField
-                name="scope_matrix_client"
-                control={
-                  <Form.CheckboxControl
-                    readOnly={deviceChecked || synapseAdminChecked}
-                    checked={matrixClientChecked}
-                    onChange={onMatrixClientChecked}
-                  />
-                }
-              >
-                <Form.Label>{MATRIX_API_SCOPE}</Form.Label>
-                <Form.HelpMessage>
+              <fieldset className="flex flex-col gap-5">
+                {/* A legend sits outside the fieldset's flex flow, so the
+                    gap between it and the first checkbox is set here. */}
+                <Text as="legend" size="md" weight="medium" className="mb-3">
                   <FormattedMessage
-                    id="pages.personal_tokens.scope_matrix_client_help"
-                    defaultMessage="Access to the Matrix Client-Server API"
-                    description="Help text for Matrix Client API scope"
+                    id="pages.personal_tokens.scopes_group_label"
+                    defaultMessage="Scopes"
+                    description="Label for the group of scope checkboxes in the add token dialog"
                   />
-                </Form.HelpMessage>
-              </Form.InlineField>
+                </Text>
 
-              <Form.InlineField
-                name="scope_synapse_admin"
-                control={
-                  <Form.CheckboxControl
-                    checked={synapseAdminChecked}
-                    onChange={onSynapseAdminChecked}
-                  />
-                }
-              >
-                <Form.Label>{SYNAPSE_ADMIN_SCOPE}</Form.Label>
-                <Form.HelpMessage>
-                  <FormattedMessage
-                    id="pages.personal_tokens.scope_synapse_admin_help"
-                    defaultMessage="Access to the Synapse admin API"
-                    description="Help text for Synapse admin scope"
-                  />
-                </Form.HelpMessage>
-              </Form.InlineField>
-
-              <Form.InlineField
-                name="scope_device"
-                control={
-                  <Form.CheckboxControl
-                    checked={deviceChecked}
-                    onChange={onDeviceChecked}
-                    disabled={!matrixClientChecked}
-                  />
-                }
-              >
-                <Form.Label>{DEVICE_SCOPE}</Form.Label>
-                <Form.HelpMessage>
-                  <FormattedMessage
-                    id="pages.personal_tokens.scope_device_help"
-                    defaultMessage="Provision a Matrix device"
-                    description="Help text for device scope"
-                  />
-                </Form.HelpMessage>
-              </Form.InlineField>
-
-              {deviceChecked && (
-                <Form.Field name="device_id" serverInvalid={false}>
-                  <Form.Label>
-                    <FormattedMessage
-                      id="pages.personal_tokens.device_id_label"
-                      defaultMessage="Device ID"
-                      description="Label for device ID field"
-                    />
-                  </Form.Label>
-                  <Form.TextControl
-                    placeholder={intl.formatMessage({
-                      id: "pages.personal_tokens.device_id_placeholder",
-                      defaultMessage: "ABCDEFGHIJ",
-                      description: "Placeholder for device ID field",
-                    })}
-                  />
+                <Form.InlineField
+                  name="scope_mas_admin"
+                  control={<Form.CheckboxControl />}
+                >
+                  <Form.Label>{MAS_ADMIN_SCOPE}</Form.Label>
                   <Form.HelpMessage>
                     <FormattedMessage
-                      id="pages.personal_tokens.device_id_help"
-                      defaultMessage="Leave empty to generate a random 10-character device ID"
-                      description="Help text for device ID field"
+                      id="pages.personal_tokens.scope_mas_admin_help"
+                      defaultMessage="Access to the MAS admin API"
+                      description="Help text for MAS admin scope"
                     />
                   </Form.HelpMessage>
-                </Form.Field>
-              )}
+                </Form.InlineField>
 
-              <Form.Field name="expires_in_days" serverInvalid={false}>
-                <Form.Label>
-                  <FormattedMessage
-                    id="pages.personal_tokens.expires_in_label"
-                    defaultMessage="Expires in (days)"
-                    description="Label for the expiry field"
-                  />
-                </Form.Label>
-                <Form.TextControl
-                  type="number"
-                  min="1"
-                  placeholder={intl.formatMessage({
-                    id: "pages.personal_tokens.expires_in_placeholder",
-                    defaultMessage: "30",
-                    description: "Placeholder for the expiry field",
-                  })}
-                />
-                <Form.HelpMessage>
-                  <FormattedMessage
-                    id="pages.personal_tokens.expires_in_help"
-                    defaultMessage="Leave empty for tokens that never expire"
-                    description="Help text for the expiry field"
-                  />
-                </Form.HelpMessage>
-              </Form.Field>
+                <Form.InlineField
+                  name="scope_matrix_client"
+                  control={
+                    <Form.CheckboxControl
+                      readOnly={deviceChecked || synapseAdminChecked}
+                      checked={matrixClientChecked}
+                      onChange={onMatrixClientChecked}
+                    />
+                  }
+                >
+                  <Form.Label>{MATRIX_API_SCOPE}</Form.Label>
+                  <Form.HelpMessage>
+                    <FormattedMessage
+                      id="pages.personal_tokens.scope_matrix_client_help"
+                      defaultMessage="Access to the Matrix Client-Server API"
+                      description="Help text for Matrix Client API scope"
+                    />
+                  </Form.HelpMessage>
+                </Form.InlineField>
+
+                <Form.InlineField
+                  name="scope_synapse_admin"
+                  control={
+                    <Form.CheckboxControl
+                      checked={synapseAdminChecked}
+                      onChange={onSynapseAdminChecked}
+                    />
+                  }
+                >
+                  <Form.Label>{SYNAPSE_ADMIN_SCOPE}</Form.Label>
+                  <Form.HelpMessage>
+                    <FormattedMessage
+                      id="pages.personal_tokens.scope_synapse_admin_help"
+                      defaultMessage="Access to the Synapse admin API"
+                      description="Help text for Synapse admin scope"
+                    />
+                  </Form.HelpMessage>
+                </Form.InlineField>
+
+                <Form.InlineField
+                  name="scope_device"
+                  control={
+                    <Form.CheckboxControl
+                      checked={deviceChecked}
+                      onChange={onDeviceChecked}
+                      disabled={!matrixClientChecked}
+                    />
+                  }
+                >
+                  <Form.Label>{DEVICE_SCOPE}</Form.Label>
+                  <Form.HelpMessage>
+                    <FormattedMessage
+                      id="pages.personal_tokens.scope_device_help"
+                      defaultMessage="Provision a Matrix device"
+                      description="Help text for device scope"
+                    />
+                  </Form.HelpMessage>
+                </Form.InlineField>
+
+                {deviceChecked && (
+                  <Form.Field name="device_id" serverInvalid={false}>
+                    <Form.Label>
+                      <FormattedMessage
+                        id="pages.personal_tokens.device_id_label"
+                        defaultMessage="Device ID"
+                        description="Label for device ID field"
+                      />
+                    </Form.Label>
+                    <Form.TextControl
+                      placeholder={intl.formatMessage({
+                        id: "pages.personal_tokens.device_id_placeholder",
+                        defaultMessage: "ABCDEFGHIJ",
+                        description: "Placeholder for device ID field",
+                      })}
+                    />
+                    <Form.HelpMessage>
+                      <FormattedMessage
+                        id="pages.personal_tokens.device_id_help"
+                        defaultMessage="Leave empty to generate a random 10-character device ID"
+                        description="Help text for device ID field"
+                      />
+                    </Form.HelpMessage>
+                  </Form.Field>
+                )}
+              </fieldset>
 
               <Form.Submit disabled={isPending}>
                 {isPending && <InlineSpinner />}
@@ -781,16 +788,7 @@ function RouteComponent() {
             const token = row.original;
             return (
               <Text size="sm" className="text-text-secondary">
-                {token.attributes.expires_at
-                  ? computeHumanReadableDateTimeStringFromUtc(
-                      token.attributes.expires_at,
-                    )
-                  : intl.formatMessage({
-                      id: "pages.personal_tokens.never_expires",
-                      defaultMessage: "Never expires",
-                      description:
-                        "Text shown when a token has no expiration date",
-                    })}
+                {personalTokenExpiryText(intl, token.attributes)}
               </Text>
             );
           },

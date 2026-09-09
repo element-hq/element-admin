@@ -1860,22 +1860,28 @@
       "value": "Expires at"
     }
   ],
-  "pages.personal_tokens.expires_in_help": [
-    {
-      "type": 0,
-      "value": "Leave empty for tokens that never expire"
-    }
-  ],
   "pages.personal_tokens.expires_in_label": [
     {
       "type": 0,
       "value": "Expires in (days)"
     }
   ],
-  "pages.personal_tokens.expires_in_placeholder": [
+  "pages.personal_tokens.expires_in_missing": [
     {
       "type": 0,
-      "value": "30"
+      "value": "Enter how many days the token should last"
+    }
+  ],
+  "pages.personal_tokens.expires_in_underflow": [
+    {
+      "type": 0,
+      "value": "A token has to last at least one day"
+    }
+  ],
+  "pages.personal_tokens.expiry_revoked": [
+    {
+      "type": 0,
+      "value": "Revoked"
     }
   ],
   "pages.personal_tokens.filter.active": [
@@ -2004,12 +2010,6 @@
       "value": "Failed to regenerate personal token"
     }
   ],
-  "pages.personal_tokens.regenerate_expires_help": [
-    {
-      "type": 0,
-      "value": "Leave empty to keep the same expiry as before, or set a new expiry time"
-    }
-  ],
   "pages.personal_tokens.regenerate_success": [
     {
       "type": 0,
@@ -2104,10 +2104,28 @@
       "value": "Access to the Synapse admin API"
     }
   ],
+  "pages.personal_tokens.scopes_group_label": [
+    {
+      "type": 0,
+      "value": "Scopes"
+    }
+  ],
   "pages.personal_tokens.scopes_label": [
     {
       "type": 0,
       "value": "Scopes"
+    }
+  ],
+  "pages.personal_tokens.set_expiry_help": [
+    {
+      "type": 0,
+      "value": "Otherwise the token never expires"
+    }
+  ],
+  "pages.personal_tokens.set_expiry_label": [
+    {
+      "type": 0,
+      "value": "Set an expiry"
     }
   ],
   "pages.personal_tokens.status.active": [
