@@ -304,15 +304,19 @@ const ScheduledTaskDisplay: React.FC<ScheduledTaskProps> = ({
       return (
         <Alert
           title={intl.formatMessage({
-            id: "pages.rooms.delete_room.success",
+            id: "pages.rooms.deletion.scheduled.title",
             defaultMessage: "Room deletion scheduled",
             description:
-              "Toast message shown when room deletion is successfully scheduled",
+              "When there is a room deletion task that is scheduled, this is the title of the alert shown.",
           })}
           type="info"
         >
-          {intl.formatDate(task.timestamp_ms, { dateStyle: "short" })}{" "}
-          {intl.formatTime(task.timestamp_ms, { timeStyle: "short" })}
+          <FormattedMessage
+            id="pages.rooms.deletion.scheduled.description"
+            defaultMessage="Room deletion task is scheduled for {timestamp, date, short} at {timestamp, time, short}."
+            description="When there is a room deletion task that is scheduled, this is the description of the alert shown."
+            values={{ timestamp: task.timestamp_ms }}
+          />
         </Alert>
       );
     }
