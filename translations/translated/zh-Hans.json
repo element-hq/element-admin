@@ -18,7 +18,7 @@
     "message": "删除"
   },
   "action.done": {
-    "message": "Done"
+    "message": "完成"
   },
   "action.go_back": {
     "message": "后退"
@@ -39,13 +39,13 @@
     "message": "筛选"
   },
   "common.loading": {
-    "message": "Loading…"
+    "message": "正在加载…"
   },
   "errors.authorization_denied": {
-    "message": "Sign-in was cancelled."
+    "message": "登录已取消。"
   },
   "errors.authorization_error": {
-    "message": "Sign-in failed: {errorMessage}"
+    "message": "登录失败：{errorMessage}"
   },
   "errors.http_fetch": {
     "message": "{url} 请求失败"
@@ -117,7 +117,7 @@
     "message": "仪表盘"
   },
   "navigation.devices": {
-    "message": "Devices"
+    "message": "设备"
   },
   "navigation.documentation": {
     "message": "文档"
@@ -174,79 +174,79 @@
     "message": "仪表盘"
   },
   "pages.devices.applications.client_id_label": {
-    "message": "Client ID"
+    "message": "客户端ID"
   },
   "pages.devices.applications.count": {
-    "message": "{COUNT, plural, =0 {No applications} one {# application} other {# applications}}"
+    "message": "{COUNT, plural, =0 {无应用程序} other {# 个应用程序}}"
   },
   "pages.devices.applications.description": {
-    "message": "Applications are OAuth 2.0 clients that users sign in to."
+    "message": "应用程序是用户登录的 OAuth 2.0 客户端。"
   },
   "pages.devices.applications.details_label": {
     "message": "Application details"
   },
   "pages.devices.applications.filters.has_active_sessions": {
-    "message": "With active devices"
+    "message": "有活动设备"
   },
   "pages.devices.applications.filters.no_active_sessions": {
-    "message": "Without active devices"
+    "message": "无活动设备"
   },
   "pages.devices.applications.grant_types_label": {
-    "message": "Grant types"
+    "message": "授权类型"
   },
   "pages.devices.applications.name_column": {
     "message": "名称"
   },
   "pages.devices.applications.not_found.description": {
-    "message": "The requested application ({clientId}) could not be found on {serverName}."
+    "message": "无法在{serverName} 上找到所请求的应用程序 ({clientId})。"
   },
   "pages.devices.applications.not_found.title": {
-    "message": "Application not found"
+    "message": "找不到应用程序"
   },
   "pages.devices.applications.redirect_uris_label": {
-    "message": "Redirect URIs"
+    "message": "重定向 URI"
   },
   "pages.devices.applications.search_placeholder": {
-    "message": "Search by name…"
+    "message": "按名称搜索"
   },
   "pages.devices.applications.statistics.active_recently": {
-    "message": "Active in the past 7 days"
+    "message": "过去 7 天内活跃"
   },
   "pages.devices.applications.statistics.created_recently": {
-    "message": "Devices added in the past 7 days"
+    "message": "过去 7 天内新增的设备"
   },
   "pages.devices.applications.statistics.heading": {
-    "message": "Device statistics"
+    "message": "设备统计"
   },
   "pages.devices.applications.statistics.total_active": {
-    "message": "Active devices"
+    "message": "活跃设备"
   },
   "pages.devices.applications.title": {
-    "message": "Applications"
+    "message": "应用程序"
   },
   "pages.devices.applications.uri_label": {
-    "message": "Homepage"
+    "message": "主页"
   },
   "pages.devices.applications.view_sessions": {
-    "message": "View all devices"
+    "message": "查看所有设备"
   },
   "pages.devices.applications.view_users": {
     "message": "View users on this application"
   },
   "pages.devices.legacy.count": {
-    "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}"
+    "message": "{COUNT, plural, =0 {无传统设备} other {# 个传统设备}}"
   },
   "pages.devices.legacy.created_at_label": {
-    "message": "Signed in at"
+    "message": "登录时间："
   },
   "pages.devices.legacy.description": {
-    "message": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
+    "message": "传统设备是指尚未迁移到 OAuth 2.0 的客户端的登录方式。"
   },
   "pages.devices.legacy.details_label": {
     "message": "Legacy device details"
   },
   "pages.devices.legacy.device_column": {
-    "message": "Device"
+    "message": "设备"
   },
   "pages.devices.legacy.device_id_label": {
     "message": "设备 ID"
@@ -255,40 +255,40 @@
     "message": "活跃"
   },
   "pages.devices.legacy.filters.activity_inactive": {
-    "message": "Inactive"
+    "message": "不活跃"
   },
   "pages.devices.legacy.filters.activity_recently_used": {
-    "message": "Recently used"
+    "message": "最近使用"
   },
   "pages.devices.legacy.filters.activity_signed_out": {
-    "message": "Signed out"
+    "message": "已注销"
   },
   "pages.devices.legacy.filters.newest_first": {
     "message": "最新的优先"
   },
   "pages.devices.legacy.filters.user_chip": {
-    "message": "User: @{localpart}:{server}"
+    "message": "用户: @{localpart}:{server}"
   },
   "pages.devices.legacy.finish.button": {
-    "message": "Remove device"
+    "message": "移除设备"
   },
   "pages.devices.legacy.finish.confirm": {
-    "message": "Remove device"
+    "message": "移除设备"
   },
   "pages.devices.legacy.finish.description": {
-    "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
+    "message": "用户将从该设备中注销。访问令牌和刷新令牌将立即被撤销。"
   },
   "pages.devices.legacy.finish.error": {
-    "message": "Failed to remove the legacy device"
+    "message": "移除传统设备失败"
   },
   "pages.devices.legacy.finish.success": {
-    "message": "Legacy device removed"
+    "message": "已移除传统设备"
   },
   "pages.devices.legacy.finish.title": {
-    "message": "Remove this legacy device?"
+    "message": "要移除此传统设备吗？"
   },
   "pages.devices.legacy.finished_at_label": {
-    "message": "Signed out at"
+    "message": "注销时间："
   },
   "pages.devices.legacy.last_active_ip_label": {
     "message": "最后活跃 IP"
@@ -297,61 +297,61 @@
     "message": "最后活跃"
   },
   "pages.devices.legacy.not_found.description": {
-    "message": "The requested legacy device ({sessionId}) could not be found on {serverName}."
+    "message": "无法在{serverName} 上找到所请求的传统设备 ({sessionId})。"
   },
   "pages.devices.legacy.not_found.title": {
-    "message": "Legacy device not found"
+    "message": "未找到传统设备"
   },
   "pages.devices.legacy.redirect_uri_label": {
-    "message": "Redirect URI"
+    "message": "重定向URI"
   },
   "pages.devices.legacy.status_column": {
     "message": "状态"
   },
   "pages.devices.legacy.technical_details": {
-    "message": "Technical details"
+    "message": "技术细节"
   },
   "pages.devices.legacy.title": {
-    "message": "Legacy devices"
+    "message": "传统设备"
   },
   "pages.devices.legacy.user_agent_label": {
-    "message": "User agent"
+    "message": "用户代理"
   },
   "pages.devices.legacy.user_column": {
-    "message": "User"
+    "message": "用户"
   },
   "pages.devices.tabs.applications": {
-    "message": "Applications"
+    "message": "应用程序"
   },
   "pages.devices.tabs.legacy": {
-    "message": "Legacy devices"
+    "message": "传统设备"
   },
   "pages.devices.tabs.section": {
-    "message": "Device views"
+    "message": "设备视图"
   },
   "pages.devices.tabs.user": {
-    "message": "User devices"
+    "message": "用户设备"
   },
   "pages.devices.title": {
-    "message": "Devices"
+    "message": "设备"
   },
   "pages.devices.user.client_column": {
-    "message": "Application"
+    "message": "应用"
   },
   "pages.devices.user.count": {
-    "message": "{COUNT, plural, =0 {No devices} one {# device} other {# devices}}"
+    "message": "{COUNT, plural, =0 {无设备} other {# 个设备}}"
   },
   "pages.devices.user.created_at_label": {
-    "message": "Signed in at"
+    "message": "登录时间："
   },
   "pages.devices.user.description": {
-    "message": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
+    "message": "设备代表用户在某应用程序上的单次登录。注销该设备将立即撤销其访问权限。"
   },
   "pages.devices.user.details_label": {
     "message": "Device details"
   },
   "pages.devices.user.device_column": {
-    "message": "Device"
+    "message": "设备"
   },
   "pages.devices.user.device_id_label": {
     "message": "设备 ID"
@@ -360,43 +360,43 @@
     "message": "活跃"
   },
   "pages.devices.user.filters.activity_inactive": {
-    "message": "Inactive"
+    "message": "不活跃"
   },
   "pages.devices.user.filters.activity_recently_used": {
-    "message": "Recently used"
+    "message": "最近使用"
   },
   "pages.devices.user.filters.activity_signed_out": {
-    "message": "Signed out"
+    "message": "已注销"
   },
   "pages.devices.user.filters.client_chip": {
-    "message": "Application: {name}"
+    "message": "应用程序：{name}"
   },
   "pages.devices.user.filters.newest_first": {
     "message": "最新的优先"
   },
   "pages.devices.user.filters.user_chip": {
-    "message": "User: @{localpart}:{server}"
+    "message": "用户: @{localpart}:{server}"
   },
   "pages.devices.user.finish.button": {
-    "message": "Remove device"
+    "message": "移除设备"
   },
   "pages.devices.user.finish.confirm": {
-    "message": "Remove device"
+    "message": "移除设备"
   },
   "pages.devices.user.finish.description": {
-    "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
+    "message": "用户将从该设备中注销。访问令牌和刷新令牌将立即被撤销。"
   },
   "pages.devices.user.finish.error": {
-    "message": "Failed to remove the device"
+    "message": "移除设备失败。"
   },
   "pages.devices.user.finish.success": {
-    "message": "Device removed"
+    "message": "设备已移除"
   },
   "pages.devices.user.finish.title": {
-    "message": "Remove this device?"
+    "message": "要移除此设备吗？"
   },
   "pages.devices.user.finished_at_label": {
-    "message": "Signed out at"
+    "message": "注销时间："
   },
   "pages.devices.user.last_active_ip_label": {
     "message": "最后活跃 IP"
@@ -405,31 +405,31 @@
     "message": "最后活跃"
   },
   "pages.devices.user.not_found.description": {
-    "message": "The requested device ({sessionId}) could not be found on {serverName}."
+    "message": "在 {serverName} 上找不到请求的device({sessionId})。"
   },
   "pages.devices.user.not_found.title": {
-    "message": "Device not found"
+    "message": "未找到设备"
   },
   "pages.devices.user.scope_label": {
-    "message": "Scope"
+    "message": "范围"
   },
   "pages.devices.user.status_column": {
     "message": "状态"
   },
   "pages.devices.user.technical_details": {
-    "message": "Technical details"
+    "message": "技术细节"
   },
   "pages.devices.user.title": {
-    "message": "User devices"
+    "message": "用户设备"
   },
   "pages.devices.user.user_agent_label": {
-    "message": "User agent"
+    "message": "用户代理"
   },
   "pages.devices.user.user_column": {
-    "message": "User"
+    "message": "用户"
   },
   "pages.devices.user.user_none": {
-    "message": "No user"
+    "message": "无用户"
   },
   "pages.federation.allowlist.add.error": {
     "message": "无法将域名添加到白名单"
@@ -638,14 +638,17 @@
   "pages.personal_tokens.expires_at_label": {
     "message": "有效期到"
   },
-  "pages.personal_tokens.expires_in_help": {
-    "message": "留空表示 Token 永不过期"
-  },
   "pages.personal_tokens.expires_in_label": {
     "message": "剩余有效期（天）"
   },
-  "pages.personal_tokens.expires_in_placeholder": {
-    "message": "30"
+  "pages.personal_tokens.expires_in_missing": {
+    "message": "Enter how many days the token should last"
+  },
+  "pages.personal_tokens.expires_in_underflow": {
+    "message": "A token has to last at least one day"
+  },
+  "pages.personal_tokens.expiry_revoked": {
+    "message": "Revoked"
   },
   "pages.personal_tokens.filter.active": {
     "message": "活跃"
@@ -710,9 +713,6 @@
   "pages.personal_tokens.regenerate_error": {
     "message": "个人 Token 重新生成失败"
   },
-  "pages.personal_tokens.regenerate_expires_help": {
-    "message": "留空以保持与之前相同的有效期，或设置新的有效期"
-  },
   "pages.personal_tokens.regenerate_success": {
     "message": "个人 Token 已成功重新生成"
   },
@@ -758,8 +758,17 @@
   "pages.personal_tokens.scope_synapse_admin_help": {
     "message": "访问 Synapse 管理 API"
   },
+  "pages.personal_tokens.scopes_group_label": {
+    "message": "Scopes"
+  },
   "pages.personal_tokens.scopes_label": {
     "message": "范围"
+  },
+  "pages.personal_tokens.set_expiry_help": {
+    "message": "Otherwise the token never expires"
+  },
+  "pages.personal_tokens.set_expiry_label": {
+    "message": "Set an expiry"
   },
   "pages.personal_tokens.status.active": {
     "message": "活跃"
@@ -966,13 +975,13 @@
     "message": "有效期到"
   },
   "pages.rooms.columns.alias": {
-    "message": "Alias"
+    "message": "别名"
   },
   "pages.rooms.columns.members": {
-    "message": "Members"
+    "message": "成员"
   },
   "pages.rooms.columns.room": {
-    "message": "Room"
+    "message": "房间"
   },
   "pages.rooms.columns.visibility": {
     "message": "Visibility"
@@ -1044,16 +1053,16 @@
     "message": "{COUNT, plural, zero {无房间} other {#个房间}}"
   },
   "pages.rooms.room_type.private": {
-    "message": "Private"
+    "message": "私有"
   },
   "pages.rooms.room_type.public": {
-    "message": "Public"
+    "message": "公开"
   },
   "pages.rooms.room_type.restricted": {
-    "message": "Restricted"
+    "message": "受限"
   },
   "pages.rooms.search_placeholder": {
-    "message": "Search…"
+    "message": "搜索"
   },
   "pages.rooms.title": {
     "message": "房间"
@@ -1119,13 +1128,13 @@
     "message": "管理员"
   },
   "pages.users.account_status.deactivated": {
-    "message": "Deactivated"
+    "message": "已停用"
   },
   "pages.users.account_status.guest": {
-    "message": "Guest"
+    "message": "访客"
   },
   "pages.users.account_status.locked": {
-    "message": "Locked"
+    "message": "已锁定"
   },
   "pages.users.add_email.button": {
     "message": "添加邮件地址"
@@ -1155,7 +1164,7 @@
     "message": "已与上游账户关联"
   },
   "pages.users.columns.account_status": {
-    "message": "Account status"
+    "message": "账户状态"
   },
   "pages.users.columns.created_at": {
     "message": "创建于"
@@ -1212,7 +1221,7 @@
     "message": "激活用户"
   },
   "pages.users.filters.active_client_chip": {
-    "message": "Has active device on: {name}"
+    "message": "已启用的设备：{name}"
   },
   "pages.users.filters.admins": {
     "message": "管理员"
@@ -1224,7 +1233,7 @@
     "message": "访客（旧版）"
   },
   "pages.users.filters.has_legacy_session": {
-    "message": "Has active legacy device"
+    "message": "具有活跃的传统设备"
   },
   "pages.users.filters.locked": {
     "message": "已锁定的用户"
@@ -1233,7 +1242,7 @@
     "message": "最新的优先"
   },
   "pages.users.filters.no_legacy_session": {
-    "message": "No active legacy device"
+    "message": "没有活跃的传统设备"
   },
   "pages.users.filters.non_guests": {
     "message": "非访客（旧版）"
@@ -1356,10 +1365,10 @@
     "message": "为此用户设置新密码"
   },
   "pages.users.statistics.devices": {
-    "message": "Devices"
+    "message": "设备"
   },
   "pages.users.statistics.legacy_devices": {
-    "message": "Legacy devices"
+    "message": "传统设备"
   },
   "pages.users.title": {
     "message": "用户"
@@ -1422,13 +1431,13 @@
     "message": "载入失败"
   },
   "ui.data_table.loading_more": {
-    "message": "Loading more…"
+    "message": "正在加载更多…"
   },
   "ui.destination_status.failing": {
     "message": "失败"
   },
   "ui.destination_status.inactive": {
-    "message": "Inactive"
+    "message": "不活跃"
   },
   "ui.destination_status.never_worked": {
     "message": "从未工作过"
@@ -1437,49 +1446,49 @@
     "message": "正在工作"
   },
   "ui.device_info.name_on_platform": {
-    "message": "{name} on {platform}"
+    "message": "{name} 在 {platform}"
   },
   "ui.device_info.type.mobile": {
-    "message": "Mobile device"
+    "message": "移动设备"
   },
   "ui.device_info.type.pc": {
-    "message": "Computer"
+    "message": "计算机"
   },
   "ui.device_info.type.tablet": {
-    "message": "Tablet"
+    "message": "平板电脑"
   },
   "ui.device_info.type.unknown": {
-    "message": "Unknown device type"
+    "message": "未知设备类型"
   },
   "ui.device_info.unknown_device": {
-    "message": "Unknown device"
+    "message": "未知设备"
   },
   "ui.device_status.active": {
     "message": "活跃"
   },
   "ui.device_status.inactive": {
-    "message": "Inactive"
+    "message": "不活跃"
   },
   "ui.device_status.last_active.tooltip": {
-    "message": "Last active on {date}."
+    "message": "最后一次活跃时间：{date} 。"
   },
   "ui.device_status.never_used": {
     "message": "从未使用过"
   },
   "ui.device_status.never_used.tooltip": {
-    "message": "This device has not been used yet."
+    "message": "该设备尚未使用过。"
   },
   "ui.device_status.recently_used": {
-    "message": "Recently used"
+    "message": "最近使用"
   },
   "ui.device_status.signed_out": {
-    "message": "Signed out"
+    "message": "已注销"
   },
   "ui.device_status.signed_out.tooltip": {
-    "message": "This device has been signed out and no longer has access."
+    "message": "该设备已注销，不再具有访问权限。"
   },
   "ui.device_status.signed_out.tooltip_at": {
-    "message": "Signed out on {date}."
+    "message": "已于{date}登出。"
   },
   "ui.language_switcher.browser_default": {
     "message": "跟随浏览器设置（{language}）"

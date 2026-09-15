@@ -1,0 +1,1517 @@
+{
+  "action.add": {
+    "message": "Dodaj"
+  },
+  "action.cancel": {
+    "message": "Anuluj"
+  },
+  "action.clear": {
+    "message": "Wyczyść"
+  },
+  "action.close": {
+    "message": "Zamknij"
+  },
+  "action.copy": {
+    "message": "Kopiuj"
+  },
+  "action.delete": {
+    "message": "Usuń"
+  },
+  "action.done": {
+    "message": "Gotowe"
+  },
+  "action.go_back": {
+    "message": "Wróć"
+  },
+  "action.remove": {
+    "message": "Usuń"
+  },
+  "action.retry": {
+    "message": "Ponów"
+  },
+  "action.sign_out": {
+    "message": "Wyloguj"
+  },
+  "common.email_address": {
+    "message": "Adres e-mail"
+  },
+  "common.filter": {
+    "message": "Filtr"
+  },
+  "common.loading": {
+    "message": "Wczytywanie…"
+  },
+  "errors.authorization_denied": {
+    "message": "Logowanie zostało anulowane."
+  },
+  "errors.authorization_error": {
+    "message": "Logowanie nieudane: {errorMessage}"
+  },
+  "errors.http_fetch": {
+    "message": "Żądanie do {url} nie powiodło się"
+  },
+  "errors.http_fetch_json_decoding": {
+    "message": "Nie udało się zdekodować odpowiedzi JSON z {url}"
+  },
+  "errors.http_status": {
+    "message": "Żądanie do {url} nie powiodło się – kod statusu {status} {statusText}"
+  },
+  "errors.mas_api": {
+    "message": "Usługa uwierzytelniania serwera domowego zwróciła błąd: {errorMessage}"
+  },
+  "errors.matrix_standard": {
+    "message": "Żądanie wysłane do serwera domowego zakończyło się błędem ''{errorCode}''. Dodatkowo serwer wysłał następującą wiadomość: {errorMessage}"
+  },
+  "errors.no_details": {
+    "message": "Serwer zwrócił błąd bez dodatkowych szczegółów."
+  },
+  "errors.not_logged_in": {
+    "message": "Niezalogowany"
+  },
+  "footer.copyright_notice": {
+    "message": "Prawa autorskie © {now, date, ::yyyy}"
+  },
+  "footer.help_and_support": {
+    "message": "Pomoc i wsparcie"
+  },
+  "footer.legal": {
+    "message": "Zasoby prawne"
+  },
+  "footer.privacy": {
+    "message": "Prywatność"
+  },
+  "header.user_menu.title": {
+    "message": "Menu konta"
+  },
+  "marketing.also_available_in_pro.description": {
+    "message": "<p><link>ESS Pro</link> to komercyjna wersja oprogramowania back-endu firmy Element.</p><p>Zawiera wszystko, co ESS Community plus funkcje i usługi dostosowane do zastosowań profesjonalnych od 100 użytkowników w górę do skali liczonej w milionach.</p> <p>Zaprojektowany, by spełniać wymagania przedsiębiorstw w zakresie zaawansowanego zarządzania tożsamościami (IAM), zgodności z przepisami, skalowalności, dostępności i wielonajemności.</p>"
+  },
+  "marketing.also_available_in_pro.title": {
+    "message": "Dostępne również w wersji Pro…"
+  },
+  "marketing.also_available_in_pro.upgrade": {
+    "message": "Ulepsz do wersji Pro"
+  },
+  "marketing.auditing.description": {
+    "message": "<p>Audyt umożliwia organizacjom przechowywanie zapisu zaszyfrowanych wiadomości i zdarzeń pokojów, by spełniać wymogi prawne.</p> <p>Aby zapewnić transparentność, proces jest widoczny dla wszystkich użytkowników.</p> <p>Funkcja audytu może zostać dostosowana pod konkretne wymogi organizacji. Można na przykład wykluczyć rozmowy prywatne w konwersacjach grupowych.</p> <p>Dane audytu są przechowywane jako strumień zdarzeń w formacie JSON, który może zostać zapisany na dysku lub usłudze S3 i być przekazany dalej do narzędzi analitycznych dla dalszej analizy.</p>"
+  },
+  "marketing.auditing.title": {
+    "message": "Audyt"
+  },
+  "marketing.sbg.description": {
+    "message": "<p>Secure Border Gateway jest zaporą sieciową działającą na poziomie aplikacji dla serwerów Matrix.</p> <ul><li>Kontroluje wszystkie żądania wysłane i otrzymane od serwera</li> <li>Może egzekwować zasady na podstawie metadanych zawartych w żądaniach</li> <li>Podejście oparte na pipelineach umożliwia podłączanie interfejsów API i zbiorów reguł</li> <li>Modularny silnik zasad, który możesz zastosować w swoich pipelineach</li></ul>"
+  },
+  "marketing.sbg.title": {
+    "message": "Secure Border Gateway"
+  },
+  "marketing.supervision.description": {
+    "message": "<p>Funkcja superwizji umożliwia organizacji zarządzać wszystkimi pokojami z jednego punktu centralnego. Konto 'superwizora' dołączy do wybranych pokoi z uprawnieniami administratora, następnie administratorzy serwera będą mogli zarządzać i nadzorować te pokoje z poziomu konsoli.</p> <ul><li>Zarządzaj pokojami i ich ustawieniami (nazwą, tematami, uprawnieniami itd.)</li> <li>Zarządzaj członkami pokojów</li> <li>Usuwaj niechciane wiadomości i multimedia</li> <li>Odzyskaj utracone pokoje (gdy wszyscy użytkownicy je opuścili)</li> <li>Możliwość odczytywania wiadomości szyfrowanych przez konto Superwizora (opcja konfiguracji)</li></ul>"
+  },
+  "marketing.supervision.title": {
+    "message": "Superwizja"
+  },
+  "navigation.auditing": {
+    "message": "Audyt"
+  },
+  "navigation.dashboard": {
+    "message": "Pulpit nawigacyjny"
+  },
+  "navigation.devices": {
+    "message": "Urządzenia"
+  },
+  "navigation.documentation": {
+    "message": "Dokumentacja"
+  },
+  "navigation.federation": {
+    "message": "Federacja"
+  },
+  "navigation.personal_tokens": {
+    "message": "Tokeny osobiste"
+  },
+  "navigation.registration_tokens": {
+    "message": "Tokeny rejestracyjne"
+  },
+  "navigation.rooms": {
+    "message": "Pokoje"
+  },
+  "navigation.supervision": {
+    "message": "Superwizja"
+  },
+  "navigation.users": {
+    "message": "Użytkownicy"
+  },
+  "pages.auditing.title": {
+    "message": "Audyt"
+  },
+  "pages.auditing.unavailable_alert.description": {
+    "message": "Ta funkcja nie jest dostępna w wersji ESS Community. Aby ją włączyć, ulepsz do wersji ESS Pro."
+  },
+  "pages.auditing.unavailable_alert.title": {
+    "message": "Audyt to funkcja dostępna w wersji ESS Pro"
+  },
+  "pages.dashboard.current_ess_version": {
+    "message": "Wersja ESS"
+  },
+  "pages.dashboard.latest_ess_version": {
+    "message": "Najnowsza wersja ESS"
+  },
+  "pages.dashboard.new_ess_release": {
+    "message": "(Nowe wydanie)"
+  },
+  "pages.dashboard.registered_users_count": {
+    "message": "Zarejestrowani użytkownicy"
+  },
+  "pages.dashboard.rooms_count": {
+    "message": "Pokoi łącznie"
+  },
+  "pages.dashboard.running_latest_ess": {
+    "message": "(Używasz najnowszej wersji)"
+  },
+  "pages.dashboard.synapse_version": {
+    "message": "Wersja Synapse"
+  },
+  "pages.dashboard.title": {
+    "message": "Pulpit nawigacyjny"
+  },
+  "pages.devices.applications.client_id_label": {
+    "message": "ID klienta"
+  },
+  "pages.devices.applications.count": {
+    "message": "{COUNT, plural, =0 {Brak aplikacji} one {# aplikacja} other {# aplikacje}}"
+  },
+  "pages.devices.applications.description": {
+    "message": "Aplikacje są klientami OAuth 2.0, do których logują się użytkownicy."
+  },
+  "pages.devices.applications.details_label": {
+    "message": "Szczegóły aplikacji"
+  },
+  "pages.devices.applications.filters.has_active_sessions": {
+    "message": "Mające aktywne urządzenia"
+  },
+  "pages.devices.applications.filters.no_active_sessions": {
+    "message": "Bez aktywnych urządzeń"
+  },
+  "pages.devices.applications.grant_types_label": {
+    "message": "Typy uprzywilejowań"
+  },
+  "pages.devices.applications.name_column": {
+    "message": "Nazwa"
+  },
+  "pages.devices.applications.not_found.description": {
+    "message": "Nie udało się znaleźć żądanej aplikacji ({clientId}) na {serverName}."
+  },
+  "pages.devices.applications.not_found.title": {
+    "message": "Nie znaleziono aplikacji"
+  },
+  "pages.devices.applications.redirect_uris_label": {
+    "message": "Przekierowuj adresy URI"
+  },
+  "pages.devices.applications.search_placeholder": {
+    "message": "Szukaj wg. nazwy…"
+  },
+  "pages.devices.applications.statistics.active_recently": {
+    "message": "Aktywne w ciągu ostatnich 7 dni"
+  },
+  "pages.devices.applications.statistics.created_recently": {
+    "message": "Urządzenia dodane w ciągu ostatnich 7 dni"
+  },
+  "pages.devices.applications.statistics.heading": {
+    "message": "Statystyki urządzenia"
+  },
+  "pages.devices.applications.statistics.total_active": {
+    "message": "Aktywne urządzenia"
+  },
+  "pages.devices.applications.title": {
+    "message": "Aplikacje"
+  },
+  "pages.devices.applications.uri_label": {
+    "message": "Strona główna"
+  },
+  "pages.devices.applications.view_sessions": {
+    "message": "Wyświetl wszystkie urządzenia"
+  },
+  "pages.devices.applications.view_users": {
+    "message": "Wyświetl użytkowników tej aplikacji"
+  },
+  "pages.devices.legacy.count": {
+    "message": "{COUNT, plural, =0 {Brak starszych urządzeń} one {# starsze urządzenie} other {# starsze urządzenia}}"
+  },
+  "pages.devices.legacy.created_at_label": {
+    "message": "Zalogowano"
+  },
+  "pages.devices.legacy.description": {
+    "message": "Starsze urządzenia to klienci, którzy jeszcze nie zalogowali się za pomocą OAuth 2.0."
+  },
+  "pages.devices.legacy.details_label": {
+    "message": "Starszy panel szczegółów urządzeń"
+  },
+  "pages.devices.legacy.device_column": {
+    "message": "Urządzenie"
+  },
+  "pages.devices.legacy.device_id_label": {
+    "message": "ID urządzenia"
+  },
+  "pages.devices.legacy.filters.activity_active": {
+    "message": "Aktywny"
+  },
+  "pages.devices.legacy.filters.activity_inactive": {
+    "message": "Nieaktywne"
+  },
+  "pages.devices.legacy.filters.activity_recently_used": {
+    "message": "Ostatnio używane"
+  },
+  "pages.devices.legacy.filters.activity_signed_out": {
+    "message": "Wylogowano"
+  },
+  "pages.devices.legacy.filters.newest_first": {
+    "message": "Najpierw najnowsze"
+  },
+  "pages.devices.legacy.filters.user_chip": {
+    "message": "Użytkownik: @{localpart}:{server}"
+  },
+  "pages.devices.legacy.finish.button": {
+    "message": "Usuń urządzenie"
+  },
+  "pages.devices.legacy.finish.confirm": {
+    "message": "Usuń urządzenie"
+  },
+  "pages.devices.legacy.finish.description": {
+    "message": "Użytkownik zostanie wylogowany z tego urządzenia. Tokeny dostępu i odświeżania zostaną natychmiast cofnięte."
+  },
+  "pages.devices.legacy.finish.error": {
+    "message": "Nie udało się usunąć starszego urządzenia"
+  },
+  "pages.devices.legacy.finish.success": {
+    "message": "Usunięto starsze urządzenie"
+  },
+  "pages.devices.legacy.finish.title": {
+    "message": "Usunąć to starsze urządzenie?"
+  },
+  "pages.devices.legacy.finished_at_label": {
+    "message": "Wylogowano"
+  },
+  "pages.devices.legacy.last_active_ip_label": {
+    "message": "Ostatni aktywny adres IP"
+  },
+  "pages.devices.legacy.last_active_label": {
+    "message": "Ostatnio aktywny"
+  },
+  "pages.devices.legacy.not_found.description": {
+    "message": "Nie udało się znaleźć starszego urządzenia ({sessionId}) na {serverName}."
+  },
+  "pages.devices.legacy.not_found.title": {
+    "message": "Nie znaleziono starszego urządzenia"
+  },
+  "pages.devices.legacy.redirect_uri_label": {
+    "message": "Przekieruj URI"
+  },
+  "pages.devices.legacy.status_column": {
+    "message": "Status"
+  },
+  "pages.devices.legacy.technical_details": {
+    "message": "Szczegóły techniczne"
+  },
+  "pages.devices.legacy.title": {
+    "message": "Starsze urządzenia"
+  },
+  "pages.devices.legacy.user_agent_label": {
+    "message": "Agent użytkownika"
+  },
+  "pages.devices.legacy.user_column": {
+    "message": "Użytkownik"
+  },
+  "pages.devices.tabs.applications": {
+    "message": "Aplikacje"
+  },
+  "pages.devices.tabs.legacy": {
+    "message": "Starsze urządzenia"
+  },
+  "pages.devices.tabs.section": {
+    "message": "Widok urządzeń"
+  },
+  "pages.devices.tabs.user": {
+    "message": "Urządzenia użytkownika"
+  },
+  "pages.devices.title": {
+    "message": "Urządzenia"
+  },
+  "pages.devices.user.client_column": {
+    "message": "Aplikacja"
+  },
+  "pages.devices.user.count": {
+    "message": "{COUNT, plural, =0 {Brak urządzeń} one {# urządzenie} other {# urządzenia}}"
+  },
+  "pages.devices.user.created_at_label": {
+    "message": "Zalogowano"
+  },
+  "pages.devices.user.description": {
+    "message": "Urządzenie reprezentuje jednorazowe zalogowanie użytkownika do aplikacji. Wylogowanie urządzenia natychmiast unieważnia jego dostęp."
+  },
+  "pages.devices.user.details_label": {
+    "message": "Szczegóły urządzenia"
+  },
+  "pages.devices.user.device_column": {
+    "message": "Urządzenie"
+  },
+  "pages.devices.user.device_id_label": {
+    "message": "ID urządzenia"
+  },
+  "pages.devices.user.filters.activity_active": {
+    "message": "Aktywny"
+  },
+  "pages.devices.user.filters.activity_inactive": {
+    "message": "Nieaktywne"
+  },
+  "pages.devices.user.filters.activity_recently_used": {
+    "message": "Ostatnio używane"
+  },
+  "pages.devices.user.filters.activity_signed_out": {
+    "message": "Wylogowano"
+  },
+  "pages.devices.user.filters.client_chip": {
+    "message": "Aplikacja: {name}"
+  },
+  "pages.devices.user.filters.newest_first": {
+    "message": "Najpierw najnowsze"
+  },
+  "pages.devices.user.filters.user_chip": {
+    "message": "Użytkownik: @{localpart}:{server}"
+  },
+  "pages.devices.user.finish.button": {
+    "message": "Usuń urządzenie"
+  },
+  "pages.devices.user.finish.confirm": {
+    "message": "Usuń urządzenie"
+  },
+  "pages.devices.user.finish.description": {
+    "message": "Użytkownik zostanie wylogowany z tego urządzenia. Tokeny dostępu i odświeżania zostaną natychmiast cofnięte."
+  },
+  "pages.devices.user.finish.error": {
+    "message": "Nie udało się usunąć urządzenia"
+  },
+  "pages.devices.user.finish.success": {
+    "message": "Urządzenie usunięte"
+  },
+  "pages.devices.user.finish.title": {
+    "message": "Usunąć to urządzenie?"
+  },
+  "pages.devices.user.finished_at_label": {
+    "message": "Wylogowano"
+  },
+  "pages.devices.user.last_active_ip_label": {
+    "message": "Ostatni aktywny adres IP"
+  },
+  "pages.devices.user.last_active_label": {
+    "message": "Ostatnio aktywny"
+  },
+  "pages.devices.user.not_found.description": {
+    "message": "Nie udało się znaleźć żądanego urządzenia ({sessionId}) na {serverName}."
+  },
+  "pages.devices.user.not_found.title": {
+    "message": "Nie znaleziono urządzenia"
+  },
+  "pages.devices.user.scope_label": {
+    "message": "Zakres"
+  },
+  "pages.devices.user.status_column": {
+    "message": "Status"
+  },
+  "pages.devices.user.technical_details": {
+    "message": "Szczegóły techniczne"
+  },
+  "pages.devices.user.title": {
+    "message": "Urządzenia użytkownika"
+  },
+  "pages.devices.user.user_agent_label": {
+    "message": "Agent użytkownika"
+  },
+  "pages.devices.user.user_column": {
+    "message": "Użytkownik"
+  },
+  "pages.devices.user.user_none": {
+    "message": "Brak użytkowników"
+  },
+  "pages.federation.allowlist.add.error": {
+    "message": "Nie udało się dodać domeny do listy dozwolonych"
+  },
+  "pages.federation.allowlist.add.success": {
+    "message": "Dodano domenę do listy dozwolonych"
+  },
+  "pages.federation.allowlist.add_domain": {
+    "message": "Dodaj domenę"
+  },
+  "pages.federation.allowlist.add_pattern": {
+    "message": "Dodaj wzór"
+  },
+  "pages.federation.allowlist.add_pattern.help": {
+    "message": "Wprowadź domenę, np. example.com lub użyj znaku * , aby zezwolić na wszystkie subdomeny jak np. *.example.com"
+  },
+  "pages.federation.allowlist.empty": {
+    "message": "Brak domen na liście dozwolonych. Dodaj wzorzec domen powyżej, aby rozpocząć."
+  },
+  "pages.federation.allowlist.heading": {
+    "message": "Lista wzorców, z którymi dozwolone jest tworzenie federacji"
+  },
+  "pages.federation.allowlist.remove.error": {
+    "message": "Nie udało się usunąć domeny z listy dozwolonych"
+  },
+  "pages.federation.allowlist.remove.success": {
+    "message": "Usunięto domenę z dozwolonych"
+  },
+  "pages.federation.allowlist.remove_confirm.alert.description": {
+    "message": "Twój serwer przestanie federalizować się z serwerami zgodnymi z podanym wzorcem."
+  },
+  "pages.federation.allowlist.remove_confirm.alert.title": {
+    "message": "Zamierzasz przestać federalizować się z tym serwerem"
+  },
+  "pages.federation.allowlist.remove_confirm.title": {
+    "message": "Usunąć {serverName} z listy dozwolonych?"
+  },
+  "pages.federation.allowlist.remove_tooltip": {
+    "message": "Usuń z listy dozwolonych"
+  },
+  "pages.federation.detail.contact": {
+    "message": "Kontakt"
+  },
+  "pages.federation.detail.last_retry": {
+    "message": "Sygnatura czasowa ostatniej próby odświeżenia"
+  },
+  "pages.federation.detail.last_retry.never": {
+    "message": "Nigdy"
+  },
+  "pages.federation.detail.last_successful_stream": {
+    "message": "Ostatni udany strumień"
+  },
+  "pages.federation.detail.retry_interval": {
+    "message": "Interwał ponawiania prób"
+  },
+  "pages.federation.detail.retry_interval.none": {
+    "message": "Brak"
+  },
+  "pages.federation.detail.security": {
+    "message": "Bezpieczeństwo"
+  },
+  "pages.federation.detail.support_page": {
+    "message": "Strona pomocy technicznej"
+  },
+  "pages.federation.details_label": {
+    "message": "Szczegóły destynacji"
+  },
+  "pages.federation.domain_count": {
+    "message": "{COUNT, plural, =0 {Brak domen} one {# domena} other {# domeny}}"
+  },
+  "pages.federation.not_found.description": {
+    "message": "Nie można znaleźć żądanego miejsca docelowego ({destination})."
+  },
+  "pages.federation.not_found.title": {
+    "message": "Nie znaleziono miejsca docelowego"
+  },
+  "pages.federation.sbg_not_enabled.description": {
+    "message": "Skontaktuj się z administratorem, aby włączyć opcję w tym wdrożeniu."
+  },
+  "pages.federation.sbg_not_enabled.title": {
+    "message": "Secure Border Gateway nie jest włączona w tym wdrożeniu"
+  },
+  "pages.federation.search_placeholder": {
+    "message": "Wyszukaj domeny…"
+  },
+  "pages.federation.tab.allowed_domains": {
+    "message": "Dozwolone domeny"
+  },
+  "pages.federation.tab.known_domains": {
+    "message": "Znane domeny"
+  },
+  "pages.federation.tab.section": {
+    "message": "Widok federacji"
+  },
+  "pages.federation.table.server_name": {
+    "message": "Nazwa serwera"
+  },
+  "pages.federation.table.status": {
+    "message": "Status"
+  },
+  "pages.federation.title": {
+    "message": "Federacja"
+  },
+  "pages.federation.unavailable_alert.description": {
+    "message": "Usługa Secure Border Gateway nie jest dostępna wersji ESS Community. Aby ją włączyć, zaktualizuj do wersji ESS Pro."
+  },
+  "pages.federation.unavailable_alert.title": {
+    "message": "Secure Border Gateway nie jest włączona w tym wdrożeniu"
+  },
+  "pages.generic_error.go_home": {
+    "message": "Przejdź do strony głównej"
+  },
+  "pages.generic_error.sign_out_and_reload": {
+    "message": "Wyloguj się i załaduj ponownie"
+  },
+  "pages.generic_error.technical_details.item": {
+    "message": "{name}: {message}"
+  },
+  "pages.generic_error.text": {
+    "message": "Może to być spowodowane błędem lub problemem z połączeniem z serwerem domowym. Możesz spróbować ponownie załadować stronę, wrócić do poprzedniej strony albo zresetować wszystko i wrócić na stronę główną."
+  },
+  "pages.generic_error.title": {
+    "message": "Wystąpił nieoczekiwany błąd."
+  },
+  "pages.landing.description": {
+    "message": "Zarządzaj wdrożeniem aplikacji Element dla swojej organizacji lub społeczności"
+  },
+  "pages.login.errors.authorization_failed": {
+    "message": "Nie udało się rozpocząć procesu logowania. Spróbuj ponownie."
+  },
+  "pages.login.errors.insecure_context": {
+    "message": "Logowanie wymaga bezpiecznego połączenia. Odśwież tę stronę przez https:// i spróbuj ponownie."
+  },
+  "pages.login.errors.no_auth_metadata": {
+    "message": "Nie udało się załadować metadanych uwierzytelniania serwera. Synapse może być niedostępny lub nie został skonfigurowany do używania Matrix Authentication Service."
+  },
+  "pages.login.errors.no_client_metadata": {
+    "message": "Nie udało się zarejestrować klienta. Usługa uwierzytelniania Matrix (Matrix Authentication Service) może być niedostępna lub niepoprawnie skonfigurowana."
+  },
+  "pages.login.errors.no_well_known": {
+    "message": "Nie można pobrać konfiguracji serwera (well-known). Sprawdź, czy nazwa serwera jest poprawna."
+  },
+  "pages.login.get_started": {
+    "message": "Rozpocznij"
+  },
+  "pages.login.server_name": {
+    "message": "Nazwa serwera"
+  },
+  "pages.login.title": {
+    "message": "Zaloguj się"
+  },
+  "pages.personal_tokens.acting_user_column": {
+    "message": "Działający użytkownik"
+  },
+  "pages.personal_tokens.acting_user_label": {
+    "message": "Użytkownik działający"
+  },
+  "pages.personal_tokens.actor_user_help": {
+    "message": "Użytkownik, w imieniu którego będzie działał ten token"
+  },
+  "pages.personal_tokens.actor_user_label": {
+    "message": "Użytkownik działający"
+  },
+  "pages.personal_tokens.add_token_title": {
+    "message": "Dodaj token osobisty"
+  },
+  "pages.personal_tokens.cant_regenerate_tooltip": {
+    "message": "Tylko {ownerMxid} może zregenerować ten token"
+  },
+  "pages.personal_tokens.cant_regenerate_tooltip_generic": {
+    "message": "Tylko właściciel tokena może go zregenerować"
+  },
+  "pages.personal_tokens.count": {
+    "message": "{count, plural, =0 {Brak tokenów osobistych} one {# token osobisty} other {# tokenów osobistych}}"
+  },
+  "pages.personal_tokens.create_error": {
+    "message": "Nie udało się utworzyć tokena osobistego"
+  },
+  "pages.personal_tokens.create_success": {
+    "message": "Token osobisty stworzony pomyślnie"
+  },
+  "pages.personal_tokens.create_token": {
+    "message": "Utwórz token"
+  },
+  "pages.personal_tokens.created_at_label": {
+    "message": "Utworzono"
+  },
+  "pages.personal_tokens.description": {
+    "message": "Tokeny osobiste to trwałe tokeny dostępu z określonymi uprawnieniami, w tym dostępem do API administracyjnego Synapse i MAS. Są przydatne do automatyzacji zadań i tworzenia integracji."
+  },
+  "pages.personal_tokens.details_label": {
+    "message": "Szczegóły tokena osobistego"
+  },
+  "pages.personal_tokens.device_id_help": {
+    "message": "Pozostaw puste, aby wygenerować losowy 10-znakowy identyfikator urządzenia"
+  },
+  "pages.personal_tokens.device_id_label": {
+    "message": "ID urządzenia"
+  },
+  "pages.personal_tokens.device_id_placeholder": {
+    "message": "ABCDEFGHIJ"
+  },
+  "pages.personal_tokens.expires_at_column": {
+    "message": "Wygasa"
+  },
+  "pages.personal_tokens.expires_at_label": {
+    "message": "Wygasa"
+  },
+  "pages.personal_tokens.expires_in_label": {
+    "message": "Wygasa za (dni)"
+  },
+  "pages.personal_tokens.expires_in_missing": {
+    "message": "Wprowadź liczbę dni ważności tokenu"
+  },
+  "pages.personal_tokens.expires_in_underflow": {
+    "message": "Okres ważności tokenu musi wynosić co najmniej jeden dzień"
+  },
+  "pages.personal_tokens.expiry_revoked": {
+    "message": "Unieważniony"
+  },
+  "pages.personal_tokens.filter.active": {
+    "message": "Aktywny"
+  },
+  "pages.personal_tokens.filter.expires": {
+    "message": "Z datą wygaśnięcia"
+  },
+  "pages.personal_tokens.filter.no_expiry": {
+    "message": "Nigdy nie wygasa"
+  },
+  "pages.personal_tokens.filter.revoked": {
+    "message": "Unieważniony"
+  },
+  "pages.personal_tokens.filter.scope_mas_admin": {
+    "message": "Dostęp do API administratora MAS"
+  },
+  "pages.personal_tokens.filter.scope_matrix_client": {
+    "message": "Dostęp do Matrix Client-Server API"
+  },
+  "pages.personal_tokens.filter.scope_synapse_admin": {
+    "message": "Dostęp do API administratora Synapse"
+  },
+  "pages.personal_tokens.last_active_column": {
+    "message": "Ostatnio aktywny"
+  },
+  "pages.personal_tokens.last_active_ip_label": {
+    "message": "Ostatni aktywny adres IP"
+  },
+  "pages.personal_tokens.last_active_label": {
+    "message": "Ostatnio aktywny"
+  },
+  "pages.personal_tokens.name_column": {
+    "message": "Nazwa"
+  },
+  "pages.personal_tokens.name_help": {
+    "message": "Nazwa tokena w formie czytelnej dla użytkownika, ułatwiająca jego identyfikację"
+  },
+  "pages.personal_tokens.name_label": {
+    "message": "Nazwa tokena"
+  },
+  "pages.personal_tokens.name_placeholder": {
+    "message": "Mój token aplikacji"
+  },
+  "pages.personal_tokens.never_expires": {
+    "message": "Nigdy nie wygasa"
+  },
+  "pages.personal_tokens.never_used": {
+    "message": "Nigdy nie używany"
+  },
+  "pages.personal_tokens.not_found.description": {
+    "message": "Poszukiwany przez Ciebie token osobisty nie istnieje lub został usunięty."
+  },
+  "pages.personal_tokens.not_found.title": {
+    "message": "Nie znaleziono tokena osobistego"
+  },
+  "pages.personal_tokens.owner_user_label": {
+    "message": "Właściciel"
+  },
+  "pages.personal_tokens.regenerate_confirm": {
+    "message": "Zregeneruj token"
+  },
+  "pages.personal_tokens.regenerate_error": {
+    "message": "Nie udało się zregenerować tokena osobistego"
+  },
+  "pages.personal_tokens.regenerate_success": {
+    "message": "Token osobisty został zregenerowany pomyślnie"
+  },
+  "pages.personal_tokens.regenerate_token": {
+    "message": "Zregeneruj token"
+  },
+  "pages.personal_tokens.regenerate_token_title": {
+    "message": "Zregeneruj token osobisty"
+  },
+  "pages.personal_tokens.regenerate_warning": {
+    "message": "Nowy token dostępu zostanie wygenerowany, a stary unieważniony. Wszystkie aplikacje korzystające z bieżącego tokena będą wymagały aktualizacji."
+  },
+  "pages.personal_tokens.revoke_success": {
+    "message": "Token osobisty został unieważniony pomyślnie"
+  },
+  "pages.personal_tokens.revoke_token": {
+    "message": "Unieważnij token"
+  },
+  "pages.personal_tokens.revoke_token.alert.description": {
+    "message": "{humanName} przestanie działać, a każda aplikacja, która z niego korzysta, będzie potrzebowała nowego tokena."
+  },
+  "pages.personal_tokens.revoke_token.alert.title": {
+    "message": "Tej akcji nie można cofnąć"
+  },
+  "pages.personal_tokens.revoke_token.error": {
+    "message": "Nie udało się unieważnić tokena"
+  },
+  "pages.personal_tokens.revoke_token.title": {
+    "message": "Czy unieważnić wybrany token osobisty?"
+  },
+  "pages.personal_tokens.revoked_at_label": {
+    "message": "Odwołano"
+  },
+  "pages.personal_tokens.scope_device_help": {
+    "message": "Skonfiguruj urządzenie Matrix"
+  },
+  "pages.personal_tokens.scope_mas_admin_help": {
+    "message": "Dostęp do API administratora MAS"
+  },
+  "pages.personal_tokens.scope_matrix_client_help": {
+    "message": "Dostęp do Matrix Client-Server API"
+  },
+  "pages.personal_tokens.scope_synapse_admin_help": {
+    "message": "Dostęp do API administratora Synapse"
+  },
+  "pages.personal_tokens.scopes_group_label": {
+    "message": "Możliwości"
+  },
+  "pages.personal_tokens.scopes_label": {
+    "message": "Zakresy"
+  },
+  "pages.personal_tokens.set_expiry_help": {
+    "message": "W przeciwnym razie token nigdy nie wygaśnie"
+  },
+  "pages.personal_tokens.set_expiry_label": {
+    "message": "Ustaw czas wygaśnięcia"
+  },
+  "pages.personal_tokens.status.active": {
+    "message": "Aktywny"
+  },
+  "pages.personal_tokens.status.column": {
+    "message": "Status"
+  },
+  "pages.personal_tokens.status.expired": {
+    "message": "Wygasły"
+  },
+  "pages.personal_tokens.status.label": {
+    "message": "Status"
+  },
+  "pages.personal_tokens.status.revoked": {
+    "message": "Unieważniony"
+  },
+  "pages.personal_tokens.title": {
+    "message": "Tokeny osobiste"
+  },
+  "pages.personal_tokens.token_created_description": {
+    "message": "Twój token osobisty został utworzony. Skopiuj go teraz, ponieważ nie zostanie wyświetlony ponownie."
+  },
+  "pages.personal_tokens.token_created_title": {
+    "message": "Utworzono token osobisty"
+  },
+  "pages.personal_tokens.token_regenerated_description": {
+    "message": "Twój osobisty token został zregenerowany. Skopiuj go teraz, ponieważ nie zostanie wyświetlony ponownie."
+  },
+  "pages.personal_tokens.token_regenerated_title": {
+    "message": "Token zregenerowany"
+  },
+  "pages.registration_tokens.auto_generate_placeholder": {
+    "message": "Wygeneruj automatycznie, jeśli pozostawiono puste"
+  },
+  "pages.registration_tokens.create_token.error": {
+    "message": "Nie można utworzyć tokenu dostępu"
+  },
+  "pages.registration_tokens.create_token.submit": {
+    "message": "Utwórz token"
+  },
+  "pages.registration_tokens.create_token.success": {
+    "message": "Token utworzono pomyślnie"
+  },
+  "pages.registration_tokens.create_token.title": {
+    "message": "Utwórz token rejestracyjny"
+  },
+  "pages.registration_tokens.created_at_column": {
+    "message": "Utworzono"
+  },
+  "pages.registration_tokens.created_at_label": {
+    "message": "Utworzono"
+  },
+  "pages.registration_tokens.custom_token_help": {
+    "message": "Opcjonalny własny token. Zostaw puste, aby wygenerować automatycznie."
+  },
+  "pages.registration_tokens.custom_token_label": {
+    "message": "Niestandardowy token"
+  },
+  "pages.registration_tokens.details_label": {
+    "message": "Szczegóły rejestrowanego tokena"
+  },
+  "pages.registration_tokens.edit_properties": {
+    "message": "Edytuj właściwości"
+  },
+  "pages.registration_tokens.edit_properties.revoked_tooltip": {
+    "message": "Cofnij odwołanie tego tokena przed edycją jego właściwości"
+  },
+  "pages.registration_tokens.edit_token.error": {
+    "message": "Nie udało się zapisać zmian"
+  },
+  "pages.registration_tokens.edit_token_title": {
+    "message": "Edytuj token rejestracyjny"
+  },
+  "pages.registration_tokens.expires_at_field": {
+    "message": "Wygasa"
+  },
+  "pages.registration_tokens.expires_at_help": {
+    "message": "Ustaw czas wygaśnięcia tokena. Pozostaw puste pole, jeśli token ma nigdy nie wygasnąć."
+  },
+  "pages.registration_tokens.expires_at_label": {
+    "message": "Wygasa"
+  },
+  "pages.registration_tokens.filters.active_only": {
+    "message": "Aktywny"
+  },
+  "pages.registration_tokens.filters.expired_only": {
+    "message": "Wygasły"
+  },
+  "pages.registration_tokens.filters.not_revoked": {
+    "message": "Nie udało się unieważnić"
+  },
+  "pages.registration_tokens.filters.revoked_only": {
+    "message": "Unieważniony"
+  },
+  "pages.registration_tokens.filters.unused_only": {
+    "message": "Nieużywany"
+  },
+  "pages.registration_tokens.filters.used_only": {
+    "message": "Zużyty"
+  },
+  "pages.registration_tokens.never_expires": {
+    "message": "Nigdy nie wygasa"
+  },
+  "pages.registration_tokens.no_expiration_placeholder": {
+    "message": "Brak daty ważności"
+  },
+  "pages.registration_tokens.not_found.description": {
+    "message": "Nie znaleziono żądanego tokenu rejestracyjnego ({tokenId}) w {serverName}."
+  },
+  "pages.registration_tokens.not_found.title": {
+    "message": "Nie znaleziono tokena rejestracyjnego"
+  },
+  "pages.registration_tokens.revoke_token": {
+    "message": "Unieważnij token"
+  },
+  "pages.registration_tokens.revoke_token.alert.description": {
+    "message": "Nikt nie będzie mógł się zarejestrować za pomocą {token}, dopóki nie zostanie on przywrócony."
+  },
+  "pages.registration_tokens.revoke_token.alert.title": {
+    "message": "Token przestanie działać"
+  },
+  "pages.registration_tokens.revoke_token.error": {
+    "message": "Nie udało się unieważnić tokena"
+  },
+  "pages.registration_tokens.revoke_token.success": {
+    "message": "Token unieważniony"
+  },
+  "pages.registration_tokens.revoke_token.title": {
+    "message": "Czy unieważnić token rejestracyjny?"
+  },
+  "pages.registration_tokens.revoked_at_label": {
+    "message": "Odwołano"
+  },
+  "pages.registration_tokens.save_changes": {
+    "message": "Zapisz zmiany"
+  },
+  "pages.registration_tokens.status.active": {
+    "message": "Aktywny"
+  },
+  "pages.registration_tokens.status.column": {
+    "message": "Status"
+  },
+  "pages.registration_tokens.status.expired": {
+    "message": "Wygasły"
+  },
+  "pages.registration_tokens.status.invalid": {
+    "message": "Nieważny"
+  },
+  "pages.registration_tokens.status.label": {
+    "message": "Status"
+  },
+  "pages.registration_tokens.status.revoked": {
+    "message": "Unieważniony"
+  },
+  "pages.registration_tokens.status.used_up": {
+    "message": "Wykorzystany"
+  },
+  "pages.registration_tokens.title": {
+    "message": "Tokeny rejestracyjne"
+  },
+  "pages.registration_tokens.token_column": {
+    "message": "Token"
+  },
+  "pages.registration_tokens.token_count": {
+    "message": "{COUNT, plural, =0 {Brak tokenów} one {# token} other {# tokeny}}"
+  },
+  "pages.registration_tokens.token_uses.limited": {
+    "message": "{uses, number} / {limit, number}"
+  },
+  "pages.registration_tokens.token_uses.unlimited": {
+    "message": "{uses, number} / ∞"
+  },
+  "pages.registration_tokens.unlimited_placeholder": {
+    "message": "Nielimitowane"
+  },
+  "pages.registration_tokens.unlimited_uses_placeholder": {
+    "message": "Pozostaw puste dla nielimitowanych użyć"
+  },
+  "pages.registration_tokens.unrevoke_token": {
+    "message": "Cofnij unieważnienie tokena"
+  },
+  "pages.registration_tokens.unrevoke_token.error": {
+    "message": "Nie udało się cofnąć unieważnienia tokenu"
+  },
+  "pages.registration_tokens.unrevoke_token.success": {
+    "message": "Cofnięto unieważnienie tokenu"
+  },
+  "pages.registration_tokens.usage_count_label": {
+    "message": "Liczba użyć"
+  },
+  "pages.registration_tokens.usage_limit_field": {
+    "message": "Limit użyć"
+  },
+  "pages.registration_tokens.usage_limit_help": {
+    "message": "Maksymalna liczba użyć tego tokena. Pozostaw puste dla nielimitowanych użyć."
+  },
+  "pages.registration_tokens.usage_limit_label": {
+    "message": "Limit użyć"
+  },
+  "pages.registration_tokens.uses_column": {
+    "message": "Użycia"
+  },
+  "pages.registration_tokens.valid_until_column": {
+    "message": "Wygasa"
+  },
+  "pages.rooms.columns.alias": {
+    "message": "Alias"
+  },
+  "pages.rooms.columns.members": {
+    "message": "Członków"
+  },
+  "pages.rooms.columns.room": {
+    "message": "Pokój"
+  },
+  "pages.rooms.columns.visibility": {
+    "message": "Widoczność"
+  },
+  "pages.rooms.delete_room.alert.description": {
+    "message": "Spowoduje to trwałe usunięcie wszystkich wiadomości i multimediów przesłanych na serwer oraz usunięcie tego pokoju z katalogu. Członkowie utracą dostęp do swoich wiadomości, a pokój zostanie usunięty z ich listy pokoi."
+  },
+  "pages.rooms.delete_room.alert.title": {
+    "message": "Zamierzasz usunąć dane pokoju"
+  },
+  "pages.rooms.delete_room.block.help": {
+    "message": "Zablokuj użytkownikom możliwość ponownego dołączenia po usunięciu pokoju."
+  },
+  "pages.rooms.delete_room.block.label": {
+    "message": "Zablokuj pokój"
+  },
+  "pages.rooms.delete_room.button": {
+    "message": "Usuń permanentnie"
+  },
+  "pages.rooms.delete_room.error": {
+    "message": "Nie udało się zaplanować usunięcia pokoju"
+  },
+  "pages.rooms.delete_room.success": {
+    "message": "Zaplanowano usunięcie pokoju"
+  },
+  "pages.rooms.delete_room.title": {
+    "message": "Usunąć ten pokój?"
+  },
+  "pages.rooms.deletion.failure.description": {
+    "message": "Zadanie usunięcia pokoju nie powiodło się dnia {timestamp, date, short} o {timestamp, time, short} z błędem: {error}"
+  },
+  "pages.rooms.deletion.failure.title": {
+    "message": "Usunięcie nie powiodło się"
+  },
+  "pages.rooms.deletion.in_progress.description": {
+    "message": "Zadanie usunięcia pokoju jest w toku od {timestamp, date, short} {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.in_progress.title": {
+    "message": "Usuwanie w toku"
+  },
+  "pages.rooms.deletion.success.description": {
+    "message": "Zadanie usunięcia pokoju zakończone pomyślnie w dniu {timestamp, date, short} o {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.success.title": {
+    "message": "Usunięto pomyślne"
+  },
+  "pages.rooms.details_label": {
+    "message": "Szczegóły pokoju"
+  },
+  "pages.rooms.filters.empty_rooms": {
+    "message": "Puste pokoje"
+  },
+  "pages.rooms.filters.non_empty_rooms": {
+    "message": "Pokoje z osobami"
+  },
+  "pages.rooms.filters.private_rooms": {
+    "message": "Pokoje prywatne"
+  },
+  "pages.rooms.filters.public_rooms": {
+    "message": "Pokoje publiczne"
+  },
+  "pages.rooms.not_found.description": {
+    "message": "Nie można znaleźć żądanego pokoju ({roomId}) na {serverName}."
+  },
+  "pages.rooms.not_found.title": {
+    "message": "Nie znaleziono pokoju"
+  },
+  "pages.rooms.room_count": {
+    "message": "{COUNT, plural, =0 {Brak pokoi} one {# pokój} other {# pokoje}}"
+  },
+  "pages.rooms.room_type.private": {
+    "message": "Prywatny"
+  },
+  "pages.rooms.room_type.public": {
+    "message": "Publiczny"
+  },
+  "pages.rooms.room_type.restricted": {
+    "message": "Ograniczony"
+  },
+  "pages.rooms.search_placeholder": {
+    "message": "Szukaj…"
+  },
+  "pages.rooms.title": {
+    "message": "Pokoje"
+  },
+  "pages.supervision.description": {
+    "message": "Zaloguj się jako <b>{mxid}</b>, aby wykonywać czynności administracyjne w dowolnym pokoju."
+  },
+  "pages.supervision.disabled_alert.description": {
+    "message": "Superwizja jest częścią Twojej subskrypcji, lecz nie została włączona w tym wdrożeniu. Zapoznaj się z dokumentacją ESS, aby ją włączyć."
+  },
+  "pages.supervision.disabled_alert.title": {
+    "message": "Superwizja jest obecnie wyłączona"
+  },
+  "pages.supervision.errors.cant_open.description": {
+    "message": "Twoja przeglądarka blokuje wyskakujące okienka. Upewnij się, że zezwalasz na okna pop-up."
+  },
+  "pages.supervision.errors.cant_open.title": {
+    "message": "Nie udało się otworzyć interfejsu superwizji w nowym oknie"
+  },
+  "pages.supervision.errors.closed.description": {
+    "message": "Okno superwizji zostało zamknięte przed zakończeniem logowania. Spróbuj zalogować się ponownie."
+  },
+  "pages.supervision.errors.closed.title": {
+    "message": "Logowanie do systemu superwizji zostało anulowane"
+  },
+  "pages.supervision.errors.generic.title": {
+    "message": "Podczas otwierania interfejsu superwizji wystąpił nieoczekiwany błąd"
+  },
+  "pages.supervision.launch": {
+    "message": "Otwórz interfejs superwizji"
+  },
+  "pages.supervision.missing_ui_address.description": {
+    "message": "Superwizja jest włączona w Twojej dystrybucji, ale nie na Element Web, co jest wymagane do prawidłowego działania tej funkcji."
+  },
+  "pages.supervision.missing_ui_address.title": {
+    "message": "Interfejs superwizji wymaga włączenia Element Web"
+  },
+  "pages.supervision.recovery_key.copied": {
+    "message": "Skopiowano klucz przywracania"
+  },
+  "pages.supervision.recovery_key.copy_failed": {
+    "message": "Nie udało się skopiować klucza przywracania"
+  },
+  "pages.supervision.recovery_key.help": {
+    "message": "Jest to klucz przywracania umożliwiający czytanie zaszyfrowanych wiadomości."
+  },
+  "pages.supervision.recovery_key.label": {
+    "message": "Klucz przywracania"
+  },
+  "pages.supervision.title": {
+    "message": "Superwizja"
+  },
+  "pages.supervision.unavailable_alert.description": {
+    "message": "Ta funkcja nie jest dostępna w wersji ESS Community. Aby ją włączyć, ulepsz do wersji ESS Pro."
+  },
+  "pages.supervision.unavailable_alert.title": {
+    "message": "Superwizja jest funkcją dostępną w ESS Pro"
+  },
+  "pages.users.account_status.active": {
+    "message": "Aktywny"
+  },
+  "pages.users.account_status.admin": {
+    "message": "Administrator"
+  },
+  "pages.users.account_status.deactivated": {
+    "message": "Dezaktywowany"
+  },
+  "pages.users.account_status.guest": {
+    "message": "Gość"
+  },
+  "pages.users.account_status.locked": {
+    "message": "Zablokowany"
+  },
+  "pages.users.add_email.button": {
+    "message": "Dodaj adres e-mail"
+  },
+  "pages.users.add_email.description": {
+    "message": "Dodaj adres e-mail temu użytkownikowi"
+  },
+  "pages.users.add_email.error": {
+    "message": "Nie udało się dodać adresu e-mail"
+  },
+  "pages.users.add_email.error.email_invalid": {
+    "message": "Nieprawidłowy adres e-mail"
+  },
+  "pages.users.add_email.error.email_missing": {
+    "message": "To pole jest wymagane"
+  },
+  "pages.users.add_email.success": {
+    "message": "Dodano adres e-mail"
+  },
+  "pages.users.add_email.title": {
+    "message": "Dodaj adres e-mail"
+  },
+  "pages.users.add_upstream_link.error": {
+    "message": "Nie udało się utworzyć powiązania z kontem nadrzędnym"
+  },
+  "pages.users.add_upstream_link.success": {
+    "message": "Powiązano z kontem nadrzędnym"
+  },
+  "pages.users.columns.account_status": {
+    "message": "Stan konta"
+  },
+  "pages.users.columns.created_at": {
+    "message": "Utworzono"
+  },
+  "pages.users.columns.matrix_id": {
+    "message": "ID Matrix"
+  },
+  "pages.users.deactivate_account.alert.description": {
+    "message": "Spowoduje to automatyczne wylogowanie użytkownika ze wszystkich urządzeń, usunięcie wszystkich tokenów dostępu, usunięcie wszystkich identyfikatorów stron trzecich i trwałe usunięcie danych jego konta."
+  },
+  "pages.users.deactivate_account.alert.title": {
+    "message": "Zamierzasz usunąć dane użytkownika"
+  },
+  "pages.users.deactivate_account.button": {
+    "message": "Dezaktywuj konto"
+  },
+  "pages.users.deactivate_account.error": {
+    "message": "Nie udało się dezaktywować konta"
+  },
+  "pages.users.deactivate_account.success": {
+    "message": "Konto dezaktywowane"
+  },
+  "pages.users.deactivate_account.title": {
+    "message": "Dezaktywować tego użytkownika?"
+  },
+  "pages.users.delete_email.description": {
+    "message": "Czy na pewno chcesz usunąć adres e-mail ({email}) użytkownika ({mxid})?"
+  },
+  "pages.users.delete_email.error": {
+    "message": "Nie udało się usunąć adresu e-mail"
+  },
+  "pages.users.delete_email.success": {
+    "message": "Usunięto adres e-mail"
+  },
+  "pages.users.delete_email.title": {
+    "message": "Usunąć adres e-mail?"
+  },
+  "pages.users.delete_upstream_link.description": {
+    "message": "Czy na pewno chcesz usunąć powiązanie między użytkownikiem ({mxid}) a jego kontem nadrzędnym ({subject})?"
+  },
+  "pages.users.delete_upstream_link.error": {
+    "message": "Nie udało się usunąć powiązania z kontem nadrzędnym"
+  },
+  "pages.users.delete_upstream_link.success": {
+    "message": "Usunięto powiązanie z kontem nadrzędnym"
+  },
+  "pages.users.delete_upstream_link.title": {
+    "message": "Usunąć powiązanie z kontem nadrzędnym?"
+  },
+  "pages.users.details_label": {
+    "message": "Szczegóły użytkownika"
+  },
+  "pages.users.filters.active": {
+    "message": "Aktywni użytkownicy"
+  },
+  "pages.users.filters.active_client_chip": {
+    "message": "Posiada aktywne urządzenie na: {name}"
+  },
+  "pages.users.filters.admins": {
+    "message": "Administratorzy"
+  },
+  "pages.users.filters.deactivated": {
+    "message": "Dezaktywowani użytkownicy"
+  },
+  "pages.users.filters.guests": {
+    "message": "Goście (starsza wersja)"
+  },
+  "pages.users.filters.has_legacy_session": {
+    "message": "Posiada aktywne starsze urządzenie"
+  },
+  "pages.users.filters.locked": {
+    "message": "Zablokowani użytkownicy"
+  },
+  "pages.users.filters.newest_first": {
+    "message": "Najpierw najnowsze"
+  },
+  "pages.users.filters.no_legacy_session": {
+    "message": "Brak aktywnych starszych urządzeń"
+  },
+  "pages.users.filters.non_guests": {
+    "message": "Osoby niebędące gośćmi (starsza wersja)"
+  },
+  "pages.users.lock_account.alert.description": {
+    "message": "Użytkownik zostanie zablokowany na wszystkich zalogowanych urządzeniach i nie będzie mógł się zalogować na nowych, dopóki nie zostanie odblokowany."
+  },
+  "pages.users.lock_account.alert.title": {
+    "message": "Użytkownik nie będzie mógł wysyłać ani odbierać wiadomości"
+  },
+  "pages.users.lock_account.button": {
+    "message": "Zablokuj konto"
+  },
+  "pages.users.lock_account.error": {
+    "message": "Nie udało się zablokować konta"
+  },
+  "pages.users.lock_account.success": {
+    "message": "Konto zablokowane"
+  },
+  "pages.users.lock_account.title": {
+    "message": "Zablokować konto tego użytkownika?"
+  },
+  "pages.users.new_user.add_user": {
+    "message": "Dodaj użytkownika"
+  },
+  "pages.users.new_user.create_account": {
+    "message": "Utwórz konto"
+  },
+  "pages.users.new_user.description": {
+    "message": "Aby dodać nowego użytkownika do {serverName}, wybierz dla niego nazwę, która stanie się częścią jego identyfikatora."
+  },
+  "pages.users.new_user.error_message": {
+    "message": "Wystąpił błąd podczas tworzenia użytkownika"
+  },
+  "pages.users.new_user.invalid_localpart": {
+    "message": "Localpart może zawierać tylko małe litery, cyfry, kropki, podkreślenia, myślniki i ukośniki"
+  },
+  "pages.users.new_user.invalid_localpart_numeric_only": {
+    "message": "Localpart nie może składać się wyłącznie z liczb"
+  },
+  "pages.users.new_user.localpart": {
+    "message": "Wprowadź nazwę"
+  },
+  "pages.users.new_user.required_error": {
+    "message": "To pole jest wymagane"
+  },
+  "pages.users.new_user.success_message": {
+    "message": "Użytkownik został utworzony"
+  },
+  "pages.users.not_found.description": {
+    "message": "Nie znaleziono żądanego użytkownika ({userId}) na {serverName}."
+  },
+  "pages.users.not_found.title": {
+    "message": "Nie znaleziono użytkownika"
+  },
+  "pages.users.reactivate_account.button": {
+    "message": "Reaktywuj"
+  },
+  "pages.users.reactivate_account.error": {
+    "message": "Nie udało się reaktywować konta"
+  },
+  "pages.users.reactivate_account.success": {
+    "message": "Konto zostało reaktywowane"
+  },
+  "pages.users.search_placeholder": {
+    "message": "Wyszukaj użytkowników…"
+  },
+  "pages.users.set_admin.alert.description": {
+    "message": "Użytkownik będzie mógł przeglądać dane innych osób oraz zarządzać ich uprawnieniami i pokojami."
+  },
+  "pages.users.set_admin.alert.title": {
+    "message": "Użytkownik będzie miał dostęp do poufnych danych"
+  },
+  "pages.users.set_admin.error": {
+    "message": "Nie udało się zmienić uprawnień administratora dla {mxid}"
+  },
+  "pages.users.set_admin.label": {
+    "message": "Administrator"
+  },
+  "pages.users.set_admin.make_admin_button": {
+    "message": "Ustaw administratora"
+  },
+  "pages.users.set_admin.successfully_demoted": {
+    "message": "{mxid} przestał posiadać uprawnienia administratora"
+  },
+  "pages.users.set_admin.successfully_promoted": {
+    "message": "{mxid} posiada teraz uprawnienia administratora"
+  },
+  "pages.users.set_admin.title": {
+    "message": "Nadać temu użytkownikowi uprawnienia administratora?"
+  },
+  "pages.users.set_password.button": {
+    "message": "Zmień hasło"
+  },
+  "pages.users.set_password.confirm_password_label": {
+    "message": "Wprowadź hasło ponownie"
+  },
+  "pages.users.set_password.error": {
+    "message": "Nie udało się ustawić hasła"
+  },
+  "pages.users.set_password.error.password_missing": {
+    "message": "To pole jest wymagane"
+  },
+  "pages.users.set_password.error.passwords_mismatch": {
+    "message": "Hasła nie pasują do siebie"
+  },
+  "pages.users.set_password.password_label": {
+    "message": "Hasło"
+  },
+  "pages.users.set_password.password_match": {
+    "message": "Hasła są zgodne!"
+  },
+  "pages.users.set_password.submit": {
+    "message": "Ustaw nowe hasło"
+  },
+  "pages.users.set_password.success": {
+    "message": "Hasło zostało ustawione pomyślnie"
+  },
+  "pages.users.set_password.title": {
+    "message": "Ustaw nowe hasło dla tego użytkownika"
+  },
+  "pages.users.statistics.devices": {
+    "message": "Urządzenia"
+  },
+  "pages.users.statistics.legacy_devices": {
+    "message": "Starsze urządzenia"
+  },
+  "pages.users.title": {
+    "message": "Użytkownicy"
+  },
+  "pages.users.unlock_account.button": {
+    "message": "Odblokuj konto"
+  },
+  "pages.users.unlock_account.error": {
+    "message": "Nie udało się odblokować konta"
+  },
+  "pages.users.unlock_account.success": {
+    "message": "Konto odblokowane"
+  },
+  "pages.users.user_count": {
+    "message": "{COUNT, plural, =0 {Brak użytkowników} one {# użytkownik} other {# użytkowników}}"
+  },
+  "product.badge.pro": {
+    "message": "Pro"
+  },
+  "product.element": {
+    "message": "Element"
+  },
+  "product.title": {
+    "message": "Element Admin"
+  },
+  "product.title.community": {
+    "message": "Element Community"
+  },
+  "product.title.pro": {
+    "message": "Element Pro"
+  },
+  "product.title.ti-m": {
+    "message": "Element TI-Messenger"
+  },
+  "room_info.empty_room": {
+    "message": "Pusty pokój"
+  },
+  "room_info.empty_space": {
+    "message": "Pusta przestrzeń"
+  },
+  "room_info.room_with": {
+    "message": "Pokój z {members}"
+  },
+  "room_info.space_with": {
+    "message": "Przestrzeń z {members}"
+  },
+  "room_info.unknown_user": {
+    "message": "Nieznany użytkownik"
+  },
+  "rooms_info.other_members": {
+    "message": "{COUNT,plural,one{# inny} few{# innych} many{# innych} other{# innych}}"
+  },
+  "ui.copy.copied": {
+    "message": "Skopiowano!"
+  },
+  "ui.copy.copy_to_clipboard": {
+    "message": "Kopiuj do schowka"
+  },
+  "ui.data.failed_to_load": {
+    "message": "Nie udało się załadować"
+  },
+  "ui.data_table.loading_more": {
+    "message": "Ładuję więcej..."
+  },
+  "ui.destination_status.failing": {
+    "message": "Niepowodzenie"
+  },
+  "ui.destination_status.inactive": {
+    "message": "Nieaktywne"
+  },
+  "ui.destination_status.never_worked": {
+    "message": "Nigdy nie działała"
+  },
+  "ui.destination_status.working": {
+    "message": "Działa"
+  },
+  "ui.device_info.name_on_platform": {
+    "message": "{name} on {platform}"
+  },
+  "ui.device_info.type.mobile": {
+    "message": "Urządzenie mobilne"
+  },
+  "ui.device_info.type.pc": {
+    "message": "Komputer"
+  },
+  "ui.device_info.type.tablet": {
+    "message": "Tablet"
+  },
+  "ui.device_info.type.unknown": {
+    "message": "Nieznany typ urządzenia"
+  },
+  "ui.device_info.unknown_device": {
+    "message": "Nieznane urządzenie"
+  },
+  "ui.device_status.active": {
+    "message": "Aktywny"
+  },
+  "ui.device_status.inactive": {
+    "message": "Nieaktywne"
+  },
+  "ui.device_status.last_active.tooltip": {
+    "message": "Ostatnio aktywne {date}."
+  },
+  "ui.device_status.never_used": {
+    "message": "Nigdy nie używany"
+  },
+  "ui.device_status.never_used.tooltip": {
+    "message": "To urządzenie nie było jeszcze używane."
+  },
+  "ui.device_status.recently_used": {
+    "message": "Ostatnio używane"
+  },
+  "ui.device_status.signed_out": {
+    "message": "Wylogowano"
+  },
+  "ui.device_status.signed_out.tooltip": {
+    "message": "Urządzenie zostało wylogowane i nie ma już dostępu."
+  },
+  "ui.device_status.signed_out.tooltip_at": {
+    "message": "Wylogowano dnia {date}."
+  },
+  "ui.language_switcher.browser_default": {
+    "message": "Użyj ustawień przeglądarki ({language})"
+  },
+  "ui.language_switcher.button_label": {
+    "message": "Ustawienia języka"
+  },
+  "ui.language_switcher.description": {
+    "message": "Wybierz preferowany język interfejsu."
+  },
+  "ui.language_switcher.language_list_label": {
+    "message": "Lista dostępnych języków"
+  },
+  "ui.language_switcher.title": {
+    "message": "Ustawienia języka"
+  },
+  "ui.user_picker.loading_list": {
+    "message": "Wczytywanie…"
+  },
+  "ui.user_picker.no_match": {
+    "message": "Brak dopasowania"
+  },
+  "ui.user_picker.no_match_help": {
+    "message": "Spróbuj użyć innego hasła. Wyszukani mogą zostać tylko użytkownicy na {serverName} za pomocą ich localpart."
+  }
+}

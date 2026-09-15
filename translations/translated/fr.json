@@ -638,14 +638,17 @@
   "pages.personal_tokens.expires_at_label": {
     "message": "Date d'expiration"
   },
-  "pages.personal_tokens.expires_in_help": {
-    "message": "Laisser vide pour le jeton n'expire jamais"
-  },
   "pages.personal_tokens.expires_in_label": {
     "message": "Expire dans (jours)"
   },
-  "pages.personal_tokens.expires_in_placeholder": {
-    "message": "30"
+  "pages.personal_tokens.expires_in_missing": {
+    "message": "Enter how many days the token should last"
+  },
+  "pages.personal_tokens.expires_in_underflow": {
+    "message": "A token has to last at least one day"
+  },
+  "pages.personal_tokens.expiry_revoked": {
+    "message": "Revoked"
   },
   "pages.personal_tokens.filter.active": {
     "message": "Actif"
@@ -710,9 +713,6 @@
   "pages.personal_tokens.regenerate_error": {
     "message": "Échec de la régénération du jeton personnel"
   },
-  "pages.personal_tokens.regenerate_expires_help": {
-    "message": "Veuillez laisser ce champ vide pour conserver la même date d'expiration qu'auparavant, ou définissez une nouvelle date d'expiration."
-  },
   "pages.personal_tokens.regenerate_success": {
     "message": "Jeton personnel régénéré avec succès"
   },
@@ -758,8 +758,17 @@
   "pages.personal_tokens.scope_synapse_admin_help": {
     "message": "Accès à l'API d'administration de Synapse"
   },
+  "pages.personal_tokens.scopes_group_label": {
+    "message": "Scopes"
+  },
   "pages.personal_tokens.scopes_label": {
     "message": "Scopes"
+  },
+  "pages.personal_tokens.set_expiry_help": {
+    "message": "Otherwise the token never expires"
+  },
+  "pages.personal_tokens.set_expiry_label": {
+    "message": "Set an expiry"
   },
   "pages.personal_tokens.status.active": {
     "message": "Actif"

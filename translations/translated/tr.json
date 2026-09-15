@@ -1,42 +1,42 @@
 {
   "action.add": {
-    "message": "Додати"
+    "message": "Ekle"
   },
   "action.cancel": {
-    "message": "Скасувати"
+    "message": "İptal"
   },
   "action.clear": {
-    "message": "Очистити"
+    "message": "Temizle"
   },
   "action.close": {
-    "message": "Закрити"
+    "message": "Kapat"
   },
   "action.copy": {
-    "message": "Копіювати"
+    "message": "Copy"
   },
   "action.delete": {
-    "message": "Видалити"
+    "message": "Delete"
   },
   "action.done": {
     "message": "Done"
   },
   "action.go_back": {
-    "message": "Назад"
+    "message": "Geri dön"
   },
   "action.remove": {
-    "message": "Видалити"
+    "message": "Kaldır"
   },
   "action.retry": {
-    "message": "Повторити спробу"
+    "message": "Yeniden dene"
   },
   "action.sign_out": {
-    "message": "Вийти"
+    "message": "Çıkış yap"
   },
   "common.email_address": {
-    "message": "Адреса електронної пошти"
+    "message": "E-posta Adresi"
   },
   "common.filter": {
-    "message": "Фільтр"
+    "message": "Filtrele"
   },
   "common.loading": {
     "message": "Loading…"
@@ -48,55 +48,55 @@
     "message": "Sign-in failed: {errorMessage}"
   },
   "errors.http_fetch": {
-    "message": "Запит до {url} не вдався"
+    "message": "{url} 'e yapılan istek başarısız oldu"
   },
   "errors.http_fetch_json_decoding": {
-    "message": "Не вдалося декодувати JSON у відповіді з {url}"
+    "message": "{url} adresinden gelen JSON yanıtının kod çözülmesi başarısız oldu"
   },
   "errors.http_status": {
-    "message": "Запит до {url} завершився невдало з кодом статусу {status} {statusText}"
+    "message": "{url} adresine yapılan istek, {status} {statusText} durum koduyla başarısız oldu"
   },
   "errors.mas_api": {
     "message": "The homeserver's authentication service returned an error: {errorMessage}"
   },
   "errors.matrix_standard": {
-    "message": "Запит до домашнього сервера не вдався з кодом помилки \"{errorCode}\". Додатково, сервер видав таке повідомлення про помилку: {errorMessage}"
+    "message": "Ana sunucuya gönderilen istek, \"{errorCode}\" hata koduyla başarısız oldu. Ayrıca sunucu şu hata mesajını döndürdü: {errorMessage}"
   },
   "errors.no_details": {
     "message": "The server returned an error with no details."
   },
   "errors.not_logged_in": {
-    "message": "Вхід не виконано"
+    "message": "Oturum açılmadı"
   },
   "footer.copyright_notice": {
-    "message": "Авторські права © {now, date, ::yyyy}"
+    "message": "Telif hakkı © {now, date, ::yyyy}"
   },
   "footer.help_and_support": {
-    "message": "Довідка та підтримка"
+    "message": "Yardım & Destek"
   },
   "footer.legal": {
-    "message": "Юридична інформація"
+    "message": "Yasal"
   },
   "footer.privacy": {
-    "message": "Конфіденційність"
+    "message": "Gizlilik"
   },
   "header.user_menu.title": {
-    "message": "Меню облікового запису"
+    "message": "Hesap menüsü"
   },
   "marketing.also_available_in_pro.description": {
-    "message": "<p><link>ESS Pro</link> це комерційна версія серверного програмного забезпечення від розробників Element.</p> <p>Вона включає в себе всі компоненти із ESS Community, а також додаткові функції та сервіси, що підходять для професійних середовищ із кількістю користувачів від 100 до мільонів.</p> <p>Ця версія розроблена із врахуванням корпоративних вимог, таких як розширений IAM, комплаєнс, покращена масштабованість, висока доступність та мультиорендність.</p>"
+    "message": "<p><link>ESS Pro</link> is the commercial backend distribution from Element.</p> <p>It includes everything in ESS Community plus additional features and services that are tailored to professional environments with more than 100 users up to massive scale in the millions.</p> <p>It is designed to support enterprise requirements in terms of advanced IAM, compliance, scalability, high availability and multi-tenancy.</p>"
   },
   "marketing.also_available_in_pro.title": {
-    "message": "Також доступно у версії Pro…"
+    "message": "Also available in Pro…"
   },
   "marketing.also_available_in_pro.upgrade": {
-    "message": "Перейти на версію Pro"
+    "message": "Upgrade to Pro"
   },
   "marketing.auditing.description": {
-    "message": "<p>Аудит надає організаціям можливість вести записи розмов та подій у кімнатах із наскрізним шифруванням для дотримання вимог комплаєнсу, або законодавства.</p> <p>Якщо функцію увімкнено, то для забезпечення прозорості усі кінцеві користувачі будуть бучити які кімнати записуються для аудиту.</p> <p>Аудит може бути налаштований у відповідності до специфічних умов організації. Наприклад, можна не відслідковувати прямі повідомлення між двома користувачами, а лише групові розмови.</p> <p>Дані аудиту будуть зберігатися у вигляді потоку машиночитних подій у форматі JSON-файлів локально, або в сховищах типу S3, та може бути перенаправлений в інструментарій аналізу журналів для подальшої фільтрації та аналізу.</p>"
+    "message": "<p>Auditing gives organizations the ability to keep records of end-to-end encrypted conversations and room events to meet compliance or legal requirements.</p> <p>When enabled, it is visible to all end users which rooms are being recorded to ensure transparency of the auditing process.</p> <p>Auditing can be configured to suit an organization’s specific requirements. For instance direct messages between two individuals can be excluded so that only group conversations are recorded.</p> <p>Audit data is being stored as a stream of machine-readable events in the JSON format either on file storage or S3 and can be forwarded to log analyzer tooling for further filtering and analysis.</p>"
   },
   "marketing.auditing.title": {
-    "message": "Аудит"
+    "message": "Auditing"
   },
   "marketing.sbg.description": {
     "message": "<p>Secure Border Gateway is an application-level firewall for Matrix servers.</p> <ul><li>Inspects all requests to and from the server</li> <li>Can use all request metadata to enforce rules</li> <li>Pipeline-based approach to connect APIs and rule sets</li> <li>Pluggable rules engine that can be applied to the pipelines</li></ul>"
@@ -105,73 +105,73 @@
     "message": "Secure Border Gateway"
   },
   "marketing.supervision.description": {
-    "message": "<p>Наглядання дозволяє організації адмініструвати всі кімнати з центральної точки. Обліковий запис «супервізора» буде приєднаний до визначених кімнат з правами адміністратора кімнати. Адміністратори сервера можуть легко видавати себе за цей обліковий запис з консолі адміністратора, щоб керувати цими кімнатами та контролювати їх.</p> <ul><li>Керувати кімнатами та їх налаштуваннями (назва, тема, дозволи тощо)</li> <li>Керувати користувачами у кімнатах</li> <li>Видаляти небажані повідомлення та завантажені медіа</li> <li>Відновлювати покинуті кімнати (звідки вийшли всі користувачі)</li> <li>Обліковий запис супервізора може як читати так і не читати зашифровані повідомлення, це налаштовується</li></ul>"
+    "message": "<p>Supervision enables an organisation to administer all rooms from a central point. A 'supervisor' account will join defined rooms with room admin privileges. Server administrators can seamlessly impersonate the account from the admin console to manage and supervise their rooms.</p> <ul><li>Manage rooms and their settings (name, topic, permissions, etc.)</li> <li>Manage room memberships</li> <li>Remove unwanted messages and uploaded media</li> <li>Recover abandoned rooms (all users have left)</li> <li>Supervisor account can or cannot read encrypted message contents (configurable)</li></ul>"
   },
   "marketing.supervision.title": {
-    "message": "Наглядання"
+    "message": "Supervision"
   },
   "navigation.auditing": {
-    "message": "Аудит"
+    "message": "Auditing"
   },
   "navigation.dashboard": {
-    "message": "Інформаційна панель"
+    "message": "Kontrol Paneli"
   },
   "navigation.devices": {
     "message": "Devices"
   },
   "navigation.documentation": {
-    "message": "Документація"
+    "message": "Dokümantasyon"
   },
   "navigation.federation": {
     "message": "Federation"
   },
   "navigation.personal_tokens": {
-    "message": "Персональні токени"
+    "message": "Kişisel tokenlar"
   },
   "navigation.registration_tokens": {
-    "message": "Реєстраційні токени"
+    "message": "Kayıt anahtarı"
   },
   "navigation.rooms": {
-    "message": "Кімнати"
+    "message": "Odalar"
   },
   "navigation.supervision": {
-    "message": "Наглядання"
+    "message": "Supervision"
   },
   "navigation.users": {
-    "message": "Користувачі"
+    "message": "Kullanıcılar"
   },
   "pages.auditing.title": {
-    "message": "Аудит"
+    "message": "Auditing"
   },
   "pages.auditing.unavailable_alert.description": {
-    "message": "Ця функція недоступна в ESS Community. Щоб її увімкнути, перейдіть на ESS Pro."
+    "message": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
   },
   "pages.auditing.unavailable_alert.title": {
-    "message": "Аудит — функція, що доступна в ESS Pro"
+    "message": "Auditing is a feature available in ESS Pro"
   },
   "pages.dashboard.current_ess_version": {
-    "message": "Версія ESS"
+    "message": "ESS sürümü"
   },
   "pages.dashboard.latest_ess_version": {
-    "message": "Остання версія ESS"
+    "message": "En son ESS sürümü"
   },
   "pages.dashboard.new_ess_release": {
-    "message": "(Нова версія)"
+    "message": "(Yeni sürüm)"
   },
   "pages.dashboard.registered_users_count": {
-    "message": "Загальна кількість зареєстрованих користувачів"
+    "message": "Kayıtlı kullanıcılar"
   },
   "pages.dashboard.rooms_count": {
-    "message": "Загальна кількість кімнат"
+    "message": "Toplam oda sayısı"
   },
   "pages.dashboard.running_latest_ess": {
-    "message": "(Ви використовуєте останню версію)"
+    "message": "(En son sürümü kullanıyorsunuz)"
   },
   "pages.dashboard.synapse_version": {
-    "message": "Версія Synapse"
+    "message": "Synapse sürümü"
   },
   "pages.dashboard.title": {
-    "message": "Інформаційна панель"
+    "message": "Kontrol Paneli"
   },
   "pages.devices.applications.client_id_label": {
     "message": "Client ID"
@@ -195,7 +195,7 @@
     "message": "Grant types"
   },
   "pages.devices.applications.name_column": {
-    "message": "Ім’я"
+    "message": "Name"
   },
   "pages.devices.applications.not_found.description": {
     "message": "The requested application ({clientId}) could not be found on {serverName}."
@@ -249,10 +249,10 @@
     "message": "Device"
   },
   "pages.devices.legacy.device_id_label": {
-    "message": "ID пристрою"
+    "message": "Cihaz Kimliği"
   },
   "pages.devices.legacy.filters.activity_active": {
-    "message": "Активні"
+    "message": "Active"
   },
   "pages.devices.legacy.filters.activity_inactive": {
     "message": "Inactive"
@@ -264,7 +264,7 @@
     "message": "Signed out"
   },
   "pages.devices.legacy.filters.newest_first": {
-    "message": "Спочатку новіші"
+    "message": "Önce en yeni"
   },
   "pages.devices.legacy.filters.user_chip": {
     "message": "User: @{localpart}:{server}"
@@ -291,10 +291,10 @@
     "message": "Signed out at"
   },
   "pages.devices.legacy.last_active_ip_label": {
-    "message": "Остання активна IP-адреса"
+    "message": "Last active IP"
   },
   "pages.devices.legacy.last_active_label": {
-    "message": "Остання активність"
+    "message": "Last active"
   },
   "pages.devices.legacy.not_found.description": {
     "message": "The requested legacy device ({sessionId}) could not be found on {serverName}."
@@ -306,7 +306,7 @@
     "message": "Redirect URI"
   },
   "pages.devices.legacy.status_column": {
-    "message": "Статус"
+    "message": "Status"
   },
   "pages.devices.legacy.technical_details": {
     "message": "Technical details"
@@ -354,10 +354,10 @@
     "message": "Device"
   },
   "pages.devices.user.device_id_label": {
-    "message": "ID пристрою"
+    "message": "Cihaz Kimliği"
   },
   "pages.devices.user.filters.activity_active": {
-    "message": "Активні"
+    "message": "Active"
   },
   "pages.devices.user.filters.activity_inactive": {
     "message": "Inactive"
@@ -372,7 +372,7 @@
     "message": "Application: {name}"
   },
   "pages.devices.user.filters.newest_first": {
-    "message": "Спочатку новіші"
+    "message": "Önce en yeni"
   },
   "pages.devices.user.filters.user_chip": {
     "message": "User: @{localpart}:{server}"
@@ -399,10 +399,10 @@
     "message": "Signed out at"
   },
   "pages.devices.user.last_active_ip_label": {
-    "message": "Остання активна IP-адреса"
+    "message": "Last active IP"
   },
   "pages.devices.user.last_active_label": {
-    "message": "Остання активність"
+    "message": "Last active"
   },
   "pages.devices.user.not_found.description": {
     "message": "The requested device ({sessionId}) could not be found on {serverName}."
@@ -414,7 +414,7 @@
     "message": "Scope"
   },
   "pages.devices.user.status_column": {
-    "message": "Статус"
+    "message": "Status"
   },
   "pages.devices.user.technical_details": {
     "message": "Technical details"
@@ -525,10 +525,10 @@
     "message": "Federation views"
   },
   "pages.federation.table.server_name": {
-    "message": "Ім’я сервера"
+    "message": "Sunucu adı"
   },
   "pages.federation.table.status": {
-    "message": "Статус"
+    "message": "Status"
   },
   "pages.federation.title": {
     "message": "Federation"
@@ -540,22 +540,22 @@
     "message": "Secure Border Gateway isn't enabled on this deployment"
   },
   "pages.generic_error.go_home": {
-    "message": "На головну"
+    "message": "Ana sayfaya git"
   },
   "pages.generic_error.sign_out_and_reload": {
-    "message": "Вийти та перезавантажити"
+    "message": "Oturumu kapat ve sayfayı yeniden yükle."
   },
   "pages.generic_error.technical_details.item": {
     "message": "{name}: {message}"
   },
   "pages.generic_error.text": {
-    "message": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
+    "message": "Bu, bir hatadan veya ana sunucuya ulaşılamamasından kaynaklanıyor olabilir. Sayfayı yeniden yüklemeyi deneyebilir, önceki sayfaya geri dönebilir veya her şeyi sıfırlayıp ana sayfaya geri dönebilirsiniz."
   },
   "pages.generic_error.title": {
-    "message": "Сталася неочікувана помилка"
+    "message": "Beklenmeyen bir hata oluştu"
   },
   "pages.landing.description": {
-    "message": "Керуйте розгортанням додатка element для вашої організації або спільноти."
+    "message": "Organizasyonunuz veya topluluğunuz için Element uygulamasının dağıtımını yönetin."
   },
   "pages.login.errors.authorization_failed": {
     "message": "Could not start the sign-in process. Please try again."
@@ -564,82 +564,82 @@
     "message": "Sign-in requires a secure connection. Reload this page over https:// and try again."
   },
   "pages.login.errors.no_auth_metadata": {
-    "message": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
+    "message": "Sunucunun kimlik doğrulama meta verileri yüklenemedi. Synapse'e erişilemiyor olabilir veya Matrix Authentication Service'i kullanacak şekilde yapılandırılmamış olabilir."
   },
   "pages.login.errors.no_client_metadata": {
-    "message": "Failed to register the client. Matrix Authentication Service may be unreachable or misconfigured."
+    "message": "İstemci kaydı başarısız oldu. Matrix Authentication Service erişilemez durumda olabilir veya yanlış yapılandırılmış olabilir."
   },
   "pages.login.errors.no_well_known": {
-    "message": "Failed to load the server's well-known document. The server name may be invalid."
+    "message": "Sunucunun well-known belgesini yükleyemedi. Sunucu adı geçersiz olabilir."
   },
   "pages.login.get_started": {
-    "message": "Почати"
+    "message": "Başlayın"
   },
   "pages.login.server_name": {
-    "message": "Ім’я сервера"
+    "message": "Sunucu adı"
   },
   "pages.login.title": {
-    "message": "Вхід"
+    "message": "Giriş"
   },
   "pages.personal_tokens.acting_user_column": {
-    "message": "Acting user"
+    "message": "Vekil Kullanıcı"
   },
   "pages.personal_tokens.acting_user_label": {
-    "message": "Acting user"
+    "message": "Vekil kullanıcı"
   },
   "pages.personal_tokens.actor_user_help": {
-    "message": "The user this token will act on behalf of"
+    "message": "Bu tokenın yetkisiyle işlem yapılacak kullanıcı"
   },
   "pages.personal_tokens.actor_user_label": {
-    "message": "Acting user"
+    "message": "Vekil kullanıcı"
   },
   "pages.personal_tokens.add_token_title": {
-    "message": "Додати персональний токен"
+    "message": "Kişisel token ekle"
   },
   "pages.personal_tokens.cant_regenerate_tooltip": {
-    "message": "Тільки {ownerMxid} може регенерувати цей токен"
+    "message": "Bu tokenı yalnızca {ownerMxid} yeniden oluşturabilir"
   },
   "pages.personal_tokens.cant_regenerate_tooltip_generic": {
-    "message": "Тільки власник токена може його регенерувати"
+    "message": "Tokenı yalnızca sahibi yeniden oluşturabilir"
   },
   "pages.personal_tokens.count": {
     "message": "{count, plural, =0 {No personal tokens} one {# personal token} other {# personal tokens}}"
   },
   "pages.personal_tokens.create_error": {
-    "message": "Не вдалося створити персональний токен"
+    "message": "Kişisel jeton oluşturulamadı"
   },
   "pages.personal_tokens.create_success": {
-    "message": "Персональний токен успішно створено"
+    "message": "Kişisel jeton başarıyla oluşturuldu"
   },
   "pages.personal_tokens.create_token": {
-    "message": "Створити токен"
+    "message": "Token oluştur"
   },
   "pages.personal_tokens.created_at_label": {
-    "message": "Створено о"
+    "message": "Oluşturulma tarihi"
   },
   "pages.personal_tokens.description": {
-    "message": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations."
+    "message": "Kişisel token'lar, Synapse ve MAS yönetim API'lerine erişim de dahil olmak üzere belirli erişime sahip, uzun ömürlü erişim token'larıdır. Görevleri otomatikleştirmek ve entegrasyonlar oluşturmak için kullanışlıdırlar."
   },
   "pages.personal_tokens.details_label": {
     "message": "Personal token details"
   },
   "pages.personal_tokens.device_id_help": {
-    "message": "Leave empty to generate a random 10-character device ID"
+    "message": "Rastgele 10 karakterlik bir cihaz kimliği oluşturmak için boş bırakın."
   },
   "pages.personal_tokens.device_id_label": {
-    "message": "ID пристрою"
+    "message": "Cihaz Kimliği"
   },
   "pages.personal_tokens.device_id_placeholder": {
     "message": "ABCDEFGHIJ"
   },
   "pages.personal_tokens.expires_at_column": {
-    "message": "Термін дії закінчується о"
+    "message": "Son geçerlilik tarihi"
   },
   "pages.personal_tokens.expires_at_label": {
-    "message": "Термін дії закінчується о"
+    "message": "Son geçerlilik tarihi"
   },
   "pages.personal_tokens.expires_in_label": {
-    "message": "Втрачає чинність через (дні)"
+    "message": "Expires in (days)"
   },
   "pages.personal_tokens.expires_in_missing": {
     "message": "Enter how many days the token should last"
@@ -651,85 +651,85 @@
     "message": "Revoked"
   },
   "pages.personal_tokens.filter.active": {
-    "message": "Активні"
+    "message": "Active"
   },
   "pages.personal_tokens.filter.expires": {
-    "message": "З датою закінчення терміну дії"
+    "message": "With an expiry date"
   },
   "pages.personal_tokens.filter.no_expiry": {
-    "message": "Ніколи не втрачає чинності"
+    "message": "Never expires"
   },
   "pages.personal_tokens.filter.revoked": {
-    "message": "Відкликано"
+    "message": "Revoked"
   },
   "pages.personal_tokens.filter.scope_mas_admin": {
-    "message": "Доступ до адміністративного API в MAS"
+    "message": "Access to the MAS admin API"
   },
   "pages.personal_tokens.filter.scope_matrix_client": {
     "message": "Access to the Matrix Client-Server API"
   },
   "pages.personal_tokens.filter.scope_synapse_admin": {
-    "message": "Доступ до адміністративного API в Synapse"
+    "message": "Access to the Synapse admin API"
   },
   "pages.personal_tokens.last_active_column": {
-    "message": "Остання активність"
+    "message": "Last active"
   },
   "pages.personal_tokens.last_active_ip_label": {
-    "message": "Остання активна IP-адреса"
+    "message": "Last active IP"
   },
   "pages.personal_tokens.last_active_label": {
-    "message": "Остання активність"
+    "message": "Last active"
   },
   "pages.personal_tokens.name_column": {
-    "message": "Ім’я"
+    "message": "Name"
   },
   "pages.personal_tokens.name_help": {
-    "message": "Зрозуміла для людини назва токена, щоб допомогти вам його ідентифікувати"
+    "message": "A human-readable name for the token, to help you identify it"
   },
   "pages.personal_tokens.name_label": {
-    "message": "Ім’я токена"
+    "message": "Token name"
   },
   "pages.personal_tokens.name_placeholder": {
-    "message": "Токен мого додатка"
+    "message": "My application token"
   },
   "pages.personal_tokens.never_expires": {
-    "message": "Ніколи не втрачає чинності"
+    "message": "Never expires"
   },
   "pages.personal_tokens.never_used": {
-    "message": "Ніколи не використовувався"
+    "message": "Never used"
   },
   "pages.personal_tokens.not_found.description": {
     "message": "The personal token you're looking for doesn't exist or has been removed."
   },
   "pages.personal_tokens.not_found.title": {
-    "message": "Персональний токен не знайдено"
+    "message": "Personal token not found"
   },
   "pages.personal_tokens.owner_user_label": {
-    "message": "Власник"
+    "message": "Owner"
   },
   "pages.personal_tokens.regenerate_confirm": {
-    "message": "Перегенерувати токен"
+    "message": "Regenerate token"
   },
   "pages.personal_tokens.regenerate_error": {
     "message": "Failed to regenerate personal token"
   },
   "pages.personal_tokens.regenerate_success": {
-    "message": "Персональний токен успішно перегенеровано"
+    "message": "Personal token regenerated successfully"
   },
   "pages.personal_tokens.regenerate_token": {
-    "message": "Перегенерувати токен"
+    "message": "Regenerate token"
   },
   "pages.personal_tokens.regenerate_token_title": {
-    "message": "Перегенерувати персональний токен"
+    "message": "Regenerate personal token"
   },
   "pages.personal_tokens.regenerate_warning": {
-    "message": "Це призведе до створення нового токена доступу та анулювання поточного. Поточний токен, що використовується у інших програмах, потрібно буде всюди оновити."
+    "message": "This will generate a new access token and invalidate the current one. Any applications using the current token will need to be updated."
   },
   "pages.personal_tokens.revoke_success": {
-    "message": "Персональний токен успішно відкликано"
+    "message": "Personal token revoked successfully"
   },
   "pages.personal_tokens.revoke_token": {
-    "message": "Відкликати токен"
+    "message": "Revoke token"
   },
   "pages.personal_tokens.revoke_token.alert.description": {
     "message": "{humanName} will stop working immediately, and anything using it will need a new token."
@@ -744,25 +744,25 @@
     "message": "Revoke this personal token?"
   },
   "pages.personal_tokens.revoked_at_label": {
-    "message": "Відкликано о"
+    "message": "Revoked at"
   },
   "pages.personal_tokens.scope_device_help": {
     "message": "Provision a Matrix device"
   },
   "pages.personal_tokens.scope_mas_admin_help": {
-    "message": "Доступ до адміністративного API в MAS"
+    "message": "Access to the MAS admin API"
   },
   "pages.personal_tokens.scope_matrix_client_help": {
     "message": "Access to the Matrix Client-Server API"
   },
   "pages.personal_tokens.scope_synapse_admin_help": {
-    "message": "Доступ до адміністративного API в Synapse"
+    "message": "Access to the Synapse admin API"
   },
   "pages.personal_tokens.scopes_group_label": {
     "message": "Scopes"
   },
   "pages.personal_tokens.scopes_label": {
-    "message": "Області дії (scopes)"
+    "message": "Scopes"
   },
   "pages.personal_tokens.set_expiry_help": {
     "message": "Otherwise the token never expires"
@@ -771,28 +771,28 @@
     "message": "Set an expiry"
   },
   "pages.personal_tokens.status.active": {
-    "message": "Активні"
+    "message": "Active"
   },
   "pages.personal_tokens.status.column": {
-    "message": "Статус"
+    "message": "Status"
   },
   "pages.personal_tokens.status.expired": {
-    "message": "Термін дії закінчився"
+    "message": "Expired"
   },
   "pages.personal_tokens.status.label": {
-    "message": "Статус"
+    "message": "Status"
   },
   "pages.personal_tokens.status.revoked": {
-    "message": "Відкликано"
+    "message": "Revoked"
   },
   "pages.personal_tokens.title": {
-    "message": "Персональні токени"
+    "message": "Kişisel tokenlar"
   },
   "pages.personal_tokens.token_created_description": {
     "message": "Your personal token has been created. Copy it now as it will not be shown again."
   },
   "pages.personal_tokens.token_created_title": {
-    "message": "Персональний токен створено"
+    "message": "Personal token created"
   },
   "pages.personal_tokens.token_regenerated_description": {
     "message": "Your personal token has been regenerated. Copy it now as it will not be shown again."
@@ -801,37 +801,37 @@
     "message": "Token regenerated"
   },
   "pages.registration_tokens.auto_generate_placeholder": {
-    "message": "Auto-generate if left empty"
+    "message": "Boş bırakılırsa otomatik olarak oluşturulur"
   },
   "pages.registration_tokens.create_token.error": {
-    "message": "Не вдалося створити токен"
+    "message": "Token oluşturulamadı"
   },
   "pages.registration_tokens.create_token.submit": {
-    "message": "Створити токен"
+    "message": "Token Oluştur"
   },
   "pages.registration_tokens.create_token.success": {
-    "message": "Токен успішно створено"
+    "message": "Token başarıyla oluşturuldu"
   },
   "pages.registration_tokens.create_token.title": {
-    "message": "Створити токен реєстрації"
+    "message": "Kayıt Tokenı Oluştur"
   },
   "pages.registration_tokens.created_at_column": {
-    "message": "Створено о"
+    "message": "Oluşturulma tarihi"
   },
   "pages.registration_tokens.created_at_label": {
-    "message": "Створено о"
+    "message": "Oluşturulma tarihi"
   },
   "pages.registration_tokens.custom_token_help": {
-    "message": "Optional custom token string. If left empty, a secure token will be auto-generated."
+    "message": "İsteğe bağlı özel belirteç dizesi. Boş bırakılırsa, güvenli bir belirteç otomatik olarak oluşturulacaktır."
   },
   "pages.registration_tokens.custom_token_label": {
-    "message": "Спеціальний токен"
+    "message": "Özel Token"
   },
   "pages.registration_tokens.details_label": {
     "message": "Registration token details"
   },
   "pages.registration_tokens.edit_properties": {
-    "message": "Редагувати властивості"
+    "message": "Özellikleri düzenle"
   },
   "pages.registration_tokens.edit_properties.revoked_tooltip": {
     "message": "Unrevoke this token before editing its properties"
@@ -840,49 +840,49 @@
     "message": "Failed to save the changes"
   },
   "pages.registration_tokens.edit_token_title": {
-    "message": "Редагувати токен реєстрації"
+    "message": "Kayıt belirtecini düzenle"
   },
   "pages.registration_tokens.expires_at_field": {
-    "message": "Термін дії закінчується о"
+    "message": "Son geçerlilik tarihi"
   },
   "pages.registration_tokens.expires_at_help": {
-    "message": "When the token expires. Leave empty if the token should never expire."
+    "message": "Tokenin süresini belirleyin. Tokenin süresinin asla dolmaması gerekiyorsa boş bırakın."
   },
   "pages.registration_tokens.expires_at_label": {
-    "message": "Термін дії закінчується о"
+    "message": "Son geçerlilik tarihi"
   },
   "pages.registration_tokens.filters.active_only": {
-    "message": "Активні"
+    "message": "Active"
   },
   "pages.registration_tokens.filters.expired_only": {
-    "message": "Термін дії закінчився"
+    "message": "Expired"
   },
   "pages.registration_tokens.filters.not_revoked": {
     "message": "Not revoked"
   },
   "pages.registration_tokens.filters.revoked_only": {
-    "message": "Відкликано"
+    "message": "Revoked"
   },
   "pages.registration_tokens.filters.unused_only": {
-    "message": "Невикористані"
+    "message": "Kullanılmamış"
   },
   "pages.registration_tokens.filters.used_only": {
-    "message": "Використані"
+    "message": "Kullanılmış"
   },
   "pages.registration_tokens.never_expires": {
-    "message": "Ніколи не втрачає чинності"
+    "message": "Never expires"
   },
   "pages.registration_tokens.no_expiration_placeholder": {
-    "message": "Без терміну дії"
+    "message": "Son kullanma tarihi yok"
   },
   "pages.registration_tokens.not_found.description": {
-    "message": "The requested registration token ({tokenId}) could not be found on {serverName}."
+    "message": "İstenen kayıt belirteci ({tokenId}), {serverName} üzerinde bulunamadı."
   },
   "pages.registration_tokens.not_found.title": {
-    "message": "Registration token not found"
+    "message": "Kayıt tokenı bulunamadı."
   },
   "pages.registration_tokens.revoke_token": {
-    "message": "Відкликати токен"
+    "message": "Revoke token"
   },
   "pages.registration_tokens.revoke_token.alert.description": {
     "message": "Nobody will be able to register with {token} until it is unrevoked."
@@ -900,37 +900,37 @@
     "message": "Revoke this registration token?"
   },
   "pages.registration_tokens.revoked_at_label": {
-    "message": "Відкликано о"
+    "message": "Revoked at"
   },
   "pages.registration_tokens.save_changes": {
-    "message": "Зберегти зміни"
+    "message": "Değişiklikleri Kaydet"
   },
   "pages.registration_tokens.status.active": {
-    "message": "Активні"
+    "message": "Active"
   },
   "pages.registration_tokens.status.column": {
-    "message": "Статус"
+    "message": "Status"
   },
   "pages.registration_tokens.status.expired": {
-    "message": "Термін дії закінчився"
+    "message": "Expired"
   },
   "pages.registration_tokens.status.invalid": {
-    "message": "Недійсний"
+    "message": "Geçersiz"
   },
   "pages.registration_tokens.status.label": {
-    "message": "Статус"
+    "message": "Status"
   },
   "pages.registration_tokens.status.revoked": {
-    "message": "Відкликано"
+    "message": "Revoked"
   },
   "pages.registration_tokens.status.used_up": {
-    "message": "Використано"
+    "message": "Tükendi"
   },
   "pages.registration_tokens.title": {
-    "message": "Реєстраційні токени"
+    "message": "Kayıt anahtarı"
   },
   "pages.registration_tokens.token_column": {
-    "message": "Токен"
+    "message": "Token"
   },
   "pages.registration_tokens.token_count": {
     "message": "{COUNT, plural, =0 {No tokens} one {# token} other {# tokens}}"
@@ -942,13 +942,13 @@
     "message": "{uses, number} / ∞"
   },
   "pages.registration_tokens.unlimited_placeholder": {
-    "message": "Необмежений"
+    "message": "Sınırsız"
   },
   "pages.registration_tokens.unlimited_uses_placeholder": {
-    "message": "Залиште порожнім для необмеженого використання"
+    "message": "Sınırsız kullanım için boş bırakın"
   },
   "pages.registration_tokens.unrevoke_token": {
-    "message": "Скасувати відкликання токена"
+    "message": "Token iptalini geri al"
   },
   "pages.registration_tokens.unrevoke_token.error": {
     "message": "Failed to unrevoke the token"
@@ -957,22 +957,22 @@
     "message": "Token unrevoked"
   },
   "pages.registration_tokens.usage_count_label": {
-    "message": "Лічильник використань"
+    "message": "Kullanım sayısı"
   },
   "pages.registration_tokens.usage_limit_field": {
-    "message": "Ліміт викликів"
+    "message": "Kullanım sınırı"
   },
   "pages.registration_tokens.usage_limit_help": {
-    "message": "Максимальна кількість використань цього токена. Залиште поле порожнім для необмеженого використання."
+    "message": "Bu tokenın kullanılabileceği maksimum sayı. Sınırsız kullanım için boş bırakın."
   },
   "pages.registration_tokens.usage_limit_label": {
-    "message": "Кількість викликів"
+    "message": "Kullanım Sınırı"
   },
   "pages.registration_tokens.uses_column": {
-    "message": "Використання"
+    "message": "Kullanım Alanları"
   },
   "pages.registration_tokens.valid_until_column": {
-    "message": "Дійсний до"
+    "message": "Geçerlilik Tarihi"
   },
   "pages.rooms.columns.alias": {
     "message": "Alias"
@@ -990,7 +990,7 @@
     "message": "This will permanently delete all messages or media uploaded to the server and remove this room from the directory. Members will lose access to their messages and the room will be removed from their room list."
   },
   "pages.rooms.delete_room.alert.title": {
-    "message": "Ви збираєтеся видалити дані кімнати"
+    "message": "You’re about to delete room data"
   },
   "pages.rooms.delete_room.block.help": {
     "message": "Prevent users from rejoining the room after deletion."
@@ -1008,49 +1008,49 @@
     "message": "Room deletion scheduled"
   },
   "pages.rooms.delete_room.title": {
-    "message": "Видалити цю кімнату?"
+    "message": "Delete this room?"
   },
   "pages.rooms.deletion.failure.description": {
-    "message": "Видалення кімнати не вдалося {timestamp, date, short} о {timestamp, time, short} з помилкою: {error}"
+    "message": "Room deletion task failed on {timestamp, date, short} at {timestamp, time, short} with error: {error}"
   },
   "pages.rooms.deletion.failure.title": {
-    "message": "Видалення не вдалося"
+    "message": "Deletion failed"
   },
   "pages.rooms.deletion.in_progress.description": {
     "message": "Room deletion task is in progress since {timestamp, date, short} at {timestamp, time, short}."
   },
   "pages.rooms.deletion.in_progress.title": {
-    "message": "Триває видалення"
+    "message": "Deletion in progress"
   },
   "pages.rooms.deletion.success.description": {
     "message": "Room deletion task completed successfully on {timestamp, date, short} at {timestamp, time, short}."
   },
   "pages.rooms.deletion.success.title": {
-    "message": "Видалення успішне"
+    "message": "Deletion successful"
   },
   "pages.rooms.details_label": {
     "message": "Room details"
   },
   "pages.rooms.filters.empty_rooms": {
-    "message": "Порожні кімнати"
+    "message": "Boş odalar"
   },
   "pages.rooms.filters.non_empty_rooms": {
-    "message": "Непорожні кімнати"
+    "message": "Boş olmayan odalar"
   },
   "pages.rooms.filters.private_rooms": {
-    "message": "Приватні кімнати"
+    "message": "Özel odalar"
   },
   "pages.rooms.filters.public_rooms": {
-    "message": "Загальнодоступні кімнати"
+    "message": "Herkese açık odalar"
   },
   "pages.rooms.not_found.description": {
-    "message": "Запитану кімнату ({roomId}) не вдалося знайти на {serverName}."
+    "message": "İstenen room ({roomId}), {serverName} numarada bulunamadı."
   },
   "pages.rooms.not_found.title": {
-    "message": "Кімнату не знайдено"
+    "message": "Oda bulunamadı"
   },
   "pages.rooms.room_count": {
-    "message": "{COUNT, plural, =0 {No rooms} one {# room} other {# rooms}}"
+    "message": "{COUNT,plural,zero{No rooms} other{No rooms} bir{# room} diğer{# rooms}}"
   },
   "pages.rooms.room_type.private": {
     "message": "Private"
@@ -1065,67 +1065,67 @@
     "message": "Search…"
   },
   "pages.rooms.title": {
-    "message": "Кімнати"
+    "message": "Odalar"
   },
   "pages.supervision.description": {
-    "message": "Увійдіть як <b>{mxid}</b>, щоб виконувати адміністративні дії в будь-якій кімнаті."
+    "message": "Sign in as <b>{mxid}</b> to perform administrative actions in any room."
   },
   "pages.supervision.disabled_alert.description": {
-    "message": "Ця функція є частиною вашої підписки. Ви можете попросити адміністратора увімкнути її."
+    "message": "Supervision is included in your subscription but isn't enabled on this deployment. See the ESS documentation to turn it on."
   },
   "pages.supervision.disabled_alert.title": {
-    "message": "Наглядання наразі вимкнено"
+    "message": "Supervision is currently disabled"
   },
   "pages.supervision.errors.cant_open.description": {
-    "message": "Ваш браузер блокує відкриття спливаючих вікон. Будь ласка, переконайтеся, що ви дозволили спливаючі вікна з цього сайту."
+    "message": "Your browser is blocking the opening of pop-up windows. Please make sure you allow pop-ups from this site."
   },
   "pages.supervision.errors.cant_open.title": {
-    "message": "Не вдалося відкрити інтерфейс наглядання в новому вікні"
+    "message": "Failed to open the supervision interface in a new window"
   },
   "pages.supervision.errors.closed.description": {
-    "message": "Не вдалося увійти в інтерфейс нагляду, оскільки він закрився до завершення входу"
+    "message": "The supervision window was closed before sign-in finished. You can try again."
   },
   "pages.supervision.errors.closed.title": {
-    "message": "Інтерфейс нагляду закрився занадто швидко"
+    "message": "Supervision sign-in was cancelled"
   },
   "pages.supervision.errors.generic.title": {
-    "message": "Під час відкриття інтерфейсу нагляду сталася неочікувана помилка"
+    "message": "An unexpected error occurred whilst opening the supervision interface"
   },
   "pages.supervision.launch": {
     "message": "Open supervision interface"
   },
   "pages.supervision.missing_ui_address.description": {
-    "message": "На вашому сервері увімкнено наглядання, але не Element Web, що необхідний для роботи інтерфейсу нагляду."
+    "message": "Supervision is enabled in your deployment, but not Element Web, which is required for the supervision interface to work."
   },
   "pages.supervision.missing_ui_address.title": {
-    "message": "Інтерфейс нагляду потребує, щоб Element Web був увімкнений"
+    "message": "The supervision interface requires Element Web to be enabled"
   },
   "pages.supervision.recovery_key.copied": {
-    "message": "Ключ відновлення скопійовано"
+    "message": "Recovery key copied"
   },
   "pages.supervision.recovery_key.copy_failed": {
-    "message": "Не вдалося скопіювати ключ відновлення"
+    "message": "Could not copy recovery key"
   },
   "pages.supervision.recovery_key.help": {
-    "message": "Це ключ відновлення, який використовується для читання зашифрованих повідомлень."
+    "message": "This is the recovery key used to enable reading encrypted messages."
   },
   "pages.supervision.recovery_key.label": {
-    "message": "Ключ відновлення"
+    "message": "Recovery key"
   },
   "pages.supervision.title": {
-    "message": "Наглядання"
+    "message": "Supervision"
   },
   "pages.supervision.unavailable_alert.description": {
-    "message": "Ця функція недоступна в ESS Community. Щоб її увімкнути, перейдіть на ESS Pro."
+    "message": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
   },
   "pages.supervision.unavailable_alert.title": {
-    "message": "Нагляд – функція, що доступна в ESS Pro"
+    "message": "Supervision is a feature available in ESS Pro"
   },
   "pages.users.account_status.active": {
-    "message": "Активні"
+    "message": "Active"
   },
   "pages.users.account_status.admin": {
-    "message": "Адміністратор"
+    "message": "Yönetici"
   },
   "pages.users.account_status.deactivated": {
     "message": "Deactivated"
@@ -1137,232 +1137,232 @@
     "message": "Locked"
   },
   "pages.users.add_email.button": {
-    "message": "Додати адресу електронної пошти"
+    "message": "E-posta adresini ekle"
   },
   "pages.users.add_email.description": {
-    "message": "Додати адресу електронної пошти для цього користувача"
+    "message": "Bu kullanıcıya bir e-posta adresi ekleyin"
   },
   "pages.users.add_email.error": {
-    "message": "Не вдалося додати адресу електронної пошти"
+    "message": "E-posta adresi eklenemedi"
   },
   "pages.users.add_email.error.email_invalid": {
-    "message": "Неправильна адреса електронної пошти"
+    "message": "Geçersiz e-posta adresi"
   },
   "pages.users.add_email.error.email_missing": {
-    "message": "Це поле обов’язкове."
+    "message": "Bu alan zorunludur"
   },
   "pages.users.add_email.success": {
-    "message": "Адресу електронної пошти додано"
+    "message": "E-posta adresi eklendi"
   },
   "pages.users.add_email.title": {
-    "message": "Додати адресу електронної пошти"
+    "message": "E-posta adresini ekle"
   },
   "pages.users.add_upstream_link.error": {
-    "message": "Failed to add link upstream account"
+    "message": "Yukarı akış hesabına link eklenemedi"
   },
   "pages.users.add_upstream_link.success": {
-    "message": "Link to upstream account added"
+    "message": "Yukarı akış hesabına link eklendi"
   },
   "pages.users.columns.account_status": {
     "message": "Account status"
   },
   "pages.users.columns.created_at": {
-    "message": "Створено о"
+    "message": "Oluşturulma tarihi"
   },
   "pages.users.columns.matrix_id": {
     "message": "Matrix ID"
   },
   "pages.users.deactivate_account.alert.description": {
-    "message": "Ця дія призведе до виходу користувача з усіх його пристроїв, видалить усі токени доступу, видалить усі ідентифікатори на сторонніх пов’язаних сервісах, та назавжди видалить дані його облікового запису."
+    "message": "Bu işlem, kullanıcının tüm cihazlardan otomatik olarak çıkışını sağlayacak, tüm erişim belirteçlerini kaldıracak, tüm üçüncü taraf kimliklerini silecek ve hesap verilerini kalıcı olarak silecektir."
   },
   "pages.users.deactivate_account.alert.title": {
-    "message": "Ви збираєтеся видалити дані користувача"
+    "message": "Kullanıcı verilerini silmek üzeresiniz"
   },
   "pages.users.deactivate_account.button": {
-    "message": "Деактивувати обліковий запис"
+    "message": "Hesabı pasifleştir"
   },
   "pages.users.deactivate_account.error": {
-    "message": "Не вдалося деактивувати обліковий запис"
+    "message": "Hesap devre dışı bırakılamadı"
   },
   "pages.users.deactivate_account.success": {
-    "message": "Обліковий запис деактивовано"
+    "message": "Hesap devre dışı bırakıldı"
   },
   "pages.users.deactivate_account.title": {
-    "message": "Деактивувати цього користувача?"
+    "message": "Bu kullanıcının hesabını devre dışı bırakmak istiyor musunuz?"
   },
   "pages.users.delete_email.description": {
-    "message": "Ви впевнені, що хочете видалити адресу електронної пошти ({email}) у користувача ({mxid})?"
+    "message": "Bu kullanıcının ({mxid}) bu e-posta adresini ({email}) kaldırmak istediğinizden emin misiniz?"
   },
   "pages.users.delete_email.error": {
-    "message": "Не вдалося видалити адресу електронної пошти"
+    "message": "E-posta adresi silinemedi"
   },
   "pages.users.delete_email.success": {
-    "message": "Адресу електронної пошти видалено"
+    "message": "E-posta adresi silindi"
   },
   "pages.users.delete_email.title": {
-    "message": "Видалити адресу електронної пошти?"
+    "message": "E-posta adresini kaldırmak mı istiyorsunuz?"
   },
   "pages.users.delete_upstream_link.description": {
-    "message": "Are you sure you want to remove the link between this user ({mxid}) with this upstream account ({subject})?"
+    "message": "Bu kullanıcı ({mxid}) ile bu üst hesap ({subject}) arasındaki bağlantıyı kaldırmak istediğinizden emin misiniz?"
   },
   "pages.users.delete_upstream_link.error": {
-    "message": "Failed to delete upstream link"
+    "message": "Yukarı akış bağlantısını silme işlemi başarısız oldu"
   },
   "pages.users.delete_upstream_link.success": {
-    "message": "Upstream link deleted"
+    "message": "Yukarı akış bağlantısı silindi"
   },
   "pages.users.delete_upstream_link.title": {
-    "message": "Remove link with upstream account?"
+    "message": "Üst hesapla olan bağlantıyı kaldıracak mısınız?"
   },
   "pages.users.details_label": {
     "message": "User details"
   },
   "pages.users.filters.active": {
-    "message": "Активні користувачі"
+    "message": "Aktif kullanıcılar"
   },
   "pages.users.filters.active_client_chip": {
     "message": "Has active device on: {name}"
   },
   "pages.users.filters.admins": {
-    "message": "Адміністратори"
+    "message": "Yöneticiler"
   },
   "pages.users.filters.deactivated": {
-    "message": "Деактивовані користувачі"
+    "message": "Devre dışı bırakılmış kullanıcılar"
   },
   "pages.users.filters.guests": {
-    "message": "Гості (стара версія)"
+    "message": "Misafirler (eski)"
   },
   "pages.users.filters.has_legacy_session": {
     "message": "Has active legacy device"
   },
   "pages.users.filters.locked": {
-    "message": "Заблоковані користувачі"
+    "message": "Kilitli kullanıcılar"
   },
   "pages.users.filters.newest_first": {
-    "message": "Спочатку новіші"
+    "message": "Önce en yeni"
   },
   "pages.users.filters.no_legacy_session": {
     "message": "No active legacy device"
   },
   "pages.users.filters.non_guests": {
-    "message": "Non-guests (legacy)"
+    "message": "Misafir olmayanlar (eski üyeler)"
   },
   "pages.users.lock_account.alert.description": {
-    "message": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."
+    "message": "Bu kullanıcı, şu anda oturum açmış olduğu tüm cihazlardan otomatik olarak kilitlenecek ve kilidi açılana kadar yeni cihazlara giriş yapamayacaktır."
   },
   "pages.users.lock_account.alert.title": {
-    "message": "The user will not be able to send or receive messages"
+    "message": "Kullanıcı mesaj gönderemeyecek veya alamayacak."
   },
   "pages.users.lock_account.button": {
-    "message": "Заблокувати обліковий запис"
+    "message": "Hesabı kilitle"
   },
   "pages.users.lock_account.error": {
-    "message": "Не вдалося заблокувати обліковий запис"
+    "message": "Hesap kilitlenemedi"
   },
   "pages.users.lock_account.success": {
-    "message": "Обліковий запис заблоковано"
+    "message": "Hesap kilitlendi"
   },
   "pages.users.lock_account.title": {
-    "message": "Заблокувати обліковий запис цього користувача?"
+    "message": "Bu kullanıcının hesabını kilitle?"
   },
   "pages.users.new_user.add_user": {
-    "message": "Додати користувача"
+    "message": "Kullanıcı ekle"
   },
   "pages.users.new_user.create_account": {
-    "message": "Створити обліковий запис"
+    "message": "Hesap oluştur"
   },
   "pages.users.new_user.description": {
-    "message": "To add a new user to {serverName}, choose a user name for this user, which will be part of their user ID."
+    "message": "{serverName}'e yeni bir kullanıcı eklemek için, bu kullanıcı için bir kullanıcı adı seçin; bu ad, kullanıcı kimliğinin bir parçası olacaktır."
   },
   "pages.users.new_user.error_message": {
-    "message": "Помилка створення користувача"
+    "message": "Kullanıcı oluşturulurken hata oluştu"
   },
   "pages.users.new_user.invalid_localpart": {
-    "message": "Localpart can only contain lowercase letters, numbers, dots, underscores, dashes and slashes"
+    "message": "Yerel kısım yalnızca küçük harfler, rakamlar, noktalar, alt çizgiler, tireler ve eğik çizgilerden oluşabilir"
   },
   "pages.users.new_user.invalid_localpart_numeric_only": {
-    "message": "Localpart cannot only contain numbers"
+    "message": "Kullanıcı adının yerel bölümü yalnızca sayılardan oluşamaz"
   },
   "pages.users.new_user.localpart": {
-    "message": "Enter name"
+    "message": "Adınızı girin"
   },
   "pages.users.new_user.required_error": {
-    "message": "Це поле обов’язкове."
+    "message": "Bu alan zorunludur"
   },
   "pages.users.new_user.success_message": {
-    "message": "Користувача створено"
+    "message": "Kullanıcı oluşturuldu"
   },
   "pages.users.not_found.description": {
-    "message": "The requested user ({userId}) could not be found on {serverName}."
+    "message": "İstenen kullanıcı ({userId}), {serverName} üzerinde bulunamadı."
   },
   "pages.users.not_found.title": {
-    "message": "Користувача не знайдено"
+    "message": "Kullanıcı bulunamadı"
   },
   "pages.users.reactivate_account.button": {
-    "message": "Повторно активувати"
+    "message": "Yeniden etkinleştir"
   },
   "pages.users.reactivate_account.error": {
-    "message": "Не вдалося повторно активувати обліковий запис"
+    "message": "Hesabı yeniden etkinleştirme başarısız oldu"
   },
   "pages.users.reactivate_account.success": {
-    "message": "Обліковий запис повторно активовано"
+    "message": "Hesap yeniden etkinleştirildi"
   },
   "pages.users.search_placeholder": {
-    "message": "Пошук користувачів…"
+    "message": "Kullanıcıları ara…"
   },
   "pages.users.set_admin.alert.description": {
-    "message": "The user will be able to view user data and make changes to user and room permissions."
+    "message": "Kullanıcı, kullanıcı verilerini görüntüleyebilecek ve kullanıcı ve oda izinlerinde değişiklik yapabilecektir."
   },
   "pages.users.set_admin.alert.title": {
-    "message": "User will have access to sensitive data"
+    "message": "Kullanıcı, hassas verilere erişebilecek"
   },
   "pages.users.set_admin.error": {
-    "message": "Не вдалося змінити права адміністратора для {mxid}"
+    "message": "{mxid} kullanıcının yönetici ayrıcalıkları değiştirilemedi"
   },
   "pages.users.set_admin.label": {
-    "message": "Адміністратор"
+    "message": "Yönetici"
   },
   "pages.users.set_admin.make_admin_button": {
-    "message": "Зробити адміністратором"
+    "message": "Yönetici yap"
   },
   "pages.users.set_admin.successfully_demoted": {
-    "message": "{mxid} більше не має прав адміністратора"
+    "message": "{mxid} artık yönetici ayrıcalıklarına sahip değil"
   },
   "pages.users.set_admin.successfully_promoted": {
-    "message": "{mxid} тепер має права адміністратора"
+    "message": "{mxid} artık yönetici ayrıcalıklarına sahip"
   },
   "pages.users.set_admin.title": {
-    "message": "Зробити цього користувача адміністратором?"
+    "message": "Bu kullanıcıyı yönetici yapmak ister misiniz?"
   },
   "pages.users.set_password.button": {
-    "message": "Змінити пароль"
+    "message": "Parola değiştir"
   },
   "pages.users.set_password.confirm_password_label": {
-    "message": "Введіть пароль ще раз"
+    "message": "Parolayı tekrar girin."
   },
   "pages.users.set_password.error": {
-    "message": "Не вдалося встановити пароль"
+    "message": "Parola belirleme başarısız oldu"
   },
   "pages.users.set_password.error.password_missing": {
-    "message": "Це поле обов’язкове."
+    "message": "Bu alan zorunludur"
   },
   "pages.users.set_password.error.passwords_mismatch": {
-    "message": "Паролі не збігаються"
+    "message": "Parolalar eşleşmiyor"
   },
   "pages.users.set_password.password_label": {
-    "message": "Пароль"
+    "message": "Parola"
   },
   "pages.users.set_password.password_match": {
-    "message": "Паролі збігаються!"
+    "message": "Parolalar eşleşiyor!"
   },
   "pages.users.set_password.submit": {
-    "message": "Встановити новий пароль"
+    "message": "Yeni parola belirle"
   },
   "pages.users.set_password.success": {
-    "message": "Пароль встановлено успішно"
+    "message": "Parola başarıyla ayarlandı"
   },
   "pages.users.set_password.title": {
-    "message": "Встановити новий пароль для цього користувача"
+    "message": "Bu kullanıcı için yeni bir parola belirleyin"
   },
   "pages.users.statistics.devices": {
     "message": "Devices"
@@ -1371,16 +1371,16 @@
     "message": "Legacy devices"
   },
   "pages.users.title": {
-    "message": "Користувачі"
+    "message": "Kullanıcılar"
   },
   "pages.users.unlock_account.button": {
-    "message": "Розблокувати обліковий запис"
+    "message": "Hesabın kilidini aç"
   },
   "pages.users.unlock_account.error": {
-    "message": "Не вдалося розблокувати обліковий запис"
+    "message": "Hesabın kilidini açma işlemi başarısız oldu"
   },
   "pages.users.unlock_account.success": {
-    "message": "Обліковий запис розблоковано"
+    "message": "Hesap kilidi kaldırıldı"
   },
   "pages.users.user_count": {
     "message": "{COUNT, plural, =0 {No users} one {# user} other {# users}}"
@@ -1392,10 +1392,10 @@
     "message": "Element"
   },
   "product.title": {
-    "message": "Element Admin"
+    "message": "Element Yönetim"
   },
   "product.title.community": {
-    "message": "Element Community"
+    "message": "Element Topluluğu"
   },
   "product.title.pro": {
     "message": "Element Pro"
@@ -1404,22 +1404,22 @@
     "message": "Element TI-Messenger"
   },
   "room_info.empty_room": {
-    "message": "Порожня кімната"
+    "message": "Boş oda"
   },
   "room_info.empty_space": {
-    "message": "Порожній простір"
+    "message": "Boş alan"
   },
   "room_info.room_with": {
-    "message": "Кімната з {members}"
+    "message": "{members} özellikli oda"
   },
   "room_info.space_with": {
-    "message": "Простір з {members}"
+    "message": "{members} kişilik alan"
   },
   "room_info.unknown_user": {
-    "message": "Невідомий користувач"
+    "message": "Bilinmeyen kullanıcı"
   },
   "rooms_info.other_members": {
-    "message": "{COUNT,plural,one{# інший} few{# інших} many{# інших} other{# інших}}"
+    "message": "{COUNT, plural, one {# diğer} other {# diğerleri}}"
   },
   "ui.copy.copied": {
     "message": "Copied!"
@@ -1428,7 +1428,7 @@
     "message": "Copy to clipboard"
   },
   "ui.data.failed_to_load": {
-    "message": "Не вдалося завантажити"
+    "message": "Yükleme başarısız"
   },
   "ui.data_table.loading_more": {
     "message": "Loading more…"
@@ -1464,7 +1464,7 @@
     "message": "Unknown device"
   },
   "ui.device_status.active": {
-    "message": "Активні"
+    "message": "Active"
   },
   "ui.device_status.inactive": {
     "message": "Inactive"
@@ -1473,7 +1473,7 @@
     "message": "Last active on {date}."
   },
   "ui.device_status.never_used": {
-    "message": "Ніколи не використовувався"
+    "message": "Never used"
   },
   "ui.device_status.never_used.tooltip": {
     "message": "This device has not been used yet."
@@ -1491,27 +1491,27 @@
     "message": "Signed out on {date}."
   },
   "ui.language_switcher.browser_default": {
-    "message": "Використовувати налаштування браузера ({language})"
+    "message": "Tarayıcı ayarlarını kullanın ({language})"
   },
   "ui.language_switcher.button_label": {
-    "message": "Мовні налаштування"
+    "message": "Dil ayarları"
   },
   "ui.language_switcher.description": {
-    "message": "Виберіть бажану мову інтерфейсу."
+    "message": "Arayüz için tercih ettiğiniz dili seçin."
   },
   "ui.language_switcher.language_list_label": {
-    "message": "Список доступних мов"
+    "message": "List of available languages"
   },
   "ui.language_switcher.title": {
-    "message": "Мовні налаштування"
+    "message": "Dil ayarları"
   },
   "ui.user_picker.loading_list": {
-    "message": "Завантаження…"
+    "message": "Loading…"
   },
   "ui.user_picker.no_match": {
-    "message": "Немає збігів"
+    "message": "No match"
   },
   "ui.user_picker.no_match_help": {
-    "message": "Спробуйте інший пошуковий запит. Ця функція дозволяє шукати лише активних користувачів на {serverName} за їхнім локальним ідентифікатором."
+    "message": "Try a different search term. This can only lookup active users on {serverName} using their localpart."
   }
 }

@@ -18,7 +18,7 @@
     "message": "Löschen"
   },
   "action.done": {
-    "message": "Done"
+    "message": "Fertig"
   },
   "action.go_back": {
     "message": "Zurück"
@@ -39,13 +39,13 @@
     "message": "Filter"
   },
   "common.loading": {
-    "message": "Loading…"
+    "message": "Wird geladen …"
   },
   "errors.authorization_denied": {
-    "message": "Sign-in was cancelled."
+    "message": "Die Anmeldung wurde abgebrochen."
   },
   "errors.authorization_error": {
-    "message": "Sign-in failed: {errorMessage}"
+    "message": "Anmeldung fehlgeschlagen: {errorMessage}"
   },
   "errors.http_fetch": {
     "message": "Anfrage an {url} fehlgeschlagen"
@@ -57,13 +57,13 @@
     "message": "Anfrage an {url} fehlgeschlagen mit Statuscode {status} {statusText}"
   },
   "errors.mas_api": {
-    "message": "The homeserver's authentication service returned an error: {errorMessage}"
+    "message": "Der Authentifizierungsdienst des Homeservers hat einen Fehler zurückgegeben: {errorMessage}"
   },
   "errors.matrix_standard": {
     "message": "Die Anfrage an den Homeserver ist mit dem Fehlercode „{errorCode}“ fehlgeschlagen. Der Server hat zusätzlich folgende Fehlermeldung zurückgegeben: {errorMessage}"
   },
   "errors.no_details": {
-    "message": "The server returned an error with no details."
+    "message": "Der Server hat eine Fehlermeldung ohne weitere Details zurückgegeben."
   },
   "errors.not_logged_in": {
     "message": "Nicht angemeldet"
@@ -183,7 +183,7 @@
     "message": "Anwendungen sind OAuth 2.0-Clients, bei denen sich Nutzer anmelden."
   },
   "pages.devices.applications.details_label": {
-    "message": "Application details"
+    "message": "Anwendungsdetails"
   },
   "pages.devices.applications.filters.has_active_sessions": {
     "message": "Mit aktiven Geräten"
@@ -231,7 +231,7 @@
     "message": "Alle Geräte anzeigen"
   },
   "pages.devices.applications.view_users": {
-    "message": "View users on this application"
+    "message": "Nutzer dieser Anwendung anzeigen"
   },
   "pages.devices.legacy.count": {
     "message": "{COUNT, plural, =0 {Keine Legacy-Geräte} one {# Legacy-Gerät} other {# Legacy-Geräte}}"
@@ -243,7 +243,7 @@
     "message": "Legacy-Geräte sind Anmeldungen von Clients, die noch nicht auf OAuth 2.0 migriert wurden."
   },
   "pages.devices.legacy.details_label": {
-    "message": "Legacy device details"
+    "message": "Details zu älteren Geräten"
   },
   "pages.devices.legacy.device_column": {
     "message": "Gerät"
@@ -348,7 +348,7 @@
     "message": "Ein Gerät stellt eine einzelne Anmeldung eines Nutzers in einer Anwendung dar. Beim Abmelden eines Geräts wird dessen Zugriff sofort widerrufen."
   },
   "pages.devices.user.details_label": {
-    "message": "Device details"
+    "message": "Geräte Details"
   },
   "pages.devices.user.device_column": {
     "message": "Gerät"
@@ -459,13 +459,13 @@
     "message": "Domain von der Zulassungsliste entfernt"
   },
   "pages.federation.allowlist.remove_confirm.alert.description": {
-    "message": "Your server will stop federating with servers matching this pattern."
+    "message": "Dein Server föderiert nicht mehr mit Servern, die diesem Muster entsprechen."
   },
   "pages.federation.allowlist.remove_confirm.alert.title": {
-    "message": "You’re about to stop federating with this server"
+    "message": "Du bist dabei, die Föderation mit diesem Server zu beenden"
   },
   "pages.federation.allowlist.remove_confirm.title": {
-    "message": "Remove {serverName} from the allowlist?"
+    "message": "{serverName} von der Positivliste entfernen?"
   },
   "pages.federation.allowlist.remove_tooltip": {
     "message": "Von der Zulassungsliste entfernen"
@@ -477,7 +477,7 @@
     "message": "Letzter Wiederholungsversuch"
   },
   "pages.federation.detail.last_retry.never": {
-    "message": "Never"
+    "message": "Nie"
   },
   "pages.federation.detail.last_successful_stream": {
     "message": "Letzter erfolgreicher Stream"
@@ -486,7 +486,7 @@
     "message": "Wiederholungsintervall"
   },
   "pages.federation.detail.retry_interval.none": {
-    "message": "None"
+    "message": "Keines"
   },
   "pages.federation.detail.security": {
     "message": "Sicherheit"
@@ -495,10 +495,10 @@
     "message": "Support-Seite"
   },
   "pages.federation.details_label": {
-    "message": "Destination details"
+    "message": "Zieldetails"
   },
   "pages.federation.domain_count": {
-    "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
+    "message": "{COUNT, plural, zero {Keine Domain} one {# Domain} other {# Domains}}"
   },
   "pages.federation.not_found.description": {
     "message": "Das angeforderte Ziel ({destination}) konnte nicht gefunden werden."
@@ -507,10 +507,10 @@
     "message": "Ziel nicht gefunden"
   },
   "pages.federation.sbg_not_enabled.description": {
-    "message": "Secure Border Gateway ist in dieser Umgebung nicht aktiviert. Wende dich an den Administrator, um es zu aktivieren."
+    "message": "Wende dich an deinen Administrator, um dies zu aktivieren."
   },
   "pages.federation.sbg_not_enabled.title": {
-    "message": "Die Funktion „Zulässige Domains“ ist eine Funktion des Secure Border Gateway, das in ESS Pro verfügbar ist"
+    "message": "Das Secure Border Gateway ist nicht aktiviert."
   },
   "pages.federation.search_placeholder": {
     "message": "Domains suchen …"
@@ -537,7 +537,7 @@
     "message": "Secure Border Gateway ist in ESS Community nicht verfügbar. Aktualisiere bitte auf ESS Pro, um es zu aktivieren."
   },
   "pages.federation.unavailable_alert.title": {
-    "message": "Die Funktion „Zulässige Domains“ ist eine Funktion des Secure Border Gateway, das in ESS Pro verfügbar ist"
+    "message": "Das Secure Border Gateway ist nicht aktiviert."
   },
   "pages.generic_error.go_home": {
     "message": "Gehe zur Startseite"
@@ -558,10 +558,10 @@
     "message": "Verwalte die Bereitstellung der Element-App für deine Organisation oder Community."
   },
   "pages.login.errors.authorization_failed": {
-    "message": "Could not start the sign-in process. Please try again."
+    "message": "Der Anmeldevorgang konnte nicht gestartet werden. Bitte versuche es erneut."
   },
   "pages.login.errors.insecure_context": {
-    "message": "Sign-in requires a secure connection. Reload this page over https:// and try again."
+    "message": "Für die Anmeldung ist eine sichere Verbindung erforderlich. Lade diese Seite über https:// neu und versuche es erneut."
   },
   "pages.login.errors.no_auth_metadata": {
     "message": "Das Laden der Metadaten des Servers für die Authentifizierung ist fehlgeschlagen. Der Homeserver ist möglicherweise nicht erreichbar oder nicht für die Verwendung des Matrix Authentication Service konfiguriert."
@@ -621,7 +621,7 @@
     "message": "Persönliche Token sind langlebige Zugriffstoken mit spezifischen Berechtigungen, darunter der Zugriff auf die Synapse- und MAS-Admin-API. Sie eignen sich zur Automatisierung von Aufgaben und zur Erstellung von Integrationen."
   },
   "pages.personal_tokens.details_label": {
-    "message": "Personal token details"
+    "message": "Details zum persönlichen Token"
   },
   "pages.personal_tokens.device_id_help": {
     "message": "Bitte leer lassen, um eine zufällige 10-stellige Geräte-ID zu generieren"
@@ -638,14 +638,17 @@
   "pages.personal_tokens.expires_at_label": {
     "message": "Ablaufdatum"
   },
-  "pages.personal_tokens.expires_in_help": {
-    "message": "Bitte für Token, die nicht verfallen, leer lassen"
-  },
   "pages.personal_tokens.expires_in_label": {
     "message": "Läuft ab in (Tagen)"
   },
-  "pages.personal_tokens.expires_in_placeholder": {
-    "message": "30"
+  "pages.personal_tokens.expires_in_missing": {
+    "message": "Gib an, wie viele Tage das Token gültig sein soll"
+  },
+  "pages.personal_tokens.expires_in_underflow": {
+    "message": "Ein Token muss mindestens einen Tag gültig sein"
+  },
+  "pages.personal_tokens.expiry_revoked": {
+    "message": "Widerrufen"
   },
   "pages.personal_tokens.filter.active": {
     "message": "Aktiv"
@@ -710,9 +713,6 @@
   "pages.personal_tokens.regenerate_error": {
     "message": "Fehler beim Regenerieren des persönlichen Tokens"
   },
-  "pages.personal_tokens.regenerate_expires_help": {
-    "message": "Bitte leer lassen, um das gleiche Ablaufdatum wie zuvor beizubehalten, oder lege ein neues Ablaufdatum fest"
-  },
   "pages.personal_tokens.regenerate_success": {
     "message": "Persönliches Token erfolgreich neu generiert"
   },
@@ -732,16 +732,16 @@
     "message": "Token widerrufen"
   },
   "pages.personal_tokens.revoke_token.alert.description": {
-    "message": "{humanName} will stop working immediately, and anything using it will need a new token."
+    "message": "{humanName} funktioniert ab sofort nicht mehr, und alles, was es verwendet, benötigt ein neues Token."
   },
   "pages.personal_tokens.revoke_token.alert.title": {
-    "message": "This cannot be undone"
+    "message": "Dies kann nicht rückgängig gemacht werden"
   },
   "pages.personal_tokens.revoke_token.error": {
-    "message": "Failed to revoke the token"
+    "message": "Token konnte nicht widerrufen werden."
   },
   "pages.personal_tokens.revoke_token.title": {
-    "message": "Revoke this personal token?"
+    "message": "Diesen persönlichen Token widerrufen?"
   },
   "pages.personal_tokens.revoked_at_label": {
     "message": "Widerrufen am"
@@ -758,8 +758,17 @@
   "pages.personal_tokens.scope_synapse_admin_help": {
     "message": "Zugriff auf die Synapse-Admin-API"
   },
+  "pages.personal_tokens.scopes_group_label": {
+    "message": "Scopes"
+  },
   "pages.personal_tokens.scopes_label": {
     "message": "Umfang"
+  },
+  "pages.personal_tokens.set_expiry_help": {
+    "message": "Andernfalls läuft das Token nie ab"
+  },
+  "pages.personal_tokens.set_expiry_label": {
+    "message": "Ablaufdatum festlegen"
   },
   "pages.personal_tokens.status.active": {
     "message": "Aktiv"
@@ -819,16 +828,16 @@
     "message": "Benutzerdefiniertes Token"
   },
   "pages.registration_tokens.details_label": {
-    "message": "Registration token details"
+    "message": "Details zum Registrierungstoken"
   },
   "pages.registration_tokens.edit_properties": {
     "message": "Eigenschaften bearbeiten"
   },
   "pages.registration_tokens.edit_properties.revoked_tooltip": {
-    "message": "Unrevoke this token before editing its properties"
+    "message": "Widerrufung dieses Tokens aufheben, bevor du seine Eigenschaften bearbeitest"
   },
   "pages.registration_tokens.edit_token.error": {
-    "message": "Failed to save the changes"
+    "message": "Die Änderungen konnten nicht gespeichert werden."
   },
   "pages.registration_tokens.edit_token_title": {
     "message": "Registrierungstoken bearbeiten"
@@ -849,7 +858,7 @@
     "message": "Abgelaufen"
   },
   "pages.registration_tokens.filters.not_revoked": {
-    "message": "Not revoked"
+    "message": "Nicht widerrufen"
   },
   "pages.registration_tokens.filters.revoked_only": {
     "message": "Widerrufen"
@@ -876,19 +885,19 @@
     "message": "Token widerrufen"
   },
   "pages.registration_tokens.revoke_token.alert.description": {
-    "message": "Nobody will be able to register with {token} until it is unrevoked."
+    "message": "Niemand kann sich mit {token} registrieren, solange die Widerrufung nicht aufgehoben ist."
   },
   "pages.registration_tokens.revoke_token.alert.title": {
-    "message": "The token will stop working"
+    "message": "Der Token wird nicht mehr funktionieren"
   },
   "pages.registration_tokens.revoke_token.error": {
-    "message": "Failed to revoke the token"
+    "message": "Token konnte nicht widerrufen werden"
   },
   "pages.registration_tokens.revoke_token.success": {
-    "message": "Token revoked"
+    "message": "Token widerrufen"
   },
   "pages.registration_tokens.revoke_token.title": {
-    "message": "Revoke this registration token?"
+    "message": "Dieses Registrierungstoken widerrufen?"
   },
   "pages.registration_tokens.revoked_at_label": {
     "message": "Widerrufen am"
@@ -942,10 +951,10 @@
     "message": "Widerruf des Tokens rückgängig machen"
   },
   "pages.registration_tokens.unrevoke_token.error": {
-    "message": "Failed to unrevoke the token"
+    "message": "Die Widerrufung des Tokens konnte nicht aufgehoben werden"
   },
   "pages.registration_tokens.unrevoke_token.success": {
-    "message": "Token unrevoked"
+    "message": "Token Widerrufung aufgehoben"
   },
   "pages.registration_tokens.usage_count_label": {
     "message": "Nutzungsanzahl"
@@ -975,7 +984,7 @@
     "message": "Chat"
   },
   "pages.rooms.columns.visibility": {
-    "message": "Visibility"
+    "message": "Sichtbarkeit"
   },
   "pages.rooms.delete_room.alert.description": {
     "message": "Dadurch werden alle auf den Server hochgeladenen Nachrichten und Medien endgültig entfernt und diese Gruppe wird aus dem Verzeichnis entfernt. Mitglieder verlieren den Zugriff auf ihre Nachrichten, und die Gruppe wird aus ihrer Chatliste gelöscht."
@@ -1020,7 +1029,7 @@
     "message": "Löschung erfolgreich"
   },
   "pages.rooms.details_label": {
-    "message": "Room details"
+    "message": "Chat-Details"
   },
   "pages.rooms.filters.empty_rooms": {
     "message": "Leere Chats"
@@ -1083,7 +1092,7 @@
     "message": "Beim Öffnen von Supervision ist ein unerwarteter Fehler aufgetreten"
   },
   "pages.supervision.launch": {
-    "message": "Open supervision interface"
+    "message": "Supervision Interface öffnen"
   },
   "pages.supervision.missing_ui_address.description": {
     "message": "In deiner Bereitstellung ist Supervision aktiviert, Element Web jedoch nicht. Element Web wird für die Supervision-Oberfläche benötigt."
@@ -1206,7 +1215,7 @@
     "message": "Verbindung mit dem Upstream-Konto entfernen?"
   },
   "pages.users.details_label": {
-    "message": "User details"
+    "message": "Nutzerdetails"
   },
   "pages.users.filters.active": {
     "message": "Aktive Nutzer"
@@ -1413,10 +1422,10 @@
     "message": "{COUNT, plural, one {# weiteren} other {# weiteren}}"
   },
   "ui.copy.copied": {
-    "message": "Copied!"
+    "message": "Kopiert!"
   },
   "ui.copy.copy_to_clipboard": {
-    "message": "Copy to clipboard"
+    "message": "In die Zwischenablage kopieren"
   },
   "ui.data.failed_to_load": {
     "message": "Laden fehlgeschlagen"

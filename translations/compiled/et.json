@@ -545,7 +545,7 @@
   "navigation.devices": [
     {
       "type": 0,
-      "value": "Devices"
+      "value": "Seadmed"
     }
   ],
   "navigation.documentation": [
@@ -617,7 +617,7 @@
   "pages.dashboard.latest_ess_version": [
     {
       "type": 0,
-      "value": "Latest ESS version"
+      "value": "Viimane ESS-versioon"
     }
   ],
   "pages.dashboard.new_ess_release": [
@@ -659,7 +659,7 @@
   "pages.devices.applications.client_id_label": [
     {
       "type": 0,
-      "value": "Client ID"
+      "value": "Kliendi tunnus (Client ID)"
     }
   ],
   "pages.devices.applications.count": [
@@ -717,13 +717,13 @@
   "pages.devices.applications.filters.has_active_sessions": [
     {
       "type": 0,
-      "value": "With active devices"
+      "value": "Aktiivsete seadmetega"
     }
   ],
   "pages.devices.applications.filters.no_active_sessions": [
     {
       "type": 0,
-      "value": "Without active devices"
+      "value": "Ilma aktiivsete seadmeteta"
     }
   ],
   "pages.devices.applications.grant_types_label": [
@@ -763,7 +763,7 @@
   "pages.devices.applications.not_found.title": [
     {
       "type": 0,
-      "value": "Application not found"
+      "value": "Rakendust ei leidu"
     }
   ],
   "pages.devices.applications.redirect_uris_label": [
@@ -775,43 +775,43 @@
   "pages.devices.applications.search_placeholder": [
     {
       "type": 0,
-      "value": "Search by name…"
+      "value": "Otsi nime järgi…"
     }
   ],
   "pages.devices.applications.statistics.active_recently": [
     {
       "type": 0,
-      "value": "Active in the past 7 days"
+      "value": "Aktiivne viimase 7 päeva jooksul"
     }
   ],
   "pages.devices.applications.statistics.created_recently": [
     {
       "type": 0,
-      "value": "Devices added in the past 7 days"
+      "value": "Viimase 7 päeva jooksul lisatud seadmed"
     }
   ],
   "pages.devices.applications.statistics.heading": [
     {
       "type": 0,
-      "value": "Device statistics"
+      "value": "Seadme statistika"
     }
   ],
   "pages.devices.applications.statistics.total_active": [
     {
       "type": 0,
-      "value": "Active devices"
+      "value": "Aktiivsed seadmed"
     }
   ],
   "pages.devices.applications.title": [
     {
       "type": 0,
-      "value": "Applications"
+      "value": "Rakendused"
     }
   ],
   "pages.devices.applications.uri_label": [
     {
       "type": 0,
-      "value": "Homepage"
+      "value": "Avaleht"
     }
   ],
   "pages.devices.applications.view_sessions": [
@@ -887,7 +887,7 @@
   "pages.devices.legacy.device_column": [
     {
       "type": 0,
-      "value": "Device"
+      "value": "Seade"
     }
   ],
   "pages.devices.legacy.device_id_label": [
@@ -911,7 +911,7 @@
   "pages.devices.legacy.filters.activity_recently_used": [
     {
       "type": 0,
-      "value": "Recently used"
+      "value": "Hiljuti kasutatud"
     }
   ],
   "pages.devices.legacy.filters.activity_signed_out": [
@@ -947,13 +947,13 @@
   "pages.devices.legacy.finish.button": [
     {
       "type": 0,
-      "value": "Remove device"
+      "value": "Eemalda seade"
     }
   ],
   "pages.devices.legacy.finish.confirm": [
     {
       "type": 0,
-      "value": "Remove device"
+      "value": "Eemalda seade"
     }
   ],
   "pages.devices.legacy.finish.description": [
@@ -1035,13 +1035,13 @@
   "pages.devices.legacy.status_column": [
     {
       "type": 0,
-      "value": "Status"
+      "value": "Olek"
     }
   ],
   "pages.devices.legacy.technical_details": [
     {
       "type": 0,
-      "value": "Technical details"
+      "value": "Tehnilised üksikasjad"
     }
   ],
   "pages.devices.legacy.title": [
@@ -1065,7 +1065,7 @@
   "pages.devices.tabs.applications": [
     {
       "type": 0,
-      "value": "Applications"
+      "value": "Rakendused"
     }
   ],
   "pages.devices.tabs.legacy": [
@@ -1077,19 +1077,19 @@
   "pages.devices.tabs.section": [
     {
       "type": 0,
-      "value": "Device views"
+      "value": "Seadmete vaated"
     }
   ],
   "pages.devices.tabs.user": [
     {
       "type": 0,
-      "value": "User devices"
+      "value": "Kasutaja seadmed"
     }
   ],
   "pages.devices.title": [
     {
       "type": 0,
-      "value": "Devices"
+      "value": "Seadmed"
     }
   ],
   "pages.devices.user.client_column": [
@@ -1159,7 +1159,7 @@
   "pages.devices.user.device_column": [
     {
       "type": 0,
-      "value": "Device"
+      "value": "Seade"
     }
   ],
   "pages.devices.user.device_id_label": [
@@ -1183,7 +1183,7 @@
   "pages.devices.user.filters.activity_recently_used": [
     {
       "type": 0,
-      "value": "Recently used"
+      "value": "Hiljuti kasutatud"
     }
   ],
   "pages.devices.user.filters.activity_signed_out": [
@@ -1195,7 +1195,7 @@
   "pages.devices.user.filters.client_chip": [
     {
       "type": 0,
-      "value": "Application: "
+      "value": "Rakendus: "
     },
     {
       "type": 1,
@@ -1229,13 +1229,13 @@
   "pages.devices.user.finish.button": [
     {
       "type": 0,
-      "value": "Remove device"
+      "value": "Eemalda seade"
     }
   ],
   "pages.devices.user.finish.confirm": [
     {
       "type": 0,
-      "value": "Remove device"
+      "value": "Eemalda seade"
     }
   ],
   "pages.devices.user.finish.description": [
@@ -1259,7 +1259,7 @@
   "pages.devices.user.finish.title": [
     {
       "type": 0,
-      "value": "Remove this device?"
+      "value": "Kas eemaldad selle seadme?"
     }
   ],
   "pages.devices.user.finished_at_label": [
@@ -1305,7 +1305,7 @@
   "pages.devices.user.not_found.title": [
     {
       "type": 0,
-      "value": "Device not found"
+      "value": "Seadet ei leidu"
     }
   ],
   "pages.devices.user.scope_label": [
@@ -1317,19 +1317,19 @@
   "pages.devices.user.status_column": [
     {
       "type": 0,
-      "value": "Status"
+      "value": "Olek"
     }
   ],
   "pages.devices.user.technical_details": [
     {
       "type": 0,
-      "value": "Technical details"
+      "value": "Tehnilised üksikasjad"
     }
   ],
   "pages.devices.user.title": [
     {
       "type": 0,
-      "value": "User devices"
+      "value": "Kasutaja seadmed"
     }
   ],
   "pages.devices.user.user_agent_label": [
@@ -1353,25 +1353,25 @@
   "pages.federation.allowlist.add.error": [
     {
       "type": 0,
-      "value": "Failed to add domain to allowlist"
+      "value": "Domeen lisamine lubatud domeenide loendisse ei õnnestunud"
     }
   ],
   "pages.federation.allowlist.add.success": [
     {
       "type": 0,
-      "value": "Domain added to allowlist"
+      "value": "Domeen on lisatud lubatud domeenide loendisse"
     }
   ],
   "pages.federation.allowlist.add_domain": [
     {
       "type": 0,
-      "value": "Add domain"
+      "value": "Lisa domeen"
     }
   ],
   "pages.federation.allowlist.add_pattern": [
     {
       "type": 0,
-      "value": "Add pattern"
+      "value": "Lisa muster"
     }
   ],
   "pages.federation.allowlist.add_pattern.help": [
@@ -1389,19 +1389,19 @@
   "pages.federation.allowlist.heading": [
     {
       "type": 0,
-      "value": "List of patterns allowed to federate with you"
+      "value": "Domeenide mustrid, millel puhul on födereerimine lubatud"
     }
   ],
   "pages.federation.allowlist.remove.error": [
     {
       "type": 0,
-      "value": "Failed to remove domain from allowlist"
+      "value": "Domeeni eemaldamine lubatud domeenide loendist ei õnnestunud"
     }
   ],
   "pages.federation.allowlist.remove.success": [
     {
       "type": 0,
-      "value": "Domain removed from allowlist"
+      "value": "Domeen on eemaldatud lubatud domeenide loendist"
     }
   ],
   "pages.federation.allowlist.remove_confirm.alert.description": [
@@ -1433,13 +1433,13 @@
   "pages.federation.allowlist.remove_tooltip": [
     {
       "type": 0,
-      "value": "Remove from allowlist"
+      "value": "Eemalda lubatud domeenide loendist"
     }
   ],
   "pages.federation.detail.contact": [
     {
       "type": 0,
-      "value": "Contact"
+      "value": "Kontakt"
     }
   ],
   "pages.federation.detail.last_retry": [
@@ -1463,7 +1463,7 @@
   "pages.federation.detail.retry_interval": [
     {
       "type": 0,
-      "value": "Retry interval"
+      "value": "Uuesti proovimise välp"
     }
   ],
   "pages.federation.detail.retry_interval.none": [
@@ -1475,13 +1475,13 @@
   "pages.federation.detail.security": [
     {
       "type": 0,
-      "value": "Security"
+      "value": "Turvalisus"
     }
   ],
   "pages.federation.detail.support_page": [
     {
       "type": 0,
-      "value": "Support page"
+      "value": "Kasutajatoe leht"
     }
   ],
   "pages.federation.details_label": [
@@ -1595,7 +1595,7 @@
   "pages.federation.table.status": [
     {
       "type": 0,
-      "value": "Status"
+      "value": "Olek"
     }
   ],
   "pages.federation.title": [
@@ -1864,22 +1864,28 @@
       "value": "Aegumine"
     }
   ],
-  "pages.personal_tokens.expires_in_help": [
-    {
-      "type": 0,
-      "value": "Leave empty for tokens that never expire"
-    }
-  ],
   "pages.personal_tokens.expires_in_label": [
     {
       "type": 0,
       "value": "Aegumine (päevades)"
     }
   ],
-  "pages.personal_tokens.expires_in_placeholder": [
+  "pages.personal_tokens.expires_in_missing": [
     {
       "type": 0,
-      "value": "30"
+      "value": "Enter how many days the token should last"
+    }
+  ],
+  "pages.personal_tokens.expires_in_underflow": [
+    {
+      "type": 0,
+      "value": "A token has to last at least one day"
+    }
+  ],
+  "pages.personal_tokens.expiry_revoked": [
+    {
+      "type": 0,
+      "value": "Revoked"
     }
   ],
   "pages.personal_tokens.filter.active": [
@@ -1891,7 +1897,7 @@
   "pages.personal_tokens.filter.expires": [
     {
       "type": 0,
-      "value": "With an expiry date"
+      "value": "Aegumiskuupäevaga"
     }
   ],
   "pages.personal_tokens.filter.no_expiry": [
@@ -1903,7 +1909,7 @@
   "pages.personal_tokens.filter.revoked": [
     {
       "type": 0,
-      "value": "Revoked"
+      "value": "Tühistatud"
     }
   ],
   "pages.personal_tokens.filter.scope_mas_admin": [
@@ -2008,12 +2014,6 @@
       "value": "Isikliku tunnusloa uuesti loomine ei õnnestunud"
     }
   ],
-  "pages.personal_tokens.regenerate_expires_help": [
-    {
-      "type": 0,
-      "value": "Leave empty to keep the same expiry as before, or set a new expiry time"
-    }
-  ],
   "pages.personal_tokens.regenerate_success": [
     {
       "type": 0,
@@ -2081,7 +2081,7 @@
   "pages.personal_tokens.revoked_at_label": [
     {
       "type": 0,
-      "value": "Revoked at"
+      "value": "Tühistamise aeg"
     }
   ],
   "pages.personal_tokens.scope_device_help": [
@@ -2108,10 +2108,28 @@
       "value": "Access to the Synapse admin API"
     }
   ],
+  "pages.personal_tokens.scopes_group_label": [
+    {
+      "type": 0,
+      "value": "Scopes"
+    }
+  ],
   "pages.personal_tokens.scopes_label": [
     {
       "type": 0,
       "value": "Scopes"
+    }
+  ],
+  "pages.personal_tokens.set_expiry_help": [
+    {
+      "type": 0,
+      "value": "Otherwise the token never expires"
+    }
+  ],
+  "pages.personal_tokens.set_expiry_label": [
+    {
+      "type": 0,
+      "value": "Set an expiry"
     }
   ],
   "pages.personal_tokens.status.active": [
@@ -2123,25 +2141,25 @@
   "pages.personal_tokens.status.column": [
     {
       "type": 0,
-      "value": "Status"
+      "value": "Olek"
     }
   ],
   "pages.personal_tokens.status.expired": [
     {
       "type": 0,
-      "value": "Expired"
+      "value": "Aegunud"
     }
   ],
   "pages.personal_tokens.status.label": [
     {
       "type": 0,
-      "value": "Status"
+      "value": "Olek"
     }
   ],
   "pages.personal_tokens.status.revoked": [
     {
       "type": 0,
-      "value": "Revoked"
+      "value": "Tühistatud"
     }
   ],
   "pages.personal_tokens.title": [
@@ -2237,7 +2255,7 @@
   "pages.registration_tokens.edit_properties": [
     {
       "type": 0,
-      "value": "Edit properties"
+      "value": "Muuda omadusi"
     }
   ],
   "pages.registration_tokens.edit_properties.revoked_tooltip": [
@@ -2285,7 +2303,7 @@
   "pages.registration_tokens.filters.expired_only": [
     {
       "type": 0,
-      "value": "Expired"
+      "value": "Aegunud"
     }
   ],
   "pages.registration_tokens.filters.not_revoked": [
@@ -2297,7 +2315,7 @@
   "pages.registration_tokens.filters.revoked_only": [
     {
       "type": 0,
-      "value": "Revoked"
+      "value": "Tühistatud"
     }
   ],
   "pages.registration_tokens.filters.unused_only": [
@@ -2399,7 +2417,7 @@
   "pages.registration_tokens.revoked_at_label": [
     {
       "type": 0,
-      "value": "Revoked at"
+      "value": "Tühistamise aeg"
     }
   ],
   "pages.registration_tokens.save_changes": [
@@ -2417,13 +2435,13 @@
   "pages.registration_tokens.status.column": [
     {
       "type": 0,
-      "value": "Status"
+      "value": "Olek"
     }
   ],
   "pages.registration_tokens.status.expired": [
     {
       "type": 0,
-      "value": "Expired"
+      "value": "Aegunud"
     }
   ],
   "pages.registration_tokens.status.invalid": [
@@ -2435,13 +2453,13 @@
   "pages.registration_tokens.status.label": [
     {
       "type": 0,
-      "value": "Status"
+      "value": "Olek"
     }
   ],
   "pages.registration_tokens.status.revoked": [
     {
       "type": 0,
-      "value": "Revoked"
+      "value": "Tühistatud"
     }
   ],
   "pages.registration_tokens.status.used_up": [
@@ -3580,7 +3598,7 @@
   "pages.users.statistics.devices": [
     {
       "type": 0,
-      "value": "Devices"
+      "value": "Seadmed"
     }
   ],
   "pages.users.statistics.legacy_devices": [
@@ -3780,7 +3798,7 @@
   "ui.data_table.loading_more": [
     {
       "type": 0,
-      "value": "Loading more…"
+      "value": "Laadin veel…"
     }
   ],
   "ui.destination_status.failing": [
@@ -3824,25 +3842,25 @@
   "ui.device_info.type.mobile": [
     {
       "type": 0,
-      "value": "Mobile device"
+      "value": "Nutiseade"
     }
   ],
   "ui.device_info.type.pc": [
     {
       "type": 0,
-      "value": "Computer"
+      "value": "Arvuti"
     }
   ],
   "ui.device_info.type.tablet": [
     {
       "type": 0,
-      "value": "Tablet"
+      "value": "Tahvelarvuti"
     }
   ],
   "ui.device_info.type.unknown": [
     {
       "type": 0,
-      "value": "Unknown device type"
+      "value": "Tundmatu seadme tüüp"
     }
   ],
   "ui.device_info.unknown_device": [
@@ -3892,7 +3910,7 @@
   "ui.device_status.recently_used": [
     {
       "type": 0,
-      "value": "Recently used"
+      "value": "Hiljuti kasutatud"
     }
   ],
   "ui.device_status.signed_out": [

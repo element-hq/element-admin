@@ -638,14 +638,17 @@
   "pages.personal_tokens.expires_at_label": {
     "message": "Istječe na"
   },
-  "pages.personal_tokens.expires_in_help": {
-    "message": "Ostavite prazno za tokene koji nikada ne istječu"
-  },
   "pages.personal_tokens.expires_in_label": {
     "message": "Istječe za (dani)"
   },
-  "pages.personal_tokens.expires_in_placeholder": {
-    "message": "30"
+  "pages.personal_tokens.expires_in_missing": {
+    "message": "Enter how many days the token should last"
+  },
+  "pages.personal_tokens.expires_in_underflow": {
+    "message": "A token has to last at least one day"
+  },
+  "pages.personal_tokens.expiry_revoked": {
+    "message": "Revoked"
   },
   "pages.personal_tokens.filter.active": {
     "message": "Aktivan"
@@ -710,9 +713,6 @@
   "pages.personal_tokens.regenerate_error": {
     "message": "Nije uspjelo ponovno generiranje osobnog tokena"
   },
-  "pages.personal_tokens.regenerate_expires_help": {
-    "message": "Ostavite prazno da biste zadržali isti rok trajanja kao i prije ili postavite novo vrijeme isteka"
-  },
   "pages.personal_tokens.regenerate_success": {
     "message": "Osobni token uspješno je ponovno generiran"
   },
@@ -758,8 +758,17 @@
   "pages.personal_tokens.scope_synapse_admin_help": {
     "message": "Pristup Synapseovu administratorskom API-ju"
   },
+  "pages.personal_tokens.scopes_group_label": {
+    "message": "Scopes"
+  },
   "pages.personal_tokens.scopes_label": {
     "message": "Opsezi"
+  },
+  "pages.personal_tokens.set_expiry_help": {
+    "message": "Otherwise the token never expires"
+  },
+  "pages.personal_tokens.set_expiry_label": {
+    "message": "Set an expiry"
   },
   "pages.personal_tokens.status.active": {
     "message": "Aktivan"
