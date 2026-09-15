@@ -404,12 +404,6 @@
   "pages.devices.user.user_none": {
     "message": "No user"
   },
-  "pages.federation.allowlist.add.error": {
-    "message": "Failed to add domain to allowlist"
-  },
-  "pages.federation.allowlist.add.success": {
-    "message": "Domain added to allowlist"
-  },
   "pages.federation.allowlist.add_domain": {
     "message": "Add domain"
   },
@@ -419,20 +413,26 @@
   "pages.federation.allowlist.add_pattern.help": {
     "message": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
   },
+  "pages.federation.allowlist.add.error": {
+    "message": "Failed to add domain to allowlist"
+  },
+  "pages.federation.allowlist.add.success": {
+    "message": "Domain added to allowlist"
+  },
   "pages.federation.allowlist.empty": {
     "message": "No domains in the allowlist yet. Add a domain pattern above to get started."
   },
   "pages.federation.allowlist.heading": {
     "message": "List of patterns allowed to federate with you"
   },
+  "pages.federation.allowlist.remove_tooltip": {
+    "message": "Remove from allowlist"
+  },
   "pages.federation.allowlist.remove.error": {
     "message": "Failed to remove domain from allowlist"
   },
   "pages.federation.allowlist.remove.success": {
     "message": "Domain removed from allowlist"
-  },
-  "pages.federation.allowlist.remove_tooltip": {
-    "message": "Remove from allowlist"
   },
   "pages.federation.detail.contact": {
     "message": "Contact"
@@ -917,6 +917,12 @@
   "pages.rooms.deletion.in_progress.title": {
     "message": "Deletion in progress"
   },
+  "pages.rooms.deletion.scheduled.description": {
+    "message": "Room deletion task is scheduled for {timestamp, date, short} at {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.scheduled.title": {
+    "message": "Room deletion scheduled"
+  },
   "pages.rooms.deletion.success.description": {
     "message": "Room deletion task completed successfully on {timestamp, date, short} at {timestamp, time, short}."
   },
@@ -1304,14 +1310,14 @@
   "rooms_info.other_members": {
     "message": "{COUNT, plural, one {# other} other {# others}}"
   },
+  "ui.data_table.loading_more": {
+    "message": "Loading more…"
+  },
   "ui.data.failed_to_load": {
     "message": "Failed to load"
   },
   "ui.data.loading": {
     "message": "Loading value"
-  },
-  "ui.data_table.loading_more": {
-    "message": "Loading more…"
   },
   "ui.destination_status.failing": {
     "message": "Failing"
