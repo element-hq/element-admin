@@ -117,7 +117,7 @@
     "message": "Juhtpaneel"
   },
   "navigation.devices": {
-    "message": "Devices"
+    "message": "Seadmed"
   },
   "navigation.documentation": {
     "message": "Dokumentatsioon"
@@ -153,7 +153,7 @@
     "message": "ESS-i versioon"
   },
   "pages.dashboard.latest_ess_version": {
-    "message": "Latest ESS version"
+    "message": "Viimane ESS-versioon"
   },
   "pages.dashboard.new_ess_release": {
     "message": "(Uus versioon)"
@@ -174,7 +174,7 @@
     "message": "Juhtpaneel"
   },
   "pages.devices.applications.client_id_label": {
-    "message": "Client ID"
+    "message": "Kliendi tunnus (Client ID)"
   },
   "pages.devices.applications.count": {
     "message": "{COUNT, plural, =0 {No applications} one {# application} other {# applications}}"
@@ -186,10 +186,10 @@
     "message": "Application details"
   },
   "pages.devices.applications.filters.has_active_sessions": {
-    "message": "With active devices"
+    "message": "Aktiivsete seadmetega"
   },
   "pages.devices.applications.filters.no_active_sessions": {
-    "message": "Without active devices"
+    "message": "Ilma aktiivsete seadmeteta"
   },
   "pages.devices.applications.grant_types_label": {
     "message": "Grant types"
@@ -201,31 +201,31 @@
     "message": "The requested application ({clientId}) could not be found on {serverName}."
   },
   "pages.devices.applications.not_found.title": {
-    "message": "Application not found"
+    "message": "Rakendust ei leidu"
   },
   "pages.devices.applications.redirect_uris_label": {
     "message": "Redirect URIs"
   },
   "pages.devices.applications.search_placeholder": {
-    "message": "Search by name…"
+    "message": "Otsi nime järgi…"
   },
   "pages.devices.applications.statistics.active_recently": {
-    "message": "Active in the past 7 days"
+    "message": "Aktiivne viimase 7 päeva jooksul"
   },
   "pages.devices.applications.statistics.created_recently": {
-    "message": "Devices added in the past 7 days"
+    "message": "Viimase 7 päeva jooksul lisatud seadmed"
   },
   "pages.devices.applications.statistics.heading": {
-    "message": "Device statistics"
+    "message": "Seadme statistika"
   },
   "pages.devices.applications.statistics.total_active": {
-    "message": "Active devices"
+    "message": "Aktiivsed seadmed"
   },
   "pages.devices.applications.title": {
-    "message": "Applications"
+    "message": "Rakendused"
   },
   "pages.devices.applications.uri_label": {
-    "message": "Homepage"
+    "message": "Avaleht"
   },
   "pages.devices.applications.view_sessions": {
     "message": "View all devices"
@@ -246,7 +246,7 @@
     "message": "Legacy device details"
   },
   "pages.devices.legacy.device_column": {
-    "message": "Device"
+    "message": "Seade"
   },
   "pages.devices.legacy.device_id_label": {
     "message": "Seadme tunnus"
@@ -258,7 +258,7 @@
     "message": "Inactive"
   },
   "pages.devices.legacy.filters.activity_recently_used": {
-    "message": "Recently used"
+    "message": "Hiljuti kasutatud"
   },
   "pages.devices.legacy.filters.activity_signed_out": {
     "message": "Signed out"
@@ -270,10 +270,10 @@
     "message": "User: @{localpart}:{server}"
   },
   "pages.devices.legacy.finish.button": {
-    "message": "Remove device"
+    "message": "Eemalda seade"
   },
   "pages.devices.legacy.finish.confirm": {
-    "message": "Remove device"
+    "message": "Eemalda seade"
   },
   "pages.devices.legacy.finish.description": {
     "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
@@ -306,10 +306,10 @@
     "message": "Redirect URI"
   },
   "pages.devices.legacy.status_column": {
-    "message": "Status"
+    "message": "Olek"
   },
   "pages.devices.legacy.technical_details": {
-    "message": "Technical details"
+    "message": "Tehnilised üksikasjad"
   },
   "pages.devices.legacy.title": {
     "message": "Legacy devices"
@@ -321,19 +321,19 @@
     "message": "User"
   },
   "pages.devices.tabs.applications": {
-    "message": "Applications"
+    "message": "Rakendused"
   },
   "pages.devices.tabs.legacy": {
     "message": "Legacy devices"
   },
   "pages.devices.tabs.section": {
-    "message": "Device views"
+    "message": "Seadmete vaated"
   },
   "pages.devices.tabs.user": {
-    "message": "User devices"
+    "message": "Kasutaja seadmed"
   },
   "pages.devices.title": {
-    "message": "Devices"
+    "message": "Seadmed"
   },
   "pages.devices.user.client_column": {
     "message": "Application"
@@ -351,7 +351,7 @@
     "message": "Device details"
   },
   "pages.devices.user.device_column": {
-    "message": "Device"
+    "message": "Seade"
   },
   "pages.devices.user.device_id_label": {
     "message": "Seadme tunnus"
@@ -363,13 +363,13 @@
     "message": "Inactive"
   },
   "pages.devices.user.filters.activity_recently_used": {
-    "message": "Recently used"
+    "message": "Hiljuti kasutatud"
   },
   "pages.devices.user.filters.activity_signed_out": {
     "message": "Signed out"
   },
   "pages.devices.user.filters.client_chip": {
-    "message": "Application: {name}"
+    "message": "Rakendus: {name}"
   },
   "pages.devices.user.filters.newest_first": {
     "message": "Esmalt uuemad"
@@ -378,10 +378,10 @@
     "message": "User: @{localpart}:{server}"
   },
   "pages.devices.user.finish.button": {
-    "message": "Remove device"
+    "message": "Eemalda seade"
   },
   "pages.devices.user.finish.confirm": {
-    "message": "Remove device"
+    "message": "Eemalda seade"
   },
   "pages.devices.user.finish.description": {
     "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
@@ -393,7 +393,7 @@
     "message": "Device removed"
   },
   "pages.devices.user.finish.title": {
-    "message": "Remove this device?"
+    "message": "Kas eemaldad selle seadme?"
   },
   "pages.devices.user.finished_at_label": {
     "message": "Signed out at"
@@ -408,19 +408,19 @@
     "message": "The requested device ({sessionId}) could not be found on {serverName}."
   },
   "pages.devices.user.not_found.title": {
-    "message": "Device not found"
+    "message": "Seadet ei leidu"
   },
   "pages.devices.user.scope_label": {
     "message": "Scope"
   },
   "pages.devices.user.status_column": {
-    "message": "Status"
+    "message": "Olek"
   },
   "pages.devices.user.technical_details": {
-    "message": "Technical details"
+    "message": "Tehnilised üksikasjad"
   },
   "pages.devices.user.title": {
-    "message": "User devices"
+    "message": "Kasutaja seadmed"
   },
   "pages.devices.user.user_agent_label": {
     "message": "User agent"
@@ -432,16 +432,16 @@
     "message": "No user"
   },
   "pages.federation.allowlist.add.error": {
-    "message": "Failed to add domain to allowlist"
+    "message": "Domeen lisamine lubatud domeenide loendisse ei õnnestunud"
   },
   "pages.federation.allowlist.add.success": {
-    "message": "Domain added to allowlist"
+    "message": "Domeen on lisatud lubatud domeenide loendisse"
   },
   "pages.federation.allowlist.add_domain": {
-    "message": "Add domain"
+    "message": "Lisa domeen"
   },
   "pages.federation.allowlist.add_pattern": {
-    "message": "Add pattern"
+    "message": "Lisa muster"
   },
   "pages.federation.allowlist.add_pattern.help": {
     "message": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
@@ -450,13 +450,13 @@
     "message": "No domains in the allowlist yet. Add a domain pattern above to get started."
   },
   "pages.federation.allowlist.heading": {
-    "message": "List of patterns allowed to federate with you"
+    "message": "Domeenide mustrid, millel puhul on födereerimine lubatud"
   },
   "pages.federation.allowlist.remove.error": {
-    "message": "Failed to remove domain from allowlist"
+    "message": "Domeeni eemaldamine lubatud domeenide loendist ei õnnestunud"
   },
   "pages.federation.allowlist.remove.success": {
-    "message": "Domain removed from allowlist"
+    "message": "Domeen on eemaldatud lubatud domeenide loendist"
   },
   "pages.federation.allowlist.remove_confirm.alert.description": {
     "message": "Your server will stop federating with servers matching this pattern."
@@ -468,10 +468,10 @@
     "message": "Remove {serverName} from the allowlist?"
   },
   "pages.federation.allowlist.remove_tooltip": {
-    "message": "Remove from allowlist"
+    "message": "Eemalda lubatud domeenide loendist"
   },
   "pages.federation.detail.contact": {
-    "message": "Contact"
+    "message": "Kontakt"
   },
   "pages.federation.detail.last_retry": {
     "message": "Last retry timestamp"
@@ -483,16 +483,16 @@
     "message": "Last successful stream"
   },
   "pages.federation.detail.retry_interval": {
-    "message": "Retry interval"
+    "message": "Uuesti proovimise välp"
   },
   "pages.federation.detail.retry_interval.none": {
     "message": "None"
   },
   "pages.federation.detail.security": {
-    "message": "Security"
+    "message": "Turvalisus"
   },
   "pages.federation.detail.support_page": {
-    "message": "Support page"
+    "message": "Kasutajatoe leht"
   },
   "pages.federation.details_label": {
     "message": "Destination details"
@@ -528,7 +528,7 @@
     "message": "Serveri nimi"
   },
   "pages.federation.table.status": {
-    "message": "Status"
+    "message": "Olek"
   },
   "pages.federation.title": {
     "message": "Federation"
@@ -638,26 +638,29 @@
   "pages.personal_tokens.expires_at_label": {
     "message": "Aegumine"
   },
-  "pages.personal_tokens.expires_in_help": {
-    "message": "Leave empty for tokens that never expire"
-  },
   "pages.personal_tokens.expires_in_label": {
     "message": "Aegumine (päevades)"
   },
-  "pages.personal_tokens.expires_in_placeholder": {
-    "message": "30"
+  "pages.personal_tokens.expires_in_missing": {
+    "message": "Enter how many days the token should last"
+  },
+  "pages.personal_tokens.expires_in_underflow": {
+    "message": "A token has to last at least one day"
+  },
+  "pages.personal_tokens.expiry_revoked": {
+    "message": "Revoked"
   },
   "pages.personal_tokens.filter.active": {
     "message": "Aktiivne"
   },
   "pages.personal_tokens.filter.expires": {
-    "message": "With an expiry date"
+    "message": "Aegumiskuupäevaga"
   },
   "pages.personal_tokens.filter.no_expiry": {
     "message": "Never expires"
   },
   "pages.personal_tokens.filter.revoked": {
-    "message": "Revoked"
+    "message": "Tühistatud"
   },
   "pages.personal_tokens.filter.scope_mas_admin": {
     "message": "Access to the MAS admin API"
@@ -710,9 +713,6 @@
   "pages.personal_tokens.regenerate_error": {
     "message": "Isikliku tunnusloa uuesti loomine ei õnnestunud"
   },
-  "pages.personal_tokens.regenerate_expires_help": {
-    "message": "Leave empty to keep the same expiry as before, or set a new expiry time"
-  },
   "pages.personal_tokens.regenerate_success": {
     "message": "Isikliku tunnusloa uuesti loomine õnnestus"
   },
@@ -744,7 +744,7 @@
     "message": "Revoke this personal token?"
   },
   "pages.personal_tokens.revoked_at_label": {
-    "message": "Revoked at"
+    "message": "Tühistamise aeg"
   },
   "pages.personal_tokens.scope_device_help": {
     "message": "Provision a Matrix device"
@@ -758,23 +758,32 @@
   "pages.personal_tokens.scope_synapse_admin_help": {
     "message": "Access to the Synapse admin API"
   },
+  "pages.personal_tokens.scopes_group_label": {
+    "message": "Scopes"
+  },
   "pages.personal_tokens.scopes_label": {
     "message": "Scopes"
+  },
+  "pages.personal_tokens.set_expiry_help": {
+    "message": "Otherwise the token never expires"
+  },
+  "pages.personal_tokens.set_expiry_label": {
+    "message": "Set an expiry"
   },
   "pages.personal_tokens.status.active": {
     "message": "Aktiivne"
   },
   "pages.personal_tokens.status.column": {
-    "message": "Status"
+    "message": "Olek"
   },
   "pages.personal_tokens.status.expired": {
-    "message": "Expired"
+    "message": "Aegunud"
   },
   "pages.personal_tokens.status.label": {
-    "message": "Status"
+    "message": "Olek"
   },
   "pages.personal_tokens.status.revoked": {
-    "message": "Revoked"
+    "message": "Tühistatud"
   },
   "pages.personal_tokens.title": {
     "message": "Isiklikud tunnusload"
@@ -822,7 +831,7 @@
     "message": "Registration token details"
   },
   "pages.registration_tokens.edit_properties": {
-    "message": "Edit properties"
+    "message": "Muuda omadusi"
   },
   "pages.registration_tokens.edit_properties.revoked_tooltip": {
     "message": "Unrevoke this token before editing its properties"
@@ -846,13 +855,13 @@
     "message": "Aktiivne"
   },
   "pages.registration_tokens.filters.expired_only": {
-    "message": "Expired"
+    "message": "Aegunud"
   },
   "pages.registration_tokens.filters.not_revoked": {
     "message": "Not revoked"
   },
   "pages.registration_tokens.filters.revoked_only": {
-    "message": "Revoked"
+    "message": "Tühistatud"
   },
   "pages.registration_tokens.filters.unused_only": {
     "message": "Unused"
@@ -891,7 +900,7 @@
     "message": "Revoke this registration token?"
   },
   "pages.registration_tokens.revoked_at_label": {
-    "message": "Revoked at"
+    "message": "Tühistamise aeg"
   },
   "pages.registration_tokens.save_changes": {
     "message": "Save Changes"
@@ -900,19 +909,19 @@
     "message": "Aktiivne"
   },
   "pages.registration_tokens.status.column": {
-    "message": "Status"
+    "message": "Olek"
   },
   "pages.registration_tokens.status.expired": {
-    "message": "Expired"
+    "message": "Aegunud"
   },
   "pages.registration_tokens.status.invalid": {
     "message": "Invalid"
   },
   "pages.registration_tokens.status.label": {
-    "message": "Status"
+    "message": "Olek"
   },
   "pages.registration_tokens.status.revoked": {
-    "message": "Revoked"
+    "message": "Tühistatud"
   },
   "pages.registration_tokens.status.used_up": {
     "message": "Used up"
@@ -1356,7 +1365,7 @@
     "message": "Sisesta sellele kasutajale uus salasõna"
   },
   "pages.users.statistics.devices": {
-    "message": "Devices"
+    "message": "Seadmed"
   },
   "pages.users.statistics.legacy_devices": {
     "message": "Legacy devices"
@@ -1422,7 +1431,7 @@
     "message": "Laadimine ei õnnestunud"
   },
   "ui.data_table.loading_more": {
-    "message": "Loading more…"
+    "message": "Laadin veel…"
   },
   "ui.destination_status.failing": {
     "message": "Failing"
@@ -1440,16 +1449,16 @@
     "message": "{name} on {platform}"
   },
   "ui.device_info.type.mobile": {
-    "message": "Mobile device"
+    "message": "Nutiseade"
   },
   "ui.device_info.type.pc": {
-    "message": "Computer"
+    "message": "Arvuti"
   },
   "ui.device_info.type.tablet": {
-    "message": "Tablet"
+    "message": "Tahvelarvuti"
   },
   "ui.device_info.type.unknown": {
-    "message": "Unknown device type"
+    "message": "Tundmatu seadme tüüp"
   },
   "ui.device_info.unknown_device": {
     "message": "Unknown device"
@@ -1470,7 +1479,7 @@
     "message": "This device has not been used yet."
   },
   "ui.device_status.recently_used": {
-    "message": "Recently used"
+    "message": "Hiljuti kasutatud"
   },
   "ui.device_status.signed_out": {
     "message": "Signed out"

@@ -38,7 +38,7 @@
   "action.done": [
     {
       "type": 0,
-      "value": "Done"
+      "value": "完成"
     }
   ],
   "action.go_back": [
@@ -80,19 +80,19 @@
   "common.loading": [
     {
       "type": 0,
-      "value": "Loading…"
+      "value": "正在加载…"
     }
   ],
   "errors.authorization_denied": [
     {
       "type": 0,
-      "value": "Sign-in was cancelled."
+      "value": "登录已取消。"
     }
   ],
   "errors.authorization_error": [
     {
       "type": 0,
-      "value": "Sign-in failed: "
+      "value": "登录失败："
     },
     {
       "type": 1,
@@ -525,7 +525,7 @@
   "navigation.devices": [
     {
       "type": 0,
-      "value": "Devices"
+      "value": "设备"
     }
   ],
   "navigation.documentation": [
@@ -639,7 +639,7 @@
   "pages.devices.applications.client_id_label": [
     {
       "type": 0,
-      "value": "Client ID"
+      "value": "客户端ID"
     }
   ],
   "pages.devices.applications.count": [
@@ -651,18 +651,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No applications"
-            }
-          ]
-        },
-        "one": {
-          "value": [
-            {
-              "type": 7
-            },
-            {
-              "type": 0,
-              "value": " application"
+              "value": "无应用程序"
             }
           ]
         },
@@ -673,7 +662,7 @@
             },
             {
               "type": 0,
-              "value": " applications"
+              "value": " 个应用程序"
             }
           ]
         }
@@ -685,7 +674,7 @@
   "pages.devices.applications.description": [
     {
       "type": 0,
-      "value": "Applications are OAuth 2.0 clients that users sign in to."
+      "value": "应用程序是用户登录的 OAuth 2.0 客户端。"
     }
   ],
   "pages.devices.applications.details_label": [
@@ -697,19 +686,19 @@
   "pages.devices.applications.filters.has_active_sessions": [
     {
       "type": 0,
-      "value": "With active devices"
+      "value": "有活动设备"
     }
   ],
   "pages.devices.applications.filters.no_active_sessions": [
     {
       "type": 0,
-      "value": "Without active devices"
+      "value": "无活动设备"
     }
   ],
   "pages.devices.applications.grant_types_label": [
     {
       "type": 0,
-      "value": "Grant types"
+      "value": "授权类型"
     }
   ],
   "pages.devices.applications.name_column": [
@@ -721,15 +710,7 @@
   "pages.devices.applications.not_found.description": [
     {
       "type": 0,
-      "value": "The requested application ("
-    },
-    {
-      "type": 1,
-      "value": "clientId"
-    },
-    {
-      "type": 0,
-      "value": ") could not be found on "
+      "value": "无法在"
     },
     {
       "type": 1,
@@ -737,67 +718,75 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " 上找到所请求的应用程序 ("
+    },
+    {
+      "type": 1,
+      "value": "clientId"
+    },
+    {
+      "type": 0,
+      "value": ")。"
     }
   ],
   "pages.devices.applications.not_found.title": [
     {
       "type": 0,
-      "value": "Application not found"
+      "value": "找不到应用程序"
     }
   ],
   "pages.devices.applications.redirect_uris_label": [
     {
       "type": 0,
-      "value": "Redirect URIs"
+      "value": "重定向 URI"
     }
   ],
   "pages.devices.applications.search_placeholder": [
     {
       "type": 0,
-      "value": "Search by name…"
+      "value": "按名称搜索"
     }
   ],
   "pages.devices.applications.statistics.active_recently": [
     {
       "type": 0,
-      "value": "Active in the past 7 days"
+      "value": "过去 7 天内活跃"
     }
   ],
   "pages.devices.applications.statistics.created_recently": [
     {
       "type": 0,
-      "value": "Devices added in the past 7 days"
+      "value": "过去 7 天内新增的设备"
     }
   ],
   "pages.devices.applications.statistics.heading": [
     {
       "type": 0,
-      "value": "Device statistics"
+      "value": "设备统计"
     }
   ],
   "pages.devices.applications.statistics.total_active": [
     {
       "type": 0,
-      "value": "Active devices"
+      "value": "活跃设备"
     }
   ],
   "pages.devices.applications.title": [
     {
       "type": 0,
-      "value": "Applications"
+      "value": "应用程序"
     }
   ],
   "pages.devices.applications.uri_label": [
     {
       "type": 0,
-      "value": "Homepage"
+      "value": "主页"
     }
   ],
   "pages.devices.applications.view_sessions": [
     {
       "type": 0,
-      "value": "View all devices"
+      "value": "查看所有设备"
     }
   ],
   "pages.devices.applications.view_users": [
@@ -815,18 +804,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No legacy devices"
-            }
-          ]
-        },
-        "one": {
-          "value": [
-            {
-              "type": 7
-            },
-            {
-              "type": 0,
-              "value": " legacy device"
+              "value": "无传统设备"
             }
           ]
         },
@@ -837,7 +815,7 @@
             },
             {
               "type": 0,
-              "value": " legacy devices"
+              "value": " 个传统设备"
             }
           ]
         }
@@ -849,13 +827,13 @@
   "pages.devices.legacy.created_at_label": [
     {
       "type": 0,
-      "value": "Signed in at"
+      "value": "登录时间："
     }
   ],
   "pages.devices.legacy.description": [
     {
       "type": 0,
-      "value": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
+      "value": "传统设备是指尚未迁移到 OAuth 2.0 的客户端的登录方式。"
     }
   ],
   "pages.devices.legacy.details_label": [
@@ -867,7 +845,7 @@
   "pages.devices.legacy.device_column": [
     {
       "type": 0,
-      "value": "Device"
+      "value": "设备"
     }
   ],
   "pages.devices.legacy.device_id_label": [
@@ -885,19 +863,19 @@
   "pages.devices.legacy.filters.activity_inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "不活跃"
     }
   ],
   "pages.devices.legacy.filters.activity_recently_used": [
     {
       "type": 0,
-      "value": "Recently used"
+      "value": "最近使用"
     }
   ],
   "pages.devices.legacy.filters.activity_signed_out": [
     {
       "type": 0,
-      "value": "Signed out"
+      "value": "已注销"
     }
   ],
   "pages.devices.legacy.filters.newest_first": [
@@ -909,7 +887,7 @@
   "pages.devices.legacy.filters.user_chip": [
     {
       "type": 0,
-      "value": "User: @"
+      "value": "用户: @"
     },
     {
       "type": 1,
@@ -927,43 +905,43 @@
   "pages.devices.legacy.finish.button": [
     {
       "type": 0,
-      "value": "Remove device"
+      "value": "移除设备"
     }
   ],
   "pages.devices.legacy.finish.confirm": [
     {
       "type": 0,
-      "value": "Remove device"
+      "value": "移除设备"
     }
   ],
   "pages.devices.legacy.finish.description": [
     {
       "type": 0,
-      "value": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
+      "value": "用户将从该设备中注销。访问令牌和刷新令牌将立即被撤销。"
     }
   ],
   "pages.devices.legacy.finish.error": [
     {
       "type": 0,
-      "value": "Failed to remove the legacy device"
+      "value": "移除传统设备失败"
     }
   ],
   "pages.devices.legacy.finish.success": [
     {
       "type": 0,
-      "value": "Legacy device removed"
+      "value": "已移除传统设备"
     }
   ],
   "pages.devices.legacy.finish.title": [
     {
       "type": 0,
-      "value": "Remove this legacy device?"
+      "value": "要移除此传统设备吗？"
     }
   ],
   "pages.devices.legacy.finished_at_label": [
     {
       "type": 0,
-      "value": "Signed out at"
+      "value": "注销时间："
     }
   ],
   "pages.devices.legacy.last_active_ip_label": [
@@ -981,15 +959,7 @@
   "pages.devices.legacy.not_found.description": [
     {
       "type": 0,
-      "value": "The requested legacy device ("
-    },
-    {
-      "type": 1,
-      "value": "sessionId"
-    },
-    {
-      "type": 0,
-      "value": ") could not be found on "
+      "value": "无法在"
     },
     {
       "type": 1,
@@ -997,19 +967,27 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " 上找到所请求的传统设备 ("
+    },
+    {
+      "type": 1,
+      "value": "sessionId"
+    },
+    {
+      "type": 0,
+      "value": ")。"
     }
   ],
   "pages.devices.legacy.not_found.title": [
     {
       "type": 0,
-      "value": "Legacy device not found"
+      "value": "未找到传统设备"
     }
   ],
   "pages.devices.legacy.redirect_uri_label": [
     {
       "type": 0,
-      "value": "Redirect URI"
+      "value": "重定向URI"
     }
   ],
   "pages.devices.legacy.status_column": [
@@ -1021,61 +999,61 @@
   "pages.devices.legacy.technical_details": [
     {
       "type": 0,
-      "value": "Technical details"
+      "value": "技术细节"
     }
   ],
   "pages.devices.legacy.title": [
     {
       "type": 0,
-      "value": "Legacy devices"
+      "value": "传统设备"
     }
   ],
   "pages.devices.legacy.user_agent_label": [
     {
       "type": 0,
-      "value": "User agent"
+      "value": "用户代理"
     }
   ],
   "pages.devices.legacy.user_column": [
     {
       "type": 0,
-      "value": "User"
+      "value": "用户"
     }
   ],
   "pages.devices.tabs.applications": [
     {
       "type": 0,
-      "value": "Applications"
+      "value": "应用程序"
     }
   ],
   "pages.devices.tabs.legacy": [
     {
       "type": 0,
-      "value": "Legacy devices"
+      "value": "传统设备"
     }
   ],
   "pages.devices.tabs.section": [
     {
       "type": 0,
-      "value": "Device views"
+      "value": "设备视图"
     }
   ],
   "pages.devices.tabs.user": [
     {
       "type": 0,
-      "value": "User devices"
+      "value": "用户设备"
     }
   ],
   "pages.devices.title": [
     {
       "type": 0,
-      "value": "Devices"
+      "value": "设备"
     }
   ],
   "pages.devices.user.client_column": [
     {
       "type": 0,
-      "value": "Application"
+      "value": "应用"
     }
   ],
   "pages.devices.user.count": [
@@ -1087,18 +1065,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No devices"
-            }
-          ]
-        },
-        "one": {
-          "value": [
-            {
-              "type": 7
-            },
-            {
-              "type": 0,
-              "value": " device"
+              "value": "无设备"
             }
           ]
         },
@@ -1109,7 +1076,7 @@
             },
             {
               "type": 0,
-              "value": " devices"
+              "value": " 个设备"
             }
           ]
         }
@@ -1121,13 +1088,13 @@
   "pages.devices.user.created_at_label": [
     {
       "type": 0,
-      "value": "Signed in at"
+      "value": "登录时间："
     }
   ],
   "pages.devices.user.description": [
     {
       "type": 0,
-      "value": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
+      "value": "设备代表用户在某应用程序上的单次登录。注销该设备将立即撤销其访问权限。"
     }
   ],
   "pages.devices.user.details_label": [
@@ -1139,7 +1106,7 @@
   "pages.devices.user.device_column": [
     {
       "type": 0,
-      "value": "Device"
+      "value": "设备"
     }
   ],
   "pages.devices.user.device_id_label": [
@@ -1157,25 +1124,25 @@
   "pages.devices.user.filters.activity_inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "不活跃"
     }
   ],
   "pages.devices.user.filters.activity_recently_used": [
     {
       "type": 0,
-      "value": "Recently used"
+      "value": "最近使用"
     }
   ],
   "pages.devices.user.filters.activity_signed_out": [
     {
       "type": 0,
-      "value": "Signed out"
+      "value": "已注销"
     }
   ],
   "pages.devices.user.filters.client_chip": [
     {
       "type": 0,
-      "value": "Application: "
+      "value": "应用程序："
     },
     {
       "type": 1,
@@ -1191,7 +1158,7 @@
   "pages.devices.user.filters.user_chip": [
     {
       "type": 0,
-      "value": "User: @"
+      "value": "用户: @"
     },
     {
       "type": 1,
@@ -1209,43 +1176,43 @@
   "pages.devices.user.finish.button": [
     {
       "type": 0,
-      "value": "Remove device"
+      "value": "移除设备"
     }
   ],
   "pages.devices.user.finish.confirm": [
     {
       "type": 0,
-      "value": "Remove device"
+      "value": "移除设备"
     }
   ],
   "pages.devices.user.finish.description": [
     {
       "type": 0,
-      "value": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
+      "value": "用户将从该设备中注销。访问令牌和刷新令牌将立即被撤销。"
     }
   ],
   "pages.devices.user.finish.error": [
     {
       "type": 0,
-      "value": "Failed to remove the device"
+      "value": "移除设备失败。"
     }
   ],
   "pages.devices.user.finish.success": [
     {
       "type": 0,
-      "value": "Device removed"
+      "value": "设备已移除"
     }
   ],
   "pages.devices.user.finish.title": [
     {
       "type": 0,
-      "value": "Remove this device?"
+      "value": "要移除此设备吗？"
     }
   ],
   "pages.devices.user.finished_at_label": [
     {
       "type": 0,
-      "value": "Signed out at"
+      "value": "注销时间："
     }
   ],
   "pages.devices.user.last_active_ip_label": [
@@ -1263,15 +1230,7 @@
   "pages.devices.user.not_found.description": [
     {
       "type": 0,
-      "value": "The requested device ("
-    },
-    {
-      "type": 1,
-      "value": "sessionId"
-    },
-    {
-      "type": 0,
-      "value": ") could not be found on "
+      "value": "在 "
     },
     {
       "type": 1,
@@ -1279,19 +1238,27 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " 上找不到请求的device("
+    },
+    {
+      "type": 1,
+      "value": "sessionId"
+    },
+    {
+      "type": 0,
+      "value": ")。"
     }
   ],
   "pages.devices.user.not_found.title": [
     {
       "type": 0,
-      "value": "Device not found"
+      "value": "未找到设备"
     }
   ],
   "pages.devices.user.scope_label": [
     {
       "type": 0,
-      "value": "Scope"
+      "value": "范围"
     }
   ],
   "pages.devices.user.status_column": [
@@ -1303,31 +1270,31 @@
   "pages.devices.user.technical_details": [
     {
       "type": 0,
-      "value": "Technical details"
+      "value": "技术细节"
     }
   ],
   "pages.devices.user.title": [
     {
       "type": 0,
-      "value": "User devices"
+      "value": "用户设备"
     }
   ],
   "pages.devices.user.user_agent_label": [
     {
       "type": 0,
-      "value": "User agent"
+      "value": "用户代理"
     }
   ],
   "pages.devices.user.user_column": [
     {
       "type": 0,
-      "value": "User"
+      "value": "用户"
     }
   ],
   "pages.devices.user.user_none": [
     {
       "type": 0,
-      "value": "No user"
+      "value": "无用户"
     }
   ],
   "pages.federation.allowlist.add.error": [
@@ -1822,22 +1789,28 @@
       "value": "有效期到"
     }
   ],
-  "pages.personal_tokens.expires_in_help": [
-    {
-      "type": 0,
-      "value": "留空表示 Token 永不过期"
-    }
-  ],
   "pages.personal_tokens.expires_in_label": [
     {
       "type": 0,
       "value": "剩余有效期（天）"
     }
   ],
-  "pages.personal_tokens.expires_in_placeholder": [
+  "pages.personal_tokens.expires_in_missing": [
     {
       "type": 0,
-      "value": "30"
+      "value": "Enter how many days the token should last"
+    }
+  ],
+  "pages.personal_tokens.expires_in_underflow": [
+    {
+      "type": 0,
+      "value": "A token has to last at least one day"
+    }
+  ],
+  "pages.personal_tokens.expiry_revoked": [
+    {
+      "type": 0,
+      "value": "Revoked"
     }
   ],
   "pages.personal_tokens.filter.active": [
@@ -1966,12 +1939,6 @@
       "value": "个人 Token 重新生成失败"
     }
   ],
-  "pages.personal_tokens.regenerate_expires_help": [
-    {
-      "type": 0,
-      "value": "留空以保持与之前相同的有效期，或设置新的有效期"
-    }
-  ],
   "pages.personal_tokens.regenerate_success": [
     {
       "type": 0,
@@ -2066,10 +2033,28 @@
       "value": "访问 Synapse 管理 API"
     }
   ],
+  "pages.personal_tokens.scopes_group_label": [
+    {
+      "type": 0,
+      "value": "Scopes"
+    }
+  ],
   "pages.personal_tokens.scopes_label": [
     {
       "type": 0,
       "value": "范围"
+    }
+  ],
+  "pages.personal_tokens.set_expiry_help": [
+    {
+      "type": 0,
+      "value": "Otherwise the token never expires"
+    }
+  ],
+  "pages.personal_tokens.set_expiry_label": [
+    {
+      "type": 0,
+      "value": "Set an expiry"
     }
   ],
   "pages.personal_tokens.status.active": [
@@ -2545,19 +2530,19 @@
   "pages.rooms.columns.alias": [
     {
       "type": 0,
-      "value": "Alias"
+      "value": "别名"
     }
   ],
   "pages.rooms.columns.members": [
     {
       "type": 0,
-      "value": "Members"
+      "value": "成员"
     }
   ],
   "pages.rooms.columns.room": [
     {
       "type": 0,
-      "value": "Room"
+      "value": "房间"
     }
   ],
   "pages.rooms.columns.visibility": [
@@ -2798,25 +2783,25 @@
   "pages.rooms.room_type.private": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "私有"
     }
   ],
   "pages.rooms.room_type.public": [
     {
       "type": 0,
-      "value": "Public"
+      "value": "公开"
     }
   ],
   "pages.rooms.room_type.restricted": [
     {
       "type": 0,
-      "value": "Restricted"
+      "value": "受限"
     }
   ],
   "pages.rooms.search_placeholder": [
     {
       "type": 0,
-      "value": "Search…"
+      "value": "搜索"
     }
   ],
   "pages.rooms.title": [
@@ -2962,19 +2947,19 @@
   "pages.users.account_status.deactivated": [
     {
       "type": 0,
-      "value": "Deactivated"
+      "value": "已停用"
     }
   ],
   "pages.users.account_status.guest": [
     {
       "type": 0,
-      "value": "Guest"
+      "value": "访客"
     }
   ],
   "pages.users.account_status.locked": [
     {
       "type": 0,
-      "value": "Locked"
+      "value": "已锁定"
     }
   ],
   "pages.users.add_email.button": [
@@ -3034,7 +3019,7 @@
   "pages.users.columns.account_status": [
     {
       "type": 0,
-      "value": "Account status"
+      "value": "账户状态"
     }
   ],
   "pages.users.columns.created_at": [
@@ -3180,7 +3165,7 @@
   "pages.users.filters.active_client_chip": [
     {
       "type": 0,
-      "value": "Has active device on: "
+      "value": "已启用的设备："
     },
     {
       "type": 1,
@@ -3208,7 +3193,7 @@
   "pages.users.filters.has_legacy_session": [
     {
       "type": 0,
-      "value": "Has active legacy device"
+      "value": "具有活跃的传统设备"
     }
   ],
   "pages.users.filters.locked": [
@@ -3226,7 +3211,7 @@
   "pages.users.filters.no_legacy_session": [
     {
       "type": 0,
-      "value": "No active legacy device"
+      "value": "没有活跃的传统设备"
     }
   ],
   "pages.users.filters.non_guests": [
@@ -3512,13 +3497,13 @@
   "pages.users.statistics.devices": [
     {
       "type": 0,
-      "value": "Devices"
+      "value": "设备"
     }
   ],
   "pages.users.statistics.legacy_devices": [
     {
       "type": 0,
-      "value": "Legacy devices"
+      "value": "传统设备"
     }
   ],
   "pages.users.title": [
@@ -3687,7 +3672,7 @@
   "ui.data_table.loading_more": [
     {
       "type": 0,
-      "value": "Loading more…"
+      "value": "正在加载更多…"
     }
   ],
   "ui.destination_status.failing": [
@@ -3699,7 +3684,7 @@
   "ui.destination_status.inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "不活跃"
     }
   ],
   "ui.destination_status.never_worked": [
@@ -3721,7 +3706,7 @@
     },
     {
       "type": 0,
-      "value": " on "
+      "value": " 在 "
     },
     {
       "type": 1,
@@ -3731,31 +3716,31 @@
   "ui.device_info.type.mobile": [
     {
       "type": 0,
-      "value": "Mobile device"
+      "value": "移动设备"
     }
   ],
   "ui.device_info.type.pc": [
     {
       "type": 0,
-      "value": "Computer"
+      "value": "计算机"
     }
   ],
   "ui.device_info.type.tablet": [
     {
       "type": 0,
-      "value": "Tablet"
+      "value": "平板电脑"
     }
   ],
   "ui.device_info.type.unknown": [
     {
       "type": 0,
-      "value": "Unknown device type"
+      "value": "未知设备类型"
     }
   ],
   "ui.device_info.unknown_device": [
     {
       "type": 0,
-      "value": "Unknown device"
+      "value": "未知设备"
     }
   ],
   "ui.device_status.active": [
@@ -3767,13 +3752,13 @@
   "ui.device_status.inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "不活跃"
     }
   ],
   "ui.device_status.last_active.tooltip": [
     {
       "type": 0,
-      "value": "Last active on "
+      "value": "最后一次活跃时间："
     },
     {
       "type": 1,
@@ -3781,7 +3766,7 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " 。"
     }
   ],
   "ui.device_status.never_used": [
@@ -3793,31 +3778,31 @@
   "ui.device_status.never_used.tooltip": [
     {
       "type": 0,
-      "value": "This device has not been used yet."
+      "value": "该设备尚未使用过。"
     }
   ],
   "ui.device_status.recently_used": [
     {
       "type": 0,
-      "value": "Recently used"
+      "value": "最近使用"
     }
   ],
   "ui.device_status.signed_out": [
     {
       "type": 0,
-      "value": "Signed out"
+      "value": "已注销"
     }
   ],
   "ui.device_status.signed_out.tooltip": [
     {
       "type": 0,
-      "value": "This device has been signed out and no longer has access."
+      "value": "该设备已注销，不再具有访问权限。"
     }
   ],
   "ui.device_status.signed_out.tooltip_at": [
     {
       "type": 0,
-      "value": "Signed out on "
+      "value": "已于"
     },
     {
       "type": 1,
@@ -3825,7 +3810,7 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": "登出。"
     }
   ],
   "ui.language_switcher.browser_default": [

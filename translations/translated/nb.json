@@ -638,14 +638,17 @@
   "pages.personal_tokens.expires_at_label": {
     "message": "Utløper kl."
   },
-  "pages.personal_tokens.expires_in_help": {
-    "message": "La feltet stå tomt for tokens som aldri utløper"
-  },
   "pages.personal_tokens.expires_in_label": {
     "message": "Utløper om (dager)"
   },
-  "pages.personal_tokens.expires_in_placeholder": {
-    "message": "30"
+  "pages.personal_tokens.expires_in_missing": {
+    "message": "Enter how many days the token should last"
+  },
+  "pages.personal_tokens.expires_in_underflow": {
+    "message": "A token has to last at least one day"
+  },
+  "pages.personal_tokens.expiry_revoked": {
+    "message": "Revoked"
   },
   "pages.personal_tokens.filter.active": {
     "message": "Aktiv"
@@ -710,9 +713,6 @@
   "pages.personal_tokens.regenerate_error": {
     "message": "Kunne ikke regenerere personlig token"
   },
-  "pages.personal_tokens.regenerate_expires_help": {
-    "message": "La feltet stå tomt for å beholde samme utløpsdato som før, eller angi en ny utløpsdato."
-  },
   "pages.personal_tokens.regenerate_success": {
     "message": "Personlig token regenerert"
   },
@@ -758,8 +758,17 @@
   "pages.personal_tokens.scope_synapse_admin_help": {
     "message": "Tilgang til Synapse admin APIet"
   },
+  "pages.personal_tokens.scopes_group_label": {
+    "message": "Scopes"
+  },
   "pages.personal_tokens.scopes_label": {
     "message": "Omfang"
+  },
+  "pages.personal_tokens.set_expiry_help": {
+    "message": "Otherwise the token never expires"
+  },
+  "pages.personal_tokens.set_expiry_label": {
+    "message": "Set an expiry"
   },
   "pages.personal_tokens.status.active": {
     "message": "Aktiv"

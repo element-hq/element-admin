@@ -2,25 +2,25 @@
   "action.add": [
     {
       "type": 0,
-      "value": "Add"
+      "value": "Ekle"
     }
   ],
   "action.cancel": [
     {
       "type": 0,
-      "value": "Cancel"
+      "value": "İptal"
     }
   ],
   "action.clear": [
     {
       "type": 0,
-      "value": "Clear"
+      "value": "Temizle"
     }
   ],
   "action.close": [
     {
       "type": 0,
-      "value": "Close"
+      "value": "Kapat"
     }
   ],
   "action.copy": [
@@ -44,37 +44,37 @@
   "action.go_back": [
     {
       "type": 0,
-      "value": "Go back"
+      "value": "Geri dön"
     }
   ],
   "action.remove": [
     {
       "type": 0,
-      "value": "Remove"
+      "value": "Kaldır"
     }
   ],
   "action.retry": [
     {
       "type": 0,
-      "value": "Retry"
+      "value": "Yeniden dene"
     }
   ],
   "action.sign_out": [
     {
       "type": 0,
-      "value": "Sign out"
+      "value": "Çıkış yap"
     }
   ],
   "common.email_address": [
     {
       "type": 0,
-      "value": "Email address"
+      "value": "E-posta Adresi"
     }
   ],
   "common.filter": [
     {
       "type": 0,
-      "value": "Filter"
+      "value": "Filtrele"
     }
   ],
   "common.loading": [
@@ -101,40 +101,32 @@
   ],
   "errors.http_fetch": [
     {
-      "type": 0,
-      "value": "Request to "
-    },
-    {
       "type": 1,
       "value": "url"
     },
     {
       "type": 0,
-      "value": " failed"
+      "value": " 'e yapılan istek başarısız oldu"
     }
   ],
   "errors.http_fetch_json_decoding": [
     {
-      "type": 0,
-      "value": "Failed to decode JSON response from "
-    },
-    {
       "type": 1,
       "value": "url"
+    },
+    {
+      "type": 0,
+      "value": " adresinden gelen JSON yanıtının kod çözülmesi başarısız oldu"
     }
   ],
   "errors.http_status": [
     {
-      "type": 0,
-      "value": "Request to "
-    },
-    {
       "type": 1,
       "value": "url"
     },
     {
       "type": 0,
-      "value": " failed with status code "
+      "value": " adresine yapılan istek, "
     },
     {
       "type": 1,
@@ -147,6 +139,10 @@
     {
       "type": 1,
       "value": "statusText"
+    },
+    {
+      "type": 0,
+      "value": " durum koduyla başarısız oldu"
     }
   ],
   "errors.mas_api": [
@@ -162,7 +158,7 @@
   "errors.matrix_standard": [
     {
       "type": 0,
-      "value": "Request to the homeserver failed with error code '"
+      "value": "Ana sunucuya gönderilen istek, \""
     },
     {
       "type": 1,
@@ -170,7 +166,7 @@
     },
     {
       "type": 0,
-      "value": "'. Additionally, the server gave the following error message: "
+      "value": "\" hata koduyla başarısız oldu. Ayrıca sunucu şu hata mesajını döndürdü: "
     },
     {
       "type": 1,
@@ -186,13 +182,13 @@
   "errors.not_logged_in": [
     {
       "type": 0,
-      "value": "Not logged in"
+      "value": "Oturum açılmadı"
     }
   ],
   "footer.copyright_notice": [
     {
       "type": 0,
-      "value": "Copyright © "
+      "value": "Telif hakkı © "
     },
     {
       "type": 3,
@@ -209,25 +205,25 @@
   "footer.help_and_support": [
     {
       "type": 0,
-      "value": "Help & Support"
+      "value": "Yardım & Destek"
     }
   ],
   "footer.legal": [
     {
       "type": 0,
-      "value": "Legal"
+      "value": "Yasal"
     }
   ],
   "footer.privacy": [
     {
       "type": 0,
-      "value": "Privacy"
+      "value": "Gizlilik"
     }
   ],
   "header.user_menu.title": [
     {
       "type": 0,
-      "value": "Account menu"
+      "value": "Hesap menüsü"
     }
   ],
   "marketing.also_available_in_pro.description": [
@@ -299,7 +295,7 @@
       "children": [
         {
           "type": 0,
-          "value": "Auditing gives organisations the ability to keep records of end-to-end encrypted conversations and room events to meet compliance or legal requirements."
+          "value": "Auditing gives organizations the ability to keep records of end-to-end encrypted conversations and room events to meet compliance or legal requirements."
         }
       ]
     },
@@ -327,7 +323,7 @@
       "children": [
         {
           "type": 0,
-          "value": "Auditing can be configured to suit an organisation’s specific requirements. For instance direct messages between two individuals can be excluded so that only group conversations are recorded."
+          "value": "Auditing can be configured to suit an organization’s specific requirements. For instance direct messages between two individuals can be excluded so that only group conversations are recorded."
         }
       ]
     },
@@ -535,7 +531,7 @@
   "navigation.dashboard": [
     {
       "type": 0,
-      "value": "Dashboard"
+      "value": "Kontrol Paneli"
     }
   ],
   "navigation.devices": [
@@ -547,7 +543,7 @@
   "navigation.documentation": [
     {
       "type": 0,
-      "value": "Documentation"
+      "value": "Dokümantasyon"
     }
   ],
   "navigation.federation": [
@@ -559,19 +555,19 @@
   "navigation.personal_tokens": [
     {
       "type": 0,
-      "value": "Personal tokens"
+      "value": "Kişisel tokenlar"
     }
   ],
   "navigation.registration_tokens": [
     {
       "type": 0,
-      "value": "Registration tokens"
+      "value": "Kayıt anahtarı"
     }
   ],
   "navigation.rooms": [
     {
       "type": 0,
-      "value": "Rooms"
+      "value": "Odalar"
     }
   ],
   "navigation.supervision": [
@@ -583,7 +579,7 @@
   "navigation.users": [
     {
       "type": 0,
-      "value": "Users"
+      "value": "Kullanıcılar"
     }
   ],
   "pages.auditing.title": [
@@ -607,49 +603,49 @@
   "pages.dashboard.current_ess_version": [
     {
       "type": 0,
-      "value": "ESS version"
+      "value": "ESS sürümü"
     }
   ],
   "pages.dashboard.latest_ess_version": [
     {
       "type": 0,
-      "value": "Latest ESS version"
+      "value": "En son ESS sürümü"
     }
   ],
   "pages.dashboard.new_ess_release": [
     {
       "type": 0,
-      "value": "(New release)"
+      "value": "(Yeni sürüm)"
     }
   ],
   "pages.dashboard.registered_users_count": [
     {
       "type": 0,
-      "value": "Users registered"
+      "value": "Kayıtlı kullanıcılar"
     }
   ],
   "pages.dashboard.rooms_count": [
     {
       "type": 0,
-      "value": "Rooms total"
+      "value": "Toplam oda sayısı"
     }
   ],
   "pages.dashboard.running_latest_ess": [
     {
       "type": 0,
-      "value": "(You're running the latest version)"
+      "value": "(En son sürümü kullanıyorsunuz)"
     }
   ],
   "pages.dashboard.synapse_version": [
     {
       "type": 0,
-      "value": "Synapse version"
+      "value": "Synapse sürümü"
     }
   ],
   "pages.dashboard.title": [
     {
       "type": 0,
-      "value": "Dashboard"
+      "value": "Kontrol Paneli"
     }
   ],
   "pages.devices.applications.client_id_label": [
@@ -889,7 +885,7 @@
   "pages.devices.legacy.device_id_label": [
     {
       "type": 0,
-      "value": "Device ID"
+      "value": "Cihaz Kimliği"
     }
   ],
   "pages.devices.legacy.filters.activity_active": [
@@ -919,7 +915,7 @@
   "pages.devices.legacy.filters.newest_first": [
     {
       "type": 0,
-      "value": "Newest first"
+      "value": "Önce en yeni"
     }
   ],
   "pages.devices.legacy.filters.user_chip": [
@@ -1161,7 +1157,7 @@
   "pages.devices.user.device_id_label": [
     {
       "type": 0,
-      "value": "Device ID"
+      "value": "Cihaz Kimliği"
     }
   ],
   "pages.devices.user.filters.activity_active": [
@@ -1201,7 +1197,7 @@
   "pages.devices.user.filters.newest_first": [
     {
       "type": 0,
-      "value": "Newest first"
+      "value": "Önce en yeni"
     }
   ],
   "pages.devices.user.filters.user_chip": [
@@ -1585,7 +1581,7 @@
   "pages.federation.table.server_name": [
     {
       "type": 0,
-      "value": "Server name"
+      "value": "Sunucu adı"
     }
   ],
   "pages.federation.table.status": [
@@ -1615,13 +1611,13 @@
   "pages.generic_error.go_home": [
     {
       "type": 0,
-      "value": "Go home"
+      "value": "Ana sayfaya git"
     }
   ],
   "pages.generic_error.sign_out_and_reload": [
     {
       "type": 0,
-      "value": "Sign out and reload"
+      "value": "Oturumu kapat ve sayfayı yeniden yükle."
     }
   ],
   "pages.generic_error.technical_details.item": [
@@ -1641,19 +1637,19 @@
   "pages.generic_error.text": [
     {
       "type": 0,
-      "value": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
+      "value": "Bu, bir hatadan veya ana sunucuya ulaşılamamasından kaynaklanıyor olabilir. Sayfayı yeniden yüklemeyi deneyebilir, önceki sayfaya geri dönebilir veya her şeyi sıfırlayıp ana sayfaya geri dönebilirsiniz."
     }
   ],
   "pages.generic_error.title": [
     {
       "type": 0,
-      "value": "An unexpected error occurred"
+      "value": "Beklenmeyen bir hata oluştu"
     }
   ],
   "pages.landing.description": [
     {
       "type": 0,
-      "value": "Manage the deployment of the element app for your organisation or community."
+      "value": "Organizasyonunuz veya topluluğunuz için Element uygulamasının dağıtımını yönetin."
     }
   ],
   "pages.login.errors.authorization_failed": [
@@ -1671,73 +1667,73 @@
   "pages.login.errors.no_auth_metadata": [
     {
       "type": 0,
-      "value": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
+      "value": "Sunucunun kimlik doğrulama meta verileri yüklenemedi. Synapse'e erişilemiyor olabilir veya Matrix Authentication Service'i kullanacak şekilde yapılandırılmamış olabilir."
     }
   ],
   "pages.login.errors.no_client_metadata": [
     {
       "type": 0,
-      "value": "Failed to register the client. Matrix Authentication Service may be unreachable or misconfigured."
+      "value": "İstemci kaydı başarısız oldu. Matrix Authentication Service erişilemez durumda olabilir veya yanlış yapılandırılmış olabilir."
     }
   ],
   "pages.login.errors.no_well_known": [
     {
       "type": 0,
-      "value": "Failed to load the server's well-known document. The server name may be invalid."
+      "value": "Sunucunun well-known belgesini yükleyemedi. Sunucu adı geçersiz olabilir."
     }
   ],
   "pages.login.get_started": [
     {
       "type": 0,
-      "value": "Get started"
+      "value": "Başlayın"
     }
   ],
   "pages.login.server_name": [
     {
       "type": 0,
-      "value": "Server name"
+      "value": "Sunucu adı"
     }
   ],
   "pages.login.title": [
     {
       "type": 0,
-      "value": "Login"
+      "value": "Giriş"
     }
   ],
   "pages.personal_tokens.acting_user_column": [
     {
       "type": 0,
-      "value": "Acting user"
+      "value": "Vekil Kullanıcı"
     }
   ],
   "pages.personal_tokens.acting_user_label": [
     {
       "type": 0,
-      "value": "Acting user"
+      "value": "Vekil kullanıcı"
     }
   ],
   "pages.personal_tokens.actor_user_help": [
     {
       "type": 0,
-      "value": "The user this token will act on behalf of"
+      "value": "Bu tokenın yetkisiyle işlem yapılacak kullanıcı"
     }
   ],
   "pages.personal_tokens.actor_user_label": [
     {
       "type": 0,
-      "value": "Acting user"
+      "value": "Vekil kullanıcı"
     }
   ],
   "pages.personal_tokens.add_token_title": [
     {
       "type": 0,
-      "value": "Add personal token"
+      "value": "Kişisel token ekle"
     }
   ],
   "pages.personal_tokens.cant_regenerate_tooltip": [
     {
       "type": 0,
-      "value": "Only "
+      "value": "Bu tokenı yalnızca "
     },
     {
       "type": 1,
@@ -1745,13 +1741,13 @@
     },
     {
       "type": 0,
-      "value": " can regenerate this token"
+      "value": " yeniden oluşturabilir"
     }
   ],
   "pages.personal_tokens.cant_regenerate_tooltip_generic": [
     {
       "type": 0,
-      "value": "Only the owner of the token can regenerate it"
+      "value": "Tokenı yalnızca sahibi yeniden oluşturabilir"
     }
   ],
   "pages.personal_tokens.count": [
@@ -1797,31 +1793,31 @@
   "pages.personal_tokens.create_error": [
     {
       "type": 0,
-      "value": "Failed to create personal token"
+      "value": "Kişisel jeton oluşturulamadı"
     }
   ],
   "pages.personal_tokens.create_success": [
     {
       "type": 0,
-      "value": "Personal token created successfully"
+      "value": "Kişisel jeton başarıyla oluşturuldu"
     }
   ],
   "pages.personal_tokens.create_token": [
     {
       "type": 0,
-      "value": "Create token"
+      "value": "Token oluştur"
     }
   ],
   "pages.personal_tokens.created_at_label": [
     {
       "type": 0,
-      "value": "Created at"
+      "value": "Oluşturulma tarihi"
     }
   ],
   "pages.personal_tokens.description": [
     {
       "type": 0,
-      "value": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations."
+      "value": "Kişisel token'lar, Synapse ve MAS yönetim API'lerine erişim de dahil olmak üzere belirli erişime sahip, uzun ömürlü erişim token'larıdır. Görevleri otomatikleştirmek ve entegrasyonlar oluşturmak için kullanışlıdırlar."
     }
   ],
   "pages.personal_tokens.details_label": [
@@ -1833,13 +1829,13 @@
   "pages.personal_tokens.device_id_help": [
     {
       "type": 0,
-      "value": "Leave empty to generate a random 10-character device ID"
+      "value": "Rastgele 10 karakterlik bir cihaz kimliği oluşturmak için boş bırakın."
     }
   ],
   "pages.personal_tokens.device_id_label": [
     {
       "type": 0,
-      "value": "Device ID"
+      "value": "Cihaz Kimliği"
     }
   ],
   "pages.personal_tokens.device_id_placeholder": [
@@ -1851,13 +1847,13 @@
   "pages.personal_tokens.expires_at_column": [
     {
       "type": 0,
-      "value": "Expires at"
+      "value": "Son geçerlilik tarihi"
     }
   ],
   "pages.personal_tokens.expires_at_label": [
     {
       "type": 0,
-      "value": "Expires at"
+      "value": "Son geçerlilik tarihi"
     }
   ],
   "pages.personal_tokens.expires_in_label": [
@@ -2161,7 +2157,7 @@
   "pages.personal_tokens.title": [
     {
       "type": 0,
-      "value": "Personal tokens"
+      "value": "Kişisel tokenlar"
     }
   ],
   "pages.personal_tokens.token_created_description": [
@@ -2191,55 +2187,55 @@
   "pages.registration_tokens.auto_generate_placeholder": [
     {
       "type": 0,
-      "value": "Auto-generate if left empty"
+      "value": "Boş bırakılırsa otomatik olarak oluşturulur"
     }
   ],
   "pages.registration_tokens.create_token.error": [
     {
       "type": 0,
-      "value": "Failed to create token"
+      "value": "Token oluşturulamadı"
     }
   ],
   "pages.registration_tokens.create_token.submit": [
     {
       "type": 0,
-      "value": "Create Token"
+      "value": "Token Oluştur"
     }
   ],
   "pages.registration_tokens.create_token.success": [
     {
       "type": 0,
-      "value": "Token created successfully"
+      "value": "Token başarıyla oluşturuldu"
     }
   ],
   "pages.registration_tokens.create_token.title": [
     {
       "type": 0,
-      "value": "Create Registration Token"
+      "value": "Kayıt Tokenı Oluştur"
     }
   ],
   "pages.registration_tokens.created_at_column": [
     {
       "type": 0,
-      "value": "Created at"
+      "value": "Oluşturulma tarihi"
     }
   ],
   "pages.registration_tokens.created_at_label": [
     {
       "type": 0,
-      "value": "Created at"
+      "value": "Oluşturulma tarihi"
     }
   ],
   "pages.registration_tokens.custom_token_help": [
     {
       "type": 0,
-      "value": "Optional custom token string. If left empty, a secure token will be auto-generated."
+      "value": "İsteğe bağlı özel belirteç dizesi. Boş bırakılırsa, güvenli bir belirteç otomatik olarak oluşturulacaktır."
     }
   ],
   "pages.registration_tokens.custom_token_label": [
     {
       "type": 0,
-      "value": "Custom Token"
+      "value": "Özel Token"
     }
   ],
   "pages.registration_tokens.details_label": [
@@ -2251,7 +2247,7 @@
   "pages.registration_tokens.edit_properties": [
     {
       "type": 0,
-      "value": "Edit properties"
+      "value": "Özellikleri düzenle"
     }
   ],
   "pages.registration_tokens.edit_properties.revoked_tooltip": [
@@ -2269,25 +2265,25 @@
   "pages.registration_tokens.edit_token_title": [
     {
       "type": 0,
-      "value": "Edit registration token"
+      "value": "Kayıt belirtecini düzenle"
     }
   ],
   "pages.registration_tokens.expires_at_field": [
     {
       "type": 0,
-      "value": "Expires at"
+      "value": "Son geçerlilik tarihi"
     }
   ],
   "pages.registration_tokens.expires_at_help": [
     {
       "type": 0,
-      "value": "When the token expires. Leave empty if the token should never expire."
+      "value": "Tokenin süresini belirleyin. Tokenin süresinin asla dolmaması gerekiyorsa boş bırakın."
     }
   ],
   "pages.registration_tokens.expires_at_label": [
     {
       "type": 0,
-      "value": "Expires at"
+      "value": "Son geçerlilik tarihi"
     }
   ],
   "pages.registration_tokens.filters.active_only": [
@@ -2317,13 +2313,13 @@
   "pages.registration_tokens.filters.unused_only": [
     {
       "type": 0,
-      "value": "Unused"
+      "value": "Kullanılmamış"
     }
   ],
   "pages.registration_tokens.filters.used_only": [
     {
       "type": 0,
-      "value": "Used"
+      "value": "Kullanılmış"
     }
   ],
   "pages.registration_tokens.never_expires": [
@@ -2335,13 +2331,13 @@
   "pages.registration_tokens.no_expiration_placeholder": [
     {
       "type": 0,
-      "value": "No expiration"
+      "value": "Son kullanma tarihi yok"
     }
   ],
   "pages.registration_tokens.not_found.description": [
     {
       "type": 0,
-      "value": "The requested registration token ("
+      "value": "İstenen kayıt belirteci ("
     },
     {
       "type": 1,
@@ -2349,7 +2345,7 @@
     },
     {
       "type": 0,
-      "value": ") could not be found on "
+      "value": "), "
     },
     {
       "type": 1,
@@ -2357,13 +2353,13 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " üzerinde bulunamadı."
     }
   ],
   "pages.registration_tokens.not_found.title": [
     {
       "type": 0,
-      "value": "Registration token not found"
+      "value": "Kayıt tokenı bulunamadı."
     }
   ],
   "pages.registration_tokens.revoke_token": [
@@ -2419,7 +2415,7 @@
   "pages.registration_tokens.save_changes": [
     {
       "type": 0,
-      "value": "Save Changes"
+      "value": "Değişiklikleri Kaydet"
     }
   ],
   "pages.registration_tokens.status.active": [
@@ -2443,7 +2439,7 @@
   "pages.registration_tokens.status.invalid": [
     {
       "type": 0,
-      "value": "Invalid"
+      "value": "Geçersiz"
     }
   ],
   "pages.registration_tokens.status.label": [
@@ -2461,13 +2457,13 @@
   "pages.registration_tokens.status.used_up": [
     {
       "type": 0,
-      "value": "Used up"
+      "value": "Tükendi"
     }
   ],
   "pages.registration_tokens.title": [
     {
       "type": 0,
-      "value": "Registration tokens"
+      "value": "Kayıt anahtarı"
     }
   ],
   "pages.registration_tokens.token_column": [
@@ -2546,19 +2542,19 @@
   "pages.registration_tokens.unlimited_placeholder": [
     {
       "type": 0,
-      "value": "Unlimited"
+      "value": "Sınırsız"
     }
   ],
   "pages.registration_tokens.unlimited_uses_placeholder": [
     {
       "type": 0,
-      "value": "Leave empty for unlimited uses"
+      "value": "Sınırsız kullanım için boş bırakın"
     }
   ],
   "pages.registration_tokens.unrevoke_token": [
     {
       "type": 0,
-      "value": "Unrevoke token"
+      "value": "Token iptalini geri al"
     }
   ],
   "pages.registration_tokens.unrevoke_token.error": [
@@ -2576,37 +2572,37 @@
   "pages.registration_tokens.usage_count_label": [
     {
       "type": 0,
-      "value": "Usage count"
+      "value": "Kullanım sayısı"
     }
   ],
   "pages.registration_tokens.usage_limit_field": [
     {
       "type": 0,
-      "value": "Usage limit"
+      "value": "Kullanım sınırı"
     }
   ],
   "pages.registration_tokens.usage_limit_help": [
     {
       "type": 0,
-      "value": "Maximum number of times this token can be used. Leave empty for unlimited uses."
+      "value": "Bu tokenın kullanılabileceği maksimum sayı. Sınırsız kullanım için boş bırakın."
     }
   ],
   "pages.registration_tokens.usage_limit_label": [
     {
       "type": 0,
-      "value": "Usage Limit"
+      "value": "Kullanım Sınırı"
     }
   ],
   "pages.registration_tokens.uses_column": [
     {
       "type": 0,
-      "value": "Uses"
+      "value": "Kullanım Alanları"
     }
   ],
   "pages.registration_tokens.valid_until_column": [
     {
       "type": 0,
-      "value": "Expires at"
+      "value": "Geçerlilik Tarihi"
     }
   ],
   "pages.rooms.columns.alias": [
@@ -2784,31 +2780,31 @@
   "pages.rooms.filters.empty_rooms": [
     {
       "type": 0,
-      "value": "Empty rooms"
+      "value": "Boş odalar"
     }
   ],
   "pages.rooms.filters.non_empty_rooms": [
     {
       "type": 0,
-      "value": "Non-empty rooms"
+      "value": "Boş olmayan odalar"
     }
   ],
   "pages.rooms.filters.private_rooms": [
     {
       "type": 0,
-      "value": "Private rooms"
+      "value": "Özel odalar"
     }
   ],
   "pages.rooms.filters.public_rooms": [
     {
       "type": 0,
-      "value": "Public rooms"
+      "value": "Herkese açık odalar"
     }
   ],
   "pages.rooms.not_found.description": [
     {
       "type": 0,
-      "value": "The requested room ("
+      "value": "İstenen room ("
     },
     {
       "type": 1,
@@ -2816,7 +2812,7 @@
     },
     {
       "type": 0,
-      "value": ") could not be found on "
+      "value": "), "
     },
     {
       "type": 1,
@@ -2824,13 +2820,13 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " numarada bulunamadı."
     }
   ],
   "pages.rooms.not_found.title": [
     {
       "type": 0,
-      "value": "Room not found"
+      "value": "Oda bulunamadı"
     }
   ],
   "pages.rooms.room_count": [
@@ -2838,7 +2834,7 @@
       "type": 6,
       "value": "COUNT",
       "options": {
-        "=0": {
+        "zero": {
           "value": [
             {
               "type": 0,
@@ -2846,7 +2842,15 @@
             }
           ]
         },
-        "one": {
+        "other": {
+          "value": [
+            {
+              "type": 0,
+              "value": "No rooms"
+            }
+          ]
+        },
+        "bir": {
           "value": [
             {
               "type": 7
@@ -2857,7 +2861,7 @@
             }
           ]
         },
-        "other": {
+        "diğer": {
           "value": [
             {
               "type": 7
@@ -2900,7 +2904,7 @@
   "pages.rooms.title": [
     {
       "type": 0,
-      "value": "Rooms"
+      "value": "Odalar"
     }
   ],
   "pages.supervision.description": [
@@ -3034,7 +3038,7 @@
   "pages.users.account_status.admin": [
     {
       "type": 0,
-      "value": "Admin"
+      "value": "Yönetici"
     }
   ],
   "pages.users.account_status.deactivated": [
@@ -3058,55 +3062,55 @@
   "pages.users.add_email.button": [
     {
       "type": 0,
-      "value": "Add email address"
+      "value": "E-posta adresini ekle"
     }
   ],
   "pages.users.add_email.description": [
     {
       "type": 0,
-      "value": "Add an email address to this user"
+      "value": "Bu kullanıcıya bir e-posta adresi ekleyin"
     }
   ],
   "pages.users.add_email.error": [
     {
       "type": 0,
-      "value": "Failed to add email address"
+      "value": "E-posta adresi eklenemedi"
     }
   ],
   "pages.users.add_email.error.email_invalid": [
     {
       "type": 0,
-      "value": "Invalid email address"
+      "value": "Geçersiz e-posta adresi"
     }
   ],
   "pages.users.add_email.error.email_missing": [
     {
       "type": 0,
-      "value": "This field is required"
+      "value": "Bu alan zorunludur"
     }
   ],
   "pages.users.add_email.success": [
     {
       "type": 0,
-      "value": "Email address added"
+      "value": "E-posta adresi eklendi"
     }
   ],
   "pages.users.add_email.title": [
     {
       "type": 0,
-      "value": "Add email address"
+      "value": "E-posta adresini ekle"
     }
   ],
   "pages.users.add_upstream_link.error": [
     {
       "type": 0,
-      "value": "Failed to add link upstream account"
+      "value": "Yukarı akış hesabına link eklenemedi"
     }
   ],
   "pages.users.add_upstream_link.success": [
     {
       "type": 0,
-      "value": "Link to upstream account added"
+      "value": "Yukarı akış hesabına link eklendi"
     }
   ],
   "pages.users.columns.account_status": [
@@ -3118,7 +3122,7 @@
   "pages.users.columns.created_at": [
     {
       "type": 0,
-      "value": "Created at"
+      "value": "Oluşturulma tarihi"
     }
   ],
   "pages.users.columns.matrix_id": [
@@ -3130,43 +3134,51 @@
   "pages.users.deactivate_account.alert.description": [
     {
       "type": 0,
-      "value": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
+      "value": "Bu işlem, kullanıcının tüm cihazlardan otomatik olarak çıkışını sağlayacak, tüm erişim belirteçlerini kaldıracak, tüm üçüncü taraf kimliklerini silecek ve hesap verilerini kalıcı olarak silecektir."
     }
   ],
   "pages.users.deactivate_account.alert.title": [
     {
       "type": 0,
-      "value": "You're about to delete user data"
+      "value": "Kullanıcı verilerini silmek üzeresiniz"
     }
   ],
   "pages.users.deactivate_account.button": [
     {
       "type": 0,
-      "value": "Deactivate account"
+      "value": "Hesabı pasifleştir"
     }
   ],
   "pages.users.deactivate_account.error": [
     {
       "type": 0,
-      "value": "Failed to deactivate account"
+      "value": "Hesap devre dışı bırakılamadı"
     }
   ],
   "pages.users.deactivate_account.success": [
     {
       "type": 0,
-      "value": "Account deactivated"
+      "value": "Hesap devre dışı bırakıldı"
     }
   ],
   "pages.users.deactivate_account.title": [
     {
       "type": 0,
-      "value": "Deactivate this user?"
+      "value": "Bu kullanıcının hesabını devre dışı bırakmak istiyor musunuz?"
     }
   ],
   "pages.users.delete_email.description": [
     {
       "type": 0,
-      "value": "Are you sure you want to remove this email address ("
+      "value": "Bu kullanıcının ("
+    },
+    {
+      "type": 1,
+      "value": "mxid"
+    },
+    {
+      "type": 0,
+      "value": ") bu e-posta adresini ("
     },
     {
       "type": 1,
@@ -3174,39 +3186,31 @@
     },
     {
       "type": 0,
-      "value": ") from this user ("
-    },
-    {
-      "type": 1,
-      "value": "mxid"
-    },
-    {
-      "type": 0,
-      "value": ")?"
+      "value": ") kaldırmak istediğinizden emin misiniz?"
     }
   ],
   "pages.users.delete_email.error": [
     {
       "type": 0,
-      "value": "Failed to delete email address"
+      "value": "E-posta adresi silinemedi"
     }
   ],
   "pages.users.delete_email.success": [
     {
       "type": 0,
-      "value": "Email address deleted"
+      "value": "E-posta adresi silindi"
     }
   ],
   "pages.users.delete_email.title": [
     {
       "type": 0,
-      "value": "Remove email address?"
+      "value": "E-posta adresini kaldırmak mı istiyorsunuz?"
     }
   ],
   "pages.users.delete_upstream_link.description": [
     {
       "type": 0,
-      "value": "Are you sure you want to remove the link between this user ("
+      "value": "Bu kullanıcı ("
     },
     {
       "type": 1,
@@ -3214,7 +3218,7 @@
     },
     {
       "type": 0,
-      "value": ") with this upstream account ("
+      "value": ") ile bu üst hesap ("
     },
     {
       "type": 1,
@@ -3222,25 +3226,25 @@
     },
     {
       "type": 0,
-      "value": ")?"
+      "value": ") arasındaki bağlantıyı kaldırmak istediğinizden emin misiniz?"
     }
   ],
   "pages.users.delete_upstream_link.error": [
     {
       "type": 0,
-      "value": "Failed to delete upstream link"
+      "value": "Yukarı akış bağlantısını silme işlemi başarısız oldu"
     }
   ],
   "pages.users.delete_upstream_link.success": [
     {
       "type": 0,
-      "value": "Upstream link deleted"
+      "value": "Yukarı akış bağlantısı silindi"
     }
   ],
   "pages.users.delete_upstream_link.title": [
     {
       "type": 0,
-      "value": "Remove link with upstream account?"
+      "value": "Üst hesapla olan bağlantıyı kaldıracak mısınız?"
     }
   ],
   "pages.users.details_label": [
@@ -3252,7 +3256,7 @@
   "pages.users.filters.active": [
     {
       "type": 0,
-      "value": "Active users"
+      "value": "Aktif kullanıcılar"
     }
   ],
   "pages.users.filters.active_client_chip": [
@@ -3268,19 +3272,19 @@
   "pages.users.filters.admins": [
     {
       "type": 0,
-      "value": "Admins"
+      "value": "Yöneticiler"
     }
   ],
   "pages.users.filters.deactivated": [
     {
       "type": 0,
-      "value": "Deactivated users"
+      "value": "Devre dışı bırakılmış kullanıcılar"
     }
   ],
   "pages.users.filters.guests": [
     {
       "type": 0,
-      "value": "Guests (legacy)"
+      "value": "Misafirler (eski)"
     }
   ],
   "pages.users.filters.has_legacy_session": [
@@ -3292,13 +3296,13 @@
   "pages.users.filters.locked": [
     {
       "type": 0,
-      "value": "Locked users"
+      "value": "Kilitli kullanıcılar"
     }
   ],
   "pages.users.filters.newest_first": [
     {
       "type": 0,
-      "value": "Newest first"
+      "value": "Önce en yeni"
     }
   ],
   "pages.users.filters.no_legacy_session": [
@@ -3310,111 +3314,107 @@
   "pages.users.filters.non_guests": [
     {
       "type": 0,
-      "value": "Non-guests (legacy)"
+      "value": "Misafir olmayanlar (eski üyeler)"
     }
   ],
   "pages.users.lock_account.alert.description": [
     {
       "type": 0,
-      "value": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."
+      "value": "Bu kullanıcı, şu anda oturum açmış olduğu tüm cihazlardan otomatik olarak kilitlenecek ve kilidi açılana kadar yeni cihazlara giriş yapamayacaktır."
     }
   ],
   "pages.users.lock_account.alert.title": [
     {
       "type": 0,
-      "value": "The user will not be able to send or receive messages"
+      "value": "Kullanıcı mesaj gönderemeyecek veya alamayacak."
     }
   ],
   "pages.users.lock_account.button": [
     {
       "type": 0,
-      "value": "Lock account"
+      "value": "Hesabı kilitle"
     }
   ],
   "pages.users.lock_account.error": [
     {
       "type": 0,
-      "value": "Failed to lock account"
+      "value": "Hesap kilitlenemedi"
     }
   ],
   "pages.users.lock_account.success": [
     {
       "type": 0,
-      "value": "Account locked"
+      "value": "Hesap kilitlendi"
     }
   ],
   "pages.users.lock_account.title": [
     {
       "type": 0,
-      "value": "Lock this user's account?"
+      "value": "Bu kullanıcının hesabını kilitle?"
     }
   ],
   "pages.users.new_user.add_user": [
     {
       "type": 0,
-      "value": "Add user"
+      "value": "Kullanıcı ekle"
     }
   ],
   "pages.users.new_user.create_account": [
     {
       "type": 0,
-      "value": "Create account"
+      "value": "Hesap oluştur"
     }
   ],
   "pages.users.new_user.description": [
-    {
-      "type": 0,
-      "value": "To add a new user to "
-    },
     {
       "type": 1,
       "value": "serverName"
     },
     {
       "type": 0,
-      "value": ", choose a user name for this user, which will be part of their user ID."
+      "value": "'e yeni bir kullanıcı eklemek için, bu kullanıcı için bir kullanıcı adı seçin; bu ad, kullanıcı kimliğinin bir parçası olacaktır."
     }
   ],
   "pages.users.new_user.error_message": [
     {
       "type": 0,
-      "value": "Error creating user"
+      "value": "Kullanıcı oluşturulurken hata oluştu"
     }
   ],
   "pages.users.new_user.invalid_localpart": [
     {
       "type": 0,
-      "value": "Localpart can only contain lowercase letters, numbers, dots, underscores, dashes and slashes"
+      "value": "Yerel kısım yalnızca küçük harfler, rakamlar, noktalar, alt çizgiler, tireler ve eğik çizgilerden oluşabilir"
     }
   ],
   "pages.users.new_user.invalid_localpart_numeric_only": [
     {
       "type": 0,
-      "value": "Localpart cannot only contain numbers"
+      "value": "Kullanıcı adının yerel bölümü yalnızca sayılardan oluşamaz"
     }
   ],
   "pages.users.new_user.localpart": [
     {
       "type": 0,
-      "value": "Enter name"
+      "value": "Adınızı girin"
     }
   ],
   "pages.users.new_user.required_error": [
     {
       "type": 0,
-      "value": "This field is required"
+      "value": "Bu alan zorunludur"
     }
   ],
   "pages.users.new_user.success_message": [
     {
       "type": 0,
-      "value": "User created"
+      "value": "Kullanıcı oluşturuldu"
     }
   ],
   "pages.users.not_found.description": [
     {
       "type": 0,
-      "value": "The requested user ("
+      "value": "İstenen kullanıcı ("
     },
     {
       "type": 1,
@@ -3422,7 +3422,7 @@
     },
     {
       "type": 0,
-      "value": ") could not be found on "
+      "value": "), "
     },
     {
       "type": 1,
@@ -3430,71 +3430,71 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " üzerinde bulunamadı."
     }
   ],
   "pages.users.not_found.title": [
     {
       "type": 0,
-      "value": "User not found"
+      "value": "Kullanıcı bulunamadı"
     }
   ],
   "pages.users.reactivate_account.button": [
     {
       "type": 0,
-      "value": "Reactivate"
+      "value": "Yeniden etkinleştir"
     }
   ],
   "pages.users.reactivate_account.error": [
     {
       "type": 0,
-      "value": "Failed to reactivate account"
+      "value": "Hesabı yeniden etkinleştirme başarısız oldu"
     }
   ],
   "pages.users.reactivate_account.success": [
     {
       "type": 0,
-      "value": "Account reactivated"
+      "value": "Hesap yeniden etkinleştirildi"
     }
   ],
   "pages.users.search_placeholder": [
     {
       "type": 0,
-      "value": "Search users…"
+      "value": "Kullanıcıları ara…"
     }
   ],
   "pages.users.set_admin.alert.description": [
     {
       "type": 0,
-      "value": "The user will be able to view user data and make changes to user and room permissions."
+      "value": "Kullanıcı, kullanıcı verilerini görüntüleyebilecek ve kullanıcı ve oda izinlerinde değişiklik yapabilecektir."
     }
   ],
   "pages.users.set_admin.alert.title": [
     {
       "type": 0,
-      "value": "User will have access to sensitive data"
+      "value": "Kullanıcı, hassas verilere erişebilecek"
     }
   ],
   "pages.users.set_admin.error": [
     {
-      "type": 0,
-      "value": "Failed to change admin privileges for "
-    },
-    {
       "type": 1,
       "value": "mxid"
+    },
+    {
+      "type": 0,
+      "value": " kullanıcının yönetici ayrıcalıkları değiştirilemedi"
     }
   ],
   "pages.users.set_admin.label": [
     {
       "type": 0,
-      "value": "Admin"
+      "value": "Yönetici"
     }
   ],
   "pages.users.set_admin.make_admin_button": [
     {
       "type": 0,
-      "value": "Make admin"
+      "value": "Yönetici yap"
     }
   ],
   "pages.users.set_admin.successfully_demoted": [
@@ -3504,7 +3504,7 @@
     },
     {
       "type": 0,
-      "value": " no longer has admin privileges"
+      "value": " artık yönetici ayrıcalıklarına sahip değil"
     }
   ],
   "pages.users.set_admin.successfully_promoted": [
@@ -3514,73 +3514,73 @@
     },
     {
       "type": 0,
-      "value": " now has admin privileges"
+      "value": " artık yönetici ayrıcalıklarına sahip"
     }
   ],
   "pages.users.set_admin.title": [
     {
       "type": 0,
-      "value": "Make this user an admin?"
+      "value": "Bu kullanıcıyı yönetici yapmak ister misiniz?"
     }
   ],
   "pages.users.set_password.button": [
     {
       "type": 0,
-      "value": "Change password"
+      "value": "Parola değiştir"
     }
   ],
   "pages.users.set_password.confirm_password_label": [
     {
       "type": 0,
-      "value": "Enter password again"
+      "value": "Parolayı tekrar girin."
     }
   ],
   "pages.users.set_password.error": [
     {
       "type": 0,
-      "value": "Failed to set password"
+      "value": "Parola belirleme başarısız oldu"
     }
   ],
   "pages.users.set_password.error.password_missing": [
     {
       "type": 0,
-      "value": "This field is required"
+      "value": "Bu alan zorunludur"
     }
   ],
   "pages.users.set_password.error.passwords_mismatch": [
     {
       "type": 0,
-      "value": "Passwords do not match"
+      "value": "Parolalar eşleşmiyor"
     }
   ],
   "pages.users.set_password.password_label": [
     {
       "type": 0,
-      "value": "Password"
+      "value": "Parola"
     }
   ],
   "pages.users.set_password.password_match": [
     {
       "type": 0,
-      "value": "Passwords match!"
+      "value": "Parolalar eşleşiyor!"
     }
   ],
   "pages.users.set_password.submit": [
     {
       "type": 0,
-      "value": "Set new password"
+      "value": "Yeni parola belirle"
     }
   ],
   "pages.users.set_password.success": [
     {
       "type": 0,
-      "value": "Password set successfully"
+      "value": "Parola başarıyla ayarlandı"
     }
   ],
   "pages.users.set_password.title": [
     {
       "type": 0,
-      "value": "Set a new password for this user"
+      "value": "Bu kullanıcı için yeni bir parola belirleyin"
     }
   ],
   "pages.users.statistics.devices": [
@@ -3598,25 +3598,25 @@
   "pages.users.title": [
     {
       "type": 0,
-      "value": "Users"
+      "value": "Kullanıcılar"
     }
   ],
   "pages.users.unlock_account.button": [
     {
       "type": 0,
-      "value": "Unlock account"
+      "value": "Hesabın kilidini aç"
     }
   ],
   "pages.users.unlock_account.error": [
     {
       "type": 0,
-      "value": "Failed to unlock account"
+      "value": "Hesabın kilidini açma işlemi başarısız oldu"
     }
   ],
   "pages.users.unlock_account.success": [
     {
       "type": 0,
-      "value": "Account unlocked"
+      "value": "Hesap kilidi kaldırıldı"
     }
   ],
   "pages.users.user_count": [
@@ -3674,13 +3674,13 @@
   "product.title": [
     {
       "type": 0,
-      "value": "Element Admin"
+      "value": "Element Yönetim"
     }
   ],
   "product.title.community": [
     {
       "type": 0,
-      "value": "Element Community"
+      "value": "Element Topluluğu"
     }
   ],
   "product.title.pro": [
@@ -3698,39 +3698,39 @@
   "room_info.empty_room": [
     {
       "type": 0,
-      "value": "Empty room"
+      "value": "Boş oda"
     }
   ],
   "room_info.empty_space": [
     {
       "type": 0,
-      "value": "Empty space"
+      "value": "Boş alan"
     }
   ],
   "room_info.room_with": [
     {
-      "type": 0,
-      "value": "Room with "
-    },
-    {
       "type": 1,
       "value": "members"
+    },
+    {
+      "type": 0,
+      "value": " özellikli oda"
     }
   ],
   "room_info.space_with": [
     {
-      "type": 0,
-      "value": "Space with "
-    },
-    {
       "type": 1,
       "value": "members"
+    },
+    {
+      "type": 0,
+      "value": " kişilik alan"
     }
   ],
   "room_info.unknown_user": [
     {
       "type": 0,
-      "value": "Unknown user"
+      "value": "Bilinmeyen kullanıcı"
     }
   ],
   "rooms_info.other_members": [
@@ -3745,7 +3745,7 @@
             },
             {
               "type": 0,
-              "value": " other"
+              "value": " diğer"
             }
           ]
         },
@@ -3756,7 +3756,7 @@
             },
             {
               "type": 0,
-              "value": " others"
+              "value": " diğerleri"
             }
           ]
         }
@@ -3780,7 +3780,7 @@
   "ui.data.failed_to_load": [
     {
       "type": 0,
-      "value": "Failed to load"
+      "value": "Yükleme başarısız"
     }
   ],
   "ui.data_table.loading_more": [
@@ -3930,7 +3930,7 @@
   "ui.language_switcher.browser_default": [
     {
       "type": 0,
-      "value": "Use browser settings ("
+      "value": "Tarayıcı ayarlarını kullanın ("
     },
     {
       "type": 1,
@@ -3944,13 +3944,13 @@
   "ui.language_switcher.button_label": [
     {
       "type": 0,
-      "value": "Language settings"
+      "value": "Dil ayarları"
     }
   ],
   "ui.language_switcher.description": [
     {
       "type": 0,
-      "value": "Choose your preferred language for the interface."
+      "value": "Arayüz için tercih ettiğiniz dili seçin."
     }
   ],
   "ui.language_switcher.language_list_label": [
@@ -3962,7 +3962,7 @@
   "ui.language_switcher.title": [
     {
       "type": 0,
-      "value": "Language settings"
+      "value": "Dil ayarları"
     }
   ],
   "ui.user_picker.loading_list": [

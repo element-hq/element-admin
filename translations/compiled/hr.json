@@ -1868,22 +1868,28 @@
       "value": "Istječe na"
     }
   ],
-  "pages.personal_tokens.expires_in_help": [
-    {
-      "type": 0,
-      "value": "Ostavite prazno za tokene koji nikada ne istječu"
-    }
-  ],
   "pages.personal_tokens.expires_in_label": [
     {
       "type": 0,
       "value": "Istječe za (dani)"
     }
   ],
-  "pages.personal_tokens.expires_in_placeholder": [
+  "pages.personal_tokens.expires_in_missing": [
     {
       "type": 0,
-      "value": "30"
+      "value": "Enter how many days the token should last"
+    }
+  ],
+  "pages.personal_tokens.expires_in_underflow": [
+    {
+      "type": 0,
+      "value": "A token has to last at least one day"
+    }
+  ],
+  "pages.personal_tokens.expiry_revoked": [
+    {
+      "type": 0,
+      "value": "Revoked"
     }
   ],
   "pages.personal_tokens.filter.active": [
@@ -2012,12 +2018,6 @@
       "value": "Nije uspjelo ponovno generiranje osobnog tokena"
     }
   ],
-  "pages.personal_tokens.regenerate_expires_help": [
-    {
-      "type": 0,
-      "value": "Ostavite prazno da biste zadržali isti rok trajanja kao i prije ili postavite novo vrijeme isteka"
-    }
-  ],
   "pages.personal_tokens.regenerate_success": [
     {
       "type": 0,
@@ -2112,10 +2112,28 @@
       "value": "Pristup Synapseovu administratorskom API-ju"
     }
   ],
+  "pages.personal_tokens.scopes_group_label": [
+    {
+      "type": 0,
+      "value": "Scopes"
+    }
+  ],
   "pages.personal_tokens.scopes_label": [
     {
       "type": 0,
       "value": "Opsezi"
+    }
+  ],
+  "pages.personal_tokens.set_expiry_help": [
+    {
+      "type": 0,
+      "value": "Otherwise the token never expires"
+    }
+  ],
+  "pages.personal_tokens.set_expiry_label": [
+    {
+      "type": 0,
+      "value": "Set an expiry"
     }
   ],
   "pages.personal_tokens.status.active": [
