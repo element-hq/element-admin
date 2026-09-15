@@ -1,0 +1,44 @@
+name: Regenerate PR 599 translations
+
+on:
+  push:
+    branches:
+      - fix/scheduled-room-deletion-timestamp-227
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: fix/scheduled-room-deletion-timestamp-227
+          persist-credentials: true
+      - uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
+        with:
+          runtime: node
+      - name: Regenerate extracted and compiled translations
+        run: |
+          pnpm i18n:extract
+          pnpm i18n:compile
+      - name: Validate generated output and code
+        run: |
+          test -f translations/compiled/en.json
+          grep -q 'pages.rooms.deletion.scheduled.title' translations/compiled/en.json
+          grep -q 'pages.rooms.deletion.scheduled.description' translations/compiled/en.json
+          pnpm lint
+          pnpm knip
+      - name: Commit only requested generated translation outputs
+        run: |
+          git config user.name "Ayobami Haastrup"
+          git config user.email "47716486+AyobamiH@users.noreply.github.com"
+          git add translations/extracted/en.json translations/compiled/en.json
+          git diff --cached --check
+          if ! git diff --cached --quiet; then
+            git commit -m "Regenerate compiled translations"
+          fi
+          git rm .github/workflows/pr-599-compiled-translations.yml
+          git commit -m "Remove temporary translation workflow"
+          git push origin HEAD:fix/scheduled-room-deletion-timestamp-227
