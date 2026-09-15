@@ -17,12 +17,12 @@
     "knip": "knip && knip --production",
     "lint": "oxlint && stylelint 'src/**/*.css' && oxfmt --check",
     "fix": "oxlint --fix && stylelint --fix 'src/**/*.css' && oxfmt",
-    "i18n:extract": "formatjs extract --throws --format crowdin 'src/**/*.{ts,tsx}' --out-file translations/extracted/en.json && oxfmt translations/extracted/en.json",
+    "check": "pnpm i18n:extract && pnpm lint && pnpm knip",
+    "i18n:extract": "formatjs extract --throws --format crowdin 'src/**/*.{ts,tsx}' --out-file translations/extracted/en.json && formatjs compile --format crowdin --ast translations/extracted/en.json --out-file translations/compiled/en.json && oxfmt translations/extracted/en.json translations/compiled/en.json",
     "i18n:download": "localazy download && pnpm i18n:normalize && oxfmt translations/translated/",
     "i18n:normalize": "node scripts/i18n-normalize-plurals.mjs",
     "i18n:compile": "pnpm i18n:normalize && formatjs compile-folder --format crowdin --ast translations/translated/ translations/compiled/ && oxfmt translations/compiled",
     "openapi-ts": "openapi-ts",
-    "prepare": "husky",
     "browserslist": "browserslist",
     "test": "playwright test"
   },
@@ -33,11 +33,11 @@
     "@formatjs/intl-localematcher": "0.8.13",
     "@js-temporal/polyfill": "0.5.1",
     "@radix-ui/react-dialog": "1.1.23",
-    "@tanstack/query-persist-client-core": "5.101.4",
+    "@tanstack/query-persist-client-core": "5.102.8",
     "@tanstack/react-pacer": "0.23.0",
-    "@tanstack/react-query": "5.101.4",
-    "@tanstack/react-router": "1.170.31",
-    "@tanstack/react-table": "9.1.2",
+    "@tanstack/react-query": "5.102.8",
+    "@tanstack/react-router": "1.170.32",
+    "@tanstack/react-table": "9.2.4",
     "@tanstack/react-virtual": "3.14.10",
     "@vector-im/compound-design-tokens": "10.2.4",
     "@vector-im/compound-web": "10.0.1",
@@ -45,9 +45,9 @@
     "idb-keyval": "6.3.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "react-error-boundary": "6.1.3",
+    "react-error-boundary": "6.1.4",
     "react-hot-toast": "2.6.0",
-    "react-intl": "10.1.22",
+    "react-intl": "10.1.25",
     "use-broadcast-ts": "2.0.2",
     "valibot": "1.4.2",
     "vaul": "1.1.2",
@@ -57,67 +57,58 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",
-    "@formatjs/cli": "6.16.19",
+    "@formatjs/cli": "6.16.22",
     "@formatjs/icu-messageformat-parser": "3.5.17",
-    "@formatjs/unplugin": "1.2.6",
+    "@formatjs/unplugin": "1.2.7",
     "@hey-api/openapi-ts": "0.99.0",
     "@localazy/cli": "2.0.12",
+    "@msw/playwright": "0.6.7",
     "@playwright/test": "1.62.1",
     "@tailwindcss/vite": "4.3.3",
-    "@tanstack/devtools-vite": "0.8.3",
-    "@tanstack/eslint-plugin-query": "5.101.4",
+    "@tanstack/devtools-vite": "0.8.5",
+    "@tanstack/eslint-plugin-query": "5.102.8",
     "@tanstack/eslint-plugin-router": "1.162.0",
-    "@tanstack/react-devtools": "0.10.10",
+    "@tanstack/react-devtools": "0.10.12",
     "@tanstack/react-pacer-devtools": "0.8.0",
-    "@tanstack/react-query-devtools": "5.101.4",
+    "@tanstack/react-query-devtools": "5.102.8",
     "@tanstack/react-router-devtools": "1.167.1",
-    "@tanstack/router-plugin": "1.168.34",
+    "@tanstack/router-plugin": "1.168.35",
     "@tsconfig/strictest": "2.0.8",
     "@tsconfig/vite-react": "8.1.1",
-    "@types/node": "26.2.0",
+    "@types/node": "26.4.1",
     "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.4",
+    "@types/react-dom": "19.2.7",
     "@types/woothee": "1.11.3",
-    "@vitejs/plugin-react": "6.1.0",
-    "browserslist": "4.28.8",
-    "eslint-plugin-formatjs": "6.5.0",
-    "husky": "9.1.7",
-    "knip": "6.32.2",
-    "lint-staged": "17.3.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "browserslist": "4.28.9",
+    "eslint-plugin-formatjs": "6.6.1",
+    "knip": "6.34.0",
+    "msw": "2.15.0",
     "oxc-transform-react": "^0.145.0",
-    "oxfmt": "0.64.0",
-    "oxlint": "1.79.0",
+    "oxfmt": "0.66.0",
+    "oxlint": "1.81.0",
     "oxlint-tsgolint": "7.0.2001",
-    "stylelint": "17.14.1",
+    "stylelint": "17.15.0",
     "stylelint-config-standard": "40.0.0",
     "stylelint-config-tailwindcss": "1.0.1",
     "tailwindcss": "4.3.3",
     "typescript": "7.0.2",
-    "vite": "8.2.1"
-  },
-  "lint-staged": {
-    "*": [
-      "oxfmt"
-    ],
-    "*.{ts,tsx,js,jsx}": [
-      "oxlint --fix"
-    ],
-    "*.css": [
-      "stylelint --fix"
-    ]
+    "vite": "8.2.2"
   },
   "knip": {
     "entry": [
       "src/base.css!",
-      "src/prerender.tsx!"
+      "src/prerender.tsx!",
+      "tests/**/*.spec.ts"
     ],
     "project": [
-      "src/**/*!"
+      "src/**/*!",
+      "tests/**/*"
     ],
     "ignore": [
       "src/api/mas/api/**/*",
       "src/api/synapse.ts"
     ]
   },
-  "packageManager": "pnpm@11.22.0+sha512.1ff870c4c6133dfd88fb2afc46dd13d47f09c9794b438c6fdb47ca98caf3bc16381ee0be93a091b8e3824cf01f889f46d7d9e20910fb0be1ab0fb5baa80dd621"
+  "packageManager": "pnpm@11.25.0+sha512.5cde925b4f075f725eb71fbae18a42ffe784524789f19b61c731cb8721ec28aaee160e01a8d5af4fedb2a42cdbf300efe23db356b0d4a17b4d63e11f8ab7c956"
 }

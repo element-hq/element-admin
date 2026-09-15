@@ -15,7 +15,6 @@ import {
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
   Alert,
-  Badge,
   Button,
   Form,
   H3,
@@ -23,7 +22,8 @@ import {
   Tooltip,
 } from "@vector-im/compound-web";
 import { type FormEvent, useCallback, useRef, useState } from "react";
-import { FormattedMessage, useIntl } from "react-intl";
+import { toast } from "react-hot-toast";
+import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
 import {
   type EditTokenParameters,
@@ -38,6 +38,7 @@ import * as Dialog from "@/components/dialog";
 import { ButtonLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import * as messages from "@/messages";
+import { RegistrationTokenStatusBadge } from "@/ui/token-status-badge";
 import {
   computeHumanReadableDateTimeStringFromUtc,
   computeLocalDateTimeStringFromUtc,
@@ -56,6 +57,12 @@ export const Route = createFileRoute("/_console/registration-tokens/$tokenId")({
   notFoundComponent: NotFoundComponent,
 });
 
+const detailsLabel = defineMessage({
+  id: "pages.registration_tokens.details_label",
+  defaultMessage: "Registration token details",
+  description: "The accessible name of the registration token details panel",
+});
+
 function NotFoundComponent() {
   const { tokenId } = Route.useParams();
   const {
@@ -63,7 +70,10 @@ function NotFoundComponent() {
   } = Route.useRouteContext();
   const intl = useIntl();
   return (
-    <Navigation.Details className="gap-4">
+    <Navigation.Details
+      className="gap-4"
+      aria-label={intl.formatMessage(detailsLabel)}
+    >
       <CloseSidebar />
 
       <Alert
@@ -108,6 +118,141 @@ const CloseSidebar: React.FC = () => {
   );
 };
 
+const revokeTokenMessage = defineMessage({
+  id: "pages.registration_tokens.revoke_token",
+  defaultMessage: "Revoke token",
+  description: "Button text to revoke a token",
+});
+
+interface RevokeTokenButtonProps {
+  serverName: string;
+  tokenId: string;
+  token: string;
+}
+
+function RevokeTokenButton({
+  serverName,
+  tokenId,
+  token,
+}: RevokeTokenButtonProps) {
+  const intl = useIntl();
+  const queryClient = useQueryClient();
+  const [open, setOpen] = useState(false);
+
+  const { mutate, isPending, isError } = useMutation({
+    mutationFn: async () =>
+      revokeRegistrationToken(queryClient, serverName, tokenId),
+    onSuccess: (data) => {
+      // Update the token query data
+      queryClient.setQueryData(
+        ["mas", "registration-token", serverName, tokenId],
+        data,
+      );
+
+      // Invalidate tokens list query to reflect new data
+      queryClient.invalidateQueries({
+        queryKey: ["mas", "registration-tokens", serverName],
+      });
+
+      toast.success(
+        intl.formatMessage({
+          id: "pages.registration_tokens.revoke_token.success",
+          defaultMessage: "Token revoked",
+          description:
+            "The success message when a registration token is revoked",
+        }),
+      );
+
+      setOpen(false);
+    },
+  });
+
+  const onOpenChange = useCallback(
+    (open: boolean) => {
+      if (isPending) {
+        return;
+      }
+      setOpen(open);
+    },
+    [isPending],
+  );
+
+  const handleClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      mutate();
+    },
+    [mutate],
+  );
+
+  return (
+    <Dialog.Root
+      open={open}
+      onOpenChange={onOpenChange}
+      trigger={
+        <Button type="button" size="md" kind="secondary" destructive>
+          <FormattedMessage {...revokeTokenMessage} />
+        </Button>
+      }
+    >
+      <Dialog.Title>
+        <FormattedMessage
+          id="pages.registration_tokens.revoke_token.title"
+          defaultMessage="Revoke this registration token?"
+          description="The title of the modal asking for confirmation to revoke a registration token"
+        />
+      </Dialog.Title>
+
+      <Dialog.Description asChild>
+        <Alert
+          type="critical"
+          title={intl.formatMessage({
+            id: "pages.registration_tokens.revoke_token.alert.title",
+            defaultMessage: "The token will stop working",
+            description:
+              "In the modal to revoke a registration token, the title of the alert",
+          })}
+        >
+          <FormattedMessage
+            id="pages.registration_tokens.revoke_token.alert.description"
+            defaultMessage="Nobody will be able to register with {token} until it is unrevoked."
+            description="In the modal to revoke a registration token, the description of the alert"
+            values={{ token }}
+          />
+        </Alert>
+      </Dialog.Description>
+
+      {isError && (
+        <Dialog.ErrorAlert
+          title={intl.formatMessage({
+            id: "pages.registration_tokens.revoke_token.error",
+            defaultMessage: "Failed to revoke the token",
+            description:
+              "Error shown in the confirmation dialog when revoking a registration token fails",
+          })}
+        />
+      )}
+
+      <Button
+        type="button"
+        kind="primary"
+        destructive
+        disabled={isPending}
+        onClick={handleClick}
+      >
+        {isPending && <InlineSpinner />}
+        <FormattedMessage {...revokeTokenMessage} />
+      </Button>
+
+      <Dialog.Close asChild>
+        <Button type="button" kind="tertiary" disabled={isPending}>
+          <FormattedMessage {...messages.actionCancel} />
+        </Button>
+      </Dialog.Close>
+    </Dialog.Root>
+  );
+}
+
 function TokenDetailComponent() {
   const intl = useIntl();
   const { credentials } = Route.useRouteContext();
@@ -118,32 +263,6 @@ function TokenDetailComponent() {
     registrationTokenQuery(credentials.serverName, parameters.tokenId),
   );
 
-  const revokeTokenMutation = useMutation({
-    mutationFn: async () =>
-      revokeRegistrationToken(
-        queryClient,
-        credentials.serverName,
-        parameters.tokenId,
-      ),
-    onSuccess: (data) => {
-      // Update the token query data
-      queryClient.setQueryData(
-        [
-          "mas",
-          "registration-token",
-          credentials.serverName,
-          parameters.tokenId,
-        ],
-        data,
-      );
-
-      // Invalidate tokens list query to reflect new data
-      queryClient.invalidateQueries({
-        queryKey: ["mas", "registration-tokens", credentials.serverName],
-      });
-    },
-  });
-
   const unrevokeTokenMutation = useMutation({
     mutationFn: async () =>
       unrevokeRegistrationToken(
@@ -151,6 +270,16 @@ function TokenDetailComponent() {
         credentials.serverName,
         parameters.tokenId,
       ),
+    onError: () => {
+      toast.error(
+        intl.formatMessage({
+          id: "pages.registration_tokens.unrevoke_token.error",
+          defaultMessage: "Failed to unrevoke the token",
+          description:
+            "The error message when the request to unrevoke a registration token fails",
+        }),
+      );
+    },
     onSuccess: (data) => {
       // Update the token query data
       queryClient.setQueryData(
@@ -167,6 +296,15 @@ function TokenDetailComponent() {
       queryClient.invalidateQueries({
         queryKey: ["mas", "registration-tokens", credentials.serverName],
       });
+
+      toast.success(
+        intl.formatMessage({
+          id: "pages.registration_tokens.unrevoke_token.success",
+          defaultMessage: "Token unrevoked",
+          description:
+            "The success message when a registration token is unrevoked",
+        }),
+      );
     },
   });
 
@@ -174,15 +312,15 @@ function TokenDetailComponent() {
   const tokenAttributes = token.attributes;
 
   return (
-    <Navigation.Details>
+    <Navigation.Details aria-label={intl.formatMessage(detailsLabel)}>
       <CloseSidebar />
 
       <div className="flex flex-col gap-4">
-        <H3 className="flex items-center gap-2">
-          {tokenAttributes.token}
+        <div className="flex items-center gap-2">
+          <H3>{tokenAttributes.token}</H3>
 
           <CopyToClipboard value={tokenAttributes.token} />
-        </H3>
+        </div>
 
         <Data.Grid>
           <Data.Item>
@@ -194,7 +332,7 @@ function TokenDetailComponent() {
               />
             </Data.Title>
             <Data.Value>
-              <TokenStatusBadge token={tokenAttributes} />
+              <RegistrationTokenStatusBadge token={tokenAttributes} />
             </Data.Value>
           </Data.Item>
 
@@ -303,23 +441,11 @@ function TokenDetailComponent() {
               />
             </Button>
           ) : (
-            <Button
-              type="button"
-              size="md"
-              kind="secondary"
-              destructive
-              disabled={revokeTokenMutation.isPending}
-              onClick={() => revokeTokenMutation.mutate()}
-            >
-              {revokeTokenMutation.isPending && (
-                <InlineSpinner className="mr-2" />
-              )}
-              <FormattedMessage
-                id="pages.registration_tokens.revoke_token"
-                defaultMessage="Revoke token"
-                description="Button text to revoke a token"
-              />
-            </Button>
+            <RevokeTokenButton
+              serverName={credentials.serverName}
+              tokenId={parameters.tokenId}
+              token={tokenAttributes.token}
+            />
           )}
 
           <EditTokenModal
@@ -330,80 +456,6 @@ function TokenDetailComponent() {
         </div>
       </div>
     </Navigation.Details>
-  );
-}
-
-interface TokenStatusBadgeProps {
-  token: {
-    valid: boolean;
-    expires_at?: string | null;
-    usage_limit?: number | null;
-    times_used: number;
-    revoked_at?: string | null;
-  };
-}
-
-function TokenStatusBadge({ token }: TokenStatusBadgeProps) {
-  if (token.valid) {
-    return (
-      <Badge kind="green">
-        <FormattedMessage
-          id="pages.registration_tokens.status.active"
-          defaultMessage="Active"
-          description="Registration token status: active"
-        />
-      </Badge>
-    );
-  }
-
-  if (token.revoked_at) {
-    return (
-      <Badge kind="red">
-        <FormattedMessage
-          id="pages.registration_tokens.status.revoked"
-          defaultMessage="Revoked"
-          description="Registration token status: revoked"
-        />
-      </Badge>
-    );
-  }
-
-  if (token.expires_at && new Date(token.expires_at) < new Date()) {
-    return (
-      <Badge kind="red">
-        <FormattedMessage
-          id="pages.registration_tokens.status.expired"
-          defaultMessage="Expired"
-          description="Registration token status: expired"
-        />
-      </Badge>
-    );
-  }
-
-  if (
-    token.usage_limit !== null &&
-    token.usage_limit !== undefined &&
-    token.times_used >= token.usage_limit
-  ) {
-    return (
-      <Badge kind="red">
-        <FormattedMessage
-          id="pages.registration_tokens.status.used_up"
-          defaultMessage="Used up"
-          description="Registration token status: used up"
-        />
-      </Badge>
-    );
-  }
-
-  return (
-    <Badge kind="red">
-      <FormattedMessage
-        id="pages.registration_tokens.status.invalid"
-        defaultMessage="Invalid"
-        description="Registration token status: invalid"
-      />
-    </Badge>
   );
 }
 
@@ -451,7 +503,7 @@ function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
     },
   });
 
-  const { mutate: mutateEditToken, isPending } = editTokenMutation;
+  const { mutate: mutateEditToken, isPending, isError } = editTokenMutation;
   const tokenAttributes = token.attributes;
 
   const clearExpiration = useCallback(
@@ -513,23 +565,46 @@ function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
     [mutateEditToken],
   );
 
+  const editPropertiesLabel = (
+    <FormattedMessage
+      id="pages.registration_tokens.edit_properties"
+      defaultMessage="Edit properties"
+      description="Button text to edit token properties"
+    />
+  );
+
+  // Returning the disabled button on its own keeps a dialog nobody can open out
+  // of the tree.
+  if (tokenAttributes.revoked_at) {
+    return (
+      <Tooltip
+        description={intl.formatMessage({
+          id: "pages.registration_tokens.edit_properties.revoked_tooltip",
+          defaultMessage: "Unrevoke this token before editing its properties",
+          description:
+            "Tooltip on the disabled 'Edit properties' button of a revoked registration token",
+        })}
+      >
+        <Button
+          type="button"
+          size="md"
+          kind="secondary"
+          disabled
+          Icon={EditIcon}
+        >
+          {editPropertiesLabel}
+        </Button>
+      </Tooltip>
+    );
+  }
+
   return (
     <Dialog.Root
       open={open}
       onOpenChange={onOpenChange}
       trigger={
-        <Button
-          type="button"
-          size="md"
-          kind="secondary"
-          disabled={!!tokenAttributes.revoked_at}
-          Icon={EditIcon}
-        >
-          <FormattedMessage
-            id="pages.registration_tokens.edit_properties"
-            defaultMessage="Edit properties"
-            description="Button text to edit token properties"
-          />
+        <Button type="button" size="md" kind="secondary" Icon={EditIcon}>
+          {editPropertiesLabel}
         </Button>
       }
     >
@@ -628,6 +703,17 @@ function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
               />
             </Form.HelpMessage>
           </Form.Field>
+
+          {isError && (
+            <Dialog.ErrorAlert
+              title={intl.formatMessage({
+                id: "pages.registration_tokens.edit_token.error",
+                defaultMessage: "Failed to save the changes",
+                description:
+                  "Error shown in the edit dialog when saving a registration token's properties fails",
+              })}
+            />
+          )}
 
           <Form.Submit disabled={isPending}>
             {isPending && <InlineSpinner />}

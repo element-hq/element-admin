@@ -16,6 +16,10 @@ strictDepBuilds: true
 
 allowBuilds:
   esbuild: false
+  # msw's postinstall only copies `mockServiceWorker.js` into `public/`; the
+  # tests use `@msw/playwright`, which intercepts in the test process, so the
+  # browser worker script is never needed.
+  msw: false
   unrs-resolver: false
 
 strictPeerDependencies: true
@@ -25,3 +29,4 @@ peerDependencyRules:
     eslint: "10"
     "@vector-im/compound-design-tokens": "8"
     vite: "8"
+    typescript: "7"

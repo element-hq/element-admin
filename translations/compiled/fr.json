@@ -35,6 +35,12 @@
       "value": "Supprimer"
     }
   ],
+  "action.done": [
+    {
+      "type": 0,
+      "value": "Done"
+    }
+  ],
   "action.go_back": [
     {
       "type": 0,
@@ -53,12 +59,6 @@
       "value": "Réessayer"
     }
   ],
-  "action.sign_in": [
-    {
-      "type": 0,
-      "value": "Se connecter"
-    }
-  ],
   "action.sign_out": [
     {
       "type": 0,
@@ -75,6 +75,28 @@
     {
       "type": 0,
       "value": "Filtre"
+    }
+  ],
+  "common.loading": [
+    {
+      "type": 0,
+      "value": "Loading…"
+    }
+  ],
+  "errors.authorization_denied": [
+    {
+      "type": 0,
+      "value": "Sign-in was cancelled."
+    }
+  ],
+  "errors.authorization_error": [
+    {
+      "type": 0,
+      "value": "Sign-in failed: "
+    },
+    {
+      "type": 1,
+      "value": "errorMessage"
     }
   ],
   "errors.http_fetch": [
@@ -127,6 +149,16 @@
       "value": "statusText"
     }
   ],
+  "errors.mas_api": [
+    {
+      "type": 0,
+      "value": "The homeserver's authentication service returned an error: "
+    },
+    {
+      "type": 1,
+      "value": "errorMessage"
+    }
+  ],
   "errors.matrix_standard": [
     {
       "type": 0,
@@ -143,6 +175,12 @@
     {
       "type": 1,
       "value": "errorMessage"
+    }
+  ],
+  "errors.no_details": [
+    {
+      "type": 0,
+      "value": "The server returned an error with no details."
     }
   ],
   "errors.not_logged_in": [
@@ -670,6 +708,12 @@
       "value": "Les applications sont des clients OAuth 2.0 auxquels les utilisateurs se connectent."
     }
   ],
+  "pages.devices.applications.details_label": [
+    {
+      "type": 0,
+      "value": "Application details"
+    }
+  ],
   "pages.devices.applications.filters.has_active_sessions": [
     {
       "type": 0,
@@ -776,6 +820,12 @@
       "value": "Afficher tous les appareils"
     }
   ],
+  "pages.devices.applications.view_users": [
+    {
+      "type": 0,
+      "value": "View users on this application"
+    }
+  ],
   "pages.devices.legacy.count": [
     {
       "type": 6,
@@ -826,6 +876,12 @@
     {
       "type": 0,
       "value": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
+    }
+  ],
+  "pages.devices.legacy.details_label": [
+    {
+      "type": 0,
+      "value": "Legacy device details"
     }
   ],
   "pages.devices.legacy.device_column": [
@@ -1094,6 +1150,12 @@
       "value": "Une appareil correspond à une connexion unique d'un utilisateur à une application. La déconnexion d'un appareil révoque immédiatement son accès."
     }
   ],
+  "pages.devices.user.details_label": [
+    {
+      "type": 0,
+      "value": "Device details"
+    }
+  ],
   "pages.devices.user.device_column": [
     {
       "type": 0,
@@ -1103,7 +1165,7 @@
   "pages.devices.user.device_id_label": [
     {
       "type": 0,
-      "value": "ID de l’appareil"
+      "value": "Identifiant de l'appareil"
     }
   ],
   "pages.devices.user.filters.activity_active": [
@@ -1342,6 +1404,32 @@
       "value": "Domaine supprimé de la liste blanche"
     }
   ],
+  "pages.federation.allowlist.remove_confirm.alert.description": [
+    {
+      "type": 0,
+      "value": "Your server will stop federating with servers matching this pattern."
+    }
+  ],
+  "pages.federation.allowlist.remove_confirm.alert.title": [
+    {
+      "type": 0,
+      "value": "You’re about to stop federating with this server"
+    }
+  ],
+  "pages.federation.allowlist.remove_confirm.title": [
+    {
+      "type": 0,
+      "value": "Remove "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": " from the allowlist?"
+    }
+  ],
   "pages.federation.allowlist.remove_tooltip": [
     {
       "type": 0,
@@ -1354,16 +1442,16 @@
       "value": "Contact"
     }
   ],
-  "pages.federation.detail.destination": [
-    {
-      "type": 0,
-      "value": "Destination"
-    }
-  ],
   "pages.federation.detail.last_retry": [
     {
       "type": 0,
       "value": "Horodatage de la dernière tentative"
+    }
+  ],
+  "pages.federation.detail.last_retry.never": [
+    {
+      "type": 0,
+      "value": "Never"
     }
   ],
   "pages.federation.detail.last_successful_stream": [
@@ -1378,6 +1466,12 @@
       "value": "Intervalle de nouvelle tentative"
     }
   ],
+  "pages.federation.detail.retry_interval.none": [
+    {
+      "type": 0,
+      "value": "None"
+    }
+  ],
   "pages.federation.detail.security": [
     {
       "type": 0,
@@ -1388,6 +1482,12 @@
     {
       "type": 0,
       "value": "Page d'assistance"
+    }
+  ],
+  "pages.federation.details_label": [
+    {
+      "type": 0,
+      "value": "Destination details"
     }
   ],
   "pages.federation.domain_count": [
@@ -1560,6 +1660,18 @@
       "value": "Gérez le déploiement d'element pour votre organisation ou votre communauté."
     }
   ],
+  "pages.login.errors.authorization_failed": [
+    {
+      "type": 0,
+      "value": "Could not start the sign-in process. Please try again."
+    }
+  ],
+  "pages.login.errors.insecure_context": [
+    {
+      "type": 0,
+      "value": "Sign-in requires a secure connection. Reload this page over https:// and try again."
+    }
+  ],
   "pages.login.errors.no_auth_metadata": [
     {
       "type": 0,
@@ -1716,6 +1828,12 @@
       "value": "Les jetons personnels sont des jetons d'accès à longue durée de vie avec un accès spécifique, tel que l'accès à l'API d'administration Synapse et MAS. Ils permettent entre autre d'automatiser des tâches et de créer des intégrations."
     }
   ],
+  "pages.personal_tokens.details_label": [
+    {
+      "type": 0,
+      "value": "Personal token details"
+    }
+  ],
   "pages.personal_tokens.device_id_help": [
     {
       "type": 0,
@@ -1851,7 +1969,7 @@
   "pages.personal_tokens.never_expires": [
     {
       "type": 0,
-      "value": "N'expire jamais"
+      "value": "Sans expiration"
     }
   ],
   "pages.personal_tokens.never_used": [
@@ -1930,6 +2048,34 @@
     {
       "type": 0,
       "value": "Révoquer le jeton"
+    }
+  ],
+  "pages.personal_tokens.revoke_token.alert.description": [
+    {
+      "type": 1,
+      "value": "humanName"
+    },
+    {
+      "type": 0,
+      "value": " will stop working immediately, and anything using it will need a new token."
+    }
+  ],
+  "pages.personal_tokens.revoke_token.alert.title": [
+    {
+      "type": 0,
+      "value": "This cannot be undone"
+    }
+  ],
+  "pages.personal_tokens.revoke_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to revoke the token"
+    }
+  ],
+  "pages.personal_tokens.revoke_token.title": [
+    {
+      "type": 0,
+      "value": "Revoke this personal token?"
     }
   ],
   "pages.personal_tokens.revoked_at_label": [
@@ -2082,10 +2228,28 @@
       "value": "Jeton personnalisé"
     }
   ],
+  "pages.registration_tokens.details_label": [
+    {
+      "type": 0,
+      "value": "Registration token details"
+    }
+  ],
   "pages.registration_tokens.edit_properties": [
     {
       "type": 0,
       "value": "Modifier les propriétés"
+    }
+  ],
+  "pages.registration_tokens.edit_properties.revoked_tooltip": [
+    {
+      "type": 0,
+      "value": "Unrevoke this token before editing its properties"
+    }
+  ],
+  "pages.registration_tokens.edit_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to save the changes"
     }
   ],
   "pages.registration_tokens.edit_token_title": [
@@ -2124,6 +2288,12 @@
       "value": "Expiré"
     }
   ],
+  "pages.registration_tokens.filters.not_revoked": [
+    {
+      "type": 0,
+      "value": "Not revoked"
+    }
+  ],
   "pages.registration_tokens.filters.revoked_only": [
     {
       "type": 0,
@@ -2145,7 +2315,7 @@
   "pages.registration_tokens.never_expires": [
     {
       "type": 0,
-      "value": "N'expire jamais"
+      "value": "Sans expiration"
     }
   ],
   "pages.registration_tokens.no_expiration_placeholder": [
@@ -2186,6 +2356,44 @@
     {
       "type": 0,
       "value": "Révoquer le jeton"
+    }
+  ],
+  "pages.registration_tokens.revoke_token.alert.description": [
+    {
+      "type": 0,
+      "value": "Nobody will be able to register with "
+    },
+    {
+      "type": 1,
+      "value": "token"
+    },
+    {
+      "type": 0,
+      "value": " until it is unrevoked."
+    }
+  ],
+  "pages.registration_tokens.revoke_token.alert.title": [
+    {
+      "type": 0,
+      "value": "The token will stop working"
+    }
+  ],
+  "pages.registration_tokens.revoke_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to revoke the token"
+    }
+  ],
+  "pages.registration_tokens.revoke_token.success": [
+    {
+      "type": 0,
+      "value": "Token revoked"
+    }
+  ],
+  "pages.registration_tokens.revoke_token.title": [
+    {
+      "type": 0,
+      "value": "Revoke this registration token?"
     }
   ],
   "pages.registration_tokens.revoked_at_label": [
@@ -2339,6 +2547,18 @@
       "value": "Annuler la révocation du jeton"
     }
   ],
+  "pages.registration_tokens.unrevoke_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to unrevoke the token"
+    }
+  ],
+  "pages.registration_tokens.unrevoke_token.success": [
+    {
+      "type": 0,
+      "value": "Token unrevoked"
+    }
+  ],
   "pages.registration_tokens.usage_count_label": [
     {
       "type": 0,
@@ -2393,10 +2613,10 @@
       "value": "Salon"
     }
   ],
-  "pages.rooms.columns.type": [
+  "pages.rooms.columns.visibility": [
     {
       "type": 0,
-      "value": "Type"
+      "value": "Visibility"
     }
   ],
   "pages.rooms.delete_room.alert.description": [
@@ -2539,6 +2759,12 @@
     {
       "type": 0,
       "value": "Suppression réussie"
+    }
+  ],
+  "pages.rooms.details_label": [
+    {
+      "type": 0,
+      "value": "Room details"
     }
   ],
   "pages.rooms.filters.empty_rooms": [
@@ -2723,6 +2949,12 @@
     {
       "type": 0,
       "value": "Une erreur inattendue s'est produite lors de l'ouverture de l'interface de supervision."
+    }
+  ],
+  "pages.supervision.launch": [
+    {
+      "type": 0,
+      "value": "Open supervision interface"
     }
   ],
   "pages.supervision.missing_ui_address.description": [
@@ -2995,6 +3227,12 @@
     {
       "type": 0,
       "value": "Supprimer l'association avec le compte en amont ?"
+    }
+  ],
+  "pages.users.details_label": [
+    {
+      "type": 0,
+      "value": "User details"
     }
   ],
   "pages.users.filters.active": [
@@ -3407,6 +3645,12 @@
       "pluralType": "cardinal"
     }
   ],
+  "product.badge.pro": [
+    {
+      "type": 0,
+      "value": "Pro"
+    }
+  ],
   "product.element": [
     {
       "type": 0,
@@ -3507,16 +3751,22 @@
       "pluralType": "cardinal"
     }
   ],
+  "ui.copy.copied": [
+    {
+      "type": 0,
+      "value": "Copied!"
+    }
+  ],
+  "ui.copy.copy_to_clipboard": [
+    {
+      "type": 0,
+      "value": "Copy to clipboard"
+    }
+  ],
   "ui.data.failed_to_load": [
     {
       "type": 0,
       "value": "Échec du chargement"
-    }
-  ],
-  "ui.data.loading": [
-    {
-      "type": 0,
-      "value": "Chargement de l'information"
     }
   ],
   "ui.data_table.loading_more": [
@@ -3602,7 +3852,7 @@
   "ui.device_status.inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "Inactif"
     }
   ],
   "ui.device_status.last_active.tooltip": [

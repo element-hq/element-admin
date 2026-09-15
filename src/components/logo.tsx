@@ -161,13 +161,26 @@ export const ElementLogo: React.FC<ElementLogoProps> = ({
   );
 };
 
-export const ProBadge: React.FC = () => (
-  <div data-variant="pro">
-    <div className={styles["badge"]} aria-hidden="true">
-      <ProBadgeText />
+export const ProBadge: React.FC = () => {
+  const intl = useIntl();
+  const title = intl.formatMessage({
+    id: "product.badge.pro",
+    description:
+      "Accessible label for the badge marking a card as a feature only available in ESS Pro",
+    defaultMessage: "Pro",
+  });
+  return (
+    <div data-variant="pro">
+      <div className={styles["badge"]}>
+        <ProBadgeText
+          // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
+          role="img"
+          aria-label={title}
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 /** The "PRO" text for the badge */
 const ProBadgeText: React.FC<React.ComponentProps<"svg">> = (props) => (

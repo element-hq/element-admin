@@ -16,7 +16,7 @@ import {
   RestartIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
-  Badge,
+  Alert,
   Button,
   Form,
   H3,
@@ -24,9 +24,9 @@ import {
   Text,
   Tooltip,
 } from "@vector-im/compound-web";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
-import { FormattedMessage, useIntl } from "react-intl";
+import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
 import {
   personalSessionQuery,
@@ -43,6 +43,13 @@ import { ButtonLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import * as messages from "@/messages";
 import { UserCard } from "@/ui/entity-cards";
+import {
+  DEFAULT_EXPIRY_DAYS,
+  TokenExpiryField,
+  daysUntilExpiry,
+  personalTokenExpiryText,
+} from "@/ui/token-expiry";
+import { PersonalTokenStatusBadge } from "@/ui/token-status-badge";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 export const Route = createFileRoute("/_console/personal-tokens/$tokenId")({
@@ -69,11 +76,18 @@ export const Route = createFileRoute("/_console/personal-tokens/$tokenId")({
   notFoundComponent: NotFoundComponent,
 });
 
+const detailsLabel = defineMessage({
+  id: "pages.personal_tokens.details_label",
+  defaultMessage: "Personal token details",
+  description: "The accessible name of the personal token details panel",
+});
+
 function NotFoundComponent() {
   const navigate = useNavigate();
+  const intl = useIntl();
 
   return (
-    <Navigation.Details>
+    <Navigation.Details aria-label={intl.formatMessage(detailsLabel)}>
       <div className="flex flex-col items-center gap-4 p-8 text-center">
         <Text size="lg" weight="semibold" className="text-text-secondary">
           <FormattedMessage
@@ -156,11 +170,144 @@ const Scope = ({ scope }: { scope: string }) => {
   }
 };
 
+const revokeTokenMessage = defineMessage({
+  id: "pages.personal_tokens.revoke_token",
+  defaultMessage: "Revoke token",
+  description: "Button text to revoke a token",
+});
+
+interface RevokeTokenButtonProps {
+  serverName: string;
+  tokenId: string;
+  humanName: string;
+}
+
+function RevokeTokenButton({
+  serverName,
+  tokenId,
+  humanName,
+}: RevokeTokenButtonProps) {
+  const intl = useIntl();
+  const queryClient = useQueryClient();
+  const [open, setOpen] = useState(false);
+
+  const { mutate, isPending, isError } = useMutation({
+    mutationFn: async () =>
+      revokePersonalSession(queryClient, serverName, tokenId),
+    onSuccess: (data) => {
+      // Update the token query data
+      queryClient.setQueryData(
+        ["mas", "personal-session", serverName, tokenId],
+        data,
+      );
+
+      // Invalidate tokens list query to reflect new data
+      queryClient.invalidateQueries({
+        queryKey: ["mas", "personal-sessions", serverName],
+      });
+
+      toast.success(
+        intl.formatMessage({
+          id: "pages.personal_tokens.revoke_success",
+          defaultMessage: "Personal token revoked successfully",
+          description: "Success message when a personal token is revoked",
+        }),
+      );
+
+      setOpen(false);
+    },
+  });
+
+  const onOpenChange = useCallback(
+    (open: boolean) => {
+      if (isPending) {
+        return;
+      }
+      setOpen(open);
+    },
+    [isPending],
+  );
+
+  const handleClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      mutate();
+    },
+    [mutate],
+  );
+
+  return (
+    <Dialog.Root
+      open={open}
+      onOpenChange={onOpenChange}
+      trigger={
+        <Button type="button" size="md" kind="secondary" destructive>
+          <FormattedMessage {...revokeTokenMessage} />
+        </Button>
+      }
+    >
+      <Dialog.Title>
+        <FormattedMessage
+          id="pages.personal_tokens.revoke_token.title"
+          defaultMessage="Revoke this personal token?"
+          description="Title of the modal asking for confirmation to revoke a personal token"
+        />
+      </Dialog.Title>
+
+      <Dialog.Description asChild>
+        <Alert
+          type="critical"
+          title={intl.formatMessage({
+            id: "pages.personal_tokens.revoke_token.alert.title",
+            defaultMessage: "This cannot be undone",
+            description:
+              "In the modal to revoke a personal token, the title of the alert",
+          })}
+        >
+          <FormattedMessage
+            id="pages.personal_tokens.revoke_token.alert.description"
+            defaultMessage="{humanName} will stop working immediately, and anything using it will need a new token."
+            description="In the modal to revoke a personal token, the description of the alert"
+            values={{ humanName }}
+          />
+        </Alert>
+      </Dialog.Description>
+
+      {isError && (
+        <Dialog.ErrorAlert
+          title={intl.formatMessage({
+            id: "pages.personal_tokens.revoke_token.error",
+            defaultMessage: "Failed to revoke the token",
+            description:
+              "Error shown in the confirmation dialog when revoking a personal token fails",
+          })}
+        />
+      )}
+
+      <Button
+        type="button"
+        kind="primary"
+        destructive
+        disabled={isPending}
+        onClick={handleClick}
+      >
+        {isPending && <InlineSpinner />}
+        <FormattedMessage {...revokeTokenMessage} />
+      </Button>
+
+      <Dialog.Close asChild>
+        <Button type="button" kind="tertiary" disabled={isPending}>
+          <FormattedMessage {...messages.actionCancel} />
+        </Button>
+      </Dialog.Close>
+    </Dialog.Root>
+  );
+}
+
 function TokenDetailComponent() {
   const intl = useIntl();
   const { credentials } = Route.useRouteContext();
   const parameters = Route.useParams();
-  const queryClient = useQueryClient();
 
   const { data: wellKnown } = useSuspenseQuery(
     wellKnownQuery(credentials.serverName),
@@ -191,39 +338,10 @@ function TokenDetailComponent() {
 
   const amITheOwner = ownerMxid === whoami.user_id;
 
-  const revokeTokenMutation = useMutation({
-    mutationFn: async () =>
-      revokePersonalSession(
-        queryClient,
-        credentials.serverName,
-        parameters.tokenId,
-      ),
-    onSuccess: (data) => {
-      // Update the token query data
-      queryClient.setQueryData(
-        ["mas", "personal-session", credentials.serverName, parameters.tokenId],
-        data,
-      );
-
-      // Invalidate tokens list query to reflect new data
-      queryClient.invalidateQueries({
-        queryKey: ["mas", "personal-sessions", credentials.serverName],
-      });
-
-      toast.success(
-        intl.formatMessage({
-          id: "pages.personal_tokens.revoke_success",
-          defaultMessage: "Personal token revoked successfully",
-          description: "Success message when a personal token is revoked",
-        }),
-      );
-    },
-  });
-
   const scope = token.attributes.scope.split(" ");
 
   return (
-    <Navigation.Details>
+    <Navigation.Details aria-label={intl.formatMessage(detailsLabel)}>
       <CloseSidebar />
 
       <div className="flex flex-col gap-4">
@@ -268,7 +386,7 @@ function TokenDetailComponent() {
               />
             </Data.Title>
             <Data.Value>
-              <PersonalTokenStatusBadge token={token} />
+              <PersonalTokenStatusBadge token={token.attributes} />
             </Data.Value>
           </Data.Item>
 
@@ -311,16 +429,7 @@ function TokenDetailComponent() {
               />
             </Data.Title>
             <Data.Value>
-              {token.attributes.expires_at
-                ? computeHumanReadableDateTimeStringFromUtc(
-                    token.attributes.expires_at,
-                  )
-                : intl.formatMessage({
-                    id: "pages.personal_tokens.never_expires",
-                    defaultMessage: "Never expires",
-                    description:
-                      "Text shown when a token has no expiration date",
-                  })}
+              {personalTokenExpiryText(intl, token.attributes)}
             </Data.Value>
           </Data.Item>
 
@@ -381,7 +490,9 @@ function TokenDetailComponent() {
               />
             ) : (
               <Tooltip
-                label={
+                // A description rather than a label: the button already says
+                // "Regenerate token", and a label would replace that name.
+                description={
                   ownerMxid
                     ? intl.formatMessage(
                         {
@@ -414,73 +525,15 @@ function TokenDetailComponent() {
               </Tooltip>
             )}
 
-            <Button
-              type="button"
-              size="md"
-              kind="secondary"
-              destructive
-              disabled={revokeTokenMutation.isPending}
-              onClick={() => revokeTokenMutation.mutate()}
-            >
-              {revokeTokenMutation.isPending && (
-                <InlineSpinner className="mr-2" />
-              )}
-              <FormattedMessage
-                id="pages.personal_tokens.revoke_token"
-                defaultMessage="Revoke token"
-                description="Button text to revoke a token"
-              />
-            </Button>
+            <RevokeTokenButton
+              serverName={credentials.serverName}
+              tokenId={parameters.tokenId}
+              humanName={token.attributes.human_name}
+            />
           </>
         )}
       </div>
     </Navigation.Details>
-  );
-}
-
-interface PersonalTokenStatusBadgeProps {
-  token: SingleResourceForPersonalSession;
-}
-
-function PersonalTokenStatusBadge({
-  token,
-}: PersonalTokenStatusBadgeProps): React.ReactElement {
-  if (token.attributes.revoked_at) {
-    return (
-      <Badge kind="grey">
-        <FormattedMessage
-          id="pages.personal_tokens.status.revoked"
-          defaultMessage="Revoked"
-          description="Status badge for revoked personal tokens"
-        />
-      </Badge>
-    );
-  }
-
-  if (token.attributes.expires_at) {
-    const expiryDate = new Date(token.attributes.expires_at);
-    const now = new Date();
-    if (expiryDate <= now) {
-      return (
-        <Badge kind="red">
-          <FormattedMessage
-            id="pages.personal_tokens.status.expired"
-            defaultMessage="Expired"
-            description="Status badge for expired personal tokens"
-          />
-        </Badge>
-      );
-    }
-  }
-
-  return (
-    <Badge kind="green">
-      <FormattedMessage
-        id="pages.personal_tokens.status.active"
-        defaultMessage="Active"
-        description="Status badge for active personal tokens"
-      />
-    </Badge>
   );
 }
 
@@ -496,6 +549,22 @@ function RegenerateTokenModal({
   const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
   const intl = useIntl();
+
+  // Pinned to the token rather than recomputed every render, so the day count
+  // the field starts at cannot change under a dialog that is already open.
+  const remainingDays = useMemo(
+    () => daysUntilExpiry(token.attributes.expires_at),
+    [token.attributes.expires_at],
+  );
+  const wasExpiring = Boolean(token.attributes.expires_at);
+  const [expiresChecked, setExpiresChecked] = useState(wasExpiring);
+
+  const onExpiresChecked = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setExpiresChecked(event.currentTarget.checked);
+    },
+    [],
+  );
 
   const regenerateTokenMutation = useMutation({
     mutationFn: async (expiresIn: null | number) =>
@@ -548,31 +617,40 @@ function RegenerateTokenModal({
       }
 
       const formData = new FormData(event.currentTarget);
-      const expiresInDays = formData.get("expires_in_days") as string;
+      // Absent unless the expiry checkbox was ticked; see `TokenExpiryField`.
+      const expiresInDays = formData.get("expires_in_days") as string | null;
 
-      const expiresIn =
-        expiresInDays && expiresInDays !== ""
-          ? Number.parseInt(expiresInDays, 10) * 24 * 60 * 60
-          : null;
+      const expiresIn = expiresInDays
+        ? Number.parseInt(expiresInDays, 10) * 24 * 60 * 60
+        : null;
 
       mutate(expiresIn);
     },
     [mutate, isPending],
   );
 
-  const handleClose = useCallback(() => {
-    if (isPending) {
-      return;
-    }
+  // Every open and close goes through here, so a dismissed dialog cannot leave
+  // the expiry checkbox on a choice the admin backed out of.
+  const onOpenChange = useCallback(
+    (open: boolean) => {
+      if (isPending) {
+        return;
+      }
 
-    setIsOpen(false);
-    reset();
-  }, [isPending, reset]);
+      setIsOpen(open);
+      reset();
+      setExpiresChecked(wasExpiring);
+    },
+    [isPending, reset, wasExpiring],
+  );
 
   return (
     <Dialog.Root
       open={isOpen}
-      onOpenChange={setIsOpen}
+      onOpenChange={onOpenChange}
+      // The token is shown exactly once, so only the explicit "Done" button
+      // may close the dialog while it is on screen.
+      dismissible={!mutationData?.data.attributes.access_token}
       trigger={
         <Button type="button" size="md" kind="secondary" Icon={RestartIcon}>
           <FormattedMessage
@@ -632,31 +710,11 @@ function RegenerateTokenModal({
                 />
               </Text>
 
-              <Form.Field name="expires_in_days" serverInvalid={false}>
-                <Form.Label>
-                  <FormattedMessage
-                    id="pages.personal_tokens.expires_in_label"
-                    defaultMessage="Expires in (days)"
-                    description="Label for the expiry field"
-                  />
-                </Form.Label>
-                <Form.TextControl
-                  type="number"
-                  min="1"
-                  placeholder={intl.formatMessage({
-                    id: "pages.personal_tokens.expires_in_placeholder",
-                    defaultMessage: "30",
-                    description: "Placeholder for the expiry field",
-                  })}
-                />
-                <Form.HelpMessage>
-                  <FormattedMessage
-                    id="pages.personal_tokens.regenerate_expires_help"
-                    defaultMessage="Leave empty to keep the same expiry as before, or set a new expiry time"
-                    description="Help text for the expiry field when regenerating"
-                  />
-                </Form.HelpMessage>
-              </Form.Field>
+              <TokenExpiryField
+                checked={expiresChecked}
+                onChange={onExpiresChecked}
+                defaultDays={remainingDays ?? DEFAULT_EXPIRY_DAYS}
+              />
             </div>
 
             <Form.Submit
@@ -679,11 +737,16 @@ function RegenerateTokenModal({
       <Dialog.Close asChild>
         <Button
           type="button"
-          kind="tertiary"
-          onClick={handleClose}
+          kind={
+            mutationData?.data.attributes.access_token ? "primary" : "tertiary"
+          }
           disabled={isPending}
         >
-          <FormattedMessage {...messages.actionCancel} />
+          {mutationData?.data.attributes.access_token ? (
+            <FormattedMessage {...messages.actionDone} />
+          ) : (
+            <FormattedMessage {...messages.actionCancel} />
+          )}
         </Button>
       </Dialog.Close>
     </Dialog.Root>

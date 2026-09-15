@@ -13,6 +13,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   license:
     name: REUSE license compliance check
@@ -42,7 +46,7 @@ jobs:
           persist-credentials: false
 
       - name: Install pnpm, Node.js and the dependencies
-        uses: pnpm/setup@84cb39b217b10273981911c288cd62326dc7c6d2 # v2.0.2
+        uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
         with:
           runtime: node
 
@@ -55,8 +59,8 @@ jobs:
       - name: Check that the translation files match the source
         run: |
           pnpm i18n:extract
-          git add -A
-          git diff --cached --exit-code || {
+          git add -- translations/
+          git diff --cached --exit-code -- translations/ || {
             echo "::error::Translation files are stale. Run 'pnpm i18n:extract' and commit the result."
             exit 1
           }
@@ -74,7 +78,7 @@ jobs:
           persist-credentials: false
 
       - name: Install pnpm, Node.js and the dependencies
-        uses: pnpm/setup@84cb39b217b10273981911c288cd62326dc7c6d2 # v2.0.2
+        uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
         with:
           runtime: node
 

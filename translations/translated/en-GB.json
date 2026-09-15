@@ -17,6 +17,9 @@
   "action.delete": {
     "message": "Delete"
   },
+  "action.done": {
+    "message": "Done"
+  },
   "action.go_back": {
     "message": "Go back"
   },
@@ -25,9 +28,6 @@
   },
   "action.retry": {
     "message": "Retry"
-  },
-  "action.sign_in": {
-    "message": "Sign in"
   },
   "action.sign_out": {
     "message": "Sign out"
@@ -38,6 +38,15 @@
   "common.filter": {
     "message": "Filter"
   },
+  "common.loading": {
+    "message": "Loading…"
+  },
+  "errors.authorization_denied": {
+    "message": "Sign-in was cancelled."
+  },
+  "errors.authorization_error": {
+    "message": "Sign-in failed: {errorMessage}"
+  },
   "errors.http_fetch": {
     "message": "Request to {url} failed"
   },
@@ -47,8 +56,14 @@
   "errors.http_status": {
     "message": "Request to {url} failed with status code {status} {statusText}"
   },
+  "errors.mas_api": {
+    "message": "The homeserver's authentication service returned an error: {errorMessage}"
+  },
   "errors.matrix_standard": {
     "message": "Request to the homeserver failed with error code ''{errorCode}''. Additionally, the server gave the following error message: {errorMessage}"
+  },
+  "errors.no_details": {
+    "message": "The server returned an error with no details."
   },
   "errors.not_logged_in": {
     "message": "Not logged in"
@@ -167,6 +182,9 @@
   "pages.devices.applications.description": {
     "message": "Applications are OAuth 2.0 clients that users sign in to."
   },
+  "pages.devices.applications.details_label": {
+    "message": "Application details"
+  },
   "pages.devices.applications.filters.has_active_sessions": {
     "message": "With active devices"
   },
@@ -212,6 +230,9 @@
   "pages.devices.applications.view_sessions": {
     "message": "View all devices"
   },
+  "pages.devices.applications.view_users": {
+    "message": "View users on this application"
+  },
   "pages.devices.legacy.count": {
     "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}"
   },
@@ -220,6 +241,9 @@
   },
   "pages.devices.legacy.description": {
     "message": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
+  },
+  "pages.devices.legacy.details_label": {
+    "message": "Legacy device details"
   },
   "pages.devices.legacy.device_column": {
     "message": "Device"
@@ -322,6 +346,9 @@
   },
   "pages.devices.user.description": {
     "message": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
+  },
+  "pages.devices.user.details_label": {
+    "message": "Device details"
   },
   "pages.devices.user.device_column": {
     "message": "Device"
@@ -431,17 +458,26 @@
   "pages.federation.allowlist.remove.success": {
     "message": "Domain removed from allowlist"
   },
+  "pages.federation.allowlist.remove_confirm.alert.description": {
+    "message": "Your server will stop federating with servers matching this pattern."
+  },
+  "pages.federation.allowlist.remove_confirm.alert.title": {
+    "message": "You’re about to stop federating with this server"
+  },
+  "pages.federation.allowlist.remove_confirm.title": {
+    "message": "Remove {serverName} from the allowlist?"
+  },
   "pages.federation.allowlist.remove_tooltip": {
     "message": "Remove from allowlist"
   },
   "pages.federation.detail.contact": {
     "message": "Contact"
   },
-  "pages.federation.detail.destination": {
-    "message": "Destination"
-  },
   "pages.federation.detail.last_retry": {
     "message": "Last retry timestamp"
+  },
+  "pages.federation.detail.last_retry.never": {
+    "message": "Never"
   },
   "pages.federation.detail.last_successful_stream": {
     "message": "Last successful stream"
@@ -449,14 +485,20 @@
   "pages.federation.detail.retry_interval": {
     "message": "Retry interval"
   },
+  "pages.federation.detail.retry_interval.none": {
+    "message": "None"
+  },
   "pages.federation.detail.security": {
     "message": "Security"
   },
   "pages.federation.detail.support_page": {
     "message": "Support page"
   },
+  "pages.federation.details_label": {
+    "message": "Destination details"
+  },
   "pages.federation.domain_count": {
-    "message": "{COUNT, plural, zero {No domains} one {# domain} other {# domains}}"
+    "message": "{COUNT, plural, =0 {No domains} one {# domain} other {# domains}}"
   },
   "pages.federation.not_found.description": {
     "message": "The requested destination ({destination}) could not be found."
@@ -465,10 +507,10 @@
     "message": "Destination not found"
   },
   "pages.federation.sbg_not_enabled.description": {
-    "message": "Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+    "message": "Contact your administrator to enable it in your deployment configuration."
   },
   "pages.federation.sbg_not_enabled.title": {
-    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+    "message": "Secure Border Gateway isn't enabled on this deployment"
   },
   "pages.federation.search_placeholder": {
     "message": "Search domains…"
@@ -495,7 +537,7 @@
     "message": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
   },
   "pages.federation.unavailable_alert.title": {
-    "message": "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro"
+    "message": "Secure Border Gateway isn't enabled on this deployment"
   },
   "pages.generic_error.go_home": {
     "message": "Go home"
@@ -514,6 +556,12 @@
   },
   "pages.landing.description": {
     "message": "Manage the deployment of the element app for your organisation or community."
+  },
+  "pages.login.errors.authorization_failed": {
+    "message": "Could not start the sign-in process. Please try again."
+  },
+  "pages.login.errors.insecure_context": {
+    "message": "Sign-in requires a secure connection. Reload this page over https:// and try again."
   },
   "pages.login.errors.no_auth_metadata": {
     "message": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
@@ -534,7 +582,7 @@
     "message": "Login"
   },
   "pages.personal_tokens.acting_user_column": {
-    "message": "Acting User"
+    "message": "Acting user"
   },
   "pages.personal_tokens.acting_user_label": {
     "message": "Acting user"
@@ -571,6 +619,9 @@
   },
   "pages.personal_tokens.description": {
     "message": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations."
+  },
+  "pages.personal_tokens.details_label": {
+    "message": "Personal token details"
   },
   "pages.personal_tokens.device_id_help": {
     "message": "Leave empty to generate a random 10-character device ID"
@@ -618,7 +669,7 @@
     "message": "Access to the Synapse admin API"
   },
   "pages.personal_tokens.last_active_column": {
-    "message": "Last Active"
+    "message": "Last active"
   },
   "pages.personal_tokens.last_active_ip_label": {
     "message": "Last active IP"
@@ -679,6 +730,18 @@
   },
   "pages.personal_tokens.revoke_token": {
     "message": "Revoke token"
+  },
+  "pages.personal_tokens.revoke_token.alert.description": {
+    "message": "{humanName} will stop working immediately, and anything using it will need a new token."
+  },
+  "pages.personal_tokens.revoke_token.alert.title": {
+    "message": "This cannot be undone"
+  },
+  "pages.personal_tokens.revoke_token.error": {
+    "message": "Failed to revoke the token"
+  },
+  "pages.personal_tokens.revoke_token.title": {
+    "message": "Revoke this personal token?"
   },
   "pages.personal_tokens.revoked_at_label": {
     "message": "Revoked at"
@@ -755,8 +818,17 @@
   "pages.registration_tokens.custom_token_label": {
     "message": "Custom Token"
   },
+  "pages.registration_tokens.details_label": {
+    "message": "Registration token details"
+  },
   "pages.registration_tokens.edit_properties": {
     "message": "Edit properties"
+  },
+  "pages.registration_tokens.edit_properties.revoked_tooltip": {
+    "message": "Unrevoke this token before editing its properties"
+  },
+  "pages.registration_tokens.edit_token.error": {
+    "message": "Failed to save the changes"
   },
   "pages.registration_tokens.edit_token_title": {
     "message": "Edit registration token"
@@ -775,6 +847,9 @@
   },
   "pages.registration_tokens.filters.expired_only": {
     "message": "Expired"
+  },
+  "pages.registration_tokens.filters.not_revoked": {
+    "message": "Not revoked"
   },
   "pages.registration_tokens.filters.revoked_only": {
     "message": "Revoked"
@@ -799,6 +874,21 @@
   },
   "pages.registration_tokens.revoke_token": {
     "message": "Revoke token"
+  },
+  "pages.registration_tokens.revoke_token.alert.description": {
+    "message": "Nobody will be able to register with {token} until it is unrevoked."
+  },
+  "pages.registration_tokens.revoke_token.alert.title": {
+    "message": "The token will stop working"
+  },
+  "pages.registration_tokens.revoke_token.error": {
+    "message": "Failed to revoke the token"
+  },
+  "pages.registration_tokens.revoke_token.success": {
+    "message": "Token revoked"
+  },
+  "pages.registration_tokens.revoke_token.title": {
+    "message": "Revoke this registration token?"
   },
   "pages.registration_tokens.revoked_at_label": {
     "message": "Revoked at"
@@ -834,7 +924,7 @@
     "message": "Token"
   },
   "pages.registration_tokens.token_count": {
-    "message": "{COUNT, plural, zero {No tokens} one {# token} other {# tokens}}"
+    "message": "{COUNT, plural, =0 {No tokens} one {# token} other {# tokens}}"
   },
   "pages.registration_tokens.token_uses.limited": {
     "message": "{uses, number} / {limit, number}"
@@ -850,6 +940,12 @@
   },
   "pages.registration_tokens.unrevoke_token": {
     "message": "Unrevoke token"
+  },
+  "pages.registration_tokens.unrevoke_token.error": {
+    "message": "Failed to unrevoke the token"
+  },
+  "pages.registration_tokens.unrevoke_token.success": {
+    "message": "Token unrevoked"
   },
   "pages.registration_tokens.usage_count_label": {
     "message": "Usage count"
@@ -867,7 +963,7 @@
     "message": "Uses"
   },
   "pages.registration_tokens.valid_until_column": {
-    "message": "Valid Until"
+    "message": "Expires at"
   },
   "pages.rooms.columns.alias": {
     "message": "Alias"
@@ -878,8 +974,8 @@
   "pages.rooms.columns.room": {
     "message": "Room"
   },
-  "pages.rooms.columns.type": {
-    "message": "Type"
+  "pages.rooms.columns.visibility": {
+    "message": "Visibility"
   },
   "pages.rooms.delete_room.alert.description": {
     "message": "This will permanently delete all messages or media uploaded to the server and remove this room from the directory. Members will lose access to their messages and the room will be removed from their room list."
@@ -923,6 +1019,9 @@
   "pages.rooms.deletion.success.title": {
     "message": "Deletion successful"
   },
+  "pages.rooms.details_label": {
+    "message": "Room details"
+  },
   "pages.rooms.filters.empty_rooms": {
     "message": "Empty rooms"
   },
@@ -942,7 +1041,7 @@
     "message": "Room not found"
   },
   "pages.rooms.room_count": {
-    "message": "{COUNT, plural, zero {No rooms} one {# room} other {# rooms}}"
+    "message": "{COUNT, plural, =0 {No rooms} one {# room} other {# rooms}}"
   },
   "pages.rooms.room_type.private": {
     "message": "Private"
@@ -963,7 +1062,7 @@
     "message": "Sign in as <b>{mxid}</b> to perform administrative actions in any room."
   },
   "pages.supervision.disabled_alert.description": {
-    "message": "This feature is part of your subscription. You can ask an administrator to enable it."
+    "message": "Supervision is included in your subscription but isn't enabled on this deployment. See the ESS documentation to turn it on."
   },
   "pages.supervision.disabled_alert.title": {
     "message": "Supervision is currently disabled"
@@ -975,13 +1074,16 @@
     "message": "Failed to open the supervision interface in a new window"
   },
   "pages.supervision.errors.closed.description": {
-    "message": "Failed to sign in the supervision interface, as it closed before it could finish signing in"
+    "message": "The supervision window was closed before sign-in finished. You can try again."
   },
   "pages.supervision.errors.closed.title": {
-    "message": "The supervision interface was closed too quickly"
+    "message": "Supervision sign-in was cancelled"
   },
   "pages.supervision.errors.generic.title": {
     "message": "An unexpected error occurred whilst opening the supervision interface"
+  },
+  "pages.supervision.launch": {
+    "message": "Open supervision interface"
   },
   "pages.supervision.missing_ui_address.description": {
     "message": "Supervision is enabled in your deployment, but not Element Web, which is required for the supervision interface to work."
@@ -1102,6 +1204,9 @@
   },
   "pages.users.delete_upstream_link.title": {
     "message": "Remove link with upstream account?"
+  },
+  "pages.users.details_label": {
+    "message": "User details"
   },
   "pages.users.filters.active": {
     "message": "Active users"
@@ -1269,7 +1374,10 @@
     "message": "Account unlocked"
   },
   "pages.users.user_count": {
-    "message": "{COUNT, plural, zero {No users} one {# user} other {# users}}"
+    "message": "{COUNT, plural, =0 {No users} one {# user} other {# users}}"
+  },
+  "product.badge.pro": {
+    "message": "Pro"
   },
   "product.element": {
     "message": "Element"
@@ -1304,11 +1412,14 @@
   "rooms_info.other_members": {
     "message": "{COUNT, plural, one {# other} other {# others}}"
   },
+  "ui.copy.copied": {
+    "message": "Copied!"
+  },
+  "ui.copy.copy_to_clipboard": {
+    "message": "Copy to clipboard"
+  },
   "ui.data.failed_to_load": {
     "message": "Failed to load"
-  },
-  "ui.data.loading": {
-    "message": "Loading value"
   },
   "ui.data_table.loading_more": {
     "message": "Loading more…"

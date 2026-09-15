@@ -16,7 +16,7 @@ import {
 import { Alert, Button, InlineSpinner, Tooltip } from "@vector-im/compound-web";
 import { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
-import { FormattedMessage, useIntl } from "react-intl";
+import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
 import { compatSessionQuery, finishCompatSession, userQuery } from "@/api/mas";
 import * as Data from "@/components/data";
@@ -55,6 +55,12 @@ export const Route = createFileRoute("/_console/devices/legacy/$sessionId")({
   notFoundComponent: NotFoundComponent,
 });
 
+const detailsLabel = defineMessage({
+  id: "pages.devices.legacy.details_label",
+  defaultMessage: "Legacy device details",
+  description: "The accessible name of the legacy device details panel",
+});
+
 function NotFoundComponent() {
   const { sessionId } = Route.useParams();
   const {
@@ -62,7 +68,10 @@ function NotFoundComponent() {
   } = Route.useRouteContext();
   const intl = useIntl();
   return (
-    <Navigation.Details className="gap-4">
+    <Navigation.Details
+      className="gap-4"
+      aria-label={intl.formatMessage(detailsLabel)}
+    >
       <CloseSidebar />
 
       <Alert
@@ -191,7 +200,7 @@ function SessionDetailComponent() {
   );
 
   return (
-    <Navigation.Details>
+    <Navigation.Details aria-label={intl.formatMessage(detailsLabel)}>
       <CloseSidebar />
 
       <div className="flex flex-col gap-6">

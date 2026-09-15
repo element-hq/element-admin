@@ -12,6 +12,7 @@ import { essVersionQuery, useEssVariant } from "@/api/ess";
 import { wellKnownQuery } from "@/api/matrix";
 import * as Card from "@/components/card";
 import * as Navigation from "@/components/navigation";
+import * as Page from "@/components/page";
 import AppFooter from "@/ui/footer";
 import * as Marketing from "@/ui/marketing";
 
@@ -52,6 +53,12 @@ function RouteComponent() {
   return (
     <Navigation.Content>
       <Navigation.Main>
+        <Page.Header>
+          <Page.Title>
+            <FormattedMessage {...titleMessage} />
+          </Page.Title>
+        </Page.Header>
+
         {!isPro && (
           <Alert
             type="info"

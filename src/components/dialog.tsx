@@ -13,7 +13,7 @@ import {
   Trigger,
 } from "@radix-ui/react-dialog";
 import { CloseIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
-import { Glass, Tooltip } from "@vector-im/compound-web";
+import { Alert, Glass, Tooltip } from "@vector-im/compound-web";
 import type { PropsWithChildren } from "react";
 import { useIntl } from "react-intl";
 import { Drawer } from "vaul";
@@ -43,13 +43,22 @@ interface RootProps extends React.PropsWithChildren {
   open?: boolean;
   asDrawer?: boolean;
   onOpenChange?: (open: boolean) => void;
+  // When false, Escape, an outside click and the close button no longer
+  // dismiss the dialog: the content has to offer its own way out.
+  // That way out has to close the dialog through `open`/`onOpenChange`:
+  // `Dialog.Close` alone does nothing, since vaul swallows every close on a
+  // non-dismissible drawer.
+  dismissible?: boolean;
 }
+
+const preventDefault = (event: Event): void => event.preventDefault();
 
 export const Root: React.FC<RootProps> = ({
   trigger,
   open,
   asDrawer,
   onOpenChange,
+  dismissible = true,
   children,
 }: RootProps) => {
   if (typeof asDrawer !== "boolean") {
@@ -60,7 +69,11 @@ export const Root: React.FC<RootProps> = ({
 
   if (asDrawer) {
     return (
-      <Drawer.Root open={open} onOpenChange={onOpenChange}>
+      <Drawer.Root
+        open={open}
+        onOpenChange={onOpenChange}
+        dismissible={dismissible}
+      >
         {trigger && <Trigger asChild>{trigger}</Trigger>}
         <Portal>
           <Drawer.Overlay className={styles["overlay"]} />
@@ -82,14 +95,20 @@ export const Root: React.FC<RootProps> = ({
           {/* This container is used as a flexbox parent to center the dialog */}
           <div className={styles["container"]}>
             <Glass className={styles["dialog"]}>
-              <DialogContent className={styles["body"]}>
+              <DialogContent
+                className={styles["body"]}
+                onEscapeKeyDown={dismissible ? undefined : preventDefault}
+                onInteractOutside={dismissible ? undefined : preventDefault}
+              >
                 {children}
 
-                <Tooltip label={intl.formatMessage(messages.actionClose)}>
-                  <Close className={styles["close"]}>
-                    <CloseIcon />
-                  </Close>
-                </Tooltip>
+                {dismissible && (
+                  <Tooltip label={intl.formatMessage(messages.actionClose)}>
+                    <Close className={styles["close"]}>
+                      <CloseIcon />
+                    </Close>
+                  </Tooltip>
+                )}
               </DialogContent>
             </Glass>
           </div>
@@ -102,6 +121,22 @@ export const Root: React.FC<RootProps> = ({
 type TitleProps = PropsWithChildren;
 export const Title: React.FC<TitleProps> = ({ children }: TitleProps) => (
   <DialogTitle className={styles["title"]}>{children}</DialogTitle>
+);
+
+interface ErrorAlertProps {
+  title: string;
+}
+
+// A mutation failure raised while the dialog is open: a toast would render in
+// the app root, which the dialog marks `aria-hidden`, so nothing there reaches
+// a screen reader. `role="alert"` is what announces it — the compound `Alert`
+// is not a live region on its own.
+export const ErrorAlert: React.FC<ErrorAlertProps> = ({
+  title,
+}: ErrorAlertProps) => (
+  <div role="alert">
+    <Alert type="critical" title={title} />
+  </div>
 );
 
 export { Close, Description } from "@radix-ui/react-dialog";

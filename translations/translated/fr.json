@@ -17,6 +17,9 @@
   "action.delete": {
     "message": "Supprimer"
   },
+  "action.done": {
+    "message": "Done"
+  },
   "action.go_back": {
     "message": "Retour"
   },
@@ -25,9 +28,6 @@
   },
   "action.retry": {
     "message": "Réessayer"
-  },
-  "action.sign_in": {
-    "message": "Se connecter"
   },
   "action.sign_out": {
     "message": "Se déconnecter"
@@ -38,6 +38,15 @@
   "common.filter": {
     "message": "Filtre"
   },
+  "common.loading": {
+    "message": "Loading…"
+  },
+  "errors.authorization_denied": {
+    "message": "Sign-in was cancelled."
+  },
+  "errors.authorization_error": {
+    "message": "Sign-in failed: {errorMessage}"
+  },
   "errors.http_fetch": {
     "message": "La requête vers {url} n'a pas abouti"
   },
@@ -47,8 +56,14 @@
   "errors.http_status": {
     "message": "La requête vers {url} n'a pas abouti avec le code d'état {status} {statusText}"
   },
+  "errors.mas_api": {
+    "message": "The homeserver's authentication service returned an error: {errorMessage}"
+  },
   "errors.matrix_standard": {
     "message": "La requête adressée au serveur d’accueil a échoué avec le code d'erreur ''{errorCode}''. De plus, le serveur a renvoyé le message d'erreur suivant : {errorMessage}"
+  },
+  "errors.no_details": {
+    "message": "The server returned an error with no details."
   },
   "errors.not_logged_in": {
     "message": "Déconnecté"
@@ -167,6 +182,9 @@
   "pages.devices.applications.description": {
     "message": "Les applications sont des clients OAuth 2.0 auxquels les utilisateurs se connectent."
   },
+  "pages.devices.applications.details_label": {
+    "message": "Application details"
+  },
   "pages.devices.applications.filters.has_active_sessions": {
     "message": "Avec des appareils actifs"
   },
@@ -212,6 +230,9 @@
   "pages.devices.applications.view_sessions": {
     "message": "Afficher tous les appareils"
   },
+  "pages.devices.applications.view_users": {
+    "message": "View users on this application"
+  },
   "pages.devices.legacy.count": {
     "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}"
   },
@@ -220,6 +241,9 @@
   },
   "pages.devices.legacy.description": {
     "message": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
+  },
+  "pages.devices.legacy.details_label": {
+    "message": "Legacy device details"
   },
   "pages.devices.legacy.device_column": {
     "message": "Appareil"
@@ -323,11 +347,14 @@
   "pages.devices.user.description": {
     "message": "Une appareil correspond à une connexion unique d'un utilisateur à une application. La déconnexion d'un appareil révoque immédiatement son accès."
   },
+  "pages.devices.user.details_label": {
+    "message": "Device details"
+  },
   "pages.devices.user.device_column": {
     "message": "Appareil"
   },
   "pages.devices.user.device_id_label": {
-    "message": "ID de l’appareil"
+    "message": "Identifiant de l'appareil"
   },
   "pages.devices.user.filters.activity_active": {
     "message": "Actif"
@@ -431,17 +458,26 @@
   "pages.federation.allowlist.remove.success": {
     "message": "Domaine supprimé de la liste blanche"
   },
+  "pages.federation.allowlist.remove_confirm.alert.description": {
+    "message": "Your server will stop federating with servers matching this pattern."
+  },
+  "pages.federation.allowlist.remove_confirm.alert.title": {
+    "message": "You’re about to stop federating with this server"
+  },
+  "pages.federation.allowlist.remove_confirm.title": {
+    "message": "Remove {serverName} from the allowlist?"
+  },
   "pages.federation.allowlist.remove_tooltip": {
     "message": "Supprimer de la liste blanche"
   },
   "pages.federation.detail.contact": {
     "message": "Contact"
   },
-  "pages.federation.detail.destination": {
-    "message": "Destination"
-  },
   "pages.federation.detail.last_retry": {
     "message": "Horodatage de la dernière tentative"
+  },
+  "pages.federation.detail.last_retry.never": {
+    "message": "Never"
   },
   "pages.federation.detail.last_successful_stream": {
     "message": "Dernier entrée réussie"
@@ -449,11 +485,17 @@
   "pages.federation.detail.retry_interval": {
     "message": "Intervalle de nouvelle tentative"
   },
+  "pages.federation.detail.retry_interval.none": {
+    "message": "None"
+  },
   "pages.federation.detail.security": {
     "message": "Sécurité"
   },
   "pages.federation.detail.support_page": {
     "message": "Page d'assistance"
+  },
+  "pages.federation.details_label": {
+    "message": "Destination details"
   },
   "pages.federation.domain_count": {
     "message": "{COUNT, plural, zero {Aucun domaine} one {# domaine} other {# domaines}}"
@@ -515,6 +557,12 @@
   "pages.landing.description": {
     "message": "Gérez le déploiement d'element pour votre organisation ou votre communauté."
   },
+  "pages.login.errors.authorization_failed": {
+    "message": "Could not start the sign-in process. Please try again."
+  },
+  "pages.login.errors.insecure_context": {
+    "message": "Sign-in requires a secure connection. Reload this page over https:// and try again."
+  },
   "pages.login.errors.no_auth_metadata": {
     "message": "Impossible de charger les métadonnées d'authentification du serveur. Synapse est peut-être inaccessible ou pas configuré pour utiliser Matrix Authentication Service."
   },
@@ -571,6 +619,9 @@
   },
   "pages.personal_tokens.description": {
     "message": "Les jetons personnels sont des jetons d'accès à longue durée de vie avec un accès spécifique, tel que l'accès à l'API d'administration Synapse et MAS. Ils permettent entre autre d'automatiser des tâches et de créer des intégrations."
+  },
+  "pages.personal_tokens.details_label": {
+    "message": "Personal token details"
   },
   "pages.personal_tokens.device_id_help": {
     "message": "Laisser vide pour générer un identifiant d'appareil aléatoire de 10 caractères"
@@ -639,7 +690,7 @@
     "message": "Mon jeton pour mon application"
   },
   "pages.personal_tokens.never_expires": {
-    "message": "N'expire jamais"
+    "message": "Sans expiration"
   },
   "pages.personal_tokens.never_used": {
     "message": "Jamais utilisé"
@@ -679,6 +730,18 @@
   },
   "pages.personal_tokens.revoke_token": {
     "message": "Révoquer le jeton"
+  },
+  "pages.personal_tokens.revoke_token.alert.description": {
+    "message": "{humanName} will stop working immediately, and anything using it will need a new token."
+  },
+  "pages.personal_tokens.revoke_token.alert.title": {
+    "message": "This cannot be undone"
+  },
+  "pages.personal_tokens.revoke_token.error": {
+    "message": "Failed to revoke the token"
+  },
+  "pages.personal_tokens.revoke_token.title": {
+    "message": "Revoke this personal token?"
   },
   "pages.personal_tokens.revoked_at_label": {
     "message": "Date de révocation"
@@ -755,8 +818,17 @@
   "pages.registration_tokens.custom_token_label": {
     "message": "Jeton personnalisé"
   },
+  "pages.registration_tokens.details_label": {
+    "message": "Registration token details"
+  },
   "pages.registration_tokens.edit_properties": {
     "message": "Modifier les propriétés"
+  },
+  "pages.registration_tokens.edit_properties.revoked_tooltip": {
+    "message": "Unrevoke this token before editing its properties"
+  },
+  "pages.registration_tokens.edit_token.error": {
+    "message": "Failed to save the changes"
   },
   "pages.registration_tokens.edit_token_title": {
     "message": "Modifier le jeton d'enregistrement"
@@ -776,6 +848,9 @@
   "pages.registration_tokens.filters.expired_only": {
     "message": "Expiré"
   },
+  "pages.registration_tokens.filters.not_revoked": {
+    "message": "Not revoked"
+  },
   "pages.registration_tokens.filters.revoked_only": {
     "message": "Révoqué"
   },
@@ -786,7 +861,7 @@
     "message": "Utilisé"
   },
   "pages.registration_tokens.never_expires": {
-    "message": "N'expire jamais"
+    "message": "Sans expiration"
   },
   "pages.registration_tokens.no_expiration_placeholder": {
     "message": "Aucune date d'expiration"
@@ -799,6 +874,21 @@
   },
   "pages.registration_tokens.revoke_token": {
     "message": "Révoquer le jeton"
+  },
+  "pages.registration_tokens.revoke_token.alert.description": {
+    "message": "Nobody will be able to register with {token} until it is unrevoked."
+  },
+  "pages.registration_tokens.revoke_token.alert.title": {
+    "message": "The token will stop working"
+  },
+  "pages.registration_tokens.revoke_token.error": {
+    "message": "Failed to revoke the token"
+  },
+  "pages.registration_tokens.revoke_token.success": {
+    "message": "Token revoked"
+  },
+  "pages.registration_tokens.revoke_token.title": {
+    "message": "Revoke this registration token?"
   },
   "pages.registration_tokens.revoked_at_label": {
     "message": "Date de révocation"
@@ -851,6 +941,12 @@
   "pages.registration_tokens.unrevoke_token": {
     "message": "Annuler la révocation du jeton"
   },
+  "pages.registration_tokens.unrevoke_token.error": {
+    "message": "Failed to unrevoke the token"
+  },
+  "pages.registration_tokens.unrevoke_token.success": {
+    "message": "Token unrevoked"
+  },
   "pages.registration_tokens.usage_count_label": {
     "message": "Nombre d'utilisations"
   },
@@ -878,8 +974,8 @@
   "pages.rooms.columns.room": {
     "message": "Salon"
   },
-  "pages.rooms.columns.type": {
-    "message": "Type"
+  "pages.rooms.columns.visibility": {
+    "message": "Visibility"
   },
   "pages.rooms.delete_room.alert.description": {
     "message": "Cette action supprimera définitivement tous les messages ou fichiers multimédias téléchargés sur le serveur et supprimera ce salon du répertoire. Les membres perdront l'accès à leurs messages et le salon sera supprimée de leur liste de salons."
@@ -922,6 +1018,9 @@
   },
   "pages.rooms.deletion.success.title": {
     "message": "Suppression réussie"
+  },
+  "pages.rooms.details_label": {
+    "message": "Room details"
   },
   "pages.rooms.filters.empty_rooms": {
     "message": "Salons vides"
@@ -982,6 +1081,9 @@
   },
   "pages.supervision.errors.generic.title": {
     "message": "Une erreur inattendue s'est produite lors de l'ouverture de l'interface de supervision."
+  },
+  "pages.supervision.launch": {
+    "message": "Open supervision interface"
   },
   "pages.supervision.missing_ui_address.description": {
     "message": "La supervision est activée dans votre déploiement, mais pas Element Web, qui est nécessaire au fonctionnement de l'interface de modération."
@@ -1102,6 +1204,9 @@
   },
   "pages.users.delete_upstream_link.title": {
     "message": "Supprimer l'association avec le compte en amont ?"
+  },
+  "pages.users.details_label": {
+    "message": "User details"
   },
   "pages.users.filters.active": {
     "message": "Utilisateurs actifs"
@@ -1271,6 +1376,9 @@
   "pages.users.user_count": {
     "message": "{COUNT, plural, zero {Aucun utilisateur} one {# utilisateur} other {# utilisateurs}}"
   },
+  "product.badge.pro": {
+    "message": "Pro"
+  },
   "product.element": {
     "message": "Element"
   },
@@ -1304,11 +1412,14 @@
   "rooms_info.other_members": {
     "message": "{COUNT, plural, one {# autre} other {# autres}}"
   },
+  "ui.copy.copied": {
+    "message": "Copied!"
+  },
+  "ui.copy.copy_to_clipboard": {
+    "message": "Copy to clipboard"
+  },
   "ui.data.failed_to_load": {
     "message": "Échec du chargement"
-  },
-  "ui.data.loading": {
-    "message": "Chargement de l'information"
   },
   "ui.data_table.loading_more": {
     "message": "Chargement…"
@@ -1347,7 +1458,7 @@
     "message": "Actif"
   },
   "ui.device_status.inactive": {
-    "message": "Inactive"
+    "message": "Inactif"
   },
   "ui.device_status.last_active.tooltip": {
     "message": "Dernière activité le {date}."

@@ -35,6 +35,12 @@
       "value": "Löschen"
     }
   ],
+  "action.done": [
+    {
+      "type": 0,
+      "value": "Done"
+    }
+  ],
   "action.go_back": [
     {
       "type": 0,
@@ -53,12 +59,6 @@
       "value": "Erneut versuchen"
     }
   ],
-  "action.sign_in": [
-    {
-      "type": 0,
-      "value": "Anmelden"
-    }
-  ],
   "action.sign_out": [
     {
       "type": 0,
@@ -68,13 +68,35 @@
   "common.email_address": [
     {
       "type": 0,
-      "value": "E-Mail Adresse"
+      "value": "E-Mail-Adresse"
     }
   ],
   "common.filter": [
     {
       "type": 0,
       "value": "Filter"
+    }
+  ],
+  "common.loading": [
+    {
+      "type": 0,
+      "value": "Loading…"
+    }
+  ],
+  "errors.authorization_denied": [
+    {
+      "type": 0,
+      "value": "Sign-in was cancelled."
+    }
+  ],
+  "errors.authorization_error": [
+    {
+      "type": 0,
+      "value": "Sign-in failed: "
+    },
+    {
+      "type": 1,
+      "value": "errorMessage"
     }
   ],
   "errors.http_fetch": [
@@ -131,6 +153,16 @@
       "value": "statusText"
     }
   ],
+  "errors.mas_api": [
+    {
+      "type": 0,
+      "value": "The homeserver's authentication service returned an error: "
+    },
+    {
+      "type": 1,
+      "value": "errorMessage"
+    }
+  ],
   "errors.matrix_standard": [
     {
       "type": 0,
@@ -142,11 +174,17 @@
     },
     {
       "type": 0,
-      "value": "” fehlgeschlagen. Zusätzlich hat der Server die folgende Fehlernachricht ausgegeben: "
+      "value": "“ fehlgeschlagen. Der Server hat zusätzlich folgende Fehlermeldung zurückgegeben: "
     },
     {
       "type": 1,
       "value": "errorMessage"
+    }
+  ],
+  "errors.no_details": [
+    {
+      "type": 0,
+      "value": "The server returned an error with no details."
     }
   ],
   "errors.not_logged_in": [
@@ -227,7 +265,7 @@
       "children": [
         {
           "type": 0,
-          "value": "Sie umfasst alle Funktionen von ESS Community sowie zusätzliche Funktionen und Dienste, die auf professionelle Umgebungen mit mehr als 100 Benutzern bis hin zu Millionen von Benutzern zugeschnitten sind."
+          "value": "Sie umfasst alle Funktionen von ESS Community sowie zusätzliche Funktionen und Dienste, die auf professionelle Umgebungen mit mehr als 100 Nutzern bis hin zu Millionen von Nutzern zugeschnitten sind."
         }
       ]
     },
@@ -279,7 +317,7 @@
       "children": [
         {
           "type": 0,
-          "value": "Wenn diese Funktion aktiviert ist, ist für alle Endbenutzer sichtbar, welche Chats aufgezeichnet werden, um die Transparenz des Auditing-Prozesses zu gewährleisten."
+          "value": "Wenn diese Funktion aktiviert ist, ist für alle Endnutzer sichtbar, welche Chats aufgezeichnet werden, um die Transparenz des Auditing-Prozesses zu gewährleisten."
         }
       ]
     },
@@ -405,7 +443,7 @@
       "children": [
         {
           "type": 0,
-          "value": "Supervision ermöglicht es einer Organisation, alle Chats von einem zentralen Punkt aus zu verwalten. Ein „Supervisor”-Konto tritt definierten Chats mit Administratorrechten bei. Serveradministratoren können sich nahtlos über die Adminkonsole in das Konto einloggen, um ihre Chats zu verwalten und zu moderieren."
+          "value": "Supervision ermöglicht es einer Organisation, alle Chats von einem zentralen Punkt aus zu verwalten. Ein „Supervisor”-Konto tritt definierten Chats mit Administratorrechten bei. Server-Administratoren können sich nahtlos über die Adminkonsole in das Konto einloggen, um ihre Chats zu verwalten und zu moderieren."
         }
       ]
     },
@@ -441,7 +479,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Raummitgliedschaften verwalten"
+              "value": "Chat-Mitgliedschaften verwalten"
             }
           ]
         },
@@ -469,7 +507,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Verlassene Chats wiederherstellen (alle Benutzer haben den Chat verlassen)"
+              "value": "Verlassene Chats wiederherstellen (alle Nutzer haben den Chat verlassen)"
             }
           ]
         },
@@ -483,7 +521,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Das Supervisor-Konto kann entweder verschlüsselte Nachrichtinhalte lesen oder nicht (konfigurierbar)"
+              "value": "Das „Supervisor“-Konto kann entweder verschlüsselte Nachrichtinhalte lesen oder nicht (konfigurierbar)"
             }
           ]
         },
@@ -515,7 +553,7 @@
   "navigation.devices": [
     {
       "type": 0,
-      "value": "Devices"
+      "value": "Geräte"
     }
   ],
   "navigation.documentation": [
@@ -575,7 +613,7 @@
   "pages.auditing.unavailable_alert.title": [
     {
       "type": 0,
-      "value": "Auditing ist in ESS Pro verfügbar."
+      "value": "Auditing ist in ESS Pro verfügbar"
     }
   ],
   "pages.dashboard.current_ess_version": [
@@ -629,7 +667,7 @@
   "pages.devices.applications.client_id_label": [
     {
       "type": 0,
-      "value": "Client ID"
+      "value": "Geräte ID"
     }
   ],
   "pages.devices.applications.count": [
@@ -641,7 +679,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No applications"
+              "value": "Keine Anwendung"
             }
           ]
         },
@@ -652,7 +690,7 @@
             },
             {
               "type": 0,
-              "value": " application"
+              "value": " Anwendung"
             }
           ]
         },
@@ -663,7 +701,7 @@
             },
             {
               "type": 0,
-              "value": " applications"
+              "value": " Anwendungen"
             }
           ]
         }
@@ -675,25 +713,31 @@
   "pages.devices.applications.description": [
     {
       "type": 0,
-      "value": "Applications are OAuth 2.0 clients that users sign in to."
+      "value": "Anwendungen sind OAuth 2.0-Clients, bei denen sich Nutzer anmelden."
+    }
+  ],
+  "pages.devices.applications.details_label": [
+    {
+      "type": 0,
+      "value": "Application details"
     }
   ],
   "pages.devices.applications.filters.has_active_sessions": [
     {
       "type": 0,
-      "value": "With active devices"
+      "value": "Mit aktiven Geräten"
     }
   ],
   "pages.devices.applications.filters.no_active_sessions": [
     {
       "type": 0,
-      "value": "Without active devices"
+      "value": "Ohne aktive Geräte"
     }
   ],
   "pages.devices.applications.grant_types_label": [
     {
       "type": 0,
-      "value": "Grant types"
+      "value": "Grant-Typen"
     }
   ],
   "pages.devices.applications.name_column": [
@@ -705,7 +749,7 @@
   "pages.devices.applications.not_found.description": [
     {
       "type": 0,
-      "value": "The requested application ("
+      "value": "Die angeforderte Anwendung ("
     },
     {
       "type": 1,
@@ -713,7 +757,7 @@
     },
     {
       "type": 0,
-      "value": ") could not be found on "
+      "value": ") konnte auf "
     },
     {
       "type": 1,
@@ -721,13 +765,13 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " nicht gefunden werden."
     }
   ],
   "pages.devices.applications.not_found.title": [
     {
       "type": 0,
-      "value": "Application not found"
+      "value": "Anwendung nicht gefunden"
     }
   ],
   "pages.devices.applications.redirect_uris_label": [
@@ -739,49 +783,55 @@
   "pages.devices.applications.search_placeholder": [
     {
       "type": 0,
-      "value": "Search by name…"
+      "value": "Suche nach Namen …"
     }
   ],
   "pages.devices.applications.statistics.active_recently": [
     {
       "type": 0,
-      "value": "Active in the past 7 days"
+      "value": "In den letzten 7 Tagen aktiv"
     }
   ],
   "pages.devices.applications.statistics.created_recently": [
     {
       "type": 0,
-      "value": "Devices added in the past 7 days"
+      "value": "In den letzten 7 Tagen hinzugefügte Geräte"
     }
   ],
   "pages.devices.applications.statistics.heading": [
     {
       "type": 0,
-      "value": "Device statistics"
+      "value": "Gerätestatistik"
     }
   ],
   "pages.devices.applications.statistics.total_active": [
     {
       "type": 0,
-      "value": "Active devices"
+      "value": "Aktive Geräte"
     }
   ],
   "pages.devices.applications.title": [
     {
       "type": 0,
-      "value": "Applications"
+      "value": "Anwendungen"
     }
   ],
   "pages.devices.applications.uri_label": [
     {
       "type": 0,
-      "value": "Homepage"
+      "value": "Startseite"
     }
   ],
   "pages.devices.applications.view_sessions": [
     {
       "type": 0,
-      "value": "View all devices"
+      "value": "Alle Geräte anzeigen"
+    }
+  ],
+  "pages.devices.applications.view_users": [
+    {
+      "type": 0,
+      "value": "View users on this application"
     }
   ],
   "pages.devices.legacy.count": [
@@ -793,7 +843,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No legacy devices"
+              "value": "Keine Legacy-Geräte"
             }
           ]
         },
@@ -804,7 +854,7 @@
             },
             {
               "type": 0,
-              "value": " legacy device"
+              "value": " Legacy-Gerät"
             }
           ]
         },
@@ -815,7 +865,7 @@
             },
             {
               "type": 0,
-              "value": " legacy devices"
+              "value": " Legacy-Geräte"
             }
           ]
         }
@@ -827,61 +877,67 @@
   "pages.devices.legacy.created_at_label": [
     {
       "type": 0,
-      "value": "Signed in at"
+      "value": "Angemeldet am"
     }
   ],
   "pages.devices.legacy.description": [
     {
       "type": 0,
-      "value": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
+      "value": "Legacy-Geräte sind Anmeldungen von Clients, die noch nicht auf OAuth 2.0 migriert wurden."
+    }
+  ],
+  "pages.devices.legacy.details_label": [
+    {
+      "type": 0,
+      "value": "Legacy device details"
     }
   ],
   "pages.devices.legacy.device_column": [
     {
       "type": 0,
-      "value": "Device"
+      "value": "Gerät"
     }
   ],
   "pages.devices.legacy.device_id_label": [
     {
       "type": 0,
-      "value": "Device ID"
+      "value": "Geräte-ID"
     }
   ],
   "pages.devices.legacy.filters.activity_active": [
     {
       "type": 0,
-      "value": "Active"
+      "value": "Aktiv"
     }
   ],
   "pages.devices.legacy.filters.activity_inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "Inaktiv"
     }
   ],
   "pages.devices.legacy.filters.activity_recently_used": [
     {
       "type": 0,
-      "value": "Recently used"
+      "value": "Kürzlich verwendet"
     }
   ],
   "pages.devices.legacy.filters.activity_signed_out": [
     {
       "type": 0,
-      "value": "Signed out"
+      "value": "Abgemeldet"
     }
   ],
   "pages.devices.legacy.filters.newest_first": [
     {
       "type": 0,
-      "value": "Newest first"
+      "value": "Neueste zuerst"
     }
   ],
   "pages.devices.legacy.filters.user_chip": [
     {
       "type": 0,
-      "value": "User: @"
+      "value": "Nutzer: @"
     },
     {
       "type": 1,
@@ -899,61 +955,61 @@
   "pages.devices.legacy.finish.button": [
     {
       "type": 0,
-      "value": "Remove device"
+      "value": "Gerät entfernen"
     }
   ],
   "pages.devices.legacy.finish.confirm": [
     {
       "type": 0,
-      "value": "Remove device"
+      "value": "Gerät entfernen"
     }
   ],
   "pages.devices.legacy.finish.description": [
     {
       "type": 0,
-      "value": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
+      "value": "Der Nutzer wird von diesem Gerät abgemeldet. Access- und Refresh-Token werden sofort widerrufen."
     }
   ],
   "pages.devices.legacy.finish.error": [
     {
       "type": 0,
-      "value": "Failed to remove the legacy device"
+      "value": "Das Legacy-Gerät konnte nicht entfernt werden"
     }
   ],
   "pages.devices.legacy.finish.success": [
     {
       "type": 0,
-      "value": "Legacy device removed"
+      "value": "Legacy-Gerät entfernt"
     }
   ],
   "pages.devices.legacy.finish.title": [
     {
       "type": 0,
-      "value": "Remove this legacy device?"
+      "value": "Legacy-Gerät entfernen?"
     }
   ],
   "pages.devices.legacy.finished_at_label": [
     {
       "type": 0,
-      "value": "Signed out at"
+      "value": "Abgemeldet um"
     }
   ],
   "pages.devices.legacy.last_active_ip_label": [
     {
       "type": 0,
-      "value": "Last active IP"
+      "value": "Letzte aktive IP-Adresse"
     }
   ],
   "pages.devices.legacy.last_active_label": [
     {
       "type": 0,
-      "value": "Last active"
+      "value": "Zuletzt aktiv"
     }
   ],
   "pages.devices.legacy.not_found.description": [
     {
       "type": 0,
-      "value": "The requested legacy device ("
+      "value": "Das angeforderte Legacy-Gerät ("
     },
     {
       "type": 1,
@@ -961,7 +1017,7 @@
     },
     {
       "type": 0,
-      "value": ") could not be found on "
+      "value": ") wurde auf "
     },
     {
       "type": 1,
@@ -969,13 +1025,13 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " nicht gefunden."
     }
   ],
   "pages.devices.legacy.not_found.title": [
     {
       "type": 0,
-      "value": "Legacy device not found"
+      "value": "Legacy-Gerät nicht gefunden"
     }
   ],
   "pages.devices.legacy.redirect_uri_label": [
@@ -993,61 +1049,61 @@
   "pages.devices.legacy.technical_details": [
     {
       "type": 0,
-      "value": "Technical details"
+      "value": "Technische Details"
     }
   ],
   "pages.devices.legacy.title": [
     {
       "type": 0,
-      "value": "Legacy devices"
+      "value": "Legacy-Geräte"
     }
   ],
   "pages.devices.legacy.user_agent_label": [
     {
       "type": 0,
-      "value": "User agent"
+      "value": "User-Agent"
     }
   ],
   "pages.devices.legacy.user_column": [
     {
       "type": 0,
-      "value": "User"
+      "value": "Nutzer"
     }
   ],
   "pages.devices.tabs.applications": [
     {
       "type": 0,
-      "value": "Applications"
+      "value": "Anwendungen"
     }
   ],
   "pages.devices.tabs.legacy": [
     {
       "type": 0,
-      "value": "Legacy devices"
+      "value": "Legacy-Geräte"
     }
   ],
   "pages.devices.tabs.section": [
     {
       "type": 0,
-      "value": "Device views"
+      "value": "Geräteansichten"
     }
   ],
   "pages.devices.tabs.user": [
     {
       "type": 0,
-      "value": "User devices"
+      "value": "Nutzergeräte"
     }
   ],
   "pages.devices.title": [
     {
       "type": 0,
-      "value": "Devices"
+      "value": "Geräte"
     }
   ],
   "pages.devices.user.client_column": [
     {
       "type": 0,
-      "value": "Application"
+      "value": "Anwendung"
     }
   ],
   "pages.devices.user.count": [
@@ -1059,7 +1115,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No devices"
+              "value": "Keine Geräte"
             }
           ]
         },
@@ -1070,7 +1126,7 @@
             },
             {
               "type": 0,
-              "value": " device"
+              "value": " Gerät"
             }
           ]
         },
@@ -1081,7 +1137,7 @@
             },
             {
               "type": 0,
-              "value": " devices"
+              "value": " Geräte"
             }
           ]
         }
@@ -1093,55 +1149,61 @@
   "pages.devices.user.created_at_label": [
     {
       "type": 0,
-      "value": "Signed in at"
+      "value": "Angemeldet am"
     }
   ],
   "pages.devices.user.description": [
     {
       "type": 0,
-      "value": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
+      "value": "Ein Gerät stellt eine einzelne Anmeldung eines Nutzers in einer Anwendung dar. Beim Abmelden eines Geräts wird dessen Zugriff sofort widerrufen."
+    }
+  ],
+  "pages.devices.user.details_label": [
+    {
+      "type": 0,
+      "value": "Device details"
     }
   ],
   "pages.devices.user.device_column": [
     {
       "type": 0,
-      "value": "Device"
+      "value": "Gerät"
     }
   ],
   "pages.devices.user.device_id_label": [
     {
       "type": 0,
-      "value": "Device ID"
+      "value": "Geräte-ID"
     }
   ],
   "pages.devices.user.filters.activity_active": [
     {
       "type": 0,
-      "value": "Active"
+      "value": "Aktiv"
     }
   ],
   "pages.devices.user.filters.activity_inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "Inaktiv"
     }
   ],
   "pages.devices.user.filters.activity_recently_used": [
     {
       "type": 0,
-      "value": "Recently used"
+      "value": "Kürzlich verwendet"
     }
   ],
   "pages.devices.user.filters.activity_signed_out": [
     {
       "type": 0,
-      "value": "Signed out"
+      "value": "Abgemeldet"
     }
   ],
   "pages.devices.user.filters.client_chip": [
     {
       "type": 0,
-      "value": "Application: "
+      "value": "Anwendung: "
     },
     {
       "type": 1,
@@ -1151,13 +1213,13 @@
   "pages.devices.user.filters.newest_first": [
     {
       "type": 0,
-      "value": "Newest first"
+      "value": "Neueste zuerst"
     }
   ],
   "pages.devices.user.filters.user_chip": [
     {
       "type": 0,
-      "value": "User: @"
+      "value": "Nutzer: @"
     },
     {
       "type": 1,
@@ -1175,61 +1237,61 @@
   "pages.devices.user.finish.button": [
     {
       "type": 0,
-      "value": "Remove device"
+      "value": "Gerät entfernen"
     }
   ],
   "pages.devices.user.finish.confirm": [
     {
       "type": 0,
-      "value": "Remove device"
+      "value": "Gerät entfernen"
     }
   ],
   "pages.devices.user.finish.description": [
     {
       "type": 0,
-      "value": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
+      "value": "Der Nutzer wird von diesem Gerät abgemeldet. Access- und Refresh-Token werden sofort widerrufen."
     }
   ],
   "pages.devices.user.finish.error": [
     {
       "type": 0,
-      "value": "Failed to remove the device"
+      "value": "Das Gerät konnte nicht entfernt werden"
     }
   ],
   "pages.devices.user.finish.success": [
     {
       "type": 0,
-      "value": "Device removed"
+      "value": "Gerät entfernt"
     }
   ],
   "pages.devices.user.finish.title": [
     {
       "type": 0,
-      "value": "Remove this device?"
+      "value": "Dieses Gerät entfernen?"
     }
   ],
   "pages.devices.user.finished_at_label": [
     {
       "type": 0,
-      "value": "Signed out at"
+      "value": "Abgemeldet um"
     }
   ],
   "pages.devices.user.last_active_ip_label": [
     {
       "type": 0,
-      "value": "Last active IP"
+      "value": "Letzte aktive IP-Adresse"
     }
   ],
   "pages.devices.user.last_active_label": [
     {
       "type": 0,
-      "value": "Last active"
+      "value": "Zuletzt aktiv"
     }
   ],
   "pages.devices.user.not_found.description": [
     {
       "type": 0,
-      "value": "The requested device ("
+      "value": "Das angeforderte Gerät ("
     },
     {
       "type": 1,
@@ -1237,7 +1299,7 @@
     },
     {
       "type": 0,
-      "value": ") could not be found on "
+      "value": ") wurde auf "
     },
     {
       "type": 1,
@@ -1245,13 +1307,13 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " nicht gefunden."
     }
   ],
   "pages.devices.user.not_found.title": [
     {
       "type": 0,
-      "value": "Device not found"
+      "value": "Gerät nicht gefunden"
     }
   ],
   "pages.devices.user.scope_label": [
@@ -1269,31 +1331,31 @@
   "pages.devices.user.technical_details": [
     {
       "type": 0,
-      "value": "Technical details"
+      "value": "Technische Details"
     }
   ],
   "pages.devices.user.title": [
     {
       "type": 0,
-      "value": "User devices"
+      "value": "Nutzergeräte"
     }
   ],
   "pages.devices.user.user_agent_label": [
     {
       "type": 0,
-      "value": "User agent"
+      "value": "User-Agent"
     }
   ],
   "pages.devices.user.user_column": [
     {
       "type": 0,
-      "value": "User"
+      "value": "Nutzer"
     }
   ],
   "pages.devices.user.user_none": [
     {
       "type": 0,
-      "value": "No user"
+      "value": "Kein Nutzer"
     }
   ],
   "pages.federation.allowlist.add.error": [
@@ -1323,7 +1385,7 @@
   "pages.federation.allowlist.add_pattern.help": [
     {
       "type": 0,
-      "value": "Gib eine Domäne wie example.com ein oder verwende *, um alle Subdomänen zuzulassen, z. B. *.example.com."
+      "value": "Gib eine Domäne wie example.com ein oder verwende *, um alle Subdomänen zuzulassen, z. B. *.example.com"
     }
   ],
   "pages.federation.allowlist.empty": [
@@ -1335,19 +1397,45 @@
   "pages.federation.allowlist.heading": [
     {
       "type": 0,
-      "value": "Liste der Muster, die für eine Föderation mit Ihnen zugelassen sind"
+      "value": "Liste der Muster, die für eine Föderation mit dir zugelassen sind"
     }
   ],
   "pages.federation.allowlist.remove.error": [
     {
       "type": 0,
-      "value": "Domain konnte nicht von der Zulassungsliste entfernt werden."
+      "value": "Domain konnte nicht von der Zulassungsliste entfernt werden"
     }
   ],
   "pages.federation.allowlist.remove.success": [
     {
       "type": 0,
       "value": "Domain von der Zulassungsliste entfernt"
+    }
+  ],
+  "pages.federation.allowlist.remove_confirm.alert.description": [
+    {
+      "type": 0,
+      "value": "Your server will stop federating with servers matching this pattern."
+    }
+  ],
+  "pages.federation.allowlist.remove_confirm.alert.title": [
+    {
+      "type": 0,
+      "value": "You’re about to stop federating with this server"
+    }
+  ],
+  "pages.federation.allowlist.remove_confirm.title": [
+    {
+      "type": 0,
+      "value": "Remove "
+    },
+    {
+      "type": 1,
+      "value": "serverName"
+    },
+    {
+      "type": 0,
+      "value": " from the allowlist?"
     }
   ],
   "pages.federation.allowlist.remove_tooltip": [
@@ -1362,16 +1450,16 @@
       "value": "Kontakt"
     }
   ],
-  "pages.federation.detail.destination": [
-    {
-      "type": 0,
-      "value": "Ziel"
-    }
-  ],
   "pages.federation.detail.last_retry": [
     {
       "type": 0,
       "value": "Letzter Wiederholungsversuch"
+    }
+  ],
+  "pages.federation.detail.last_retry.never": [
+    {
+      "type": 0,
+      "value": "Never"
     }
   ],
   "pages.federation.detail.last_successful_stream": [
@@ -1386,6 +1474,12 @@
       "value": "Wiederholungsintervall"
     }
   ],
+  "pages.federation.detail.retry_interval.none": [
+    {
+      "type": 0,
+      "value": "None"
+    }
+  ],
   "pages.federation.detail.security": [
     {
       "type": 0,
@@ -1396,6 +1490,12 @@
     {
       "type": 0,
       "value": "Support-Seite"
+    }
+  ],
+  "pages.federation.details_label": [
+    {
+      "type": 0,
+      "value": "Destination details"
     }
   ],
   "pages.federation.domain_count": [
@@ -1467,13 +1567,13 @@
   "pages.federation.sbg_not_enabled.title": [
     {
       "type": 0,
-      "value": "Die Funktion „Zulässige Domains“ ist eine Funktion des Secure Border Gateway, das in ESS Pro verfügbar ist."
+      "value": "Die Funktion „Zulässige Domains“ ist eine Funktion des Secure Border Gateway, das in ESS Pro verfügbar ist"
     }
   ],
   "pages.federation.search_placeholder": [
     {
       "type": 0,
-      "value": "Domains suchen..."
+      "value": "Domains suchen …"
     }
   ],
   "pages.federation.tab.allowed_domains": [
@@ -1515,13 +1615,13 @@
   "pages.federation.unavailable_alert.description": [
     {
       "type": 0,
-      "value": "Secure Border Gateway ist in ESS Community nicht verfügbar. Zum Aktivieren aktualisieren Sie bitte auf ESS Pro."
+      "value": "Secure Border Gateway ist in ESS Community nicht verfügbar. Aktualisiere bitte auf ESS Pro, um es zu aktivieren."
     }
   ],
   "pages.federation.unavailable_alert.title": [
     {
       "type": 0,
-      "value": "Zulässige Domains ist eine Funktion des Secure Border Gateway, das in ESS Pro verfügbar ist."
+      "value": "Die Funktion „Zulässige Domains“ ist eine Funktion des Secure Border Gateway, das in ESS Pro verfügbar ist"
     }
   ],
   "pages.generic_error.go_home": [
@@ -1568,6 +1668,18 @@
       "value": "Verwalte die Bereitstellung der Element-App für deine Organisation oder Community."
     }
   ],
+  "pages.login.errors.authorization_failed": [
+    {
+      "type": 0,
+      "value": "Could not start the sign-in process. Please try again."
+    }
+  ],
+  "pages.login.errors.insecure_context": [
+    {
+      "type": 0,
+      "value": "Sign-in requires a secure connection. Reload this page over https:// and try again."
+    }
+  ],
   "pages.login.errors.no_auth_metadata": [
     {
       "type": 0,
@@ -1583,13 +1695,13 @@
   "pages.login.errors.no_well_known": [
     {
       "type": 0,
-      "value": "Das \"well-known\" Dokument des Servers konnte nicht geladen werden. Der Servername ist möglicherweise ungültig."
+      "value": "Das well-known-Dokument des Servers konnte nicht geladen werden. Der Servername ist möglicherweise ungültig."
     }
   ],
   "pages.login.get_started": [
     {
       "type": 0,
-      "value": "Los geht's"
+      "value": "Los geht’s"
     }
   ],
   "pages.login.server_name": [
@@ -1645,13 +1757,13 @@
     },
     {
       "type": 0,
-      "value": " kann dieses Token neu generieren."
+      "value": " kann dieses Token neu generieren"
     }
   ],
   "pages.personal_tokens.cant_regenerate_tooltip_generic": [
     {
       "type": 0,
-      "value": "Nur der Eigentümer des Tokens kann es neu generieren."
+      "value": "Nur der Eigentümer des Tokens kann es neu generieren"
     }
   ],
   "pages.personal_tokens.count": [
@@ -1697,7 +1809,7 @@
   "pages.personal_tokens.create_error": [
     {
       "type": 0,
-      "value": "Es konnte kein persönliches Token erstellt werden."
+      "value": "Es konnte kein persönliches Token erstellt werden"
     }
   ],
   "pages.personal_tokens.create_success": [
@@ -1724,10 +1836,16 @@
       "value": "Persönliche Token sind langlebige Zugriffstoken mit spezifischen Berechtigungen, darunter der Zugriff auf die Synapse- und MAS-Admin-API. Sie eignen sich zur Automatisierung von Aufgaben und zur Erstellung von Integrationen."
     }
   ],
+  "pages.personal_tokens.details_label": [
+    {
+      "type": 0,
+      "value": "Personal token details"
+    }
+  ],
   "pages.personal_tokens.device_id_help": [
     {
       "type": 0,
-      "value": "Bitte leer lassen, um eine zufällige 10-stellige Geräte-ID zu generieren."
+      "value": "Bitte leer lassen, um eine zufällige 10-stellige Geräte-ID zu generieren"
     }
   ],
   "pages.personal_tokens.device_id_label": [
@@ -1757,7 +1875,7 @@
   "pages.personal_tokens.expires_in_help": [
     {
       "type": 0,
-      "value": "Bitte für Token, die nicht verfallen, leer lassen."
+      "value": "Bitte für Token, die nicht verfallen, leer lassen"
     }
   ],
   "pages.personal_tokens.expires_in_label": [
@@ -1841,7 +1959,7 @@
   "pages.personal_tokens.name_help": [
     {
       "type": 0,
-      "value": "Ein für Menschen lesbarer Name für das Token, der hilft, es zu identifizieren."
+      "value": "Ein für Menschen lesbarer Name für das Token, der hilft, es zu identifizieren"
     }
   ],
   "pages.personal_tokens.name_label": [
@@ -1901,7 +2019,7 @@
   "pages.personal_tokens.regenerate_expires_help": [
     {
       "type": 0,
-      "value": "Bitte leer lassen, um das gleiche Ablaufdatum wie zuvor beizubehalten, oder lege ein neues Ablaufdatum fest."
+      "value": "Bitte leer lassen, um das gleiche Ablaufdatum wie zuvor beizubehalten, oder lege ein neues Ablaufdatum fest"
     }
   ],
   "pages.personal_tokens.regenerate_success": [
@@ -1938,6 +2056,34 @@
     {
       "type": 0,
       "value": "Token widerrufen"
+    }
+  ],
+  "pages.personal_tokens.revoke_token.alert.description": [
+    {
+      "type": 1,
+      "value": "humanName"
+    },
+    {
+      "type": 0,
+      "value": " will stop working immediately, and anything using it will need a new token."
+    }
+  ],
+  "pages.personal_tokens.revoke_token.alert.title": [
+    {
+      "type": 0,
+      "value": "This cannot be undone"
+    }
+  ],
+  "pages.personal_tokens.revoke_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to revoke the token"
+    }
+  ],
+  "pages.personal_tokens.revoke_token.title": [
+    {
+      "type": 0,
+      "value": "Revoke this personal token?"
     }
   ],
   "pages.personal_tokens.revoked_at_label": [
@@ -2090,10 +2236,28 @@
       "value": "Benutzerdefiniertes Token"
     }
   ],
+  "pages.registration_tokens.details_label": [
+    {
+      "type": 0,
+      "value": "Registration token details"
+    }
+  ],
   "pages.registration_tokens.edit_properties": [
     {
       "type": 0,
       "value": "Eigenschaften bearbeiten"
+    }
+  ],
+  "pages.registration_tokens.edit_properties.revoked_tooltip": [
+    {
+      "type": 0,
+      "value": "Unrevoke this token before editing its properties"
+    }
+  ],
+  "pages.registration_tokens.edit_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to save the changes"
     }
   ],
   "pages.registration_tokens.edit_token_title": [
@@ -2130,6 +2294,12 @@
     {
       "type": 0,
       "value": "Abgelaufen"
+    }
+  ],
+  "pages.registration_tokens.filters.not_revoked": [
+    {
+      "type": 0,
+      "value": "Not revoked"
     }
   ],
   "pages.registration_tokens.filters.revoked_only": [
@@ -2194,6 +2364,44 @@
     {
       "type": 0,
       "value": "Token widerrufen"
+    }
+  ],
+  "pages.registration_tokens.revoke_token.alert.description": [
+    {
+      "type": 0,
+      "value": "Nobody will be able to register with "
+    },
+    {
+      "type": 1,
+      "value": "token"
+    },
+    {
+      "type": 0,
+      "value": " until it is unrevoked."
+    }
+  ],
+  "pages.registration_tokens.revoke_token.alert.title": [
+    {
+      "type": 0,
+      "value": "The token will stop working"
+    }
+  ],
+  "pages.registration_tokens.revoke_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to revoke the token"
+    }
+  ],
+  "pages.registration_tokens.revoke_token.success": [
+    {
+      "type": 0,
+      "value": "Token revoked"
+    }
+  ],
+  "pages.registration_tokens.revoke_token.title": [
+    {
+      "type": 0,
+      "value": "Revoke this registration token?"
     }
   ],
   "pages.registration_tokens.revoked_at_label": [
@@ -2347,6 +2555,18 @@
       "value": "Widerruf des Tokens rückgängig machen"
     }
   ],
+  "pages.registration_tokens.unrevoke_token.error": [
+    {
+      "type": 0,
+      "value": "Failed to unrevoke the token"
+    }
+  ],
+  "pages.registration_tokens.unrevoke_token.success": [
+    {
+      "type": 0,
+      "value": "Token unrevoked"
+    }
+  ],
   "pages.registration_tokens.usage_count_label": [
     {
       "type": 0,
@@ -2386,25 +2606,25 @@
   "pages.rooms.columns.alias": [
     {
       "type": 0,
-      "value": "Alias"
+      "value": "Adresse"
     }
   ],
   "pages.rooms.columns.members": [
     {
       "type": 0,
-      "value": "Members"
+      "value": "Mitglieder"
     }
   ],
   "pages.rooms.columns.room": [
     {
       "type": 0,
-      "value": "Room"
+      "value": "Chat"
     }
   ],
-  "pages.rooms.columns.type": [
+  "pages.rooms.columns.visibility": [
     {
       "type": 0,
-      "value": "Type"
+      "value": "Visibility"
     }
   ],
   "pages.rooms.delete_room.alert.description": [
@@ -2416,13 +2636,13 @@
   "pages.rooms.delete_room.alert.title": [
     {
       "type": 0,
-      "value": "Du bist im Begriff, Chat Daten zu löschen."
+      "value": "Du bist im Begriff, Chat-Daten zu löschen"
     }
   ],
   "pages.rooms.delete_room.block.help": [
     {
       "type": 0,
-      "value": "Nutzern nicht gestatten, die Gruppe nach dem Löschen wieder zu betreten."
+      "value": "Verhindern, dass Nutzer dem Raum nach dem Löschen wieder beitreten."
     }
   ],
   "pages.rooms.delete_room.block.label": [
@@ -2440,7 +2660,7 @@
   "pages.rooms.delete_room.error": [
     {
       "type": 0,
-      "value": "Das Löschen des Chats konnte nicht geplant werden."
+      "value": "Das Löschen des Chats konnte nicht geplant werden"
     }
   ],
   "pages.rooms.delete_room.success": [
@@ -2549,6 +2769,12 @@
       "value": "Löschung erfolgreich"
     }
   ],
+  "pages.rooms.details_label": [
+    {
+      "type": 0,
+      "value": "Room details"
+    }
+  ],
   "pages.rooms.filters.empty_rooms": [
     {
       "type": 0,
@@ -2644,25 +2870,25 @@
   "pages.rooms.room_type.private": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "Privat"
     }
   ],
   "pages.rooms.room_type.public": [
     {
       "type": 0,
-      "value": "Public"
+      "value": "Öffentlich"
     }
   ],
   "pages.rooms.room_type.restricted": [
     {
       "type": 0,
-      "value": "Restricted"
+      "value": "Eingeschränkt"
     }
   ],
   "pages.rooms.search_placeholder": [
     {
       "type": 0,
-      "value": "Search…"
+      "value": "Suchen …"
     }
   ],
   "pages.rooms.title": [
@@ -2718,19 +2944,25 @@
   "pages.supervision.errors.closed.description": [
     {
       "type": 0,
-      "value": "Supervision konnte nicht geöffnet werden – das Anmeldefenster wurde geschlossen, bevor die Anmeldung abgeschlossen war. Bitte erneut versuchen."
+      "value": "Supervision konnte nicht geöffnet werden – das Anmeldefenster wurde geschlossen, bevor die Anmeldung abgeschlossen war"
     }
   ],
   "pages.supervision.errors.closed.title": [
     {
       "type": 0,
-      "value": "Das Supervision-Fenster wurde vorzeitig geschlossen."
+      "value": "Das Supervision-Fenster wurde vorzeitig geschlossen"
     }
   ],
   "pages.supervision.errors.generic.title": [
     {
       "type": 0,
-      "value": "Beim Öffnen von Supervision ist ein unerwarteter Fehler aufgetreten."
+      "value": "Beim Öffnen von Supervision ist ein unerwarteter Fehler aufgetreten"
+    }
+  ],
+  "pages.supervision.launch": [
+    {
+      "type": 0,
+      "value": "Open supervision interface"
     }
   ],
   "pages.supervision.missing_ui_address.description": [
@@ -2742,7 +2974,7 @@
   "pages.supervision.missing_ui_address.title": [
     {
       "type": 0,
-      "value": "Für die Supervision-Oberfläche muss Element Web aktiviert sein."
+      "value": "Für die Supervision-Oberfläche muss Element Web aktiviert sein"
     }
   ],
   "pages.supervision.recovery_key.copied": [
@@ -2754,7 +2986,7 @@
   "pages.supervision.recovery_key.copy_failed": [
     {
       "type": 0,
-      "value": "Der Wiederherstellungsschlüssel konnte nicht kopiert werden."
+      "value": "Der Wiederherstellungsschlüssel konnte nicht kopiert werden"
     }
   ],
   "pages.supervision.recovery_key.help": [
@@ -2790,7 +3022,7 @@
   "pages.users.account_status.active": [
     {
       "type": 0,
-      "value": "Active"
+      "value": "Aktiv"
     }
   ],
   "pages.users.account_status.admin": [
@@ -2802,19 +3034,19 @@
   "pages.users.account_status.deactivated": [
     {
       "type": 0,
-      "value": "Deactivated"
+      "value": "Deaktiviert"
     }
   ],
   "pages.users.account_status.guest": [
     {
       "type": 0,
-      "value": "Guest"
+      "value": "Gast"
     }
   ],
   "pages.users.account_status.locked": [
     {
       "type": 0,
-      "value": "Locked"
+      "value": "Gesperrt"
     }
   ],
   "pages.users.add_email.button": [
@@ -2844,7 +3076,7 @@
   "pages.users.add_email.error.email_missing": [
     {
       "type": 0,
-      "value": "Dies ist ein Pflichtfeld"
+      "value": "Dieses Feld ist ein Pflichtfeld"
     }
   ],
   "pages.users.add_email.success": [
@@ -2856,7 +3088,7 @@
   "pages.users.add_email.title": [
     {
       "type": 0,
-      "value": "E-Mail Adresse hinzufügen"
+      "value": "E-Mail hinzufügen"
     }
   ],
   "pages.users.add_upstream_link.error": [
@@ -2874,19 +3106,19 @@
   "pages.users.columns.account_status": [
     {
       "type": 0,
-      "value": "Account status"
+      "value": "Kontostatus"
     }
   ],
   "pages.users.columns.created_at": [
     {
       "type": 0,
-      "value": "Created at"
+      "value": "Erstellt am"
     }
   ],
   "pages.users.columns.matrix_id": [
     {
       "type": 0,
-      "value": "Matrix ID"
+      "value": "Matrix-ID"
     }
   ],
   "pages.users.deactivate_account.alert.description": [
@@ -2904,7 +3136,7 @@
   "pages.users.deactivate_account.button": [
     {
       "type": 0,
-      "value": "Nutzerkonto deaktivieren"
+      "value": "Konto deaktivieren"
     }
   ],
   "pages.users.deactivate_account.error": [
@@ -3005,6 +3237,12 @@
       "value": "Verbindung mit dem Upstream-Konto entfernen?"
     }
   ],
+  "pages.users.details_label": [
+    {
+      "type": 0,
+      "value": "User details"
+    }
+  ],
   "pages.users.filters.active": [
     {
       "type": 0,
@@ -3014,7 +3252,7 @@
   "pages.users.filters.active_client_chip": [
     {
       "type": 0,
-      "value": "Has active device on: "
+      "value": "Hat aktives Gerät in: "
     },
     {
       "type": 1,
@@ -3042,7 +3280,7 @@
   "pages.users.filters.has_legacy_session": [
     {
       "type": 0,
-      "value": "Has active legacy device"
+      "value": "Hat ein aktives Legacy-Gerät"
     }
   ],
   "pages.users.filters.locked": [
@@ -3060,7 +3298,7 @@
   "pages.users.filters.no_legacy_session": [
     {
       "type": 0,
-      "value": "No active legacy device"
+      "value": "Kein aktives Legacy-Gerät"
     }
   ],
   "pages.users.filters.non_guests": [
@@ -3078,7 +3316,7 @@
   "pages.users.lock_account.alert.title": [
     {
       "type": 0,
-      "value": "Der Nutzer kann keine Nachrichten mehr senden oder empfangen."
+      "value": "Der Nutzer kann keine Nachrichten mehr senden oder empfangen"
     }
   ],
   "pages.users.lock_account.button": [
@@ -3158,7 +3396,7 @@
   "pages.users.new_user.required_error": [
     {
       "type": 0,
-      "value": "Dies ist ein Pflichtfeld"
+      "value": "Dieses Feld ist ein Pflichtfeld"
     }
   ],
   "pages.users.new_user.success_message": [
@@ -3216,7 +3454,7 @@
   "pages.users.search_placeholder": [
     {
       "type": 0,
-      "value": "Nutzer suchen..."
+      "value": "Nutzer suchen …"
     }
   ],
   "pages.users.set_admin.alert.description": [
@@ -3300,7 +3538,7 @@
   "pages.users.set_password.error.password_missing": [
     {
       "type": 0,
-      "value": "Dies ist ein Pflichtfeld"
+      "value": "Dieses Feld ist ein Pflichtfeld"
     }
   ],
   "pages.users.set_password.error.passwords_mismatch": [
@@ -3342,13 +3580,13 @@
   "pages.users.statistics.devices": [
     {
       "type": 0,
-      "value": "Devices"
+      "value": "Geräte"
     }
   ],
   "pages.users.statistics.legacy_devices": [
     {
       "type": 0,
-      "value": "Legacy devices"
+      "value": "Legacy-Geräte"
     }
   ],
   "pages.users.title": [
@@ -3366,7 +3604,7 @@
   "pages.users.unlock_account.error": [
     {
       "type": 0,
-      "value": "Entsperren des Kontos ist fehlgeschlagen."
+      "value": "Entsperren des Kontos ist fehlgeschlagen"
     }
   ],
   "pages.users.unlock_account.success": [
@@ -3413,6 +3651,12 @@
       },
       "offset": 0,
       "pluralType": "cardinal"
+    }
+  ],
+  "product.badge.pro": [
+    {
+      "type": 0,
+      "value": "Pro"
     }
   ],
   "product.element": [
@@ -3480,7 +3724,7 @@
   "room_info.unknown_user": [
     {
       "type": 0,
-      "value": "Unbekannter Nutzer."
+      "value": "Unbekannter Nutzer"
     }
   ],
   "rooms_info.other_members": [
@@ -3515,28 +3759,34 @@
       "pluralType": "cardinal"
     }
   ],
+  "ui.copy.copied": [
+    {
+      "type": 0,
+      "value": "Copied!"
+    }
+  ],
+  "ui.copy.copy_to_clipboard": [
+    {
+      "type": 0,
+      "value": "Copy to clipboard"
+    }
+  ],
   "ui.data.failed_to_load": [
     {
       "type": 0,
       "value": "Laden fehlgeschlagen"
     }
   ],
-  "ui.data.loading": [
-    {
-      "type": 0,
-      "value": "Wert wird geladen"
-    }
-  ],
   "ui.data_table.loading_more": [
     {
       "type": 0,
-      "value": "Loading more…"
+      "value": "Weitere werden geladen …"
     }
   ],
   "ui.destination_status.failing": [
     {
       "type": 0,
-      "value": "Fehlgeschlagen"
+      "value": "Fehlerhaft"
     }
   ],
   "ui.destination_status.inactive": [
@@ -3564,7 +3814,7 @@
     },
     {
       "type": 0,
-      "value": " on "
+      "value": " auf "
     },
     {
       "type": 1,
@@ -3574,7 +3824,7 @@
   "ui.device_info.type.mobile": [
     {
       "type": 0,
-      "value": "Mobile device"
+      "value": "Mobilgerät"
     }
   ],
   "ui.device_info.type.pc": [
@@ -3592,31 +3842,31 @@
   "ui.device_info.type.unknown": [
     {
       "type": 0,
-      "value": "Unknown device type"
+      "value": "Unbekannter Gerätetyp"
     }
   ],
   "ui.device_info.unknown_device": [
     {
       "type": 0,
-      "value": "Unknown device"
+      "value": "Unbekanntes Gerät"
     }
   ],
   "ui.device_status.active": [
     {
       "type": 0,
-      "value": "Active"
+      "value": "Aktiv"
     }
   ],
   "ui.device_status.inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "Inaktiv"
     }
   ],
   "ui.device_status.last_active.tooltip": [
     {
       "type": 0,
-      "value": "Last active on "
+      "value": "Zuletzt aktiv am "
     },
     {
       "type": 1,
@@ -3630,37 +3880,37 @@
   "ui.device_status.never_used": [
     {
       "type": 0,
-      "value": "Never used"
+      "value": "Noch nie verwendet"
     }
   ],
   "ui.device_status.never_used.tooltip": [
     {
       "type": 0,
-      "value": "This device has not been used yet."
+      "value": "Dieses Gerät wurde noch nicht benutzt."
     }
   ],
   "ui.device_status.recently_used": [
     {
       "type": 0,
-      "value": "Recently used"
+      "value": "Kürzlich verwendet"
     }
   ],
   "ui.device_status.signed_out": [
     {
       "type": 0,
-      "value": "Signed out"
+      "value": "Abgemeldet"
     }
   ],
   "ui.device_status.signed_out.tooltip": [
     {
       "type": 0,
-      "value": "This device has been signed out and no longer has access."
+      "value": "Dieses Gerät wurde abgemeldet und hat keinen Zugriff mehr."
     }
   ],
   "ui.device_status.signed_out.tooltip_at": [
     {
       "type": 0,
-      "value": "Signed out on "
+      "value": "Abgemeldet am "
     },
     {
       "type": 1,
@@ -3694,7 +3944,7 @@
   "ui.language_switcher.description": [
     {
       "type": 0,
-      "value": "Wähle deine bevorzugte Sprache für die Benutzeroberfläche"
+      "value": "Wähle deine bevorzugte Sprache für die Benutzeroberfläche."
     }
   ],
   "ui.language_switcher.language_list_label": [
@@ -3712,7 +3962,7 @@
   "ui.user_picker.loading_list": [
     {
       "type": 0,
-      "value": "Lade …"
+      "value": "Wird geladen …"
     }
   ],
   "ui.user_picker.no_match": [

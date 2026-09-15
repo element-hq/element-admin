@@ -9,7 +9,7 @@ import {
   CloseIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Alert, Avatar, Text, Tooltip } from "@vector-im/compound-web";
-import { FormattedMessage, useIntl } from "react-intl";
+import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
 import {
   oauth2ClientQuery,
@@ -73,6 +73,12 @@ export const Route = createFileRoute(
   notFoundComponent: NotFoundComponent,
 });
 
+const detailsLabel = defineMessage({
+  id: "pages.devices.applications.details_label",
+  defaultMessage: "Application details",
+  description: "The accessible name of the application details panel",
+});
+
 function NotFoundComponent() {
   const { clientId } = Route.useParams();
   const {
@@ -80,7 +86,10 @@ function NotFoundComponent() {
   } = Route.useRouteContext();
   const intl = useIntl();
   return (
-    <Navigation.Details className="gap-4">
+    <Navigation.Details
+      className="gap-4"
+      aria-label={intl.formatMessage(detailsLabel)}
+    >
       <CloseSidebar />
 
       <Alert
@@ -154,8 +163,10 @@ function ClientDetailComponent() {
   const { since } = Route.useLoaderDeps();
   const statistics = statisticsParameters(clientId, since);
 
+  const intl = useIntl();
+
   return (
-    <Navigation.Details>
+    <Navigation.Details aria-label={intl.formatMessage(detailsLabel)}>
       <CloseSidebar />
 
       <div className="flex flex-col gap-6">
@@ -317,6 +328,19 @@ function ClientDetailComponent() {
               id="pages.devices.applications.view_sessions"
               defaultMessage="View all devices"
               description="Button on the application details sidebar that navigates to the devices list filtered to this application"
+            />
+          </ButtonLink>
+
+          <ButtonLink
+            kind="secondary"
+            size="md"
+            to="/users"
+            search={{ client: [clientId] }}
+          >
+            <FormattedMessage
+              id="pages.devices.applications.view_users"
+              defaultMessage="View users on this application"
+              description="Button on the application details sidebar that navigates to the users list filtered to those with an active device on this application"
             />
           </ButtonLink>
         </div>

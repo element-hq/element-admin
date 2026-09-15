@@ -16,9 +16,8 @@ import {
   Form,
   InlineSpinner,
   Text,
-  Tooltip,
 } from "@vector-im/compound-web";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { FormattedMessage, useIntl } from "react-intl";
 
@@ -32,7 +31,9 @@ import {
 import { wellKnownQuery } from "@/api/matrix";
 import * as Card from "@/components/card";
 import * as DataTable from "@/components/data-table";
+import * as Dialog from "@/components/dialog";
 import * as Navigation from "@/components/navigation";
+import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
 import * as Marketing from "@/ui/marketing";
 import { Heading } from "./_console.federation";
@@ -110,15 +111,15 @@ function MarketingFallback({
             title={intl.formatMessage({
               id: "pages.federation.sbg_not_enabled.title",
               description:
-                "Title of the alert explaining that allowed domains is part of the Secure Border Gateway and is not enabled",
+                "Title of the alert explaining that the Secure Border Gateway is not enabled on this deployment, shown to an ESS Pro customer who already owns the feature",
               defaultMessage:
-                "Allowed domains is a feature of the Secure Border Gateway available in ESS Pro",
+                "Secure Border Gateway isn't enabled on this deployment",
             })}
           >
             <FormattedMessage
               id="pages.federation.sbg_not_enabled.description"
-              description="Description of the alert explaining the SBG is not enabled on this deployment"
-              defaultMessage="Secure Border Gateway is not enabled on this deployment. Contact your administrator to enable it."
+              description="Description of the alert explaining what to do about the Secure Border Gateway not being enabled, under a title which already says that it isn't"
+              defaultMessage="Contact your administrator to enable it in your deployment configuration."
             />
           </Alert>
         )
@@ -186,36 +187,6 @@ function AllowlistManagement({ synapseRoot }: { synapseRoot: string }) {
           defaultMessage: "Failed to add domain to allowlist",
           description:
             "Toast message when adding a domain to the federation allowlist fails",
-        }),
-      );
-    },
-  });
-
-  const removeMutation = useMutation({
-    mutationFn: (serverName: string) =>
-      removeFromAllowlist(queryClient, synapseRoot, [serverName]),
-
-    async onSuccess() {
-      toast.success(
-        intl.formatMessage({
-          id: "pages.federation.allowlist.remove.success",
-          defaultMessage: "Domain removed from allowlist",
-          description:
-            "Toast message when a domain is removed from the federation allowlist",
-        }),
-      );
-      await queryClient.invalidateQueries({
-        queryKey: ["federation", "allowlist"],
-      });
-    },
-
-    onError() {
-      toast.error(
-        intl.formatMessage({
-          id: "pages.federation.allowlist.remove.error",
-          defaultMessage: "Failed to remove domain from allowlist",
-          description:
-            "Toast message when removing a domain from the federation allowlist fails",
         }),
       );
     },
@@ -296,24 +267,10 @@ function AllowlistManagement({ synapseRoot }: { synapseRoot: string }) {
               {entry.server_name}
             </Text>
 
-            <Tooltip
-              label={intl.formatMessage({
-                id: "pages.federation.allowlist.remove_tooltip",
-                defaultMessage: "Remove from allowlist",
-                description:
-                  "Tooltip for the button to remove a domain from the federation allowlist",
-              })}
-            >
-              <Button
-                iconOnly
-                kind="tertiary"
-                size="md"
-                destructive
-                Icon={DeleteIcon}
-                onClick={() => removeMutation.mutate(entry.server_name)}
-                disabled={removeMutation.isPending}
-              />
-            </Tooltip>
+            <RemoveAllowlistEntryButton
+              synapseRoot={synapseRoot}
+              serverName={entry.server_name}
+            />
           </div>
         ))}
 
@@ -330,5 +287,119 @@ function AllowlistManagement({ synapseRoot }: { synapseRoot: string }) {
         )}
       </div>
     </div>
+  );
+}
+
+function RemoveAllowlistEntryButton({
+  synapseRoot,
+  serverName,
+}: {
+  synapseRoot: string;
+  serverName: string;
+}) {
+  const intl = useIntl();
+  const queryClient = useQueryClient();
+  const [open, setOpen] = useState(false);
+
+  const removeMutation = useMutation({
+    mutationFn: () =>
+      removeFromAllowlist(queryClient, synapseRoot, [serverName]),
+
+    async onSuccess() {
+      toast.success(
+        intl.formatMessage({
+          id: "pages.federation.allowlist.remove.success",
+          defaultMessage: "Domain removed from allowlist",
+          description:
+            "Toast message when a domain is removed from the federation allowlist",
+        }),
+      );
+      await queryClient.invalidateQueries({
+        queryKey: ["federation", "allowlist"],
+      });
+      setOpen(false);
+    },
+  });
+
+  const onOpenChange = (nextOpen: boolean) => {
+    if (removeMutation.isPending) return;
+    setOpen(nextOpen);
+  };
+
+  return (
+    <Dialog.Root
+      open={open}
+      onOpenChange={onOpenChange}
+      trigger={
+        <Button
+          iconOnly
+          kind="tertiary"
+          size="md"
+          destructive
+          Icon={DeleteIcon}
+          aria-label={intl.formatMessage({
+            id: "pages.federation.allowlist.remove_tooltip",
+            defaultMessage: "Remove from allowlist",
+            description:
+              "Accessible label for the button to remove a domain from the federation allowlist",
+          })}
+        />
+      }
+    >
+      <Dialog.Title>
+        <FormattedMessage
+          id="pages.federation.allowlist.remove_confirm.title"
+          defaultMessage="Remove {serverName} from the allowlist?"
+          description="Title of the confirmation dialog for removing a domain from the federation allowlist"
+          values={{ serverName }}
+        />
+      </Dialog.Title>
+
+      <Dialog.Description asChild>
+        <Alert
+          type="critical"
+          title={intl.formatMessage({
+            id: "pages.federation.allowlist.remove_confirm.alert.title",
+            description:
+              "Title of the alert in the confirmation dialog for removing a domain from the federation allowlist",
+            defaultMessage: "You’re about to stop federating with this server",
+          })}
+        >
+          <FormattedMessage
+            id="pages.federation.allowlist.remove_confirm.alert.description"
+            description="Description of the alert in the confirmation dialog for removing a domain from the federation allowlist"
+            defaultMessage="Your server will stop federating with servers matching this pattern."
+          />
+        </Alert>
+      </Dialog.Description>
+
+      {removeMutation.isError && (
+        <Dialog.ErrorAlert
+          title={intl.formatMessage({
+            id: "pages.federation.allowlist.remove.error",
+            defaultMessage: "Failed to remove domain from allowlist",
+            description:
+              "Error shown in the confirmation dialog when removing a domain from the federation allowlist fails",
+          })}
+        />
+      )}
+
+      <Button
+        kind="primary"
+        destructive
+        disabled={removeMutation.isPending}
+        onClick={() => removeMutation.mutate()}
+        Icon={removeMutation.isPending ? undefined : DeleteIcon}
+      >
+        {removeMutation.isPending && <InlineSpinner />}
+        <FormattedMessage {...messages.actionRemove} />
+      </Button>
+
+      <Dialog.Close asChild>
+        <Button kind="tertiary" disabled={removeMutation.isPending}>
+          <FormattedMessage {...messages.actionCancel} />
+        </Button>
+      </Dialog.Close>
+    </Dialog.Root>
   );
 }
