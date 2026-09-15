@@ -308,7 +308,28 @@ const ScheduledTaskDisplay: React.FC<ScheduledTaskProps> = ({
 }: ScheduledTaskProps) => {
   const intl = useIntl();
   switch (task.status) {
-    case "scheduled":
+    case "scheduled": {
+      // For scheduled tasks, Synapse uses timestamp_ms as the future launch time.
+      return (
+        <Alert
+          title={intl.formatMessage({
+            id: "pages.rooms.deletion.scheduled.title",
+            defaultMessage: "Room deletion scheduled",
+            description:
+              "When there is a room deletion task that is scheduled, this is the title of the alert shown.",
+          })}
+          type="info"
+        >
+          <FormattedMessage
+            id="pages.rooms.deletion.scheduled.description"
+            defaultMessage="Room deletion task is scheduled for {timestamp, date, short} at {timestamp, time, short}."
+            description="When there is a room deletion task that is scheduled, this is the description of the alert shown."
+            values={{ timestamp: task.timestamp_ms }}
+          />
+        </Alert>
+      );
+    }
+
     case "active": {
       return (
         <Alert

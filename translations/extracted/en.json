@@ -1363,6 +1363,14 @@
     "description": "When there is a room deletion task that is in progress, this is the title of the alert shown.",
     "message": "Deletion in progress"
   },
+  "pages.rooms.deletion.scheduled.description": {
+    "description": "When there is a room deletion task that is scheduled, this is the description of the alert shown.",
+    "message": "Room deletion task is scheduled for {timestamp, date, short} at {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.scheduled.title": {
+    "description": "When there is a room deletion task that is scheduled, this is the title of the alert shown.",
+    "message": "Room deletion scheduled"
+  },
   "pages.rooms.deletion.success.description": {
     "description": "When there is a room deletion task that has completed successfully, this is the description of the alert shown.",
     "message": "Room deletion task completed successfully on {timestamp, date, short} at {timestamp, time, short}."
