@@ -36,7 +36,7 @@
     "@tanstack/query-persist-client-core": "5.102.8",
     "@tanstack/react-pacer": "0.23.0",
     "@tanstack/react-query": "5.102.8",
-    "@tanstack/react-router": "1.170.34",
+    "@tanstack/react-router": "1.170.35",
     "@tanstack/react-table": "9.2.4",
     "@tanstack/react-virtual": "3.14.11",
     "@vector-im/compound-design-tokens": "11.0.0",
