@@ -38,7 +38,7 @@
   "action.done": [
     {
       "type": 0,
-      "value": "Done"
+      "value": "OK"
     }
   ],
   "action.go_back": [
@@ -80,19 +80,19 @@
   "common.loading": [
     {
       "type": 0,
-      "value": "Loading…"
+      "value": "Chargement…"
     }
   ],
   "errors.authorization_denied": [
     {
       "type": 0,
-      "value": "Sign-in was cancelled."
+      "value": "La connexion a été annulée."
     }
   ],
   "errors.authorization_error": [
     {
       "type": 0,
-      "value": "Sign-in failed: "
+      "value": "La connexion a échoué : "
     },
     {
       "type": 1,
@@ -152,7 +152,7 @@
   "errors.mas_api": [
     {
       "type": 0,
-      "value": "The homeserver's authentication service returned an error: "
+      "value": "Le service d'authentification du serveur d'accueil a retourné une erreur : "
     },
     {
       "type": 1,
@@ -180,7 +180,7 @@
   "errors.no_details": [
     {
       "type": 0,
-      "value": "The server returned an error with no details."
+      "value": "Le serveur n'a retourné aucun détail sur les "
     }
   ],
   "errors.not_logged_in": [
@@ -711,7 +711,7 @@
   "pages.devices.applications.details_label": [
     {
       "type": 0,
-      "value": "Application details"
+      "value": "Détails de l'application"
     }
   ],
   "pages.devices.applications.filters.has_active_sessions": [
@@ -823,7 +823,7 @@
   "pages.devices.applications.view_users": [
     {
       "type": 0,
-      "value": "View users on this application"
+      "value": "Voir les utilisateurs de cette application"
     }
   ],
   "pages.devices.legacy.count": [
@@ -1451,7 +1451,7 @@
   "pages.federation.detail.last_retry.never": [
     {
       "type": 0,
-      "value": "Never"
+      "value": "Jamais"
     }
   ],
   "pages.federation.detail.last_successful_stream": [
@@ -1469,7 +1469,7 @@
   "pages.federation.detail.retry_interval.none": [
     {
       "type": 0,
-      "value": "None"
+      "value": "Aucun"
     }
   ],
   "pages.federation.detail.security": [
@@ -1487,7 +1487,7 @@
   "pages.federation.details_label": [
     {
       "type": 0,
-      "value": "Destination details"
+      "value": "Détails de la destination"
     }
   ],
   "pages.federation.domain_count": [
@@ -2747,6 +2747,36 @@
     {
       "type": 0,
       "value": "Suppression en cours"
+    }
+  ],
+  "pages.rooms.deletion.scheduled.description": [
+    {
+      "type": 0,
+      "value": "Room deletion task is scheduled for "
+    },
+    {
+      "type": 3,
+      "value": "timestamp",
+      "style": "short"
+    },
+    {
+      "type": 0,
+      "value": " at "
+    },
+    {
+      "type": 4,
+      "value": "timestamp",
+      "style": "short"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "pages.rooms.deletion.scheduled.title": [
+    {
+      "type": 0,
+      "value": "Room deletion scheduled"
     }
   ],
   "pages.rooms.deletion.success.description": [

@@ -18,7 +18,7 @@
     "message": "Supprimer"
   },
   "action.done": {
-    "message": "Done"
+    "message": "OK"
   },
   "action.go_back": {
     "message": "Retour"
@@ -39,13 +39,13 @@
     "message": "Filtre"
   },
   "common.loading": {
-    "message": "Loading…"
+    "message": "Chargement…"
   },
   "errors.authorization_denied": {
-    "message": "Sign-in was cancelled."
+    "message": "La connexion a été annulée."
   },
   "errors.authorization_error": {
-    "message": "Sign-in failed: {errorMessage}"
+    "message": "La connexion a échoué : {errorMessage}"
   },
   "errors.http_fetch": {
     "message": "La requête vers {url} n'a pas abouti"
@@ -57,13 +57,13 @@
     "message": "La requête vers {url} n'a pas abouti avec le code d'état {status} {statusText}"
   },
   "errors.mas_api": {
-    "message": "The homeserver's authentication service returned an error: {errorMessage}"
+    "message": "Le service d'authentification du serveur d'accueil a retourné une erreur : {errorMessage}"
   },
   "errors.matrix_standard": {
     "message": "La requête adressée au serveur d’accueil a échoué avec le code d'erreur ''{errorCode}''. De plus, le serveur a renvoyé le message d'erreur suivant : {errorMessage}"
   },
   "errors.no_details": {
-    "message": "The server returned an error with no details."
+    "message": "Le serveur n'a retourné aucun détail sur les "
   },
   "errors.not_logged_in": {
     "message": "Déconnecté"
@@ -183,7 +183,7 @@
     "message": "Les applications sont des clients OAuth 2.0 auxquels les utilisateurs se connectent."
   },
   "pages.devices.applications.details_label": {
-    "message": "Application details"
+    "message": "Détails de l'application"
   },
   "pages.devices.applications.filters.has_active_sessions": {
     "message": "Avec des appareils actifs"
@@ -231,7 +231,7 @@
     "message": "Afficher tous les appareils"
   },
   "pages.devices.applications.view_users": {
-    "message": "View users on this application"
+    "message": "Voir les utilisateurs de cette application"
   },
   "pages.devices.legacy.count": {
     "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}"
@@ -477,7 +477,7 @@
     "message": "Horodatage de la dernière tentative"
   },
   "pages.federation.detail.last_retry.never": {
-    "message": "Never"
+    "message": "Jamais"
   },
   "pages.federation.detail.last_successful_stream": {
     "message": "Dernier entrée réussie"
@@ -486,7 +486,7 @@
     "message": "Intervalle de nouvelle tentative"
   },
   "pages.federation.detail.retry_interval.none": {
-    "message": "None"
+    "message": "Aucun"
   },
   "pages.federation.detail.security": {
     "message": "Sécurité"
@@ -495,7 +495,7 @@
     "message": "Page d'assistance"
   },
   "pages.federation.details_label": {
-    "message": "Destination details"
+    "message": "Détails de la destination"
   },
   "pages.federation.domain_count": {
     "message": "{COUNT, plural, zero {Aucun domaine} one {# domaine} other {# domaines}}"
@@ -1021,6 +1021,12 @@
   },
   "pages.rooms.deletion.in_progress.title": {
     "message": "Suppression en cours"
+  },
+  "pages.rooms.deletion.scheduled.description": {
+    "message": "Room deletion task is scheduled for {timestamp, date, short} at {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.scheduled.title": {
+    "message": "Room deletion scheduled"
   },
   "pages.rooms.deletion.success.description": {
     "message": "Suppression du salon effectuée avec succès le {timestamp, date, short} à {timestamp, time, short} ."
