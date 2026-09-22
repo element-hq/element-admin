@@ -2753,6 +2753,36 @@
       "value": "Brisanje je u tijeku"
     }
   ],
+  "pages.rooms.deletion.scheduled.description": [
+    {
+      "type": 0,
+      "value": "Room deletion task is scheduled for "
+    },
+    {
+      "type": 3,
+      "value": "timestamp",
+      "style": "short"
+    },
+    {
+      "type": 0,
+      "value": " at "
+    },
+    {
+      "type": 4,
+      "value": "timestamp",
+      "style": "short"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "pages.rooms.deletion.scheduled.title": [
+    {
+      "type": 0,
+      "value": "Room deletion scheduled"
+    }
+  ],
   "pages.rooms.deletion.success.description": [
     {
       "type": 0,

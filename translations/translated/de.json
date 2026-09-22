@@ -1022,6 +1022,12 @@
   "pages.rooms.deletion.in_progress.title": {
     "message": "Löschvorgang läuft"
   },
+  "pages.rooms.deletion.scheduled.description": {
+    "message": "Das Löschen des Raums ist für den {timestamp, date, short} um {timestamp, time, short} geplant."
+  },
+  "pages.rooms.deletion.scheduled.title": {
+    "message": "Raumlöschung geplant"
+  },
   "pages.rooms.deletion.success.description": {
     "message": "Die Aufgabe zum Löschen eines Chats wurde erfolgreich am {timestamp, date, short} um {timestamp, time, short} Uhr abgeschlossen."
   },

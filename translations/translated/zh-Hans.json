@@ -1022,6 +1022,12 @@
   "pages.rooms.deletion.in_progress.title": {
     "message": "正在删除"
   },
+  "pages.rooms.deletion.scheduled.description": {
+    "message": "Room deletion task is scheduled for {timestamp, date, short} at {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.scheduled.title": {
+    "message": "Room deletion scheduled"
+  },
   "pages.rooms.deletion.success.description": {
     "message": "房间删除任务已于{timestamp, date, short} {timestamp, time, short}成功完成。"
   },

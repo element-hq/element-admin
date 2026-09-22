@@ -2753,6 +2753,36 @@
       "value": "Löschvorgang läuft"
     }
   ],
+  "pages.rooms.deletion.scheduled.description": [
+    {
+      "type": 0,
+      "value": "Das Löschen des Raums ist für den "
+    },
+    {
+      "type": 3,
+      "value": "timestamp",
+      "style": "short"
+    },
+    {
+      "type": 0,
+      "value": " um "
+    },
+    {
+      "type": 4,
+      "value": "timestamp",
+      "style": "short"
+    },
+    {
+      "type": 0,
+      "value": " geplant."
+    }
+  ],
+  "pages.rooms.deletion.scheduled.title": [
+    {
+      "type": 0,
+      "value": "Raumlöschung geplant"
+    }
+  ],
   "pages.rooms.deletion.success.description": [
     {
       "type": 0,
