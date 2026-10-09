@@ -16,6 +16,7 @@ import { wellKnownQuery } from "@/api/matrix";
 import config from "@/config";
 import { CLIENT_METADATA, REDIRECT_URI } from "@/constants";
 import { useAuthStore } from "@/stores/auth";
+import { retryWhileTransient } from "@/utils/retry";
 
 const LoginSearchParameters = v.object({
   redirect: v.optional(v.string()),
@@ -58,11 +59,11 @@ function RouteComponent() {
   const {
     data: wellKnown,
     isFetching: isWellKnownFetching,
-    isError: isWellKnownError,
+    failureReason: wellKnownFailure,
   } = useQuery({
     ...wellKnownQuery(debouncedServerName),
+    ...retryWhileTransient,
     enabled: !!debouncedServerName.trim(),
-    retry: false,
   });
   const synapseRoot = wellKnown?.["m.homeserver"].base_url;
 
@@ -70,18 +71,18 @@ function RouteComponent() {
   const {
     data: authMetadata,
     isFetching: isAuthMetadataFetching,
-    isError: isAuthMetadataError,
+    failureReason: authMetadataFailure,
   } = useQuery({
     ...authMetadataQuery(synapseRoot || ""),
+    ...retryWhileTransient,
     enabled: !!synapseRoot,
-    retry: false,
   });
 
   // Step 3: register the client against the server
   const {
     data: clientMetadata,
     isFetching: isClientMetadataFetching,
-    isError: isClientMetadataError,
+    failureReason: clientMetadataFailure,
   } = useQuery({
     queryKey: ["clientRegistration", authMetadata?.registration_endpoint],
     queryFn: ({ signal }) =>
@@ -90,8 +91,8 @@ function RouteComponent() {
         CLIENT_METADATA,
         signal,
       ),
+    ...retryWhileTransient,
     enabled: !!authMetadata?.registration_endpoint,
-    retry: false,
   });
 
   // PKCE needs Web Crypto, which browsers only expose on secure origins
@@ -171,6 +172,11 @@ function RouteComponent() {
     ],
   );
 
+  // `failureReason` is set from the first failed attempt, so an error shows
+  // while a transient failure is still being retried.
+  const isWellKnownError = !!wellKnownFailure;
+  const isAuthMetadataError = !!authMetadataFailure;
+  const isClientMetadataError = !!clientMetadataFailure;
   const isError =
     isWellKnownError || isAuthMetadataError || isClientMetadataError;
   const isLoading =
