@@ -89,11 +89,14 @@ export class HttpStatusError extends LocalizedError {
       "Generic error message when we fail to make a request to the specified URL. Typical values for 'status' are '404' or '500', typical values for 'statusText' are 'Not Found' or 'Internal Server Error'",
   });
 
+  readonly status: number;
+
   constructor(response: Response, options?: ErrorOptions) {
     super(
       `Request to ${response.url} failed with status code ${response.status} ${response.statusText}`,
       options,
     );
+    this.status = response.status;
     this.values = {
       status: response.status,
       statusText: response.statusText,

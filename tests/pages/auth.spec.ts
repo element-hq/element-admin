@@ -3,7 +3,9 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 import { heading } from "../helpers";
+import { matrixFailing } from "../mocks/failing";
 import { SERVER_NAME } from "../mocks/fixtures";
+import { authMetadata } from "../mocks/matrix";
 import { expect, test } from "../mocks/test";
 
 test.describe("authentication", () => {
@@ -26,6 +28,36 @@ test.describe("authentication", () => {
 
     await expect(page.getByRole("heading", heading("Dashboard"))).toBeVisible();
     await expect(page).toHaveURL("/");
+  });
+
+  /**
+   * ESS's haproxy answers 429 while Synapse restarts. The error shows on the
+   * first failure, but discovery keeps retrying and unlocks the form once
+   * Synapse is back, without a reload.
+   */
+  test("recovers when Synapse comes back during discovery", async ({
+    page,
+    network,
+  }) => {
+    network.use(
+      matrixFailing(
+        "/_matrix/client/unstable/org.matrix.msc2965/auth_metadata",
+        429,
+      ),
+    );
+
+    await page.goto("/login");
+    await page.getByLabel("Server name").fill(SERVER_NAME);
+
+    const error = page.getByText("Failed to load the server's auth metadata.");
+    const submit = page.getByRole("button", { name: "Get started" });
+    await expect(error).toBeVisible();
+    await expect(submit).toBeDisabled();
+
+    network.use(authMetadata());
+
+    await expect(submit).toBeEnabled({ timeout: 10_000 });
+    await expect(error).toBeHidden();
   });
 
   /**
