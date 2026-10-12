@@ -13,7 +13,10 @@ import {
   type Table,
   type TableFeatures,
 } from "@tanstack/react-table";
-import { useWindowVirtualizer } from "@tanstack/react-virtual";
+import {
+  useWindowVirtualizer,
+  type VirtualItem,
+} from "@tanstack/react-virtual";
 import {
   CloseIcon,
   FilterIcon,
@@ -322,34 +325,26 @@ interface ListProps<
   isFetching?: boolean;
 }
 
-export function List<TFeatures extends TableFeatures, TData extends RowData>({
-  table,
-  totalCount,
-  hasNextPage,
-  fetchNextPage,
-  isFetching,
-  className,
-  ...props
-}: ListProps<TFeatures, TData>) {
-  // The virtualizer we use doesn't work with the React compiler
+/**
+ * The virtualizer is mutated in place and keeps its identity across renders,
+ * so React compiler memoization would serve stale reads from it
+ * (https://github.com/TanStack/virtual/issues/743). This hook opts out of the
+ * compiler and hands back plain values instead.
+ */
+function useRowVirtualizer(
+  count: number,
+  bodyRef: React.RefObject<HTMLDivElement | null>,
+): {
+  virtualItems: VirtualItem[];
+  scrollMargin: number;
+  totalSize: number;
+  scrollToIndex: (index: number) => void;
+} {
   "use no memo";
-
-  const bodyRef = useRef<HTMLDivElement | null>(null);
-  const titleId = useContext(TitleIdContext);
-  const { rows } = table.getRowModel();
-  const columns = table.getAllLeafColumns();
-
-  const gridTemplate = columns
-    .map((column) => gridTrack(metaWidth(column.columnDef.meta)))
-    .join(" ");
-  const minInlineSize = columns.reduce(
-    (total, column) => total + trackMinWidth(metaWidth(column.columnDef.meta)),
-    0,
-  );
 
   // oxlint-disable-next-line react/incompatible-library
   const rowVirtualizer = useWindowVirtualizer({
-    count: rows.length + (hasNextPage ? 1 : 0),
+    count,
     estimateSize: () => 56,
     overscan: 5,
     // Because we're using a window virtualizer, we need to calculate the
@@ -365,14 +360,38 @@ export function List<TFeatures extends TableFeatures, TData extends RowData>({
       globalThis.window.scrollY,
   });
 
-  // Prevent the compiler from optimizing it
-  // See https://github.com/TanStack/virtual/issues/743
-  const rowVirtualizerRef = useRef(rowVirtualizer);
+  return {
+    virtualItems: rowVirtualizer.getVirtualItems(),
+    scrollMargin: rowVirtualizer.options.scrollMargin,
+    totalSize: rowVirtualizer.getTotalSize(),
+    scrollToIndex: (index) => rowVirtualizer.scrollToIndex(index),
+  };
+}
 
-  // oxlint-disable-next-line react/refs
-  const virtualItems = rowVirtualizerRef.current.getVirtualItems();
-  // oxlint-disable-next-line react/refs
-  const scrollMargin = rowVirtualizerRef.current.options.scrollMargin;
+export function List<TFeatures extends TableFeatures, TData extends RowData>({
+  table,
+  totalCount,
+  hasNextPage,
+  fetchNextPage,
+  isFetching,
+  className,
+  ...props
+}: ListProps<TFeatures, TData>) {
+  const bodyRef = useRef<HTMLDivElement | null>(null);
+  const titleId = useContext(TitleIdContext);
+  const { rows } = table.getRowModel();
+  const columns = table.getAllLeafColumns();
+
+  const gridTemplate = columns
+    .map((column) => gridTrack(metaWidth(column.columnDef.meta)))
+    .join(" ");
+  const minInlineSize = columns.reduce(
+    (total, column) => total + trackMinWidth(metaWidth(column.columnDef.meta)),
+    0,
+  );
+
+  const { virtualItems, scrollMargin, totalSize, scrollToIndex } =
+    useRowVirtualizer(rows.length + (hasNextPage ? 1 : 0), bodyRef);
 
   // Roving tabindex: only one row is tabbable so the grid is a single tab
   // stop. The last focused row stays the tab stop; if it is scrolled out of
@@ -450,7 +469,7 @@ export function List<TFeatures extends TableFeatures, TData extends RowData>({
     // A far-away target may not be mounted yet; scroll it into the virtual
     // window and focus it once it has rendered.
     if (!focusRowLink(target)) {
-      rowVirtualizerRef.current.scrollToIndex(target);
+      scrollToIndex(target);
       requestAnimationFrame(() => {
         if (!focusRowLink(target)) {
           requestAnimationFrame(() => focusRowLink(target));
@@ -533,12 +552,8 @@ export function List<TFeatures extends TableFeatures, TData extends RowData>({
           role={rows.length > 0 || hasNextPage ? "rowgroup" : undefined}
           ref={bodyRef}
           className={styles["body"]}
-          style={{
-            // oxlint-disable-next-line react/refs
-            blockSize: `${rowVirtualizerRef.current.getTotalSize()}px`,
-          }}
+          style={{ blockSize: `${totalSize}px` }}
         >
-          {/* oxlint-disable-next-line react/refs */}
           {virtualItems.map((virtualRow) => {
             // Rounded to keep the rows on whole-pixel boundaries — the
             // scrollMargin comes from getBoundingClientRect() and is usually
