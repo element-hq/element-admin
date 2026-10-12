@@ -498,7 +498,7 @@ export const federationDestination = (
  *
  * A 404 is a normal response here: `serverSupportQuery` swallows every failure
  * and returns null, and the detail page then renders no contact info. The
- * request still has to be handled, or `onUnhandledRequest: "error"` fails the
+ * request still has to be handled, or `onUnhandledFrame: "error"` fails the
  * test.
  */
 export const serverSupport = (

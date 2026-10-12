@@ -138,7 +138,7 @@ __screenshots__/  the baselines, one directory per spec
 
 Things that bite:
 
-- Strict mode is on: `onUnhandledRequest` fails the test and names the URL for
+- Strict mode is on: `onUnhandledFrame` fails the test and names the URL for
   any request with no handler, except a `blob:` or `data:` URL the page minted
   for itself.
 - Mutations are not mocked, so a test that submits a POST/PUT/DELETE fails under

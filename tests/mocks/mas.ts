@@ -444,7 +444,7 @@ export const personalSessionDetail = (
  * token lists.
  *
  * If nothing else answers the path, MSW treats the request as passed through
- * rather than unhandled, so `onUnhandledRequest: "error"` does not fire and the
+ * rather than unhandled, so `onUnhandledFrame: "error"` does not fire and the
  * request escapes to the real network. Only point this at a path the current
  * deployment already serves.
  *
