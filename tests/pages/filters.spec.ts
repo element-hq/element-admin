@@ -2,8 +2,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
-// oxlint-disable unicorn/consistent-function-scoping
-
 import type { NetworkFixture } from "@msw/playwright";
 import type { Page } from "@playwright/test";
 
@@ -111,6 +109,10 @@ const searchParameters = (page: Page): URLSearchParams =>
 
 const mxid = (username: string): string => `@${username}:${SERVER_NAME}`;
 
+/** A user row is identified by its Matrix ID cell. */
+const mxidCell = (page: Page, username: string) =>
+  page.getByText(mxid(username), { exact: true });
+
 test.describe("/users", () => {
   /**
    * Five users, each satisfying exactly one branch of an attribute-derived
@@ -136,10 +138,6 @@ test.describe("/users", () => {
     activeCompatSessions: [0],
     activeClients: { 1: [ELEMENT_WEB] },
   };
-
-  /** A user row is identified by its Matrix ID cell. */
-  const mxidCell = (page: Page, username: string) =>
-    page.getByText(mxid(username), { exact: true });
 
   /** Returns the recorder for the users handler it installs. */
   const visit = async (
@@ -659,6 +657,16 @@ test.describe("/rooms", () => {
   });
 });
 
+/** Records the requests to `path` and lets them through to the deployment. */
+const install = (
+  network: NetworkFixture,
+  path: string,
+): ReturnType<typeof recorder> => {
+  const requests = recorder();
+  network.use(observeQuery(path, requests.onRequest));
+  return requests;
+};
+
 /**
  * The remaining list pages, covered on the request side only: `observeQuery`
  * records a request and falls through to the deployment's own handler, so the
@@ -667,15 +675,6 @@ test.describe("/rooms", () => {
  * DOM assertion.
  */
 test.describe("device and token lists — emitted parameters", () => {
-  const install = (
-    network: NetworkFixture,
-    path: string,
-  ): ReturnType<typeof recorder> => {
-    const requests = recorder();
-    network.use(observeQuery(path, requests.onRequest));
-    return requests;
-  };
-
   test("/devices/user always narrows to dynamic clients, and maps the activity buckets to filter[status]", async ({
     page,
     network,
