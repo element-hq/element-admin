@@ -342,7 +342,7 @@ export type OAuth2ClientFilter = {
    * Retrieve only clients of the given kind
    *
    * * `dynamic`: clients registered via the dynamic-client-registration
-   * endpoint
+   *   endpoint
    *
    * * `static`: clients declared in the configuration file
    */
@@ -1815,7 +1815,7 @@ export type ListOAuth2ClientsData = {
      * Retrieve only clients of the given kind
      *
      * * `dynamic`: clients registered via the dynamic-client-registration
-     * endpoint
+     *   endpoint
      *
      * * `static`: clients declared in the configuration file
      */
@@ -2465,7 +2465,7 @@ export type CreateUserErrors = {
    */
   400: ErrorResponse;
   /**
-   * Username is reserved by the homeserver
+   * User already exists or the username is reserved by the homeserver
    */
   409: ErrorResponse;
 };
