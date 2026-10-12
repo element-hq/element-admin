@@ -49,7 +49,7 @@ const labelActive = defineMessage({
     "Device status badge: the device is signed in and was used in the last few months",
 });
 
-const tooltipSignedOutAt = defineMessage({
+const tooltipSignedOutAt = defineMessage<{ date: string }>({
   id: "ui.device_status.signed_out.tooltip_at",
   defaultMessage: "Signed out on {date}.",
   description:
@@ -66,7 +66,7 @@ const tooltipNeverUsed = defineMessage({
   defaultMessage: "This device has not been used yet.",
   description: "Tooltip on the 'Never used' device status badge",
 });
-const tooltipLastActive = defineMessage({
+const tooltipLastActive = defineMessage<{ date: string }>({
   id: "ui.device_status.last_active.tooltip",
   defaultMessage: "Last active on {date}.",
   description:

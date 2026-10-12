@@ -5,6 +5,7 @@
 import { defineNetworkFixture, type NetworkFixture } from "@msw/playwright";
 import { test as base } from "@playwright/test";
 import { http, passthrough } from "msw";
+import { HttpNetworkFrame } from "msw/experimental";
 
 import { type DeploymentName, deployments } from "./handlers";
 
@@ -48,7 +49,7 @@ export const test = base.extend<Fixtures>({
         // Strict: an unhandled request fails the test naming the URL. Without
         // it, a forgotten endpoint hits the real internet and surfaces as an
         // opaque `ERR_NAME_NOT_RESOLVED` behind a generic error screen.
-        onUnhandledRequest(request, print) {
+        onUnhandledFrame({ frame, defaults }) {
           // URLs the page minted for itself are the exception. The header
           // avatar arrives as a `Blob` and `useImageBlob` turns it into an
           // object URL, so the `<img>` loads `blob:http://…/<uuid>`. WebKit
@@ -57,9 +58,11 @@ export const test = base.extend<Fixtures>({
           // `iPhone 15` descriptors default to WebKit. No handler can match a
           // page-minted URL, so failing on one would make those projects
           // unusable.
-          const { protocol } = new URL(request.url);
-          if (protocol === "blob:" || protocol === "data:") return;
-          print.error();
+          if (frame instanceof HttpNetworkFrame) {
+            const { protocol } = new URL(frame.data.request.url);
+            if (protocol === "blob:" || protocol === "data:") return;
+          }
+          defaults.error();
         },
       });
 

@@ -11,7 +11,7 @@ export default defineConfig({
 
   output: {
     path: "src/api/mas/api",
-    postProcess: ["oxfmt", "oxlint"],
+    postProcess: ["oxlint", "oxfmt"],
   },
 
   parser: {
