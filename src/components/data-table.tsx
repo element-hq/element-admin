@@ -331,6 +331,9 @@ export function List<TFeatures extends TableFeatures, TData extends RowData>({
   className,
   ...props
 }: ListProps<TFeatures, TData>) {
+  // The virtualizer we use doesn't work with the React compiler
+  "use no memo";
+
   const bodyRef = useRef<HTMLDivElement | null>(null);
   const titleId = useContext(TitleIdContext);
   const { rows } = table.getRowModel();
@@ -344,6 +347,7 @@ export function List<TFeatures extends TableFeatures, TData extends RowData>({
     0,
   );
 
+  // oxlint-disable-next-line react/incompatible-library
   const rowVirtualizer = useWindowVirtualizer({
     count: rows.length + (hasNextPage ? 1 : 0),
     estimateSize: () => 56,

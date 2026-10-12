@@ -43,13 +43,17 @@ export const Section: React.FC<SectionProps> = ({ children }: SectionProps) => (
   <div className={styles["section"]}>{children}</div>
 );
 
+// "now" is the load time of the application. It only matters for rendering the
+// "current year" in the copyright notice
+const now = new Date();
+
 export const CopyrightNotice: React.FC = () => (
   <div className={styles["copyright-notice"]}>
     <FormattedMessage
       id="footer.copyright_notice"
       defaultMessage="Copyright © {now, date, ::yyyy}"
       description="The copyright notice on the footer"
-      values={{ now: new Date() }}
+      values={{ now }}
     />
   </div>
 );
