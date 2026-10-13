@@ -18,7 +18,7 @@
     "message": "Видалити"
   },
   "action.done": {
-    "message": "Done"
+    "message": "Готово"
   },
   "action.go_back": {
     "message": "Назад"
@@ -39,13 +39,13 @@
     "message": "Фільтр"
   },
   "common.loading": {
-    "message": "Loading…"
+    "message": "Завантаження…"
   },
   "errors.authorization_denied": {
-    "message": "Sign-in was cancelled."
+    "message": "Вхід скасовано."
   },
   "errors.authorization_error": {
-    "message": "Sign-in failed: {errorMessage}"
+    "message": "Не вдалося ввійти: {errorMessage}"
   },
   "errors.http_fetch": {
     "message": "Запит до {url} не вдався"
@@ -57,13 +57,13 @@
     "message": "Запит до {url} завершився невдало з кодом статусу {status} {statusText}"
   },
   "errors.mas_api": {
-    "message": "The homeserver's authentication service returned an error: {errorMessage}"
+    "message": "Служба автентифікації домашнього сервера повернула помилку: {errorMessage}"
   },
   "errors.matrix_standard": {
-    "message": "Запит до домашнього сервера не вдався з кодом помилки \"{errorCode}\". Додатково, сервер видав таке повідомлення про помилку: {errorMessage}"
+    "message": "Збій запиту до домашнього сервера з кодом помилки \"{errorCode}\". Додатково, сервер видав таке повідомлення про помилку: {errorMessage}"
   },
   "errors.no_details": {
-    "message": "The server returned an error with no details."
+    "message": "Сервер повернув помилку без подробиць."
   },
   "errors.not_logged_in": {
     "message": "Вхід не виконано"
@@ -99,7 +99,7 @@
     "message": "Аудит"
   },
   "marketing.sbg.description": {
-    "message": "<p>Secure Border Gateway is an application-level firewall for Matrix servers.</p> <ul><li>Inspects all requests to and from the server</li> <li>Can use all request metadata to enforce rules</li> <li>Pipeline-based approach to connect APIs and rule sets</li> <li>Pluggable rules engine that can be applied to the pipelines</li></ul>"
+    "message": "<p>Secure Border Gateway — це брандмауер на рівні застосунків для серверів Matrix.</p> <ul><li>Перевіряє всі запити, що надходять на сервер та надсилаються з нього</li> <li>Може використовувати всі метадані запитів для забезпечення дотримання правил</li> <li>Підхід на основі пайплайнів для з'єднання API та наборів правил</li> <li>Модульний механізм обробки правил, який можна застосовувати до пайплайнів</li></ul>"
   },
   "marketing.sbg.title": {
     "message": "Secure Border Gateway"
@@ -117,13 +117,13 @@
     "message": "Інформаційна панель"
   },
   "navigation.devices": {
-    "message": "Devices"
+    "message": "Пристрої"
   },
   "navigation.documentation": {
     "message": "Документація"
   },
   "navigation.federation": {
-    "message": "Federation"
+    "message": "Федерація"
   },
   "navigation.personal_tokens": {
     "message": "Персональні токени"
@@ -174,79 +174,79 @@
     "message": "Інформаційна панель"
   },
   "pages.devices.applications.client_id_label": {
-    "message": "Client ID"
+    "message": "ID клієнта"
   },
   "pages.devices.applications.count": {
-    "message": "{COUNT, plural, =0 {No applications} one {# application} other {# applications}}"
+    "message": "{COUNT, plural, =0 {Немає застосунків} one {# застосунок} few {# застосунки} other {# застосунків}}"
   },
   "pages.devices.applications.description": {
-    "message": "Applications are OAuth 2.0 clients that users sign in to."
+    "message": "Застосунки – це клієнти OAuth 2.0, в які користувачі входять."
   },
   "pages.devices.applications.details_label": {
-    "message": "Application details"
+    "message": "Подробиці застосунку"
   },
   "pages.devices.applications.filters.has_active_sessions": {
-    "message": "With active devices"
+    "message": "З активними пристроями"
   },
   "pages.devices.applications.filters.no_active_sessions": {
-    "message": "Without active devices"
+    "message": "Без активних пристроїв"
   },
   "pages.devices.applications.grant_types_label": {
-    "message": "Grant types"
+    "message": "Типи рівнів"
   },
   "pages.devices.applications.name_column": {
     "message": "Ім’я"
   },
   "pages.devices.applications.not_found.description": {
-    "message": "The requested application ({clientId}) could not be found on {serverName}."
+    "message": "Запитаний застосунок ({clientId}) не вдалося знайти на {serverName}."
   },
   "pages.devices.applications.not_found.title": {
-    "message": "Application not found"
+    "message": "Застосунок не знайдено"
   },
   "pages.devices.applications.redirect_uris_label": {
-    "message": "Redirect URIs"
+    "message": "URI переспрямування"
   },
   "pages.devices.applications.search_placeholder": {
-    "message": "Search by name…"
+    "message": "Пошук за назвою…"
   },
   "pages.devices.applications.statistics.active_recently": {
-    "message": "Active in the past 7 days"
+    "message": "Активний протягом останніх 7 днів"
   },
   "pages.devices.applications.statistics.created_recently": {
-    "message": "Devices added in the past 7 days"
+    "message": "Пристрої, додані за останні 7 днів"
   },
   "pages.devices.applications.statistics.heading": {
-    "message": "Device statistics"
+    "message": "Статистика пристроїв"
   },
   "pages.devices.applications.statistics.total_active": {
-    "message": "Active devices"
+    "message": "Активні пристрої"
   },
   "pages.devices.applications.title": {
-    "message": "Applications"
+    "message": "Застосунки"
   },
   "pages.devices.applications.uri_label": {
-    "message": "Homepage"
+    "message": "Домашня сторінка"
   },
   "pages.devices.applications.view_sessions": {
-    "message": "View all devices"
+    "message": "Переглянути всі пристрої"
   },
   "pages.devices.applications.view_users": {
-    "message": "View users on this application"
+    "message": "Переглянути користувачів цього застосунку"
   },
   "pages.devices.legacy.count": {
-    "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}"
+    "message": "{COUNT, plural, =0 {Немає застарілих пристроїв} one {# застарілий пристрій} few {# застарілі пристрої} other {# застарілих пристроїв}}"
   },
   "pages.devices.legacy.created_at_label": {
-    "message": "Signed in at"
+    "message": "Вхід о"
   },
   "pages.devices.legacy.description": {
-    "message": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
+    "message": "Застарілі пристрої — це входи з клієнтів, які ще не перейшли на OAuth 2.0."
   },
   "pages.devices.legacy.details_label": {
-    "message": "Legacy device details"
+    "message": "Відомості про старий пристрій"
   },
   "pages.devices.legacy.device_column": {
-    "message": "Device"
+    "message": "Пристрій"
   },
   "pages.devices.legacy.device_id_label": {
     "message": "ID пристрою"
@@ -255,40 +255,40 @@
     "message": "Активні"
   },
   "pages.devices.legacy.filters.activity_inactive": {
-    "message": "Inactive"
+    "message": "Неактивний"
   },
   "pages.devices.legacy.filters.activity_recently_used": {
-    "message": "Recently used"
+    "message": "Нещодавно використовувані"
   },
   "pages.devices.legacy.filters.activity_signed_out": {
-    "message": "Signed out"
+    "message": "Виконано вихід"
   },
   "pages.devices.legacy.filters.newest_first": {
     "message": "Спочатку новіші"
   },
   "pages.devices.legacy.filters.user_chip": {
-    "message": "User: @{localpart}:{server}"
+    "message": "Користувач: @{localpart}:{server}"
   },
   "pages.devices.legacy.finish.button": {
-    "message": "Remove device"
+    "message": "Вилучити пристрій"
   },
   "pages.devices.legacy.finish.confirm": {
-    "message": "Remove device"
+    "message": "Вилучити пристрій"
   },
   "pages.devices.legacy.finish.description": {
-    "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
+    "message": "Буде виконано вихід користувача на цьому пристрої. Токени доступу та оновлення будуть негайно відкликані."
   },
   "pages.devices.legacy.finish.error": {
-    "message": "Failed to remove the legacy device"
+    "message": "Не вдалося вилучити застарілий пристрій"
   },
   "pages.devices.legacy.finish.success": {
-    "message": "Legacy device removed"
+    "message": "Застарілий пристрій вилучено"
   },
   "pages.devices.legacy.finish.title": {
-    "message": "Remove this legacy device?"
+    "message": "Вилучити цей застарілий пристрій?"
   },
   "pages.devices.legacy.finished_at_label": {
-    "message": "Signed out at"
+    "message": "Вихід здійснено о"
   },
   "pages.devices.legacy.last_active_ip_label": {
     "message": "Остання активна IP-адреса"
@@ -297,61 +297,61 @@
     "message": "Остання активність"
   },
   "pages.devices.legacy.not_found.description": {
-    "message": "The requested legacy device ({sessionId}) could not be found on {serverName}."
+    "message": "Не вдалося знайти запитаний застарілий пристрій ({sessionId}) на {serverName}."
   },
   "pages.devices.legacy.not_found.title": {
-    "message": "Legacy device not found"
+    "message": "Застарілий пристрій не знайдено"
   },
   "pages.devices.legacy.redirect_uri_label": {
-    "message": "Redirect URI"
+    "message": "URI переспрямування"
   },
   "pages.devices.legacy.status_column": {
     "message": "Статус"
   },
   "pages.devices.legacy.technical_details": {
-    "message": "Technical details"
+    "message": "Технічні подробиці"
   },
   "pages.devices.legacy.title": {
-    "message": "Legacy devices"
+    "message": "Застарілі пристрої"
   },
   "pages.devices.legacy.user_agent_label": {
-    "message": "User agent"
+    "message": "Агент користувача"
   },
   "pages.devices.legacy.user_column": {
-    "message": "User"
+    "message": "Користувач"
   },
   "pages.devices.tabs.applications": {
-    "message": "Applications"
+    "message": "Застосунки"
   },
   "pages.devices.tabs.legacy": {
-    "message": "Legacy devices"
+    "message": "Застарілі пристрої"
   },
   "pages.devices.tabs.section": {
-    "message": "Device views"
+    "message": "Перегляди пристроїв"
   },
   "pages.devices.tabs.user": {
-    "message": "User devices"
+    "message": "Пристрої користувача"
   },
   "pages.devices.title": {
-    "message": "Devices"
+    "message": "Пристрої"
   },
   "pages.devices.user.client_column": {
-    "message": "Application"
+    "message": "Застосунок"
   },
   "pages.devices.user.count": {
-    "message": "{COUNT, plural, =0 {No devices} one {# device} other {# devices}}"
+    "message": "{COUNT, plural, =0 {Немає пристроїв} one {# пристрій} few {# пристрої} other {# пристроїв}}"
   },
   "pages.devices.user.created_at_label": {
-    "message": "Signed in at"
+    "message": "Вхід о"
   },
   "pages.devices.user.description": {
-    "message": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
+    "message": "Пристрій — це єдиний вхід користувача в застосунок. Вихід із пристрою негайно відкличе його доступ."
   },
   "pages.devices.user.details_label": {
-    "message": "Device details"
+    "message": "Відомості про пристрій"
   },
   "pages.devices.user.device_column": {
-    "message": "Device"
+    "message": "Пристрій"
   },
   "pages.devices.user.device_id_label": {
     "message": "ID пристрою"
@@ -360,43 +360,43 @@
     "message": "Активні"
   },
   "pages.devices.user.filters.activity_inactive": {
-    "message": "Inactive"
+    "message": "Неактивний"
   },
   "pages.devices.user.filters.activity_recently_used": {
-    "message": "Recently used"
+    "message": "Нещодавно використовувані"
   },
   "pages.devices.user.filters.activity_signed_out": {
-    "message": "Signed out"
+    "message": "Виконано вихід"
   },
   "pages.devices.user.filters.client_chip": {
-    "message": "Application: {name}"
+    "message": "Застосунок: {name}"
   },
   "pages.devices.user.filters.newest_first": {
     "message": "Спочатку новіші"
   },
   "pages.devices.user.filters.user_chip": {
-    "message": "User: @{localpart}:{server}"
+    "message": "Користувач: @{localpart}:{server}"
   },
   "pages.devices.user.finish.button": {
-    "message": "Remove device"
+    "message": "Вилучити пристрій"
   },
   "pages.devices.user.finish.confirm": {
-    "message": "Remove device"
+    "message": "Вилучити пристрій"
   },
   "pages.devices.user.finish.description": {
-    "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
+    "message": "Буде виконано вихід користувача на цьому пристрої. Токени доступу та оновлення будуть негайно відкликані."
   },
   "pages.devices.user.finish.error": {
-    "message": "Failed to remove the device"
+    "message": "Не вдалося вилучити пристрій"
   },
   "pages.devices.user.finish.success": {
-    "message": "Device removed"
+    "message": "Пристрій вилучено"
   },
   "pages.devices.user.finish.title": {
-    "message": "Remove this device?"
+    "message": "Вилучити цей пристрій?"
   },
   "pages.devices.user.finished_at_label": {
-    "message": "Signed out at"
+    "message": "Вихід здійснено о"
   },
   "pages.devices.user.last_active_ip_label": {
     "message": "Остання активна IP-адреса"
@@ -405,124 +405,124 @@
     "message": "Остання активність"
   },
   "pages.devices.user.not_found.description": {
-    "message": "The requested device ({sessionId}) could not be found on {serverName}."
+    "message": "Не вдалося знайти запитаний пристрій ({sessionId}) на {serverName}."
   },
   "pages.devices.user.not_found.title": {
-    "message": "Device not found"
+    "message": "Пристрій не знайдено"
   },
   "pages.devices.user.scope_label": {
-    "message": "Scope"
+    "message": "Область дії"
   },
   "pages.devices.user.status_column": {
     "message": "Статус"
   },
   "pages.devices.user.technical_details": {
-    "message": "Technical details"
+    "message": "Технічні подробиці"
   },
   "pages.devices.user.title": {
-    "message": "User devices"
+    "message": "Пристрої користувача"
   },
   "pages.devices.user.user_agent_label": {
-    "message": "User agent"
+    "message": "Агент користувача"
   },
   "pages.devices.user.user_column": {
-    "message": "User"
+    "message": "Користувач"
   },
   "pages.devices.user.user_none": {
-    "message": "No user"
+    "message": "Немає користувача"
   },
   "pages.federation.allowlist.add.error": {
-    "message": "Failed to add domain to allowlist"
+    "message": "Не вдалося додати домен до списку дозволених"
   },
   "pages.federation.allowlist.add.success": {
-    "message": "Domain added to allowlist"
+    "message": "Домен додано до списку дозволених"
   },
   "pages.federation.allowlist.add_domain": {
-    "message": "Add domain"
+    "message": "Додати домен"
   },
   "pages.federation.allowlist.add_pattern": {
-    "message": "Add pattern"
+    "message": "Додати шаблон"
   },
   "pages.federation.allowlist.add_pattern.help": {
-    "message": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
+    "message": "Введіть домен, наприклад example.com, або використовуйте *, щоб дозволити всі піддомени, наприклад *.example.com"
   },
   "pages.federation.allowlist.empty": {
-    "message": "No domains in the allowlist yet. Add a domain pattern above to get started."
+    "message": "У списку дозволених поки що немає жодного домену. Щоб розпочати, додайте вище шаблон домену."
   },
   "pages.federation.allowlist.heading": {
-    "message": "List of patterns allowed to federate with you"
+    "message": "Список шаблонів, яким дозволено федеративний зв'язок із вами"
   },
   "pages.federation.allowlist.remove.error": {
-    "message": "Failed to remove domain from allowlist"
+    "message": "Не вдалося вилучити домен зі списку дозволених"
   },
   "pages.federation.allowlist.remove.success": {
-    "message": "Domain removed from allowlist"
+    "message": "Домен вилучено зі списку дозволених"
   },
   "pages.federation.allowlist.remove_confirm.alert.description": {
-    "message": "Your server will stop federating with servers matching this pattern."
+    "message": "Ваш сервер припинить федеративний зв'язок із серверами, що відповідають цьому шаблону."
   },
   "pages.federation.allowlist.remove_confirm.alert.title": {
-    "message": "You’re about to stop federating with this server"
+    "message": "Ви збираєтеся припинити федеративний зв'язок із цим сервером"
   },
   "pages.federation.allowlist.remove_confirm.title": {
-    "message": "Remove {serverName} from the allowlist?"
+    "message": "Вилучити {serverName} зі списку дозволених?"
   },
   "pages.federation.allowlist.remove_tooltip": {
-    "message": "Remove from allowlist"
+    "message": "Вилучити зі списку дозволених"
   },
   "pages.federation.detail.contact": {
-    "message": "Contact"
+    "message": "Контакт"
   },
   "pages.federation.detail.last_retry": {
-    "message": "Last retry timestamp"
+    "message": "Позначка часу останньої повторної спроби"
   },
   "pages.federation.detail.last_retry.never": {
-    "message": "Never"
+    "message": "Ніколи"
   },
   "pages.federation.detail.last_successful_stream": {
-    "message": "Last successful stream"
+    "message": "Остання успішна трансляція"
   },
   "pages.federation.detail.retry_interval": {
-    "message": "Retry interval"
+    "message": "Інтервал повторних спроб"
   },
   "pages.federation.detail.retry_interval.none": {
-    "message": "None"
+    "message": "Немає"
   },
   "pages.federation.detail.security": {
-    "message": "Security"
+    "message": "Безпека"
   },
   "pages.federation.detail.support_page": {
-    "message": "Support page"
+    "message": "Сторінка підтримки"
   },
   "pages.federation.details_label": {
-    "message": "Destination details"
+    "message": "Подробиці пункту призначення"
   },
   "pages.federation.domain_count": {
-    "message": "{COUNT, plural, =0 {No domains} one {# domain} other {# domains}}"
+    "message": "{COUNT, plural, =0 {Немає доменів} one {# домен} few {# домени} other {# доменів}}"
   },
   "pages.federation.not_found.description": {
-    "message": "The requested destination ({destination}) could not be found."
+    "message": "Не вдалося знайти запитувану точку призначення ({destination})."
   },
   "pages.federation.not_found.title": {
-    "message": "Destination not found"
+    "message": "Точку призначення не знайдено"
   },
   "pages.federation.sbg_not_enabled.description": {
-    "message": "Contact your administrator to enable it in your deployment configuration."
+    "message": "Зверніться до адміністратора, щоб увімкнути цю функцію в конфігурації розгортання."
   },
   "pages.federation.sbg_not_enabled.title": {
-    "message": "Secure Border Gateway isn't enabled on this deployment"
+    "message": "Secure Border Gateway не ввімкнено в цьому розгортанні."
   },
   "pages.federation.search_placeholder": {
-    "message": "Search domains…"
+    "message": "Пошук доменів…"
   },
   "pages.federation.tab.allowed_domains": {
-    "message": "Allowed domains"
+    "message": "Дозволені домени"
   },
   "pages.federation.tab.known_domains": {
-    "message": "Known domains"
+    "message": "Відомі домени"
   },
   "pages.federation.tab.section": {
-    "message": "Federation views"
+    "message": "Перегляди з федерації"
   },
   "pages.federation.table.server_name": {
     "message": "Ім’я сервера"
@@ -531,13 +531,13 @@
     "message": "Статус"
   },
   "pages.federation.title": {
-    "message": "Federation"
+    "message": "Федерація"
   },
   "pages.federation.unavailable_alert.description": {
-    "message": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
+    "message": "Secure Border Gateway недоступний у спільноті ESS. Оновіть його до ESS Pro, щоб увімкнути."
   },
   "pages.federation.unavailable_alert.title": {
-    "message": "Secure Border Gateway isn't enabled on this deployment"
+    "message": "Secure Border Gateway не ввімкнено в цьому розгортанні."
   },
   "pages.generic_error.go_home": {
     "message": "На головну"
@@ -549,7 +549,7 @@
     "message": "{name}: {message}"
   },
   "pages.generic_error.text": {
-    "message": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
+    "message": "Це може бути наслідком помилки або неможливості зв'язку з домашнім сервером. Ви можете спробувати завантажити сторінку ще раз, повернутися на попередню сторінку або скинути всі налаштування та повернутися на головну сторінку."
   },
   "pages.generic_error.title": {
     "message": "Сталася неочікувана помилка"
@@ -558,19 +558,19 @@
     "message": "Керуйте розгортанням додатка element для вашої організації або спільноти."
   },
   "pages.login.errors.authorization_failed": {
-    "message": "Could not start the sign-in process. Please try again."
+    "message": "Не вдалося розпочати процес входу. Спробуйте ще раз."
   },
   "pages.login.errors.insecure_context": {
-    "message": "Sign-in requires a secure connection. Reload this page over https:// and try again."
+    "message": "Для входу потрібне безпечне з’єднання. Перезавантажте цю сторінку через https:// і спробуйте ще раз."
   },
   "pages.login.errors.no_auth_metadata": {
-    "message": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
+    "message": "Не вдалося завантажити метадані сервера автентифікації. Можливо, Synapse недоступний або не налаштований для використання Matrix Authentication Service."
   },
   "pages.login.errors.no_client_metadata": {
-    "message": "Failed to register the client. Matrix Authentication Service may be unreachable or misconfigured."
+    "message": "Не вдалося зареєструвати клієнт. Можливо, Matrix Authentication Service недоступна або неправильно налаштована."
   },
   "pages.login.errors.no_well_known": {
-    "message": "Failed to load the server's well-known document. The server name may be invalid."
+    "message": "Не вдалося завантажити відомий документ сервера. Можливо, ім'я сервера недійсне."
   },
   "pages.login.get_started": {
     "message": "Почати"
@@ -582,16 +582,16 @@
     "message": "Вхід"
   },
   "pages.personal_tokens.acting_user_column": {
-    "message": "Acting user"
+    "message": "Користувач, що виконує обов'язки"
   },
   "pages.personal_tokens.acting_user_label": {
-    "message": "Acting user"
+    "message": "Користувач, що виконує обов'язки"
   },
   "pages.personal_tokens.actor_user_help": {
-    "message": "The user this token will act on behalf of"
+    "message": "Користувач, від імені якого цей токен буде діяти"
   },
   "pages.personal_tokens.actor_user_label": {
-    "message": "Acting user"
+    "message": "Користувач, що виконує обов'язки"
   },
   "pages.personal_tokens.add_token_title": {
     "message": "Додати персональний токен"
@@ -603,7 +603,7 @@
     "message": "Тільки власник токена може його регенерувати"
   },
   "pages.personal_tokens.count": {
-    "message": "{count, plural, =0 {No personal tokens} one {# personal token} other {# personal tokens}}"
+    "message": "{count, plural, =0 {Немає особистих токенів} one {# особистий токен} few {# особисті токени} other {# особистих токенів}}"
   },
   "pages.personal_tokens.create_error": {
     "message": "Не вдалося створити персональний токен"
@@ -618,13 +618,13 @@
     "message": "Створено о"
   },
   "pages.personal_tokens.description": {
-    "message": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations."
+    "message": "Особисті токени — це довготривалі токени доступу з конкретними правами, зокрема доступом до API адміністрування Synapse та MAS. Вони корисні для автоматизації завдань та створення інтеграцій."
   },
   "pages.personal_tokens.details_label": {
-    "message": "Personal token details"
+    "message": "Подробиці особистого токена"
   },
   "pages.personal_tokens.device_id_help": {
-    "message": "Leave empty to generate a random 10-character device ID"
+    "message": "Залиште поле порожнім, щоб згенерувати випадковий ID пристрою довжиною 10 символів"
   },
   "pages.personal_tokens.device_id_label": {
     "message": "ID пристрою"
@@ -642,13 +642,13 @@
     "message": "Втрачає чинність через (дні)"
   },
   "pages.personal_tokens.expires_in_missing": {
-    "message": "Enter how many days the token should last"
+    "message": "Введіть, скільки днів має діяти токен"
   },
   "pages.personal_tokens.expires_in_underflow": {
-    "message": "A token has to last at least one day"
+    "message": "Токен має діяти щонайменше один день"
   },
   "pages.personal_tokens.expiry_revoked": {
-    "message": "Revoked"
+    "message": "Відкликано"
   },
   "pages.personal_tokens.filter.active": {
     "message": "Активні"
@@ -666,7 +666,7 @@
     "message": "Доступ до адміністративного API в MAS"
   },
   "pages.personal_tokens.filter.scope_matrix_client": {
-    "message": "Access to the Matrix Client-Server API"
+    "message": "Доступ до клієнт-серверного API Matrix"
   },
   "pages.personal_tokens.filter.scope_synapse_admin": {
     "message": "Доступ до адміністративного API в Synapse"
@@ -699,7 +699,7 @@
     "message": "Ніколи не використовувався"
   },
   "pages.personal_tokens.not_found.description": {
-    "message": "The personal token you're looking for doesn't exist or has been removed."
+    "message": "Особистий токен, який ви шукаєте, не існує або вилучений."
   },
   "pages.personal_tokens.not_found.title": {
     "message": "Персональний токен не знайдено"
@@ -711,7 +711,7 @@
     "message": "Перегенерувати токен"
   },
   "pages.personal_tokens.regenerate_error": {
-    "message": "Failed to regenerate personal token"
+    "message": "Не вдалося відновити особистий токен"
   },
   "pages.personal_tokens.regenerate_success": {
     "message": "Персональний токен успішно перегенеровано"
@@ -732,43 +732,43 @@
     "message": "Відкликати токен"
   },
   "pages.personal_tokens.revoke_token.alert.description": {
-    "message": "{humanName} will stop working immediately, and anything using it will need a new token."
+    "message": "{humanName} негайно перестане працювати, і всім, хто ним користується, знадобиться новий токен."
   },
   "pages.personal_tokens.revoke_token.alert.title": {
-    "message": "This cannot be undone"
+    "message": "Цю дію неможливо скасувати"
   },
   "pages.personal_tokens.revoke_token.error": {
-    "message": "Failed to revoke the token"
+    "message": "Не вдалося відкликати токен"
   },
   "pages.personal_tokens.revoke_token.title": {
-    "message": "Revoke this personal token?"
+    "message": "Відкликати цей особистий токен?"
   },
   "pages.personal_tokens.revoked_at_label": {
     "message": "Відкликано о"
   },
   "pages.personal_tokens.scope_device_help": {
-    "message": "Provision a Matrix device"
+    "message": "Налаштування пристрою Matrix"
   },
   "pages.personal_tokens.scope_mas_admin_help": {
     "message": "Доступ до адміністративного API в MAS"
   },
   "pages.personal_tokens.scope_matrix_client_help": {
-    "message": "Access to the Matrix Client-Server API"
+    "message": "Доступ до клієнт-серверного API Matrix"
   },
   "pages.personal_tokens.scope_synapse_admin_help": {
     "message": "Доступ до адміністративного API в Synapse"
   },
   "pages.personal_tokens.scopes_group_label": {
-    "message": "Scopes"
+    "message": "Області дії"
   },
   "pages.personal_tokens.scopes_label": {
     "message": "Області дії (scopes)"
   },
   "pages.personal_tokens.set_expiry_help": {
-    "message": "Otherwise the token never expires"
+    "message": "В іншому випадку термін дії токена ніколи не закінчується"
   },
   "pages.personal_tokens.set_expiry_label": {
-    "message": "Set an expiry"
+    "message": "Встановити термін дії"
   },
   "pages.personal_tokens.status.active": {
     "message": "Активні"
@@ -789,19 +789,19 @@
     "message": "Персональні токени"
   },
   "pages.personal_tokens.token_created_description": {
-    "message": "Your personal token has been created. Copy it now as it will not be shown again."
+    "message": "Ваш особистий токен створено. Скопіюйте його зараз, оскільки він більше не показуватиметься."
   },
   "pages.personal_tokens.token_created_title": {
     "message": "Персональний токен створено"
   },
   "pages.personal_tokens.token_regenerated_description": {
-    "message": "Your personal token has been regenerated. Copy it now as it will not be shown again."
+    "message": "Ваш особистий токен відновлено. Скопіюйте його зараз, оскільки він більше не показуватиметься."
   },
   "pages.personal_tokens.token_regenerated_title": {
-    "message": "Token regenerated"
+    "message": "Токен відновлено"
   },
   "pages.registration_tokens.auto_generate_placeholder": {
-    "message": "Auto-generate if left empty"
+    "message": "Автоматично генерується, якщо залишити порожнім"
   },
   "pages.registration_tokens.create_token.error": {
     "message": "Не вдалося створити токен"
@@ -822,22 +822,22 @@
     "message": "Створено о"
   },
   "pages.registration_tokens.custom_token_help": {
-    "message": "Optional custom token string. If left empty, a secure token will be auto-generated."
+    "message": "Необов’язковий рядок власного токена. Якщо залишити порожнім, безпечний токен буде згенеровано автоматично."
   },
   "pages.registration_tokens.custom_token_label": {
     "message": "Спеціальний токен"
   },
   "pages.registration_tokens.details_label": {
-    "message": "Registration token details"
+    "message": "Подробиці реєстраційного токена"
   },
   "pages.registration_tokens.edit_properties": {
     "message": "Редагувати властивості"
   },
   "pages.registration_tokens.edit_properties.revoked_tooltip": {
-    "message": "Unrevoke this token before editing its properties"
+    "message": "Скасуйте відкликання цього токена перед редагуванням його властивостей"
   },
   "pages.registration_tokens.edit_token.error": {
-    "message": "Failed to save the changes"
+    "message": "Не вдалося зберегти зміни"
   },
   "pages.registration_tokens.edit_token_title": {
     "message": "Редагувати токен реєстрації"
@@ -846,7 +846,7 @@
     "message": "Термін дії закінчується о"
   },
   "pages.registration_tokens.expires_at_help": {
-    "message": "When the token expires. Leave empty if the token should never expire."
+    "message": "Коли закінчується термін дії токена. Залиште поле порожнім, якщо термін дії токена не повинен закінчуватися."
   },
   "pages.registration_tokens.expires_at_label": {
     "message": "Термін дії закінчується о"
@@ -858,7 +858,7 @@
     "message": "Термін дії закінчився"
   },
   "pages.registration_tokens.filters.not_revoked": {
-    "message": "Not revoked"
+    "message": "Не відкликано"
   },
   "pages.registration_tokens.filters.revoked_only": {
     "message": "Відкликано"
@@ -876,28 +876,28 @@
     "message": "Без терміну дії"
   },
   "pages.registration_tokens.not_found.description": {
-    "message": "The requested registration token ({tokenId}) could not be found on {serverName}."
+    "message": "Запитаний реєстраційний токен ({tokenId}) не знайдено на {serverName}."
   },
   "pages.registration_tokens.not_found.title": {
-    "message": "Registration token not found"
+    "message": "Реєстраційний токен не знайдено"
   },
   "pages.registration_tokens.revoke_token": {
     "message": "Відкликати токен"
   },
   "pages.registration_tokens.revoke_token.alert.description": {
-    "message": "Nobody will be able to register with {token} until it is unrevoked."
+    "message": "Ніхто не зможе зареєструватися за допомогою {token}, доки його не буде відкликано."
   },
   "pages.registration_tokens.revoke_token.alert.title": {
-    "message": "The token will stop working"
+    "message": "Токен перестане діяти"
   },
   "pages.registration_tokens.revoke_token.error": {
-    "message": "Failed to revoke the token"
+    "message": "Не вдалося відкликати токен"
   },
   "pages.registration_tokens.revoke_token.success": {
-    "message": "Token revoked"
+    "message": "Токен відкликано"
   },
   "pages.registration_tokens.revoke_token.title": {
-    "message": "Revoke this registration token?"
+    "message": "Відкликати цей реєстраційний токен?"
   },
   "pages.registration_tokens.revoked_at_label": {
     "message": "Відкликано о"
@@ -933,7 +933,7 @@
     "message": "Токен"
   },
   "pages.registration_tokens.token_count": {
-    "message": "{COUNT, plural, =0 {No tokens} one {# token} other {# tokens}}"
+    "message": "{COUNT, plural, =0 {Немає токенів} one {# токен} few {# токени} other {# токенів}}"
   },
   "pages.registration_tokens.token_uses.limited": {
     "message": "{uses, number} / {limit, number}"
@@ -951,10 +951,10 @@
     "message": "Скасувати відкликання токена"
   },
   "pages.registration_tokens.unrevoke_token.error": {
-    "message": "Failed to unrevoke the token"
+    "message": "Не вдалося скасувати відкликання токена"
   },
   "pages.registration_tokens.unrevoke_token.success": {
-    "message": "Token unrevoked"
+    "message": "Відкликання токена скасовано"
   },
   "pages.registration_tokens.usage_count_label": {
     "message": "Лічильник використань"
@@ -975,37 +975,37 @@
     "message": "Дійсний до"
   },
   "pages.rooms.columns.alias": {
-    "message": "Alias"
+    "message": "Псевдонім"
   },
   "pages.rooms.columns.members": {
-    "message": "Members"
+    "message": "Учасники"
   },
   "pages.rooms.columns.room": {
-    "message": "Room"
+    "message": "Кімната"
   },
   "pages.rooms.columns.visibility": {
-    "message": "Visibility"
+    "message": "Видимість"
   },
   "pages.rooms.delete_room.alert.description": {
-    "message": "This will permanently delete all messages or media uploaded to the server and remove this room from the directory. Members will lose access to their messages and the room will be removed from their room list."
+    "message": "Це призведе до остаточного видалення всіх повідомлень та медіа, вивантажених на сервер, а також до вилучення цієї кімнати з каталогу. Учасники втратять доступ до своїх повідомлень, а кімната буде вилучена з їхнього списку кімнат."
   },
   "pages.rooms.delete_room.alert.title": {
     "message": "Ви збираєтеся видалити дані кімнати"
   },
   "pages.rooms.delete_room.block.help": {
-    "message": "Prevent users from rejoining the room after deletion."
+    "message": "Запобігати повторному входу користувачів у кімнату після видалення."
   },
   "pages.rooms.delete_room.block.label": {
-    "message": "Block room"
+    "message": "Заблокувати кімнату"
   },
   "pages.rooms.delete_room.button": {
-    "message": "Delete permanently"
+    "message": "Видалити назавжди"
   },
   "pages.rooms.delete_room.error": {
-    "message": "Failed to schedule room deletion"
+    "message": "Не вдалося запланувати видалення кімнати"
   },
   "pages.rooms.delete_room.success": {
-    "message": "Room deletion scheduled"
+    "message": "Видалення кімнати заплановано"
   },
   "pages.rooms.delete_room.title": {
     "message": "Видалити цю кімнату?"
@@ -1017,25 +1017,25 @@
     "message": "Видалення не вдалося"
   },
   "pages.rooms.deletion.in_progress.description": {
-    "message": "Room deletion task is in progress since {timestamp, date, short} at {timestamp, time, short}."
+    "message": "Завдання з видалення кімнати виконується з {timestamp, date, short} о {timestamp, time, short}."
   },
   "pages.rooms.deletion.in_progress.title": {
     "message": "Триває видалення"
   },
   "pages.rooms.deletion.scheduled.description": {
-    "message": "Room deletion task is scheduled for {timestamp, date, short} at {timestamp, time, short}."
+    "message": "Завдання з видалення кімнати заплановано на {timestamp, date, short} о {timestamp, time, short}."
   },
   "pages.rooms.deletion.scheduled.title": {
-    "message": "Room deletion scheduled"
+    "message": "Видалення кімнати заплановано"
   },
   "pages.rooms.deletion.success.description": {
-    "message": "Room deletion task completed successfully on {timestamp, date, short} at {timestamp, time, short}."
+    "message": "Завдання з видалення кімнати успішно завершено {timestamp, date, short} о {timestamp, time, short}."
   },
   "pages.rooms.deletion.success.title": {
     "message": "Видалення успішне"
   },
   "pages.rooms.details_label": {
-    "message": "Room details"
+    "message": "Відомості про кімнату"
   },
   "pages.rooms.filters.empty_rooms": {
     "message": "Порожні кімнати"
@@ -1056,19 +1056,19 @@
     "message": "Кімнату не знайдено"
   },
   "pages.rooms.room_count": {
-    "message": "{COUNT, plural, =0 {No rooms} one {# room} other {# rooms}}"
+    "message": "{COUNT, plural, =0 {Немає кімнат} one {# кімната} few {# кімнати} other {# кімнат}}"
   },
   "pages.rooms.room_type.private": {
-    "message": "Private"
+    "message": "Приватна"
   },
   "pages.rooms.room_type.public": {
-    "message": "Public"
+    "message": "Загальнодоступна"
   },
   "pages.rooms.room_type.restricted": {
-    "message": "Restricted"
+    "message": "З обмеженим доступом"
   },
   "pages.rooms.search_placeholder": {
-    "message": "Search…"
+    "message": "Пошук…"
   },
   "pages.rooms.title": {
     "message": "Кімнати"
@@ -1077,7 +1077,7 @@
     "message": "Увійдіть як <b>{mxid}</b>, щоб виконувати адміністративні дії в будь-якій кімнаті."
   },
   "pages.supervision.disabled_alert.description": {
-    "message": "Ця функція є частиною вашої підписки. Ви можете попросити адміністратора увімкнути її."
+    "message": "Функція нагляду входить до вашої передплати, але не ввімкнена в цьому розгортанні. Щоб увімкнути її, зверніться до документації ESS."
   },
   "pages.supervision.disabled_alert.title": {
     "message": "Наглядання наразі вимкнено"
@@ -1089,16 +1089,16 @@
     "message": "Не вдалося відкрити інтерфейс наглядання в новому вікні"
   },
   "pages.supervision.errors.closed.description": {
-    "message": "Не вдалося увійти в інтерфейс нагляду, оскільки він закрився до завершення входу"
+    "message": "Вікно нагляду було закрито до завершення входу. Спробуйте ще раз."
   },
   "pages.supervision.errors.closed.title": {
-    "message": "Інтерфейс нагляду закрився занадто швидко"
+    "message": "Вхід у режим нагляду скасовано"
   },
   "pages.supervision.errors.generic.title": {
     "message": "Під час відкриття інтерфейсу нагляду сталася неочікувана помилка"
   },
   "pages.supervision.launch": {
-    "message": "Open supervision interface"
+    "message": "Відкрити інтерфейс наглядача"
   },
   "pages.supervision.missing_ui_address.description": {
     "message": "На вашому сервері увімкнено наглядання, але не Element Web, що необхідний для роботи інтерфейсу нагляду."
@@ -1134,13 +1134,13 @@
     "message": "Адміністратор"
   },
   "pages.users.account_status.deactivated": {
-    "message": "Deactivated"
+    "message": "Деактивовано"
   },
   "pages.users.account_status.guest": {
-    "message": "Guest"
+    "message": "Гість"
   },
   "pages.users.account_status.locked": {
-    "message": "Locked"
+    "message": "Заблоковано"
   },
   "pages.users.add_email.button": {
     "message": "Додати адресу електронної пошти"
@@ -1164,13 +1164,13 @@
     "message": "Додати адресу електронної пошти"
   },
   "pages.users.add_upstream_link.error": {
-    "message": "Failed to add link upstream account"
+    "message": "Не вдалося зв'язати з обліковим записом верхнього рівня"
   },
   "pages.users.add_upstream_link.success": {
-    "message": "Link to upstream account added"
+    "message": "Зв'язано з обліковим записом верхнього рівня"
   },
   "pages.users.columns.account_status": {
-    "message": "Account status"
+    "message": "Стан облікового запису"
   },
   "pages.users.columns.created_at": {
     "message": "Створено о"
@@ -1209,25 +1209,25 @@
     "message": "Видалити адресу електронної пошти?"
   },
   "pages.users.delete_upstream_link.description": {
-    "message": "Are you sure you want to remove the link between this user ({mxid}) with this upstream account ({subject})?"
+    "message": "Ви впевнені, що хочете прибрати зв'язок між цим користувачем ({mxid}) та цим обліковим записом вищого рівня ({subject})?"
   },
   "pages.users.delete_upstream_link.error": {
-    "message": "Failed to delete upstream link"
+    "message": "Не вдалося прибрати зв'язок з обліковим записом вищого рівня"
   },
   "pages.users.delete_upstream_link.success": {
-    "message": "Upstream link deleted"
+    "message": "Відв'язано від облікового запису вищого рівня"
   },
   "pages.users.delete_upstream_link.title": {
-    "message": "Remove link with upstream account?"
+    "message": "Прибрати зв'язок з обліковим записом вищого рівня?"
   },
   "pages.users.details_label": {
-    "message": "User details"
+    "message": "Відомості про користувача"
   },
   "pages.users.filters.active": {
     "message": "Активні користувачі"
   },
   "pages.users.filters.active_client_chip": {
-    "message": "Has active device on: {name}"
+    "message": "Має активний пристрій на: {name}"
   },
   "pages.users.filters.admins": {
     "message": "Адміністратори"
@@ -1239,7 +1239,7 @@
     "message": "Гості (стара версія)"
   },
   "pages.users.filters.has_legacy_session": {
-    "message": "Has active legacy device"
+    "message": "Має активний застарілий пристрій"
   },
   "pages.users.filters.locked": {
     "message": "Заблоковані користувачі"
@@ -1248,16 +1248,16 @@
     "message": "Спочатку новіші"
   },
   "pages.users.filters.no_legacy_session": {
-    "message": "No active legacy device"
+    "message": "Немає активних застарілих пристроїв"
   },
   "pages.users.filters.non_guests": {
-    "message": "Non-guests (legacy)"
+    "message": "Не гості (застаріле)"
   },
   "pages.users.lock_account.alert.description": {
-    "message": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."
+    "message": "Цей користувач буде автоматично заблокований на всіх пристроях, на яких він наразі увійшов, і він не зможе увійти на нових пристроях, доки його не розблокують."
   },
   "pages.users.lock_account.alert.title": {
-    "message": "The user will not be able to send or receive messages"
+    "message": "Користувач не зможе надсилати або отримувати повідомлення"
   },
   "pages.users.lock_account.button": {
     "message": "Заблокувати обліковий запис"
@@ -1278,19 +1278,19 @@
     "message": "Створити обліковий запис"
   },
   "pages.users.new_user.description": {
-    "message": "To add a new user to {serverName}, choose a user name for this user, which will be part of their user ID."
+    "message": "Щоб додати нового користувача до {serverName}, виберіть для нього ім’я користувача, яке буде частиною його ID користувача."
   },
   "pages.users.new_user.error_message": {
     "message": "Помилка створення користувача"
   },
   "pages.users.new_user.invalid_localpart": {
-    "message": "Localpart can only contain lowercase letters, numbers, dots, underscores, dashes and slashes"
+    "message": "Локальна частина може містити лише малі букви, цифри, крапки, символи підкреслення, тире та скісні риски"
   },
   "pages.users.new_user.invalid_localpart_numeric_only": {
-    "message": "Localpart cannot only contain numbers"
+    "message": "Локальна частина не може містити лише числа"
   },
   "pages.users.new_user.localpart": {
-    "message": "Enter name"
+    "message": "Введіть ім'я"
   },
   "pages.users.new_user.required_error": {
     "message": "Це поле обов’язкове."
@@ -1299,7 +1299,7 @@
     "message": "Користувача створено"
   },
   "pages.users.not_found.description": {
-    "message": "The requested user ({userId}) could not be found on {serverName}."
+    "message": "Запитаного користувача ({userId}) не знайдено на {serverName}."
   },
   "pages.users.not_found.title": {
     "message": "Користувача не знайдено"
@@ -1317,10 +1317,10 @@
     "message": "Пошук користувачів…"
   },
   "pages.users.set_admin.alert.description": {
-    "message": "The user will be able to view user data and make changes to user and room permissions."
+    "message": "Користувач зможе переглядати дані користувача та вносити зміни до дозволів користувачів і кімнати."
   },
   "pages.users.set_admin.alert.title": {
-    "message": "User will have access to sensitive data"
+    "message": "Користувач матиме доступ до конфіденційних даних"
   },
   "pages.users.set_admin.error": {
     "message": "Не вдалося змінити права адміністратора для {mxid}"
@@ -1371,10 +1371,10 @@
     "message": "Встановити новий пароль для цього користувача"
   },
   "pages.users.statistics.devices": {
-    "message": "Devices"
+    "message": "Пристрої"
   },
   "pages.users.statistics.legacy_devices": {
-    "message": "Legacy devices"
+    "message": "Застарілі пристрої"
   },
   "pages.users.title": {
     "message": "Користувачі"
@@ -1389,7 +1389,7 @@
     "message": "Обліковий запис розблоковано"
   },
   "pages.users.user_count": {
-    "message": "{COUNT, plural, =0 {No users} one {# user} other {# users}}"
+    "message": "{COUNT, plural, =0 {Немає користувачів} one {# користувач} few {# користувача} other {# користувачів}}"
   },
   "product.badge.pro": {
     "message": "Pro"
@@ -1428,73 +1428,73 @@
     "message": "{COUNT,plural,one{# інший} few{# інших} many{# інших} other{# інших}}"
   },
   "ui.copy.copied": {
-    "message": "Copied!"
+    "message": "Скопійовано!"
   },
   "ui.copy.copy_to_clipboard": {
-    "message": "Copy to clipboard"
+    "message": "Копіювати в буфер обміну"
   },
   "ui.data.failed_to_load": {
     "message": "Не вдалося завантажити"
   },
   "ui.data_table.loading_more": {
-    "message": "Loading more…"
+    "message": "Завантажується ще…"
   },
   "ui.destination_status.failing": {
-    "message": "Failing"
+    "message": "Збій"
   },
   "ui.destination_status.inactive": {
-    "message": "Inactive"
+    "message": "Неактивний"
   },
   "ui.destination_status.never_worked": {
-    "message": "Never worked"
+    "message": "Ніколи не працював"
   },
   "ui.destination_status.working": {
-    "message": "Working"
+    "message": "Працює"
   },
   "ui.device_info.name_on_platform": {
-    "message": "{name} on {platform}"
+    "message": "{name} на {platform}"
   },
   "ui.device_info.type.mobile": {
-    "message": "Mobile device"
+    "message": "Мобільний пристрій"
   },
   "ui.device_info.type.pc": {
-    "message": "Computer"
+    "message": "Комп'ютер"
   },
   "ui.device_info.type.tablet": {
-    "message": "Tablet"
+    "message": "Планшет"
   },
   "ui.device_info.type.unknown": {
-    "message": "Unknown device type"
+    "message": "Невідомий тип пристрою"
   },
   "ui.device_info.unknown_device": {
-    "message": "Unknown device"
+    "message": "Невідомий пристрій"
   },
   "ui.device_status.active": {
     "message": "Активні"
   },
   "ui.device_status.inactive": {
-    "message": "Inactive"
+    "message": "Неактивний"
   },
   "ui.device_status.last_active.tooltip": {
-    "message": "Last active on {date}."
+    "message": "Остання активність {date}."
   },
   "ui.device_status.never_used": {
     "message": "Ніколи не використовувався"
   },
   "ui.device_status.never_used.tooltip": {
-    "message": "This device has not been used yet."
+    "message": "Цей пристрій ще не використовувався."
   },
   "ui.device_status.recently_used": {
-    "message": "Recently used"
+    "message": "Нещодавно використовувані"
   },
   "ui.device_status.signed_out": {
-    "message": "Signed out"
+    "message": "Виконано вихід"
   },
   "ui.device_status.signed_out.tooltip": {
-    "message": "This device has been signed out and no longer has access."
+    "message": "На цьому пристрої вийшли з облікового запису, і він більше не має доступу."
   },
   "ui.device_status.signed_out.tooltip_at": {
-    "message": "Signed out on {date}."
+    "message": "Вийшли {date}."
   },
   "ui.language_switcher.browser_default": {
     "message": "Використовувати налаштування браузера ({language})"

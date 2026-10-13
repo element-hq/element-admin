@@ -38,7 +38,7 @@
   "action.done": [
     {
       "type": 0,
-      "value": "Done"
+      "value": "Готово"
     }
   ],
   "action.go_back": [
@@ -80,19 +80,19 @@
   "common.loading": [
     {
       "type": 0,
-      "value": "Loading…"
+      "value": "Завантаження…"
     }
   ],
   "errors.authorization_denied": [
     {
       "type": 0,
-      "value": "Sign-in was cancelled."
+      "value": "Вхід скасовано."
     }
   ],
   "errors.authorization_error": [
     {
       "type": 0,
-      "value": "Sign-in failed: "
+      "value": "Не вдалося ввійти: "
     },
     {
       "type": 1,
@@ -152,7 +152,7 @@
   "errors.mas_api": [
     {
       "type": 0,
-      "value": "The homeserver's authentication service returned an error: "
+      "value": "Служба автентифікації домашнього сервера повернула помилку: "
     },
     {
       "type": 1,
@@ -162,7 +162,7 @@
   "errors.matrix_standard": [
     {
       "type": 0,
-      "value": "Запит до домашнього сервера не вдався з кодом помилки \""
+      "value": "Збій запиту до домашнього сервера з кодом помилки \""
     },
     {
       "type": 1,
@@ -180,7 +180,7 @@
   "errors.no_details": [
     {
       "type": 0,
-      "value": "The server returned an error with no details."
+      "value": "Сервер повернув помилку без подробиць."
     }
   ],
   "errors.not_logged_in": [
@@ -359,7 +359,7 @@
       "children": [
         {
           "type": 0,
-          "value": "Secure Border Gateway is an application-level firewall for Matrix servers."
+          "value": "Secure Border Gateway — це брандмауер на рівні застосунків для серверів Matrix."
         }
       ]
     },
@@ -377,7 +377,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Inspects all requests to and from the server"
+              "value": "Перевіряє всі запити, що надходять на сервер та надсилаються з нього"
             }
           ]
         },
@@ -391,7 +391,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Can use all request metadata to enforce rules"
+              "value": "Може використовувати всі метадані запитів для забезпечення дотримання правил"
             }
           ]
         },
@@ -405,7 +405,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Pipeline-based approach to connect APIs and rule sets"
+              "value": "Підхід на основі пайплайнів для з'єднання API та наборів правил"
             }
           ]
         },
@@ -419,7 +419,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Pluggable rules engine that can be applied to the pipelines"
+              "value": "Модульний механізм обробки правил, який можна застосовувати до пайплайнів"
             }
           ]
         }
@@ -541,7 +541,7 @@
   "navigation.devices": [
     {
       "type": 0,
-      "value": "Devices"
+      "value": "Пристрої"
     }
   ],
   "navigation.documentation": [
@@ -553,7 +553,7 @@
   "navigation.federation": [
     {
       "type": 0,
-      "value": "Federation"
+      "value": "Федерація"
     }
   ],
   "navigation.personal_tokens": [
@@ -655,7 +655,7 @@
   "pages.devices.applications.client_id_label": [
     {
       "type": 0,
-      "value": "Client ID"
+      "value": "ID клієнта"
     }
   ],
   "pages.devices.applications.count": [
@@ -667,7 +667,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No applications"
+              "value": "Немає застосунків"
             }
           ]
         },
@@ -678,7 +678,18 @@
             },
             {
               "type": 0,
-              "value": " application"
+              "value": " застосунок"
+            }
+          ]
+        },
+        "few": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " застосунки"
             }
           ]
         },
@@ -689,7 +700,7 @@
             },
             {
               "type": 0,
-              "value": " applications"
+              "value": " застосунків"
             }
           ]
         }
@@ -701,31 +712,31 @@
   "pages.devices.applications.description": [
     {
       "type": 0,
-      "value": "Applications are OAuth 2.0 clients that users sign in to."
+      "value": "Застосунки – це клієнти OAuth 2.0, в які користувачі входять."
     }
   ],
   "pages.devices.applications.details_label": [
     {
       "type": 0,
-      "value": "Application details"
+      "value": "Подробиці застосунку"
     }
   ],
   "pages.devices.applications.filters.has_active_sessions": [
     {
       "type": 0,
-      "value": "With active devices"
+      "value": "З активними пристроями"
     }
   ],
   "pages.devices.applications.filters.no_active_sessions": [
     {
       "type": 0,
-      "value": "Without active devices"
+      "value": "Без активних пристроїв"
     }
   ],
   "pages.devices.applications.grant_types_label": [
     {
       "type": 0,
-      "value": "Grant types"
+      "value": "Типи рівнів"
     }
   ],
   "pages.devices.applications.name_column": [
@@ -737,7 +748,7 @@
   "pages.devices.applications.not_found.description": [
     {
       "type": 0,
-      "value": "The requested application ("
+      "value": "Запитаний застосунок ("
     },
     {
       "type": 1,
@@ -745,7 +756,7 @@
     },
     {
       "type": 0,
-      "value": ") could not be found on "
+      "value": ") не вдалося знайти на "
     },
     {
       "type": 1,
@@ -759,67 +770,67 @@
   "pages.devices.applications.not_found.title": [
     {
       "type": 0,
-      "value": "Application not found"
+      "value": "Застосунок не знайдено"
     }
   ],
   "pages.devices.applications.redirect_uris_label": [
     {
       "type": 0,
-      "value": "Redirect URIs"
+      "value": "URI переспрямування"
     }
   ],
   "pages.devices.applications.search_placeholder": [
     {
       "type": 0,
-      "value": "Search by name…"
+      "value": "Пошук за назвою…"
     }
   ],
   "pages.devices.applications.statistics.active_recently": [
     {
       "type": 0,
-      "value": "Active in the past 7 days"
+      "value": "Активний протягом останніх 7 днів"
     }
   ],
   "pages.devices.applications.statistics.created_recently": [
     {
       "type": 0,
-      "value": "Devices added in the past 7 days"
+      "value": "Пристрої, додані за останні 7 днів"
     }
   ],
   "pages.devices.applications.statistics.heading": [
     {
       "type": 0,
-      "value": "Device statistics"
+      "value": "Статистика пристроїв"
     }
   ],
   "pages.devices.applications.statistics.total_active": [
     {
       "type": 0,
-      "value": "Active devices"
+      "value": "Активні пристрої"
     }
   ],
   "pages.devices.applications.title": [
     {
       "type": 0,
-      "value": "Applications"
+      "value": "Застосунки"
     }
   ],
   "pages.devices.applications.uri_label": [
     {
       "type": 0,
-      "value": "Homepage"
+      "value": "Домашня сторінка"
     }
   ],
   "pages.devices.applications.view_sessions": [
     {
       "type": 0,
-      "value": "View all devices"
+      "value": "Переглянути всі пристрої"
     }
   ],
   "pages.devices.applications.view_users": [
     {
       "type": 0,
-      "value": "View users on this application"
+      "value": "Переглянути користувачів цього застосунку"
     }
   ],
   "pages.devices.legacy.count": [
@@ -831,7 +842,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No legacy devices"
+              "value": "Немає застарілих пристроїв"
             }
           ]
         },
@@ -842,7 +853,18 @@
             },
             {
               "type": 0,
-              "value": " legacy device"
+              "value": " застарілий пристрій"
+            }
+          ]
+        },
+        "few": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " застарілі пристрої"
             }
           ]
         },
@@ -853,7 +875,7 @@
             },
             {
               "type": 0,
-              "value": " legacy devices"
+              "value": " застарілих пристроїв"
             }
           ]
         }
@@ -865,25 +887,25 @@
   "pages.devices.legacy.created_at_label": [
     {
       "type": 0,
-      "value": "Signed in at"
+      "value": "Вхід о"
     }
   ],
   "pages.devices.legacy.description": [
     {
       "type": 0,
-      "value": "Legacy devices are sign-ins from clients that have not yet migrated to OAuth 2.0."
+      "value": "Застарілі пристрої — це входи з клієнтів, які ще не перейшли на OAuth 2.0."
     }
   ],
   "pages.devices.legacy.details_label": [
     {
       "type": 0,
-      "value": "Legacy device details"
+      "value": "Відомості про старий пристрій"
     }
   ],
   "pages.devices.legacy.device_column": [
     {
       "type": 0,
-      "value": "Device"
+      "value": "Пристрій"
     }
   ],
   "pages.devices.legacy.device_id_label": [
@@ -901,19 +923,19 @@
   "pages.devices.legacy.filters.activity_inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "Неактивний"
     }
   ],
   "pages.devices.legacy.filters.activity_recently_used": [
     {
       "type": 0,
-      "value": "Recently used"
+      "value": "Нещодавно використовувані"
     }
   ],
   "pages.devices.legacy.filters.activity_signed_out": [
     {
       "type": 0,
-      "value": "Signed out"
+      "value": "Виконано вихід"
     }
   ],
   "pages.devices.legacy.filters.newest_first": [
@@ -925,7 +947,7 @@
   "pages.devices.legacy.filters.user_chip": [
     {
       "type": 0,
-      "value": "User: @"
+      "value": "Користувач: @"
     },
     {
       "type": 1,
@@ -943,43 +965,43 @@
   "pages.devices.legacy.finish.button": [
     {
       "type": 0,
-      "value": "Remove device"
+      "value": "Вилучити пристрій"
     }
   ],
   "pages.devices.legacy.finish.confirm": [
     {
       "type": 0,
-      "value": "Remove device"
+      "value": "Вилучити пристрій"
     }
   ],
   "pages.devices.legacy.finish.description": [
     {
       "type": 0,
-      "value": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
+      "value": "Буде виконано вихід користувача на цьому пристрої. Токени доступу та оновлення будуть негайно відкликані."
     }
   ],
   "pages.devices.legacy.finish.error": [
     {
       "type": 0,
-      "value": "Failed to remove the legacy device"
+      "value": "Не вдалося вилучити застарілий пристрій"
     }
   ],
   "pages.devices.legacy.finish.success": [
     {
       "type": 0,
-      "value": "Legacy device removed"
+      "value": "Застарілий пристрій вилучено"
     }
   ],
   "pages.devices.legacy.finish.title": [
     {
       "type": 0,
-      "value": "Remove this legacy device?"
+      "value": "Вилучити цей застарілий пристрій?"
     }
   ],
   "pages.devices.legacy.finished_at_label": [
     {
       "type": 0,
-      "value": "Signed out at"
+      "value": "Вихід здійснено о"
     }
   ],
   "pages.devices.legacy.last_active_ip_label": [
@@ -997,7 +1019,7 @@
   "pages.devices.legacy.not_found.description": [
     {
       "type": 0,
-      "value": "The requested legacy device ("
+      "value": "Не вдалося знайти запитаний застарілий пристрій ("
     },
     {
       "type": 1,
@@ -1005,7 +1027,7 @@
     },
     {
       "type": 0,
-      "value": ") could not be found on "
+      "value": ") на "
     },
     {
       "type": 1,
@@ -1019,13 +1041,13 @@
   "pages.devices.legacy.not_found.title": [
     {
       "type": 0,
-      "value": "Legacy device not found"
+      "value": "Застарілий пристрій не знайдено"
     }
   ],
   "pages.devices.legacy.redirect_uri_label": [
     {
       "type": 0,
-      "value": "Redirect URI"
+      "value": "URI переспрямування"
     }
   ],
   "pages.devices.legacy.status_column": [
@@ -1037,61 +1059,61 @@
   "pages.devices.legacy.technical_details": [
     {
       "type": 0,
-      "value": "Technical details"
+      "value": "Технічні подробиці"
     }
   ],
   "pages.devices.legacy.title": [
     {
       "type": 0,
-      "value": "Legacy devices"
+      "value": "Застарілі пристрої"
     }
   ],
   "pages.devices.legacy.user_agent_label": [
     {
       "type": 0,
-      "value": "User agent"
+      "value": "Агент користувача"
     }
   ],
   "pages.devices.legacy.user_column": [
     {
       "type": 0,
-      "value": "User"
+      "value": "Користувач"
     }
   ],
   "pages.devices.tabs.applications": [
     {
       "type": 0,
-      "value": "Applications"
+      "value": "Застосунки"
     }
   ],
   "pages.devices.tabs.legacy": [
     {
       "type": 0,
-      "value": "Legacy devices"
+      "value": "Застарілі пристрої"
     }
   ],
   "pages.devices.tabs.section": [
     {
       "type": 0,
-      "value": "Device views"
+      "value": "Перегляди пристроїв"
     }
   ],
   "pages.devices.tabs.user": [
     {
       "type": 0,
-      "value": "User devices"
+      "value": "Пристрої користувача"
     }
   ],
   "pages.devices.title": [
     {
       "type": 0,
-      "value": "Devices"
+      "value": "Пристрої"
     }
   ],
   "pages.devices.user.client_column": [
     {
       "type": 0,
-      "value": "Application"
+      "value": "Застосунок"
     }
   ],
   "pages.devices.user.count": [
@@ -1103,7 +1125,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No devices"
+              "value": "Немає пристроїв"
             }
           ]
         },
@@ -1114,7 +1136,18 @@
             },
             {
               "type": 0,
-              "value": " device"
+              "value": " пристрій"
+            }
+          ]
+        },
+        "few": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " пристрої"
             }
           ]
         },
@@ -1125,7 +1158,7 @@
             },
             {
               "type": 0,
-              "value": " devices"
+              "value": " пристроїв"
             }
           ]
         }
@@ -1137,25 +1170,25 @@
   "pages.devices.user.created_at_label": [
     {
       "type": 0,
-      "value": "Signed in at"
+      "value": "Вхід о"
     }
   ],
   "pages.devices.user.description": [
     {
       "type": 0,
-      "value": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
+      "value": "Пристрій — це єдиний вхід користувача в застосунок. Вихід із пристрою негайно відкличе його доступ."
     }
   ],
   "pages.devices.user.details_label": [
     {
       "type": 0,
-      "value": "Device details"
+      "value": "Відомості про пристрій"
     }
   ],
   "pages.devices.user.device_column": [
     {
       "type": 0,
-      "value": "Device"
+      "value": "Пристрій"
     }
   ],
   "pages.devices.user.device_id_label": [
@@ -1173,25 +1206,25 @@
   "pages.devices.user.filters.activity_inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "Неактивний"
     }
   ],
   "pages.devices.user.filters.activity_recently_used": [
     {
       "type": 0,
-      "value": "Recently used"
+      "value": "Нещодавно використовувані"
     }
   ],
   "pages.devices.user.filters.activity_signed_out": [
     {
       "type": 0,
-      "value": "Signed out"
+      "value": "Виконано вихід"
     }
   ],
   "pages.devices.user.filters.client_chip": [
     {
       "type": 0,
-      "value": "Application: "
+      "value": "Застосунок: "
     },
     {
       "type": 1,
@@ -1207,7 +1240,7 @@
   "pages.devices.user.filters.user_chip": [
     {
       "type": 0,
-      "value": "User: @"
+      "value": "Користувач: @"
     },
     {
       "type": 1,
@@ -1225,43 +1258,43 @@
   "pages.devices.user.finish.button": [
     {
       "type": 0,
-      "value": "Remove device"
+      "value": "Вилучити пристрій"
     }
   ],
   "pages.devices.user.finish.confirm": [
     {
       "type": 0,
-      "value": "Remove device"
+      "value": "Вилучити пристрій"
     }
   ],
   "pages.devices.user.finish.description": [
     {
       "type": 0,
-      "value": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
+      "value": "Буде виконано вихід користувача на цьому пристрої. Токени доступу та оновлення будуть негайно відкликані."
     }
   ],
   "pages.devices.user.finish.error": [
     {
       "type": 0,
-      "value": "Failed to remove the device"
+      "value": "Не вдалося вилучити пристрій"
     }
   ],
   "pages.devices.user.finish.success": [
     {
       "type": 0,
-      "value": "Device removed"
+      "value": "Пристрій вилучено"
     }
   ],
   "pages.devices.user.finish.title": [
     {
       "type": 0,
-      "value": "Remove this device?"
+      "value": "Вилучити цей пристрій?"
     }
   ],
   "pages.devices.user.finished_at_label": [
     {
       "type": 0,
-      "value": "Signed out at"
+      "value": "Вихід здійснено о"
     }
   ],
   "pages.devices.user.last_active_ip_label": [
@@ -1279,7 +1312,7 @@
   "pages.devices.user.not_found.description": [
     {
       "type": 0,
-      "value": "The requested device ("
+      "value": "Не вдалося знайти запитаний пристрій ("
     },
     {
       "type": 1,
@@ -1287,7 +1320,7 @@
     },
     {
       "type": 0,
-      "value": ") could not be found on "
+      "value": ") на "
     },
     {
       "type": 1,
@@ -1301,13 +1334,13 @@
   "pages.devices.user.not_found.title": [
     {
       "type": 0,
-      "value": "Device not found"
+      "value": "Пристрій не знайдено"
     }
   ],
   "pages.devices.user.scope_label": [
     {
       "type": 0,
-      "value": "Scope"
+      "value": "Область дії"
     }
   ],
   "pages.devices.user.status_column": [
@@ -1319,103 +1352,103 @@
   "pages.devices.user.technical_details": [
     {
       "type": 0,
-      "value": "Technical details"
+      "value": "Технічні подробиці"
     }
   ],
   "pages.devices.user.title": [
     {
       "type": 0,
-      "value": "User devices"
+      "value": "Пристрої користувача"
     }
   ],
   "pages.devices.user.user_agent_label": [
     {
       "type": 0,
-      "value": "User agent"
+      "value": "Агент користувача"
     }
   ],
   "pages.devices.user.user_column": [
     {
       "type": 0,
-      "value": "User"
+      "value": "Користувач"
     }
   ],
   "pages.devices.user.user_none": [
     {
       "type": 0,
-      "value": "No user"
+      "value": "Немає користувача"
     }
   ],
   "pages.federation.allowlist.add.error": [
     {
       "type": 0,
-      "value": "Failed to add domain to allowlist"
+      "value": "Не вдалося додати домен до списку дозволених"
     }
   ],
   "pages.federation.allowlist.add.success": [
     {
       "type": 0,
-      "value": "Domain added to allowlist"
+      "value": "Домен додано до списку дозволених"
     }
   ],
   "pages.federation.allowlist.add_domain": [
     {
       "type": 0,
-      "value": "Add domain"
+      "value": "Додати домен"
     }
   ],
   "pages.federation.allowlist.add_pattern": [
     {
       "type": 0,
-      "value": "Add pattern"
+      "value": "Додати шаблон"
     }
   ],
   "pages.federation.allowlist.add_pattern.help": [
     {
       "type": 0,
-      "value": "Enter a domain like example.com or use * to allow all subdomains, like *.example.com"
+      "value": "Введіть домен, наприклад example.com, або використовуйте *, щоб дозволити всі піддомени, наприклад *.example.com"
     }
   ],
   "pages.federation.allowlist.empty": [
     {
       "type": 0,
-      "value": "No domains in the allowlist yet. Add a domain pattern above to get started."
+      "value": "У списку дозволених поки що немає жодного домену. Щоб розпочати, додайте вище шаблон домену."
     }
   ],
   "pages.federation.allowlist.heading": [
     {
       "type": 0,
-      "value": "List of patterns allowed to federate with you"
+      "value": "Список шаблонів, яким дозволено федеративний зв'язок із вами"
     }
   ],
   "pages.federation.allowlist.remove.error": [
     {
       "type": 0,
-      "value": "Failed to remove domain from allowlist"
+      "value": "Не вдалося вилучити домен зі списку дозволених"
     }
   ],
   "pages.federation.allowlist.remove.success": [
     {
       "type": 0,
-      "value": "Domain removed from allowlist"
+      "value": "Домен вилучено зі списку дозволених"
     }
   ],
   "pages.federation.allowlist.remove_confirm.alert.description": [
     {
       "type": 0,
-      "value": "Your server will stop federating with servers matching this pattern."
+      "value": "Ваш сервер припинить федеративний зв'язок із серверами, що відповідають цьому шаблону."
     }
   ],
   "pages.federation.allowlist.remove_confirm.alert.title": [
     {
       "type": 0,
-      "value": "You’re about to stop federating with this server"
+      "value": "Ви збираєтеся припинити федеративний зв'язок із цим сервером"
     }
   ],
   "pages.federation.allowlist.remove_confirm.title": [
     {
       "type": 0,
-      "value": "Remove "
+      "value": "Вилучити "
     },
     {
       "type": 1,
@@ -1423,67 +1456,67 @@
     },
     {
       "type": 0,
-      "value": " from the allowlist?"
+      "value": " зі списку дозволених?"
     }
   ],
   "pages.federation.allowlist.remove_tooltip": [
     {
       "type": 0,
-      "value": "Remove from allowlist"
+      "value": "Вилучити зі списку дозволених"
     }
   ],
   "pages.federation.detail.contact": [
     {
       "type": 0,
-      "value": "Contact"
+      "value": "Контакт"
     }
   ],
   "pages.federation.detail.last_retry": [
     {
       "type": 0,
-      "value": "Last retry timestamp"
+      "value": "Позначка часу останньої повторної спроби"
     }
   ],
   "pages.federation.detail.last_retry.never": [
     {
       "type": 0,
-      "value": "Never"
+      "value": "Ніколи"
     }
   ],
   "pages.federation.detail.last_successful_stream": [
     {
       "type": 0,
-      "value": "Last successful stream"
+      "value": "Остання успішна трансляція"
     }
   ],
   "pages.federation.detail.retry_interval": [
     {
       "type": 0,
-      "value": "Retry interval"
+      "value": "Інтервал повторних спроб"
     }
   ],
   "pages.federation.detail.retry_interval.none": [
     {
       "type": 0,
-      "value": "None"
+      "value": "Немає"
     }
   ],
   "pages.federation.detail.security": [
     {
       "type": 0,
-      "value": "Security"
+      "value": "Безпека"
     }
   ],
   "pages.federation.detail.support_page": [
     {
       "type": 0,
-      "value": "Support page"
+      "value": "Сторінка підтримки"
     }
   ],
   "pages.federation.details_label": [
     {
       "type": 0,
-      "value": "Destination details"
+      "value": "Подробиці пункту призначення"
     }
   ],
   "pages.federation.domain_count": [
@@ -1495,7 +1528,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No domains"
+              "value": "Немає доменів"
             }
           ]
         },
@@ -1506,7 +1539,18 @@
             },
             {
               "type": 0,
-              "value": " domain"
+              "value": " домен"
+            }
+          ]
+        },
+        "few": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " домени"
             }
           ]
         },
@@ -1517,7 +1561,7 @@
             },
             {
               "type": 0,
-              "value": " domains"
+              "value": " доменів"
             }
           ]
         }
@@ -1529,7 +1573,7 @@
   "pages.federation.not_found.description": [
     {
       "type": 0,
-      "value": "The requested destination ("
+      "value": "Не вдалося знайти запитувану точку призначення ("
     },
     {
       "type": 1,
@@ -1537,49 +1581,49 @@
     },
     {
       "type": 0,
-      "value": ") could not be found."
+      "value": ")."
     }
   ],
   "pages.federation.not_found.title": [
     {
       "type": 0,
-      "value": "Destination not found"
+      "value": "Точку призначення не знайдено"
     }
   ],
   "pages.federation.sbg_not_enabled.description": [
     {
       "type": 0,
-      "value": "Contact your administrator to enable it in your deployment configuration."
+      "value": "Зверніться до адміністратора, щоб увімкнути цю функцію в конфігурації розгортання."
     }
   ],
   "pages.federation.sbg_not_enabled.title": [
     {
       "type": 0,
-      "value": "Secure Border Gateway isn't enabled on this deployment"
+      "value": "Secure Border Gateway не ввімкнено в цьому розгортанні."
     }
   ],
   "pages.federation.search_placeholder": [
     {
       "type": 0,
-      "value": "Search domains…"
+      "value": "Пошук доменів…"
     }
   ],
   "pages.federation.tab.allowed_domains": [
     {
       "type": 0,
-      "value": "Allowed domains"
+      "value": "Дозволені домени"
     }
   ],
   "pages.federation.tab.known_domains": [
     {
       "type": 0,
-      "value": "Known domains"
+      "value": "Відомі домени"
     }
   ],
   "pages.federation.tab.section": [
     {
       "type": 0,
-      "value": "Federation views"
+      "value": "Перегляди з федерації"
     }
   ],
   "pages.federation.table.server_name": [
@@ -1597,19 +1641,19 @@
   "pages.federation.title": [
     {
       "type": 0,
-      "value": "Federation"
+      "value": "Федерація"
     }
   ],
   "pages.federation.unavailable_alert.description": [
     {
       "type": 0,
-      "value": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
+      "value": "Secure Border Gateway недоступний у спільноті ESS. Оновіть його до ESS Pro, щоб увімкнути."
     }
   ],
   "pages.federation.unavailable_alert.title": [
     {
       "type": 0,
-      "value": "Secure Border Gateway isn't enabled on this deployment"
+      "value": "Secure Border Gateway не ввімкнено в цьому розгортанні."
     }
   ],
   "pages.generic_error.go_home": [
@@ -1641,7 +1685,7 @@
   "pages.generic_error.text": [
     {
       "type": 0,
-      "value": "This may be the result of a bug or failing to reach the homeserver. You can retry loading the page, go back to the previous page, or reset everything and go back to the homepage."
+      "value": "Це може бути наслідком помилки або неможливості зв'язку з домашнім сервером. Ви можете спробувати завантажити сторінку ще раз, повернутися на попередню сторінку або скинути всі налаштування та повернутися на головну сторінку."
     }
   ],
   "pages.generic_error.title": [
@@ -1659,31 +1703,31 @@
   "pages.login.errors.authorization_failed": [
     {
       "type": 0,
-      "value": "Could not start the sign-in process. Please try again."
+      "value": "Не вдалося розпочати процес входу. Спробуйте ще раз."
     }
   ],
   "pages.login.errors.insecure_context": [
     {
       "type": 0,
-      "value": "Sign-in requires a secure connection. Reload this page over https:// and try again."
+      "value": "Для входу потрібне безпечне з’єднання. Перезавантажте цю сторінку через https:// і спробуйте ще раз."
     }
   ],
   "pages.login.errors.no_auth_metadata": [
     {
       "type": 0,
-      "value": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
+      "value": "Не вдалося завантажити метадані сервера автентифікації. Можливо, Synapse недоступний або не налаштований для використання Matrix Authentication Service."
     }
   ],
   "pages.login.errors.no_client_metadata": [
     {
       "type": 0,
-      "value": "Failed to register the client. Matrix Authentication Service may be unreachable or misconfigured."
+      "value": "Не вдалося зареєструвати клієнт. Можливо, Matrix Authentication Service недоступна або неправильно налаштована."
     }
   ],
   "pages.login.errors.no_well_known": [
     {
       "type": 0,
-      "value": "Failed to load the server's well-known document. The server name may be invalid."
+      "value": "Не вдалося завантажити відомий документ сервера. Можливо, ім'я сервера недійсне."
     }
   ],
   "pages.login.get_started": [
@@ -1707,25 +1751,25 @@
   "pages.personal_tokens.acting_user_column": [
     {
       "type": 0,
-      "value": "Acting user"
+      "value": "Користувач, що виконує обов'язки"
     }
   ],
   "pages.personal_tokens.acting_user_label": [
     {
       "type": 0,
-      "value": "Acting user"
+      "value": "Користувач, що виконує обов'язки"
     }
   ],
   "pages.personal_tokens.actor_user_help": [
     {
       "type": 0,
-      "value": "The user this token will act on behalf of"
+      "value": "Користувач, від імені якого цей токен буде діяти"
     }
   ],
   "pages.personal_tokens.actor_user_label": [
     {
       "type": 0,
-      "value": "Acting user"
+      "value": "Користувач, що виконує обов'язки"
     }
   ],
   "pages.personal_tokens.add_token_title": [
@@ -1763,7 +1807,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No personal tokens"
+              "value": "Немає особистих токенів"
             }
           ]
         },
@@ -1774,7 +1818,18 @@
             },
             {
               "type": 0,
-              "value": " personal token"
+              "value": " особистий токен"
+            }
+          ]
+        },
+        "few": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " особисті токени"
             }
           ]
         },
@@ -1785,7 +1840,7 @@
             },
             {
               "type": 0,
-              "value": " personal tokens"
+              "value": " особистих токенів"
             }
           ]
         }
@@ -1821,19 +1876,19 @@
   "pages.personal_tokens.description": [
     {
       "type": 0,
-      "value": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations."
+      "value": "Особисті токени — це довготривалі токени доступу з конкретними правами, зокрема доступом до API адміністрування Synapse та MAS. Вони корисні для автоматизації завдань та створення інтеграцій."
     }
   ],
   "pages.personal_tokens.details_label": [
     {
       "type": 0,
-      "value": "Personal token details"
+      "value": "Подробиці особистого токена"
     }
   ],
   "pages.personal_tokens.device_id_help": [
     {
       "type": 0,
-      "value": "Leave empty to generate a random 10-character device ID"
+      "value": "Залиште поле порожнім, щоб згенерувати випадковий ID пристрою довжиною 10 символів"
     }
   ],
   "pages.personal_tokens.device_id_label": [
@@ -1869,19 +1924,19 @@
   "pages.personal_tokens.expires_in_missing": [
     {
       "type": 0,
-      "value": "Enter how many days the token should last"
+      "value": "Введіть, скільки днів має діяти токен"
     }
   ],
   "pages.personal_tokens.expires_in_underflow": [
     {
       "type": 0,
-      "value": "A token has to last at least one day"
+      "value": "Токен має діяти щонайменше один день"
     }
   ],
   "pages.personal_tokens.expiry_revoked": [
     {
       "type": 0,
-      "value": "Revoked"
+      "value": "Відкликано"
     }
   ],
   "pages.personal_tokens.filter.active": [
@@ -1917,7 +1972,7 @@
   "pages.personal_tokens.filter.scope_matrix_client": [
     {
       "type": 0,
-      "value": "Access to the Matrix Client-Server API"
+      "value": "Доступ до клієнт-серверного API Matrix"
     }
   ],
   "pages.personal_tokens.filter.scope_synapse_admin": [
@@ -1983,7 +2038,7 @@
   "pages.personal_tokens.not_found.description": [
     {
       "type": 0,
-      "value": "The personal token you're looking for doesn't exist or has been removed."
+      "value": "Особистий токен, який ви шукаєте, не існує або вилучений."
     }
   ],
   "pages.personal_tokens.not_found.title": [
@@ -2007,7 +2062,7 @@
   "pages.personal_tokens.regenerate_error": [
     {
       "type": 0,
-      "value": "Failed to regenerate personal token"
+      "value": "Не вдалося відновити особистий токен"
     }
   ],
   "pages.personal_tokens.regenerate_success": [
@@ -2053,25 +2108,25 @@
     },
     {
       "type": 0,
-      "value": " will stop working immediately, and anything using it will need a new token."
+      "value": " негайно перестане працювати, і всім, хто ним користується, знадобиться новий токен."
     }
   ],
   "pages.personal_tokens.revoke_token.alert.title": [
     {
       "type": 0,
-      "value": "This cannot be undone"
+      "value": "Цю дію неможливо скасувати"
     }
   ],
   "pages.personal_tokens.revoke_token.error": [
     {
       "type": 0,
-      "value": "Failed to revoke the token"
+      "value": "Не вдалося відкликати токен"
     }
   ],
   "pages.personal_tokens.revoke_token.title": [
     {
       "type": 0,
-      "value": "Revoke this personal token?"
+      "value": "Відкликати цей особистий токен?"
     }
   ],
   "pages.personal_tokens.revoked_at_label": [
@@ -2083,7 +2138,7 @@
   "pages.personal_tokens.scope_device_help": [
     {
       "type": 0,
-      "value": "Provision a Matrix device"
+      "value": "Налаштування пристрою Matrix"
     }
   ],
   "pages.personal_tokens.scope_mas_admin_help": [
@@ -2095,7 +2150,7 @@
   "pages.personal_tokens.scope_matrix_client_help": [
     {
       "type": 0,
-      "value": "Access to the Matrix Client-Server API"
+      "value": "Доступ до клієнт-серверного API Matrix"
     }
   ],
   "pages.personal_tokens.scope_synapse_admin_help": [
@@ -2107,7 +2162,7 @@
   "pages.personal_tokens.scopes_group_label": [
     {
       "type": 0,
-      "value": "Scopes"
+      "value": "Області дії"
     }
   ],
   "pages.personal_tokens.scopes_label": [
@@ -2119,13 +2174,13 @@
   "pages.personal_tokens.set_expiry_help": [
     {
       "type": 0,
-      "value": "Otherwise the token never expires"
+      "value": "В іншому випадку термін дії токена ніколи не закінчується"
     }
   ],
   "pages.personal_tokens.set_expiry_label": [
     {
       "type": 0,
-      "value": "Set an expiry"
+      "value": "Встановити термін дії"
     }
   ],
   "pages.personal_tokens.status.active": [
@@ -2167,7 +2222,7 @@
   "pages.personal_tokens.token_created_description": [
     {
       "type": 0,
-      "value": "Your personal token has been created. Copy it now as it will not be shown again."
+      "value": "Ваш особистий токен створено. Скопіюйте його зараз, оскільки він більше не показуватиметься."
     }
   ],
   "pages.personal_tokens.token_created_title": [
@@ -2179,19 +2234,19 @@
   "pages.personal_tokens.token_regenerated_description": [
     {
       "type": 0,
-      "value": "Your personal token has been regenerated. Copy it now as it will not be shown again."
+      "value": "Ваш особистий токен відновлено. Скопіюйте його зараз, оскільки він більше не показуватиметься."
     }
   ],
   "pages.personal_tokens.token_regenerated_title": [
     {
       "type": 0,
-      "value": "Token regenerated"
+      "value": "Токен відновлено"
     }
   ],
   "pages.registration_tokens.auto_generate_placeholder": [
     {
       "type": 0,
-      "value": "Auto-generate if left empty"
+      "value": "Автоматично генерується, якщо залишити порожнім"
     }
   ],
   "pages.registration_tokens.create_token.error": [
@@ -2233,7 +2288,7 @@
   "pages.registration_tokens.custom_token_help": [
     {
       "type": 0,
-      "value": "Optional custom token string. If left empty, a secure token will be auto-generated."
+      "value": "Необов’язковий рядок власного токена. Якщо залишити порожнім, безпечний токен буде згенеровано автоматично."
     }
   ],
   "pages.registration_tokens.custom_token_label": [
@@ -2245,7 +2300,7 @@
   "pages.registration_tokens.details_label": [
     {
       "type": 0,
-      "value": "Registration token details"
+      "value": "Подробиці реєстраційного токена"
     }
   ],
   "pages.registration_tokens.edit_properties": [
@@ -2257,13 +2312,13 @@
   "pages.registration_tokens.edit_properties.revoked_tooltip": [
     {
       "type": 0,
-      "value": "Unrevoke this token before editing its properties"
+      "value": "Скасуйте відкликання цього токена перед редагуванням його властивостей"
     }
   ],
   "pages.registration_tokens.edit_token.error": [
     {
       "type": 0,
-      "value": "Failed to save the changes"
+      "value": "Не вдалося зберегти зміни"
     }
   ],
   "pages.registration_tokens.edit_token_title": [
@@ -2281,7 +2336,7 @@
   "pages.registration_tokens.expires_at_help": [
     {
       "type": 0,
-      "value": "When the token expires. Leave empty if the token should never expire."
+      "value": "Коли закінчується термін дії токена. Залиште поле порожнім, якщо термін дії токена не повинен закінчуватися."
     }
   ],
   "pages.registration_tokens.expires_at_label": [
@@ -2305,7 +2360,7 @@
   "pages.registration_tokens.filters.not_revoked": [
     {
       "type": 0,
-      "value": "Not revoked"
+      "value": "Не відкликано"
     }
   ],
   "pages.registration_tokens.filters.revoked_only": [
@@ -2341,7 +2396,7 @@
   "pages.registration_tokens.not_found.description": [
     {
       "type": 0,
-      "value": "The requested registration token ("
+      "value": "Запитаний реєстраційний токен ("
     },
     {
       "type": 1,
@@ -2349,7 +2404,7 @@
     },
     {
       "type": 0,
-      "value": ") could not be found on "
+      "value": ") не знайдено на "
     },
     {
       "type": 1,
@@ -2363,7 +2418,7 @@
   "pages.registration_tokens.not_found.title": [
     {
       "type": 0,
-      "value": "Registration token not found"
+      "value": "Реєстраційний токен не знайдено"
     }
   ],
   "pages.registration_tokens.revoke_token": [
@@ -2375,7 +2430,7 @@
   "pages.registration_tokens.revoke_token.alert.description": [
     {
       "type": 0,
-      "value": "Nobody will be able to register with "
+      "value": "Ніхто не зможе зареєструватися за допомогою "
     },
     {
       "type": 1,
@@ -2383,31 +2438,31 @@
     },
     {
       "type": 0,
-      "value": " until it is unrevoked."
+      "value": ", доки його не буде відкликано."
     }
   ],
   "pages.registration_tokens.revoke_token.alert.title": [
     {
       "type": 0,
-      "value": "The token will stop working"
+      "value": "Токен перестане діяти"
     }
   ],
   "pages.registration_tokens.revoke_token.error": [
     {
       "type": 0,
-      "value": "Failed to revoke the token"
+      "value": "Не вдалося відкликати токен"
     }
   ],
   "pages.registration_tokens.revoke_token.success": [
     {
       "type": 0,
-      "value": "Token revoked"
+      "value": "Токен відкликано"
     }
   ],
   "pages.registration_tokens.revoke_token.title": [
     {
       "type": 0,
-      "value": "Revoke this registration token?"
+      "value": "Відкликати цей реєстраційний токен?"
     }
   ],
   "pages.registration_tokens.revoked_at_label": [
@@ -2485,7 +2540,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No tokens"
+              "value": "Немає токенів"
             }
           ]
         },
@@ -2496,7 +2551,18 @@
             },
             {
               "type": 0,
-              "value": " token"
+              "value": " токен"
+            }
+          ]
+        },
+        "few": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " токени"
             }
           ]
         },
@@ -2507,7 +2573,7 @@
             },
             {
               "type": 0,
-              "value": " tokens"
+              "value": " токенів"
             }
           ]
         }
@@ -2564,13 +2630,13 @@
   "pages.registration_tokens.unrevoke_token.error": [
     {
       "type": 0,
-      "value": "Failed to unrevoke the token"
+      "value": "Не вдалося скасувати відкликання токена"
     }
   ],
   "pages.registration_tokens.unrevoke_token.success": [
     {
       "type": 0,
-      "value": "Token unrevoked"
+      "value": "Відкликання токена скасовано"
     }
   ],
   "pages.registration_tokens.usage_count_label": [
@@ -2612,31 +2678,31 @@
   "pages.rooms.columns.alias": [
     {
       "type": 0,
-      "value": "Alias"
+      "value": "Псевдонім"
     }
   ],
   "pages.rooms.columns.members": [
     {
       "type": 0,
-      "value": "Members"
+      "value": "Учасники"
     }
   ],
   "pages.rooms.columns.room": [
     {
       "type": 0,
-      "value": "Room"
+      "value": "Кімната"
     }
   ],
   "pages.rooms.columns.visibility": [
     {
       "type": 0,
-      "value": "Visibility"
+      "value": "Видимість"
     }
   ],
   "pages.rooms.delete_room.alert.description": [
     {
       "type": 0,
-      "value": "This will permanently delete all messages or media uploaded to the server and remove this room from the directory. Members will lose access to their messages and the room will be removed from their room list."
+      "value": "Це призведе до остаточного видалення всіх повідомлень та медіа, вивантажених на сервер, а також до вилучення цієї кімнати з каталогу. Учасники втратять доступ до своїх повідомлень, а кімната буде вилучена з їхнього списку кімнат."
     }
   ],
   "pages.rooms.delete_room.alert.title": [
@@ -2648,31 +2714,31 @@
   "pages.rooms.delete_room.block.help": [
     {
       "type": 0,
-      "value": "Prevent users from rejoining the room after deletion."
+      "value": "Запобігати повторному входу користувачів у кімнату після видалення."
     }
   ],
   "pages.rooms.delete_room.block.label": [
     {
       "type": 0,
-      "value": "Block room"
+      "value": "Заблокувати кімнату"
     }
   ],
   "pages.rooms.delete_room.button": [
     {
       "type": 0,
-      "value": "Delete permanently"
+      "value": "Видалити назавжди"
     }
   ],
   "pages.rooms.delete_room.error": [
     {
       "type": 0,
-      "value": "Failed to schedule room deletion"
+      "value": "Не вдалося запланувати видалення кімнати"
     }
   ],
   "pages.rooms.delete_room.success": [
     {
       "type": 0,
-      "value": "Room deletion scheduled"
+      "value": "Видалення кімнати заплановано"
     }
   ],
   "pages.rooms.delete_room.title": [
@@ -2718,7 +2784,7 @@
   "pages.rooms.deletion.in_progress.description": [
     {
       "type": 0,
-      "value": "Room deletion task is in progress since "
+      "value": "Завдання з видалення кімнати виконується з "
     },
     {
       "type": 3,
@@ -2727,7 +2793,7 @@
     },
     {
       "type": 0,
-      "value": " at "
+      "value": " о "
     },
     {
       "type": 4,
@@ -2748,7 +2814,7 @@
   "pages.rooms.deletion.scheduled.description": [
     {
       "type": 0,
-      "value": "Room deletion task is scheduled for "
+      "value": "Завдання з видалення кімнати заплановано на "
     },
     {
       "type": 3,
@@ -2757,7 +2823,7 @@
     },
     {
       "type": 0,
-      "value": " at "
+      "value": " о "
     },
     {
       "type": 4,
@@ -2772,13 +2838,13 @@
   "pages.rooms.deletion.scheduled.title": [
     {
       "type": 0,
-      "value": "Room deletion scheduled"
+      "value": "Видалення кімнати заплановано"
     }
   ],
   "pages.rooms.deletion.success.description": [
     {
       "type": 0,
-      "value": "Room deletion task completed successfully on "
+      "value": "Завдання з видалення кімнати успішно завершено "
     },
     {
       "type": 3,
@@ -2787,7 +2853,7 @@
     },
     {
       "type": 0,
-      "value": " at "
+      "value": " о "
     },
     {
       "type": 4,
@@ -2808,7 +2874,7 @@
   "pages.rooms.details_label": [
     {
       "type": 0,
-      "value": "Room details"
+      "value": "Відомості про кімнату"
     }
   ],
   "pages.rooms.filters.empty_rooms": [
@@ -2872,7 +2938,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No rooms"
+              "value": "Немає кімнат"
             }
           ]
         },
@@ -2883,7 +2949,18 @@
             },
             {
               "type": 0,
-              "value": " room"
+              "value": " кімната"
+            }
+          ]
+        },
+        "few": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " кімнати"
             }
           ]
         },
@@ -2894,7 +2971,7 @@
             },
             {
               "type": 0,
-              "value": " rooms"
+              "value": " кімнат"
             }
           ]
         }
@@ -2906,25 +2983,25 @@
   "pages.rooms.room_type.private": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "Приватна"
     }
   ],
   "pages.rooms.room_type.public": [
     {
       "type": 0,
-      "value": "Public"
+      "value": "Загальнодоступна"
     }
   ],
   "pages.rooms.room_type.restricted": [
     {
       "type": 0,
-      "value": "Restricted"
+      "value": "З обмеженим доступом"
     }
   ],
   "pages.rooms.search_placeholder": [
     {
       "type": 0,
-      "value": "Search…"
+      "value": "Пошук…"
     }
   ],
   "pages.rooms.title": [
@@ -2956,7 +3033,7 @@
   "pages.supervision.disabled_alert.description": [
     {
       "type": 0,
-      "value": "Ця функція є частиною вашої підписки. Ви можете попросити адміністратора увімкнути її."
+      "value": "Функція нагляду входить до вашої передплати, але не ввімкнена в цьому розгортанні. Щоб увімкнути її, зверніться до документації ESS."
     }
   ],
   "pages.supervision.disabled_alert.title": [
@@ -2980,13 +3057,13 @@
   "pages.supervision.errors.closed.description": [
     {
       "type": 0,
-      "value": "Не вдалося увійти в інтерфейс нагляду, оскільки він закрився до завершення входу"
+      "value": "Вікно нагляду було закрито до завершення входу. Спробуйте ще раз."
     }
   ],
   "pages.supervision.errors.closed.title": [
     {
       "type": 0,
-      "value": "Інтерфейс нагляду закрився занадто швидко"
+      "value": "Вхід у режим нагляду скасовано"
     }
   ],
   "pages.supervision.errors.generic.title": [
@@ -2998,7 +3075,7 @@
   "pages.supervision.launch": [
     {
       "type": 0,
-      "value": "Open supervision interface"
+      "value": "Відкрити інтерфейс наглядача"
     }
   ],
   "pages.supervision.missing_ui_address.description": [
@@ -3070,19 +3147,19 @@
   "pages.users.account_status.deactivated": [
     {
       "type": 0,
-      "value": "Deactivated"
+      "value": "Деактивовано"
     }
   ],
   "pages.users.account_status.guest": [
     {
       "type": 0,
-      "value": "Guest"
+      "value": "Гість"
     }
   ],
   "pages.users.account_status.locked": [
     {
       "type": 0,
-      "value": "Locked"
+      "value": "Заблоковано"
     }
   ],
   "pages.users.add_email.button": [
@@ -3130,19 +3207,19 @@
   "pages.users.add_upstream_link.error": [
     {
       "type": 0,
-      "value": "Failed to add link upstream account"
+      "value": "Не вдалося зв'язати з обліковим записом верхнього рівня"
     }
   ],
   "pages.users.add_upstream_link.success": [
     {
       "type": 0,
-      "value": "Link to upstream account added"
+      "value": "Зв'язано з обліковим записом верхнього рівня"
     }
   ],
   "pages.users.columns.account_status": [
     {
       "type": 0,
-      "value": "Account status"
+      "value": "Стан облікового запису"
     }
   ],
   "pages.users.columns.created_at": [
@@ -3236,7 +3313,7 @@
   "pages.users.delete_upstream_link.description": [
     {
       "type": 0,
-      "value": "Are you sure you want to remove the link between this user ("
+      "value": "Ви впевнені, що хочете прибрати зв'язок між цим користувачем ("
     },
     {
       "type": 1,
@@ -3244,7 +3321,7 @@
     },
     {
       "type": 0,
-      "value": ") with this upstream account ("
+      "value": ") та цим обліковим записом вищого рівня ("
     },
     {
       "type": 1,
@@ -3258,25 +3335,25 @@
   "pages.users.delete_upstream_link.error": [
     {
       "type": 0,
-      "value": "Failed to delete upstream link"
+      "value": "Не вдалося прибрати зв'язок з обліковим записом вищого рівня"
     }
   ],
   "pages.users.delete_upstream_link.success": [
     {
       "type": 0,
-      "value": "Upstream link deleted"
+      "value": "Відв'язано від облікового запису вищого рівня"
     }
   ],
   "pages.users.delete_upstream_link.title": [
     {
       "type": 0,
-      "value": "Remove link with upstream account?"
+      "value": "Прибрати зв'язок з обліковим записом вищого рівня?"
     }
   ],
   "pages.users.details_label": [
     {
       "type": 0,
-      "value": "User details"
+      "value": "Відомості про користувача"
     }
   ],
   "pages.users.filters.active": [
@@ -3288,7 +3365,7 @@
   "pages.users.filters.active_client_chip": [
     {
       "type": 0,
-      "value": "Has active device on: "
+      "value": "Має активний пристрій на: "
     },
     {
       "type": 1,
@@ -3316,7 +3393,7 @@
   "pages.users.filters.has_legacy_session": [
     {
       "type": 0,
-      "value": "Has active legacy device"
+      "value": "Має активний застарілий пристрій"
     }
   ],
   "pages.users.filters.locked": [
@@ -3334,25 +3411,25 @@
   "pages.users.filters.no_legacy_session": [
     {
       "type": 0,
-      "value": "No active legacy device"
+      "value": "Немає активних застарілих пристроїв"
     }
   ],
   "pages.users.filters.non_guests": [
     {
       "type": 0,
-      "value": "Non-guests (legacy)"
+      "value": "Не гості (застаріле)"
     }
   ],
   "pages.users.lock_account.alert.description": [
     {
       "type": 0,
-      "value": "This user will automatically locked out of any devices they are currently signed into and won't be able to sign into any new devices until they have been unlocked."
+      "value": "Цей користувач буде автоматично заблокований на всіх пристроях, на яких він наразі увійшов, і він не зможе увійти на нових пристроях, доки його не розблокують."
     }
   ],
   "pages.users.lock_account.alert.title": [
     {
       "type": 0,
-      "value": "The user will not be able to send or receive messages"
+      "value": "Користувач не зможе надсилати або отримувати повідомлення"
     }
   ],
   "pages.users.lock_account.button": [
@@ -3394,7 +3471,7 @@
   "pages.users.new_user.description": [
     {
       "type": 0,
-      "value": "To add a new user to "
+      "value": "Щоб додати нового користувача до "
     },
     {
       "type": 1,
@@ -3402,7 +3479,7 @@
     },
     {
       "type": 0,
-      "value": ", choose a user name for this user, which will be part of their user ID."
+      "value": ", виберіть для нього ім’я користувача, яке буде частиною його ID користувача."
     }
   ],
   "pages.users.new_user.error_message": [
@@ -3414,19 +3491,19 @@
   "pages.users.new_user.invalid_localpart": [
     {
       "type": 0,
-      "value": "Localpart can only contain lowercase letters, numbers, dots, underscores, dashes and slashes"
+      "value": "Локальна частина може містити лише малі букви, цифри, крапки, символи підкреслення, тире та скісні риски"
     }
   ],
   "pages.users.new_user.invalid_localpart_numeric_only": [
     {
       "type": 0,
-      "value": "Localpart cannot only contain numbers"
+      "value": "Локальна частина не може містити лише числа"
     }
   ],
   "pages.users.new_user.localpart": [
     {
       "type": 0,
-      "value": "Enter name"
+      "value": "Введіть ім'я"
     }
   ],
   "pages.users.new_user.required_error": [
@@ -3444,7 +3521,7 @@
   "pages.users.not_found.description": [
     {
       "type": 0,
-      "value": "The requested user ("
+      "value": "Запитаного користувача ("
     },
     {
       "type": 1,
@@ -3452,7 +3529,7 @@
     },
     {
       "type": 0,
-      "value": ") could not be found on "
+      "value": ") не знайдено на "
     },
     {
       "type": 1,
@@ -3496,13 +3573,13 @@
   "pages.users.set_admin.alert.description": [
     {
       "type": 0,
-      "value": "The user will be able to view user data and make changes to user and room permissions."
+      "value": "Користувач зможе переглядати дані користувача та вносити зміни до дозволів користувачів і кімнати."
     }
   ],
   "pages.users.set_admin.alert.title": [
     {
       "type": 0,
-      "value": "User will have access to sensitive data"
+      "value": "Користувач матиме доступ до конфіденційних даних"
     }
   ],
   "pages.users.set_admin.error": [
@@ -3616,13 +3693,13 @@
   "pages.users.statistics.devices": [
     {
       "type": 0,
-      "value": "Devices"
+      "value": "Пристрої"
     }
   ],
   "pages.users.statistics.legacy_devices": [
     {
       "type": 0,
-      "value": "Legacy devices"
+      "value": "Застарілі пристрої"
     }
   ],
   "pages.users.title": [
@@ -3658,7 +3735,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No users"
+              "value": "Немає користувачів"
             }
           ]
         },
@@ -3669,7 +3746,18 @@
             },
             {
               "type": 0,
-              "value": " user"
+              "value": " користувач"
+            }
+          ]
+        },
+        "few": {
+          "value": [
+            {
+              "type": 7
+            },
+            {
+              "type": 0,
+              "value": " користувача"
             }
           ]
         },
@@ -3680,7 +3768,7 @@
             },
             {
               "type": 0,
-              "value": " users"
+              "value": " користувачів"
             }
           ]
         }
@@ -3820,13 +3908,13 @@
   "ui.copy.copied": [
     {
       "type": 0,
-      "value": "Copied!"
+      "value": "Скопійовано!"
     }
   ],
   "ui.copy.copy_to_clipboard": [
     {
       "type": 0,
-      "value": "Copy to clipboard"
+      "value": "Копіювати в буфер обміну"
     }
   ],
   "ui.data.failed_to_load": [
@@ -3838,31 +3926,31 @@
   "ui.data_table.loading_more": [
     {
       "type": 0,
-      "value": "Loading more…"
+      "value": "Завантажується ще…"
     }
   ],
   "ui.destination_status.failing": [
     {
       "type": 0,
-      "value": "Failing"
+      "value": "Збій"
     }
   ],
   "ui.destination_status.inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "Неактивний"
     }
   ],
   "ui.destination_status.never_worked": [
     {
       "type": 0,
-      "value": "Never worked"
+      "value": "Ніколи не працював"
     }
   ],
   "ui.destination_status.working": [
     {
       "type": 0,
-      "value": "Working"
+      "value": "Працює"
     }
   ],
   "ui.device_info.name_on_platform": [
@@ -3872,7 +3960,7 @@
     },
     {
       "type": 0,
-      "value": " on "
+      "value": " на "
     },
     {
       "type": 1,
@@ -3882,31 +3970,31 @@
   "ui.device_info.type.mobile": [
     {
       "type": 0,
-      "value": "Mobile device"
+      "value": "Мобільний пристрій"
     }
   ],
   "ui.device_info.type.pc": [
     {
       "type": 0,
-      "value": "Computer"
+      "value": "Комп'ютер"
     }
   ],
   "ui.device_info.type.tablet": [
     {
       "type": 0,
-      "value": "Tablet"
+      "value": "Планшет"
     }
   ],
   "ui.device_info.type.unknown": [
     {
       "type": 0,
-      "value": "Unknown device type"
+      "value": "Невідомий тип пристрою"
     }
   ],
   "ui.device_info.unknown_device": [
     {
       "type": 0,
-      "value": "Unknown device"
+      "value": "Невідомий пристрій"
     }
   ],
   "ui.device_status.active": [
@@ -3918,13 +4006,13 @@
   "ui.device_status.inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "Неактивний"
     }
   ],
   "ui.device_status.last_active.tooltip": [
     {
       "type": 0,
-      "value": "Last active on "
+      "value": "Остання активність "
     },
     {
       "type": 1,
@@ -3944,31 +4032,31 @@
   "ui.device_status.never_used.tooltip": [
     {
       "type": 0,
-      "value": "This device has not been used yet."
+      "value": "Цей пристрій ще не використовувався."
     }
   ],
   "ui.device_status.recently_used": [
     {
       "type": 0,
-      "value": "Recently used"
+      "value": "Нещодавно використовувані"
     }
   ],
   "ui.device_status.signed_out": [
     {
       "type": 0,
-      "value": "Signed out"
+      "value": "Виконано вихід"
     }
   ],
   "ui.device_status.signed_out.tooltip": [
     {
       "type": 0,
-      "value": "This device has been signed out and no longer has access."
+      "value": "На цьому пристрої вийшли з облікового запису, і він більше не має доступу."
     }
   ],
   "ui.device_status.signed_out.tooltip_at": [
     {
       "type": 0,
-      "value": "Signed out on "
+      "value": "Вийшли "
     },
     {
       "type": 1,
