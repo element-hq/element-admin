@@ -2,8 +2,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
-// oxlint-disable unicorn/consistent-function-scoping
-
 import type { NetworkFixture } from "@msw/playwright";
 import type { Page } from "@playwright/test";
 
@@ -111,6 +109,10 @@ const searchParameters = (page: Page): URLSearchParams =>
 
 const mxid = (username: string): string => `@${username}:${SERVER_NAME}`;
 
+/** A user row is identified by its Matrix ID cell. */
+const mxidCell = (page: Page, username: string) =>
+  page.getByText(mxid(username), { exact: true });
+
 test.describe("/users", () => {
   /**
    * Five users, each satisfying exactly one branch of an attribute-derived
@@ -136,10 +138,6 @@ test.describe("/users", () => {
     activeCompatSessions: [0],
     activeClients: { 1: [ELEMENT_WEB] },
   };
-
-  /** A user row is identified by its Matrix ID cell. */
-  const mxidCell = (page: Page, username: string) =>
-    page.getByText(mxid(username), { exact: true });
 
   /** Returns the recorder for the users handler it installs. */
   const visit = async (
@@ -173,10 +171,12 @@ test.describe("/users", () => {
     await expect(page.getByText("5 users", { exact: true })).toBeVisible();
     await expectRowCount(page, 5);
 
-    expect(filtersOf(requests.lastRows())).toEqual({});
-    expect(filtersOf(requests.lastCount())).toEqual({});
+    await expect.poll(() => filtersOf(requests.lastRows())).toEqual({});
+    await expect.poll(() => filtersOf(requests.lastCount())).toEqual({});
     // The row query pages forward, which is what `dir=backward` flips.
-    expect(requests.lastRows()?.["page[first]"]).toEqual(["200"]);
+    await expect
+      .poll(() => requests.lastRows()?.["page[first]"])
+      .toEqual(["200"]);
   });
 
   test("the search box sends filter[search] and filters rows and count alike", async ({
@@ -195,12 +195,16 @@ test.describe("/users", () => {
 
     expect(searchParameters(page).get("search")).toBe("ali");
 
-    expect(filtersOf(requests.lastRows())).toEqual({
-      "filter[search]": ["ali"],
-    });
-    expect(filtersOf(requests.lastCount())).toEqual({
-      "filter[search]": ["ali"],
-    });
+    await expect
+      .poll(() => filtersOf(requests.lastRows()))
+      .toEqual({
+        "filter[search]": ["ali"],
+      });
+    await expect
+      .poll(() => filtersOf(requests.lastCount()))
+      .toEqual({
+        "filter[search]": ["ali"],
+      });
   });
 
   test("Admins sends filter[admin]=true, and un-toggling removes it without refetching", async ({
@@ -217,12 +221,16 @@ test.describe("/users", () => {
     await expectRowCount(page, 1);
 
     expect(searchParameters(page).get("admin")).toBe("true");
-    expect(filtersOf(requests.lastRows())).toEqual({
-      "filter[admin]": ["true"],
-    });
-    expect(filtersOf(requests.lastCount())).toEqual({
-      "filter[admin]": ["true"],
-    });
+    await expect
+      .poll(() => filtersOf(requests.lastRows()))
+      .toEqual({
+        "filter[admin]": ["true"],
+      });
+    await expect
+      .poll(() => filtersOf(requests.lastCount()))
+      .toEqual({
+        "filter[admin]": ["true"],
+      });
 
     // Toggling the same item again removes the filter rather than negating it:
     // there is no "Non-admins" item, and `filter[admin]=false` must not appear.
@@ -253,12 +261,16 @@ test.describe("/users", () => {
     await expect(mxidCell(page, "alice")).toBeVisible();
     await expectRowCount(page, 3);
     expect(searchParameters(page).get("status")).toBe("active");
-    expect(filtersOf(requests.lastRows())).toEqual({
-      "filter[status]": ["active"],
-    });
-    expect(filtersOf(requests.lastCount())).toEqual({
-      "filter[status]": ["active"],
-    });
+    await expect
+      .poll(() => filtersOf(requests.lastRows()))
+      .toEqual({
+        "filter[status]": ["active"],
+      });
+    await expect
+      .poll(() => filtersOf(requests.lastCount()))
+      .toEqual({
+        "filter[status]": ["active"],
+      });
 
     await toggleFilter(page, "Locked users");
 
@@ -266,12 +278,16 @@ test.describe("/users", () => {
     await expect(mxidCell(page, "bob")).toBeVisible();
     await expectRowCount(page, 1);
     expect(searchParameters(page).get("status")).toBe("locked");
-    expect(filtersOf(requests.lastRows())).toEqual({
-      "filter[status]": ["locked"],
-    });
-    expect(filtersOf(requests.lastCount())).toEqual({
-      "filter[status]": ["locked"],
-    });
+    await expect
+      .poll(() => filtersOf(requests.lastRows()))
+      .toEqual({
+        "filter[status]": ["locked"],
+      });
+    await expect
+      .poll(() => filtersOf(requests.lastCount()))
+      .toEqual({
+        "filter[status]": ["locked"],
+      });
 
     await toggleFilter(page, "Deactivated users");
 
@@ -279,12 +295,16 @@ test.describe("/users", () => {
     await expect(mxidCell(page, "carol")).toBeVisible();
     await expectRowCount(page, 1);
     expect(searchParameters(page).get("status")).toBe("deactivated");
-    expect(filtersOf(requests.lastRows())).toEqual({
-      "filter[status]": ["deactivated"],
-    });
-    expect(filtersOf(requests.lastCount())).toEqual({
-      "filter[status]": ["deactivated"],
-    });
+    await expect
+      .poll(() => filtersOf(requests.lastRows()))
+      .toEqual({
+        "filter[status]": ["deactivated"],
+      });
+    await expect
+      .poll(() => filtersOf(requests.lastCount()))
+      .toEqual({
+        "filter[status]": ["deactivated"],
+      });
   });
 
   test("the guest filters send filter[legacy-guest]", async ({
@@ -299,12 +319,16 @@ test.describe("/users", () => {
     await expect(mxidCell(page, "guest42")).toBeVisible();
     await expectRowCount(page, 1);
     expect(searchParameters(page).get("guest")).toBe("true");
-    expect(filtersOf(requests.lastRows())).toEqual({
-      "filter[legacy-guest]": ["true"],
-    });
-    expect(filtersOf(requests.lastCount())).toEqual({
-      "filter[legacy-guest]": ["true"],
-    });
+    await expect
+      .poll(() => filtersOf(requests.lastRows()))
+      .toEqual({
+        "filter[legacy-guest]": ["true"],
+      });
+    await expect
+      .poll(() => filtersOf(requests.lastCount()))
+      .toEqual({
+        "filter[legacy-guest]": ["true"],
+      });
 
     await toggleFilter(page, "Non-guests (legacy)");
 
@@ -312,12 +336,16 @@ test.describe("/users", () => {
     await expect(mxidCell(page, "guest42")).toBeHidden();
     await expectRowCount(page, 4);
     expect(searchParameters(page).get("guest")).toBe("false");
-    expect(filtersOf(requests.lastRows())).toEqual({
-      "filter[legacy-guest]": ["false"],
-    });
-    expect(filtersOf(requests.lastCount())).toEqual({
-      "filter[legacy-guest]": ["false"],
-    });
+    await expect
+      .poll(() => filtersOf(requests.lastRows()))
+      .toEqual({
+        "filter[legacy-guest]": ["false"],
+      });
+    await expect
+      .poll(() => filtersOf(requests.lastCount()))
+      .toEqual({
+        "filter[legacy-guest]": ["false"],
+      });
   });
 
   test("the legacy-device filters send filter[has-active-compat-session]", async ({
@@ -332,12 +360,16 @@ test.describe("/users", () => {
     await expect(mxidCell(page, "alice")).toBeVisible();
     await expectRowCount(page, 1);
     expect(searchParameters(page).get("legacy")).toBe("true");
-    expect(filtersOf(requests.lastRows())).toEqual({
-      "filter[has-active-compat-session]": ["true"],
-    });
-    expect(filtersOf(requests.lastCount())).toEqual({
-      "filter[has-active-compat-session]": ["true"],
-    });
+    await expect
+      .poll(() => filtersOf(requests.lastRows()))
+      .toEqual({
+        "filter[has-active-compat-session]": ["true"],
+      });
+    await expect
+      .poll(() => filtersOf(requests.lastCount()))
+      .toEqual({
+        "filter[has-active-compat-session]": ["true"],
+      });
 
     await toggleFilter(page, "No active legacy device");
 
@@ -345,12 +377,16 @@ test.describe("/users", () => {
     await expect(mxidCell(page, "alice")).toBeHidden();
     await expectRowCount(page, 4);
     expect(searchParameters(page).get("legacy")).toBe("false");
-    expect(filtersOf(requests.lastRows())).toEqual({
-      "filter[has-active-compat-session]": ["false"],
-    });
-    expect(filtersOf(requests.lastCount())).toEqual({
-      "filter[has-active-compat-session]": ["false"],
-    });
+    await expect
+      .poll(() => filtersOf(requests.lastRows()))
+      .toEqual({
+        "filter[has-active-compat-session]": ["false"],
+      });
+    await expect
+      .poll(() => filtersOf(requests.lastCount()))
+      .toEqual({
+        "filter[has-active-compat-session]": ["false"],
+      });
   });
 
   test("?client= sends an exploded filter[active-oauth2-client] and a removable chip", async ({
@@ -372,12 +408,16 @@ test.describe("/users", () => {
 
     // Exploded form, one value per occurrence — a comma-joined single value
     // would be a different serialization.
-    expect(filtersOf(requests.lastRows())).toEqual({
-      "filter[active-oauth2-client]": [ELEMENT_WEB],
-    });
-    expect(filtersOf(requests.lastCount())).toEqual({
-      "filter[active-oauth2-client]": [ELEMENT_WEB],
-    });
+    await expect
+      .poll(() => filtersOf(requests.lastRows()))
+      .toEqual({
+        "filter[active-oauth2-client]": [ELEMENT_WEB],
+      });
+    await expect
+      .poll(() => filtersOf(requests.lastCount()))
+      .toEqual({
+        "filter[active-oauth2-client]": [ELEMENT_WEB],
+      });
 
     // The chip names the application, so the ULID was resolved rather than
     // echoed.
@@ -392,7 +432,7 @@ test.describe("/users", () => {
     await expect(chip).toBeHidden();
     await expectRowCount(page, 5);
     expect(searchParameters(page).has("client")).toBe(false);
-    expect(filtersOf(requests.lastRows())).toEqual({});
+    await expect.poll(() => filtersOf(requests.lastRows())).toEqual({});
   });
 
   test("two filters compose into two query parameters", async ({
@@ -420,14 +460,18 @@ test.describe("/users", () => {
     expect(parameters.get("admin")).toBe("true");
     expect(parameters.get("status")).toBe("active");
 
-    expect(filtersOf(requests.lastRows())).toEqual({
-      "filter[admin]": ["true"],
-      "filter[status]": ["active"],
-    });
-    expect(filtersOf(requests.lastCount())).toEqual({
-      "filter[admin]": ["true"],
-      "filter[status]": ["active"],
-    });
+    await expect
+      .poll(() => filtersOf(requests.lastRows()))
+      .toEqual({
+        "filter[admin]": ["true"],
+        "filter[status]": ["active"],
+      });
+    await expect
+      .poll(() => filtersOf(requests.lastCount()))
+      .toEqual({
+        "filter[admin]": ["true"],
+        "filter[status]": ["active"],
+      });
 
     // "Clear" drops both filters, and like un-toggling a single one it fires no
     // request: the unfiltered query is already cached from the initial load.
@@ -493,20 +537,24 @@ test.describe("/users", () => {
     await expect
       .poll(() => requests.lastRows()?.["page[first]"])
       .toEqual(["200"]);
-    expect(requests.lastRows()?.["page[last]"]).toBeUndefined();
+    await expect
+      .poll(() => requests.lastRows()?.["page[last]"])
+      .toBeUndefined();
 
     await toggleFilter(page, "Newest first");
 
     await expect
       .poll(() => requests.lastRows()?.["page[last]"])
       .toEqual(["200"]);
-    expect(requests.lastRows()?.["page[first]"]).toBeUndefined();
-    expect(filtersOf(requests.lastRows())).toEqual({});
+    await expect
+      .poll(() => requests.lastRows()?.["page[first]"])
+      .toBeUndefined();
+    await expect.poll(() => filtersOf(requests.lastRows())).toEqual({});
     expect(searchParameters(page).get("dir")).toBe("backward");
 
     // The count query has no direction, so the heading is unchanged.
     await expect(page.getByText("5 users", { exact: true })).toBeVisible();
-    expect(filtersOf(requests.lastCount())).toEqual({});
+    await expect.poll(() => filtersOf(requests.lastCount())).toEqual({});
   });
 
   test("the sidebar link lands on the Active users filter", async ({
@@ -523,12 +571,16 @@ test.describe("/users", () => {
 
     await expect(page.getByText("3 users", { exact: true })).toBeVisible();
     expect(searchParameters(page).get("status")).toBe("active");
-    expect(filtersOf(requests.lastRows())).toEqual({
-      "filter[status]": ["active"],
-    });
-    expect(filtersOf(requests.lastCount())).toEqual({
-      "filter[status]": ["active"],
-    });
+    await expect
+      .poll(() => filtersOf(requests.lastRows()))
+      .toEqual({
+        "filter[status]": ["active"],
+      });
+    await expect
+      .poll(() => filtersOf(requests.lastCount()))
+      .toEqual({
+        "filter[status]": ["active"],
+      });
   });
 });
 
@@ -579,7 +631,7 @@ test.describe("/rooms", () => {
 
     // The unfiltered baseline for the rooms tests: `limit` is the only
     // parameter an unfiltered list carries.
-    expect(requests.lastRows()).toEqual({ limit: ["200"] });
+    await expect.poll(() => requests.lastRows()).toEqual({ limit: ["200"] });
   });
 
   test("the search box sends search_term", async ({ page, network }) => {
@@ -593,7 +645,9 @@ test.describe("/rooms", () => {
     await expectRowCount(page, 2);
 
     expect(searchParameters(page).get("search_term")).toBe("General");
-    expect(requests.lastRows()?.["search_term"]).toEqual(["General"]);
+    await expect
+      .poll(() => requests.lastRows()?.["search_term"])
+      .toEqual(["General"]);
   });
 
   test("the room-visibility filters send public_rooms", async ({
@@ -608,14 +662,18 @@ test.describe("/rooms", () => {
     await expect(page.getByText("General", { exact: true })).toBeVisible();
     await expectRowCount(page, 1);
     expect(searchParameters(page).get("public_rooms")).toBe("true");
-    expect(requests.lastRows()?.["public_rooms"]).toEqual(["true"]);
+    await expect
+      .poll(() => requests.lastRows()?.["public_rooms"])
+      .toEqual(["true"]);
 
     await toggleFilter(page, "Private rooms");
 
     await expect(page.getByText("3 rooms", { exact: true })).toBeVisible();
     await expect(page.getByText("General", { exact: true })).toBeHidden();
     expect(searchParameters(page).get("public_rooms")).toBe("false");
-    expect(requests.lastRows()?.["public_rooms"]).toEqual(["false"]);
+    await expect
+      .poll(() => requests.lastRows()?.["public_rooms"])
+      .toEqual(["false"]);
   });
 
   test("the emptiness filters send empty_rooms", async ({ page, network }) => {
@@ -627,14 +685,18 @@ test.describe("/rooms", () => {
     await expect(page.getByText("Deserted", { exact: true })).toBeVisible();
     await expectRowCount(page, 1);
     expect(searchParameters(page).get("empty_rooms")).toBe("true");
-    expect(requests.lastRows()?.["empty_rooms"]).toEqual(["true"]);
+    await expect
+      .poll(() => requests.lastRows()?.["empty_rooms"])
+      .toEqual(["true"]);
 
     await toggleFilter(page, "Non-empty rooms");
 
     await expect(page.getByText("3 rooms", { exact: true })).toBeVisible();
     await expect(page.getByText("Deserted", { exact: true })).toBeHidden();
     expect(searchParameters(page).get("empty_rooms")).toBe("false");
-    expect(requests.lastRows()?.["empty_rooms"]).toEqual(["false"]);
+    await expect
+      .poll(() => requests.lastRows()?.["empty_rooms"])
+      .toEqual(["false"]);
   });
 
   test("a search term and a filter compose", async ({ page, network }) => {
@@ -651,13 +713,25 @@ test.describe("/rooms", () => {
     await expectRowCount(page, 1);
 
     // The whole request, so a dropped `limit` would show up too.
-    expect(requests.lastRows()).toEqual({
-      limit: ["200"],
-      search_term: ["General"],
-      public_rooms: ["true"],
-    });
+    await expect
+      .poll(() => requests.lastRows())
+      .toEqual({
+        limit: ["200"],
+        search_term: ["General"],
+        public_rooms: ["true"],
+      });
   });
 });
+
+/** Records the requests to `path` and lets them through to the deployment. */
+const install = (
+  network: NetworkFixture,
+  path: string,
+): ReturnType<typeof recorder> => {
+  const requests = recorder();
+  network.use(observeQuery(path, requests.onRequest));
+  return requests;
+};
 
 /**
  * The remaining list pages, covered on the request side only: `observeQuery`
@@ -667,15 +741,6 @@ test.describe("/rooms", () => {
  * DOM assertion.
  */
 test.describe("device and token lists — emitted parameters", () => {
-  const install = (
-    network: NetworkFixture,
-    path: string,
-  ): ReturnType<typeof recorder> => {
-    const requests = recorder();
-    network.use(observeQuery(path, requests.onRequest));
-    return requests;
-  };
-
   test("/devices/user always narrows to dynamic clients, and maps the activity buckets to filter[status]", async ({
     page,
     network,
@@ -721,7 +786,9 @@ test.describe("device and token lists — emitted parameters", () => {
         "filter[last-active-after]",
         "filter[status]",
       ]);
-    expect(requests.lastRows()?.["filter[status]"]).toEqual(["active"]);
+    await expect
+      .poll(() => requests.lastRows()?.["filter[status]"])
+      .toEqual(["active"]);
     expect(searchParameters(page).get("activity")).toBe("recently-used");
   });
 
@@ -822,7 +889,7 @@ test.describe("device and token lists — emitted parameters", () => {
     // An unfiltered list emits no `filter[...]` at all, so the recorder has to
     // have caught a request before that is worth asserting.
     await expect.poll(() => requests.rows().length).toBeGreaterThan(0);
-    expect(filtersOf(requests.lastRows())).toEqual({});
+    await expect.poll(() => filtersOf(requests.lastRows())).toEqual({});
 
     // Four independent booleans rather than one status picklist, so each item
     // adds a parameter instead of replacing the previous one.
@@ -930,7 +997,7 @@ test.describe("device and token lists — emitted parameters", () => {
     // As on /registration-tokens: an unfiltered list emits no `filter[...]` at
     // all.
     await expect.poll(() => requests.rows().length).toBeGreaterThan(0);
-    expect(filtersOf(requests.lastRows())).toEqual({});
+    await expect.poll(() => filtersOf(requests.lastRows())).toEqual({});
 
     await toggleFilter(page, "Revoked");
     await expect
