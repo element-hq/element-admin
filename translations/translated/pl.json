@@ -1023,10 +1023,10 @@
     "message": "Usuwanie w toku"
   },
   "pages.rooms.deletion.scheduled.description": {
-    "message": "Room deletion task is scheduled for {timestamp, date, short} at {timestamp, time, short}."
+    "message": "Zadanie usunięcia pokoju zostało ustawione na {timestamp, date, short} o {timestamp, time, short}."
   },
   "pages.rooms.deletion.scheduled.title": {
-    "message": "Room deletion scheduled"
+    "message": "Zaplanowano usunięcie pokoju"
   },
   "pages.rooms.deletion.success.description": {
     "message": "Zadanie usunięcia pokoju zakończone pomyślnie w dniu {timestamp, date, short} o {timestamp, time, short}."

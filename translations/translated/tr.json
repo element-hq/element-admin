@@ -195,7 +195,7 @@
     "message": "Grant types"
   },
   "pages.devices.applications.name_column": {
-    "message": "Name"
+    "message": "İsim"
   },
   "pages.devices.applications.not_found.description": {
     "message": "The requested application ({clientId}) could not be found on {serverName}."
@@ -252,7 +252,7 @@
     "message": "Cihaz Kimliği"
   },
   "pages.devices.legacy.filters.activity_active": {
-    "message": "Active"
+    "message": "Aktif"
   },
   "pages.devices.legacy.filters.activity_inactive": {
     "message": "Inactive"
@@ -291,10 +291,10 @@
     "message": "Signed out at"
   },
   "pages.devices.legacy.last_active_ip_label": {
-    "message": "Last active IP"
+    "message": "Son aktif IP adresi"
   },
   "pages.devices.legacy.last_active_label": {
-    "message": "Last active"
+    "message": "Son aktif"
   },
   "pages.devices.legacy.not_found.description": {
     "message": "The requested legacy device ({sessionId}) could not be found on {serverName}."
@@ -306,7 +306,7 @@
     "message": "Redirect URI"
   },
   "pages.devices.legacy.status_column": {
-    "message": "Status"
+    "message": "Durum"
   },
   "pages.devices.legacy.technical_details": {
     "message": "Technical details"
@@ -357,7 +357,7 @@
     "message": "Cihaz Kimliği"
   },
   "pages.devices.user.filters.activity_active": {
-    "message": "Active"
+    "message": "Aktif"
   },
   "pages.devices.user.filters.activity_inactive": {
     "message": "Inactive"
@@ -399,10 +399,10 @@
     "message": "Signed out at"
   },
   "pages.devices.user.last_active_ip_label": {
-    "message": "Last active IP"
+    "message": "Son aktif IP adresi"
   },
   "pages.devices.user.last_active_label": {
-    "message": "Last active"
+    "message": "Son aktif"
   },
   "pages.devices.user.not_found.description": {
     "message": "The requested device ({sessionId}) could not be found on {serverName}."
@@ -414,7 +414,7 @@
     "message": "Scope"
   },
   "pages.devices.user.status_column": {
-    "message": "Status"
+    "message": "Durum"
   },
   "pages.devices.user.technical_details": {
     "message": "Technical details"
@@ -528,7 +528,7 @@
     "message": "Sunucu adı"
   },
   "pages.federation.table.status": {
-    "message": "Status"
+    "message": "Durum"
   },
   "pages.federation.title": {
     "message": "Federation"
@@ -639,7 +639,7 @@
     "message": "Son geçerlilik tarihi"
   },
   "pages.personal_tokens.expires_in_label": {
-    "message": "Expires in (days)"
+    "message": "Son geçerlilik tarihi (gün)"
   },
   "pages.personal_tokens.expires_in_missing": {
     "message": "Enter how many days the token should last"
@@ -651,85 +651,85 @@
     "message": "Revoked"
   },
   "pages.personal_tokens.filter.active": {
-    "message": "Active"
+    "message": "Aktif"
   },
   "pages.personal_tokens.filter.expires": {
-    "message": "With an expiry date"
+    "message": "Son kullanma tarihi olan"
   },
   "pages.personal_tokens.filter.no_expiry": {
-    "message": "Never expires"
+    "message": "Son kullanma tarihi yok"
   },
   "pages.personal_tokens.filter.revoked": {
-    "message": "Revoked"
+    "message": "İptal edildi"
   },
   "pages.personal_tokens.filter.scope_mas_admin": {
-    "message": "Access to the MAS admin API"
+    "message": "MAS yönetim API'sine erişim"
   },
   "pages.personal_tokens.filter.scope_matrix_client": {
-    "message": "Access to the Matrix Client-Server API"
+    "message": "Matrix İstemci-Sunucu API'sine erişim"
   },
   "pages.personal_tokens.filter.scope_synapse_admin": {
-    "message": "Access to the Synapse admin API"
+    "message": "Synapse yönetici API'sine erişim"
   },
   "pages.personal_tokens.last_active_column": {
-    "message": "Last active"
+    "message": "Son aktif"
   },
   "pages.personal_tokens.last_active_ip_label": {
-    "message": "Last active IP"
+    "message": "Son aktif IP adresi"
   },
   "pages.personal_tokens.last_active_label": {
-    "message": "Last active"
+    "message": "Son aktif"
   },
   "pages.personal_tokens.name_column": {
-    "message": "Name"
+    "message": "İsim"
   },
   "pages.personal_tokens.name_help": {
-    "message": "A human-readable name for the token, to help you identify it"
+    "message": "Belirteci tanımlamanıza yardımcı olacak, insan tarafından okunabilir bir ad"
   },
   "pages.personal_tokens.name_label": {
-    "message": "Token name"
+    "message": "Token adı"
   },
   "pages.personal_tokens.name_placeholder": {
-    "message": "My application token"
+    "message": "Başvuru belirteci"
   },
   "pages.personal_tokens.never_expires": {
-    "message": "Never expires"
+    "message": "Son kullanma tarihi yok"
   },
   "pages.personal_tokens.never_used": {
-    "message": "Never used"
+    "message": "Hiç kullanılmamış"
   },
   "pages.personal_tokens.not_found.description": {
-    "message": "The personal token you're looking for doesn't exist or has been removed."
+    "message": "Aradığınız kişisel token mevcut değil veya kaldırılmış."
   },
   "pages.personal_tokens.not_found.title": {
-    "message": "Personal token not found"
+    "message": "Kişisel belirteç bulunamadı."
   },
   "pages.personal_tokens.owner_user_label": {
-    "message": "Owner"
+    "message": "Sahibi"
   },
   "pages.personal_tokens.regenerate_confirm": {
-    "message": "Regenerate token"
+    "message": "Jetonu yeniden oluştur"
   },
   "pages.personal_tokens.regenerate_error": {
-    "message": "Failed to regenerate personal token"
+    "message": "Kişisel jetonun yeniden oluşturulması başarısız oldu"
   },
   "pages.personal_tokens.regenerate_success": {
-    "message": "Personal token regenerated successfully"
+    "message": "Kişisel jeton başarıyla yeniden oluşturuldu"
   },
   "pages.personal_tokens.regenerate_token": {
-    "message": "Regenerate token"
+    "message": "Jetonu yeniden oluştur"
   },
   "pages.personal_tokens.regenerate_token_title": {
-    "message": "Regenerate personal token"
+    "message": "Kişisel jetonu yeniden oluştur"
   },
   "pages.personal_tokens.regenerate_warning": {
-    "message": "This will generate a new access token and invalidate the current one. Any applications using the current token will need to be updated."
+    "message": "Bu işlem yeni bir erişim jetonu oluşturacak ve mevcut jetonu geçersiz kılacaktır. Mevcut jetonu kullanan tüm uygulamaların güncellenmesi gerekecektir."
   },
   "pages.personal_tokens.revoke_success": {
-    "message": "Personal token revoked successfully"
+    "message": "Kişisel jeton başarıyla iptal edildi"
   },
   "pages.personal_tokens.revoke_token": {
-    "message": "Revoke token"
+    "message": "Jetonu iptal et"
   },
   "pages.personal_tokens.revoke_token.alert.description": {
     "message": "{humanName} will stop working immediately, and anything using it will need a new token."
@@ -744,25 +744,25 @@
     "message": "Revoke this personal token?"
   },
   "pages.personal_tokens.revoked_at_label": {
-    "message": "Revoked at"
+    "message": "İptal edildi"
   },
   "pages.personal_tokens.scope_device_help": {
-    "message": "Provision a Matrix device"
+    "message": "Matrix cihazını hazırlama"
   },
   "pages.personal_tokens.scope_mas_admin_help": {
-    "message": "Access to the MAS admin API"
+    "message": "MAS yönetim API'sine erişim"
   },
   "pages.personal_tokens.scope_matrix_client_help": {
-    "message": "Access to the Matrix Client-Server API"
+    "message": "Matrix İstemci-Sunucu API'sine erişim"
   },
   "pages.personal_tokens.scope_synapse_admin_help": {
-    "message": "Access to the Synapse admin API"
+    "message": "Synapse yönetici API'sine erişim"
   },
   "pages.personal_tokens.scopes_group_label": {
     "message": "Scopes"
   },
   "pages.personal_tokens.scopes_label": {
-    "message": "Scopes"
+    "message": "Kapsamlar"
   },
   "pages.personal_tokens.set_expiry_help": {
     "message": "Otherwise the token never expires"
@@ -771,19 +771,19 @@
     "message": "Set an expiry"
   },
   "pages.personal_tokens.status.active": {
-    "message": "Active"
+    "message": "Aktif"
   },
   "pages.personal_tokens.status.column": {
-    "message": "Status"
+    "message": "Durum"
   },
   "pages.personal_tokens.status.expired": {
-    "message": "Expired"
+    "message": "Süresi dolmuş"
   },
   "pages.personal_tokens.status.label": {
-    "message": "Status"
+    "message": "Durum"
   },
   "pages.personal_tokens.status.revoked": {
-    "message": "Revoked"
+    "message": "İptal edildi"
   },
   "pages.personal_tokens.title": {
     "message": "Kişisel tokenlar"
@@ -852,16 +852,16 @@
     "message": "Son geçerlilik tarihi"
   },
   "pages.registration_tokens.filters.active_only": {
-    "message": "Active"
+    "message": "Aktif"
   },
   "pages.registration_tokens.filters.expired_only": {
-    "message": "Expired"
+    "message": "Süresi dolmuş"
   },
   "pages.registration_tokens.filters.not_revoked": {
     "message": "Not revoked"
   },
   "pages.registration_tokens.filters.revoked_only": {
-    "message": "Revoked"
+    "message": "İptal edildi"
   },
   "pages.registration_tokens.filters.unused_only": {
     "message": "Kullanılmamış"
@@ -870,7 +870,7 @@
     "message": "Kullanılmış"
   },
   "pages.registration_tokens.never_expires": {
-    "message": "Never expires"
+    "message": "Son kullanma tarihi yok"
   },
   "pages.registration_tokens.no_expiration_placeholder": {
     "message": "Son kullanma tarihi yok"
@@ -882,7 +882,7 @@
     "message": "Kayıt tokenı bulunamadı."
   },
   "pages.registration_tokens.revoke_token": {
-    "message": "Revoke token"
+    "message": "Jetonu iptal et"
   },
   "pages.registration_tokens.revoke_token.alert.description": {
     "message": "Nobody will be able to register with {token} until it is unrevoked."
@@ -900,28 +900,28 @@
     "message": "Revoke this registration token?"
   },
   "pages.registration_tokens.revoked_at_label": {
-    "message": "Revoked at"
+    "message": "İptal edildi"
   },
   "pages.registration_tokens.save_changes": {
     "message": "Değişiklikleri Kaydet"
   },
   "pages.registration_tokens.status.active": {
-    "message": "Active"
+    "message": "Aktif"
   },
   "pages.registration_tokens.status.column": {
-    "message": "Status"
+    "message": "Durum"
   },
   "pages.registration_tokens.status.expired": {
-    "message": "Expired"
+    "message": "Süresi dolmuş"
   },
   "pages.registration_tokens.status.invalid": {
     "message": "Geçersiz"
   },
   "pages.registration_tokens.status.label": {
-    "message": "Status"
+    "message": "Durum"
   },
   "pages.registration_tokens.status.revoked": {
-    "message": "Revoked"
+    "message": "İptal edildi"
   },
   "pages.registration_tokens.status.used_up": {
     "message": "Tükendi"
@@ -1128,7 +1128,7 @@
     "message": "Supervision is a feature available in ESS Pro"
   },
   "pages.users.account_status.active": {
-    "message": "Active"
+    "message": "Aktif"
   },
   "pages.users.account_status.admin": {
     "message": "Yönetici"
@@ -1470,7 +1470,7 @@
     "message": "Unknown device"
   },
   "ui.device_status.active": {
-    "message": "Active"
+    "message": "Aktif"
   },
   "ui.device_status.inactive": {
     "message": "Inactive"
@@ -1479,7 +1479,7 @@
     "message": "Last active on {date}."
   },
   "ui.device_status.never_used": {
-    "message": "Never used"
+    "message": "Hiç kullanılmamış"
   },
   "ui.device_status.never_used.tooltip": {
     "message": "This device has not been used yet."

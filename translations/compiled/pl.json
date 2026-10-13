@@ -2744,7 +2744,7 @@
   "pages.rooms.deletion.scheduled.description": [
     {
       "type": 0,
-      "value": "Room deletion task is scheduled for "
+      "value": "Zadanie usunięcia pokoju zostało ustawione na "
     },
     {
       "type": 3,
@@ -2753,7 +2753,7 @@
     },
     {
       "type": 0,
-      "value": " at "
+      "value": " o "
     },
     {
       "type": 4,
@@ -2768,7 +2768,7 @@
   "pages.rooms.deletion.scheduled.title": [
     {
       "type": 0,
-      "value": "Room deletion scheduled"
+      "value": "Zaplanowano usunięcie pokoju"
     }
   ],
   "pages.rooms.deletion.success.description": [
