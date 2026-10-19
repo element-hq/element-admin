@@ -37,7 +37,7 @@
     "@tanstack/react-pacer": "0.24.1",
     "@tanstack/react-query": "5.104.1",
     "@tanstack/react-router": "1.170.42",
-    "@tanstack/react-table": "9.2.8",
+    "@tanstack/react-table": "9.3.1",
     "@tanstack/react-virtual": "3.14.14",
     "@vector-im/compound-design-tokens": "11.3.1",
     "@vector-im/compound-web": "10.3.1",
