@@ -86,7 +86,7 @@
     "msw": "3.0.3",
     "oxc-transform-react": "^0.152.0",
     "oxfmt": "0.72.0",
-    "oxlint": "1.87.0",
+    "oxlint": "1.88.0",
     "oxlint-tsgolint": "7.0.2004",
     "stylelint": "17.16.0",
     "stylelint-config-standard": "40.0.0",
