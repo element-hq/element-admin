@@ -84,3 +84,12 @@ updates:
           - "@types/*"
     cooldown:
       default-days: 7
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    labels:
+      - "A-Dependencies"
+    schedule:
+      interval: "daily"
+    cooldown:
+      default-days: 7
