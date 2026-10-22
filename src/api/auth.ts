@@ -25,7 +25,7 @@ export const authMetadataQuery = (synapseRoot: string) =>
     staleTime: Infinity,
     queryFn: async ({ signal }) => {
       const authMetadataUrl = new URL(
-        "/_matrix/client/unstable/org.matrix.msc2965/auth_metadata",
+        "/_matrix/client/v1/auth_metadata",
         synapseRoot,
       );
       const response = await fetch(authMetadataUrl, { signal });
