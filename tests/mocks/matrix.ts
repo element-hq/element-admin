@@ -166,7 +166,7 @@ export const wellKnown = (): RequestHandler =>
  * when deriving the admin API base URL.
  */
 export const authMetadata = (): RequestHandler =>
-  http.get("*/_matrix/client/unstable/org.matrix.msc2965/auth_metadata", () =>
+  http.get("*/_matrix/client/v1/auth_metadata", () =>
     HttpResponse.json({
       issuer: `${MAS_ROOT}/`,
       account_management_uri: `${MAS_ROOT}/account/`,

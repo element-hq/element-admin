@@ -39,12 +39,7 @@ test.describe("authentication", () => {
     page,
     network,
   }) => {
-    network.use(
-      matrixFailing(
-        "/_matrix/client/unstable/org.matrix.msc2965/auth_metadata",
-        429,
-      ),
-    );
+    network.use(matrixFailing("/_matrix/client/v1/auth_metadata", 429));
 
     await page.goto("/login");
     await page.getByLabel("Server name").fill(SERVER_NAME);
