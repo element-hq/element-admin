@@ -40,7 +40,7 @@
     "@tanstack/react-table": "9.2.8",
     "@tanstack/react-virtual": "3.14.14",
     "@vector-im/compound-design-tokens": "11.3.1",
-    "@vector-im/compound-web": "10.3.1",
+    "@vector-im/compound-web": "10.4.0",
     "classnames": "2.5.1",
     "idb-keyval": "6.3.0",
     "react": "19.3.0",
