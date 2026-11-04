@@ -19,7 +19,8 @@ test.describe("rooms", () => {
     ).toBeVisible();
 
     // The third room has neither a name nor an alias, so its display name comes
-    // from the members endpoint and its alias cell renders an em dash.
+    // from the members endpoint and its alias cell renders an em dash. The
+    // first room backs an announcement room, which replaces its visibility.
     await expect(page.getByRole("grid")).toMatchAriaSnapshot(`
       - grid "3 rooms":
         - rowgroup:
@@ -30,7 +31,7 @@ test.describe("rooms", () => {
               - link:
                 - paragraph: General
             - gridcell "#general:example.com"
-            - gridcell "Public"
+            - gridcell "Announcement room"
           - row:
             - gridcell:
               - link:
@@ -63,8 +64,15 @@ test.describe("rooms", () => {
       - paragraph: "#general:example.com"
       - paragraph: "!room0:example.com"
       - paragraph: Everything and anything
+      - link "Send an announcement"
       - button "Delete"
       - list:
+        - listitem:
+          - term: Announcement room
+          - definition: general
+        - listitem:
+          - term: Allowed senders
+          - definition: "@alice:example.com"
         - listitem:
           - term: History Visibility
           - definition: World Readable
@@ -76,6 +84,22 @@ test.describe("rooms", () => {
       "href",
       "/users?search=admin",
     );
+  });
+
+  test("links an announcement room to the send page", async ({ page }) => {
+    await loginAs(page);
+    await page.goto(`/rooms/${encodeURIComponent(roomId(DEFAULT_ROOMS, 0))}`);
+
+    await page.getByRole("link", { name: "Send an announcement" }).click();
+
+    await expect(
+      page.getByRole("heading", heading("Send an announcement")),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("radio", { name: "An announcement room" }),
+    ).toBeChecked();
+    await expect(page.getByText("Server announcements")).toBeVisible();
+    await expect(page.getByText("general", { exact: true })).toBeVisible();
   });
 
   test("shows a not-found alert for an unknown room", async ({ page }) => {
