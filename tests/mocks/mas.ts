@@ -287,6 +287,21 @@ export const userDetail = (users: UserOverrides[]): RequestHandler =>
     "mock 404: unknown user",
   );
 
+/**
+ * A user by its username (localpart), which is how a Matrix ID is resolved to a
+ * MAS user. An unknown username 404s, as MAS does.
+ */
+export const userByUsername = (users: UserOverrides[]): RequestHandler =>
+  http.get("*/api/admin/v1/users/by-username/:username", ({ params }) => {
+    const index = users.findIndex(
+      (user) => user.username === params["username"],
+    );
+
+    return index === -1
+      ? HttpResponse.json(masError("mock 404: unknown user"), { status: 404 })
+      : HttpResponse.json(singleUser(index, users[index]));
+  });
+
 // The user detail page's side queries, all three empty.
 export const userEmails = (): RequestHandler =>
   emptyCollection("/api/admin/v1/user-emails");

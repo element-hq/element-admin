@@ -114,11 +114,16 @@ export class MatrixStandardError extends LocalizedError {
       "Generic error message when Synapse returned a rich error, with an error code (M_FORBIDDEN, etc.) and a human-readable error message, usually in english.",
   });
 
+  readonly errcode: string;
+  readonly errorMessage: string;
+
   constructor(errcode: string, error: string, options?: ErrorOptions) {
     super(
       `Request failed with error code ${errcode}. Additionally, the server gave the following error message: ${error}`,
       options,
     );
+    this.errcode = errcode;
+    this.errorMessage = error;
     this.values = {
       errorCode: errcode,
       errorMessage: error,

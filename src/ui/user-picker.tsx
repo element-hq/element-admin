@@ -3,29 +3,21 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
-import {
-  autoUpdate,
-  FloatingFocusManager,
-  size,
-  useFloating,
-  useFocus,
-  useInteractions,
-  useListNavigation,
-  useRole,
-} from "@floating-ui/react";
 import { useDebouncedValue } from "@tanstack/react-pacer";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { CloseIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
-import { Avatar, Button, Form } from "@vector-im/compound-web";
-import { useCallback, useId, useMemo, useRef, useState } from "react";
-import { FormattedMessage } from "react-intl";
+import { ArrowRightIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
+import { Avatar } from "@vector-im/compound-web";
+import { useCallback, useMemo, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 
 import { usersInfiniteQuery } from "@/api/mas";
 import type { SingleResourceForUser } from "@/api/mas/api";
 import { mediaThumbnailQuery, profileQuery } from "@/api/matrix";
+import { ButtonLink } from "@/components/link";
 import { useImageBlob } from "@/utils/blob";
 
-import styles from "./user-picker.module.css";
+import { Combobox, ComboboxSelection } from "./combobox";
+import styles from "./picker.module.css";
 
 const UserChipContent = ({
   synapseRoot,
@@ -43,7 +35,7 @@ const UserChipContent = ({
   return (
     <>
       <Avatar id={mxid} name={displayName || mxid} src={avatar} size="32px" />
-      <div className={styles["user-infos"]}>
+      <div className={styles["infos"]}>
         {displayName ? (
           <>
             <div className={styles["primary"]}>{displayName}</div>
@@ -65,15 +57,25 @@ const normalizeSearch = (term: string): string =>
 export const UserPicker = ({
   serverName,
   synapseRoot,
+  defaultUser = null,
+  onChange,
 }: {
   serverName: string;
   synapseRoot: string;
+  defaultUser?: SingleResourceForUser | null;
+  onChange?: (user: SingleResourceForUser | null) => void;
 }) => {
+  const intl = useIntl();
   // Tracks the selected user
-  const [selectedUser, setSelectedUser] =
-    useState<null | SingleResourceForUser>(null);
-  // Tracks the active/hovered index in the list
-  const [activeIndex, setActiveIndex] = useState<null | number>(null);
+  const [selectedUser, setSelectedUserState] =
+    useState<null | SingleResourceForUser>(defaultUser);
+  const setSelectedUser = useCallback(
+    (user: SingleResourceForUser | null) => {
+      setSelectedUserState(user);
+      onChange?.(user);
+    },
+    [onChange],
+  );
 
   // This state is in-sync with the input, and the debounced one is the one kicking off the query
   const [userSearch, setUserSearch] = useState("");
@@ -81,54 +83,6 @@ export const UserPicker = ({
     normalizeSearch(userSearch),
     { key: "user-picker", wait: 200 },
     ({ isPending }) => ({ isPending }),
-  );
-
-  const listRef = useRef<(HTMLElement | null)[]>([]);
-  const [showList, setShowList] = useState(false);
-  const { refs, floatingStyles, context } = useFloating<HTMLInputElement>({
-    open: showList,
-    onOpenChange: setShowList,
-    // Makes sure to update the sizing/positioning when the window is resizing,
-    // which is especially important on mobile
-    whileElementsMounted: autoUpdate,
-    middleware: [
-      size({
-        // Gives a bit of padding with the bottom of the screen
-        padding: 16,
-        apply({ rects, elements, availableHeight }) {
-          // Inject a few CSS variables to get the sizing right
-          elements.floating.style.setProperty(
-            "--reference-width",
-            `${rects.reference.width}px`,
-          );
-          elements.floating.style.setProperty(
-            "--reference-height",
-            `${rects.reference.height}px`,
-          );
-          elements.floating.style.setProperty(
-            "--available-height",
-            `${availableHeight}px`,
-          );
-        },
-      }),
-    ],
-  });
-
-  // This gives the right aria roles to the input and the list items
-  const role = useRole(context, { role: "combobox" });
-  // This gives the keyboard list navigation behaviour
-  const listNav = useListNavigation(context, {
-    listRef,
-    activeIndex: activeIndex,
-    onNavigate: setActiveIndex,
-    // This keeps the focus on the text input rather than on the items
-    virtual: true,
-  });
-  // This opens/closes the list when focusing the input
-  const focus = useFocus(context);
-
-  const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
-    [role, listNav, focus],
   );
 
   const { data, isPlaceholderData } = useInfiniteQuery({
@@ -155,149 +109,64 @@ export const UserPicker = ({
     [data, userSearch],
   );
 
-  const onSearchInput = useCallback(
-    (event: React.InputEvent<HTMLInputElement>) => {
-      event.preventDefault();
-      const newValue = event.currentTarget.value;
-      setUserSearch(newValue);
-      // Reset active index when searching
-      setActiveIndex(null);
-    },
-    [],
-  );
-
-  // Select the current active item when pressing enter
-  const onSearchKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLInputElement>) => {
-      const activeUser =
-        activeIndex !== null && !isLoading && users[activeIndex];
-      if (event.key === "Enter" && activeUser) {
-        event.preventDefault();
-        setSelectedUser(activeUser);
-      }
-    },
-    [activeIndex, isLoading, users],
-  );
-
   const onClearSelection = useCallback(() => {
-    setShowList(false);
     setUserSearch("");
     setSelectedUser(null);
-  }, []);
-
-  const itemIdPrefix = useId();
+  }, [setSelectedUser]);
 
   if (selectedUser) {
     return (
-      <div className={styles["selected-user"]}>
-        <Form.TextControl type="hidden" value={selectedUser.id} />
-        <div className={styles["user-chip"]}>
-          <UserChipContent
-            synapseRoot={synapseRoot}
-            mxid={`@${selectedUser.attributes.username}:${serverName}`}
+      <ComboboxSelection
+        value={selectedUser.id}
+        onClear={onClearSelection}
+        action={
+          <ButtonLink
+            iconOnly
+            Icon={ArrowRightIcon}
+            kind="secondary"
+            to="/users/$userId"
+            params={{ userId: selectedUser.id }}
+            aria-label={intl.formatMessage({
+              id: "ui.user_picker.view",
+              defaultMessage: "View",
+              description:
+                "Accessible name of the button next to the chosen user which opens their details",
+            })}
           />
-        </div>
-        <Button
-          iconOnly
-          Icon={CloseIcon}
-          kind="secondary"
-          onClick={onClearSelection}
+        }
+      >
+        <UserChipContent
+          synapseRoot={synapseRoot}
+          mxid={`@${selectedUser.attributes.username}:${serverName}`}
         />
-      </div>
+      </ComboboxSelection>
     );
   }
 
   return (
-    <>
-      <Form.TextControl
-        ref={(node) => {
-          refs.setReference(node);
-        }}
-        value={userSearch}
-        required
-        aria-autocomplete="list"
-        className={styles["reference"]}
-        {...getReferenceProps({
-          onInput: onSearchInput,
-          onKeyDown: onSearchKeyDown,
-        })}
-      />
-      {showList && (
-        <FloatingFocusManager
-          context={context}
-          initialFocus={-1}
-          visuallyHiddenDismiss
-        >
-          <div
-            ref={(node) => {
-              refs.setFloating(node);
-            }}
-            style={floatingStyles}
-            className={styles["floating"]}
-            {...getFloatingProps()}
-          >
-            {users.length === 0 ? (
-              isLoading ? (
-                <div className={styles["loading"]}>
-                  <FormattedMessage
-                    id="ui.user_picker.loading_list"
-                    description="On the user-picker list, this is the placeholder shown whilst things are loading"
-                    defaultMessage="Loading…"
-                  />
-                </div>
-              ) : (
-                <div className={styles["no-match"]}>
-                  <div className={styles["headline"]}>
-                    <FormattedMessage
-                      id="ui.user_picker.no_match"
-                      description="On the user-picker list, this is the placeholder shown when there are no results"
-                      defaultMessage="No match"
-                    />
-                  </div>
-                  <div className={styles["help"]}>
-                    <FormattedMessage
-                      id="ui.user_picker.no_match_help"
-                      description="On the user-picker list, this is the help text shown when there are no results"
-                      defaultMessage="Try a different search term. This can only lookup active users on {serverName} using their localpart."
-                      values={{
-                        serverName,
-                      }}
-                    />
-                  </div>
-                </div>
-              )
-            ) : (
-              <ul className={styles["list"]} aria-busy={isLoading}>
-                {users.map((user, index) => (
-                  <li
-                    key={user.id}
-                    ref={(node) => {
-                      listRef.current[index] = node;
-                    }}
-                    {...getItemProps({
-                      id: `${itemIdPrefix}-${user.id}`,
-                      onClick(event: React.MouseEvent<HTMLLIElement>) {
-                        event.preventDefault();
-                        setSelectedUser(user);
-                      },
-                      active: index === activeIndex,
-                    })}
-                    className={styles["item"]}
-                    data-active={index === activeIndex}
-                    // oxlint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-                    tabIndex={index === activeIndex ? 0 : -1}
-                  >
-                    <UserChipContent
-                      synapseRoot={synapseRoot}
-                      mxid={`@${user.attributes.username}:${serverName}`}
-                    />
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </FloatingFocusManager>
+    <Combobox
+      items={users}
+      itemKey={(user) => user.id}
+      renderItem={(user) => (
+        <UserChipContent
+          synapseRoot={synapseRoot}
+          mxid={`@${user.attributes.username}:${serverName}`}
+        />
       )}
-    </>
+      onSelect={setSelectedUser}
+      search={userSearch}
+      onSearchChange={setUserSearch}
+      isLoading={isLoading}
+      noMatchHelp={
+        <FormattedMessage
+          id="ui.user_picker.no_match_help"
+          description="On the user-picker list, this is the help text shown when there are no results"
+          defaultMessage="Try a different search term. This can only lookup active users on {serverName} using their localpart."
+          values={{
+            serverName,
+          }}
+        />
+      }
+    />
   );
 };

@@ -85,6 +85,7 @@ const common = (): RequestHandler[] => [
   mas.registrationTokensList(DEFAULT_REGISTRATION_TOKENS),
   mas.personalSessionsList(DEFAULT_PERSONAL_SESSIONS),
   mas.userDetail(DEFAULT_USERS),
+  mas.userByUsername(DEFAULT_USERS),
   mas.oauth2ClientDetail(DEFAULT_OAUTH2_CLIENTS),
   mas.oauth2SessionDetail(DEFAULT_OAUTH2_SESSIONS),
   mas.compatSessionDetail(DEFAULT_COMPAT_SESSIONS),
