@@ -20,6 +20,7 @@ import * as matrix from "./matrix";
 import {
   ADMIN_MXID,
   DEFAULT_ALLOWLIST,
+  DEFAULT_ANNOUNCEMENT_ROOMS,
   DEFAULT_COMPAT_SESSIONS,
   DEFAULT_DESTINATIONS,
   DEFAULT_OAUTH2_CLIENTS,
@@ -67,6 +68,8 @@ const common = (): RequestHandler[] => [
   matrix.roomDetail(DEFAULT_ROOMS),
   matrix.roomMembers(DEFAULT_ROOM_MEMBERS),
   matrix.scheduledTasks(),
+  matrix.serverAnnouncements(DEFAULT_ANNOUNCEMENT_ROOMS),
+  matrix.serverNoticesProbe(true),
   matrix.federationDestinations(DEFAULT_DESTINATIONS),
   matrix.federationDestination(DEFAULT_DESTINATIONS),
   matrix.serverSupport(DEFAULT_SERVER_SUPPORT),

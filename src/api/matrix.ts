@@ -12,7 +12,7 @@ import { MatrixStandardError, UnauthorizedError } from "@/errors";
 import { accessToken } from "@/stores/auth";
 import { ensureResponseOk } from "@/utils/fetch";
 
-const MatrixErrorResponse = v.object({
+export const MatrixErrorResponse = v.object({
   errcode: v.string(),
   error: v.string(),
 });
