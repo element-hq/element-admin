@@ -2801,6 +2801,24 @@
       "value": "Expires at"
     }
   ],
+  "pages.rooms.announcement_allowed_senders": [
+    {
+      "type": 0,
+      "value": "Allowed senders"
+    }
+  ],
+  "pages.rooms.announcement_room": [
+    {
+      "type": 0,
+      "value": "Announcement room"
+    }
+  ],
+  "pages.rooms.announcement_room_badge": [
+    {
+      "type": 0,
+      "value": "Announcement room"
+    }
+  ],
   "pages.rooms.columns.alias": [
     {
       "type": 0,
@@ -3117,6 +3135,12 @@
     {
       "type": 0,
       "value": "Search…"
+    }
+  ],
+  "pages.rooms.send_announcement": [
+    {
+      "type": 0,
+      "value": "Send an announcement"
     }
   ],
   "pages.rooms.title": [
