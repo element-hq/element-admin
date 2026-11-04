@@ -1891,6 +1891,10 @@
     "description": "The placeholder text for the user search input",
     "message": "Search users…"
   },
+  "pages.users.send_server_notice": {
+    "description": "Button in the user details which opens the page to send a server notice to this user",
+    "message": "Send a server notice"
+  },
   "pages.users.set_admin.alert.description": {
     "description": "In the modal to give admin privileges, the description of the alert",
     "message": "The user will be able to view user data and make changes to user and room permissions."
