@@ -28,8 +28,12 @@ import type {
   RoomMembers,
   RoomsListResponse,
   ScheduledTask,
+  SendServerAnnouncementResponse,
+  SendServerNoticeParameters,
+  SendServerNoticeResponse,
   ServerAnnouncementRoom,
   ServerAnnouncementsList,
+  ServerEventParameters,
 } from "@/api/synapse";
 
 import {
@@ -479,6 +483,61 @@ export const serverNoticesProbe = (enabled: boolean): RequestHandler =>
           ),
           { status: 400 },
         );
+  });
+
+/**
+ * Sending to an announcement room. `onSend` receives the config id from the
+ * path and the request body; the response names the room the fixture with that
+ * id is backed by, or 404s for an unknown id like Synapse does.
+ */
+export const sendServerAnnouncement = (
+  rooms: ServerAnnouncementRoom[],
+  onSend?: (id: string, body: ServerEventParameters) => void,
+): RequestHandler =>
+  http.post(
+    "*/_synapse/admin/v1/server_announcements/:id/send",
+    async ({ params, request }) => {
+      const id = String(params["id"]);
+      const room = rooms.find((candidate) => candidate.id === id);
+      if (!room?.room_id) return notFound();
+
+      onSend?.(id, (await request.json()) as ServerEventParameters);
+      return HttpResponse.json({
+        event_id: "$announcement-event",
+        room_id: room.room_id,
+      } satisfies SendServerAnnouncementResponse);
+    },
+  );
+
+/**
+ * Sending a server notice. `onSend` receives the request body; the server
+ * notices probe falls through to `serverNoticesProbe`.
+ */
+export const sendServerNotice = (
+  onSend?: (body: SendServerNoticeParameters) => void,
+): RequestHandler =>
+  http.post("*/_synapse/admin/v1/send_server_notice", async ({ request }) => {
+    if (await isServerNoticesProbe(request)) return;
+    onSend?.((await request.json()) as SendServerNoticeParameters);
+    // oxlint-disable-next-line typescript/consistent-return
+    return HttpResponse.json({
+      event_id: "$server-notice-event",
+    } satisfies SendServerNoticeResponse);
+  });
+
+/**
+ * Sending a server notice fails as on a server without `server_notices`
+ * configured, while the probe still reports them enabled: the configuration
+ * changed after the page loaded.
+ */
+export const sendServerNoticeDisabled = (): RequestHandler =>
+  http.post("*/_synapse/admin/v1/send_server_notice", async ({ request }) => {
+    if (await isServerNoticesProbe(request)) return;
+    // oxlint-disable-next-line typescript/consistent-return
+    return HttpResponse.json(
+      matrixError("M_UNKNOWN", "Server notices are not enabled on this server"),
+      { status: 400 },
+    );
   });
 
 /**

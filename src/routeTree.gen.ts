@@ -13,6 +13,7 @@ import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as ConsoleRouteImport } from './routes/_console'
 import { Route as CallbackRouteImport } from './routes/callback'
 import { Route as ConsoleIndexRouteImport } from './routes/_console.index'
+import { Route as ConsoleAnnouncementsRouteImport } from './routes/_console.announcements'
 import { Route as ConsoleAuditingRouteImport } from './routes/_console.auditing'
 import { Route as ConsoleDevicesRouteImport } from './routes/_console.devices'
 import { Route as ConsoleFederationRouteImport } from './routes/_console.federation'
@@ -54,6 +55,11 @@ const CallbackRoute = CallbackRouteImport.update({
 const ConsoleIndexRoute = ConsoleIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleAnnouncementsRoute = ConsoleAnnouncementsRouteImport.update({
+  id: '/announcements',
+  path: '/announcements',
   getParentRoute: () => ConsoleRoute,
 } as any)
 const ConsoleAuditingRoute = ConsoleAuditingRouteImport.update({
@@ -190,6 +196,7 @@ const ConsoleFederationKnownDomainsDestinationRoute =
 export interface FileRoutesByFullPath {
   '/': typeof ConsoleIndexRoute
   '/callback': typeof CallbackRoute
+  '/announcements': typeof ConsoleAnnouncementsRoute
   '/auditing': typeof ConsoleAuditingRoute
   '/devices': typeof ConsoleDevicesRouteWithChildren
   '/federation': typeof ConsoleFederationRouteWithChildren
@@ -218,6 +225,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof ConsoleIndexRoute
   '/callback': typeof CallbackRoute
+  '/announcements': typeof ConsoleAnnouncementsRoute
   '/auditing': typeof ConsoleAuditingRoute
   '/personal-tokens': typeof ConsolePersonalTokensRouteWithChildren
   '/registration-tokens': typeof ConsoleRegistrationTokensRouteWithChildren
@@ -246,6 +254,7 @@ export interface FileRoutesById {
   '/_auth': typeof AuthRouteWithChildren
   '/_console': typeof ConsoleRouteWithChildren
   '/callback': typeof CallbackRoute
+  '/_console/announcements': typeof ConsoleAnnouncementsRoute
   '/_console/auditing': typeof ConsoleAuditingRoute
   '/_console/devices': typeof ConsoleDevicesRouteWithChildren
   '/_console/federation': typeof ConsoleFederationRouteWithChildren
@@ -277,6 +286,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/callback'
+    | '/announcements'
     | '/auditing'
     | '/devices'
     | '/federation'
@@ -305,6 +315,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/callback'
+    | '/announcements'
     | '/auditing'
     | '/personal-tokens'
     | '/registration-tokens'
@@ -332,6 +343,7 @@ export interface FileRouteTypes {
     | '/_auth'
     | '/_console'
     | '/callback'
+    | '/_console/announcements'
     | '/_console/auditing'
     | '/_console/devices'
     | '/_console/federation'
@@ -393,6 +405,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof ConsoleIndexRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/announcements': {
+      id: '/_console/announcements'
+      path: '/announcements'
+      fullPath: '/announcements'
+      preLoaderRoute: typeof ConsoleAnnouncementsRouteImport
       parentRoute: typeof ConsoleRoute
     }
     '/_console/auditing': {
@@ -715,6 +734,7 @@ const ConsoleUsersRouteWithChildren = ConsoleUsersRoute._addFileChildren(
 )
 
 interface ConsoleRouteChildren {
+  ConsoleAnnouncementsRoute: typeof ConsoleAnnouncementsRoute
   ConsoleAuditingRoute: typeof ConsoleAuditingRoute
   ConsoleDevicesRoute: typeof ConsoleDevicesRouteWithChildren
   ConsoleFederationRoute: typeof ConsoleFederationRouteWithChildren
@@ -727,6 +747,7 @@ interface ConsoleRouteChildren {
 }
 
 const ConsoleRouteChildren: ConsoleRouteChildren = {
+  ConsoleAnnouncementsRoute: ConsoleAnnouncementsRoute,
   ConsoleAuditingRoute: ConsoleAuditingRoute,
   ConsoleDevicesRoute: ConsoleDevicesRouteWithChildren,
   ConsoleFederationRoute: ConsoleFederationRouteWithChildren,

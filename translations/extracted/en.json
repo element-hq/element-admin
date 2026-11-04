@@ -187,6 +187,122 @@
     "description": "Label for the users navigation item in the main navigation sidebar",
     "message": "Users"
   },
+  "pages.announcements.content.body_help": {
+    "description": "Help text under the text area to write the message",
+    "message": "Markdown is supported."
+  },
+  "pages.announcements.content.body_label": {
+    "description": "Label of the text area to write the message",
+    "message": "Message"
+  },
+  "pages.announcements.content.legend": {
+    "description": "Heading of the section to write the message",
+    "message": "Content"
+  },
+  "pages.announcements.content.message": {
+    "description": "Label of the option to write a text message",
+    "message": "Message"
+  },
+  "pages.announcements.content.raw": {
+    "description": "Label of the option to write the event type and JSON content by hand",
+    "message": "Raw event"
+  },
+  "pages.announcements.description": {
+    "description": "The description of the page to send a server announcement or notice",
+    "message": "Post a message as the server to one user, or to everyone through an announcement room."
+  },
+  "pages.announcements.raw.content_label": {
+    "description": "Label of the text area for the JSON content of the raw event",
+    "message": "Content (JSON)"
+  },
+  "pages.announcements.raw.content_not_object": {
+    "description": "Error shown under the raw event content when it is not a JSON object",
+    "message": "Content must be a JSON object"
+  },
+  "pages.announcements.raw.member_event_error": {
+    "description": "Error shown under the raw event type when it is m.room.member",
+    "message": "Membership events cannot be sent."
+  },
+  "pages.announcements.raw.type_label": {
+    "description": "Label of the field for the type of the raw event",
+    "message": "Event type"
+  },
+  "pages.announcements.recipient.legend": {
+    "description": "Heading of the section to choose who receives the message",
+    "message": "Recipient"
+  },
+  "pages.announcements.recipient.notices_disabled": {
+    "description": "Shown in the user card, and under a failed send, when server notices are not configured. 'server_notices' is a configuration key and must not be translated.",
+    "message": "Server notices are not enabled on this server. Enable them under server_notices in the Synapse configuration."
+  },
+  "pages.announcements.recipient.room": {
+    "description": "Label of the card to send a message to an announcement room",
+    "message": "An announcement room"
+  },
+  "pages.announcements.recipient.room_help": {
+    "description": "Help text of the card to send a message to an announcement room",
+    "message": "Sends to every user the room is delivered to."
+  },
+  "pages.announcements.recipient.room_none_configured": {
+    "description": "Shown in the announcement room card when Synapse has no announcement room configured. 'server_announcements' is a configuration key and must not be translated.",
+    "message": "No announcement room is configured on this server. Add rooms under server_announcements in the Synapse configuration."
+  },
+  "pages.announcements.recipient.room_unsupported": {
+    "description": "Shown in the announcement room card when Synapse does not know the announcement rooms API",
+    "message": "This version of Synapse does not support announcement rooms."
+  },
+  "pages.announcements.recipient.unknown_room": {
+    "description": "Shown when the page was opened for an announcement room id which is not in the Synapse configuration",
+    "message": "The announcement room “{id}” is not configured on this server."
+  },
+  "pages.announcements.recipient.user": {
+    "description": "Label of the card to send a server notice to a single user",
+    "message": "A specific user"
+  },
+  "pages.announcements.recipient.user_help": {
+    "description": "Help text of the card to send a server notice to a single user",
+    "message": "Sends a server notice to that user only."
+  },
+  "pages.announcements.room.deleted_help": {
+    "description": "Help text under the announcement room picker when the chosen room was deleted",
+    "message": "This room was deleted. Restart Synapse to recreate it."
+  },
+  "pages.announcements.room.label": {
+    "description": "Label of the field to choose the announcement room to send to",
+    "message": "Announcement room"
+  },
+  "pages.announcements.send.button": {
+    "description": "Label of the button to send the server notice or announcement",
+    "message": "Send"
+  },
+  "pages.announcements.send.room_error": {
+    "description": "Title of the alert shown when sending a message to an announcement room failed",
+    "message": "Failed to send the announcement"
+  },
+  "pages.announcements.send.room_success": {
+    "description": "Toast message when a message was sent to an announcement room",
+    "message": "Announcement sent"
+  },
+  "pages.announcements.send.user_error": {
+    "description": "Title of the alert shown when sending a server notice to a user failed",
+    "message": "Failed to send the server notice"
+  },
+  "pages.announcements.send.user_success": {
+    "description": "Toast message when a server notice was sent to a user",
+    "message": "Server notice sent"
+  },
+  "pages.announcements.title": {
+    "description": "The title of the page to send a server announcement or notice",
+    "message": "Send an announcement"
+  },
+  "pages.announcements.user.label": {
+    "description": "Label of the field to pick the user who receives the server notice",
+    "message": "User"
+  },
+  "pages.announcements.user.not_found": {
+    "description": "Error shown when the page was opened for a user which does not exist on this server",
+    "message": "{mxid} is not a user of this server"
+  },
   "pages.auditing.title": {
     "description": "The title of the auditing page",
     "message": "Auditing"
@@ -222,6 +338,10 @@
   "pages.dashboard.running_latest_ess": {
     "description": "On the dashboard, this shows that you're running the latest ESS version",
     "message": "(You're running the latest version)"
+  },
+  "pages.dashboard.send_announcement": {
+    "description": "On the dashboard, the button which opens the page to send a server announcement or notice",
+    "message": "Send an announcement"
   },
   "pages.dashboard.synapse_version": {
     "description": "On the dashboard, this shows the Synapse version",
@@ -2015,6 +2135,30 @@
     "description": "Title of the language switcher modal",
     "message": "Language settings"
   },
+  "ui.room_picker.clear": {
+    "description": "Accessible name of the button which clears the chosen room in the announcement room picker",
+    "message": "Clear selection"
+  },
+  "ui.room_picker.deleted_room": {
+    "description": "In the announcement room picker, the name of a configured room which was deleted and cannot be chosen",
+    "message": "{name} (deleted)"
+  },
+  "ui.room_picker.no_match": {
+    "description": "On the announcement room picker list, the headline shown when no room matches the search",
+    "message": "No match"
+  },
+  "ui.room_picker.no_match_help": {
+    "description": "On the announcement room picker list, the help text shown when no room matches the search",
+    "message": "Try a different search term. Only the announcement rooms configured in Synapse are listed."
+  },
+  "ui.room_picker.placeholder": {
+    "description": "Placeholder of the search input of the announcement room picker",
+    "message": "Search announcement rooms…"
+  },
+  "ui.room_picker.view": {
+    "description": "Accessible name of the button next to the chosen announcement room which opens its details",
+    "message": "View"
+  },
   "ui.user_picker.clear": {
     "description": "Accessible name of the button which clears the chosen user in the user picker",
     "message": "Clear selection"
@@ -2030,5 +2174,9 @@
   "ui.user_picker.no_match_help": {
     "description": "On the user-picker list, this is the help text shown when there are no results",
     "message": "Try a different search term. This can only lookup active users on {serverName} using their localpart."
+  },
+  "ui.user_picker.view": {
+    "description": "Accessible name of the button next to the chosen user which opens their details",
+    "message": "View"
   }
 }

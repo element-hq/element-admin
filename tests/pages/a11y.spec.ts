@@ -18,6 +18,7 @@ import {
   SYNAPSE_VERSION,
   userId,
 } from "../mocks/fixtures";
+import { sendServerNoticeDisabled, serverNoticesProbe } from "../mocks/matrix";
 import { expect, test } from "../mocks/test";
 
 /**
@@ -72,6 +73,77 @@ test("finds no violations on the dashboard", async ({ page }) => {
   await expect(page.getByRole("heading", heading("Dashboard"))).toBeVisible();
   // Each tile is its own data boundary, resolving after the heading.
   await expect(page.getByText(SYNAPSE_VERSION)).toBeVisible();
+
+  expect(await scanViolations(page)).toEqual([]);
+});
+
+test("finds no violations on the send announcement page", async ({ page }) => {
+  await loginAs(page);
+  await page.goto("/announcements");
+
+  await expect(
+    page.getByRole("heading", heading("Send an announcement")),
+  ).toBeVisible();
+  // The room card is enabled once the announcement rooms list resolved.
+  await expect(
+    page.getByRole("radio", { name: "An announcement room" }),
+  ).toBeEnabled();
+
+  expect(await scanViolations(page)).toEqual([]);
+});
+
+test("finds no violations on the send announcement page in raw mode", async ({
+  page,
+}) => {
+  await loginAs(page);
+  await page.goto("/announcements?user=%40alice%3Aexample.com");
+
+  // The deep-linked user shows once MAS resolved it.
+  await expect(
+    page.getByText("@alice:example.com", { exact: true }),
+  ).toBeVisible();
+  await page.getByRole("radio", { name: "Raw event" }).check();
+  await expect(
+    page.getByRole("textbox", { name: "Content (JSON)" }),
+  ).toBeVisible();
+
+  expect(await scanViolations(page)).toEqual([]);
+});
+
+test("finds no violations on the send announcement page with an error", async ({
+  page,
+  network,
+}) => {
+  network.use(sendServerNoticeDisabled());
+  await loginAs(page);
+  await page.goto("/announcements?user=%40alice%3Aexample.com");
+
+  await expect(
+    page.getByText("@alice:example.com", { exact: true }),
+  ).toBeVisible();
+  await page.getByRole("textbox", { name: "Message" }).fill("Hi");
+  await page.getByRole("button", { name: "Send" }).click();
+  await expect(
+    page.getByText("Failed to send the server notice"),
+  ).toBeVisible();
+
+  expect(await scanViolations(page)).toEqual([]);
+});
+
+test("finds no violations on the send announcement page without server notices", async ({
+  page,
+  network,
+}) => {
+  network.use(serverNoticesProbe(false));
+  await loginAs(page);
+  await page.goto("/announcements");
+
+  await expect(
+    page.getByRole("radio", { name: "A specific user" }),
+  ).toBeDisabled();
+  await expect(
+    page.getByRole("radio", { name: "An announcement room" }),
+  ).toBeChecked();
 
   expect(await scanViolations(page)).toEqual([]);
 });
