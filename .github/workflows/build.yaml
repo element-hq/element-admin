@@ -11,6 +11,8 @@ on:
       - main
     tags:
       - v*
+  # Builds a branch on demand, tagged with the branch name and `sha-<commit>`
+  workflow_dispatch:
 
 env:
   IMAGE: oci-push.vpn.infra.element.io/element-admin
