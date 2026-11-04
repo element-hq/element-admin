@@ -3709,6 +3709,12 @@
       "value": "Search users…"
     }
   ],
+  "pages.users.send_server_notice": [
+    {
+      "type": 0,
+      "value": "Send a server notice"
+    }
+  ],
   "pages.users.set_admin.alert.description": [
     {
       "type": 0,
