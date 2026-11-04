@@ -1419,6 +1419,18 @@
     "description": "Column header for the token expiration date column",
     "message": "Expires at"
   },
+  "pages.rooms.announcement_allowed_senders": {
+    "description": "In the room details, the title of the field listing the users allowed to post in this announcement room",
+    "message": "Allowed senders"
+  },
+  "pages.rooms.announcement_room": {
+    "description": "In the room details, the title of the field showing the identifier this announcement room has in the Synapse configuration",
+    "message": "Announcement room"
+  },
+  "pages.rooms.announcement_room_badge": {
+    "description": "Badge in the visibility column of the rooms list for a room which is a server announcement room, shown instead of its visibility",
+    "message": "Announcement room"
+  },
   "pages.rooms.columns.alias": {
     "description": "Column header for the room alias in the rooms list table",
     "message": "Alias"
@@ -1546,6 +1558,10 @@
   "pages.rooms.search_placeholder": {
     "description": "Placeholder for the search input on the rooms list page",
     "message": "Search…"
+  },
+  "pages.rooms.send_announcement": {
+    "description": "Button in the room details which opens the page to send a message to this announcement room",
+    "message": "Send an announcement"
   },
   "pages.rooms.title": {
     "description": "The title of the rooms list page",
