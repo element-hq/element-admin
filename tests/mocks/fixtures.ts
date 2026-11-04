@@ -32,6 +32,7 @@ import type {
   Room,
   RoomDetail,
   RoomsListResponse,
+  ServerAnnouncementRoom,
 } from "@/api/synapse";
 
 /**
@@ -685,6 +686,35 @@ export const DEFAULT_ROOMS: RoomOverrides[] = [
     joined_members: 2,
     joined_local_members: 2,
     state_events: 7,
+  },
+];
+
+/** The bot account Synapse posts server announcements as. */
+export const ANNOUNCEMENTS_MXID = `@_server_announcements:${SERVER_NAME}`;
+
+/**
+ * The announcement rooms served by every deployment. The first is backed by the
+ * first default room; the second has no `room_id`, which is how Synapse reports
+ * a configured room that was purged at runtime.
+ */
+export const DEFAULT_ANNOUNCEMENT_ROOMS: ServerAnnouncementRoom[] = [
+  {
+    id: "general",
+    room_id: roomId(DEFAULT_ROOMS, 0),
+    room_name: "Server announcements",
+    room_topic: "News from the server team",
+    room_avatar_url: null,
+    allowed_user_ids: [`@alice:${SERVER_NAME}`],
+    excluded_user_ids: [],
+  },
+  {
+    id: "ops",
+    room_id: null,
+    room_name: "Maintenance",
+    room_topic: null,
+    room_avatar_url: null,
+    allowed_user_ids: [],
+    excluded_user_ids: [],
   },
 ];
 
