@@ -35,7 +35,6 @@
   letter-spacing: var(--cpd-font-letter-spacing-body-md);
   color: var(--cpd-color-text-secondary);
   max-width: 60ch;
-  text-align: justify;
   grid-column: 1 / span 2;
 }
 
