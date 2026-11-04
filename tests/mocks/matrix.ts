@@ -28,11 +28,14 @@ import type {
   RoomMembers,
   RoomsListResponse,
   ScheduledTask,
+  ServerAnnouncementRoom,
+  ServerAnnouncementsList,
 } from "@/api/synapse";
 
 import {
   ACCESS_TOKEN,
   ADMIN_MXID,
+  ANNOUNCEMENTS_MXID,
   type AllowlistEntry,
   DEFAULT_ADMINBOT,
   destinationName,
@@ -421,6 +424,62 @@ export const scheduledTasks = (): RequestHandler =>
       scheduled_tasks: ScheduledTask[];
     }),
   );
+
+/**
+ * The configured announcement rooms. An empty list is what Synapse answers when
+ * `server_announcements` is not configured at all.
+ */
+export const serverAnnouncements = (
+  rooms: ServerAnnouncementRoom[],
+): RequestHandler =>
+  http.get("*/_synapse/admin/v1/server_announcements", () =>
+    HttpResponse.json({
+      management_user_id: ANNOUNCEMENTS_MXID,
+      rooms,
+    } satisfies ServerAnnouncementsList),
+  );
+
+/** The malformed user ID `serverNoticesEnabledQuery` probes with. */
+const SERVER_NOTICES_PROBE = "not-a-user-id";
+
+/** Is this `send_server_notice` request the app's server notices probe? */
+const isServerNoticesProbe = async (request: Request) => {
+  const body: unknown = await request.clone().json();
+  return (
+    typeof body === "object" &&
+    body !== null &&
+    "user_id" in body &&
+    body.user_id === SERVER_NOTICES_PROBE
+  );
+};
+
+/**
+ * Answers the server notices probe the way Synapse does: the malformed user ID
+ * is rejected when server notices are enabled, and the disabled check answers
+ * first when they are not. Any other `send_server_notice` request falls
+ * through.
+ */
+export const serverNoticesProbe = (enabled: boolean): RequestHandler =>
+  http.post("*/_synapse/admin/v1/send_server_notice", async ({ request }) => {
+    // Resolving to nothing hands the request on to the next handler.
+    if (!(await isServerNoticesProbe(request))) return;
+    // oxlint-disable-next-line typescript/consistent-return
+    return enabled
+      ? HttpResponse.json(
+          matrixError(
+            "M_INVALID_PARAM",
+            "Expected user ID string to start with '@'",
+          ),
+          { status: 400 },
+        )
+      : HttpResponse.json(
+          matrixError(
+            "M_UNKNOWN",
+            "Server notices are not enabled on this server",
+          ),
+          { status: 400 },
+        );
+  });
 
 /**
  * The federation destinations list. The count-only form
