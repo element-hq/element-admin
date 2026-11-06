@@ -5,16 +5,15 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
-FROM --platform=$BUILDPLATFORM docker.io/library/node:24-alpine AS builder
+# The image only bootstraps pnpm: it switches to the `packageManager` version
+# and installs the Node.js version from `devEngines.runtime` in package.json.
+FROM --platform=$BUILDPLATFORM ghcr.io/pnpm/pnpm:12 AS builder
 
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
-
-COPY . /app
 WORKDIR /app
-
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+
+COPY . .
 RUN pnpm run build
 RUN gzip -k /app/dist/**/*
 RUN ln -s /tmp/index.runtime.html dist/
