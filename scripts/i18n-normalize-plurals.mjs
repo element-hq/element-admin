@@ -72,6 +72,9 @@ for (const file of readdirSync(TRANSLATED_DIR)) {
     }
 
     if (ensureOtherClause(ast)) {
+      // printer.d.ts declares its own copy of the TYPE enum, so the parser's
+      // elements don't share an enum type with what printAST expects.
+      // oxlint-disable-next-line typescript/no-unsafe-enum-assignment
       entry.message = printAST(ast);
       fileChanged = true;
       totalFixed += 1;
