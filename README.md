@@ -74,7 +74,7 @@ git clone https://github.com/element-hq/element-admin.git
 cd element-admin
 ```
 
-2. Install dependencies (requires Node.js 18+ and pnpm):
+2. Install dependencies with [pnpm](https://pnpm.io/installation) 11 or later. It also downloads the Node.js version that `devEngines.runtime` in `package.json` declares:
 
 ```bash
 pnpm install

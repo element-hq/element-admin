@@ -5,6 +5,8 @@
 #
 # $schema: https://www.schemastore.org/pnpm-workspace.json
 
+saveExact: true
+
 trustPolicy: no-downgrade
 
 trustPolicyExclude:
