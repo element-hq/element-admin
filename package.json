@@ -53,7 +53,7 @@
     "vaul": "1.1.2",
     "verkit": "^0.5.0",
     "woothee": "1.11.1",
-    "zustand": "5.0.15"
+    "zustand": "5.0.16"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",
