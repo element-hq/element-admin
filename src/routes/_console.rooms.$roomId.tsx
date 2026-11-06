@@ -6,6 +6,7 @@
 /* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
 import {
   useMutation,
+  useQuery,
   useSuspenseQuery,
   useQueryClient,
 } from "@tanstack/react-query";
@@ -13,6 +14,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import {
   CloseIcon,
   DeleteIcon,
+  SendIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
   Alert,
@@ -31,6 +33,7 @@ import {
   deleteRoom,
   roomDetailQuery,
   scheduledTasksForResource,
+  serverAnnouncementsQuery,
 } from "@/api/synapse";
 import type { ScheduledTask } from "@/api/synapse";
 import * as Data from "@/components/data";
@@ -402,9 +405,9 @@ const ScheduledTaskDisplay: React.FC<ScheduledTaskProps> = ({
   }
 };
 
-const RoomDeletionStatusDisplay: React.FC<RoomCommonProps> = (
-  props: RoomCommonProps,
-) => {
+const RoomDeletionStatusDisplay: React.FC<
+  React.PropsWithChildren<RoomCommonProps>
+> = ({ children, ...props }: React.PropsWithChildren<RoomCommonProps>) => {
   const { data: scheduledTasks } = useSuspenseQuery(
     scheduledTasksForResource(props.synapseRoot, props.roomId),
   );
@@ -420,6 +423,8 @@ const RoomDeletionStatusDisplay: React.FC<RoomCommonProps> = (
 
   return (
     <div className="flex flex-col gap-4">
+      {children}
+
       {displayDeleteButton && <DeleteRoomDialog {...props} />}
 
       {scheduledTasks.scheduled_tasks.map((scheduledTask) => (
@@ -485,6 +490,13 @@ function RouteComponent() {
 
   const { data: room } = useSuspenseQuery(roomDetailQuery(synapseRoot, roomId));
 
+  const { data: announcements } = useQuery(
+    serverAnnouncementsQuery(synapseRoot),
+  );
+  const announcementRoom = announcements?.rooms.find(
+    (candidate) => candidate.room_id === room.room_id,
+  );
+
   const intl = useIntl();
 
   return (
@@ -537,10 +549,58 @@ function RouteComponent() {
           roomType={room.room_type}
           members={room.joined_members}
           synapseRoot={synapseRoot}
-        />
+        >
+          {announcementRoom && (
+            <ButtonLink
+              kind="primary"
+              size="md"
+              Icon={SendIcon}
+              to="/announcements"
+              search={{ room: announcementRoom.id }}
+            >
+              <FormattedMessage
+                id="pages.rooms.send_announcement"
+                defaultMessage="Send an announcement"
+                description="Button in the room details which opens the page to send a message to this announcement room"
+              />
+            </ButtonLink>
+          )}
+        </RoomDeletionStatusDisplay>
       </div>
 
       <Data.Grid>
+        {announcementRoom && (
+          <>
+            <Data.Item>
+              <Data.Title>
+                <FormattedMessage
+                  id="pages.rooms.announcement_room"
+                  defaultMessage="Announcement room"
+                  description="In the room details, the title of the field showing the identifier this announcement room has in the Synapse configuration"
+                />
+              </Data.Title>
+              <Data.Value>{announcementRoom.id}</Data.Value>
+            </Data.Item>
+
+            <Data.Item>
+              <Data.Title>
+                <FormattedMessage
+                  id="pages.rooms.announcement_allowed_senders"
+                  defaultMessage="Allowed senders"
+                  description="In the room details, the title of the field listing the users allowed to post in this announcement room"
+                />
+              </Data.Title>
+              <Data.Value className="break-all">
+                {announcementRoom.allowed_user_ids.length > 0
+                  ? announcementRoom.allowed_user_ids.map((userId) => (
+                      <div key={userId}>{userId}</div>
+                    ))
+                  : "—"}
+              </Data.Value>
+            </Data.Item>
+          </>
+        )}
+
         <Data.Item>
           <Data.Title>Visibility</Data.Title>
           <Data.Value>{room.public ? "Public" : "Private"}</Data.Value>

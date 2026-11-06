@@ -20,6 +20,7 @@ import {
   KeyIcon,
   LockIcon,
   PlusIcon,
+  SendIcon,
 } from "@vector-im/compound-design-tokens/assets/web/icons";
 import {
   Alert,
@@ -1735,6 +1736,22 @@ function RouteComponent() {
         </div>
 
         <div className="flex flex-col gap-4">
+          {!deactivated && (
+            <ButtonLink
+              kind="secondary"
+              size="md"
+              Icon={SendIcon}
+              to="/announcements"
+              search={{ user: mxid }}
+            >
+              <FormattedMessage
+                id="pages.users.send_server_notice"
+                defaultMessage="Send a server notice"
+                description="Button in the user details which opens the page to send a server notice to this user"
+              />
+            </ButtonLink>
+          )}
+
           {locked && !deactivated && (
             <UnlockButton
               user={user}

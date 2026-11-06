@@ -586,6 +586,192 @@
       "value": "Users"
     }
   ],
+  "pages.announcements.content.body_help": [
+    {
+      "type": 0,
+      "value": "Markdown is supported."
+    }
+  ],
+  "pages.announcements.content.body_label": [
+    {
+      "type": 0,
+      "value": "Message"
+    }
+  ],
+  "pages.announcements.content.legend": [
+    {
+      "type": 0,
+      "value": "Content"
+    }
+  ],
+  "pages.announcements.content.message": [
+    {
+      "type": 0,
+      "value": "Message"
+    }
+  ],
+  "pages.announcements.content.raw": [
+    {
+      "type": 0,
+      "value": "Raw event"
+    }
+  ],
+  "pages.announcements.description": [
+    {
+      "type": 0,
+      "value": "Post a message as the server to one user, or to everyone through an announcement room."
+    }
+  ],
+  "pages.announcements.raw.content_label": [
+    {
+      "type": 0,
+      "value": "Content (JSON)"
+    }
+  ],
+  "pages.announcements.raw.content_not_object": [
+    {
+      "type": 0,
+      "value": "Content must be a JSON object"
+    }
+  ],
+  "pages.announcements.raw.member_event_error": [
+    {
+      "type": 0,
+      "value": "Membership events cannot be sent."
+    }
+  ],
+  "pages.announcements.raw.type_label": [
+    {
+      "type": 0,
+      "value": "Event type"
+    }
+  ],
+  "pages.announcements.recipient.legend": [
+    {
+      "type": 0,
+      "value": "Recipient"
+    }
+  ],
+  "pages.announcements.recipient.notices_disabled": [
+    {
+      "type": 0,
+      "value": "Server notices are not enabled on this server. Enable them under server_notices in the Synapse configuration."
+    }
+  ],
+  "pages.announcements.recipient.room": [
+    {
+      "type": 0,
+      "value": "An announcement room"
+    }
+  ],
+  "pages.announcements.recipient.room_help": [
+    {
+      "type": 0,
+      "value": "Sends to every user the room is delivered to."
+    }
+  ],
+  "pages.announcements.recipient.room_none_configured": [
+    {
+      "type": 0,
+      "value": "No announcement room is configured on this server. Add rooms under server_announcements in the Synapse configuration."
+    }
+  ],
+  "pages.announcements.recipient.room_unsupported": [
+    {
+      "type": 0,
+      "value": "This version of Synapse does not support announcement rooms."
+    }
+  ],
+  "pages.announcements.recipient.unknown_room": [
+    {
+      "type": 0,
+      "value": "The announcement room “"
+    },
+    {
+      "type": 1,
+      "value": "id"
+    },
+    {
+      "type": 0,
+      "value": "” is not configured on this server."
+    }
+  ],
+  "pages.announcements.recipient.user": [
+    {
+      "type": 0,
+      "value": "A specific user"
+    }
+  ],
+  "pages.announcements.recipient.user_help": [
+    {
+      "type": 0,
+      "value": "Sends a server notice to that user only."
+    }
+  ],
+  "pages.announcements.room.deleted_help": [
+    {
+      "type": 0,
+      "value": "This room was deleted. Restart Synapse to recreate it."
+    }
+  ],
+  "pages.announcements.room.label": [
+    {
+      "type": 0,
+      "value": "Announcement room"
+    }
+  ],
+  "pages.announcements.send.button": [
+    {
+      "type": 0,
+      "value": "Send"
+    }
+  ],
+  "pages.announcements.send.room_error": [
+    {
+      "type": 0,
+      "value": "Failed to send the announcement"
+    }
+  ],
+  "pages.announcements.send.room_success": [
+    {
+      "type": 0,
+      "value": "Announcement sent"
+    }
+  ],
+  "pages.announcements.send.user_error": [
+    {
+      "type": 0,
+      "value": "Failed to send the server notice"
+    }
+  ],
+  "pages.announcements.send.user_success": [
+    {
+      "type": 0,
+      "value": "Server notice sent"
+    }
+  ],
+  "pages.announcements.title": [
+    {
+      "type": 0,
+      "value": "Send an announcement"
+    }
+  ],
+  "pages.announcements.user.label": [
+    {
+      "type": 0,
+      "value": "User"
+    }
+  ],
+  "pages.announcements.user.not_found": [
+    {
+      "type": 1,
+      "value": "mxid"
+    },
+    {
+      "type": 0,
+      "value": " is not a user of this server"
+    }
+  ],
   "pages.auditing.title": [
     {
       "type": 0,
@@ -638,6 +824,12 @@
     {
       "type": 0,
       "value": "(You're running the latest version)"
+    }
+  ],
+  "pages.dashboard.send_announcement": [
+    {
+      "type": 0,
+      "value": "Send an announcement"
     }
   ],
   "pages.dashboard.synapse_version": [
@@ -2609,6 +2801,24 @@
       "value": "Expires at"
     }
   ],
+  "pages.rooms.announcement_allowed_senders": [
+    {
+      "type": 0,
+      "value": "Allowed senders"
+    }
+  ],
+  "pages.rooms.announcement_room": [
+    {
+      "type": 0,
+      "value": "Announcement room"
+    }
+  ],
+  "pages.rooms.announcement_room_badge": [
+    {
+      "type": 0,
+      "value": "Announcement room"
+    }
+  ],
   "pages.rooms.columns.alias": [
     {
       "type": 0,
@@ -2925,6 +3135,12 @@
     {
       "type": 0,
       "value": "Search…"
+    }
+  ],
+  "pages.rooms.send_announcement": [
+    {
+      "type": 0,
+      "value": "Send an announcement"
     }
   ],
   "pages.rooms.title": [
@@ -3493,6 +3709,12 @@
       "value": "Search users…"
     }
   ],
+  "pages.users.send_server_notice": [
+    {
+      "type": 0,
+      "value": "Send a server notice"
+    }
+  ],
   "pages.users.set_admin.alert.description": [
     {
       "type": 0,
@@ -3995,6 +4217,40 @@
       "value": "Language settings"
     }
   ],
+  "ui.room_picker.deleted_room": [
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": " (deleted)"
+    }
+  ],
+  "ui.room_picker.no_match_help": [
+    {
+      "type": 0,
+      "value": "Try a different search term. Only the announcement rooms configured in Synapse are listed."
+    }
+  ],
+  "ui.room_picker.placeholder": [
+    {
+      "type": 0,
+      "value": "Search announcement rooms…"
+    }
+  ],
+  "ui.room_picker.view": [
+    {
+      "type": 0,
+      "value": "View"
+    }
+  ],
+  "ui.user_picker.clear": [
+    {
+      "type": 0,
+      "value": "Clear selection"
+    }
+  ],
   "ui.user_picker.loading_list": [
     {
       "type": 0,
@@ -4019,6 +4275,12 @@
     {
       "type": 0,
       "value": " using their localpart."
+    }
+  ],
+  "ui.user_picker.view": [
+    {
+      "type": 0,
+      "value": "View"
     }
   ]
 }

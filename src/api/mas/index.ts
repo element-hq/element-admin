@@ -354,6 +354,26 @@ export const userQuery = (serverName: string, userId: string) =>
     },
   });
 
+/** A user looked up by its localpart, or `null` if MAS has no such user. */
+export const userByUsernameQuery = (serverName: string, username: string) =>
+  queryOptions({
+    queryKey: ["mas", "user-by-username", serverName, username],
+    queryFn: async ({
+      client,
+      signal,
+    }): Promise<api.SingleResponseForUser | null> => {
+      const result = await api.getUserByUsername({
+        ...(await masBaseOptions(client, serverName, signal)),
+        path: { username },
+      });
+      if (result.response?.status === 404) {
+        return null;
+      }
+      ensureNoError(result);
+      return result.data;
+    },
+  });
+
 export const usersCountQuery = (
   serverName: string,
   parameters: UserListFilters = {},

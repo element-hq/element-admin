@@ -5,11 +5,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
  */
 
-.selected-user {
+.selected {
   display: flex;
   gap: var(--cpd-space-4x);
 
-  .user-chip {
+  .chip {
     flex: 1;
     display: flex;
     gap: var(--cpd-space-3x);
@@ -21,7 +21,7 @@
   }
 }
 
-.user-infos {
+.infos {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -105,6 +105,15 @@
 
       &[data-active="true"] {
         background-color: var(--cpd-color-bg-action-secondary-pressed);
+      }
+
+      &[aria-disabled="true"] {
+        background-color: var(--cpd-color-bg-canvas-disabled);
+
+        .primary,
+        .secondary {
+          color: var(--cpd-color-text-disabled);
+        }
       }
     }
 
