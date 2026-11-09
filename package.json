@@ -64,7 +64,7 @@
     "@localazy/cli": "2.0.12",
     "@msw/playwright": "0.7.0",
     "@playwright/test": "1.64.1",
-    "@tailwindcss/vite": "4.3.3",
+    "@tailwindcss/vite": "4.3.4",
     "@tanstack/devtools-vite": "0.8.6",
     "@tanstack/eslint-plugin-query": "5.105.0",
     "@tanstack/eslint-plugin-router": "1.162.0",
@@ -91,7 +91,7 @@
     "stylelint": "17.16.0",
     "stylelint-config-standard": "40.0.0",
     "stylelint-config-tailwindcss": "1.0.1",
-    "tailwindcss": "4.3.3",
+    "tailwindcss": "4.3.4",
     "typescript": "7.0.2",
     "vite": "8.3.5"
   },
