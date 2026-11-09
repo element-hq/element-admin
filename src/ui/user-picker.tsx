@@ -6,7 +6,6 @@
 import {
   autoUpdate,
   FloatingFocusManager,
-  size,
   useFloating,
   useFocus,
   useInteractions,
@@ -18,14 +17,13 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { CloseIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Avatar, Button, Form } from "@vector-im/compound-web";
 import { useCallback, useId, useMemo, useRef, useState } from "react";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 import { usersInfiniteQuery } from "@/api/mas";
 import type { SingleResourceForUser } from "@/api/mas/api";
 import { mediaThumbnailQuery, profileQuery } from "@/api/matrix";
+import * as Picker from "@/components/picker";
 import { useImageBlob } from "@/utils/blob";
-
-import styles from "./user-picker.module.css";
 
 const UserChipContent = ({
   synapseRoot,
@@ -43,16 +41,16 @@ const UserChipContent = ({
   return (
     <>
       <Avatar id={mxid} name={displayName || mxid} src={avatar} size="32px" />
-      <div className={styles["user-infos"]}>
+      <Picker.Infos>
         {displayName ? (
           <>
-            <div className={styles["primary"]}>{displayName}</div>
-            <div className={styles["secondary"]}>{mxid}</div>
+            <Picker.Primary>{displayName}</Picker.Primary>
+            <Picker.Secondary>{mxid}</Picker.Secondary>
           </>
         ) : (
-          <div className={styles["primary"]}>{mxid}</div>
+          <Picker.Primary>{mxid}</Picker.Primary>
         )}
-      </div>
+      </Picker.Infos>
     </>
   );
 };
@@ -69,11 +67,10 @@ export const UserPicker = ({
   serverName: string;
   synapseRoot: string;
 }) => {
+  const intl = useIntl();
   // Tracks the selected user
   const [selectedUser, setSelectedUser] =
     useState<null | SingleResourceForUser>(null);
-  // Tracks the active/hovered index in the list
-  const [activeIndex, setActiveIndex] = useState<null | number>(null);
 
   // This state is in-sync with the input, and the debounced one is the one kicking off the query
   const [userSearch, setUserSearch] = useState("");
@@ -81,54 +78,6 @@ export const UserPicker = ({
     normalizeSearch(userSearch),
     { key: "user-picker", wait: 200 },
     ({ isPending }) => ({ isPending }),
-  );
-
-  const listRef = useRef<(HTMLElement | null)[]>([]);
-  const [showList, setShowList] = useState(false);
-  const { refs, floatingStyles, context } = useFloating<HTMLInputElement>({
-    open: showList,
-    onOpenChange: setShowList,
-    // Makes sure to update the sizing/positioning when the window is resizing,
-    // which is especially important on mobile
-    whileElementsMounted: autoUpdate,
-    middleware: [
-      size({
-        // Gives a bit of padding with the bottom of the screen
-        padding: 16,
-        apply({ rects, elements, availableHeight }) {
-          // Inject a few CSS variables to get the sizing right
-          elements.floating.style.setProperty(
-            "--reference-width",
-            `${rects.reference.width}px`,
-          );
-          elements.floating.style.setProperty(
-            "--reference-height",
-            `${rects.reference.height}px`,
-          );
-          elements.floating.style.setProperty(
-            "--available-height",
-            `${availableHeight}px`,
-          );
-        },
-      }),
-    ],
-  });
-
-  // This gives the right aria roles to the input and the list items
-  const role = useRole(context, { role: "combobox" });
-  // This gives the keyboard list navigation behaviour
-  const listNav = useListNavigation(context, {
-    listRef,
-    activeIndex: activeIndex,
-    onNavigate: setActiveIndex,
-    // This keeps the focus on the text input rather than on the items
-    virtual: true,
-  });
-  // This opens/closes the list when focusing the input
-  const focus = useFocus(context);
-
-  const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
-    [role, listNav, focus],
   );
 
   const { data, isPlaceholderData } = useInfiniteQuery({
@@ -155,18 +104,49 @@ export const UserPicker = ({
     [data, userSearch],
   );
 
+  // Tracks the active/hovered index in the list
+  const [activeIndex, setActiveIndex] = useState<null | number>(null);
+
+  const listRef = useRef<(HTMLElement | null)[]>([]);
+  const [showList, setShowList] = useState(false);
+  const { refs, floatingStyles, context } = useFloating<HTMLInputElement>({
+    open: showList,
+    onOpenChange: setShowList,
+    // Makes sure to update the sizing/positioning when the window is resizing,
+    // which is especially important on mobile
+    whileElementsMounted: autoUpdate,
+    middleware: Picker.floatingMiddleware,
+  });
+
+  // This gives the right aria roles to the input and the list items
+  const role = useRole(context, { role: "combobox" });
+  // This gives the keyboard list navigation behaviour
+  const listNav = useListNavigation(context, {
+    listRef,
+    activeIndex,
+    onNavigate: setActiveIndex,
+    // This keeps the focus on the text input rather than on the items
+    virtual: true,
+  });
+  // This opens/closes the list when focusing the input
+  const focus = useFocus(context);
+
+  const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
+    [role, listNav, focus],
+  );
+
   const onSearchInput = useCallback(
     (event: React.InputEvent<HTMLInputElement>) => {
       event.preventDefault();
-      const newValue = event.currentTarget.value;
-      setUserSearch(newValue);
+      setUserSearch(event.currentTarget.value);
       // Reset active index when searching
       setActiveIndex(null);
     },
     [],
   );
 
-  // Select the current active item when pressing enter
+  // Select the current active user when pressing enter, unless the list may
+  // not match the search yet
   const onSearchKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
       const activeUser =
@@ -180,7 +160,6 @@ export const UserPicker = ({
   );
 
   const onClearSelection = useCallback(() => {
-    setShowList(false);
     setUserSearch("");
     setSelectedUser(null);
   }, []);
@@ -189,34 +168,39 @@ export const UserPicker = ({
 
   if (selectedUser) {
     return (
-      <div className={styles["selected-user"]}>
+      <Picker.Selection>
         <Form.TextControl type="hidden" value={selectedUser.id} />
-        <div className={styles["user-chip"]}>
+        <Picker.Chip>
           <UserChipContent
             synapseRoot={synapseRoot}
             mxid={`@${selectedUser.attributes.username}:${serverName}`}
           />
-        </div>
+        </Picker.Chip>
         <Button
           iconOnly
           Icon={CloseIcon}
           kind="secondary"
+          aria-label={intl.formatMessage({
+            id: "ui.user_picker.clear",
+            defaultMessage: "Clear selection",
+            description:
+              "Accessible name of the button which clears the chosen user in the user picker",
+          })}
           onClick={onClearSelection}
         />
-      </div>
+      </Picker.Selection>
     );
   }
 
   return (
     <>
-      <Form.TextControl
+      <Picker.Input
         ref={(node) => {
           refs.setReference(node);
         }}
         value={userSearch}
         required
         aria-autocomplete="list"
-        className={styles["reference"]}
         {...getReferenceProps({
           onInput: onSearchInput,
           onKeyDown: onSearchKeyDown,
@@ -228,33 +212,32 @@ export const UserPicker = ({
           initialFocus={-1}
           visuallyHiddenDismiss
         >
-          <div
+          <Picker.Floating
             ref={(node) => {
               refs.setFloating(node);
             }}
             style={floatingStyles}
-            className={styles["floating"]}
             {...getFloatingProps()}
           >
             {users.length === 0 ? (
               isLoading ? (
-                <div className={styles["loading"]}>
+                <Picker.Loading>
                   <FormattedMessage
                     id="ui.user_picker.loading_list"
                     description="On the user-picker list, this is the placeholder shown whilst things are loading"
                     defaultMessage="Loading…"
                   />
-                </div>
+                </Picker.Loading>
               ) : (
-                <div className={styles["no-match"]}>
-                  <div className={styles["headline"]}>
+                <Picker.Empty>
+                  <Picker.EmptyTitle>
                     <FormattedMessage
                       id="ui.user_picker.no_match"
                       description="On the user-picker list, this is the placeholder shown when there are no results"
                       defaultMessage="No match"
                     />
-                  </div>
-                  <div className={styles["help"]}>
+                  </Picker.EmptyTitle>
+                  <Picker.EmptyHelp>
                     <FormattedMessage
                       id="ui.user_picker.no_match_help"
                       description="On the user-picker list, this is the help text shown when there are no results"
@@ -263,17 +246,18 @@ export const UserPicker = ({
                         serverName,
                       }}
                     />
-                  </div>
-                </div>
+                  </Picker.EmptyHelp>
+                </Picker.Empty>
               )
             ) : (
-              <ul className={styles["list"]} aria-busy={isLoading}>
+              <Picker.List busy={isLoading}>
                 {users.map((user, index) => (
-                  <li
+                  <Picker.Item
                     key={user.id}
                     ref={(node) => {
                       listRef.current[index] = node;
                     }}
+                    active={index === activeIndex}
                     {...getItemProps({
                       id: `${itemIdPrefix}-${user.id}`,
                       onClick(event: React.MouseEvent<HTMLLIElement>) {
@@ -282,20 +266,16 @@ export const UserPicker = ({
                       },
                       active: index === activeIndex,
                     })}
-                    className={styles["item"]}
-                    data-active={index === activeIndex}
-                    // oxlint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-                    tabIndex={index === activeIndex ? 0 : -1}
                   >
                     <UserChipContent
                       synapseRoot={synapseRoot}
                       mxid={`@${user.attributes.username}:${serverName}`}
                     />
-                  </li>
+                  </Picker.Item>
                 ))}
-              </ul>
+              </Picker.List>
             )}
-          </div>
+          </Picker.Floating>
         </FloatingFocusManager>
       )}
     </>
