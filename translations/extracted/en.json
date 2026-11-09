@@ -2015,6 +2015,10 @@
     "description": "Title of the language switcher modal",
     "message": "Language settings"
   },
+  "ui.user_picker.clear": {
+    "description": "Accessible name of the button which clears the chosen user in the user picker",
+    "message": "Clear selection"
+  },
   "ui.user_picker.loading_list": {
     "description": "On the user-picker list, this is the placeholder shown whilst things are loading",
     "message": "Loading…"

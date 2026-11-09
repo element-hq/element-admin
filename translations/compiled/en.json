@@ -3995,6 +3995,12 @@
       "value": "Language settings"
     }
   ],
+  "ui.user_picker.clear": [
+    {
+      "type": 0,
+      "value": "Clear selection"
+    }
+  ],
   "ui.user_picker.loading_list": [
     {
       "type": 0,
