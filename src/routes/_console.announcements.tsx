@@ -523,7 +523,7 @@ function SendForm({ serverName, synapseRoot }: SendFormProps) {
             help={
               <FormattedMessage
                 id="pages.announcements.recipient.user_help"
-                defaultMessage="Sends a server notice to that user only."
+                defaultMessage="Sends a message to a single user."
                 description="Help text of the card to send a server notice to a single user"
               />
             }
@@ -549,7 +549,7 @@ function SendForm({ serverName, synapseRoot }: SendFormProps) {
             help={
               <FormattedMessage
                 id="pages.announcements.recipient.room_help"
-                defaultMessage="Sends to every user the room is delivered to."
+                defaultMessage="Sends to every user."
                 description="Help text of the card to send a message to an announcement room"
               />
             }

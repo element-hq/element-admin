@@ -667,7 +667,7 @@
   "pages.announcements.recipient.room_help": [
     {
       "type": 0,
-      "value": "Sends to every user the room is delivered to."
+      "value": "Sends to every user."
     }
   ],
   "pages.announcements.recipient.room_none_configured": [
@@ -705,7 +705,7 @@
   "pages.announcements.recipient.user_help": [
     {
       "type": 0,
-      "value": "Sends a server notice to that user only."
+      "value": "Sends a message to a single user."
     }
   ],
   "pages.announcements.room.deleted_help": [

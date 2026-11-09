@@ -241,7 +241,7 @@
   },
   "pages.announcements.recipient.room_help": {
     "description": "Help text of the card to send a message to an announcement room",
-    "message": "Sends to every user the room is delivered to."
+    "message": "Sends to every user."
   },
   "pages.announcements.recipient.room_none_configured": {
     "description": "Shown in the announcement room card when Synapse has no announcement room configured. 'server_announcements' is a configuration key and must not be translated.",
@@ -261,7 +261,7 @@
   },
   "pages.announcements.recipient.user_help": {
     "description": "Help text of the card to send a server notice to a single user",
-    "message": "Sends a server notice to that user only."
+    "message": "Sends a message to a single user."
   },
   "pages.announcements.room.deleted_help": {
     "description": "Help text under the announcement room picker when the chosen room was deleted",
