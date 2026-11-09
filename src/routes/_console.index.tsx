@@ -5,6 +5,7 @@
 
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { SendIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Heading, Separator, Text } from "@vector-im/compound-web";
 import { defineMessage, FormattedMessage } from "react-intl";
 
@@ -14,6 +15,7 @@ import { usersCountQuery } from "@/api/mas";
 import { wellKnownQuery } from "@/api/matrix";
 import { roomsCountQuery, serverVersionQuery } from "@/api/synapse";
 import * as Data from "@/components/data";
+import { ButtonLink } from "@/components/link";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import AppFooter from "@/ui/footer";
@@ -155,6 +157,20 @@ function RouteComponent() {
             <Page.Title>
               <FormattedMessage {...titleMessage} />
             </Page.Title>
+            <Page.Controls>
+              <ButtonLink
+                to="/announcements"
+                kind="primary"
+                size="md"
+                Icon={SendIcon}
+              >
+                <FormattedMessage
+                  id="pages.dashboard.send_announcement"
+                  defaultMessage="Send an announcement"
+                  description="On the dashboard, the button which opens the page to send a server announcement or notice"
+                />
+              </ButtonLink>
+            </Page.Controls>
           </Page.Header>
 
           <section className="flex flex-col gap-6">

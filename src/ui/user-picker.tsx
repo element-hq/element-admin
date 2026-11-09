@@ -14,7 +14,10 @@ import {
 } from "@floating-ui/react";
 import { useDebouncedValue } from "@tanstack/react-pacer";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { CloseIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
+import {
+  ArrowRightIcon,
+  CloseIcon,
+} from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Avatar, Button, Form } from "@vector-im/compound-web";
 import { useCallback, useId, useMemo, useRef, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
@@ -22,6 +25,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { usersInfiniteQuery } from "@/api/mas";
 import type { SingleResourceForUser } from "@/api/mas/api";
 import { mediaThumbnailQuery, profileQuery } from "@/api/matrix";
+import { ButtonLink } from "@/components/link";
 import * as Picker from "@/components/picker";
 import { useImageBlob } from "@/utils/blob";
 
@@ -63,14 +67,25 @@ const normalizeSearch = (term: string): string =>
 export const UserPicker = ({
   serverName,
   synapseRoot,
+  defaultUser = null,
+  onChange,
 }: {
   serverName: string;
   synapseRoot: string;
+  defaultUser?: SingleResourceForUser | null;
+  onChange?: (user: SingleResourceForUser | null) => void;
 }) => {
   const intl = useIntl();
   // Tracks the selected user
-  const [selectedUser, setSelectedUser] =
-    useState<null | SingleResourceForUser>(null);
+  const [selectedUser, setSelectedUserState] =
+    useState<null | SingleResourceForUser>(defaultUser);
+  const setSelectedUser = useCallback(
+    (user: SingleResourceForUser | null) => {
+      setSelectedUserState(user);
+      onChange?.(user);
+    },
+    [onChange],
+  );
 
   // This state is in-sync with the input, and the debounced one is the one kicking off the query
   const [userSearch, setUserSearch] = useState("");
@@ -156,13 +171,13 @@ export const UserPicker = ({
         setSelectedUser(activeUser);
       }
     },
-    [activeIndex, isLoading, users],
+    [activeIndex, isLoading, users, setSelectedUser],
   );
 
   const onClearSelection = useCallback(() => {
     setUserSearch("");
     setSelectedUser(null);
-  }, []);
+  }, [setSelectedUser]);
 
   const itemIdPrefix = useId();
 
@@ -176,6 +191,19 @@ export const UserPicker = ({
             mxid={`@${selectedUser.attributes.username}:${serverName}`}
           />
         </Picker.Chip>
+        <ButtonLink
+          iconOnly
+          Icon={ArrowRightIcon}
+          kind="secondary"
+          to="/users/$userId"
+          params={{ userId: selectedUser.id }}
+          aria-label={intl.formatMessage({
+            id: "ui.user_picker.view",
+            defaultMessage: "View",
+            description:
+              "Accessible name of the button next to the chosen user which opens their details",
+          })}
+        />
         <Button
           iconOnly
           Icon={CloseIcon}

@@ -497,3 +497,174 @@ export const scheduledTasksForResource = (
         : false;
     },
   });
+
+// Server announcements and server notices
+
+const ServerAnnouncementRoom = v.object({
+  id: v.string(),
+  room_id: v.nullable(v.string()),
+  room_name: v.string(),
+  room_topic: v.nullable(v.string()),
+  room_avatar_url: v.nullable(v.string()),
+  allowed_user_ids: v.array(v.string()),
+  excluded_user_ids: v.array(v.string()),
+});
+
+export type ServerAnnouncementRoom = v.InferOutput<
+  typeof ServerAnnouncementRoom
+>;
+
+const ServerAnnouncementsList = v.object({
+  management_user_id: v.string(),
+  rooms: v.array(ServerAnnouncementRoom),
+});
+
+export type ServerAnnouncementsList = v.InferOutput<
+  typeof ServerAnnouncementsList
+>;
+
+/**
+ * The announcement rooms configured on the server, or `null` on a Synapse that
+ * predates the endpoint.
+ */
+export const serverAnnouncementsQuery = (synapseRoot: string) =>
+  queryOptions({
+    queryKey: ["synapse", "server_announcements", synapseRoot],
+    queryFn: async ({
+      client,
+      signal,
+    }): Promise<ServerAnnouncementsList | null> => {
+      const url = new URL(
+        "/_synapse/admin/v1/server_announcements",
+        synapseRoot,
+      );
+
+      const response = await fetch(url, await baseOptions(client, signal));
+
+      if (response.status === 404) {
+        return null;
+      }
+
+      await ensureNotError(response);
+
+      return v.parse(ServerAnnouncementsList, await response.json());
+    },
+  });
+
+/**
+ * Whether server notices are enabled. Synapse has no endpoint saying so, but
+ * its `send_server_notice` servlet checks that they are enabled before it parses
+ * the user ID, and rejects a malformed ID before any lookup, so this request is
+ * answered by one of those two checks and never reaches a user.
+ */
+export const serverNoticesEnabledQuery = (synapseRoot: string) =>
+  queryOptions({
+    queryKey: ["synapse", "server_notices_enabled", synapseRoot],
+    queryFn: async ({ client, signal }): Promise<boolean> => {
+      const url = new URL("/_synapse/admin/v1/send_server_notice", synapseRoot);
+
+      const options = await baseOptions(client, signal);
+      const response = await fetch(url, {
+        ...options,
+        method: "POST",
+        body: JSON.stringify({ user_id: "not-a-user-id", content: {} }),
+        headers: {
+          ...options.headers,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.status === 400) {
+        const body: unknown = await response
+          .clone()
+          .json()
+          .catch(() => null);
+        const error = v.safeParse(MatrixErrorResponse, body);
+        if (error.success && error.output.errcode === "M_INVALID_PARAM")
+          return true;
+        if (error.success && error.output.errcode === "M_UNKNOWN") return false;
+      }
+
+      await ensureNotError(response);
+
+      throw new Error("Synapse accepted the server notices probe");
+    },
+  });
+
+export interface ServerEventParameters {
+  type?: string;
+  content: Record<string, unknown>;
+}
+
+const SendServerAnnouncementResponse = v.object({
+  event_id: v.string(),
+  room_id: v.string(),
+});
+
+export type SendServerAnnouncementResponse = v.InferOutput<
+  typeof SendServerAnnouncementResponse
+>;
+
+export const sendServerAnnouncement = async (
+  client: QueryClient,
+  synapseRoot: string,
+  id: string,
+  parameters: ServerEventParameters,
+  signal?: AbortSignal,
+): Promise<SendServerAnnouncementResponse> => {
+  const url = new URL(
+    `/_synapse/admin/v1/server_announcements/${encodeURIComponent(id)}/send`,
+    synapseRoot,
+  );
+
+  const options = await baseOptions(client, signal);
+  const response = await fetch(url, {
+    ...options,
+    method: "POST",
+    body: JSON.stringify(parameters),
+    headers: {
+      ...options.headers,
+      "Content-Type": "application/json",
+    },
+  });
+
+  await ensureNotError(response);
+
+  return v.parse(SendServerAnnouncementResponse, await response.json());
+};
+
+const SendServerNoticeResponse = v.object({
+  event_id: v.string(),
+});
+
+export type SendServerNoticeResponse = v.InferOutput<
+  typeof SendServerNoticeResponse
+>;
+
+export interface SendServerNoticeParameters extends ServerEventParameters {
+  user_id: string;
+}
+
+export const sendServerNotice = async (
+  client: QueryClient,
+  synapseRoot: string,
+  parameters: SendServerNoticeParameters,
+  signal?: AbortSignal,
+): Promise<SendServerNoticeResponse> => {
+  const url = new URL("/_synapse/admin/v1/send_server_notice", synapseRoot);
+
+  const options = await baseOptions(client, signal);
+  const response = await fetch(url, {
+    ...options,
+    method: "POST",
+    body: JSON.stringify(parameters),
+    headers: {
+      ...options.headers,
+      "Content-Type": "application/json",
+    },
+  });
+
+  await ensureNotError(response);
+
+  return v.parse(SendServerNoticeResponse, await response.json());
+};
