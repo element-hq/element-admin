@@ -4,8 +4,8 @@
 
 /**
  * Handlers for everything that is not the MAS admin API: Matrix
- * client-server, the Synapse admin API, the ESS endpoints and the public
- * GitHub releases API.
+ * client-server, the Synapse admin API, the ESS endpoints, the public
+ * GitHub releases API and the ESS Pro release notes feed.
  *
  * Handlers match a `*\/path` pattern rather than an absolute URL, because the
  * app discovers the Synapse root from the well-known document and the MAS
@@ -39,7 +39,10 @@ import {
   destinationPage,
   type DestinationOverrides,
   destinationPageSlice,
+  ESS_PRO_FEED_TITLES,
   ESS_VERSION,
+  essProFeed,
+  type EssProFeedItem,
   FIXTURE_EPOCH_MS,
   LATEST_ESS_RELEASE,
   MAS_ROOT,
@@ -587,16 +590,41 @@ export const federationAllowlistMissing = (): RequestHandler =>
     }),
   );
 
-export const githubLatestRelease = (): RequestHandler =>
+/**
+ * The latest community release on GitHub. `onRequest` sees every request, for
+ * a test asserting whether GitHub was asked at all.
+ */
+export const githubLatestRelease = (onRequest?: () => void): RequestHandler =>
   http.get(
     "https://api.github.com/repos/element-hq/ess-helm/releases/latest",
-    () =>
+    () => {
+      onRequest?.();
       // The app's release schema requires all five fields.
-      HttpResponse.json({
+      return HttpResponse.json({
         html_url: `https://github.com/element-hq/ess-helm/releases/tag/${LATEST_ESS_RELEASE}`,
         name: LATEST_ESS_RELEASE,
         tag_name: LATEST_ESS_RELEASE,
         created_at: "2026-08-01T10:00:00Z",
         body: "Mocked release notes.",
-      }),
+      });
+    },
   );
+
+export const ESS_PRO_FEED_URL =
+  "https://docs.element.io/latest/element-server-suite-pro/release-notes/feed.xml";
+
+/**
+ * The ESS Pro release notes feed, which the dashboard reads instead of GitHub
+ * on a Pro deployment. `onRequest` sees every request, for a test asserting
+ * whether the feed was asked for at all.
+ */
+export const essProReleaseFeed = (
+  items: readonly EssProFeedItem[] = ESS_PRO_FEED_TITLES,
+  onRequest?: () => void,
+): RequestHandler =>
+  http.get(ESS_PRO_FEED_URL, () => {
+    onRequest?.();
+    return new HttpResponse(essProFeed(items), {
+      headers: { "Content-Type": "application/rss+xml" },
+    });
+  });

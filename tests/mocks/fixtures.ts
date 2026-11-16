@@ -72,6 +72,73 @@ export const ESS_VERSION = "26.8.1";
 /** The `tag_name` of the mocked latest ESS release on GitHub. */
 export const LATEST_ESS_RELEASE = "26.9.0";
 
+/**
+ * The newest mainline release in the mocked ESS Pro feed. Distinct from
+ * `LATEST_ESS_RELEASE`, so a test can tell which source the dashboard used.
+ */
+export const LATEST_ESS_PRO_RELEASE = "26.10.0";
+
+/**
+ * Where the mocked ESS Pro feed links an item to: an anchor named after the
+ * version in its title.
+ */
+const essProReleaseLink = (title: string): string =>
+  `https://docs.example.com/ess-pro#${/\d[\w.-]*/.exec(title)?.[0] ?? "none"}`;
+
+/** A feed item: its title, linked to `essProReleaseLink` unless given a link. */
+export type EssProFeedItem = string | { title: string; link: string };
+
+/**
+ * The mocked ESS Pro release feed, newest first as the real feed orders it: by
+ * date, so LTS and mainline entries interleave and the newest item is not the
+ * highest version. It has three LTS streams (26.4, 25.10 and 25.4); the 26.4
+ * stream's `.0` lacks the LTS marker. The versions are picked so that comparing
+ * them as strings gives the wrong answer, and three items must be skipped: a
+ * link which is not a URL to follow, a pre-release, and a title with no version.
+ */
+export const ESS_PRO_FEED_TITLES: readonly EssProFeedItem[] = [
+  { title: "ESS Pro 26.12.0 (2026-12-02)", link: "javascript:alert(1)" },
+  "ESS Pro 26.11.0-rc1 (2026-11-02)",
+  "ESS Pro LTS 26.4.10 (2026-10-29)",
+  "ESS Pro LTS 25.10.14 (2026-10-29)",
+  "ESS Pro 26.10.0 (2026-10-09)",
+  "ESS Pro 26.9.1 (2026-09-04)",
+  "ESS Pro release notes have moved (2026-08-30)",
+  "ESS Pro 26.8.1 (2026-08-21)",
+  "ESS Pro LTS 26.4.9 (2026-07-28)",
+  "ESS Pro LTS 25.10.13 (2026-06-09)",
+  "ESS Pro LTS 25.4.19 (2026-06-09)",
+  "ESS Pro 26.4.0 (2026-05-01)",
+];
+
+/** The mocked ESS Pro release notes feed, an RSS 2.0 document. */
+export const essProFeed = (
+  items: readonly EssProFeedItem[],
+): string => `<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ESS Pro release notes</title>
+    <link>https://docs.element.io/latest/</link>
+${items
+  .map((item) =>
+    typeof item === "string"
+      ? { title: item, link: essProReleaseLink(item) }
+      : item,
+  )
+  .map(
+    ({ title, link }) => `    <item>
+      <title>${title}</title>
+      <link>${link}</link>
+      <guid isPermaLink="true">${link}</guid>
+      <description>&lt;p&gt;Mocked release notes.&lt;/p&gt;</description>
+      <pubDate>Wed, 02 Sep 2026 00:00:00 +0000</pubDate>
+    </item>`,
+  )
+  .join("\n")}
+  </channel>
+</rss>
+`;
+
 export const SYNAPSE_VERSION = "1.158.0";
 
 /**
