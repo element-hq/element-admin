@@ -30,16 +30,17 @@ export const test = base.extend<Fixtures>({
 
   network: [
     async ({ context, deployment, baseURL }, use) => {
-      // The app's own document has to pass through to the static server. MSW's
-      // `isCommonAssetRequest` skips `.html`/`.js`/`.css`, but the SPA document
-      // is requested as `/` or `/users`, with no extension, so it is not
-      // skipped and strict mode below would fail the test. `baseURL` may or may
+      // The app's own documents and assets have to pass through to the static
+      // server, or strict mode below would fail the test. `baseURL` may or may
       // not end in a slash, so the pattern goes through `URL` rather than
       // concatenation.
       const appDocuments = baseURL && new URL("*", baseURL).toString();
 
       const network = defineNetworkFixture({
         context,
+        // MSW skips URLs that look like static assets by default, which would
+        // send the ESS Pro release feed (`feed.xml`) to the real internet.
+        skipAssetRequests: false,
         handlers: [
           ...(appDocuments
             ? [http.get(appDocuments, () => passthrough())]

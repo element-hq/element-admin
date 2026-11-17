@@ -3,12 +3,17 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { Heading, Separator, Text } from "@vector-im/compound-web";
 import { defineMessage, FormattedMessage } from "react-intl";
 
-import { essVersionQuery, useEssVersion } from "@/api/ess";
+import { essVersionQuery, useEssVariant, useEssVersion } from "@/api/ess";
+import {
+  checkEssProUpdate,
+  essProReleasesQuery,
+  streamOf,
+} from "@/api/ess-releases";
 import { githubReleaseQuery } from "@/api/github";
 import { usersCountQuery } from "@/api/mas";
 import { wellKnownQuery } from "@/api/matrix";
@@ -17,7 +22,7 @@ import * as Data from "@/components/data";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
 import AppFooter from "@/ui/footer";
-import { compareMain, normalize } from "verkit";
+import { compareMain, normalizeFull, type SemVer } from "verkit";
 
 const titleMessage = defineMessage({
   id: "pages.dashboard.title",
@@ -50,49 +55,150 @@ export const Route = createFileRoute("/_console/")({
     queryClient.prefetchQuery(usersCountQuery(credentials.serverName));
 
     // The latest-release tile only renders for ESS deployments, so a non-ESS
-    // server skips the request to api.github.com.
-    const { version } = await queryClient.ensureQueryData(
+    // server skips the release lookup. Pro releases are versioned separately
+    // from the community chart on GitHub.
+    const { version, edition } = await queryClient.ensureQueryData(
       essVersionQuery(synapseRoot),
     );
-    if (version) {
+    if (version && edition === "pro") {
+      queryClient.prefetchQuery(essProReleasesQuery);
+    } else if (version) {
       queryClient.prefetchQuery(latestEssReleaseQuery);
     }
   },
   component: RouteComponent,
 });
 
-interface LatestEssReleaseProps {
-  isRunningLatest?: boolean;
+interface ReleaseLinkProps {
+  href: string;
+  children: React.ReactNode;
 }
-const LatestEssRelease: React.FC<LatestEssReleaseProps> = ({
-  isRunningLatest,
+const ReleaseLink: React.FC<ReleaseLinkProps> = ({
+  href,
+  children,
+}: ReleaseLinkProps) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noreferrer"
+    className="text-text-link-external underline hover:no-underline"
+  >
+    {children}
+  </a>
+);
+
+interface ReleaseStatusProps {
+  href: string;
+  name: string;
+  status: React.ReactNode;
+}
+const ReleaseStatus: React.FC<ReleaseStatusProps> = ({
+  href,
+  name,
+  status,
+}: ReleaseStatusProps) => (
+  <div>
+    <ReleaseLink href={href}>{name}</ReleaseLink>
+    <Text as="span" size="sm" className="text-text-secondary px-2">
+      {status}
+    </Text>
+  </div>
+);
+
+const runningLatestMessage = defineMessage({
+  id: "pages.dashboard.running_latest_ess",
+  defaultMessage: "(You're running the latest version)",
+  description:
+    "On the dashboard, this shows that you're running the latest ESS version",
+});
+
+const newReleaseMessage = defineMessage({
+  id: "pages.dashboard.new_ess_release",
+  defaultMessage: "(New release)",
+  description:
+    "On the dashboard, this shows that there is a new ESS release available",
+});
+
+const runningLatestLtsMessage = defineMessage({
+  id: "pages.dashboard.running_latest_ess_lts",
+  defaultMessage: "(You're running the latest LTS release)",
+  description:
+    "On the dashboard, this shows that you're running the latest release of your ESS Pro LTS line",
+});
+
+const newLtsReleaseMessage = defineMessage({
+  id: "pages.dashboard.new_ess_lts_release",
+  defaultMessage: "(New LTS release)",
+  description:
+    "On the dashboard, this shows that there is a new release available on your ESS Pro LTS line",
+});
+
+interface LatestEssReleaseProps {
+  essVersion: SemVer;
+}
+
+const LatestEssCommunityRelease: React.FC<LatestEssReleaseProps> = ({
+  essVersion,
 }: LatestEssReleaseProps) => {
   const { data } = useSuspenseQuery(latestEssReleaseQuery);
+  const isRunningLatest = compareMain(essVersion, data.tag_name) >= 0;
   return (
     <Data.Value>
-      <a
+      <ReleaseStatus
         href={data.html_url}
-        target="_blank"
-        rel="noreferrer"
-        className="text-text-link-external underline hover:no-underline"
-      >
-        {data.name}
-      </a>
-      <Text as="span" size="sm" className="text-text-secondary px-2">
-        {isRunningLatest ? (
+        name={data.name}
+        status={
           <FormattedMessage
-            id="pages.dashboard.running_latest_ess"
-            defaultMessage="(You're running the latest version)"
-            description="On the dashboard, this shows that you're running the latest ESS version"
+            {...(isRunningLatest ? runningLatestMessage : newReleaseMessage)}
           />
-        ) : (
+        }
+      />
+    </Data.Value>
+  );
+};
+
+const LatestEssProRelease: React.FC<LatestEssReleaseProps> = ({
+  essVersion,
+}: LatestEssReleaseProps) => {
+  const { data } = useSuspenseQuery(essProReleasesQuery);
+  const update = checkEssProUpdate(data, essVersion);
+  if (!update) {
+    throw new Error("The ESS Pro release feed has no release to compare to");
+  }
+  const { stream, latest, isRunningLatest, newerLts } = update;
+
+  let status;
+  if (stream === "lts") {
+    status = isRunningLatest ? runningLatestLtsMessage : newLtsReleaseMessage;
+  } else {
+    status = isRunningLatest ? runningLatestMessage : newReleaseMessage;
+  }
+
+  return (
+    <Data.Value>
+      {latest && (
+        <ReleaseStatus
+          href={latest.link}
+          name={latest.version}
+          status={<FormattedMessage {...status} />}
+        />
+      )}
+      {newerLts && (
+        <Text as="div" size="sm" className="text-text-secondary">
           <FormattedMessage
-            id="pages.dashboard.new_ess_release"
-            defaultMessage="(New release)"
-            description="On the dashboard, this shows that there is a new ESS release available"
+            id="pages.dashboard.latest_ess_lts_stream"
+            defaultMessage="{stream} is the latest LTS stream"
+            description="On the dashboard, this points an ESS Pro LTS deployment at a more recent LTS release stream. {stream} is a link showing the stream's number, like 26.10"
+            values={{
+              stream: (
+                <ReleaseLink href={newerLts.link}>
+                  {streamOf(newerLts)}
+                </ReleaseLink>
+              ),
+            }}
           />
-        )}
-      </Text>
+        </Text>
+      )}
     </Data.Value>
   );
 };
@@ -136,16 +242,7 @@ function RouteComponent() {
 
   const synapseRoot = wellKnown["m.homeserver"].base_url;
   const essVersion = useEssVersion(synapseRoot);
-  // Same gate as the loader's: the tile which shows this only renders for ESS
-  // deployments.
-  const { data: latestEssRelease } = useQuery({
-    ...latestEssReleaseQuery,
-    enabled: !!essVersion,
-  });
-  let isUsingLatest = false;
-  if (latestEssRelease?.tag_name && essVersion) {
-    isUsingLatest = compareMain(essVersion, latestEssRelease.tag_name) >= 0;
-  }
+  const essVariant = useEssVariant(synapseRoot);
 
   return (
     <>
@@ -178,7 +275,7 @@ function RouteComponent() {
                         description="On the dashboard, this shows the current ESS version"
                       />
                     </Data.Title>
-                    <Data.Value>{normalize(essVersion)}</Data.Value>
+                    <Data.Value>{normalizeFull(essVersion)}</Data.Value>
                   </Data.Item>
 
                   <Data.Item>
@@ -190,7 +287,11 @@ function RouteComponent() {
                       />
                     </Data.Title>
                     <Data.DynamicValue>
-                      <LatestEssRelease isRunningLatest={isUsingLatest} />
+                      {essVariant === "pro" ? (
+                        <LatestEssProRelease essVersion={essVersion} />
+                      ) : (
+                        <LatestEssCommunityRelease essVersion={essVersion} />
+                      )}
                     </Data.DynamicValue>
                   </Data.Item>
                 </>

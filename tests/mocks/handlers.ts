@@ -102,7 +102,9 @@ const essPro = (): RequestHandler[] => [
   matrix.federationAllowlist(DEFAULT_ALLOWLIST),
   matrix.adminbot(),
   // The dashboard only looks up the latest release where it has an ESS version
-  // to compare it against.
+  // to compare it against: in the Pro feed on Pro, on GitHub otherwise. Both
+  // are handled so a test can switch the edition with `network.use()`.
+  matrix.essProReleaseFeed(),
   matrix.githubLatestRelease(),
 ];
 
@@ -116,6 +118,7 @@ const essCommunity = (): RequestHandler[] => [
   mas.version(),
   matrix.essVersion(ESS_VERSION, "community"),
   matrix.githubLatestRelease(),
+  matrix.essProReleaseFeed(),
   // The allowlist is Pro-only but still probed on a Community deployment, so it
   // has to be handled — as a 404.
   matrix.federationAllowlistMissing(),
@@ -131,8 +134,8 @@ const plainMas = (): RequestHandler[] => [
   matrix.essVersionMissing(),
   // The `/federation` layout route probes the allowlist whatever the
   // deployment, so it still needs handling — just not successfully. Nothing
-  // handles the adminbot config or the GitHub release here: an unhandled
-  // request fails the run, which is what pins the gates on those two.
+  // handles the adminbot config, the GitHub release or the ESS Pro feed here:
+  // an unhandled request fails the run, which is what pins the gates on those.
   matrix.federationAllowlistMissing(),
 ];
 
