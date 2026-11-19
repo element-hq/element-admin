@@ -85,7 +85,7 @@
     "knip": "6.44.0",
     "msw": "3.0.3",
     "oxc-transform-react": "^0.152.0",
-    "oxfmt": "0.75.0",
+    "oxfmt": "0.76.0",
     "oxlint": "1.90.0",
     "oxlint-tsgolint": "7.0.2005",
     "stylelint": "17.16.0",
