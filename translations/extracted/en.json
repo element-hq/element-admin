@@ -1359,6 +1359,14 @@
     "description": "Title for the delete room dialog",
     "message": "Delete this room?"
   },
+  "pages.rooms.deletion.cancelled.description": {
+    "description": "When there is a room deletion task that was cancelled, this is the description of the alert shown.",
+    "message": "Room deletion task was cancelled on {timestamp, date, short} at {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.cancelled.title": {
+    "description": "When there is a room deletion task that was cancelled, this is the title of the alert shown.",
+    "message": "Deletion cancelled"
+  },
   "pages.rooms.deletion.failure.description": {
     "description": "When there is a room deletion task that has failed, this is the description of the alert shown.",
     "message": "Room deletion task failed on {timestamp, date, short} at {timestamp, time, short} with error: {error}"
