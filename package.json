@@ -84,7 +84,7 @@
     "eslint-plugin-formatjs": "8.1.4",
     "knip": "6.45.1",
     "msw": "3.0.3",
-    "oxc-transform-react": "^0.152.0",
+    "oxc-transform-react": "^0.156.0",
     "oxfmt": "0.76.0",
     "oxlint": "1.93.0",
     "oxlint-tsgolint": "7.0.2005",
