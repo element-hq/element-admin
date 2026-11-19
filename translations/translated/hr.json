@@ -152,8 +152,14 @@
   "pages.dashboard.current_ess_version": {
     "message": "Inačica ESS-a"
   },
+  "pages.dashboard.latest_ess_lts_stream": {
+    "message": "{stream} is the latest LTS stream"
+  },
   "pages.dashboard.latest_ess_version": {
     "message": "Najnovija inačica ESS-a"
+  },
+  "pages.dashboard.new_ess_lts_release": {
+    "message": "(New LTS release)"
   },
   "pages.dashboard.new_ess_release": {
     "message": "(Novo izdanje)"
@@ -166,6 +172,9 @@
   },
   "pages.dashboard.running_latest_ess": {
     "message": "(Upotrebljavate najnoviju inačicu)"
+  },
+  "pages.dashboard.running_latest_ess_lts": {
+    "message": "(You're running the latest LTS release)"
   },
   "pages.dashboard.synapse_version": {
     "message": "Inačica Synapse"
