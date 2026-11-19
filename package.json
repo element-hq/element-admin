@@ -87,7 +87,7 @@
     "oxc-transform-react": "^0.152.0",
     "oxfmt": "0.76.0",
     "oxlint": "1.93.0",
-    "oxlint-tsgolint": "7.0.2005",
+    "oxlint-tsgolint": "7.0.2007",
     "stylelint": "17.16.0",
     "stylelint-config-standard": "40.0.0",
     "stylelint-config-tailwindcss": "1.0.1",
