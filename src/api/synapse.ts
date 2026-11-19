@@ -321,6 +321,7 @@ const ScheduledTask = v.object({
     v.literal("active"),
     v.literal("complete"),
     v.literal("failed"),
+    v.literal("cancelled"),
   ]),
   timestamp_ms: v.number(),
   resource_id: v.nullable(v.string()),

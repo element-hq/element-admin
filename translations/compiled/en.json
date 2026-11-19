@@ -2703,6 +2703,36 @@
       "value": "Delete this room?"
     }
   ],
+  "pages.rooms.deletion.cancelled.description": [
+    {
+      "type": 0,
+      "value": "Room deletion task was cancelled on "
+    },
+    {
+      "type": 3,
+      "value": "timestamp",
+      "style": "short"
+    },
+    {
+      "type": 0,
+      "value": " at "
+    },
+    {
+      "type": 4,
+      "value": "timestamp",
+      "style": "short"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "pages.rooms.deletion.cancelled.title": [
+    {
+      "type": 0,
+      "value": "Deletion cancelled"
+    }
+  ],
   "pages.rooms.deletion.failure.description": [
     {
       "type": 0,

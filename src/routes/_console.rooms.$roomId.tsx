@@ -396,6 +396,27 @@ const ScheduledTaskDisplay: React.FC<ScheduledTaskProps> = ({
       );
     }
 
+    case "cancelled": {
+      return (
+        <Alert
+          type="info"
+          title={intl.formatMessage({
+            id: "pages.rooms.deletion.cancelled.title",
+            defaultMessage: "Deletion cancelled",
+            description:
+              "When there is a room deletion task that was cancelled, this is the title of the alert shown.",
+          })}
+        >
+          <FormattedMessage
+            id="pages.rooms.deletion.cancelled.description"
+            defaultMessage="Room deletion task was cancelled on {timestamp, date, short} at {timestamp, time, short}."
+            description="When there is a room deletion task that was cancelled, this is the description of the alert shown."
+            values={{ timestamp: task.timestamp_ms }}
+          />
+        </Alert>
+      );
+    }
+
     default: {
       return assertNever(task.status);
     }
@@ -415,7 +436,7 @@ const RoomDeletionStatusDisplay: React.FC<RoomCommonProps> = (
   );
 
   const displayDeleteButton = deletionTasks.every(
-    (task) => task.status === "failed",
+    (task) => task.status === "failed" || task.status === "cancelled",
   );
 
   return (
