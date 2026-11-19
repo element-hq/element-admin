@@ -12,7 +12,12 @@ import {
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Outlet,
+  redirect,
+  useNavigate,
+} from "@tanstack/react-router";
 import {
   createColumnHelper,
   tableFeatures,
@@ -56,6 +61,7 @@ import * as messages from "@/messages";
 import AppFooter from "@/ui/footer";
 import { useImageBlob } from "@/utils/blob";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
+import { getFeaturesStatus, useFeaturesStatus } from "@/utils/features";
 import { useFilters } from "@/utils/filters";
 import { useCurrentChildRoutePath } from "@/utils/routes";
 
@@ -159,6 +165,28 @@ export const Route = createFileRoute("/_console/users")({
 
     return { parameters, direction: search.dir };
   },
+
+  // The active OAuth 2.0 client and legacy device filters only exist from MAS
+  // 1.20, and older versions silently ignore them, so drop them from the URL.
+  beforeLoad: async ({ context: { queryClient, credentials }, search }) => {
+    if (search.client === undefined && search.legacy === undefined) return;
+    const { devices } = await getFeaturesStatus(
+      queryClient,
+      credentials.serverName,
+    );
+    if (!devices) {
+      throw redirect({
+        to: ".",
+        search: (previous) => ({
+          ...previous,
+          client: undefined,
+          legacy: undefined,
+        }),
+        replace: true,
+      });
+    }
+  },
+
   loader: async ({
     context: { queryClient, credentials },
     deps: { parameters, direction },
@@ -618,7 +646,15 @@ function RouteComponent() {
     [debouncedSearch],
   );
 
-  const filters = useFilters(search, filtersDefinition);
+  const { devices } = useFeaturesStatus(credentials.serverName);
+  const availableFilters = useMemo(
+    () =>
+      devices
+        ? filtersDefinition
+        : filtersDefinition.filter((filter) => filter.key !== "legacy"),
+    [devices],
+  );
+  const filters = useFilters(search, availableFilters);
 
   // Column definitions
   const columns = useMemo(
