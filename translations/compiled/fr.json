@@ -614,10 +614,26 @@
       "value": "Version d'ESS"
     }
   ],
+  "pages.dashboard.latest_ess_lts_stream": [
+    {
+      "type": 1,
+      "value": "stream"
+    },
+    {
+      "type": 0,
+      "value": " est le dernier canal LTS"
+    }
+  ],
   "pages.dashboard.latest_ess_version": [
     {
       "type": 0,
       "value": "Dernière version d'ESS"
+    }
+  ],
+  "pages.dashboard.new_ess_lts_release": [
+    {
+      "type": 0,
+      "value": "(Nouvelle version LTS)"
     }
   ],
   "pages.dashboard.new_ess_release": [
@@ -642,6 +658,12 @@
     {
       "type": 0,
       "value": "(Vous utilisez la dernière version)"
+    }
+  ],
+  "pages.dashboard.running_latest_ess_lts": [
+    {
+      "type": 0,
+      "value": "(Vous utilisez la dernière version LTS)"
     }
   ],
   "pages.dashboard.synapse_version": [
@@ -1413,13 +1435,13 @@
   "pages.federation.allowlist.remove_confirm.alert.title": [
     {
       "type": 0,
-      "value": "You’re about to stop federating with this server"
+      "value": "Vous êtes sur le point d'interrompre la fédération avec ce serveur"
     }
   ],
   "pages.federation.allowlist.remove_confirm.title": [
     {
       "type": 0,
-      "value": "Remove "
+      "value": "Supprimer "
     },
     {
       "type": 1,
@@ -1427,7 +1449,7 @@
     },
     {
       "type": 0,
-      "value": " from the allowlist?"
+      "value": " de la liste blanche ?"
     }
   ],
   "pages.federation.allowlist.remove_tooltip": [
@@ -1495,7 +1517,7 @@
       "type": 6,
       "value": "COUNT",
       "options": {
-        "zero": {
+        "=0": {
           "value": [
             {
               "type": 0,
@@ -1553,13 +1575,13 @@
   "pages.federation.sbg_not_enabled.description": [
     {
       "type": 0,
-      "value": "La passerelle de sécurité (Secure Border Gateway) n'est pas activée sur ce déploiement. Veuillez contacter votre administrateur pour l'activer."
+      "value": "Contactez votre administrateur afin qu’il l’active dans la configuration de votre déploiement."
     }
   ],
   "pages.federation.sbg_not_enabled.title": [
     {
       "type": 0,
-      "value": "La fonctionnalité « Domaines autorisés » est une fonctionnalité de Secure Border Gateway disponible dans ESS Pro"
+      "value": "« Secure Border Gateway » n'est pas activé sur ce déploiement"
     }
   ],
   "pages.federation.search_placeholder": [
@@ -1613,7 +1635,7 @@
   "pages.federation.unavailable_alert.title": [
     {
       "type": 0,
-      "value": "La fonctionnalité « Domaines autorisés » est une fonctionnalité de Secure Border Gateway disponible dans ESS Pro"
+      "value": "« Secure Border Gateway » n'est pas activé sur ce déploiement"
     }
   ],
   "pages.generic_error.go_home": [
@@ -1663,13 +1685,13 @@
   "pages.login.errors.authorization_failed": [
     {
       "type": 0,
-      "value": "Could not start the sign-in process. Please try again."
+      "value": "Impossible de démarrer le processus de connexion. Veuillez réessayer."
     }
   ],
   "pages.login.errors.insecure_context": [
     {
       "type": 0,
-      "value": "Sign-in requires a secure connection. Reload this page over https:// and try again."
+      "value": "La connexion nécessite une connexion sécurisée. Veuillez recharger cette page via https:// et réessayer."
     }
   ],
   "pages.login.errors.no_auth_metadata": [
@@ -1831,7 +1853,7 @@
   "pages.personal_tokens.details_label": [
     {
       "type": 0,
-      "value": "Personal token details"
+      "value": "Détails du jeton personnel"
     }
   ],
   "pages.personal_tokens.device_id_help": [
@@ -2057,25 +2079,25 @@
     },
     {
       "type": 0,
-      "value": " will stop working immediately, and anything using it will need a new token."
+      "value": " cessera de fonctionner immédiatement, et tout ce qui l'utilise aura besoin d'un nouveau jeton."
     }
   ],
   "pages.personal_tokens.revoke_token.alert.title": [
     {
       "type": 0,
-      "value": "This cannot be undone"
+      "value": "Cette action est irréversible"
     }
   ],
   "pages.personal_tokens.revoke_token.error": [
     {
       "type": 0,
-      "value": "Failed to revoke the token"
+      "value": "Échec de la révocation du jeton"
     }
   ],
   "pages.personal_tokens.revoke_token.title": [
     {
       "type": 0,
-      "value": "Revoke this personal token?"
+      "value": "Révoquer ce jeton personnel ?"
     }
   ],
   "pages.personal_tokens.revoked_at_label": [
@@ -2249,7 +2271,7 @@
   "pages.registration_tokens.details_label": [
     {
       "type": 0,
-      "value": "Registration token details"
+      "value": "Détails du jeton d'enregistrement"
     }
   ],
   "pages.registration_tokens.edit_properties": [
@@ -2261,13 +2283,13 @@
   "pages.registration_tokens.edit_properties.revoked_tooltip": [
     {
       "type": 0,
-      "value": "Unrevoke this token before editing its properties"
+      "value": "Réactivez ce jeton avant de modifier ses propriétés"
     }
   ],
   "pages.registration_tokens.edit_token.error": [
     {
       "type": 0,
-      "value": "Failed to save the changes"
+      "value": "Échec de l'enregistrement des modifications"
     }
   ],
   "pages.registration_tokens.edit_token_title": [
@@ -2309,7 +2331,7 @@
   "pages.registration_tokens.filters.not_revoked": [
     {
       "type": 0,
-      "value": "Not revoked"
+      "value": "Non révoqués"
     }
   ],
   "pages.registration_tokens.filters.revoked_only": [
@@ -2393,7 +2415,7 @@
   "pages.registration_tokens.revoke_token.alert.title": [
     {
       "type": 0,
-      "value": "The token will stop working"
+      "value": "Le jeton cessera de fonctionner."
     }
   ],
   "pages.registration_tokens.revoke_token.error": [
@@ -2485,7 +2507,7 @@
       "type": 6,
       "value": "COUNT",
       "options": {
-        "zero": {
+        "=0": {
           "value": [
             {
               "type": 0,
@@ -2812,7 +2834,7 @@
   "pages.rooms.details_label": [
     {
       "type": 0,
-      "value": "Room details"
+      "value": "Détails du salon"
     }
   ],
   "pages.rooms.filters.empty_rooms": [
@@ -2872,7 +2894,7 @@
       "type": 6,
       "value": "COUNT",
       "options": {
-        "zero": {
+        "=0": {
           "value": [
             {
               "type": 0,
@@ -3002,7 +3024,7 @@
   "pages.supervision.launch": [
     {
       "type": 0,
-      "value": "Open supervision interface"
+      "value": "Ouvrir l'interface de supervision"
     }
   ],
   "pages.supervision.missing_ui_address.description": [
@@ -3280,7 +3302,7 @@
   "pages.users.details_label": [
     {
       "type": 0,
-      "value": "User details"
+      "value": "Détails de l'utilisateur"
     }
   ],
   "pages.users.filters.active": [
@@ -3658,7 +3680,7 @@
       "type": 6,
       "value": "COUNT",
       "options": {
-        "zero": {
+        "=0": {
           "value": [
             {
               "type": 0,
@@ -3802,13 +3824,13 @@
   "ui.copy.copied": [
     {
       "type": 0,
-      "value": "Copied!"
+      "value": "Copié !"
     }
   ],
   "ui.copy.copy_to_clipboard": [
     {
       "type": 0,
-      "value": "Copy to clipboard"
+      "value": "Copier dans le presse-papiers"
     }
   ],
   "ui.data.failed_to_load": [

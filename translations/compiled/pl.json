@@ -606,10 +606,26 @@
       "value": "Wersja ESS"
     }
   ],
+  "pages.dashboard.latest_ess_lts_stream": [
+    {
+      "type": 1,
+      "value": "stream"
+    },
+    {
+      "type": 0,
+      "value": " jest najnowszym strumieniem LTS"
+    }
+  ],
   "pages.dashboard.latest_ess_version": [
     {
       "type": 0,
       "value": "Najnowsza wersja ESS"
+    }
+  ],
+  "pages.dashboard.new_ess_lts_release": [
+    {
+      "type": 0,
+      "value": "(Nowa wersja LTS)"
     }
   ],
   "pages.dashboard.new_ess_release": [
@@ -634,6 +650,12 @@
     {
       "type": 0,
       "value": "(Używasz najnowszej wersji)"
+    }
+  ],
+  "pages.dashboard.running_latest_ess_lts": [
+    {
+      "type": 0,
+      "value": "(Korzystasz z najnowszej wersji LTS)"
     }
   ],
   "pages.dashboard.synapse_version": [

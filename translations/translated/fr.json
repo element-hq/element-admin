@@ -152,8 +152,14 @@
   "pages.dashboard.current_ess_version": {
     "message": "Version d'ESS"
   },
+  "pages.dashboard.latest_ess_lts_stream": {
+    "message": "{stream} est le dernier canal LTS"
+  },
   "pages.dashboard.latest_ess_version": {
     "message": "Dernière version d'ESS"
+  },
+  "pages.dashboard.new_ess_lts_release": {
+    "message": "(Nouvelle version LTS)"
   },
   "pages.dashboard.new_ess_release": {
     "message": "(Nouvelle version)"
@@ -166,6 +172,9 @@
   },
   "pages.dashboard.running_latest_ess": {
     "message": "(Vous utilisez la dernière version)"
+  },
+  "pages.dashboard.running_latest_ess_lts": {
+    "message": "(Vous utilisez la dernière version LTS)"
   },
   "pages.dashboard.synapse_version": {
     "message": "Version de Synapse"
@@ -462,10 +471,10 @@
     "message": "Your server will stop federating with servers matching this pattern."
   },
   "pages.federation.allowlist.remove_confirm.alert.title": {
-    "message": "You’re about to stop federating with this server"
+    "message": "Vous êtes sur le point d'interrompre la fédération avec ce serveur"
   },
   "pages.federation.allowlist.remove_confirm.title": {
-    "message": "Remove {serverName} from the allowlist?"
+    "message": "Supprimer {serverName} de la liste blanche ?"
   },
   "pages.federation.allowlist.remove_tooltip": {
     "message": "Supprimer de la liste blanche"
@@ -498,7 +507,7 @@
     "message": "Détails de la destination"
   },
   "pages.federation.domain_count": {
-    "message": "{COUNT, plural, zero {Aucun domaine} one {# domaine} other {# domaines}}"
+    "message": "{COUNT, plural, =0 {Aucun domaine} one {# domaine} other {# domaines}}"
   },
   "pages.federation.not_found.description": {
     "message": "La destination demandée ({destination}) est introuvable."
@@ -507,10 +516,10 @@
     "message": "Destination introuvable"
   },
   "pages.federation.sbg_not_enabled.description": {
-    "message": "La passerelle de sécurité (Secure Border Gateway) n'est pas activée sur ce déploiement. Veuillez contacter votre administrateur pour l'activer."
+    "message": "Contactez votre administrateur afin qu’il l’active dans la configuration de votre déploiement."
   },
   "pages.federation.sbg_not_enabled.title": {
-    "message": "La fonctionnalité « Domaines autorisés » est une fonctionnalité de Secure Border Gateway disponible dans ESS Pro"
+    "message": "« Secure Border Gateway » n'est pas activé sur ce déploiement"
   },
   "pages.federation.search_placeholder": {
     "message": "Rechercher des domaines…"
@@ -537,7 +546,7 @@
     "message": "Secure Border Gateway n'est pas disponible dans ESS Community. Effectuez une mise à niveau vers ESS Pro pour l'activer."
   },
   "pages.federation.unavailable_alert.title": {
-    "message": "La fonctionnalité « Domaines autorisés » est une fonctionnalité de Secure Border Gateway disponible dans ESS Pro"
+    "message": "« Secure Border Gateway » n'est pas activé sur ce déploiement"
   },
   "pages.generic_error.go_home": {
     "message": "Retour à l'accueil"
@@ -558,10 +567,10 @@
     "message": "Gérez le déploiement d'element pour votre organisation ou votre communauté."
   },
   "pages.login.errors.authorization_failed": {
-    "message": "Could not start the sign-in process. Please try again."
+    "message": "Impossible de démarrer le processus de connexion. Veuillez réessayer."
   },
   "pages.login.errors.insecure_context": {
-    "message": "Sign-in requires a secure connection. Reload this page over https:// and try again."
+    "message": "La connexion nécessite une connexion sécurisée. Veuillez recharger cette page via https:// et réessayer."
   },
   "pages.login.errors.no_auth_metadata": {
     "message": "Impossible de charger les métadonnées d'authentification du serveur. Synapse est peut-être inaccessible ou pas configuré pour utiliser Matrix Authentication Service."
@@ -621,7 +630,7 @@
     "message": "Les jetons personnels sont des jetons d'accès à longue durée de vie avec un accès spécifique, tel que l'accès à l'API d'administration Synapse et MAS. Ils permettent entre autre d'automatiser des tâches et de créer des intégrations."
   },
   "pages.personal_tokens.details_label": {
-    "message": "Personal token details"
+    "message": "Détails du jeton personnel"
   },
   "pages.personal_tokens.device_id_help": {
     "message": "Laisser vide pour générer un identifiant d'appareil aléatoire de 10 caractères"
@@ -732,16 +741,16 @@
     "message": "Révoquer le jeton"
   },
   "pages.personal_tokens.revoke_token.alert.description": {
-    "message": "{humanName} will stop working immediately, and anything using it will need a new token."
+    "message": "{humanName} cessera de fonctionner immédiatement, et tout ce qui l'utilise aura besoin d'un nouveau jeton."
   },
   "pages.personal_tokens.revoke_token.alert.title": {
-    "message": "This cannot be undone"
+    "message": "Cette action est irréversible"
   },
   "pages.personal_tokens.revoke_token.error": {
-    "message": "Failed to revoke the token"
+    "message": "Échec de la révocation du jeton"
   },
   "pages.personal_tokens.revoke_token.title": {
-    "message": "Revoke this personal token?"
+    "message": "Révoquer ce jeton personnel ?"
   },
   "pages.personal_tokens.revoked_at_label": {
     "message": "Date de révocation"
@@ -828,16 +837,16 @@
     "message": "Jeton personnalisé"
   },
   "pages.registration_tokens.details_label": {
-    "message": "Registration token details"
+    "message": "Détails du jeton d'enregistrement"
   },
   "pages.registration_tokens.edit_properties": {
     "message": "Modifier les propriétés"
   },
   "pages.registration_tokens.edit_properties.revoked_tooltip": {
-    "message": "Unrevoke this token before editing its properties"
+    "message": "Réactivez ce jeton avant de modifier ses propriétés"
   },
   "pages.registration_tokens.edit_token.error": {
-    "message": "Failed to save the changes"
+    "message": "Échec de l'enregistrement des modifications"
   },
   "pages.registration_tokens.edit_token_title": {
     "message": "Modifier le jeton d'enregistrement"
@@ -858,7 +867,7 @@
     "message": "Expiré"
   },
   "pages.registration_tokens.filters.not_revoked": {
-    "message": "Not revoked"
+    "message": "Non révoqués"
   },
   "pages.registration_tokens.filters.revoked_only": {
     "message": "Révoqué"
@@ -888,7 +897,7 @@
     "message": "Nobody will be able to register with {token} until it is unrevoked."
   },
   "pages.registration_tokens.revoke_token.alert.title": {
-    "message": "The token will stop working"
+    "message": "Le jeton cessera de fonctionner."
   },
   "pages.registration_tokens.revoke_token.error": {
     "message": "Failed to revoke the token"
@@ -933,7 +942,7 @@
     "message": "Jeton"
   },
   "pages.registration_tokens.token_count": {
-    "message": "{COUNT, plural, zero {Aucun jeton} one {# jeton} other {# jetons}}"
+    "message": "{COUNT, plural, =0 {Aucun jeton} one {# jeton} other {# jetons}}"
   },
   "pages.registration_tokens.token_uses.limited": {
     "message": "{uses, number}/{limit, number}"
@@ -1035,7 +1044,7 @@
     "message": "Suppression réussie"
   },
   "pages.rooms.details_label": {
-    "message": "Room details"
+    "message": "Détails du salon"
   },
   "pages.rooms.filters.empty_rooms": {
     "message": "Salons vides"
@@ -1056,7 +1065,7 @@
     "message": "Salon introuvable"
   },
   "pages.rooms.room_count": {
-    "message": "{COUNT, plural, zero {Aucun salon} one {# salon} other {# salons}}"
+    "message": "{COUNT, plural, =0 {Aucun salon} one {# salon} other {# salons}}"
   },
   "pages.rooms.room_type.private": {
     "message": "Privé"
@@ -1098,7 +1107,7 @@
     "message": "Une erreur inattendue s'est produite lors de l'ouverture de l'interface de supervision."
   },
   "pages.supervision.launch": {
-    "message": "Open supervision interface"
+    "message": "Ouvrir l'interface de supervision"
   },
   "pages.supervision.missing_ui_address.description": {
     "message": "La supervision est activée dans votre déploiement, mais pas Element Web, qui est nécessaire au fonctionnement de l'interface de modération."
@@ -1221,7 +1230,7 @@
     "message": "Supprimer l'association avec le compte en amont ?"
   },
   "pages.users.details_label": {
-    "message": "User details"
+    "message": "Détails de l'utilisateur"
   },
   "pages.users.filters.active": {
     "message": "Utilisateurs actifs"
@@ -1389,7 +1398,7 @@
     "message": "Compte débloqué"
   },
   "pages.users.user_count": {
-    "message": "{COUNT, plural, zero {Aucun utilisateur} one {# utilisateur} other {# utilisateurs}}"
+    "message": "{COUNT, plural, =0 {Aucun utilisateur} one {# utilisateur} other {# utilisateurs}}"
   },
   "product.badge.pro": {
     "message": "Pro"
@@ -1428,10 +1437,10 @@
     "message": "{COUNT, plural, one {# autre} other {# autres}}"
   },
   "ui.copy.copied": {
-    "message": "Copied!"
+    "message": "Copié !"
   },
   "ui.copy.copy_to_clipboard": {
-    "message": "Copy to clipboard"
+    "message": "Copier dans le presse-papiers"
   },
   "ui.data.failed_to_load": {
     "message": "Échec du chargement"

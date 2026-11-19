@@ -152,8 +152,14 @@
   "pages.dashboard.current_ess_version": {
     "message": "Wersja ESS"
   },
+  "pages.dashboard.latest_ess_lts_stream": {
+    "message": "{stream} jest najnowszym strumieniem LTS"
+  },
   "pages.dashboard.latest_ess_version": {
     "message": "Najnowsza wersja ESS"
+  },
+  "pages.dashboard.new_ess_lts_release": {
+    "message": "(Nowa wersja LTS)"
   },
   "pages.dashboard.new_ess_release": {
     "message": "(Nowe wydanie)"
@@ -166,6 +172,9 @@
   },
   "pages.dashboard.running_latest_ess": {
     "message": "(Używasz najnowszej wersji)"
+  },
+  "pages.dashboard.running_latest_ess_lts": {
+    "message": "(Korzystasz z najnowszej wersji LTS)"
   },
   "pages.dashboard.synapse_version": {
     "message": "Wersja Synapse"

@@ -594,10 +594,26 @@
       "value": "ESS 版本"
     }
   ],
+  "pages.dashboard.latest_ess_lts_stream": [
+    {
+      "type": 1,
+      "value": "stream"
+    },
+    {
+      "type": 0,
+      "value": " is the latest LTS stream"
+    }
+  ],
   "pages.dashboard.latest_ess_version": [
     {
       "type": 0,
       "value": "最新的 ESS 版本"
+    }
+  ],
+  "pages.dashboard.new_ess_lts_release": [
+    {
+      "type": 0,
+      "value": "(New LTS release)"
     }
   ],
   "pages.dashboard.new_ess_release": [
@@ -622,6 +638,12 @@
     {
       "type": 0,
       "value": "（您正在运行最新版本）"
+    }
+  ],
+  "pages.dashboard.running_latest_ess_lts": [
+    {
+      "type": 0,
+      "value": "(You're running the latest LTS release)"
     }
   ],
   "pages.dashboard.synapse_version": [

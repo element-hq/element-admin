@@ -152,8 +152,14 @@
   "pages.dashboard.current_ess_version": {
     "message": "ESS sürümü"
   },
+  "pages.dashboard.latest_ess_lts_stream": {
+    "message": "{stream} is the latest LTS stream"
+  },
   "pages.dashboard.latest_ess_version": {
     "message": "En son ESS sürümü"
+  },
+  "pages.dashboard.new_ess_lts_release": {
+    "message": "(New LTS release)"
   },
   "pages.dashboard.new_ess_release": {
     "message": "(Yeni sürüm)"
@@ -166,6 +172,9 @@
   },
   "pages.dashboard.running_latest_ess": {
     "message": "(En son sürümü kullanıyorsunuz)"
+  },
+  "pages.dashboard.running_latest_ess_lts": {
+    "message": "(You're running the latest LTS release)"
   },
   "pages.dashboard.synapse_version": {
     "message": "Synapse sürümü"

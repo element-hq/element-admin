@@ -18,7 +18,7 @@
     "message": "Kustuta"
   },
   "action.done": {
-    "message": "Done"
+    "message": "Valmis"
   },
   "action.go_back": {
     "message": "Mine tagasi"
@@ -39,31 +39,31 @@
     "message": "Filter"
   },
   "common.loading": {
-    "message": "Loading…"
+    "message": "Laadin…"
   },
   "errors.authorization_denied": {
-    "message": "Sign-in was cancelled."
+    "message": "Sisselogimine on katkestatud."
   },
   "errors.authorization_error": {
-    "message": "Sign-in failed: {errorMessage}"
+    "message": "Sisselogimine ei õnnestunud: {errorMessage}"
   },
   "errors.http_fetch": {
-    "message": "Request to {url} failed"
+    "message": "Päring „{url}“ aadressile ei õnnestunud"
   },
   "errors.http_fetch_json_decoding": {
     "message": "„{url}“ võrguaadressilt JSON-vormingus saadud vastuse dekodeerimine ei õnnestunud"
   },
   "errors.http_status": {
-    "message": "Request to {url} failed with status code {status} {statusText}"
+    "message": "Päring „{url}“ aadressile ei õnnestunud. Vastuse olekukood oli {status} {statusText}"
   },
   "errors.mas_api": {
-    "message": "The homeserver's authentication service returned an error: {errorMessage}"
+    "message": "Koduserveri autentimisteenus andis päringu vastuseks vea: {errorMessage}"
   },
   "errors.matrix_standard": {
-    "message": "Request to the homeserver failed with error code ''{errorCode}''. Additionally, the server gave the following error message: {errorMessage}"
+    "message": "Päringul koduserverisse oli vastus veakoodiga „{errorCode}“ ja veateatega „{errorMessage}“"
   },
   "errors.no_details": {
-    "message": "The server returned an error with no details."
+    "message": "Päringuvastus serverist oli veateade, kuid ilma üksikasjadeta."
   },
   "errors.not_logged_in": {
     "message": "Sa pole loginud sisse"
@@ -152,8 +152,14 @@
   "pages.dashboard.current_ess_version": {
     "message": "ESS-i versioon"
   },
+  "pages.dashboard.latest_ess_lts_stream": {
+    "message": "{stream} is the latest LTS stream"
+  },
   "pages.dashboard.latest_ess_version": {
     "message": "Viimane ESS-versioon"
+  },
+  "pages.dashboard.new_ess_lts_release": {
+    "message": "(Uus LTS-versioon)"
   },
   "pages.dashboard.new_ess_release": {
     "message": "(Uus versioon)"
@@ -166,6 +172,9 @@
   },
   "pages.dashboard.running_latest_ess": {
     "message": "(Sa kasutad viimast versiooni)"
+  },
+  "pages.dashboard.running_latest_ess_lts": {
+    "message": "(You're running the latest LTS release)"
   },
   "pages.dashboard.synapse_version": {
     "message": "Synapse'i versioon"
@@ -183,7 +192,7 @@
     "message": "Applications are OAuth 2.0 clients that users sign in to."
   },
   "pages.devices.applications.details_label": {
-    "message": "Application details"
+    "message": "Rakenduse üksikasjad"
   },
   "pages.devices.applications.filters.has_active_sessions": {
     "message": "Aktiivsete seadmetega"
@@ -228,10 +237,10 @@
     "message": "Avaleht"
   },
   "pages.devices.applications.view_sessions": {
-    "message": "View all devices"
+    "message": "Vaata kõiki seadmeid"
   },
   "pages.devices.applications.view_users": {
-    "message": "View users on this application"
+    "message": "Vaata selle rakenduse kasutajaid"
   },
   "pages.devices.legacy.count": {
     "message": "{COUNT, plural, =0 {No legacy devices} one {# legacy device} other {# legacy devices}}"
@@ -261,7 +270,7 @@
     "message": "Hiljuti kasutatud"
   },
   "pages.devices.legacy.filters.activity_signed_out": {
-    "message": "Signed out"
+    "message": "Välja logitud"
   },
   "pages.devices.legacy.filters.newest_first": {
     "message": "Esmalt uuemad"
@@ -288,7 +297,7 @@
     "message": "Remove this legacy device?"
   },
   "pages.devices.legacy.finished_at_label": {
-    "message": "Signed out at"
+    "message": "Väljalogimise aeg"
   },
   "pages.devices.legacy.last_active_ip_label": {
     "message": "Viimatikasutatud IP-aadress"
@@ -303,7 +312,7 @@
     "message": "Legacy device not found"
   },
   "pages.devices.legacy.redirect_uri_label": {
-    "message": "Redirect URI"
+    "message": "Edasisuunamise URI"
   },
   "pages.devices.legacy.status_column": {
     "message": "Olek"
@@ -318,7 +327,7 @@
     "message": "User agent"
   },
   "pages.devices.legacy.user_column": {
-    "message": "User"
+    "message": "Kasutaja"
   },
   "pages.devices.tabs.applications": {
     "message": "Rakendused"
@@ -336,7 +345,7 @@
     "message": "Seadmed"
   },
   "pages.devices.user.client_column": {
-    "message": "Application"
+    "message": "Rakendus"
   },
   "pages.devices.user.count": {
     "message": "{COUNT, plural, =0 {No devices} one {# device} other {# devices}}"
@@ -348,7 +357,7 @@
     "message": "A device represents a single sign-in a user has on an application. Signing out a device revokes its access immediately."
   },
   "pages.devices.user.details_label": {
-    "message": "Device details"
+    "message": "Seadme andmed"
   },
   "pages.devices.user.device_column": {
     "message": "Seade"
@@ -366,7 +375,7 @@
     "message": "Hiljuti kasutatud"
   },
   "pages.devices.user.filters.activity_signed_out": {
-    "message": "Signed out"
+    "message": "Välja logitud"
   },
   "pages.devices.user.filters.client_chip": {
     "message": "Rakendus: {name}"
@@ -387,16 +396,16 @@
     "message": "The user will be signed out of this device. Access and refresh tokens will be revoked immediately."
   },
   "pages.devices.user.finish.error": {
-    "message": "Failed to remove the device"
+    "message": "Seadme eemaldamine ei õnnestunud"
   },
   "pages.devices.user.finish.success": {
-    "message": "Device removed"
+    "message": "Seade on eemaldatud"
   },
   "pages.devices.user.finish.title": {
     "message": "Kas eemaldad selle seadme?"
   },
   "pages.devices.user.finished_at_label": {
-    "message": "Signed out at"
+    "message": "Väljalogimise aeg"
   },
   "pages.devices.user.last_active_ip_label": {
     "message": "Viimatikasutatud IP-aadress"
@@ -426,7 +435,7 @@
     "message": "User agent"
   },
   "pages.devices.user.user_column": {
-    "message": "User"
+    "message": "Kasutaja"
   },
   "pages.devices.user.user_none": {
     "message": "No user"
@@ -474,7 +483,7 @@
     "message": "Kontakt"
   },
   "pages.federation.detail.last_retry": {
-    "message": "Last retry timestamp"
+    "message": "Viimase uuesti proovimise ajatempel"
   },
   "pages.federation.detail.last_retry.never": {
     "message": "Never"
@@ -513,13 +522,13 @@
     "message": "Secure Border Gateway isn't enabled on this deployment"
   },
   "pages.federation.search_placeholder": {
-    "message": "Search domains…"
+    "message": "Otsi domeene…"
   },
   "pages.federation.tab.allowed_domains": {
-    "message": "Allowed domains"
+    "message": "Lubatud domeenid"
   },
   "pages.federation.tab.known_domains": {
-    "message": "Known domains"
+    "message": "Teadaolevad domeenid"
   },
   "pages.federation.tab.section": {
     "message": "Federation views"
@@ -561,7 +570,7 @@
     "message": "Could not start the sign-in process. Please try again."
   },
   "pages.login.errors.insecure_context": {
-    "message": "Sign-in requires a secure connection. Reload this page over https:// and try again."
+    "message": "Sisselogimine eeldab turvalise ühenduse kasutamist. Laadi see leht uuesti https:// protokolliga ja proovi uuesti."
   },
   "pages.login.errors.no_auth_metadata": {
     "message": "Failed to load the server's auth metadata. Synapse may be unreachable or not configured to use Matrix Authentication Service."
@@ -582,19 +591,19 @@
     "message": "Logi sisse"
   },
   "pages.personal_tokens.acting_user_column": {
-    "message": "Acting user"
+    "message": "Seos kasutajaga"
   },
   "pages.personal_tokens.acting_user_label": {
-    "message": "Acting user"
+    "message": "Kasutaja, kelle nimel tunnusluba tegutseb"
   },
   "pages.personal_tokens.actor_user_help": {
-    "message": "The user this token will act on behalf of"
+    "message": "Kasutaja, kelle nimel see tunnusluba saab tegutseda"
   },
   "pages.personal_tokens.actor_user_label": {
-    "message": "Acting user"
+    "message": "Kasutaja, kelle nimel tunnusluba tegutseb"
   },
   "pages.personal_tokens.add_token_title": {
-    "message": "Add personal token"
+    "message": "Lisa isiklik tunnusluba"
   },
   "pages.personal_tokens.cant_regenerate_tooltip": {
     "message": "Ainult {ownerMxid} saab seda tunnusluba uuesti luua"
@@ -603,28 +612,28 @@
     "message": "Ainult tunnusloa omanik saab seda uuesti luua"
   },
   "pages.personal_tokens.count": {
-    "message": "{count, plural, =0 {No personal tokens} one {# personal token} other {# personal tokens}}"
+    "message": "{count, plural, =0 {Isiklike tunnuslube pole} one {# isiklik tunnusluba} other {# isiklikku tunnusluba}}"
   },
   "pages.personal_tokens.create_error": {
-    "message": "Failed to create personal token"
+    "message": "Isikliku tunnusloa loomine ei õnnestunud"
   },
   "pages.personal_tokens.create_success": {
-    "message": "Personal token created successfully"
+    "message": "Isikliku tunnusloa loomine õnnestus"
   },
   "pages.personal_tokens.create_token": {
-    "message": "Create token"
+    "message": "Loo tunnusluba"
   },
   "pages.personal_tokens.created_at_label": {
-    "message": "Created at"
+    "message": "Loodud"
   },
   "pages.personal_tokens.description": {
-    "message": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations."
+    "message": "Isiklikud tunnusload on pika kehtivusega juurdepääsuload, millele on lubatud konkreetne juurdepääs, sealhulgas Synapse'i ja MAS-i halduse juurdepääs API-st. Need sobivad hästi ülesannete automatiseerimiseks ja lõimingute loomiseks."
   },
   "pages.personal_tokens.details_label": {
-    "message": "Personal token details"
+    "message": "Isikliku tunnusloa andmed"
   },
   "pages.personal_tokens.device_id_help": {
-    "message": "Leave empty to generate a random 10-character device ID"
+    "message": "Kui jätad tühjaks, siis luuakse juhuslik 10 tähemärki pikk seadmetunnus"
   },
   "pages.personal_tokens.device_id_label": {
     "message": "Seadme tunnus"
@@ -642,13 +651,13 @@
     "message": "Aegumine (päevades)"
   },
   "pages.personal_tokens.expires_in_missing": {
-    "message": "Enter how many days the token should last"
+    "message": "Sisesta tunnusloa kehtivuse ülempiir päevades"
   },
   "pages.personal_tokens.expires_in_underflow": {
-    "message": "A token has to last at least one day"
+    "message": "Tunnusluba peaks kehtima vähemalt ühe päeva"
   },
   "pages.personal_tokens.expiry_revoked": {
-    "message": "Revoked"
+    "message": "Tühistatud"
   },
   "pages.personal_tokens.filter.active": {
     "message": "Aktiivne"
@@ -657,19 +666,19 @@
     "message": "Aegumiskuupäevaga"
   },
   "pages.personal_tokens.filter.no_expiry": {
-    "message": "Never expires"
+    "message": "Ei aegu iialgi"
   },
   "pages.personal_tokens.filter.revoked": {
     "message": "Tühistatud"
   },
   "pages.personal_tokens.filter.scope_mas_admin": {
-    "message": "Access to the MAS admin API"
+    "message": "Ligipääs MAS-i haldusliidese API-le"
   },
   "pages.personal_tokens.filter.scope_matrix_client": {
-    "message": "Access to the Matrix Client-Server API"
+    "message": "Ligipääs Matrixi klient-server API-le"
   },
   "pages.personal_tokens.filter.scope_synapse_admin": {
-    "message": "Access to the Synapse admin API"
+    "message": "Ligipääs Synapse haldusliidese API-le"
   },
   "pages.personal_tokens.last_active_column": {
     "message": "Viimati kasutusel"
@@ -684,7 +693,7 @@
     "message": "Nimi"
   },
   "pages.personal_tokens.name_help": {
-    "message": "A human-readable name for the token, to help you identify it"
+    "message": "Inimloetav nimi tunnusloa jaoks, mis aitaks teda eristada"
   },
   "pages.personal_tokens.name_label": {
     "message": "Tunnusloa nimi"
@@ -693,13 +702,13 @@
     "message": "Minu rakenduse tunnusluba"
   },
   "pages.personal_tokens.never_expires": {
-    "message": "Never expires"
+    "message": "Ei aegu iialgi"
   },
   "pages.personal_tokens.never_used": {
     "message": "Mitte kunagi kasutatud"
   },
   "pages.personal_tokens.not_found.description": {
-    "message": "The personal token you're looking for doesn't exist or has been removed."
+    "message": "Sinu otsitavat tunnusluba kas pole olemas või ta on eemaldatud."
   },
   "pages.personal_tokens.not_found.title": {
     "message": "Isiklikku tunnusluba ei leidu"
@@ -723,52 +732,52 @@
     "message": "Loo isiklik tunnusluba uuesti"
   },
   "pages.personal_tokens.regenerate_warning": {
-    "message": "This will generate a new access token and invalidate the current one. Any applications using the current token will need to be updated."
+    "message": "Järgnevaga luuakse uus tunnusluba ja senine kaotab kehtivuse. Kõik rakendused ja liidestused, mis seda kasutavad, vajavad uue tunnusloa lisamist."
   },
   "pages.personal_tokens.revoke_success": {
     "message": "Isikliku tunnusloa tühistamine õnnestus"
   },
   "pages.personal_tokens.revoke_token": {
-    "message": "Revoke token"
+    "message": "Tühista tunnusluba"
   },
   "pages.personal_tokens.revoke_token.alert.description": {
-    "message": "{humanName} will stop working immediately, and anything using it will need a new token."
+    "message": "„{humanName}“ lakkab kohe töötamast ja kõik liidestused, mis seda kasutavad, vajavad uut tunnusluba."
   },
   "pages.personal_tokens.revoke_token.alert.title": {
-    "message": "This cannot be undone"
+    "message": "Seda tegevust ei saa tagasi pöörata"
   },
   "pages.personal_tokens.revoke_token.error": {
-    "message": "Failed to revoke the token"
+    "message": "Tunnusloa tühistamine ei õnnestunud"
   },
   "pages.personal_tokens.revoke_token.title": {
-    "message": "Revoke this personal token?"
+    "message": "Kas tühistad selle isikliku tunnusloa?"
   },
   "pages.personal_tokens.revoked_at_label": {
     "message": "Tühistamise aeg"
   },
   "pages.personal_tokens.scope_device_help": {
-    "message": "Provision a Matrix device"
+    "message": "Matrixi seadme eettevalmistus ja eelseadistus"
   },
   "pages.personal_tokens.scope_mas_admin_help": {
-    "message": "Access to the MAS admin API"
+    "message": "Ligipääs MAS-i haldusliidese API-le"
   },
   "pages.personal_tokens.scope_matrix_client_help": {
-    "message": "Access to the Matrix Client-Server API"
+    "message": "Ligipääs Matrixi klient-server API-le"
   },
   "pages.personal_tokens.scope_synapse_admin_help": {
-    "message": "Access to the Synapse admin API"
+    "message": "Ligipääs Synapse haldusliidese API-le"
   },
   "pages.personal_tokens.scopes_group_label": {
-    "message": "Scopes"
+    "message": "Kohaldamisalad"
   },
   "pages.personal_tokens.scopes_label": {
-    "message": "Scopes"
+    "message": "Kohaldamisalad ja õigused"
   },
   "pages.personal_tokens.set_expiry_help": {
-    "message": "Otherwise the token never expires"
+    "message": "Vastasel juhul ei aegu tunnusluba iialgi"
   },
   "pages.personal_tokens.set_expiry_label": {
-    "message": "Set an expiry"
+    "message": "Määra aegumine"
   },
   "pages.personal_tokens.status.active": {
     "message": "Aktiivne"
@@ -789,37 +798,37 @@
     "message": "Isiklikud tunnusload"
   },
   "pages.personal_tokens.token_created_description": {
-    "message": "Your personal token has been created. Copy it now as it will not be shown again."
+    "message": "Sinu isiklik tunnusluba on loodud. Kopeeri see kohe turvalisse asukohta - seda enam ei kuvata."
   },
   "pages.personal_tokens.token_created_title": {
-    "message": "Personal token created"
+    "message": "Isiklik tunnusluba on loodud"
   },
   "pages.personal_tokens.token_regenerated_description": {
-    "message": "Your personal token has been regenerated. Copy it now as it will not be shown again."
+    "message": "Sinu isiklik tunnusluba on uuesti loodud. Kopeeri see kohe turvalisse asukohta - seda enam ei kuvata."
   },
   "pages.personal_tokens.token_regenerated_title": {
-    "message": "Token regenerated"
+    "message": "Tunnusluba on uuesti loodud"
   },
   "pages.registration_tokens.auto_generate_placeholder": {
-    "message": "Auto-generate if left empty"
+    "message": "Kui jäetakse tühjaks, genereeritakse automaatselt"
   },
   "pages.registration_tokens.create_token.error": {
-    "message": "Failed to create token"
+    "message": "Tunnusloa loomine ei õnnestunud"
   },
   "pages.registration_tokens.create_token.submit": {
-    "message": "Create Token"
+    "message": "Lisa tunnusluba"
   },
   "pages.registration_tokens.create_token.success": {
-    "message": "Token created successfully"
+    "message": "Tunnusloa loomine õnnestus"
   },
   "pages.registration_tokens.create_token.title": {
-    "message": "Create Registration Token"
+    "message": "Registreerimise tunnusloa loomine"
   },
   "pages.registration_tokens.created_at_column": {
-    "message": "Created at"
+    "message": "Loodud"
   },
   "pages.registration_tokens.created_at_label": {
-    "message": "Created at"
+    "message": "Loodud"
   },
   "pages.registration_tokens.custom_token_help": {
     "message": "Optional custom token string. If left empty, a secure token will be auto-generated."
@@ -828,7 +837,7 @@
     "message": "Custom Token"
   },
   "pages.registration_tokens.details_label": {
-    "message": "Registration token details"
+    "message": "Registreerimise tunnusloa andmed"
   },
   "pages.registration_tokens.edit_properties": {
     "message": "Muuda omadusi"
@@ -837,10 +846,10 @@
     "message": "Unrevoke this token before editing its properties"
   },
   "pages.registration_tokens.edit_token.error": {
-    "message": "Failed to save the changes"
+    "message": "Muudatuste salvestamine ei õnnestunud"
   },
   "pages.registration_tokens.edit_token_title": {
-    "message": "Edit registration token"
+    "message": "Muuda registreerimise tunnusluba"
   },
   "pages.registration_tokens.expires_at_field": {
     "message": "Aegumine"
@@ -858,52 +867,52 @@
     "message": "Aegunud"
   },
   "pages.registration_tokens.filters.not_revoked": {
-    "message": "Not revoked"
+    "message": "Pole tühistatud"
   },
   "pages.registration_tokens.filters.revoked_only": {
     "message": "Tühistatud"
   },
   "pages.registration_tokens.filters.unused_only": {
-    "message": "Unused"
+    "message": "Kasutamata"
   },
   "pages.registration_tokens.filters.used_only": {
-    "message": "Used"
+    "message": "Kasutatud"
   },
   "pages.registration_tokens.never_expires": {
-    "message": "Never expires"
+    "message": "Ei aegu iialgi"
   },
   "pages.registration_tokens.no_expiration_placeholder": {
-    "message": "No expiration"
+    "message": "Aegumiskuupäeva pole"
   },
   "pages.registration_tokens.not_found.description": {
     "message": "The requested registration token ({tokenId}) could not be found on {serverName}."
   },
   "pages.registration_tokens.not_found.title": {
-    "message": "Registration token not found"
+    "message": "Registreerimise tunnusluba ei leidunud"
   },
   "pages.registration_tokens.revoke_token": {
-    "message": "Revoke token"
+    "message": "Tühista tunnusluba"
   },
   "pages.registration_tokens.revoke_token.alert.description": {
     "message": "Nobody will be able to register with {token} until it is unrevoked."
   },
   "pages.registration_tokens.revoke_token.alert.title": {
-    "message": "The token will stop working"
+    "message": "See tunnusluba lõpetab toimimise"
   },
   "pages.registration_tokens.revoke_token.error": {
-    "message": "Failed to revoke the token"
+    "message": "Selle tunnusloa tühistamine ei õnnestunud"
   },
   "pages.registration_tokens.revoke_token.success": {
-    "message": "Token revoked"
+    "message": "Tunnusluba on tühistatud"
   },
   "pages.registration_tokens.revoke_token.title": {
-    "message": "Revoke this registration token?"
+    "message": "Kas tühistad registreerimise tunnusloa?"
   },
   "pages.registration_tokens.revoked_at_label": {
     "message": "Tühistamise aeg"
   },
   "pages.registration_tokens.save_changes": {
-    "message": "Save Changes"
+    "message": "Salvesta muudatused"
   },
   "pages.registration_tokens.status.active": {
     "message": "Aktiivne"
@@ -915,7 +924,7 @@
     "message": "Aegunud"
   },
   "pages.registration_tokens.status.invalid": {
-    "message": "Invalid"
+    "message": "Kehtetu"
   },
   "pages.registration_tokens.status.label": {
     "message": "Olek"
@@ -924,7 +933,7 @@
     "message": "Tühistatud"
   },
   "pages.registration_tokens.status.used_up": {
-    "message": "Used up"
+    "message": "Kasutatud"
   },
   "pages.registration_tokens.title": {
     "message": "Registration tokens"
@@ -957,34 +966,34 @@
     "message": "Token unrevoked"
   },
   "pages.registration_tokens.usage_count_label": {
-    "message": "Usage count"
+    "message": "Kasutuskordi"
   },
   "pages.registration_tokens.usage_limit_field": {
-    "message": "Usage limit"
+    "message": "Kasutuspiirang"
   },
   "pages.registration_tokens.usage_limit_help": {
-    "message": "Maximum number of times this token can be used. Leave empty for unlimited uses."
+    "message": "Selle tunnusloa kasutuskordade arvu ülempiir. Piiramatu kasutuse jaoks jäta väli tühjaks."
   },
   "pages.registration_tokens.usage_limit_label": {
-    "message": "Usage Limit"
+    "message": "Kasutuspiirang"
   },
   "pages.registration_tokens.uses_column": {
-    "message": "Uses"
+    "message": "Kasutusi"
   },
   "pages.registration_tokens.valid_until_column": {
-    "message": "Expires at"
+    "message": "Aegub"
   },
   "pages.rooms.columns.alias": {
     "message": "Alias"
   },
   "pages.rooms.columns.members": {
-    "message": "Members"
+    "message": "Liikmed"
   },
   "pages.rooms.columns.room": {
-    "message": "Room"
+    "message": "Jututuba"
   },
   "pages.rooms.columns.visibility": {
-    "message": "Visibility"
+    "message": "Nähtavus"
   },
   "pages.rooms.delete_room.alert.description": {
     "message": "Järgnevaga kustutatakse kõiki selle jututoa sõnumid ja serverisse üleslaaditud meediafailid ning eemaldatakse jututuba serveri jututubade kataloogist. Kõik senised liikmed kaotavad ligipääsu oma sõnumitele ja jututuba kaob kasutaja jututubade loendist."
@@ -1023,10 +1032,10 @@
     "message": "Kustutamine on töös"
   },
   "pages.rooms.deletion.scheduled.description": {
-    "message": "Room deletion task is scheduled for {timestamp, date, short} at {timestamp, time, short}."
+    "message": "Jututoa kustutamine on ajastatud: {timestamp, date, short} kell {timestamp, time, short}."
   },
   "pages.rooms.deletion.scheduled.title": {
-    "message": "Room deletion scheduled"
+    "message": "Jututoa kustutamine on ajastatud"
   },
   "pages.rooms.deletion.success.description": {
     "message": "Jututoa kustutamine õnnestus {timestamp, date, short} kell {timestamp, time, short}."
@@ -1035,7 +1044,7 @@
     "message": "Kustutamine õnnestus"
   },
   "pages.rooms.details_label": {
-    "message": "Room details"
+    "message": "Jututoa üksikasjad"
   },
   "pages.rooms.filters.empty_rooms": {
     "message": "Tühjad jututoad"
@@ -1059,16 +1068,16 @@
     "message": "{COUNT, plural, zero {Jututube pole} one {# jututuba} other {# jututuba}}"
   },
   "pages.rooms.room_type.private": {
-    "message": "Private"
+    "message": "Privaatne"
   },
   "pages.rooms.room_type.public": {
-    "message": "Public"
+    "message": "Avalik"
   },
   "pages.rooms.room_type.restricted": {
-    "message": "Restricted"
+    "message": "Piiratud juurdepääsuga"
   },
   "pages.rooms.search_placeholder": {
-    "message": "Search…"
+    "message": "Otsi…"
   },
   "pages.rooms.title": {
     "message": "Jututoad"
@@ -1107,16 +1116,16 @@
     "message": "The supervision interface requires Element Web to be enabled"
   },
   "pages.supervision.recovery_key.copied": {
-    "message": "Recovery key copied"
+    "message": "Taastevõti on kopeeritud"
   },
   "pages.supervision.recovery_key.copy_failed": {
-    "message": "Could not copy recovery key"
+    "message": "Taastevõtme kopeerimine ei õnnestunud"
   },
   "pages.supervision.recovery_key.help": {
-    "message": "This is the recovery key used to enable reading encrypted messages."
+    "message": "See on taastevõti, mida kasutatakse krüptitud sõnumite lugemise võimaldamiseks."
   },
   "pages.supervision.recovery_key.label": {
-    "message": "Recovery key"
+    "message": "Taastevõti"
   },
   "pages.supervision.title": {
     "message": "Supervision"
@@ -1134,19 +1143,19 @@
     "message": "Peakasutaja"
   },
   "pages.users.account_status.deactivated": {
-    "message": "Deactivated"
+    "message": "Deaktiveeritud"
   },
   "pages.users.account_status.guest": {
-    "message": "Guest"
+    "message": "Külaline"
   },
   "pages.users.account_status.locked": {
-    "message": "Locked"
+    "message": "Lukustatud"
   },
   "pages.users.add_email.button": {
-    "message": "Add email address"
+    "message": "Lisa e-posti aadress"
   },
   "pages.users.add_email.description": {
-    "message": "Add an email address to this user"
+    "message": "Lisa sellele kasutajale e-posti aadress"
   },
   "pages.users.add_email.error": {
     "message": "E-posti aadressi lisamine ei õnnestunud"
@@ -1161,7 +1170,7 @@
     "message": "E-posti aadress on lisatud"
   },
   "pages.users.add_email.title": {
-    "message": "Add email address"
+    "message": "Lisa e-posti aadress"
   },
   "pages.users.add_upstream_link.error": {
     "message": "Failed to add link upstream account"
@@ -1170,31 +1179,31 @@
     "message": "Link to upstream account added"
   },
   "pages.users.columns.account_status": {
-    "message": "Account status"
+    "message": "Kasutajakonto olek"
   },
   "pages.users.columns.created_at": {
-    "message": "Created at"
+    "message": "Loodud"
   },
   "pages.users.columns.matrix_id": {
-    "message": "Matrix ID"
+    "message": "Matrixi kasutajatunnus"
   },
   "pages.users.deactivate_account.alert.description": {
-    "message": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
+    "message": "Järgnevaga logitakse kasutaja automaatselt kõikidest seadmetest välja, eemaldatakse kõik juurdepääsu tunnusload, kustutakse kõik kolmandate osapoolte tunnused ja kustutakse jäädavalt tema konto andmed."
   },
   "pages.users.deactivate_account.alert.title": {
     "message": "Sa oled kustutamas kasutaja andmeid"
   },
   "pages.users.deactivate_account.button": {
-    "message": "Deactivate account"
+    "message": "Deaktiveeri kasutajakonto"
   },
   "pages.users.deactivate_account.error": {
-    "message": "Failed to deactivate account"
+    "message": "Kasutajakonto deaktiveerimine ei õnnestus"
   },
   "pages.users.deactivate_account.success": {
-    "message": "Account deactivated"
+    "message": "Kasutajakonto deaktiveeritud"
   },
   "pages.users.deactivate_account.title": {
-    "message": "Deactivate this user?"
+    "message": "Kas deaktiveerid selle kasutaja?"
   },
   "pages.users.delete_email.description": {
     "message": "Kas oled kindel, et soovid selle e-posti aadressi ({email}) sellelt kasutajalt ({mxid}) eemaldada?"
@@ -1221,7 +1230,7 @@
     "message": "Remove link with upstream account?"
   },
   "pages.users.details_label": {
-    "message": "User details"
+    "message": "Kasutaja andmed"
   },
   "pages.users.filters.active": {
     "message": "Aktiivsed kasutajad"
@@ -1317,10 +1326,10 @@
     "message": "Otsi kasutajaid…"
   },
   "pages.users.set_admin.alert.description": {
-    "message": "The user will be able to view user data and make changes to user and room permissions."
+    "message": "Sel kasutajal saab olema õigus vaadata kasutajate andmeid ja muuta kasutajate õigusi ning jututubade reegleid."
   },
   "pages.users.set_admin.alert.title": {
-    "message": "User will have access to sensitive data"
+    "message": "Kasutajal on juurdepääs delikaatsetele andmetele"
   },
   "pages.users.set_admin.error": {
     "message": "{mxid} kasutaja peakasutaja õiguste muutmine ei õnnestunud"
@@ -1389,7 +1398,7 @@
     "message": "Kasutajakonto lukustus on eemaldatud"
   },
   "pages.users.user_count": {
-    "message": "{COUNT, plural, =0 {No users} one {# user} other {# users}}"
+    "message": "{COUNT, plural, =0 {Kasutajaid pole} one {# kasutaja} other {# kasutajat}}"
   },
   "product.badge.pro": {
     "message": "Pro"
@@ -1428,10 +1437,10 @@
     "message": "{COUNT, plural, one {# muu kasutaja} other {# muud kasutajat}}"
   },
   "ui.copy.copied": {
-    "message": "Copied!"
+    "message": "Kopeeritud!"
   },
   "ui.copy.copy_to_clipboard": {
-    "message": "Copy to clipboard"
+    "message": "Kopeeri lõikelauale"
   },
   "ui.data.failed_to_load": {
     "message": "Laadimine ei õnnestunud"
@@ -1440,19 +1449,19 @@
     "message": "Laadin veel…"
   },
   "ui.destination_status.failing": {
-    "message": "Failing"
+    "message": "Ei toimi"
   },
   "ui.destination_status.inactive": {
     "message": "Inactive"
   },
   "ui.destination_status.never_worked": {
-    "message": "Never worked"
+    "message": "Pole iialgi toiminud"
   },
   "ui.destination_status.working": {
-    "message": "Working"
+    "message": "Toimib"
   },
   "ui.device_info.name_on_platform": {
-    "message": "{name} on {platform}"
+    "message": "{name} platvormil {platform}"
   },
   "ui.device_info.type.mobile": {
     "message": "Nutiseade"
@@ -1467,7 +1476,7 @@
     "message": "Tundmatu seadme tüüp"
   },
   "ui.device_info.unknown_device": {
-    "message": "Unknown device"
+    "message": "Tundmatu seade"
   },
   "ui.device_status.active": {
     "message": "Aktiivne"
@@ -1476,25 +1485,25 @@
     "message": "Inactive"
   },
   "ui.device_status.last_active.tooltip": {
-    "message": "Last active on {date}."
+    "message": "Viimati aktiivne: {date}."
   },
   "ui.device_status.never_used": {
     "message": "Mitte kunagi kasutatud"
   },
   "ui.device_status.never_used.tooltip": {
-    "message": "This device has not been used yet."
+    "message": "Seda seadet pole veel kasutatud."
   },
   "ui.device_status.recently_used": {
     "message": "Hiljuti kasutatud"
   },
   "ui.device_status.signed_out": {
-    "message": "Signed out"
+    "message": "Välja logitud"
   },
   "ui.device_status.signed_out.tooltip": {
-    "message": "This device has been signed out and no longer has access."
+    "message": "See seade on välja logitud ja sellel pole enam juurdepääsu."
   },
   "ui.device_status.signed_out.tooltip_at": {
-    "message": "Signed out on {date}."
+    "message": "Väljalogitud: {date}."
   },
   "ui.language_switcher.browser_default": {
     "message": "Kasuta veebibrauseri seadistusi ({language})"

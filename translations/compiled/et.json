@@ -38,7 +38,7 @@
   "action.done": [
     {
       "type": 0,
-      "value": "Done"
+      "value": "Valmis"
     }
   ],
   "action.go_back": [
@@ -80,19 +80,19 @@
   "common.loading": [
     {
       "type": 0,
-      "value": "Loading…"
+      "value": "Laadin…"
     }
   ],
   "errors.authorization_denied": [
     {
       "type": 0,
-      "value": "Sign-in was cancelled."
+      "value": "Sisselogimine on katkestatud."
     }
   ],
   "errors.authorization_error": [
     {
       "type": 0,
-      "value": "Sign-in failed: "
+      "value": "Sisselogimine ei õnnestunud: "
     },
     {
       "type": 1,
@@ -102,7 +102,7 @@
   "errors.http_fetch": [
     {
       "type": 0,
-      "value": "Request to "
+      "value": "Päring „"
     },
     {
       "type": 1,
@@ -110,7 +110,7 @@
     },
     {
       "type": 0,
-      "value": " failed"
+      "value": "“ aadressile ei õnnestunud"
     }
   ],
   "errors.http_fetch_json_decoding": [
@@ -130,7 +130,7 @@
   "errors.http_status": [
     {
       "type": 0,
-      "value": "Request to "
+      "value": "Päring „"
     },
     {
       "type": 1,
@@ -138,7 +138,7 @@
     },
     {
       "type": 0,
-      "value": " failed with status code "
+      "value": "“ aadressile ei õnnestunud. Vastuse olekukood oli "
     },
     {
       "type": 1,
@@ -156,7 +156,7 @@
   "errors.mas_api": [
     {
       "type": 0,
-      "value": "The homeserver's authentication service returned an error: "
+      "value": "Koduserveri autentimisteenus andis päringu vastuseks vea: "
     },
     {
       "type": 1,
@@ -166,7 +166,7 @@
   "errors.matrix_standard": [
     {
       "type": 0,
-      "value": "Request to the homeserver failed with error code '"
+      "value": "Päringul koduserverisse oli vastus veakoodiga „"
     },
     {
       "type": 1,
@@ -174,17 +174,21 @@
     },
     {
       "type": 0,
-      "value": "'. Additionally, the server gave the following error message: "
+      "value": "“ ja veateatega „"
     },
     {
       "type": 1,
       "value": "errorMessage"
+    },
+    {
+      "type": 0,
+      "value": "“"
     }
   ],
   "errors.no_details": [
     {
       "type": 0,
-      "value": "The server returned an error with no details."
+      "value": "Päringuvastus serverist oli veateade, kuid ilma üksikasjadeta."
     }
   ],
   "errors.not_logged_in": [
@@ -614,10 +618,26 @@
       "value": "ESS-i versioon"
     }
   ],
+  "pages.dashboard.latest_ess_lts_stream": [
+    {
+      "type": 1,
+      "value": "stream"
+    },
+    {
+      "type": 0,
+      "value": " is the latest LTS stream"
+    }
+  ],
   "pages.dashboard.latest_ess_version": [
     {
       "type": 0,
       "value": "Viimane ESS-versioon"
+    }
+  ],
+  "pages.dashboard.new_ess_lts_release": [
+    {
+      "type": 0,
+      "value": "(Uus LTS-versioon)"
     }
   ],
   "pages.dashboard.new_ess_release": [
@@ -642,6 +662,12 @@
     {
       "type": 0,
       "value": "(Sa kasutad viimast versiooni)"
+    }
+  ],
+  "pages.dashboard.running_latest_ess_lts": [
+    {
+      "type": 0,
+      "value": "(You're running the latest LTS release)"
     }
   ],
   "pages.dashboard.synapse_version": [
@@ -711,7 +737,7 @@
   "pages.devices.applications.details_label": [
     {
       "type": 0,
-      "value": "Application details"
+      "value": "Rakenduse üksikasjad"
     }
   ],
   "pages.devices.applications.filters.has_active_sessions": [
@@ -817,13 +843,13 @@
   "pages.devices.applications.view_sessions": [
     {
       "type": 0,
-      "value": "View all devices"
+      "value": "Vaata kõiki seadmeid"
     }
   ],
   "pages.devices.applications.view_users": [
     {
       "type": 0,
-      "value": "View users on this application"
+      "value": "Vaata selle rakenduse kasutajaid"
     }
   ],
   "pages.devices.legacy.count": [
@@ -917,7 +943,7 @@
   "pages.devices.legacy.filters.activity_signed_out": [
     {
       "type": 0,
-      "value": "Signed out"
+      "value": "Välja logitud"
     }
   ],
   "pages.devices.legacy.filters.newest_first": [
@@ -983,7 +1009,7 @@
   "pages.devices.legacy.finished_at_label": [
     {
       "type": 0,
-      "value": "Signed out at"
+      "value": "Väljalogimise aeg"
     }
   ],
   "pages.devices.legacy.last_active_ip_label": [
@@ -1029,7 +1055,7 @@
   "pages.devices.legacy.redirect_uri_label": [
     {
       "type": 0,
-      "value": "Redirect URI"
+      "value": "Edasisuunamise URI"
     }
   ],
   "pages.devices.legacy.status_column": [
@@ -1059,7 +1085,7 @@
   "pages.devices.legacy.user_column": [
     {
       "type": 0,
-      "value": "User"
+      "value": "Kasutaja"
     }
   ],
   "pages.devices.tabs.applications": [
@@ -1095,7 +1121,7 @@
   "pages.devices.user.client_column": [
     {
       "type": 0,
-      "value": "Application"
+      "value": "Rakendus"
     }
   ],
   "pages.devices.user.count": [
@@ -1153,7 +1179,7 @@
   "pages.devices.user.details_label": [
     {
       "type": 0,
-      "value": "Device details"
+      "value": "Seadme andmed"
     }
   ],
   "pages.devices.user.device_column": [
@@ -1189,7 +1215,7 @@
   "pages.devices.user.filters.activity_signed_out": [
     {
       "type": 0,
-      "value": "Signed out"
+      "value": "Välja logitud"
     }
   ],
   "pages.devices.user.filters.client_chip": [
@@ -1247,13 +1273,13 @@
   "pages.devices.user.finish.error": [
     {
       "type": 0,
-      "value": "Failed to remove the device"
+      "value": "Seadme eemaldamine ei õnnestunud"
     }
   ],
   "pages.devices.user.finish.success": [
     {
       "type": 0,
-      "value": "Device removed"
+      "value": "Seade on eemaldatud"
     }
   ],
   "pages.devices.user.finish.title": [
@@ -1265,7 +1291,7 @@
   "pages.devices.user.finished_at_label": [
     {
       "type": 0,
-      "value": "Signed out at"
+      "value": "Väljalogimise aeg"
     }
   ],
   "pages.devices.user.last_active_ip_label": [
@@ -1341,7 +1367,7 @@
   "pages.devices.user.user_column": [
     {
       "type": 0,
-      "value": "User"
+      "value": "Kasutaja"
     }
   ],
   "pages.devices.user.user_none": [
@@ -1445,7 +1471,7 @@
   "pages.federation.detail.last_retry": [
     {
       "type": 0,
-      "value": "Last retry timestamp"
+      "value": "Viimase uuesti proovimise ajatempel"
     }
   ],
   "pages.federation.detail.last_retry.never": [
@@ -1565,19 +1591,19 @@
   "pages.federation.search_placeholder": [
     {
       "type": 0,
-      "value": "Search domains…"
+      "value": "Otsi domeene…"
     }
   ],
   "pages.federation.tab.allowed_domains": [
     {
       "type": 0,
-      "value": "Allowed domains"
+      "value": "Lubatud domeenid"
     }
   ],
   "pages.federation.tab.known_domains": [
     {
       "type": 0,
-      "value": "Known domains"
+      "value": "Teadaolevad domeenid"
     }
   ],
   "pages.federation.tab.section": [
@@ -1669,7 +1695,7 @@
   "pages.login.errors.insecure_context": [
     {
       "type": 0,
-      "value": "Sign-in requires a secure connection. Reload this page over https:// and try again."
+      "value": "Sisselogimine eeldab turvalise ühenduse kasutamist. Laadi see leht uuesti https:// protokolliga ja proovi uuesti."
     }
   ],
   "pages.login.errors.no_auth_metadata": [
@@ -1711,31 +1737,31 @@
   "pages.personal_tokens.acting_user_column": [
     {
       "type": 0,
-      "value": "Acting user"
+      "value": "Seos kasutajaga"
     }
   ],
   "pages.personal_tokens.acting_user_label": [
     {
       "type": 0,
-      "value": "Acting user"
+      "value": "Kasutaja, kelle nimel tunnusluba tegutseb"
     }
   ],
   "pages.personal_tokens.actor_user_help": [
     {
       "type": 0,
-      "value": "The user this token will act on behalf of"
+      "value": "Kasutaja, kelle nimel see tunnusluba saab tegutseda"
     }
   ],
   "pages.personal_tokens.actor_user_label": [
     {
       "type": 0,
-      "value": "Acting user"
+      "value": "Kasutaja, kelle nimel tunnusluba tegutseb"
     }
   ],
   "pages.personal_tokens.add_token_title": [
     {
       "type": 0,
-      "value": "Add personal token"
+      "value": "Lisa isiklik tunnusluba"
     }
   ],
   "pages.personal_tokens.cant_regenerate_tooltip": [
@@ -1767,7 +1793,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No personal tokens"
+              "value": "Isiklike tunnuslube pole"
             }
           ]
         },
@@ -1778,7 +1804,7 @@
             },
             {
               "type": 0,
-              "value": " personal token"
+              "value": " isiklik tunnusluba"
             }
           ]
         },
@@ -1789,7 +1815,7 @@
             },
             {
               "type": 0,
-              "value": " personal tokens"
+              "value": " isiklikku tunnusluba"
             }
           ]
         }
@@ -1801,43 +1827,43 @@
   "pages.personal_tokens.create_error": [
     {
       "type": 0,
-      "value": "Failed to create personal token"
+      "value": "Isikliku tunnusloa loomine ei õnnestunud"
     }
   ],
   "pages.personal_tokens.create_success": [
     {
       "type": 0,
-      "value": "Personal token created successfully"
+      "value": "Isikliku tunnusloa loomine õnnestus"
     }
   ],
   "pages.personal_tokens.create_token": [
     {
       "type": 0,
-      "value": "Create token"
+      "value": "Loo tunnusluba"
     }
   ],
   "pages.personal_tokens.created_at_label": [
     {
       "type": 0,
-      "value": "Created at"
+      "value": "Loodud"
     }
   ],
   "pages.personal_tokens.description": [
     {
       "type": 0,
-      "value": "Personal tokens are long-lived access tokens with specific access, including Synapse and MAS administration API access. They are useful for automating tasks and for creating integrations."
+      "value": "Isiklikud tunnusload on pika kehtivusega juurdepääsuload, millele on lubatud konkreetne juurdepääs, sealhulgas Synapse'i ja MAS-i halduse juurdepääs API-st. Need sobivad hästi ülesannete automatiseerimiseks ja lõimingute loomiseks."
     }
   ],
   "pages.personal_tokens.details_label": [
     {
       "type": 0,
-      "value": "Personal token details"
+      "value": "Isikliku tunnusloa andmed"
     }
   ],
   "pages.personal_tokens.device_id_help": [
     {
       "type": 0,
-      "value": "Leave empty to generate a random 10-character device ID"
+      "value": "Kui jätad tühjaks, siis luuakse juhuslik 10 tähemärki pikk seadmetunnus"
     }
   ],
   "pages.personal_tokens.device_id_label": [
@@ -1873,19 +1899,19 @@
   "pages.personal_tokens.expires_in_missing": [
     {
       "type": 0,
-      "value": "Enter how many days the token should last"
+      "value": "Sisesta tunnusloa kehtivuse ülempiir päevades"
     }
   ],
   "pages.personal_tokens.expires_in_underflow": [
     {
       "type": 0,
-      "value": "A token has to last at least one day"
+      "value": "Tunnusluba peaks kehtima vähemalt ühe päeva"
     }
   ],
   "pages.personal_tokens.expiry_revoked": [
     {
       "type": 0,
-      "value": "Revoked"
+      "value": "Tühistatud"
     }
   ],
   "pages.personal_tokens.filter.active": [
@@ -1903,7 +1929,7 @@
   "pages.personal_tokens.filter.no_expiry": [
     {
       "type": 0,
-      "value": "Never expires"
+      "value": "Ei aegu iialgi"
     }
   ],
   "pages.personal_tokens.filter.revoked": [
@@ -1915,19 +1941,19 @@
   "pages.personal_tokens.filter.scope_mas_admin": [
     {
       "type": 0,
-      "value": "Access to the MAS admin API"
+      "value": "Ligipääs MAS-i haldusliidese API-le"
     }
   ],
   "pages.personal_tokens.filter.scope_matrix_client": [
     {
       "type": 0,
-      "value": "Access to the Matrix Client-Server API"
+      "value": "Ligipääs Matrixi klient-server API-le"
     }
   ],
   "pages.personal_tokens.filter.scope_synapse_admin": [
     {
       "type": 0,
-      "value": "Access to the Synapse admin API"
+      "value": "Ligipääs Synapse haldusliidese API-le"
     }
   ],
   "pages.personal_tokens.last_active_column": [
@@ -1957,7 +1983,7 @@
   "pages.personal_tokens.name_help": [
     {
       "type": 0,
-      "value": "A human-readable name for the token, to help you identify it"
+      "value": "Inimloetav nimi tunnusloa jaoks, mis aitaks teda eristada"
     }
   ],
   "pages.personal_tokens.name_label": [
@@ -1975,7 +2001,7 @@
   "pages.personal_tokens.never_expires": [
     {
       "type": 0,
-      "value": "Never expires"
+      "value": "Ei aegu iialgi"
     }
   ],
   "pages.personal_tokens.never_used": [
@@ -1987,7 +2013,7 @@
   "pages.personal_tokens.not_found.description": [
     {
       "type": 0,
-      "value": "The personal token you're looking for doesn't exist or has been removed."
+      "value": "Sinu otsitavat tunnusluba kas pole olemas või ta on eemaldatud."
     }
   ],
   "pages.personal_tokens.not_found.title": [
@@ -2035,7 +2061,7 @@
   "pages.personal_tokens.regenerate_warning": [
     {
       "type": 0,
-      "value": "This will generate a new access token and invalidate the current one. Any applications using the current token will need to be updated."
+      "value": "Järgnevaga luuakse uus tunnusluba ja senine kaotab kehtivuse. Kõik rakendused ja liidestused, mis seda kasutavad, vajavad uue tunnusloa lisamist."
     }
   ],
   "pages.personal_tokens.revoke_success": [
@@ -2047,35 +2073,39 @@
   "pages.personal_tokens.revoke_token": [
     {
       "type": 0,
-      "value": "Revoke token"
+      "value": "Tühista tunnusluba"
     }
   ],
   "pages.personal_tokens.revoke_token.alert.description": [
+    {
+      "type": 0,
+      "value": "„"
+    },
     {
       "type": 1,
       "value": "humanName"
     },
     {
       "type": 0,
-      "value": " will stop working immediately, and anything using it will need a new token."
+      "value": "“ lakkab kohe töötamast ja kõik liidestused, mis seda kasutavad, vajavad uut tunnusluba."
     }
   ],
   "pages.personal_tokens.revoke_token.alert.title": [
     {
       "type": 0,
-      "value": "This cannot be undone"
+      "value": "Seda tegevust ei saa tagasi pöörata"
     }
   ],
   "pages.personal_tokens.revoke_token.error": [
     {
       "type": 0,
-      "value": "Failed to revoke the token"
+      "value": "Tunnusloa tühistamine ei õnnestunud"
     }
   ],
   "pages.personal_tokens.revoke_token.title": [
     {
       "type": 0,
-      "value": "Revoke this personal token?"
+      "value": "Kas tühistad selle isikliku tunnusloa?"
     }
   ],
   "pages.personal_tokens.revoked_at_label": [
@@ -2087,49 +2117,49 @@
   "pages.personal_tokens.scope_device_help": [
     {
       "type": 0,
-      "value": "Provision a Matrix device"
+      "value": "Matrixi seadme eettevalmistus ja eelseadistus"
     }
   ],
   "pages.personal_tokens.scope_mas_admin_help": [
     {
       "type": 0,
-      "value": "Access to the MAS admin API"
+      "value": "Ligipääs MAS-i haldusliidese API-le"
     }
   ],
   "pages.personal_tokens.scope_matrix_client_help": [
     {
       "type": 0,
-      "value": "Access to the Matrix Client-Server API"
+      "value": "Ligipääs Matrixi klient-server API-le"
     }
   ],
   "pages.personal_tokens.scope_synapse_admin_help": [
     {
       "type": 0,
-      "value": "Access to the Synapse admin API"
+      "value": "Ligipääs Synapse haldusliidese API-le"
     }
   ],
   "pages.personal_tokens.scopes_group_label": [
     {
       "type": 0,
-      "value": "Scopes"
+      "value": "Kohaldamisalad"
     }
   ],
   "pages.personal_tokens.scopes_label": [
     {
       "type": 0,
-      "value": "Scopes"
+      "value": "Kohaldamisalad ja õigused"
     }
   ],
   "pages.personal_tokens.set_expiry_help": [
     {
       "type": 0,
-      "value": "Otherwise the token never expires"
+      "value": "Vastasel juhul ei aegu tunnusluba iialgi"
     }
   ],
   "pages.personal_tokens.set_expiry_label": [
     {
       "type": 0,
-      "value": "Set an expiry"
+      "value": "Määra aegumine"
     }
   ],
   "pages.personal_tokens.status.active": [
@@ -2171,67 +2201,67 @@
   "pages.personal_tokens.token_created_description": [
     {
       "type": 0,
-      "value": "Your personal token has been created. Copy it now as it will not be shown again."
+      "value": "Sinu isiklik tunnusluba on loodud. Kopeeri see kohe turvalisse asukohta - seda enam ei kuvata."
     }
   ],
   "pages.personal_tokens.token_created_title": [
     {
       "type": 0,
-      "value": "Personal token created"
+      "value": "Isiklik tunnusluba on loodud"
     }
   ],
   "pages.personal_tokens.token_regenerated_description": [
     {
       "type": 0,
-      "value": "Your personal token has been regenerated. Copy it now as it will not be shown again."
+      "value": "Sinu isiklik tunnusluba on uuesti loodud. Kopeeri see kohe turvalisse asukohta - seda enam ei kuvata."
     }
   ],
   "pages.personal_tokens.token_regenerated_title": [
     {
       "type": 0,
-      "value": "Token regenerated"
+      "value": "Tunnusluba on uuesti loodud"
     }
   ],
   "pages.registration_tokens.auto_generate_placeholder": [
     {
       "type": 0,
-      "value": "Auto-generate if left empty"
+      "value": "Kui jäetakse tühjaks, genereeritakse automaatselt"
     }
   ],
   "pages.registration_tokens.create_token.error": [
     {
       "type": 0,
-      "value": "Failed to create token"
+      "value": "Tunnusloa loomine ei õnnestunud"
     }
   ],
   "pages.registration_tokens.create_token.submit": [
     {
       "type": 0,
-      "value": "Create Token"
+      "value": "Lisa tunnusluba"
     }
   ],
   "pages.registration_tokens.create_token.success": [
     {
       "type": 0,
-      "value": "Token created successfully"
+      "value": "Tunnusloa loomine õnnestus"
     }
   ],
   "pages.registration_tokens.create_token.title": [
     {
       "type": 0,
-      "value": "Create Registration Token"
+      "value": "Registreerimise tunnusloa loomine"
     }
   ],
   "pages.registration_tokens.created_at_column": [
     {
       "type": 0,
-      "value": "Created at"
+      "value": "Loodud"
     }
   ],
   "pages.registration_tokens.created_at_label": [
     {
       "type": 0,
-      "value": "Created at"
+      "value": "Loodud"
     }
   ],
   "pages.registration_tokens.custom_token_help": [
@@ -2249,7 +2279,7 @@
   "pages.registration_tokens.details_label": [
     {
       "type": 0,
-      "value": "Registration token details"
+      "value": "Registreerimise tunnusloa andmed"
     }
   ],
   "pages.registration_tokens.edit_properties": [
@@ -2267,13 +2297,13 @@
   "pages.registration_tokens.edit_token.error": [
     {
       "type": 0,
-      "value": "Failed to save the changes"
+      "value": "Muudatuste salvestamine ei õnnestunud"
     }
   ],
   "pages.registration_tokens.edit_token_title": [
     {
       "type": 0,
-      "value": "Edit registration token"
+      "value": "Muuda registreerimise tunnusluba"
     }
   ],
   "pages.registration_tokens.expires_at_field": [
@@ -2309,7 +2339,7 @@
   "pages.registration_tokens.filters.not_revoked": [
     {
       "type": 0,
-      "value": "Not revoked"
+      "value": "Pole tühistatud"
     }
   ],
   "pages.registration_tokens.filters.revoked_only": [
@@ -2321,25 +2351,25 @@
   "pages.registration_tokens.filters.unused_only": [
     {
       "type": 0,
-      "value": "Unused"
+      "value": "Kasutamata"
     }
   ],
   "pages.registration_tokens.filters.used_only": [
     {
       "type": 0,
-      "value": "Used"
+      "value": "Kasutatud"
     }
   ],
   "pages.registration_tokens.never_expires": [
     {
       "type": 0,
-      "value": "Never expires"
+      "value": "Ei aegu iialgi"
     }
   ],
   "pages.registration_tokens.no_expiration_placeholder": [
     {
       "type": 0,
-      "value": "No expiration"
+      "value": "Aegumiskuupäeva pole"
     }
   ],
   "pages.registration_tokens.not_found.description": [
@@ -2367,13 +2397,13 @@
   "pages.registration_tokens.not_found.title": [
     {
       "type": 0,
-      "value": "Registration token not found"
+      "value": "Registreerimise tunnusluba ei leidunud"
     }
   ],
   "pages.registration_tokens.revoke_token": [
     {
       "type": 0,
-      "value": "Revoke token"
+      "value": "Tühista tunnusluba"
     }
   ],
   "pages.registration_tokens.revoke_token.alert.description": [
@@ -2393,25 +2423,25 @@
   "pages.registration_tokens.revoke_token.alert.title": [
     {
       "type": 0,
-      "value": "The token will stop working"
+      "value": "See tunnusluba lõpetab toimimise"
     }
   ],
   "pages.registration_tokens.revoke_token.error": [
     {
       "type": 0,
-      "value": "Failed to revoke the token"
+      "value": "Selle tunnusloa tühistamine ei õnnestunud"
     }
   ],
   "pages.registration_tokens.revoke_token.success": [
     {
       "type": 0,
-      "value": "Token revoked"
+      "value": "Tunnusluba on tühistatud"
     }
   ],
   "pages.registration_tokens.revoke_token.title": [
     {
       "type": 0,
-      "value": "Revoke this registration token?"
+      "value": "Kas tühistad registreerimise tunnusloa?"
     }
   ],
   "pages.registration_tokens.revoked_at_label": [
@@ -2423,7 +2453,7 @@
   "pages.registration_tokens.save_changes": [
     {
       "type": 0,
-      "value": "Save Changes"
+      "value": "Salvesta muudatused"
     }
   ],
   "pages.registration_tokens.status.active": [
@@ -2447,7 +2477,7 @@
   "pages.registration_tokens.status.invalid": [
     {
       "type": 0,
-      "value": "Invalid"
+      "value": "Kehtetu"
     }
   ],
   "pages.registration_tokens.status.label": [
@@ -2465,7 +2495,7 @@
   "pages.registration_tokens.status.used_up": [
     {
       "type": 0,
-      "value": "Used up"
+      "value": "Kasutatud"
     }
   ],
   "pages.registration_tokens.title": [
@@ -2580,37 +2610,37 @@
   "pages.registration_tokens.usage_count_label": [
     {
       "type": 0,
-      "value": "Usage count"
+      "value": "Kasutuskordi"
     }
   ],
   "pages.registration_tokens.usage_limit_field": [
     {
       "type": 0,
-      "value": "Usage limit"
+      "value": "Kasutuspiirang"
     }
   ],
   "pages.registration_tokens.usage_limit_help": [
     {
       "type": 0,
-      "value": "Maximum number of times this token can be used. Leave empty for unlimited uses."
+      "value": "Selle tunnusloa kasutuskordade arvu ülempiir. Piiramatu kasutuse jaoks jäta väli tühjaks."
     }
   ],
   "pages.registration_tokens.usage_limit_label": [
     {
       "type": 0,
-      "value": "Usage Limit"
+      "value": "Kasutuspiirang"
     }
   ],
   "pages.registration_tokens.uses_column": [
     {
       "type": 0,
-      "value": "Uses"
+      "value": "Kasutusi"
     }
   ],
   "pages.registration_tokens.valid_until_column": [
     {
       "type": 0,
-      "value": "Expires at"
+      "value": "Aegub"
     }
   ],
   "pages.rooms.columns.alias": [
@@ -2622,19 +2652,19 @@
   "pages.rooms.columns.members": [
     {
       "type": 0,
-      "value": "Members"
+      "value": "Liikmed"
     }
   ],
   "pages.rooms.columns.room": [
     {
       "type": 0,
-      "value": "Room"
+      "value": "Jututuba"
     }
   ],
   "pages.rooms.columns.visibility": [
     {
       "type": 0,
-      "value": "Visibility"
+      "value": "Nähtavus"
     }
   ],
   "pages.rooms.delete_room.alert.description": [
@@ -2752,7 +2782,7 @@
   "pages.rooms.deletion.scheduled.description": [
     {
       "type": 0,
-      "value": "Room deletion task is scheduled for "
+      "value": "Jututoa kustutamine on ajastatud: "
     },
     {
       "type": 3,
@@ -2761,7 +2791,7 @@
     },
     {
       "type": 0,
-      "value": " at "
+      "value": " kell "
     },
     {
       "type": 4,
@@ -2776,7 +2806,7 @@
   "pages.rooms.deletion.scheduled.title": [
     {
       "type": 0,
-      "value": "Room deletion scheduled"
+      "value": "Jututoa kustutamine on ajastatud"
     }
   ],
   "pages.rooms.deletion.success.description": [
@@ -2812,7 +2842,7 @@
   "pages.rooms.details_label": [
     {
       "type": 0,
-      "value": "Room details"
+      "value": "Jututoa üksikasjad"
     }
   ],
   "pages.rooms.filters.empty_rooms": [
@@ -2910,25 +2940,25 @@
   "pages.rooms.room_type.private": [
     {
       "type": 0,
-      "value": "Private"
+      "value": "Privaatne"
     }
   ],
   "pages.rooms.room_type.public": [
     {
       "type": 0,
-      "value": "Public"
+      "value": "Avalik"
     }
   ],
   "pages.rooms.room_type.restricted": [
     {
       "type": 0,
-      "value": "Restricted"
+      "value": "Piiratud juurdepääsuga"
     }
   ],
   "pages.rooms.search_placeholder": [
     {
       "type": 0,
-      "value": "Search…"
+      "value": "Otsi…"
     }
   ],
   "pages.rooms.title": [
@@ -3020,25 +3050,25 @@
   "pages.supervision.recovery_key.copied": [
     {
       "type": 0,
-      "value": "Recovery key copied"
+      "value": "Taastevõti on kopeeritud"
     }
   ],
   "pages.supervision.recovery_key.copy_failed": [
     {
       "type": 0,
-      "value": "Could not copy recovery key"
+      "value": "Taastevõtme kopeerimine ei õnnestunud"
     }
   ],
   "pages.supervision.recovery_key.help": [
     {
       "type": 0,
-      "value": "This is the recovery key used to enable reading encrypted messages."
+      "value": "See on taastevõti, mida kasutatakse krüptitud sõnumite lugemise võimaldamiseks."
     }
   ],
   "pages.supervision.recovery_key.label": [
     {
       "type": 0,
-      "value": "Recovery key"
+      "value": "Taastevõti"
     }
   ],
   "pages.supervision.title": [
@@ -3074,31 +3104,31 @@
   "pages.users.account_status.deactivated": [
     {
       "type": 0,
-      "value": "Deactivated"
+      "value": "Deaktiveeritud"
     }
   ],
   "pages.users.account_status.guest": [
     {
       "type": 0,
-      "value": "Guest"
+      "value": "Külaline"
     }
   ],
   "pages.users.account_status.locked": [
     {
       "type": 0,
-      "value": "Locked"
+      "value": "Lukustatud"
     }
   ],
   "pages.users.add_email.button": [
     {
       "type": 0,
-      "value": "Add email address"
+      "value": "Lisa e-posti aadress"
     }
   ],
   "pages.users.add_email.description": [
     {
       "type": 0,
-      "value": "Add an email address to this user"
+      "value": "Lisa sellele kasutajale e-posti aadress"
     }
   ],
   "pages.users.add_email.error": [
@@ -3128,7 +3158,7 @@
   "pages.users.add_email.title": [
     {
       "type": 0,
-      "value": "Add email address"
+      "value": "Lisa e-posti aadress"
     }
   ],
   "pages.users.add_upstream_link.error": [
@@ -3146,25 +3176,25 @@
   "pages.users.columns.account_status": [
     {
       "type": 0,
-      "value": "Account status"
+      "value": "Kasutajakonto olek"
     }
   ],
   "pages.users.columns.created_at": [
     {
       "type": 0,
-      "value": "Created at"
+      "value": "Loodud"
     }
   ],
   "pages.users.columns.matrix_id": [
     {
       "type": 0,
-      "value": "Matrix ID"
+      "value": "Matrixi kasutajatunnus"
     }
   ],
   "pages.users.deactivate_account.alert.description": [
     {
       "type": 0,
-      "value": "This will automatically sign the user out of all devices, remove any access tokens, delete all third-party IDs, and permanently erase their account data."
+      "value": "Järgnevaga logitakse kasutaja automaatselt kõikidest seadmetest välja, eemaldatakse kõik juurdepääsu tunnusload, kustutakse kõik kolmandate osapoolte tunnused ja kustutakse jäädavalt tema konto andmed."
     }
   ],
   "pages.users.deactivate_account.alert.title": [
@@ -3176,25 +3206,25 @@
   "pages.users.deactivate_account.button": [
     {
       "type": 0,
-      "value": "Deactivate account"
+      "value": "Deaktiveeri kasutajakonto"
     }
   ],
   "pages.users.deactivate_account.error": [
     {
       "type": 0,
-      "value": "Failed to deactivate account"
+      "value": "Kasutajakonto deaktiveerimine ei õnnestus"
     }
   ],
   "pages.users.deactivate_account.success": [
     {
       "type": 0,
-      "value": "Account deactivated"
+      "value": "Kasutajakonto deaktiveeritud"
     }
   ],
   "pages.users.deactivate_account.title": [
     {
       "type": 0,
-      "value": "Deactivate this user?"
+      "value": "Kas deaktiveerid selle kasutaja?"
     }
   ],
   "pages.users.delete_email.description": [
@@ -3280,7 +3310,7 @@
   "pages.users.details_label": [
     {
       "type": 0,
-      "value": "User details"
+      "value": "Kasutaja andmed"
     }
   ],
   "pages.users.filters.active": [
@@ -3500,13 +3530,13 @@
   "pages.users.set_admin.alert.description": [
     {
       "type": 0,
-      "value": "The user will be able to view user data and make changes to user and room permissions."
+      "value": "Sel kasutajal saab olema õigus vaadata kasutajate andmeid ja muuta kasutajate õigusi ning jututubade reegleid."
     }
   ],
   "pages.users.set_admin.alert.title": [
     {
       "type": 0,
-      "value": "User will have access to sensitive data"
+      "value": "Kasutajal on juurdepääs delikaatsetele andmetele"
     }
   ],
   "pages.users.set_admin.error": [
@@ -3670,7 +3700,7 @@
           "value": [
             {
               "type": 0,
-              "value": "No users"
+              "value": "Kasutajaid pole"
             }
           ]
         },
@@ -3681,7 +3711,7 @@
             },
             {
               "type": 0,
-              "value": " user"
+              "value": " kasutaja"
             }
           ]
         },
@@ -3692,7 +3722,7 @@
             },
             {
               "type": 0,
-              "value": " users"
+              "value": " kasutajat"
             }
           ]
         }
@@ -3810,13 +3840,13 @@
   "ui.copy.copied": [
     {
       "type": 0,
-      "value": "Copied!"
+      "value": "Kopeeritud!"
     }
   ],
   "ui.copy.copy_to_clipboard": [
     {
       "type": 0,
-      "value": "Copy to clipboard"
+      "value": "Kopeeri lõikelauale"
     }
   ],
   "ui.data.failed_to_load": [
@@ -3834,7 +3864,7 @@
   "ui.destination_status.failing": [
     {
       "type": 0,
-      "value": "Failing"
+      "value": "Ei toimi"
     }
   ],
   "ui.destination_status.inactive": [
@@ -3846,13 +3876,13 @@
   "ui.destination_status.never_worked": [
     {
       "type": 0,
-      "value": "Never worked"
+      "value": "Pole iialgi toiminud"
     }
   ],
   "ui.destination_status.working": [
     {
       "type": 0,
-      "value": "Working"
+      "value": "Toimib"
     }
   ],
   "ui.device_info.name_on_platform": [
@@ -3862,7 +3892,7 @@
     },
     {
       "type": 0,
-      "value": " on "
+      "value": " platvormil "
     },
     {
       "type": 1,
@@ -3896,7 +3926,7 @@
   "ui.device_info.unknown_device": [
     {
       "type": 0,
-      "value": "Unknown device"
+      "value": "Tundmatu seade"
     }
   ],
   "ui.device_status.active": [
@@ -3914,7 +3944,7 @@
   "ui.device_status.last_active.tooltip": [
     {
       "type": 0,
-      "value": "Last active on "
+      "value": "Viimati aktiivne: "
     },
     {
       "type": 1,
@@ -3934,7 +3964,7 @@
   "ui.device_status.never_used.tooltip": [
     {
       "type": 0,
-      "value": "This device has not been used yet."
+      "value": "Seda seadet pole veel kasutatud."
     }
   ],
   "ui.device_status.recently_used": [
@@ -3946,19 +3976,19 @@
   "ui.device_status.signed_out": [
     {
       "type": 0,
-      "value": "Signed out"
+      "value": "Välja logitud"
     }
   ],
   "ui.device_status.signed_out.tooltip": [
     {
       "type": 0,
-      "value": "This device has been signed out and no longer has access."
+      "value": "See seade on välja logitud ja sellel pole enam juurdepääsu."
     }
   ],
   "ui.device_status.signed_out.tooltip_at": [
     {
       "type": 0,
-      "value": "Signed out on "
+      "value": "Väljalogitud: "
     },
     {
       "type": 1,
