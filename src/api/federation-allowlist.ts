@@ -8,7 +8,8 @@ import { queryOptions } from "@tanstack/react-query";
 import * as v from "valibot";
 
 import { accessToken } from "@/stores/auth";
-import { ensureResponseOk, fetch } from "@/utils/fetch";
+import { authenticatedFetch as fetch } from "@/utils/authenticated-fetch";
+import { ensureResponseOk } from "@/utils/fetch";
 
 const ALLOWLIST_BASE_PATH =
   "/_synapse/io.element/admin/v1/federation/whitelist";

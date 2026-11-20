@@ -8,7 +8,8 @@ import { queryOptions } from "@tanstack/react-query";
 import * as v from "valibot";
 
 import { accessToken } from "@/stores/auth";
-import { ensureResponseOk } from "@/utils/fetch";
+import { authenticatedFetch } from "@/utils/authenticated-fetch";
+import { ensureResponseOk, fetch } from "@/utils/fetch";
 
 const baseOptions = async (
   client: QueryClient,
@@ -56,7 +57,7 @@ export const whoamiQuery = (synapseRoot: string) =>
         "/_matrix/client/v3/account/whoami",
         synapseRoot,
       );
-      const response = await fetch(
+      const response = await authenticatedFetch(
         whoamiUrl,
         await baseOptions(client, signal),
       );
@@ -82,7 +83,7 @@ export const profileQuery = (synapseRoot: string, mxid: string) =>
         `/_matrix/client/v3/profile/${encodeURIComponent(mxid)}`,
         synapseRoot,
       );
-      const response = await fetch(
+      const response = await authenticatedFetch(
         profileUrl,
         await baseOptions(client, signal),
       );
@@ -132,7 +133,10 @@ export const mediaThumbnailQuery = (
         `/_matrix/client/v1/media/thumbnail/${encodeURIComponent(serverName)}/${encodeURIComponent(mediaId)}?width=96&height=96&method=crop`,
         synapseRoot,
       );
-      const response = await fetch(mediaUrl, await baseOptions(client, signal));
+      const response = await authenticatedFetch(
+        mediaUrl,
+        await baseOptions(client, signal),
+      );
 
       ensureResponseOk(response);
 

@@ -8,7 +8,8 @@ import * as v from "valibot";
 import { parse, type SemVer } from "verkit";
 
 import { accessToken } from "@/stores/auth";
-import { ensureResponseOk, fetch } from "@/utils/fetch";
+import { authenticatedFetch as fetch } from "@/utils/authenticated-fetch";
+import { ensureResponseOk } from "@/utils/fetch";
 
 const VersionResponse = v.object({
   version: v.nullable(v.string()),

@@ -96,6 +96,13 @@ const TokenResponse = v.object({
   expires_in: v.number(),
 });
 
+/** An OAuth refresh grant was permanently rejected, not a transient failure. */
+export class RefreshTokenRejectedError extends Error {
+  constructor() {
+    super("The refresh token is no longer valid");
+  }
+}
+
 export const tokenRequest = async (
   tokenEndpoint: string,
   parameters: TokenRequestParameters,
@@ -109,6 +116,21 @@ export const tokenRequest = async (
     },
     signal,
   });
+
+  if (parameters.grant_type === "refresh_token" && response.status === 400) {
+    const errorBody: unknown = await response
+      .clone()
+      .json()
+      .catch(() => null);
+    if (
+      typeof errorBody === "object" &&
+      errorBody !== null &&
+      "error" in errorBody &&
+      errorBody.error === "invalid_grant"
+    ) {
+      throw new RefreshTokenRejectedError();
+    }
+  }
 
   ensureResponseOk(response);
 
