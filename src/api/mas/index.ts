@@ -15,7 +15,7 @@ import { wellKnownQuery } from "@/api/matrix";
 import { PAGE_SIZE } from "@/constants";
 import { HttpStatusError, MasApiError } from "@/errors";
 import { accessToken } from "@/stores/auth";
-import { fetch } from "@/utils/fetch";
+import { authenticatedFetch as fetch } from "@/utils/authenticated-fetch";
 
 import * as api from "./api";
 import { createClient, type Client } from "./api/client";

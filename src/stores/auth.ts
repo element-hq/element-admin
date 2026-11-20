@@ -8,7 +8,11 @@ import { shared } from "use-broadcast-ts";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { authMetadataQuery, tokenRequest } from "@/api/auth";
+import {
+  authMetadataQuery,
+  RefreshTokenRejectedError,
+  tokenRequest,
+} from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
 import { NotLoggedInError } from "@/errors";
 import { reset } from "@/query";
@@ -122,6 +126,11 @@ interface AuthStoreActions {
     abortSignal?: AbortSignal,
   ): Promise<string>;
 
+  /** Discard a session only if these exact credentials are still active. */
+  invalidateRejectedCredentials: (
+    credentials: AuthStoreState["credentials"],
+  ) => Promise<void>;
+
   clear: () => Promise<void>;
 }
 
@@ -230,19 +239,37 @@ export const useAuthStore = create<AuthStore>()(
               }
 
               // Alright, real business: refresh the token
-              const response = await tokenRequest(
-                token_endpoint,
-                {
-                  grant_type: "refresh_token",
-                  refresh_token: current.credentials.refreshToken,
-                  client_id: current.credentials.clientId,
-                },
-                signal,
-              );
+              const credentials = current.credentials;
+              let response;
+              try {
+                response = await tokenRequest(
+                  token_endpoint,
+                  {
+                    grant_type: "refresh_token",
+                    refresh_token: credentials.refreshToken,
+                    client_id: credentials.clientId,
+                  },
+                  signal,
+                );
+              } catch (error) {
+                if (error instanceof RefreshTokenRejectedError) {
+                  await get().invalidateRejectedCredentials(credentials);
+                  throw new NotLoggedInError({ cause: error });
+                }
+                throw error;
+              }
+
+              // An in-flight refresh must never resurrect a logged-out
+              // session or overwrite an account selected in the meantime.
+              // A new session can use the same server and OAuth client ID.
+              // Never supply its token to a request started by the old one.
+              if (get().credentials !== credentials) {
+                throw new NotLoggedInError();
+              }
 
               await current.saveCredentials(
-                current.credentials.serverName,
-                current.credentials.clientId,
+                credentials.serverName,
+                credentials.clientId,
                 response.access_token,
                 response.refresh_token,
                 response.expires_in,
@@ -281,6 +308,13 @@ export const useAuthStore = create<AuthStore>()(
             static: false,
           } satisfies DynamicCredential;
           await set({ authorizationSession: null, credentials });
+        },
+
+        async invalidateRejectedCredentials(credentials) {
+          // A late 401 must not sign out a refreshed or replaced session,
+          // including a replacement which happens to reuse the same token.
+          if (!credentials || get().credentials !== credentials) return;
+          await get().clear();
         },
 
         async clear() {

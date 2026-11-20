@@ -11,7 +11,8 @@ import * as v from "valibot";
 import { PAGE_SIZE } from "@/constants";
 import { MatrixStandardError } from "@/errors";
 import { accessToken } from "@/stores/auth";
-import { ensureResponseOk, fetch } from "@/utils/fetch";
+import { authenticatedFetch as fetch } from "@/utils/authenticated-fetch";
+import { ensureResponseOk } from "@/utils/fetch";
 
 const MatrixErrorResponse = v.object({
   errcode: v.string(),
