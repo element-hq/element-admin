@@ -54,22 +54,29 @@ import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 export const Route = createFileRoute("/_console/personal-tokens/$tokenId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
+    const wellKnown = await queryClient.query({
+      ...wellKnownQuery(credentials.serverName),
+      staleTime: "static",
+    });
     const synapseRoot = wellKnown["m.homeserver"].base_url;
-    await queryClient.ensureQueryData(whoamiQuery(synapseRoot));
+    await queryClient.query({
+      ...whoamiQuery(synapseRoot),
+      staleTime: "static",
+    });
 
-    const { data: session } = await queryClient.ensureQueryData(
-      personalSessionQuery(credentials.serverName, params.tokenId),
-    );
-    await queryClient.ensureQueryData(
-      userQuery(credentials.serverName, session.attributes.actor_user_id),
-    );
+    const { data: session } = await queryClient.query({
+      ...personalSessionQuery(credentials.serverName, params.tokenId),
+      staleTime: "static",
+    });
+    await queryClient.query({
+      ...userQuery(credentials.serverName, session.attributes.actor_user_id),
+      staleTime: "static",
+    });
     if (session.attributes.owner_user_id) {
-      await queryClient.ensureQueryData(
-        userQuery(credentials.serverName, session.attributes.owner_user_id),
-      );
+      await queryClient.query({
+        ...userQuery(credentials.serverName, session.attributes.owner_user_id),
+        staleTime: "static",
+      });
     }
   },
   component: TokenDetailComponent,

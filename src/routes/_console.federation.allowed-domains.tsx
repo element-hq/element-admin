@@ -42,20 +42,26 @@ const ALLOWLIST_PAGE_SIZE = 100;
 
 export const Route = createFileRoute("/_console/federation/allowed-domains")({
   loader: async ({ context: { queryClient, credentials } }) => {
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
+    const wellKnown = await queryClient.query({
+      ...wellKnownQuery(credentials.serverName),
+      staleTime: "static",
+    });
     const synapseRoot = wellKnown["m.homeserver"].base_url;
-    await queryClient.ensureQueryData(essVersionQuery(synapseRoot));
+    await queryClient.query({
+      ...essVersionQuery(synapseRoot),
+      staleTime: "static",
+    });
 
-    const available = await queryClient.ensureQueryData(
-      federationAllowlistAvailableQuery(synapseRoot),
-    );
+    const available = await queryClient.query({
+      ...federationAllowlistAvailableQuery(synapseRoot),
+      staleTime: "static",
+    });
 
     if (available) {
-      await queryClient.ensureQueryData(
-        federationAllowlistQuery(synapseRoot, 0, ALLOWLIST_PAGE_SIZE),
-      );
+      await queryClient.query({
+        ...federationAllowlistQuery(synapseRoot, 0, ALLOWLIST_PAGE_SIZE),
+        staleTime: "static",
+      });
     }
   },
 

@@ -30,11 +30,15 @@ export const Route = createFileRoute("/_console/auditing")({
   },
 
   loader: async ({ context: { queryClient, credentials } }): Promise<void> => {
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
+    const wellKnown = await queryClient.query({
+      ...wellKnownQuery(credentials.serverName),
+      staleTime: "static",
+    });
     const synapseRoot = wellKnown["m.homeserver"].base_url;
-    await queryClient.ensureQueryData(essVersionQuery(synapseRoot));
+    await queryClient.query({
+      ...essVersionQuery(synapseRoot),
+      staleTime: "static",
+    });
   },
 
   component: RouteComponent,

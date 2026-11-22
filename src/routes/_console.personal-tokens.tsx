@@ -5,6 +5,7 @@
 
 import {
   keepPreviousData,
+  noop,
   useMutation,
   useQuery,
   useQueryClient,
@@ -115,15 +116,19 @@ export const Route = createFileRoute("/_console/personal-tokens")({
     deps: { parameters },
   }) => {
     // Kick off the token count query without awaiting it
-    queryClient.prefetchQuery(
-      personalSessionsCountQuery(credentials.serverName, parameters),
-    );
+    queryClient
+      .query(personalSessionsCountQuery(credentials.serverName, parameters))
+      .catch(noop);
 
     await Promise.all([
-      queryClient.ensureQueryData(wellKnownQuery(credentials.serverName)),
-      queryClient.ensureInfiniteQueryData(
-        personalSessionsInfiniteQuery(credentials.serverName, parameters),
-      ),
+      queryClient.query({
+        ...wellKnownQuery(credentials.serverName),
+        staleTime: "static",
+      }),
+      queryClient.infiniteQuery({
+        ...personalSessionsInfiniteQuery(credentials.serverName, parameters),
+        staleTime: "static",
+      }),
     ]);
   },
 

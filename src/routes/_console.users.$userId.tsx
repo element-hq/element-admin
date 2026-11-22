@@ -5,6 +5,7 @@
 
 /* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
 import {
+  noop,
   useMutation,
   useQuery,
   useQueryClient,
@@ -87,30 +88,35 @@ export const Route = createFileRoute("/_console/users/$userId")({
     ensureParametersAreUlids(params);
 
     // Fire the queries as soon as possible without awaiting it
-    const emailPromise = queryClient.ensureQueryData(
-      userEmailsQuery(credentials.serverName, params.userId),
-    );
-    const upstreamLinksPromise = queryClient.ensureQueryData(
-      userUpstreamLinksQuery(credentials.serverName, params.userId),
-    );
-    // This API might not be available, if it's the case we don't want to throw,
-    // so we use prefetchQuery instead of ensureQueryData
-    const upstreamProvidersPromise = queryClient.prefetchQuery(
-      upstreamProvidersQuery(credentials.serverName),
-    );
-    const siteConfigPromise = queryClient.ensureQueryData(
-      siteConfigQuery(credentials.serverName),
-    );
-    const userPromise = queryClient.ensureQueryData(
-      userQuery(credentials.serverName, params.userId),
-    );
+    const emailPromise = queryClient.query({
+      ...userEmailsQuery(credentials.serverName, params.userId),
+      staleTime: "static",
+    });
+    const upstreamLinksPromise = queryClient.query({
+      ...userUpstreamLinksQuery(credentials.serverName, params.userId),
+      staleTime: "static",
+    });
+    // This API might not be available, in which case the error is swallowed so
+    // the loader doesn't throw
+    const upstreamProvidersPromise = queryClient
+      .query(upstreamProvidersQuery(credentials.serverName))
+      .catch(noop);
+    const siteConfigPromise = queryClient.query({
+      ...siteConfigQuery(credentials.serverName),
+      staleTime: "static",
+    });
+    const userPromise = queryClient.query({
+      ...userQuery(credentials.serverName, params.userId),
+      staleTime: "static",
+    });
     const featuresPromise = getFeaturesStatus(
       queryClient,
       credentials.serverName,
     );
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
+    const wellKnown = await queryClient.query({
+      ...wellKnownQuery(credentials.serverName),
+      staleTime: "static",
+    });
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
     // The sessions APIs only exist on recent MAS versions, and the two device
@@ -120,25 +126,30 @@ export const Route = createFileRoute("/_console/users/$userId")({
     const { devices: hasDevices } = await featuresPromise;
     const sessionsCountsPromise = hasDevices
       ? Promise.all([
-          queryClient.ensureQueryData(
-            oauth2SessionsCountQuery(credentials.serverName, {
+          queryClient.query({
+            ...oauth2SessionsCountQuery(credentials.serverName, {
               clientKind: "dynamic",
               user: params.userId,
               status: "active",
             }),
-          ),
-          queryClient.ensureQueryData(
-            compatSessionsCountQuery(credentials.serverName, {
+            staleTime: "static",
+          }),
+          queryClient.query({
+            ...compatSessionsCountQuery(credentials.serverName, {
               user: params.userId,
               status: "active",
             }),
-          ),
+            staleTime: "static",
+          }),
         ])
       : undefined;
 
     const { data: user } = await userPromise;
     const mxid = `@${user.attributes.username}:${credentials.serverName}`;
-    await queryClient.ensureQueryData(profileQuery(synapseRoot, mxid));
+    await queryClient.query({
+      ...profileQuery(synapseRoot, mxid),
+      staleTime: "static",
+    });
     await emailPromise;
     await upstreamLinksPromise;
     await upstreamProvidersPromise;

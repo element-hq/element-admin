@@ -5,6 +5,7 @@
 import { useDebouncedCallback } from "@tanstack/react-pacer";
 import {
   keepPreviousData,
+  noop,
   useQuery,
   useSuspenseInfiniteQuery,
 } from "@tanstack/react-query";
@@ -87,13 +88,14 @@ export const Route = createFileRoute("/_console/devices/applications")({
     context: { queryClient, credentials },
     deps: { parameters },
   }) => {
-    queryClient.prefetchQuery(
-      oauth2ClientsCountQuery(credentials.serverName, parameters),
-    );
+    queryClient
+      .query(oauth2ClientsCountQuery(credentials.serverName, parameters))
+      .catch(noop);
 
-    await queryClient.ensureInfiniteQueryData(
-      oauth2ClientsInfiniteQuery(credentials.serverName, parameters),
-    );
+    await queryClient.infiniteQuery({
+      ...oauth2ClientsInfiniteQuery(credentials.serverName, parameters),
+      staleTime: "static",
+    });
   },
 
   pendingComponent: () => (

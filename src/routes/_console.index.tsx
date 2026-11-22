@@ -3,7 +3,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { noop, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { Heading, Separator, Text } from "@vector-im/compound-web";
 import { defineMessage, FormattedMessage } from "react-intl";
@@ -43,27 +43,29 @@ export const Route = createFileRoute("/_console/")({
   },
 
   loader: async ({ context: { queryClient, credentials } }) => {
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
+    const wellKnown = await queryClient.query({
+      ...wellKnownQuery(credentials.serverName),
+      staleTime: "static",
+    });
 
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
     // Kick the loading of these queries but don't await them
-    queryClient.prefetchQuery(serverVersionQuery(synapseRoot));
-    queryClient.prefetchQuery(roomsCountQuery(synapseRoot));
-    queryClient.prefetchQuery(usersCountQuery(credentials.serverName));
+    queryClient.query(serverVersionQuery(synapseRoot)).catch(noop);
+    queryClient.query(roomsCountQuery(synapseRoot)).catch(noop);
+    queryClient.query(usersCountQuery(credentials.serverName)).catch(noop);
 
     // The latest-release tile only renders for ESS deployments, so a non-ESS
     // server skips the release lookup. Pro releases are versioned separately
     // from the community chart on GitHub.
-    const { version, edition } = await queryClient.ensureQueryData(
-      essVersionQuery(synapseRoot),
-    );
+    const { version, edition } = await queryClient.query({
+      ...essVersionQuery(synapseRoot),
+      staleTime: "static",
+    });
     if (version && edition === "pro") {
-      queryClient.prefetchQuery(essProReleasesQuery);
+      queryClient.query(essProReleasesQuery).catch(noop);
     } else if (version) {
-      queryClient.prefetchQuery(latestEssReleaseQuery);
+      queryClient.query(latestEssReleaseQuery).catch(noop);
     }
   },
   component: RouteComponent,

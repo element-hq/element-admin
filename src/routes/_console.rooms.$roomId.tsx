@@ -43,16 +43,21 @@ import { assertNever } from "@/utils/never";
 
 export const Route = createFileRoute("/_console/rooms/$roomId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
-    const wellKnown = await queryClient.ensureQueryData(
-      matrixWellKnownQuery(credentials.serverName),
-    );
+    const wellKnown = await queryClient.query({
+      ...matrixWellKnownQuery(credentials.serverName),
+      staleTime: "static",
+    });
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
     await Promise.all([
-      queryClient.ensureQueryData(roomDetailQuery(synapseRoot, params.roomId)),
-      queryClient.ensureQueryData(
-        scheduledTasksForResource(synapseRoot, params.roomId),
-      ),
+      queryClient.query({
+        ...roomDetailQuery(synapseRoot, params.roomId),
+        staleTime: "static",
+      }),
+      queryClient.query({
+        ...scheduledTasksForResource(synapseRoot, params.roomId),
+        staleTime: "static",
+      }),
     ]);
   },
   component: RouteComponent,

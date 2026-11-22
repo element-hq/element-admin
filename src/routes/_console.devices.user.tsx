@@ -4,6 +4,7 @@
 
 import {
   keepPreviousData,
+  noop,
   useQuery,
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
@@ -109,17 +110,18 @@ export const Route = createFileRoute("/_console/devices/user")({
     context: { queryClient, credentials },
     deps: { parameters, direction },
   }) => {
-    queryClient.prefetchQuery(
-      oauth2SessionsCountQuery(credentials.serverName, parameters),
-    );
+    queryClient
+      .query(oauth2SessionsCountQuery(credentials.serverName, parameters))
+      .catch(noop);
 
-    await queryClient.ensureInfiniteQueryData(
-      oauth2SessionsInfiniteQuery(
+    await queryClient.infiniteQuery({
+      ...oauth2SessionsInfiniteQuery(
         credentials.serverName,
         parameters,
         direction,
       ),
-    );
+      staleTime: "static",
+    });
   },
 
   pendingComponent: () => (

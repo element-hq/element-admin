@@ -53,14 +53,16 @@ export const Route = createFileRoute("/_console/federation/known-domains")({
     context: { queryClient, credentials },
     deps: { parameters },
   }) => {
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
+    const wellKnown = await queryClient.query({
+      ...wellKnownQuery(credentials.serverName),
+      staleTime: "static",
+    });
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
-    await queryClient.ensureInfiniteQueryData(
-      federationDestinationsInfiniteQuery(synapseRoot, parameters),
-    );
+    await queryClient.infiniteQuery({
+      ...federationDestinationsInfiniteQuery(synapseRoot, parameters),
+      staleTime: "static",
+    });
   },
 
   pendingComponent: () => (

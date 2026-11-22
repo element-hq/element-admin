@@ -49,9 +49,10 @@ import { ensureParametersAreUlids } from "@/utils/parameters";
 export const Route = createFileRoute("/_console/registration-tokens/$tokenId")({
   loader: async ({ context: { queryClient, credentials }, params }) => {
     ensureParametersAreUlids(params);
-    await queryClient.ensureQueryData(
-      registrationTokenQuery(credentials.serverName, params.tokenId),
-    );
+    await queryClient.query({
+      ...registrationTokenQuery(credentials.serverName, params.tokenId),
+      staleTime: "static",
+    });
   },
   component: TokenDetailComponent,
   notFoundComponent: NotFoundComponent,

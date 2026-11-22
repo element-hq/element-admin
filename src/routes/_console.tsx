@@ -67,22 +67,28 @@ export const Route = createFileRoute("/_console")({
   },
 
   loader: async ({ context: { credentials, queryClient } }) => {
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
+    const wellKnown = await queryClient.query({
+      ...wellKnownQuery(credentials.serverName),
+      staleTime: "static",
+    });
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
     const masFeaturesPromise = getFeaturesStatus(
       queryClient,
       credentials.serverName,
     );
-    const essVersionPromise = queryClient.ensureQueryData(
-      essVersionQuery(synapseRoot),
-    );
-    const whoami = await queryClient.ensureQueryData(whoamiQuery(synapseRoot));
-    await queryClient.ensureQueryData(
-      profileQuery(synapseRoot, whoami.user_id),
-    );
+    const essVersionPromise = queryClient.query({
+      ...essVersionQuery(synapseRoot),
+      staleTime: "static",
+    });
+    const whoami = await queryClient.query({
+      ...whoamiQuery(synapseRoot),
+      staleTime: "static",
+    });
+    await queryClient.query({
+      ...profileQuery(synapseRoot, whoami.user_id),
+      staleTime: "static",
+    });
     await Promise.all([essVersionPromise, masFeaturesPromise]);
 
     return {
@@ -200,9 +206,10 @@ const SignOutMenuItem = ({
 
   const signOutMutation = useMutation({
     mutationFn: async () => {
-      const { revocation_endpoint } = await queryClient.ensureQueryData(
-        authMetadataQuery(synapseRoot),
-      );
+      const { revocation_endpoint } = await queryClient.query({
+        ...authMetadataQuery(synapseRoot),
+        staleTime: "static",
+      });
 
       await revokeToken(
         revocation_endpoint,

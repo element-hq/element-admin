@@ -3,7 +3,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
-import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import { noop, useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   CopyIcon,
@@ -51,19 +51,21 @@ export const Route = createFileRoute("/_console/supervision")({
   },
 
   loader: async ({ context: { queryClient, credentials } }): Promise<void> => {
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
+    const wellKnown = await queryClient.query({
+      ...wellKnownQuery(credentials.serverName),
+      staleTime: "static",
+    });
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
-    const { edition } = await queryClient.ensureQueryData(
-      essVersionQuery(synapseRoot),
-    );
+    const { edition } = await queryClient.query({
+      ...essVersionQuery(synapseRoot),
+      staleTime: "static",
+    });
     if (edition === "pro") {
-      // We use prefetchQuery and not ensureQueryData here to avoid failing the
-      // load if the adminbot endpoint fails to fetch. The endpoint 404s on
-      // non-Pro deployments, so it's only worth calling there.
-      await queryClient.prefetchQuery(adminbotQuery(synapseRoot));
+      // Errors are swallowed to avoid failing the load if the adminbot
+      // endpoint fails to fetch. The endpoint 404s on non-Pro deployments, so
+      // it's only worth calling there.
+      await queryClient.query(adminbotQuery(synapseRoot)).catch(noop);
     }
   },
 

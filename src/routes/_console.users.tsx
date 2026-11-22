@@ -6,6 +6,7 @@
 import { useDebouncedCallback } from "@tanstack/react-pacer";
 import {
   keepPreviousData,
+  noop,
   useMutation,
   useQuery,
   useQueryClient,
@@ -192,15 +193,19 @@ export const Route = createFileRoute("/_console/users")({
     deps: { parameters, direction },
   }) => {
     // Kick-off the users count query without awaiting it
-    queryClient.prefetchQuery(
-      usersCountQuery(credentials.serverName, parameters),
-    );
+    queryClient
+      .query(usersCountQuery(credentials.serverName, parameters))
+      .catch(noop);
 
-    await queryClient.ensureQueryData(wellKnownQuery(credentials.serverName));
+    await queryClient.query({
+      ...wellKnownQuery(credentials.serverName),
+      staleTime: "static",
+    });
 
-    await queryClient.ensureInfiniteQueryData(
-      usersInfiniteQuery(credentials.serverName, parameters, direction),
-    );
+    await queryClient.infiniteQuery({
+      ...usersInfiniteQuery(credentials.serverName, parameters, direction),
+      staleTime: "static",
+    });
   },
 
   pendingComponent: () => (

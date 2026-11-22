@@ -123,14 +123,16 @@ export const Route = createFileRoute("/_console/rooms")({
     context: { queryClient, credentials },
     deps: { parameters },
   }) => {
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
+    const wellKnown = await queryClient.query({
+      ...wellKnownQuery(credentials.serverName),
+      staleTime: "static",
+    });
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
-    await queryClient.ensureInfiniteQueryData(
-      roomsInfiniteQuery(synapseRoot, parameters),
-    );
+    await queryClient.infiniteQuery({
+      ...roomsInfiniteQuery(synapseRoot, parameters),
+      staleTime: "static",
+    });
   },
 
   pendingComponent: () => (

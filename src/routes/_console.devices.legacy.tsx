@@ -4,6 +4,7 @@
 
 import {
   keepPreviousData,
+  noop,
   useQuery,
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
@@ -102,17 +103,18 @@ export const Route = createFileRoute("/_console/devices/legacy")({
     context: { queryClient, credentials },
     deps: { parameters, direction },
   }) => {
-    queryClient.prefetchQuery(
-      compatSessionsCountQuery(credentials.serverName, parameters),
-    );
+    queryClient
+      .query(compatSessionsCountQuery(credentials.serverName, parameters))
+      .catch(noop);
 
-    await queryClient.ensureInfiniteQueryData(
-      compatSessionsInfiniteQuery(
+    await queryClient.infiniteQuery({
+      ...compatSessionsInfiniteQuery(
         credentials.serverName,
         parameters,
         direction,
       ),
-    );
+      staleTime: "static",
+    });
   },
 
   pendingComponent: () => (
