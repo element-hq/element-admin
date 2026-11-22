@@ -771,7 +771,7 @@ export const vUpstreamOAuthProvider = v.object({
   brand_name: v.nullish(v.string()),
   created_at: v.pipe(v.string(), v.isoTimestamp()),
   disabled_at: v.nullish(v.pipe(v.string(), v.isoTimestamp())),
-  registration_token_required: v.boolean(),
+  registration_token_required: v.optional(v.boolean()),
 });
 
 /**

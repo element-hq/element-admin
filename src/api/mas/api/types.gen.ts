@@ -1600,7 +1600,7 @@ export type UpstreamOAuthProvider = {
    * Whether a registration token is required for registrations via this
    * provider.
    */
-  registration_token_required: boolean;
+  registration_token_required?: boolean;
 };
 
 /**

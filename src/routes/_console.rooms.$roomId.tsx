@@ -396,6 +396,27 @@ const ScheduledTaskDisplay: React.FC<ScheduledTaskProps> = ({
       );
     }
 
+    case "cancelled": {
+      return (
+        <Alert
+          type="info"
+          title={intl.formatMessage({
+            id: "pages.rooms.deletion.cancelled.title",
+            defaultMessage: "Deletion cancelled",
+            description:
+              "When there is a room deletion task that was cancelled, this is the title of the alert shown.",
+          })}
+        >
+          <FormattedMessage
+            id="pages.rooms.deletion.cancelled.description"
+            defaultMessage="Room deletion task was cancelled on {timestamp, date, short} at {timestamp, time, short}."
+            description="When there is a room deletion task that was cancelled, this is the description of the alert shown."
+            values={{ timestamp: task.timestamp_ms }}
+          />
+        </Alert>
+      );
+    }
+
     default: {
       return assertNever(task.status);
     }
@@ -415,7 +436,7 @@ const RoomDeletionStatusDisplay: React.FC<RoomCommonProps> = (
   );
 
   const displayDeleteButton = deletionTasks.every(
-    (task) => task.status === "failed",
+    (task) => task.status === "failed" || task.status === "cancelled",
   );
 
   return (
@@ -452,7 +473,7 @@ function RoomCreator({
   creator,
   serverName,
 }: {
-  creator: string;
+  creator: string | null;
   serverName: string;
 }) {
   if (!creator) {
@@ -484,6 +505,9 @@ function RouteComponent() {
   const synapseRoot = wellKnown["m.homeserver"].base_url;
 
   const { data: room } = useSuspenseQuery(roomDetailQuery(synapseRoot, roomId));
+  // A room without a stats row has no member count, which the name and avatar
+  // fallbacks treat like an empty room.
+  const members = room.joined_members ?? 0;
 
   const intl = useIntl();
 
@@ -498,7 +522,7 @@ function RouteComponent() {
             roomName={room.name}
             roomCanonicalAlias={room.canonical_alias}
             roomType={room.room_type}
-            members={room.joined_members}
+            members={members}
             synapseRoot={synapseRoot}
             size="64px"
           />
@@ -511,7 +535,7 @@ function RouteComponent() {
               roomName={room.name}
               roomCanonicalAlias={room.canonical_alias}
               roomType={room.room_type}
-              members={room.joined_members}
+              members={members}
               synapseRoot={synapseRoot}
             />
           </H3>
@@ -535,7 +559,7 @@ function RouteComponent() {
           roomName={room.name}
           roomCanonicalAlias={room.canonical_alias}
           roomType={room.room_type}
-          members={room.joined_members}
+          members={members}
           synapseRoot={synapseRoot}
         />
       </div>
@@ -573,25 +597,31 @@ function RouteComponent() {
           <Data.Value>{room.federatable ? "Yes" : "No"}</Data.Value>
         </Data.Item>
 
-        <Data.Item>
-          <Data.Title>Room Version</Data.Title>
-          <Data.Value>{room.version}</Data.Value>
-        </Data.Item>
+        {room.version !== null && (
+          <Data.Item>
+            <Data.Title>Room Version</Data.Title>
+            <Data.Value>{room.version}</Data.Value>
+          </Data.Item>
+        )}
 
         <Data.Item>
           <Data.Title>Room Type</Data.Title>
           <Data.Value>{room.room_type || "Standard Room"}</Data.Value>
         </Data.Item>
 
-        <Data.Item>
-          <Data.Title>Total Members</Data.Title>
-          <Data.NumericValue value={room.joined_members} />
-        </Data.Item>
+        {room.joined_members !== null && (
+          <Data.Item>
+            <Data.Title>Total Members</Data.Title>
+            <Data.NumericValue value={room.joined_members} />
+          </Data.Item>
+        )}
 
-        <Data.Item>
-          <Data.Title>Local Members</Data.Title>
-          <Data.NumericValue value={room.joined_local_members} />
-        </Data.Item>
+        {room.joined_local_members !== null && (
+          <Data.Item>
+            <Data.Title>Local Members</Data.Title>
+            <Data.NumericValue value={room.joined_local_members} />
+          </Data.Item>
+        )}
 
         <Data.Item>
           <Data.Title>Local Devices</Data.Title>
@@ -606,10 +636,12 @@ function RouteComponent() {
           />
         </Data.Item>
 
-        <Data.Item>
-          <Data.Title>State Events</Data.Title>
-          <Data.NumericValue value={room.state_events} />
-        </Data.Item>
+        {room.state_events !== null && (
+          <Data.Item>
+            <Data.Title>State Events</Data.Title>
+            <Data.NumericValue value={room.state_events} />
+          </Data.Item>
+        )}
 
         {room.avatar && (
           <Data.Item>

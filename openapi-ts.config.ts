@@ -29,6 +29,16 @@ export default defineConfig({
             : undefined;
         },
 
+        UpstreamOAuthProvider: (schema) => {
+          // Make the 'registration_token_required' flag on upstream providers
+          // optional, as it was introduced in MAS 1.19.0
+          schema.required = schema.required
+            ? schema.required.filter(
+                (property) => property !== "registration_token_required",
+              )
+            : undefined;
+        },
+
         SiteConfig: (schema) => {
           // Only make the `server_name` required, rest can be optional
           schema.required = ["server_name"];

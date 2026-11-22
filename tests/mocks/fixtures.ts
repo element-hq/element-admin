@@ -596,7 +596,8 @@ export const singleRoom = (
 
 /**
  * The same room as a list entry. `Room` is `RoomDetail` minus four keys, which
- * the list schema strips, so the fixture omits them.
+ * the list schema strips, so the fixture omits them. The list only returns
+ * rooms with a stats row, so its counts are never null.
  */
 const roomListEntry = (index: number, overrides: RoomOverrides = {}): Room => {
   const {
@@ -606,7 +607,12 @@ const roomListEntry = (index: number, overrides: RoomOverrides = {}): Room => {
     forgotten: _forgotten,
     ...room
   } = singleRoom(index, overrides);
-  return room;
+  return {
+    ...room,
+    joined_members: room.joined_members ?? 0,
+    joined_local_members: room.joined_local_members ?? 0,
+    state_events: room.state_events ?? 0,
+  };
 };
 
 /**
