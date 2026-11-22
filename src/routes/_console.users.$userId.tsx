@@ -882,7 +882,7 @@ function SetPasswordButton({
   );
 
   const handleSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    (event: React.SubmitEvent<HTMLFormElement>) => {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
       const password = formData.get("password") as string;
@@ -1199,7 +1199,7 @@ function UpstreamLinksList({
   });
 
   const onSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    (event: React.SubmitEvent<HTMLFormElement>) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
       const subject = data.get("subject") as string;
@@ -1462,7 +1462,7 @@ function EmailsList({ userId, mxid, serverName }: EmailsListProps) {
   });
 
   const onSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    (event: React.SubmitEvent<HTMLFormElement>) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
       const email = data.get("email") as string;

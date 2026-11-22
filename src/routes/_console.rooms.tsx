@@ -343,7 +343,7 @@ function RouteComponent() {
   );
 
   const onSearchInput = useCallback(
-    (event: React.FormEvent<HTMLInputElement>) => {
+    (event: React.InputEvent<HTMLInputElement>) => {
       debouncedSearch(event.currentTarget.value);
     },
     [debouncedSearch],

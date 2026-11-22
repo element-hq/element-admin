@@ -381,7 +381,7 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
   );
 
   const onSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    (event: React.SubmitEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (isPending) {
         return;

@@ -21,7 +21,7 @@ import {
   InlineSpinner,
   Tooltip,
 } from "@vector-im/compound-web";
-import { type FormEvent, useCallback, useRef, useState } from "react";
+import { type SubmitEvent, useCallback, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
@@ -541,7 +541,7 @@ function EditTokenModal({ token, serverName, tokenId }: EditTokenModalProps) {
   );
 
   const handleEditSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
+    (event: SubmitEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       const formData = new FormData(event.currentTarget);
