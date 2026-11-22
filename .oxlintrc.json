@@ -63,6 +63,7 @@
     "typescript/no-explicit-any": "error",
     "typescript/no-inferrable-types": "error",
     "typescript/no-invalid-void-type": "error",
+    "typescript/no-deprecated": "error",
     "typescript/no-namespace": "error",
     "typescript/no-non-null-asserted-nullish-coalescing": "error",
     "typescript/no-non-null-assertion": "error",
