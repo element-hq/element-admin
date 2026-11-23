@@ -34,7 +34,7 @@ import {
   userQuery,
 } from "@/api/mas";
 import type { SingleResourceForPersonalSession } from "@/api/mas/api";
-import { wellKnownQuery, whoamiQuery } from "@/api/matrix";
+import { whoamiQuery } from "@/api/matrix";
 import { CopyToClipboard } from "@/components/copy";
 import * as Data from "@/components/data";
 import * as Dialog from "@/components/dialog";
@@ -52,12 +52,10 @@ import { PersonalTokenStatusBadge } from "@/ui/token-status-badge";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 export const Route = createFileRoute("/_console/personal-tokens/$tokenId")({
-  loader: async ({ context: { queryClient, credentials }, params }) => {
-    const wellKnown = await queryClient.query({
-      ...wellKnownQuery(credentials.serverName),
-      staleTime: "static",
-    });
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
+  loader: async ({
+    context: { queryClient, credentials, synapseRoot },
+    params,
+  }) => {
     await queryClient.query({
       ...whoamiQuery(synapseRoot),
       staleTime: "static",
@@ -312,13 +310,9 @@ function RevokeTokenButton({
 
 function TokenDetailComponent() {
   const intl = useIntl();
-  const { credentials } = Route.useRouteContext();
+  const { credentials, synapseRoot } = Route.useRouteContext();
   const parameters = Route.useParams();
 
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
   const { data: whoami } = useSuspenseQuery(whoamiQuery(synapseRoot));
 
   const {
@@ -352,7 +346,11 @@ function TokenDetailComponent() {
               description="Label for the acting user field"
             />
           </Text>
-          <UserCard serverName={credentials.serverName} userId={actor.id} />
+          <UserCard
+            serverName={credentials.serverName}
+            synapseRoot={synapseRoot}
+            userId={actor.id}
+          />
         </div>
 
         {token.attributes.owner_user_id && (
@@ -366,6 +364,7 @@ function TokenDetailComponent() {
             </Text>
             <UserCard
               serverName={credentials.serverName}
+              synapseRoot={synapseRoot}
               userId={token.attributes.owner_user_id}
             />
           </div>

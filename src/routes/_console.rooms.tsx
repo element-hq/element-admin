@@ -4,10 +4,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 import { useDebouncedCallback } from "@tanstack/react-pacer";
-import {
-  useSuspenseInfiniteQuery,
-  useSuspenseQuery,
-} from "@tanstack/react-query";
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
 import {
   createColumnHelper,
@@ -24,7 +21,6 @@ import {
 } from "react-intl";
 import * as v from "valibot";
 
-import { wellKnownQuery } from "@/api/matrix";
 import {
   type RoomListFilters,
   roomsInfiniteQuery,
@@ -120,15 +116,9 @@ export const Route = createFileRoute("/_console/rooms")({
     } satisfies RoomListFilters,
   }),
   loader: async ({
-    context: { queryClient, credentials },
+    context: { queryClient, synapseRoot },
     deps: { parameters },
   }) => {
-    const wellKnown = await queryClient.query({
-      ...wellKnownQuery(credentials.serverName),
-      staleTime: "static",
-    });
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
-
     await queryClient.infiniteQuery({
       ...roomsInfiniteQuery(synapseRoot, parameters),
       staleTime: "static",
@@ -198,7 +188,7 @@ const filtersDefinition = [
 ] as const;
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
+  const { synapseRoot } = Route.useRouteContext();
   const search = Route.useSearch();
   const { parameters } = Route.useLoaderDeps();
   const from = useCurrentChildRoutePath(Route.id);
@@ -223,11 +213,6 @@ function RouteComponent() {
       wait: 400,
     },
   );
-
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
 
   const { data, hasNextPage, fetchNextPage, isFetching } =
     useSuspenseInfiniteQuery(roomsInfiniteQuery(synapseRoot, parameters));

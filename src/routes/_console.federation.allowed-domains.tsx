@@ -28,7 +28,6 @@ import {
   federationAllowlistQuery,
   removeFromAllowlist,
 } from "@/api/federation-allowlist";
-import { wellKnownQuery } from "@/api/matrix";
 import * as Card from "@/components/card";
 import * as DataTable from "@/components/data-table";
 import * as Dialog from "@/components/dialog";
@@ -41,12 +40,7 @@ import { Heading } from "./_console.federation";
 const ALLOWLIST_PAGE_SIZE = 100;
 
 export const Route = createFileRoute("/_console/federation/allowed-domains")({
-  loader: async ({ context: { queryClient, credentials } }) => {
-    const wellKnown = await queryClient.query({
-      ...wellKnownQuery(credentials.serverName),
-      staleTime: "static",
-    });
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
+  loader: async ({ context: { queryClient, synapseRoot } }) => {
     await queryClient.query({
       ...essVersionQuery(synapseRoot),
       staleTime: "static",
@@ -69,12 +63,8 @@ export const Route = createFileRoute("/_console/federation/allowed-domains")({
 });
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
+  const { synapseRoot } = Route.useRouteContext();
 
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
   const variant = useEssVariant(synapseRoot);
   const isPro = variant === "pro";
 

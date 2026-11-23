@@ -226,7 +226,7 @@ const UserFilterLabel = ({
 };
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
+  const { credentials, synapseRoot } = Route.useRouteContext();
   const search = Route.useSearch();
   const { parameters, direction } = Route.useLoaderDeps();
   const intl = useIntl();
@@ -332,6 +332,7 @@ function RouteComponent() {
             return (
               <UserCell
                 serverName={credentials.serverName}
+                synapseRoot={synapseRoot}
                 userId={session.attributes.user_id}
               />
             );
@@ -355,7 +356,7 @@ function RouteComponent() {
           ),
         }),
       ]),
-    [credentials.serverName, cutoffs, intl, search],
+    [credentials.serverName, synapseRoot, cutoffs, intl, search],
   );
 
   const table = useTable({

@@ -40,7 +40,6 @@ import {
   userQuery,
 } from "@/api/mas";
 import type { SingleResourceForPersonalSession } from "@/api/mas/api/types.gen";
-import { wellKnownQuery } from "@/api/matrix";
 import { CopyToClipboard } from "@/components/copy";
 import * as DataTable from "@/components/data-table";
 import * as Dialog from "@/components/dialog";
@@ -120,16 +119,10 @@ export const Route = createFileRoute("/_console/personal-tokens")({
       .query(personalSessionsCountQuery(credentials.serverName, parameters))
       .catch(noop);
 
-    await Promise.all([
-      queryClient.query({
-        ...wellKnownQuery(credentials.serverName),
-        staleTime: "static",
-      }),
-      queryClient.infiniteQuery({
-        ...personalSessionsInfiniteQuery(credentials.serverName, parameters),
-        staleTime: "static",
-      }),
-    ]);
+    await queryClient.infiniteQuery({
+      ...personalSessionsInfiniteQuery(credentials.serverName, parameters),
+      staleTime: "static",
+    });
   },
 
   pendingComponent: () => (
@@ -583,10 +576,9 @@ const PersonalTokenAddButton = ({
 interface UserCellProps {
   userId: string;
   serverName: string;
+  synapseRoot: string;
 }
-const UserCell = ({ userId, serverName }: UserCellProps) => {
-  const { data: wellKnown } = useSuspenseQuery(wellKnownQuery(serverName));
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
+const UserCell = ({ userId, serverName, synapseRoot }: UserCellProps) => {
   const { data } = useSuspenseQuery(userQuery(serverName, userId));
   const mxid = `@${data.data.attributes.username}:${serverName}`;
   return <UserInfo synapseRoot={synapseRoot} mxid={mxid} />;
@@ -659,17 +651,12 @@ const filtersDefinition = [
 ] as const;
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
+  const { credentials, synapseRoot } = Route.useRouteContext();
   const search = Route.useSearch();
   const { parameters } = Route.useLoaderDeps();
   const from = useCurrentChildRoutePath(Route.id);
   const navigate = useNavigate({ from });
   const intl = useIntl();
-
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
 
   const { data: totalCount } = useQuery({
     ...personalSessionsCountQuery(credentials.serverName, parameters),
@@ -734,6 +721,7 @@ function RouteComponent() {
                 <UserCell
                   userId={token.attributes.actor_user_id}
                   serverName={credentials.serverName}
+                  synapseRoot={synapseRoot}
                 />
               </Suspense>
             );
@@ -799,7 +787,7 @@ function RouteComponent() {
           },
         }),
       ]),
-    [search, intl, credentials.serverName],
+    [search, intl, credentials.serverName, synapseRoot],
   );
 
   const table = useTable({

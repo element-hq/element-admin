@@ -10,7 +10,6 @@ import { Alert, Avatar, H3, Tooltip } from "@vector-im/compound-web";
 import { Suspense, useMemo } from "react";
 import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
-import { wellKnownQuery } from "@/api/matrix";
 import { federationDestinationQuery } from "@/api/synapse";
 import { serverSupportQuery } from "@/api/well-known-support";
 import * as Data from "@/components/data";
@@ -23,13 +22,7 @@ import { getDestinationStatus, StatusBadge } from "@/ui/destination-status";
 export const Route = createFileRoute(
   "/_console/federation/known-domains/$destination",
 )({
-  loader: async ({ context: { queryClient, credentials }, params }) => {
-    const wellKnown = await queryClient.query({
-      ...wellKnownQuery(credentials.serverName),
-      staleTime: "static",
-    });
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
-
+  loader: async ({ context: { queryClient, synapseRoot }, params }) => {
     await queryClient.query({
       ...federationDestinationQuery(synapseRoot, params.destination),
       staleTime: "static",
@@ -238,13 +231,8 @@ function ContactInfo({ destination }: { destination: string }) {
 }
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
+  const { synapseRoot } = Route.useRouteContext();
   const { destination: destinationName } = Route.useParams();
-
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
 
   const { data: dest } = useSuspenseQuery(
     federationDestinationQuery(synapseRoot, destinationName),

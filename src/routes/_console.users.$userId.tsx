@@ -67,7 +67,7 @@ import type {
   UpstreamOAuthLink,
   UserEmail,
 } from "@/api/mas/api";
-import { profileQuery, wellKnownQuery } from "@/api/matrix";
+import { profileQuery } from "@/api/matrix";
 import * as Data from "@/components/data";
 import * as Dialog from "@/components/dialog";
 import { EntityCard, EntityCardSkeleton } from "@/components/entity-card";
@@ -84,7 +84,10 @@ import { getFeaturesStatus, useFeaturesStatus } from "@/utils/features";
 import { ensureParametersAreUlids } from "@/utils/parameters";
 
 export const Route = createFileRoute("/_console/users/$userId")({
-  loader: async ({ context: { queryClient, credentials }, params }) => {
+  loader: async ({
+    context: { queryClient, credentials, synapseRoot },
+    params,
+  }) => {
     ensureParametersAreUlids(params);
 
     // Fire the queries as soon as possible without awaiting it
@@ -113,11 +116,6 @@ export const Route = createFileRoute("/_console/users/$userId")({
       queryClient,
       credentials.serverName,
     );
-    const wellKnown = await queryClient.query({
-      ...wellKnownQuery(credentials.serverName),
-      staleTime: "static",
-    });
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
 
     // The sessions APIs only exist on recent MAS versions, and the two device
     // cards are hidden without them, so don't even ask for the counts there.
@@ -1692,13 +1690,8 @@ const CloseSidebar: React.FC = () => {
 };
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
+  const { credentials, synapseRoot } = Route.useRouteContext();
   const { userId } = Route.useParams();
-
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
 
   const {
     data: { data: user },

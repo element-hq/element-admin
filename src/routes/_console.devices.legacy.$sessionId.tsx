@@ -125,7 +125,7 @@ const CloseSidebar: React.FC = () => {
 };
 
 function SessionDetailComponent() {
-  const { credentials } = Route.useRouteContext();
+  const { credentials, synapseRoot } = Route.useRouteContext();
   const { sessionId } = Route.useParams();
   const queryClient = useQueryClient();
   const intl = useIntl();
@@ -220,6 +220,7 @@ function SessionDetailComponent() {
 
         <UserCard
           serverName={credentials.serverName}
+          synapseRoot={synapseRoot}
           userId={session.attributes.user_id}
         />
 
@@ -384,6 +385,7 @@ function SessionDetailComponent() {
               <StaticEntityCard>
                 <UserCardBody
                   serverName={credentials.serverName}
+                  synapseRoot={synapseRoot}
                   userId={session.attributes.user_id}
                 />
               </StaticEntityCard>

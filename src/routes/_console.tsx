@@ -50,7 +50,7 @@ const TokenView: React.FC<TokenViewProps> = ({ token }: TokenViewProps) => (
 );
 
 export const Route = createFileRoute("/_console")({
-  beforeLoad: ({ location }) => {
+  beforeLoad: async ({ context, location }) => {
     const state = useAuthStore.getState();
     if (!state.credentials) {
       throw redirect({
@@ -61,18 +61,19 @@ export const Route = createFileRoute("/_console")({
       });
     }
 
-    return {
-      credentials: state.credentials,
-    };
-  },
-
-  loader: async ({ context: { credentials, queryClient } }) => {
-    const wellKnown = await queryClient.query({
+    const { credentials } = state;
+    const wellKnown = await context.queryClient.query({
       ...wellKnownQuery(credentials.serverName),
       staleTime: "static",
     });
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
 
+    return {
+      credentials,
+      synapseRoot: wellKnown["m.homeserver"].base_url,
+    };
+  },
+
+  loader: async ({ context: { credentials, synapseRoot, queryClient } }) => {
     const masFeaturesPromise = getFeaturesStatus(
       queryClient,
       credentials.serverName,
@@ -102,11 +103,9 @@ export const Route = createFileRoute("/_console")({
 });
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
+  const { credentials, synapseRoot } = Route.useRouteContext();
+  // Keep the well-known observed so it never gets garbage-collected
+  useQuery(wellKnownQuery(credentials.serverName));
   const { data: whoami } = useSuspenseQuery(whoamiQuery(synapseRoot));
 
   const { data: profile } = useSuspenseQuery(

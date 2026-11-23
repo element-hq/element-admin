@@ -28,7 +28,6 @@ import {
   useEssVariant,
   type AdminbotResponse,
 } from "@/api/ess";
-import { wellKnownQuery } from "@/api/matrix";
 import * as Card from "@/components/card";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
@@ -50,13 +49,7 @@ export const Route = createFileRoute("/_console/supervision")({
     },
   },
 
-  loader: async ({ context: { queryClient, credentials } }): Promise<void> => {
-    const wellKnown = await queryClient.query({
-      ...wellKnownQuery(credentials.serverName),
-      staleTime: "static",
-    });
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
-
+  loader: async ({ context: { queryClient, synapseRoot } }): Promise<void> => {
     const { edition } = await queryClient.query({
       ...essVersionQuery(synapseRoot),
       staleTime: "static",
@@ -506,11 +499,7 @@ const MaybeAdminbotContent = ({ synapseRoot }: { synapseRoot: string }) => {
 };
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
+  const { synapseRoot } = Route.useRouteContext();
   const variant = useEssVariant(synapseRoot);
 
   return (

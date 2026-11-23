@@ -16,7 +16,6 @@ import {
 } from "@/api/ess-releases";
 import { githubReleaseQuery } from "@/api/github";
 import { usersCountQuery } from "@/api/mas";
-import { wellKnownQuery } from "@/api/matrix";
 import { roomsCountQuery, serverVersionQuery } from "@/api/synapse";
 import * as Data from "@/components/data";
 import * as Navigation from "@/components/navigation";
@@ -42,14 +41,7 @@ export const Route = createFileRoute("/_console/")({
     },
   },
 
-  loader: async ({ context: { queryClient, credentials } }) => {
-    const wellKnown = await queryClient.query({
-      ...wellKnownQuery(credentials.serverName),
-      staleTime: "static",
-    });
-
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
-
+  loader: async ({ context: { queryClient, credentials, synapseRoot } }) => {
     // Kick the loading of these queries but don't await them
     queryClient.query(serverVersionQuery(synapseRoot)).catch(noop);
     queryClient.query(roomsCountQuery(synapseRoot)).catch(noop);
@@ -236,13 +228,7 @@ const TotalRooms: React.FC<TotalRoomsProps> = ({
 };
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
-
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
+  const { credentials, synapseRoot } = Route.useRouteContext();
   const essVersion = useEssVersion(synapseRoot);
   const essVariant = useEssVariant(synapseRoot);
 

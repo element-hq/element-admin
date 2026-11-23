@@ -26,7 +26,6 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
-import { wellKnownQuery as matrixWellKnownQuery } from "@/api/matrix";
 import {
   deleteRoom,
   roomDetailQuery,
@@ -42,13 +41,7 @@ import * as messages from "@/messages";
 import { assertNever } from "@/utils/never";
 
 export const Route = createFileRoute("/_console/rooms/$roomId")({
-  loader: async ({ context: { queryClient, credentials }, params }) => {
-    const wellKnown = await queryClient.query({
-      ...matrixWellKnownQuery(credentials.serverName),
-      staleTime: "static",
-    });
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
-
+  loader: async ({ context: { queryClient, synapseRoot }, params }) => {
     await Promise.all([
       queryClient.query({
         ...roomDetailQuery(synapseRoot, params.roomId),
@@ -501,13 +494,8 @@ function RoomCreator({
 }
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
+  const { credentials, synapseRoot } = Route.useRouteContext();
   const { roomId } = Route.useParams();
-
-  const { data: wellKnown } = useSuspenseQuery(
-    matrixWellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
 
   const { data: room } = useSuspenseQuery(roomDetailQuery(synapseRoot, roomId));
   // A room without a stats row has no member count, which the name and avatar
