@@ -196,7 +196,7 @@ const SignOutMenuItem = ({
   credentials,
 }: {
   synapseRoot: string;
-  credentials: { serverName: string; clientId: string; accessToken: string };
+  credentials: { serverName: string; clientId: string; refreshToken: string };
 }) => {
   const intl = useIntl();
   const queryClient = useQueryClient();
@@ -212,8 +212,9 @@ const SignOutMenuItem = ({
 
       await revokeToken(
         revocation_endpoint,
-        credentials.accessToken,
+        credentials.refreshToken,
         credentials.clientId,
+        "refresh_token",
       );
     },
     throwOnError: true,

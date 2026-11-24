@@ -43,6 +43,28 @@ test.describe("authentication", () => {
     await expect(page).toHaveURL("/");
   });
 
+  test("signing out revokes the refresh token", async ({ page, network }) => {
+    let revoked: URLSearchParams | undefined;
+    network.use(
+      http.post("*/oauth2/revoke", async ({ request }) => {
+        revoked = new URLSearchParams(await request.text());
+        return new HttpResponse(null, { status: 200 });
+      }),
+    );
+
+    await signIn(page);
+    await expect(page.getByRole("heading", heading("Dashboard"))).toBeVisible();
+
+    await page.locator('header button[aria-haspopup="menu"]').click();
+    await page.getByRole("menuitem", { name: "Sign out" }).click();
+
+    await expect(
+      page.getByRole("button", { name: "Get started" }),
+    ).toBeVisible();
+    expect(revoked?.get("token")).toBe(REFRESH_TOKEN);
+    expect(revoked?.get("token_type_hint")).toBe("refresh_token");
+  });
+
   /**
    * ESS's haproxy answers 429 while Synapse restarts. The error shows on the
    * first failure, but discovery keeps retrying and unlocks the form once

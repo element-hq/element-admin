@@ -130,8 +130,9 @@ function GenericError({ error, reset }: ErrorComponentProps) {
 
       await revokeToken(
         revocation_endpoint,
-        credentials.accessToken,
+        credentials.refreshToken,
         credentials.clientId,
+        "refresh_token",
       );
     },
 
