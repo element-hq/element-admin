@@ -83,7 +83,7 @@
     "knip": "6.45.1",
     "msw": "3.0.6",
     "oxc-transform-react": "^0.156.0",
-    "oxfmt": "0.78.0",
+    "oxfmt": "0.79.0",
     "oxlint": "1.94.0",
     "oxlint-tsgolint": "7.0.2007",
     "stylelint": "17.16.0",
