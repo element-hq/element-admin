@@ -3,15 +3,20 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
-import type { QueryClient } from "@tanstack/react-query";
+import {
+  noop,
+  type MutationCacheNotifyEvent,
+  type QueryCacheNotifyEvent,
+  type QueryClient,
+} from "@tanstack/react-query";
 import { shared } from "use-broadcast-ts";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { authMetadataQuery, tokenRequest } from "@/api/auth";
+import { authMetadataQuery, revokeToken, tokenRequest } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
-import { NotLoggedInError } from "@/errors";
-import { reset } from "@/query";
+import { NotLoggedInError, OAuthError, UnauthorizedError } from "@/errors";
+import { queryClient, reset } from "@/query";
 import { router } from "@/router";
 import { randomString } from "@/utils/random";
 import { addTimeout } from "@/utils/signal";
@@ -87,6 +92,9 @@ interface AuthStoreState {
 
   /** The active credentials, if any */
   credentials: DynamicCredential | StaticCredential | null;
+
+  /** Whether the last session ended because the server rejected its tokens */
+  sessionExpired: boolean;
 }
 
 interface AuthStoreActions {
@@ -123,6 +131,9 @@ interface AuthStoreActions {
   ): Promise<string>;
 
   clear: () => Promise<void>;
+
+  /** Signs out after the server rejected the session's tokens */
+  expire: () => Promise<void>;
 }
 
 const isExpired = (credentials: DynamicCredential): boolean => {
@@ -133,12 +144,35 @@ const isExpired = (credentials: DynamicCredential): boolean => {
 
 type AuthStore = AuthStoreState & AuthStoreActions;
 
+const revokeSession = async (credentials: DynamicCredential): Promise<void> => {
+  const wellKnown = await queryClient.query({
+    ...wellKnownQuery(credentials.serverName),
+    staleTime: "static",
+  });
+
+  const { revocation_endpoint } = await queryClient.query({
+    ...authMetadataQuery(wellKnown["m.homeserver"].base_url),
+    staleTime: "static",
+  });
+
+  // The access token may be the one that got rejected, and MAS only ends a
+  // session for a token that is still valid.
+  await revokeToken(
+    revocation_endpoint,
+    credentials.refreshToken,
+    credentials.clientId,
+    "refresh_token",
+    AbortSignal.timeout(10 * 1000),
+  );
+};
+
 export const useAuthStore = create<AuthStore>()(
   persist(
     shared(
       (set, get) => ({
         authorizationSession: null,
         credentials: null,
+        sessionExpired: false,
 
         async startAuthorizationSession(rawServerName, clientId, redirect) {
           const serverName = normalizeServerName(rawServerName);
@@ -232,15 +266,27 @@ export const useAuthStore = create<AuthStore>()(
               }
 
               // Alright, real business: refresh the token
-              const response = await tokenRequest(
-                token_endpoint,
-                {
-                  grant_type: "refresh_token",
-                  refresh_token: current.credentials.refreshToken,
-                  client_id: current.credentials.clientId,
-                },
-                signal,
-              );
+              let response;
+              try {
+                response = await tokenRequest(
+                  token_endpoint,
+                  {
+                    grant_type: "refresh_token",
+                    refresh_token: current.credentials.refreshToken,
+                    client_id: current.credentials.clientId,
+                  },
+                  signal,
+                );
+              } catch (error) {
+                if (
+                  error instanceof OAuthError &&
+                  error.error === "invalid_grant"
+                ) {
+                  await get().expire();
+                  throw new NotLoggedInError({ cause: error });
+                }
+                throw error;
+              }
 
               await current.saveCredentials(
                 current.credentials.serverName,
@@ -262,7 +308,11 @@ export const useAuthStore = create<AuthStore>()(
             accessToken,
             static: true,
           } satisfies StaticCredential;
-          await set({ authorizationSession: null, credentials });
+          await set({
+            authorizationSession: null,
+            credentials,
+            sessionExpired: false,
+          });
         },
 
         async saveCredentials(
@@ -282,13 +332,41 @@ export const useAuthStore = create<AuthStore>()(
             expiresAt,
             static: false,
           } satisfies DynamicCredential;
-          await set({ authorizationSession: null, credentials });
+          await set({
+            authorizationSession: null,
+            credentials,
+            sessionExpired: false,
+          });
         },
 
         async clear() {
-          await set({ authorizationSession: null, credentials: null });
+          await set({
+            authorizationSession: null,
+            credentials: null,
+            sessionExpired: false,
+          });
 
           // Reset the query client
+          await reset();
+        },
+
+        async expire() {
+          const { credentials } = get();
+          if (!credentials) return;
+
+          await set({
+            authorizationSession: null,
+            credentials: null,
+            sessionExpired: true,
+          });
+
+          // A rejected access token does not prove the session ended on the
+          // server, e.g. when a refresh replaced it while a request was in
+          // flight.
+          if (!credentials.static) {
+            revokeSession(credentials).catch(noop);
+          }
+
           await reset();
         },
       }),
@@ -313,6 +391,23 @@ useAuthStore.subscribe((oldState, newState) => {
     router.invalidate({ filter: (match) => match.routeId !== "/callback" });
   }
 });
+
+const onUnauthorized = (
+  event: QueryCacheNotifyEvent | MutationCacheNotifyEvent,
+) => {
+  if (
+    event.type === "updated" &&
+    (event.action.type === "failed" || event.action.type === "error") &&
+    event.action.error instanceof UnauthorizedError
+  ) {
+    void useAuthStore.getState().expire();
+  }
+};
+
+// "failed" fires on every attempt, so the session ends on the first rejection
+// rather than after the retries of a mounted query.
+queryClient.getQueryCache().subscribe(onUnauthorized);
+queryClient.getMutationCache().subscribe(onUnauthorized);
 
 // Expose a method to expose the static credential
 (globalThis as Record<string, unknown>)["__useStaticCredentials"] = (

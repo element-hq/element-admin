@@ -2,10 +2,23 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
+import type { Page } from "@playwright/test";
+import { http, HttpResponse, type RequestHandler } from "msw";
+
 import { heading } from "../helpers";
-import { matrixFailing } from "../mocks/failing";
-import { SERVER_NAME } from "../mocks/fixtures";
-import { authMetadata } from "../mocks/matrix";
+import { loginAs } from "../mocks/auth";
+import { masFailing, matrixFailing } from "../mocks/failing";
+import {
+  ACCESS_TOKEN,
+  DEFAULT_ROOMS,
+  DEFAULT_USERS,
+  masError,
+  REFRESH_TOKEN,
+  roomId,
+  SERVER_NAME,
+  userId,
+} from "../mocks/fixtures";
+import { authMetadata, matrixError } from "../mocks/matrix";
 import { expect, test } from "../mocks/test";
 
 test.describe("authentication", () => {
@@ -96,5 +109,173 @@ test.describe("authentication", () => {
     await expect(
       page.getByRole("button", { name: "Get started" }),
     ).toBeDisabled();
+  });
+});
+
+/** Signs in through the mocked OIDC flow, up to the redirect into the console. */
+const signIn = async (page: Page): Promise<void> => {
+  await page.goto("/login");
+  await page.getByLabel("Server name").fill(SERVER_NAME);
+  const submit = page.getByRole("button", { name: "Get started" });
+  await expect(submit).toBeEnabled();
+  await submit.click();
+};
+
+/**
+ * A token endpoint answering `grantType` with `failure`. Its access tokens are
+ * expired on arrival, so the first authenticated request after sign-in goes
+ * through a refresh grant.
+ */
+const grantFailing = (
+  grantType: "authorization_code" | "refresh_token",
+  failure: () => Response,
+): RequestHandler =>
+  http.post("*/oauth2/token", async ({ request }) => {
+    const body = new URLSearchParams(await request.text());
+    if (body.get("grant_type") === grantType) return failure();
+    return HttpResponse.json({
+      access_token: ACCESS_TOKEN,
+      refresh_token: REFRESH_TOKEN,
+      token_type: "Bearer",
+      expires_in: 0,
+    });
+  });
+
+const notice = (page: Page) => page.getByText("Your session has expired");
+const errorPageTitle = heading("An unexpected error occurred");
+
+test.describe("a rejected session", () => {
+  test("signs out on a 401 from Synapse", async ({ page, network }) => {
+    network.use(
+      matrixFailing(
+        "/_synapse/admin/v1/rooms/:roomId",
+        401,
+        matrixError("M_UNKNOWN_TOKEN", "Invalid access token passed."),
+      ),
+    );
+
+    await loginAs(page);
+    const path = `/rooms/${encodeURIComponent(roomId(DEFAULT_ROOMS, 0))}`;
+    await page.goto(path);
+
+    await expect(notice(page)).toBeVisible();
+    await expect(page.getByText("Sign in again to continue.")).toBeVisible();
+    expect(new URL(page.url()).pathname).toBe("/login");
+    expect(new URL(page.url()).searchParams.get("redirect")).toBe(path);
+
+    await page.getByRole("button", { name: "Close" }).click();
+    await expect(notice(page)).toBeHidden();
+    expect(new URL(page.url()).searchParams.get("redirect")).toBe(path);
+  });
+
+  test("signs out on a 401 from MAS", async ({ page, network }) => {
+    network.use(
+      masFailing(
+        "/api/admin/v1/users/:id",
+        401,
+        masError("Invalid access token"),
+      ),
+    );
+
+    await loginAs(page);
+    const path = `/users/${userId(DEFAULT_USERS, 1)}`;
+    await page.goto(path);
+
+    await expect(notice(page)).toBeVisible();
+    expect(new URL(page.url()).pathname).toBe("/login");
+    expect(new URL(page.url()).searchParams.get("redirect")).toBe(path);
+  });
+
+  // matrixFailing answers with M_UNKNOWN, which is not a rejected token even
+  // on a 401.
+  for (const status of [401, 403, 500]) {
+    test(`keeps the session on a ${status} from Synapse`, async ({
+      page,
+      network,
+    }) => {
+      network.use(matrixFailing("/_synapse/admin/v1/rooms/:roomId", status));
+
+      await loginAs(page);
+      await page.goto(`/rooms/${encodeURIComponent(roomId(DEFAULT_ROOMS, 0))}`);
+
+      await expect(page.getByRole("heading", errorPageTitle)).toBeVisible();
+      await expect(
+        page.getByRole("button", { name: "Sign out and reload" }),
+      ).toBeVisible();
+      await expect(notice(page)).toBeHidden();
+    });
+  }
+
+  test("signs out when the refresh token is rejected", async ({
+    page,
+    network,
+  }) => {
+    let revoked: URLSearchParams | undefined;
+    network.use(
+      grantFailing("refresh_token", () =>
+        HttpResponse.json({ error: "invalid_grant" }, { status: 400 }),
+      ),
+      http.post("*/oauth2/revoke", async ({ request }) => {
+        revoked = new URLSearchParams(await request.text());
+        return new HttpResponse(null, { status: 200 });
+      }),
+    );
+
+    await signIn(page);
+
+    await expect(notice(page)).toBeVisible();
+    await expect(page).toHaveURL("/login");
+    await expect.poll(() => revoked?.get("token")).toBe(REFRESH_TOKEN);
+    expect(revoked?.get("token_type_hint")).toBe("refresh_token");
+  });
+
+  test("keeps the session when the refresh fails transiently", async ({
+    page,
+    network,
+  }) => {
+    network.use(
+      grantFailing(
+        "refresh_token",
+        () => new HttpResponse("Service Unavailable", { status: 503 }),
+      ),
+    );
+
+    await signIn(page);
+
+    await expect(page.getByRole("heading", errorPageTitle)).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Sign out and reload" }),
+    ).toBeVisible();
+    await expect(notice(page)).toBeHidden();
+  });
+
+  test("shows the server's error when the code exchange fails", async ({
+    page,
+    network,
+  }) => {
+    network.use(
+      grantFailing("authorization_code", () =>
+        HttpResponse.json(
+          {
+            error: "invalid_grant",
+            error_description: "The authorization code has expired",
+          },
+          { status: 400 },
+        ),
+      ),
+    );
+
+    await signIn(page);
+
+    await expect(page.getByRole("heading", errorPageTitle)).toBeVisible();
+    await expect(
+      page.getByText(
+        "The homeserver's authentication service returned an error: The authorization code has expired",
+      ),
+    ).toBeVisible();
+
+    await page.goto("/login");
+    await expect(page.getByLabel("Server name")).toBeVisible();
+    await expect(notice(page)).toBeHidden();
   });
 });

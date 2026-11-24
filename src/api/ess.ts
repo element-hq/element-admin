@@ -7,8 +7,9 @@ import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import * as v from "valibot";
 import { parse, type SemVer } from "verkit";
 
+import { ensureNotError } from "@/api/matrix";
 import { accessToken } from "@/stores/auth";
-import { ensureResponseOk, fetch } from "@/utils/fetch";
+import { fetch } from "@/utils/fetch";
 
 const VersionResponse = v.object({
   version: v.nullable(v.string()),
@@ -29,7 +30,7 @@ export const essVersionQuery = (synapseRoot: string) =>
           signal,
         });
 
-        ensureResponseOk(response);
+        await ensureNotError(response);
 
         const versionData = v.parse(VersionResponse, await response.json());
 
@@ -87,7 +88,7 @@ export const adminbotQuery = (synapseRoot: string) =>
         return null;
       }
 
-      ensureResponseOk(response);
+      await ensureNotError(response);
 
       const adminbotData = v.parse(AdminbotResponse, await response.json());
 

@@ -6,9 +6,9 @@
 import { useDebouncedState } from "@tanstack/react-pacer";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { Form, InlineSpinner } from "@vector-im/compound-web";
+import { Alert, Form, InlineSpinner } from "@vector-im/compound-web";
 import { useCallback, useState } from "react";
-import { defineMessage, FormattedMessage } from "react-intl";
+import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 import * as v from "valibot";
 
 import { authMetadataQuery, clientRegistration } from "@/api/auth";
@@ -39,7 +39,10 @@ export const Route = createFileRoute("/_auth/login/")({
 });
 
 function RouteComponent() {
+  const intl = useIntl();
   const { redirect } = Route.useSearch();
+  const sessionExpired = useAuthStore((store) => store.sessionExpired);
+  const clear = useAuthStore((store) => store.clear);
   const [serverName, setServerName] = useState(config.serverName ?? "");
   const [debouncedServerName, setDebouncedServerName, debouncer] =
     useDebouncedState(
@@ -189,6 +192,25 @@ function RouteComponent() {
 
   return (
     <Form.Root onSubmit={onSubmit}>
+      {sessionExpired && (
+        <Alert
+          type="info"
+          title={intl.formatMessage({
+            id: "pages.login.session_expired.title",
+            defaultMessage: "Your session has expired",
+            description:
+              "Title of the notice on the login page after the user was signed out because the server rejected their session",
+          })}
+          onClose={() => void clear()}
+        >
+          <FormattedMessage
+            id="pages.login.session_expired.description"
+            defaultMessage="Sign in again to continue."
+            description="Body of the notice on the login page after the user was signed out because the server rejected their session"
+          />
+        </Alert>
+      )}
+
       {/* Discovery failing on the typed server name is what marks the field
           invalid; the insecure-origin and failed-authorization messages below
           render without doing so. */}

@@ -6,6 +6,7 @@
 import { queryOptions } from "@tanstack/react-query";
 import * as v from "valibot";
 
+import { OAuthError } from "@/errors";
 import { ensureResponseOk, fetch } from "@/utils/fetch";
 
 const AuthMetadataResponse = v.object({
@@ -38,6 +39,33 @@ export const authMetadataQuery = (synapseRoot: string) =>
     },
   });
 
+const OAuthErrorResponse = v.object({
+  error: v.string(),
+  error_description: v.optional(v.string()),
+});
+
+/**
+ * Throws an `OAuthError` for an RFC 6749 or RFC 7591 error body, or an
+ * `HttpStatusError` for anything else.
+ */
+const ensureNotOAuthError = async (response: Response) => {
+  try {
+    ensureResponseOk(response);
+  } catch (error) {
+    let oauthError;
+    try {
+      const data = await response.json();
+      oauthError = v.parse(OAuthErrorResponse, data);
+    } catch {
+      throw error;
+    }
+
+    throw new OAuthError(oauthError.error, oauthError.error_description, {
+      cause: error,
+    });
+  }
+};
+
 export interface ClientMetadata {
   application_type: string;
   client_name: string;
@@ -66,7 +94,7 @@ export const clientRegistration = async (
     signal,
   });
 
-  ensureResponseOk(response);
+  await ensureNotOAuthError(response);
 
   const clientRegistrationData = v.parse(
     ClientRegistrationResponse,
@@ -110,7 +138,7 @@ export const tokenRequest = async (
     signal,
   });
 
-  ensureResponseOk(response);
+  await ensureNotOAuthError(response);
 
   const tokenData = v.parse(TokenResponse, await response.json());
 
@@ -121,6 +149,7 @@ export const revokeToken = async (
   revocationEndpoint: string,
   token: string,
   clientId: string,
+  tokenTypeHint: "access_token" | "refresh_token" = "access_token",
   signal: AbortSignal | null = null,
 ) => {
   const response = await fetch(revocationEndpoint, {
@@ -128,7 +157,7 @@ export const revokeToken = async (
     body: new URLSearchParams({
       token,
       client_id: clientId,
-      token_type_hint: "access_token",
+      token_type_hint: tokenTypeHint,
     }),
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -136,5 +165,5 @@ export const revokeToken = async (
     signal,
   });
 
-  ensureResponseOk(response);
+  await ensureNotOAuthError(response);
 };
