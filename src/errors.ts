@@ -105,6 +105,53 @@ export class HttpStatusError extends LocalizedError {
   }
 }
 
+export class UnauthorizedError extends LocalizedError {
+  localizedMessage = defineMessage({
+    id: "errors.unauthorized",
+    defaultMessage: "Your session is no longer valid",
+    description:
+      "Error message when the server rejected our access token. The user gets signed out when this happens.",
+  });
+
+  constructor(response: Response, options?: ErrorOptions) {
+    super(
+      `Request to ${response.url} was rejected with status code ${response.status} ${response.statusText}`,
+      options,
+    );
+  }
+}
+
+export class OAuthError extends LocalizedError {
+  localizedMessage = defineMessage({
+    id: "errors.oauth",
+    defaultMessage:
+      "The homeserver's authentication service returned an error: {errorMessage}",
+    description:
+      "Error message when an OAuth 2.0 endpoint of the authentication service (token, registration, revocation) returned an error. 'errorMessage' is the description the server gave, usually in english, or the raw error code when it gave none.",
+  });
+
+  readonly error: string;
+  readonly errorDescription?: string;
+
+  constructor(
+    error: string,
+    errorDescription?: string,
+    options?: ErrorOptions,
+  ) {
+    super(
+      errorDescription
+        ? `OAuth 2.0 request failed with error code ${error}: ${errorDescription}`
+        : `OAuth 2.0 request failed with error code ${error}`,
+      options,
+    );
+    this.error = error;
+    this.errorDescription = errorDescription;
+    this.values = {
+      errorMessage: errorDescription || error,
+    };
+  }
+}
+
 export class MatrixStandardError extends LocalizedError {
   localizedMessage = defineMessage({
     id: "errors.matrix_standard",

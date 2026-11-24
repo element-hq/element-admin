@@ -5,52 +5,12 @@
 
 import type { QueryClient } from "@tanstack/react-query";
 import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
-import { notFound } from "@tanstack/react-router";
 import * as v from "valibot";
 
 import { PAGE_SIZE } from "@/constants";
-import { MatrixStandardError } from "@/errors";
+import { ensureNotError } from "@/api/matrix";
 import { accessToken } from "@/stores/auth";
-import { ensureResponseOk, fetch } from "@/utils/fetch";
-
-const MatrixErrorResponse = v.object({
-  errcode: v.string(),
-  error: v.string(),
-});
-
-const ensureNotError = async (response: Response, handleNotFound = false) => {
-  try {
-    ensureResponseOk(response);
-  } catch (error) {
-    // Try to decode the error message from the JSON response
-    let matrixError;
-    try {
-      const data = await response.json();
-      matrixError = v.parse(MatrixErrorResponse, data);
-    } catch {
-      // In case the body wasn't JSON, ignore that error and instead throw the original error
-      throw error;
-    }
-
-    // Special case for M_NOT_FOUND errors
-    if (
-      handleNotFound &&
-      response.status === 404 &&
-      matrixError.errcode === "M_NOT_FOUND"
-    ) {
-      console.warn(
-        "Received M_NOT_FOUND error from Synapse, throwing a 'notFound' error",
-        error,
-        matrixError,
-      );
-      throw notFound();
-    }
-
-    throw new MatrixStandardError(matrixError.errcode, matrixError.error, {
-      cause: error,
-    });
-  }
-};
+import { fetch } from "@/utils/fetch";
 
 const baseOptions = async (
   client: QueryClient,

@@ -91,6 +91,14 @@
     "description": "Error message when a request was sent which was supposed to be authenticated, but turns out that the user is not logged in. This is a rare error, usually because of a race-condition during login or logout.",
     "message": "Not logged in"
   },
+  "errors.oauth": {
+    "description": "Error message when an OAuth 2.0 endpoint of the authentication service (token, registration, revocation) returned an error. 'errorMessage' is the description the server gave, usually in english, or the raw error code when it gave none.",
+    "message": "The homeserver's authentication service returned an error: {errorMessage}"
+  },
+  "errors.unauthorized": {
+    "description": "Error message when the server rejected our access token. The user gets signed out when this happens.",
+    "message": "Your session is no longer valid"
+  },
   "footer.copyright_notice": {
     "description": "The copyright notice on the footer",
     "message": "Copyright © {now, date, ::yyyy}"
@@ -782,6 +790,14 @@
   "pages.login.server_name": {
     "description": "Label for the server name field",
     "message": "Server name"
+  },
+  "pages.login.session_expired.description": {
+    "description": "Body of the notice on the login page after the user was signed out because the server rejected their session",
+    "message": "Sign in again to continue."
+  },
+  "pages.login.session_expired.title": {
+    "description": "Title of the notice on the login page after the user was signed out because the server rejected their session",
+    "message": "Your session has expired"
   },
   "pages.login.title": {
     "description": "Title for the login page",

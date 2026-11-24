@@ -13,7 +13,7 @@ import { notFound } from "@tanstack/react-router";
 import { authMetadataQuery } from "@/api/auth";
 import { wellKnownQuery } from "@/api/matrix";
 import { PAGE_SIZE } from "@/constants";
-import { HttpStatusError, MasApiError } from "@/errors";
+import { HttpStatusError, MasApiError, UnauthorizedError } from "@/errors";
 import { accessToken } from "@/stores/auth";
 import { fetch } from "@/utils/fetch";
 
@@ -48,6 +48,9 @@ function ensureNoError<
     throw notFound({
       data: result.error,
     });
+  }
+  if (result.response?.status === 401) {
+    throw new UnauthorizedError(result.response, { cause: result.error });
   }
   if (result.error !== undefined) {
     // MAS errors arrive as a decoded body rather than an `Error`: a structured

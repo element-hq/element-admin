@@ -5,10 +5,64 @@
 
 import type { QueryClient } from "@tanstack/react-query";
 import { queryOptions, skipToken } from "@tanstack/react-query";
+import { notFound } from "@tanstack/react-router";
 import * as v from "valibot";
 
+import { MatrixStandardError, UnauthorizedError } from "@/errors";
 import { accessToken } from "@/stores/auth";
 import { ensureResponseOk } from "@/utils/fetch";
+
+const MatrixErrorResponse = v.object({
+  errcode: v.string(),
+  error: v.string(),
+});
+
+/**
+ * Throws for a failed response from Synapse or a Synapse module, decoding the
+ * Matrix error body when there is one.
+ */
+export const ensureNotError = async (
+  response: Response,
+  handleNotFound = false,
+) => {
+  try {
+    ensureResponseOk(response);
+  } catch (error) {
+    // Try to decode the error message from the JSON response
+    let matrixError;
+    try {
+      const data = await response.json();
+      matrixError = v.parse(MatrixErrorResponse, data);
+    } catch {
+      // In case the body wasn't JSON, ignore that error and instead throw the original error
+      throw error;
+    }
+
+    // Synapse answers M_UNKNOWN_TOKEN for an expired, revoked or unknown
+    // access token, and other codes for failures unrelated to the session.
+    if (response.status === 401 && matrixError.errcode === "M_UNKNOWN_TOKEN") {
+      throw new UnauthorizedError(response, { cause: error });
+    }
+
+    // Special case for M_NOT_FOUND errors
+    if (
+      handleNotFound &&
+      response.status === 404 &&
+      matrixError.errcode === "M_NOT_FOUND"
+    ) {
+      console.warn(
+        "Received M_NOT_FOUND error from Synapse, throwing a 'notFound' error",
+        error,
+        matrixError,
+      );
+      throw notFound();
+    }
+
+    throw new MatrixStandardError(matrixError.errcode, matrixError.error, {
+      cause: error,
+    });
+  }
+};
 
 const baseOptions = async (
   client: QueryClient,
@@ -61,7 +115,7 @@ export const whoamiQuery = (synapseRoot: string) =>
         await baseOptions(client, signal),
       );
 
-      ensureResponseOk(response);
+      await ensureNotError(response);
 
       const whoamiData = v.parse(WhoamiResponse, await response.json());
 
@@ -92,7 +146,7 @@ export const profileQuery = (synapseRoot: string, mxid: string) =>
         return {};
       }
 
-      ensureResponseOk(response);
+      await ensureNotError(response);
 
       const profileData = v.parse(ProfileResponse, await response.json());
 
@@ -133,7 +187,7 @@ export const mediaThumbnailQuery = (
             await baseOptions(client, signal),
           );
 
-          ensureResponseOk(response);
+          await ensureNotError(response);
 
           return response.blob();
         }

@@ -7,8 +7,9 @@ import type { QueryClient } from "@tanstack/react-query";
 import { queryOptions } from "@tanstack/react-query";
 import * as v from "valibot";
 
+import { ensureNotError } from "@/api/matrix";
 import { accessToken } from "@/stores/auth";
-import { ensureResponseOk, fetch } from "@/utils/fetch";
+import { fetch } from "@/utils/fetch";
 
 const ALLOWLIST_BASE_PATH =
   "/_synapse/io.element/admin/v1/federation/whitelist";
@@ -48,7 +49,7 @@ export const federationAllowlistAvailableQuery = (synapseRoot: string) =>
 
       try {
         const response = await fetch(url, await baseOptions(client, signal));
-        ensureResponseOk(response);
+        await ensureNotError(response);
         return true;
       } catch {
         return false;
@@ -72,7 +73,7 @@ export const federationAllowlistQuery = (
       url.searchParams.set("limit", String(limit));
 
       const response = await fetch(url, await baseOptions(client, signal));
-      ensureResponseOk(response);
+      await ensureNotError(response);
 
       return v.parse(AllowlistResponse, await response.json());
     },
@@ -100,7 +101,7 @@ export const addToAllowlist = async (
     },
   });
 
-  ensureResponseOk(response);
+  await ensureNotError(response);
 };
 
 /**
@@ -125,5 +126,5 @@ export const removeFromAllowlist = async (
     },
   });
 
-  ensureResponseOk(response);
+  await ensureNotError(response);
 };
