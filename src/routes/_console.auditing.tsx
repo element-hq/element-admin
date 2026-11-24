@@ -3,13 +3,11 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { Alert } from "@vector-im/compound-web";
 import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
 import { essVersionQuery, useEssVariant } from "@/api/ess";
-import { wellKnownQuery } from "@/api/matrix";
 import * as Card from "@/components/card";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
@@ -29,23 +27,18 @@ export const Route = createFileRoute("/_console/auditing")({
     },
   },
 
-  loader: async ({ context: { queryClient, credentials } }): Promise<void> => {
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
-    await queryClient.ensureQueryData(essVersionQuery(synapseRoot));
+  loader: async ({ context: { queryClient, synapseRoot } }): Promise<void> => {
+    await queryClient.query({
+      ...essVersionQuery(synapseRoot),
+      staleTime: "static",
+    });
   },
 
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
+  const { synapseRoot } = Route.useRouteContext();
   const variant = useEssVariant(synapseRoot);
   const intl = useIntl();
   const isPro = variant === "pro";

@@ -101,7 +101,7 @@ export const preloadLocale = async (): Promise<void> => {
       ? selectedLocale
       : bestLocale;
 
-  await queryClient.ensureQueryData(localeQuery(locale));
+  await queryClient.query({ ...localeQuery(locale), staleTime: "static" });
 };
 
 export const IntlProvider = ({ children }: { children: React.ReactNode }) => {

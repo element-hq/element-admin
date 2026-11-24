@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 import {
+  noop,
   useMutation,
   useQueryClient,
   useSuspenseQuery,
@@ -44,12 +45,13 @@ export const Route = createFileRoute("/_console/devices/legacy/$sessionId")({
     ensureParametersAreUlids(params);
     const {
       data: { attributes },
-    } = await queryClient.ensureQueryData(
-      compatSessionQuery(credentials.serverName, params.sessionId),
-    );
-    queryClient.prefetchQuery(
-      userQuery(credentials.serverName, attributes.user_id),
-    );
+    } = await queryClient.query({
+      ...compatSessionQuery(credentials.serverName, params.sessionId),
+      staleTime: "static",
+    });
+    queryClient
+      .query(userQuery(credentials.serverName, attributes.user_id))
+      .catch(noop);
   },
   component: SessionDetailComponent,
   notFoundComponent: NotFoundComponent,
@@ -123,7 +125,7 @@ const CloseSidebar: React.FC = () => {
 };
 
 function SessionDetailComponent() {
-  const { credentials } = Route.useRouteContext();
+  const { credentials, synapseRoot } = Route.useRouteContext();
   const { sessionId } = Route.useParams();
   const queryClient = useQueryClient();
   const intl = useIntl();
@@ -218,6 +220,7 @@ function SessionDetailComponent() {
 
         <UserCard
           serverName={credentials.serverName}
+          synapseRoot={synapseRoot}
           userId={session.attributes.user_id}
         />
 
@@ -382,6 +385,7 @@ function SessionDetailComponent() {
               <StaticEntityCard>
                 <UserCardBody
                   serverName={credentials.serverName}
+                  synapseRoot={synapseRoot}
                   userId={session.attributes.user_id}
                 />
               </StaticEntityCard>

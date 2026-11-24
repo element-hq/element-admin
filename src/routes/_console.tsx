@@ -50,7 +50,7 @@ const TokenView: React.FC<TokenViewProps> = ({ token }: TokenViewProps) => (
 );
 
 export const Route = createFileRoute("/_console")({
-  beforeLoad: ({ location }) => {
+  beforeLoad: async ({ context, location }) => {
     const state = useAuthStore.getState();
     if (!state.credentials) {
       throw redirect({
@@ -61,28 +61,35 @@ export const Route = createFileRoute("/_console")({
       });
     }
 
+    const { credentials } = state;
+    const wellKnown = await context.queryClient.query({
+      ...wellKnownQuery(credentials.serverName),
+      staleTime: "static",
+    });
+
     return {
-      credentials: state.credentials,
+      credentials,
+      synapseRoot: wellKnown["m.homeserver"].base_url,
     };
   },
 
-  loader: async ({ context: { credentials, queryClient } }) => {
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
-
+  loader: async ({ context: { credentials, synapseRoot, queryClient } }) => {
     const masFeaturesPromise = getFeaturesStatus(
       queryClient,
       credentials.serverName,
     );
-    const essVersionPromise = queryClient.ensureQueryData(
-      essVersionQuery(synapseRoot),
-    );
-    const whoami = await queryClient.ensureQueryData(whoamiQuery(synapseRoot));
-    await queryClient.ensureQueryData(
-      profileQuery(synapseRoot, whoami.user_id),
-    );
+    const essVersionPromise = queryClient.query({
+      ...essVersionQuery(synapseRoot),
+      staleTime: "static",
+    });
+    const whoami = await queryClient.query({
+      ...whoamiQuery(synapseRoot),
+      staleTime: "static",
+    });
+    await queryClient.query({
+      ...profileQuery(synapseRoot, whoami.user_id),
+      staleTime: "static",
+    });
     await Promise.all([essVersionPromise, masFeaturesPromise]);
 
     return {
@@ -96,11 +103,9 @@ export const Route = createFileRoute("/_console")({
 });
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
+  const { credentials, synapseRoot } = Route.useRouteContext();
+  // Keep the well-known observed so it never gets garbage-collected
+  useQuery(wellKnownQuery(credentials.serverName));
   const { data: whoami } = useSuspenseQuery(whoamiQuery(synapseRoot));
 
   const { data: profile } = useSuspenseQuery(
@@ -200,9 +205,10 @@ const SignOutMenuItem = ({
 
   const signOutMutation = useMutation({
     mutationFn: async () => {
-      const { revocation_endpoint } = await queryClient.ensureQueryData(
-        authMetadataQuery(synapseRoot),
-      );
+      const { revocation_endpoint } = await queryClient.query({
+        ...authMetadataQuery(synapseRoot),
+        staleTime: "static",
+      });
 
       await revokeToken(
         revocation_endpoint,

@@ -58,14 +58,16 @@ export const Route = createFileRoute("/callback")({
 
     const code = search.code;
 
-    const wellKnown = await context.queryClient.ensureQueryData(
-      wellKnownQuery(session.serverName),
-    );
+    const wellKnown = await context.queryClient.query({
+      ...wellKnownQuery(session.serverName),
+      staleTime: "static",
+    });
     const synapseRoot = wellKnown["m.homeserver"].base_url;
 
-    const authMetadata = await context.queryClient.ensureQueryData(
-      authMetadataQuery(synapseRoot),
-    );
+    const authMetadata = await context.queryClient.query({
+      ...authMetadataQuery(synapseRoot),
+      staleTime: "static",
+    });
 
     const tokenResponse = await tokenRequest(authMetadata.token_endpoint, {
       grant_type: "authorization_code",

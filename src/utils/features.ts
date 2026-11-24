@@ -67,8 +67,9 @@ export const getFeaturesStatus = async (
   queryClient: QueryClient,
   serverName: string,
 ): Promise<MasFeaturesStatus> => {
-  const { version } = await queryClient.ensureQueryData(
-    versionQuery(serverName),
-  );
+  const { version } = await queryClient.query({
+    ...versionQuery(serverName),
+    staleTime: "static",
+  });
   return computeFeaturesStatus(version);
 };

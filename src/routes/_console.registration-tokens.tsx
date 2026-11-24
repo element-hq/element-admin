@@ -5,6 +5,7 @@
 
 import {
   keepPreviousData,
+  noop,
   useMutation,
   useQuery,
   useQueryClient,
@@ -98,13 +99,14 @@ export const Route = createFileRoute("/_console/registration-tokens")({
     deps: { parameters },
   }) => {
     // Kick off the token count query without awaiting it
-    queryClient.prefetchQuery(
-      registrationTokensCountQuery(credentials.serverName, parameters),
-    );
+    queryClient
+      .query(registrationTokensCountQuery(credentials.serverName, parameters))
+      .catch(noop);
 
-    await queryClient.ensureInfiniteQueryData(
-      registrationTokensInfiniteQuery(credentials.serverName, parameters),
-    );
+    await queryClient.infiniteQuery({
+      ...registrationTokensInfiniteQuery(credentials.serverName, parameters),
+      staleTime: "static",
+    });
   },
 
   pendingComponent: () => (
@@ -238,7 +240,7 @@ const TokenAddButton: React.FC<TokenAddButtonProps> = ({
   );
 
   const onSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    (event: React.SubmitEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (isPending) {
         return;

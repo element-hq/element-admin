@@ -3,7 +3,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
-import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import { noop, useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   CopyIcon,
@@ -28,7 +28,6 @@ import {
   useEssVariant,
   type AdminbotResponse,
 } from "@/api/ess";
-import { wellKnownQuery } from "@/api/matrix";
 import * as Card from "@/components/card";
 import * as Navigation from "@/components/navigation";
 import * as Page from "@/components/page";
@@ -50,20 +49,16 @@ export const Route = createFileRoute("/_console/supervision")({
     },
   },
 
-  loader: async ({ context: { queryClient, credentials } }): Promise<void> => {
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
-
-    const { edition } = await queryClient.ensureQueryData(
-      essVersionQuery(synapseRoot),
-    );
+  loader: async ({ context: { queryClient, synapseRoot } }): Promise<void> => {
+    const { edition } = await queryClient.query({
+      ...essVersionQuery(synapseRoot),
+      staleTime: "static",
+    });
     if (edition === "pro") {
-      // We use prefetchQuery and not ensureQueryData here to avoid failing the
-      // load if the adminbot endpoint fails to fetch. The endpoint 404s on
-      // non-Pro deployments, so it's only worth calling there.
-      await queryClient.prefetchQuery(adminbotQuery(synapseRoot));
+      // Errors are swallowed to avoid failing the load if the adminbot
+      // endpoint fails to fetch. The endpoint 404s on non-Pro deployments, so
+      // it's only worth calling there.
+      await queryClient.query(adminbotQuery(synapseRoot)).catch(noop);
     }
   },
 
@@ -504,11 +499,7 @@ const MaybeAdminbotContent = ({ synapseRoot }: { synapseRoot: string }) => {
 };
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
+  const { synapseRoot } = Route.useRouteContext();
   const variant = useEssVariant(synapseRoot);
 
   return (

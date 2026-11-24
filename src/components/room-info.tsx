@@ -41,28 +41,34 @@ const useRoomAvatar = (
   return useImageBlob(avatarBlob);
 };
 
-const useRoomName = (
-  roomName: string | null,
-  roomType: string | null,
-  membersCount: number,
+const useRoomMembers = (
   synapseRoot: string,
   roomId: string,
-): string => {
-  const intl = useIntl();
-  const { data } = useQuery({
-    ...roomMembersQuery(synapseRoot, roomId),
-    enabled: !roomName,
-  });
+  membersCount: number,
+) => {
+  const { data } = useQuery(roomMembersQuery(synapseRoot, roomId));
   // Fill our own placeholder data if we haven't loaded them yet
   // This is because:
   //
   //  - initialData is a bad fit, as it ends up in the cache
   //    and won't trigger a fetch on mount
   //  - placeholderData still means the data is nullable
-  const members = data ?? {
-    members: [],
-    total: membersCount,
-  };
+  return (
+    data ?? {
+      members: [],
+      total: membersCount,
+    }
+  );
+};
+
+const useGeneratedRoomName = (
+  roomType: string | null,
+  membersCount: number,
+  synapseRoot: string,
+  roomId: string,
+): string => {
+  const intl = useIntl();
+  const members = useRoomMembers(synapseRoot, roomId, membersCount);
   const fallbackDisplayName = intl.formatMessage({
     id: "room_info.unknown_user",
     defaultMessage: "Unknown user",
@@ -84,10 +90,6 @@ const useRoomName = (
   });
 
   const isSpace = roomType === "m.space";
-
-  if (roomName) {
-    return roomName;
-  }
 
   if (membersCount === undefined || membersCount === 0) {
     return isSpace
@@ -190,29 +192,77 @@ export const RoomAvatar: React.FC<RoomAvatarProps> = ({
   members,
   size,
 }: RoomAvatarProps) => {
-  const isSpace = roomType === "m.space";
+  const name = roomName || roomCanonicalAlias;
+  return name ? (
+    <NamedRoomAvatar
+      synapseRoot={synapseRoot}
+      roomId={roomId}
+      name={name}
+      roomType={roomType}
+      size={size}
+    />
+  ) : (
+    <UnnamedRoomAvatar
+      synapseRoot={synapseRoot}
+      roomId={roomId}
+      roomType={roomType}
+      members={members}
+      size={size}
+    />
+  );
+};
+
+interface NamedRoomAvatarProps {
+  synapseRoot: string;
+  roomId: string;
+  name: string;
+  roomType: string | null;
+  size?: string;
+}
+const NamedRoomAvatar: React.FC<NamedRoomAvatarProps> = ({
+  synapseRoot,
+  roomId,
+  name,
+  roomType,
+  size,
+}: NamedRoomAvatarProps) => {
   const avatar = useRoomAvatar(synapseRoot, roomId);
-  const shouldShowHeroes =
-    members > 0 && members <= 2 && !roomName && !roomCanonicalAlias;
-  // Fill our own placeholder data if we haven't loaded them yet
-  const { data } = useQuery({
-    ...roomMembersQuery(synapseRoot, roomId),
-    enabled: shouldShowHeroes,
-  });
-  const membersList = data ?? {
-    members: [],
-    total: members,
-  };
+  return (
+    <Avatar
+      id={roomId}
+      src={avatar}
+      name={name}
+      type={roomType === "m.space" ? "square" : "round"}
+      size={size}
+    />
+  );
+};
+
+interface UnnamedRoomAvatarProps {
+  synapseRoot: string;
+  roomId: string;
+  roomType: string | null;
+  members: number;
+  size?: string;
+}
+const UnnamedRoomAvatar: React.FC<UnnamedRoomAvatarProps> = ({
+  synapseRoot,
+  roomId,
+  roomType,
+  members,
+  size,
+}: UnnamedRoomAvatarProps) => {
+  const avatar = useRoomAvatar(synapseRoot, roomId);
+  const membersList = useRoomMembers(synapseRoot, roomId, members);
   // In case we don't have a room avatar, we show up to two user avatars
   const heroes = membersList.members.toSorted().splice(0, 2);
-  const displayName = useRoomName(
-    roomName || roomCanonicalAlias,
+  const displayName = useGeneratedRoomName(
     roomType,
     members,
     synapseRoot,
     roomId,
   );
-  return shouldShowHeroes && heroes.length > 0 ? (
+  return members > 0 && members <= 2 && heroes.length > 0 ? (
     <AvatarStack>
       {heroes.map((mxid) => (
         <UserAvatar
@@ -228,7 +278,7 @@ export const RoomAvatar: React.FC<RoomAvatarProps> = ({
       id={roomId}
       src={avatar}
       name={displayName}
-      type={isSpace ? "square" : "round"}
+      type={roomType === "m.space" ? "square" : "round"}
       size={size}
     />
   );
@@ -249,16 +299,30 @@ export const RoomDisplayName: React.FC<RoomDisplayNameProps> = ({
   roomCanonicalAlias,
   roomType,
   members,
-}: RoomDisplayNameProps) => {
-  const displayName = useRoomName(
-    roomName || roomCanonicalAlias,
-    roomType,
-    members,
-    synapseRoot,
-    roomId,
+}: RoomDisplayNameProps) =>
+  roomName ||
+  roomCanonicalAlias || (
+    <UnnamedRoomDisplayName
+      synapseRoot={synapseRoot}
+      roomId={roomId}
+      roomType={roomType}
+      members={members}
+    />
   );
-  return displayName;
-};
+
+interface UnnamedRoomDisplayNameProps {
+  synapseRoot: string;
+  roomId: string;
+  roomType: string | null;
+  members: number;
+}
+const UnnamedRoomDisplayName: React.FC<UnnamedRoomDisplayNameProps> = ({
+  synapseRoot,
+  roomId,
+  roomType,
+  members,
+}: UnnamedRoomDisplayNameProps) =>
+  useGeneratedRoomName(roomType, members, synapseRoot, roomId);
 
 interface UserAvatarProps {
   synapseRoot: string;

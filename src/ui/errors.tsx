@@ -117,14 +117,16 @@ function GenericError({ error, reset }: ErrorComponentProps) {
         throw new Error("Cannot sign out of a static credential");
       }
 
-      const wellKnown = await queryClient.ensureQueryData(
-        wellKnownQuery(credentials.serverName),
-      );
+      const wellKnown = await queryClient.query({
+        ...wellKnownQuery(credentials.serverName),
+        staleTime: "static",
+      });
       const synapseRoot = wellKnown["m.homeserver"].base_url;
 
-      const { revocation_endpoint } = await queryClient.ensureQueryData(
-        authMetadataQuery(synapseRoot),
-      );
+      const { revocation_endpoint } = await queryClient.query({
+        ...authMetadataQuery(synapseRoot),
+        staleTime: "static",
+      });
 
       await revokeToken(
         revocation_endpoint,

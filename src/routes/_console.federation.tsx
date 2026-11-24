@@ -8,7 +8,6 @@ import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
 import { essVersionQuery } from "@/api/ess";
 import { federationAllowlistAvailableQuery } from "@/api/federation-allowlist";
-import { wellKnownQuery } from "@/api/matrix";
 import * as Page from "@/components/page";
 import * as SubTabs from "@/components/sub-tabs";
 
@@ -65,15 +64,15 @@ export const Route = createFileRoute("/_console/federation")({
     },
   },
 
-  loader: async ({ context: { queryClient, credentials } }): Promise<void> => {
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
-    await queryClient.ensureQueryData(essVersionQuery(synapseRoot));
-    await queryClient.ensureQueryData(
-      federationAllowlistAvailableQuery(synapseRoot),
-    );
+  loader: async ({ context: { queryClient, synapseRoot } }): Promise<void> => {
+    await queryClient.query({
+      ...essVersionQuery(synapseRoot),
+      staleTime: "static",
+    });
+    await queryClient.query({
+      ...federationAllowlistAvailableQuery(synapseRoot),
+      staleTime: "static",
+    });
   },
 
   component: () => <Outlet />,

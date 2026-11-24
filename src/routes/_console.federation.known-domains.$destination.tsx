@@ -3,14 +3,13 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 // Please see LICENSE files in the repository root for full details.
 
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { noop, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { CloseIcon } from "@vector-im/compound-design-tokens/assets/web/icons";
 import { Alert, Avatar, H3, Tooltip } from "@vector-im/compound-web";
 import { Suspense, useMemo } from "react";
 import { defineMessage, FormattedMessage, useIntl } from "react-intl";
 
-import { wellKnownQuery } from "@/api/matrix";
 import { federationDestinationQuery } from "@/api/synapse";
 import { serverSupportQuery } from "@/api/well-known-support";
 import * as Data from "@/components/data";
@@ -23,20 +22,16 @@ import { getDestinationStatus, StatusBadge } from "@/ui/destination-status";
 export const Route = createFileRoute(
   "/_console/federation/known-domains/$destination",
 )({
-  loader: async ({ context: { queryClient, credentials }, params }) => {
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
-
-    await queryClient.ensureQueryData(
-      federationDestinationQuery(synapseRoot, params.destination),
-    );
+  loader: async ({ context: { queryClient, synapseRoot }, params }) => {
+    await queryClient.query({
+      ...federationDestinationQuery(synapseRoot, params.destination),
+      staleTime: "static",
+    });
 
     // Only prefetch a destination's own well-known once we know Synapse has
     // heard of it, so an arbitrary route param can't make the admin's browser
     // fetch an attacker-controlled host.
-    queryClient.prefetchQuery(serverSupportQuery(params.destination));
+    queryClient.query(serverSupportQuery(params.destination)).catch(noop);
   },
 
   component: RouteComponent,
@@ -236,13 +231,8 @@ function ContactInfo({ destination }: { destination: string }) {
 }
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
+  const { synapseRoot } = Route.useRouteContext();
   const { destination: destinationName } = Route.useParams();
-
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
 
   const { data: dest } = useSuspenseQuery(
     federationDestinationQuery(synapseRoot, destinationName),

@@ -115,11 +115,15 @@ const masBaseOptions = async (
   signal?: AbortSignal;
 }> => {
   const token = await accessToken(client, signal);
-  const wellKnown = await client.ensureQueryData(wellKnownQuery(serverName));
+  const wellKnown = await client.query({
+    ...wellKnownQuery(serverName),
+    staleTime: "static",
+  });
 
-  const authMetadata = await client.ensureQueryData(
-    authMetadataQuery(wellKnown["m.homeserver"].base_url),
-  );
+  const authMetadata = await client.query({
+    ...authMetadataQuery(wellKnown["m.homeserver"].base_url),
+    staleTime: "static",
+  });
 
   // There is an edge-case where the issuer is not the same as where MAS is deployed.
   // In this case, we rely on the GraphQL endpoint to determine the MAS API

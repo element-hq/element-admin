@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { noop, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowLeftIcon,
@@ -60,14 +60,15 @@ export const Route = createFileRoute(
     for (const parameters of Object.values(
       statisticsParameters(params.clientId, since),
     )) {
-      queryClient.prefetchQuery(
-        oauth2SessionsCountQuery(credentials.serverName, parameters),
-      );
+      queryClient
+        .query(oauth2SessionsCountQuery(credentials.serverName, parameters))
+        .catch(noop);
     }
 
-    await queryClient.ensureQueryData(
-      oauth2ClientQuery(credentials.serverName, params.clientId),
-    );
+    await queryClient.query({
+      ...oauth2ClientQuery(credentials.serverName, params.clientId),
+      staleTime: "static",
+    });
   },
   component: ClientDetailComponent,
   notFoundComponent: NotFoundComponent,

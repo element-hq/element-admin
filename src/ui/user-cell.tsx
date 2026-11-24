@@ -8,7 +8,6 @@ import { type ReactNode, Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import { oauth2ClientQuery, userQuery } from "@/api/mas";
-import { wellKnownQuery } from "@/api/matrix";
 import { ClientInfo } from "@/components/client-info";
 import * as Placeholder from "@/components/placeholder";
 import { UserInfo } from "@/components/room-info";
@@ -33,12 +32,17 @@ const CellBoundary: React.FC<{ fallback: string; children: ReactNode }> = ({
   </ErrorBoundary>
 );
 
-const UserCellInner: React.FC<{ serverName: string; userId: string }> = ({
+interface UserCellProps {
+  serverName: string;
+  synapseRoot: string;
+  userId: string;
+}
+
+const UserCellInner: React.FC<UserCellProps> = ({
   serverName,
+  synapseRoot,
   userId,
 }) => {
-  const { data: wellKnown } = useSuspenseQuery(wellKnownQuery(serverName));
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
   const {
     data: { data: user },
   } = useSuspenseQuery(userQuery(serverName, userId));
@@ -47,12 +51,17 @@ const UserCellInner: React.FC<{ serverName: string; userId: string }> = ({
 };
 
 // "Avatar + display name + mxid" for a MAS user ID, for use in table rows.
-export const UserCell: React.FC<{ serverName: string; userId: string }> = ({
+export const UserCell: React.FC<UserCellProps> = ({
   serverName,
+  synapseRoot,
   userId,
 }) => (
   <CellBoundary fallback={userId}>
-    <UserCellInner serverName={serverName} userId={userId} />
+    <UserCellInner
+      serverName={serverName}
+      synapseRoot={synapseRoot}
+      userId={userId}
+    />
   </CellBoundary>
 );
 

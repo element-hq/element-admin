@@ -4,6 +4,7 @@
 
 import {
   keepPreviousData,
+  noop,
   useQuery,
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
@@ -102,17 +103,18 @@ export const Route = createFileRoute("/_console/devices/legacy")({
     context: { queryClient, credentials },
     deps: { parameters, direction },
   }) => {
-    queryClient.prefetchQuery(
-      compatSessionsCountQuery(credentials.serverName, parameters),
-    );
+    queryClient
+      .query(compatSessionsCountQuery(credentials.serverName, parameters))
+      .catch(noop);
 
-    await queryClient.ensureInfiniteQueryData(
-      compatSessionsInfiniteQuery(
+    await queryClient.infiniteQuery({
+      ...compatSessionsInfiniteQuery(
         credentials.serverName,
         parameters,
         direction,
       ),
-    );
+      staleTime: "static",
+    });
   },
 
   pendingComponent: () => (
@@ -196,7 +198,7 @@ const UserFilterLabel = ({
 };
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
+  const { credentials, synapseRoot } = Route.useRouteContext();
   const search = Route.useSearch();
   const { parameters, direction } = Route.useLoaderDeps();
   const intl = useIntl();
@@ -272,6 +274,7 @@ function RouteComponent() {
           cell: ({ row }) => (
             <UserCell
               serverName={credentials.serverName}
+              synapseRoot={synapseRoot}
               userId={row.original.attributes.user_id}
             />
           ),
@@ -294,7 +297,7 @@ function RouteComponent() {
           ),
         }),
       ]),
-    [credentials.serverName, cutoffs, intl, search],
+    [credentials.serverName, synapseRoot, cutoffs, intl, search],
   );
 
   const table = useTable({

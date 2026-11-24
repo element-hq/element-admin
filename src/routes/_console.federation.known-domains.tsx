@@ -4,10 +4,7 @@
 // Please see LICENSE files in the repository root for full details.
 
 import { useDebouncedCallback } from "@tanstack/react-pacer";
-import {
-  useSuspenseInfiniteQuery,
-  useSuspenseQuery,
-} from "@tanstack/react-query";
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
 import {
   createColumnHelper,
@@ -19,7 +16,6 @@ import { useCallback, useMemo } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import * as v from "valibot";
 
-import { wellKnownQuery } from "@/api/matrix";
 import {
   type Destination,
   type DestinationListFilters,
@@ -50,17 +46,13 @@ export const Route = createFileRoute("/_console/federation/known-domains")({
     } satisfies DestinationListFilters,
   }),
   loader: async ({
-    context: { queryClient, credentials },
+    context: { queryClient, synapseRoot },
     deps: { parameters },
   }) => {
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
-
-    await queryClient.ensureInfiniteQueryData(
-      federationDestinationsInfiniteQuery(synapseRoot, parameters),
-    );
+    await queryClient.infiniteQuery({
+      ...federationDestinationsInfiniteQuery(synapseRoot, parameters),
+      staleTime: "static",
+    });
   },
 
   pendingComponent: () => (
@@ -83,7 +75,7 @@ export const Route = createFileRoute("/_console/federation/known-domains")({
 });
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
+  const { synapseRoot } = Route.useRouteContext();
   const intl = useIntl();
   const search = Route.useSearch();
   const { parameters } = Route.useLoaderDeps();
@@ -115,11 +107,6 @@ function RouteComponent() {
     },
     [debouncedSearch],
   );
-
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
 
   const { data, hasNextPage, fetchNextPage, isFetching } =
     useSuspenseInfiniteQuery(

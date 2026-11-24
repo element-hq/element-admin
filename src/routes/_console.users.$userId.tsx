@@ -5,6 +5,7 @@
 
 /* eslint-disable formatjs/no-literal-string-in-jsx -- Not fully translated */
 import {
+  noop,
   useMutation,
   useQuery,
   useQueryClient,
@@ -66,7 +67,7 @@ import type {
   UpstreamOAuthLink,
   UserEmail,
 } from "@/api/mas/api";
-import { profileQuery, wellKnownQuery } from "@/api/matrix";
+import { profileQuery } from "@/api/matrix";
 import * as Data from "@/components/data";
 import * as Dialog from "@/components/dialog";
 import { EntityCard, EntityCardSkeleton } from "@/components/entity-card";
@@ -83,35 +84,38 @@ import { getFeaturesStatus, useFeaturesStatus } from "@/utils/features";
 import { ensureParametersAreUlids } from "@/utils/parameters";
 
 export const Route = createFileRoute("/_console/users/$userId")({
-  loader: async ({ context: { queryClient, credentials }, params }) => {
+  loader: async ({
+    context: { queryClient, credentials, synapseRoot },
+    params,
+  }) => {
     ensureParametersAreUlids(params);
 
     // Fire the queries as soon as possible without awaiting it
-    const emailPromise = queryClient.ensureQueryData(
-      userEmailsQuery(credentials.serverName, params.userId),
-    );
-    const upstreamLinksPromise = queryClient.ensureQueryData(
-      userUpstreamLinksQuery(credentials.serverName, params.userId),
-    );
-    // This API might not be available, if it's the case we don't want to throw,
-    // so we use prefetchQuery instead of ensureQueryData
-    const upstreamProvidersPromise = queryClient.prefetchQuery(
-      upstreamProvidersQuery(credentials.serverName),
-    );
-    const siteConfigPromise = queryClient.ensureQueryData(
-      siteConfigQuery(credentials.serverName),
-    );
-    const userPromise = queryClient.ensureQueryData(
-      userQuery(credentials.serverName, params.userId),
-    );
+    const emailPromise = queryClient.query({
+      ...userEmailsQuery(credentials.serverName, params.userId),
+      staleTime: "static",
+    });
+    const upstreamLinksPromise = queryClient.query({
+      ...userUpstreamLinksQuery(credentials.serverName, params.userId),
+      staleTime: "static",
+    });
+    // This API might not be available, in which case the error is swallowed so
+    // the loader doesn't throw
+    const upstreamProvidersPromise = queryClient
+      .query(upstreamProvidersQuery(credentials.serverName))
+      .catch(noop);
+    const siteConfigPromise = queryClient.query({
+      ...siteConfigQuery(credentials.serverName),
+      staleTime: "static",
+    });
+    const userPromise = queryClient.query({
+      ...userQuery(credentials.serverName, params.userId),
+      staleTime: "static",
+    });
     const featuresPromise = getFeaturesStatus(
       queryClient,
       credentials.serverName,
     );
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
 
     // The sessions APIs only exist on recent MAS versions, and the two device
     // cards are hidden without them, so don't even ask for the counts there.
@@ -120,25 +124,30 @@ export const Route = createFileRoute("/_console/users/$userId")({
     const { devices: hasDevices } = await featuresPromise;
     const sessionsCountsPromise = hasDevices
       ? Promise.all([
-          queryClient.ensureQueryData(
-            oauth2SessionsCountQuery(credentials.serverName, {
+          queryClient.query({
+            ...oauth2SessionsCountQuery(credentials.serverName, {
               clientKind: "dynamic",
               user: params.userId,
               status: "active",
             }),
-          ),
-          queryClient.ensureQueryData(
-            compatSessionsCountQuery(credentials.serverName, {
+            staleTime: "static",
+          }),
+          queryClient.query({
+            ...compatSessionsCountQuery(credentials.serverName, {
               user: params.userId,
               status: "active",
             }),
-          ),
+            staleTime: "static",
+          }),
         ])
       : undefined;
 
     const { data: user } = await userPromise;
     const mxid = `@${user.attributes.username}:${credentials.serverName}`;
-    await queryClient.ensureQueryData(profileQuery(synapseRoot, mxid));
+    await queryClient.query({
+      ...profileQuery(synapseRoot, mxid),
+      staleTime: "static",
+    });
     await emailPromise;
     await upstreamLinksPromise;
     await upstreamProvidersPromise;
@@ -871,7 +880,7 @@ function SetPasswordButton({
   );
 
   const handleSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    (event: React.SubmitEvent<HTMLFormElement>) => {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
       const password = formData.get("password") as string;
@@ -1188,7 +1197,7 @@ function UpstreamLinksList({
   });
 
   const onSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    (event: React.SubmitEvent<HTMLFormElement>) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
       const subject = data.get("subject") as string;
@@ -1451,7 +1460,7 @@ function EmailsList({ userId, mxid, serverName }: EmailsListProps) {
   });
 
   const onSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    (event: React.SubmitEvent<HTMLFormElement>) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
       const email = data.get("email") as string;
@@ -1681,13 +1690,8 @@ const CloseSidebar: React.FC = () => {
 };
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
+  const { credentials, synapseRoot } = Route.useRouteContext();
   const { userId } = Route.useParams();
-
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
 
   const {
     data: { data: user },

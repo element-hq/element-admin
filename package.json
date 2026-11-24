@@ -23,7 +23,6 @@
     "i18n:normalize": "node scripts/i18n-normalize-plurals.mjs",
     "i18n:compile": "pnpm i18n:normalize && formatjs compile-folder --format crowdin --ast translations/translated/ translations/compiled/ && oxfmt translations/compiled",
     "openapi-ts": "openapi-ts",
-    "browserslist": "browserslist",
     "test": "playwright test"
   },
   "dependencies": {
@@ -80,7 +79,6 @@
     "@types/react-dom": "19.3.0",
     "@types/woothee": "1.11.3",
     "@vitejs/plugin-react": "6.3.0",
-    "browserslist": "4.29.5",
     "eslint-plugin-formatjs": "8.1.4",
     "knip": "6.45.1",
     "msw": "3.0.6",

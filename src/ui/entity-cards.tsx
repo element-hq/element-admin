@@ -6,7 +6,6 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { Suspense } from "react";
 
 import { oauth2ClientQuery, userQuery } from "@/api/mas";
-import { wellKnownQuery } from "@/api/matrix";
 import { ClientInfo } from "@/components/client-info";
 import { EntityCard, EntityCardSkeleton } from "@/components/entity-card";
 import * as Placeholder from "@/components/placeholder";
@@ -14,6 +13,7 @@ import { UserInfo } from "@/components/room-info";
 
 interface UserCardProps {
   serverName: string;
+  synapseRoot: string;
   userId: string;
 }
 
@@ -32,10 +32,9 @@ const UserCardBodySkeleton = () => (
 
 const UserCardBodyInner: React.FC<UserCardProps> = ({
   serverName,
+  synapseRoot,
   userId,
 }: UserCardProps) => {
-  const { data: wellKnown } = useSuspenseQuery(wellKnownQuery(serverName));
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
   const {
     data: { data: user },
   } = useSuspenseQuery(userQuery(serverName, userId));
@@ -59,6 +58,7 @@ export const UserCardBody: React.FC<UserCardProps> = (props: UserCardProps) => (
 // renders right away and only its body waits for the queries.
 export const UserCard: React.FC<UserCardProps> = ({
   serverName,
+  synapseRoot,
   userId,
 }: UserCardProps) => (
   <EntityCard
@@ -67,7 +67,11 @@ export const UserCard: React.FC<UserCardProps> = ({
     search={{ status: "active" }}
     resetScroll={false}
   >
-    <UserCardBody serverName={serverName} userId={userId} />
+    <UserCardBody
+      serverName={serverName}
+      synapseRoot={synapseRoot}
+      userId={userId}
+    />
   </EntityCard>
 );
 

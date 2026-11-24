@@ -150,7 +150,7 @@ function RouteComponent() {
 
   // Create authorize URL if we have all the data
   const onSubmit = useCallback(
-    async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    async (event: React.SubmitEvent<HTMLFormElement>): Promise<void> => {
       event.preventDefault();
       if (!debouncedServerName.trim() || !authMetadata || !clientMetadata) {
         return;

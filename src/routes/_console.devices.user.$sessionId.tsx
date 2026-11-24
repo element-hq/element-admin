@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 import {
+  noop,
   useMutation,
   useQuery,
   useQueryClient,
@@ -51,17 +52,18 @@ export const Route = createFileRoute("/_console/devices/user/$sessionId")({
     ensureParametersAreUlids(params);
     const {
       data: { attributes },
-    } = await queryClient.ensureQueryData(
-      oauth2SessionQuery(credentials.serverName, params.sessionId),
-    );
+    } = await queryClient.query({
+      ...oauth2SessionQuery(credentials.serverName, params.sessionId),
+      staleTime: "static",
+    });
 
-    queryClient.prefetchQuery(
-      oauth2ClientQuery(credentials.serverName, attributes.client_id),
-    );
+    queryClient
+      .query(oauth2ClientQuery(credentials.serverName, attributes.client_id))
+      .catch(noop);
     if (attributes.user_id) {
-      queryClient.prefetchQuery(
-        userQuery(credentials.serverName, attributes.user_id),
-      );
+      queryClient
+        .query(userQuery(credentials.serverName, attributes.user_id))
+        .catch(noop);
     }
   },
   component: SessionDetailComponent,
@@ -136,7 +138,7 @@ const CloseSidebar: React.FC = () => {
 };
 
 function SessionDetailComponent() {
-  const { credentials } = Route.useRouteContext();
+  const { credentials, synapseRoot } = Route.useRouteContext();
   const { sessionId } = Route.useParams();
   const queryClient = useQueryClient();
   const intl = useIntl();
@@ -240,6 +242,7 @@ function SessionDetailComponent() {
         {session.attributes.user_id && (
           <UserCard
             serverName={credentials.serverName}
+            synapseRoot={synapseRoot}
             userId={session.attributes.user_id}
           />
         )}
@@ -409,6 +412,7 @@ function SessionDetailComponent() {
                 <StaticEntityCard>
                   <UserCardBody
                     serverName={credentials.serverName}
+                    synapseRoot={synapseRoot}
                     userId={session.attributes.user_id}
                   />
                 </StaticEntityCard>

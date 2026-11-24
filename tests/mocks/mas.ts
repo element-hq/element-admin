@@ -146,7 +146,6 @@ export const siteConfig = (
       password_registration_enabled: true,
       password_registration_email_required: true,
       password_registration_token_required: false,
-      registration_token_required: false,
       email_change_allowed: true,
       displayname_change_allowed: true,
       password_change_allowed: true,

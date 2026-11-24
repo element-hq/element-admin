@@ -6,6 +6,7 @@
 import { useDebouncedCallback } from "@tanstack/react-pacer";
 import {
   keepPreviousData,
+  noop,
   useMutation,
   useQuery,
   useQueryClient,
@@ -46,11 +47,7 @@ import {
 } from "@/api/mas";
 import type { UserListFilters } from "@/api/mas";
 import type { SingleResourceForUser } from "@/api/mas/api/types.gen";
-import {
-  mediaThumbnailQuery,
-  profileQuery,
-  wellKnownQuery,
-} from "@/api/matrix";
+import { mediaThumbnailQuery, profileQuery } from "@/api/matrix";
 import * as DataTable from "@/components/data-table";
 import * as Dialog from "@/components/dialog";
 import { TextLink } from "@/components/link";
@@ -192,15 +189,14 @@ export const Route = createFileRoute("/_console/users")({
     deps: { parameters, direction },
   }) => {
     // Kick-off the users count query without awaiting it
-    queryClient.prefetchQuery(
-      usersCountQuery(credentials.serverName, parameters),
-    );
+    queryClient
+      .query(usersCountQuery(credentials.serverName, parameters))
+      .catch(noop);
 
-    await queryClient.ensureQueryData(wellKnownQuery(credentials.serverName));
-
-    await queryClient.ensureInfiniteQueryData(
-      usersInfiniteQuery(credentials.serverName, parameters, direction),
-    );
+    await queryClient.infiniteQuery({
+      ...usersInfiniteQuery(credentials.serverName, parameters, direction),
+      staleTime: "static",
+    });
   },
 
   pendingComponent: () => (
@@ -376,7 +372,7 @@ const UserAddButton: React.FC<UserAddButtonProps> = ({
   );
 
   const onSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    (event: React.SubmitEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (isPending) {
         return;
@@ -588,17 +584,12 @@ const filtersDefinition = [
 ] as const;
 
 function RouteComponent() {
-  const { credentials } = Route.useRouteContext();
+  const { credentials, synapseRoot } = Route.useRouteContext();
   const search = Route.useSearch();
   const { direction, parameters } = Route.useLoaderDeps();
   const intl = useIntl();
   const from = useCurrentChildRoutePath(Route.id);
   const navigate = useNavigate({ from });
-
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
 
   const { data: totalCount } = useQuery({
     ...usersCountQuery(credentials.serverName, parameters),

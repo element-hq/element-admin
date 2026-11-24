@@ -5,7 +5,6 @@
 
 import {
   useMutation,
-  useQuery,
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
@@ -35,7 +34,7 @@ import {
   userQuery,
 } from "@/api/mas";
 import type { SingleResourceForPersonalSession } from "@/api/mas/api";
-import { wellKnownQuery, whoamiQuery } from "@/api/matrix";
+import { whoamiQuery } from "@/api/matrix";
 import { CopyToClipboard } from "@/components/copy";
 import * as Data from "@/components/data";
 import * as Dialog from "@/components/dialog";
@@ -53,23 +52,28 @@ import { PersonalTokenStatusBadge } from "@/ui/token-status-badge";
 import { computeHumanReadableDateTimeStringFromUtc } from "@/utils/datetime";
 
 export const Route = createFileRoute("/_console/personal-tokens/$tokenId")({
-  loader: async ({ context: { queryClient, credentials }, params }) => {
-    const wellKnown = await queryClient.ensureQueryData(
-      wellKnownQuery(credentials.serverName),
-    );
-    const synapseRoot = wellKnown["m.homeserver"].base_url;
-    await queryClient.ensureQueryData(whoamiQuery(synapseRoot));
+  loader: async ({
+    context: { queryClient, credentials, synapseRoot },
+    params,
+  }) => {
+    await queryClient.query({
+      ...whoamiQuery(synapseRoot),
+      staleTime: "static",
+    });
 
-    const { data: session } = await queryClient.ensureQueryData(
-      personalSessionQuery(credentials.serverName, params.tokenId),
-    );
-    await queryClient.ensureQueryData(
-      userQuery(credentials.serverName, session.attributes.actor_user_id),
-    );
+    const { data: session } = await queryClient.query({
+      ...personalSessionQuery(credentials.serverName, params.tokenId),
+      staleTime: "static",
+    });
+    await queryClient.query({
+      ...userQuery(credentials.serverName, session.attributes.actor_user_id),
+      staleTime: "static",
+    });
     if (session.attributes.owner_user_id) {
-      await queryClient.ensureQueryData(
-        userQuery(credentials.serverName, session.attributes.owner_user_id),
-      );
+      await queryClient.query({
+        ...userQuery(credentials.serverName, session.attributes.owner_user_id),
+        staleTime: "static",
+      });
     }
   },
   component: TokenDetailComponent,
@@ -306,13 +310,9 @@ function RevokeTokenButton({
 
 function TokenDetailComponent() {
   const intl = useIntl();
-  const { credentials } = Route.useRouteContext();
+  const { credentials, synapseRoot } = Route.useRouteContext();
   const parameters = Route.useParams();
 
-  const { data: wellKnown } = useSuspenseQuery(
-    wellKnownQuery(credentials.serverName),
-  );
-  const synapseRoot = wellKnown["m.homeserver"].base_url;
   const { data: whoami } = useSuspenseQuery(whoamiQuery(synapseRoot));
 
   const {
@@ -326,17 +326,6 @@ function TokenDetailComponent() {
   } = useSuspenseQuery(
     userQuery(credentials.serverName, token.attributes.actor_user_id),
   );
-
-  const { data: ownerData } = useQuery({
-    ...userQuery(credentials.serverName, token.attributes.owner_user_id || ""),
-    enabled: !!token.attributes.owner_user_id,
-  });
-
-  const ownerMxid = ownerData
-    ? `@${ownerData.data.attributes.username}:${credentials.serverName}`
-    : undefined;
-
-  const amITheOwner = ownerMxid === whoami.user_id;
 
   const scope = token.attributes.scope.split(" ");
 
@@ -357,10 +346,14 @@ function TokenDetailComponent() {
               description="Label for the acting user field"
             />
           </Text>
-          <UserCard serverName={credentials.serverName} userId={actor.id} />
+          <UserCard
+            serverName={credentials.serverName}
+            synapseRoot={synapseRoot}
+            userId={actor.id}
+          />
         </div>
 
-        {ownerData && (
+        {token.attributes.owner_user_id && (
           <div className="flex flex-col gap-2 items-start">
             <Text size="sm" weight="semibold" className="text-text-secondary">
               <FormattedMessage
@@ -371,7 +364,8 @@ function TokenDetailComponent() {
             </Text>
             <UserCard
               serverName={credentials.serverName}
-              userId={ownerData.data.id}
+              synapseRoot={synapseRoot}
+              userId={token.attributes.owner_user_id}
             />
           </div>
         )}
@@ -483,46 +477,23 @@ function TokenDetailComponent() {
 
         {!token.attributes.revoked_at && (
           <>
-            {amITheOwner ? (
-              <RegenerateTokenModal
+            {token.attributes.owner_user_id ? (
+              <OwnerRegenerateToken
                 token={token}
                 serverName={credentials.serverName}
+                ownerUserId={token.attributes.owner_user_id}
+                currentUserMxid={whoami.user_id}
               />
             ) : (
-              <Tooltip
-                // A description rather than a label: the button already says
-                // "Regenerate token", and a label would replace that name.
-                description={
-                  ownerMxid
-                    ? intl.formatMessage(
-                        {
-                          id: "pages.personal_tokens.cant_regenerate_tooltip",
-                          defaultMessage:
-                            "Only {ownerMxid} can regenerate this token",
-                          description:
-                            "Personal tokens can only be regenerated by the owner of said token. This is the tooltip explaining that on the disabled 'Regenerate token' button when the owner is another user",
-                        },
-                        {
-                          ownerMxid,
-                        },
-                      )
-                    : intl.formatMessage({
-                        id: "pages.personal_tokens.cant_regenerate_tooltip_generic",
-                        defaultMessage:
-                          "Only the owner of the token can regenerate it",
-                        description:
-                          "Personal tokens can only be regenerated by the owner of said token. This is the tooltip explaining that on the disabled 'Regenerate token' button when the owner is a client",
-                      })
-                }
-              >
-                <Button disabled Icon={RestartIcon} size="md" kind="secondary">
-                  <FormattedMessage
-                    id="pages.personal_tokens.regenerate_token"
-                    defaultMessage="Regenerate token"
-                    description="Button text to regenerate a token"
-                  />
-                </Button>
-              </Tooltip>
+              <CantRegenerateButton
+                description={intl.formatMessage({
+                  id: "pages.personal_tokens.cant_regenerate_tooltip_generic",
+                  defaultMessage:
+                    "Only the owner of the token can regenerate it",
+                  description:
+                    "Personal tokens can only be regenerated by the owner of said token. This is the tooltip explaining that on the disabled 'Regenerate token' button when the owner is a client",
+                })}
+              />
             )}
 
             <RevokeTokenButton
@@ -536,6 +507,61 @@ function TokenDetailComponent() {
     </Navigation.Details>
   );
 }
+
+interface OwnerRegenerateTokenProps {
+  token: SingleResourceForPersonalSession;
+  serverName: string;
+  ownerUserId: string;
+  currentUserMxid: string;
+}
+
+function OwnerRegenerateToken({
+  token,
+  serverName,
+  ownerUserId,
+  currentUserMxid,
+}: OwnerRegenerateTokenProps) {
+  const intl = useIntl();
+  const {
+    data: { data: owner },
+  } = useSuspenseQuery(userQuery(serverName, ownerUserId));
+
+  const ownerMxid = `@${owner.attributes.username}:${serverName}`;
+
+  if (ownerMxid === currentUserMxid) {
+    return <RegenerateTokenModal token={token} serverName={serverName} />;
+  }
+
+  return (
+    <CantRegenerateButton
+      description={intl.formatMessage(
+        {
+          id: "pages.personal_tokens.cant_regenerate_tooltip",
+          defaultMessage: "Only {ownerMxid} can regenerate this token",
+          description:
+            "Personal tokens can only be regenerated by the owner of said token. This is the tooltip explaining that on the disabled 'Regenerate token' button when the owner is another user",
+        },
+        {
+          ownerMxid,
+        },
+      )}
+    />
+  );
+}
+
+const CantRegenerateButton = ({ description }: { description: string }) => (
+  // A description rather than a label: the button already says
+  // "Regenerate token", and a label would replace that name.
+  <Tooltip description={description}>
+    <Button disabled Icon={RestartIcon} size="md" kind="secondary">
+      <FormattedMessage
+        id="pages.personal_tokens.regenerate_token"
+        defaultMessage="Regenerate token"
+        description="Button text to regenerate a token"
+      />
+    </Button>
+  </Tooltip>
+);
 
 interface RegenerateTokenModalProps {
   token: SingleResourceForPersonalSession;
@@ -610,7 +636,7 @@ function RegenerateTokenModal({
   } = regenerateTokenMutation;
 
   const handleSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    (event: React.SubmitEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (isPending) {
         return;

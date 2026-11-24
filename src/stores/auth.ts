@@ -196,15 +196,17 @@ export const useAuthStore = create<AuthStore>()(
 
           signal.throwIfAborted();
 
-          const wellKnown = await queryClient.ensureQueryData(
-            wellKnownQuery(current.credentials.serverName),
-          );
+          const wellKnown = await queryClient.query({
+            ...wellKnownQuery(current.credentials.serverName),
+            staleTime: "static",
+          });
 
           signal.throwIfAborted();
 
-          const { token_endpoint } = await queryClient.ensureQueryData(
-            authMetadataQuery(wellKnown["m.homeserver"].base_url),
-          );
+          const { token_endpoint } = await queryClient.query({
+            ...authMetadataQuery(wellKnown["m.homeserver"].base_url),
+            staleTime: "static",
+          });
 
           signal.throwIfAborted();
 

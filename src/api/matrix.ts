@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 import type { QueryClient } from "@tanstack/react-query";
-import { queryOptions } from "@tanstack/react-query";
+import { queryOptions, skipToken } from "@tanstack/react-query";
 import * as v from "valibot";
 
 import { accessToken } from "@/stores/auth";
@@ -116,28 +116,26 @@ export const mediaThumbnailQuery = (
   mxc: string | undefined,
 ) =>
   queryOptions({
-    enabled: !!mxc,
     queryKey: ["matrix", "media-thumbnail", synapseRoot, mxc],
     // Never try to re-fetch a media, they are immutable
     staleTime: Infinity,
     refetchOnWindowFocus: false,
-    queryFn: async ({ client, signal }): Promise<Blob> => {
-      if (!mxc) {
-        throw new Error("No mxc set");
-      }
+    queryFn: mxc
+      ? async ({ client, signal }): Promise<Blob> => {
+          const [serverName, mediaId] = parseMxcUrl(mxc);
 
-      const [serverName, mediaId] = parseMxcUrl(mxc);
+          const mediaUrl = new URL(
+            `/_matrix/client/v1/media/thumbnail/${encodeURIComponent(serverName)}/${encodeURIComponent(mediaId)}?width=96&height=96&method=crop`,
+            synapseRoot,
+          );
+          const response = await fetch(
+            mediaUrl,
+            await baseOptions(client, signal),
+          );
 
-      const mediaUrl = new URL(
-        `/_matrix/client/v1/media/thumbnail/${encodeURIComponent(serverName)}/${encodeURIComponent(mediaId)}?width=96&height=96&method=crop`,
-        synapseRoot,
-      );
-      const response = await fetch(mediaUrl, await baseOptions(client, signal));
+          ensureResponseOk(response);
 
-      ensureResponseOk(response);
-
-      const mediaData = await response.blob();
-
-      return mediaData;
-    },
+          return response.blob();
+        }
+      : skipToken,
   });
