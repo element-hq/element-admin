@@ -189,6 +189,22 @@
       "value": "Вхід не виконано"
     }
   ],
+  "errors.oauth": [
+    {
+      "type": 0,
+      "value": "The homeserver's authentication service returned an error: "
+    },
+    {
+      "type": 1,
+      "value": "errorMessage"
+    }
+  ],
+  "errors.unauthorized": [
+    {
+      "type": 0,
+      "value": "Your session is no longer valid"
+    }
+  ],
   "footer.copyright_notice": [
     {
       "type": 0,
@@ -617,7 +633,7 @@
     },
     {
       "type": 0,
-      "value": " is the latest LTS stream"
+      "value": " — це найновіша версія LTS"
     }
   ],
   "pages.dashboard.latest_ess_version": [
@@ -629,7 +645,7 @@
   "pages.dashboard.new_ess_lts_release": [
     {
       "type": 0,
-      "value": "(New LTS release)"
+      "value": "(Нова версія LTS)"
     }
   ],
   "pages.dashboard.new_ess_release": [
@@ -659,7 +675,7 @@
   "pages.dashboard.running_latest_ess_lts": [
     {
       "type": 0,
-      "value": "(You're running the latest LTS release)"
+      "value": "(Ви використовуєте найновішу версію LTS)"
     }
   ],
   "pages.dashboard.synapse_version": [
@@ -1764,6 +1780,18 @@
       "value": "Ім’я сервера"
     }
   ],
+  "pages.login.session_expired.description": [
+    {
+      "type": 0,
+      "value": "Sign in again to continue."
+    }
+  ],
+  "pages.login.session_expired.title": [
+    {
+      "type": 0,
+      "value": "Your session has expired"
+    }
+  ],
   "pages.login.title": [
     {
       "type": 0,
@@ -2767,6 +2795,36 @@
     {
       "type": 0,
       "value": "Видалити цю кімнату?"
+    }
+  ],
+  "pages.rooms.deletion.cancelled.description": [
+    {
+      "type": 0,
+      "value": "Room deletion task was cancelled on "
+    },
+    {
+      "type": 3,
+      "value": "timestamp",
+      "style": "short"
+    },
+    {
+      "type": 0,
+      "value": " at "
+    },
+    {
+      "type": 4,
+      "value": "timestamp",
+      "style": "short"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "pages.rooms.deletion.cancelled.title": [
+    {
+      "type": 0,
+      "value": "Deletion cancelled"
     }
   ],
   "pages.rooms.deletion.failure.description": [

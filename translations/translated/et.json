@@ -68,6 +68,12 @@
   "errors.not_logged_in": {
     "message": "Sa pole loginud sisse"
   },
+  "errors.oauth": {
+    "message": "The homeserver's authentication service returned an error: {errorMessage}"
+  },
+  "errors.unauthorized": {
+    "message": "Your session is no longer valid"
+  },
   "footer.copyright_notice": {
     "message": "Autoriõigused © {now, date, ::yyyy}"
   },
@@ -99,16 +105,16 @@
     "message": "Auditeerimine"
   },
   "marketing.sbg.description": {
-    "message": "<p>Secure Border Gateway is an application-level firewall for Matrix servers.</p> <ul><li>Inspects all requests to and from the server</li> <li>Can use all request metadata to enforce rules</li> <li>Pipeline-based approach to connect APIs and rule sets</li> <li>Pluggable rules engine that can be applied to the pipelines</li></ul>"
+    "message": "<p>Secure Border Gateway (Turvaline võrgulüüs) on rakenduse tasemele toimiv tulemüür Matrixi serveritele.</p> <ul><li>Kontrollib kõiki serverisse saabuvaid ja serverist väljuvaid päringuid</li> <li>Saab reeglite jõustamiseks kasutada kõiki päringute metaandmeid</li> <li>API-de ja reeglistikega ühenduse loomisel põhinev konveiertöötluse loogika</li> <li>Lisatavate reeglite mootor, mida saab konveiertöötluses kasutada</li></ul>"
   },
   "marketing.sbg.title": {
-    "message": "Secure Border Gateway"
+    "message": "Secure Border Gateway (Turvaline võrgulüüs)"
   },
   "marketing.supervision.description": {
-    "message": "<p>Supervision enables an organisation to administer all rooms from a central point. A 'supervisor' account will join defined rooms with room admin privileges. Server administrators can seamlessly impersonate the account from the admin console to manage and supervise their rooms.</p> <ul><li>Manage rooms and their settings (name, topic, permissions, etc.)</li> <li>Manage room memberships</li> <li>Remove unwanted messages and uploaded media</li> <li>Recover abandoned rooms (all users have left)</li> <li>Supervisor account can or cannot read encrypted message contents (configurable)</li></ul>"
+    "message": "<p>Järelevalve võimaldab organisatsioonil hallata kõiki jututube ühest kesksest kohast. „Järelevalve“ kasutajakonto liitub määratletud jututubadega peakasutaja õigustes. Serveri peakasutajad saavad sujuvalt kontot administraatori konsoolil jäljendada, et oma jututube hallata ja jälgida.</p> <ul><li>Võimalus hallata jututube ja nende seadistusi (nimi, teema, õigused jne)</li> <li>Võimalus hallata jututubade liikmelisust</li> <li>Saad eemaldada soovimatud sõnumid ja üleslaaditud meediumifailid</li> <li>Saad taastada hüljatud jututube (kust kõik kasutajad on lahkunud)</li> <li>Järelevalve konto saab või ei saa lugeda krüptitud sõnumite sisu (seadistatav)</li></ul>"
   },
   "marketing.supervision.title": {
-    "message": "Supervision"
+    "message": "Järelevalve"
   },
   "navigation.auditing": {
     "message": "Auditeerimine"
@@ -123,7 +129,7 @@
     "message": "Dokumentatsioon"
   },
   "navigation.federation": {
-    "message": "Federation"
+    "message": "Födereerimine"
   },
   "navigation.personal_tokens": {
     "message": "Isiklikud tunnusload"
@@ -135,7 +141,7 @@
     "message": "Jututoad"
   },
   "navigation.supervision": {
-    "message": "Supervision"
+    "message": "Järelevalve"
   },
   "navigation.users": {
     "message": "Kasutajad"
@@ -144,7 +150,7 @@
     "message": "Auditeerimine"
   },
   "pages.auditing.unavailable_alert.description": {
-    "message": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
+    "message": "See funktsionaalsus pole ESS-i kogukonnaversioonis (ESS Community) saadaval. Selle kasutamiseks uuenda ESS Pro versiooniks."
   },
   "pages.auditing.unavailable_alert.title": {
     "message": "Auditeerimine on ESS Pro versioonis saadaval olev funktsionaalsus."
@@ -189,7 +195,7 @@
     "message": "{COUNT, plural, =0 {No applications} one {# application} other {# applications}}"
   },
   "pages.devices.applications.description": {
-    "message": "Applications are OAuth 2.0 clients that users sign in to."
+    "message": "Rakendused on OAuth 2.0 kliendid, kuhu kasutajad sisse logivad."
   },
   "pages.devices.applications.details_label": {
     "message": "Rakenduse üksikasjad"
@@ -207,13 +213,13 @@
     "message": "Nimi"
   },
   "pages.devices.applications.not_found.description": {
-    "message": "The requested application ({clientId}) could not be found on {serverName}."
+    "message": "Soovitud rakendust ({clientId}) ei leidunud {serverName} serveris."
   },
   "pages.devices.applications.not_found.title": {
     "message": "Rakendust ei leidu"
   },
   "pages.devices.applications.redirect_uris_label": {
-    "message": "Redirect URIs"
+    "message": "Edasisuunamise aadressid (URI-d)"
   },
   "pages.devices.applications.search_placeholder": {
     "message": "Otsi nime järgi…"
@@ -264,7 +270,7 @@
     "message": "Aktiivne"
   },
   "pages.devices.legacy.filters.activity_inactive": {
-    "message": "Inactive"
+    "message": "Pole aktiivne"
   },
   "pages.devices.legacy.filters.activity_recently_used": {
     "message": "Hiljuti kasutatud"
@@ -369,7 +375,7 @@
     "message": "Aktiivne"
   },
   "pages.devices.user.filters.activity_inactive": {
-    "message": "Inactive"
+    "message": "Pole aktiivne"
   },
   "pages.devices.user.filters.activity_recently_used": {
     "message": "Hiljuti kasutatud"
@@ -540,7 +546,7 @@
     "message": "Olek"
   },
   "pages.federation.title": {
-    "message": "Federation"
+    "message": "Födereerimine"
   },
   "pages.federation.unavailable_alert.description": {
     "message": "Secure Border Gateway is not available in ESS Community. Upgrade to ESS Pro to enable it."
@@ -586,6 +592,12 @@
   },
   "pages.login.server_name": {
     "message": "Serveri nimi"
+  },
+  "pages.login.session_expired.description": {
+    "message": "Sign in again to continue."
+  },
+  "pages.login.session_expired.title": {
+    "message": "Your session has expired"
   },
   "pages.login.title": {
     "message": "Logi sisse"
@@ -951,10 +963,10 @@
     "message": "{uses, number} / ∞"
   },
   "pages.registration_tokens.unlimited_placeholder": {
-    "message": "Unlimited"
+    "message": "Piiramatu"
   },
   "pages.registration_tokens.unlimited_uses_placeholder": {
-    "message": "Leave empty for unlimited uses"
+    "message": "Piiramatuks kasutuseks jäta tühjaks"
   },
   "pages.registration_tokens.unrevoke_token": {
     "message": "Unrevoke token"
@@ -1018,6 +1030,12 @@
   },
   "pages.rooms.delete_room.title": {
     "message": "Kas kustutad selle jututoa?"
+  },
+  "pages.rooms.deletion.cancelled.description": {
+    "message": "Room deletion task was cancelled on {timestamp, date, short} at {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.cancelled.title": {
+    "message": "Deletion cancelled"
   },
   "pages.rooms.deletion.failure.description": {
     "message": "Ruumi kustutamise ülesanne lõppes ebaõnnestumisega {timestamp, date, short} {timestamp, time, short}, veateade oli: {error}"
@@ -1128,10 +1146,10 @@
     "message": "Taastevõti"
   },
   "pages.supervision.title": {
-    "message": "Supervision"
+    "message": "Järelevalve"
   },
   "pages.supervision.unavailable_alert.description": {
-    "message": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
+    "message": "See funktsionaalsus pole ESS-i kogukonnaversioonis (ESS Community) saadaval. Selle kasutamiseks uuenda ESS Pro versiooniks."
   },
   "pages.supervision.unavailable_alert.title": {
     "message": "Supervision is a feature available in ESS Pro"
@@ -1452,7 +1470,7 @@
     "message": "Ei toimi"
   },
   "ui.destination_status.inactive": {
-    "message": "Inactive"
+    "message": "Pole aktiivne"
   },
   "ui.destination_status.never_worked": {
     "message": "Pole iialgi toiminud"
@@ -1482,7 +1500,7 @@
     "message": "Aktiivne"
   },
   "ui.device_status.inactive": {
-    "message": "Inactive"
+    "message": "Pole aktiivne"
   },
   "ui.device_status.last_active.tooltip": {
     "message": "Viimati aktiivne: {date}."

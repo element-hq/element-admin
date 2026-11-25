@@ -68,6 +68,12 @@
   "errors.not_logged_in": {
     "message": "Niezalogowany"
   },
+  "errors.oauth": {
+    "message": "The homeserver's authentication service returned an error: {errorMessage}"
+  },
+  "errors.unauthorized": {
+    "message": "Your session is no longer valid"
+  },
   "footer.copyright_notice": {
     "message": "Prawa autorskie © {now, date, ::yyyy}"
   },
@@ -587,6 +593,12 @@
   "pages.login.server_name": {
     "message": "Nazwa serwera"
   },
+  "pages.login.session_expired.description": {
+    "message": "Sign in again to continue."
+  },
+  "pages.login.session_expired.title": {
+    "message": "Your session has expired"
+  },
   "pages.login.title": {
     "message": "Zaloguj się"
   },
@@ -1018,6 +1030,12 @@
   },
   "pages.rooms.delete_room.title": {
     "message": "Usunąć ten pokój?"
+  },
+  "pages.rooms.deletion.cancelled.description": {
+    "message": "Room deletion task was cancelled on {timestamp, date, short} at {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.cancelled.title": {
+    "message": "Deletion cancelled"
   },
   "pages.rooms.deletion.failure.description": {
     "message": "Zadanie usunięcia pokoju nie powiodło się dnia {timestamp, date, short} o {timestamp, time, short} z błędem: {error}"

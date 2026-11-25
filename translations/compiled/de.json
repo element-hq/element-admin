@@ -193,6 +193,22 @@
       "value": "Nicht angemeldet"
     }
   ],
+  "errors.oauth": [
+    {
+      "type": 0,
+      "value": "The homeserver's authentication service returned an error: "
+    },
+    {
+      "type": 1,
+      "value": "errorMessage"
+    }
+  ],
+  "errors.unauthorized": [
+    {
+      "type": 0,
+      "value": "Your session is no longer valid"
+    }
+  ],
   "footer.copyright_notice": [
     {
       "type": 0,
@@ -1728,6 +1744,18 @@
       "value": "Servername"
     }
   ],
+  "pages.login.session_expired.description": [
+    {
+      "type": 0,
+      "value": "Sign in again to continue."
+    }
+  ],
+  "pages.login.session_expired.title": [
+    {
+      "type": 0,
+      "value": "Your session has expired"
+    }
+  ],
   "pages.login.title": [
     {
       "type": 0,
@@ -2709,6 +2737,36 @@
     {
       "type": 0,
       "value": "Diesen Chat löschen?"
+    }
+  ],
+  "pages.rooms.deletion.cancelled.description": [
+    {
+      "type": 0,
+      "value": "Room deletion task was cancelled on "
+    },
+    {
+      "type": 3,
+      "value": "timestamp",
+      "style": "short"
+    },
+    {
+      "type": 0,
+      "value": " at "
+    },
+    {
+      "type": 4,
+      "value": "timestamp",
+      "style": "short"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "pages.rooms.deletion.cancelled.title": [
+    {
+      "type": 0,
+      "value": "Deletion cancelled"
     }
   ],
   "pages.rooms.deletion.failure.description": [

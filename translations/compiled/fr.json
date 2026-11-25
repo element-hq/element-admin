@@ -189,6 +189,22 @@
       "value": "Déconnecté"
     }
   ],
+  "errors.oauth": [
+    {
+      "type": 0,
+      "value": "Le service d'authentification du serveur d'accueil a retourné une erreur : "
+    },
+    {
+      "type": 1,
+      "value": "errorMessage"
+    }
+  ],
+  "errors.unauthorized": [
+    {
+      "type": 0,
+      "value": "Votre session n'est plus valide."
+    }
+  ],
   "footer.copyright_notice": [
     {
       "type": 0,
@@ -1724,6 +1740,18 @@
       "value": "Nom du serveur"
     }
   ],
+  "pages.login.session_expired.description": [
+    {
+      "type": 0,
+      "value": "Veuillez vous reconnecter pour continuer."
+    }
+  ],
+  "pages.login.session_expired.title": [
+    {
+      "type": 0,
+      "value": "Votre session a expiré."
+    }
+  ],
   "pages.login.title": [
     {
       "type": 0,
@@ -2705,6 +2733,36 @@
     {
       "type": 0,
       "value": "Supprimer ce salon ?"
+    }
+  ],
+  "pages.rooms.deletion.cancelled.description": [
+    {
+      "type": 0,
+      "value": "Room deletion task was cancelled on "
+    },
+    {
+      "type": 3,
+      "value": "timestamp",
+      "style": "short"
+    },
+    {
+      "type": 0,
+      "value": " at "
+    },
+    {
+      "type": 4,
+      "value": "timestamp",
+      "style": "short"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "pages.rooms.deletion.cancelled.title": [
+    {
+      "type": 0,
+      "value": "Deletion cancelled"
     }
   ],
   "pages.rooms.deletion.failure.description": [

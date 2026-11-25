@@ -68,6 +68,12 @@
   "errors.not_logged_in": {
     "message": "未登录"
   },
+  "errors.oauth": {
+    "message": "The homeserver's authentication service returned an error: {errorMessage}"
+  },
+  "errors.unauthorized": {
+    "message": "Your session is no longer valid"
+  },
   "footer.copyright_notice": {
     "message": "版权所有 © {now, date, ::yyyy}"
   },
@@ -587,6 +593,12 @@
   "pages.login.server_name": {
     "message": "服务器名称"
   },
+  "pages.login.session_expired.description": {
+    "message": "Sign in again to continue."
+  },
+  "pages.login.session_expired.title": {
+    "message": "Your session has expired"
+  },
   "pages.login.title": {
     "message": "登录"
   },
@@ -1018,6 +1030,12 @@
   },
   "pages.rooms.delete_room.title": {
     "message": "删除这个房间吗？"
+  },
+  "pages.rooms.deletion.cancelled.description": {
+    "message": "Room deletion task was cancelled on {timestamp, date, short} at {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.cancelled.title": {
+    "message": "Deletion cancelled"
   },
   "pages.rooms.deletion.failure.description": {
     "message": "房间删除任务于{timestamp, date, short} {timestamp, time, short}失败，错误：{error}"
