@@ -68,6 +68,12 @@
   "errors.not_logged_in": {
     "message": "Вхід не виконано"
   },
+  "errors.oauth": {
+    "message": "The homeserver's authentication service returned an error: {errorMessage}"
+  },
+  "errors.unauthorized": {
+    "message": "Your session is no longer valid"
+  },
   "footer.copyright_notice": {
     "message": "Авторські права © {now, date, ::yyyy}"
   },
@@ -153,13 +159,13 @@
     "message": "Версія ESS"
   },
   "pages.dashboard.latest_ess_lts_stream": {
-    "message": "{stream} is the latest LTS stream"
+    "message": "{stream} — це найновіша версія LTS"
   },
   "pages.dashboard.latest_ess_version": {
     "message": "Остання версія ESS"
   },
   "pages.dashboard.new_ess_lts_release": {
-    "message": "(New LTS release)"
+    "message": "(Нова версія LTS)"
   },
   "pages.dashboard.new_ess_release": {
     "message": "(Нова версія)"
@@ -174,7 +180,7 @@
     "message": "(Ви використовуєте останню версію)"
   },
   "pages.dashboard.running_latest_ess_lts": {
-    "message": "(You're running the latest LTS release)"
+    "message": "(Ви використовуєте найновішу версію LTS)"
   },
   "pages.dashboard.synapse_version": {
     "message": "Версія Synapse"
@@ -586,6 +592,12 @@
   },
   "pages.login.server_name": {
     "message": "Ім’я сервера"
+  },
+  "pages.login.session_expired.description": {
+    "message": "Sign in again to continue."
+  },
+  "pages.login.session_expired.title": {
+    "message": "Your session has expired"
   },
   "pages.login.title": {
     "message": "Вхід"
@@ -1018,6 +1030,12 @@
   },
   "pages.rooms.delete_room.title": {
     "message": "Видалити цю кімнату?"
+  },
+  "pages.rooms.deletion.cancelled.description": {
+    "message": "Room deletion task was cancelled on {timestamp, date, short} at {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.cancelled.title": {
+    "message": "Deletion cancelled"
   },
   "pages.rooms.deletion.failure.description": {
     "message": "Видалення кімнати не вдалося {timestamp, date, short} о {timestamp, time, short} з помилкою: {error}"

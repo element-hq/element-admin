@@ -197,6 +197,22 @@
       "value": "Sa pole loginud sisse"
     }
   ],
+  "errors.oauth": [
+    {
+      "type": 0,
+      "value": "The homeserver's authentication service returned an error: "
+    },
+    {
+      "type": 1,
+      "value": "errorMessage"
+    }
+  ],
+  "errors.unauthorized": [
+    {
+      "type": 0,
+      "value": "Your session is no longer valid"
+    }
+  ],
   "footer.copyright_notice": [
     {
       "type": 0,
@@ -367,7 +383,7 @@
       "children": [
         {
           "type": 0,
-          "value": "Secure Border Gateway is an application-level firewall for Matrix servers."
+          "value": "Secure Border Gateway (Turvaline võrgulüüs) on rakenduse tasemele toimiv tulemüür Matrixi serveritele."
         }
       ]
     },
@@ -385,7 +401,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Inspects all requests to and from the server"
+              "value": "Kontrollib kõiki serverisse saabuvaid ja serverist väljuvaid päringuid"
             }
           ]
         },
@@ -399,7 +415,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Can use all request metadata to enforce rules"
+              "value": "Saab reeglite jõustamiseks kasutada kõiki päringute metaandmeid"
             }
           ]
         },
@@ -413,7 +429,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Pipeline-based approach to connect APIs and rule sets"
+              "value": "API-de ja reeglistikega ühenduse loomisel põhinev konveiertöötluse loogika"
             }
           ]
         },
@@ -427,7 +443,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Pluggable rules engine that can be applied to the pipelines"
+              "value": "Lisatavate reeglite mootor, mida saab konveiertöötluses kasutada"
             }
           ]
         }
@@ -437,7 +453,7 @@
   "marketing.sbg.title": [
     {
       "type": 0,
-      "value": "Secure Border Gateway"
+      "value": "Secure Border Gateway (Turvaline võrgulüüs)"
     }
   ],
   "marketing.supervision.description": [
@@ -447,7 +463,7 @@
       "children": [
         {
           "type": 0,
-          "value": "Supervision enables an organisation to administer all rooms from a central point. A 'supervisor' account will join defined rooms with room admin privileges. Server administrators can seamlessly impersonate the account from the admin console to manage and supervise their rooms."
+          "value": "Järelevalve võimaldab organisatsioonil hallata kõiki jututube ühest kesksest kohast. „Järelevalve“ kasutajakonto liitub määratletud jututubadega peakasutaja õigustes. Serveri peakasutajad saavad sujuvalt kontot administraatori konsoolil jäljendada, et oma jututube hallata ja jälgida."
         }
       ]
     },
@@ -465,7 +481,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Manage rooms and their settings (name, topic, permissions, etc.)"
+              "value": "Võimalus hallata jututube ja nende seadistusi (nimi, teema, õigused jne)"
             }
           ]
         },
@@ -479,7 +495,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Manage room memberships"
+              "value": "Võimalus hallata jututubade liikmelisust"
             }
           ]
         },
@@ -493,7 +509,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Remove unwanted messages and uploaded media"
+              "value": "Saad eemaldada soovimatud sõnumid ja üleslaaditud meediumifailid"
             }
           ]
         },
@@ -507,7 +523,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Recover abandoned rooms (all users have left)"
+              "value": "Saad taastada hüljatud jututube (kust kõik kasutajad on lahkunud)"
             }
           ]
         },
@@ -521,7 +537,7 @@
           "children": [
             {
               "type": 0,
-              "value": "Supervisor account can or cannot read encrypted message contents (configurable)"
+              "value": "Järelevalve konto saab või ei saa lugeda krüptitud sõnumite sisu (seadistatav)"
             }
           ]
         }
@@ -531,7 +547,7 @@
   "marketing.supervision.title": [
     {
       "type": 0,
-      "value": "Supervision"
+      "value": "Järelevalve"
     }
   ],
   "navigation.auditing": [
@@ -561,7 +577,7 @@
   "navigation.federation": [
     {
       "type": 0,
-      "value": "Federation"
+      "value": "Födereerimine"
     }
   ],
   "navigation.personal_tokens": [
@@ -585,7 +601,7 @@
   "navigation.supervision": [
     {
       "type": 0,
-      "value": "Supervision"
+      "value": "Järelevalve"
     }
   ],
   "navigation.users": [
@@ -603,7 +619,7 @@
   "pages.auditing.unavailable_alert.description": [
     {
       "type": 0,
-      "value": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
+      "value": "See funktsionaalsus pole ESS-i kogukonnaversioonis (ESS Community) saadaval. Selle kasutamiseks uuenda ESS Pro versiooniks."
     }
   ],
   "pages.auditing.unavailable_alert.title": [
@@ -731,7 +747,7 @@
   "pages.devices.applications.description": [
     {
       "type": 0,
-      "value": "Applications are OAuth 2.0 clients that users sign in to."
+      "value": "Rakendused on OAuth 2.0 kliendid, kuhu kasutajad sisse logivad."
     }
   ],
   "pages.devices.applications.details_label": [
@@ -767,7 +783,7 @@
   "pages.devices.applications.not_found.description": [
     {
       "type": 0,
-      "value": "The requested application ("
+      "value": "Soovitud rakendust ("
     },
     {
       "type": 1,
@@ -775,7 +791,7 @@
     },
     {
       "type": 0,
-      "value": ") could not be found on "
+      "value": ") ei leidunud "
     },
     {
       "type": 1,
@@ -783,7 +799,7 @@
     },
     {
       "type": 0,
-      "value": "."
+      "value": " serveris."
     }
   ],
   "pages.devices.applications.not_found.title": [
@@ -795,7 +811,7 @@
   "pages.devices.applications.redirect_uris_label": [
     {
       "type": 0,
-      "value": "Redirect URIs"
+      "value": "Edasisuunamise aadressid (URI-d)"
     }
   ],
   "pages.devices.applications.search_placeholder": [
@@ -931,7 +947,7 @@
   "pages.devices.legacy.filters.activity_inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "Pole aktiivne"
     }
   ],
   "pages.devices.legacy.filters.activity_recently_used": [
@@ -1203,7 +1219,7 @@
   "pages.devices.user.filters.activity_inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "Pole aktiivne"
     }
   ],
   "pages.devices.user.filters.activity_recently_used": [
@@ -1627,7 +1643,7 @@
   "pages.federation.title": [
     {
       "type": 0,
-      "value": "Federation"
+      "value": "Födereerimine"
     }
   ],
   "pages.federation.unavailable_alert.description": [
@@ -1726,6 +1742,18 @@
     {
       "type": 0,
       "value": "Serveri nimi"
+    }
+  ],
+  "pages.login.session_expired.description": [
+    {
+      "type": 0,
+      "value": "Sign in again to continue."
+    }
+  ],
+  "pages.login.session_expired.title": [
+    {
+      "type": 0,
+      "value": "Your session has expired"
     }
   ],
   "pages.login.title": [
@@ -2580,13 +2608,13 @@
   "pages.registration_tokens.unlimited_placeholder": [
     {
       "type": 0,
-      "value": "Unlimited"
+      "value": "Piiramatu"
     }
   ],
   "pages.registration_tokens.unlimited_uses_placeholder": [
     {
       "type": 0,
-      "value": "Leave empty for unlimited uses"
+      "value": "Piiramatuks kasutuseks jäta tühjaks"
     }
   ],
   "pages.registration_tokens.unrevoke_token": [
@@ -2713,6 +2741,36 @@
     {
       "type": 0,
       "value": "Kas kustutad selle jututoa?"
+    }
+  ],
+  "pages.rooms.deletion.cancelled.description": [
+    {
+      "type": 0,
+      "value": "Room deletion task was cancelled on "
+    },
+    {
+      "type": 3,
+      "value": "timestamp",
+      "style": "short"
+    },
+    {
+      "type": 0,
+      "value": " at "
+    },
+    {
+      "type": 4,
+      "value": "timestamp",
+      "style": "short"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "pages.rooms.deletion.cancelled.title": [
+    {
+      "type": 0,
+      "value": "Deletion cancelled"
     }
   ],
   "pages.rooms.deletion.failure.description": [
@@ -3074,13 +3132,13 @@
   "pages.supervision.title": [
     {
       "type": 0,
-      "value": "Supervision"
+      "value": "Järelevalve"
     }
   ],
   "pages.supervision.unavailable_alert.description": [
     {
       "type": 0,
-      "value": "This feature is not available in ESS Community. Upgrade to ESS Pro to enable it."
+      "value": "See funktsionaalsus pole ESS-i kogukonnaversioonis (ESS Community) saadaval. Selle kasutamiseks uuenda ESS Pro versiooniks."
     }
   ],
   "pages.supervision.unavailable_alert.title": [
@@ -3870,7 +3928,7 @@
   "ui.destination_status.inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "Pole aktiivne"
     }
   ],
   "ui.destination_status.never_worked": [
@@ -3938,7 +3996,7 @@
   "ui.device_status.inactive": [
     {
       "type": 0,
-      "value": "Inactive"
+      "value": "Pole aktiivne"
     }
   ],
   "ui.device_status.last_active.tooltip": [

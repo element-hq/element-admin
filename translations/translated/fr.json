@@ -68,6 +68,12 @@
   "errors.not_logged_in": {
     "message": "Déconnecté"
   },
+  "errors.oauth": {
+    "message": "Le service d'authentification du serveur d'accueil a retourné une erreur : {errorMessage}"
+  },
+  "errors.unauthorized": {
+    "message": "Votre session n'est plus valide."
+  },
   "footer.copyright_notice": {
     "message": "Copyright © {now, date, ::yyyy}"
   },
@@ -587,6 +593,12 @@
   "pages.login.server_name": {
     "message": "Nom du serveur"
   },
+  "pages.login.session_expired.description": {
+    "message": "Veuillez vous reconnecter pour continuer."
+  },
+  "pages.login.session_expired.title": {
+    "message": "Votre session a expiré."
+  },
   "pages.login.title": {
     "message": "Connexion"
   },
@@ -1018,6 +1030,12 @@
   },
   "pages.rooms.delete_room.title": {
     "message": "Supprimer ce salon ?"
+  },
+  "pages.rooms.deletion.cancelled.description": {
+    "message": "Room deletion task was cancelled on {timestamp, date, short} at {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.cancelled.title": {
+    "message": "Deletion cancelled"
   },
   "pages.rooms.deletion.failure.description": {
     "message": "La tâche de suppression de la salle a échoué le {timestamp, date, short} à {timestamp, time, short} avec erreur : {error}"

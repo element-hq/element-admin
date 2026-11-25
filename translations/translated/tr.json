@@ -68,6 +68,12 @@
   "errors.not_logged_in": {
     "message": "Oturum açılmadı"
   },
+  "errors.oauth": {
+    "message": "The homeserver's authentication service returned an error: {errorMessage}"
+  },
+  "errors.unauthorized": {
+    "message": "Your session is no longer valid"
+  },
   "footer.copyright_notice": {
     "message": "Telif hakkı © {now, date, ::yyyy}"
   },
@@ -587,6 +593,12 @@
   "pages.login.server_name": {
     "message": "Sunucu adı"
   },
+  "pages.login.session_expired.description": {
+    "message": "Sign in again to continue."
+  },
+  "pages.login.session_expired.title": {
+    "message": "Your session has expired"
+  },
   "pages.login.title": {
     "message": "Giriş"
   },
@@ -1018,6 +1030,12 @@
   },
   "pages.rooms.delete_room.title": {
     "message": "Delete this room?"
+  },
+  "pages.rooms.deletion.cancelled.description": {
+    "message": "Room deletion task was cancelled on {timestamp, date, short} at {timestamp, time, short}."
+  },
+  "pages.rooms.deletion.cancelled.title": {
+    "message": "Deletion cancelled"
   },
   "pages.rooms.deletion.failure.description": {
     "message": "Room deletion task failed on {timestamp, date, short} at {timestamp, time, short} with error: {error}"
