@@ -63,6 +63,7 @@ test.describe("users", () => {
       - img "@alice:example.com"
       - heading "Alice" [level=3]
       - paragraph: "@alice:example.com"
+      - link "Send a server notice"
       - button "Lock account"
       - button "Deactivate account"
       - list:
@@ -70,6 +71,37 @@ test.describe("users", () => {
           - term: Status
           - definition: Active
     `);
+  });
+
+  test("links to the send page with the user preselected", async ({ page }) => {
+    await loginAs(page);
+    await page.goto(`/users/${userId(DEFAULT_USERS, 1)}`);
+
+    await page.getByRole("link", { name: "Send a server notice" }).click();
+
+    await expect(
+      page.getByRole("heading", heading("Send an announcement")),
+    ).toBeVisible();
+    await expect(
+      page.getByText("@alice:example.com", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("radio", { name: "A specific user" }),
+    ).toBeChecked();
+    // The message is the only thing left to fill in.
+    await page.getByRole("textbox", { name: "Message" }).fill("Hi");
+    await expect(page.getByRole("button", { name: "Send" })).toBeEnabled();
+  });
+
+  test("offers no server notice to a deactivated user", async ({ page }) => {
+    await loginAs(page);
+    await page.goto(`/users/${userId(DEFAULT_USERS, 2)}`);
+
+    const pane = drawer(page, page.getByRole("button", { name: "Reactivate" }));
+    await expect(pane).toBeVisible();
+    await expect(
+      pane.getByRole("link", { name: "Send a server notice" }),
+    ).toHaveCount(0);
   });
 
   test("shows a not-found alert for an unknown user", async ({ page }) => {

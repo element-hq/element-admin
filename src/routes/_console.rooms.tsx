@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
 
 import { useDebouncedCallback } from "@tanstack/react-pacer";
-import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
 import {
   createColumnHelper,
@@ -25,6 +25,8 @@ import {
   type RoomListFilters,
   roomsInfiniteQuery,
   type Room,
+  type ServerAnnouncementRoom,
+  serverAnnouncementsQuery,
 } from "@/api/synapse";
 import * as DataTable from "@/components/data-table";
 import { TextLink } from "@/components/link";
@@ -225,6 +227,19 @@ function RouteComponent() {
 
   const totalCount = data.pages[0]?.total_rooms ?? 0;
 
+  const { data: announcements } = useQuery(
+    serverAnnouncementsQuery(synapseRoot),
+  );
+  const announcementRooms = useMemo(
+    () =>
+      new Map<string, ServerAnnouncementRoom>(
+        announcements?.rooms.flatMap((room) =>
+          room.room_id === null ? [] : [[room.room_id, room]],
+        ),
+      ),
+    [announcements],
+  );
+
   const filters = useFilters(search, filtersDefinition);
 
   // Column definitions
@@ -305,10 +320,23 @@ function RouteComponent() {
         columnHelper.display({
           id: "visibility",
           header: intl.formatMessage(columnMessages.visibility),
-          meta: { width: DataTable.columnWidth.status },
+          // Wider than a status column so the "Announcement room" badge fits.
+          meta: { width: { min: 200, fr: 1 } },
           // oxlint-disable-next-line react/no-unstable-nested-components
           cell: ({ row }) => {
             const room = row.original;
+            if (announcementRooms.has(room.room_id)) {
+              return (
+                <Badge kind="blue">
+                  <FormattedMessage
+                    id="pages.rooms.announcement_room_badge"
+                    defaultMessage="Announcement room"
+                    description="Badge in the visibility column of the rooms list for a room which is a server announcement room, shown instead of its visibility"
+                  />
+                </Badge>
+              );
+            }
+
             let label = intl.formatMessage(roomTypeMessages.private);
             let kind: "grey" | "green" | "blue" = "grey";
 
@@ -324,7 +352,7 @@ function RouteComponent() {
           },
         }),
       ]),
-    [search, synapseRoot, intl],
+    [search, synapseRoot, intl, announcementRooms],
   );
 
   const onSearchInput = useCallback(
