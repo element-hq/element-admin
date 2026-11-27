@@ -46,7 +46,7 @@
     "react-dom": "19.3.1",
     "react-error-boundary": "6.1.6",
     "react-hot-toast": "2.6.1",
-    "react-intl": "12.1.8",
+    "react-intl": "12.2.0",
     "use-broadcast-ts": "2.0.2",
     "valibot": "1.5.0",
     "vaul": "1.1.2",
