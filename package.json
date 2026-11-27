@@ -70,7 +70,7 @@
     "@tanstack/react-devtools": "0.10.15",
     "@tanstack/react-pacer-devtools": "0.9.1",
     "@tanstack/react-query-devtools": "5.108.0",
-    "@tanstack/react-router-devtools": "1.167.3",
+    "@tanstack/react-router-devtools": "1.167.4",
     "@tanstack/router-plugin": "1.169.0",
     "@tsconfig/strictest": "2.0.9",
     "@tsconfig/vite-react": "8.1.2",
